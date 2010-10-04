@@ -3,7 +3,7 @@
 
 .flexigrid
 	{
-	font-family: Arial, Helvetica, sans-serif;
+//	font-family: Arial, Helvetica, sans-serif;
 	font-size: 80%;
 	position: relative;
 	border: 0px solid #eee;
@@ -312,8 +312,8 @@
 	
 	.flexigrid div.iDiv input, .flexigrid div.iDiv select, .flexigrid div.iDiv textarea
 		{
-		font-family: Arial, Helvetica, sans-serif;
-		font-size: 11px;
+//		font-family: Arial, Helvetica, sans-serif;
+//		font-size: 11px;
 		}
 		
 	.flexigrid div.iDiv input.tb
@@ -407,8 +407,8 @@
 	}	
 
 div.colCopy {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 11px;
+//	font-family: Arial, Helvetica, sans-serif;
+//	font-size: 11px;
 	background: #fafafa url(images/fhbg.gif) repeat-x bottom;
 	border: 1px solid #ccc;
 	border-bottom: 0px;

@@ -1,7 +1,7 @@
 /* taginfo.css */
 
 body {
-    font-family: Verdana,sans-serif;
+    font-family: Verdana,Arial,sans-serif;
     padding: 0;
     margin: 0;
 }
@@ -53,7 +53,6 @@ a:hover {
 }
 
 a.taglink {
-    font-family: monospace;
     color: #006000 !important;
 }
 
@@ -171,11 +170,11 @@ div.message span {
 /* ========== */
 
 div#tabs {
-    font-size: 100%;
+//    font-size: 100%;
 }
 
 div#tabs h2 {
-    margin: 0 0 4px 0;
+    margin: 0 0 10px 0;
     font-size: 110%;
 }
 
@@ -244,7 +243,7 @@ div#tools {
 }
 
 span.lang {
-    font-family: monospace;
+//    font-family: monospace;
     background-color: #f0e0f0;
     color: #202020;
     border: 1px solid #808080;

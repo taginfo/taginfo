@@ -2,6 +2,22 @@
 Taginfo
 =======
 
+Brings together information about OpenStreetMap tags and makes it searchable and browsable.
+
+Documentation: http://wiki.openstreetmap.org/wiki/Taginfo
+Live System: http://taginfo.openstreetmap.de/
+
+
+FILES
+-----
+
+* sources
+    import scripts
+
+* web
+    Web User Interface and API
+
+
 PREREQUISITES
 -------------
 
@@ -19,4 +35,27 @@ Debian/Ubuntu packages:
 
 Gems:
     gem install mongrel rack sinatra
+
+
+DATA IMPORT
+-----------
+
+
+WEB USER INTERFACE
+------------------
+
+You need a 'data' directory in the parent directory of the directory where
+this README is. It must contain the sqlite database files created in the
+data import step or downloaded from http://taginfo.openstreetmap.de/download .
+
+To start the web user interface:
+cd web
+./taginfo.rb
+
+
+AUTHOR
+------
+
+Jochen Topf <jochen@remote.org>
+http://wiki.openstreetmap.org/wiki/User:Joto
 
