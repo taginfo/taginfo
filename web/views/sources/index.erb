@@ -1,0 +1,29 @@
+<h1>Sources</h1>
+
+<p>Taginfo takes data about OSM tags from several sources and brings them
+together for easy browsing and discovery.</p>
+
+<p>Note that Taginfo only displays this data. If you want to change it, you
+have to go back to the source.</p>
+
+<table class="list">
+    <tr>
+        <th>Source</th><th>Data until*</th><th>Last update run</th>
+    </tr>
+    <% @sources.each do |source| %>
+    <tr>
+        <td><a href="/sources/<%= source['source_id'] %>"><img src="/img/sources/<%= source['source_id'] %>.16.png" alt=""/> <%= source['source_name'] %></a></td>
+        <td><%= source['data_until'] %></td>
+        <td><%= source['update_start'] %> to <%= source['update_end'] %></td>
+    </tr>
+    <% end %>
+</table>
+
+<p>* All edits until this time will be in the data, later edits might be.</p>
+
+<p>All times in UTC.</p>
+
+<p>Updates are currently done manually about once a week until they have proven
+to work reliably. It is planned to switch to daily updates as soon as
+possible.</p>
+

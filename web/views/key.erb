@@ -1,0 +1,233 @@
+<table id="overview">
+</table>
+
+<h1><%= @key_pp %></h1>
+
+<div class="source-wiki" title="Description from the wiki">
+    <%= @desc %>
+</div>
+
+<div id="tools">
+    <% if @count_all < 1000 %>
+        [<%= xapi_link('*', @key + '=*') %>] [<%= josm_link('*', @key + '=*') %>]
+    <% else %>
+        <span title="Links disabled, because there are too many objects with this key">[XAPI] [JOSM]</span>
+    <% end %>
+</div>
+
+<form id="filter-form">
+    <label for="filter">Filter:</label>
+    <select id="filter" name="filter">
+        <option value="all"<%=       @sel['all']       %>>No filter</option>
+        <option value="nodes"<%=     @sel['nodes']     %>><img src="/img/types/node.16.png" alt=""/> Nodes only</option>
+        <option value="ways"<%=      @sel['ways']      %>>Ways only</option>
+        <option value="relations"<%= @sel['relations'] %>>Relations only</option>
+    </select>
+</form>
+
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-values">Values</a></li>
+        <li><a href="#tabs-keys">Other Keys</a></li>
+        <li><a href="#tabs-map">Map</a></li>
+        <li><a href="#tabs-wiki">Wiki</a></li>
+        <li><a href="#tabs-josm">JOSM</a></li>
+    </ul>
+    <div id="tabs-values">
+        <h2>Values used with this key</h2>
+       <table id="grid-values">
+       </table>
+    </div>
+    <div id="tabs-keys">
+        <h2>Other keys used together with this key</h2>
+       <table id="grid-keys">
+       </table>
+    </div>
+    <div id="tabs-map">
+        <h2>Geographical distribution of this key</h2>
+        <p><i>Currently only tags on nodes are shown.</i></p>
+        <div style="background-image: url(/img/worldp.png); background-repeat: no-repeat;"/><img src="/api/1/db/keys/distribution/<%= @key_uri %>" alt=""/></div>
+    </div>
+    <div id="tabs-wiki">
+        <h2>Wiki pages about this key</h2>
+        <table id="wiki-langs">
+        </table>
+    </div>
+    <div id="tabs-josm">
+        <h2>JOSM style rules with this key</h2>
+        <form>
+            <label for="josm-style">Choose style:</label>
+            <select id="josm-style" name="josm-style">
+                <option>Standard</option>
+            </select>
+        </form>
+       <table id="grid-josm">
+       </table>
+    </div>
+</div>
+
+<iframe id="josmiframe" name="josmiframe"></iframe>
+
+<script type="text/javascript">
+    jQuery(function() {
+        jQuery('#josm').bind('click', function() {
+            jQuery('#josmiframe')[0].src = jQuery('#josm')[0].href;
+            return false;
+        });
+
+        jQuery('#filter').bind('change', function() {
+            var value = this.value;
+            window.location.search = 'filter=' + value;
+        });
+
+        var tabs = jQuery('#tabs').tabs();
+
+        jQuery.getJSON('/api/1/db/keys/overview/<%= @key_uri %>', function(data, textStatus) {
+            var table_content = '<tr><th></th><th title="Number of objects with this key">Number of objects</th><th class="values" title="Number of different values">Values</th></tr>';
+            table_content += jQuery.map(['all', 'nodes', 'ways', 'relations'], function(obj, i) {
+                var d = data[obj];
+                return '<tr><td>' + print_image(obj) + '</td><td class="count">' + print_value_with_percent(d.count, d.count_fraction) + '</td><td class="values">' + d.values.print_with_ts() + '</td></tr>';
+            }).join('');
+            jQuery('#overview').append(table_content);
+        });
+
+        jQuery('#grid-values').flexigrid({
+            url: '/api/1/db/keys/values/<%= @key_uri %>?filter=<%= @filter_type %>',
+            method: 'GET',
+            dataType: 'json',
+            colModel: [
+                { display: 'Count', name: 'count', width: 300, sortable: true, align: 'center' },
+                { display: 'Value', name: 'value', width: 500, sortable: true, align: 'left' }
+            ],
+            searchitems: [
+                { display: 'Value', name: 'value' }
+            ],
+            sortname: 'count',
+            sortorder: 'desc',
+            showToggleBtn: false,
+            showTableToggleBtn: false,
+            usepager: true,
+            useRp: true,
+            rp: 15,
+            height: 410,
+            preProcess: function(data) {
+                data.rows = jQuery.map(data.data, function(row, i) {
+                    return { 'cell': [
+                        print_value_with_percent(row.count, row.fraction),
+                        row.value.to_value(<%= @key_json %>)
+                    ] };
+                });
+                delete data.data;
+                return data;
+            }
+        });
+
+        jQuery('#grid-keys').flexigrid({
+            url: '/api/1/db/keys/keys/<%= @key_uri %>?filter=<%= @filter_type %>',
+            method: 'GET',
+            dataType: 'json',
+            colModel: [
+                { display: '<span title="Number of objects with this key that also have the other key">Count &rarr;</span>', name: 'to_count', width: 320, sortable: true, align: 'center' },
+                { display: '<span title="Key used together with this key">Other key</span>', name: 'other_key', width: 340, sortable: true, align: 'left' },
+                { display: '<span title="Number of objects with other key that also have this key">&rarr; Count</span>', name: 'from_count', width: 320, sortable: true, align: 'center' }
+            ],
+/*            searchitems: [
+                { display: 'Other Key', name: 'other_key' }
+            ],*/
+            sortname: 'to_count',
+            sortorder: 'desc',
+            showToggleBtn: false,
+            showTableToggleBtn: false,
+            usepager: true,
+            useRp: true,
+            rp: 15,
+            height: 410,
+            preProcess: function(data) {
+                data.rows = jQuery.map(data.data, function(row, i) {
+                    return { 'cell': [
+                        print_value_with_percent(row.together_count, row.to_fraction),
+                        row.other_key.to_key(),
+                        print_value_with_percent(row.together_count, row.from_fraction),
+                    ] };
+                });
+                return data;
+            }
+        });
+
+        jQuery('#grid-josm').flexigrid({
+            url: '/api/1/josm/styles/standard/keys/<%= @key_uri %>',
+            method: 'GET',
+            dataType: 'json',
+            colModel: [
+                { display: 'Value',     name: 'v',         width: 200, sortable: true,  align: 'left'  },
+                { display: 'Scale min', name: 'scale_min', width:  80, sortable: true,  align: 'right' },
+                { display: 'Scale max', name: 'scale_max', width:  80, sortable: true,  align: 'right' },
+                { display: 'Rule XML',  name: 'rule',      width: 100, sortable: false, align: 'left'  }
+            ],
+/*            searchitems: [
+                { display: 'Key/Value', name: 'v' }
+            ],*/
+            sortname: 'v',
+            sortorder: 'asc',
+            showToggleBtn: false,
+            showTableToggleBtn: false,
+            usepager: true,
+            useRp: true,
+            rp: 15,
+            height: 410,
+            preProcess: function(data) {
+                data.rows = jQuery.map(data.data, function(row, i) {
+                    return { 'cell': [
+                        row.v ? row.v.to_value(row.k) : row.b ? (row.b + ' (Boolean)') : '*',
+                        row.scale_min.print_with_ts(),
+                        row.scale_max.print_with_ts(),
+                        '<span title="' + row.rule + '">XML</span>'
+                    ] };
+                });
+                return data;
+            }
+        });
+
+        jQuery('#wiki-langs').flexigrid({
+            url: '/api/1/wiki/keys/<%= @key_uri %>',
+            method: 'GET',
+            dataType: 'json',
+            colModel: [
+                { display: 'Language',      name: 'lang',             width: 150, sortable: false },
+                { display: 'Wikipage',      name: 'title',            width: 160, sortable: false, align: 'right' },
+                { display: 'Description',   name: 'description',      width: 400, sortable: false },
+                { display: 'Image',         name: 'image',            width: 120, sortable: false },
+                { display: 'Objects',       name: 'objects',          width:  80, sortable: false },
+                { display: 'Implied Tags',  name: 'tags_implied',     width: 120, sortable: false },
+                { display: 'Combined Tags', name: 'tags_combination', width: 120, sortable: false },
+                { display: 'Linked Tags',   name: 'tags_linked',      width: 220, sortable: false }
+            ],
+            showToggleBtn: false,
+            showTableToggleBtn: false,
+            usepager: false,
+            useRp: false,
+            height: 400,
+            preProcess: function(data) {
+                return {
+                    total: data.size,
+                    page: 1,
+                    rows: jQuery.map(data, function(row, i) {
+                        return { 'cell': [
+                            print_language(row.lang, row.language),
+                            print_wiki_link(row.title),
+                            row.description,
+                            row.image == null ? '<i>no image</i>' : print_wiki_link(row.image),
+                            (row.on_node      ? '<img src="/img/types/node.16.png"     alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
+                            (row.on_way       ? '<img src="/img/types/way.16.png"      alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
+                            (row.on_area      ? '<img src="/img/types/area.16.png"     alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
+                            (row.on_relation  ? '<img src="/img/types/relation.16.png" alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>'),
+                            print_key_or_tag_list(row.tags_implies),
+                            print_key_or_tag_list(row.tags_combination),
+                            print_key_or_tag_list(row.tags_linked)
+                        ]};
+                    })
+                };
+            }
+        });
+    });
+</script>

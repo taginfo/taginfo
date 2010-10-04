@@ -1,0 +1,49 @@
+<h1>Keys</h1>
+
+<table id="keys">
+</table>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        jQuery('#keys').flexigrid({
+            url: '/api/1/db/keys',
+            method: 'GET',
+            dataType: 'json',
+            colModel: [
+                { display: 'Key',               name: 'key',      width: 200, sortable: true, align: 'left' },
+                { display: '<span title="Number of objects with this key"><img src="/img/types/all.16.png" alt=""/> Total</span>',           name: 'count_all',        width: 250, sortable: true, align: 'center' },
+                { display: '<span title="Number of nodes with this key"><img src="/img/types/node.16.png" alt=""/> Nodes</span>',            name: 'count_nodes',      width: 250, sortable: true, align: 'center' },
+                { display: '<span title="Number of ways with this key"><img src="/img/types/way.16.png" alt=""/> Ways</span>',               name: 'count_ways',       width: 250, sortable: true, align: 'center' },
+                { display: '<span title="Number of relations with this key"><img src="/img/types/relation.16.png" alt=""/> Relation</span>', name: 'count_relations',  width: 250, sortable: true, align: 'center' },
+                { display: 'Users',             name: 'users_all', width: 44, sortable: true, align: 'right' },
+                { display: '<span title="Number of different values for this key">Values</span>',  name: 'values_all', width: 70, sortable: true, align: 'right' },
+                { display: 'Prevalent Values',  name: 'prevalent_values', width: 500, sortable: true, align: 'left' }
+            ],
+            searchitems: [
+                { display: 'Key', name: 'key' }
+            ],
+            sortname: 'count_all',
+            sortorder: 'desc',
+            showToggleBtn: false,
+            usepager: true,
+            useRp: true,
+            rp: 15,
+            height: 420,
+            preProcess: function(data) {
+                data.rows = jQuery.map(data.data, function(row, i) {
+                    return { 'cell': [
+                        row.key.to_key(),
+                        print_value_with_percent(row.count_all,       row.count_all_fraction),
+                        print_value_with_percent(row.count_nodes,     row.count_nodes_fraction),
+                        print_value_with_percent(row.count_ways,      row.count_ways_fraction),
+                        print_value_with_percent(row.count_relations, row.count_relations_fraction),
+                        row.users_all.print_with_ts(),
+                        row.values_all.print_with_ts(),
+                        print_tag_list(row.key, row.prevalent_values)
+                    ] };
+                });
+                return data;
+            }
+        });
+    });
+</script>

@@ -1,0 +1,22 @@
+
+Taginfo
+=======
+
+PREREQUISITES
+-------------
+
+Uses
+    * Mongrel
+    * Sinatra web framework http://www.sinatrarb.com/
+    * jQuery
+    * flexigrid http://code.google.com/p/flexigrid/ http://www.flexigrid.info/
+
+Icon from:
+    http://www.openclipart.org/detail/20131
+
+Debian/Ubuntu packages:
+    rubygems
+
+Gems:
+    gem install mongrel rack sinatra
+

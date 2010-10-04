@@ -1,0 +1,52 @@
+<h1><img src="/img/sources/db.32.png" alt="" title="Database"/> Database</h1>
+
+<p>The main OSM database is, of course, the most important source
+of information about tags. It shows what tags are actually used.</p>
+
+<div class="stats" style="float: left; padding-right: 60px;">
+    <div>
+        <h2><img class="icon_large" src="/img/types/all.24.png" alt=""/> Objects</h2>
+        <table class="stats">
+            <tr><td style="width: 7em;">There are </td><td style="width: 7em;" class="number"><%= @stats['objects'].to_s_with_ts %></td><td> objects in the database</td></tr>
+            <tr><td>with together </td><td class="number"><%= @stats['object_tags'].to_s_with_ts %></td><td> tags</td></tr>
+        </table>
+    </div>
+    <div>
+        <h2><img class="icon_large" src="/img/types/node.24.png" alt=""/> Nodes</h2>
+        <table class="stats">
+            <tr><td style="width: 7em;">There are </td><td style="width: 7em;" class="number"><%= @stats['nodes'].to_s_with_ts %></td><td> nodes</td></tr>
+            <tr><td>of which </td><td class="number"><%= @stats['nodes_with_tags'].to_s_with_ts %></td><td> have at least on tag</td></tr>
+            <tr><td>(thats </td><td class="number"><%= @stats['nodes_with_tags_percent'] %></td><td> %)</td></tr>
+            <tr><td>with together </td><td class="number"><%= @stats['node_tags'].to_s_with_ts %></td><td> tags</td></tr>
+            <tr><td>(or about </td><td class="number"><%= @stats['tags_per_node'] %></td><td> tags per tagged node)</td></tr>
+        </table>
+    </div>
+    <div>
+        <h2><img class="icon_large" src="/img/types/way.24.png" alt=""/> Ways</h2>
+        <table class="stats">
+            <tr><td style="width: 7em;">There are </td><td style="width: 7em;" class="number"><%= @stats['ways'].to_s_with_ts %></td><td> ways</td></tr>
+            <tr><td>(of which </td><td class="number"><%= @stats['closed_ways'].to_s_with_ts %></td><td> are closed)</td></tr>
+            <tr><td>with together </td><td class="number"><%= @stats['way_tags'].to_s_with_ts %></td><td> tags</td></tr>
+            <tr><td>(or about </td><td class="number"><%= @stats['tags_per_way'] %></td><td> tags per way)</td></tr>
+        </table>
+    </div>
+    <div>
+        <h2><img class="icon_large" src="/img/types/relation.24.png" alt=""/> Relations</h2>
+        <table class="stats">
+            <tr><td style="width: 7em;">There are </td><td style="width: 7em;" class="number"><%= @stats['relations'].to_s_with_ts %></td><td> relations</td></tr>
+            <tr><td>with together </td><td class="number"><%= @stats['relation_tags'].to_s_with_ts %></td><td> tags</td></tr>
+            <tr><td>(or about </td><td class="number"><%= @stats['tags_per_relation'] %></td><td> tags per relation)</td></tr>
+        </table>
+    </div>
+</div>
+
+<div class="stats">
+    <div>
+        <h2><img class="icon_large" src="/img/types/tag.24.png" alt=""/> Tags</h2>
+        <table class="stats">
+            <tr><td style="width: 7em;">There are </td><td style="width: 7em;" class="number"><%= @stats['num_keys'].to_s_with_ts %></td><td> different keys</td></tr>
+            <tr><td>and </td><td class="number"><%= @stats['num_tags'].to_s_with_ts %></td><td> different tags</td></tr>
+        </table>
+    </div>
+</div>
+

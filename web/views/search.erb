@@ -1,0 +1,13 @@
+<h1>Search results</h1>
+
+<p><b>You were searching for:</b> <%= @escaped_search_string %></p>
+
+<% if ! @key.nil? %>
+    <p><b>Exact match:</b> <a href="/keys/<%= h @key %>"><%= h @key %></a></p>
+<% end %>
+
+<% if @substring_keys %>
+    <p><b>Keys containing this word:</b>
+    <%= @substring_keys.map{ |key| "<a href='/keys/#{ h key }'>#{ h key }</a>" }.join(' &bull; ') %></p>
+<% end %>
+

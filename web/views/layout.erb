@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+    <head>
+        <title><%= h(title) %></title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="/css/taginfo.css" />
+        <link rel="Stylesheet" type="text/css" href="/css/smoothness/jquery-ui-1.7.3.custom.css" />
+        <link rel="stylesheet" type="text/css" href="/css/flexigrid/flexigrid.css" />
+        <script type="text/javascript" src="/js/jquery-1.3.2.min.js"></script>
+        <script type="text/javascript" src="/js/jquery-ui-1.7.2.all.min.js"></script>
+<!--        <script type="text/javascript" src="/js/flexigrid.pack.js"></script>-->
+        <script type="text/javascript" src="/js/flexigrid.js"></script>
+        <script type="text/javascript" src="/js/taginfo.js"></script>
+    </head>
+    <body>
+        <div id="top">
+<!--            <div id="right">
+                <select id="select_language" name="select_language">
+                    <option>English</option>
+                    <option>Deutsch</option>
+                    <option>switch does not work yet</option>
+                </select>
+            </div>-->
+            <div id="middle">
+                <form action="/search">
+                    <input type="text" id="search" name="search" value=""/>
+                </form>
+            </div>
+            <div id="left">
+                <a href="/"><img src="/img/taginfo.48.png" alt="Taginfo" style="padding-top: 2px;"/></a>
+                <span class="breadcrumbs"><%= breadcrumbs %></span>
+            </div>
+        </div>
+        <div id="date">
+            Data from: <%= @data_until %> UTC [<a href="/sources">Details...</a>]
+        </div>
+        <div id="main">
+            <%= yield %>
+        </div>
+        <div id="bottom">
+            <span><a href="/about">About</a>&nbsp;&bull;&nbsp;<a href="/sources">Sources</a>&nbsp;&bull;&nbsp;<a href="/api">API</a>&nbsp;&bull;&nbsp;<a href="/download">Download</a></span>
+        </div>
+    </body>
+</html>

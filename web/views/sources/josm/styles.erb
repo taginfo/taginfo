@@ -1,0 +1,19 @@
+
+<h1><img src="/img/josm.32.png" alt="" title="JOSM"/> JOSM Styles</h1>
+
+<table id="styles">
+    <tr>
+        <th>Id</th><th>Name</th><th>URL</th>
+    </tr>
+</table>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        jQuery.getJSON('/api/1/josm/styles', function(data, textStatus) {
+            var x = jQuery.map(data, function(style, i) {
+                return '<tr><td><a href="/sources/josm/styles/' + style.id + '">' + style.id + '</a></td><td>' + style.name + '</td><td>' + style.url + '</td></tr>';
+            }).join('');
+            jQuery('#styles').append(x);
+        });
+    });
+</script>

@@ -1,0 +1,11 @@
+<div style="text-align: center;">
+    <h1><img src="/img/taginfo.128.png" class="icon_large" alt=""/><br/>Taginfo</h1>
+
+    <p>[<a href="/keys">Show all Keys</a>]</p>
+
+    <div class="tagcloud">
+        <% @tags.each do |tag| %>
+            <a href="/tags/<%= tag['key'] %>" class="popkey" style="font-size: <%= tagcloud_size(tag) %>px;"><%= tag['key'] %></a>
+        <% end %>
+    </div>
+</div>

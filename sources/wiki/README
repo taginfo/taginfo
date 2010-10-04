@@ -1,0 +1,22 @@
+
+Taginfo Sources: Wiki
+=====================
+
+PREREQUISITES
+-------------
+
+On Debian/Ubuntu you need the following packages:
+    libjson-ruby sqlite3 packages libsqlite3-ruby1.8
+
+
+RUNNING
+-------
+
+Run ./update.sh DIR
+
+where DIR is the name of a directory where the data will be stored.
+
+The file 'allpages.list' is currently not used. But because we get the
+information from the wiki anyway, we just store it. Maybe in the future
+it is of some use.
+
