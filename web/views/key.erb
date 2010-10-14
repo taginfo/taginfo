@@ -8,7 +8,7 @@
 </div>
 
 <div id="tools">
-    <% if @count_all < 1000 %>
+    <% if @count_all_values < 1000 %>
         [<%= xapi_link('*', @key + '=*') %>] [<%= josm_link('*', @key + '=*') %>]
     <% else %>
         <span title="Links disabled, because there are too many objects with this key">[XAPI] [JOSM]</span>
@@ -19,7 +19,7 @@
     <label for="filter">Filter:</label>
     <select id="filter" name="filter">
         <option value="all"<%=       @sel['all']       %>>No filter</option>
-        <option value="nodes"<%=     @sel['nodes']     %>><img src="/img/types/node.16.png" alt=""/> Nodes only</option>
+        <option value="nodes"<%=     @sel['nodes']     %>>Nodes only</option>
         <option value="ways"<%=      @sel['ways']      %>>Ways only</option>
         <option value="relations"<%= @sel['relations'] %>>Relations only</option>
     </select>
@@ -35,8 +35,11 @@
     </ul>
     <div id="tabs-values">
         <h2>Values used with this key</h2>
-       <table id="grid-values">
-       </table>
+        <div id="canvas-values"></div>
+        <div style="margin-left: 180px;">
+            <table id="grid-values">
+            </table>
+        </div>
     </div>
     <div id="tabs-keys">
         <h2>Other keys used together with this key</h2>
@@ -108,6 +111,7 @@
             showTableToggleBtn: false,
             usepager: true,
             useRp: true,
+            rpOptions: [10,15,20,25,50,100],
             rp: 15,
             height: 410,
             preProcess: function(data) {
@@ -140,6 +144,7 @@
             showTableToggleBtn: false,
             usepager: true,
             useRp: true,
+            rpOptions: [10,15,20,25,50,100],
             rp: 15,
             height: 410,
             preProcess: function(data) {
@@ -173,6 +178,7 @@
             showTableToggleBtn: false,
             usepager: true,
             useRp: true,
+            rpOptions: [10,15,20,25,50,100],
             rp: 15,
             height: 410,
             preProcess: function(data) {
@@ -206,6 +212,7 @@
             showTableToggleBtn: false,
             usepager: false,
             useRp: false,
+            rpOptions: [10,15,20,25,50,100],
             height: 400,
             preProcess: function(data) {
                 return {
@@ -230,4 +237,32 @@
             }
         });
     });
+</script>
+<script type="text/javascript+protovis">
+
+var data = <%= @prevalent_values.to_json() %>;
+
+var w = 160, h = 440;
+
+var vis = new pv.Panel()
+    .canvas('canvas-values')
+    .width(w)
+    .height(h + 20);
+
+var scale = pv.Scale.linear(0, <%= @count_all_values %>).range(0, h);
+
+vis.add(pv.Layout.Stack)
+    .bottom(10)
+    .layers(data)
+    .x(10)
+    .y(function(d) scale(d.count))
+  .layer.add(pv.Bar)
+    .width(20)
+  .anchor('left')
+    .add(pv.Label)
+    .left(30)
+    .text(function(d) d.value);
+
+vis.render();
+
 </script>

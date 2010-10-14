@@ -28,53 +28,54 @@ CREATE TABLE stats (
 DROP TABLE IF EXISTS wikipages;
 
 CREATE TABLE wikipages (
-    lang             VARCHAR,
-    tag              VARCHAR,
-    key              VARCHAR,
-    value            VARCHAR,
-    title            VARCHAR,
-    tgroup           VARCHAR,
-    type             VARCHAR,
+    lang             TEXT,
+    tag              TEXT,
+    key              TEXT,
+    value            TEXT,
+    title            TEXT,
+    body             TEXT,
+    tgroup           TEXT,
+    type             TEXT,
     has_templ        INTEGER,
     parsed           INTEGER,
-    description      VARCHAR,
-    image            VARCHAR,
+    description      TEXT,
+    image            TEXT,
     on_node          INTEGER,
     on_way           INTEGER,
     on_area          INTEGER,
     on_relation      INTEGER,
-    tags_implies     VARCHAR,
-    tags_combination VARCHAR,
-    tags_linked      VARCHAR,
-    status           VARCHAR
+    tags_implies     TEXT,
+    tags_combination TEXT,
+    tags_linked      TEXT,
+    status           TEXT
 );
 
 DROP TABLE IF EXISTS wikipages_keys;
 
 CREATE TABLE wikipages_keys (
-    key   VARCHAR,
-    langs VARCHAR
+    key   TEXT,
+    langs TEXT
 );
 
 DROP TABLE IF EXISTS wikipages_tags;
 
 CREATE TABLE wikipages_tags (
-    key   VARCHAR,
-    value VARCHAR,
-    langs VARCHAR
+    key   TEXT,
+    value TEXT,
+    langs TEXT
 );
 
 DROP TABLE IF EXISTS wiki_languages;
 
 CREATE TABLE wiki_languages (
-    language    VARCHAR,
-    count_pages INT
+    language    TEXT,
+    count_pages INTEGER
 );
 
 DROP TABLE IF EXISTS stats;
 
 CREATE TABLE stats (
-    key   VARCHAR,
+    key   TEXT,
     value INT64
 );
 

@@ -117,12 +117,13 @@ class WikiPage
 
     def insert(db)
         db.execute(
-            "INSERT INTO wikipages (lang, tag, key, value, title, tgroup, type, has_templ, parsed, description, image, on_node, on_way, on_area, on_relation, tags_implies, tags_combination, tags_linked) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO wikipages (lang, tag, key, value, title, body, tgroup, type, has_templ, parsed, description, image, on_node, on_way, on_area, on_relation, tags_implies, tags_combination, tags_linked) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             lang,
             tag,
             key,
             value,
             title,
+            content,
             group,
             type,
             has_templ,

@@ -326,3 +326,9 @@ table.list th, table.list td {
     padding: 4px 20px;
 }
 
+div#canvas-values {
+    position: absolute;
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+}
+

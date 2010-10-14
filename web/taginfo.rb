@@ -149,10 +149,20 @@ class Taginfo < Sinatra::Base
         @sel = Hash.new('')
         @sel[@filter_type] = ' selected="selected"'
 
-        @count_all = @db.select('SELECT count_all FROM db.keys').condition('key = ?', @key). get_first_value().to_i
+        @count_all_values = @db.select("SELECT count_#{@filter_type} FROM db.keys").condition('key = ?', @key).get_first_value().to_i
 
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang='en' AND key=? AND value IS NULL", @key).get_first_value())
         @desc = '<i>no description in wiki</i>' if @desc == ''
+
+        @prevalent_values = @db.select("SELECT value, count_#{@filter_type} AS count FROM tags").
+            condition('key=?', @key).
+            condition('count > ?', @count_all_values * 0.02).
+            order_by([:count], :count, 'DESC').
+            execute().map{ |row| [{ 'value' => row['value'], 'count' => row['count'].to_i }] }
+
+        # add "(other)" label for the rest of the values
+        sum = @prevalent_values.inject(0){ |sum, x| sum += x[0]['count'] }
+        @prevalent_values << [{ 'value' => '(other)', 'count' => @count_all_values - sum }]
 
         erb :key
     end
@@ -187,7 +197,7 @@ class Taginfo < Sinatra::Base
         @sel = Hash.new('')
         @sel[@filter_type] = ' selected="selected"'
 
-        @count_all = @db.select('SELECT count_all FROM db.tags').condition('key = ? AND value = ?', @key, @value). get_first_value().to_i
+        @count_all = @db.select('SELECT count_all FROM db.tags').condition('key = ? AND value = ?', @key, @value).get_first_value().to_i
 
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang='en' AND key=? AND value=?", @key, @value).get_first_value())
         @desc = '<i>no description in wiki</i>' if @desc == ''
