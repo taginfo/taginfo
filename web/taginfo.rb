@@ -167,8 +167,8 @@ class Taginfo < Sinatra::Base
         erb :key
     end
 
-    get '/tags/:tag' do
-        @tag = params[:tag]
+    get %r{^/tags/(.*)} do
+        @tag = params[:captures].first
         (@key, @value) = @tag.split('=', 2)
 
         @key_html = escape_html(@key)
