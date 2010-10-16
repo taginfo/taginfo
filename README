@@ -24,8 +24,11 @@ PREREQUISITES
 Uses
     * Mongrel
     * Sinatra web framework http://www.sinatrarb.com/
-    * jQuery
-    * flexigrid http://code.google.com/p/flexigrid/ http://www.flexigrid.info/
+    * jQuery (www.jquery.com), necessary files are included
+    * Flexigrid (Originally from http://code.google.com/p/flexigrid/
+        http://www.flexigrid.info/ , the version used and included
+        is the one from http://github.com/joto/flexigrid with
+        some bugfixes.)
 
 Icon from:
     http://www.openclipart.org/detail/20131

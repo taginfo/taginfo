@@ -80,10 +80,8 @@
 				(
 			 	function ()
 					{
-					var n = $('thead tr:first th:visible',g.hDiv).index(this);
-
-					var cdpos = parseInt($('div',this).width());
-					var ppos = cdpos;
+					var n = $('thead tr:first th:visible',g.hDiv).index(this),
+					    cdpos = parseInt($('div',this).width());
 					if (cdleft==0) 
 							cdleft -= Math.floor(p.cgwidth/2); 
 
@@ -126,8 +124,8 @@
 				if (dragtype=='colresize') //column resize
 					{
 						$(g.nDiv).hide();$(g.nBtn).hide();
-						var n = $('div',this.cDrag).index(obj);
-						var ow = $('th:visible div:eq('+n+')',this.hDiv).width();
+						var n = $('div',this.cDrag).index(obj),
+						    ow = $('th:visible div:eq('+n+')',this.hDiv).width();
 						$(obj).addClass('dragging').siblings().hide();
 						$(obj).prev().addClass('dragging').show();
 						
@@ -165,7 +163,7 @@
 						}
 						
 						
-						$(this.colCopy).css({position:'absolute',float:'left',display:'none', textAlign: obj.align});
+						$(this.colCopy).css({position:'absolute','float':'left',display:'none', textAlign: obj.align});
 						$('body').append(this.colCopy);
 						$(this.cDrag).hide();
 						
@@ -178,10 +176,10 @@
 			
 				if (this.colresize) //column resize
 					{
-						var n = this.colresize.n;
-						var diff = e.pageX-this.colresize.startX;
-						var nleft = this.colresize.ol + diff;
-						var nw = this.colresize.ow + diff;
+						var n = this.colresize.n,
+						    diff = e.pageX-this.colresize.startX,
+						    nleft = this.colresize.ol + diff,
+						    nw = this.colresize.ow + diff;
 						if (nw > p.minwidth)
 							{
 								$('div:eq('+n+')',this.cDrag).css('left',nleft);
@@ -190,17 +188,17 @@
 					}
 				else if (this.vresize) //table resize
 					{
-						var v = this.vresize;
-						var y = e.pageY;
-						var diff = y-v.sy;
+						var v = this.vresize,
+						    y = e.pageY,
+						    diff = y-v.sy;
 						
 						if (!p.defwidth) p.defwidth = p.width;
 						
 						if (p.width != 'auto' && !p.nohresize && v.hgo)
 						{
-							var x = e.pageX;
-							var xdiff = x - v.sx;
-							var newW = v.w + xdiff;
+							var x = e.pageX,
+							    xdiff = x - v.sx,
+							    newW = v.w + xdiff;
 							if (newW > p.defwidth)
 								{
 									this.gDiv.style.width = newW + 'px';
@@ -234,8 +232,8 @@
 
 				if (this.colresize)
 					{
-						var n = this.colresize.n;
-						var nw = this.colresize.nw;
+						var n = this.colresize.n,
+						    nw = this.colresize.nw;
 
 								$('th:visible div:eq('+n+')',this.hDiv).css('width',nw);
 								$('tr',this.bDiv).each (
@@ -294,17 +292,14 @@
 			},
 			toggleCol: function(cid,visible) {
 				
-				var ncol = $("th[axis='col"+cid+"']",this.hDiv)[0];
-				var n = $('thead th',g.hDiv).index(ncol);
-				var cb = $('input[value='+cid+']',g.nDiv)[0];
-				
+				var ncol = $("th[axis='col"+cid+"']",this.hDiv)[0],
+				    n = $('thead th',g.hDiv).index(ncol),
+				    cb = $('input[value='+cid+']',g.nDiv)[0];
 				
 				if (visible==null)
 					{
 						visible = ncol.hide;
 					}
-				
-				
 				
 				if ($('input:checked',g.nDiv).length<p.minColToggle&&!visible) return false;
 				
@@ -371,15 +366,15 @@
 					data = p.preProcess(data);
 				
 				if (this.pDiv) {
-                    $('.pReload',this.pDiv).removeClass('loading');
-                }
+					 this.domElements.pReload.removeClass('loading');
+				}
 				this.loading = false;
 
 				if (!data) 
 					{
-				    if (this.pDiv) {
-				    	$('.pPageStat',this.pDiv).html(p.errormsg);	
-                    }
+					if (this.pDiv) {
+						this.domElements.pPageStat.html(p.errormsg);	
+					}
 					return false;
 					}
 
@@ -395,9 +390,9 @@
 					p.pages = 1;
 					p.page = 1;
 					this.buildpager();
-				    if (this.pDiv) {
-				    	$('.pPageStat',this.pDiv).html(p.nomsg);
-                    }
+					if (this.pDiv) {
+						this.domElements.pPageStat.html(p.nomsg);	
+					}
 					return false;
 					}
 				
@@ -431,8 +426,8 @@
 							 	function ()
 									{
 										
-										var td = document.createElement('td');
-										var idx = $(this).attr('axis').substr(3);
+										var td = document.createElement('td'),
+										    idx = $(this).attr('axis').substr(3);
 										td.align = this.align;
 										td.innerHTML = row.cell[idx];
 										$(tr).append(td);
@@ -444,7 +439,7 @@
 							if ($('thead',this.gDiv).length<1) //handle if grid has no headers
 							{
 
-									for (idx=0;idx<cell.length;idx++)
+									for (var idx=0;idx<cell.length;idx++)
 										{
 										var td = document.createElement('td');
 										td.innerHTML = row.cell[idx];
@@ -460,7 +455,7 @@
 					
 				} else if (p.dataType=='xml') {
 
-				i = 1;
+				var i = 1;
 
 				$("rows row",data).each
 				(
@@ -487,8 +482,8 @@
 							 	function ()
 									{
 										
-										var td = document.createElement('td');
-										var idx = $(this).attr('axis').substr(3);
+										var td = document.createElement('td'),
+										    idx = $(this).attr('axis').substr(3);
 										td.align = this.align;
 										td.innerHTML = $("cell:eq("+ idx +")",robj).text();
 										$(tr).append(td);
@@ -565,13 +560,13 @@
 			},
 			buildpager: function(){ //rebuild pager based on new properties
 			
-        	if (this.pDiv) {
-                $('.pcontrol input',this.pDiv).val(p.page);
-                $('.pcontrol span',this.pDiv).html(p.pages);
-            }
+			if (this.pDiv) {
+				this.domElements.pcontrol_input.val(p.page);
+				this.domElements.pcontrol_span.html(p.pages);
+			}
 			
-			var r1 = (p.page-1) * p.rp + 1;
-			var r2 = r1 + p.rp - 1;
+			var r1 = (p.page-1) * p.rp + 1,
+			    r2 = r1 + p.rp - 1;
 			
 			if (p.total<r2) r2 = p.total;
 			
@@ -581,9 +576,9 @@
 			stat = stat.replace(/{to}/,r2);
 			stat = stat.replace(/{total}/,p.total);
 			
-        	if (this.pDiv) {
-			    $('.pPageStat',this.pDiv).html(stat);
-            }
+			if (this.pDiv) {
+				this.domElements.pPageStat.html(stat);	
+			}
 			
 			},
 			populate: function () { //get latest data
@@ -599,10 +594,10 @@
 				this.loading = true;
 				if (!p.url) return false;
 				
-        	    if (this.pDiv) {
-                    $('.pPageStat',this.pDiv).html(p.procmsg);
-                    $('.pReload',this.pDiv).addClass('loading');
-                }
+				if (this.pDiv) {
+					this.domElements.pPageStat.html(p.procmsg);	
+					this.domElements.pReload.addClass('loading');
+				}
 				
 				$(g.block).css({top:g.bDiv.offsetTop});
 				
@@ -655,13 +650,15 @@
 					case 'next': if (p.page<p.pages) p.newp = parseInt(p.page) + 1; break;
 					case 'last': p.newp = p.pages; break;
 					case 'input': 
-							var nv = parseInt($('.pcontrol input',this.pDiv).val());
-							if (isNaN(nv)) nv = 1;
-							if (nv<1) nv = 1;
-							else if (nv > p.pages) nv = p.pages;
-							$('.pcontrol input',this.pDiv).val(nv);
-							p.newp =nv;
-							break;
+							if (this.pDiv) {
+								var nv = parseInt(this.domElements.pcontrol_input.val());
+								if (isNaN(nv)) nv = 1;
+								if (nv<1) nv = 1;
+								else if (nv > p.pages) nv = p.pages;
+								this.domElements.pcontrol_input.val(nv);
+								p.newp =nv;
+								break;
+							}
 				}
 			
 				if (p.newp==p.page) return false;
@@ -679,9 +676,9 @@
 					(
 						function ()
 							{
-									var tdDiv = document.createElement('div');
-									var n = $('td',$(this).parent()).index(this);
-									var pth = $('th:eq('+n+')',g.hDiv).get(0);
+									var tdDiv = document.createElement('div'),
+									    n = $('td',$(this).parent()).index(this),
+									    pth = $('th:eq('+n+')',g.hDiv).get(0);
 			
 									if (pth!=null)
 									{
@@ -702,8 +699,8 @@
 									 //tdDiv.value = this.innerHTML; //store preprocess value
 									 tdDiv.innerHTML = this.innerHTML;
 									 
-									 var prnt = $(this).parent()[0];
-									 var pid = false;
+									 var prnt = $(this).parent()[0],
+									     pid = false;
 									 if (prnt.id) pid = prnt.id.substr(3);
 									 
 									 if (pth!=null)
@@ -721,14 +718,14 @@
 			},
 			getCellDim: function (obj) // get cell prop for editable event
 			{
-				var ht = parseInt($(obj).height());
-				var pht = parseInt($(obj).parent().height());
-				var wt = parseInt(obj.style.width);
-				var pwt = parseInt($(obj).parent().width());
-				var top = obj.offsetParent.offsetTop;
-				var left = obj.offsetParent.offsetLeft;
-				var pdl = parseInt($(obj).css('paddingLeft'));
-				var pdt = parseInt($(obj).css('paddingTop'));
+				var ht = parseInt($(obj).height()),
+				    pht = parseInt($(obj).parent().height()),
+				    wt = parseInt(obj.style.width),
+				    pwt = parseInt($(obj).parent().width()),
+				    top = obj.offsetParent.offsetTop,
+				    left = obj.offsetParent.offsetLeft,
+				    pdl = parseInt($(obj).css('paddingLeft')),
+				    pdt = parseInt($(obj).css('paddingTop'));
 				return {ht:ht,wt:wt,top:top,left:left,pdl:pdl, pdt:pdt, pht:pht, pwt: pwt};
 			},
 			addRowProp: function()
@@ -800,13 +797,13 @@
 		//create model if any
 		if (p.colModel)
 		{
-			thead = document.createElement('thead');
-			tr = document.createElement('tr');
+			var thead = document.createElement('thead');
+			var tr = document.createElement('tr');
 			
-			for (i=0;i<p.colModel.length;i++)
+			for (var i=0;i<p.colModel.length;i++)
 				{
-					var cm = p.colModel[i];
-					var th = document.createElement('th');
+					var cm = p.colModel[i],
+					    th = document.createElement('th');
 
 					th.innerHTML = cm.display;
 					
@@ -1009,10 +1006,10 @@
 									
 									} else if (!g.colresize) {
 										
-									var nv = $('th:visible',g.hDiv).index(this);
-									var onl = parseInt($('div:eq('+nv+')',g.cDrag).css('left'));
-									var nw = jQuery(g.nBtn).outerWidth();
-									nl = onl - nw + Math.floor(p.cgwidth/2);
+									var nv = $('th:visible',g.hDiv).index(this),
+									    onl = parseInt($('div:eq('+nv+')',g.cDrag).css('left')),
+									    nw = jQuery(g.nBtn).outerWidth(),
+									    nl = onl - nw + Math.floor(p.cgwidth/2);
 									
 									$(g.nDiv).hide();$(g.nBtn).hide();
 									
@@ -1083,7 +1080,7 @@
 		var cdcol = $('thead tr:first th:first',g.hDiv).get(0);
 		
 		if (cdcol != null)
-		{		
+		{
 		g.cDrag.className = 'cDrag';
 		g.cdpad = 0;
 		
@@ -1098,8 +1095,8 @@
 
 		$(g.bDiv).before(g.cDrag);
 		
-		var cdheight = $(g.bDiv).height();
-		var hdheight = $(g.hDiv).height();
+		var cdheight = $(g.bDiv).height(),
+		    hdheight = $(g.hDiv).height();
 		
 		$(g.cDrag).css({top: -hdheight + 'px'});
 		
@@ -1170,13 +1167,20 @@
 		$(g.bDiv).after(g.pDiv);
 		var html = ' <div class="pGroup"> <div class="pFirst pButton"><span></span></div><div class="pPrev pButton"><span></span></div> </div> <div class="btnseparator"></div> <div class="pGroup"><span class="pcontrol">'+p.pagetext+' <input type="text" size="4" value="1" /> '+p.outof+' <span> 1 </span></span></div> <div class="btnseparator"></div> <div class="pGroup"> <div class="pNext pButton"><span></span></div><div class="pLast pButton"><span></span></div> </div> <div class="btnseparator"></div> <div class="pGroup"> <div class="pReload pButton"><span></span></div> </div> <div class="btnseparator"></div> <div class="pGroup"><span class="pPageStat"></span></div>';
 		$('div',g.pDiv).html(html);
+
+		g.domElements = {
+			pReload: $('.pReload', g.pDiv),
+			pPageStat: $('.pPageStat', g.pDiv),
+			pcontrol_input: $('.pcontrol input', g.pDiv),
+			pcontrol_span: $('.pcontrol span', g.pDiv)
+		};
 		
-		$('.pReload',g.pDiv).click(function(){g.populate()});
+		g.domElements.pReload.click(function(){g.populate()});
 		$('.pFirst',g.pDiv).click(function(){g.changePage('first')});
 		$('.pPrev',g.pDiv).click(function(){g.changePage('prev')});
 		$('.pNext',g.pDiv).click(function(){g.changePage('next')});
 		$('.pLast',g.pDiv).click(function(){g.changePage('last')});
-		$('.pcontrol input',g.pDiv).keydown(function(e){if(e.keyCode==13) g.changePage('input')});
+		g.domElements.pcontrol_input.keydown(function(e){if(e.keyCode==13) g.changePage('input')});
 		if ($.browser.msie&&$.browser.version<7) $('.pButton',g.pDiv).hover(function(){$(this).addClass('pBtnOver');},function(){$(this).removeClass('pBtnOver');});
 			
 			if (p.useRp)
@@ -1184,8 +1188,9 @@
 			var opt = "";
 			for (var nx=0;nx<p.rpOptions.length;nx++)
 			{
-				if (p.rp == p.rpOptions[nx]) sel = 'selected="selected"'; else sel = '';
-				 opt += "<option value='" + p.rpOptions[nx] + "' " + sel + " >" + p.rpOptions[nx] + "&nbsp;&nbsp;</option>";
+                var sel = '';
+				if (p.rp == p.rpOptions[nx]) sel = 'selected="selected"';
+				opt += "<option value='" + p.rpOptions[nx] + "' " + sel + " >" + p.rpOptions[nx] + "&nbsp;&nbsp;</option>";
 			};
 			$('.pDiv2',g.pDiv).prepend("<div class='pGroup'><select name='rp'>"+opt+"</select></div> <div class='btnseparator'></div>");
 			$('select',g.pDiv).change(
@@ -1266,8 +1271,8 @@
 
 		//add block
 		g.block.className = 'gBlock';
-		var gh = $(g.bDiv).height();
-		var gtop = g.bDiv.offsetTop;
+		var gh = $(g.bDiv).height(),
+		    gtop = g.bDiv.offsetTop;
 		$(g.block).css(
 		{
 			width: g.bDiv.style.width,
@@ -1299,13 +1304,12 @@
 			
 			var cn = 0;
 			
-			
 			$('th div',g.hDiv).each
 			(
 			 	function ()
 					{
-						var kcol = $("th[axis='col" + cn + "']",g.hDiv)[0];
-						var chk = 'checked="checked"';
+						var kcol = $("th[axis='col" + cn + "']",g.hDiv)[0],
+						    chk = 'checked="checked"';
 						if (kcol.style.display=='none') chk = '';
 						
 						$('tbody',g.nDiv).append('<tr><td class="ndcol1"><input type="checkbox" '+ chk +' class="togCol" value="'+ cn +'" /></td><td class="ndcol2">'+this.innerHTML+'</td></tr>');
