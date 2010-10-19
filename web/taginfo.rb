@@ -195,7 +195,7 @@ class Taginfo < Sinatra::Base
         @title = [@key_html + '=' + @value_html, 'Tags']
         @breadcrumbs << ['Keys', '/keys']
         @breadcrumbs << [@key_html, '/keys/' + @key_uri]
-        @breadcrumbs << @key_html + '=' + ( @value.length > 20 ? escape_html(@value[0,20] + '...') : @value_html)
+        @breadcrumbs << ( @value.length > 30 ? escape_html(@value[0,20] + '...') : @value_html)
 
         @filter_type = get_filter()
         @sel = Hash.new('')

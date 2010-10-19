@@ -1,7 +1,7 @@
 # api/db.rb
 class Taginfo < Sinatra::Base
 
-    get '/api/1/db/keys' do
+    get '/api/2/db/keys' do
         total = @db.count('db.keys').
             condition_if("key LIKE '%' || ? || '%'", params[:query]).
             get_first_value().to_i
@@ -33,8 +33,8 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
-    get %r{^/api/1/db/keys/overview/(.*)} do
-        key = params[:captures].first
+    get '/api/2/db/keys/overview' do
+        key = params[:key]
         out = Hash.new
 
         # default values
@@ -59,16 +59,16 @@ class Taginfo < Sinatra::Base
         out.to_json
     end
 
-    get %r{^/api/1/db/keys/distribution/(.*)} do
-        key = params[:captures].first
+    get '/api/2/db/keys/distribution' do
+        key = params[:key]
         content_type :png
         @db.select('SELECT png FROM db.key_distributions').
             condition('key = ?', key).
             get_first_value()
     end
 
-    get %r{^/api/1/db/keys/values/(.*)} do
-        key = params[:captures].first
+    get '/api/2/db/keys/values' do
+        key = params[:key]
         filter_type = get_filter()
 
         if params[:sortname] == 'count'
@@ -107,8 +107,8 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
-    get %r{^/api/1/db/keys/keys/(.*)} do
-        key = params[:captures].first
+    get '/api/2/db/keys/keys' do
+        key = params[:key]
         filter_type = get_filter()
 
         if params[:sortname] == 'to_count'
@@ -145,7 +145,7 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
-    get '/api/1/db/popular_keys' do
+    get '/api/2/db/popular_keys' do
         total = @db.count('popular_keys').
             condition_if("key LIKE '%' || ? || '%'", params[:query]).
             get_first_value().to_i
@@ -172,7 +172,7 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
-    get '/api/1/db/tags/overview/' do
+    get '/api/2/db/tags/overview' do
         key   = params[:key]
         value = params[:value]
 

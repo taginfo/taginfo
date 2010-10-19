@@ -1,36 +1,6 @@
 # api/wiki.rb
 class Taginfo < Sinatra::Base
 
-    get '/api/1/wiki/keys' do
-        languages = @db.execute('SELECT language FROM wiki.wiki_languages ORDER by language').map do |row|
-            row['language']
-        end
-
-        total = @db.count('wiki.wikipages_keys').
-            condition_if("key LIKE '%' || ? || '%'", params[:query]).
-            get_first_value().to_i
-
-        res = @db.select('SELECT key, langs FROM wiki.wikipages_keys').
-            condition_if("key LIKE '%' || ? || '%'", params[:query]).
-            order_by([:key], params[:sortname], params[:sortorder]).
-            paging(params[:rp], params[:page]).
-            execute()
-
-        return {
-            :page  => params[:page].to_i,
-            :rp    => params[:rp].to_i,
-            :total => total,
-            :data  => res.map{ |row|
-                lang_hash = Hash.new
-                row['langs'].split(',').each{ |l|
-                    (lang, status) = l.split(' ', 2)
-                    lang_hash[lang] = status
-                }
-                { :key => row['key'], :lang => lang_hash }
-            }
-        }.to_json
-    end
-
     def get_wiki_result(res)
         return res.map{ |row| {
                 :lang             => h(row['lang']),
@@ -49,15 +19,45 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
-    get %r{/api/1/wiki/keys/(.*)} do
-        key = params[:captures].first
+    get '/api/2/wiki/keys' do
+        key = params[:key]
 
-        res = @db.execute('SELECT * FROM wikipages WHERE value IS NULL AND key = ? ORDER BY lang', key)
+        if key.nil?
 
-        return get_wiki_result(res)
+            languages = @db.execute('SELECT language FROM wiki.wiki_languages ORDER by language').map do |row|
+                row['language']
+            end
+
+            total = @db.count('wiki.wikipages_keys').
+                condition_if("key LIKE '%' || ? || '%'", params[:query]).
+                get_first_value().to_i
+
+            res = @db.select('SELECT key, langs FROM wiki.wikipages_keys').
+                condition_if("key LIKE '%' || ? || '%'", params[:query]).
+                order_by([:key], params[:sortname], params[:sortorder]).
+                paging(params[:rp], params[:page]).
+                execute()
+
+            return {
+                :page  => params[:page].to_i,
+                :rp    => params[:rp].to_i,
+                :total => total,
+                :data  => res.map{ |row|
+                    lang_hash = Hash.new
+                    row['langs'].split(',').each{ |l|
+                        (lang, status) = l.split(' ', 2)
+                        lang_hash[lang] = status
+                    }
+                    { :key => row['key'], :lang => lang_hash }
+                }
+            }.to_json
+        else
+            res = @db.execute('SELECT * FROM wikipages WHERE value IS NULL AND key = ? ORDER BY lang', key)
+            return get_wiki_result(res)
+        end
     end
 
-    get '/api/1/wiki/tags/' do
+    get '/api/2/wiki/tags' do
         key   = params[:key]
         value = params[:value]
 

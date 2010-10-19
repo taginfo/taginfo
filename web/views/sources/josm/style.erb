@@ -7,7 +7,7 @@
 <script type="text/javascript">
     jQuery(document).ready(function() {
         jQuery('#rules').flexigrid({
-            url: '/api/1/josm/styles/<%= @stylename %>',
+            url: '/api/2/josm/styles/<%= @stylename %>',
             method: 'GET',
             dataType: 'json',
             colModel: [

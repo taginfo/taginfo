@@ -1,6 +1,6 @@
 class Taginfo < Sinatra::Base
 
-    get '/api/1/josm/styles' do
+    get '/api/2/josm/styles' do
         # XXX dummy function
         return [
             { :id => 'standard', :name => 'standard', :url => '' }
@@ -34,7 +34,7 @@ class Taginfo < Sinatra::Base
         end
     end
 
-    get '/api/1/josm/styles/:style' do
+    get '/api/2/josm/styles/:style' do
         total = @db.count('josm_style_rules').
             condition_if("k LIKE '%' || ? || '%' OR v LIKE '%' || ? || '%'", params[:query], params[:query]).
             get_first_value().to_i
@@ -61,9 +61,9 @@ class Taginfo < Sinatra::Base
         end
     end
 
-    get %r{^/api/1/josm/styles/([^/]+)/keys/(.*)} do
-        style = params[:captures].first # XXX do something with this
-        key   = params[:captures][1]
+    get '/api/2/josm/styles/:style/keys' do
+        style = params[:style] # XXX do something with this
+        key   = params[:key]
         
         total = @db.count('josm_style_rules').
             condition('k = ?', key).
@@ -80,7 +80,7 @@ class Taginfo < Sinatra::Base
         return get_josm_result(total, res);
     end
 
-    get '/api/1/josm/styles/:style/tags/' do
+    get '/api/2/josm/styles/:style/tags' do
         key   = params[:key]
         value = params[:value]
 

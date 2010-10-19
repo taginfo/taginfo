@@ -49,7 +49,7 @@
     <div id="tabs-map">
         <h2>Geographical distribution of this key</h2>
         <p><i>Currently only tags on nodes are shown.</i></p>
-        <div style="background-image: url(/img/worldp.png); background-repeat: no-repeat;"/><img src="/api/1/db/keys/distribution/<%= @key_uri %>" alt=""/></div>
+        <div style="background-image: url(/img/worldp.png); background-repeat: no-repeat;"/><img src="/api/2/db/keys/distribution?key=<%= @key_uri %>" alt=""/></div>
     </div>
     <div id="tabs-wiki">
         <h2>Wiki pages about this key</h2>
@@ -85,7 +85,7 @@
 
         var tabs = jQuery('#tabs').tabs();
 
-        jQuery.getJSON('/api/1/db/keys/overview/<%= @key_uri %>', function(data, textStatus) {
+        jQuery.getJSON('/api/2/db/keys/overview?key=<%= @key_uri %>', function(data, textStatus) {
             var table_content = '<tr><th></th><th title="Number of objects with this key">Number of objects</th><th class="values" title="Number of different values">Values</th></tr>';
             table_content += jQuery.map(['all', 'nodes', 'ways', 'relations'], function(obj, i) {
                 var d = data[obj];
@@ -95,7 +95,7 @@
         });
 
         jQuery('#grid-values').flexigrid({
-            url: '/api/1/db/keys/values/<%= @key_uri %>?filter=<%= @filter_type %>',
+            url: '/api/2/db/keys/values?key=<%= @key_uri %>&filter=<%= @filter_type %>',
             method: 'GET',
             dataType: 'json',
             colModel: [
@@ -127,7 +127,7 @@
         });
 
         jQuery('#grid-keys').flexigrid({
-            url: '/api/1/db/keys/keys/<%= @key_uri %>?filter=<%= @filter_type %>',
+            url: '/api/2/db/keys/keys?key=<%= @key_uri %>&filter=<%= @filter_type %>',
             method: 'GET',
             dataType: 'json',
             colModel: [
@@ -160,7 +160,7 @@
         });
 
         jQuery('#grid-josm').flexigrid({
-            url: '/api/1/josm/styles/standard/keys/<%= @key_uri %>',
+            url: '/api/2/josm/styles/standard/keys?key=<%= @key_uri %>',
             method: 'GET',
             dataType: 'json',
             colModel: [
@@ -195,7 +195,7 @@
         });
 
         jQuery('#wiki-langs').flexigrid({
-            url: '/api/1/wiki/keys/<%= @key_uri %>',
+            url: '/api/2/wiki/keys?key=<%= @key_uri %>',
             method: 'GET',
             dataType: 'json',
             colModel: [

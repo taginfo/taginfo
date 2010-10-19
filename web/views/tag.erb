@@ -1,7 +1,7 @@
 <table id="overview">
 </table>
 
-<h1><%= link_to_tag(@key, @value)  %></h1>
+<h1><%= link_to_key(@key) %>=<%= @value_pp %></h1>
 
 <div class="source-wiki" title="Description from the wiki">
     <%= @desc %>
@@ -54,7 +54,7 @@
 
         var tabs = jQuery('#tabs').tabs();
 
-        jQuery.getJSON('/api/1/db/tags/overview/?key=<%= @key_uri %>&value=<%= @value_uri %>', function(data, textStatus) {
+        jQuery.getJSON('/api/2/db/tags/overview?key=<%= @key_uri %>&value=<%= @value_uri %>', function(data, textStatus) {
             var table_content = '<tr><th></th><th title="Number of objects with this tag">Number of objects</th></tr>';
             table_content += jQuery.map(['all', 'nodes', 'ways', 'relations'], function(obj, i) {
                 var d = data[obj];
@@ -64,7 +64,7 @@
         });
 
         jQuery('#grid-josm').flexigrid({
-            url: '/api/1/josm/styles/standard/tags/?key=<%= @key_uri %>&value=<%= @value_uri %>',
+            url: '/api/2/josm/styles/standard/tags?key=<%= @key_uri %>&value=<%= @value_uri %>',
             method: 'GET',
             dataType: 'json',
             colModel: [
@@ -99,7 +99,7 @@
         });
 
         jQuery('#wiki-langs').flexigrid({
-            url: '/api/1/wiki/tags/?key=<%= @key_uri %>&value=<%= @value_uri %>',
+            url: '/api/2/wiki/tags?key=<%= @key_uri %>&value=<%= @value_uri %>',
             method: 'GET',
             dataType: 'json',
             colModel: [
