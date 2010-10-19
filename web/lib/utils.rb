@@ -148,10 +148,10 @@ def link_to_value(key, value)
     v = escape(value)
     title = escape_html(key) + '=' + escape_html(value)
 
-    if key.match(/[=\/]/)
-        return '<a class="taglink" href="/tags/'     + '=' + v + '?key=' + k + '" title="' + title + '">' + pp_value(value) + '</a>'
+    if key.match(/[=\/]/) || value.match(/[=\/]/)
+        return '<a class="taglink" href="/tags/?key=' + k + '&value=' + v + '" title="' + title + '">' + pp_value(value) + '</a>'
     else
-        return '<a class="taglink" href="/tags/' + k + '=' + v +               '" title="' + title + '">' + pp_value(value) + '</a>'
+        return '<a class="taglink" href="/tags/' + k + '=' + v + '" title="' + title + '">' + pp_value(value) + '</a>'
     end
 end
 

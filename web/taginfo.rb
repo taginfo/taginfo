@@ -173,13 +173,22 @@ class Taginfo < Sinatra::Base
         erb :key
     end
 
-    get %r{^/tags/([^=]*)=(.*)} do
+    get %r{^/tags/(.*)} do
+        if params[:captures].first.match(/=/)
+            kv = params[:captures].first.split('=', 2)
+        else
+            kv = [ params[:captures].first, '' ]
+        end
         if params[:key].nil?
-            @key = params[:captures][0]
+            @key = kv[0]
         else
             @key = params[:key]
         end
-        @value = params[:captures][1]
+        if params[:value].nil?
+            @value = kv[1]
+        else
+            @value = params[:value]
+        end
         @tag = @key + '=' + @value
 
         @key_html = escape_html(@key)
