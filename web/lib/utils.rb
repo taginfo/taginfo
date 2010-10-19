@@ -53,16 +53,28 @@ def title
     @title.join(' | ')
 end
 
-def xapi_url(element, predicate)
+# Escape tag key or value for XAPI according to
+# http://wiki.openstreetmap.org/wiki/XAPI#Escaping
+def xapi_escape(text)
+    text.gsub(/([|\[\]*\/=()\\])/, '\\\\\1')
+end
+
+def xapi_url(element, key, value=nil)
+    predicate = xapi_escape(key) + '='
+    if value.nil?
+        predicate += '*'
+    else
+        predicate += xapi_escape(value)
+    end
     "http://www.informationfreeway.org/api/0.6/#{ element }[#{ Rack::Utils::escape(predicate) }]"
 end
 
-def xapi_link(element, predicate)
-    "<a id='xapi' href='#{ xapi_url(element, predicate) }'>XAPI</a>"
+def xapi_link(element, key, value=nil)
+    "<a id='xapi' href='#{ xapi_url(element, key, value) }'>XAPI</a>"
 end
 
-def josm_link(element, predicate)
-    "<a id='josm' href='http://localhost:8111/import?url=#{ xapi_url(element, predicate) }'>JOSM</a>"
+def josm_link(element, key, value=nil)
+    "<a id='josm' href='http://localhost:8111/import?url=#{ xapi_url(element, key, value) }'>JOSM</a>"
 end
 
 def tagcloud_size(tag)

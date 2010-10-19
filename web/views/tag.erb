@@ -9,7 +9,7 @@
 
 <div id="tools">
     <% if @count_all < 1000 %>
-        [<%= xapi_link('*', @tag) %>] [<%= josm_link('*', @tag) %>]
+        [<%= xapi_link('*', @key, @value) %>] [<%= josm_link('*', @key, @value) %>]
     <% else %>
         <span title="Links disabled, because there are too many objects with this tag">[XAPI] [JOSM]</span>
     <% end %>
