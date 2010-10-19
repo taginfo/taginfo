@@ -5,7 +5,7 @@
 
     <div class="tagcloud">
         <% @tags.each do |tag| %>
-            <a href="/tags/<%= tag['key'] %>" class="popkey" style="font-size: <%= tagcloud_size(tag) %>px;"><%= tag['key'] %></a>
+            <a href="/keys/<%= tag['key'] %>" class="popkey" style="font-size: <%= tagcloud_size(tag) %>px;"><%= tag['key'] %></a>
         <% end %>
     </div>
 </div>

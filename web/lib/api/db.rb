@@ -37,6 +37,12 @@ class Taginfo < Sinatra::Base
         key = params[:captures].first
         out = Hash.new
 
+        # default values
+        ['all', 'nodes', 'ways', 'relations'].each do |type|
+            out[type] = { :count => 0, :count_fraction => 0.0, :values => 0 }
+        end
+        out['users'] = 0;
+
         @db.select('SELECT * FROM db.keys').
             condition('key = ?', key).
             execute() do |row|
@@ -170,7 +176,12 @@ class Taginfo < Sinatra::Base
         key   = params[:key]
         value = params[:value]
 
-        out = {}
+        out = Hash.new
+
+        # default values
+        ['all', 'nodes', 'ways', 'relations'].each do |type|
+            out[type] = { :count => 0, :count_fraction => 0.0 }
+        end
 
         @db.select('SELECT * FROM db.tags').
             condition('key = ?', key).

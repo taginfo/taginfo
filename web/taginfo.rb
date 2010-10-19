@@ -134,7 +134,11 @@ class Taginfo < Sinatra::Base
     end
 
     get %r{^/keys/(.*)} do
-        @key = params[:captures].first
+        if params[:key].nil?
+            @key = params[:captures][0]
+        else
+            @key = params[:key]
+        end
 
         @key_html = escape_html(@key)
         @key_uri  = escape(@key)
@@ -191,7 +195,7 @@ class Taginfo < Sinatra::Base
         @title = [@key_html + '=' + @value_html, 'Tags']
         @breadcrumbs << ['Keys', '/keys']
         @breadcrumbs << [@key_html, '/keys/' + @key_uri]
-        @breadcrumbs << @key_html + '=' + @value_html
+        @breadcrumbs << @key_html + '=' + ( @value.length > 20 ? escape_html(@value[0,20] + '...') : @value_html)
 
         @filter_type = get_filter()
         @sel = Hash.new('')

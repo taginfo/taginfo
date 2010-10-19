@@ -1,7 +1,7 @@
 <table id="overview">
 </table>
 
-<h1><a href="/keys/<%= @key_uri %>"><%= @key_pp %></a>=<%= @value_pp %></h1>
+<h1><%= link_to_tag(@key, @value)  %></h1>
 
 <div class="source-wiki" title="Description from the wiki">
     <%= @desc %>

@@ -96,8 +96,14 @@ function html_escape(text) {
 }
 
 function link_to_key(key) {
-    var k = encodeURIComponent(key);
-    return '<a class="taglink" href="/keys/' + k +           '" title="' + html_escape(key) +                            '">' + pp_key(key)     + '</a>';
+    var k = encodeURIComponent(key),
+        title = html_escape(key);
+
+    if (key.match(/[=\/]/)) {
+        return '<a class="taglink" href="/keys/?key=' + k + '" title="' + title + '">' + pp_key(key) + '</a>';
+    } else {
+        return '<a class="taglink" href="/keys/'      + k + '" title="' + title + '">' + pp_key(key) + '</a>';
+    }
 }
 
 function link_to_value(key, value) {
@@ -105,10 +111,10 @@ function link_to_value(key, value) {
         v = encodeURIComponent(value),
         title = html_escape(key) + '=' + html_escape(value);
 
-    if (key.indexOf('=') == -1) {
-        return '<a class="taglink" href="/tags/' + k + '=' + v +               '" title="' + title + '">' + pp_value(value) + '</a>';
-    } else {
+    if (key.match(/[=\/]/)) {
         return '<a class="taglink" href="/tags/'     + '=' + v + '?key=' + k + '" title="' + title + '">' + pp_value(value) + '</a>';
+    } else {
+        return '<a class="taglink" href="/tags/' + k + '=' + v +               '" title="' + title + '">' + pp_value(value) + '</a>';
     }
 }
 
