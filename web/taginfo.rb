@@ -162,14 +162,21 @@ class Taginfo < Sinatra::Base
 
         # add "(other)" label for the rest of the values
         sum = @prevalent_values.inject(0){ |sum, x| sum += x[0]['count'] }
-        @prevalent_values << [{ 'value' => '(other)', 'count' => @count_all_values - sum }]
+        if sum < @count_all_values
+            @prevalent_values << [{ 'value' => '(other)', 'count' => @count_all_values - sum }]
+        end
 
         erb :key
     end
 
-    get %r{^/tags/(.*)} do
-        @tag = params[:captures].first
-        (@key, @value) = @tag.split('=', 2)
+    get %r{^/tags/([^=]*)=(.*)} do
+        if params[:key].nil?
+            @key = params[:captures][0]
+        else
+            @key = params[:key]
+        end
+        @value = params[:captures][1]
+        @tag = @key + '=' + @value
 
         @key_html = escape_html(@key)
         @key_uri  = escape(@key)
@@ -181,17 +188,10 @@ class Taginfo < Sinatra::Base
         @value_json = @value.to_json
         @value_pp   = pp_value(@value)
 
-        @tag_html = @key_html + '=' + @value_html
-        @tag_uri  = @key_uri  + '=' + @value_uri
-
-        if @tag !~ /=/
-            redirect '/keys/' + @tag
-        end
-
-        @title = [@tag_html, 'Tags']
+        @title = [@key_html + '=' + @value_html, 'Tags']
         @breadcrumbs << ['Keys', '/keys']
         @breadcrumbs << [@key_html, '/keys/' + @key_uri]
-        @breadcrumbs << @tag_html
+        @breadcrumbs << @key_html + '=' + @value_html
 
         @filter_type = get_filter()
         @sel = Hash.new('')

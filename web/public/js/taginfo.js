@@ -32,8 +32,8 @@ function print_tag_list(key, list) {
 }
 
 function print_value_with_percent(value, fraction) {
-    var v1 = value.print_with_ts();
-    var v2 = fraction.print_as_percent();
+    var v1 = value.print_with_ts(),
+        v2 = fraction.print_as_percent();
     return '<div class="value">' + v1 + '</div><div class="fraction">' + v2 + '</div><div class="bar" style="width: ' + (fraction*100).toFixed() + 'px;"></div>';
 }
 
@@ -58,40 +58,61 @@ Number.prototype.print_as_percent = function() {
     return (this * 100).toFixed(2) + '%';
 };
 
+var pp_chars = '!"#$%&()*+,-/;<=>?@[\\]^`{|}~' + "'";
+
 function pp_key(key) {
     if (key == '') {
-        return '<b><i>empty string<i></b>';
+        return '<span class="badchar empty">empty string</span>';
     }
-    return key.replace(/([&<>#;\/]+)/g, "<b>$1</b>").replace(/ /g, '<b>&#x2423;</b>').replace(/\s+/g, '<b>?</b>').replace(/([-!"\$%'()*+,.=?@\[\\\]^`{|}~]+)/g, "<b>$1</b>");
+
+    var result = '',
+        length = key.length;
+
+    for (var i=0; i<length; i++) {
+        var c = key.charAt(i);
+        if (pp_chars.indexOf(c) != -1) {
+            result += '<span class="badchar">' + c + '</span>';
+        } else if (c == ' ') {
+            result += '<span class="badchar">&#x2423;</span>';
+        } else if (c.match(/\s/)) {
+            result += '<span class="whitespace">&nbsp;</span>';
+        } else {
+            result += c;
+        }
+    }
+
+    return result;
 }
 
 function pp_value(value) {
     if (value == '') {
-        return '<b><i>empty string<i></b>';
+        return '<span class="badchar empty">empty string</span>';
     }
-    return value.replace(/ /g, '&#x2423;').replace(/\s+/g, '<b>?</b>');
+    return value.replace(/ /g, '&#x2423;').replace(/\s/g, '<span class="whitespace">&nbsp;</span>');
+}
+
+function html_escape(text) {
+    return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 function link_to_key(key) {
     var k = encodeURIComponent(key);
-    return '<a class="taglink" href="/keys/' + k +           '" title="' + k +           '">' + pp_key(key)     + '</a>';
+    return '<a class="taglink" href="/keys/' + k +           '" title="' + html_escape(key) +                            '">' + pp_key(key)     + '</a>';
 }
 
 function link_to_value(key, value) {
-    var k = encodeURIComponent(key);
-    var v = encodeURIComponent(value);
-    return '<a class="taglink" href="/tags/' + k + '=' + v + '" title="' + k + '=' + v + '">' + pp_value(value) + '</a>';
+    var k = encodeURIComponent(key),
+        v = encodeURIComponent(value),
+        title = html_escape(key) + '=' + html_escape(value);
+
+    if (key.indexOf('=') == -1) {
+        return '<a class="taglink" href="/tags/' + k + '=' + v +               '" title="' + title + '">' + pp_value(value) + '</a>';
+    } else {
+        return '<a class="taglink" href="/tags/'     + '=' + v + '?key=' + k + '" title="' + title + '">' + pp_value(value) + '</a>';
+    }
 }
 
 function link_to_tag(key, value) {
     return link_to_key(key) + '=' + link_to_value(key, value);
 }
-
-String.prototype.to_key = function() {
-    return link_to_key(this);
-}
-
-String.prototype.to_value = function(key) {
-    return link_to_value(key, this);
-};
 

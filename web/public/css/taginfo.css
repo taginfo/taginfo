@@ -28,11 +28,6 @@ p {
     margin-top: 2px;
 }
 
-tt b {
-    color: #ff0000;
-    font-weight: normal;
-}
-
 dd {
     padding-bottom: 12px;
 }
@@ -56,8 +51,17 @@ a.taglink {
     color: #006000 !important;
 }
 
-a.taglink b, h1 b {
+span.badchar {
     color: #e00000;
+    font-weight: bold;
+}
+
+span.whitespace {
+    background-color: #e00000;
+}
+
+span.empty {
+    font-style: italic;
 }
 
 a.wikilink {

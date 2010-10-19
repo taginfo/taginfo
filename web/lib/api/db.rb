@@ -17,7 +17,7 @@ class Taginfo < Sinatra::Base
             :rp    => params[:rp].to_i,
             :total => total,
             :data  => res.map{ |row| {
-                :key                      => h(row['key']),
+                :key                      => row['key'],
                 :count_all                => row['count_all'].to_i,
                 :count_all_fraction       => row['count_all'].to_f / @stats['objects'],
                 :count_nodes              => row['count_nodes'].to_i,
@@ -28,16 +28,17 @@ class Taginfo < Sinatra::Base
                 :count_relations_fraction => row['count_relations'].to_f / @stats['relations'],
                 :values_all               => row['values_all'].to_i,
                 :users_all                => row['users_all'].to_i,
-                :prevalent_values         => (row['prevalent_values'] || '').split('|').map{ |pv| h(pv) }
+                :prevalent_values         => (row['prevalent_values'] || '').split('|').map{ |pv| pv }
             } }
         }.to_json
     end
 
-    get '/api/1/db/keys/overview/:key' do
+    get %r{^/api/1/db/keys/overview/(.*)} do
+        key = params[:captures].first
         out = Hash.new
 
         @db.select('SELECT * FROM db.keys').
-            condition('key = ?', params[:key]).
+            condition('key = ?', key).
             execute() do |row|
                 ['all', 'nodes', 'ways', 'relations'].each do |type|
                     out[type] = {
@@ -52,14 +53,16 @@ class Taginfo < Sinatra::Base
         out.to_json
     end
 
-    get '/api/1/db/keys/distribution/:key' do
+    get %r{^/api/1/db/keys/distribution/(.*)} do
+        key = params[:captures].first
         content_type :png
         @db.select('SELECT png FROM db.key_distributions').
-            condition('key = ?', params[:key]).
+            condition('key = ?', key).
             get_first_value()
     end
 
-    get '/api/1/db/keys/values/:key' do
+    get %r{^/api/1/db/keys/values/(.*)} do
+        key = params[:captures].first
         filter_type = get_filter()
 
         if params[:sortname] == 'count'
@@ -67,20 +70,20 @@ class Taginfo < Sinatra::Base
         end
 
         (this_key_count, total) = @db.select("SELECT count_#{filter_type} AS count, values_#{filter_type} AS count_values FROM db.keys").
-            condition('key = ?', params[:key]).
+            condition('key = ?', key).
             get_columns(:count, :count_values)
 
         if params[:query].to_s != ''
             total = @db.count('db.tags').
                 condition("count_#{filter_type} > 0").
-                condition('key = ?', params[:key]).
+                condition('key = ?', key).
                 condition_if("value LIKE '%' || ? || '%'", params[:query]).
                 get_first_value()
         end
 
         res = @db.select('SELECT * FROM db.tags').
             condition("count_#{filter_type} > 0").
-            condition('key = ?', params[:key]).
+            condition('key = ?', key).
             condition_if("value LIKE '%' || ? || '%'", params[:query]).
             order_by([:value, :count_all, :count_nodes, :count_ways, :count_relations], params[:sortname], params[:sortorder]).
             paging(params[:rp], params[:page]).
@@ -91,14 +94,15 @@ class Taginfo < Sinatra::Base
             :rp    => params[:rp].to_i,
             :total => total.to_i,
             :data  => res.map{ |row| {
-                :value    => h(row['value']),
+                :value    => row['value'],
                 :count    => row['count_' + filter_type].to_i,
                 :fraction => row['count_' + filter_type].to_f / this_key_count.to_f
             } }
         }.to_json
     end
 
-    get '/api/1/db/keys/keys/:key' do
+    get %r{^/api/1/db/keys/keys/(.*)} do
+        key = params[:captures].first
         filter_type = get_filter()
 
         if params[:sortname] == 'to_count'
@@ -108,16 +112,16 @@ class Taginfo < Sinatra::Base
         end
 
         total = @db.count('db.keypairs').
-            condition('key1 = ? OR key2 = ?', params[:key], params[:key]).
+            condition('key1 = ? OR key2 = ?', key, key).
             condition("count_#{filter_type} > 0").
             get_first_value().to_i
 
         has_this_key = @db.select("SELECT count_#{filter_type} FROM db.keys").
-            condition('key = ?', params[:key]).
+            condition('key = ?', key).
             get_first_value()
 
         res = @db.select("SELECT p.key1 AS other_key, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.keypairs p, db.keys k WHERE p.key1=k.key AND p.key2=? AND p.count_#{filter_type} > 0 
-                    UNION SELECT p.key2 AS other_key, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.keypairs p, db.keys k WHERE p.key2=k.key AND p.key1=? AND p.count_#{filter_type} > 0", params[:key], params[:key]).
+                    UNION SELECT p.key2 AS other_key, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.keypairs p, db.keys k WHERE p.key2=k.key AND p.key1=? AND p.count_#{filter_type} > 0", key, key).
             order_by([:together_count, :other_key, :from_fraction], params[:sortname], params[:sortorder]).
             paging(params[:rp], params[:page]).
             execute()
@@ -127,7 +131,7 @@ class Taginfo < Sinatra::Base
             :rp    => params[:rp].to_i,
             :total => total,
             :data  => res.map{ |row| {
-                :other_key      => h(row['other_key']),
+                :other_key      => row['other_key'],
                 :together_count => row['together_count'].to_i,
                 :to_fraction    => row['together_count'].to_f / has_this_key.to_f,
                 :from_fraction  => row['from_fraction'].to_f
@@ -151,7 +155,7 @@ class Taginfo < Sinatra::Base
             :rp    => params[:rp].to_i,
             :total => total,
             :data  => res.map{ |row| {
-                :key         => h(row['key']),
+                :key         => row['key'],
                 :scale_count => row['scale_count'].to_f,
                 :scale_users => row['scale_users'].to_f,
                 :scale_wiki  => row['scale_wiki'].to_f,
@@ -162,9 +166,9 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
-    get '/api/1/db/tags/overview/:tag' do
-        tag = params[:tag]
-        (key, value) = tag.split('=', 2)
+    get '/api/1/db/tags/overview/' do
+        key   = params[:key]
+        value = params[:value]
 
         out = {}
 

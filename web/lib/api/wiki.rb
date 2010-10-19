@@ -26,7 +26,7 @@ class Taginfo < Sinatra::Base
                     (lang, status) = l.split(' ', 2)
                     lang_hash[lang] = status
                 }
-                { :key => h(row['key']), :lang => lang_hash }
+                { :key => row['key'], :lang => lang_hash }
             }
         }.to_json
     end
@@ -42,9 +42,9 @@ class Taginfo < Sinatra::Base
                 :on_way           => row['on_way']      == '1' ? true : false,
                 :on_area          => row['on_area']     == '1' ? true : false,
                 :on_relation      => row['on_relation'] == '1' ? true : false,
-                :tags_implies     => row['tags_implies'    ].split(',').map{ |tag| h(tag) },
-                :tags_combination => row['tags_combination'].split(',').map{ |tag| h(tag) },
-                :tags_linked      => row['tags_linked'     ].split(',').map{ |tag| h(tag) }
+                :tags_implies     => row['tags_implies'    ].split(','),
+                :tags_combination => row['tags_combination'].split(','),
+                :tags_linked      => row['tags_linked'     ].split(',')
             }
         }.to_json
     end
@@ -57,9 +57,9 @@ class Taginfo < Sinatra::Base
         return get_wiki_result(res)
     end
 
-    get %r{/api/1/wiki/tags/(.*)} do
-        tag = params[:captures].first
-        (key, value) = tag.split('=', 2)
+    get '/api/1/wiki/tags/' do
+        key   = params[:key]
+        value = params[:value]
 
         res = @db.execute('SELECT * FROM wikipages WHERE key = ? AND value = ? ORDER BY lang', key, value)
 

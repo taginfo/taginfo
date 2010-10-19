@@ -100,17 +100,35 @@ def get_total(type)
     return @stats[key]
 end
 
+# see also web/public/js/taginfo.js
 def pp_key(key)
     if key == ''
-        return '<b><i>empty string<i></b>'
+        return '<span class="badchar empty">empty string</span>'
     end
-    return key.gsub(/([&<>#;\/]+)/, '<b>\1</b>').gsub(/ /, '<b>&#x2423;</b>').gsub(/\s+/, '<b>?</b>').gsub(/([-!"\$%'()*+,.=@\[\\\]^`{|}~]+)/, '<b>\1</b>')
+
+    pp_chars = '!"#$%&()*+,-/;<=>?@[\\]^`{|}~' + "'";
+
+    result = ''
+    key.each_char do |c|
+        if (!pp_chars.index(c).nil?)
+            result += '<span class="badchar">' + c + '</span>'
+        elsif (c == ' ')
+            result += '<span class="badchar">&#x2423;</span>'
+        elsif (c.match(/\s/))
+            result += '<span class="whitespace">&nbsp;</span>'
+        else
+            result += c;
+        end
+    end
+
+    return result;
 end
 
+# see also web/public/js/taginfo.js
 def pp_value(value)
     if value == ''
-        return '<b><i>empty string<i></b>'
+        return '<span class="badchar empty">empty string</span>'
     end
-    return escape_html(value).gsub(/ /, '&#x2423;').gsub(/\s/, '<b>?</b>')
+    return escape_html(value).gsub(/ /, '&#x2423;').gsub(/\s/, '<span class="whitespace">&nbsp;</span>')
 end
 

@@ -13,9 +13,9 @@ class Taginfo < Sinatra::Base
             :rp    => params[:rp].to_i,
             :total => total,
             :data  => res.map{ |row| {
-                :k => h(row['k']),
-                :v => h(row['v']),
-                :b => h(row['b']),
+                :k => row['k'],
+                :v => row['v'],
+                :b => row['b'],
                 :scale_min => row['scale_min'].nil? ? nil : row['scale_min'].to_i,
                 :scale_max => row['scale_max'].nil? ? nil : row['scale_max'].to_i,
                 :rule => h(row['rule'])
@@ -61,14 +61,17 @@ class Taginfo < Sinatra::Base
         end
     end
 
-    get '/api/1/josm/styles/:style/keys/:key' do
+    get %r{^/api/1/josm/styles/([^/]+)/keys/(.*)} do
+        style = params[:captures].first # XXX do something with this
+        key   = params[:captures][1]
+        
         total = @db.count('josm_style_rules').
-            condition('k = ?', params[:key]).
+            condition('k = ?', key).
             condition_if("v LIKE '%' || ? || '%'", params[:query]).
             get_first_value().to_i
 
         res = @db.select('SELECT * FROM josm_style_rules').
-            condition('k = ?', params[:key]).
+            condition('k = ?', key).
             condition_if("v LIKE '%' || ? || '%'", params[:query]).
             order_by([:v, :b, :scale_min, :scale_max], sort_by_for_values, params[:sortorder]).
             paging(params[:rp], params[:page]).
@@ -77,9 +80,9 @@ class Taginfo < Sinatra::Base
         return get_josm_result(total, res);
     end
 
-    get '/api/1/josm/styles/:style/tags/:tag' do
-        tag = params[:tag]
-        (key, value) = tag.split('=', 2)
+    get '/api/1/josm/styles/:style/tags/' do
+        key   = params[:key]
+        value = params[:value]
 
         total = @db.count('josm_style_rules').
             condition('k = ?', key).

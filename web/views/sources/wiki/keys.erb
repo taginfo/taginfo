@@ -46,7 +46,7 @@
                     total: data.total,
                     page: data.page,
                     rows: jQuery.map(data.data, function(row, i) {
-                        d = [row.key.to_key() <%= @languages.map{ ", ''"}.join() %>];
+                        d = [link_to_key(row.key) <%= @languages.map{ ", ''"}.join() %>];
                         for (var lang in row.lang) {
                             ptype = row.lang[lang];
                             d[lang_to_idx[lang]] = '<img src="/img/sources/wiki/wiki-' + ptype + '.png" alt="[' + ptype + ']"/>';

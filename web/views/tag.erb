@@ -54,7 +54,7 @@
 
         var tabs = jQuery('#tabs').tabs();
 
-        jQuery.getJSON('/api/1/db/tags/overview/<%= @tag_uri %>', function(data, textStatus) {
+        jQuery.getJSON('/api/1/db/tags/overview/?key=<%= @key_uri %>&value=<%= @value_uri %>', function(data, textStatus) {
             var table_content = '<tr><th></th><th title="Number of objects with this tag">Number of objects</th></tr>';
             table_content += jQuery.map(['all', 'nodes', 'ways', 'relations'], function(obj, i) {
                 var d = data[obj];
@@ -64,7 +64,7 @@
         });
 
         jQuery('#grid-josm').flexigrid({
-            url: '/api/1/josm/styles/standard/tags/<%= @tag_uri %>',
+            url: '/api/1/josm/styles/standard/tags/?key=<%= @key_uri %>&value=<%= @value_uri %>',
             method: 'GET',
             dataType: 'json',
             colModel: [
@@ -88,7 +88,7 @@
             preProcess: function(data) {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
-                        row.v ? row.v.to_value(row.k) : row.b ? (row.b + ' (Boolean)') : '*',
+                        row.v ? link_to_value(row.k, row.v) : row.b ? (row.b + ' (Boolean)') : '*',
                         row.scale_min,
                         row.scale_max,
                         '<span title="' + row.rule + '">XML</span>'
@@ -99,7 +99,7 @@
         });
 
         jQuery('#wiki-langs').flexigrid({
-            url: '/api/1/wiki/tags/<%= @tag_uri %>',
+            url: '/api/1/wiki/tags/?key=<%= @key_uri %>&value=<%= @value_uri %>',
             method: 'GET',
             dataType: 'json',
             colModel: [
