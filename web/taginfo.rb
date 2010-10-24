@@ -218,19 +218,6 @@ class Taginfo < Sinatra::Base
         erb :tag
     end
 
-    get '/debug/tags/?' do
-        @title = ['Tags', 'Debug']
-        @breadcrumbs << 'Debug'
-        @breadcrumbs << 'Tags'
-        limit = 300;
-        (@min, @max) = @db.select('SELECT min(count) AS min, max(count) AS max FROM popular_keys').get_columns(:min, :max)
-        @tags = @db.select("SELECT key, count, (count - ?) / (? - ?) AS scale, in_wiki, in_josm FROM popular_keys ORDER BY count DESC LIMIT #{limit}", @min.to_f, @max, @min).
-            execute().
-            each_with_index{ |tag, idx| tag['pos'] = (limit - idx) / limit.to_f }.
-            sort{ |a,b| a['key'] <=> b['key'] }
-        erb :'debug/tags'
-    end
-
     #--------------------------------------------------------------------------
 
     get '/search/?' do
@@ -321,6 +308,7 @@ class Taginfo < Sinatra::Base
     load 'lib/api/db.rb'
     load 'lib/api/wiki.rb'
     load 'lib/api/josm.rb'
+    load 'lib/test.rb'
 
     # run application
     run!

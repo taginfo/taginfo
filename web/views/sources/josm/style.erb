@@ -33,8 +33,8 @@
                     return { 'cell': [
                         link_to_key(row.k),
                         row.v ? link_to_value(row.k, row.v) : row.b ? (row.b + ' (Boolean)') : '*',
-                        row.scale_min == null ? '' : row.scale_min.print_with_ts(),
-                        row.scale_max == null ? '' : row.scale_max.print_with_ts(),
+                        print_with_ts(row.scale_min),
+                        print_with_ts(row.scale_max),
                         '<span title="' + row.rule + '">XML</span>'
                     ] };
                 });

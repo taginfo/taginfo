@@ -43,8 +43,8 @@
     </div>
     <div id="tabs-keys">
         <h2>Other keys used together with this key</h2>
-       <table id="grid-keys">
-       </table>
+        <table id="grid-keys">
+        </table>
     </div>
     <div id="tabs-map">
         <h2>Geographical distribution of this key</h2>
@@ -89,7 +89,7 @@
             var table_content = '<tr><th></th><th title="Number of objects with this key">Number of objects</th><th class="values" title="Number of different values">Values</th></tr>';
             table_content += jQuery.map(['all', 'nodes', 'ways', 'relations'], function(obj, i) {
                 var d = data[obj];
-                return '<tr><td>' + print_image(obj) + '</td><td class="count">' + print_value_with_percent(d.count, d.count_fraction) + '</td><td class="values">' + d.values.print_with_ts() + '</td></tr>';
+                return '<tr><td>' + print_image(obj) + '</td><td class="count">' + print_value_with_percent(d.count, d.count_fraction) + '</td><td class="values">' + print_with_ts(d.values) + '</td></tr>';
             }).join('');
             jQuery('#overview').append(table_content);
         });
@@ -185,8 +185,8 @@
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
                         row.v ? link_to_value(row.k, row.v) : row.b ? (row.b + ' (Boolean)') : '*',
-                        row.scale_min.print_with_ts(),
-                        row.scale_max.print_with_ts(),
+                        print_with_ts(row.scale_min),
+                        print_with_ts(row.scale_max),
                         '<span title="' + row.rule + '">XML</span>'
                     ] };
                 });
@@ -242,7 +242,7 @@
 
 var data = <%= @prevalent_values.to_json() %>;
 
-var w = 160, h = 440;
+var w=160, h=440;
 
 var vis = new pv.Panel()
     .canvas('canvas-values')

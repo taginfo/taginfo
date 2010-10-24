@@ -32,7 +32,7 @@ function print_tag_list(key, list) {
 }
 
 function print_value_with_percent(value, fraction) {
-    var v1 = value.print_with_ts(),
+    var v1 = print_with_ts(value),
         v2 = fraction.print_as_percent();
     return '<div class="value">' + v1 + '</div><div class="fraction">' + v2 + '</div><div class="bar" style="width: ' + (fraction*100).toFixed() + 'px;"></div>';
 }
@@ -49,9 +49,13 @@ function print_image(type) {
 }
 
 // print a number with thousand separator
-Number.prototype.print_with_ts = function() {
-    return this.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1&thinsp;');
-};
+function print_with_ts(value) {
+    if (value === null) {
+        return '-';
+    } else {
+        return value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1&thinsp;');
+    }
+}
 
 // print a number as percent value with two digits after the decimal point
 Number.prototype.print_as_percent = function() {

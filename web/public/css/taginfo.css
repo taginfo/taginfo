@@ -336,3 +336,9 @@ div#canvas-values {
     background-color: #ffffff;
 }
 
+div#canvas-keypairs {
+//    position: absolute;
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+}
+
