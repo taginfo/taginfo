@@ -29,19 +29,22 @@ DROP TABLE IF EXISTS keys;
 
 CREATE TABLE keys (
   key              VARCHAR,
-  count_all        INTEGER,
-  count_nodes      INTEGER,
-  count_ways       INTEGER,
-  count_relations  INTEGER,
-  values_all       INTEGER,
-  values_nodes     INTEGER,
-  values_ways      INTEGER,
-  values_relations INTEGER,
-  users_all        INTEGER,
-  users_nodes      INTEGER,
-  users_ways       INTEGER,
-  users_relations  INTEGER,
-  grids            INTEGER,
+  count_all        INTEGER DEFAULT 0,
+  count_nodes      INTEGER DEFAULT 0,
+  count_ways       INTEGER DEFAULT 0,
+  count_relations  INTEGER DEFAULT 0,
+  values_all       INTEGER DEFAULT 0,
+  values_nodes     INTEGER DEFAULT 0,
+  values_ways      INTEGER DEFAULT 0,
+  values_relations INTEGER DEFAULT 0,
+  users_all        INTEGER DEFAULT 0,
+  users_nodes      INTEGER DEFAULT 0,
+  users_ways       INTEGER DEFAULT 0,
+  users_relations  INTEGER DEFAULT 0,
+  grids            INTEGER DEFAULT 0,
+  in_wiki          INTEGER DEFAULT 0,
+  in_josm          INTEGER DEFAULT 0,
+  in_potlatch      INTEGER DEFAULT 0,
   prevalent_values TEXT
 );
 
@@ -57,10 +60,13 @@ DROP TABLE IF EXISTS tags;
 CREATE TABLE tags (
   key              VARCHAR,
   value            VARCHAR,
-  count_all        INTEGER,
-  count_nodes      INTEGER,
-  count_ways       INTEGER,
-  count_relations  INTEGER 
+  count_all        INTEGER DEFAULT 0,
+  count_nodes      INTEGER DEFAULT 0,
+  count_ways       INTEGER DEFAULT 0,
+  count_relations  INTEGER DEFAULT 0,
+  in_wiki          INTEGER DEFAULT 0,
+  in_josm          INTEGER DEFAULT 0,
+  in_potlatch      INTEGER DEFAULT 0
 );
 
 DROP TABLE IF EXISTS keypairs;

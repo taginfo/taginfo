@@ -8,7 +8,7 @@ class Taginfo < Sinatra::Base
         
         res = @db.select('SELECT * FROM db.keys').
             condition_if("key LIKE '%' || ? || '%'", params[:query]).
-            order_by([:key, :count_all, :count_nodes, :count_ways, :count_relations, :values_all, :users_all], params[:sortname], params[:sortorder]).
+            order_by([:key, :count_all, :count_nodes, :count_ways, :count_relations, :values_all, :users_all, :in_wiki, :in_josm, :in_potlatch], params[:sortname], params[:sortorder]).
             paging(params[:rp], params[:page]).
             execute()
 
@@ -28,6 +28,9 @@ class Taginfo < Sinatra::Base
                 :count_relations_fraction => row['count_relations'].to_f / @stats['relations'],
                 :values_all               => row['values_all'].to_i,
                 :users_all                => row['users_all'].to_i,
+                :in_wiki                  => row['in_wiki']     == '1' ? true : false,
+                :in_josm                  => row['in_josm']     == '1' ? true : false,
+                :in_potlatch              => row['in_potlatch'] == '1' ? true : false,
                 :prevalent_values         => (row['prevalent_values'] || '').split('|').map{ |pv| pv }
             } }
         }.to_json
