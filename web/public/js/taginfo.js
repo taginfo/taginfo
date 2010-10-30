@@ -1,7 +1,7 @@
 // taginfo.js
 
 function print_wiki_link(title) {
-    return '&rarr; <a class="wikilink" href="http://wiki.openstreetmap.org/wiki/' + title + '">' + title + '</a>';
+    return '&rarr; <a class="wikilink" href="http://wiki.openstreetmap.org/wiki/' + title + '" target="_blank">' + title + '</a>';
 }
 
 function print_language(code, lang) {

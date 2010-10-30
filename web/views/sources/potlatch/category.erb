@@ -1,0 +1,17 @@
+<% @features.each do |row| %>
+    <div>&nbsp;&nbsp;<a href="/sources/potlatch/features/<%= escape row['name'] %>"><%= row['name'] %></a></div>
+<% end %>
+<script type="text/javascript">
+jQuery('#features a').bind('click', function() {
+    jQuery('#features div').removeClass('current');
+    jQuery(this).parent().addClass('current');
+    jQuery.ajax({
+        url: this.href,
+        success: function(html) {
+            jQuery('#feature').html(html);
+        }
+    });
+    return false;
+});
+
+</script>

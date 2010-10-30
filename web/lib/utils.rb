@@ -171,3 +171,7 @@ def link_to_tag(key, value)
     return link_to_key(key) + '=' + link_to_value(key, value)
 end
 
+def external_link(title, link)
+    %Q{&rarr; <a class="extlink" href="#{link}" target="_blank">#{title}</a>}
+end
+
