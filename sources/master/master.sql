@@ -38,9 +38,12 @@ INSERT INTO master_stats SELECT * FROM db.stats
 INSERT INTO db.keys (key) SELECT DISTINCT key FROM wiki.wikipages        WHERE key NOT IN (SELECT key FROM db.keys);
 INSERT INTO db.keys (key) SELECT DISTINCT k   FROM josm.josm_style_rules WHERE k   NOT IN (SELECT key FROM db.keys);
 -- potlatch XXX
-UPDATE db.keys SET in_wiki=1 WHERE key IN (SELECT key FROM wiki.wikipages);
-UPDATE db.keys SET in_josm=1 WHERE key IN (SELECT k FROM josm.josm_style_rules);
+-- INSERT INTO db.keys (key) SELECT DISTINCT key FROM merkaartor.keys       WHERE key NOT IN (SELECT key FROM db.keys);
+
+UPDATE db.keys SET in_wiki=1       WHERE key IN (SELECT key FROM wiki.wikipages);
+UPDATE db.keys SET in_josm=1       WHERE key IN (SELECT k FROM josm.josm_style_rules);
 -- potlatch XXX
+UPDATE db.keys SET in_merkaartor=1 WHERE key IN (SELECT key FROM merkaartor.keys);
 
 -- too slow, so we drop it for now
 -- INSERT INTO db.tags (key, value) SELECT DISTINCT key, value FROM wiki.wikipages WHERE key || '=XX=' || value NOT IN (SELECT key || '=XX=' || value FROM db.tags);
