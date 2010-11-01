@@ -1,0 +1,59 @@
+<h1><%= @title %></h1>
+
+<p>This table shows keys that appear more than 10&thinsp;000 times in the OSM
+database but have no wiki page describing them.  If you know anything about one
+of these keys, please create the wiki page by clicking on the link in the
+leftmost column and describe the key. Sometimes it might make sense to create a
+redirect to a different wiki page instead. To do this put just one line with
+<tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>page name</i>]]</tt>
+in the wiki page.</p>
+
+<form>
+    <input type="checkbox" name="english" id="english" value="0"/> Also show keys that have no English language wiki page but a page in some other language.
+</form>
+<p></p>
+
+<table id="keys">
+</table>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        jQuery('#keys').flexigrid({
+            url: '/api/2/reports/frequently_used_keys_without_wiki_page',
+            method: 'GET',
+            dataType: 'json',
+            colModel: [
+                { display: 'Create Wiki Page...', name: 'create_wiki_page', width: 200, sortable: false, align: 'left' },
+                { display: 'Key', name: 'key', width: 180, sortable: true, align: 'left' },
+                { display: '<span title="Number of objects with this key">Total</span>', name: 'count_all', width: 70, sortable: true, align: 'right' },
+                { display: 'Users', name: 'users_all', width: 44, sortable: true, align: 'right' },
+                { display: '<span title="Number of different values for this key">Values</span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
+                { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true, align: 'left' }
+            ],
+            searchitems: [
+                { display: 'Key', name: 'key' }
+            ],
+            sortname: 'count_all',
+            sortorder: 'desc',
+            showToggleBtn: false,
+            usepager: true,
+            useRp: true,
+            rp: 15,
+            rpOptions: [10,15,20,25,50,100],
+            height: 420,
+            preProcess: function(data) {
+                data.rows = jQuery.map(data.data, function(row, i) {
+                    return { 'cell': [
+                        print_wiki_edit_link('Key:' + row.key),
+                        link_to_key(row.key),
+                        print_with_ts(row.count_all),
+                        print_with_ts(row.users_all),
+                        print_with_ts(row.values_all),
+                        print_tag_list(row.key, row.prevalent_values)
+                    ] };
+                });
+                return data;
+            }
+        });
+    });
+</script>

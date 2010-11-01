@@ -170,6 +170,8 @@ class Taginfo < Sinatra::Base
             @prevalent_values << [{ 'value' => '(other)', 'count' => @count_all_values - sum }]
         end
 
+        @wiki_count = @db.count('wiki.wikipages').condition('value IS NULL').condition('key=?', @key).get_first_value().to_i
+
         erb :key
     end
 
@@ -308,6 +310,8 @@ class Taginfo < Sinatra::Base
     load 'lib/api/db.rb'
     load 'lib/api/wiki.rb'
     load 'lib/api/josm.rb'
+    load 'lib/api/reports.rb'
+    load 'lib/ui/reports.rb'
     load 'lib/test.rb'
 
     # run application

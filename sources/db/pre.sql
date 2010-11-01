@@ -43,8 +43,10 @@ CREATE TABLE keys (
   users_relations  INTEGER DEFAULT 0,
   grids            INTEGER DEFAULT 0,
   in_wiki          INTEGER DEFAULT 0,
+  in_wiki_en       INTEGER DEFAULT 0,
   in_josm          INTEGER DEFAULT 0,
   in_potlatch      INTEGER DEFAULT 0,
+  in_merkaartor    INTEGER DEFAULT 0,
   prevalent_values TEXT
 );
 
@@ -64,9 +66,13 @@ CREATE TABLE tags (
   count_nodes      INTEGER DEFAULT 0,
   count_ways       INTEGER DEFAULT 0,
   count_relations  INTEGER DEFAULT 0,
+  object_type      VARCHAR(1),          -- (n)ode, (w)ay, (r)elation
+  object_id        INTEGER,
   in_wiki          INTEGER DEFAULT 0,
+  in_wiki_en       INTEGER DEFAULT 0,
   in_josm          INTEGER DEFAULT 0,
-  in_potlatch      INTEGER DEFAULT 0
+  in_potlatch      INTEGER DEFAULT 0,
+  in_merkaartor    INTEGER DEFAULT 0
 );
 
 DROP TABLE IF EXISTS keypairs;

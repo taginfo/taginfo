@@ -4,6 +4,10 @@ function print_wiki_link(title) {
     return '&rarr; <a class="wikilink" href="http://wiki.openstreetmap.org/wiki/' + title + '">' + title + '</a>';
 }
 
+function print_wiki_edit_link(title) {
+    return '&rarr; <a class="wikilink" href="http://wiki.openstreetmap.org/w/index.php?action=edit&title=' + title + '">' + title + '</a>';
+}
+
 function print_language(code, lang) {
     return '<span class="lang" title="' + lang + '">' + code + '</span> ' + lang;
 }

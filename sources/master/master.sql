@@ -38,8 +38,9 @@ INSERT INTO master_stats SELECT * FROM db.stats
 INSERT INTO db.keys (key) SELECT DISTINCT key FROM wiki.wikipages        WHERE key NOT IN (SELECT key FROM db.keys);
 INSERT INTO db.keys (key) SELECT DISTINCT k   FROM josm.josm_style_rules WHERE k   NOT IN (SELECT key FROM db.keys);
 -- potlatch XXX
-UPDATE db.keys SET in_wiki=1 WHERE key IN (SELECT key FROM wiki.wikipages);
-UPDATE db.keys SET in_josm=1 WHERE key IN (SELECT k FROM josm.josm_style_rules);
+UPDATE db.keys SET in_wiki=1    WHERE key IN (SELECT distinct key FROM wiki.wikipages);
+UPDATE db.keys SET in_wiki_en=1 WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE lang='en');
+UPDATE db.keys SET in_josm=1    WHERE key IN (SELECT distinct k   FROM josm.josm_style_rules);
 -- potlatch XXX
 
 -- too slow, so we drop it for now
@@ -49,20 +50,22 @@ UPDATE db.keys SET in_josm=1 WHERE key IN (SELECT k FROM josm.josm_style_rules);
 DROP TABLE IF EXISTS popular_keys;
 
 CREATE TABLE popular_keys (
-    key         VARCHAR,
-    count       INTEGER,
-    users       INTEGER,
-    wikipages   INTEGER DEFAULT 0,
-    in_wiki     INTEGER DEFAULT 0,
-    in_josm     INTEGER DEFAULT 0,
-    in_potlatch INTEGER DEFAULT 0,
-    scale_count REAL,
-    scale_users REAL,
-    scale_wiki  REAL,
-    scale_josm  REAL,
-    scale_name  REAL,
-    scale1      REAL,
-    scale2      REAL
+    key           VARCHAR,
+    count         INTEGER,
+    users         INTEGER,
+    wikipages     INTEGER DEFAULT 0,
+    in_wiki       INTEGER DEFAULT 0,
+    in_wiki_en    INTEGER DEFAULT 0,
+    in_josm       INTEGER DEFAULT 0,
+    in_potlatch   INTEGER DEFAULT 0,
+    in_merkaartor INTEGER DEFAULT 0,
+    scale_count   REAL,
+    scale_users   REAL,
+    scale_wiki    REAL,
+    scale_josm    REAL,
+    scale_name    REAL,
+    scale1        REAL,
+    scale2        REAL
 );
 
 INSERT INTO popular_keys (key, count, users)
@@ -71,8 +74,9 @@ INSERT INTO popular_keys (key, count, users)
 -- count number of wikipages for each key
 UPDATE popular_keys SET wikipages = (SELECT count(*) FROM wiki.wikipages w WHERE w.key=popular_keys.key);
 
-UPDATE popular_keys SET in_wiki=1 WHERE key IN (SELECT key FROM wiki.wikipages);
-UPDATE popular_keys SET in_josm=1 WHERE key IN (SELECT k FROM josm.josm_style_rules);
+UPDATE popular_keys SET in_wiki=1    WHERE key IN (SELECT distinct key FROM wiki.wikipages);
+UPDATE popular_keys SET in_wiki_en=1 WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE lang='en');
+UPDATE popular_keys SET in_josm=1    WHERE key IN (SELECT distinct k   FROM josm.josm_style_rules);
 
 DROP TABLE IF EXISTS popular_metadata;
 

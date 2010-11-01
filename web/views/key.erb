@@ -53,8 +53,13 @@
     </div>
     <div id="tabs-wiki">
         <h2>Wiki pages about this key</h2>
-        <table id="wiki-langs">
-        </table>
+        <% if @wiki_count > 0 %>
+            <table id="wiki-langs">
+            </table>
+        <% else %>
+            <p><i>No wiki page available for this key.</i></p>
+            <p>[<a href="http://wiki.openstreetmap.org/w/index.php?action=edit&title=<%= @key_uri %>">Create wiki page</a>]</p>
+        <% end %>
     </div>
     <div id="tabs-josm">
         <h2>JOSM style rules with this key</h2>
@@ -194,6 +199,7 @@
             }
         });
 
+<% if @wiki_count > 0 %>
         jQuery('#wiki-langs').flexigrid({
             url: '/api/2/wiki/keys?key=<%= @key_uri %>',
             method: 'GET',
@@ -236,6 +242,7 @@
                 };
             }
         });
+<% end %>
     });
 </script>
 <script type="text/javascript+protovis">
