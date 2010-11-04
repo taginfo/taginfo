@@ -36,7 +36,6 @@ CREATE TABLE categories (
     name TEXT
 );
 
-
 --
 --  features
 --
@@ -44,14 +43,17 @@ CREATE TABLE categories (
 DROP TABLE IF EXISTS features;
 
 CREATE TABLE features (
-    name          TEXT,
-    category_id   TEXT REFERENCES categories (id),
-    category_name TEXT,
-    help          TEXT,
-    on_point      INTEGER,
-    on_line       INTEGER,
-    on_area       INTEGER,
-    on_relation   INTEGER
+    name            TEXT,
+    category_id     TEXT REFERENCES categories (id),
+    category_name   TEXT,
+    help            TEXT,
+    on_point        INTEGER,
+    on_line         INTEGER,
+    on_area         INTEGER,
+    on_relation     INTEGER,
+    icon_image      TEXT,
+    icon_foreground TEXT,
+    icon_background TEXT
 );
 
 --

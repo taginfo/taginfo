@@ -57,6 +57,10 @@ doc.elements.each('/mapFeatures/feature') do |feature_element|
                 on[$1.to_sym] = 1
             when /^(category|help)$/
                 fields[element.name] = element.text.strip
+            when 'icon'
+                fields['icon_image']      = element.attributes['image']
+                fields['icon_background'] = element.attributes['background']
+                fields['icon_foreground'] = element.attributes['foreground']
         end
     end
 
@@ -64,8 +68,8 @@ doc.elements.each('/mapFeatures/feature') do |feature_element|
         on = { :point => 1, :line => 1, :area => 1, :relation => 1 }
     end
 
-    db.execute('INSERT INTO features (name, category_id, help, on_point, on_line, on_area, on_relation) VALUES (?, ?, ?, ?, ?, ?, ?)',
-        feature_name, fields['category'], fields['help'], on[:point], on[:line], on[:area], on[:relation])
+    db.execute('INSERT INTO features (name, category_id, help, on_point, on_line, on_area, on_relation, icon_image, icon_background, icon_foreground) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        feature_name, fields['category'], fields['help'], on[:point], on[:line], on[:area], on[:relation], fields['icon_image'], fields['icon_background'], fields['icon_foreground'])
 end
 
 db.execute('COMMIT');
