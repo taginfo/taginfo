@@ -253,125 +253,16 @@ class Taginfo < Sinatra::Base
 
     #--------------------------------------------------------------------------
 
-    get '/sources/db/?' do
-        @title = 'Database'
-        @breadcrumbs << ['Sources', '/sources']
-        @breadcrumbs << ['Database']
-        erb :'sources/db'
-    end
-
-    #--------------------------------------------------------------------------
-
-    get '/sources/wiki/?' do
-        @title = 'Wiki'
-        @breadcrumbs << ['Sources', '/sources']
-        @breadcrumbs << ['Wiki']
-        erb :'sources/wiki/index'
-    end
-
-    get '/sources/wiki/keys/?' do
-        @title = ['Keys', 'Wiki']
-        @breadcrumbs << ['Sources', '/sources']
-        @breadcrumbs << ['Wiki', '/sources/wiki']
-        @breadcrumbs << ['Keys']
-
-        @languages = @db.execute('SELECT language FROM wiki_languages ORDER by language').map do |row|
-            row['language']
-        end
-
-        lang_lookup = Hash.new
-        @languages.each_with_index do |lang, idx|
-            lang_lookup[lang] = idx + 1
-        end
-        @languages_lookup = @languages.map{ |lang| "'#{lang}': #{lang_lookup[lang]}" }.join(', ')
-
-        erb :'sources/wiki/keys'
-    end
-
-    #--------------------------------------------------------------------------
-
-    get '/sources/josm/?' do
-        @title = 'JOSM'
-        @breadcrumbs << ['Sources', '/sources']
-        @breadcrumbs << ['JOSM']
-        erb :'sources/josm/index'
-    end
-
-    get '/sources/josm/styles/?' do
-        @title = ['Styles', 'JOSM']
-        @breadcrumbs << ['Sources', '/sources']
-        @breadcrumbs << ['JOSM', '/sources/josm']
-        @breadcrumbs << ['Styles']
-        erb :'sources/josm/styles'
-    end
-
-    get '/sources/josm/styles/:style' do
-        @stylename = h(params[:style])
-        @title = [@stylename, 'Styles', 'JOSM']
-        @breadcrumbs << ['Sources', '/sources']
-        @breadcrumbs << ['JOSM', '/sources/josm']
-        @breadcrumbs << ['Styles', '/sources/josm/styles']
-        @breadcrumbs << @stylename
-        erb :'sources/josm/style'
-    end
-
-    #--------------------------------------------------------------------------
-
-    get '/sources/potlatch/?' do
-        @title = 'Potlatch'
-        @breadcrumbs << ['Sources', '/sources']
-        @breadcrumbs << ['Potlatch']
-
-        erb :'sources/potlatch/index'
-    end
-
-    get '/sources/potlatch/categories' do
-        @title = 'Potlatch Features'
-        @breadcrumbs << ['Sources', '/sources']
-        @breadcrumbs << ['Potlatch', '/sources/potlatch']
-        @breadcrumbs << ['Features']
-
-        @categories = @db.execute('SELECT * FROM potlatch.categories ORDER BY name')
-
-        erb :'sources/potlatch/categories'
-    end
-
-    get '/sources/potlatch/categories/:category' do
-        @category = params[:category]
-        @features = @db.execute('SELECT * FROM potlatch.features WHERE category_id=? ORDER BY name', @category)
-
-        erb :'sources/potlatch/category', :layout => false
-    end
-
-    get '/sources/potlatch/features/:feature' do
-        @feature_name = params[:feature]
-        @feature = @db.execute('SELECT * FROM potlatch.features WHERE name=?', @feature_name)[0]
-        @tags = @db.execute('SELECT * FROM potlatch.tags WHERE feature_name=? ORDER BY key, value', @feature_name)
-
-        erb :'sources/potlatch/feature', :layout => false
-    end
-
-    get %r{/sources/potlatch/icon/(.*)} do
-        content_type :png
-        IO.read('../../var/sources/potlatch/resources/' + params[:captures].first)
-    end
-
-    #--------------------------------------------------------------------------
-
-    get '/sources/merkaartor/?' do
-        @title = 'Merkaartor'
-        @breadcrumbs << ['Sources', '/sources']
-        @breadcrumbs << ['Merkaartor']
-        erb :'sources/merkaartor/index'
-    end
-
-    #--------------------------------------------------------------------------
-
     load 'lib/api/db.rb'
     load 'lib/api/wiki.rb'
     load 'lib/api/josm.rb'
     load 'lib/api/reports.rb'
     load 'lib/ui/reports.rb'
+    load 'lib/ui/sources/db.rb'
+    load 'lib/ui/sources/wiki.rb'
+    load 'lib/ui/sources/josm.rb'
+    load 'lib/ui/sources/potlatch.rb'
+    load 'lib/ui/sources/merkaartor.rb'
     load 'lib/test.rb'
 
     # run application
