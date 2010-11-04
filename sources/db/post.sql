@@ -38,6 +38,13 @@ INSERT INTO stats (key, value) SELECT 'num_keypairs_on_nodes',     count(*) FROM
 INSERT INTO stats (key, value) SELECT 'num_keypairs_on_ways',      count(*) FROM keypairs WHERE count_ways      > 0;
 INSERT INTO stats (key, value) SELECT 'num_keypairs_on_relations', count(*) FROM keypairs WHERE count_relations > 0;
 
+INSERT INTO stats (key, value) SELECT 'characters_in_keys_plain',   count(*) FROM keys WHERE characters='plain';
+INSERT INTO stats (key, value) SELECT 'characters_in_keys_colon',   count(*) FROM keys WHERE characters='colon';
+INSERT INTO stats (key, value) SELECT 'characters_in_keys_letters', count(*) FROM keys WHERE characters='letters';
+INSERT INTO stats (key, value) SELECT 'characters_in_keys_space',   count(*) FROM keys WHERE characters='space';
+INSERT INTO stats (key, value) SELECT 'characters_in_keys_problem', count(*) FROM keys WHERE characters='problem';
+INSERT INTO stats (key, value) SELECT 'characters_in_keys_rest',    count(*) FROM keys WHERE characters='rest';
+
 UPDATE keys SET prevalent_values=(
         SELECT group_concat(value, '|') FROM (
             SELECT value FROM tags t

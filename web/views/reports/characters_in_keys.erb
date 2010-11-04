@@ -1,4 +1,39 @@
 <h1><%= @title %></h1>
 
-<p>Any valid Unicode character can appear in an OSM key but usually only lower case latin letters (a-z) and the underscore (_) are used.</p>
+<p>Any valid Unicode character can appear in an OSM key but usually only lower
+case latin letters (a-z) and the underscore (_) are used, sometimes the colon
+(:) is added as a separator character.</p>
+
+<table class="list">
+    <tr>
+        <td class="number"><%= @stats['characters_in_keys_plain'] %></td>
+        <td class="number"><%= sprintf '%.2f', @stats['characters_in_keys_plain'] * 100.0 / @stats['num_keys'] %>%</td>
+        <td>Plain keys (only latin lowercase letters (a-z) and underscore (_), first and last characters are letters).</td>
+    </tr>
+    <tr>
+        <td class="number"><%= @stats['characters_in_keys_colon'] %></td>
+        <td class="number"><%= sprintf '%.2f', @stats['characters_in_keys_colon'] * 100.0 / @stats['num_keys'] %>%</td>
+        <td>Like plain keys but with one or more colons (:) inside.</td>
+    </tr>
+    <tr>
+        <td class="number"><%= @stats['characters_in_keys_letters'] %></td>
+        <td class="number"><%= sprintf '%.2f', @stats['characters_in_keys_letters'] * 100.0 / @stats['num_keys'] %>%</td>
+        <td>Like plain keys but with uppercase latin letters or letters from other alphabets (and possibly with colons).</td>
+    </tr>
+    <tr>
+        <td class="number"><%= @stats['characters_in_keys_space'] %></td>
+        <td class="number"><%= sprintf '%.2f', @stats['characters_in_keys_space'] * 100.0 / @stats['num_keys'] %>%</td>
+        <td>Contains whitespace (space, tab, new line, carriage return, or whitespace characters from other alphabets).</td>
+    </tr>
+    <tr>
+        <td class="number"><%= @stats['characters_in_keys_problem'] %></td>
+        <td class="number"><%= sprintf '%.2f', @stats['characters_in_keys_problem'] * 100.0 / @stats['num_keys'] %>%</td>
+        <td>Contains possibly problematic characters (=+/&amp;&lt;&gt;;'"?%#@\,) or control characters.</td>
+    </tr>
+    <tr>
+        <td class="number"><%= @stats['characters_in_keys_rest'] %></td>
+        <td class="number"><%= sprintf '%.2f', @stats['characters_in_keys_rest'] * 100.0 / @stats['num_keys'] %>%</td>
+        <td>Everything else.</td>
+    </tr>
+</table>
 
