@@ -11,7 +11,7 @@ module SQL
             @db = SQLite3::Database.new(filename)
             @db.results_as_hash = true
 
-            [:db, :wiki, :josm].each do |dbname|
+            [:db, :wiki, :josm, :merkaartor].each do |dbname|
                 @db.execute("ATTACH DATABASE '#{dir}/taginfo-#{dbname}.db' AS #{dbname}")
             end
 

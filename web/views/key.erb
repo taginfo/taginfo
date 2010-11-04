@@ -32,6 +32,7 @@
         <li><a href="#tabs-map">Map</a></li>
         <li><a href="#tabs-wiki">Wiki</a></li>
         <li><a href="#tabs-josm">JOSM</a></li>
+        <li><a href="#tabs-merkaartor">Merkaartor</a></li>
     </ul>
     <div id="tabs-values">
         <h2>Values used with this key</h2>
@@ -71,6 +72,23 @@
         </form>
        <table id="grid-josm">
        </table>
+    </div>
+    <div id="tabs-merkaartor">
+        <p>Type: <%= @merkaartor_type %></p>
+        <% if @merkaartor_link %>
+            <p>Link: XXX</p>
+        <% end %>
+        <p>
+            <%= @merkaartor_images %>
+        </p>
+        <h3>Values</h3>
+        <%= @merkaartor_values.map{ |value| link_to_value(@key, value) }.join(', ') %>
+        <h3>Descriptions</h3>
+        <table>
+            <% @merkaartor_desc.each do |desc| %>
+                <tr><td><%= desc['lang'] %></td><td><%= desc['description'] %></td></tr>
+            <% end %>
+        </table>
     </div>
 </div>
 

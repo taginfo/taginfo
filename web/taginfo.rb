@@ -171,6 +171,16 @@ class Taginfo < Sinatra::Base
         end
 
         @wiki_count = @db.count('wiki.wikipages').condition('value IS NULL').condition('key=?', @key).get_first_value().to_i
+        
+        (@merkaartor_type, @merkaartor_link, @merkaartor_selector) = @db.select('SELECT tag_type, link, selector FROM merkaartor.keys').condition('key=?', @key).get_columns(:tag_type, :link, :selector)
+        @merkaartor_images = [:node, :way, :area, :relation].map{ |type|
+            name = type.to_s.capitalize
+            '<img src="/img/types/' + (@merkaartor_selector =~ /Type is #{name}/ ? type.to_s : 'none') + '.16.png" alt="' + name + '" title="' + name + '"/>'
+        }.join('&nbsp;')
+
+        @merkaartor_values = @db.select('SELECT value FROM merkaartor.tags').condition('key=?', @key).order_by([:value], :value, 'ASC').execute().map{ |row| row['value'] }
+
+        @merkaartor_desc = @db.select('SELECT lang, description FROM key_descriptions').condition('key=?', @key).order_by([:lang], :lang, 'ASC').execute()
 
         erb :key
     end
@@ -303,6 +313,15 @@ class Taginfo < Sinatra::Base
         @breadcrumbs << ['Styles', '/sources/josm/styles']
         @breadcrumbs << @stylename
         erb :'sources/josm/style'
+    end
+
+    #--------------------------------------------------------------------------
+
+    get '/sources/merkaartor/?' do
+        @title = 'Merkaartor'
+        @breadcrumbs << ['Sources', '/sources']
+        @breadcrumbs << ['Merkaartor']
+        erb :'sources/merkaartor/index'
     end
 
     #--------------------------------------------------------------------------
