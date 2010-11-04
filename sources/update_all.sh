@@ -5,7 +5,7 @@
 #  update_all.sh DIR
 #
 
-SOURCES="db josm wiki"
+SOURCES="josm potlatch merkaartor wiki db"
 
 set -e
 

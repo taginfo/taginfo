@@ -21,11 +21,11 @@ DATABASE=$DIR/taginfo-potlatch.db
 rm -f $DATABASE
 
 echo "Getting resources..."
-#if [ -d $DIR/resources ]; then
-#    svn update $DIR/resources
-#else
-#    svn checkout http://svn.openstreetmap.org/applications/editors/potlatch2/resources $DIR/resources
-#fi
+if [ -d $DIR/resources ]; then
+    svn update $DIR/resources
+else
+    svn checkout http://svn.openstreetmap.org/applications/editors/potlatch2/resources $DIR/resources
+fi
 
 echo "Running pre.sql..."
 sqlite3 $DATABASE <pre.sql
