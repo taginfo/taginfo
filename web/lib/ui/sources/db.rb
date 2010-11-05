@@ -1,7 +1,7 @@
 # web/lib/ui/sources/db.rb
 class Taginfo < Sinatra::Base
 
-    get! '/sources/db/' do
+    get! '/sources/db' do
         @title = 'Database'
         @breadcrumbs << ['Sources', '/sources']
         @breadcrumbs << ['Database']

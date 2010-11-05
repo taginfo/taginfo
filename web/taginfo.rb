@@ -114,7 +114,7 @@ class Taginfo < Sinatra::Base
         end
     end
 
-    get! '/sources/' do
+    get! '/sources' do
         @title = 'Sources'
         @breadcrumbs << @title
         @sources = @db.select('SELECT * FROM master_meta ORDER BY source_name').execute()
@@ -127,7 +127,7 @@ class Taginfo < Sinatra::Base
         erb :api
     end
 
-    get '/keys' do
+    get! '/keys' do
         @title = 'Keys'
         @breadcrumbs << ['Keys']
         erb :keys

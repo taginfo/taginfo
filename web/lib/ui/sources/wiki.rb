@@ -1,14 +1,14 @@
 # web/lib/ui/sources/wiki.rb
 class Taginfo < Sinatra::Base
 
-    get! '/sources/wiki/' do
+    get! '/sources/wiki' do
         @title = 'Wiki'
         @breadcrumbs << ['Sources', '/sources']
         @breadcrumbs << ['Wiki']
         erb :'sources/wiki/index'
     end
 
-    get! '/sources/wiki/keys/' do
+    get! '/sources/wiki/keys' do
         @title = ['Keys', 'Wiki']
         @breadcrumbs << ['Sources', '/sources']
         @breadcrumbs << ['Wiki', '/sources/wiki']

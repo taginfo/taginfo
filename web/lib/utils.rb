@@ -175,13 +175,11 @@ def external_link(title, link)
     %Q{&rarr; <a class="extlink" href="#{link}" target="_blank">#{title}</a>}
 end
 
-# Like the 'get' method but will add a redirect for the same path with trailing / removed
+# Like the 'get' method but will add a redirect for the same path with trailing / added
 def get!(path, &block)
     get path, &block
-    if path =~ %r{^(.*)/$}
-        get $1 do
-            redirect path
-        end
+    get path + '/' do
+        redirect path
     end
 end
 
