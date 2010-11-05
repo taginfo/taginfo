@@ -126,6 +126,7 @@ div#date {
     color: #606060;
 }
 
+/*
 div#bottom {
     position: fixed;
     bottom: 2px;
@@ -148,7 +149,7 @@ div#bottom span {
     -chrome-border-radius: 8px;
     -o-border-radius: 8px;
 }
-
+*/
 div#main {
     margin: 20px;
 }
@@ -387,6 +388,27 @@ table.drilldown td.arrow {
 table.drilldown td#feature {
     min-width: 16em;
     padding: 10px;
+}
+
+/* ==========  */
+
+a.button {
+    background-color: #f0f0f0;
+    color: #303030;
+    border: 1px solid #e8e8e8;
+    padding: 0 2px;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -chrome-border-radius: 3px;
+    -o-border-radius: 3px;
+}
+
+a.button:hover {
+    background-color: #f2f2f2;
+    color: #606060;
+    border: 1px solid #eaeaea;
+    text-decoration: none;
 }
 
 /* ==========  */

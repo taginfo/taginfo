@@ -121,12 +121,6 @@ class Taginfo < Sinatra::Base
         erb :'sources/index'
     end
 
-    get '/api' do
-        @title = 'API'
-        @breadcrumbs << @title
-        erb :api
-    end
-
     get! '/keys' do
         @title = 'Keys'
         @breadcrumbs << ['Keys']
