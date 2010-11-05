@@ -1,14 +1,14 @@
 # web/lib/ui/sources/josm.rb
 class Taginfo < Sinatra::Base
 
-    get '/sources/josm/?' do
+    get! '/sources/josm/' do
         @title = 'JOSM'
         @breadcrumbs << ['Sources', '/sources']
         @breadcrumbs << ['JOSM']
         erb :'sources/josm/index'
     end
 
-    get '/sources/josm/styles/?' do
+    get! '/sources/josm/styles/' do
         @title = ['Styles', 'JOSM']
         @breadcrumbs << ['Sources', '/sources']
         @breadcrumbs << ['JOSM', '/sources/josm']

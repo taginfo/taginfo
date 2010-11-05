@@ -1,11 +1,11 @@
 # test.rb
 class Taginfo < Sinatra::Base
 
-    get '/test' do
+    get! '/test/' do
         erb :'test/index'
     end
 
-    get '/test/tags/?' do
+    get! '/test/tags/' do
         @title = ['Tags', 'Test']
         @breadcrumbs << [ 'Test', '/test' ]
         @breadcrumbs << 'Tags'
@@ -17,6 +17,5 @@ class Taginfo < Sinatra::Base
             sort{ |a,b| a['key'] <=> b['key'] }
         erb :'test/tags'
     end
-
 
 end

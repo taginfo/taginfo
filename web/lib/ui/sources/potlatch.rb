@@ -1,7 +1,7 @@
 # web/lib/ui/sources/potlatch.rb
 class Taginfo < Sinatra::Base
 
-    get '/sources/potlatch/?' do
+    get! '/sources/potlatch/' do
         @title = 'Potlatch'
         @breadcrumbs << ['Sources', '/sources']
         @breadcrumbs << ['Potlatch']

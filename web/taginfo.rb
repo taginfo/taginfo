@@ -114,7 +114,7 @@ class Taginfo < Sinatra::Base
         end
     end
 
-    get '/sources/?' do
+    get! '/sources/' do
         @title = 'Sources'
         @breadcrumbs << @title
         @sources = @db.select('SELECT * FROM master_meta ORDER BY source_name').execute()

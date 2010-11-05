@@ -1,7 +1,7 @@
 # web/lib/ui/reports.rb
 class Taginfo < Sinatra::Base
 
-    get '/reports/?' do
+    get! '/reports/' do
         @title = 'Reports'
         @breadcrumbs << @title
         erb :'reports/index'
