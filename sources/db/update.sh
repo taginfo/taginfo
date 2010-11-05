@@ -31,7 +31,7 @@ bzcat $DIR/planet.osm.bz2 | $HERE/osmium_tagstats -
 cd $HERE
 
 echo "Running update_characters..."
-./update_characters.pl
+./update_characters.pl $DIR
 
 echo "Running post.sql..."
 perl -pe "s|__DIR__|$DIR|" post.sql | sqlite3 $DATABASE
