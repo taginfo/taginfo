@@ -45,6 +45,9 @@ INSERT INTO stats (key, value) SELECT 'characters_in_keys_space',   count(*) FRO
 INSERT INTO stats (key, value) SELECT 'characters_in_keys_problem', count(*) FROM keys WHERE characters='problem';
 INSERT INTO stats (key, value) SELECT 'characters_in_keys_rest',    count(*) FROM keys WHERE characters='rest';
 
+INSERT INTO stats (key, value) VALUES ('objects',      (SELECT sum(value) FROM stats WHERE key IN ('nodes', 'ways', 'relations')));
+INSERT INTO stats (key, value) VALUES ('objects_tags', (SELECT sum(value) FROM stats WHERE key IN ('node_tags', 'way_tags', 'relation_tags')));
+
 UPDATE keys SET prevalent_values=(
         SELECT group_concat(value, '|') FROM (
             SELECT value FROM tags t

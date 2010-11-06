@@ -47,6 +47,10 @@ module SQL
             Select.new(self, 'SELECT count(*) FROM ' + table)
         end
 
+        def stats(key)
+            get_first_value('SELECT value FROM master_stats WHERE key=?', key).to_i
+        end
+
     end
 
     # Representation of a SELECT query.
@@ -153,4 +157,3 @@ module SQL
     end
 
 end
-

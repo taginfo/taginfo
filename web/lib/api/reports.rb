@@ -25,7 +25,7 @@ class Taginfo < Sinatra::Base
             :data  => res.map{ |row| {
                 :key                      => row['key'],
                 :count_all                => row['count_all'].to_i,
-                :count_all_fraction       => row['count_all'].to_f / @stats['objects'],
+                :count_all_fraction       => row['count_all'].to_f / @db.stats('objects'),
                 :values_all               => row['values_all'].to_i,
                 :users_all                => row['users_all'].to_i,
                 :prevalent_values         => (row['prevalent_values'] || '').split('|').map{ |pv| pv }

@@ -23,8 +23,10 @@ CREATE TABLE master_meta (
 );
 
 INSERT INTO master_meta SELECT * FROM db.meta
-                  UNION SELECT * FROM josm.meta
-                  UNION SELECT * FROM wiki.meta;
+                  UNION SELECT * FROM wiki.meta
+                  UNION SELECT * FROM josm.meta;
+-- XXX                 UNION SELECT * FROM potlatch.meta
+-- XXX                 UNION SELECT * FROM merkaartor.meta;
 
 DROP TABLE IF EXISTS master_stats;
 
@@ -34,8 +36,10 @@ CREATE TABLE master_stats (
 );
 
 INSERT INTO master_stats SELECT * FROM db.stats
+                   UNION SELECT * FROM wiki.stats
                    UNION SELECT * FROM josm.stats
-                   UNION SELECT * FROM wiki.stats;
+                   UNION SELECT * FROM potlatch.stats
+                   UNION SELECT * FROM merkaartor.stats;
 
 INSERT INTO db.keys (key) SELECT DISTINCT key FROM wiki.wikipages        WHERE key NOT IN (SELECT key FROM db.keys);
 INSERT INTO db.keys (key) SELECT DISTINCT k   FROM josm.josm_style_rules WHERE k   NOT IN (SELECT key FROM db.keys);

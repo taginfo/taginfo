@@ -72,8 +72,8 @@ class Taginfo < Sinatra::Base
             @stats[row[0]] = row[1].to_i
         end
 
-        @stats['objects']                 = @stats['nodes']     + @stats['ways']     + @stats['relations']
-        @stats['object_tags']             = @stats['node_tags'] + @stats['way_tags'] + @stats['relation_tags']
+        @stats['objects']                 = @stats['nodes']     + @stats['ways']     + @stats['relations'] # XXX to be removed
+        @stats['object_tags']             = @stats['node_tags'] + @stats['way_tags'] + @stats['relation_tags'] # XXX to be removed
         @stats['nodes_with_tags_percent'] = (10000.0 * @stats['nodes_with_tags'] / @stats['nodes']).to_i.to_f           / 100
         @stats['tags_per_node']           = (  100.0 * @stats['node_tags']       / @stats['nodes_with_tags']).to_i.to_f / 100
         @stats['tags_per_way']            = (  100.0 * @stats['way_tags']        / @stats['ways']).to_i.to_f            / 100
