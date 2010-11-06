@@ -16,9 +16,9 @@ of information about tags. It shows what tags are actually used.</p>
         <table class="stats">
             <tr><td style="width: 7em;">There are </td><td style="width: 7em;" class="number"><%= @db.stats('nodes').to_s_with_ts %></td><td> nodes</td></tr>
             <tr><td>of which </td><td class="number"><%= @db.stats('nodes_with_tags').to_s_with_ts %></td><td> have at least on tag</td></tr>
-            <tr><td>(thats </td><td class="number"><%= @stats['nodes_with_tags_percent'] %></td><td> %)</td></tr>
+            <tr><td>(thats </td><td class="number"><%= (10000.0 * @db.stats('nodes_with_tags') / @db.stats('nodes')).to_i.to_f / 100 %></td><td> %)</td></tr>
             <tr><td>with together </td><td class="number"><%= @db.stats('node_tags').to_s_with_ts %></td><td> tags</td></tr>
-            <tr><td>(or about </td><td class="number"><%= @stats['tags_per_node'] %></td><td> tags per tagged node)</td></tr>
+            <tr><td>(or about </td><td class="number"><%= ( 100.0 * @db.stats('node_tags') / @db.stats('nodes_with_tags')).to_i.to_f / 100 %></td><td> tags per tagged node)</td></tr>
         </table>
     </div>
     <div>
@@ -27,7 +27,7 @@ of information about tags. It shows what tags are actually used.</p>
             <tr><td style="width: 7em;">There are </td><td style="width: 7em;" class="number"><%= @db.stats('ways').to_s_with_ts %></td><td> ways</td></tr>
             <tr><td>(of which </td><td class="number"><%= @db.stats('closed_ways').to_s_with_ts %></td><td> are closed)</td></tr>
             <tr><td>with together </td><td class="number"><%= @db.stats('way_tags').to_s_with_ts %></td><td> tags</td></tr>
-            <tr><td>(or about </td><td class="number"><%= @stats['tags_per_way'] %></td><td> tags per way)</td></tr>
+            <tr><td>(or about </td><td class="number"><%= ( 100.0 * @db.stats('way_tags') / @db.stats('ways')).to_i.to_f / 100 %></td><td> tags per way)</td></tr>
         </table>
     </div>
     <div>
@@ -35,7 +35,7 @@ of information about tags. It shows what tags are actually used.</p>
         <table class="stats">
             <tr><td style="width: 7em;">There are </td><td style="width: 7em;" class="number"><%= @db.stats('relations').to_s_with_ts %></td><td> relations</td></tr>
             <tr><td>with together </td><td class="number"><%= @db.stats('relation_tags').to_s_with_ts %></td><td> tags</td></tr>
-            <tr><td>(or about </td><td class="number"><%= @stats['tags_per_relation'] %></td><td> tags per relation)</td></tr>
+            <tr><td>(or about </td><td class="number"><%= ( 100.0 * @db.stats('relation_tags') / @db.stats('relations')).to_i.to_f / 100 %></td><td> tags per relation)</td></tr>
         </table>
     </div>
 </div>

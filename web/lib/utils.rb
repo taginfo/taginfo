@@ -113,7 +113,7 @@ def get_total(type)
         'nodes'     => 'nodes_with_tags',
         'ways'      => 'ways',
         'relations' => 'relations' }[type]
-    return @stats[key]
+    return @db.stats(key)
 end
 
 # see also web/public/js/taginfo.js
