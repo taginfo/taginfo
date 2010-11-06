@@ -5,6 +5,7 @@ class Taginfo < Sinatra::Base
         return res.map{ |row| {
                 :lang             => h(row['lang']),
                 :language         => h(::Language[row['lang']].native_name),
+                :language_en      => h(::Language[row['lang']].english_name),
                 :title            => h(row['title']),
                 :description      => h(row['description']),
                 :image            => h(row['image']),

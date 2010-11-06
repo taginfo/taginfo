@@ -29,10 +29,11 @@
 <div id="tabs">
     <ul>
         <li><a href="#tabs-values">Values</a></li>
-        <li><a href="#tabs-keys">Other Keys</a></li>
+        <li><a href="#tabs-keys">Combinations</a></li>
         <li><a href="#tabs-map">Map</a></li>
         <li><a href="#tabs-wiki">Wiki</a></li>
         <li><a href="#tabs-josm">JOSM</a></li>
+<%#        <li><a href="#tabs-potlatch">Potlatch</a></li>%>
 <%#        <li><a href="#tabs-merkaartor">Merkaartor</a></li>%>
     </ul>
     <div id="tabs-values">
@@ -245,7 +246,7 @@
                     page: 1,
                     rows: jQuery.map(data, function(row, i) {
                         return { 'cell': [
-                            print_language(row.lang, row.language),
+                            print_language(row.lang, row.language, row.language_en),
                             print_wiki_link(row.title),
                             row.description,
                             row.image == null ? '<i>no image</i>' : print_wiki_link(row.image),

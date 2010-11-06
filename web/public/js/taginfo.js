@@ -14,8 +14,8 @@ function print_wiki_link(title, options) {
     return '<img src="/img/link-wiki.gif" alt=""/><a class="wikilink" href="http://wiki.openstreetmap.org/' + path + '" target="_blank">' + title + '</a>';
 }
 
-function print_language(code, lang) {
-    return '<span class="lang" title="' + lang + '">' + code + '</span> ' + lang;
+function print_language(code, native_name, english_name) {
+    return '<span class="lang" title="' + native_name + ' (' + english_name + ')">' + code + '</span> ' + native_name;
 }
 
 function print_key_list(list) {

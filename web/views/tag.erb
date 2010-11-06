@@ -124,7 +124,7 @@
                     page: 1,
                     rows: jQuery.map(data, function(row, i) {
                         return { 'cell': [
-                            print_language(row.lang, row.language),
+                            print_language(row.lang, row.language, row.language_en),
                             print_wiki_link(row.title),
                             row.description,
                             row.image == null ? '<i>no image</i>' : print_wiki_link(row.image),
