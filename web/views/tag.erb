@@ -9,9 +9,10 @@
 
 <div id="tools">
     <% if @count_all < 1000 %>
-        [<%= xapi_link('*', @key, @value) %>] [<%= josm_link('*', @key, @value) %>]
+        <%= xapi_link('*', @key, @value) %> <%= josm_link('*', @key, @value) %>
     <% else %>
-        <span title="Links disabled, because there are too many objects with this tag">[XAPI] [JOSM]</span>
+        <span class="button disabled" title="Button disabled, because there are too many objects with this key"><img src="/img/link-extern.gif" alt=""/>XAPI</span>
+        <span class="button disabled" title="Button disabled, because there are too many objects with this key"><img src="/img/link-extern.gif" alt=""/>JOSM</span>
     <% end %>
 </div>
 

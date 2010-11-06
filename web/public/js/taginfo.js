@@ -1,11 +1,17 @@
 // taginfo.js
 
-function print_wiki_link(title) {
-    return '&rarr; <a class="wikilink" href="http://wiki.openstreetmap.org/wiki/' + title + '" target="_blank">' + title + '</a>';
-}
+function print_wiki_link(title, options) {
+    if (title == '') {
+        return '';
+    }
 
-function print_wiki_edit_link(title) {
-    return '&rarr; <a class="wikilink" href="http://wiki.openstreetmap.org/w/index.php?action=edit&title=' + title + '">' + title + '</a>';
+    if (options && options.edit) {
+        path = 'w/index.php?action=edit&title=' + title;
+    } else {
+        path = 'wiki/' + title;
+    }
+
+    return '<img src="/img/link-wiki.gif" alt=""/><a class="wikilink" href="http://wiki.openstreetmap.org/' + path + '" target="_blank">' + title + '</a>';
 }
 
 function print_language(code, lang) {

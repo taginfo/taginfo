@@ -32,10 +32,10 @@
             </div>
         </div>
         <div id="date">
-            Data from: <%= @data_until %> UTC <a class="button" href="/sources">Sources</a>
-            <a class="button" href="/download">Download</a>
-            <a class="button" href="/about">About</a>
-            <a class="button" href="http://wiki.openstreetmap.org/wiki/Taginfo">Wiki</a>
+            Data from: <%= @data_until %> UTC <span class="button"><a href="/sources">Sources</a></span>
+            <span class="button"><a href="/download">Download</a></span>
+            <span class="button"><a href="/about">About</a></span>
+            <span class="button"><img src="/img/link-extern.gif" alt=""/><a href="http://wiki.openstreetmap.org/wiki/Taginfo">Wiki</a></span>
         </div>
         <div id="main">
             <%= yield %>

@@ -70,11 +70,15 @@ def xapi_url(element, key, value=nil)
 end
 
 def xapi_link(element, key, value=nil)
-    "<a id='xapi' href='#{ xapi_url(element, key, value) }'>XAPI</a>"
+    '<span class="button">' + external_link('XAPI', xapi_url(element, key, value)) + '</span>'
 end
 
 def josm_link(element, key, value=nil)
-    "<a id='josm' href='http://localhost:8111/import?url=#{ xapi_url(element, key, value) }'>JOSM</a>"
+    '<span class="button">' + external_link('JOSM', 'http://localhost:8111/import?url=' + xapi_url(element, key, value)) + '</span>'
+end
+
+def external_link(title, link)
+    %Q{<img src="/img/link-extern.gif" alt=""/><a class="extlink" href="#{link}">#{title}</a>}
 end
 
 def tagcloud_size(tag)
@@ -169,10 +173,6 @@ end
 
 def link_to_tag(key, value)
     return link_to_key(key) + '=' + link_to_value(key, value)
-end
-
-def external_link(title, link)
-    %Q{&rarr; <a class="extlink" href="#{link}" target="_blank">#{title}</a>}
 end
 
 # Like the 'get' method but will add a redirect for the same path with trailing / added
