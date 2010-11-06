@@ -8,8 +8,8 @@ redirect to a different wiki page instead. To do this put just one line with
 <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>page name</i>]]</tt>
 in the wiki page.</p>
 
-<form>
-    <input type="checkbox" name="english" id="english" value="0"/> Also show keys that have no English language wiki page but a page in some other language.
+<form method="" type="GET">
+    <input type="checkbox" name="english" id="english"<%= params[:english] == '1' ? ' checked="checked"' : '' %>/> Also show keys that have no English language wiki page but a page in some other language.
 </form>
 <p></p>
 
@@ -17,9 +17,10 @@ in the wiki page.</p>
 </table>
 
 <script type="text/javascript">
+var grid;
     jQuery(document).ready(function() {
-        jQuery('#keys').flexigrid({
-            url: '/api/2/reports/frequently_used_keys_without_wiki_page',
+        grid = jQuery('#keys').flexigrid({
+            url: '/api/2/reports/frequently_used_keys_without_wiki_page?english=' + <%= params[:english] == '1' ? '1' : '0' %>,
             method: 'GET',
             dataType: 'json',
             colModel: [
@@ -54,6 +55,12 @@ in the wiki page.</p>
                 });
                 return data;
             }
+        });
+        jQuery('#english').bind('click', function() {
+            jQuery('#keys').flexOptions({
+                url: '/api/2/reports/frequently_used_keys_without_wiki_page?english=' + (jQuery('#english')[0].checked ? '1' : '0')
+            });
+            jQuery('#keys').flexReload();
         });
     });
 </script>

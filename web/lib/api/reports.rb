@@ -3,16 +3,20 @@
 class Taginfo < Sinatra::Base
 
     get '/api/2/reports/frequently_used_keys_without_wiki_page' do
+
         min_count = params[:min_count].to_i || 10000
+
+        english = (params[:english] == '1') ? '_en' : ''
+
         total = @db.count('db.keys').
             condition('count_all > ?', min_count).
-            condition('in_wiki = 0').
+            condition("in_wiki#{english} = 0").
             condition_if("key LIKE '%' || ? || '%'", params[:query]).
             get_first_value().to_i
         
         res = @db.select('SELECT * FROM db.keys').
             condition('count_all > ?', min_count).
-            condition('in_wiki = 0').
+            condition("in_wiki#{english} = 0").
             condition_if("key LIKE '%' || ? || '%'", params[:query]).
             order_by([:key, :count_all, :values_all, :users_all], params[:sortname], params[:sortorder]).
             paging(params[:rp], params[:page]).

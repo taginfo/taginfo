@@ -46,8 +46,8 @@ INSERT INTO db.keys (key) SELECT DISTINCT k   FROM josm.josm_style_rules WHERE k
 -- potlatch XXX
 -- INSERT INTO db.keys (key) SELECT DISTINCT key FROM merkaartor.keys       WHERE key NOT IN (SELECT key FROM db.keys);
 
-UPDATE db.keys SET in_wiki=1    WHERE key IN (SELECT distinct key FROM wiki.wikipages);
-UPDATE db.keys SET in_wiki_en=1 WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE lang='en');
+UPDATE db.keys SET in_wiki=1    WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NULL);
+UPDATE db.keys SET in_wiki_en=1 WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NULL AND lang='en');
 UPDATE db.keys SET in_josm=1    WHERE key IN (SELECT distinct k   FROM josm.josm_style_rules);
 -- potlatch XXX
 UPDATE db.keys SET in_merkaartor=1 WHERE key IN (SELECT key FROM merkaartor.keys);
