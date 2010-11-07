@@ -12,7 +12,8 @@ have to go back to the source.</p>
     </tr>
     <% @sources.each do |source| %>
     <tr>
-        <td><a href="/sources/<%= source['source_id'] %>"><img src="/img/sources/<%= source['source_id'] %>.16.png" alt=""/> <%= source['source_name'] %></a></td>
+        <td><a href="/sources/<%= source['source_id'] %>"><img src="/img/sources/<%= source['source_id'] %>.16.png" alt="" width="16" height="16"/></a>
+            <a href="/sources/<%= source['source_id'] %>"><%= source['source_name'] %></a></td>
         <td><%= source['data_until'] %></td>
         <td><%= source['update_start'] %> to <%= source['update_end'] %></td>
     </tr>

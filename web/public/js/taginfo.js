@@ -11,7 +11,7 @@ function print_wiki_link(title, options) {
         path = 'wiki/' + title;
     }
 
-    return '<img src="/img/link-wiki.gif" alt=""/><a class="wikilink" href="http://wiki.openstreetmap.org/' + path + '" target="_blank">' + title + '</a>';
+    return '<img src="/img/link-wiki.gif" alt="" width="14" height="10"/><a class="wikilink" href="http://wiki.openstreetmap.org/' + path + '" target="_blank">' + title + '</a>';
 }
 
 function print_language(code, native_name, english_name) {
@@ -55,7 +55,7 @@ String.prototype.capitalize = function() {
 function print_image(type) {
     type = type.replace(/s$/, '');
     var name = type.capitalize();
-    return '<img src="/img/types/' + type + '.16.png" alt="[' + name + ']" title="' + name + '"/>';
+    return '<img src="/img/types/' + type + '.16.png" alt="[' + name + ']" title="' + name + '" width="16" height="16"/>';
 }
 
 // print a number with thousand separator

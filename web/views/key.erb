@@ -11,8 +11,8 @@
     <% if @count_all_values < 1000 %>
         <%= xapi_link('*', @key) %> <%= josm_link('*', @key) %>
     <% else %>
-        <span class="button disabled" title="Button disabled, because there are too many objects with this key"><img src="/img/link-extern-disabled.gif" alt=""/>XAPI</span>
-        <span class="button disabled" title="Button disabled, because there are too many objects with this key"><img src="/img/link-extern-disabled.gif" alt=""/>JOSM</span>
+        <span class="button disabled" title="Button disabled, because there are too many objects with this key"><img src="/img/link-extern-disabled.gif" width="14" height="10" alt=""/>XAPI</span>
+        <span class="button disabled" title="Button disabled, because there are too many objects with this key"><img src="/img/link-extern-disabled.gif" width="14" height="10" alt=""/>JOSM</span>
     <% end %>
 </div>
 
@@ -52,7 +52,7 @@
     <div id="tabs-map">
         <h2>Geographical distribution of this key</h2>
         <p><i>Currently only tags on nodes are shown.</i></p>
-        <div style="background-image: url(/img/worldp.png); background-repeat: no-repeat;"/><img src="/api/2/db/keys/distribution?key=<%= @key_uri %>" alt=""/></div>
+        <div style="background-image: url(/img/worldp.png); background-repeat: no-repeat;"/><img src="/api/2/db/keys/distribution?key=<%= @key_uri %>" alt="" width="720" height="360"/></div>
     </div>
     <div id="tabs-wiki">
         <h2>Wiki pages about this key</h2>
@@ -250,10 +250,10 @@
                             print_wiki_link(row.title),
                             row.description,
                             row.image == null ? '<i>no image</i>' : print_wiki_link(row.image),
-                            (row.on_node      ? '<img src="/img/types/node.16.png"     alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
-                            (row.on_way       ? '<img src="/img/types/way.16.png"      alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
-                            (row.on_area      ? '<img src="/img/types/area.16.png"     alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
-                            (row.on_relation  ? '<img src="/img/types/relation.16.png" alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>'),
+                            (row.on_node      ? '<img src="/img/types/node.16.png"     alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>') + ' ' +
+                            (row.on_way       ? '<img src="/img/types/way.16.png"      alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>') + ' ' +
+                            (row.on_area      ? '<img src="/img/types/area.16.png"     alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>') + ' ' +
+                            (row.on_relation  ? '<img src="/img/types/relation.16.png" alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>'),
                             print_key_or_tag_list(row.tags_implies),
                             print_key_or_tag_list(row.tags_combination),
                             print_key_or_tag_list(row.tags_linked)
