@@ -8,19 +8,22 @@ have to go back to the source.</p>
 
 <table class="list">
     <tr>
-        <th>Source</th><th>Data until*</th><th>Last update run</th>
+        <th></th><th>Source</th><th>Data until*</th><th>Last update run</th><th></th>
     </tr>
     <% @sources.each do |source| %>
     <tr>
+        <td class="border"></td>
         <td><a href="/sources/<%= source['source_id'] %>"><img src="/img/sources/<%= source['source_id'] %>.16.png" alt="" width="16" height="16"/></a>
             <a href="/sources/<%= source['source_id'] %>"><%= source['source_name'] %></a></td>
         <td><%= source['data_until'] %></td>
         <td><%= source['update_start'] %> to <%= source['update_end'] %></td>
+        <td class="border"></td>
     </tr>
     <% end %>
+    <tr><th colspan="5"/></tr>
 </table>
 
-<p>* All edits until this time will be in the data, later edits might be.</p>
+<p style="font-size: 80%">* All edits until this time will be in the data, later edits might be.</p>
 
 <p>All times in UTC.</p>
 

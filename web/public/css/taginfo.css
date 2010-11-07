@@ -95,7 +95,7 @@ div#top {
     margin: 8px 20px;
     background-image: url('/img/bg-green.png');
     background-repeat: repeat-x;
-    background-color: #b0e0b0;
+    background-color: #b0f0b0;
     padding: 2px 16px 0 16px;
     -moz-border-radius: 4px;
     -khtml-border-radius: 4px;
@@ -261,7 +261,18 @@ div.bar {
 
 td.number {
     text-align: right;
-    color: #e06000;
+//    color: #e06000;
+}
+
+span.char {
+    background-color: #f0f0f0;
+    border: 1px solid #e0e0e0;
+    padding: 0 2px;
+    -moz-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -chrome-border-radius: 4px;
+    -o-border-radius: 4px;
 }
 
 .source-wiki {
@@ -283,19 +294,36 @@ div.tagcloud {
     margin: 0 10%;
 }
 
+/* ========== */
+
 table.list {
-    border: 1px solid #605060;
+    background-image: url('/img/bg-green.png');
+    background-position: 0 -2px;
+    background-repeat: repeat-x;
+    background-color: #b0f0b0;
     border-collapse: collapse;
+    -moz-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -chrome-border-radius: 4px;
+    -o-border-radius: 4px;
 }
 
 table.list th {
-    background-color: #606060;
-    color: #ffffff;
+    padding: 4px;
 }
 
-table.list th, table.list td {
-    padding: 4px 20px;
+table.list td {
+    background-color: #ffffff;
+    padding: 4px 10px;
 }
+
+table.list td.border {
+    background-color: #b0f0b0;
+    padding: 4px;
+}
+
+/* ========== */
 
 div#canvas-values {
     position: absolute;
