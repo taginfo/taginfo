@@ -142,7 +142,7 @@ class Taginfo < Sinatra::Base
         @prevalent_values = @db.select("SELECT value, count_#{@filter_type} AS count FROM tags").
             condition('key=?', @key).
             condition('count > ?', @count_all_values * 0.02).
-            order_by([:count], :count, 'DESC').
+            order_by(:count, 'DESC').
             execute().map{ |row| [{ 'value' => row['value'], 'count' => row['count'].to_i }] }
 
         # add "(other)" label for the rest of the values
@@ -159,9 +159,9 @@ class Taginfo < Sinatra::Base
             '<img src="/img/types/' + (@merkaartor_selector =~ /Type is #{name}/ ? type.to_s : 'none') + '.16.png" alt="' + name + '" title="' + name + '"/>'
         }.join('&nbsp;')
 
-        @merkaartor_values = @db.select('SELECT value FROM merkaartor.tags').condition('key=?', @key).order_by([:value], :value, 'ASC').execute().map{ |row| row['value'] }
+        @merkaartor_values = @db.select('SELECT value FROM merkaartor.tags').condition('key=?', @key).order_by(:value).execute().map{ |row| row['value'] }
 
-        @merkaartor_desc = @db.select('SELECT lang, description FROM key_descriptions').condition('key=?', @key).order_by([:lang], :lang, 'ASC').execute()
+        @merkaartor_desc = @db.select('SELECT lang, description FROM key_descriptions').condition('key=?', @key).order_by(:lang).execute()
 
         erb :key
     end

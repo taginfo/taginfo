@@ -8,7 +8,20 @@ class Taginfo < Sinatra::Base
         
         res = @db.select('SELECT * FROM db.keys').
             condition_if("key LIKE '%' || ? || '%'", params[:query]).
-            order_by([:key, :count_all, :count_nodes, :count_ways, :count_relations, :values_all, :users_all, :in_wiki, :in_josm, :in_potlatch], params[:sortname], params[:sortorder]).
+            order_by(params[:sortname], params[:sortorder]) { |o|
+                o.key
+                o.count_all
+                o.count_nodes
+                o.count_ways
+                o.count_relations
+                o.values_all
+                o.users_all
+                o.in_wiki
+                o.in_josm
+                o.in_potlatch
+                o.length 'length(key)'
+                o.length :key
+            }.
             paging(params[:rp], params[:page]).
             execute()
 
@@ -94,7 +107,13 @@ class Taginfo < Sinatra::Base
             condition("count_#{filter_type} > 0").
             condition('key = ?', key).
             condition_if("value LIKE '%' || ? || '%'", params[:query]).
-            order_by([:value, :count_all, :count_nodes, :count_ways, :count_relations], params[:sortname], params[:sortorder]).
+            order_by(params[:sortname], params[:sortorder]){ |o|
+                o.value
+                o.count_all
+                o.count_nodes
+                o.count_ways
+                o.count_relations
+            }.
             paging(params[:rp], params[:page]).
             execute()
 
@@ -131,7 +150,11 @@ class Taginfo < Sinatra::Base
 
         res = @db.select("SELECT p.key1 AS other_key, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.keypairs p, db.keys k WHERE p.key1=k.key AND p.key2=? AND p.count_#{filter_type} > 0 
                     UNION SELECT p.key2 AS other_key, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.keypairs p, db.keys k WHERE p.key2=k.key AND p.key1=? AND p.count_#{filter_type} > 0", key, key).
-            order_by([:together_count, :other_key, :from_fraction], params[:sortname], params[:sortorder]).
+            order_by(params[:sortname], params[:sortorder]){ |o|
+                o.together_count
+                o.other_key
+                o.from_fraction
+            }.
             paging(params[:rp], params[:page]).
             execute()
 
@@ -155,7 +178,15 @@ class Taginfo < Sinatra::Base
         
         res = @db.select('SELECT * FROM popular_keys').
             condition_if("key LIKE '%' || ? || '%'", params[:query]).
-            order_by([:key, :scale_count, :scale_users, :scale_wiki, :scale_josm, :scale1, :scale2], params[:sortname], params[:sortorder]).
+            order_by(params[:sortname], params[:sortorder]){ |o|
+                o.key
+                o.scale_count
+                o.scale_user
+                o.scale_wiki
+                o.scale_josm
+                o.scale1
+                o.scale2
+            }.
             paging(params[:rp], params[:page]).
             execute()
 

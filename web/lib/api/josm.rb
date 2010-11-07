@@ -23,17 +23,6 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
-    def sort_by_for_keys
-        return case params[:sortname]
-            when 'k'
-                ['k', 'v', 'b']
-            when 'v'
-                ['v', 'b', 'k']
-            else
-                params[:sortname]
-        end
-    end
-
     get '/api/2/josm/styles/:style' do
         total = @db.count('josm_style_rules').
             condition_if("k LIKE '%' || ? || '%' OR v LIKE '%' || ? || '%'", params[:query], params[:query]).
@@ -41,24 +30,21 @@ class Taginfo < Sinatra::Base
 
         res = @db.select('SELECT * FROM josm_style_rules').
             condition_if("k LIKE '%' || ? || '%' OR v LIKE '%' || ? || '%'", params[:query], params[:query]).
-            order_by([:k, :v, :b, :scale_min, :scale_max], sort_by_for_keys, params[:sortorder]).
+            order_by(params[:sortname], params[:sortorder]){ |o|
+                o.k :k
+                o.k :v
+                o.k :b
+                o.v :v
+                o.v :b
+                o.v :k
+                o.b
+                o.scale_min
+                o.scale_max
+            }.
             paging(params[:rp], params[:page]).
             execute()
 
         return get_josm_result(total, res);
-    end
-
-    def sort_by_for_values
-        return case params[:sortname]
-            when 'v'
-                ['v', 'b']
-            when 'scale_min'
-                ['scale_min', 'scale_max', 'v', 'b']
-            when 'scale_max'
-                ['scale_max', 'scale_min', 'v', 'b']
-            else
-                params[:sortname]
-        end
     end
 
     get '/api/2/josm/styles/:style/keys' do
@@ -73,7 +59,19 @@ class Taginfo < Sinatra::Base
         res = @db.select('SELECT * FROM josm_style_rules').
             condition('k = ?', key).
             condition_if("v LIKE '%' || ? || '%'", params[:query]).
-            order_by([:v, :b, :scale_min, :scale_max], sort_by_for_values, params[:sortorder]).
+            order_by(params[:sortname], params[:sortorder]){ |o|
+                o.v :v
+                o.v :b
+                o.b
+                o.scale_min :scale_min
+                o.scale_min :scale_max
+                o.scale_min :v
+                o.scale_min :b
+                o.scale_max :scale_max
+                o.scale_max :scale_min
+                o.scale_max :v
+                o.scale_max :b
+            }.
             paging(params[:rp], params[:page]).
             execute()
 
@@ -92,7 +90,7 @@ class Taginfo < Sinatra::Base
         res = @db.select('SELECT * FROM josm_style_rules').
             condition('k = ?', key).
             condition('v = ?', value).
-            order_by([:scale_min], 'scale_min', 'ASC').
+            order_by(:scale_min).
             paging(params[:rp], params[:page]).
             execute()
 

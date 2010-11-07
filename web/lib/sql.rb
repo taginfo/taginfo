@@ -78,25 +78,37 @@ module SQL
             self
         end
 
-        def order_by(allowed, values, direction='ASC')
-            unless values.is_a?(Array)
+        def order_by(values, direction='ASC', &block)
+
+            if values.is_a?(Array)
+                values = values.compact
+            else
                 values = [values]
             end
-            values.compact.each do |value|
-                unless allowed.include?(value.to_sym)
-                    raise ArgumentError, 'order by this attribute not allowed'
-                end
-            end
+
+            o = Order.new(values, &block)
+
             if direction.nil?
                 direction = 'ASC'
             else
+                direction = direction.to_s
                 if direction !~ /^(asc|desc)$/i
                     raise ArgumentError, 'direction must be ASC or DESC'
                 end
             end
-            unless values.compact.empty?
-                @order_by = "ORDER BY " + values.map{ |value| "#{value} #{direction}" }.join(',')
+
+            values.each do |value|
+                unless o._allowed(value)
+                    raise ArgumentError, 'order by this attribute not allowed'
+                end
             end
+
+            unless values.empty?
+                @order_by = "ORDER BY " + values.map{ |value|
+                    o[value.to_s].map{ |oel| oel.to_s(direction.upcase) }.join(',')
+                }.join(',')
+            end
+
             self
         end
 
@@ -152,6 +164,63 @@ module SQL
             row = @db.get_first_row(q, *@params)
             return [nil] * columns.size if row.nil?;
             columns.map{ |column| row[column.to_s] }
+        end
+
+    end
+
+    class OrderElement
+
+        @@DIRECTION = { 'ASC' => 'DESC', 'DESC' => 'ASC' }
+
+        def initialize(column, reverse)
+            @column  = column
+            @reverse = reverse
+        end
+
+        def to_s(direction)
+            dir = @reverse ? @@DIRECTION[direction.upcase] : direction.upcase
+            "#{@column} #{dir}" 
+        end
+
+    end
+
+    class Order
+
+        def initialize(values, &block)
+            @allowed = Hash.new
+            if block_given?
+                yield self
+            else
+                values.each do |value|
+                    _add(value.to_s)
+                end
+            end
+        end
+
+        def _allowed(field)
+            @allowed.has_key?(field.to_s)
+        end
+
+        def [](field)
+            @allowed[field]
+        end
+
+        def _add(field, attribute=nil)
+            field = field.to_s
+            if field =~ /^(.*)!$/
+                field = $1
+                reverse = true
+            else
+                reverse = false
+            end
+            attribute = field if attribute.nil?
+
+            @allowed[field] ||= Array.new
+            @allowed[field] << OrderElement.new(attribute.to_s, reverse)
+        end
+
+        def method_missing(field, attribute=nil)
+            _add(field, attribute)
         end
 
     end

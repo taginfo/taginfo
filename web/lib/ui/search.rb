@@ -13,7 +13,7 @@ class Taginfo < Sinatra::Base
 
         @substring_keys = @db.select('SELECT key FROM keys').
             condition("key LIKE '%' || ? || '%' AND key != ?", params[:search], params[:search]).
-            order_by([:key], :key, 'ASC').
+            order_by(:key).
             execute().
             map{ |row| row['key'] }
 
