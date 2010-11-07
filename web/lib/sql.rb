@@ -78,6 +78,13 @@ module SQL
             self
         end
 
+        def conditions(cond)
+            cond.each do |cond|
+                condition(cond)
+            end
+            self
+        end
+
         def order_by(values, direction='ASC', &block)
 
             if values.is_a?(Array)

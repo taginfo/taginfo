@@ -1,13 +1,27 @@
 # api/db.rb
 class Taginfo < Sinatra::Base
 
+    @@filters = {
+        :characters_space       => "characters='space'",
+        :characters_problematic => "characters='problem'"
+    }
+
     get '/api/2/db/keys' do
+
+        if params[:filters]
+            filters = params[:filters].split(',').map{ |f| @@filters[f.to_sym] }.compact
+        else
+            filters = []
+        end
+
         total = @db.count('db.keys').
             condition_if("key LIKE '%' || ? || '%'", params[:query]).
+            conditions(filters).
             get_first_value().to_i
         
         res = @db.select('SELECT * FROM db.keys').
             condition_if("key LIKE '%' || ? || '%'", params[:query]).
+            conditions(filters).
             order_by(params[:sortname], params[:sortorder]) { |o|
                 o.key
                 o.count_all
