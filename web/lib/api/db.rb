@@ -3,7 +3,9 @@ class Taginfo < Sinatra::Base
 
     @@filters = {
         :characters_space       => "characters='space'",
-        :characters_problematic => "characters='problem'"
+        :characters_problematic => "characters='problem'",
+        :in_wiki                => "in_wiki=1",
+        :not_in_db              => "count_all=0"
     }
 
     get '/api/2/db/keys' do

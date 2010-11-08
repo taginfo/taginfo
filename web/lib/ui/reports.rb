@@ -9,7 +9,13 @@ class Taginfo < Sinatra::Base
 
     #--------------------------------------------------------------------------
 
-    ['Frequently Used Keys Without Wiki Page', 'Characters in Keys', 'Key Lengths'].each do |title|
+    [
+        'Frequently Used Keys Without Wiki Page', 
+        'Wiki Pages About Non-Existing Keys',
+        'Language Comparison Table for Keys in the Wiki',
+        'Characters in Keys',
+        'Key Lengths'
+    ].each do |title|
         name = title.gsub(/ /, '_').downcase
         get '/reports/' + name do
             @title = title
