@@ -35,9 +35,9 @@ class Taginfo < Sinatra::Base
         erb :'sources/potlatch/feature', :layout => false
     end
 
-    get %r{/sources/potlatch/icon/(.*)} do
+    get %r{/sources/potlatch/icon/(.*)} do |icon|
         content_type :png
-        IO.read('../../var/sources/potlatch/resources/' + params[:captures].first)
+        send_file('../../var/sources/potlatch/resources/' + icon)
     end
 
 end
