@@ -74,6 +74,13 @@ CREATE TABLE wiki_languages (
     count_pages INTEGER
 );
 
+DROP TABLE IF EXISTS invalid_page_title;
+
+CREATE TABLE invalid_page_titles (
+    reason TEXT,
+    title  TEXT
+);
+
 DROP TABLE IF EXISTS stats;
 
 CREATE TABLE stats (

@@ -97,13 +97,14 @@ class WikiPage
     end
 
     # Has this wiki page a name that we can understand and process?
-    def valid?
-        return false if @lang  !~ /^[a-z]{2}(-[a-z0-9-]+)?$/
-        return false if @ttype == 'key' && ! @value.nil?
-        return false if @ttype == 'tag' &&   @value.nil?
-        return false if @key   =~ %r{/}
-        return false if @value =~ %r{/}
-        return true
+    def check_title
+        return :wrong_lang_format if @lang  !~ /^[a-z]{2}(-[a-z0-9-]+)?$/
+        return :lang_en           if @title =~ /^en:/i
+        return :value_for_key     if @ttype == 'key' && ! @value.nil?
+        return :no_value_for_tag  if @ttype == 'tag' &&   @value.nil?
+        return :slash_in_key      if @key   =~ %r{/}
+        return :slash_in_value    if @value =~ %r{/}
+        return :ok
     end
 
     # Return parameters for API call to read this page.
@@ -239,7 +240,8 @@ File.open(dir + '/tagpages.list') do |wikipages|
         page = WikiPage.new(t[0], t[1], t[2])
         puts "page: (#{page.title}) (#{page.type}) (#{page.namespace}) (#{page.tag})"
 
-        if page.valid?
+        reason = page.check_title
+        if reason == :ok
             res = api.get(page.params)
             page.content = res.body
 
@@ -301,7 +303,8 @@ File.open(dir + '/tagpages.list') do |wikipages|
             end
             page.insert(db)
         else
-            puts "invalid page: #{page.title}"
+            puts "invalid page: #{reason} #{page.title}"
+            db.execute('INSERT INTO invalid_page_titles (reason, title) VALUES (?, ?)', reason, page.title)
         end
     end
 end

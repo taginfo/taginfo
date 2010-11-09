@@ -18,4 +18,12 @@ class Taginfo < Sinatra::Base
         erb :'test/tags'
     end
 
+    get '/test/wiki_import' do
+        @title = ['Wiki Import', 'Test']
+        @breadcrumbs << [ 'Wiki Import', '/test' ]
+        @breadcrumbs << 'Tags'
+        @invalid_page_titles = @db.select('SELECT * FROM invalid_page_titles').execute()
+        erb :'test/wiki_import'
+    end
+
 end
