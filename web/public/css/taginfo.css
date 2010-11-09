@@ -337,6 +337,11 @@ div#canvas-keypairs {
     background-color: #ffffff;
 }
 
+div.canvas {
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+}
+
 /* ==========  */
 
 table.drilldown {

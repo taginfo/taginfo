@@ -111,5 +111,9 @@ UPDATE popular_keys SET scale_name  = 0 WHERE key LIKE '%:%';
 
 UPDATE popular_keys SET scale1 = 10 * scale_count + 8 * scale_users + 2 * scale_wiki + 1 * scale_josm + 2 * scale_name;
 
+INSERT INTO languages (code) SELECT distinct(lang) FROM wiki.wikipages WHERE lang NOT IN (SELECT code FROM languages);
+UPDATE languages SET wiki_key_pages=(SELECT count(distinct key) FROM wiki.wikipages WHERE lang=code AND value IS NULL);
+UPDATE languages SET wiki_tag_pages=(SELECT count(distinct key) FROM wiki.wikipages WHERE lang=code AND value IS NOT NULL);
+
 ANALYZE;
 

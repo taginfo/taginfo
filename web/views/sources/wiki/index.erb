@@ -7,7 +7,10 @@
 </p>
 
 <p>Taginfo finds all pages beginning with 'Key:' or 'Tag:' and their
-counterparts for other languages (for example 'De:Key:...'). </p>
+counterparts for other languages (for example 'DE:Key:...'). </p>
 
 <p>[<a href="/sources/wiki/keys">Show all tag keys with pages on the wiki</a>]</p>
 
+<p>There are <%= @db.stats('wiki_pages_for_keys') %> wiki pages describing <%= @db.stats('wiki_keys_described') %> keys.
+
+<p>There are pages in <%= @db.stats('wiki_languages') %> languages.</p>

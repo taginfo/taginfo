@@ -42,4 +42,30 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
+    get '/api/2/reports/languages' do
+        res = @db.select('SELECT * FROM languages').
+            order_by(params[:sortname], params[:sortorder]){ |o|
+                o.code
+                o.native_name
+                o.english_name
+                o.wiki_key_pages
+                o.wiki_tag_pages
+            }.
+            execute()
+
+        return {
+            :page  => 1,
+            :total => res.size,
+            :data  => res.map{ |row| {
+                :code                    => row['code'],
+                :native_name             => row['native_name'],
+                :english_name            => row['english_name'],
+                :wiki_key_pages          => row['wiki_key_pages'].to_i,
+                :wiki_key_pages_fraction => row['wiki_key_pages'].to_f / @db.stats('wiki_keys_described'),
+                :wiki_tag_pages          => row['wiki_tag_pages'].to_i,
+                :wiki_tag_pages_fraction => row['wiki_tag_pages'].to_f / @db.stats('wiki_tags_described'),
+            } }
+        }.to_json
+    end
+
 end

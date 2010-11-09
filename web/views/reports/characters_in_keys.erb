@@ -1,61 +1,79 @@
 <h1><%= @title %></h1>
 
 <p>Any valid Unicode character can appear in an OSM key but usually only lower
-case latin letters (a-z) and the underscore (_) are used, sometimes the colon
+case latin letters (a-z) and the underscore (_) are used. Sometimes the colon
 (:) is added as a separator character.</p>
 
 <div id="tabs">
     <ul>
         <li><a href="#tabs-statistics">Statistics</a></li>
-        <li><a href="#tabs-whitespace">Whitespace</a></li>
-        <li><a href="#tabs-problematic">Problematic</a></li>
+        <li><a href="#tabs-whitespace"><span style="background-color: #d62727;">&nbsp;&nbsp;&nbsp;</span> Whitespace</a></li>
+        <li><a href="#tabs-problematic"><span style="background-color: #ff9896;">&nbsp;&nbsp;&nbsp;</span> Problematic</a></li>
     </ul>
     <div id="tabs-statistics">
-        <h2>Statistics</h2>
-        <table class="list">
-            <tr><th></th><th>Count</th><th>Fraction</th><th>Description</th><th></th></tr>
-            <tr><td class="border"></td>
-                <td class="number"><%= @db.stats('characters_in_keys_plain') %></td>
-                <td class="number"><%= sprintf '%.2f', @db.stats('characters_in_keys_plain') * 100.0 / @db.stats('num_keys') %>%</td>
+        <h2>Statistics Overview</h2>
+        <div class="canvas" id="canvas"></div>
+        <p></p>
+        <table id="statistics">
+            <tr>
+                <td style="background-color: #2ca02c;">A</td>
+                <td><%= @db.stats('characters_in_keys_plain') %></td>
+                <td><%= sprintf '%.2f', @db.stats('characters_in_keys_plain') * 100.0 / @db.stats('num_keys') %>%</td>
                 <td>Only latin lowercase letters (<span class="char">a</span> to <span class="char">z</span>) and underscore (<span class="char">_</span>), first and last characters are letters.</td>
-            <td class="border"></td></tr>
-            <tr><td class="border"></td>
-                <td class="number"><%= @db.stats('characters_in_keys_colon') %></td>
-                <td class="number"><%= sprintf '%.2f', @db.stats('characters_in_keys_colon') * 100.0 / @db.stats('num_keys') %>%</td>
-                <td>Like above but with one or more colons (<span class="char">:</span>) inside.</td>
-            <td class="border"></td></tr>
-            <tr><td class="border"></td>
-                <td class="number"><%= @db.stats('characters_in_keys_letters') %></td>
-                <td class="number"><%= sprintf '%.2f', @db.stats('characters_in_keys_letters') * 100.0 / @db.stats('num_keys') %>%</td>
-                <td>Like above but with uppercase latin letters or letters from other alphabets.</td>
-            <td class="border"></td></tr>
-            <tr><td class="border"></td>
-                <td class="number"><%= @db.stats('characters_in_keys_space') %></td>
-                <td class="number"><%= sprintf '%.2f', @db.stats('characters_in_keys_space') * 100.0 / @db.stats('num_keys') %>%</td>
-                <td>Contain whitespace (space, tab, new line, carriage return, or whitespace characters from other alphabets).</td>
-            <td class="border"></td></tr>
-            <tr><td class="border"></td>
-                <td class="number"><%= @db.stats('characters_in_keys_problem') %></td>
-                <td class="number"><%= sprintf '%.2f', @db.stats('characters_in_keys_problem') * 100.0 / @db.stats('num_keys') %>%</td>
-                <td>Contain possibly problematic characters: <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.</td>
-            <td class="border"></td></tr>
-            <tr><td class="border"></td>
-                <td class="number"><%= @db.stats('characters_in_keys_rest') %></td>
-                <td class="number"><%= sprintf '%.2f', @db.stats('characters_in_keys_rest') * 100.0 / @db.stats('num_keys') %>%</td>
+            </tr>
+            <tr>
+                <td style="background-color: #98df8a;">B</td>
+                <td><%= @db.stats('characters_in_keys_colon') %></td>
+                <td><%= sprintf '%.2f', @db.stats('characters_in_keys_colon') * 100.0 / @db.stats('num_keys') %>%</td>
+                <td>Like A but with one or more colons (<span class="char">:</span>) inside.</td>
+            </tr>
+            <tr>
+                <td style="background-color: #dbdb8d;">C</td>
+                <td><%= @db.stats('characters_in_keys_letters') %></td>
+                <td><%= sprintf '%.2f', @db.stats('characters_in_keys_letters') * 100.0 / @db.stats('num_keys') %>%</td>
+                <td>Like B but with uppercase latin letters or letters from other alphabets.</td>
+            </tr>
+            <tr>
+                <td style="background-color: #d62728;">D</td>
+                <td><%= @db.stats('characters_in_keys_space') %></td>
+                <td><%= sprintf '%.2f', @db.stats('characters_in_keys_space') * 100.0 / @db.stats('num_keys') %>%</td>
+                <td>Like C but contains at least one whitespace character (space, tab, new line, carriage return, or from other alphabets).</td>
+            </tr>
+            <tr>
+                <td style="background-color: #ff9896;">E</td>
+                <td><%= @db.stats('characters_in_keys_problem') %></td>
+                <td><%= sprintf '%.2f', @db.stats('characters_in_keys_problem') * 100.0 / @db.stats('num_keys') %>%</td>
+                <td>Like C but contains possibly problematic characters: <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.</td>
+            </tr>
+            <tr>
+                <td style="background-color: #aec7e8;">F</td>
+                <td><%= @db.stats('characters_in_keys_rest') %></td>
+                <td><%= sprintf '%.2f', @db.stats('characters_in_keys_rest') * 100.0 / @db.stats('num_keys') %>%</td>
                 <td>Everything else.</td>
-            <td class="border"></td></tr>
-            <tr><th colspan="5"/></tr>
+            </tr>
         </table>
     </div>
     <div id="tabs-whitespace">
         <h2>Keys With Whitespace</h2>
-        <p>Keys that contain whitespace characters such as space, tab, new line, carriage return, or whitespace characters from other alphabets.</p>
+        <p>Keys that contain whitespace characters such as space, tab, new
+        line, carriage return, or whitespace characters from other
+        alphabets.<br/>
+        Whitespace in keys can be confusing, especially at the
+        beginning or end of the key, because they are invisible. Generally
+        the underscore (_) should be used instead.</p>
         <table id="keys-whitespace">
         </table>
     </div>
     <div id="tabs-problematic">
         <h2>Keys With Possibly Problematic Characters</h2>
-        <p>Keys that contain possibly problematic characters: <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.</p>
+        <p>Keys that contain possibly problematic characters: <span
+        class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>. These characters
+        can be problematic, because they are used to quote strings in
+        different programming languages or have special meanings in XML, HTML,
+        URLs, and other places. The equal sign is used often as separator
+        between tag keys and values.<br/>
+        Keys that appear in this list are not necessarily wrong though. But
+        in many cases they are just results of some error.</p>
         <table id="keys-problematic">
         </table>
     </div>
@@ -64,16 +82,23 @@ case latin letters (a-z) and the underscore (_) are used, sometimes the colon
 <script type="text/javascript">
     jQuery(document).ready(function() {
         var tabs = jQuery('#tabs').tabs();
+        jQuery('#statistics').flexigrid({
+            colModel: [
+                { display: '&nbsp;', name: 'row', width: 10, sortable: true, align: 'center' },
+                { display: 'Count', name: 'count', width: 40, sortable: true, align: 'right' },
+                { display: 'Fraction', name: 'fraction', width: 60, sortable: true, align: 'right' },
+                { display: 'Characters in Key', name: 'characters', width: 810, sortable: true, align: 'left' }
+            ],
+            width: 990,
+            height: 170
+        });
         jQuery('#keys-whitespace').flexigrid({
             url: '/api/2/db/keys?filters=characters_space',
             method: 'GET',
             dataType: 'json',
             colModel: [
-                { display: 'Key',               name: 'key',      width: 180, sortable: true, align: 'left' },
+                { display: 'Key', name: 'key', width: 250, sortable: true, align: 'left' },
                 { display: '<span title="Number of objects with this key"><img src="/img/types/all.16.png" alt=""/> Total</span>',           name: 'count_all',        width: 250, sortable: true, align: 'center' },
-                { display: '<span title="Number of nodes with this key"><img src="/img/types/node.16.png" alt=""/> Nodes</span>',            name: 'count_nodes',      width: 250, sortable: true, align: 'center' },
-                { display: '<span title="Number of ways with this key"><img src="/img/types/way.16.png" alt=""/> Ways</span>',               name: 'count_ways',       width: 250, sortable: true, align: 'center' },
-                { display: '<span title="Number of relations with this key"><img src="/img/types/relation.16.png" alt=""/> Relation</span>', name: 'count_relations',  width: 250, sortable: true, align: 'center' },
                 { display: 'Users', name: 'users_all', width: 44, sortable: true, align: 'right' },
                 { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" title="Wiki"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
                 { display: '<img src="/img/sources/josm.16.png" alt="JOSM" title="JOSM"/>', name: 'in_josm', width: 20, sortable: true, align: 'center' },
@@ -98,9 +123,6 @@ case latin letters (a-z) and the underscore (_) are used, sometimes the colon
                     return { 'cell': [
                         link_to_key(row.key),
                         print_value_with_percent(row.count_all,       row.count_all_fraction),
-                        print_value_with_percent(row.count_nodes,     row.count_nodes_fraction),
-                        print_value_with_percent(row.count_ways,      row.count_ways_fraction),
-                        print_value_with_percent(row.count_relations, row.count_relations_fraction),
                         print_with_ts(row.users_all),
                         row.in_wiki       ? '&#x2714;' : '-',
                         row.in_josm       ? '&#x2714;' : '-',
@@ -118,11 +140,8 @@ case latin letters (a-z) and the underscore (_) are used, sometimes the colon
             method: 'GET',
             dataType: 'json',
             colModel: [
-                { display: 'Key',               name: 'key',      width: 180, sortable: true, align: 'left' },
+                { display: 'Key', name: 'key', width: 250, sortable: true, align: 'left' },
                 { display: '<span title="Number of objects with this key"><img src="/img/types/all.16.png" alt=""/> Total</span>',           name: 'count_all',        width: 250, sortable: true, align: 'center' },
-                { display: '<span title="Number of nodes with this key"><img src="/img/types/node.16.png" alt=""/> Nodes</span>',            name: 'count_nodes',      width: 250, sortable: true, align: 'center' },
-                { display: '<span title="Number of ways with this key"><img src="/img/types/way.16.png" alt=""/> Ways</span>',               name: 'count_ways',       width: 250, sortable: true, align: 'center' },
-                { display: '<span title="Number of relations with this key"><img src="/img/types/relation.16.png" alt=""/> Relation</span>', name: 'count_relations',  width: 250, sortable: true, align: 'center' },
                 { display: 'Users', name: 'users_all', width: 44, sortable: true, align: 'right' },
                 { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" title="Wiki"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
                 { display: '<img src="/img/sources/josm.16.png" alt="JOSM" title="JOSM"/>', name: 'in_josm', width: 20, sortable: true, align: 'center' },
@@ -147,9 +166,6 @@ case latin letters (a-z) and the underscore (_) are used, sometimes the colon
                     return { 'cell': [
                         link_to_key(row.key),
                         print_value_with_percent(row.count_all,       row.count_all_fraction),
-                        print_value_with_percent(row.count_nodes,     row.count_nodes_fraction),
-                        print_value_with_percent(row.count_ways,      row.count_ways_fraction),
-                        print_value_with_percent(row.count_relations, row.count_relations_fraction),
                         print_with_ts(row.users_all),
                         row.in_wiki       ? '&#x2714;' : '-',
                         row.in_josm       ? '&#x2714;' : '-',
@@ -163,4 +179,36 @@ case latin letters (a-z) and the underscore (_) are used, sometimes the colon
             }
         });
     });
+</script>
+<script type="text/javascript+protovis">
+
+var data = <%= i = '@'; %w(plain colon letters space problem rest).map{ |type| i=i.next; [ { :label => i, :value => @db.stats('characters_in_keys_' + type) } ] }.to_json() %>;
+
+var w=968, h=50;
+
+var vis = new pv.Panel()
+    .canvas('canvas')
+    .width(w + 20)
+    .height(h);
+
+var colors = { A: '#2ca02c', B: '#98df8a', C: '#dbdb8d', D: '#d62728', E: '#ff9896', F: '#aec7e8' };
+
+var scale = pv.Scale.linear(0, <%= @db.stats('num_keys') %>).range(0, w);
+
+vis.add(pv.Layout.Stack)
+    .orient('left-top')
+    .left(10)
+    .layers(data)
+    .x(10)
+    .y(function(d) scale(d.value))
+  .layer.add(pv.Bar)
+    .fillStyle(function(d) colors[d.label])
+    .height(20)
+  .anchor('bottom')
+    .add(pv.Label)
+    .top(46)
+    .text(function(d) d.label);
+
+vis.render();
+
 </script>

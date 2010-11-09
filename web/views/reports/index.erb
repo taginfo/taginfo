@@ -1,17 +1,19 @@
 <h1>Reports</h1>
 
-<h2>Database</h2>
+<p>Reports show the data from different perspectives. They often bring
+together the data from several sources in interesting ways.</p>
 
-<ul>
-    <li><a href="/reports/characters_in_keys">Characters in keys</a></li>
-    <li><a href="/reports/key_lengths">Key lengths</a></li>
-</ul>
-
-<h2>Wiki</h2>
-
-<ul>
-    <li><a href="/reports/frequently_used_keys_without_wiki_page">Frequently used keys without wiki page</a></li>
-    <li><a href="/reports/wiki_pages_about_non-existing_keys">Wiki pages about non-existing keys</a></li>
-    <li><a href="/reports/language_comparison_table_for_keys_in_the_wiki">Language comparison table for keys in the wiki</a></li>
-</ul>
-
+<table>
+    <% Report.reports.each do |report| %>
+        <tr>
+            <% %w(db wiki).each do |source| %>
+                <td>
+                    <% if report.sources[source] %>
+                        <img src="/img/sources/<%= source %>.16.png" alt="<%= source.capitalize %>" title="<%= source.capitalize %>" width="16" height="16"/>
+                    <% end %>
+                </td>
+            <% end %>
+            <td><a href="<%= report.url %>"><%= report.title %></a></td>
+        </tr>
+    <% end %>
+</table>

@@ -53,16 +53,18 @@ CREATE TABLE wikipages (
 DROP TABLE IF EXISTS wikipages_keys;
 
 CREATE TABLE wikipages_keys (
-    key   TEXT,
-    langs TEXT
+    key        TEXT,
+    langs      TEXT,
+    lang_count INTEGER
 );
 
 DROP TABLE IF EXISTS wikipages_tags;
 
 CREATE TABLE wikipages_tags (
-    key   TEXT,
-    value TEXT,
-    langs TEXT
+    key        TEXT,
+    value      TEXT,
+    langs      TEXT,
+    lang_count INTEGER
 );
 
 DROP TABLE IF EXISTS wiki_languages;

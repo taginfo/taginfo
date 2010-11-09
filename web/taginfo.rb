@@ -34,6 +34,7 @@ require 'sqlite3'
 
 require 'lib/utils.rb'
 require 'lib/sql.rb'
+require 'lib/reports.rb'
 
 #------------------------------------------------------------------------------
 

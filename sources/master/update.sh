@@ -20,8 +20,8 @@ DATABASE=$DIR/taginfo-master.db
 
 rm -f $DATABASE
 
-perl -pe "s|__DIR__|$DIR|" master.sql | sqlite3 $DATABASE
 sqlite3 $DATABASE <languages.sql
+perl -pe "s|__DIR__|$DIR|" master.sql | sqlite3 $DATABASE
 
 echo -n "Done master: "; date
 
