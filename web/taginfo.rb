@@ -109,15 +109,15 @@ class Taginfo < Sinatra::Base
         erb :'sources/index'
     end
 
-    get! '/keys' do
+    get '/keys' do
         @title = 'Keys'
         @breadcrumbs << ['Keys']
         erb :keys
     end
 
-    get %r{^/keys/(.*)} do
+    get %r{^/keys/(.*)} do |key|
         if params[:key].nil?
-            @key = params[:captures][0]
+            @key = key
         else
             @key = params[:key]
         end
@@ -167,11 +167,11 @@ class Taginfo < Sinatra::Base
         erb :key
     end
 
-    get %r{^/tags/(.*)} do
-        if params[:captures].first.match(/=/)
-            kv = params[:captures].first.split('=', 2)
+    get %r{^/tags/(.*)} do |tag|
+        if tag.match(/=/)
+            kv = tag.split('=', 2)
         else
-            kv = [ params[:captures].first, '' ]
+            kv = [ tag, '' ]
         end
         if params[:key].nil?
             @key = kv[0]
