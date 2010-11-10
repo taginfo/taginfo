@@ -14,7 +14,7 @@ class Taginfo < Sinatra::Base
         @tags = @db.select("SELECT key, count, (count - ?) / (? - ?) AS scale, in_wiki, in_josm FROM popular_keys ORDER BY count DESC LIMIT #{limit}", @min.to_f, @max, @min).
             execute().
             each_with_index{ |tag, idx| tag['pos'] = (limit - idx) / limit.to_f }.
-            sort{ |a,b| a['key'] <=> b['key'] }
+            sort_by{ |row| row['key'] }
         erb :'test/tags'
     end
 

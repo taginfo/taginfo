@@ -78,10 +78,8 @@ class Taginfo < Sinatra::Base
 
     #-------------------------------------
 
-    before do
-        if request.path_info =~ %r{^/api/}
-            content_type :json
-        end
+    before '/api/*' do
+        content_type :json
     end
 
     #-------------------------------------
@@ -90,7 +88,7 @@ class Taginfo < Sinatra::Base
         @tags = @db.select("SELECT key, scale1 FROM popular_keys ORDER BY scale1 DESC LIMIT #{ TAGCLOUD_NUMBER_OF_TAGS }").
             execute().
             each_with_index{ |tag, idx| tag['pos'] = (TAGCLOUD_NUMBER_OF_TAGS - idx) / TAGCLOUD_NUMBER_OF_TAGS.to_f }.
-            sort{ |a,b| a['key'] <=> b['key'] }
+            sort_by{ |row| row['key'] }
         erb :index
     end
 

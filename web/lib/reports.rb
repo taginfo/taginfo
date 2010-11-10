@@ -5,7 +5,7 @@
         attr_reader :title, :sources
 
         def self.reports
-            @@reports.sort{ |a,b| a.title <=> b.title }
+            @@reports.sort_by{ |report| report.title }
         end
 
         def initialize(title, sources)
