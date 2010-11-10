@@ -1,4 +1,4 @@
-# api/wiki.rb
+# web/lib/api/wiki.rb
 class Taginfo < Sinatra::Base
 
     def get_wiki_result(res)

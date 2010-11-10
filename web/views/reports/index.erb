@@ -4,7 +4,7 @@
 together the data from several sources in interesting ways.</p>
 
 <table>
-    <% Report.reports.each do |report| %>
+    <% Report.each do |report| %>
         <tr>
             <% %w(db wiki).each do |source| %>
                 <td>
@@ -13,7 +13,7 @@ together the data from several sources in interesting ways.</p>
                     <% end %>
                 </td>
             <% end %>
-            <td><a href="<%= report.url %>"><%= report.title %></a></td>
+            <td style="padding: 2px;"><a href="<%= report.url %>"><%= report.title %></a></td>
         </tr>
     <% end %>
 </table>

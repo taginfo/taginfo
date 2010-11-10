@@ -7,9 +7,7 @@ class Taginfo < Sinatra::Base
         erb :'reports/index'
     end
 
-    #--------------------------------------------------------------------------
-
-    Report.reports.each do |report|
+    Report.each do |report|
         get report.url do
             @title = report.title
             @breadcrumbs << [ 'Reports', '/reports' ]

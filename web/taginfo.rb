@@ -92,7 +92,7 @@ class Taginfo < Sinatra::Base
         erb :index
     end
 
-    ['about', 'contact', 'download', 'languages'].each do |page|
+    %w(about contact download keys).each do |page|
         get '/' + page do
             @title = page.capitalize
             @breadcrumbs << @title
@@ -107,11 +107,7 @@ class Taginfo < Sinatra::Base
         erb :'sources/index'
     end
 
-    get '/keys' do
-        @title = 'Keys'
-        @breadcrumbs << ['Keys']
-        erb :keys
-    end
+    #-------------------------------------
 
     get %r{^/keys/(.*)} do |key|
         if params[:key].nil?
@@ -164,6 +160,8 @@ class Taginfo < Sinatra::Base
 
         erb :key
     end
+
+    #-------------------------------------
 
     get %r{^/tags/(.*)} do |tag|
         if tag.match(/=/)

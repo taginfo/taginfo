@@ -1,3 +1,4 @@
+# web/lib/api/josm.rb
 class Taginfo < Sinatra::Base
 
     get '/api/2/josm/styles' do

@@ -1,4 +1,4 @@
-# lib/api/reports.rb
+# web/lib/api/reports.rb
 
 class Taginfo < Sinatra::Base
 

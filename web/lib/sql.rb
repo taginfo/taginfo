@@ -1,4 +1,4 @@
-# sql.rb
+# web/lib/sql.rb
 #
 # SQL database wrapper with convenience methods for query building.
 module SQL
