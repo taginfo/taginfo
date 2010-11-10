@@ -1,0 +1,39 @@
+
+osm:
+    tag: Tag
+    tags: Tags
+    key: Key
+    keys: Keys
+    value: Value
+    values: Values
+    node: Node
+    nodes: Nodes
+    way: Way
+    ways: Ways
+    relation: Relation
+    relations: Relations
+    user: User
+    users: Users
+
+buttons:
+    sources: Sources
+    download: Download
+    about: About
+    wiki: Wiki
+    show_all_keys: Show all keys
+
+data_from: Data from
+
+flexigrid:
+    pagetext: Page
+    pagestat: Displaying {from} to {to} of {total} items
+    outof: of
+    findtext: Find
+    procmsg: Processing, please wait...
+    nomsg: No items
+    errormsg: Connection Error
+
+map: Map
+maps: Maps
+key_combinations: Combinations
+

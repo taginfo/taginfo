@@ -1,4 +1,4 @@
-<h1>Keys</h1>
+<h1><%= t.osm.keys %></h1>
 
 <table id="keys">
 </table>
@@ -10,7 +10,7 @@
             method: 'GET',
             dataType: 'json',
             colModel: [
-                { display: 'Key',               name: 'key',      width: 180, sortable: true, align: 'left' },
+                { display: 'Key', name: 'key', width: 180, sortable: true, align: 'left' },
                 { display: '<span title="Number of objects with this key"><img src="/img/types/all.16.png" alt=""/> Total</span>',           name: 'count_all',        width: 250, sortable: true, align: 'center' },
                 { display: '<span title="Number of nodes with this key"><img src="/img/types/node.16.png" alt=""/> Nodes</span>',            name: 'count_nodes',      width: 250, sortable: true, align: 'center' },
                 { display: '<span title="Number of ways with this key"><img src="/img/types/way.16.png" alt=""/> Ways</span>',               name: 'count_ways',       width: 250, sortable: true, align: 'center' },
@@ -28,6 +28,13 @@
             ],
             sortname: 'count_all',
             sortorder: 'desc',
+            pagetext: '<%= t.flexigrid.pagetext %>',
+            pagestat: '<%= t.flexigrid.pagestat %>',
+            outof:    '<%= t.flexigrid.outof    %>',
+            findtext: '<%= t.flexigrid.findtext %>',
+            procmsg:  '<%= t.flexigrid.procmsg  %>',
+            nomsg:    '<%= t.flexigrid.nomsg    %>',
+            errormsg: '<%= t.flexigrid.errormsg %>',
             showToggleBtn: false,
             usepager: true,
             useRp: true,

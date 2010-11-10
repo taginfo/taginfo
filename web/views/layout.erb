@@ -3,6 +3,7 @@
     <head>
         <title><%= h(title) %></title>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="content-language" content="<%= r18n.locale.code %>" />
         <link rel="stylesheet" type="text/css" href="/css/taginfo.css" />
         <link rel="Stylesheet" type="text/css" href="/css/smoothness/jquery-ui-1.7.3.custom.css" />
         <link rel="stylesheet" type="text/css" href="/css/flexigrid/flexigrid.css" />
@@ -15,11 +16,13 @@
     <body>
         <div id="top">
 <!--            <div id="right">
-                <select id="select_language" name="select_language">
-                    <option>English</option>
-                    <option>Deutsch</option>
-                    <option>switch does not work yet</option>
-                </select>
+                <form id="set_language">
+                    <select id="locale" name="locale">
+<% r18n.available_locales.each do |locale| %>
+                        <option value="<%= locale.code %>"<%= locale.code == r18n.locale.code ? ' selected="selected"' : ''%>><%= locale.title %></option>
+<% end %>
+                    </select>
+                </form>
             </div>-->
             <div id="middle">
                 <form action="/search">
@@ -32,13 +35,13 @@
             </div>
         </div>
         <div id="date">
-            Data from: <%= @data_until %> UTC <span class="button"><a href="/sources">Sources</a></span>
-            <span class="button"><a href="/download">Download</a></span>
-            <span class="button"><a href="/about">About</a></span>
-            <span class="button"><img src="/img/link-extern.gif" alt="" width="14" height="10"/><a href="http://wiki.openstreetmap.org/wiki/Taginfo">Wiki</a></span>
+            <%= t.data_from %>: <%= @data_until %> UTC <span class="button"><a href="/sources"><%= t.buttons.sources %></a></span>
+            <span class="button"><a href="/download"><%= t.buttons.download %></a></span>
+            <span class="button"><a href="/about"><%= t.buttons.about %></a></span>
+            <span class="button"><img src="/img/link-extern.gif" alt="" width="14" height="10"/><a href="http://wiki.openstreetmap.org/wiki/Taginfo"><%= t.buttons.wiki %></a></span>
         </div>
         <div id="main">
-            <%= yield %>
+<%= yield %>
         </div>
     </body>
 </html>

@@ -136,3 +136,10 @@ function link_to_tag(key, value) {
     return link_to_key(key) + '=' + link_to_value(key, value);
 }
 
+jQuery(document).ready(function() {
+    jQuery('#locale').bind('change', function() {
+        jQuery('#set_language').submit();
+    });
+    jQuery('#search').focus();
+});
+

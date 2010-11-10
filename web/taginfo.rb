@@ -28,9 +28,11 @@
 #------------------------------------------------------------------------------
 
 require 'rubygems'
-require 'sinatra/base'
 require 'json'
 require 'sqlite3'
+
+require 'sinatra/base'
+require 'sinatra/r18n'
 
 require 'lib/utils.rb'
 require 'lib/language.rb'
@@ -44,6 +46,8 @@ TAGCLOUD_NUMBER_OF_TAGS = 200
 #------------------------------------------------------------------------------
 
 class Taginfo < Sinatra::Base
+
+    register Sinatra::R18n
 
     configure do
         set :app_file, __FILE__
@@ -65,7 +69,21 @@ class Taginfo < Sinatra::Base
         alias_method :h, :escape_html
     end
 
+    # make trimming \n after %> the default in erb templates
+    alias_method :erb_orig, :erb
+    def erb(template, options={}, locals={})
+        options[:trim] = '>' unless options[:trim]
+        erb_orig template, options, locals
+    end
+
     before do
+#        if params[:locale]
+#            response.set_cookie('taginfo_locale', params[:locale])
+#        elsif request.cookies['taginfo_locale']
+#            params[:locale] = request.cookies['taginfo_locale']
+#        end
+        params[:locale] = 'en'
+
         @db = SQL::Database.new('../../data')
 
         @data_until = @db.select("SELECT min(data_until) FROM master_meta").get_first_value().sub(/:..$/, '')

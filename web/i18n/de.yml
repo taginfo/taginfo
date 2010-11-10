@@ -1,0 +1,38 @@
+osm:
+    tag: Tag
+    tags: Tags
+    key: Key
+    keys: Keys
+    value: Value
+    values: Values
+    node: Node
+    nodes: Nodes
+    way: Way
+    ways: Ways
+    relation: Relation
+    relations: Relations
+    user: User
+    users: Users
+
+buttons:
+    sources: Datenquellen
+    download: Download
+    about: Über Taginfo
+    wiki: Wiki
+    show_all_keys: Alle Keys anzeigen
+
+data_from: Daten vom
+
+flexigrid:
+    pagetext: Seite
+    pagestat: Eintrag {from} bis {to} von {total}
+    outof: von
+    findtext: Suche
+    procmsg: Daten werden geladen, bitte warten...
+    nomsg: Keine Einträge
+    errormsg: Fehler in der Verbindung
+
+map: Karte
+maps: Karten
+key_combinations: Kombinationen
+
