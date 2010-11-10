@@ -1,7 +1,9 @@
-# test.rb
+# web/lib/ui/test.rb
 class Taginfo < Sinatra::Base
 
     get! '/test' do
+        @title = 'Test'
+        @breadcrumbs << 'Test'
         erb :'test/index'
     end
 
@@ -20,8 +22,8 @@ class Taginfo < Sinatra::Base
 
     get '/test/wiki_import' do
         @title = ['Wiki Import', 'Test']
-        @breadcrumbs << [ 'Wiki Import', '/test' ]
-        @breadcrumbs << 'Tags'
+        @breadcrumbs << [ 'Test', '/test' ]
+        @breadcrumbs << 'Wiki Import'
         @invalid_page_titles = @db.select('SELECT * FROM invalid_page_titles').execute()
         erb :'test/wiki_import'
     end
