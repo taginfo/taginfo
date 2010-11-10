@@ -24,16 +24,16 @@ rm -f $DIR/count.db
 echo "Running pre.sql..."
 sqlite3 $DATABASE <pre.sql
 
-echo "Running count..."
+echo -n "Running count... "; date
 HERE=`pwd`
 cd $DIR
 bzcat $DIR/planet.osm.bz2 | $HERE/osmium_tagstats -
 cd $HERE
 
-echo "Running update_characters..."
+echo -n "Running update_characters... "; date
 ./update_characters.pl $DIR
 
-echo "Running post.sql..."
+echo -n "Running post.sql... "; date
 perl -pe "s|__DIR__|$DIR|" post.sql | sqlite3 $DATABASE
 
 echo -n "Done db: "; date
