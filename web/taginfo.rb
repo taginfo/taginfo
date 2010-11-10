@@ -216,6 +216,7 @@ class Taginfo < Sinatra::Base
     load 'lib/api/wiki.rb'
     load 'lib/api/josm.rb'
     load 'lib/api/reports.rb'
+
     load 'lib/ui/search.rb'
     load 'lib/ui/reports.rb'
     load 'lib/ui/sources/db.rb'
@@ -223,7 +224,7 @@ class Taginfo < Sinatra::Base
     load 'lib/ui/sources/josm.rb'
     load 'lib/ui/sources/potlatch.rb'
     load 'lib/ui/sources/merkaartor.rb'
-    load 'lib/test.rb'
+    load 'lib/ui/test.rb'
 
     # run application
     run!
