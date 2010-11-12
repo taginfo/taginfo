@@ -15,7 +15,7 @@ of information about tags. It shows what tags are actually used.</p>
         <h2><img class="icon_large" src="/img/types/node.24.png" alt=""/> Nodes</h2>
         <table class="stats">
             <tr><td style="width: 7em;">There are </td><td style="width: 7em;" class="number"><%= @db.stats('nodes').to_s_with_ts %></td><td> nodes</td></tr>
-            <tr><td>of which </td><td class="number"><%= @db.stats('nodes_with_tags').to_s_with_ts %></td><td> have at least on tag</td></tr>
+            <tr><td>of which </td><td class="number"><%= @db.stats('nodes_with_tags').to_s_with_ts %></td><td> have at least one tag</td></tr>
             <tr><td>(thats </td><td class="number"><%= (10000.0 * @db.stats('nodes_with_tags') / @db.stats('nodes')).to_i.to_f / 100 %></td><td> %)</td></tr>
             <tr><td>with together </td><td class="number"><%= @db.stats('node_tags').to_s_with_ts %></td><td> tags</td></tr>
             <tr><td>(or about </td><td class="number"><%= ( 100.0 * @db.stats('node_tags') / @db.stats('nodes_with_tags')).to_i.to_f / 100 %></td><td> tags per tagged node)</td></tr>
