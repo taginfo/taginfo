@@ -34,6 +34,15 @@ CREATE TABLE keys (
   prevalent_values TEXT
 );
 
+DROP TABLE IF EXISTS prevalent_values;
+CREATE TABLE prevalent_values (
+  key      TEXT,
+  value    TEXT,
+  count    INTEGER,
+  fraction REAL
+);
+
+
 DROP TABLE IF EXISTS key_distributions;
 
 CREATE TABLE key_distributions (

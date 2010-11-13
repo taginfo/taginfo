@@ -59,6 +59,13 @@ UPDATE keys SET prevalent_values=(
         )
     ) WHERE values_all < 1000;
 
+INSERT INTO prevalent_values (key, value, count, fraction)
+            SELECT t.key, t.value, t.count_all, CAST(t.count_all AS REAL) / CAST(k.count_all AS REAL) FROM tags t, keys k
+                    WHERE t.key       = k.key
+                      AND t.count_all > k.count_all / 100.0;
+
+CREATE INDEX prevalent_values_key_idx ON prevalent_values (key);
+
 ANALYZE;
 
 UPDATE source SET update_end=datetime('now');
