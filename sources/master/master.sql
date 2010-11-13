@@ -1,8 +1,10 @@
+-- ============================================================================
 --
 --  Taginfo
 --
 --  master.sql
 --
+-- ============================================================================
 
 .bail ON
 
@@ -12,8 +14,29 @@ ATTACH DATABASE '__DIR__/josm/taginfo-josm.db'             AS josm;
 ATTACH DATABASE '__DIR__/potlatch/taginfo-potlatch.db'     AS potlatch; 
 ATTACH DATABASE '__DIR__/merkaartor/taginfo-merkaartor.db' AS merkaartor; 
 
-DROP TABLE IF EXISTS master_meta;
+-- ============================================================================
 
+--
+--  Collects information about all the sources.
+--
+DROP TABLE IF EXISTS sources;
+CREATE TABLE sources (
+    no           INTEGER,
+    visible      INTEGER,
+    id           TEXT,
+    name         TEXT,
+    update_start TEXT,
+    update_end   TEXT,
+    data_until   TEXT
+);
+
+INSERT INTO sources SELECT 1, 1, * FROM db.source
+              UNION SELECT 2, 1, * FROM wiki.source
+              UNION SELECT 3, 1, * FROM josm.source
+              UNION SELECT 4, 0, * FROM potlatch.source
+              UNION SELECT 5, 0, * FROM merkaartor.source;
+
+DROP TABLE IF EXISTS master_meta;
 CREATE TABLE master_meta (
     source_id    TEXT,
     source_name  TEXT,
@@ -22,14 +45,14 @@ CREATE TABLE master_meta (
     data_until   TEXT
 );
 
-INSERT INTO master_meta SELECT * FROM db.meta
-                  UNION SELECT * FROM wiki.meta
-                  UNION SELECT * FROM josm.meta;
+-- for backwards compatibility
+INSERT INTO master_meta SELECT * FROM db.source
+                  UNION SELECT * FROM wiki.source
+                  UNION SELECT * FROM josm.source;
 -- XXX                 UNION SELECT * FROM potlatch.meta
 -- XXX                 UNION SELECT * FROM merkaartor.meta;
 
 DROP TABLE IF EXISTS master_stats;
-
 CREATE TABLE master_stats (
     key   TEXT,
     value INT64
@@ -40,6 +63,8 @@ INSERT INTO master_stats SELECT * FROM db.stats
                    UNION SELECT * FROM josm.stats
                    UNION SELECT * FROM potlatch.stats
                    UNION SELECT * FROM merkaartor.stats;
+
+-- ============================================================================
 
 INSERT INTO db.keys (key) SELECT DISTINCT key FROM wiki.wikipages        WHERE key NOT IN (SELECT key FROM db.keys);
 INSERT INTO db.keys (key) SELECT DISTINCT k   FROM josm.josm_style_rules WHERE k   NOT IN (SELECT key FROM db.keys);
@@ -55,9 +80,9 @@ UPDATE db.keys SET in_merkaartor=1 WHERE key IN (SELECT key FROM merkaartor.keys
 -- too slow, so we drop it for now
 -- INSERT INTO db.tags (key, value) SELECT DISTINCT key, value FROM wiki.wikipages WHERE key || '=XX=' || value NOT IN (SELECT key || '=XX=' || value FROM db.tags);
 
+-- ============================================================================
 
 DROP TABLE IF EXISTS popular_keys;
-
 CREATE TABLE popular_keys (
     key           VARCHAR,
     count         INTEGER,
@@ -87,8 +112,9 @@ UPDATE popular_keys SET in_wiki=1    WHERE key IN (SELECT distinct key FROM wiki
 UPDATE popular_keys SET in_wiki_en=1 WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE lang='en');
 UPDATE popular_keys SET in_josm=1    WHERE key IN (SELECT distinct k   FROM josm.josm_style_rules);
 
-DROP TABLE IF EXISTS popular_metadata;
+-- ============================================================================
 
+DROP TABLE IF EXISTS popular_metadata;
 CREATE TABLE popular_metadata (
     keys        INTEGER,
     count_min   INTEGER,
@@ -111,9 +137,13 @@ UPDATE popular_keys SET scale_name  = 0 WHERE key LIKE '%:%';
 
 UPDATE popular_keys SET scale1 = 10 * scale_count + 8 * scale_users + 2 * scale_wiki + 1 * scale_josm + 2 * scale_name;
 
+-- ============================================================================
+
 INSERT INTO languages (code) SELECT distinct(lang) FROM wiki.wikipages WHERE lang NOT IN (SELECT code FROM languages);
 UPDATE languages SET wiki_key_pages=(SELECT count(distinct key) FROM wiki.wikipages WHERE lang=code AND value IS NULL);
 UPDATE languages SET wiki_tag_pages=(SELECT count(distinct key) FROM wiki.wikipages WHERE lang=code AND value IS NOT NULL);
+
+-- ============================================================================
 
 ANALYZE;
 

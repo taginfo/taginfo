@@ -18,5 +18,5 @@ INSERT INTO stats (key, value) SELECT 'josm_tags_in_style_rules', count(distinct
 
 ANALYZE;
 
-UPDATE meta SET update_end=datetime('now');
+UPDATE source SET update_end=datetime('now');
 

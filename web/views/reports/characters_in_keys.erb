@@ -51,6 +51,12 @@ case latin letters (a-z) and the underscore (_) are used. Sometimes the colon
                 <td><%= sprintf '%.2f', @db.stats('characters_in_keys_rest') * 100.0 / @db.stats('num_keys') %>%</td>
                 <td>Everything else.</td>
             </tr>
+            <tr>
+                <td style="border-top: 1px solid #000000;"></td>
+                <td style="border-top: 1px solid #000000;"><%= @db.stats('num_keys') %></td>
+                <td style="border-top: 1px solid #000000;">100%</td>
+                <td style="border-top: 1px solid #000000;">Total</td>
+            </tr>
         </table>
     </div>
     <div id="tabs-whitespace">
@@ -90,7 +96,7 @@ case latin letters (a-z) and the underscore (_) are used. Sometimes the colon
                 { display: 'Characters in Key', name: 'characters', width: 810, sortable: true, align: 'left' }
             ],
             width: 990,
-            height: 170
+            height: 200
         });
         jQuery('#keys-whitespace').flexigrid({
             url: '/api/2/db/keys?filters=characters_space',

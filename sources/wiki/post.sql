@@ -36,5 +36,5 @@ INSERT INTO stats (key, value) SELECT 'wiki_languages', count(*) FROM wiki_langu
 
 ANALYZE;
 
-UPDATE meta SET update_end=datetime('now');
+UPDATE source SET update_end=datetime('now');
 

@@ -1,19 +1,21 @@
 <h1>Reports</h1>
 
-<p>Reports show the data from different perspectives. They often bring
-together the data from several sources in interesting ways.</p>
+<p class="text">Reports show the data from different perspectives.
+They often bring together data from several sources in interesting ways. Some
+of the reports can help with finding certain kinds of errors, such as popular
+keys without wiki pages.</p>
 
-<table>
-    <% Report.each do |report| %>
-        <tr>
-            <% %w(db wiki).each do |source| %>
-                <td>
-                    <% if report.sources[source] %>
-                        <img src="/img/sources/<%= source %>.16.png" alt="<%= source.capitalize %>" title="<%= source.capitalize %>" width="16" height="16"/>
-                    <% end %>
-                </td>
-            <% end %>
-            <td style="padding: 2px;"><a href="<%= report.url %>"><%= report.title %></a></td>
-        </tr>
-    <% end %>
+<table class="reports">
+    <tr><th class="source" colspan="<%= Source.size %>"/>Data<br/>Sources</th><th></th></tr>
+<% Report.each do |report| %>
+    <tr>
+<% Source.each do |source| %>
+        <td class="source"><%= source.link_img if report.uses_source? source.id %></td>
+<% end %>
+        <td><a href="<%= report.url %>"><%= report.title %></a></td>
+    </tr>
+<% end %>
+    <tr><th class="last" colspan="<%= Source.size %>"/></th><th></th></tr>
 </table>
+
+

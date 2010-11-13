@@ -35,8 +35,10 @@ require 'sinatra/base'
 require 'sinatra/r18n'
 
 require 'lib/utils.rb'
+require 'lib/javascript.rb'
 require 'lib/language.rb'
 require 'lib/sql.rb'
+require 'lib/sources.rb'
 require 'lib/reports.rb'
 
 #------------------------------------------------------------------------------
@@ -44,6 +46,15 @@ require 'lib/reports.rb'
 TAGCLOUD_NUMBER_OF_TAGS = 200
 
 #------------------------------------------------------------------------------
+
+db = SQL::Database.new('../../data')
+
+# XXX update this to use new sources table
+db.select('SELECT * FROM master_meta ORDER BY source_name').execute().each do |source|
+    Source.new source['source_id'], source['source_name'], source['data_until'], source['update_start'], source['update_end']
+end
+
+db.close
 
 class Taginfo < Sinatra::Base
 
@@ -83,6 +94,12 @@ class Taginfo < Sinatra::Base
 #            params[:locale] = request.cookies['taginfo_locale']
 #        end
         params[:locale] = 'en'
+
+        javascript 'jquery-1.3.2.min'
+        javascript 'jquery-ui-1.7.2.all.min'
+        javascript 'flexigrid-minified'
+        javascript 'taginfo'
+        javascript 'protovis-r3.2'
 
         @db = SQL::Database.new('../../data')
 

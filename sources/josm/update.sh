@@ -9,12 +9,14 @@ set -e
 
 DIR=$1
 
+DATECMD='date +%Y-%m-%dT%H:%M:%S'
+
 if [ "x" = "x$DIR" ]; then
     echo "Usage: update.sh DIR"
     exit 1
 fi
 
-echo -n "Start josm: "; date
+echo "`$DATECMD` Start josm..."
 
 DATABASE=$DIR/taginfo-josm.db
 ELEMSTYLES=$DIR/elemstyles.xml
@@ -22,17 +24,20 @@ ELEMSTYLES=$DIR/elemstyles.xml
 rm -f $DATABASE
 rm -f $ELEMSTYLES
 
-echo "Getting styles..."
+echo "`$DATECMD` Getting styles..."
 wget -O $ELEMSTYLES http://josm.openstreetmap.de/svn/trunk/styles/standard/elemstyles.xml
 
-echo "Running pre.sql..."
+echo "`$DATECMD` Running init.sql..."
+sqlite3 $DATABASE <../init.sql
+
+echo "`$DATECMD` Running pre.sql..."
 sqlite3 $DATABASE <pre.sql
 
-echo "Running import..."
+echo "`$DATECMD` Running import..."
 ./import_josm.rb $DIR
 
-echo "Running post.sql..."
+echo "`$DATECMD` Running post.sql..."
 sqlite3 $DATABASE <post.sql
 
-echo -n "Done josm: "; date
+echo "`$DATECMD` Done josm."
 

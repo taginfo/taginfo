@@ -11,3 +11,5 @@ UPDATE features SET category_name = (SELECT name FROM categories WHERE id=catego
 
 ANALYZE;
 
+UPDATE source SET update_end=datetime('now');
+

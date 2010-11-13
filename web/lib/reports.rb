@@ -11,13 +11,17 @@ class Report
         end
     end
 
-    def initialize(title, sources)
+    def initialize(title, *sources)
         @@reports << self
         @title = title
         @sources = Hash.new
-        sources.each do |s|
-            @sources[s] = 1
+        sources.each do |id|
+            @sources[id] = 1
         end
+    end
+
+    def uses_source?(id)
+        sources.has_key? id
     end
 
     def name
@@ -30,9 +34,10 @@ class Report
 
 end
 
-Report.new 'Characters in Keys', %w(db)
-Report.new 'Frequently Used Keys Without Wiki Page', %w(db wiki)
-Report.new 'Key Lengths', %w(db)
-Report.new 'Language Comparison Table for Keys in the Wiki', %w(wiki)
-Report.new 'Languages', %w(wiki)
-Report.new 'Wiki Pages About Non-Existing Keys', %w(db wiki)
+Report.new 'Characters in Keys', :db
+Report.new 'Frequently Used Keys Without Wiki Page', :db, :wiki
+Report.new 'Key Lengths', :db
+Report.new 'Language Comparison Table for Keys in the Wiki', :wiki
+Report.new 'Languages', :wiki
+Report.new 'Wiki Pages About Non-Existing Keys', :db, :wiki
+

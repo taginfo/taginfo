@@ -6,15 +6,17 @@
 
 .bail ON
 
+--
+--  Contains all the languages Taginfo knows about.
+--
 DROP TABLE IF EXISTS languages;
-
 CREATE TABLE languages (
     code           VARCHAR,
-    iso639_1       VARCHAR,
+    iso639_1       VARCHAR, -- official ISO 639-1 code (if available)
     english_name   VARCHAR,
     native_name    VARCHAR,
-    wiki_key_pages INTEGER,
-    wiki_tag_pages INTEGER
+    wiki_key_pages INTEGER, -- count of wiki pages with the title "code:Key:*" (or "Key:*" for code='en')
+    wiki_tag_pages INTEGER  -- count of wiki pages with the title "code:Tag:*" (or "Tag:*" for code='en')
 );
 
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('ar',      'ar', 'Arabic', 'العربية');
@@ -47,6 +49,4 @@ INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('uk', 
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('zh',      'zh', 'Chinese', '中文');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('zh-hans', NULL, 'Chinese', '中文');
 -- INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('', '', '', '');
-
-ANALYZE;
 

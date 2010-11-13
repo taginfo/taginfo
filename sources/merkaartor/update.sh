@@ -9,18 +9,20 @@ set -e
 
 DIR=$1
 
+DATECMD='date +%Y-%m-%dT%H:%M:%S'
+
 if [ "x" = "x$DIR" ]; then
     echo "Usage: update.sh DIR"
     exit 1
 fi
 
-echo -n "Start merkaartor: "; date
+echo "`$DATECMD` Start merkaartor..."
 
 DATABASE=$DIR/taginfo-merkaartor.db
 
 rm -f $DATABASE
 
-echo "Getting resources..."
+echo "`$DATECMD` Updating resources..."
 if [ -d $DIR/git-source ]; then
     cd $DIR/git-source
     git pull
@@ -29,14 +31,17 @@ else
     git clone http://git.gitorious.org/merkaartor/main.git $DIR/git-source
 fi
 
-echo "Running pre.sql..."
+echo "`$DATECMD` Running init.sql..."
+sqlite3 $DATABASE <../init.sql
+
+echo "`$DATECMD` Running pre.sql..."
 sqlite3 $DATABASE <pre.sql
 
-echo "Running import..."
+echo "`$DATECMD` Running import..."
 ./import_merkaartor.rb $DIR
 
-echo "Running post.sql..."
+echo "`$DATECMD` Running post.sql..."
 sqlite3 $DATABASE <post.sql
 
-echo -n "Done merkaartor: "; date
+echo "`$DATECMD` Done merkaartor."
 

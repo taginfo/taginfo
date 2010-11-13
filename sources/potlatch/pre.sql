@@ -6,24 +6,7 @@
 
 .bail ON
 
-DROP TABLE IF EXISTS meta;
-
-CREATE TABLE meta (
-    source_id    TEXT,
-    source_name  TEXT,
-    update_start TEXT,
-    update_end   TEXT,
-    data_until   TEXT
-);
-
-INSERT INTO meta (source_id, source_name, update_start, data_until) SELECT 'potlatch', 'Potlatch', datetime('now'), datetime('now');
-
-DROP TABLE IF EXISTS stats;
-
-CREATE TABLE stats (
-    key   TEXT,
-    value INT64
-);
+INSERT INTO source (id, name, update_start, data_until) SELECT 'potlatch', 'Potlatch', datetime('now'), datetime('now');
 
 --
 --  categories

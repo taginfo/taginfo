@@ -9,6 +9,8 @@ SOURCES="josm potlatch merkaartor wiki db"
 
 set -e
 
+DATECMD='date +%Y-%m-%dT%H:%M:%S'
+
 DIR=$1
 
 if [ "x" = "x$DIR" ]; then
@@ -16,9 +18,11 @@ if [ "x" = "x$DIR" ]; then
     exit 1
 fi
 
-exec >$DIR/update_all.log 2>&1
+LOGFILE=`date +%Y%m%dT%H%M`
+mkdir -p $DIR/log
+exec >$DIR/log/$LOGFILE.log 2>&1
 
-echo -n "Start: "; date
+echo "`$DATECMD` Start update_all..."
 
 mkdir -p $DIR/download
 
@@ -40,7 +44,7 @@ cd ..
 
 for source in $SOURCES; do
     echo "====================================="
-    echo "Running bzip2..."
+    echo "Running bzip2 on $source..."
     bzip2 -9 -c $DIR/$source/taginfo-$source.db >$DIR/download/taginfo-$source.db.bz2
     echo "Done."
 done
@@ -49,5 +53,6 @@ echo "Running bzip2..."
 bzip2 -9 -c $DIR/taginfo-master.db >$DIR/download/taginfo-master.db.bz2
 echo "Done."
 
-echo -n "Done: "; date
+echo "====================================="
+echo "`$DATECMD` Done update_all."
 
