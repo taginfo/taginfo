@@ -11,6 +11,23 @@ class Fixnum
 
 end
 
+class Numeric
+
+    def to_bytes
+        if self >= 1024*1024
+            unit = 'MB'
+            value = self / (1024*1024)
+        elsif self >= 1024
+            unit = 'kB'
+            value = self / 1024
+        else
+            unit = 'B'
+        end
+        value.to_i.to_s + '&thinsp;' + unit
+    end
+
+end
+
 def breadcrumbs
     return @breadcrumbs.map{ |name, link|
         if link

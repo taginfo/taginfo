@@ -37,3 +37,17 @@ map: Map
 maps: Maps
 key_combinations: Combinations
 
+source:
+    master:
+        description: Aggregate statistics and miscellaneous data needed for the Taginfo user interface.
+    db:
+        description: Statistics about each key and each tag from the main OSM database (planet file).
+    wiki:
+        description: Data from the tag and key pages of the OSM wiki.
+    josm:
+        description: Configuration data from the JOSM OSM editor.
+    potlatch:
+        description: Configuration data from the Potlatch2 OSM editor.
+    merkaartor:
+        description: Configuration data from the Merkaartor OSM editor.
+

@@ -3,7 +3,7 @@ class Source
 
     @@sources = Array.new
 
-    attr_reader :id, :name, :data_until, :update_start, :update_end
+    attr_reader :id, :name, :data_until, :update_start, :update_end, :dbsize, :dbpack
 
     # Enumerate all available sources
     def self.each
@@ -26,6 +26,10 @@ class Source
         @data_until   = data_until
         @update_start = update_start
         @update_end   = update_end
+
+        @dbsize = File.size("../../data/#{ dbname }").to_bytes rescue '<i>unknown</i>'
+        @dbpack = File.size("../../download/#{ dbname }.bz2").to_bytes rescue '<i>unknown</i>'
+
         @@sources << self
     end
 
@@ -52,6 +56,14 @@ class Source
     # Returns a link to this source
     def link_name
         %Q{<a href="#{ url }">#{ name }</a>}
+    end
+
+    def dbname
+        "taginfo-#{ @id }.db"
+    end
+
+    def link_download
+        %Q{<a href="/download/#{ dbname }.bz2">#{ dbname }.bz2</a>}
     end
 
 end
