@@ -27,6 +27,25 @@ class Taginfo < Sinatra::Base
             paging(params[:rp], params[:page]).
             execute()
 
+        reshash = Hash.new
+        res.each do |row|
+            reshash[row['key']] = row
+            row['prevalent_values'] = Array.new
+        end
+
+        prevvalues = @db.select('SELECT key, value, count, fraction FROM db.prevalent_values').
+            condition("key IN (#{ res.map{ |row| "'" + SQLite3::Database.quote(row['key']) + "'" }.join(',') })").
+            order_by([:count], 'DESC').
+            execute()
+
+        prevvalues.each do |pv|
+            key = pv['key']
+            pv.delete_if{ |k,v| k.is_a?(Integer) || k == 'key' }
+            pv['count'] = pv['count'].to_i
+            pv['fraction'] = pv['fraction'].to_f
+            reshash[key]['prevalent_values'] << pv
+        end
+
         return {
             :page  => params[:page].to_i,
             :rp    => params[:rp].to_i,
@@ -37,7 +56,7 @@ class Taginfo < Sinatra::Base
                 :count_all_fraction => row['count_all'].to_f / @db.stats('objects'),
                 :values_all         => row['values_all'].to_i,
                 :users_all          => row['users_all'].to_i,
-                :prevalent_values   => (row['prevalent_values'] || '').split('|').map{ |pv| pv }
+                :prevalent_values   => row['prevalent_values']
             } }
         }.to_json
     end

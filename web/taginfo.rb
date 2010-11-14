@@ -50,8 +50,8 @@ TAGCLOUD_NUMBER_OF_TAGS = 200
 db = SQL::Database.new('../../data')
 
 # XXX update this to use new sources table
-db.select('SELECT * FROM master_meta ORDER BY source_name').execute().each do |source|
-    Source.new source['source_id'], source['source_name'], source['data_until'], source['update_start'], source['update_end']
+db.select('SELECT * FROM sources ORDER BY no').execute().each do |source|
+    Source.new source['id'], source['name'], source['data_until'], source['update_start'], source['update_end'], source['visible'] == '1'
 end
 
 db.close

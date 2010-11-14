@@ -3,7 +3,7 @@ class Source
 
     @@sources = Array.new
 
-    attr_reader :id, :name, :data_until, :update_start, :update_end, :dbsize, :dbpack
+    attr_reader :id, :name, :data_until, :update_start, :update_end, :visible, :dbsize, :dbpack
 
     # Enumerate all available sources
     def self.each
@@ -17,15 +17,20 @@ class Source
         @@sources.size
     end
 
+    def self.visible
+        @@sources.select{ |source| source.visible }
+    end
+
     # Create new source
     #  id - Symbol with id for this source
     #  name - Name of this source
-    def initialize(id, name, data_until, update_start, update_end)
+    def initialize(id, name, data_until, update_start, update_end, visible)
         @id           = id.to_sym
         @name         = name
         @data_until   = data_until
         @update_start = update_start
         @update_end   = update_end
+        @visible      = visible
 
         @dbsize = File.size("../../data/#{ dbname }").to_bytes rescue '<i>unknown</i>'
         @dbpack = File.size("../../download/#{ dbname }.bz2").to_bytes rescue '<i>unknown</i>'

@@ -19,6 +19,7 @@ buttons:
     download: Download
     about: Über Taginfo
     wiki: Wiki
+    reports: Reports
     show_all_keys: Alle Keys anzeigen
 
 data_from: Daten vom

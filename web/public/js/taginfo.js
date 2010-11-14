@@ -35,6 +35,27 @@ function print_key_or_tag_list(list) {
     }).join(' &bull; ');
 }
 
+function print_prevalent_value_list(key, list) {
+    if (list.length == 0) {
+        return '<i>all values have less than 1%</i>';
+    }
+    return jQuery.map(list, function(item, i) {
+        return link_to_value_with_title(key, item.value, '(' + (item.fraction * 100).toFixed(2) + '%)');
+    }).join(' &bull; ');
+}
+
+function link_to_value_with_title(key, value, extra) {
+    var k = encodeURIComponent(key),
+        v = encodeURIComponent(value),
+        title = html_escape(value) + ' ' + extra;
+
+    if (key.match(/[=\/]/) || value.match(/[=\/]/)) {
+        return '<a class="taglink" href="/tags/?key=' + k + '&value=' + v + '" title="' + title + '">' + pp_value(value) + '</a>';
+    } else {
+        return '<a class="taglink" href="/tags/' + k + '=' + v + '" title="' + title + '">' + pp_value(value) + '</a>';
+    }
+}
+
 function print_tag_list(key, list) {
     return jQuery.map(list, function(value, i) {
         return link_to_value(key, value);

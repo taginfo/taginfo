@@ -10,7 +10,7 @@ have to go back to the source.</p>
     <tr>
         <th></th><th>Source</th><th>Data until*</th><th>Last update run</th><th></th>
     </tr>
-    <% Source.each do |source| %>
+    <% Source.visible.each do |source| %>
     <tr>
         <td class="border"></td>
         <td><%= source.link_img + ' ' + source.link_name %>

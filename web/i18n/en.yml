@@ -20,6 +20,7 @@ buttons:
     download: Download
     about: About
     wiki: Wiki
+    reports: Reports
     show_all_keys: Show all keys
 
 data_from: Data from

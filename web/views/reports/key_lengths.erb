@@ -1,6 +1,6 @@
 <h1><%= @title %></h1>
 
-<p>Tag keys can be between 0 and 255 (Unicode) characters long.</p>
+<p>Tag keys can be between 0 and 255 (Unicode) characters long. Very short or very long keys are often, but not always, errors.</p>
 
 <%
     hist = Array.new
@@ -31,7 +31,7 @@
     jQuery(document).ready(function() {
         var tabs = jQuery('#tabs').tabs();
         jQuery('#keys').flexigrid({
-            url: '/api/2/db/keys',
+            url: '/api/2/db/keys?include=prevalent_values',
             method: 'GET',
             dataType: 'json',
             colModel: [
@@ -67,7 +67,7 @@
                  //       row.in_potlatch   ? '&#x2714;' : '-',
                  //       row.in_merkaartor ? '&#x2714;' : '-',
                         print_with_ts(row.values_all),
-                        print_tag_list(row.key, row.prevalent_values)
+                        print_prevalent_value_list(row.key, row.prevalent_values)
                     ] };
                 });
                 return data;

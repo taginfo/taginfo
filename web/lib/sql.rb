@@ -86,7 +86,6 @@ module SQL
         end
 
         def order_by(values, direction='ASC', &block)
-
             if values.is_a?(Array)
                 values = values.compact
             else
@@ -105,6 +104,7 @@ module SQL
             end
 
             values.each do |value|
+                value = o.default if value.nil?
                 unless o._allowed(value)
                     raise ArgumentError, 'order by this attribute not allowed'
                 end
@@ -112,6 +112,7 @@ module SQL
 
             unless values.empty?
                 @order_by = "ORDER BY " + values.map{ |value|
+                    value = o.default if value.nil?
                     o[value.to_s].map{ |oel| oel.to_s(direction.upcase) }.join(',')
                 }.join(',')
             end
@@ -193,6 +194,8 @@ module SQL
 
     class Order
 
+        attr_reader :default
+
         def initialize(values, &block)
             @allowed = Hash.new
             if block_given?
@@ -214,6 +217,7 @@ module SQL
 
         def _add(field, attribute=nil)
             field = field.to_s
+            @default = field unless defined? @default
             if field =~ /^(.*)!$/
                 field = $1
                 reverse = true

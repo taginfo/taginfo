@@ -16,6 +16,11 @@ class Taginfo < Sinatra::Base
             filters = []
         end
 
+        include_data = Hash.new
+        if params[:include]
+            params[:include].split(',').each{ |inc| include_data[inc.to_sym] = 1 }
+        end
+
         total = @db.count('db.keys').
             condition_if("key LIKE '%' || ? || '%'", params[:query]).
             conditions(filters).
@@ -41,11 +46,52 @@ class Taginfo < Sinatra::Base
             paging(params[:rp], params[:page]).
             execute()
 
+        if include_data[:wikipages]
+            reshash = Hash.new
+            res.each do |row|
+                reshash[row['key']] = row
+                row['wikipages'] = Array.new
+            end
+
+            wikipages = @db.select('SELECT key, lang, title, type FROM wiki.wikipages').
+                condition("value IS NULL").
+                condition("key IN (#{ res.map{ |row| "'" + SQLite3::Database.quote(row['key']) + "'" }.join(',') })").
+                order_by([:key, :lang]).
+                execute()
+
+            wikipages.each do |wp|
+                key = wp['key']
+                wp.delete_if{ |k,v| k.is_a?(Integer) || k == 'key' }
+                reshash[key]['wikipages'] << wp
+            end
+        end
+
+        if include_data[:prevalent_values]
+            reshash = Hash.new
+            res.each do |row|
+                reshash[row['key']] = row
+                row['prevalent_values'] = Array.new
+            end
+
+            prevvalues = @db.select('SELECT key, value, count, fraction FROM db.prevalent_values').
+                condition("key IN (#{ res.map{ |row| "'" + SQLite3::Database.quote(row['key']) + "'" }.join(',') })").
+                order_by([:count], 'DESC').
+                execute()
+
+            prevvalues.each do |pv|
+                key = pv['key']
+                pv.delete_if{ |k,v| k.is_a?(Integer) || k == 'key' }
+                pv['count'] = pv['count'].to_i
+                pv['fraction'] = pv['fraction'].to_f
+                reshash[key]['prevalent_values'] << pv
+            end
+        end
+
         return {
             :page  => params[:page].to_i,
             :rp    => params[:rp].to_i,
             :total => total,
-            :data  => res.map{ |row| {
+            :data  => res.map{ |row| h = {
                 :key                      => row['key'],
                 :count_all                => row['count_all'].to_i,
                 :count_all_fraction       => row['count_all'].to_f / @db.stats('objects'),
@@ -60,8 +106,10 @@ class Taginfo < Sinatra::Base
                 :in_wiki                  => row['in_wiki']     == '1' ? true : false,
                 :in_josm                  => row['in_josm']     == '1' ? true : false,
                 :in_potlatch              => row['in_potlatch'] == '1' ? true : false,
-                :prevalent_values         => (row['prevalent_values'] || '').split('|').map{ |pv| pv }
-            } }
+            } 
+            h[:wikipages] = row['wikipages'] if row['wikipages']
+            h[:prevalent_values] = row['prevalent_values'][0,10] if row['prevalent_values']
+            h }
         }.to_json
     end
 
