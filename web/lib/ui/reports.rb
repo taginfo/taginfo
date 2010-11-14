@@ -2,7 +2,7 @@
 class Taginfo < Sinatra::Base
 
     get! '/reports' do
-        @title = 'Reports'
+        @title = t.taginfo.reports
         @breadcrumbs << @title
         erb :'reports/index'
     end
@@ -10,8 +10,8 @@ class Taginfo < Sinatra::Base
     Report.each do |report|
         get report.url do
             @title = report.title
-            @breadcrumbs << [ 'Reports', '/reports' ]
-            @breadcrumbs << report.title
+            @breadcrumbs << [ t.taginfo.reports, '/reports' ]
+            @breadcrumbs << t.reports[report.name].name
             erb ('reports/' + report.name).to_sym
         end
     end

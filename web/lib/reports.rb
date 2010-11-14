@@ -25,7 +25,7 @@ class Report
     end
 
     def name
-        @title.gsub(/ /, '_').downcase
+        @title.gsub(/[\s-]/, '_').downcase
     end
 
     def url

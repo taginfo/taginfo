@@ -1,18 +1,15 @@
-<h1>Reports</h1>
+<h1><%= t.taginfo.reports %></h1>
 
-<p class="text">Reports show the data from different perspectives.
-They often bring together data from several sources in interesting ways. Some
-of the reports can help with finding certain kinds of errors, such as popular
-keys without wiki pages.</p>
+<%= t.pages.reports.index.intro %>
 
 <table class="reports">
-    <tr><th class="source" colspan="<%= Source.visible.size %>"/>Data<br/>Sources</th><th></th></tr>
+    <tr><th class="source" colspan="<%= Source.visible.size %>"/><%= t.pages.reports.index.data_sources %></th><th></th></tr>
 <% Report.each do |report| %>
     <tr>
 <% Source.visible.each do |source| %>
         <td class="source"><%= source.link_img if report.uses_source? source.id %></td>
 <% end %>
-        <td><a href="<%= report.url %>"><%= report.title %></a></td>
+        <td><a href="<%= report.url %>"><%= t.reports[report.name].name %></a></td>
     </tr>
 <% end %>
     <tr><th class="last" colspan="<%= Source.visible.size %>"/></th><th></th></tr>

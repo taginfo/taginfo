@@ -49,7 +49,6 @@ TAGCLOUD_NUMBER_OF_TAGS = 200
 
 db = SQL::Database.new('../../data')
 
-# XXX update this to use new sources table
 db.select('SELECT * FROM sources ORDER BY no').execute().each do |source|
     Source.new source['id'], source['name'], source['data_until'], source['update_start'], source['update_end'], source['visible'] == '1'
 end
@@ -103,7 +102,7 @@ class Taginfo < Sinatra::Base
 
         @db = SQL::Database.new('../../data')
 
-        @data_until = @db.select("SELECT min(data_until) FROM master_meta").get_first_value().sub(/:..$/, '')
+        @data_until = @db.select("SELECT min(data_until) FROM sources").get_first_value().sub(/:..$/, '')
 
         @breadcrumbs = []
     end
@@ -128,18 +127,17 @@ class Taginfo < Sinatra::Base
         erb :index
     end
 
-    %w(about contact download keys).each do |page|
+    %w(about download keys).each do |page|
         get '/' + page do
-            @title = page.capitalize
+            @title = t.taginfo[page]
             @breadcrumbs << @title
             erb page.to_sym
         end
     end
 
     get! '/sources' do
-        @title = 'Sources'
+        @title = t.taginfo.sources
         @breadcrumbs << @title
-        @sources = @db.select('SELECT * FROM master_meta ORDER BY source_name').execute()
         erb :'sources/index'
     end
 
@@ -157,8 +155,8 @@ class Taginfo < Sinatra::Base
         @key_json = @key.to_json
         @key_pp   = pp_key(@key)
 
-        @title = [@key_html, 'Keys']
-        @breadcrumbs << ['Keys', '/keys']
+        @title = [@key_html, t.osm.keys]
+        @breadcrumbs << [t.osm.keys, '/keys']
         @breadcrumbs << @key_html
 
         @filter_type = get_filter()
@@ -168,7 +166,7 @@ class Taginfo < Sinatra::Base
         @count_all_values = @db.select("SELECT count_#{@filter_type} FROM db.keys").condition('key = ?', @key).get_first_value().to_i
 
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang='en' AND key=? AND value IS NULL", @key).get_first_value())
-        @desc = '<i>no description in wiki</i>' if @desc == ''
+        @desc = "<i>#{ t.ui.empty.no_description_in_wiki }</i>" if @desc == ''
 
         @prevalent_values = @db.select("SELECT value, count_#{@filter_type} AS count FROM tags").
             condition('key=?', @key).
@@ -227,8 +225,8 @@ class Taginfo < Sinatra::Base
         @value_json = @value.to_json
         @value_pp   = pp_value(@value)
 
-        @title = [@key_html + '=' + @value_html, 'Tags']
-        @breadcrumbs << ['Keys', '/keys']
+        @title = [@key_html + '=' + @value_html, t.taginfo.tags]
+        @breadcrumbs << [t.taginfo.keys, '/keys']
         @breadcrumbs << [@key_html, '/keys/' + @key_uri]
         @breadcrumbs << ( @value.length > 30 ? escape_html(@value[0,20] + '...') : @value_html)
 
@@ -239,7 +237,7 @@ class Taginfo < Sinatra::Base
         @count_all = @db.select('SELECT count_all FROM db.tags').condition('key = ? AND value = ?', @key, @value).get_first_value().to_i
 
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang='en' AND key=? AND value=?", @key, @value).get_first_value())
-        @desc = '<i>no description in wiki</i>' if @desc == ''
+        @desc = "<i>#{ t.ui.empty.no_description_in_wiki }</i>" if @desc == ''
 
         erb :tag
     end

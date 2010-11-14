@@ -1,17 +1,10 @@
-<h1>Download</h1>
+<h1><%= t.taginfo.download %></h1>
 
-<p>Here you can download the databases used by Taginfo. All the data is stored
-in <img src="/img/link-extern.gif" alt=""/><a class="extlink"
-href="http://www.sqlite.org/">Sqlite</a> databases. The database files are then
-packed with <img src="/img/link-extern.gif" alt=""/><a class="extlink"
-href="http://www.bzip.org/">bzip2</a>.</p>
-
-<p>If you don't want to download these databases, but need automated access to
-the data, you can also use the <a href="/about">API</a>.
+<%= t.pages.download.index.intro %>
 
 <table class="list">
     <tr>
-        <th></th><th></th><th>File</th><th>Packed</th><th>Unpacked</th><th>Description</th><th></th>
+        <th></th><th></th><th><%= t.pages.download.index.file %></th><th><%= t.pages.download.index.packed %></th><th><%= t.pages.download.index.unpacked %></th><th><%= t.pages.download.index.description %></th><th></th>
     </tr>
 <% Source.visible.each do |source| %>
     <tr><td class="border"></td>
@@ -24,7 +17,8 @@ the data, you can also use the <a href="/about">API</a>.
     <tr><td class="border"></td>
         <td style="text-align: center;"><img src="/img/taginfo.32.png" alt="Taginfo" width="32" height="16"/></td>
         <td><a href="/download/taginfo-master.db.bz2">taginfo-master.db.bz2</a></td>
-        <td style="text-align: right;"><%= File.size("../../download/taginfo-master.db.bz2").to_bytes rescue '<i>unknown</i>' %></td><td style="text-align: right;"><%= File.size("../../data/taginfo-master.db").to_bytes rescue '<i>unknown</i>' %></td>
+        <td style="text-align: right;"><%= File.size("../../download/taginfo-master.db.bz2").to_bytes rescue "<i>#{ t.ui.empty.unknown }</i>" %></td>
+        <td style="text-align: right;"><%= File.size("../../data/taginfo-master.db").to_bytes rescue "<i>#{ t.ui.empty.unknown }</i>" %></td>
         <td><%= t.source.master.description %></td>
     <td class="border"></td></tr>
     <tr><th colspan="7"/></tr>

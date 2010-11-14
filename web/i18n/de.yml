@@ -14,13 +14,18 @@ osm:
     user: User
     users: Users
 
-buttons:
+taginfo:
     sources: Datenquellen
     download: Download
     about: Über Taginfo
     wiki: Wiki
     reports: Reports
+    keys: Keys
+    tags: Tags
+
+buttons:
     show_all_keys: Alle Keys anzeigen
+    reports: Reports
 
 data_from: Daten vom
 
@@ -36,4 +41,8 @@ flexigrid:
 map: Karte
 maps: Karten
 key_combinations: Kombinationen
+
+ui:
+    empty:
+        no_description_in_wiki: Keine Beschreibung im Wiki vorhanden
 

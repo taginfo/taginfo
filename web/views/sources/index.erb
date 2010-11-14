@@ -1,14 +1,10 @@
-<h1>Sources</h1>
+<h1><%= t.taginfo.sources %></h1>
 
-<p>Taginfo takes data about OSM tags from several sources and brings them
-together for easy browsing and discovery.</p>
-
-<p>Note that Taginfo only displays this data. If you want to change it, you
-have to go back to the source.</p>
+<%= t.pages.sources.index.intro %>
 
 <table class="list">
     <tr>
-        <th></th><th>Source</th><th>Data until*</th><th>Last update run</th><th></th>
+        <th></th><th><%= t.taginfo.source %></th><th><%= t.pages.sources.index.data_until %>*</th><th><%= t.pages.sources.index.last_update_run %></th><th></th>
     </tr>
     <% Source.visible.each do |source| %>
     <tr>
@@ -22,11 +18,6 @@ have to go back to the source.</p>
     <tr><th colspan="5"/></tr>
 </table>
 
-<p style="font-size: 80%">* All edits until this time will be in the data, later edits might be.</p>
+<p style="font-size: 80%">* <%= t.pages.sources.index.data_until_explanation %></p>
 
-<p>All times in UTC.</p>
-
-<p>Updates are currently done manually about once a week until they have proven
-to work reliably. It is planned to switch to daily updates as soon as
-possible.</p>
-
+<%= t.pages.sources.index.info %>

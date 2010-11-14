@@ -15,13 +15,59 @@ osm:
     user: User
     users: Users
 
-buttons:
+taginfo:
+    source: Source
     sources: Sources
     download: Download
     about: About
     wiki: Wiki
     reports: Reports
+    keys: Keys
+    tags: Tags
+
+buttons:
     show_all_keys: Show all keys
+    reports: Reports
+
+pages:
+    sources:
+        index:
+            intro: |
+                <p>Taginfo takes data about OSM tags from several sources and brings them
+                together for easy browsing and discovery.</p>
+                <p>Note that Taginfo only displays this data. If you want to change it, you
+                have to go back to the source.</p>
+            data_until: Data until
+            last_update_run: Last update run
+            data_until_explanation: All edits until this time will be in the data, later edits might be.
+            utc: All times in UTC.
+            info: |
+                <p>All times in UTC.</p>
+                <p>Updates are currently done manually about once a week until they have proven
+                to work reliably. It is planned to switch to daily updates as soon as
+                possible.</p>
+    download:
+        index:
+            intro: |
+                <p>Here you can download the databases used by Taginfo. All the data is stored
+                in <img src="/img/link-extern.gif" alt=""/><a class="extlink"
+                href="http://www.sqlite.org/">Sqlite</a> databases. The database files are then
+                packed with <img src="/img/link-extern.gif" alt=""/><a class="extlink"
+                href="http://www.bzip.org/">bzip2</a>.</p>
+                <p>If you don't want to download these databases, but need automated access to
+                the data, you can also use the <a href="/about">API</a>.
+            file: File
+            packed: Packed
+            unpacked: Unpacked
+            description: Description
+    reports:
+        index:
+            intro: |
+                <p class="text">Reports show the data from different perspectives.
+                They often bring together data from several sources in interesting ways. Some
+                of the reports can help with finding certain kinds of errors, such as popular
+                keys without wiki pages.</p>
+            data_sources: Data<br/>Sources
 
 data_from: Data from
 
@@ -38,6 +84,11 @@ map: Map
 maps: Maps
 key_combinations: Combinations
 
+ui:
+    empty:
+        no_description_in_wiki: No description in wiki
+        unknown: Unknown
+
 source:
     master:
         description: Aggregate statistics and miscellaneous data needed for the Taginfo user interface.
@@ -51,4 +102,18 @@ source:
         description: Configuration data from the Potlatch2 OSM editor.
     merkaartor:
         description: Configuration data from the Merkaartor OSM editor.
+
+reports:
+    characters_in_keys:
+        name: Characters in Keys
+    frequently_used_keys_without_wiki_page:
+        name: Frequently Used Keys Without Wiki Page
+    key_lengths:
+        name: Key Lengths
+    language_comparison_table_for_keys_in_the_wiki:
+        name: Language Comparison Table for Keys in the Wiki
+    languages:
+        name: Languages
+    wiki_pages_about_non_existing_keys:
+        name: Wiki Pages About Non-Existing Keys
 

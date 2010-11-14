@@ -31,10 +31,10 @@
             </div>
         </div>
         <div id="date">
-            <%= t.data_from %>: <%= @data_until %> UTC <span class="button"><a href="/sources"><%= t.buttons.sources %></a></span>
-            <span class="button"><a href="/download"><%= t.buttons.download %></a></span>
-            <span class="button"><a href="/about"><%= t.buttons.about %></a></span>
-            <span class="button"><img src="/img/link-extern.gif" alt="" width="14" height="10"/><a href="http://wiki.openstreetmap.org/wiki/Taginfo"><%= t.buttons.wiki %></a></span>
+            <%= t.data_from %>: <%= @data_until %> UTC <span class="button"><a href="/sources"><%= t.taginfo.sources %></a></span>
+            <span class="button"><a href="/download"><%= t.taginfo.download %></a></span>
+            <span class="button"><a href="/about"><%= t.taginfo.about %></a></span>
+            <span class="button"><img src="/img/link-extern.gif" alt="" width="14" height="10"/><a href="http://wiki.openstreetmap.org/wiki/Taginfo"><%= t.taginfo.wiki %></a></span>
         </div>
         <div id="main">
 <%= yield %>
