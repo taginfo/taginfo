@@ -13,7 +13,7 @@ the data, you can also use the <a href="/about">API</a>.
     <tr>
         <th></th><th></th><th>File</th><th>Packed</th><th>Unpacked</th><th>Description</th><th></th>
     </tr>
-<% Source.each do |source| %>
+<% Source.visible.each do |source| %>
     <tr><td class="border"></td>
         <td style="text-align: center;"><%= source.img %></td>
         <td><%= source.link_download %></td>
