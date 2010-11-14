@@ -36,22 +36,6 @@ INSERT INTO sources SELECT 1, 1, * FROM db.source
               UNION SELECT 4, 0, * FROM potlatch.source
               UNION SELECT 5, 0, * FROM merkaartor.source;
 
-DROP TABLE IF EXISTS master_meta;
-CREATE TABLE master_meta (
-    source_id    TEXT,
-    source_name  TEXT,
-    update_start TEXT,
-    update_end   TEXT,
-    data_until   TEXT
-);
-
--- for backwards compatibility
-INSERT INTO master_meta SELECT * FROM db.source
-                  UNION SELECT * FROM wiki.source
-                  UNION SELECT * FROM josm.source;
--- XXX                 UNION SELECT * FROM potlatch.meta
--- XXX                 UNION SELECT * FROM merkaartor.meta;
-
 DROP TABLE IF EXISTS master_stats;
 CREATE TABLE master_stats (
     key   TEXT,
