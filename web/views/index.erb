@@ -4,7 +4,7 @@
     <p><span class="button"><a href="/keys"><%= t.buttons.show_all_keys %></a></span>
        <span class="button"><a href="/reports"><%= t.buttons.reports %></a></span></p>
 
-    <div class="tagcloud">
+    <div style="margin: 0 10%;">
 <% @tags.each do |tag| %>
         <a href="/keys/<%= tag['key'] %>" class="popkey" style="font-size: <%= tagcloud_size(tag) %>px;"><%= tag['key'] %></a>
 <% end %>

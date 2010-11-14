@@ -147,10 +147,6 @@ div#main {
 
 /* ========== */
 
-div#tabs {
-//    font-size: 100%;
-}
-
 div#tabs h2 {
     margin: 0 0 10px 0;
     font-size: 110%;
@@ -235,30 +231,6 @@ span.lang {
     -o-border-radius: 4px;
 }
 
-div.value {
-    width: 6em;
-    float: left;
-    padding: 0 !important;
-    margin: 0 !important;
-    text-align: right;
-}
-
-div.fraction {
-    width: 5em;
-    float: left;
-    padding: 0 !important;
-    margin: 0 !important;
-    text-align: right;
-}
-
-div.bar {
-    float: left;
-    margin: 4px 0 0 6px !important;
-    padding: 0 !important;
-    height: 8px;
-    background-color: #60c060;
-}
-
 td.number {
     text-align: right;
 //    color: #e06000;
@@ -290,8 +262,35 @@ form#filter-form {
     padding-bottom: 20px;
 }
 
-div.tagcloud {
-    margin: 0 10%;
+div.canvas {
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+}
+
+/* ========== */
+
+div.value {
+    width: 6em;
+    float: left;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-align: right;
+}
+
+div.fraction {
+    width: 5em;
+    float: left;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-align: right;
+}
+
+div.bar {
+    float: left;
+    margin: 4px 0 0 6px !important;
+    padding: 0 !important;
+    height: 8px;
+    background-color: #60c060;
 }
 
 /* ========== */
@@ -360,25 +359,6 @@ table.reports th.last {
     -webkit-border-radius: 0 0 4px 4px;
     -chrome-border-radius: 0 0 4px 4px;
     -o-border-radius: 0 0 4px 4px;
-}
-
-/* ========== */
-
-div#canvas-values {
-    position: absolute;
-    border: 1px solid #cccccc;
-    background-color: #ffffff;
-}
-
-div#canvas-keypairs {
-//    position: absolute;
-    border: 1px solid #cccccc;
-    background-color: #ffffff;
-}
-
-div.canvas {
-    border: 1px solid #cccccc;
-    background-color: #ffffff;
 }
 
 /* ==========  */
