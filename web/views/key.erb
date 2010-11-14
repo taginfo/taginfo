@@ -285,6 +285,14 @@ vis.add(pv.Layout.Stack)
     .y(function(d) scale(d.count))
   .layer.add(pv.Bar)
     .width(20)
+    .cursor(function() {
+        return this.data().value == '(other)' ? 'default' : 'pointer';
+    })
+    .event('click', function() {
+        if (this.data().value != '(other)') {
+            window.location = url_to_value(<%= @key_json %>, this.data().value);
+        }
+    })
   .anchor('left')
     .add(pv.Label)
     .left(30)

@@ -142,14 +142,16 @@ function link_to_key(key) {
 }
 
 function link_to_value(key, value) {
-    var k = encodeURIComponent(key),
-        v = encodeURIComponent(value),
-        title = html_escape(key) + '=' + html_escape(value);
+    return '<a class="taglink" href="' + url_to_value(key, value) + '" title="' + html_escape(key) + '=' + html_escape(value) + '">' + pp_value(value) + '</a>';
+}
 
+function url_to_value(key, value) {
+    var k = encodeURIComponent(key),
+        v = encodeURIComponent(value);
     if (key.match(/[=\/]/) || value.match(/[=\/]/)) {
-        return '<a class="taglink" href="/tags/?key=' + k + '&value=' + v + '" title="' + title + '">' + pp_value(value) + '</a>';
+        return '/tags/?key=' + k + '&value=' + v;
     } else {
-        return '<a class="taglink" href="/tags/' + k + '=' + v + '" title="' + title + '">' + pp_value(value) + '</a>';
+        return '/tags/' + k + '=' + v;
     }
 }
 
