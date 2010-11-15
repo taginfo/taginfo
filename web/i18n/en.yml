@@ -68,6 +68,9 @@ pages:
                 of the reports can help with finding certain kinds of errors, such as popular
                 keys without wiki pages.</p>
             data_sources: Data<br/>Sources
+    search:
+        result:
+            title: Search result
 
 data_from: Data from
 
@@ -91,16 +94,22 @@ ui:
 
 source:
     master:
+        name: Master
         description: Aggregate statistics and miscellaneous data needed for the Taginfo user interface.
     db:
+        name: Database
         description: Statistics about each key and each tag from the main OSM database (planet file).
     wiki:
+        name: Wiki
         description: Data from the tag and key pages of the OSM wiki.
     josm:
+        name: JOSM
         description: Configuration data from the JOSM OSM editor.
     potlatch:
+        name: Potlatch
         description: Configuration data from the Potlatch2 OSM editor.
     merkaartor:
+        name: Merkaartor
         description: Configuration data from the Merkaartor OSM editor.
 
 reports:
