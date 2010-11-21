@@ -53,7 +53,7 @@ a.taglink {
 
 span.badchar {
     color: #e00000;
-    font-weight: bold;
+//    font-weight: bold;
 }
 
 span.whitespace {
