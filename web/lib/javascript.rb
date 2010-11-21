@@ -15,7 +15,7 @@ class Javascript
         if file.nil?
             c = ''
             r = yield c
-            @content = c + r
+            @content = (c == '' ? r : c)
         else
             @file = file
         end
@@ -40,8 +40,10 @@ class JQuery
     extend R18n::Helpers
 
     def self.ready
+        page = ''
+        content = yield page
         "jQuery(document).ready(function() {\n" +
-            yield +
+            (page=='' ? content : page) +
         "});\n"
     end
 
@@ -77,7 +79,7 @@ class JS
     #
     def self.raw(code)
        code.instance_eval do
-          def to_json
+          def to_json(state=nil)
               to_s
           end
        end
