@@ -11,7 +11,7 @@
         <td style="text-align: center;"><%= source.img %></td>
         <td><%= source.link_download %></td>
         <td style="text-align: right;"><%= source.dbpack %></td><td style="text-align: right;"><%= source.dbsize %></td>
-        <td><%= t.source[source.id].description %></td>
+        <td><%= t.sources[source.id].description %></td>
     <td class="border"></td></tr>
 <% end %>
     <tr><td class="border"></td>
@@ -19,7 +19,7 @@
         <td><a href="/download/taginfo-master.db.bz2">taginfo-master.db.bz2</a></td>
         <td style="text-align: right;"><%= File.size("../../download/taginfo-master.db.bz2").to_bytes rescue "<i>#{ t.ui.empty.unknown }</i>" %></td>
         <td style="text-align: right;"><%= File.size("../../data/taginfo-master.db").to_bytes rescue "<i>#{ t.ui.empty.unknown }</i>" %></td>
-        <td><%= t.source.master.description %></td>
+        <td><%= t.sources.master.description %></td>
     <td class="border"></td></tr>
     <tr><th colspan="7"/></tr>
 </table>

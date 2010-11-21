@@ -69,8 +69,8 @@ pages:
                 keys without wiki pages.</p>
             data_sources: Data<br/>Sources
     search:
-        result:
-            title: Search result
+        results:
+            title: Search results
 
 data_from: Data from
 
@@ -92,7 +92,7 @@ ui:
         no_description_in_wiki: No description in wiki
         unknown: Unknown
 
-source:
+sources:
     master:
         name: Master
         description: Aggregate statistics and miscellaneous data needed for the Taginfo user interface.
