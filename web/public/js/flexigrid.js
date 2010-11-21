@@ -614,9 +614,13 @@
 					,{ name : 'rp', value : p.rp }
 					,{ name : 'sortname', value : p.sortname}
 					,{ name : 'sortorder', value : p.sortorder }
-					,{ name : 'query', value : p.query}
-					,{ name : 'qtype', value : p.qtype}
-				];							 
+				];
+                if (p.query != '') {
+                    param.push({ name: 'query', value: p.query })
+                }
+                if (p.qtype != '') {
+                    param.push({ name: 'qtype', value: p.qtype })
+                }
 							 
 				if (p.params)
 					{
