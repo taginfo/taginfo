@@ -243,6 +243,165 @@ function create_flexigrid(domid, options) {
 }
 
 var create_flexigrid_for = {
+    keys: {
+        keys: function() {
+            create_flexigrid('grid-keys', {
+                url: '/api/2/db/keys?include=prevalent_values',
+                colModel: [
+                    { display: 'Key', name: 'key', width: 180, sortable: true, align: 'left' },
+                    { display: '<span title="Number of objects with this key"><img src="/img/types/all.16.png" alt=""/> Total</span>',           name: 'count_all',        width: 250, sortable: true, align: 'center' },
+                    { display: '<span title="Number of nodes with this key"><img src="/img/types/node.16.png" alt=""/> Nodes</span>',            name: 'count_nodes',      width: 250, sortable: true, align: 'center' },
+                    { display: '<span title="Number of ways with this key"><img src="/img/types/way.16.png" alt=""/> Ways</span>',               name: 'count_ways',       width: 250, sortable: true, align: 'center' },
+                    { display: '<span title="Number of relations with this key"><img src="/img/types/relation.16.png" alt=""/> Relation</span>', name: 'count_relations',  width: 250, sortable: true, align: 'center' },
+                    { display: 'Users', name: 'users_all', width: 44, sortable: true, align: 'right' },
+                    { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" title="Wiki"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
+                    { display: '<img src="/img/sources/josm.16.png" alt="JOSM" title="JOSM"/>', name: 'in_josm', width: 20, sortable: true, align: 'center' },
+                    { display: '<span title="Number of different values for this key">Values</span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
+                    { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true, align: 'left' }
+                ],
+                searchitems: [
+                    { display: 'Key', name: 'key' }
+                ],
+                sortname: 'count_all',
+                sortorder: 'desc',
+                height: 420,
+                preProcess: function(data) {
+                    data.rows = jQuery.map(data.data, function(row, i) {
+                        return { 'cell': [
+                            link_to_key(row.key),
+                            print_value_with_percent(row.count_all,       row.count_all_fraction),
+                            print_value_with_percent(row.count_nodes,     row.count_nodes_fraction),
+                            print_value_with_percent(row.count_ways,      row.count_ways_fraction),
+                            print_value_with_percent(row.count_relations, row.count_relations_fraction),
+                            print_with_ts(row.users_all),
+                            row.in_wiki ? '&#x2714;' : '-',
+                            row.in_josm ? '&#x2714;' : '-',
+                            print_with_ts(row.values_all),
+                            print_prevalent_value_list(row.key, row.prevalent_values)
+                        ] };
+                    });
+                    return data;
+                }
+            });
+        }
+    },
+    key: {
+        values: function(key, filter_type) {
+            create_flexigrid('grid-values', {
+                url: '/api/2/db/keys/values?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type),
+                colModel: [
+                    { display: 'Count', name: 'count', width: 300, sortable: true, align: 'center' },
+                    { display: 'Value', name: 'value', width: 500, sortable: true, align: 'left' }
+                ],
+                searchitems: [
+                    { display: 'Value', name: 'value' }
+                ],
+                sortname: 'count',
+                sortorder: 'desc',
+                height: 410,
+                preProcess: function(data) {
+                    data.rows = jQuery.map(data.data, function(row, i) {
+                        return { 'cell': [
+                            print_value_with_percent(row.count, row.fraction),
+                            link_to_value(key, row.value)
+                        ] };
+                    });
+                    delete data.data;
+                    return data;
+                }
+            });
+        },
+        keys: function(key, filter_type) {
+            create_flexigrid('grid-keys', {
+                url: '/api/2/db/keys/keys?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type),
+                colModel: [
+                    { display: '<span title="Number of objects with this key that also have the other key">Count &rarr;</span>', name: 'to_count', width: 320, sortable: true, align: 'center' },
+                    { display: '<span title="Key used together with this key">Other key</span>', name: 'other_key', width: 340, sortable: true, align: 'left' },
+                    { display: '<span title="Number of objects with other key that also have this key">&rarr; Count</span>', name: 'from_count', width: 320, sortable: true, align: 'center' }
+                ],
+                sortname: 'to_count',
+                sortorder: 'desc',
+                height: 410,
+                preProcess: function(data) {
+                    data.rows = jQuery.map(data.data, function(row, i) {
+                        return { 'cell': [
+                            print_value_with_percent(row.together_count, row.to_fraction),
+                            link_to_key(row.other_key),
+                            print_value_with_percent(row.together_count, row.from_fraction),
+                        ] };
+                    });
+                    return data;
+                }
+            });
+        },
+        josm: function(key, filter_type) {
+            create_flexigrid('grid-josm', {
+                url: '/api/2/josm/styles/standard/keys?key=' + encodeURIComponent(key),
+                colModel: [
+                    { display: 'Value',     name: 'v',         width: 200, sortable: true,  align: 'left'  },
+                    { display: 'Scale min', name: 'scale_min', width:  80, sortable: true,  align: 'right' },
+                    { display: 'Scale max', name: 'scale_max', width:  80, sortable: true,  align: 'right' },
+                    { display: 'Rule XML',  name: 'rule',      width: 100, sortable: false, align: 'left'  }
+                ],
+                searchitems: [
+                    { display: 'Value', name: 'v' }
+                ],
+                sortname: 'v',
+                sortorder: 'asc',
+                height: 410,
+                preProcess: function(data) {
+                    data.rows = jQuery.map(data.data, function(row, i) {
+                        return { 'cell': [
+                            row.v ? link_to_value(row.k, row.v) : row.b ? (row.b + ' (Boolean)') : '*',
+                            print_with_ts(row.scale_min),
+                            print_with_ts(row.scale_max),
+                            '<span title="' + row.rule + '">XML</span>'
+                        ] };
+                    });
+                    return data;
+                }
+            });
+        },
+        wiki: function(key, filter_type) {
+            create_flexigrid('grid-wiki', {
+                url: '/api/2/wiki/keys?key=' + encodeURIComponent(key),
+                colModel: [
+                    { display: 'Language',      name: 'lang',             width: 150, sortable: false },
+                    { display: 'Wikipage',      name: 'title',            width: 160, sortable: false, align: 'right' },
+                    { display: 'Description',   name: 'description',      width: 400, sortable: false },
+                    { display: 'Image',         name: 'image',            width: 120, sortable: false },
+                    { display: 'Objects',       name: 'objects',          width:  80, sortable: false },
+                    { display: 'Implied Tags',  name: 'tags_implied',     width: 120, sortable: false },
+                    { display: 'Combined Tags', name: 'tags_combination', width: 120, sortable: false },
+                    { display: 'Linked Tags',   name: 'tags_linked',      width: 220, sortable: false }
+                ],
+                usepager: false,
+                useRp: false,
+                height: 400,
+                preProcess: function(data) {
+                    return {
+                        total: data.size,
+                        page: 1,
+                        rows: jQuery.map(data, function(row, i) {
+                            return { 'cell': [
+                                print_language(row.lang, row.language, row.language_en),
+                                print_wiki_link(row.title),
+                                row.description,
+                                row.image == null ? '<i>no image</i>' : print_wiki_link(row.image),
+                                (row.on_node      ? '<img src="/img/types/node.16.png"     alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>') + ' ' +
+                                (row.on_way       ? '<img src="/img/types/way.16.png"      alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>') + ' ' +
+                                (row.on_area      ? '<img src="/img/types/area.16.png"     alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>') + ' ' +
+                                (row.on_relation  ? '<img src="/img/types/relation.16.png" alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>'),
+                                print_key_or_tag_list(row.tags_implies),
+                                print_key_or_tag_list(row.tags_combination),
+                                print_key_or_tag_list(row.tags_linked)
+                            ]};
+                        })
+                    };
+                }
+            });
+        }
+    },
     search: {
         keys: function(query) {
             create_flexigrid('grid-keys', {
