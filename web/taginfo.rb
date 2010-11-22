@@ -89,12 +89,9 @@ class Taginfo < Sinatra::Base
     end
 
     before do
-#        if params[:locale]
-#            response.set_cookie('taginfo_locale', params[:locale])
-#        elsif request.cookies['taginfo_locale']
-#            params[:locale] = request.cookies['taginfo_locale']
-#        end
-        params[:locale] = 'en'
+        if request.cookies['taginfo_locale'] && request.path != '/switch_locale'
+            params[:locale] = request.cookies['taginfo_locale']
+        end
 
         javascript 'jquery-1.4.2.min'
         javascript 'jquery-ui-1.8.6.custom.min'
@@ -118,6 +115,15 @@ class Taginfo < Sinatra::Base
 
     before '/api/*' do
         content_type :json
+    end
+
+    #-------------------------------------
+
+    # This is called when the language is changed with the pull-down menu in the top-right corner.
+    # It sets a cookie and redirects back to the page the user was coming from.
+    get '/switch_locale' do
+        response.set_cookie('taginfo_locale', params[:locale])
+        redirect params[:url]
     end
 
     #-------------------------------------

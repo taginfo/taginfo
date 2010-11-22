@@ -32,6 +32,55 @@ pages:
         buttons:
             show_all_keys: Alle Keys anzeigen
             reports: Reports
+    sources:
+        index:
+            intro: |
+                <p>Taginfo führt Daten über OSM-Tags aus verschiedenen Quellen zusammen,
+                zum einfachen Suchen und Finden.</p>
+                <p>Taginfo zeigt diese Daten nur an. Wenn Du sie ändern willst, dann mußt
+                Du sie an der Quelle ändern.</p>
+            data_until: Daten bis
+            last_update_run: Letzte Aktualisierung
+            data_until_explanation: Alle Änderungen bis zu diesem Zeitpunkt sind auf jeden Fall in den Daten, später können unter Umständen auch drin sein.
+            to: bis
+            info: |
+                <p>Alle Uhrzeiten in UTC.</p>
+                <p>Aktualisierungen werden derzeit etwa einmal die Woche durchgeführt, bis
+                klar ist, dass sie zuverlässig laufen. Sobald wie möglich soll auf tägliche
+                Aktualisierungen umgestellt werden.</p>
+    download:
+        index:
+            intro: |
+                <p>Hier kannst Du die Datenbanken herunterladen, die von Taginfo verwendet
+                werden. Alle Daten sind in <img src="/img/link-extern.gif" alt=""/><a class="extlink"
+                href="http://www.sqlite.org/">Sqlite-Datenbanken</a> gespeichert.
+                Die Datenbank-Dateien sind dann mit
+                <img src="/img/link-extern.gif" alt=""/><a class="extlink"
+                href="http://www.bzip.org/">bzip2</a> gepackt.</p>
+                <p>Wenn Du die Datenbanken nicht herunterladen willst, aber trotzdem
+                automatisiert auf die Daten zugreifen willst, kannst Du auch die 
+                <a href="/about">API</a> verwenden.</p>
+            file: Datei
+            packed: Gepackt
+            unpacked: Ungepackt
+            description: Beschreibung
+            unknown: Unbekannt
+    reports:
+        index:
+            intro: |
+                <p class="text">Reports zeigen die Daten aus verschiedenen Perspektiven.
+                Meist bringen Sie Daten aus verschiedenen Quellen auf interessante Art und
+                Weise zusammen. Manche der Reports helfen dabei, bestimmte Arten von Fehlern
+                zu finden, zum Beispiel häufig verwendete Keys ohne Wiki-Seite.</p>
+            data_sources: Daten-<br/>Quellen
+    search:
+        results:
+            title: Suchergebnisse
+            you_were_searching_for: Du hast gesucht nach
+    key:
+        no_description_in_wiki: Keine Beschreibung im Wiki
+    tag:
+        no_description_in_wiki: Keine Beschreibung im Wiki
 
 flexigrid:
     pagetext: Seite
@@ -66,7 +115,7 @@ reports:
     characters_in_keys:
         name: Zeichen in Keys
     frequently_used_keys_without_wiki_page:
-        name: Häufig benutzte Key ohne Wiki-Seite
+        name: Häufig benutzte Keys ohne Wiki-Seite
     key_lengths:
         name: Key-Längen
     language_comparison_table_for_keys_in_the_wiki:
@@ -74,5 +123,5 @@ reports:
     languages:
         name: Sprachen
     wiki_pages_about_non_existing_keys:
-        name: Wikiseiten über nicht-existierende Keys
+        name: Wiki-Seiten über nicht-existierende Keys
 

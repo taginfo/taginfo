@@ -44,7 +44,7 @@ pages:
             data_until: Data until
             last_update_run: Last update run
             data_until_explanation: All edits until this time will be in the data, later edits might be.
-            utc: All times in UTC.
+            to: to
             info: |
                 <p>All times in UTC.</p>
                 <p>Updates are currently done manually about once a week until they have proven
@@ -59,7 +59,7 @@ pages:
                 packed with <img src="/img/link-extern.gif" alt=""/><a class="extlink"
                 href="http://www.bzip.org/">bzip2</a>.</p>
                 <p>If you don't want to download these databases, but need automated access to
-                the data, you can also use the <a href="/about">API</a>.
+                the data, you can also use the <a href="/about">API</a>.</p>
             file: File
             packed: Packed
             unpacked: Unpacked

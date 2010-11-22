@@ -12,15 +12,16 @@
     </head>
     <body>
         <div id="top">
-<!--            <div id="right">
-                <form id="set_language">
+            <div id="right">
+                <form id="set_language" action="/switch_locale">
+                    <input type="hidden" name="url" value="<%= request.url %>"/>
                     <select id="locale" name="locale">
 <% r18n.available_locales.each do |locale| %>
                         <option value="<%= locale.code %>"<%= locale.code == r18n.locale.code ? ' selected="selected"' : ''%>><%= locale.title %></option>
 <% end %>
                     </select>
                 </form>
-            </div>-->
+            </div>
             <div id="middle">
                 <form action="/search">
                     <input type="text" id="search" name="q" value=""/>
