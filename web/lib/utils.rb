@@ -175,3 +175,8 @@ def get!(path, &block)
     end
 end
 
+# return the base url for this site
+def base_url
+    request.scheme + '://' + request.host + ':' + request.port.to_s 
+end
+

@@ -129,5 +129,25 @@ UPDATE languages SET wiki_tag_pages=(SELECT count(distinct key) FROM wiki.wikipa
 
 -- ============================================================================
 
+DROP TABLE IF EXISTS suggestions;
+CREATE TABLE suggestions (
+    key     TEXT,
+    value   TEXT,
+    count   INTEGER,
+    in_wiki INTEGER DEFAULT 0,
+    score   INTEGER
+);
+
+INSERT INTO suggestions (key, value, count) SELECT key, NULL, count_all FROM db.keys WHERE count_all > 10000 OR in_wiki = 1;
+INSERT INTO suggestions (key, value, count) SELECT key, value, count FROM db.prevalent_values WHERE count > 1000;
+
+INSERT INTO suggestions (key, value, in_wiki) SELECT key, value, 1 FROM wiki.wikipages WHERE value IS NOT NULL AND key || '=' || value NOT IN (SELECT key || '=' || value FROM suggestions);
+
+DELETE FROM suggestions WHERE count < 100;
+
+UPDATE suggestions SET score = count * (1+in_wiki);
+
+-- ============================================================================
+
 ANALYZE;
 

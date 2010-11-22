@@ -16,6 +16,11 @@ if [ "x" = "x$DIR" ]; then
     exit 1
 fi
 
+echo "`$DATECMD` Create search database..."
+
+rm -f $DIR/taginfo-search.db
+perl -pe "s|__DIR__|$DIR|" search.sql | sqlite3 $DIR/taginfo-search.db
+
 echo "`$DATECMD` Start master..."
 
 DATABASE=$DIR/taginfo-master.db

@@ -24,12 +24,16 @@ taginfo:
     reports: Reports
     keys: Keys
     tags: Tags
-
-buttons:
-    show_all_keys: Show all keys
-    reports: Reports
+    map: Map
+    maps: Maps
+    key_combinations: Combinations
+    data_from: Data from
 
 pages:
+    index:
+        buttons:
+            show_all_keys: Show all keys
+            reports: Reports
     sources:
         index:
             intro: |
@@ -60,6 +64,7 @@ pages:
             packed: Packed
             unpacked: Unpacked
             description: Description
+            unknown: unknown
     reports:
         index:
             intro: |
@@ -71,8 +76,11 @@ pages:
     search:
         results:
             title: Search results
-
-data_from: Data from
+            you_were_searching_for: You were searching for
+    key:
+        no_description_in_wiki: No description in wiki
+    tag:
+        no_description_in_wiki: No description in wiki
 
 flexigrid:
     pagetext: Page
@@ -82,15 +90,6 @@ flexigrid:
     procmsg: Processing, please wait...
     nomsg: No items
     errormsg: Connection Error
-
-map: Map
-maps: Maps
-key_combinations: Combinations
-
-ui:
-    empty:
-        no_description_in_wiki: No description in wiki
-        unknown: Unknown
 
 sources:
     master:

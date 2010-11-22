@@ -126,6 +126,35 @@ function pp_value(value) {
     return value.replace(/ /g, '&#x2423;').replace(/\s/g, '<span class="whitespace">&nbsp;</span>');
 }
 
+function pp_value_replace(value) {
+    return value.replace(/ /g, '&#x2423;').replace(/\s/g, '<span class="whitespace">&nbsp;</span>');
+}
+
+function pp_value_with_highlight(value, highlight) {
+    //var values = value.split(new RegExp(highlight, 'i'));
+    var values = value.split(highlight);
+    values = jQuery.map(values, function(value, i) {
+        return pp_value_replace(value);
+    });
+    highlight = pp_value_replace(highlight);
+    return values.join('<b>' + highlight + '</b>');
+}
+
+function link_to_key_with_highlight(key, highlight) {
+    var k = encodeURIComponent(key),
+        title = html_escape(key);
+
+    if (key.match(/[=\/]/)) {
+        return '<a class="taglink" href="/keys/?key=' + k + '" title="' + title + '">' + pp_key_with_highlight(key, highlight) + '</a>';
+    } else {
+        return '<a class="taglink" href="/keys/'      + k + '" title="' + title + '">' + pp_key_with_highlight(key, highlight) + '</a>';
+    }
+}
+
+function link_to_value_with_highlight(key, value, highlight) {
+    return '<a class="taglink" href="' + url_to_value(key, value) + '" title="' + html_escape(key) + '=' + html_escape(value) + '">' + pp_value_with_highlight(value, highlight) + '</a>';
+}
+
 function html_escape(text) {
     return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
@@ -138,6 +167,20 @@ function link_to_key(key) {
         return '<a class="taglink" href="/keys/?key=' + k + '" title="' + title + '">' + pp_key(key) + '</a>';
     } else {
         return '<a class="taglink" href="/keys/'      + k + '" title="' + title + '">' + pp_key(key) + '</a>';
+    }
+}
+
+function link_to_key_with_highlight(key, highlight) {
+    var k = encodeURIComponent(key),
+        title = html_escape(key);
+
+    var re = new RegExp('(' + highlight + ')', 'g');
+    var hk = key.replace(re, "<b>$1</b>");
+
+    if (key.match(/[=\/]/)) {
+        return '<a class="taglink" href="/keys/?key=' + k + '" title="' + title + '">' + hk + '</a>';
+    } else {
+        return '<a class="taglink" href="/keys/'      + k + '" title="' + title + '">' + hk + '</a>';
     }
 }
 
@@ -163,6 +206,113 @@ jQuery(document).ready(function() {
     jQuery('#locale').bind('change', function() {
         jQuery('#set_language').submit();
     });
+    jQuery('#search').autocomplete({
+        minLength: 2,
+        source: '/search/suggest?format=simple',
+        delay: 10,
+        select: function(event, ui) {
+            var query = ui.item.value;
+            if (query.match(/=/)) {
+                window.location = '/tags/' + ui.item.value;
+            } else {
+                window.location = '/keys/' + ui.item.value;
+            }
+        }
+    });
     jQuery('#search').focus();
 });
+
+/* ============================ */
+
+var grids = {};
+
+var flexigrid_defaults = {
+    method        : 'GET',
+    dataType      : 'json',
+    showToggleBtn : false,
+    usepager      : true,
+    useRp         : true,
+    rp            : 15,
+    rpOptions     : [10,15,20,25,50,100],
+};
+
+function create_flexigrid(domid, options) {
+    if (grids[domid] == null) {
+        grids[domid] = jQuery('#' + domid).flexigrid(jQuery.extend({}, flexigrid_defaults, flexigrid_defaults_lang, options));
+    }
+}
+
+var create_flexigrid_for = {
+    search: {
+        keys: function(query) {
+            create_flexigrid('grid-keys', {
+                url: '/api/2/db/keys?query=' + encodeURIComponent(query),
+                colModel: [
+                    { display: 'Count', name: 'count_all', width: 80, sortable: true, align: 'right' },
+                    { display: 'Key', name: 'key', width: 500, sortable: true, align: 'left' }
+                ],
+                sortname: 'count_all',
+                sortorder: 'desc',
+                height: 420,
+                preProcess: function(data) {
+                    data.rows = jQuery.map(data.data, function(row, i) {
+                        return { 'cell': [
+                            print_with_ts(row.count_all),
+                            link_to_key_with_highlight(row.key, query)
+                        ] };
+                    });
+                    return data;
+                }
+            });
+        },
+        values: function(query) {
+            create_flexigrid('grid-values', {
+                url: '/api/2/search/values?q=' + encodeURIComponent(query),
+                colModel: [
+                    { display: 'Count', name: 'count_all', width: 80, sortable: true, align: 'right' },
+                    { display: 'Value', name: 'value', width: 500, sortable: true, align: 'left' }
+                ],
+                sortname: 'count_all',
+                sortorder: 'desc',
+                height: 420,
+                preProcess: function(data) {
+                    data.rows = jQuery.map(data.data, function(row, i) {
+                        return { 'cell': [
+                            print_with_ts(row.count_all),
+                            link_to_value_with_highlight(row.key, row.value, query)
+                        ] };
+                    });
+                    return data;
+                }
+            });
+        },
+        tags: function(query) {
+            var q = query.split('=', 2);
+            create_flexigrid('grid-tags', {
+                url: '/api/2/search/tags?q=' + encodeURIComponent(query),
+                colModel: [
+                    { display: 'Count', name: 'count_all', width: 80, sortable: true, align: 'right' },
+                    { display: 'Key', name: 'key', width: 300, sortable: true, align: 'left' },
+                    { display: 'Value', name: 'value', width: 500, sortable: true, align: 'left' }
+                ],
+                sortname: 'count_all',
+                sortorder: 'desc',
+                height: 420,
+                preProcess: function(data) {
+                    data.rows = jQuery.map(data.data, function(row, i) {
+                        return { 'cell': [
+                            print_with_ts(row.count_all),
+                            link_to_key_with_highlight(row.key, q[0]),
+                            link_to_value_with_highlight(row.key, row.value, q[1])
+                        ] };
+                    });
+                    return data;
+                }
+            });
+        },
+        wiki: function(query) {
+            // TODO
+        }
+    }
+};
 

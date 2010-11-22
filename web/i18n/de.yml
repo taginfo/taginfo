@@ -22,12 +22,16 @@ taginfo:
     reports: Reports
     keys: Keys
     tags: Tags
+    map: Karte
+    maps: Karten
+    key_combinations: Kombinationen
+    data_from: Daten vom
 
-buttons:
-    show_all_keys: Alle Keys anzeigen
-    reports: Reports
-
-data_from: Daten vom
+pages:
+    index:
+        buttons:
+            show_all_keys: Alle Keys anzeigen
+            reports: Reports
 
 flexigrid:
     pagetext: Seite
@@ -38,11 +42,37 @@ flexigrid:
     nomsg: Keine Einträge
     errormsg: Fehler in der Verbindung
 
-map: Karte
-maps: Karten
-key_combinations: Kombinationen
+sources:
+    master:
+        name: Master
+        description: Zusammengefaßte Statistiken und Verschiedenes für die Taginfo-Webseite.
+    db:
+        name: Datenbank
+        description: Statistik über jeden Key und Tag aus der OSM-Datenbank (Planet-Datei).
+    wiki:
+        name: Wiki
+        description: Daten von den Tag- und Key-Seiten des OSM-Wikis.
+    josm:
+        name: JOSM
+        description: Einstellungen des OSM-Editors "JOSM".
+    potlatch:
+        name: Potlatch
+        description: Einstellungen des OSM-Editors "Potlatch2".
+    merkaartor:
+        name: Merkaartor
+        description: Einstellungen des OSM-Editors "Merkaartor".
 
-ui:
-    empty:
-        no_description_in_wiki: Keine Beschreibung im Wiki vorhanden
+reports:
+    characters_in_keys:
+        name: Zeichen in Keys
+    frequently_used_keys_without_wiki_page:
+        name: Häufig benutzte Key ohne Wiki-Seite
+    key_lengths:
+        name: Key-Längen
+    language_comparison_table_for_keys_in_the_wiki:
+        name: Sprach-Vergleichstabelle für Keys aus dem Wiki
+    languages:
+        name: Sprachen
+    wiki_pages_about_non_existing_keys:
+        name: Wikiseiten über nicht-existierende Keys
 

@@ -59,6 +59,8 @@ class Taginfo < Sinatra::Base
 
     register Sinatra::R18n
 
+    mime_type :opensearch, 'application/opensearchdescription+xml'
+
     configure do
         set :app_file, __FILE__
 
@@ -94,11 +96,12 @@ class Taginfo < Sinatra::Base
 #        end
         params[:locale] = 'en'
 
-        javascript 'jquery-1.3.2.min'
-        javascript 'jquery-ui-1.7.2.all.min'
+        javascript 'jquery-1.4.2.min'
+        javascript 'jquery-ui-1.8.6.custom.min'
         javascript 'flexigrid-minified'
-        javascript 'taginfo'
         javascript 'protovis-r3.2'
+        javascript 'taginfo'
+        javascript 'lang/' + r18n.locale.code
 
         @db = SQL::Database.new('../../data')
 
@@ -166,7 +169,7 @@ class Taginfo < Sinatra::Base
         @count_all_values = @db.select("SELECT count_#{@filter_type} FROM db.keys").condition('key = ?', @key).get_first_value().to_i
 
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang='en' AND key=? AND value IS NULL", @key).get_first_value())
-        @desc = "<i>#{ t.ui.empty.no_description_in_wiki }</i>" if @desc == ''
+        @desc = "<i>#{ t.pages.key.no_description_in_wiki }</i>" if @desc == ''
 
         @prevalent_values = @db.select("SELECT value, count_#{@filter_type} AS count FROM tags").
             condition('key=?', @key).
@@ -237,9 +240,24 @@ class Taginfo < Sinatra::Base
         @count_all = @db.select('SELECT count_all FROM db.tags').condition('key = ? AND value = ?', @key, @value).get_first_value().to_i
 
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang='en' AND key=? AND value=?", @key, @value).get_first_value())
-        @desc = "<i>#{ t.ui.empty.no_description_in_wiki }</i>" if @desc == ''
+        @desc = "<i>#{ t.pages.tag.no_description_in_wiki }</i>" if @desc == ''
 
         erb :tag
+    end
+
+    #-------------------------------------
+
+    get '/js/lang/:lang.js' do
+        trans = R18n::I18n.new(params[:lang], 'i18n')
+        return 'var flexigrid_defaults_lang = ' + {
+            :pagetext => trans.t.flexigrid.pagetext,
+            :pagestat => trans.t.flexigrid.pagestat,
+            :outof    => trans.t.flexigrid.outof,
+            :findtext => trans.t.flexigrid.findtext,
+            :procmsg  => trans.t.flexigrid.procmsg,
+            :nomsg    => trans.t.flexigrid.nomsg,
+            :errormsg => trans.t.flexigrid.errormsg,
+        }.to_json + ";\n"
     end
 
     #--------------------------------------------------------------------------
@@ -248,6 +266,7 @@ class Taginfo < Sinatra::Base
     load 'lib/api/wiki.rb'
     load 'lib/api/josm.rb'
     load 'lib/api/reports.rb'
+    load 'lib/api/search.rb'
 
     load 'lib/ui/search.rb'
     load 'lib/ui/reports.rb'

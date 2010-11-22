@@ -1,12 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
-    <head>
+    <head profile="http://a9.com/-/spec/opensearch/1.1/">
         <title><%= h(title) %></title>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="content-language" content="<%= r18n.locale.code %>" />
         <link rel="stylesheet" type="text/css" href="/css/taginfo.css" />
-        <link rel="stylesheet" type="text/css" href="/css/smoothness/jquery-ui-1.7.3.custom.css" />
+        <link rel="stylesheet" type="text/css" href="/css/smoothness/jquery-ui-1.8.6.custom.css" />
         <link rel="stylesheet" type="text/css" href="/css/flexigrid/flexigrid.css" />
+        <link rel="search" type="application/opensearchdescription+xml" href="/search/opensearch.xml" title="Taginfo" />
 <%= javascript_tags %>
     </head>
     <body>
@@ -22,7 +23,7 @@
             </div>-->
             <div id="middle">
                 <form action="/search">
-                    <input type="text" id="search" name="search" value=""/>
+                    <input type="text" id="search" name="q" value=""/>
                 </form>
             </div>
             <div id="left">
@@ -31,7 +32,7 @@
             </div>
         </div>
         <div id="date">
-            <%= t.data_from %>: <%= @data_until %> UTC <span class="button"><a href="/sources"><%= t.taginfo.sources %></a></span>
+            <%= t.taginfo.data_from %>: <%= @data_until %> UTC <span class="button"><a href="/sources"><%= t.taginfo.sources %></a></span>
             <span class="button"><a href="/download"><%= t.taginfo.download %></a></span>
             <span class="button"><a href="/about"><%= t.taginfo.about %></a></span>
             <span class="button"><img src="/img/link-extern.gif" alt="" width="14" height="10"/><a href="http://wiki.openstreetmap.org/wiki/Taginfo"><%= t.taginfo.wiki %></a></span>
