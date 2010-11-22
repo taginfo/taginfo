@@ -281,6 +281,7 @@ class Taginfo < Sinatra::Base
     load 'lib/ui/sources/josm.rb'
     load 'lib/ui/sources/potlatch.rb'
     load 'lib/ui/sources/merkaartor.rb'
+    load 'lib/ui/embed.rb'
     load 'lib/ui/test.rb'
 
     # run application
