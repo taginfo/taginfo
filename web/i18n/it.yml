@@ -1,0 +1,125 @@
+
+osm:
+    tag: Tag
+    tags: Tags
+    key: Chiave
+    keys: Chiavi
+    value: Valore
+    values: Valori
+    node: Nodo
+    nodes: Nodi
+    way: Way
+    ways: Ways
+    relation: Relazione
+    relations: Relazioni
+    user: Utente
+    users: Utenti
+
+taginfo:
+    source: Fonte
+    sources: Fonti
+    download: Download
+    about: Riguardo a
+    wiki: Wiki
+    reports: Reports
+    keys: Chiavi
+    tags: Tags
+    map: Mappa
+    maps: Mappe
+    key_combinations: Combinazioni
+    data_from: Dati da
+
+pages:
+    index:
+        buttons:
+            show_all_keys: Mostra tutte le chiavi
+            reports: Reports
+    sources:
+        index:
+            intro: |
+                <p>Taginfo prende i dati dai tags OSM da diverse fonti e li fonde insieme
+                per una facile navigazione e scoperta.</p>
+                <p>Da notare che Taginfo visualizza solo i dati. Se volete cambiarli, dovete tornare alla fonte dei dati.</p>
+            data_until: Dati fino a
+            last_update_run: Ultimo aggiornamento eseguito
+            data_until_explanation: Tutte le modifiche eseguite fino a questo orario saranno presenti nei dati, le modifiche successive potrebbero esserci.
+            to: a
+            info: |
+                <p>Tutti gli orari sono in UTC.</p>
+                <p>Attualmente gli aggiornamenti vengono eseguiti manualmente circa una volta a settimana fino a quando non 
+                saremo sicuri che siano affidabili. Prevediamo di passare ad aggiornamenti giornalieri il più presto possibile.</p>
+    download:
+        index:
+            intro: |
+                <p>Qui potete scaricare il database usato da Taginfo. Tutti i dati sono memorizzati
+                in un database <img src="/img/link-extern.gif" alt=""/><a class="extlink"
+                href="http://www.sqlite.org/">Sqlite</a>. I file del database sono poi
+                compressi con <img src="/img/link-extern.gif" alt=""/><a class="extlink"
+                href="http://www.bzip.org/">bzip2</a>.</p>
+                <p>Se non volete scaricare questi database, ma avete bisogno di avere un accesso automatizzato
+                ai dati, potete anche usare le <a href="/about">API</a>.</p>
+            file: File
+            packed: Compressi
+            unpacked: Decompressi
+            description: Descrizione
+            unknown: sconosciuto
+    reports:
+        index:
+            intro: |
+                <p class="text">I Reports mostrano i dati da differenti prospettive.
+                Spesso riuniscono i dati da diverse fonti in modi interessanti. Alcuni
+                di questi reports possono aiutare a trovare certi tipi di errori, come ad esempio
+                chiavi popolari senza una pagini nel wiki.</p>
+            data_sources: Fonte<br/>dati
+    search:
+        results:
+            title: Risultati ricerca
+            you_were_searching_for: Stavi cercando
+    key:
+        no_description_in_wiki: Nessuna descrizione nel wiki
+    tag:
+        no_description_in_wiki: Nessuna descrizione nel wiki
+
+flexigrid:
+    pagetext: Pagina
+    pagestat: Visualizzazione da {from} a {to} di {total} oggetti
+    outof: di
+    findtext: Trova
+    procmsg: Elaborazione, attendere prego...
+    nomsg: Nessun oggetto
+    errormsg: Errore di Connessione
+
+sources:
+    master:
+        name: Master
+        description: Statistiche aggregate e dati eterogenei sono necessari per l'interfaccia utente di Taginfo.
+    db:
+        name: Database
+        description: Le statistiche riguardanti ogni chiave e tag dal database principale di OSM (file di planet).
+    wiki:
+        name: Wiki
+        description: Dati dalle pagine della wiki OSM dei tag e delle chiavi.
+    josm:
+        name: JOSM
+        description: Dati di configurazione dall'editor JOSM di OSM.
+    potlatch:
+        name: Potlatch
+        description: Dati di configurazione dall'editor Potlatch2 di OSM.
+    merkaartor:
+        name: Merkaartor
+        description: Dati di configurazione dall'editor Merkaartor di OSM.
+
+reports:
+    characters_in_keys:
+        name: Caratteri nelle chiavi
+    frequently_used_keys_without_wiki_page:
+        name: Chiavi Usate Frequentemente Senza una Pagina Wiki
+    key_lengths:
+        name: Lunghezze Chiavi
+    language_comparison_table_for_keys_in_the_wiki:
+        name: Tabella Comparativa Linguaggi per le Chiavi nella Wiki
+    languages:
+        name: Linguaggi
+    wiki_pages_about_non_existing_keys:
+        name: Pagine della Wiki Riguardanti Chiavi Non-Esistenti
+
