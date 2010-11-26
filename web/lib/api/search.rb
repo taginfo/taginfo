@@ -14,7 +14,11 @@ class Taginfo < Sinatra::Base
 
         res = @db.select('SELECT * FROM search.ftsearch').
             condition_if("value MATCH ?", query).
-            order_by([:count_all], 'DESC').
+            order_by(params[:sortname], params[:sortorder]) { |o|
+                o.count_all
+                o.key
+                o.value
+            }.
             paging(params[:rp], params[:page]).
             execute()
 

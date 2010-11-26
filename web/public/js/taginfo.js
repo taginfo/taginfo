@@ -429,6 +429,7 @@ var create_flexigrid_for = {
                 url: '/api/2/search/values?q=' + encodeURIComponent(query),
                 colModel: [
                     { display: 'Count', name: 'count_all', width: 80, sortable: true, align: 'right' },
+                    { display: 'Key', name: 'key', width: 250, sortable: true, align: 'left' },
                     { display: 'Value', name: 'value', width: 500, sortable: true, align: 'left' }
                 ],
                 sortname: 'count_all',
@@ -438,6 +439,7 @@ var create_flexigrid_for = {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
                             print_with_ts(row.count_all),
+                            link_to_key(row.key),
                             link_to_value_with_highlight(row.key, row.value, query)
                         ] };
                     });
