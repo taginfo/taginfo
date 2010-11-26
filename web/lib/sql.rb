@@ -154,21 +154,29 @@ module SQL
             @query.compact.join(' ')
         end
 
+        def log_query(query, params)
+            if params.size > 0
+                puts "Query: #{query}; (with params: #{params.map{ |p| "'#{p}'" }.join(', ')})"
+            else
+                puts "Query: #{query};"
+            end
+        end
+
         def execute(&block)
             q = build_query()
-            puts "Query: #{q}; (with params: #{@params.join(', ')})"
+            log_query(q, @params)
             @db.execute(q, *@params, &block)
         end
 
         def get_first_value
             q = build_query()
-            puts "Query: #{q}; (with params: #{@params.join(', ')})"
+            log_query(q, @params)
             @db.get_first_value(q, *@params)
         end
 
         def get_columns(*columns)
             q = build_query()
-            puts "Query: #{q}; (with params: #{@params.join(', ')})"
+            log_query(q, @params)
             row = @db.get_first_row(q, *@params)
             return [nil] * columns.size if row.nil?;
             columns.map{ |column| row[column.to_s] }
