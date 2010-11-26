@@ -36,14 +36,25 @@ class Taginfo < Sinatra::Base
 
     get '/api/2/search/tags' do
         query = params[:q]
-        query =~ /(.*)=(.*)/
-        query_key = $1
-        query_value = $2
+        (query_key, query_value) = query.split('=', 2)
 
-        total = @db.execute('SELECT count(*) FROM (SELECT * FROM search.ftsearch WHERE key MATCH ? INTERSECT SELECT * FROM search.ftsearch WHERE value MATCH ?)', query_key, query_value)[0][0].to_i
+        if query_key == ''
+            total = @db.execute('SELECT count(*) FROM search.ftsearch WHERE value MATCH ?', query_value)[0][0].to_i
+            sel = @db.select('SELECT * FROM search.ftsearch WHERE value MATCH ?', query_value)
+        elsif query_value == ''
+            total = @db.execute('SELECT count(*) FROM search.ftsearch WHERE key MATCH ?', query_key)[0][0].to_i
+            sel = @db.select('SELECT * FROM search.ftsearch WHERE key MATCH ?', query_key)
+        else
+            total = @db.execute('SELECT count(*) FROM (SELECT * FROM search.ftsearch WHERE key MATCH ? INTERSECT SELECT * FROM search.ftsearch WHERE value MATCH ?)', query_key, query_value)[0][0].to_i
+            sel = @db.select('SELECT * FROM search.ftsearch WHERE key MATCH ? INTERSECT SELECT * FROM search.ftsearch WHERE value MATCH ?', query_key, query_value)
+        end
 
-        res = @db.select('SELECT * FROM search.ftsearch WHERE key MATCH ? INTERSECT SELECT * FROM search.ftsearch WHERE value MATCH ?', query_key, query_value).
-            order_by([:count_all], 'DESC').
+        res = sel.
+            order_by(params[:sortname], params[:sortorder]) { |o|
+                o.count_all
+                o.key
+                o.value
+            }.
             paging(params[:rp], params[:page]).
             execute()
 

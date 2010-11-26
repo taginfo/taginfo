@@ -47,15 +47,15 @@ END_XML
             res = sel.
                 condition_if("value LIKE ? || '%'", value).
                 execute().
-                map{ |row| row['key'] + '=' + row['value'] }
-        elsif query =~ /(.*)=(.*)/
+                map{ |row| row['key'] + '=' + row['value'].to_s }
+        elsif query =~ /^([^=]+)=(.*)/
             key = $1
             value = $2
             res = sel.
                 condition_if("key LIKE ? || '%'", key).
                 condition_if("value LIKE ? || '%'", value).
                 execute().
-                map{ |row| row['key'] + '=' + row['value'] }
+                map{ |row| row['key'] + '=' + row['value'].to_s }
         else
             res = sel.
                 condition_if("key LIKE ? || '%'", query).
