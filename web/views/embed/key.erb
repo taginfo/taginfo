@@ -1,15 +1,20 @@
-<a target="_blank" title="More stats at Taginfo" href="http://taginfo.openstreetmap.de/keys?key=<%= escape(@key) %>"><img src="/img/taginfo.32.png" alt="Taginfo"/> Taginfo</a>
+<% if @dbkey.nil? %>
+<a target="_blank" title="More information about key '<%= escape_html(@key) %>' at Taginfo" href="http://taginfo.openstreetmap.de/tags/?key=<%= escape(@key) %>&value=<%= escape(@value) %>"><img src="/img/taginfo.24.png" alt="Taginfo"/> Taginfo</a>
+<p>This key does not appear in the OSM database.</p>
+<% else %>
+<a target="_blank" title="More information about key '<%= escape_html(@key) %>' at Taginfo" href="http://taginfo.openstreetmap.de/keys/?key=<%= escape(@key) %>"><img src="/img/taginfo.24.png" alt="Taginfo"/> Taginfo</a>
 <div class="content"><table>
     <tr>
-        <td><img src="/img/types/node.16.png" alt="Nodes" title="Nodes with key <%= escape_html(@key) %> in database"></td>
-        <td><%= @res['count_nodes'].to_i.to_s_with_ts %></td>
+        <td class="ft"><img src="/img/types/node.16.png" alt="Nodes" title="Nodes with key '<%= escape_html(@key) %>' in database"></td>
+        <td title="Nodes with key '<%= escape_html(@key) %>' in database"><%= @dbkey['count_nodes'].to_i.to_s_with_ts %></td>
     </tr>
     <tr>
-        <td><img src="/img/types/way.16.png" alt="Ways" title="Ways with key <%= escape_html(@key) %> in database"></td>
-        <td><%= @res['count_ways'].to_i.to_s_with_ts %></td>
+        <td class="ft"><img src="/img/types/way.16.png" alt="Ways" title="Ways with key '<%= escape_html(@key) %>' in database"></td>
+        <td title="Ways with key '<%= escape_html(@key) %>' in database"><%= @dbkey['count_ways'].to_i.to_s_with_ts %></td>
     </tr>
     <tr>
-        <td><img src="/img/types/relation.16.png" alt="Relations" title="Relations with key <%= escape_html(@key) %> in database"></td>
-        <td><%= @res['count_relations'].to_i.to_s_with_ts %></td>
+        <td class="ft"><img src="/img/types/relation.16.png" alt="Relations" title="Relations with key '<%= escape_html(@key) %>' in database"></td>
+        <td title="Relations with key '<%= escape_html(@key) %>' in database"><%= @dbkey['count_relations'].to_i.to_s_with_ts %></td>
     </tr>
 </table></div>
+<% end %>
