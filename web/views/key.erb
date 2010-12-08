@@ -95,35 +95,33 @@
 <iframe id="josmiframe" name="josmiframe"></iframe>
 
 <script type="text/javascript">
-    jQuery(function() {
-        jQuery('#josm').bind('click', function() {
-            jQuery('#josmiframe')[0].src = jQuery('#josm')[0].href;
-            return false;
-        });
-
-        jQuery('#filter').bind('change', function() {
-            var value = this.value;
-            window.location.search = 'filter=' + value;
-        });
-
-        jQuery.getJSON('/api/2/db/keys/overview?key=<%= @key_uri %>', function(data, textStatus) {
-            var table_content = '<tr><th></th><th title="Number of objects with this key">Number of objects</th><th class="values" title="Number of different values">Values</th></tr>';
-            table_content += jQuery.map(['all', 'nodes', 'ways', 'relations'], function(obj, i) {
-                var d = data[obj];
-                return '<tr><td>' + print_image(obj) + '</td><td class="count">' + print_value_with_percent(d.count, d.count_fraction) + '</td><td class="values">' + print_with_ts(d.values) + '</td></tr>';
-            }).join('');
-            jQuery('#overview').append(table_content);
-        });
-
-        var tabs = jQuery('#tabs').tabs({
-            show: function(event, ui) { 
-                window.location.hash = ui.tab.hash;
-                create_flexigrid_for.key[ui.tab.hash.substring(1)](<%= @key.to_json %>, <%= @filter_type.to_json %>);
-            }
-        });
+jQuery(function() {
+    jQuery('#josm').bind('click', function() {
+        jQuery('#josmiframe')[0].src = jQuery('#josm')[0].href;
+        return false;
     });
-</script>
-<script type="text/javascript+protovis">
+
+    jQuery('#filter').bind('change', function() {
+        var value = this.value;
+        window.location.search = 'filter=' + value;
+    });
+
+    jQuery.getJSON('/api/2/db/keys/overview?key=<%= @key_uri %>', function(data, textStatus) {
+        var table_content = '<tr><th></th><th title="Number of objects with this key">Number of objects</th><th class="values" title="Number of different values">Values</th></tr>';
+        table_content += jQuery.map(['all', 'nodes', 'ways', 'relations'], function(obj, i) {
+            var d = data[obj];
+            return '<tr><td>' + print_image(obj) + '</td><td class="count">' + print_value_with_percent(d.count, d.count_fraction) + '</td><td class="values">' + print_with_ts(d.values) + '</td></tr>';
+        }).join('');
+        jQuery('#overview').append(table_content);
+    });
+
+    var tabs = jQuery('#tabs').tabs({
+        show: function(event, ui) { 
+            window.location.hash = ui.tab.hash;
+            create_flexigrid_for.key[ui.tab.hash.substring(1)](<%= @key.to_json %>, <%= @filter_type.to_json %>);
+        }
+    });
+});
 
 var data = <%= @prevalent_values.to_json() %>;
 
@@ -140,7 +138,7 @@ vis.add(pv.Layout.Stack)
     .bottom(10)
     .layers(data)
     .x(10)
-    .y(function(d) scale(d.count))
+    .y(function(d) { return scale(d.count); })
   .layer.add(pv.Bar)
     .width(20)
     .cursor(function() {
@@ -154,7 +152,7 @@ vis.add(pv.Layout.Stack)
   .anchor('left')
     .add(pv.Label)
     .left(30)
-    .text(function(d) d.value);
+    .text(function(d) { return d.value; });
 
 vis.render();
 
