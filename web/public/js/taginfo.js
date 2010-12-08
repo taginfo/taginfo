@@ -474,6 +474,141 @@ var create_flexigrid_for = {
         wiki: function(query) {
             // TODO
         }
+    },
+    reports: {
+        characters_in_keys: {
+            statistics: function() {
+                create_flexigrid('grid-statistics', {
+                    colModel: [
+                        { display: '&nbsp;', name: 'row', width: 10, sortable: true, align: 'center' },
+                        { display: 'Count', name: 'count', width: 40, sortable: true, align: 'right' },
+                        { display: 'Fraction', name: 'fraction', width: 60, sortable: true, align: 'right' },
+                        { display: 'Characters in Key', name: 'characters', width: 810, sortable: true, align: 'left' }
+                    ],
+                    width: 990,
+                    height: 200,
+                    usepager: false
+                });
+            },
+            whitespace: function() {
+                create_flexigrid('grid-whitespace', {
+                    url: '/api/2/db/keys?filters=characters_space&include=prevalent_values',
+                    colModel: [
+                        { display: 'Key', name: 'key', width: 250, sortable: true, align: 'left' },
+                        { display: '<span title="Number of objects with this key"><img src="/img/types/all.16.png" alt=""/> Total</span>',           name: 'count_all',        width: 250, sortable: true, align: 'center' },
+                        { display: 'Users', name: 'users_all', width: 44, sortable: true, align: 'right' },
+                        { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" title="Wiki"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
+                        { display: '<img src="/img/sources/josm.16.png" alt="JOSM" title="JOSM"/>', name: 'in_josm', width: 20, sortable: true, align: 'center' },
+                        //   { display: '<img src="/img/sources/potlatch.16.png" alt="Potlatch 2" title="Potlatch 2"/>', name: 'in_potlatch', width: 20, sortable: true, align: 'center' },
+                        //   { display: '<img src="/img/sources/merkaartor.16.png" alt="Merkaartor" title="Merkaartor"/>', name: 'in_merkaartor', width: 20, sortable: true, align: 'center' },
+                        { display: '<span title="Number of different values for this key">Values</span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
+                        { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true, align: 'left' }
+                    ],
+                    searchitems: [
+                        { display: 'Key', name: 'key' }
+                    ],
+                    sortname: 'count_all',
+                    sortorder: 'desc',
+                    height: 420,
+                    preProcess: function(data) {
+                        data.rows = jQuery.map(data.data, function(row, i) {
+                            return { 'cell': [
+                                link_to_key(row.key),
+                                print_value_with_percent(row.count_all,       row.count_all_fraction),
+                                print_with_ts(row.users_all),
+                                row.in_wiki       ? '&#x2714;' : '-',
+                                row.in_josm       ? '&#x2714;' : '-',
+                            //       row.in_potlatch   ? '&#x2714;' : '-',
+                            //       row.in_merkaartor ? '&#x2714;' : '-',
+                                print_with_ts(row.values_all),
+                                print_prevalent_value_list(row.key, row.prevalent_values)
+                            ] };
+                        });
+                        return data;
+                    }
+                });
+            },
+            problematic: function() {
+                create_flexigrid('grid-problematic', {
+                    url: '/api/2/db/keys?filters=characters_problematic&include=prevalent_values',
+                    colModel: [
+                        { display: 'Key', name: 'key', width: 250, sortable: true, align: 'left' },
+                        { display: '<span title="Number of objects with this key"><img src="/img/types/all.16.png" alt=""/> Total</span>',           name: 'count_all',        width: 250, sortable: true, align: 'center' },
+                        { display: 'Users', name: 'users_all', width: 44, sortable: true, align: 'right' },
+                        { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" title="Wiki"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
+                        { display: '<img src="/img/sources/josm.16.png" alt="JOSM" title="JOSM"/>', name: 'in_josm', width: 20, sortable: true, align: 'center' },
+                        //   { display: '<img src="/img/sources/potlatch.16.png" alt="Potlatch 2" title="Potlatch 2"/>', name: 'in_potlatch', width: 20, sortable: true, align: 'center' },
+                        //   { display: '<img src="/img/sources/merkaartor.16.png" alt="Merkaartor" title="Merkaartor"/>', name: 'in_merkaartor', width: 20, sortable: true, align: 'center' },
+                        { display: '<span title="Number of different values for this key">Values</span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
+                        { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true, align: 'left' }
+                    ],
+                    searchitems: [
+                        { display: 'Key', name: 'key' }
+                    ],
+                    sortname: 'count_all',
+                    sortorder: 'desc',
+                    height: 420,
+                    preProcess: function(data) {
+                        data.rows = jQuery.map(data.data, function(row, i) {
+                            return { 'cell': [
+                                link_to_key(row.key),
+                                print_value_with_percent(row.count_all,       row.count_all_fraction),
+                                print_with_ts(row.users_all),
+                                row.in_wiki       ? '&#x2714;' : '-',
+                                row.in_josm       ? '&#x2714;' : '-',
+                            //       row.in_potlatch   ? '&#x2714;' : '-',
+                            //       row.in_merkaartor ? '&#x2714;' : '-',
+                                print_with_ts(row.values_all),
+                                print_prevalent_value_list(row.key, row.prevalent_values)
+                            ] };
+                        });
+                        return data;
+                    }
+                });
+            }
+        },
+        key_lengths: {
+            keys: function() {
+                create_flexigrid('grid-keys', {
+                    url: '/api/2/db/keys?include=prevalent_values',
+                    colModel: [
+                        { display: 'Length', name: 'length', width: 60, sortable: true, align: 'right' },
+                        { display: 'Key', name: 'key', width: 180, sortable: true, align: 'left' },
+                        { display: 'Number of Objects', name: 'count_all', width: 250, sortable: true, align: 'center' },
+                        { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" title="Wiki"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
+                        { display: '<img src="/img/sources/josm.16.png" alt="JOSM" title="JOSM"/>', name: 'in_josm', width: 20, sortable: true, align: 'center' },
+                        //   { display: '<img src="/img/sources/potlatch.16.png" alt="Potlatch 2" title="Potlatch 2"/>', name: 'in_potlatch', width: 20, sortable: true, align: 'center' },
+                        //   { display: '<img src="/img/sources/merkaartor.16.png" alt="Merkaartor" title="Merkaartor"/>', name: 'in_merkaartor', width: 20, sortable: true, align: 'center' },
+                        { display: '<span title="Number of different values for this key">Values</span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
+                        { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true, align: 'left' }
+                    ],
+                    searchitems: [
+                        { display: 'Key', name: 'key' }
+                    ],
+                    sortname: 'length',
+                    sortorder: 'asc',
+                    height: 420,
+                    preProcess: function(data) {
+                        data.rows = jQuery.map(data.data, function(row, i) {
+                            return { 'cell': [
+                                row.key.length,
+                                link_to_key(row.key),
+                                print_value_with_percent(row.count_all,       row.count_all_fraction),
+                                row.in_wiki       ? '&#x2714;' : '-',
+                                row.in_josm       ? '&#x2714;' : '-',
+                            //       row.in_potlatch   ? '&#x2714;' : '-',
+                            //       row.in_merkaartor ? '&#x2714;' : '-',
+                                print_with_ts(row.values_all),
+                                print_prevalent_value_list(row.key, row.prevalent_values)
+                            ] };
+                        });
+                        return data;
+                    }
+                });
+            },
+            histogram: function() {
+            }
+        }
     }
 };
 
