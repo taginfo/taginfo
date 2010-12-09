@@ -41,7 +41,7 @@ pages:
                 Du sie an der Quelle ändern.</p>
             data_until: Daten bis
             last_update_run: Letzte Aktualisierung
-            data_until_explanation: Alle Änderungen bis zu diesem Zeitpunkt sind auf jeden Fall in den Daten, später können unter Umständen auch drin sein.
+            data_until_explanation: Alle Änderungen bis zu diesem Zeitpunkt sind auf jeden Fall in den Daten, spätere können unter Umständen auch drin sein.
             to: bis
             info: |
                 <p>Alle Uhrzeiten in UTC.</p>
