@@ -17,8 +17,6 @@ class Taginfo < Sinatra::Base
                 :k => row['k'],
                 :v => row['v'],
                 :b => row['b'],
-                :scale_min => row['scale_min'].nil? ? nil : row['scale_min'].to_i,
-                :scale_max => row['scale_max'].nil? ? nil : row['scale_max'].to_i,
                 :rule => h(row['rule'])
             } }
         }.to_json
@@ -39,8 +37,6 @@ class Taginfo < Sinatra::Base
                 o.v :b
                 o.v :k
                 o.b
-                o.scale_min
-                o.scale_max
             }.
             paging(params[:rp], params[:page]).
             execute()
@@ -64,14 +60,6 @@ class Taginfo < Sinatra::Base
                 o.v :v
                 o.v :b
                 o.b
-                o.scale_min :scale_min
-                o.scale_min :scale_max
-                o.scale_min :v
-                o.scale_min :b
-                o.scale_max :scale_max
-                o.scale_max :scale_min
-                o.scale_max :v
-                o.scale_max :b
             }.
             paging(params[:rp], params[:page]).
             execute()
@@ -91,7 +79,7 @@ class Taginfo < Sinatra::Base
         res = @db.select('SELECT * FROM josm_style_rules').
             condition('k = ?', key).
             condition('v = ?', value).
-            order_by(:scale_min).
+            order_by([:k, :v]).
             paging(params[:rp], params[:page]).
             execute()
 

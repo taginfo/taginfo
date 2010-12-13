@@ -62,15 +62,15 @@ def xapi_url(element, key, value=nil)
 end
 
 def xapi_link(element, key, value=nil)
-    '<span class="button">' + external_link('XAPI', xapi_url(element, key, value)) + '</span>'
+    '<span class="button">' + external_link('xapi_button', 'XAPI', xapi_url(element, key, value)) + '</span>'
 end
 
 def josm_link(element, key, value=nil)
-    '<span class="button">' + external_link('JOSM', 'http://localhost:8111/import?url=' + xapi_url(element, key, value)) + '</span>'
+    '<span class="button">' + external_link('josm_button', 'JOSM', 'http://localhost:8111/import?url=' + xapi_url(element, key, value)) + '</span>'
 end
 
-def external_link(title, link)
-    %Q{<img src="/img/link-extern.gif" alt="" width="14" height="10"/><a class="extlink" href="#{link}">#{title}</a>}
+def external_link(id, title, link)
+    %Q{<img src="/img/link-extern.gif" alt="" width="14" height="10"/><a id="#{id}" class="extlink" href="#{link}">#{title}</a>}
 end
 
 def tagcloud_size(tag)

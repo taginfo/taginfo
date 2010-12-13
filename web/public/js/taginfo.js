@@ -285,6 +285,71 @@ var create_flexigrid_for = {
             });
         }
     },
+    tag: {
+        wiki: function(key, value) {
+            create_flexigrid('grid-wiki', {
+                url: '/api/2/wiki/tags?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value),
+                colModel: [
+                    { display: 'Language',      name: 'lang',             width: 150, sortable: false },
+                    { display: 'Wikipage',      name: 'title',            width: 200, sortable: false, align: 'right' },
+                    { display: 'Description',   name: 'description',      width: 400, sortable: false },
+                    { display: 'Image',         name: 'image',            width: 120, sortable: false },
+                    { display: 'Objects',       name: 'objects',          width:  80, sortable: false },
+                    { display: 'Implied Tags',  name: 'tags_implied',     width: 120, sortable: false },
+                    { display: 'Combined Tags', name: 'tags_combination', width: 120, sortable: false },
+                    { display: 'Linked Tags',   name: 'tags_linked',      width: 220, sortable: false }
+                ],
+                usepager: false,
+                useRp: false,
+                height: 300,
+                preProcess: function(data) {
+                    return {
+                        total: data.size,
+                        page: 1,
+                        rows: jQuery.map(data, function(row, i) {
+                            return { 'cell': [
+                                print_language(row.lang, row.language, row.language_en),
+                                print_wiki_link(row.title),
+                                row.description,
+                                row.image == null ? '<i>no image</i>' : print_wiki_link(row.image),
+                                (row.on_node      ? '<img src="/img/types/node.16.png"     alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
+                                (row.on_way       ? '<img src="/img/types/way.16.png"      alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
+                                (row.on_area      ? '<img src="/img/types/area.16.png"     alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
+                                (row.on_relation  ? '<img src="/img/types/relation.16.png" alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>'),
+                                print_key_or_tag_list(row.tags_implies),
+                                print_key_or_tag_list(row.tags_combination),
+                                print_key_or_tag_list(row.tags_linked)
+                            ]};
+                        })
+                    };
+                }
+            });
+        },
+        josm: function(key, value) {
+            create_flexigrid('grid-josm', {
+                url: '/api/2/josm/styles/standard/tags?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value),
+                colModel: [
+                    { display: 'Value',    name: 'v',    width: 200, sortable: false, align: 'left' },
+                    { display: 'Rule XML', name: 'rule', width: 100, sortable: false, align: 'left' }
+                ],
+    /*            searchitems: [
+                    { display: 'Key/Value', name: 'k' }
+                ],*/
+                sortname: 'v',
+                sortorder: 'asc',
+                height: 300,
+                preProcess: function(data) {
+                    data.rows = jQuery.map(data.data, function(row, i) {
+                        return { 'cell': [
+                            row.v ? link_to_value(row.k, row.v) : row.b ? (row.b + ' (Boolean)') : '*',
+                            '<span title="' + row.rule + '">XML</span>'
+                        ] };
+                    });
+                    return data;
+                }
+            });
+        }
+    },
     key: {
         values: function(key, filter_type) {
             create_flexigrid('grid-values', {
@@ -338,10 +403,8 @@ var create_flexigrid_for = {
             create_flexigrid('grid-josm', {
                 url: '/api/2/josm/styles/standard/keys?key=' + encodeURIComponent(key),
                 colModel: [
-                    { display: 'Value',     name: 'v',         width: 200, sortable: true,  align: 'left'  },
-                    { display: 'Scale min', name: 'scale_min', width:  80, sortable: true,  align: 'right' },
-                    { display: 'Scale max', name: 'scale_max', width:  80, sortable: true,  align: 'right' },
-                    { display: 'Rule XML',  name: 'rule',      width: 100, sortable: false, align: 'left'  }
+                    { display: 'Value',    name: 'v',    width: 200, sortable: true,  align: 'left' },
+                    { display: 'Rule XML', name: 'rule', width: 100, sortable: false, align: 'left' }
                 ],
                 searchitems: [
                     { display: 'Value', name: 'v' }
@@ -353,8 +416,6 @@ var create_flexigrid_for = {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
                             row.v ? link_to_value(row.k, row.v) : row.b ? (row.b + ' (Boolean)') : '*',
-                            print_with_ts(row.scale_min),
-                            print_with_ts(row.scale_max),
                             '<span title="' + row.rule + '">XML</span>'
                         ] };
                     });

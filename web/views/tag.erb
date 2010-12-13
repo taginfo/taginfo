@@ -18,15 +18,15 @@
 
 <div id="tabs">
     <ul>
-        <li><a href="#tabs-wiki">Wiki</a></li>
-        <li><a href="#tabs-josm">JOSM</a></li>
+        <li><a href="#wiki">Wiki</a></li>
+        <li><a href="#josm">JOSM</a></li>
     </ul>
-    <div id="tabs-wiki">
+    <div id="wiki">
         <h2>Wiki pages about this tag</h2>
-        <table id="wiki-langs">
+        <table id="grid-wiki">
         </table>
     </div>
-    <div id="tabs-josm">
+    <div id="josm">
         <h2>JOSM style rules about this tag</h2>
         <form>
             <label for="josm-style">Choose style:</label>
@@ -41,104 +41,35 @@
 
 <iframe id="josmiframe" name="josmiframe"></iframe>
 
-<script type="text/javascript">
-    jQuery(function() {
-        jQuery('#josm').bind('click', function() {
-            jQuery('#josmiframe')[0].src = jQuery('#josm')[0].href;
-            return false;
-        });
+<% javascript do
+    JQuery.ready do
+        JS.raw(<<"JAVASCRIPT")
+jQuery('#josm_button').bind('click', function() {
+    jQuery('#josmiframe')[0].src = jQuery('#josm_button')[0].href;
+    return false;
+});
 
-        jQuery('#filter').bind('change', function() {
-            var value = this.value;
-            window.location.search = 'filter=' + value;
-        });
+jQuery('#filter').bind('change', function() {
+    var value = this.value;
+    window.location.search = 'filter=' + value;
+});
 
-        var tabs = jQuery('#tabs').tabs();
+jQuery.getJSON('/api/2/db/tags/overview?key=#{ @key_uri }&value=#{ @value_uri }', function(data, textStatus) {
+    var table_content = '<tr><th></th><th title="Number of objects with this tag">Number of objects</th></tr>';
+    table_content += jQuery.map(['all', 'nodes', 'ways', 'relations'], function(obj, i) {
+        var d = data[obj];
+        return '<tr><td>' + print_image(obj) + '</td><td class="count">' + print_value_with_percent(d.count, d.count_fraction) + '</td></tr>';
+    }).join('');
+    jQuery('#overview').append(table_content);
+});
 
-        jQuery.getJSON('/api/2/db/tags/overview?key=<%= @key_uri %>&value=<%= @value_uri %>', function(data, textStatus) {
-            var table_content = '<tr><th></th><th title="Number of objects with this tag">Number of objects</th></tr>';
-            table_content += jQuery.map(['all', 'nodes', 'ways', 'relations'], function(obj, i) {
-                var d = data[obj];
-                return '<tr><td>' + print_image(obj) + '</td><td class="count">' + print_value_with_percent(d.count, d.count_fraction) + '</td></tr>';
-            }).join('');
-            jQuery('#overview').append(table_content);
-        });
-
-        jQuery('#grid-josm').flexigrid({
-            url: '/api/2/josm/styles/standard/tags?key=<%= @key_uri %>&value=<%= @value_uri %>',
-            method: 'GET',
-            dataType: 'json',
-            colModel: [
-                { display: 'Value',     name: 'v',         width: 200, sortable: false, align: 'left'  },
-                { display: 'Scale min', name: 'scale_min', width:  80, sortable: false, align: 'right' },
-                { display: 'Scale max', name: 'scale_max', width:  80, sortable: false, align: 'right' },
-                { display: 'Rule XML',  name: 'rule',      width: 100, sortable: false, align: 'left'  }
-            ],
-/*            searchitems: [
-                { display: 'Key/Value', name: 'k' }
-            ],*/
-            sortname: 'v',
-            sortorder: 'asc',
-            showToggleBtn: false,
-            showTableToggleBtn: true,
-            usepager: true,
-            useRp: true,
-            rpOptions: [10,15,20,25,50,100],
-            rp: 15,
-            height: 300,
-            preProcess: function(data) {
-                data.rows = jQuery.map(data.data, function(row, i) {
-                    return { 'cell': [
-                        row.v ? link_to_value(row.k, row.v) : row.b ? (row.b + ' (Boolean)') : '*',
-                        row.scale_min,
-                        row.scale_max,
-                        '<span title="' + row.rule + '">XML</span>'
-                    ] };
-                });
-                return data;
-            }
-        });
-
-        jQuery('#wiki-langs').flexigrid({
-            url: '/api/2/wiki/tags?key=<%= @key_uri %>&value=<%= @value_uri %>',
-            method: 'GET',
-            dataType: 'json',
-            colModel: [
-                { display: 'Language',      name: 'lang',             width: 150, sortable: false },
-                { display: 'Wikipage',      name: 'title',            width: 200, sortable: false, align: 'right' },
-                { display: 'Description',   name: 'description',      width: 400, sortable: false },
-                { display: 'Image',         name: 'image',            width: 120, sortable: false },
-                { display: 'Objects',       name: 'objects',          width:  80, sortable: false },
-                { display: 'Implied Tags',  name: 'tags_implied',     width: 120, sortable: false },
-                { display: 'Combined Tags', name: 'tags_combination', width: 120, sortable: false },
-                { display: 'Linked Tags',   name: 'tags_linked',      width: 220, sortable: false }
-            ],
-            showToggleBtn: false,
-            showTableToggleBtn: false,
-            usepager: false,
-            useRp: false,
-            height: 300,
-            preProcess: function(data) {
-                return {
-                    total: data.size,
-                    page: 1,
-                    rows: jQuery.map(data, function(row, i) {
-                        return { 'cell': [
-                            print_language(row.lang, row.language, row.language_en),
-                            print_wiki_link(row.title),
-                            row.description,
-                            row.image == null ? '<i>no image</i>' : print_wiki_link(row.image),
-                            (row.on_node      ? '<img src="/img/types/node.16.png"     alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
-                            (row.on_way       ? '<img src="/img/types/way.16.png"      alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
-                            (row.on_area      ? '<img src="/img/types/area.16.png"     alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
-                            (row.on_relation  ? '<img src="/img/types/relation.16.png" alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>'),
-                            print_key_or_tag_list(row.tags_implies),
-                            print_key_or_tag_list(row.tags_combination),
-                            print_key_or_tag_list(row.tags_linked)
-                        ]};
-                    })
-                };
-            }
-        });
-    });
-</script>
+var tabs = jQuery('#tabs').tabs({
+    show: function(event, ui) { 
+        window.location.hash = ui.tab.hash;
+        create_flexigrid_for.tag[ui.tab.hash.substring(1)](#{ @key.to_json }, #{ @value.to_json });
+    }
+});
+JAVASCRIPT
+    end
+end
+%>

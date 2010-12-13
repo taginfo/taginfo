@@ -94,36 +94,37 @@
 
 <iframe id="josmiframe" name="josmiframe"></iframe>
 
-<script type="text/javascript">
-jQuery(function() {
-    jQuery('#josm').bind('click', function() {
-        jQuery('#josmiframe')[0].src = jQuery('#josm')[0].href;
-        return false;
-    });
+<% javascript do
+    JQuery.ready do
+        JS.raw(<<"JAVASCRIPT")
 
-    jQuery('#filter').bind('change', function() {
-        var value = this.value;
-        window.location.search = 'filter=' + value;
-    });
-
-    jQuery.getJSON('/api/2/db/keys/overview?key=<%= @key_uri %>', function(data, textStatus) {
-        var table_content = '<tr><th></th><th title="Number of objects with this key">Number of objects</th><th class="values" title="Number of different values">Values</th></tr>';
-        table_content += jQuery.map(['all', 'nodes', 'ways', 'relations'], function(obj, i) {
-            var d = data[obj];
-            return '<tr><td>' + print_image(obj) + '</td><td class="count">' + print_value_with_percent(d.count, d.count_fraction) + '</td><td class="values">' + print_with_ts(d.values) + '</td></tr>';
-        }).join('');
-        jQuery('#overview').append(table_content);
-    });
-
-    var tabs = jQuery('#tabs').tabs({
-        show: function(event, ui) { 
-            window.location.hash = ui.tab.hash;
-            create_flexigrid_for.key[ui.tab.hash.substring(1)](<%= @key.to_json %>, <%= @filter_type.to_json %>);
-        }
-    });
+jQuery('#josm_button').bind('click', function() {
+    jQuery('#josmiframe')[0].src = jQuery('#josm_button')[0].href;
+    return false;
 });
 
-var data = <%= @prevalent_values.to_json() %>;
+jQuery('#filter').bind('change', function() {
+    var value = this.value;
+    window.location.search = 'filter=' + value;
+});
+
+jQuery.getJSON('/api/2/db/keys/overview?key=#{ @key_uri }', function(data, textStatus) {
+    var table_content = '<tr><th></th><th title="Number of objects with this key">Number of objects</th><th class="values" title="Number of different values">Values</th></tr>';
+    table_content += jQuery.map(['all', 'nodes', 'ways', 'relations'], function(obj, i) {
+        var d = data[obj];
+        return '<tr><td>' + print_image(obj) + '</td><td class="count">' + print_value_with_percent(d.count, d.count_fraction) + '</td><td class="values">' + print_with_ts(d.values) + '</td></tr>';
+    }).join('');
+    jQuery('#overview').append(table_content);
+});
+
+var tabs = jQuery('#tabs').tabs({
+    show: function(event, ui) { 
+        window.location.hash = ui.tab.hash;
+        create_flexigrid_for.key[ui.tab.hash.substring(1)](#{ @key.to_json }, #{ @filter_type.to_json });
+    }
+});
+
+var data = #{ @prevalent_values.to_json() };
 
 var w=160, h=440;
 
@@ -132,7 +133,7 @@ var vis = new pv.Panel()
     .width(w)
     .height(h + 20);
 
-var scale = pv.Scale.linear(0, <%= @count_all_values %>).range(0, h);
+var scale = pv.Scale.linear(0, #{ @count_all_values }).range(0, h);
 
 vis.add(pv.Layout.Stack)
     .bottom(10)
@@ -146,7 +147,7 @@ vis.add(pv.Layout.Stack)
     })
     .event('click', function() {
         if (this.data().value != '(other)') {
-            window.location = url_to_value(<%= @key_json %>, this.data().value);
+            window.location = url_to_value(#{ @key_json }, this.data().value);
         }
     })
   .anchor('left')
@@ -156,4 +157,7 @@ vis.add(pv.Layout.Stack)
 
 vis.render();
 
-</script>
+JAVASCRIPT
+    end
+end
+%>
