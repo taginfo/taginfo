@@ -5,45 +5,12 @@ be in any language. This table lists the languages Taginfo knows about and how
 many wiki pages there are in these languages documenting keys and tags,
 respectively.</p>
 
-<table id="langs">
+<table id="grid-langs">
 </table>
 
-<script type="text/javascript">
-    jQuery(function() {
-        jQuery('#langs').flexigrid({
-            url: '/api/2/reports/languages',
-            method: 'GET',
-            dataType: 'json',
-            colModel: [
-                { display: 'Code', name: 'code', width: 60, sortable: true },
-                { display: 'Native Name', name: 'native_name', width: 150, sortable: true },
-                { display: 'English Name', name: 'english_name', width: 150, sortable: true },
-                { display: 'Wiki Key Pages', name: 'wiki_key_pages', width: 260, sortable: true, align: 'center' },
-                { display: 'Wiki Tag Pages', name: 'wiki_tag_pages', width: 260, sortable: true, align: 'center' }
-            ],
-            height: 540,
-            sortname: 'code',
-            sortorder: 'asc',
-            showToggleBtn: false,
-            showTableToggleBtn: false,
-            usepager: false,
-            useRp: false,
-            rpOptions: [10,15,20,25,50,100],
-            preProcess: function(data) {
-                return {
-                    total: data.total,
-                    page: 1,
-                    rows: jQuery.map(data.data, function(row, i) {
-                        return { 'cell': [
-                            '<span class="lang">' + row.code + '</span"',
-                            row.native_name,
-                            row.english_name,
-                            print_value_with_percent(row.wiki_key_pages, row.wiki_key_pages_fraction),
-                            print_value_with_percent(row.wiki_tag_pages, row.wiki_tag_pages_fraction)
-                        ]};
-                    })
-                };
-            }
-        });
-    });
-</script>
+<% javascript do
+    JQuery.ready do
+        JS.raw(%Q{ create_flexigrid_for.reports.languages(); })
+    end
+end
+%>

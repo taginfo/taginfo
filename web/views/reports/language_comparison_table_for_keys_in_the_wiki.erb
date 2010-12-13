@@ -13,7 +13,7 @@
 
 <p>This table shows all tag keys for which there are wiki pages available and in what languages they are.</p>
 
-<table id="wiki-keys">
+<table id="grid-keys">
 </table>
 
 <p></p>
@@ -30,7 +30,7 @@
         var lang_to_idx = {
             <%= @languages_lookup %>
         };
-        jQuery('#wiki-keys').flexigrid({
+        jQuery('#grid-keys').flexigrid({
             url: '/api/2/wiki/keys',
             method: 'GET',
             dataType: 'json',
