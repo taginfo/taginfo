@@ -567,6 +567,42 @@ var create_flexigrid_for = {
         }
     },
     reports: {
+        wiki_pages_about_non_existing_keys: function() {
+            create_flexigrid('grid-keys', {
+                url: '/api/2/db/keys?filters=in_wiki,not_in_db&include=wikipages',
+                colModel: [
+                    { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" title="Wiki"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
+                    { display: '<img src="/img/sources/josm.16.png" alt="JOSM" title="JOSM"/>', name: 'in_josm', width: 20, sortable: true, align: 'center' },
+                //   { display: '<img src="/img/sources/potlatch.16.png" alt="Potlatch 2" title="Potlatch 2"/>', name: 'in_potlatch', width: 20, sortable: true, align: 'center' },
+                //   { display: '<img src="/img/sources/merkaartor.16.png" alt="Merkaartor" title="Merkaartor"/>', name: 'in_merkaartor', width: 20, sortable: true, align: 'center' },
+                    { display: 'Key', name: 'key', width: 260, sortable: true, align: 'left' },
+                    { display: 'Wiki Pages', name: 'wikipages', width: 400, sortable: false, align: 'left' }
+                ],
+                searchitems: [
+                    { display: 'Key', name: 'key' }
+                ],
+                sortname: 'count_all',
+                sortorder: 'desc',
+                height: 420,
+                preProcess: function(data) {
+                    data.rows = jQuery.map(data.data, function(row, i) {
+                        var wikilinks = [];
+                        jQuery(row.wikipages).each(function(i, wikipage) {
+                            wikilinks.push(print_wiki_link(wikipage.title));
+                        });
+                        return { 'cell': [
+                            row.in_wiki       ? '&#x2714;' : '-',
+                            row.in_josm       ? '&#x2714;' : '-',
+                    //       row.in_potlatch   ? '&#x2714;' : '-',
+                    //       row.in_merkaartor ? '&#x2714;' : '-',
+                            link_to_key(row.key),
+                            wikilinks.join(' &nbsp;&bull;&nbsp; ')
+                        ] };
+                    });
+                    return data;
+                }
+            });
+        },
         languages: function() {
             create_flexigrid('grid-langs', {
                 url: '/api/2/reports/languages',
