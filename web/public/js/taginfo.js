@@ -536,6 +536,36 @@ var create_flexigrid_for = {
             // TODO
         }
     },
+    sources: {
+        josm: {
+            style: function(stylename) {
+                create_flexigrid('grid-rules', {
+                    url: '/api/2/josm/styles/' + stylename,
+                    colModel: [
+                        { display: 'Key',      name: 'k',    width: 200, sortable: true,  align: 'left' },
+                        { display: 'Value',    name: 'v',    width: 200, sortable: true,  align: 'left' },
+                        { display: 'Rule XML', name: 'rule', width: 100, sortable: false, align: 'left' }
+                    ],
+                    searchitems: [
+                        { display: 'Key/Value', name: 'k' }
+                    ],
+                    sortname: 'k',
+                    sortorder: 'asc',
+                    height: 400,
+                    preProcess: function(data) {
+                        data.rows = jQuery.map(data.data, function(row, i) {
+                            return { 'cell': [
+                                link_to_key(row.k),
+                                row.v ? link_to_value(row.k, row.v) : row.b ? (row.b + ' (Boolean)') : '*',
+                                '<span title="' + row.rule + '">XML</span>'
+                            ] };
+                        });
+                        return data;
+                    }
+                });
+            }
+        }
+    },
     reports: {
         characters_in_keys: {
             statistics: function() {
