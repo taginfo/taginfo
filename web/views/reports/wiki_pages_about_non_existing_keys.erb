@@ -1,9 +1,6 @@
-<h1><%= @title %></h1>
+<h1><%= t.reports.wiki_pages_about_non_existing_keys.name %></h1>
 
-<p>This table shows keys for which a wiki page exists but there is not a single
-instance in the database. This is not necessarily an error (maybe somebody
-added the documentation in the wiki as preparation for using a key or the wiki
-page documents a now obsolete key), but it can also be a typo or other error.</p>
+<%= t.reports.wiki_pages_about_non_existing_keys.intro %>
 
 <table id="grid-keys">
 </table>

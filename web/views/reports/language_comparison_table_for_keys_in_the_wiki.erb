@@ -9,9 +9,9 @@
     end
     @languages_lookup = @languages.map{ |lang| "'#{lang}': #{lang_lookup[lang]}" }.join(', ')
 %>
-<h1><%= @title %></h1>
+<h1><%= t.reports.language_comparison_table_for_keys_in_the_wiki.name %></h1>
 
-<p>This table shows all tag keys for which there are wiki pages available and in what languages they are.</p>
+<%= t.reports.language_comparison_table_for_keys_in_the_wiki.intro %>
 
 <table id="grid-keys">
 </table>
@@ -19,10 +19,11 @@
 <p></p>
 
 <table>
-    <tr><td><img src="/img/sources/wiki/wiki-t.png" alt="[t]"/></td><td>Page in wiki available and contains standard template.</td></tr>
-    <tr><td><img src="/img/sources/wiki/wiki-e.png" alt="[e]"/></td><td>Page in wiki available and contains standard template, but couldn't be parsed.</td></tr>
-    <tr><td><img src="/img/sources/wiki/wiki-p.png" alt="[p]"/></td><td>Page in wiki available but doesn't contain standard template.</td></tr>
-    <tr><td><img src="/img/sources/wiki/wiki-r.png" alt="[r]"/></td><td>Page is a redirect.</td></tr>
+    
+    <tr><td><img src="/img/sources/wiki/wiki-t.png" alt="[t]"/></td><td><%= t.reports.language_comparison_table_for_keys_in_the_wiki.icons.template %></td></tr>
+    <tr><td><img src="/img/sources/wiki/wiki-e.png" alt="[e]"/></td><td><%= t.reports.language_comparison_table_for_keys_in_the_wiki.icons.error    %></td></tr>
+    <tr><td><img src="/img/sources/wiki/wiki-p.png" alt="[p]"/></td><td><%= t.reports.language_comparison_table_for_keys_in_the_wiki.icons.page     %></td></tr>
+    <tr><td><img src="/img/sources/wiki/wiki-r.png" alt="[r]"/></td><td><%= t.reports.language_comparison_table_for_keys_in_the_wiki.icons.redirect %></td></tr>
 </table>
 
 <script type="text/javascript">

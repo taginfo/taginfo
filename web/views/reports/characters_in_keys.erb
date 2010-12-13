@@ -1,56 +1,28 @@
-<h1><%= @title %></h1>
+<h1><%= t.reports.characters_in_keys.name %></h1>
 
-<p>Any valid Unicode character can appear in an OSM key but usually only lower
-case latin letters (a-z) and the underscore (_) are used. Sometimes the colon
-(:) is added as a separator character.</p>
+<%= t.reports.characters_in_keys.intro %>
 
 <div id="tabs">
     <ul>
-        <li><a href="#statistics">Statistics</a></li>
-        <li><a href="#whitespace"><span style="background-color: #d62727;">&nbsp;&nbsp;&nbsp;</span> Whitespace</a></li>
-        <li><a href="#problematic"><span style="background-color: #ff9896;">&nbsp;&nbsp;&nbsp;</span> Problematic</a></li>
+        <li><a href="#statistics"><%= t.reports.characters_in_keys.statistics.tab %></a></li>
+        <li><a href="#whitespace"><span style="background-color: #d62727;">&nbsp;&nbsp;&nbsp;</span> <%= t.reports.characters_in_keys.whitespace.tab %></a></li>
+        <li><a href="#problematic"><span style="background-color: #ff9896;">&nbsp;&nbsp;&nbsp;</span> <%= t.reports.characters_in_keys.problematic.tab %></a></li>
     </ul>
     <div id="statistics">
-        <h2>Statistics Overview</h2>
+        <h2><%= t.reports.characters_in_keys.statistics.title %></h2>
         <div class="canvas" id="canvas"></div>
         <p></p>
         <table id="grid-statistics">
+<% letter='A'
+   colors = { :A => '#2ca02c', :B => '#98df8a', :C => '#dbdb8d', :D => '#d62728', :E => '#ff9896', :F => '#aec7e8' }
+   %w(plain colon letters space problem rest).each do |type| %>
             <tr>
-                <td style="background-color: #2ca02c;">A</td>
-                <td><%= @db.stats('characters_in_keys_plain') %></td>
-                <td><%= sprintf '%.2f', @db.stats('characters_in_keys_plain') * 100.0 / @db.stats('num_keys') %>%</td>
-                <td>Only latin lowercase letters (<span class="char">a</span> to <span class="char">z</span>) and underscore (<span class="char">_</span>), first and last characters are letters.</td>
+                <td style="background-color: <%= colors[letter.to_sym] %>;"><%= letter %></td>
+                <td><%= @db.stats('characters_in_keys_' + type) %></td>
+                <td><%= sprintf '%.2f', @db.stats('characters_in_keys_' + type) * 100.0 / @db.stats('num_keys') %>%</td>
+                <td><%= t.reports.characters_in_keys.statistics.characters_in_keys[type] %></td>
             </tr>
-            <tr>
-                <td style="background-color: #98df8a;">B</td>
-                <td><%= @db.stats('characters_in_keys_colon') %></td>
-                <td><%= sprintf '%.2f', @db.stats('characters_in_keys_colon') * 100.0 / @db.stats('num_keys') %>%</td>
-                <td>Like A but with one or more colons (<span class="char">:</span>) inside.</td>
-            </tr>
-            <tr>
-                <td style="background-color: #dbdb8d;">C</td>
-                <td><%= @db.stats('characters_in_keys_letters') %></td>
-                <td><%= sprintf '%.2f', @db.stats('characters_in_keys_letters') * 100.0 / @db.stats('num_keys') %>%</td>
-                <td>Like B but with uppercase latin letters or letters from other alphabets.</td>
-            </tr>
-            <tr>
-                <td style="background-color: #d62728;">D</td>
-                <td><%= @db.stats('characters_in_keys_space') %></td>
-                <td><%= sprintf '%.2f', @db.stats('characters_in_keys_space') * 100.0 / @db.stats('num_keys') %>%</td>
-                <td>Like C but contains at least one whitespace character (space, tab, new line, carriage return, or from other alphabets).</td>
-            </tr>
-            <tr>
-                <td style="background-color: #ff9896;">E</td>
-                <td><%= @db.stats('characters_in_keys_problem') %></td>
-                <td><%= sprintf '%.2f', @db.stats('characters_in_keys_problem') * 100.0 / @db.stats('num_keys') %>%</td>
-                <td>Like C but contains possibly problematic characters: <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.</td>
-            </tr>
-            <tr>
-                <td style="background-color: #aec7e8;">F</td>
-                <td><%= @db.stats('characters_in_keys_rest') %></td>
-                <td><%= sprintf '%.2f', @db.stats('characters_in_keys_rest') * 100.0 / @db.stats('num_keys') %>%</td>
-                <td>Everything else.</td>
-            </tr>
+<% letter = letter.succ; end %>
             <tr>
                 <td style="border-top: 1px solid #000000;"></td>
                 <td style="border-top: 1px solid #000000;"><%= @db.stats('num_keys') %></td>
@@ -60,32 +32,23 @@ case latin letters (a-z) and the underscore (_) are used. Sometimes the colon
         </table>
     </div>
     <div id="whitespace">
-        <h2>Keys With Whitespace</h2>
-        <p>Keys that contain whitespace characters such as space, tab, new
-        line, carriage return, or whitespace characters from other
-        alphabets.<br/>
-        Whitespace in keys can be confusing, especially at the
-        beginning or end of the key, because they are invisible. Generally
-        the underscore (_) should be used instead.</p>
+        <h2><%= t.reports.characters_in_keys.whitespace.title %></h2>
+        <%= t.reports.characters_in_keys.whitespace.intro %>
         <table id="grid-whitespace">
         </table>
     </div>
     <div id="problematic">
-        <h2>Keys With Possibly Problematic Characters</h2>
-        <p>Keys that contain possibly problematic characters: <span
-        class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>. These characters
-        can be problematic, because they are used to quote strings in
-        different programming languages or have special meanings in XML, HTML,
-        URLs, and other places. The equal sign is used often as separator
-        between tag keys and values.<br/>
-        Keys that appear in this list are not necessarily wrong though. But
-        in many cases they are just results of some error.</p>
+        <h2><%= t.reports.characters_in_keys.problematic.title %></h2>
+        <%= t.reports.characters_in_keys.problematic.intro %>
         <table id="grid-problematic">
         </table>
     </div>
 </div>
 
-<script type="text/javascript">
+<% javascript do
+    JQuery.ready do
+        JS.raw(<<"JAVASCRIPT")
+
 var tabs = jQuery('#tabs').tabs({
     show: function(event, ui) { 
         window.location.hash = ui.tab.hash;
@@ -93,7 +56,7 @@ var tabs = jQuery('#tabs').tabs({
     }
 });
 
-var data = <%= i = '@'; %w(plain colon letters space problem rest).map{ |type| i=i.next; [ { :label => i, :value => @db.stats('characters_in_keys_' + type) } ] }.to_json() %>;
+var data = #{ i = '@'; %w(plain colon letters space problem rest).map{ |type| i=i.next; [ { :label => i, :value => @db.stats('characters_in_keys_' + type) } ] }.to_json() };
 
 var w=968, h=50;
 
@@ -102,9 +65,9 @@ var vis = new pv.Panel()
     .width(w + 20)
     .height(h);
 
-var colors = { A: '#2ca02c', B: '#98df8a', C: '#dbdb8d', D: '#d62728', E: '#ff9896', F: '#aec7e8' };
+var colors = #{ colors.to_json };
 
-var scale = pv.Scale.linear(0, <%= @db.stats('num_keys') %>).range(0, w);
+var scale = pv.Scale.linear(0, #{ @db.stats('num_keys') }).range(0, w);
 
 vis.add(pv.Layout.Stack)
     .orient('left-top')
@@ -121,5 +84,7 @@ vis.add(pv.Layout.Stack)
     .text(function(d) { return d.label; });
 
 vis.render();
-
-</script>
+JAVASCRIPT
+    end
+end
+%>

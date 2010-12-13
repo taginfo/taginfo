@@ -114,14 +114,67 @@ sources:
 reports:
     characters_in_keys:
         name: Characters in Keys
+        intro: |
+            <p>Any valid Unicode character can appear in an OSM key but usually only lower
+            case latin letters (a-z) and the underscore (_) are used. Sometimes the colon
+            (:) is added as a separator character.</p>
+        statistics:
+            tab: Statistics
+            title: Statistics Overview
+            characters_in_keys:
+                plain: Only latin lowercase letters (<span class="char">a</span> to <span class="char">z</span>) and underscore (<span class="char">_</span>), first and last characters are letters.
+                colon: Like A but with one or more colons (<span class="char">:</span>) inside.
+                letters: Like B but with uppercase latin letters or letters from other alphabets.
+                space: Like C but contains at least one whitespace character (space, tab, new line, carriage return, or from other alphabets).
+                problem: Like C but contains possibly problematic characters <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
+                rest: Everything else.
+        whitespace:
+            tab: Whitespace
+            title: Keys With Whitespace
+            intro: |
+                <p>Keys that contain whitespace characters such as space, tab, new
+                line, carriage return, or whitespace characters from other
+                alphabets.<br/>
+                Whitespace in keys can be confusing, especially at the
+                beginning or end of the key, because they are invisible. Generally
+                the underscore (_) should be used instead.</p>
+        problematic:
+            tab: Problematic
+            title: Keys With Possibly Problematic Characters
+            intro: |
+                <p>Keys that contain possibly problematic characters: <span
+                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>. These characters
+                can be problematic, because they are used to quote strings in
+                different programming languages or have special meanings in XML, HTML,
+                URLs, and other places. The equal sign is used often as separator
+                between tag keys and values.<br/>
+                Keys that appear in this list are not necessarily wrong though. But
+                in many cases they are just results of some error.</p>
     frequently_used_keys_without_wiki_page:
         name: Frequently Used Keys Without Wiki Page
     key_lengths:
         name: Key Lengths
     language_comparison_table_for_keys_in_the_wiki:
         name: Language Comparison Table for Keys in the Wiki
+        icons:
+            template: Page in wiki available and contains standard template.
+            error: Page in wiki available and contains standard template, but couldn't be parsed.
+            page: Page in wiki available but doesn't contain standard template.
+            redirect: Page is a redirect.
+        intro: |
+            <p>This table shows all tag keys for which there are wiki pages available and in what languages they are.</p>
     languages:
         name: Languages
+        intro: |
+            <p>OpenStreetMap is an international project. Tags and their descriptions can
+            be in any language. This table lists the languages Taginfo knows about and how
+            many wiki pages there are in these languages documenting keys and tags,
+            respectively.</p>
     wiki_pages_about_non_existing_keys:
         name: Wiki Pages About Non-Existing Keys
+        intro: |
+            <p>This table shows keys for which a wiki page exists but there is not a single
+            instance in the database. This is not necessarily an error (maybe somebody
+            added the documentation in the wiki as preparation for using a key or the wiki
+            page documents a now obsolete key), but it can also be a typo or other error.</p>
 
