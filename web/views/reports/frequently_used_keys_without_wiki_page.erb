@@ -13,54 +13,20 @@ in the wiki page.</p>
 </form>
 <p></p>
 
-<table id="keys">
+<table id="grid-keys">
 </table>
 
-<script type="text/javascript">
-var grid;
-    jQuery(document).ready(function() {
-        grid = jQuery('#keys').flexigrid({
-            url: '/api/2/reports/frequently_used_keys_without_wiki_page?english=' + <%= params[:english] == '1' ? '1' : '0' %>,
-            method: 'GET',
-            dataType: 'json',
-            colModel: [
-                { display: 'Create Wiki Page...', name: 'create_wiki_page', width: 200, sortable: false, align: 'left' },
-                { display: 'Key', name: 'key', width: 180, sortable: true, align: 'left' },
-                { display: '<span title="Number of objects with this key">Total</span>', name: 'count_all', width: 70, sortable: true, align: 'right' },
-                { display: 'Users', name: 'users_all', width: 44, sortable: true, align: 'right' },
-                { display: '<span title="Number of different values for this key">Values</span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
-                { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true, align: 'left' }
-            ],
-            searchitems: [
-                { display: 'Key', name: 'key' }
-            ],
-            sortname: 'count_all',
-            sortorder: 'desc',
-            showToggleBtn: false,
-            usepager: true,
-            useRp: true,
-            rp: 15,
-            rpOptions: [10,15,20,25,50,100],
-            height: 420,
-            preProcess: function(data) {
-                data.rows = jQuery.map(data.data, function(row, i) {
-                    return { 'cell': [
-                        print_wiki_link('Key:' + row.key, { edit: true }),
-                        link_to_key(row.key),
-                        print_with_ts(row.count_all),
-                        print_with_ts(row.users_all),
-                        print_with_ts(row.values_all),
-                        print_prevalent_value_list(row.key, row.prevalent_values)
-                    ] };
+<% javascript do
+    JQuery.ready do
+        JS.raw(<<"JAVASCRIPT")
+            create_flexigrid_for.reports.frequently_used_keys_without_wiki_page(#{ params[:english] == '1' ? '1' : '0' });
+            jQuery('#english').bind('click', function() {
+                jQuery('#grid-keys').flexOptions({
+                    url: '/api/2/reports/frequently_used_keys_without_wiki_page?english=' + (jQuery('#english')[0].checked ? '1' : '0')
                 });
-                return data;
-            }
-        });
-        jQuery('#english').bind('click', function() {
-            jQuery('#keys').flexOptions({
-                url: '/api/2/reports/frequently_used_keys_without_wiki_page?english=' + (jQuery('#english')[0].checked ? '1' : '0')
+                jQuery('#grid-keys').flexReload();
             });
-            jQuery('#keys').flexReload();
-        });
-    });
-</script>
+JAVASCRIPT
+    end
+end
+%>

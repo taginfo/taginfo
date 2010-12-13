@@ -248,7 +248,7 @@ var create_flexigrid_for = {
             create_flexigrid('grid-keys', {
                 url: '/api/2/db/keys?include=prevalent_values',
                 colModel: [
-                    { display: 'Key', name: 'key', width: 180, sortable: true, align: 'left' },
+                    { display: 'Key', name: 'key', width: 180, sortable: true },
                     { display: '<span title="Number of objects with this key"><img src="/img/types/all.16.png" alt=""/> Total</span>',           name: 'count_all',        width: 250, sortable: true, align: 'center' },
                     { display: '<span title="Number of nodes with this key"><img src="/img/types/node.16.png" alt=""/> Nodes</span>',            name: 'count_nodes',      width: 250, sortable: true, align: 'center' },
                     { display: '<span title="Number of ways with this key"><img src="/img/types/way.16.png" alt=""/> Ways</span>',               name: 'count_ways',       width: 250, sortable: true, align: 'center' },
@@ -257,7 +257,7 @@ var create_flexigrid_for = {
                     { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" title="Wiki"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
                     { display: '<img src="/img/sources/josm.16.png" alt="JOSM" title="JOSM"/>', name: 'in_josm', width: 20, sortable: true, align: 'center' },
                     { display: '<span title="Number of different values for this key">Values</span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
-                    { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true, align: 'left' }
+                    { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true }
                 ],
                 searchitems: [
                     { display: 'Key', name: 'key' }
@@ -329,8 +329,8 @@ var create_flexigrid_for = {
             create_flexigrid('grid-josm', {
                 url: '/api/2/josm/styles/standard/tags?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value),
                 colModel: [
-                    { display: 'Value',    name: 'v',    width: 200, sortable: false, align: 'left' },
-                    { display: 'Rule XML', name: 'rule', width: 100, sortable: false, align: 'left' }
+                    { display: 'Value',    name: 'v',    width: 200, sortable: false },
+                    { display: 'Rule XML', name: 'rule', width: 100, sortable: false }
                 ],
     /*            searchitems: [
                     { display: 'Key/Value', name: 'k' }
@@ -356,7 +356,7 @@ var create_flexigrid_for = {
                 url: '/api/2/db/keys/values?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type),
                 colModel: [
                     { display: 'Count', name: 'count', width: 300, sortable: true, align: 'center' },
-                    { display: 'Value', name: 'value', width: 500, sortable: true, align: 'left' }
+                    { display: 'Value', name: 'value', width: 500, sortable: true }
                 ],
                 searchitems: [
                     { display: 'Value', name: 'value' }
@@ -381,7 +381,7 @@ var create_flexigrid_for = {
                 url: '/api/2/db/keys/keys?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type),
                 colModel: [
                     { display: '<span title="Number of objects with this key that also have the other key">Count &rarr;</span>', name: 'to_count', width: 320, sortable: true, align: 'center' },
-                    { display: '<span title="Key used together with this key">Other key</span>', name: 'other_key', width: 340, sortable: true, align: 'left' },
+                    { display: '<span title="Key used together with this key">Other key</span>', name: 'other_key', width: 340, sortable: true },
                     { display: '<span title="Number of objects with other key that also have this key">&rarr; Count</span>', name: 'from_count', width: 320, sortable: true, align: 'center' }
                 ],
                 sortname: 'to_count',
@@ -403,8 +403,8 @@ var create_flexigrid_for = {
             create_flexigrid('grid-josm', {
                 url: '/api/2/josm/styles/standard/keys?key=' + encodeURIComponent(key),
                 colModel: [
-                    { display: 'Value',    name: 'v',    width: 200, sortable: true,  align: 'left' },
-                    { display: 'Rule XML', name: 'rule', width: 100, sortable: false, align: 'left' }
+                    { display: 'Value',    name: 'v',    width: 200, sortable: true },
+                    { display: 'Rule XML', name: 'rule', width: 100, sortable: false }
                 ],
                 searchitems: [
                     { display: 'Value', name: 'v' }
@@ -469,7 +469,7 @@ var create_flexigrid_for = {
                 url: '/api/2/db/keys?query=' + encodeURIComponent(query),
                 colModel: [
                     { display: 'Count', name: 'count_all', width: 80, sortable: true, align: 'right' },
-                    { display: 'Key', name: 'key', width: 500, sortable: true, align: 'left' }
+                    { display: 'Key', name: 'key', width: 500, sortable: true }
                 ],
                 sortname: 'count_all',
                 sortorder: 'desc',
@@ -490,8 +490,8 @@ var create_flexigrid_for = {
                 url: '/api/2/search/values?q=' + encodeURIComponent(query),
                 colModel: [
                     { display: 'Count', name: 'count_all', width: 80, sortable: true, align: 'right' },
-                    { display: 'Key', name: 'key', width: 250, sortable: true, align: 'left' },
-                    { display: 'Value', name: 'value', width: 500, sortable: true, align: 'left' }
+                    { display: 'Key', name: 'key', width: 250, sortable: true },
+                    { display: 'Value', name: 'value', width: 500, sortable: true }
                 ],
                 sortname: 'count_all',
                 sortorder: 'desc',
@@ -514,8 +514,8 @@ var create_flexigrid_for = {
                 url: '/api/2/search/tags?q=' + encodeURIComponent(query),
                 colModel: [
                     { display: 'Count', name: 'count_all', width: 80, sortable: true, align: 'right' },
-                    { display: 'Key', name: 'key', width: 300, sortable: true, align: 'left' },
-                    { display: 'Value', name: 'value', width: 500, sortable: true, align: 'left' }
+                    { display: 'Key', name: 'key', width: 300, sortable: true },
+                    { display: 'Value', name: 'value', width: 500, sortable: true }
                 ],
                 sortname: 'count_all',
                 sortorder: 'desc',
@@ -542,9 +542,9 @@ var create_flexigrid_for = {
                 create_flexigrid('grid-rules', {
                     url: '/api/2/josm/styles/' + stylename,
                     colModel: [
-                        { display: 'Key',      name: 'k',    width: 200, sortable: true,  align: 'left' },
-                        { display: 'Value',    name: 'v',    width: 200, sortable: true,  align: 'left' },
-                        { display: 'Rule XML', name: 'rule', width: 100, sortable: false, align: 'left' }
+                        { display: 'Key',      name: 'k',    width: 200, sortable: true },
+                        { display: 'Value',    name: 'v',    width: 200, sortable: true },
+                        { display: 'Rule XML', name: 'rule', width: 100, sortable: false }
                     ],
                     searchitems: [
                         { display: 'Key/Value', name: 'k' }
@@ -567,6 +567,38 @@ var create_flexigrid_for = {
         }
     },
     reports: {
+        frequently_used_keys_without_wiki_page: function(english) {
+            create_flexigrid('grid-keys', {
+                url: '/api/2/reports/frequently_used_keys_without_wiki_page?english=' + english,
+                colModel: [
+                    { display: 'Create Wiki Page...', name: 'create_wiki_page', width: 200, sortable: false },
+                    { display: 'Key', name: 'key', width: 180, sortable: true },
+                    { display: '<span title="Number of objects with this key">Total</span>', name: 'count_all', width: 70, sortable: true, align: 'right' },
+                    { display: 'Users', name: 'users_all', width: 44, sortable: true, align: 'right' },
+                    { display: '<span title="Number of different values for this key">Values</span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
+                    { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true }
+                ],
+                searchitems: [
+                    { display: 'Key', name: 'key' }
+                ],
+                sortname: 'count_all',
+                sortorder: 'desc',
+                height: 420,
+                preProcess: function(data) {
+                    data.rows = jQuery.map(data.data, function(row, i) {
+                        return { 'cell': [
+                            print_wiki_link('Key:' + row.key, { edit: true }),
+                            link_to_key(row.key),
+                            print_with_ts(row.count_all),
+                            print_with_ts(row.users_all),
+                            print_with_ts(row.values_all),
+                            print_prevalent_value_list(row.key, row.prevalent_values)
+                        ] };
+                    });
+                    return data;
+                }
+            });
+        },
         characters_in_keys: {
             statistics: function() {
                 create_flexigrid('grid-statistics', {
@@ -574,7 +606,7 @@ var create_flexigrid_for = {
                         { display: '&nbsp;', name: 'row', width: 10, sortable: true, align: 'center' },
                         { display: 'Count', name: 'count', width: 40, sortable: true, align: 'right' },
                         { display: 'Fraction', name: 'fraction', width: 60, sortable: true, align: 'right' },
-                        { display: 'Characters in Key', name: 'characters', width: 810, sortable: true, align: 'left' }
+                        { display: 'Characters in Key', name: 'characters', width: 810, sortable: true }
                     ],
                     width: 990,
                     height: 200,
@@ -585,7 +617,7 @@ var create_flexigrid_for = {
                 create_flexigrid('grid-whitespace', {
                     url: '/api/2/db/keys?filters=characters_space&include=prevalent_values',
                     colModel: [
-                        { display: 'Key', name: 'key', width: 250, sortable: true, align: 'left' },
+                        { display: 'Key', name: 'key', width: 250, sortable: true },
                         { display: '<span title="Number of objects with this key"><img src="/img/types/all.16.png" alt=""/> Total</span>',           name: 'count_all',        width: 250, sortable: true, align: 'center' },
                         { display: 'Users', name: 'users_all', width: 44, sortable: true, align: 'right' },
                         { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" title="Wiki"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
@@ -593,7 +625,7 @@ var create_flexigrid_for = {
                         //   { display: '<img src="/img/sources/potlatch.16.png" alt="Potlatch 2" title="Potlatch 2"/>', name: 'in_potlatch', width: 20, sortable: true, align: 'center' },
                         //   { display: '<img src="/img/sources/merkaartor.16.png" alt="Merkaartor" title="Merkaartor"/>', name: 'in_merkaartor', width: 20, sortable: true, align: 'center' },
                         { display: '<span title="Number of different values for this key">Values</span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
-                        { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true, align: 'left' }
+                        { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true }
                     ],
                     searchitems: [
                         { display: 'Key', name: 'key' }
@@ -623,7 +655,7 @@ var create_flexigrid_for = {
                 create_flexigrid('grid-problematic', {
                     url: '/api/2/db/keys?filters=characters_problematic&include=prevalent_values',
                     colModel: [
-                        { display: 'Key', name: 'key', width: 250, sortable: true, align: 'left' },
+                        { display: 'Key', name: 'key', width: 250, sortable: true },
                         { display: '<span title="Number of objects with this key"><img src="/img/types/all.16.png" alt=""/> Total</span>',           name: 'count_all',        width: 250, sortable: true, align: 'center' },
                         { display: 'Users', name: 'users_all', width: 44, sortable: true, align: 'right' },
                         { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" title="Wiki"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
@@ -631,7 +663,7 @@ var create_flexigrid_for = {
                         //   { display: '<img src="/img/sources/potlatch.16.png" alt="Potlatch 2" title="Potlatch 2"/>', name: 'in_potlatch', width: 20, sortable: true, align: 'center' },
                         //   { display: '<img src="/img/sources/merkaartor.16.png" alt="Merkaartor" title="Merkaartor"/>', name: 'in_merkaartor', width: 20, sortable: true, align: 'center' },
                         { display: '<span title="Number of different values for this key">Values</span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
-                        { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true, align: 'left' }
+                        { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true }
                     ],
                     searchitems: [
                         { display: 'Key', name: 'key' }
@@ -664,14 +696,14 @@ var create_flexigrid_for = {
                     url: '/api/2/db/keys?include=prevalent_values',
                     colModel: [
                         { display: 'Length', name: 'length', width: 60, sortable: true, align: 'right' },
-                        { display: 'Key', name: 'key', width: 180, sortable: true, align: 'left' },
+                        { display: 'Key', name: 'key', width: 180, sortable: true },
                         { display: 'Number of Objects', name: 'count_all', width: 250, sortable: true, align: 'center' },
                         { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" title="Wiki"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
                         { display: '<img src="/img/sources/josm.16.png" alt="JOSM" title="JOSM"/>', name: 'in_josm', width: 20, sortable: true, align: 'center' },
                         //   { display: '<img src="/img/sources/potlatch.16.png" alt="Potlatch 2" title="Potlatch 2"/>', name: 'in_potlatch', width: 20, sortable: true, align: 'center' },
                         //   { display: '<img src="/img/sources/merkaartor.16.png" alt="Merkaartor" title="Merkaartor"/>', name: 'in_merkaartor', width: 20, sortable: true, align: 'center' },
                         { display: '<span title="Number of different values for this key">Values</span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
-                        { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true, align: 'left' }
+                        { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true }
                     ],
                     searchitems: [
                         { display: 'Key', name: 'key' }
