@@ -46,8 +46,7 @@ pages:
             to: a
             info: |
                 <p>Tutti gli orari sono in UTC.</p>
-                <p>Attualmente gli aggiornamenti vengono eseguiti manualmente circa una volta a settimana fino a quando non 
-                saremo sicuri che siano affidabili. Prevediamo di passare ad aggiornamenti giornalieri il più presto possibile.</p>
+                <p>Updates are done daily.</p>
     download:
         index:
             intro: |

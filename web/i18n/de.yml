@@ -45,9 +45,7 @@ pages:
             to: bis
             info: |
                 <p>Alle Uhrzeiten in UTC.</p>
-                <p>Aktualisierungen werden derzeit etwa einmal die Woche durchgeführt, bis
-                klar ist, dass sie zuverlässig laufen. Sobald wie möglich soll auf tägliche
-                Aktualisierungen umgestellt werden.</p>
+                <p>Die Daten werden täglich aktualisiert.</p>
     download:
         index:
             intro: |

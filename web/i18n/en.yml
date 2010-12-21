@@ -47,9 +47,7 @@ pages:
             to: to
             info: |
                 <p>All times in UTC.</p>
-                <p>Updates are currently done manually about once a week until they have proven
-                to work reliably. It is planned to switch to daily updates as soon as
-                possible.</p>
+                <p>Updates are done daily.</p>
     download:
         index:
             intro: |
