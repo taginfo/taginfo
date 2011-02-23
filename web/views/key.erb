@@ -105,7 +105,11 @@ jQuery('#josm_button').bind('click', function() {
 
 jQuery('#filter').bind('change', function() {
     var value = this.value;
-    window.location.search = 'filter=' + value;
+
+    var qs = jQuery.getQueryString;
+    qs['filter'] = value;
+
+    window.location.search = jQuery.param(qs);
 });
 
 jQuery.getJSON('/api/2/db/keys/overview?key=#{ @key_uri }', function(data, textStatus) {
