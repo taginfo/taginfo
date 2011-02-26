@@ -25,6 +25,8 @@
 #
 #------------------------------------------------------------------------------
 
+require 'rubygems'
+
 require 'pp'
 require 'sqlite3'
 require 'rexml/document'
