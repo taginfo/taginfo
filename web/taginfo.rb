@@ -285,7 +285,7 @@ class Taginfo < Sinatra::Base
     load 'lib/ui/test.rb'
 
     # run application
-    run!
+    run! if app_file == $0
 
 end
 
