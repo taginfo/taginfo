@@ -1,4 +1,7 @@
-<% if @dbtag.nil? %>
+<% if @key == '{{{key}}}' && @value == '{{{value}}}' %>
+<a target="_blank" title="More information about tag '<%= escape_html(@key) %>=<%= escape_html(@value) %>' at Taginfo" href="http://taginfo.openstreetmap.de/"><img src="/img/taginfo.24.png" alt="Taginfo"/> <b>Taginfo</b> [More...]</a>
+<p>Statistics about the tag will appear here.</p>
+<% elsif @dbtag.nil? %>
 <a target="_blank" title="More information about tag '<%= escape_html(@key) %>=<%= escape_html(@value) %>' at Taginfo" href="http://taginfo.openstreetmap.de/tags/?key=<%= escape(@key) %>&value=<%= escape(@value) %>"><img src="/img/taginfo.24.png" alt="Taginfo"/> <b>Taginfo</b> [More...]</a>
 <p>This tag does not appear in the OSM database.</p>
 <% else %>
