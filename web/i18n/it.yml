@@ -46,7 +46,6 @@ pages:
             to: a
             info: |
                 <p>Tutti gli orari sono in UTC.</p>
-                <p>Updates are done daily.</p>
     download:
         index:
             intro: |

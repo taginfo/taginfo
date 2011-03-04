@@ -50,7 +50,6 @@ pages:
             to: bis
             info: |
                 <p>Alle Uhrzeiten in UTC.</p>
-                <p>Die Daten werden täglich aktualisiert.</p>
     download:
         index:
             intro: |

@@ -52,7 +52,6 @@ pages:
             to: to
             info: |
                 <p>All times in UTC.</p>
-                <p>Updates are done daily.</p>
     download:
         index:
             intro: |
