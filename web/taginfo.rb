@@ -93,8 +93,8 @@ class Taginfo < Sinatra::Base
             params[:locale] = request.cookies['taginfo_locale']
         end
 
-        javascript 'jquery-1.4.2.min'
-        javascript 'jquery-ui-1.8.6.custom.min'
+        javascript 'jquery-1.5.1.min'
+        javascript 'jquery-ui-1.8.10.custom.min'
         javascript 'flexigrid-minified'
         javascript 'protovis-r3.2'
         javascript 'taginfo'
