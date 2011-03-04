@@ -97,8 +97,8 @@ class Taginfo < Sinatra::Base
         javascript 'jquery-ui-1.8.10.custom.min'
         javascript 'flexigrid-minified'
         javascript 'protovis-r3.2'
-        javascript 'taginfo'
         javascript 'lang/' + r18n.locale.code
+        javascript 'taginfo'
 
         @db = SQL::Database.new('../../data')
 
@@ -255,19 +255,29 @@ class Taginfo < Sinatra::Base
 
     get '/js/lang/:lang.js' do
         trans = R18n::I18n.new(params[:lang], 'i18n')
-        return 'var flexigrid_defaults_lang = ' + {
-            :pagetext => trans.t.flexigrid.pagetext,
-            :pagestat => trans.t.flexigrid.pagestat,
-            :outof    => trans.t.flexigrid.outof,
-            :findtext => trans.t.flexigrid.findtext,
-            :procmsg  => trans.t.flexigrid.procmsg,
-            :nomsg    => trans.t.flexigrid.nomsg,
-            :errormsg => trans.t.flexigrid.errormsg,
+        return 'var texts = ' + {
+            :flexigrid => {
+                :pagetext => trans.t.flexigrid.pagetext,
+                :pagestat => trans.t.flexigrid.pagestat,
+                :outof    => trans.t.flexigrid.outof,
+                :findtext => trans.t.flexigrid.findtext,
+                :procmsg  => trans.t.flexigrid.procmsg,
+                :nomsg    => trans.t.flexigrid.nomsg,
+                :errormsg => trans.t.flexigrid.errormsg,
+            },
+            :instance_description => {
+                :title => trans.t.taginfo.instance.title
+            },
+            :misc => {
+                :values_less_than_one_percent => trans.t.misc.values_less_than_one_percent,
+                :empty_string => trans.t.misc.empty_string
+            }
         }.to_json + ";\n"
     end
 
     #--------------------------------------------------------------------------
 
+    load 'lib/instance.rb'
     load 'lib/api/db.rb'
     load 'lib/api/wiki.rb'
     load 'lib/api/josm.rb'

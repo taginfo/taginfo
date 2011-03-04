@@ -409,3 +409,9 @@ table.drilldown td#feature {
 }
 
 /* ==========  */
+
+div#instance_description a {
+    text-decoration: underline;
+}
+
+/* ==========  */

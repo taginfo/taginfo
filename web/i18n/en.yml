@@ -19,7 +19,7 @@ taginfo:
     source: Source
     sources: Sources
     download: Download
-    about: About
+    about: About Taginfo
     wiki: Wiki
     reports: Reports
     keys: Keys
@@ -28,6 +28,11 @@ taginfo:
     maps: Maps
     key_combinations: Combinations
     data_from: Data from
+    instance:
+        title: About this Taginfo site
+        other: See the <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> for other sites.
+        description:
+            main: This is the main Taginfo site. It contains OSM data for the whole planet and is updated daily.
 
 pages:
     index:
@@ -175,4 +180,8 @@ reports:
             instance in the database. This is not necessarily an error (maybe somebody
             added the documentation in the wiki as preparation for using a key or the wiki
             page documents a now obsolete key), but it can also be a typo or other error.</p>
+
+misc:
+    values_less_than_one_percent: all values have less than 1%
+    empty_string: empty string
 

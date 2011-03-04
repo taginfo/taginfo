@@ -10,6 +10,16 @@ jQuery(document).ready(function() {
         }
         return b;
     })(window.location.search.substr(1).split('&'))
+
+    jQuery('#instance_description').dialog({
+        autoOpen: false,
+        position: [20, 50],
+        title: texts.instance_description.title
+    });
+
+    jQuery('#instance').click(function() {
+        jQuery('#instance_description').dialog('open');
+    });
 });
 
 function print_wiki_link(title, options) {
@@ -49,7 +59,7 @@ function print_key_or_tag_list(list) {
 
 function print_prevalent_value_list(key, list) {
     if (list.length == 0) {
-        return '<i>all values have less than 1%</i>';
+        return '<i>' + texts.misc.values_less_than_one_percent + '</i>';
     }
     return jQuery.map(list, function(item, i) {
         return link_to_value_with_title(key, item.value, '(' + (item.fraction * 100).toFixed(2) + '%)');
@@ -109,7 +119,7 @@ var pp_chars = '!"#$%&()*+,-/;<=>?@[\\]^`{|}~' + "'";
 
 function pp_key(key) {
     if (key == '') {
-        return '<span class="badchar empty">empty string</span>';
+        return '<span class="badchar empty">' + texts.misc.empty_string + '</span>';
     }
 
     var result = '',
@@ -133,7 +143,7 @@ function pp_key(key) {
 
 function pp_value(value) {
     if (value == '') {
-        return '<span class="badchar empty">empty string</span>';
+        return '<span class="badchar empty">' + texts.misc.empty_string + '</span>';
     }
     return value.replace(/ /g, '&#x2423;').replace(/\s/g, '<span class="whitespace">&nbsp;</span>');
 }
@@ -250,7 +260,7 @@ var flexigrid_defaults = {
 
 function create_flexigrid(domid, options) {
     if (grids[domid] == null) {
-        grids[domid] = jQuery('#' + domid).flexigrid(jQuery.extend({}, flexigrid_defaults, flexigrid_defaults_lang, options));
+        grids[domid] = jQuery('#' + domid).flexigrid(jQuery.extend({}, flexigrid_defaults, texts.flexigrid, options));
     }
 }
 
