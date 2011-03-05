@@ -1,0 +1,64 @@
+#!/usr/bin/ruby
+#
+#  tapi - Taginfo API
+#
+#  Example utility for accessing the Taginfo API
+#
+#  Usage: tapi PATH KEY=VAL KEY=VAL ...
+#
+#  The tool will send the request to the server, get the JSON result and
+#  print it out in an easier to read form.
+#
+#  You can set the following environment variables (default in brackets):
+#    TAGINFO_API_SERVER   [taginfo.openstreetmap.de]
+#    TAGINFO_API_PORT     [80]
+#    TAGINFO_API_VERSION  [2]
+#
+
+require 'rubygems'
+
+require 'net/http'
+require 'uri'
+require 'json'
+
+API_SERVER  = ENV['TAGINFO_API_SERVER']  || 'taginfo.openstreetmap.de'
+API_PORT    = ENV['TAGINFO_API_PORT']    || 80
+API_VERSION = ENV['TAGINFO_API_VERSION'] || '2'
+
+def api_call(path, params)
+    query = []
+    params.each_pair do |k,v|
+        query << k + '=' + v
+    end
+    uri = URI::HTTP.build({
+        :host  => API_SERVER,
+        :port  => API_PORT,
+        :path  => '/api/' + API_VERSION + '/' + path,
+        :query => query.join('&')
+    })
+    STDERR.puts "URI=#{uri}"
+
+    request = Net::HTTP::Get.new(uri.request_uri)
+    request['User-Agent'] = 'tapi/1.0 (Taginfo)'
+    result = Net::HTTP.start(uri.host, uri.port) do |http|
+        http.request(request)
+    end
+    if result.code != '200'
+        STDERR.puts "#{result.code} #{result.message}"
+        exit 1
+    end
+
+#    puts result.body
+    puts JSON.pretty_generate(JSON.parse(result.body))
+end
+
+path = ARGV.shift.sub(%r{^/}, '')
+
+options = {}
+ARGV.each do |arg|
+    (k, v) = arg.split('=')
+    options[k] = v;
+end
+
+api_call(path, options)
+
