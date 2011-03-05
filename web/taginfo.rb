@@ -53,6 +53,8 @@ db.select('SELECT * FROM sources ORDER BY no').execute().each do |source|
     Source.new source['id'], source['name'], source['data_until'], source['update_start'], source['update_end'], source['visible'] == '1'
 end
 
+DATA_UNTIL = db.select("SELECT min(data_until) FROM sources").get_first_value().sub(/:..$/, '')
+
 db.close
 
 class Taginfo < Sinatra::Base
@@ -102,7 +104,7 @@ class Taginfo < Sinatra::Base
 
         @db = SQL::Database.new('../../data')
 
-        @data_until = @db.select("SELECT min(data_until) FROM sources").get_first_value().sub(/:..$/, '')
+        @data_until = DATA_UNTIL
 
         @breadcrumbs = []
     end
