@@ -2,16 +2,40 @@
 class Taginfo < Sinatra::Base
 
     @@filters = {
-        :characters_space       => "characters='space'",
-        :characters_problematic => "characters='problem'",
-        :in_wiki                => "in_wiki=1",
-        :not_in_db              => "count_all=0"
+        :characters_space       => { :expr => "characters='space'",   :doc => 'only show keys with spaces' },
+        :characters_problematic => { :expr => "characters='problem'", :doc => 'only show keys with problematic characters' },
+        :in_wiki                => { :expr => "in_wiki=1",            :doc => 'only show keys that appear in the wiki' },
+        :not_in_db              => { :expr => "count_all=0",          :doc => 'only show keys that do not appear in the database' }
     }
 
-    get '/api/2/db/keys' do
+    api(2, 'db/keys', {
+        :description => 'Get list of keys that are in the database or mentioned in any other source.',
+        :parameters => nil,
+        :paging => :optional,
+        :filter => @@filters,
+        :query => 'substring on key',
+        :sort => %w( key count_all count_nodes count_ways count_relations values_all users_all in_wiki in_josm in_potlatch length ),
+        :result => {
+            :key                      => :STRING, 
+            :count_all                => :INT,
+            :count_all_fraction       => :FLOAT,
+            :count_nodes              => :INT,
+            :count_nodes_fraction     => :FLOAT,
+            :count_ways               => :INT,
+            :count_ways_fraction      => :FLOAT,
+            :count_relations          => :INT,
+            :count_relations_fraction => :FLOAT,
+            :values_all               => :INT,
+            :users_all                => :INT,
+            :in_wiki                  => :BOOL,
+            :in_josm                  => :BOOL,
+            :in_potlatch              => :BOOL
+        },
+        :example => { :page => 1, :rp => 10, :filter => 'in_wiki', :sortname => 'key', :sortorder => 'asc' }
+    }) do
 
         if params[:filters]
-            filters = params[:filters].split(',').map{ |f| @@filters[f.to_sym] }.compact
+            filters = params[:filters].split(',').map{ |f| @@filters[f.to_sym][:expr] }.compact
         else
             filters = []
         end
@@ -113,7 +137,35 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
-    get '/api/2/db/keys/overview' do
+    api(2, 'db/keys/overview', {
+        :description => 'Show statistics for nodes, ways, relations and total for this key.',
+        :parameters => :key,
+        :paging => :no,
+        :result => {
+            :nodes => {
+                :count => :INT,
+                :count_fraction => :FLOAT,
+                :values => :INT
+            },
+            :ways => {
+                :count => :INT,
+                :count_fraction => :FLOAT,
+                :values => :INT
+            },
+            :relations => {
+                :count => :INT,
+                :count_fraction => :FLOAT,
+                :values => :INT
+            },
+            :all => {
+                :count => :INT,
+                :count_fraction => :FLOAT,
+                :values => :INT
+            },
+            :users => :INT
+        },
+        :example => { :key => 'highway' }
+    }) do
         key = params[:key]
         out = Hash.new
 
@@ -139,7 +191,12 @@ class Taginfo < Sinatra::Base
         out.to_json
     end
 
-    get '/api/2/db/keys/distribution' do
+    api(2, 'db/keys/distribution', {
+        :description => 'Get map with distribution of this key in the database.',
+        :parameters => [:key],
+        :result => 'PNG image.',
+        :example => { :key => 'amenity' }
+    }) do
         key = params[:key]
         content_type :png
         @db.select('SELECT png FROM db.key_distributions').
@@ -147,7 +204,21 @@ class Taginfo < Sinatra::Base
             get_first_value()
     end
 
-    get '/api/2/db/keys/values' do
+    api(2, 'db/keys/values', {
+        :description => 'Get values used with a given key',
+        :parameters => [:key],
+        :paging => :optional,
+        :filter => {
+            :all       => { :doc => 'no filter' },
+            :nodes     => { :doc => 'only values on tags used on nodes' },
+            :ways      => { :doc => 'only values on tags used on ways' },
+            :relations => { :doc => 'only values on tags used on relations' }
+        },
+        :sort => %w( value count_all count_nodes count_ways count_relations ),
+        :query => 'substring on value',
+        :result => { :value => :STRING, :count => :INT, :fraction => :FLOAT },
+        :example => { :key => 'highway', :page => 1, :rp => 10, :sortname => 'count_ways', :sortorder => 'desc' }
+    }) do
         key = params[:key]
         filter_type = get_filter()
 
@@ -193,7 +264,25 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
-    get '/api/2/db/keys/keys' do
+    api(2, 'db/keys/keys', {
+        :description => 'Find keys that are used together with a given key.',
+        :parameters => [:key],
+        :paging => :optional,
+        :filter => {
+            :all       => { :doc => 'no filter' },
+            :nodes     => { :doc => 'only values on tags used on nodes' },
+            :ways      => { :doc => 'only values on tags used on ways' },
+            :relations => { :doc => 'only values on tags used on relations' }
+        },
+        :sort => %w( together_count other_key from_fraction ),
+        :result => {
+            :other_key      => :STRING,
+            :together_count => :INT,
+            :to_fraction    => :FLOAT,
+            :from_fraction  => :FLOAT
+        },
+        :example => { :key => 'highway', :page => 1, :rp => 10, :sortname => 'together_count', :sortorder => 'desc' }
+    }) do
         key = params[:key]
         filter_type = get_filter()
 
@@ -235,7 +324,7 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
-    get '/api/2/db/popular_keys' do
+    api(2, 'db/popular_keys') do
         total = @db.count('popular_keys').
             condition_if("key LIKE '%' || ? || '%'", params[:query]).
             get_first_value().to_i
@@ -270,7 +359,30 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
-    get '/api/2/db/tags/overview' do
+    api(2, 'db/tags/overview', {
+        :description => 'Show statistics for nodes, ways, relations and total for this tag.',
+        :parameters => [:key, :value],
+        :paging => :no,
+        :result => {
+            :nodes => {
+                :count => :INT,
+                :count_fraction => :FLOAT,
+            },
+            :ways => {
+                :count => :INT,
+                :count_fraction => :FLOAT,
+            },
+            :relations => {
+                :count => :INT,
+                :count_fraction => :FLOAT,
+            },
+            :all => {
+                :count => :INT,
+                :count_fraction => :FLOAT,
+            }
+        },
+        :example => { :key => 'highway', :value => 'residential' }
+    }) do
         key   = params[:key]
         value = params[:value]
 

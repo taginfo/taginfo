@@ -175,6 +175,12 @@ def get!(path, &block)
     end
 end
 
+# Like the 'get' method but specific for API calls, includes documentation for API calls
+def api(version, path, doc=nil, &block)
+    APIDoc.new(version, path, doc) unless doc.nil?
+    get("/api/#{version}/#{path}", &block)
+end
+
 # return the base url for this site
 def base_url
     request.scheme + '://' + request.host + ':' + request.port.to_s 

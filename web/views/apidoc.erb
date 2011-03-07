@@ -1,0 +1,64 @@
+<h1>API Documentation</h1>
+
+<p>See <a href="http://wiki.openstreetmap.org/wiki/Taginfo/API">the OSM wiki</a> for general information about the API.</p>
+
+<h2>Table of Contents</h2>
+
+<p style="color: red;">This list of API calls and their descriptions are not complete!</p>
+
+<ul>
+<% APIDoc.paths.keys.sort.each do |version|
+       APIDoc.paths[version].keys.sort.each do |path|
+           doc = APIDoc.paths[version][path] %>
+    <li><a href="#<%= doc.complete_path.tr('/', '_')[1,1000] %>"><%= doc.complete_path %></li>
+<%     end
+   end %>
+</ul>
+
+<% APIDoc.paths.keys.sort.each do |version|
+       APIDoc.paths[version].keys.sort.each do |path|
+           doc = APIDoc.paths[version][path] %>
+<a name="<%= doc.complete_path.tr('/', '_')[1,1000] %>"></a>
+<h2><%= doc.complete_path %></h2>
+<table class="desc">
+    </tr>
+    <tr>
+    <tr>
+        <th>Path:</th>
+        <td><tt><%= doc.complete_path %></tt></td>
+    </tr>
+    <tr>
+        <th>Description:</th>
+        <td><%= doc.description %></td>
+    </tr>
+    <tr>
+        <th>Parameters:</th>
+        <td><%= doc.parameters || '<i>none</i>' %></td>
+    </tr>
+    <tr>
+        <th>Paging:</th>
+        <td><%= doc.show_paging %></td>
+    </tr>
+    <tr>
+        <th>Filter:</th>
+        <td><%= doc.show_filter %></td>
+    </tr>
+    <tr>
+        <th>Sort:</th>
+        <td><%= doc.show_sort %></td>
+    </tr>
+    <tr>
+        <th>Query:</th>
+        <td><%= doc.show_query %></td>
+    </tr>
+    <tr>
+        <th>Result:</th>
+        <td><%= doc.show_result %></td>
+    </tr>
+    <tr>
+        <th>Example:</th>
+        <td><a href="<%= doc.show_example %>" target="_blank"><%= doc.show_example %></a></td>
+    </tr>
+</table>
+<%     end
+  end %>

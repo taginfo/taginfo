@@ -311,11 +311,13 @@ table.list {
 table.list th {
     padding: 4px;
     font-weight: normal;
+    vertical-align: top;
 }
 
 table.list td {
     background-color: #ffffff;
     padding: 4px 10px;
+    vertical-align: top;
 }
 
 table.list td.border {
@@ -406,6 +408,28 @@ table.drilldown td.arrow {
 table.drilldown td#feature {
     min-width: 16em;
     padding: 10px;
+}
+
+/* ==========  */
+
+table.desc {
+    background-color: #f0f0f0;
+    padding: 6px;
+    width: 100%;
+}
+
+table.desc th {
+    text-align: left;
+    vertical-align: top;
+    font-weight: normal;
+    width: 8em;
+    padding: 2px;
+}
+
+table.desc td {
+    vertical-align: top;
+    background-color: #ffffff;
+    padding: 2px;
 }
 
 /* ==========  */

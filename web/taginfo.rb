@@ -40,6 +40,7 @@ require 'lib/language.rb'
 require 'lib/sql.rb'
 require 'lib/sources.rb'
 require 'lib/reports.rb'
+require 'lib/apidoc.rb'
 
 #------------------------------------------------------------------------------
 
@@ -275,6 +276,14 @@ class Taginfo < Sinatra::Base
                 :empty_string => trans.t.misc.empty_string
             }
         }.to_json + ";\n"
+    end
+
+    #--------------------------------------------------------------------------
+
+    get '/apidoc' do
+        @title = 'API Documentation'
+        @breadcrumbs << @title
+        erb :apidoc
     end
 
     #--------------------------------------------------------------------------
