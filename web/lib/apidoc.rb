@@ -3,7 +3,7 @@ class APIDoc
 
     @@paths = {}
 
-    attr_accessor :version, :path, :parameters, :paging, :filter, :sort, :query, :result, :description, :example
+    attr_accessor :version, :path, :parameters, :paging, :filter, :sort, :result, :description, :example, :ui
 
     def self.paths
         @@paths
@@ -30,11 +30,20 @@ class APIDoc
         paging || 'no'
     end
 
+    def show_parameters
+        return '<i>none</i>' unless parameters
+        list = []
+        parameters.keys.sort{ |a,b| a.to_s <=> b.to_s }.each do |p|
+            list << "<tt>#{p}</tt> &mdash; #{parameters[p]}"
+        end
+        list.join('<br/>')
+    end
+
     def show_filter
         return '<i>none</i>' unless filter
         list = []
         filter.keys.sort{ |a,b| a.to_s <=> b.to_s }.each do |f|
-            list << "<tt>#{f}</tt> (#{filter[f][:doc]})"
+            list << "<tt>#{f}</tt> &mdash; #{filter[f][:doc]}"
         end
         list.join('<br/>')
     end
@@ -48,14 +57,14 @@ class APIDoc
         complete_path + '?' + params.join('&')
     end
 
+    def show_ui
+        return '' if example.nil?
+        ui
+    end
+
     def show_sort
         return '<i>none</i>' unless sort
         sort.map{ |s| "<tt>#{s}</tt>" }.join(', ')
-    end
-
-    def show_query
-        return '<i>none</i>' unless query
-        query
     end
 
     def show_result

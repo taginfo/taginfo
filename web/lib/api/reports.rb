@@ -2,7 +2,30 @@
 
 class Taginfo < Sinatra::Base
 
-    get '/api/2/reports/frequently_used_keys_without_wiki_page' do
+    api(2, 'reports/frequently_used_keys_without_wiki_page', {
+        :description => 'Return frequently used tag keys that have no associated wiki page.',
+        :parameters => {
+            :min_count => 'How many tags with this key must there be at least to show up here? (default 10000).',
+            :english => 'Check for key wiki pages in any language (0, default) or in the English language (1).',
+            :query => 'Only show results where the key matches this query (substring match, optional).'
+        },
+        :paging => :optional,
+        :sort => %w( key count_all values_all users_all ),
+        :result => {
+            :key                => :STRING,
+            :count_all          => :INT,
+            :count_all_fraction => :FLOAT,
+            :values_all         => :INT,
+            :users_all          => :INT,
+            :prevalent_values   => [{
+                :value    => :STRING,
+                :count    => :INT,
+                :fraction => :FLOAT
+            }]
+        },
+        :example => { :min_count => 1000, :english => '1', :page => 1, :rp => 10, :sortname => 'count_all', :sortorder => 'desc' },
+        :ui => '/reports/frequently_used_keys_without_wiki_page'
+    }) do
 
         min_count = params[:min_count].to_i || 10000
 
@@ -61,7 +84,22 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
-    get '/api/2/reports/languages' do
+    api(2, 'reports/languages', {
+        :description => 'List languages Taginfo knows about and how many wiki pages describing keys and tags there are in these languages.',
+        :paging => :no,
+        :result => {
+            :code                    => :STRING,
+            :native_name             => :STRING,
+            :english_name            => :STRING,
+            :wiki_key_pages          => :INT,
+            :wiki_key_pages_fraction => :FLOAT,
+            :wiki_tag_pages          => :INT,
+            :wiki_tag_pages_fraction => :FLOAT
+        },
+        :sort => %w( code native_name english_name wiki_key_pages wiki_tag_pages ),
+        :example => { :sortname => 'wiki_key_pages', :sortorder => 'desc' },
+        :ui => '/reports/languages'
+    }) do
         res = @db.select('SELECT * FROM languages').
             order_by(params[:sortname], params[:sortorder]){ |o|
                 o.code

@@ -33,7 +33,7 @@
     </tr>
     <tr>
         <th>Parameters:</th>
-        <td><%= doc.parameters || '<i>none</i>' %></td>
+        <td><%= doc.show_parameters %></td>
     </tr>
     <tr>
         <th>Paging:</th>
@@ -48,16 +48,16 @@
         <td><%= doc.show_sort %></td>
     </tr>
     <tr>
-        <th>Query:</th>
-        <td><%= doc.show_query %></td>
-    </tr>
-    <tr>
         <th>Result:</th>
         <td><%= doc.show_result %></td>
     </tr>
     <tr>
         <th>Example:</th>
         <td><a href="<%= doc.show_example %>" target="_blank"><%= doc.show_example %></a></td>
+    </tr>
+    <tr>
+        <th title="User interface page where this API is used">UI Example:</th>
+        <td><a href="<%= doc.show_ui %>" target="_blank"><%= doc.show_ui %></a></td>
     </tr>
 </table>
 <%     end
