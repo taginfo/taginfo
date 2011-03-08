@@ -1,7 +1,7 @@
 # web/lib/api/josm.rb
 class Taginfo < Sinatra::Base
 
-    get '/api/2/josm/styles' do
+    api(2, 'josm/styles') do
         # XXX dummy function
         return [
             { :id => 'standard', :name => 'standard', :url => '' }
@@ -22,7 +22,7 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
-    get '/api/2/josm/styles/:style' do
+    api(2, 'josm/styles/:style') do
         total = @db.count('josm_style_rules').
             condition_if("k LIKE '%' || ? || '%' OR v LIKE '%' || ? || '%'", params[:query], params[:query]).
             get_first_value().to_i
@@ -44,7 +44,7 @@ class Taginfo < Sinatra::Base
         return get_josm_result(total, res);
     end
 
-    get '/api/2/josm/styles/:style/keys' do
+    api(2, 'josm/styles/:style/keys') do
         style = params[:style] # XXX do something with this
         key   = params[:key]
         
@@ -67,7 +67,7 @@ class Taginfo < Sinatra::Base
         return get_josm_result(total, res);
     end
 
-    get '/api/2/josm/styles/:style/tags' do
+    api(2, 'josm/styles/:style/tags') do
         key   = params[:key]
         value = params[:value]
 

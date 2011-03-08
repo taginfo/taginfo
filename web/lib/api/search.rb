@@ -1,11 +1,19 @@
 # web/lib/api/search.rb
 class Taginfo < Sinatra::Base
 
-    get '/api/2/search/keys' do
-        query = params[:q]
-    end
-
-    get '/api/2/search/values' do
+    api(2, 'search/values', {
+        :description => 'Search all tag values for string.',
+        :parameters => { :q => 'Value to search for (substring search, required).' },
+        :sort => %w( count_all key value ),
+        :paging => :optional,
+        :result => {
+            :key       => :STRING,
+            :value     => :STRING,
+            :count_all => :INT
+        },
+        :example => { :q => 'foo', :page => 1, :rp => 10 },
+        :ui => '/search?q=foo#values'
+    }) do
         query = params[:q]
 
         total = @db.count('search.ftsearch').
@@ -34,7 +42,7 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
-    get '/api/2/search/tags' do
+    api(2, 'search/tags') do
         query = params[:q]
         (query_key, query_value) = query.split('=', 2)
 
@@ -68,10 +76,6 @@ class Taginfo < Sinatra::Base
                 :count_all => row['count_all'].to_i,
             }}
         }.to_json
-    end
-
-    get '/api/2/search/wiki' do
-        query = params[:q]
     end
 
 end

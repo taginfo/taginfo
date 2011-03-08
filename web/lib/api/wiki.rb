@@ -20,7 +20,7 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
-    get '/api/2/wiki/keys' do
+    api(2, 'wiki/keys') do
         key = params[:key]
 
         if key.nil?
@@ -60,7 +60,7 @@ class Taginfo < Sinatra::Base
         end
     end
 
-    get '/api/2/wiki/tags' do
+    api(2, 'wiki/tags') do
         key   = params[:key]
         value = params[:value]
 

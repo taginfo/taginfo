@@ -30,7 +30,8 @@ class Taginfo < Sinatra::Base
             :in_josm                  => :BOOL,
             :in_potlatch              => :BOOL
         },
-        :example => { :page => 1, :rp => 10, :filter => 'in_wiki', :sortname => 'key', :sortorder => 'asc' }
+        :example => { :page => 1, :rp => 10, :filter => 'in_wiki', :sortname => 'key', :sortorder => 'asc' },
+        :ui => '/keys'
     }) do
 
         if params[:filters]
@@ -163,7 +164,8 @@ class Taginfo < Sinatra::Base
             },
             :users => :INT
         },
-        :example => { :key => 'highway' }
+        :example => { :key => 'highway' },
+        :ui => '/keys/highway'
     }) do
         key = params[:key]
         out = Hash.new
@@ -194,7 +196,8 @@ class Taginfo < Sinatra::Base
         :description => 'Get map with distribution of this key in the database.',
         :parameters => { :key => 'Tag key (required).' },
         :result => 'PNG image.',
-        :example => { :key => 'amenity' }
+        :example => { :key => 'amenity' },
+        :ui => '/keys/highway#map'
     }) do
         key = params[:key]
         content_type :png
@@ -218,7 +221,8 @@ class Taginfo < Sinatra::Base
         },
         :sort => %w( value count_all count_nodes count_ways count_relations ),
         :result => { :value => :STRING, :count => :INT, :fraction => :FLOAT },
-        :example => { :key => 'highway', :page => 1, :rp => 10, :sortname => 'count_ways', :sortorder => 'desc' }
+        :example => { :key => 'highway', :page => 1, :rp => 10, :sortname => 'count_ways', :sortorder => 'desc' },
+        :ui => '/keys/highway#values'
     }) do
         key = params[:key]
         filter_type = get_filter()
@@ -282,7 +286,8 @@ class Taginfo < Sinatra::Base
             :to_fraction    => :FLOAT,
             :from_fraction  => :FLOAT
         },
-        :example => { :key => 'highway', :page => 1, :rp => 10, :sortname => 'together_count', :sortorder => 'desc' }
+        :example => { :key => 'highway', :page => 1, :rp => 10, :sortname => 'together_count', :sortorder => 'desc' },
+        :ui => '/keys/highway#keys'
     }) do
         key = params[:key]
         filter_type = get_filter()
@@ -385,7 +390,8 @@ class Taginfo < Sinatra::Base
                 :count_fraction => :FLOAT,
             }
         },
-        :example => { :key => 'highway', :value => 'residential' }
+        :example => { :key => 'highway', :value => 'residential' },
+        :ui => '/tags/highway=residential'
     }) do
         key   = params[:key]
         value = params[:value]
