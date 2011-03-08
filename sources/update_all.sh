@@ -16,10 +16,13 @@
 #
 #------------------------------------------------------------------------------
 
-# these sources will be downloaded from http://taginfo.openstreetmap.de/download/
+# These sources will be downloaded from http://taginfo.openstreetmap.de/download/
+# Note that this will NOT work for the "db" source! Well, you can download it,
+# but it will fail later, because the database is changed by the master.sql
+# scripts.
 SOURCES_DOWNLOAD=""
 
-# these sources will be created from the actual sources
+# These sources will be created from the actual sources
 SOURCES_CREATE="josm potlatch merkaartor wiki db"
 
 #------------------------------------------------------------------------------
