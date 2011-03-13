@@ -37,7 +37,7 @@ db = SQLite3::Database.new(dir + '/taginfo-potlatch.db')
 
 db.execute('BEGIN TRANSACTION');
 
-file = File.new(dir + '/resources/map_features.xml')
+file = File.new(dir + '/git-source/resources/map_features.xml')
 doc = REXML::Document.new(file)
 
 doc.elements.each('/mapFeatures/category') do |category_element|

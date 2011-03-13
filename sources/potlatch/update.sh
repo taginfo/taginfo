@@ -23,10 +23,12 @@ DATABASE=$DIR/taginfo-potlatch.db
 rm -f $DATABASE
 
 echo "`$DATECMD` Updating resources..."
-if [ -d $DIR/resources ]; then
-    svn update $DIR/resources
+if [ -d $DIR/git-source ]; then
+    cd $DIR/git-source
+    git pull
+    cd -
 else
-    svn checkout http://svn.openstreetmap.org/applications/editors/potlatch2/resources $DIR/resources
+    git clone git://git.openstreetmap.org/potlatch2.git $DIR/git-source
 fi
 
 echo "`$DATECMD` Running init.sql..."
