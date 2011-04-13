@@ -22,6 +22,7 @@ PREREQUISITES
 Uses
     * Mongrel
     * Sinatra web framework http://www.sinatrarb.com/
+    * Rack Contrib Gem (for Rack::JSONP)
     * JSON gem (install with gem, Debian/Ubuntu packages are too old and buggy)
     * jQuery (www.jquery.com), necessary files are included
     * Flexigrid (Originally from http://code.google.com/p/flexigrid/
@@ -36,13 +37,14 @@ Debian/Ubuntu packages:
     rubygems
 
 Gems:
-    gem install mongrel rack sinatra json
+    gem install mongrel rack rack-contrib sinatra json
 
 
 DATA IMPORT
 -----------
 
 See http://wiki.openstreetmap.org/wiki/Taginfo/Running
+
 
 WEB USER INTERFACE
 ------------------

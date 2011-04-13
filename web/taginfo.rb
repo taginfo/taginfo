@@ -33,6 +33,7 @@ require 'sqlite3'
 
 require 'sinatra/base'
 require 'sinatra/r18n'
+require 'rack/contrib'
 
 require 'lib/utils.rb'
 require 'lib/javascript.rb'
@@ -61,6 +62,8 @@ db.close
 class Taginfo < Sinatra::Base
 
     register Sinatra::R18n
+
+    use Rack::JSONP
 
     mime_type :opensearch, 'application/opensearchdescription+xml'
 

@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+    <head>
+        <title>Taginfo JSONP Test</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <script>
+var result;
+function jsonp(data) {
+    result = data;
+}
+        </script>
+        <script src="http://taginfo.openstreetmap.de/api/2/db/keys?include=prevalent_values&page=1&rp=15&sortname=count_all&sortorder=desc&qtype=key&callback=jsonp"></script>
+        <script>
+var key = result.data[0].key;
+alert(key);
+        </script>
+    </head>
+   <body>
+        <h1>Taginfo JSONP Test</h1>
+   </body>
+</html>
