@@ -36,6 +36,7 @@ taginfo:
 
 pages:
     index:
+        description: Taginfo is a system for finding and aggregating information about OpenStreetMap tags.
         buttons:
             show_all_keys: Show all keys
             reports: Reports

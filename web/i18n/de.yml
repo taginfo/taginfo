@@ -34,6 +34,7 @@ taginfo:
 
 pages:
     index:
+        description: Taginfo sammelt und aggregiert Informationen über OpenStreetMap-Tags.
         buttons:
             show_all_keys: Alle Keys anzeigen
             reports: Reports
