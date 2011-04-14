@@ -149,7 +149,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
     static const int string_store_size = 1024 * 1024 * 10;
     StringStore *string_store;
 
-    Sqlite::Database *db;
+    Osmium::Sqlite::Database *db;
 
     void _timer_info(const char *msg) {
         int duration = time(0) - timer;
@@ -183,7 +183,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
         std::bitset<KeyStats::location_image_x_size * KeyStats::location_image_y_size> location_all;
         int sum_size=0;
 
-        Sqlite::Statement *statement_insert_into_key_distributions = db->prepare("INSERT INTO key_distributions (key, png) VALUES (?, ?);");
+        Osmium::Sqlite::Statement *statement_insert_into_key_distributions = db->prepare("INSERT INTO key_distributions (key, png) VALUES (?, ?);");
         db->begin_transaction();
 
         for (tags_iterator = tags_stat.begin(); tags_iterator != tags_stat.end(); tags_iterator++) {
@@ -279,7 +279,7 @@ public:
     TagStatsHandler() : Base() {
         string_store = new StringStore(string_store_size);
         max_timestamp = 0;
-        db = new Sqlite::Database("taginfo-db.db");
+        db = new Osmium::Sqlite::Database("taginfo-db.db");
     }
 
     ~TagStatsHandler() {
@@ -366,23 +366,23 @@ public:
         _print_memory_usage();
         timer = time(0);
 
-        Sqlite::Statement *statement_insert_into_keys = db->prepare("INSERT INTO keys (key, " \
+        Osmium::Sqlite::Statement *statement_insert_into_keys = db->prepare("INSERT INTO keys (key, " \
                 " count_all,  count_nodes,  count_ways,  count_relations, " \
                 "values_all, values_nodes, values_ways, values_relations, " \
                 " users_all, " \
                 "grids) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 
-        Sqlite::Statement *statement_insert_into_tags = db->prepare("INSERT INTO tags (key, value, " \
+        Osmium::Sqlite::Statement *statement_insert_into_tags = db->prepare("INSERT INTO tags (key, value, " \
                 "count_all, count_nodes, count_ways, count_relations) " \
                 "VALUES (?, ?, ?, ?, ?, ?);");
 
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
-        Sqlite::Statement *statement_insert_into_key_combinations = db->prepare("INSERT INTO keypairs (key1, key2, " \
+        Osmium::Sqlite::Statement *statement_insert_into_key_combinations = db->prepare("INSERT INTO keypairs (key1, key2, " \
                 "count_all, count_nodes, count_ways, count_relations) " \
                 "VALUES (?, ?, ?, ?, ?, ?);");
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
-        Sqlite::Statement *statement_update_meta = db->prepare("UPDATE source SET data_until=?");
+        Osmium::Sqlite::Statement *statement_update_meta = db->prepare("UPDATE source SET data_until=?");
 
         db->begin_transaction();
 
