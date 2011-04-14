@@ -17,7 +17,7 @@ CXXFLAGS += -DTAGSTATS_COUNT_KEY_COMBINATIONS
 
 CXXFLAGS += -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
 
-CXXFLAGS += -I../include -I../../../osmium/osmium/include
+CXXFLAGS += -I../../../osmium/osmium/include
 
 LDFLAGS = -L/usr/local/lib -lexpat -lpthread
 
