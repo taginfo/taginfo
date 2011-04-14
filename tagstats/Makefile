@@ -23,7 +23,7 @@ LDFLAGS = -L/usr/local/lib -lexpat -lpthread
 
 LIB_SQLITE   = -lsqlite3
 LIB_GD       = -lgd -lz -lm
-LIB_PROTOBUF = -lz -lprotobuf -losmpbf
+LIB_PROTOBUF = -lz -lprotobuf-lite -losmpbf
 
 .PHONY: all clean install
 
