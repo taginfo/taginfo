@@ -1,3 +1,11 @@
 User-agent: *
-Disallow: /
+Disallow: /api
+Disallow: /css
 Disallow: /download
+Disallow: /embed
+Disallow: /flexigrid
+Disallow: /img
+Disallow: /js
+Disallow: /keys
+Disallow: /search/suggest
+Disallow: /tags
