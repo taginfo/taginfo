@@ -73,6 +73,9 @@ typedef google::sparse_hash_map<osm_user_id_t, uint32_t> user_hash_map_t;
 typedef google::sparse_hash_map<const char *, Counter, djb2_hash, eqstr> key_combination_hash_map_t;
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
+/**
+ * A KeyStats object holds all statistics for an OSM tag key.
+ */
 class KeyStats {
 
 public:
@@ -90,16 +93,7 @@ public:
     user_hash_map_t user_hash;
 #endif // TAGSTATS_COUNT_USERS
 
-    static const int location_image_y_size = 360;
-    static const int location_image_x_size = 2 * location_image_y_size;
-
-    std::bitset<location_image_x_size * location_image_y_size> location;
-
-    int grids;
-
-    KeyStats() {
-        grids = 0;
-    }
+    GeoDistribution distribution;
 
     void update(const char *value, Osmium::OSM::Object *object, StringStore *string_store) {
         key.count[object->get_type()]++;
@@ -122,9 +116,8 @@ public:
 #endif // TAGSTATS_COUNT_USERS
 
         if (object->get_type() == NODE) {
-            int x =                                   int(2 * (static_cast<Osmium::OSM::Node *>(object)->get_lon() + 180));
-            int y = KeyStats::location_image_y_size - int(2 * (static_cast<Osmium::OSM::Node *>(object)->get_lat() +  90));
-            location[KeyStats::location_image_x_size * y + x] = true;
+            distribution.add_coordinate(static_cast<Osmium::OSM::Node *>(object)->get_lon(),
+                                        static_cast<Osmium::OSM::Node *>(object)->get_lat());
         }
     }
 
@@ -180,7 +173,6 @@ class TagStatsHandler : public Osmium::Handler::Base {
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
     void _print_images() {
-        std::bitset<KeyStats::location_image_x_size * KeyStats::location_image_y_size> location_all;
         int sum_size=0;
 
         Osmium::Sqlite::Statement *statement_insert_into_key_distributions = db->prepare("INSERT INTO key_distributions (key, png) VALUES (?, ?);");
@@ -190,61 +182,19 @@ class TagStatsHandler : public Osmium::Handler::Base {
             const char *key = tags_iterator->first;
             KeyStats *stat = tags_iterator->second;
 
-            gdImagePtr im = gdImageCreate(KeyStats::location_image_x_size, KeyStats::location_image_y_size);
-            int bgColor = gdImageColorAllocate(im, 0, 0, 0);
-            gdImageColorTransparent(im, bgColor);
-            int fgColor = gdImageColorAllocate(im, 180, 0, 0);
-
-            int n=0;
-            for (int y=0; y < KeyStats::location_image_y_size; y++) {
-                for (int x=0; x < KeyStats::location_image_x_size; x++) {
-                    if (stat->location[n]) {
-                        stat->grids++;
-                        gdImageSetPixel(im, x, y, fgColor);
-                        location_all[n] = true;
-                    }
-                    n++;
-                }
-            }
-
             int size;
-            void *ptr = gdImagePngPtr(im, &size);
+            void *ptr = stat->distribution.create_png(&size);
             sum_size += size;
             statement_insert_into_key_distributions
             ->bind_text(key)
             ->bind_blob(ptr, size)
             ->execute();
-            gdFree(ptr);
 
-            gdImageDestroy(im);
+            stat->distribution.free_png(ptr);
         }
 
-        gdImagePtr im_all = gdImageCreate(KeyStats::location_image_x_size, KeyStats::location_image_y_size);
-        gdImageColorAllocate(im_all, 0, 0, 0);
-        int white_all = gdImageColorAllocate(im_all, 255, 255, 255);
-        int n=0, count_grid=0;
-        for (int y=0; y < KeyStats::location_image_y_size; y++) {
-            for (int x=0; x < KeyStats::location_image_x_size; x++) {
-                if (location_all[n]) {
-                    gdImageSetPixel(im_all, x, y, white_all);
-                    count_grid++;
-                }
-                n++;
-            }
-        }
-        std::cerr << "grids_all: " << count_grid << std::endl;
-
-        int size;
-        void *ptr = gdImagePngPtr(im_all, &size);
-        statement_insert_into_key_distributions
-        ->bind_null()
-        ->bind_blob(ptr, size)
-        ->execute();
-        gdFree(ptr);
-
-        gdImageDestroy(im_all);
-
-        std::cerr << "sum of location image sizes: " << sum_size + size << std::endl;
+        std::cerr << "grids_all: " << GeoDistribution::count_all_set_cells() << std::endl;
+        std::cerr << "sum of location image sizes: " << sum_size << std::endl;
 
         db->commit();
         delete statement_insert_into_key_distributions;
@@ -355,7 +305,7 @@ public:
         std::cerr << "sizeof(user_hash_map_t) = " << sizeof(user_hash_map_t) << std::endl;
 #endif // TAGSTATS_COUNT_USERS
 
-        std::cerr << "sizeof(std::bitset<x_size*y_size>) = " << sizeof(std::bitset<KeyStats::location_image_x_size * KeyStats::location_image_y_size>) << std::endl;
+        std::cerr << "sizeof(std::bitset<x_size*y_size>) = " << sizeof(std::bitset<GeoDistribution::resolution_x * GeoDistribution::resolution_y>) << std::endl;
         std::cerr << "sizeof(KeyStats) = " << sizeof(KeyStats) << std::endl << std::endl;
 
         _print_memory_usage();
@@ -445,7 +395,7 @@ public:
 #else
             ->bind_int64(0)
 #endif // TAGSTATS_COUNT_USERS
-            ->bind_int64(stat->grids)
+            ->bind_int64(stat->distribution.get_cells())
             ->execute();
 
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS

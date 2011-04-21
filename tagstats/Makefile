@@ -29,13 +29,16 @@ LIB_PROTOBUF = -lz -lprotobuf-lite -losmpbf
 
 all: tagstats
 
-tagstats: tagstats.cpp tagstats_handler.hpp string_store.hpp
+tagstats: tagstats.cpp tagstats_handler.hpp string_store.hpp geodistribution.hpp
 	$(CXX) $(CXXFLAGS) -o $@ $< $(LDFLAGS) $(LIB_PROTOBUF) $(LIB_GD) $(LIB_SQLITE)
+
+check:
+	cppcheck --enable=all *.cpp *.hpp
 
 install:
 	install -m 755 -g root -o root -d $(DESTDIR)/usr/bin
 	install -m 755 -g root -o root tagstats $(DESTDIR)/usr/bin/tagstats
-    
+
 clean:
 	rm -f *.o core tagstats
 
