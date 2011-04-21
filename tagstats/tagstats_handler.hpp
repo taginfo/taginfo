@@ -6,8 +6,6 @@
 #include <string>
 #include <fstream>
 
-#include <gd.h>
-
 #include <osmium/utils/sqlite.hpp>
 #include "string_store.hpp"
 
@@ -93,7 +91,7 @@ public:
     user_hash_map_t user_hash;
 #endif // TAGSTATS_COUNT_USERS
 
-    GeoDistribution distribution;
+    GeoDistribution node_distribution;
 
     void update(const char *value, Osmium::OSM::Object *object, StringStore *string_store) {
         key.count[object->get_type()]++;
@@ -116,8 +114,8 @@ public:
 #endif // TAGSTATS_COUNT_USERS
 
         if (object->get_type() == NODE) {
-            distribution.add_coordinate(static_cast<Osmium::OSM::Node *>(object)->get_lon(),
-                                        static_cast<Osmium::OSM::Node *>(object)->get_lat());
+            node_distribution.add_coordinate(static_cast<Osmium::OSM::Node *>(object)->get_lon(),
+                                             static_cast<Osmium::OSM::Node *>(object)->get_lat());
         }
     }
 
@@ -129,12 +127,15 @@ public:
 
 typedef google::sparse_hash_map<const char *, KeyStats *, djb2_hash, eqstr> key_hash_map_t;
 
+
+/**
+ * Osmium handler that creates statistics for Taginfo.
+ */
 class TagStatsHandler : public Osmium::Handler::Base {
 
     time_t timer;
 
     key_hash_map_t           tags_stat;
-    key_hash_map_t::iterator tags_iterator;
 
     time_t max_timestamp;
 
@@ -178,22 +179,23 @@ class TagStatsHandler : public Osmium::Handler::Base {
         Osmium::Sqlite::Statement *statement_insert_into_key_distributions = db->prepare("INSERT INTO key_distributions (key, png) VALUES (?, ?);");
         db->begin_transaction();
 
+        key_hash_map_t::iterator tags_iterator;
         for (tags_iterator = tags_stat.begin(); tags_iterator != tags_stat.end(); tags_iterator++) {
             const char *key = tags_iterator->first;
             KeyStats *stat = tags_iterator->second;
 
             int size;
-            void *ptr = stat->distribution.create_png(&size);
+            void *ptr = stat->node_distribution.create_png(&size);
             sum_size += size;
             statement_insert_into_key_distributions
             ->bind_text(key)
             ->bind_blob(ptr, size)
             ->execute();
 
-            stat->distribution.free_png(ptr);
+            stat->node_distribution.free_png(ptr);
         }
 
-        std::cerr << "grids_all: " << GeoDistribution::count_all_set_cells() << std::endl;
+        std::cerr << "gridcells_all: " << GeoDistribution::count_all_set_cells() << std::endl;
         std::cerr << "sum of location image sizes: " << sum_size << std::endl;
 
         db->commit();
@@ -226,9 +228,8 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
 public:
 
-    TagStatsHandler() : Base() {
+    TagStatsHandler() : Base(), max_timestamp(0) {
         string_store = new StringStore(string_store_size);
-        max_timestamp = 0;
         db = new Osmium::Sqlite::Database("taginfo-db.db");
     }
 
@@ -245,6 +246,7 @@ public:
         }
 
         int tag_count = object->tag_count();
+        key_hash_map_t::iterator tags_iterator;
         for (int i=0; i<tag_count; i++) {
             const char* key = object->get_tag_key(i);
 
@@ -357,6 +359,7 @@ public:
         uint64_t user_hash_buckets=0;
 #endif // TAGSTATS_COUNT_USERS
 
+        key_hash_map_t::iterator tags_iterator;
         value_hash_map_t::iterator values_iterator;
         for (tags_iterator = tags_stat.begin(); tags_iterator != tags_stat.end(); tags_iterator++) {
             KeyStats *stat = tags_iterator->second;
@@ -395,7 +398,7 @@ public:
 #else
             ->bind_int64(0)
 #endif // TAGSTATS_COUNT_USERS
-            ->bind_int64(stat->distribution.get_cells())
+            ->bind_int64(stat->node_distribution.get_cells())
             ->execute();
 
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
