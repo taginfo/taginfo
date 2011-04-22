@@ -7,30 +7,39 @@
 
 class GeoDistribution {
 
-public:
-
     static const int resolution_y = 360;
     static const int resolution_x = 2 * resolution_y;
 
-    static const int image_size_y = resolution_y;
-    static const int image_size_x = resolution_x;
+    typedef std::bitset<resolution_x * resolution_y> geo_distribution_t;
 
-private:
+    /**
+     * Contains a pointer to a bitset that gives us the distribution.
+     * If only one grid cell is used so far, this pointer is NULL. Only
+     * if more than one grid cell is used, we dynamically create an
+     * object for this.
+     */
+    geo_distribution_t *distribution;
 
-    std::bitset<resolution_x * resolution_y> *location;
-
+    /**
+     * Number of grid cells.
+     * Will be 0 in the beginning, 1 if there is only one grid cell and
+     * 2 if there are two or more.
+     */
     int cells;
-    int loc;
 
-    static std::bitset<resolution_x * resolution_y> location_all;
+    /// If there is only one grid cell location, this is where its kept
+    int location;
+
+    /// Overall distribution
+    static geo_distribution_t distribution_all;
 
 public:
 
-    GeoDistribution() : location(NULL), cells(0), loc(-1) {
+    GeoDistribution() : distribution(NULL), cells(0), location(-1) {
     }
 
     ~GeoDistribution() {
-        delete location;
+        delete distribution;
     }
 
     /**
@@ -47,21 +56,21 @@ public:
 
         int n = resolution_x * y + x;
         if (cells == 0) {
-            loc = n;
+            location = n;
             cells++;
-            location_all[n] = true;
+            distribution_all[n] = true;
         } else if (cells == 1) {
-            if (loc != n) {
-                location = new std::bitset<resolution_x * resolution_y>;
-                (*location)[loc] = true;
-                location_all[loc] = true;
-                (*location)[n] = true;
-                location_all[n] = true;
+            if (location != n) {
+                distribution = new geo_distribution_t;
+                (*distribution)[location] = true;
+                distribution_all[location] = true;
+                (*distribution)[n] = true;
+                distribution_all[n] = true;
                 cells++;
             }
         } else {
-            (*location)[n] = true;
-            location_all[n] = true;
+            (*distribution)[n] = true;
+            distribution_all[n] = true;
         }
     }
 
@@ -75,16 +84,16 @@ public:
      * @returns Pointer to memory area with PNG image.
      */
     void *create_png(int *size) {
-        gdImagePtr im = gdImageCreate(image_size_x, image_size_y);
+        gdImagePtr im = gdImageCreate(resolution_x, resolution_y);
         int bgColor = gdImageColorAllocate(im, 0, 0, 0);
         gdImageColorTransparent(im, bgColor);
         int fgColor = gdImageColorAllocate(im, 180, 0, 0);
 
-        if (location) {
+        if (distribution) {
             int n=0;
             for (int y=0; y < resolution_y; y++) {
                 for (int x=0; x < resolution_x; x++) {
-                    if ((*location)[n]) {
+                    if ((*distribution)[n]) {
                         cells++;
                         gdImageSetPixel(im, x, y, fgColor);
                     }
@@ -92,8 +101,8 @@ public:
                 }
             }
         } else {
-            int y = loc / resolution_x;
-            int x = loc - y;
+            int y = location / resolution_x;
+            int x = location - y;
             gdImageSetPixel(im, x, y, fgColor);
         }
 
@@ -122,11 +131,14 @@ public:
      * object.
      */
     static int count_all_set_cells() {
-        return location_all.count();
+        return distribution_all.count();
     }
 
+    /**
+     * Resets the distribution storage for the overall distribution.
+     */
     static void reset() {
-        location_all.reset();
+        distribution_all.reset();
     }
 };
 

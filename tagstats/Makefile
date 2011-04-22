@@ -33,7 +33,7 @@ tagstats: tagstats.cpp tagstats_handler.hpp string_store.hpp geodistribution.hpp
 	$(CXX) $(CXXFLAGS) -o $@ $< $(LDFLAGS) $(LIB_PROTOBUF) $(LIB_GD) $(LIB_SQLITE)
 
 check:
-	cppcheck --enable=all *.cpp *.hpp
+	cppcheck --enable=all tagstats.cpp
 
 install:
 	install -m 755 -g root -o root -d $(DESTDIR)/usr/bin

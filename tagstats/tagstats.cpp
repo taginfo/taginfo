@@ -7,7 +7,7 @@
 #include "geodistribution.hpp"
 #include "tagstats_handler.hpp"
 
-std::bitset<GeoDistribution::resolution_x * GeoDistribution::resolution_y> GeoDistribution::location_all;
+GeoDistribution::geo_distribution_t GeoDistribution::distribution_all;
 
 class MyTagStatsHandler : public Osmium::Handler::Base {
 

@@ -2,7 +2,6 @@
 #define TAGSTATS_HANDLER_HPP
 
 #include <google/sparse_hash_map>
-#include <bitset>
 #include <string>
 #include <fstream>
 
@@ -135,7 +134,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
     time_t timer;
 
-    key_hash_map_t           tags_stat;
+    key_hash_map_t tags_stat;
 
     time_t max_timestamp;
 
@@ -152,9 +151,8 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
     void _update_key_combination_hash(Osmium::OSM::Object *object) {
-//        KeyStats *stat;
         key_hash_map_t::iterator tsi1, tsi2;
-        const char /*other_key,*/ *key1, *key2;
+        const char *key1, *key2;
 
         int tag_count = object->tag_count();
         for (int i=0; i<tag_count; i++) {
@@ -179,17 +177,15 @@ class TagStatsHandler : public Osmium::Handler::Base {
         Osmium::Sqlite::Statement *statement_insert_into_key_distributions = db->prepare("INSERT INTO key_distributions (key, png) VALUES (?, ?);");
         db->begin_transaction();
 
-        key_hash_map_t::iterator tags_iterator;
-        for (tags_iterator = tags_stat.begin(); tags_iterator != tags_stat.end(); tags_iterator++) {
-            const char *key = tags_iterator->first;
-            KeyStats *stat = tags_iterator->second;
+        for (key_hash_map_t::iterator it = tags_stat.begin(); it != tags_stat.end(); it++) {
+            KeyStats *stat = it->second;
 
             int size;
             void *ptr = stat->node_distribution.create_png(&size);
             sum_size += size;
             statement_insert_into_key_distributions
-            ->bind_text(key)
-            ->bind_blob(ptr, size)
+            ->bind_text(it->first) // column: key
+            ->bind_blob(ptr, size) // column: png
             ->execute();
 
             stat->node_distribution.free_png(ptr);
@@ -246,11 +242,10 @@ public:
         }
 
         int tag_count = object->tag_count();
-        key_hash_map_t::iterator tags_iterator;
         for (int i=0; i<tag_count; i++) {
             const char* key = object->get_tag_key(i);
 
-            tags_iterator = tags_stat.find(key);
+            key_hash_map_t::iterator tags_iterator = tags_stat.find(key);
             if (tags_iterator == tags_stat.end()) {
                 stat = new KeyStats();
                 tags_stat.insert(std::pair<const char *, KeyStats *>(string_store->add(key), stat));
@@ -307,7 +302,7 @@ public:
         std::cerr << "sizeof(user_hash_map_t) = " << sizeof(user_hash_map_t) << std::endl;
 #endif // TAGSTATS_COUNT_USERS
 
-        std::cerr << "sizeof(std::bitset<x_size*y_size>) = " << sizeof(std::bitset<GeoDistribution::resolution_x * GeoDistribution::resolution_y>) << std::endl;
+        std::cerr << "sizeof(GeoDistribution) = " << sizeof(GeoDistribution) << std::endl;
         std::cerr << "sizeof(KeyStats) = " << sizeof(KeyStats) << std::endl << std::endl;
 
         _print_memory_usage();
@@ -359,22 +354,20 @@ public:
         uint64_t user_hash_buckets=0;
 #endif // TAGSTATS_COUNT_USERS
 
-        key_hash_map_t::iterator tags_iterator;
-        value_hash_map_t::iterator values_iterator;
-        for (tags_iterator = tags_stat.begin(); tags_iterator != tags_stat.end(); tags_iterator++) {
+        for (key_hash_map_t::iterator tags_iterator = tags_stat.begin(); tags_iterator != tags_stat.end(); tags_iterator++) {
             KeyStats *stat = tags_iterator->second;
 
             values_hash_size    += stat->values_hash.size();
             values_hash_buckets += stat->values_hash.bucket_count();
 
-            for (values_iterator = stat->values_hash.begin(); values_iterator != stat->values_hash.end(); values_iterator++) {
+            for (value_hash_map_t::iterator values_iterator = stat->values_hash.begin(); values_iterator != stat->values_hash.end(); values_iterator++) {
                 statement_insert_into_tags
-                ->bind_text(tags_iterator->first)
-                ->bind_text(values_iterator->first)
-                ->bind_int64(values_iterator->second.all())
-                ->bind_int64(values_iterator->second.nodes())
-                ->bind_int64(values_iterator->second.ways())
-                ->bind_int64(values_iterator->second.relations())
+                ->bind_text(tags_iterator->first)                   // column: key
+                ->bind_text(values_iterator->first)                 // column: value
+                ->bind_int64(values_iterator->second.all())         // column: count_all
+                ->bind_int64(values_iterator->second.nodes())       // column: count_nodes
+                ->bind_int64(values_iterator->second.ways())        // column: count_ways
+                ->bind_int64(values_iterator->second.relations())   // column: count_relations
                 ->execute();
             }
 
@@ -384,21 +377,21 @@ public:
 #endif // TAGSTATS_COUNT_USERS
 
             statement_insert_into_keys
-            ->bind_text(tags_iterator->first)
-            ->bind_int64(stat->key.all())
-            ->bind_int64(stat->key.nodes())
-            ->bind_int64(stat->key.ways())
-            ->bind_int64(stat->key.relations())
-            ->bind_int64(stat->values_hash.size())
-            ->bind_int64(stat->values.nodes())
-            ->bind_int64(stat->values.ways())
-            ->bind_int64(stat->values.relations())
+            ->bind_text(tags_iterator->first)      // column: key
+            ->bind_int64(stat->key.all())          // column: count_all
+            ->bind_int64(stat->key.nodes())        // column: count_nodes
+            ->bind_int64(stat->key.ways())         // column: count_ways
+            ->bind_int64(stat->key.relations())    // column: count_relations
+            ->bind_int64(stat->values_hash.size()) // column: values_all
+            ->bind_int64(stat->values.nodes())     // column: values_nodes
+            ->bind_int64(stat->values.ways())      // column: values_ways
+            ->bind_int64(stat->values.relations()) // column: values_relations
 #ifdef TAGSTATS_COUNT_USERS
-            ->bind_int64(stat->user_hash.size())
+            ->bind_int64(stat->user_hash.size())   // column: users_all
 #else
             ->bind_int64(0)
 #endif // TAGSTATS_COUNT_USERS
-            ->bind_int64(stat->node_distribution.get_cells())
+            ->bind_int64(stat->node_distribution.get_cells()) // column: grids
             ->execute();
 
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
@@ -408,12 +401,12 @@ public:
             for (key_combination_hash_map_t::iterator it = stat->key_combination_hash.begin(); it != stat->key_combination_hash.end(); it++) {
                 Counter *s = &(it->second);
                 statement_insert_into_key_combinations
-                ->bind_text(tags_iterator->first)
-                ->bind_text(it->first)
-                ->bind_int64(s->all())
-                ->bind_int64(s->nodes())
-                ->bind_int64(s->ways())
-                ->bind_int64(s->relations())
+                ->bind_text(tags_iterator->first) // column: key1
+                ->bind_text(it->first)            // column: key2
+                ->bind_int64(s->all())            // column: count_all
+                ->bind_int64(s->nodes())          // column: count_nodes
+                ->bind_int64(s->ways())           // column: count_ways
+                ->bind_int64(s->relations())      // column: count_relations
                 ->execute();
             }
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
