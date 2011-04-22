@@ -6,8 +6,8 @@
 
 CXX = g++
 
-CXXFLAGS = -g
-#CXXFLAGS = -O3
+#CXXFLAGS = -g
+CXXFLAGS = -O3
 
 CXXFLAGS += -std=c++0x -Wall -Wextra -Wredundant-decls -Wdisabled-optimization -pedantic
 #CXXFLAGS += -Wpadded -Winline
@@ -36,8 +36,7 @@ check:
 	cppcheck --enable=all tagstats.cpp
 
 install:
-	install -m 755 -g root -o root -d $(DESTDIR)/usr/bin
-	install -m 755 -g root -o root tagstats $(DESTDIR)/usr/bin/tagstats
+	install -m 755 tagstats ../sources/db/tagstats
 
 clean:
 	rm -f *.o core tagstats

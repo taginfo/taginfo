@@ -1,0 +1,5 @@
+
+The tagstats binary in this directory is build for Ubuntu Maverick (10.10).  It
+might not work on your system. If not, you have to go to the ../../tagstats
+directory and build your own version.
+

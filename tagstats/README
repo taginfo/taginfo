@@ -1,0 +1,10 @@
+
+Tagstats
+========
+
+Tagstats is a C++ program to create all the database statistics from a planet
+or other OSM file. You probably must compile this yourself and copy it in the
+../sources/db directory. Tagstats uses the Osmium framework
+(wiki.osm.org/wiki/Osmium) which must be installed on your system before
+you try building tagstats.
+

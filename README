@@ -14,6 +14,7 @@ FILES
 * sources  - import scripts
 * web      - Web User Interface and API
 * examples - script to use the API
+* tagstats - C++ program to create database statistics
 
 
 PREREQUISITES
