@@ -39,6 +39,12 @@ public:
     void add_coordinate(double dx, double dy) {
         int x =                int(2 * (dx + 180));
         int y = resolution_y - int(2 * (dy +  90));
+
+        if (x < 0) x=0;
+        if (y < 0) y=0;
+        if (x >= resolution_x) x = resolution_x-1;
+        if (y >= resolution_y) y = resolution_y-1;
+
         int n = resolution_x * y + x;
         if (cells == 0) {
             loc = n;
@@ -50,6 +56,7 @@ public:
                 (*location)[loc] = true;
                 location_all[loc] = true;
                 (*location)[n] = true;
+                location_all[n] = true;
                 cells++;
             }
         } else {
@@ -118,6 +125,9 @@ public:
         return location_all.count();
     }
 
+    static void reset() {
+        location_all.reset();
+    }
 };
 
 #endif // TAGSTATS_GEODISTRIBUTION_HPP

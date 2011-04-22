@@ -77,6 +77,7 @@ public:
 int main(int argc, char *argv[]) {
     Osmium::Framework osmium;
 
+    GeoDistribution::reset();
     if (argc != 2) {
         std::cerr << "Usage: " << argv[0] << " OSMFILE" << std::endl;
         exit(1);
