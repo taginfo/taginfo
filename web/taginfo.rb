@@ -106,6 +106,9 @@ class Taginfo < Sinatra::Base
         javascript 'lang/' + r18n.locale.code
         javascript 'taginfo'
 
+        # set expire to three hours after midnight UTC
+        expires(((Time.utc(Time.now.year(), Time.now.month(), Time.now.day(), 3, 0, 0) + (Time.now.hour < 3 ? 0 : 24)*60*60)-Time.now).to_i.to_i)
+
         @db = SQL::Database.new('../../data')
 
         @data_until = DATA_UNTIL
