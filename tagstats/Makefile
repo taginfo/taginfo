@@ -35,6 +35,9 @@ tagstats: tagstats.cpp tagstats_handler.hpp string_store.hpp geodistribution.hpp
 check:
 	cppcheck --enable=all tagstats.cpp
 
+indent:
+	astyle --style=java --indent-namespaces --indent-switches --pad-header --suffix=none \*.hpp \*.cpp
+
 install:
 	install -m 755 tagstats ../sources/db/tagstats
 

@@ -80,8 +80,6 @@ public:
     Counter key;
     Counter values;
 
-    value_hash_map_t values_hash;
-
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
     key_combination_hash_map_t key_combination_hash;
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
@@ -90,12 +88,26 @@ public:
     user_hash_map_t user_hash;
 #endif // TAGSTATS_COUNT_USERS
 
+    value_hash_map_t values_hash;
+
+    KeyStats()
+        : key(),
+          values(),
+#ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
+          key_combination_hash(),
+#endif // TAGSTATS_COUNT_KEY_COMBINATIONS
+#ifdef TAGSTATS_COUNT_USERS
+          user_hash(),
+#endif // TAGSTATS_COUNT_USERS
+          values_hash() {
+    }
+
     GeoDistribution node_distribution;
 
     void update(const char *value, Osmium::OSM::Object *object, StringStore *string_store) {
         key.count[object->get_type()]++;
 
-        value_hash_map_t::iterator values_iterator = values_hash.find(value);
+        value_hash_map_t::iterator values_iterator(values_hash.find(value));
         if (values_iterator == values_hash.end()) {
             Counter counter;
             counter.count[object->get_type()] = 1;
@@ -151,16 +163,15 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
     void _update_key_combination_hash(Osmium::OSM::Object *object) {
-        key_hash_map_t::iterator tsi1, tsi2;
         const char *key1, *key2;
 
         int tag_count = object->tag_count();
         for (int i=0; i<tag_count; i++) {
             key1 = object->get_tag_key(i);
-            tsi1 = tags_stat.find(key1);
+            key_hash_map_t::iterator tsi1(tags_stat.find(key1));
             for (int j=i+1; j<tag_count; j++) {
                 key2 = object->get_tag_key(j);
-                tsi2 = tags_stat.find(key2);
+                key_hash_map_t::iterator tsi2(tags_stat.find(key2));
                 if (strcmp(key1, key2) < 0) {
                     tsi1->second->add_key_kombination(tsi2->first, object->get_type());
                 } else {
@@ -177,7 +188,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
         Osmium::Sqlite::Statement *statement_insert_into_key_distributions = db->prepare("INSERT INTO key_distributions (key, png) VALUES (?, ?);");
         db->begin_transaction();
 
-        for (key_hash_map_t::iterator it = tags_stat.begin(); it != tags_stat.end(); it++) {
+        for (key_hash_map_t::const_iterator it(tags_stat.begin()); it != tags_stat.end(); it++) {
             KeyStats *stat = it->second;
 
             int size;
@@ -235,17 +246,16 @@ public:
     }
 
     void callback_object(Osmium::OSM::Object *object) {
-        KeyStats *stat;
-
         if (max_timestamp < object->get_timestamp()) {
             max_timestamp = object->get_timestamp();
         }
 
+        KeyStats *stat;
         int tag_count = object->tag_count();
         for (int i=0; i<tag_count; i++) {
             const char* key = object->get_tag_key(i);
 
-            key_hash_map_t::iterator tags_iterator = tags_stat.find(key);
+            key_hash_map_t::iterator tags_iterator(tags_stat.find(key));
             if (tags_iterator == tags_stat.end()) {
                 stat = new KeyStats();
                 tags_stat.insert(std::pair<const char *, KeyStats *>(string_store->add(key), stat));
@@ -354,13 +364,13 @@ public:
         uint64_t user_hash_buckets=0;
 #endif // TAGSTATS_COUNT_USERS
 
-        for (key_hash_map_t::iterator tags_iterator = tags_stat.begin(); tags_iterator != tags_stat.end(); tags_iterator++) {
+        for (key_hash_map_t::const_iterator tags_iterator(tags_stat.begin()); tags_iterator != tags_stat.end(); tags_iterator++) {
             KeyStats *stat = tags_iterator->second;
 
             values_hash_size    += stat->values_hash.size();
             values_hash_buckets += stat->values_hash.bucket_count();
 
-            for (value_hash_map_t::iterator values_iterator = stat->values_hash.begin(); values_iterator != stat->values_hash.end(); values_iterator++) {
+            for (value_hash_map_t::const_iterator values_iterator(stat->values_hash.begin()); values_iterator != stat->values_hash.end(); values_iterator++) {
                 statement_insert_into_tags
                 ->bind_text(tags_iterator->first)                   // column: key
                 ->bind_text(values_iterator->first)                 // column: value
@@ -398,8 +408,8 @@ public:
             key_combination_hash_size    += stat->key_combination_hash.size();
             key_combination_hash_buckets += stat->key_combination_hash.bucket_count();
 
-            for (key_combination_hash_map_t::iterator it = stat->key_combination_hash.begin(); it != stat->key_combination_hash.end(); it++) {
-                Counter *s = &(it->second);
+            for (key_combination_hash_map_t::const_iterator it(stat->key_combination_hash.begin()); it != stat->key_combination_hash.end(); it++) {
+                const Counter *s = &(it->second);
                 statement_insert_into_key_combinations
                 ->bind_text(tags_iterator->first) // column: key1
                 ->bind_text(it->first)            // column: key2
