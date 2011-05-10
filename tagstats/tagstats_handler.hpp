@@ -233,19 +233,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
     }
 
-public:
-
-    TagStatsHandler() : Base(), max_timestamp(0) {
-        string_store = new StringStore(string_store_size);
-        db = new Osmium::Sqlite::Database("taginfo-db.db");
-    }
-
-    ~TagStatsHandler() {
-        delete db;
-        delete string_store;
-    }
-
-    void callback_object(Osmium::OSM::Object *object) {
+    void collect_tag_stats(Osmium::OSM::Object *object) {
         if (max_timestamp < object->get_timestamp()) {
             max_timestamp = object->get_timestamp();
         }
@@ -268,6 +256,30 @@ public:
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
         _update_key_combination_hash(object);
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
+    }
+
+public:
+
+    TagStatsHandler() : Base(), max_timestamp(0) {
+        string_store = new StringStore(string_store_size);
+        db = new Osmium::Sqlite::Database("taginfo-db.db");
+    }
+
+    ~TagStatsHandler() {
+        delete db;
+        delete string_store;
+    }
+
+    void callback_node(Osmium::OSM::Node *node) {
+        collect_tag_stats(node);
+    }
+
+    void callback_way(Osmium::OSM::Way *way) {
+        collect_tag_stats(way);
+    }
+
+    void callback_relation(Osmium::OSM::Relation *relation) {
+        collect_tag_stats(relation);
     }
 
     void callback_before_nodes() {

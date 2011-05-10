@@ -26,13 +26,9 @@ public:
         osmium_handler_tagstats.callback_before_nodes();
     }
 
-    void callback_object(Osmium::OSM::Object *object) {
-        osmium_handler_stats.callback_object(object);
-        osmium_handler_tagstats.callback_object(object);
-    }
-
     void callback_node(Osmium::OSM::Node *node) {
         osmium_handler_stats.callback_node(node);
+        osmium_handler_tagstats.callback_node(node);
         //    osmium_handler_node_location_store.callback_node(node);
     }
 
@@ -46,6 +42,7 @@ public:
 
     void callback_way(Osmium::OSM::Way *way) {
         osmium_handler_stats.callback_way(way);
+        osmium_handler_tagstats.callback_way(way);
         //    osmium_handler_node_location_store.callback_way(way);
     }
 
@@ -59,6 +56,7 @@ public:
 
     void callback_relation(Osmium::OSM::Relation *relation) {
         osmium_handler_stats.callback_relation(relation);
+        osmium_handler_tagstats.callback_relation(relation);
     }
 
     void callback_after_relations() {
