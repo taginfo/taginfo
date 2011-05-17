@@ -141,6 +141,7 @@ var scale = pv.Scale.linear(0, #{ @count_all_values }).range(0, h);
 
 vis.add(pv.Layout.Stack)
     .bottom(10)
+    .order('reverse')
     .layers(data)
     .x(10)
     .y(function(d) { return scale(d.count); })
