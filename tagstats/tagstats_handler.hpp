@@ -356,7 +356,7 @@ public:
         db->begin_transaction();
 
         struct tm *tm = gmtime(&max_timestamp);
-        static char max_timestamp_str[Osmium::OSM::Object::max_length_timestamp+1];
+        static char max_timestamp_str[20]; // thats enough space for the timestamp generated from the pattern in the next line
         strftime(max_timestamp_str, sizeof(max_timestamp_str), "%Y-%m-%d %H:%M:%S", tm);
         statement_update_meta->bind_text(max_timestamp_str)->execute();
 
