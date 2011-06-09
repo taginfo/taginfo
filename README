@@ -40,6 +40,9 @@ Debian/Ubuntu packages:
 Gems:
     gem install mongrel rack rack-contrib sinatra json
 
+There is a developer mailing list at
+http://lists.openstreetmap.org/listinfo/taginfo-dev
+
 
 DATA IMPORT
 -----------
