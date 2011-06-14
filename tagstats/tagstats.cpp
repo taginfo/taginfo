@@ -82,6 +82,7 @@ int main(int argc, char *argv[]) {
     }
 
     Osmium::OSMFile infile(argv[1]);
-    infile.read<MyTagStatsHandler>();
+    MyTagStatsHandler handler;
+    infile.read(handler);
 }
 
