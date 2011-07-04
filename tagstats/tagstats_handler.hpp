@@ -121,7 +121,7 @@ public:
         }
 
 #ifdef TAGSTATS_COUNT_USERS
-        user_hash[object->get_uid()]++;
+        user_hash[object->uid()]++;
 #endif // TAGSTATS_COUNT_USERS
 
         if (object->get_type() == NODE) {
@@ -165,12 +165,12 @@ class TagStatsHandler : public Osmium::Handler::Base {
     void _update_key_combination_hash(Osmium::OSM::Object *object) {
         const char *key1, *key2;
 
-        int tag_count = object->tag_count();
+        int tag_count = object->tags().size();
         for (int i=0; i<tag_count; i++) {
-            key1 = object->get_tag_key(i);
+            key1 = object->tags().get_tag_key(i);
             key_hash_map_t::iterator tsi1(tags_stat.find(key1));
             for (int j=i+1; j<tag_count; j++) {
-                key2 = object->get_tag_key(j);
+                key2 = object->tags().get_tag_key(j);
                 key_hash_map_t::iterator tsi2(tags_stat.find(key2));
                 if (strcmp(key1, key2) < 0) {
                     tsi1->second->add_key_kombination(tsi2->first, object->get_type());
@@ -234,14 +234,14 @@ class TagStatsHandler : public Osmium::Handler::Base {
     }
 
     void collect_tag_stats(Osmium::OSM::Object *object) {
-        if (max_timestamp < object->get_timestamp()) {
-            max_timestamp = object->get_timestamp();
+        if (max_timestamp < object->timestamp()) {
+            max_timestamp = object->timestamp();
         }
 
         KeyStats *stat;
-        int tag_count = object->tag_count();
-        for (int i=0; i<tag_count; i++) {
-            const char* key = object->get_tag_key(i);
+        Osmium::OSM::TagList::const_iterator end = object->tags().end();
+        for (Osmium::OSM::TagList::const_iterator it = object->tags().begin(); it != end; ++it) {
+            const char* key = it->key();
 
             key_hash_map_t::iterator tags_iterator(tags_stat.find(key));
             if (tags_iterator == tags_stat.end()) {
@@ -250,7 +250,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
             } else {
                 stat = tags_iterator->second;
             }
-            stat->update(object->get_tag_value(i), object, string_store);
+            stat->update(it->value(), object, string_store);
         }
 
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
@@ -270,23 +270,23 @@ public:
         delete string_store;
     }
 
-    void callback_node(Osmium::OSM::Node *node) {
+    void node(Osmium::OSM::Node *node) {
         collect_tag_stats(node);
     }
 
-    void callback_way(Osmium::OSM::Way *way) {
+    void way(Osmium::OSM::Way *way) {
         collect_tag_stats(way);
     }
 
-    void callback_relation(Osmium::OSM::Relation *relation) {
+    void relation(Osmium::OSM::Relation *relation) {
         collect_tag_stats(relation);
     }
 
-    void callback_before_nodes() {
+    void before_nodes() {
         timer = time(0);
     }
 
-    void callback_after_nodes() {
+    void after_nodes() {
         _timer_info("processing nodes");
         _print_memory_usage();
         timer = time(0);
@@ -295,24 +295,24 @@ public:
         _print_memory_usage();
     }
 
-    void callback_before_ways() {
+    void before_ways() {
         timer = time(0);
     }
 
-    void callback_after_ways() {
+    void after_ways() {
         _timer_info("processing ways");
         _print_memory_usage();
     }
 
-    void callback_before_relations() {
+    void before_relations() {
         timer = time(0);
     }
 
-    void callback_after_relations() {
+    void after_relations() {
         _timer_info("processing relations");
     }
 
-    void callback_init() {
+    void init(Osmium::OSM::Meta&) {
         std::cerr << "sizeof(value_hash_map_t) = " << sizeof(value_hash_map_t) << std::endl;
         std::cerr << "sizeof(Counter) = " << sizeof(Counter) << std::endl;
 
@@ -331,7 +331,7 @@ public:
         std::cerr << "init done" << std::endl << std::endl;
     }
 
-    void callback_final() {
+    void final() {
         _print_memory_usage();
         timer = time(0);
 
