@@ -296,7 +296,6 @@ class Taginfo < Sinatra::Base
 
     #--------------------------------------------------------------------------
 
-    load 'lib/instance.rb'
     load 'lib/api/db.rb'
     load 'lib/api/wiki.rb'
     load 'lib/api/josm.rb'
