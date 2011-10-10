@@ -127,9 +127,9 @@ class Taginfo < Sinatra::Base
                 :count_relations_fraction => row['count_relations'].to_f / @db.stats('relations'),
                 :values_all               => row['values_all'].to_i,
                 :users_all                => row['users_all'].to_i,
-                :in_wiki                  => row['in_wiki']     == '1' ? true : false,
-                :in_josm                  => row['in_josm']     == '1' ? true : false,
-                :in_potlatch              => row['in_potlatch'] == '1' ? true : false,
+                :in_wiki                  => row['in_wiki'].to_i     == 1 ? true : false,
+                :in_josm                  => row['in_josm'].to_i     == 1 ? true : false,
+                :in_potlatch              => row['in_potlatch'].to_i == 1 ? true : false,
             } 
             h[:wikipages] = row['wikipages'] if row['wikipages']
             h[:prevalent_values] = row['prevalent_values'][0,10] if row['prevalent_values']

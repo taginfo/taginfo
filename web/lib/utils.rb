@@ -81,10 +81,10 @@ end
 
 def tagcloud_color(tag)
     c = 0xa0;
-    if tag['in_wiki'] == '1'
+    if tag['in_wiki'].to_i == 1
         c -= 0x40;
     end
-    if tag['in_josm'] == '1'
+    if tag['in_josm'].to_i == 1
         c -= 0x60;
     end
     sprintf('#%02x%02x%02x', c, c, c)
