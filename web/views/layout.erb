@@ -7,7 +7,7 @@
         <link rel="stylesheet" type="text/css" href="/css/taginfo.css" />
         <link rel="stylesheet" type="text/css" href="/css/smoothness/jquery-ui-1.8.10.custom.css" />
         <link rel="stylesheet" type="text/css" href="/css/flexigrid/flexigrid.css" />
-        <link rel="search" type="application/opensearchdescription+xml" href="/search/opensearch.xml" title="Taginfo" />
+        <link rel="search" type="application/opensearchdescription+xml" href="/search/opensearch.xml" title="<%= TaginfoConfig.get('opensearch.shortname') %>" />
 <%= javascript_tags %>
     </head>
     <body>
@@ -28,9 +28,9 @@
                 </form>
             </div>
             <div id="left">
-                <a id="instance" href="#"><img src="/img/instance.png" alt="" height="24" style="padding: 2px 6px 0 0;"/></a>
+                <a id="instance" href="#"><img src="<%= TaginfoConfig.get('instance.icon', '/img/instance.png') %>" alt="" height="24" style="padding: 2px 6px 0 0;"/></a>
                 <div id="instance_description" style="display: none;" class="ui-widget-content ui-corner-all">
-                    <p><%= taginfo_instance_description %></p>
+                    <p><%= TaginfoConfig.get('instance.description') %></p>
                     <p><%= t.taginfo.instance.other %></p>
                 </div>
                 <a href="/"><img src="/img/taginfo.48.png" alt="Taginfo" width="48" height="24" style="padding-top: 2px;"/></a>

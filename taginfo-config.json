@@ -1,0 +1,34 @@
+// This is an example of a Taginfo config file.
+// Copy it to the directory above where you found this example file.
+{
+    // You probably want to change all these.
+    "instance": {
+        // Used in the title of all HTML pages.
+        "name": "Test Taginfo",
+        // Description that appears if you click on the instance icon in the upper left.
+        "description": "This is a Taginfo test instance. To change this text or the icon above change your <tt>taginfo-config.json</tt>.",
+        // URL path to instance icon in the upper left.
+        "icon": "/img/instance.png"
+    },
+    "tagcloud": {
+        "number_of_tags": 200
+    },
+    // For the geodistribution map. If you change this, you also have to change the C++ code in tagstats.
+    "geodistribution": {
+        "width": 720,
+        "height": 360,
+        "background_image": "/img/worldp.png"
+    },
+    "xapi": {
+        // URL prefix for the XAPI/JOSM links on the key and tag pages.
+        // "url_prefix": "http://www.informationfreeway.org/api/0.6/"
+        "url_prefix": "http://open.mapquestapi.com/xapi/api/0.6/"
+    },
+    "opensearch": {
+        // For the OpenSearchDescription. You have to change at least the shortname and the contact for your instance.
+        "shortname": "Taginfo Test Instance",
+        "contact": "somebody@example.com",
+        "description": "Find metadata about OpenStreetMap tags",
+        "tags": "osm openstreetmap tag tags taginfo"
+    }
+}

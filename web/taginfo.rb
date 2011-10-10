@@ -36,6 +36,7 @@ require 'sinatra/r18n'
 require 'rack/contrib'
 
 require 'lib/utils.rb'
+require 'lib/config.rb'
 require 'lib/javascript.rb'
 require 'lib/language.rb'
 require 'lib/sql.rb'
@@ -45,7 +46,7 @@ require 'lib/apidoc.rb'
 
 #------------------------------------------------------------------------------
 
-TAGCLOUD_NUMBER_OF_TAGS = 200
+TaginfoConfig.read
 
 #------------------------------------------------------------------------------
 
@@ -138,9 +139,10 @@ class Taginfo < Sinatra::Base
     #-------------------------------------
 
     get '/' do
-        @tags = @db.select("SELECT key, scale1 FROM popular_keys ORDER BY scale1 DESC LIMIT #{ TAGCLOUD_NUMBER_OF_TAGS }").
+        tagcloud_number_of_tags = TaginfoConfig.get('tagcloud.number_of_tags', 200)
+        @tags = @db.select("SELECT key, scale1 FROM popular_keys ORDER BY scale1 DESC LIMIT #{ tagcloud_number_of_tags }").
             execute().
-            each_with_index{ |tag, idx| tag['pos'] = (TAGCLOUD_NUMBER_OF_TAGS - idx) / TAGCLOUD_NUMBER_OF_TAGS.to_f }.
+            each_with_index{ |tag, idx| tag['pos'] = (tagcloud_number_of_tags - idx) / tagcloud_number_of_tags.to_f }.
             sort_by{ |row| row['key'] }
         erb :index
     end

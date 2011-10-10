@@ -20,10 +20,10 @@ class Taginfo < Sinatra::Base
         opensearch = <<END_XML
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-    <ShortName>Taginfo</ShortName>
-    <Description>Find metadata about OpenStreetMap tags</Description>
-    <Tags>osm openstreetmap tag tags taginfo</Tags>
-    <Contact>admin@openstreetmap.de</Contact>
+    <ShortName>#{ TaginfoConfig.get('opensearch.shortname') }</ShortName>
+    <Description>#{ TaginfoConfig.get('opensearch.description') }</Description>
+    <Tags>#{ TaginfoConfig.get('opensearch.tags') }</Tags>
+    <Contact>#{ TaginfoConfig.get('opensearch.contact') }</Contact>
     <Url type="application/x-suggestions+json" rel="suggestions" template="__URL__/search/suggest?term={searchTerms}"/>
     <Url type="text/html" method="get" template="__URL__/search?q={searchTerms}"/>
     <Url type="application/opensearchdescription+xml" rel="self" template="__URL__/opensearch.xml"/>

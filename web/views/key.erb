@@ -50,7 +50,7 @@
     <div id="map">
         <h2>Geographical distribution of this key</h2>
         <p><i>Currently only tags on nodes are shown.</i></p>
-        <div style="background-image: url(/img/worldp.png); background-repeat: no-repeat;"/><img src="/api/2/db/keys/distribution?key=<%= @key_uri %>" alt="" width="720" height="360"/></div>
+        <div style="background-image: url(<%= TaginfoConfig.get('geodistribution.background_image') %>); background-repeat: no-repeat;"/><img src="/api/2/db/keys/distribution?key=<%= @key_uri %>" alt="" width="<%= TaginfoConfig.get('geodistribution.width') %>" height="<%= TaginfoConfig.get('geodistribution.height') %>"/></div>
     </div>
     <div id="wiki">
         <h2>Wiki pages about this key</h2>

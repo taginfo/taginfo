@@ -41,7 +41,7 @@ end
 def title
     @title = [] if @title.nil?
     @title = [@title] unless @title.is_a?(Array)
-    @title << 'OpenStreetMap Taginfo'
+    @title << TaginfoConfig.get('instance.name', 'OpenStreetMap Taginfo')
     @title.join(' | ')
 end
 
@@ -58,7 +58,7 @@ def xapi_url(element, key, value=nil)
     else
         predicate += xapi_escape(value)
     end
-    "http://www.informationfreeway.org/api/0.6/#{ element }[#{ Rack::Utils::escape(predicate) }]"
+    TaginfoConfig.get('xapi.url_prefix', 'http://www.informationfreeway.org/api/0.6/') + "#{ element }[#{ Rack::Utils::escape(predicate) }]"
 end
 
 def xapi_link(element, key, value=nil)

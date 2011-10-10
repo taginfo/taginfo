@@ -31,8 +31,6 @@ taginfo:
     instance:
         title: About this Taginfo site
         other: See the <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> for other sites.
-        description:
-            main: This is the main Taginfo site. It contains OSM data for the whole planet and is updated daily.
 
 pages:
     index:

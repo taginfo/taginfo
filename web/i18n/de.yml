@@ -29,8 +29,6 @@ taginfo:
     instance:
         title: Über dieses Taginfo
         other: Andere Taginfo-Webseiten sind im <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM-Wiki</a> zu finden.
-        description:
-            main: Dieses sind die Haupt-Taginfo-Webseiten. Sie enthalten OSM-Daten für die ganze Erde und werden täglich aktualisiert.
 
 pages:
     index:
