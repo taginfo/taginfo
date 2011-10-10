@@ -21,7 +21,7 @@ if [ "x" = "x$DIR" ]; then
 fi
 
 if [ "x" = "x$PLANETFILE" ]; then
-    PLANETFILE=/osm/planet/var/current-planet.osm.pbf
+    PLANETFILE=`../../bin/taginfo-config.rb sources.db.planetfile`
 fi
 
 echo "`$DATECMD` Start db..."

@@ -1,5 +1,5 @@
 // This is an example of a Taginfo config file.
-// Copy it to the directory above where you found this example file.
+// Copy it to the directory above and name it 'taginfo-config.json', then change your local settings.
 {
     // You probably want to change all these.
     "instance": {
@@ -30,5 +30,17 @@
         "contact": "somebody@example.com",
         "description": "Find metadata about OpenStreetMap tags",
         "tags": "osm openstreetmap tag tags taginfo"
+    },
+    "sources": {
+        // These sources will be downloaded from http://taginfo.openstreetmap.org/download/
+        // Note that this will NOT work for the "db" source! Well, you can download it,
+        // but it will fail later, because the database is changed by the master.sql
+        // scripts.
+        "download": "josm potlatch merkaartor wiki",
+        // These sources will be created from the actual sources.
+        "create": "db",
+        "db": {
+            "planetfile": "/osm/planet/var/current-planet.osm.pbf"
+        }
     }
 }

@@ -16,14 +16,14 @@
 #
 #------------------------------------------------------------------------------
 
-# These sources will be downloaded from http://taginfo.openstreetmap.de/download/
+# These sources will be downloaded from http://taginfo.openstreetmap.org/download/
 # Note that this will NOT work for the "db" source! Well, you can download it,
 # but it will fail later, because the database is changed by the master.sql
 # scripts.
-SOURCES_DOWNLOAD=""
+SOURCES_DOWNLOAD=`../bin/taginfo-config.rb sources.download`
 
 # These sources will be created from the actual sources
-SOURCES_CREATE="josm potlatch merkaartor wiki db"
+SOURCES_CREATE=`../bin/taginfo-config.rb sources.create`
 
 #------------------------------------------------------------------------------
 
@@ -50,7 +50,7 @@ for source in $SOURCES_DOWNLOAD; do
     echo "====================================="
     echo "Downloading $source..."
     mkdir -p $DIR/$source
-    wget --quiet -O $DIR/download/taginfo-$source.db.bz2 http://taginfo.openstreetmap.de/download/taginfo-$source.db.bz2
+    wget --quiet -O $DIR/download/taginfo-$source.db.bz2 http://taginfo.openstreetmap.org/download/taginfo-$source.db.bz2
     bzcat $DIR/download/taginfo-$source.db.bz2 >$DIR/$source/taginfo-$source.db
     echo "Done."
 done
