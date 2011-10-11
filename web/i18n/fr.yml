@@ -2,184 +2,170 @@
 osm:
     tag: Tag
     tags: Tags
-    key: Key
-    keys: Keys
-    value: Value
-    values: Values
-    node: Node
-    nodes: Nodes
-    way: Way
-    ways: Ways
+    key: Clé
+    keys: Clés
+    value: Valeur
+    values: Valeurs
+    node: Nœud
+    nodes: Nœuds
+    way: Chemin
+    ways: Chemins
     relation: Relation
     relations: Relations
-    user: User
-    users: Users
+    user: Utilisateur
+    users: Utilisateurs
 
 taginfo:
     source: Source
     sources: Sources
-    download: Download
-    about: About Taginfo
+    download: Téléchargement
+    about: A Propos de Taginfo
     wiki: Wiki
-    reports: Reports
-    keys: Keys
+    reports: Compte-Rendus
+    keys: Clés
     tags: Tags
-    map: Map
-    maps: Maps
-    key_combinations: Combinations
-    data_from: Data from
+    map: Carte
+    maps: Cartes
+    key_combinations: Combinaisons
+    data_from: Données de
     instance:
-        title: About this Taginfo site
-        other: See the <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> for other sites.
+        title: A propos de ce site Taginfo
+        other: Visiter la page <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> pour d'autres sites.
 
 pages:
     index:
-        description: Taginfo is a system for finding and aggregating information about OpenStreetMap tags.
+        description: Taginfo est un outil pour trouver et comptabiliser les informations sur les tags du projet OpenStreetMap.
         buttons:
-            show_all_keys: Show all keys
-            reports: Reports
+            show_all_keys: Montrer toutes les clés
+            reports: Compte-Rendus
     sources:
         index:
             intro: |
-                <p>Taginfo takes data about OSM tags from several sources and brings them
-                together for easy browsing and discovery.</p>
-                <p>Note that Taginfo only displays this data. If you want to change it, you
-                have to go back to the source.</p>
-            data_until: Data until
-            last_update_run: Last update run
-            data_until_explanation: All edits until this time will be in the data, later edits might be.
+                <p>Taginfo retrouve des données sur les tags OSM depuis plusieures sources et les assemble pour en faciliter l'exploration.</p>
+                <p>Il est a noter que pour modifier les données il faut le faire à la source, car Taginfo ne fait que les afficher.</p>
+            data_until: Données jusqu'à
+            last_update_run: Dernière mise à jour
+            data_until_explanation: Toutes les modifications jusqu'à cette date sont présentes, les suivantes le seront peut-être.
             to: to
             info: |
-                <p>All times in UTC.</p>
+                <p>Toutes les heures sont en temps universel (UTC).</p>
     download:
         index:
             intro: |
-                <p>Here you can download the databases used by Taginfo. All the data is stored
-                in <img src="/img/link-extern.gif" alt=""/><a class="extlink"
-                href="http://www.sqlite.org/">Sqlite</a> databases. The database files are then
-                packed with <img src="/img/link-extern.gif" alt=""/><a class="extlink"
-                href="http://www.bzip.org/">bzip2</a>.</p>
-                <p>If you don't want to download these databases, but need automated access to
-                the data, you can also use the <a href="/about">API</a>.</p>
-            file: File
-            packed: Packed
-            unpacked: Unpacked
+                <p>Vous pouvez télécharger les données utilisées par Taginfo. Toutes les données sont stockées
+                dans des bases de données <img src="/img/link-extern.gif" alt=""/><a class="extlink" href="http://www.sqlite.org/">Sqlite</a>.
+                Les fichiers de base de données sont ensuite compressés
+                avec <img src="/img/link-extern.gif" alt=""/><a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
+                <p>Si vous ne voulez pas télécharger les données, vous pouvez toujours y accéder automatiquement grâce à l'<a href="/about">API</a>.</p>
+            file: Fichier
+            packed: Compressé
+            unpacked: Decompressé
             description: Description
-            unknown: unknown
+            unknown: inconnu
     reports:
         index:
             intro: |
-                <p class="text">Reports show the data from different perspectives.
-                They often bring together data from several sources in interesting ways. Some
-                of the reports can help with finding certain kinds of errors, such as popular
-                keys without wiki pages.</p>
+                <p class="text">Les compte-rendus montre les données de différents points de vue.
+                Ils agrègent de façon interessante des données d'origines variées.
+                Certains compte-rendus peuvent aider à trouver tous types d'erreurs, comme par exemple des valeurs de tags beaucoup utilisées mais n'ayant pas de page sur le wiki.
+                </p>
             data_sources: Data<br/>Sources
     search:
         results:
-            title: Search results
-            you_were_searching_for: You were searching for
+            title: Résultats de la recherche
+            you_were_searching_for: Vous recherchez
     key:
-        no_description_in_wiki: No description in wiki
+        no_description_in_wiki: Aucune description dans le wiki
     tag:
-        no_description_in_wiki: No description in wiki
+        no_description_in_wiki: Aucune description dans le wiki
 
 flexigrid:
     pagetext: Page
-    pagestat: Displaying {from} to {to} of {total} items
-    outof: of
-    findtext: Find
-    procmsg: Processing, please wait...
-    nomsg: No items
-    errormsg: Connection Error
+    pagestat: Affiche de {from} à {to} des {total} éléments
+    outof: de
+    findtext: Trouver
+    procmsg: Traitement en cours, patientez s'il vous plait...
+    nomsg: Aucun élément
+    errormsg: Erreur de connexion
 
 sources:
     master:
-        name: Master
-        description: Aggregate statistics and miscellaneous data needed for the Taginfo user interface.
+        name: Maître
+        description: Agrégation de statistiques et de données diverses nécessaire à l'interface de Taginfo.
     db:
-        name: Database
-        description: Statistics about each key and each tag from the main OSM database (planet file).
+        name: Base de données
+        description: Statistiques pour chaque clé et valeur des tag sur la partie France Métropole d'OSM
     wiki:
         name: Wiki
-        description: Data from the tag and key pages of the OSM wiki.
+        description: Clés et valeurs des tags sur le Wiki d'OSM.
     josm:
         name: JOSM
-        description: Configuration data from the JOSM OSM editor.
+        description: Configuration pour l'éditeur JOSM.
     potlatch:
         name: Potlatch
-        description: Configuration data from the Potlatch2 OSM editor.
+        description: Configuration pour l'éditeur Potlatch2.
     merkaartor:
         name: Merkaartor
-        description: Configuration data from the Merkaartor OSM editor.
+        description: Configuration pour l'éditeur Merkaartor.
 
 reports:
     characters_in_keys:
-        name: Characters in Keys
+        name: Caractères utilisés dans les clés
         intro: |
-            <p>Any valid Unicode character can appear in an OSM key but usually only lower
-            case latin letters (a-z) and the underscore (_) are used. Sometimes the colon
-            (:) is added as a separator character.</p>
+            <p>Tout caractère Unicode peut apparaitre dans les clés de tag OSM mais seulement les lettres latines minuscules (a-z) et le caractère souligné (_)
+            sont utilisés. Il est aussi possible le caractère deux-points (:) comme separateur.</p>
         statistics:
-            tab: Statistics
-            title: Statistics Overview
+            tab: Statistiques
+            title: Statistiques Overview
             characters_in_keys:
-                plain: Only latin lowercase letters (<span class="char">a</span> to <span class="char">z</span>) and underscore (<span class="char">_</span>), first and last characters are letters.
-                colon: Like A but with one or more colons (<span class="char">:</span>) inside.
-                letters: Like B but with uppercase latin letters or letters from other alphabets.
-                space: Like C but contains at least one whitespace character (space, tab, new line, carriage return, or from other alphabets).
-                problem: Like C but contains possibly problematic characters <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
-                rest: Everything else.
+                plain: Seulement les lettres latines minuscules (<span class="char">a</span> à <span class="char">z</span>) et le souligné (<span class="char">_</span>), le première et dernière caractère est une lettre .
+                colon: Comme la règle A mais contenant un ou plusieurs caractères deux-points (<span class="char">:</span>).
+                letters: Comme la règle B mais avec des lettres latines majuscules ou des lettres d'autres alphabets.
+                space: Comme la règle C mais peut contenir au moins un symbole d'espacement (espace, tabulation, nouvelle ligne, retour chariot, et selon d'autres alphabets).
+                problem: Comme la règle C mais peut contenir des caractères problématiques <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
+                rest: Toutes les autres possibilités.
         whitespace:
-            tab: Whitespace
-            title: Keys With Whitespace
+            tab: Espacement
+            title: Clés contenant des espaces
             intro: |
-                <p>Keys that contain whitespace characters such as space, tab, new
-                line, carriage return, or whitespace characters from other
-                alphabets.<br/>
-                Whitespace in keys can be confusing, especially at the
-                beginning or end of the key, because they are invisible. Generally
-                the underscore (_) should be used instead.</p>
+                <p>Les tags dont la clé contient des symboles d'espacement comme l'espace, tabulation, nouvelle ligne, retour chariot, ou autre selon les alphabets.
+                <br/>Les espaces dans les clés des tags est source d'erreur, surtout s'ils sont placés au début ou la fin de la clé ; 
+                il est donc préférable d'utiliser le caractère de souligment (<span class="char">_</span>) à la place.
+                </p>
         problematic:
-            tab: Problematic
-            title: Keys With Possibly Problematic Characters
+            tab: Problématiques
+            title: Clés avec des caractères problématiques
             intro: |
-                <p>Keys that contain possibly problematic characters: <span
-                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>. These characters
-                can be problematic, because they are used to quote strings in
-                different programming languages or have special meanings in XML, HTML,
-                URLs, and other places. The equal sign is used often as separator
-                between tag keys and values.<br/>
-                Keys that appear in this list are not necessarily wrong though. But
-                in many cases they are just results of some error.</p>
+                <p>Les tags dont la clé contient des symboles problématiques : <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
+                Ces caractères peuvent poser des problèmes car ils peuvent avoir des interprétations particulières par les outils employés pour les traitements des données (sql,xml,html...).
+                Par exemple le signe égal (<span class="char">=</span>) est utilisé pour séparer la clé et la valeur d'un tag.
+                <br/>Les clés de tag apparaissant dans cette liste ne sont pas forcément faux, mais ils riques d'être source d'erreur.</p>
     frequently_used_keys_without_wiki_page:
-        name: Frequently Used Keys Without Wiki Page
+        name: Clés fréquentes sans page de Wiki associée
     key_lengths:
-        name: Key Lengths
+        name: Longueurs des clés
     language_comparison_table_for_keys_in_the_wiki:
-        name: Language Comparison Table for Keys in the Wiki
+        name: Comparaison par langue des clés présentées sur le Wiki
         icons:
-            template: Page in wiki available and contains standard template.
-            error: Page in wiki available and contains standard template, but couldn't be parsed.
-            page: Page in wiki available but doesn't contain standard template.
-            redirect: Page is a redirect.
+            template: Page disponible dans le Wiki et contenant les modèles standards.
+            error: Page disponible dans le Wiki et contenant les modèles standards, mais impossible à déchiffrer.
+            page: Page disponible dans le Wiki mais ne contenant pas les modèles standards.
+            redirect: Page de redirection.
         intro: |
-            <p>This table shows all tag keys for which there are wiki pages available and in what languages they are.</p>
+            <p>Cette table affiche tous les clés de tag possédant une page Wiki et dans quelle langue.</p>
     languages:
-        name: Languages
+        name: Langues
         intro: |
-            <p>OpenStreetMap is an international project. Tags and their descriptions can
-            be in any language. This table lists the languages Taginfo knows about and how
-            many wiki pages there are in these languages documenting keys and tags,
-            respectively.</p>
+            <p>OpenStreetMap est un projet international.
+            Les tags et leur description peuvent être dans n'importe quelle langue.
+            Cette table affiche les langues et combien de pages dans ces langues documentent les tags.</p>
     wiki_pages_about_non_existing_keys:
-        name: Wiki Pages About Non-Existing Keys
+        name: Page de Wiki inexistante
         intro: |
-            <p>This table shows keys for which a wiki page exists but there is not a single
-            instance in the database. This is not necessarily an error (maybe somebody
-            added the documentation in the wiki as preparation for using a key or the wiki
-            page documents a now obsolete key), but it can also be a typo or other error.</p>
+            <p>Cette table affiche les pages de Wiki existantes pour documenter des tags non trouvés dans la base de données OSM.
+            Ce n'est pas forcément une erreur, si un tag est en cours de préparation, mais ce peut aussi être une erreur suite à une faute de frappe.</p>
 
 misc:
-    values_less_than_one_percent: all values have less than 1%
-    empty_string: empty string
+    values_less_than_one_percent: Toutes les valeurs sont inférieures à 1%
+    empty_string: chaîne de caractère vide
 
