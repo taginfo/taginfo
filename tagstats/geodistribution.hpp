@@ -10,7 +10,7 @@
  * Functor class defining the () operator as a function that limits a
  * Osmium::OSM::Position to a bounding box, reduces the resolution
  * of the coordinates and returns an integer.
- * 
+ *
  * @tparam T Result type after conversion. Must be an unsigned integer type.
  */
 template <typename T>

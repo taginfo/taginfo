@@ -299,7 +299,7 @@ public:
 #ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
         , m_storage()
 #endif
-        {
+    {
         string_store = new StringStore(string_store_size);
         db = new Osmium::Sqlite::Database("taginfo-db.db");
     }
