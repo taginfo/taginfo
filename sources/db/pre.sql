@@ -24,7 +24,8 @@ CREATE TABLE keys (
   users_nodes      INTEGER DEFAULT 0,
   users_ways       INTEGER DEFAULT 0,
   users_relations  INTEGER DEFAULT 0,
-  grids            INTEGER DEFAULT 0,
+  cells_nodes      INTEGER DEFAULT 0,
+  cells_ways       INTEGER DEFAULT 0,
   in_wiki          INTEGER DEFAULT 0,
   in_wiki_en       INTEGER DEFAULT 0,
   in_josm          INTEGER DEFAULT 0,
@@ -47,7 +48,8 @@ DROP TABLE IF EXISTS key_distributions;
 
 CREATE TABLE key_distributions (
   key              VARCHAR,
-  png              BLOB
+  nodes            BLOB,
+  ways             BLOB
 );
 
 DROP TABLE IF EXISTS tags;

@@ -1,87 +1,118 @@
 
+#include <getopt.h>
+
 #include <osmium.hpp>
 
 #include <osmium/handler/statistics.hpp>
-//#include <osmium/handler/node_location_store.hpp>
+
+/**
+ * Positions are stored in this type of integer for the distribution images.
+ * TAGSTATS_GEODISTRIBUTION_INT must be set in Makefile, typically to uint16_t
+ * or uint32_t (for higher resolution but needs twice as much memory).
+ */
+typedef TAGSTATS_GEODISTRIBUTION_INT rough_position_t;
+
+#ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
+# include <osmium/storage/byid.hpp>
+// Set TAGSTATS_GEODISTRIBUTION_STORAGE to SparseTable or Mmap in Makefile
+typedef Osmium::Storage::TAGSTATS_GEODISTRIBUTION_FOR_WAYS<rough_position_t> storage_t;
+#endif // TAGSTATS_GEODISTRIBUTION_FOR_WAYS
+
 #include "geodistribution.hpp"
+
+GeoDistribution::geo_distribution_t GeoDistribution::c_distribution_all;
+int GeoDistribution::c_width;
+int GeoDistribution::c_height;
+
 #include "tagstats_handler.hpp"
 
-GeoDistribution::geo_distribution_t GeoDistribution::distribution_all;
-
-class MyTagStatsHandler : public Osmium::Handler::Base {
-
-    Osmium::Handler::Statistics      osmium_handler_stats;
-    TagStatsHandler                  osmium_handler_tagstats;
-    //Osmium::Handler::NLS_Sparsetable osmium_handler_node_location_store;
-
-public:
-
-    void init(Osmium::OSM::Meta& meta) {
-        osmium_handler_tagstats.init(meta);
-        // osmium_handler_node_location_store.init(meta);
-    }
-
-    void before_nodes() {
-        osmium_handler_tagstats.before_nodes();
-    }
-
-    void node(Osmium::OSM::Node *node) {
-        osmium_handler_stats.node(node);
-        osmium_handler_tagstats.node(node);
-        //    osmium_handler_node_location_store.node(node);
-    }
-
-    void after_nodes() {
-        osmium_handler_tagstats.after_nodes();
-    }
-
-    void before_ways() {
-        osmium_handler_tagstats.before_ways();
-    }
-
-    void way(Osmium::OSM::Way *way) {
-        osmium_handler_stats.way(way);
-        osmium_handler_tagstats.way(way);
-        //    osmium_handler_node_location_store.way(way);
-    }
-
-    void after_ways() {
-        osmium_handler_tagstats.after_ways();
-    }
-
-    void before_relations() {
-        osmium_handler_tagstats.before_relations();
-    }
-
-    void relation(Osmium::OSM::Relation *relation) {
-        osmium_handler_stats.relation(relation);
-        osmium_handler_tagstats.relation(relation);
-    }
-
-    void after_relations() {
-        osmium_handler_tagstats.after_relations();
-    }
-
-    void final() {
-        // osmium_handler_node_location_store.final();
-        osmium_handler_stats.final();
-        osmium_handler_tagstats.final();
-    }
-};
 
 /* ================================================== */
 
-int main(int argc, char *argv[]) {
-    Osmium::init();
+void print_help() {
+    std::cout << "tagstats [OPTIONS] OSMFILE\n\n" \
+              << "This program is part of Taginfo. It calculates statistics\n" \
+              << "on OSM tags and puts them into taginfo-db.db and count.db.\n" \
+              << "\nOptions:\n" \
+              << "  -H, --help           This help message\n" \
+              << "  -d, --debug          Enable debugging output\n" \
+              << "  -t, --top=NUMBER     Top of bounding box for distribution images\n" \
+              << "  -r, --right=NUMBER   Right of bounding box for distribution images\n" \
+              << "  -b, --bottom=NUMBER  Bottom of bounding box for distribution images\n" \
+              << "  -l, --left=NUMBER    Left of bounding box for distribution images\n" \
+              << "  -w, --width=NUMBER   Width of distribution images (default: 360)\n" \
+              << "  -h, --height=NUMBER  Height of distribution images (default: 180)\n" \
+              << "\nDefault for bounding box is: (-180, -90, 180, 90)\n";
+}
 
-    GeoDistribution::reset();
-    if (argc != 2) {
-        std::cerr << "Usage: " << argv[0] << " OSMFILE" << std::endl;
+int main(int argc, char *argv[]) {
+    static struct option long_options[] = {
+        {"debug",  no_argument, 0, 'd'},
+        {"help",   no_argument, 0, 'H'},
+        {"top",    required_argument, 0, 't'},
+        {"right",  required_argument, 0, 'r'},
+        {"bottom", required_argument, 0, 'b'},
+        {"left",   required_argument, 0, 'l'},
+        {"width",  required_argument, 0, 'w'},
+        {"height", required_argument, 0, 'h'},
+        {0, 0, 0, 0}
+    };
+
+    bool debug = false;
+
+    int top    =   90;
+    int right  =  180;
+    int bottom =  -90;
+    int left   = -180;
+
+    unsigned int width  = 360;
+    unsigned int height = 180;
+
+    while (true) {
+        int c = getopt_long(argc, argv, "dHt:r:b:l:w:h:", long_options, 0);
+        if (c == -1) {
+            break;
+        }
+
+        switch (c) {
+            case 'd':
+                debug = true;
+                break;
+            case 'H':
+                print_help();
+                exit(0);
+            case 't':
+                top = atoi(optarg);
+                break;
+            case 'r':
+                right = atoi(optarg);
+                break;
+            case 'b':
+                bottom = atoi(optarg);
+                break;
+            case 'l':
+                left = atoi(optarg);
+                break;
+            case 'w':
+                width = atoi(optarg);
+                break;
+            case 'h':
+                height = atoi(optarg);
+                break;
+            default:
+                exit(1);
+        }
+    }
+
+    Osmium::init(debug);
+
+    if (argc - optind != 1) {
+        std::cerr << "Usage: " << argv[0] << " [OPTIONS] OSMFILE" << std::endl;
         exit(1);
     }
 
-    Osmium::OSMFile infile(argv[1]);
-    MyTagStatsHandler handler;
+    Osmium::OSMFile infile(argv[optind]);
+    TagStatsHandler handler(left, bottom, right, top, width, height);
     infile.read(handler);
 }
 

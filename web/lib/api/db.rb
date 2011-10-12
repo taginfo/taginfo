@@ -201,7 +201,7 @@ class Taginfo < Sinatra::Base
     }) do
         key = params[:key]
         content_type :png
-        @db.select('SELECT png FROM db.key_distributions').
+        @db.select('SELECT nodes FROM db.key_distributions').
             condition('key = ?', key).
             get_first_value()
     end

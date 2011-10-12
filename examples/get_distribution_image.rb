@@ -1,17 +1,18 @@
 #!/usr/bin/ruby
 #
-#  get_distribution_image DB KEY
+#  get_distribution_image DB KEY nodes|ways
 #
 
 require 'rubygems'
 require 'sqlite3'
 
 filename = ARGV[0]
-key = ARGV[1]
+key      = ARGV[1]
+type     = ARGV[2]
 
 db = SQLite3::Database.new(filename)
 
-db.execute("SELECT png FROM key_distributions WHERE key=?", key) do |row|
-    puts row[0]
+db.execute("SELECT #{type} FROM key_distributions WHERE key=?", key) do |row|
+    $stdout.write row[0]
 end
 

@@ -79,6 +79,7 @@ public:
 
     Counter key;
     Counter values;
+    Counter cells;
 
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
     key_combination_hash_map_t key_combination_hash;
@@ -90,28 +91,30 @@ public:
 
     value_hash_map_t values_hash;
 
+    GeoDistribution distribution;
+
     KeyStats()
         : key(),
           values(),
+          cells(),
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
           key_combination_hash(),
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 #ifdef TAGSTATS_COUNT_USERS
           user_hash(),
 #endif // TAGSTATS_COUNT_USERS
-          values_hash() {
+          values_hash(),
+          distribution() {
     }
 
-    GeoDistribution node_distribution;
-
-    void update(const char *value, Osmium::OSM::Object *object, StringStore *string_store) {
+    void update(const char* value, Osmium::OSM::Object* object, StringStore* string_store) {
         key.count[object->get_type()]++;
 
         value_hash_map_t::iterator values_iterator(values_hash.find(value));
         if (values_iterator == values_hash.end()) {
             Counter counter;
             counter.count[object->get_type()] = 1;
-            values_hash.insert(std::pair<const char *, Counter>(string_store->add(value), counter));
+            values_hash.insert(std::pair<const char*, Counter>(string_store->add(value), counter));
             values.count[object->get_type()]++;
         } else {
             values_iterator->second.count[object->get_type()]++;
@@ -123,11 +126,6 @@ public:
 #ifdef TAGSTATS_COUNT_USERS
         user_hash[object->uid()]++;
 #endif // TAGSTATS_COUNT_USERS
-
-        if (object->get_type() == NODE) {
-            node_distribution.add_coordinate(static_cast<Osmium::OSM::Node *>(object)->get_lon(),
-                                             static_cast<Osmium::OSM::Node *>(object)->get_lat());
-        }
     }
 
     void add_key_kombination(const char *other_key, osm_object_id_t type) {
@@ -152,9 +150,9 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
     // this must be much bigger than the largest string we want to store
     static const int string_store_size = 1024 * 1024 * 10;
-    StringStore *string_store;
+    StringStore* string_store;
 
-    Osmium::Sqlite::Database *db;
+    Osmium::Sqlite::Database* db;
 
     void _timer_info(const char *msg) {
         int duration = time(0) - timer;
@@ -182,24 +180,33 @@ class TagStatsHandler : public Osmium::Handler::Base {
     }
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
-    void _print_images() {
+    void _print_and_clear_distribution_images(bool for_nodes) {
         int sum_size=0;
 
-        Osmium::Sqlite::Statement *statement_insert_into_key_distributions = db->prepare("INSERT INTO key_distributions (key, png) VALUES (?, ?);");
+        Osmium::Sqlite::Statement* statement_insert_into_key_distributions = db->prepare(for_nodes ? "INSERT INTO key_distributions (nodes, key) VALUES (?, ?);" : "UPDATE key_distributions SET ways=? WHERE key=?");
         db->begin_transaction();
 
-        for (key_hash_map_t::const_iterator it(tags_stat.begin()); it != tags_stat.end(); it++) {
-            KeyStats *stat = it->second;
+        for (key_hash_map_t::const_iterator it = tags_stat.begin(); it != tags_stat.end(); it++) {
+            KeyStats* stat = it->second;
+
+            if (for_nodes) {
+                stat->cells.count[NODE] = stat->distribution.cells();
+            } else {
+                stat->cells.count[WAY] = stat->distribution.cells();
+            }
 
             int size;
-            void *ptr = stat->node_distribution.create_png(&size);
+            void *ptr = stat->distribution.create_png(&size);
             sum_size += size;
+
             statement_insert_into_key_distributions
+            ->bind_blob(ptr, size) // column: nodes/ways
             ->bind_text(it->first) // column: key
-            ->bind_blob(ptr, size) // column: png
             ->execute();
 
-            stat->node_distribution.free_png(ptr);
+            stat->distribution.free_png(ptr);
+
+            stat->distribution.clear();
         }
 
         std::cerr << "gridcells_all: " << GeoDistribution::count_all_set_cells() << std::endl;
@@ -251,6 +258,22 @@ class TagStatsHandler : public Osmium::Handler::Base {
                 stat = tags_iterator->second;
             }
             stat->update(it->value(), object, string_store);
+
+            if (object->get_type() == NODE) {
+                try {
+                    stat->distribution.add_coordinate(m_map_to_int(static_cast<Osmium::OSM::Node*>(object)->position()));
+                } catch (std::range_error) {
+                    // ignore
+                }
+            }
+#ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
+            else if (object->get_type() == WAY) {
+                // This will only add the coordinate of the first node in a way to the
+                // distribution. We'll see how this goes, maybe we need to store the
+                // coordinates of all nodes?
+                stat->distribution.add_coordinate(m_storage[static_cast<Osmium::OSM::Way*>(object)->nodes().front().ref()]);
+            }
+#endif // TAGSTATS_GEODISTRIBUTION_FOR_WAYS
         }
 
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
@@ -258,11 +281,28 @@ class TagStatsHandler : public Osmium::Handler::Base {
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
     }
 
+    Osmium::Handler::Statistics osmium_handler_stats;
+
+    MapToInt<rough_position_t> m_map_to_int;
+
+#ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
+    storage_t m_storage;
+#endif
+
 public:
 
-    TagStatsHandler() : Base(), max_timestamp(0) {
+    TagStatsHandler(double minx, double miny, double maxx, double maxy, unsigned int width, unsigned int height) :
+        Base(),
+        max_timestamp(0),
+        osmium_handler_stats(),
+        m_map_to_int(minx, miny, maxx, maxy, width, height)
+#ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
+        , m_storage()
+#endif
+        {
         string_store = new StringStore(string_store_size);
         db = new Osmium::Sqlite::Database("taginfo-db.db");
+        GeoDistribution::set_dimensions(width, height);
     }
 
     ~TagStatsHandler() {
@@ -270,15 +310,25 @@ public:
         delete string_store;
     }
 
-    void node(Osmium::OSM::Node *node) {
+    void node(Osmium::OSM::Node* node) {
+        osmium_handler_stats.node(node);
         collect_tag_stats(node);
+#ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
+        try {
+            m_storage.set(node->id(), m_map_to_int(node->position()));
+        } catch (std::range_error) {
+            // ignore
+        }
+#endif
     }
 
-    void way(Osmium::OSM::Way *way) {
+    void way(Osmium::OSM::Way* way) {
+        osmium_handler_stats.way(way);
         collect_tag_stats(way);
     }
 
-    void relation(Osmium::OSM::Relation *relation) {
+    void relation(Osmium::OSM::Relation* relation) {
+        osmium_handler_stats.relation(relation);
         collect_tag_stats(relation);
     }
 
@@ -289,8 +339,8 @@ public:
     void after_nodes() {
         _timer_info("processing nodes");
         _print_memory_usage();
+        _print_and_clear_distribution_images(true);
         timer = time(0);
-        _print_images();
         _timer_info("dumping images");
         _print_memory_usage();
     }
@@ -301,6 +351,9 @@ public:
 
     void after_ways() {
         _timer_info("processing ways");
+#ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
+        _print_and_clear_distribution_images(false);
+#endif
         _print_memory_usage();
     }
 
@@ -332,6 +385,7 @@ public:
     }
 
     void final() {
+        osmium_handler_stats.final();
         _print_memory_usage();
         timer = time(0);
 
@@ -339,23 +393,23 @@ public:
                 " count_all,  count_nodes,  count_ways,  count_relations, " \
                 "values_all, values_nodes, values_ways, values_relations, " \
                 " users_all, " \
-                "grids) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+                "cells_nodes, cells_ways) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 
         Osmium::Sqlite::Statement *statement_insert_into_tags = db->prepare("INSERT INTO tags (key, value, " \
                 "count_all, count_nodes, count_ways, count_relations) " \
                 "VALUES (?, ?, ?, ?, ?, ?);");
 
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
-        Osmium::Sqlite::Statement *statement_insert_into_key_combinations = db->prepare("INSERT INTO keypairs (key1, key2, " \
+        Osmium::Sqlite::Statement* statement_insert_into_key_combinations = db->prepare("INSERT INTO keypairs (key1, key2, " \
                 "count_all, count_nodes, count_ways, count_relations) " \
                 "VALUES (?, ?, ?, ?, ?, ?);");
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
-        Osmium::Sqlite::Statement *statement_update_meta = db->prepare("UPDATE source SET data_until=?");
+        Osmium::Sqlite::Statement* statement_update_meta = db->prepare("UPDATE source SET data_until=?");
 
         db->begin_transaction();
 
-        struct tm *tm = gmtime(&max_timestamp);
+        struct tm* tm = gmtime(&max_timestamp);
         static char max_timestamp_str[20]; // thats enough space for the timestamp generated from the pattern in the next line
         strftime(max_timestamp_str, sizeof(max_timestamp_str), "%Y-%m-%d %H:%M:%S", tm);
         statement_update_meta->bind_text(max_timestamp_str)->execute();
@@ -413,7 +467,8 @@ public:
 #else
             ->bind_int64(0)
 #endif // TAGSTATS_COUNT_USERS
-            ->bind_int64(stat->node_distribution.get_cells()) // column: grids
+            ->bind_int64(stat->cells.nodes())      // column: cells_nodes
+            ->bind_int64(stat->cells.ways())       // column: cells_ways
             ->execute();
 
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
