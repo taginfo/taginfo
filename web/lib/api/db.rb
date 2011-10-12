@@ -206,6 +206,34 @@ class Taginfo < Sinatra::Base
             get_first_value()
     end
 
+    api(3, 'db/keys/distribution/nodes', {
+        :description => 'Get map with distribution of this key in the database (nodes only).',
+        :parameters => { :key => 'Tag key (required).' },
+        :result => 'PNG image.',
+        :example => { :key => 'amenity' },
+        :ui => '/keys/amenity#map'
+    }) do
+        key = params[:key]
+        content_type :png
+        @db.select('SELECT nodes FROM db.key_distributions').
+            condition('key = ?', key).
+            get_first_value()
+    end
+
+    api(3, 'db/keys/distribution/ways', {
+        :description => 'Get map with distribution of this key in the database (ways only).',
+        :parameters => { :key => 'Tag key (required).' },
+        :result => 'PNG image.',
+        :example => { :key => 'highway' },
+        :ui => '/keys/highway#map'
+    }) do
+        key = params[:key]
+        content_type :png
+        @db.select('SELECT ways FROM db.key_distributions').
+            condition('key = ?', key).
+            get_first_value()
+    end
+
     api(2, 'db/keys/values', {
         :description => 'Get values used with a given key.',
         :parameters => {
