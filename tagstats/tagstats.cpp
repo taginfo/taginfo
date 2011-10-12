@@ -111,8 +111,10 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
+    GeoDistribution::set_dimensions(width, height);
     Osmium::OSMFile infile(argv[optind]);
-    TagStatsHandler handler(left, bottom, right, top, width, height);
+    MapToInt<rough_position_t> map_to_int(left, bottom, right, top, width, height);
+    TagStatsHandler handler(map_to_int);
     infile.read(handler);
 }
 

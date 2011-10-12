@@ -291,18 +291,17 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
 public:
 
-    TagStatsHandler(double minx, double miny, double maxx, double maxy, unsigned int width, unsigned int height) :
+    TagStatsHandler(MapToInt<rough_position_t>& map_to_int) :
         Base(),
         max_timestamp(0),
         osmium_handler_stats(),
-        m_map_to_int(minx, miny, maxx, maxy, width, height)
+        m_map_to_int(map_to_int)
 #ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
         , m_storage()
 #endif
         {
         string_store = new StringStore(string_store_size);
         db = new Osmium::Sqlite::Database("taginfo-db.db");
-        GeoDistribution::set_dimensions(width, height);
     }
 
     ~TagStatsHandler() {
