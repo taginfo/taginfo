@@ -19,7 +19,7 @@ taginfo:
     source: Source
     sources: Sources
     download: Téléchargement
-    about: A Propos de Taginfo
+    about: À Propos de Taginfo
     wiki: Wiki
     reports: Compte-Rendus
     keys: Clés
@@ -29,7 +29,7 @@ taginfo:
     key_combinations: Combinaisons
     data_from: Données de
     instance:
-        title: A propos de ce site Taginfo
+        title: À propos de ce site Taginfo
         other: Visiter la page <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> pour d'autres sites.
 
 pages:
@@ -42,11 +42,11 @@ pages:
         index:
             intro: |
                 <p>Taginfo retrouve des données sur les tags OSM depuis plusieures sources et les assemble pour en faciliter l'exploration.</p>
-                <p>Il est a noter que pour modifier les données il faut le faire à la source, car Taginfo ne fait que les afficher.</p>
+                <p>Il est à noter que pour modifier les données il faut le faire à la source, car Taginfo ne fait que les afficher.</p>
             data_until: Données jusqu'à
             last_update_run: Dernière mise à jour
             data_until_explanation: Toutes les modifications jusqu'à cette date sont présentes, les suivantes le seront peut-être.
-            to: to
+            to: à
             info: |
                 <p>Toutes les heures sont en temps universel (UTC).</p>
     download:
@@ -56,7 +56,7 @@ pages:
                 dans des bases de données <img src="/img/link-extern.gif" alt=""/><a class="extlink" href="http://www.sqlite.org/">Sqlite</a>.
                 Les fichiers de base de données sont ensuite compressés
                 avec <img src="/img/link-extern.gif" alt=""/><a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
-                <p>Si vous ne voulez pas télécharger les données, vous pouvez toujours y accéder automatiquement grâce à l'<a href="/about">API</a>.</p>
+                <p>Si vous ne voulez pas télécharger les données, vous pouvez toujours y accéder directement grâce à l'<a href="/about">API</a>.</p>
             file: Fichier
             packed: Compressé
             unpacked: Decompressé
@@ -94,10 +94,10 @@ sources:
         description: Agrégation de statistiques et de données diverses nécessaire à l'interface de Taginfo.
     db:
         name: Base de données
-        description: Statistiques pour chaque clé et valeur des tag sur la partie France Métropole d'OSM
+        description: Statistiques pour chaque clé et valeur des tags pour la France (métropole) d'OSM
     wiki:
         name: Wiki
-        description: Clés et valeurs des tags sur le Wiki d'OSM.
+        description: Clés et valeurs des tags sur le wiki d'OSM.
     josm:
         name: JOSM
         description: Configuration pour l'éditeur JOSM.
@@ -112,11 +112,11 @@ reports:
     characters_in_keys:
         name: Caractères utilisés dans les clés
         intro: |
-            <p>Tout caractère Unicode peut apparaitre dans les clés de tag OSM mais seulement les lettres latines minuscules (a-z) et le caractère souligné (_)
-            sont utilisés. Il est aussi possible le caractère deux-points (:) comme separateur.</p>
+            <p>Tout caractère Unicode peut apparaitre dans les clés de tags OSM mais seulement les lettres latines minuscules (a-z) et le caractère souligné (_)
+            sont utilisés. Il est aussi possible d'utiliser le caractère deux-points (:) comme separateur.</p>
         statistics:
             tab: Statistiques
-            title: Statistiques Overview
+            title: Statistiques globales
             characters_in_keys:
                 plain: Seulement les lettres latines minuscules (<span class="char">a</span> à <span class="char">z</span>) et le souligné (<span class="char">_</span>), le première et dernière caractère est une lettre .
                 colon: Comme la règle A mais contenant un ou plusieurs caractères deux-points (<span class="char">:</span>).
@@ -137,7 +137,7 @@ reports:
             title: Clés avec des caractères problématiques
             intro: |
                 <p>Les tags dont la clé contient des symboles problématiques : <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
-                Ces caractères peuvent poser des problèmes car ils peuvent avoir des interprétations particulières par les outils employés pour les traitements des données (sql,xml,html...).
+                Ces caractères peuvent poser des problèmes car ils peuvent avoir des interprétations particulières par les outils employés pour les traitements des données (sql, xml, html...).
                 Par exemple le signe égal (<span class="char">=</span>) est utilisé pour séparer la clé et la valeur d'un tag.
                 <br/>Les clés de tag apparaissant dans cette liste ne sont pas forcément faux, mais ils riques d'être source d'erreur.</p>
     frequently_used_keys_without_wiki_page:
@@ -145,27 +145,26 @@ reports:
     key_lengths:
         name: Longueurs des clés
     language_comparison_table_for_keys_in_the_wiki:
-        name: Comparaison par langue des clés présentées sur le Wiki
+        name: Comparaison par langue des clés présentées sur le wiki
         icons:
-            template: Page disponible dans le Wiki et contenant les modèles standards.
-            error: Page disponible dans le Wiki et contenant les modèles standards, mais impossible à déchiffrer.
-            page: Page disponible dans le Wiki mais ne contenant pas les modèles standards.
+            template: Page disponible dans le wiki et contenant les modèles standards.
+            error: Page disponible dans le wiki et contenant les modèles standards, mais impossible à déchiffrer.
+            page: Page disponible dans le wiki mais ne contenant pas les modèles standards.
             redirect: Page de redirection.
         intro: |
-            <p>Cette table affiche tous les clés de tag possédant une page Wiki et dans quelle langue.</p>
+            <p>Cette table affiche toutes les clés de tags possédant une page wiki et dans quelle langue.</p>
     languages:
         name: Langues
         intro: |
             <p>OpenStreetMap est un projet international.
-            Les tags et leur description peuvent être dans n'importe quelle langue.
+            Les tags et leurs descriptions peuvent être dans n'importe quelle langue.
             Cette table affiche les langues et combien de pages dans ces langues documentent les tags.</p>
     wiki_pages_about_non_existing_keys:
-        name: Page de Wiki inexistante
+        name: Page du wiki inexistante
         intro: |
-            <p>Cette table affiche les pages de Wiki existantes pour documenter des tags non trouvés dans la base de données OSM.
+            <p>Cette table affiche les pages du wiki existantes pour documenter des tags non trouvés dans la base de données OSM.
             Ce n'est pas forcément une erreur, si un tag est en cours de préparation, mais ce peut aussi être une erreur suite à une faute de frappe.</p>
 
 misc:
     values_less_than_one_percent: Toutes les valeurs sont inférieures à 1%
     empty_string: chaîne de caractère vide
-
