@@ -38,10 +38,18 @@ echo "`$DATECMD` Running pre.sql..."
 sqlite3 $DATABASE <pre.sql
 
 echo "`$DATECMD` Running count... "
+
+top=`../../bin/taginfo-config.rb geodistribution.top`
+right=`../../bin/taginfo-config.rb geodistribution.right`
+bottom=`../../bin/taginfo-config.rb geodistribution.bottom`
+left=`../../bin/taginfo-config.rb geodistribution.left`
+width=`../../bin/taginfo-config.rb geodistribution.width`
+height=`../../bin/taginfo-config.rb geodistribution.height`
+
 HERE=`pwd`
 cd $DIR
 #valgrind --leak-check=full --show-reachable=yes $HERE/tagstats $PLANETFILE >valgrind.log 2>&1
-$HERE/tagstats $PLANETFILE
+$HERE/tagstats --left=$left --bottom=$bottom --top=$top --right=$right --width=$width --height=$height $PLANETFILE
 cd $HERE
 
 echo "`$DATECMD` Running update_characters... "

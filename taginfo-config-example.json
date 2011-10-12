@@ -13,10 +13,15 @@
     "tagcloud": {
         "number_of_tags": 200
     },
-    // For the geodistribution map. If you change this, you also have to change the C++ code in tagstats.
+    // For the geodistribution map. See the wiki documentation about these settings.
     "geodistribution": {
-        "width": 720,
-        "height": 360,
+        "left": -180,
+        "bottom": -90,
+        "right": 180,
+        "top": 90,
+        "width": 360,
+        "height": 180,
+        "scale_image": 2,
         "background_image": "/img/worldp.png"
     },
     "xapi": {

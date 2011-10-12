@@ -51,16 +51,16 @@
         <h2>Geographical distribution of this key</h2>
         <% if @filter_type == 'all' %>
             <div style="background-image: url(<%= TaginfoConfig.get('geodistribution.background_image') %>); background-repeat: no-repeat;"/>
-                <img src="/api/3/db/keys/distribution/nodes?key=<%= @key_uri %>" alt="" width="<%= TaginfoConfig.get('geodistribution.width') %>" height="<%= TaginfoConfig.get('geodistribution.height') %>" style="position: absolute;"/>
-                <img src="/api/3/db/keys/distribution/ways?key=<%= @key_uri %>" alt="" width="<%= TaginfoConfig.get('geodistribution.width') %>" height="<%= TaginfoConfig.get('geodistribution.height') %>"/>
+                <img src="/api/3/db/keys/distribution/nodes?key=<%= @key_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>" style="position: absolute;"/>
+                <img src="/api/3/db/keys/distribution/ways?key=<%= @key_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
             </div>
         <% elsif @filter_type == 'nodes' %>
             <div style="background-image: url(<%= TaginfoConfig.get('geodistribution.background_image') %>); background-repeat: no-repeat;"/>
-                <img src="/api/3/db/keys/distribution/nodes?key=<%= @key_uri %>" alt="" width="<%= TaginfoConfig.get('geodistribution.width') %>" height="<%= TaginfoConfig.get('geodistribution.height') %>"/>
+                <img src="/api/3/db/keys/distribution/nodes?key=<%= @key_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
             </div>
         <% elsif @filter_type == 'ways' %>
             <div style="background-image: url(<%= TaginfoConfig.get('geodistribution.background_image') %>); background-repeat: no-repeat;"/>
-                <img src="/api/3/db/keys/distribution/ways?key=<%= @key_uri %>" alt="" width="<%= TaginfoConfig.get('geodistribution.width') %>" height="<%= TaginfoConfig.get('geodistribution.height') %>"/>
+                <img src="/api/3/db/keys/distribution/ways?key=<%= @key_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
             </div>
         <% elsif @filter_type == 'relations' %>
             <p><i>Relations do not have a geographical location, so no map can be shown.</i></p>
