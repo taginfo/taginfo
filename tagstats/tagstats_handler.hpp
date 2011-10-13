@@ -183,7 +183,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
     void _print_and_clear_distribution_images(bool for_nodes) {
         int sum_size=0;
 
-        Osmium::Sqlite::Statement* statement_insert_into_key_distributions = db->prepare(for_nodes ? "INSERT INTO key_distributions (nodes, key) VALUES (?, ?);" : "UPDATE key_distributions SET ways=? WHERE key=?");
+        Osmium::Sqlite::Statement* statement_insert_into_key_distributions = db->prepare("INSERT INTO key_distributions (key, object_type, png) VALUES (?, ?, ?);");
         db->begin_transaction();
 
         for (key_hash_map_t::const_iterator it = tags_stat.begin(); it != tags_stat.end(); it++) {
@@ -200,8 +200,9 @@ class TagStatsHandler : public Osmium::Handler::Base {
             sum_size += size;
 
             statement_insert_into_key_distributions
-            ->bind_blob(ptr, size) // column: nodes/ways
-            ->bind_text(it->first) // column: key
+            ->bind_text(it->first)             // column: key
+            ->bind_text(for_nodes ? "n" : "w") // column: object_type
+            ->bind_blob(ptr, size)             // column: png
             ->execute();
 
             stat->distribution.free_png(ptr);
@@ -338,6 +339,17 @@ public:
     void after_nodes() {
         _timer_info("processing nodes");
         _print_memory_usage();
+
+        int size;
+        void* ptr = GeoDistribution::create_empty_png(&size);
+        Osmium::Sqlite::Statement* statement_insert_into_key_distributions = db->prepare("INSERT INTO key_distributions (png) VALUES (?);");
+        db->begin_transaction();
+        statement_insert_into_key_distributions
+        ->bind_blob(ptr, size) // column: png
+        ->execute();
+        db->commit();
+        delete statement_insert_into_key_distributions;
+
         _print_and_clear_distribution_images(true);
         timer = time(0);
         _timer_info("dumping images");

@@ -179,7 +179,7 @@ public:
             }
         }
 
-        void *png = gdImagePngPtr(im, size);
+        void* png = gdImagePngPtr(im, size);
         gdImageDestroy(im);
 
         return png;
@@ -190,6 +190,17 @@ public:
      */
     void free_png(void *png) {
         gdFree(png);
+    }
+
+    static void* create_empty_png(int* size) {
+        gdImagePtr im = gdImageCreate(c_width, c_height);
+        int bgColor = gdImageColorAllocate(im, 0, 0, 0);
+        gdImageColorTransparent(im, bgColor);
+
+        void* png = gdImagePngPtr(im, size);
+        gdImageDestroy(im);
+
+        return png;
     }
 
     /**

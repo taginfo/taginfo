@@ -201,8 +201,12 @@ class Taginfo < Sinatra::Base
     }) do
         key = params[:key]
         content_type :png
-        @db.select('SELECT nodes FROM db.key_distributions').
+        @db.select('SELECT png FROM db.key_distributions').
+            condition("object_type='n'").
             condition('key = ?', key).
+            get_first_value() ||
+        @db.select('SELECT png FROM db.key_distributions').
+            condition('key IS NULL').
             get_first_value()
     end
 
@@ -215,8 +219,12 @@ class Taginfo < Sinatra::Base
     }) do
         key = params[:key]
         content_type :png
-        @db.select('SELECT nodes FROM db.key_distributions').
+        @db.select('SELECT png FROM db.key_distributions').
+            condition("object_type='n'").
             condition('key = ?', key).
+            get_first_value() ||
+        @db.select('SELECT png FROM db.key_distributions').
+            condition('key IS NULL').
             get_first_value()
     end
 
@@ -229,8 +237,12 @@ class Taginfo < Sinatra::Base
     }) do
         key = params[:key]
         content_type :png
-        @db.select('SELECT ways FROM db.key_distributions').
+        @db.select('SELECT png FROM db.key_distributions').
+            condition("object_type='w'").
             condition('key = ?', key).
+            get_first_value() ||
+        @db.select('SELECT png FROM db.key_distributions').
+            condition('key IS NULL').
             get_first_value()
     end
 

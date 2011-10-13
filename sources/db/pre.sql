@@ -48,8 +48,8 @@ DROP TABLE IF EXISTS key_distributions;
 
 CREATE TABLE key_distributions (
   key              VARCHAR,
-  nodes            BLOB,
-  ways             BLOB
+  object_type      VARCHAR(1),          -- (n)ode, (w)ay,
+  png              BLOB
 );
 
 DROP TABLE IF EXISTS tags;
