@@ -193,7 +193,7 @@ class Taginfo < Sinatra::Base
     end
 
     api(2, 'db/keys/distribution', {
-        :description => 'Get map with distribution of this key in the database.',
+        :description => 'Get map with distribution of this key in the database (nodes only).',
         :parameters => { :key => 'Tag key (required).' },
         :result => 'PNG image.',
         :example => { :key => 'amenity' },
@@ -311,7 +311,10 @@ class Taginfo < Sinatra::Base
 
     api(2, 'db/keys/keys', {
         :description => 'Find keys that are used together with a given key.',
-        :parameters => { :key => 'Tag key (required).' },
+        :parameters => {
+            :key => 'Tag key (required).',
+            :query => 'Only show results where the other_key matches this query (substring match, optional).'
+        },
         :paging => :optional,
         :filter => {
             :all       => { :doc => 'No filter.' },
@@ -338,8 +341,8 @@ class Taginfo < Sinatra::Base
             params[:sortname] = ['from_fraction', 'together_count', 'other_key']
         end
 
-        total = @db.count('db.keypairs').
-            condition('key1 = ? OR key2 = ?', key, key).
+        cq = @db.count('db.keypairs')
+        total = (params[:query] != '' ? cq.condition("(key1 = ? AND key2 LIKE '%' || ? || '%') OR (key2 = ? AND key1 LIKE '%' || ? || '%')", key, params[:query], key, params[:query]) : cq.condition('key1 = ? OR key2 = ?', key, key)).
             condition("count_#{filter_type} > 0").
             get_first_value().to_i
 
@@ -347,8 +350,11 @@ class Taginfo < Sinatra::Base
             condition('key = ?', key).
             get_first_value()
 
-        res = @db.select("SELECT p.key1 AS other_key, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.keypairs p, db.keys k WHERE p.key1=k.key AND p.key2=? AND p.count_#{filter_type} > 0 
-                    UNION SELECT p.key2 AS other_key, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.keypairs p, db.keys k WHERE p.key2=k.key AND p.key1=? AND p.count_#{filter_type} > 0", key, key).
+        res = (params[:query] != '' ?
+            @db.select("SELECT p.key1 AS other_key, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.keypairs p, db.keys k WHERE p.key1=k.key AND p.key2=? AND (p.key1 LIKE '%' || ? || '%') AND p.count_#{filter_type} > 0
+                    UNION SELECT p.key2 AS other_key, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.keypairs p, db.keys k WHERE p.key2=k.key AND p.key1=? AND (p.key2 LIKE '%' || ? || '%') AND p.count_#{filter_type} > 0", key, params[:query], key, params[:query]) :
+            @db.select("SELECT p.key1 AS other_key, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.keypairs p, db.keys k WHERE p.key1=k.key AND p.key2=? AND p.count_#{filter_type} > 0 
+                    UNION SELECT p.key2 AS other_key, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.keypairs p, db.keys k WHERE p.key2=k.key AND p.key1=? AND p.count_#{filter_type} > 0", key, key)).
             order_by(params[:sortname], params[:sortorder]){ |o|
                 o.together_count
                 o.other_key

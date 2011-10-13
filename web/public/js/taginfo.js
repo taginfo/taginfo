@@ -406,6 +406,9 @@ var create_flexigrid_for = {
                     { display: '<span title="Key used together with this key">Other key</span>', name: 'other_key', width: 340, sortable: true },
                     { display: '<span title="Number of objects with other key that also have this key">&rarr; Count</span>', name: 'from_count', width: 320, sortable: true, align: 'center' }
                 ],
+                searchitems: [
+                    { display: 'Other key', name: 'other_key' }
+                ],
                 sortname: 'to_count',
                 sortorder: 'desc',
                 height: 410,
