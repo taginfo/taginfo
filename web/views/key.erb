@@ -138,7 +138,9 @@ jQuery.getJSON('/api/2/db/keys/overview?key=#{ @key_uri }', function(data, textS
 var tabs = jQuery('#tabs').tabs({
     show: function(event, ui) { 
         window.location.hash = ui.tab.hash;
-        create_flexigrid_for.key[ui.tab.hash.substring(1)](#{ @key.to_json }, #{ @filter_type.to_json });
+        if (ui.tab.hash.substring(1) in create_flexigrid_for.key) {
+            create_flexigrid_for.key[ui.tab.hash.substring(1)](#{ @key.to_json }, #{ @filter_type.to_json });
+        }
     }
 });
 
