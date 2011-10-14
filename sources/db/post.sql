@@ -21,7 +21,7 @@ CREATE        INDEX tags_key_idx ON tags (key);
 -- CREATE UNIQUE INDEX tags_key_value_idx ON tags (key, value);
 CREATE        INDEX keypairs_key1_idx ON keypairs (key1);
 CREATE        INDEX keypairs_key2_idx ON keypairs (key2);
-CREATE UNIQUE INDEX key_distributions_key_idx ON key_distributions (key);
+CREATE UNIQUE INDEX key_distributions_key_idx ON key_distributions (key, object_type);
 
 INSERT INTO stats (key, value) SELECT 'num_keys',                  count(*) FROM keys;
 INSERT INTO stats (key, value) SELECT 'num_keys_on_nodes',         count(*) FROM keys WHERE count_nodes     > 0;
