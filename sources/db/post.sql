@@ -12,10 +12,6 @@ PRAGMA count_changes = OFF;
 PRAGMA temp_store    = MEMORY;
 PRAGMA cache_size    = 5000000; 
 
-ATTACH DATABASE '__DIR__/count.db' AS count;
-INSERT INTO stats SELECT * FROM count.stats;
-DETACH DATABASE count;
-
 CREATE UNIQUE INDEX keys_key_idx ON keys (key);
 CREATE        INDEX tags_key_idx ON tags (key);
 -- CREATE UNIQUE INDEX tags_key_value_idx ON tags (key, value);

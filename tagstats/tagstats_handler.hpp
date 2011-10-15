@@ -174,7 +174,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
     static const int string_store_size = 1024 * 1024 * 10;
     StringStore* string_store;
 
-    Osmium::Sqlite::Database* db;
+    Osmium::Sqlite::Database& m_database;
 
     void _timer_info(const char *msg) {
         int duration = time(0) - timer;
@@ -205,8 +205,8 @@ class TagStatsHandler : public Osmium::Handler::Base {
     void _print_and_clear_distribution_images(bool for_nodes) {
         int sum_size=0;
 
-        Osmium::Sqlite::Statement* statement_insert_into_key_distributions = db->prepare("INSERT INTO key_distributions (key, object_type, png) VALUES (?, ?, ?);");
-        db->begin_transaction();
+        Osmium::Sqlite::Statement* statement_insert_into_key_distributions = m_database.prepare("INSERT INTO key_distributions (key, object_type, png) VALUES (?, ?, ?);");
+        m_database.begin_transaction();
 
         for (key_hash_map_t::const_iterator it = tags_stat.begin(); it != tags_stat.end(); it++) {
             KeyStats* stat = it->second;
@@ -235,7 +235,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
         std::cerr << "gridcells_all: " << GeoDistribution::count_all_set_cells() << std::endl;
         std::cerr << "sum of location image sizes: " << sum_size << std::endl;
 
-        db->commit();
+        m_database.commit();
         delete statement_insert_into_key_distributions;
     }
 
@@ -314,21 +314,20 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
 public:
 
-    TagStatsHandler(MapToInt<rough_position_t>& map_to_int) :
+    TagStatsHandler(Osmium::Sqlite::Database& database, MapToInt<rough_position_t>& map_to_int) :
         Base(),
         max_timestamp(0),
-        statistics_handler(),
+        m_database(database),
+        statistics_handler(database),
         m_map_to_int(map_to_int)
 #ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
         , m_storage()
 #endif
     {
         string_store = new StringStore(string_store_size);
-        db = new Osmium::Sqlite::Database("taginfo-db.db");
     }
 
     ~TagStatsHandler() {
-        delete db;
         delete string_store;
     }
 
@@ -364,12 +363,12 @@ public:
 
         int size;
         void* ptr = GeoDistribution::create_empty_png(&size);
-        Osmium::Sqlite::Statement* statement_insert_into_key_distributions = db->prepare("INSERT INTO key_distributions (png) VALUES (?);");
-        db->begin_transaction();
+        Osmium::Sqlite::Statement* statement_insert_into_key_distributions = m_database.prepare("INSERT INTO key_distributions (png) VALUES (?);");
+        m_database.begin_transaction();
         statement_insert_into_key_distributions
         ->bind_blob(ptr, size) // column: png
         ->execute();
-        db->commit();
+        m_database.commit();
         delete statement_insert_into_key_distributions;
 
         _print_and_clear_distribution_images(true);
@@ -422,25 +421,25 @@ public:
         _print_memory_usage();
         timer = time(0);
 
-        Osmium::Sqlite::Statement *statement_insert_into_keys = db->prepare("INSERT INTO keys (key, " \
+        Osmium::Sqlite::Statement *statement_insert_into_keys = m_database.prepare("INSERT INTO keys (key, " \
                 " count_all,  count_nodes,  count_ways,  count_relations, " \
                 "values_all, values_nodes, values_ways, values_relations, " \
                 " users_all, " \
                 "cells_nodes, cells_ways) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 
-        Osmium::Sqlite::Statement *statement_insert_into_tags = db->prepare("INSERT INTO tags (key, value, " \
+        Osmium::Sqlite::Statement *statement_insert_into_tags = m_database.prepare("INSERT INTO tags (key, value, " \
                 "count_all, count_nodes, count_ways, count_relations) " \
                 "VALUES (?, ?, ?, ?, ?, ?);");
 
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
-        Osmium::Sqlite::Statement* statement_insert_into_key_combinations = db->prepare("INSERT INTO keypairs (key1, key2, " \
+        Osmium::Sqlite::Statement* statement_insert_into_key_combinations = m_database.prepare("INSERT INTO keypairs (key1, key2, " \
                 "count_all, count_nodes, count_ways, count_relations) " \
                 "VALUES (?, ?, ?, ?, ?, ?);");
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
-        Osmium::Sqlite::Statement* statement_update_meta = db->prepare("UPDATE source SET data_until=?");
+        Osmium::Sqlite::Statement* statement_update_meta = m_database.prepare("UPDATE source SET data_until=?");
 
-        db->begin_transaction();
+        m_database.begin_transaction();
 
         struct tm* tm = gmtime(&max_timestamp);
         static char max_timestamp_str[20]; // thats enough space for the timestamp generated from the pattern in the next line
@@ -524,7 +523,7 @@ public:
             delete stat; // lets make valgrind happy
         }
 
-        db->commit();
+        m_database.commit();
 
         delete statement_update_meta;
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS

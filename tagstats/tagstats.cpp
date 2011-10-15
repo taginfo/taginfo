@@ -51,7 +51,7 @@ int GeoDistribution::c_height;
 /* ================================================== */
 
 void print_help() {
-    std::cout << "tagstats [OPTIONS] OSMFILE\n\n" \
+    std::cout << "tagstats [OPTIONS] OSMFILE DATABASE\n\n" \
               << "This program is part of Taginfo. It calculates statistics\n" \
               << "on OSM tags and puts them into taginfo-db.db and count.db.\n" \
               << "\nOptions:\n" \
@@ -127,15 +127,16 @@ int main(int argc, char *argv[]) {
 
     Osmium::init(debug);
 
-    if (argc - optind != 1) {
-        std::cerr << "Usage: " << argv[0] << " [OPTIONS] OSMFILE" << std::endl;
+    if (argc - optind != 2) {
+        std::cerr << "Usage: " << argv[0] << " [OPTIONS] OSMFILE DATABASE" << std::endl;
         exit(1);
     }
 
     GeoDistribution::set_dimensions(width, height);
     Osmium::OSMFile infile(argv[optind]);
+    Osmium::Sqlite::Database db(argv[optind+1]);
     MapToInt<rough_position_t> map_to_int(left, bottom, right, top, width, height);
-    TagStatsHandler handler(map_to_int);
+    TagStatsHandler handler(db, map_to_int);
     infile.read(handler);
 }
 

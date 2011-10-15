@@ -32,7 +32,7 @@ class StatisticsHandler : public Osmium::Handler::Base {
 
 public:
 
-    StatisticsHandler() : Base() {
+    StatisticsHandler(Osmium::Sqlite::Database& database) : Base(), m_database(database) {
         // if you change anything in this array, also change the corresponding struct below
         static const char *sn[] = {
             "nodes",
@@ -136,22 +136,8 @@ public:
     }
 
     void final() {
-        unlink("count.db");
-        Osmium::Sqlite::Database db("count.db");
-
-        sqlite3 *sqlite_db = db.get_sqlite3();
-        if (SQLITE_OK != sqlite3_exec(sqlite_db, \
-                                        "CREATE TABLE stats (" \
-                                        "  key    TEXT, " \
-                                        "  value  INT64 " \
-                                        ");", 0, 0, 0)) {
-            std::cerr << "Database error: " << sqlite3_errmsg(sqlite_db) << "\n";
-            sqlite3_close(sqlite_db);
-            exit(1);
-        }
-
-        Osmium::Sqlite::Statement *statement_insert_into_main_stats = db.prepare("INSERT INTO stats (key, value) VALUES (?, ?);");
-        db.begin_transaction();
+        Osmium::Sqlite::Statement* statement_insert_into_main_stats = m_database.prepare("INSERT INTO stats (key, value) VALUES (?, ?);");
+        m_database.begin_transaction();
 
         for (int i=0; m_stat_names[i]; ++i) {
             statement_insert_into_main_stats
@@ -164,7 +150,7 @@ public:
         ->bind_int64( ((uint64_t *) &m_stats)[0] - ((uint64_t *) &m_stats)[1] )
         ->execute();
 
-        db.commit();
+        m_database.commit();
 
         delete statement_insert_into_main_stats;
     }
@@ -203,6 +189,8 @@ private:
     } m_stats;
 
     const char **m_stat_names;
+
+    Osmium::Sqlite::Database& m_database;
 
     osm_object_id_t m_id;
     osm_version_t   m_version;

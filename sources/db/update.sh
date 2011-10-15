@@ -29,7 +29,6 @@ echo "`$DATECMD` Start db..."
 DATABASE=$DIR/taginfo-db.db
 
 rm -f $DATABASE
-rm -f $DIR/count.db
 
 echo "`$DATECMD` Running init.sql..."
 sqlite3 $DATABASE <../init.sql
@@ -46,17 +45,14 @@ left=`../../bin/taginfo-config.rb geodistribution.left`
 width=`../../bin/taginfo-config.rb geodistribution.width`
 height=`../../bin/taginfo-config.rb geodistribution.height`
 
-HERE=`pwd`
-cd $DIR
-#valgrind --leak-check=full --show-reachable=yes $HERE/tagstats $PLANETFILE >valgrind.log 2>&1
-$HERE/tagstats --left=$left --bottom=$bottom --top=$top --right=$right --width=$width --height=$height $PLANETFILE
-cd $HERE
+#valgrind --leak-check=full --show-reachable=yes $DIR/tagstats $PLANETFILE $DATABASE >valgrind.log 2>&1
+$DIR/tagstats --left=$left --bottom=$bottom --top=$top --right=$right --width=$width --height=$height $PLANETFILE $DATABASE
 
 echo "`$DATECMD` Running update_characters... "
 ./update_characters.pl $DIR
 
 echo "`$DATECMD` Running post.sql... "
-perl -pe "s|__DIR__|$DIR|" post.sql | sqlite3 $DATABASE
+sqlite3 $DATABASE <post.sql
 
 echo "`$DATECMD` Done db."
 
