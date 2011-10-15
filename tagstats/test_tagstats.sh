@@ -1,6 +1,9 @@
 #!/bin/sh
 #
-#  test_tagstats.sh
+#  test_tagstats.sh OSMFILE
+#
+#  This is a little helper program to test the function of tagstats.
+#  Its not supposed to be used in production.
 #
 
 set -e
