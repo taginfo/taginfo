@@ -60,10 +60,10 @@ int main(int argc, char *argv[]) {
 
     bool debug = false;
 
-    int top    =   90;
-    int right  =  180;
-    int bottom =  -90;
-    int left   = -180;
+    double top    =   90;
+    double right  =  180;
+    double bottom =  -90;
+    double left   = -180;
 
     unsigned int width  = 360;
     unsigned int height = 180;
@@ -82,16 +82,16 @@ int main(int argc, char *argv[]) {
                 print_help();
                 exit(0);
             case 't':
-                top = atoi(optarg);
+                top = atof(optarg);
                 break;
             case 'r':
-                right = atoi(optarg);
+                right = atof(optarg);
                 break;
             case 'b':
-                bottom = atoi(optarg);
+                bottom = atof(optarg);
                 break;
             case 'l':
-                left = atoi(optarg);
+                left = atof(optarg);
                 break;
             case 'w':
                 width = atoi(optarg);
