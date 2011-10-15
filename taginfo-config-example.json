@@ -3,6 +3,8 @@
 {
     // You probably want to change all these.
     "instance": {
+        // url prefix for the site
+        "url": "http://localhost:4567",
         // Used in the title of all HTML pages.
         "name": "Test Taginfo",
         // Description that appears if you click on the instance icon in the upper left.

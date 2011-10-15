@@ -95,6 +95,12 @@ class Taginfo < Sinatra::Base
         erb_orig template, options, locals
     end
 
+    # when do we expect the next data update
+    def next_update
+        # three hours after midnight UTC
+        ((Time.utc(Time.now.year(), Time.now.month(), Time.now.day(), 3, 0, 0) + (Time.now.hour < 3 ? 0 : 24)*60*60)-Time.now).to_i.to_i
+    end
+
     before do
         if request.cookies['taginfo_locale'] && request.path != '/switch_locale'
             params[:locale] = request.cookies['taginfo_locale']
@@ -107,8 +113,9 @@ class Taginfo < Sinatra::Base
         javascript 'lang/' + r18n.locale.code
         javascript 'taginfo'
 
-        # set expire to three hours after midnight UTC
-        expires(((Time.utc(Time.now.year(), Time.now.month(), Time.now.day(), 3, 0, 0) + (Time.now.hour < 3 ? 0 : 24)*60*60)-Time.now).to_i.to_i)
+        # set to immediate expire on normal pages
+        # (otherwise switching languages doesn't work)
+        expires 0, :no_cache
 
         @db = SQL::Database.new('../../data')
 
@@ -125,6 +132,7 @@ class Taginfo < Sinatra::Base
 
     before '/api/*' do
         content_type :json
+        expires next_update
     end
 
     #-------------------------------------
@@ -133,7 +141,7 @@ class Taginfo < Sinatra::Base
     # It sets a cookie and redirects back to the page the user was coming from.
     get '/switch_locale' do
         response.set_cookie('taginfo_locale', params[:locale])
-        redirect params[:url]
+        redirect(TaginfoConfig.get('instance.url') + params[:url])
     end
 
     #-------------------------------------
@@ -268,6 +276,7 @@ class Taginfo < Sinatra::Base
     #-------------------------------------
 
     get '/js/lang/:lang.js' do
+        expires next_update
         trans = R18n::I18n.new(params[:lang], 'i18n')
         return 'var texts = ' + {
             :flexigrid => {

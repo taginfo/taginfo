@@ -14,7 +14,7 @@
         <div id="top">
             <div id="right">
                 <form id="set_language" action="/switch_locale">
-                    <input type="hidden" name="url" value="<%= request.url %>"/>
+                    <input type="hidden" name="url" value="<%= request.path %>"/>
                     <select id="locale" name="locale">
 <% r18n.available_locales.sort{ |a,b| a.title <=> b.title }.each do |locale| %>
                         <option value="<%= locale.code %>"<%= locale.code == r18n.locale.code ? ' selected="selected"' : ''%>><%= locale.title %>&nbsp;</option>
