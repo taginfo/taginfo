@@ -129,14 +129,14 @@ public:
           distribution() {
     }
 
-    void update(const char* value, Osmium::OSM::Object* object, StringStore* string_store) {
+    void update(const char* value, Osmium::OSM::Object* object, StringStore& string_store) {
         key.count[object->get_type()]++;
 
         value_hash_map_t::iterator values_iterator(values_hash.find(value));
         if (values_iterator == values_hash.end()) {
             Counter counter;
             counter.count[object->get_type()] = 1;
-            values_hash.insert(std::pair<const char*, Counter>(string_store->add(value), counter));
+            values_hash.insert(std::pair<const char*, Counter>(string_store.add(value), counter));
             values.count[object->get_type()]++;
         } else {
             values_iterator->second.count[object->get_type()]++;
@@ -168,11 +168,11 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
     key_hash_map_t tags_stat;
 
-    time_t max_timestamp;
+    time_t m_max_timestamp;
 
     // this must be much bigger than the largest string we want to store
     static const int string_store_size = 1024 * 1024 * 10;
-    StringStore* string_store;
+    StringStore m_string_store;
 
     Osmium::Sqlite::Database& m_database;
 
@@ -240,10 +240,10 @@ class TagStatsHandler : public Osmium::Handler::Base {
     }
 
     void _print_memory_usage() {
-        std::cerr << "string_store: chunk_size=" << string_store->get_chunk_size() / 1024 / 1024 << "MB"
-                  <<                  " chunks=" << string_store->get_chunk_count()
-                  <<                  " memory=" << (string_store->get_chunk_size() / 1024 / 1024) * string_store->get_chunk_count() << "MB"
-                  <<           " bytes_in_last=" << string_store->get_used_bytes_in_last_chunk() / 1024 << "kB"
+        std::cerr << "string_store: chunk_size=" << m_string_store.get_chunk_size() / 1024 / 1024 << "MB"
+                  <<                  " chunks=" << m_string_store.get_chunk_count()
+                  <<                  " memory=" << (m_string_store.get_chunk_size() / 1024 / 1024) * m_string_store.get_chunk_count() << "MB"
+                  <<           " bytes_in_last=" << m_string_store.get_used_bytes_in_last_chunk() / 1024 << "kB"
                   << std::endl;
 
         char filename[100];
@@ -264,11 +264,11 @@ class TagStatsHandler : public Osmium::Handler::Base {
     }
 
     void collect_tag_stats(Osmium::OSM::Object *object) {
-        if (max_timestamp < object->timestamp()) {
-            max_timestamp = object->timestamp();
+        if (m_max_timestamp < object->timestamp()) {
+            m_max_timestamp = object->timestamp();
         }
 
-        KeyStats *stat;
+        KeyStats* stat;
         Osmium::OSM::TagList::const_iterator end = object->tags().end();
         for (Osmium::OSM::TagList::const_iterator it = object->tags().begin(); it != end; ++it) {
             const char* key = it->key();
@@ -276,11 +276,11 @@ class TagStatsHandler : public Osmium::Handler::Base {
             key_hash_map_t::iterator tags_iterator(tags_stat.find(key));
             if (tags_iterator == tags_stat.end()) {
                 stat = new KeyStats();
-                tags_stat.insert(std::pair<const char *, KeyStats *>(string_store->add(key), stat));
+                tags_stat.insert(std::pair<const char *, KeyStats *>(m_string_store.add(key), stat));
             } else {
                 stat = tags_iterator->second;
             }
-            stat->update(it->value(), object, string_store);
+            stat->update(it->value(), object, m_string_store);
 
             if (object->get_type() == NODE) {
                 try {
@@ -316,7 +316,8 @@ public:
 
     TagStatsHandler(Osmium::Sqlite::Database& database, MapToInt<rough_position_t>& map_to_int) :
         Base(),
-        max_timestamp(0),
+        m_max_timestamp(0),
+        m_string_store(string_store_size),
         m_database(database),
         statistics_handler(database),
         m_map_to_int(map_to_int)
@@ -324,11 +325,6 @@ public:
         , m_storage()
 #endif
     {
-        string_store = new StringStore(string_store_size);
-    }
-
-    ~TagStatsHandler() {
-        delete string_store;
     }
 
     void node(Osmium::OSM::Node* node) {
@@ -441,7 +437,7 @@ public:
 
         m_database.begin_transaction();
 
-        struct tm* tm = gmtime(&max_timestamp);
+        struct tm* tm = gmtime(&m_max_timestamp);
         static char max_timestamp_str[20]; // thats enough space for the timestamp generated from the pattern in the next line
         strftime(max_timestamp_str, sizeof(max_timestamp_str), "%Y-%m-%d %H:%M:%S", tm);
         statement_update_meta->bind_text(max_timestamp_str)->execute();
