@@ -33,7 +33,7 @@ LIB_PROTOBUF = -lz -lprotobuf-lite -losmpbf
 
 all: tagstats
 
-tagstats: tagstats.cpp tagstats_handler.hpp string_store.hpp geodistribution.hpp
+tagstats: tagstats.cpp tagstats_handler.hpp statistics_handler.hpp string_store.hpp geodistribution.hpp
 	$(CXX) $(CXXFLAGS) -o $@ $< $(LDFLAGS) $(LIB_PROTOBUF) $(LIB_GD) $(LIB_SQLITE)
 
 check:
