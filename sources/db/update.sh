@@ -45,8 +45,8 @@ left=`../../bin/taginfo-config.rb geodistribution.left`
 width=`../../bin/taginfo-config.rb geodistribution.width`
 height=`../../bin/taginfo-config.rb geodistribution.height`
 
-#valgrind --leak-check=full --show-reachable=yes $DIR/tagstats $PLANETFILE $DATABASE >valgrind.log 2>&1
-$DIR/tagstats --left=$left --bottom=$bottom --top=$top --right=$right --width=$width --height=$height $PLANETFILE $DATABASE
+#valgrind --leak-check=full --show-reachable=yes ./tagstats $PLANETFILE $DATABASE >valgrind.log 2>&1
+./tagstats --left=$left --bottom=$bottom --top=$top --right=$right --width=$width --height=$height $PLANETFILE $DATABASE
 
 echo "`$DATECMD` Running update_characters... "
 ./update_characters.pl $DIR
