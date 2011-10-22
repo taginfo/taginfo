@@ -27,7 +27,7 @@ taginfo:
     map: Carte
     maps: Cartes
     key_combinations: Combinaisons
-    data_from: Données de
+    data_from: Données datant du
     instance:
         title: À propos de ce site Taginfo
         other: Visiter la page <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> pour d'autres sites.
@@ -83,8 +83,11 @@ pages:
             nodes: Seulement les nodes
             ways: Seulement les ways
             relations: Seulement les relations
-        values_used: Valeurs utilisés par cette clé
-        other_keys_used: Autres clés utilisées avec cette clé
+        number_objects: Quantité
+        values_used: Valeurs utilisées par cette clé
+        other_keys_used:
+            title: Autres clés utilisées avec cette clé
+            other: Autres clés
         geographic_distribution:
             title: Distribution géographique de cette clé
             relations: |
@@ -99,6 +102,12 @@ pages:
                   Choix du style :
     tag:
         no_description_in_wiki: Aucune description dans le wiki
+        wiki_pages:
+            title: Pages du wiki sur cette valeur
+        josm_rules:
+            title: Régles de style JOSM sur cette valeur
+            choice: |
+                  Choix du style :
 
 flexigrid:
     pagetext: Page
@@ -189,3 +198,5 @@ reports:
 misc:
     values_less_than_one_percent: Toutes les valeurs sont inférieures à 1%
     empty_string: chaîne de caractère vide
+    count: Quantité
+    all: Tous

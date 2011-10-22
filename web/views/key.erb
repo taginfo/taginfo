@@ -43,7 +43,7 @@
         </div>
     </div>
     <div id="keys">
-        <h2><%= t.pages.key.other_keys_used %></h2>
+        <h2><%= t.pages.key.other_keys_used.title %></h2>
         <table id="grid-keys">
         </table>
     </div>
@@ -127,7 +127,7 @@ jQuery('#filter').bind('change', function() {
 });
 
 jQuery.getJSON('/api/2/db/keys/overview?key=#{ @key_uri }', function(data, textStatus) {
-    var table_content = '<tr><th></th><th title="Number of objects with this key">Number of objects</th><th class="values" title="Number of different values">Values</th></tr>';
+    var table_content = '<tr><th></th><th title="Number of objects with this key">' + texts.pages.key.number_objects + '</th><th class="values" title="Number of different values">' + texts.osm.values + '</th></tr>';
     table_content += jQuery.map(['all', 'nodes', 'ways', 'relations'], function(obj, i) {
         var d = data[obj];
         return '<tr><td>' + print_image(obj) + '</td><td class="count">' + print_value_with_percent(d.count, d.count_fraction) + '</td><td class="values">' + print_with_ts(d.values) + '</td></tr>';

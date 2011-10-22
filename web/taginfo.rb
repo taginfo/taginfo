@@ -289,12 +289,29 @@ class Taginfo < Sinatra::Base
                 :errormsg => trans.t.flexigrid.errormsg,
             },
             :instance_description => {
-                :title => trans.t.taginfo.instance.title
+                :title => trans.t.taginfo.instance.title,
             },
             :misc => {
                 :values_less_than_one_percent => trans.t.misc.values_less_than_one_percent,
-                :empty_string => trans.t.misc.empty_string
-            }
+                :empty_string => trans.t.misc.empty_string,
+                :count => trans.t.misc.count,
+                :all => trans.t.misc.all,
+            },
+            :osm => {
+                :value => trans.t.osm.value,
+                :values => trans.t.osm.values,
+                :node => trans.t.osm.node,
+                :way => trans.t.osm.way,
+                :relation => trans.t.osm.relation,
+            },
+            :pages => {
+                :key => {
+                    :other_keys_used => {
+                        :other => trans.t.pages.key.other_keys_used.other,
+                    },
+                    :number_objects => trans.t.pages.key.number_objects,
+                },
+            },
         }.to_json + ";\n"
     end
 

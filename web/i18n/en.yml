@@ -87,8 +87,11 @@ pages:
             nodes: Nodes only
             ways: Ways only
             relations: Relations only
+        number_objects: Number of objects
         values_used: Values used with this key
-        other_keys_used: Other keys used together with this key
+        other_keys_used:
+            title:: Other keys used together with this key
+            other: Other keys
         geographic_distribution:
             title: Geographical distribution of this key
             relations: Relations do not have a geographical location, so no map can be shown.
@@ -101,6 +104,12 @@ pages:
                   Choose style:
     tag:
         no_description_in_wiki: No description in wiki
+        wiki_pages:
+            title: Wiki pages about this tag
+        josm_rules:
+            title: JOSM style rules with this tag
+            choice: |
+                  Choose style:
 
 flexigrid:
     pagetext: Page
@@ -201,4 +210,6 @@ reports:
 misc:
     values_less_than_one_percent: all values have less than 1%
     empty_string: empty string
+    count: Count
+    all: All
 
