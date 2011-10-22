@@ -342,7 +342,7 @@ class Taginfo < Sinatra::Base
         end
 
         cq = @db.count('db.keypairs')
-        total = (params[:query] != '' ? cq.condition("(key1 = ? AND key2 LIKE '%' || ? || '%') OR (key2 = ? AND key1 LIKE '%' || ? || '%')", key, params[:query], key, params[:query]) : cq.condition('key1 = ? OR key2 = ?', key, key)).
+        total = (params[:query].to_s != '' ? cq.condition("(key1 = ? AND key2 LIKE '%' || ? || '%') OR (key2 = ? AND key1 LIKE '%' || ? || '%')", key, params[:query], key, params[:query]) : cq.condition('key1 = ? OR key2 = ?', key, key)).
             condition("count_#{filter_type} > 0").
             get_first_value().to_i
 
@@ -350,7 +350,7 @@ class Taginfo < Sinatra::Base
             condition('key = ?', key).
             get_first_value()
 
-        res = (params[:query] != '' ?
+        res = (params[:query].to_s != '' ?
             @db.select("SELECT p.key1 AS other_key, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.keypairs p, db.keys k WHERE p.key1=k.key AND p.key2=? AND (p.key1 LIKE '%' || ? || '%') AND p.count_#{filter_type} > 0
                     UNION SELECT p.key2 AS other_key, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.keypairs p, db.keys k WHERE p.key2=k.key AND p.key1=? AND (p.key2 LIKE '%' || ? || '%') AND p.count_#{filter_type} > 0", key, params[:query], key, params[:query]) :
             @db.select("SELECT p.key1 AS other_key, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.keypairs p, db.keys k WHERE p.key1=k.key AND p.key2=? AND p.count_#{filter_type} > 0 
