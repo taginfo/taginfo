@@ -76,6 +76,27 @@ pages:
             you_were_searching_for: Vous recherchez
     key:
         no_description_in_wiki: Aucune description dans le wiki
+        filter:
+            label: |
+                 Filtre :
+            none: Désactivé
+            nodes: Seulement les nodes
+            ways: Seulement les ways
+            relations: Seulement les relations
+        values_used: Valeurs utilisés par cette clé
+        other_keys_used: Autres clés utilisées avec cette clé
+        geographic_distribution:
+            title: Distribution géographique de cette clé
+            relations: |
+                    Les relations n'ont pas de position géographique: elles ne peuvent donc
+                    pas être affichées sur une carte.
+        wiki_pages:
+            title: Pages du wiki sur cette clé
+            none_found: Aucune page du wiki trouvée.
+        josm_rules:
+            title: Régles de style JOSM sur cette clé
+            choice: |
+                  Choix du style :
     tag:
         no_description_in_wiki: Aucune description dans le wiki
 
