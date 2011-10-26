@@ -90,7 +90,7 @@ pages:
         number_objects: Number of objects
         values_used: Values used with this key
         other_keys_used:
-            title:: Other keys used together with this key
+            title: Other keys used together with this key
             other: Other keys
         geographic_distribution:
             title: Geographical distribution of this key

@@ -15,6 +15,7 @@ osm:
     users: Users
 
 taginfo:
+    source: Datenquelle
     sources: Datenquellen
     download: Download
     about: Über Taginfo
@@ -80,8 +81,36 @@ pages:
             you_were_searching_for: Du hast gesucht nach
     key:
         no_description_in_wiki: Keine Beschreibung im Wiki
+        filter:
+            label: |
+                 Filter:
+            none: Kein Filter
+            nodes: Nur Nodes
+            ways: Nur Ways
+            relations: Nur Relations
+        number_objects: Anzahl Objekte
+        values_used: Values für diesen Key
+        other_keys_used:
+            title: Andere Keys, die mit diesem Key benutzt werden
+            other: Andere Keys
+        geographic_distribution:
+            title: Geographische Verteilung dieses Keys
+            relations: Relations haben keinen geographischen Ort, daher kann keine Karte angezeigt werden.
+        wiki_pages:
+            title: Wiki-Seiten über diesen Key
+            none_found: Keine Wiki-Seite für diesen Key.
+        josm_rules:
+            title: JOSM-Stil-Regeln mit diesem Key
+            choice: |
+                  Stil auswählen:
     tag:
         no_description_in_wiki: Keine Beschreibung im Wiki
+        wiki_pages:
+            title: Wiki-Seiten über dieses Tag
+        josm_rules:
+            title: JOSM-Stil-Regeln mit diesem Tag
+            choice: |
+                  Stil auswählen:
 
 flexigrid:
     pagetext: Seite
@@ -129,4 +158,6 @@ reports:
 misc:
     values_less_than_one_percent: alle Values haben weniger als 1%
     empty_string: leere Zeichenkette
+    count: Anzahl
+    all: Alle
 
