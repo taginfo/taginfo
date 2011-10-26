@@ -68,7 +68,7 @@ class Source
     end
 
     def link_download
-        %Q{<a href="/download/#{ dbname }.bz2">#{ dbname }.bz2</a>}
+        %Q{<a rel="nofollow" href="/download/#{ dbname }.bz2">#{ dbname }.bz2</a>}
     end
 
 end

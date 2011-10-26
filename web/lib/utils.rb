@@ -70,7 +70,7 @@ def josm_link(element, key, value=nil)
 end
 
 def external_link(id, title, link)
-    %Q{<img src="/img/link-extern.gif" alt="" width="14" height="10"/><a id="#{id}" class="extlink" href="#{link}">#{title}</a>}
+    %Q{<img src="/img/link-extern.gif" rel="nofollow" alt="" width="14" height="10"/><a id="#{id}" class="extlink" href="#{link}">#{title}</a>}
 end
 
 def tagcloud_size(tag)
