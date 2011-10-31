@@ -129,24 +129,24 @@ public:
           distribution() {
     }
 
-    void update(const char* value, Osmium::OSM::Object* object, StringStore& string_store) {
-        key.count[object->get_type()]++;
+    void update(const char* value, const Osmium::OSM::Object& object, StringStore& string_store) {
+        key.count[object.get_type()]++;
 
         value_hash_map_t::iterator values_iterator(values_hash.find(value));
         if (values_iterator == values_hash.end()) {
             Counter counter;
-            counter.count[object->get_type()] = 1;
+            counter.count[object.get_type()] = 1;
             values_hash.insert(std::pair<const char*, Counter>(string_store.add(value), counter));
-            values.count[object->get_type()]++;
+            values.count[object.get_type()]++;
         } else {
-            values_iterator->second.count[object->get_type()]++;
-            if (values_iterator->second.count[object->get_type()] == 1) {
-                values.count[object->get_type()]++;
+            values_iterator->second.count[object.get_type()]++;
+            if (values_iterator->second.count[object.get_type()] == 1) {
+                values.count[object.get_type()]++;
             }
         }
 
 #ifdef TAGSTATS_COUNT_USERS
-        user_hash[object->uid()]++;
+        user_hash[object.uid()]++;
 #endif // TAGSTATS_COUNT_USERS
     }
 
@@ -182,20 +182,20 @@ class TagStatsHandler : public Osmium::Handler::Base {
     }
 
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
-    void _update_key_combination_hash(Osmium::OSM::Object *object) {
+    void _update_key_combination_hash(const Osmium::OSM::Object& object) {
         const char *key1, *key2;
 
-        int tag_count = object->tags().size();
+        int tag_count = object.tags().size();
         for (int i=0; i<tag_count; i++) {
-            key1 = object->tags().get_tag_key(i);
+            key1 = object.tags().get_tag_key(i);
             key_hash_map_t::iterator tsi1(tags_stat.find(key1));
             for (int j=i+1; j<tag_count; j++) {
-                key2 = object->tags().get_tag_key(j);
+                key2 = object.tags().get_tag_key(j);
                 key_hash_map_t::iterator tsi2(tags_stat.find(key2));
                 if (strcmp(key1, key2) < 0) {
-                    tsi1->second->add_key_kombination(tsi2->first, object->get_type());
+                    tsi1->second->add_key_kombination(tsi2->first, object.get_type());
                 } else {
-                    tsi2->second->add_key_kombination(tsi1->first, object->get_type());
+                    tsi2->second->add_key_kombination(tsi1->first, object.get_type());
                 }
             }
         }
@@ -263,14 +263,14 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
     }
 
-    void collect_tag_stats(Osmium::OSM::Object *object) {
-        if (m_max_timestamp < object->timestamp()) {
-            m_max_timestamp = object->timestamp();
+    void collect_tag_stats(const Osmium::OSM::Object& object) {
+        if (m_max_timestamp < object.timestamp()) {
+            m_max_timestamp = object.timestamp();
         }
 
         KeyStats* stat;
-        Osmium::OSM::TagList::const_iterator end = object->tags().end();
-        for (Osmium::OSM::TagList::const_iterator it = object->tags().begin(); it != end; ++it) {
+        Osmium::OSM::TagList::const_iterator end = object.tags().end();
+        for (Osmium::OSM::TagList::const_iterator it = object.tags().begin(); it != end; ++it) {
             const char* key = it->key();
 
             key_hash_map_t::iterator tags_iterator(tags_stat.find(key));
@@ -282,19 +282,19 @@ class TagStatsHandler : public Osmium::Handler::Base {
             }
             stat->update(it->value(), object, m_string_store);
 
-            if (object->get_type() == NODE) {
+            if (object.get_type() == NODE) {
                 try {
-                    stat->distribution.add_coordinate(m_map_to_int(static_cast<Osmium::OSM::Node*>(object)->position()));
+                    stat->distribution.add_coordinate(m_map_to_int(static_cast<const Osmium::OSM::Node&>(object).position()));
                 } catch (std::range_error) {
                     // ignore
                 }
             }
 #ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
-            else if (object->get_type() == WAY) {
+            else if (object.get_type() == WAY) {
                 // This will only add the coordinate of the first node in a way to the
                 // distribution. We'll see how this goes, maybe we need to store the
                 // coordinates of all nodes?
-                stat->distribution.add_coordinate(m_storage[static_cast<Osmium::OSM::Way*>(object)->nodes().front().ref()]);
+                stat->distribution.add_coordinate(m_storage[static_cast<const Osmium::OSM::Way&>(object).nodes().front().ref()]);
             }
 #endif // TAGSTATS_GEODISTRIBUTION_FOR_WAYS
         }
@@ -327,9 +327,9 @@ public:
     {
     }
 
-    void node(Osmium::OSM::Node* node) {
+    void node(const shared_ptr<Osmium::OSM::Node const>& node) {
         statistics_handler.node(node);
-        collect_tag_stats(node);
+        collect_tag_stats(*node);
 #ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
         try {
             m_storage.set(node->id(), m_map_to_int(node->position()));
@@ -339,14 +339,14 @@ public:
 #endif
     }
 
-    void way(Osmium::OSM::Way* way) {
+    void way(const shared_ptr<Osmium::OSM::Way const>& way) {
         statistics_handler.way(way);
-        collect_tag_stats(way);
+        collect_tag_stats(*way);
     }
 
-    void relation(Osmium::OSM::Relation* relation) {
+    void relation(const shared_ptr<Osmium::OSM::Relation const>& relation) {
         statistics_handler.relation(relation);
-        collect_tag_stats(relation);
+        collect_tag_stats(*relation);
     }
 
     void before_nodes() {

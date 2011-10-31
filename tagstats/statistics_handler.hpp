@@ -72,8 +72,8 @@ public:
         }
     }
 
-    void node(const Osmium::OSM::Node* node) {
-        update_common_stats(node);
+    void node(const shared_ptr<Osmium::OSM::Node const>& node) {
+        update_common_stats(*node);
         m_stats.nodes++;
         if (m_tag_count == 0) {
             m_stats.nodes_without_tags++;
@@ -91,8 +91,8 @@ public:
         m_stats.sum_node_version += m_version;
     }
 
-    void way(const Osmium::OSM::Way* way) {
-        update_common_stats(way);
+    void way(const shared_ptr<Osmium::OSM::Way const>& way) {
+        update_common_stats(*way);
         m_stats.ways++;
         if (way->is_closed()) {
             m_stats.closed_ways++;
@@ -114,8 +114,8 @@ public:
         m_stats.sum_way_version += m_version;
     }
 
-    void relation(const Osmium::OSM::Relation* relation) {
-        update_common_stats(relation);
+    void relation(const shared_ptr<Osmium::OSM::Relation const>& relation) {
+        update_common_stats(*relation);
         m_stats.relations++;
         if (m_id > (int64_t) m_stats.max_relation_id) {
             m_stats.max_relation_id = m_id;
@@ -196,12 +196,12 @@ private:
     osm_version_t   m_version;
     int             m_tag_count;
 
-    void update_common_stats(const Osmium::OSM::Object* object) {
-        m_id        = object->id();
-        m_version   = object->version();
-        m_tag_count = object->tags().size();
+    void update_common_stats(const Osmium::OSM::Object& object) {
+        m_id        = object.id();
+        m_version   = object.version();
+        m_tag_count = object.tags().size();
 
-        osm_user_id_t uid = object->uid();
+        osm_user_id_t uid = object.uid();
         if (uid == 0) {
             m_stats.anon_user_objects++;
         }
@@ -209,7 +209,7 @@ private:
             m_stats.max_user_id = uid;
         }
 
-        osm_changeset_id_t changeset = object->changeset();
+        osm_changeset_id_t changeset = object.changeset();
         if (changeset > (int64_t) m_stats.max_changeset_id) {
             m_stats.max_changeset_id = changeset;
         }
