@@ -53,7 +53,7 @@ int GeoDistribution::c_height;
 void print_help() {
     std::cout << "tagstats [OPTIONS] OSMFILE DATABASE\n\n" \
               << "This program is part of Taginfo. It calculates statistics\n" \
-              << "on OSM tags and puts them into taginfo-db.db and count.db.\n" \
+              << "on OSM tags from OSMFILE and puts them into DATABASE (an SQLite database).\n" \
               << "\nOptions:\n" \
               << "  -H, --help           This help message\n" \
               << "  -d, --debug          Enable debugging output\n" \
@@ -63,7 +63,7 @@ void print_help() {
               << "  -l, --left=NUMBER    Left of bounding box for distribution images\n" \
               << "  -w, --width=NUMBER   Width of distribution images (default: 360)\n" \
               << "  -h, --height=NUMBER  Height of distribution images (default: 180)\n" \
-              << "\nDefault for bounding box is: (-180, -90, 180, 90)\n";
+              << "\nDefault for bounding box is: (-180, -90, 180, 90).\n";
 }
 
 int main(int argc, char *argv[]) {
