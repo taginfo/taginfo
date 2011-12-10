@@ -300,6 +300,8 @@ class Taginfo < Sinatra::Base
                 :all => trans.t.misc.all,
             },
             :osm => {
+                :key => trans.t.osm.key,
+                :keys => trans.t.osm.keys,
                 :value => trans.t.osm.value,
                 :values => trans.t.osm.values,
                 :node => trans.t.osm.node,
