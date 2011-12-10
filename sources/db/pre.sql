@@ -81,3 +81,16 @@ CREATE TABLE keypairs (
   count_relations  INTEGER 
 );
 
+DROP TABLE IF EXISTS tagpairs;
+
+CREATE TABLE tagpairs (
+  key1             VARCHAR,
+  value1           VARCHAR,
+  key2             VARCHAR,
+  value2           VARCHAR,
+  count_all        INTEGER,
+  count_nodes      INTEGER,
+  count_ways       INTEGER,
+  count_relations  INTEGER 
+);
+

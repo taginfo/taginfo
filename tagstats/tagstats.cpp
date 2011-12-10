@@ -56,8 +56,11 @@ void print_help() {
               << "on OSM tags from OSMFILE and puts them into DATABASE (an SQLite database).\n" \
               << "\nOptions:\n" \
               << "  -H, --help           This help message\n" \
-              << "  -d, --debug          Enable debugging output\n" \
-              << "  -t, --top=NUMBER     Top of bounding box for distribution images\n" \
+              << "  -d, --debug          Enable debugging output\n";
+#ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
+    std::cout << "  -T, --tags-list      File with tags we are especially interested in\n";
+#endif // TAGSTATS_COUNT_TAG_COMBINATIONS
+    std::cout << "  -t, --top=NUMBER     Top of bounding box for distribution images\n" \
               << "  -r, --right=NUMBER   Right of bounding box for distribution images\n" \
               << "  -b, --bottom=NUMBER  Bottom of bounding box for distribution images\n" \
               << "  -l, --left=NUMBER    Left of bounding box for distribution images\n" \
@@ -68,18 +71,23 @@ void print_help() {
 
 int main(int argc, char *argv[]) {
     static struct option long_options[] = {
-        {"debug",  no_argument, 0, 'd'},
-        {"help",   no_argument, 0, 'H'},
-        {"top",    required_argument, 0, 't'},
-        {"right",  required_argument, 0, 'r'},
-        {"bottom", required_argument, 0, 'b'},
-        {"left",   required_argument, 0, 'l'},
-        {"width",  required_argument, 0, 'w'},
-        {"height", required_argument, 0, 'h'},
+        {"debug",     no_argument, 0, 'd'},
+        {"help",      no_argument, 0, 'H'},
+#ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
+        {"tags-list", required_argument, 0, 'T'},
+#endif // TAGSTATS_COUNT_TAG_COMBINATIONS
+        {"top",       required_argument, 0, 't'},
+        {"right",     required_argument, 0, 'r'},
+        {"bottom",    required_argument, 0, 'b'},
+        {"left",      required_argument, 0, 'l'},
+        {"width",     required_argument, 0, 'w'},
+        {"height",    required_argument, 0, 'h'},
         {0, 0, 0, 0}
     };
 
     bool debug = false;
+
+    std::string tags_list;
 
     double top    =   90;
     double right  =  180;
@@ -90,7 +98,13 @@ int main(int argc, char *argv[]) {
     unsigned int height = 180;
 
     while (true) {
-        int c = getopt_long(argc, argv, "dHt:r:b:l:w:h:", long_options, 0);
+        int c = getopt_long(argc, argv,
+#ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
+        "dHT:t:r:b:l:w:h:",
+#else
+        "dHt:r:b:l:w:h:",
+#endif // TAGSTATS_COUNT_TAG_COMBINATIONS
+        long_options, 0);
         if (c == -1) {
             break;
         }
@@ -102,6 +116,11 @@ int main(int argc, char *argv[]) {
             case 'H':
                 print_help();
                 exit(0);
+#ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
+            case 'T':
+                tags_list = optarg;
+                break;
+#endif // TAGSTATS_COUNT_TAG_COMBINATIONS
             case 't':
                 top = atof(optarg);
                 break;
@@ -136,7 +155,7 @@ int main(int argc, char *argv[]) {
     Osmium::OSMFile infile(argv[optind]);
     Osmium::Sqlite::Database db(argv[optind+1]);
     MapToInt<rough_position_t> map_to_int(left, bottom, right, top, width, height);
-    TagStatsHandler handler(db, map_to_int);
+    TagStatsHandler handler(db, tags_list, map_to_int);
     infile.read(handler);
 }
 

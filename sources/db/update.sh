@@ -8,7 +8,7 @@
 set -e
 
 # uncomment this if you want to get a core file in case tagstats crashes
-#ulimit -c 1000000000
+#ulimit -c unlimited
 
 DIR=$1
 PLANETFILE=$2
