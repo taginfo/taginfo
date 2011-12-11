@@ -315,6 +315,11 @@ class Taginfo < Sinatra::Base
                     },
                     :number_objects => trans.t.pages.key.number_objects,
                 },
+                :tag => {
+                    :other_tags_used => {
+                        :other => trans.t.pages.tag.other_tags_used.other,
+                    },
+                },
             },
         }.to_json + ";\n"
     end

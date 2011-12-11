@@ -25,6 +25,7 @@ taginfo:
     tags: Tags
     map: Karte
     maps: Karten
+    combinations: Kombinationen
     key_combinations: Kombinationen
     data_from: Daten vom
     instance:
@@ -105,6 +106,12 @@ pages:
                   Stil auswählen:
     tag:
         no_description_in_wiki: Keine Beschreibung im Wiki
+        other_tags_used:
+            title: Tags, die mit diesem Tag zusammen benutzt werden
+            other: Andere Tags
+        combinations:
+            title: Kombinationen
+            description: <i>Diese Tabelle zeigt nur die häufigsten Kombinationen der häufigsten Tags.</i>
         wiki_pages:
             title: Wiki-Seiten über dieses Tag
         josm_rules:

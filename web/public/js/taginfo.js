@@ -229,6 +229,16 @@ function link_to_tag(key, value) {
     return link_to_key(key) + '=' + link_to_value(key, value);
 }
 
+function link_to_key_or_tag(key, value) {
+    var link = link_to_key(key);
+    if (value && value != '') {
+        link += '=' + link_to_value(key, value);
+    } else {
+        link += '=*';
+    }
+    return link;
+}
+
 jQuery(document).ready(function() {
     jQuery('#locale').bind('change', function() {
         jQuery('#set_language').submit();
@@ -313,6 +323,32 @@ var create_flexigrid_for = {
         }
     },
     tag: {
+        combinations: function(key, value, filter_type) {
+            create_flexigrid('grid-combinations', {
+                url: '/api/2/db/tags/combinations?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value) + '&filter=' + encodeURIComponent(filter_type),
+                colModel: [
+                    { display: '<span title="Number of objects with this tag that also have the other tag">' + texts.misc.count + ' &rarr;</span>', name: 'to_count', width: 320, sortable: true, align: 'center' },
+                    { display: '<span title="Tag used together with this tag">' + texts.pages.tag.other_tags_used.other + '</span>', name: 'other_tag', width: 340, sortable: true },
+                    { display: '<span title="Number of objects with other tag that also have this tag">&rarr; ' + texts.misc.count + '</span>', name: 'from_count', width: 320, sortable: true, align: 'center' }
+                ],
+                searchitems: [
+                    { display: 'Other tag', name: 'other_tag' }
+                ],
+                sortname: 'to_count',
+                sortorder: 'desc',
+                height: 410,
+                preProcess: function(data) {
+                    data.rows = jQuery.map(data.data, function(row, i) {
+                        return { 'cell': [
+                            print_value_with_percent(row.together_count, row.to_fraction),
+                            link_to_key_or_tag(row.other_key, row.other_value),
+                            print_value_with_percent(row.together_count, row.from_fraction),
+                        ] };
+                    });
+                    return data;
+                }
+            });
+        },
         wiki: function(key, value) {
             create_flexigrid('grid-wiki', {
                 url: '/api/2/wiki/tags?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value),

@@ -16,11 +16,28 @@
     <% end %>
 </div>
 
+<form id="filter-form">
+    <label for="filter"><%= t.pages.key.filter.label %></label>
+    <select id="filter" name="filter">
+        <option value="all"<%=       @sel['all']       %>><%= t.pages.key.filter.none %></option>
+        <option value="nodes"<%=     @sel['nodes']     %>><%= t.pages.key.filter.nodes %></option>
+        <option value="ways"<%=      @sel['ways']      %>><%= t.pages.key.filter.ways %></option>
+        <option value="relations"<%= @sel['relations'] %>><%= t.pages.key.filter.relations %></option>
+    </select>
+</form>
+
 <div id="tabs">
     <ul>
+        <li><a href="#combinations"><%= t.taginfo.combinations %></a></li>
         <li><a href="#wiki"><%= t.sources.wiki.name %></a></li>
         <li><a href="#josm"><%= t.sources.josm.name %></a></li>
     </ul>
+    <div id="combinations">
+        <h2><%= t.pages.tag.combinations.title %></h2>
+        <p><%= t.pages.tag.combinations.description %></p>
+        <table id="grid-combinations">
+        </table>
+    </div>
     <div id="wiki">
         <h2><%= t.pages.tag.wiki_pages.title %></h2>
         <table id="grid-wiki">
@@ -66,7 +83,7 @@ jQuery.getJSON('/api/2/db/tags/overview?key=#{ @key_uri }&value=#{ @value_uri }'
 var tabs = jQuery('#tabs').tabs({
     show: function(event, ui) { 
         window.location.hash = ui.tab.hash;
-        create_flexigrid_for.tag[ui.tab.hash.substring(1)](#{ @key.to_json }, #{ @value.to_json });
+        create_flexigrid_for.tag[ui.tab.hash.substring(1)](#{ @key.to_json }, #{ @value.to_json }, #{ @filter_type.to_json });
     }
 });
 JAVASCRIPT

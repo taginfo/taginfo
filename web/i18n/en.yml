@@ -26,6 +26,7 @@ taginfo:
     tags: Tags
     map: Map
     maps: Maps
+    combinations: Combinations
     key_combinations: Combinations
     data_from: Data from
     instance:
@@ -104,6 +105,12 @@ pages:
                   Choose style:
     tag:
         no_description_in_wiki: No description in wiki
+        other_tags_used:
+            title: Other tags used together with this tag
+            other: Other tags
+        combinations:
+            title: Combinations
+            description: <i>This table shows only the most common combinations of the most common tags.</i>
         wiki_pages:
             title: Wiki pages about this tag
         josm_rules:
