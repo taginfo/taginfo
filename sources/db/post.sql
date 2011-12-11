@@ -19,6 +19,33 @@ CREATE        INDEX keypairs_key1_idx ON keypairs (key1);
 CREATE        INDEX keypairs_key2_idx ON keypairs (key2);
 CREATE UNIQUE INDEX key_distributions_key_idx ON key_distributions (key, object_type);
 
+CREATE        INDEX tagpairs_key1_value1_idx ON tagpairs (key1, value1);
+CREATE        INDEX tagpairs_key2_value2_idx ON tagpairs (key2, value2);
+
+CREATE TABLE selected_tags (
+  skey             VARCHAR,
+  svalue           VARCHAR,
+  count_all        INTEGER DEFAULT 0,
+  count_nodes      INTEGER DEFAULT 0,
+  count_ways       INTEGER DEFAULT 0,
+  count_relations  INTEGER DEFAULT 0
+);
+
+INSERT INTO selected_tags (skey, svalue)
+    SELECT key1, value1 FROM tagpairs WHERE value1 != ''
+    UNION
+    SELECT key2, value2 FROM tagpairs WHERE value2 != '';
+
+UPDATE selected_tags SET
+    count_all       = (SELECT t.count_all       FROM tags t WHERE t.key=skey AND t.value=svalue),
+    count_nodes     = (SELECT t.count_nodes     FROM tags t WHERE t.key=skey AND t.value=svalue),
+    count_ways      = (SELECT t.count_ways      FROM tags t WHERE t.key=skey AND t.value=svalue),
+    count_relations = (SELECT t.count_relations FROM tags t WHERE t.key=skey AND t.value=svalue);
+
+ANALYZE selected_tags;
+
+CREATE UNIQUE INDEX selected_tags_key_value_idx ON selected_tags (skey, svalue);
+
 INSERT INTO stats (key, value) SELECT 'num_keys',                  count(*) FROM keys;
 INSERT INTO stats (key, value) SELECT 'num_keys_on_nodes',         count(*) FROM keys WHERE count_nodes     > 0;
 INSERT INTO stats (key, value) SELECT 'num_keys_on_ways',          count(*) FROM keys WHERE count_ways      > 0;
