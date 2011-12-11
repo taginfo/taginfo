@@ -187,6 +187,12 @@ typedef google::sparse_hash_map<const char *, KeyValueStats *, djb2_hash, eqstr>
  */
 class TagStatsHandler : public Osmium::Handler::Base {
 
+    /**
+     * Tag combination not appearing at least this often are not written
+     * to database.
+     */
+    static const unsigned int min_tag_combination_count = 1000;
+
     time_t timer;
 
     key_hash_map_t tags_stat;
@@ -623,20 +629,22 @@ public:
             for (combination_hash_map_t::const_iterator it = stat->m_key_value_combination_hash.begin(); it != stat->m_key_value_combination_hash.end(); ++it) {
                 const Counter* s = &(it->second);
 
-                std::vector<std::string> kv2;
-                boost::split(kv2, it->first, boost::is_any_of("="));
-                kv2.push_back(""); // if there is no = in key, make sure there is an empty value
+                if (s->all() >= min_tag_combination_count) {
+                    std::vector<std::string> kv2;
+                    boost::split(kv2, it->first, boost::is_any_of("="));
+                    kv2.push_back(""); // if there is no = in key, make sure there is an empty value
 
-                statement_insert_into_tag_combinations
-                ->bind_text(kv1[0])          // column: key1
-                ->bind_text(kv1[1])          // column: value1
-                ->bind_text(kv2[0])          // column: key2
-                ->bind_text(kv2[1])          // column: value2
-                ->bind_int64(s->all())       // column: count_all
-                ->bind_int64(s->nodes())     // column: count_nodes
-                ->bind_int64(s->ways())      // column: count_ways
-                ->bind_int64(s->relations()) // column: count_relations
-                ->execute();
+                    statement_insert_into_tag_combinations
+                    ->bind_text(kv1[0])          // column: key1
+                    ->bind_text(kv1[1])          // column: value1
+                    ->bind_text(kv2[0])          // column: key2
+                    ->bind_text(kv2[1])          // column: value2
+                    ->bind_int64(s->all())       // column: count_all
+                    ->bind_int64(s->nodes())     // column: count_nodes
+                    ->bind_int64(s->ways())      // column: count_ways
+                    ->bind_int64(s->relations()) // column: count_relations
+                    ->execute();
+                }
             }
 
             delete stat; // lets make valgrind happy
