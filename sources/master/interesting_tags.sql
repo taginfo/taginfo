@@ -33,7 +33,7 @@ DELETE FROM interesting_tags WHERE value IS NOT NULL AND key LIKE 'fresno_%';
 
 ANALYZE interesting_tags;
 
-.output __DIR__/interesting_tags.lst
+.output __DIR__/db/interesting_tags.lst
 
 SELECT key FROM interesting_tags WHERE value IS NULL ORDER BY key;
 SELECT key || '=' || value FROM interesting_tags WHERE value IS NOT NULL ORDER BY key, value;
