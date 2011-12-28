@@ -41,3 +41,17 @@ CREATE TABLE josm_style_rules (
     rule           VARCHAR
 );
 
+--
+--  josm_style_images
+--
+--  Images/Icons used in JOSM style rules
+--
+
+DROP TABLE IF EXISTS josm_style_images;
+
+CREATE TABLE josm_style_images (
+    style          VARCHAR,
+    path           VARCHAR,
+    png            BLOB
+);
+

@@ -27,6 +27,15 @@ rm -f $ELEMSTYLES
 echo "`$DATECMD` Getting styles..."
 wget -O $ELEMSTYLES http://josm.openstreetmap.de/svn/trunk/styles/standard/elemstyles.xml
 
+echo "`$DATECMD` Updating images..."
+if [ -d $DIR/svn-source ]; then
+    cd $DIR/svn-source
+    svn update
+    cd -
+else
+    svn checkout http://josm.openstreetmap.de/svn/trunk/images/styles $DIR/svn-source
+fi
+
 echo "`$DATECMD` Running init.sql..."
 sqlite3 $DATABASE <../init.sql
 

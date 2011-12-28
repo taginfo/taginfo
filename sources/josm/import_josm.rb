@@ -27,6 +27,7 @@
 
 require 'rubygems'
 
+require 'find'
 require 'pp'
 require 'sqlite3'
 require 'rexml/document'
@@ -91,6 +92,26 @@ doc.elements.each('/rules/rule') do |rule_element|
     end
 #    pp "rule #{rule.k} #{rule.v}"
     rule.insert(db)
+end
+
+db.execute('COMMIT');
+
+db.execute('BEGIN TRANSACTION');
+
+Dir.chdir(dir + '/svn-source') do
+    Dir.foreach(dir + '/svn-source') do |style|
+        Find.find(style) do |path|
+            if FileTest.directory?(path) && File.basename(path) =~ /^\./
+                Find.prune
+            elsif FileTest.file?(path)
+                File.open(path) do |file|
+                    png = file.read
+                    pathwostyle = path.sub(%r(^#{style}/), '')
+                    db.execute('INSERT INTO josm_style_images (style, path, png) VALUES (?, ?, ?)', style, pathwostyle, png)
+                end
+            end
+        end
+    end
 end
 
 db.execute('COMMIT');

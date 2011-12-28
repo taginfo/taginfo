@@ -1,6 +1,22 @@
 # web/lib/api/josm.rb
 class Taginfo < Sinatra::Base
 
+    api(2, 'josm/styles/images', {
+        :description => 'Access images for map features used in JOSM.',
+        :parameters => { :style => 'JOSM style', :image => 'Image path' },
+        :result => 'PNG image.',
+        :example => { :style => 'standard', :image => 'transport/bus.png' },
+        :ui => '/keys/landuse#josm'
+    }) do
+        style = params[:style]
+        image = params[:image]
+        content_type :png
+        @db.select('SELECT png FROM josm.josm_style_images').
+            condition('style = ?', style).
+            condition('path = ?', image).
+            get_first_value()
+    end
+
     api(2, 'josm/styles') do
         # XXX dummy function
         return [
