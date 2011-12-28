@@ -36,8 +36,10 @@ CREATE TABLE josm_style_rules (
     scale_min      INTEGER,
     scale_max      INTEGER,
     icon_source    VARCHAR,
+    line_color     VARCHAR,
     line_width     INTEGER,
     line_realwidth INTEGER,
+    area_color     VARCHAR,
     rule           VARCHAR
 );
 

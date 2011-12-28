@@ -37,7 +37,8 @@ class Rule
     attr_accessor :k, :v, :b
     attr_accessor :scale_min, :scale_max
     attr_accessor :icon_source
-    attr_accessor :line_width, :line_realwidth
+    attr_accessor :line_color, :line_width, :line_realwidth
+    attr_accessor :area_color
 
     attr_reader :rule
 
@@ -47,15 +48,17 @@ class Rule
 
     def insert(db)
         db.execute(
-            'INSERT INTO josm_style_rules (k, v, b, scale_min, scale_max, icon_source, line_width, line_realwidth, rule) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            'INSERT INTO josm_style_rules (k, v, b, scale_min, scale_max, icon_source, line_color, line_width, line_realwidth, area_color, rule) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
             k,
             v,
             b,
             scale_min,
             scale_max,
             icon_source,
+            line_color,
             line_width,
             line_realwidth,
+            area_color,
             rule
         )
     end
@@ -85,7 +88,10 @@ doc.elements.each('/rules/rule') do |rule_element|
                 rule.scale_max = element.text
             when 'icon'
                 rule.icon_source = element.attributes['src']
+            when 'area'
+                rule.area_color = element.attributes['colour']
             when 'line'
+                rule.line_color = element.attributes['colour']
                 rule.line_width = element.attributes['width']
                 rule.line_realwidth = element.attributes['realwidth']
         end
