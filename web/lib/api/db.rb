@@ -192,6 +192,31 @@ class Taginfo < Sinatra::Base
         out.to_json
     end
 
+    api(3, 'db/keys/overview') do
+        key = params[:key]
+        out = []
+
+        # default values
+        ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
+            out[n] = { :type => type, :count => 0, :count_fraction => 0.0, :values => 0 }
+        end
+
+        @db.select('SELECT * FROM db.keys').
+            condition('key = ?', key).
+            execute() do |row|
+                ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
+                    out[n] = {
+                        :type           => type,
+                        :count          => row['count_'  + type].to_i,
+                        :count_fraction => row['count_'  + type].to_f / get_total(type),
+                        :values         => row['values_' + type].to_i
+                    }
+                end
+        end
+
+        out.to_json
+    end
+
     api(2, 'db/keys/distribution', {
         :description => 'Get map with distribution of this key in the database (nodes only).',
         :parameters => { :key => 'Tag key (required).' },

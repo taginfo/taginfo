@@ -305,8 +305,12 @@ class Taginfo < Sinatra::Base
                 :value => trans.t.osm.value,
                 :values => trans.t.osm.values,
                 :node => trans.t.osm.node,
+                :nodes => trans.t.osm.nodes,
                 :way => trans.t.osm.way,
+                :ways => trans.t.osm.ways,
                 :relation => trans.t.osm.relation,
+                :relations => trans.t.osm.relations,
+                :all => trans.t.osm.all
             },
             :pages => {
                 :key => {

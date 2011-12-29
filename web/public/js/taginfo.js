@@ -420,6 +420,32 @@ var create_flexigrid_for = {
         }
     },
     key: {
+        overview: function(key, filter_type) {
+            create_flexigrid('grid-overview', {
+                url: '/api/3/db/keys/overview?key=' + encodeURIComponent(key),
+                colModel: [
+                    { display: 'Type', name: 'type', width: 100, sortable: true },
+                    { display: 'Number of objects', name: 'count', width: 260, sortable: true, align: 'center' },
+                    { display: 'Number of values', name: 'value', width: 140, sortable: true, align: 'right' }
+                ],
+                usepager: false,
+                useRp: false,
+                height: 130,
+                preProcess: function(data) {
+                    return {
+                        total: 4,
+                        page: 1,
+                        rows: jQuery.map(data, function(row, i) {
+                            return { 'cell': [
+                                print_image(row.type) + ' ' + texts.osm[row.type],
+                                print_value_with_percent(row.count, row.count_fraction),
+                                print_with_ts(row.values)
+                            ]};
+                        })
+                    };
+                }
+            });
+        },
         values: function(key, filter_type) {
             create_flexigrid('grid-values', {
                 url: '/api/2/db/keys/values?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type),

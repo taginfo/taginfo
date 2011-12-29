@@ -1,6 +1,3 @@
-<table id="overview">
-</table>
-
 <h1><%= @key_pp %></h1>
 
 <div class="source-wiki" title="Description from the wiki">
@@ -28,12 +25,18 @@
 
 <div id="tabs">
     <ul>
+        <li><a href="#overview"><%= t.taginfo.overview %></a></li>
         <li><a href="#values"><%= t.osm.values %></a></li>
         <li><a href="#keys"><%= t.taginfo.key_combinations %></a></li>
         <li><a href="#map"><%= t.taginfo.map %></a></li>
         <li><a href="#wiki"><%= t.sources.wiki.name %></a></li>
         <li><a href="#josm"><%= t.sources.josm.name %></a></li>
     </ul>
+    <div id="overview">
+        <h2><%= t.taginfo.overview %></h2>
+        <table id="grid-overview">
+        </table>
+    </div>
     <div id="values">
         <h2><%= t.pages.key.values_used %></h2>
         <div class="canvas" id="canvas-values" style="position: absolute;"></div>
@@ -124,15 +127,6 @@ jQuery('#filter').bind('change', function() {
     qs['filter'] = value;
 
     window.location.search = jQuery.param(qs);
-});
-
-jQuery.getJSON('/api/2/db/keys/overview?key=#{ @key_uri }', function(data, textStatus) {
-    var table_content = '<tr><th></th><th title="Number of objects with this key">' + texts.pages.key.number_objects + '</th><th class="values" title="Number of different values">' + texts.osm.values + '</th></tr>';
-    table_content += jQuery.map(['all', 'nodes', 'ways', 'relations'], function(obj, i) {
-        var d = data[obj];
-        return '<tr><td>' + print_image(obj) + '</td><td class="count">' + print_value_with_percent(d.count, d.count_fraction) + '</td><td class="values">' + print_with_ts(d.values) + '</td></tr>';
-    }).join('');
-    jQuery('#overview').append(table_content);
 });
 
 var tabs = jQuery('#tabs').tabs({

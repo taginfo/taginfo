@@ -12,6 +12,7 @@ osm:
     ways: Ways
     relation: Relation
     relations: Relations
+    all: All
     user: User
     users: Users
 
@@ -28,6 +29,7 @@ taginfo:
     maps: Maps
     combinations: Combinations
     key_combinations: Combinations
+    overview: Overview
     data_from: Data from
     instance:
         title: About this Taginfo site

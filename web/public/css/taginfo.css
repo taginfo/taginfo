@@ -159,46 +159,6 @@ div#tabs form {
 
 /* ==========  */
 
-table#overview {
-    position: absolute;
-    border-collapse: collapse;
-    right: 20px;
-    margin-top: 8px;
-    background-color: #d0e0f0;
-    background-image: url('/img/bg-blue.png');
-    background-repeat: repeat-x;
-    -moz-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -chrome-border-radius: 4px;
-    -o-border-radius: 4px;
-}
-
-table#overview th {
-    border-bottom: 1px solid #ffffff;
-    font-weight: normal;
-    padding: 4px;
-}
-
-table#overview td {
-    padding: 4px;
-    color: #404040;
-}
-
-table#overview div.bar {
-    background-color: #4080e0;
-}
-
-table#overview .count {
-    width: 300px;
-}
-
-table#overview .values {
-    text-align: right;
-}
-
-/* ========== */
-
 table.stats {
     margin-top: 0;
     margin-left: 16px;
