@@ -1,6 +1,3 @@
-<table id="overview">
-</table>
-
 <h1><%= link_to_key(@key) %>=<%= @value_pp %></h1>
 
 <div class="source-wiki" title="Description from the wiki">
@@ -28,10 +25,16 @@
 
 <div id="tabs">
     <ul>
+        <li><a href="#overview"><%= t.taginfo.overview %></a></li>
         <li><a href="#combinations"><%= t.taginfo.combinations %></a></li>
         <li><a href="#wiki"><%= t.sources.wiki.name %></a></li>
         <li><a href="#josm"><%= t.sources.josm.name %></a></li>
     </ul>
+    <div id="overview">
+        <h2><%= t.taginfo.overview %></h2>
+        <table id="grid-overview">
+        </table>
+    </div>
     <div id="combinations">
         <h2><%= t.pages.tag.combinations.title %></h2>
         <p><%= t.pages.tag.combinations.description %></p>
@@ -69,15 +72,6 @@ jQuery('#josm_button').bind('click', function() {
 jQuery('#filter').bind('change', function() {
     var value = this.value;
     window.location.search = 'filter=' + value;
-});
-
-jQuery.getJSON('/api/2/db/tags/overview?key=#{ @key_uri }&value=#{ @value_uri }', function(data, textStatus) {
-    var table_content = '<tr><th></th><th title="Number of objects with this tag">Number of objects</th></tr>';
-    table_content += jQuery.map(['all', 'nodes', 'ways', 'relations'], function(obj, i) {
-        var d = data[obj];
-        return '<tr><td>' + print_image(obj) + '</td><td class="count">' + print_value_with_percent(d.count, d.count_fraction) + '</td></tr>';
-    }).join('');
-    jQuery('#overview').append(table_content);
 });
 
 var tabs = jQuery('#tabs').tabs({

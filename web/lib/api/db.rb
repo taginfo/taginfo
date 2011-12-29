@@ -489,6 +489,32 @@ class Taginfo < Sinatra::Base
         out.to_json
     end
 
+    api(3, 'db/tags/overview') do
+        key = params[:key]
+        value = params[:value]
+        out = []
+
+        # default values
+        ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
+            out[n] = { :type => type, :count => 0, :count_fraction => 0.0 }
+        end
+
+        @db.select('SELECT * FROM db.tags').
+            condition('key = ?', key).
+            condition('value = ?', value).
+            execute() do |row|
+                ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
+                    out[n] = {
+                        :type           => type,
+                        :count          => row['count_'  + type].to_i,
+                        :count_fraction => row['count_'  + type].to_f / get_total(type)
+                    }
+                end
+        end
+
+        out.to_json
+    end
+
     api(2, 'db/tags/combinations', {
         :description => 'Find keys and tags that are used together with a given tag.',
         :parameters => {

@@ -323,6 +323,30 @@ var create_flexigrid_for = {
         }
     },
     tag: {
+        overview: function(key, value, filter_type) {
+            create_flexigrid('grid-overview', {
+                url: '/api/3/db/tags/overview?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value),
+                colModel: [
+                    { display: 'Type', name: 'type', width: 100, sortable: true },
+                    { display: 'Number of objects', name: 'count', width: 260, sortable: true, align: 'center' }
+                ],
+                usepager: false,
+                useRp: false,
+                height: 130,
+                preProcess: function(data) {
+                    return {
+                        total: 4,
+                        page: 1,
+                        rows: jQuery.map(data, function(row, i) {
+                            return { 'cell': [
+                                print_image(row.type) + ' ' + texts.osm[row.type],
+                                print_value_with_percent(row.count, row.count_fraction)
+                            ]};
+                        })
+                    };
+                }
+            });
+        },
         combinations: function(key, value, filter_type) {
             create_flexigrid('grid-combinations', {
                 url: '/api/2/db/tags/combinations?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value) + '&filter=' + encodeURIComponent(filter_type),
