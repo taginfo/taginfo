@@ -53,7 +53,6 @@ a.taglink {
 
 span.badchar {
     color: #e00000;
-//    font-weight: bold;
 }
 
 span.whitespace {
@@ -193,7 +192,6 @@ span.lang {
 
 td.number {
     text-align: right;
-//    color: #e06000;
 }
 
 span.char {
@@ -208,14 +206,7 @@ span.char {
 }
 
 .source-wiki {
-    background-color: #e0d0c0;
-    padding: 2px 6px;
     width: 50%;
-    -moz-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -chrome-border-radius: 4px;
-    -o-border-radius: 4px;
 }
 
 form#filter-form {
