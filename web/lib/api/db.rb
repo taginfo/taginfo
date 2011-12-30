@@ -137,6 +137,63 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
+    api(2, 'db/tags', {
+        :description => 'Get list of most often used tags.',
+        :parameters => { :query => 'Only show tags matching this query (substring match in key and value, optional).' },
+        :paging => :optional,
+        :sort => %w( tag count_all count_nodes count_ways count_relations ),
+        :result => {
+            :key                      => :STRING, 
+            :value                    => :STRING, 
+            :count_all                => :INT,
+            :count_all_fraction       => :FLOAT,
+            :count_nodes              => :INT,
+            :count_nodes_fraction     => :FLOAT,
+            :count_ways               => :INT,
+            :count_ways_fraction      => :FLOAT,
+            :count_relations          => :INT,
+            :count_relations_fraction => :FLOAT,
+        },
+        :example => { :page => 1, :rp => 10, :sortname => 'tag', :sortorder => 'asc' },
+        :ui => '/tags'
+    }) do
+
+        total = @db.count('db.selected_tags').
+            condition_if("(skey LIKE '%' || ? || '%') OR (svalue LIKE '%' || ? || '%')", params[:query], params[:query]).
+            get_first_value().to_i
+        
+        res = @db.select('SELECT * FROM db.selected_tags').
+            condition_if("(skey LIKE '%' || ? || '%') OR (svalue LIKE '%' || ? || '%')", params[:query], params[:query]).
+            order_by(params[:sortname], params[:sortorder]) { |o|
+                o.tag :skey
+                o.tag :svalue
+                o.count_all
+                o.count_nodes
+                o.count_ways
+                o.count_relations
+            }.
+            paging(params[:rp], params[:page]).
+            execute()
+
+        return {
+            :page  => params[:page].to_i,
+            :rp    => params[:rp].to_i,
+            :total => total,
+            :data  => res.map{ |row| {
+                :key                      => row['skey'],
+                :value                    => row['svalue'],
+                :count_all                => row['count_all'].to_i,
+                :count_all_fraction       => row['count_all'].to_f / @db.stats('objects'),
+                :count_nodes              => row['count_nodes'].to_i,
+                :count_nodes_fraction     => row['count_nodes'].to_f / @db.stats('nodes_with_tags'),
+                :count_ways               => row['count_ways'].to_i,
+                :count_ways_fraction      => row['count_ways'].to_f / @db.stats('ways'),
+                :count_relations          => row['count_relations'].to_i,
+                :count_relations_fraction => row['count_relations'].to_f / @db.stats('relations'),
+            } }
+        }.to_json
+    end
+
     api(2, 'db/keys/overview', {
         :description => 'Show statistics for nodes, ways, relations and total for this key.',
         :parameters => { :key => 'Tag key (required).' },

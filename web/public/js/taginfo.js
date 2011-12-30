@@ -322,6 +322,38 @@ var create_flexigrid_for = {
             });
         }
     },
+    tags: {
+        tags: function() {
+            create_flexigrid('grid-tags', {
+                url: '/api/2/db/tags',
+                colModel: [
+                    { display: texts.osm.tag, name: 'tag', width: 300, sortable: true },
+                    { display: '<span title="Number of objects with this tag"><img src="/img/types/all.16.png" alt=""/> Total</span>',           name: 'count_all',        width: 260, sortable: true, align: 'center' },
+                    { display: '<span title="Number of nodes with this tag"><img src="/img/types/node.16.png" alt=""/> Nodes</span>',            name: 'count_nodes',      width: 220, sortable: true, align: 'center' },
+                    { display: '<span title="Number of ways with this tag"><img src="/img/types/way.16.png" alt=""/> Ways</span>',               name: 'count_ways',       width: 220, sortable: true, align: 'center' },
+                    { display: '<span title="Number of relations with this tag"><img src="/img/types/relation.16.png" alt=""/> Relation</span>', name: 'count_relations',  width: 220, sortable: true, align: 'center' }
+                ],
+                searchitems: [
+                    { display: texts.osm.tag, name: 'tag' }
+                ],
+                sortname: 'count_all',
+                sortorder: 'desc',
+                height: 420,
+                preProcess: function(data) {
+                    data.rows = jQuery.map(data.data, function(row, i) {
+                        return { 'cell': [
+                            link_to_tag(row.key, row.value),
+                            print_value_with_percent(row.count_all,       row.count_all_fraction),
+                            print_value_with_percent(row.count_nodes,     row.count_nodes_fraction),
+                            print_value_with_percent(row.count_ways,      row.count_ways_fraction),
+                            print_value_with_percent(row.count_relations, row.count_relations_fraction)
+                        ] };
+                    });
+                    return data;
+                }
+            });
+        }
+    },
     tag: {
         overview: function(key, value, filter_type) {
             create_flexigrid('grid-overview', {

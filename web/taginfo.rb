@@ -155,7 +155,7 @@ class Taginfo < Sinatra::Base
         erb :index
     end
 
-    %w(about download keys).each do |page|
+    %w(about download keys tags).each do |page|
         get '/' + page do
             @title = t.taginfo[page]
             @breadcrumbs << @title
@@ -258,7 +258,7 @@ class Taginfo < Sinatra::Base
         @value_pp   = pp_value(@value)
 
         @title = [@key_html + '=' + @value_html, t.taginfo.tags]
-        @breadcrumbs << [t.taginfo.keys, '/keys']
+        @breadcrumbs << [t.taginfo.tags, '/tags']
         @breadcrumbs << [@key_html, '/keys/' + @key_uri]
         @breadcrumbs << ( @value.length > 30 ? escape_html(@value[0,20] + '...') : @value_html)
 
@@ -304,6 +304,8 @@ class Taginfo < Sinatra::Base
                 :keys => trans.t.osm.keys,
                 :value => trans.t.osm.value,
                 :values => trans.t.osm.values,
+                :tag => trans.t.osm.tag,
+                :tags => trans.t.osm.tags,
                 :node => trans.t.osm.node,
                 :nodes => trans.t.osm.nodes,
                 :way => trans.t.osm.way,
