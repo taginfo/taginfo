@@ -1,0 +1,18 @@
+<h1><%= t.reports.josm_styles.name %></h1>
+
+Select style:
+<select>
+<% ['standard'].each do |style| %>
+    <option id="<%= style %>" name="<%= style %>"><%= style %></option>
+<% end %>
+</select>
+
+<table id="grid-rules">
+</table>
+
+<% javascript do
+    JQuery.ready do
+        JS.raw(%Q{ create_flexigrid_for.reports.josm_styles('standard'); })
+    end
+end
+%>

@@ -696,37 +696,39 @@ var create_flexigrid_for = {
             // TODO
         }
     },
-    sources: {
-        josm: {
-            style: function(stylename) {
-                create_flexigrid('grid-rules', {
-                    url: '/api/2/josm/styles/' + stylename,
-                    colModel: [
-                        { display: texts.osm.key, name: 'k',    width: 200, sortable: true },
-                        { display: texts.osm.value,    name: 'v',    width: 200, sortable: true },
-                        { display: 'Rule XML', name: 'rule', width: 100, sortable: false }
-                    ],
-                    searchitems: [
-                        { display: 'Key/Value', name: 'k' }
-                    ],
-                    sortname: 'k',
-                    sortorder: 'asc',
-                    height: 400,
-                    preProcess: function(data) {
-                        data.rows = jQuery.map(data.data, function(row, i) {
-                            return { 'cell': [
-                                link_to_key(row.k),
-                                row.v ? link_to_value(row.k, row.v) : row.b ? (row.b + ' (Boolean)') : '*',
-                                '<span title="' + row.rule + '">XML</span>'
-                            ] };
-                        });
-                        return data;
-                    }
-                });
-            }
-        }
-    },
     reports: {
+        josm_styles: function(stylename) {
+            create_flexigrid('grid-rules', {
+                url: '/api/2/josm/styles/' + stylename,
+                colModel: [
+                    { display: texts.osm.key, name: 'k',    width: 200, sortable: true },
+                    { display: texts.osm.value,    name: 'v',    width: 200, sortable: true },
+                    { display: 'Icon', name: 'icon', width: 30, sortable: false, align: 'center' },
+                    { display: 'Line', name: 'line', width: 30, sortable: false, align: 'center' },
+                    { display: 'Area', name: 'area', width: 30, sortable: false, align: 'center' },
+                    { display: 'Rule XML', name: 'rule', width: 100, sortable: false }
+                ],
+                searchitems: [
+                    { display: 'Key/Value', name: 'k' }
+                ],
+                sortname: 'k',
+                sortorder: 'asc',
+                height: 400,
+                preProcess: function(data) {
+                    data.rows = jQuery.map(data.data, function(row, i) {
+                        return { 'cell': [
+                            link_to_key(row.k),
+                            row.v ? link_to_value(row.k, row.v) : row.b ? (row.b + ' (Boolean)') : '*',
+                            row.icon ? '<img src="/api/2/josm/styles/images?style=standard&image=' + row.icon + '" title="' + row.icon + '" alt=""/>' : '',
+                            '<div>' + (row.line_width > 0 ? '<div title="' + row.line_color + '" style="height: ' + row.line_width + 'px; margin-top: ' + (6 - Math.round(row.line_width/2)) + 'px; padding: 0; background-color: ' + row.line_color + '"></div>' : '') + '</div>',
+                            row.area_color ? '<div title="' + row.area_color + '" style="height: 8px; background-color: ' + row.area_color + '"></div>' : '',
+                            '<span title="' + row.rule + '">XML</span>'
+                        ] };
+                    });
+                    return data;
+                }
+            });
+        },
         wiki_pages_about_non_existing_keys: function() {
             create_flexigrid('grid-keys', {
                 url: '/api/2/db/keys?filters=in_wiki,not_in_db&include=wikipages',

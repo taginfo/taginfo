@@ -152,6 +152,8 @@ sources:
 reports:
     database_statistics:
         name: Database statistics
+    josm_styles:
+        name: JOSM styles
     characters_in_keys:
         name: Characters in keys
         intro: |

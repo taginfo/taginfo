@@ -35,6 +35,7 @@ class Report
 end
 
 Report.new 'Database statistics', :db
+Report.new 'JOSM styles', :josm
 Report.new 'Characters in keys', :db
 Report.new 'Frequently used keys without wiki page', :db, :wiki
 Report.new 'Key lengths', :db
