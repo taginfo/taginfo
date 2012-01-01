@@ -2,17 +2,16 @@
 
 <%= t.pages.reports.index.intro %>
 
-<table class="reports">
-    <tr><th class="source" colspan="<%= Source.visible.size %>"/><%= t.pages.reports.index.data_sources %></th><th></th></tr>
+<table class="list">
+    <tr><th colspan="<%= Source.visible.size %>"/><%= t.pages.reports.index.data_sources %></th><th>Report</th></tr>
 <% Report.each do |report| %>
     <tr>
 <% Source.visible.each do |source| %>
-        <td class="source"><%= source.link_img if report.uses_source? source.id %></td>
+        <td width="35"><%= source.link_img if report.uses_source? source.id %></td>
 <% end %>
         <td><a href="<%= report.url %>"><%= t.reports[report.name].name %></a></td>
     </tr>
 <% end %>
-    <tr><th class="last" colspan="<%= Source.visible.size %>"/></th><th></th></tr>
 </table>
 
 

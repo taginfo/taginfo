@@ -23,7 +23,7 @@
             </p>
         </td>
         <td rowspan="3" class="box">
-            <p>Reports show taginfo data from different angles.</p>
+            <%= t.pages.reports.index.intro %>
             <p style="margin-top: 15px">
 <% Report.each do |report| %>
                 <a href="<%= report.url %>"><%= t.reports[report.name].name %></a><br/>

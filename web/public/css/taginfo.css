@@ -290,6 +290,7 @@ div.bar {
 /* ========== */
 
 table.list {
+    width: 100%;
     background-color: #fbfbff0;
     border-collapse: collapse;
     -moz-border-radius: 4px;
@@ -302,7 +303,6 @@ table.list {
 table.list th {
     background-color: rgb(85%,85%,85%);
     padding: 4px;
-    font-weight: normal;
     vertical-align: top;
 }
 
@@ -313,44 +313,6 @@ table.list td {
 }
 
 /* ========== */
-
-table.reports {
-    border-collapse: collapse;
-}
-
-table.reports th.source {
-    background-color: #f0f0f0;
-    font-size: 80%;
-    padding-bottom: 4px;
-    -moz-border-radius: 4px 4px 0 0;
-    -khtml-border-radius: 4px 4px 0 0;
-    -webkit-border-radius: 4px 4px 0 0;
-    -chrome-border-radius: 4px 4px 0 0;
-    -o-border-radius: 4px 4px 0 0;
-}
-
-table.reports td {
-    padding: 2px 4px;
-}
-
-table.reports td.source {
-    background-color: #f0f0f0;
-    text-align: center;
-    padding: 2px 0 0 0;
-    width: 24px;
-}
-
-table.reports th.last {
-    background-color: #f0f0f0;
-    height: 8px;
-    -moz-border-radius: 0 0 4px 4px;
-    -khtml-border-radius: 0 0 4px 4px;
-    -webkit-border-radius: 0 0 4px 4px;
-    -chrome-border-radius: 0 0 4px 4px;
-    -o-border-radius: 0 0 4px 4px;
-}
-
-/* ==========  */
 
 table.drilldown {
     border-collapse: separate;

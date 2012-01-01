@@ -72,11 +72,10 @@ pages:
     reports:
         index:
             intro: |
-                <p class="text">Reports show the data from different perspectives.
+                <p class="text">Reports show the data from different angles.
                 They often bring together data from several sources in interesting ways. Some
-                of the reports can help with finding certain kinds of errors, such as popular
-                keys without wiki pages.</p>
-            data_sources: Data<br/>Sources
+                of the reports can help with finding specific errors.</p>
+            data_sources: Data sources used
     search:
         results:
             title: Search results
