@@ -3,7 +3,6 @@
 
 .flexigrid
 	{
-//	font-family: Arial, Helvetica, sans-serif;
 	font-size: 80%;
 	position: relative;
 	border: 0px solid #eee;
@@ -66,7 +65,7 @@
 
 .flexigrid div.nDiv tr:hover td, .flexigrid div.nDiv tr.ndcolover td
 	{
-	background: #d5effc url(images/hl.png) repeat-x top;
+/*	background: #d5effc url(images/hl.png) repeat-x top;*/
 	border: 1px solid #a8d8eb;
 	}
 	
@@ -97,7 +96,7 @@
 		height: 24px;
 		width: 14px;
 		z-index: 900;
-		background: #fafafa url(images/fhbg.gif) repeat-x bottom;
+		/*background: #fafafa url(images/fhbg.gif) repeat-x bottom;*/
 		border: 0px solid #ccc;
 		border-left: 1px solid #ccc;
 		top: 0px;
@@ -113,18 +112,18 @@
 			width: 12px;
 			border-left: 1px solid #fff;
 			float: left;
-			background: url(images/ddn.png) no-repeat center;
+			/*background: url(images/ddn.png) no-repeat center;*/
 			}		
 		
 		.flexigrid div.nBtn.srtd
 			{
-			background: url(images/wbg.gif) repeat-x 0px -1px;
+			/*background: url(images/wbg.gif) repeat-x 0px -1px;*/
 			}
 		
 
 .flexigrid div.mDiv
 	{
-	background: url(images/wbg.gif) repeat-x top;
+	/*background: url(images/wbg.gif) repeat-x top;*/
 	border: 1px solid #ccc;
 	border-bottom: 0px;
 	border-top: 0px;
@@ -168,17 +167,17 @@
 			border-bottom: 1px solid #ddd;
 			width: 14px;
 			height: 14px;
-			background: url(images/uup.png) no-repeat center;
+			/*background: url(images/uup.png) no-repeat center;*/
 			}
 			
 			.flexigrid div.mDiv div.ptogtitle.vsble span
 			{
-			background: url(images/ddn.png) no-repeat center;			
+			/*background: url(images/ddn.png) no-repeat center;*/
 			}			
 
 .flexigrid div.tDiv /*toolbar*/
 	{
-	background: #fafafa url(images/bg.gif) repeat-x top;
+	background: #fafafa /*url(images/bg.gif) repeat-x top*/;
 	position: relative;			
 	border: 1px solid #ccc;
 	border-bottom: 0px;
@@ -194,7 +193,7 @@
 
 .flexigrid div.sDiv /*toolbar*/
 	{
-	background: #fafafa url(images/bg.gif) repeat-x top;
+	background: #fafafa /*url(images/bg.gif) repeat-x top*/;
 	position: relative;
 	border: 1px solid #ccc;
 	border-top: 0px;
@@ -266,10 +265,11 @@
 
 .flexigrid div.hDiv
 	{
-	background: #fafafa url(images/fhbg.gif) repeat-x bottom;
+	background: rgb(198,200,202);
 	position: relative;
 	border: 1px solid #ccc;
-	border-bottom: 0px;
+/*	border-bottom: 0px;*/
+    font-weight: bold;
 	overflow: hidden;
 	}	
 
@@ -312,8 +312,6 @@
 	
 	.flexigrid div.iDiv input, .flexigrid div.iDiv select, .flexigrid div.iDiv textarea
 		{
-//		font-family: Arial, Helvetica, sans-serif;
-//		font-size: 11px;
 		}
 		
 	.flexigrid div.iDiv input.tb
@@ -330,7 +328,7 @@
 	{
 	border: 1px solid #ccc;
 	border-top: 0px;
-	background: #fff;
+	background: rgb(230,231,232);
 	overflow: auto;
 	position: relative;
 	}
@@ -363,7 +361,7 @@
 		height: 5px;
 		overflow: hidden;
 		position: relative;
-		background: #fafafa url(images/wbg.gif) repeat-x 0px -1px;
+	    background: rgb(198,200,202);
 		border: 1px solid #ccc;
 		border-top: 0px;
 		text-align: center;
@@ -407,8 +405,6 @@
 	}	
 
 div.colCopy {
-//	font-family: Arial, Helvetica, sans-serif;
-//	font-size: 11px;
 	background: #fafafa url(images/fhbg.gif) repeat-x bottom;
 	border: 1px solid #ccc;
 	border-bottom: 0px;
@@ -417,7 +413,7 @@ div.colCopy {
 
 .flexigrid div.hDiv th.sorted
 	{
-	background: url(images/wbg.gif) repeat-x 0px -1px;
+    background: rgb(188,189,192);
 	border-bottom: 0px solid #ccc;
 	}
 	
@@ -509,7 +505,7 @@ div.colCopy {
 				
 		.flexigrid tr td.sorted
 				{
-				background: #f3f3f3;
+                background: rgb(220,221,222);
 				border-right: 1px solid #ddd;
 				border-bottom: 1px solid #f3f3f3;
 				}		
@@ -521,13 +517,13 @@ div.colCopy {
 
 		.flexigrid tr.erow td
 				{
-				background: #f7f7f7;
+                background: rgb(220,221,222);
 				border-bottom: 1px solid #f7f7f7;
 				}
 				
 		.flexigrid tr.erow td.sorted
 				{
-				background: #e3e3e3;
+                background: rgb(209,211,212);
 				border-bottom: 1px solid #e3e3e3;
 				}						
 

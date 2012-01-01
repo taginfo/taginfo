@@ -12,7 +12,7 @@
     </head>
     <body>
         <div id="top">
-            <div id="right">
+            <div id="top_right">
                 <form id="set_language" action="/switch_locale">
                     <input type="hidden" name="url" value="<%= request.path %>"/>
                     <select id="locale" name="locale">
@@ -21,33 +21,36 @@
 <% end %>
                     </select>
                 </form>
-            </div>
-            <div id="middle">
                 <form action="/search">
-                    <input type="text" id="search" name="q" value=""/>
+                    <input type="text" id="search" name="q" value="Search taginfo..." style="color: #d0d0d0;"/>
                 </form>
             </div>
-            <div id="left">
-                <a id="instance" href="#"><img src="<%= TaginfoConfig.get('instance.icon', '/img/instance.png') %>" alt="" height="24" style="padding: 2px 6px 0 0;"/></a>
-                <div id="instance_description" style="display: none;" class="ui-widget-content ui-corner-all">
-                    <p><%= TaginfoConfig.get('instance.description') %></p>
-                    <p><%= t.taginfo.instance.other %></p>
-                </div>
-                <a href="/"><img src="/img/taginfo.48.png" alt="Taginfo" width="48" height="24" style="padding-top: 2px;"/></a>
-                <span class="breadcrumbs"><%= breadcrumbs %></span>
+            <div id="date">
+                <%= t.taginfo.data_from %>: <%= @data_until %> UTC
             </div>
-        </div>
-        <div id="date">
-            <%= t.taginfo.data_from %>: <%= @data_until %> UTC
+            <div id="top_left">
+                <a href="/"><img src="<%= TaginfoConfig.get('instance.icon', '/img/logo/world.png') %>" alt="taginfo"/></a>
+<% if @section %>
+                <a href="/"><img src="/img/logo/taginfo_with_bar.png" alt="taginfo"/></a>
+                <a class="section" href="/<%= @section %>"><%= @section_title %></a>
+<% else %>
+                <a href="/"><img src="/img/logo/taginfo.png" alt="taginfo"/></a>
+<% end %>
+            </div>
         </div>
         <div id="main">
 <%= yield %>
         </div>
         <div id="footer">
-            <a href="/sources"><%= t.taginfo.sources %></a> &middot;
-            <a href="/download"><%= t.taginfo.download %></a> &middot;
-            <a href="/about"><%= t.taginfo.about %></a> &middot;
-            <img src="/img/link-extern.gif" alt="" width="14" height="10"/><a href="http://wiki.openstreetmap.org/wiki/Taginfo"><%= t.taginfo.wiki %></a>
+            <div id="footer_left">
+                <a href="http://www.openstreetmap.org/"><b style="font-style: smallcaps;">OpenStreetMap</b></a>
+            </div>
+            <div id="footer_right">
+                <a href="/sources"><%= t.taginfo.sources %></a> &middot;
+                <a href="/download"><%= t.taginfo.download %></a> &middot;
+                <a href="/about"><%= t.taginfo.about %></a> &middot;
+                <img src="/img/link-extern.gif" alt="" width="14" height="10"/><a href="http://wiki.openstreetmap.org/wiki/Taginfo"><%= t.taginfo.wiki %></a>
+            </div>
         </div>
     </body>
 </html>

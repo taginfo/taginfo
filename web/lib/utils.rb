@@ -28,16 +28,6 @@ class Numeric
 
 end
 
-def breadcrumbs
-    return @breadcrumbs.map{ |name, link|
-        if link
-            "<a href='#{link}'>#{name}</a>"
-        else
-            name
-        end    
-    }.join(' &raquo; ')
-end
-
 def title
     @title = [] if @title.nil?
     @title = [@title] unless @title.is_a?(Array)
@@ -76,7 +66,7 @@ end
 def tagcloud_size(tag)
     #(Math.log(0.000001 + tag['scale'].to_f * Math::E) * 36 + 12).to_i
     x = tag['scale1'].to_f / 17 / 2 + tag['pos'] / 2
-    (x * 24 + 12).to_i
+    (x * 32 + 10).to_i
 end
 
 def tagcloud_color(tag)

@@ -10,10 +10,10 @@
         // Description that appears if you click on the instance icon in the upper left.
         "description": "This is a Taginfo test instance. To change this text or the icon above change your <tt>taginfo-config.json</tt>.",
         // URL path to instance icon in the upper left.
-        "icon": "/img/instance.png"
+        "icon": "/img/logo/world.png"
     },
     "tagcloud": {
-        "number_of_tags": 200
+        "number_of_tags": 100
     },
     // For the geodistribution map. See the wiki documentation about these settings.
     "geodistribution": {

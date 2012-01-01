@@ -1,13 +1,55 @@
-<div style="text-align: center;">
-    <h1><img src="/img/taginfo.128.png" class="icon_large" alt="" width="128" height="63"/><br/>Taginfo</h1>
-    <p><%= t.pages.index.description %></p>
-
-    <p><span class="button"><a href="/keys"><%= t.pages.index.buttons.show_all_keys %></a></span>
-       <span class="button"><a href="/reports"><%= t.pages.index.buttons.reports %></a></span></p>
-
-    <div style="margin: 0 10%;">
+<table id="index">
+    <tr>
+        <td>
+            <h2><a href="/keys">KEYS</a></h2>
+        </td>
+        <td rowspan="4" width="20"></td>
+        <td width="338">
+            <h2><a href="/reports">REPORTS</a></h2>
+        </td>
+        <td rowspan="4" width="20"></td>
+        <td width="338">
+            <h2><a href="/about">ABOUT TAGINFO</a></h2>
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="3" class="box">
+            <p>Here are some common tag keys. There is also a <a href="/keys">list of all keys</a>
+            or a <a href="/tags">list of the most common tags</a>.</p>
+            <p style="margin-top: 15px; line-height: 200%; text-align: justify;">
 <% @tags.each do |tag| %>
-        <a href="/keys/<%= tag['key'] %>" class="popkey" style="font-size: <%= tagcloud_size(tag) %>px;"><%= tag['key'] %></a>
+            <a href="/keys/<%= tag['key'] %>" class="taglink" style="font-size: <%= tagcloud_size(tag) %>px;"><%= tag['key'] %></a>
 <% end %>
-    </div>
-</div>
+            </p>
+        </td>
+        <td rowspan="3" class="box">
+            <p>Reports show taginfo data from different angles.</p>
+            <p style="margin-top: 15px">
+<% Report.each do |report| %>
+                <a href="<%= report.url %>"><%= t.reports[report.name].name %></a><br/>
+<% end %>
+            </p>
+            <p style="padding-top: 20px;"><a href="/reports">See all reports...</a></p>
+        </td>
+        <td class="box">
+            <p>OpenStreetMap uses <b>tags</b> of the form <b>key=value</b>
+            to add meaning to geographic objects.
+            Taginfo collects information about these tags from several
+            sources and helps you find tags and explore their uses.</p>
+            <p><a href="/about">More about taginfo...</a></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h2><a href="/international">INTERNATIONAL</a></h2>
+        </td>
+    </tr>
+    <tr>
+        <td class="box">
+            <p>This is the main taginfo site. It contains OSM data for
+            the whole planet and is updated daily.</p>
+            <p><a href="/sites">See other taginfo sites showing data for a
+            specific area...</a></p>
+        </td>
+    </tr>
+</table>

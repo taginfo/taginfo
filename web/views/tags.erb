@@ -1,0 +1,13 @@
+<!--<h1><%= t.osm.tags %></h1>-->
+
+<div id="block">
+    <table id="grid-tags">
+    </table>
+</div>
+
+<% javascript do
+    JQuery.ready do
+        JS.raw(%Q{ create_flexigrid_for.tags.tags(); })
+    end
+end
+%>

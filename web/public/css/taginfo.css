@@ -1,9 +1,10 @@
 /* taginfo.css */
 
 body {
-    font-family: Verdana,Arial,sans-serif;
+    font-family: Arial,sans-serif;
     padding: 0;
     margin: 0;
+    line-height: 130%;
 }
 
 img {
@@ -16,10 +17,12 @@ img.icon_large {
 }
 
 h1 {
-    margin-top: 0;
+    margin: 0;
+    font-size: 150%;
 }
 
 h2 {
+    font-weight: normal;
     margin-top: 20px;
     margin-bottom: 4px;
 }
@@ -40,17 +43,17 @@ iframe {
 
 a {
     text-decoration: none;
-    color: #006000;
+    color: #083e76;
 }
 
 a:hover {
     text-decoration: underline;
 }
-
+/*
 a.taglink {
-    color: #006000 !important;
+    color: #4a837c !important;
 }
-
+*/
 span.badchar {
     color: #e00000;
 }
@@ -68,6 +71,13 @@ a.wikilink {
 }
 
 a.extlink {
+}
+
+a.section {
+    text-transform: uppercase;
+    font-size: 200%;
+    position: relative;
+    top: -9px;
 }
 
 /* ==========  */
@@ -91,70 +101,93 @@ span.disabled {
 /* ========== */
 
 div#top {
-    margin: 8px 20px;
-    background-image: url('/img/bg-green.png');
-    background-repeat: repeat-x;
-    background-color: #b0f0b0;
-    padding: 2px 16px 0 16px;
-    -moz-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -chrome-border-radius: 4px;
-    -o-border-radius: 4px;
+    margin: 15px 20px;
 }
 
-div#top div#left span.breadcrumbs {
-    position: relative;
-    left: 8px;
-    top: -6px;
+div#top div#top_right {
+    position: absolute;
+    right: 20px;
+    top: 30px;
 }
 
-div#top div#right {
-    float: right;
-    padding-top: 2px;
-}
-
-div#top div#middle {
-    float: right;
-    padding: 2px 30px 0 0;
-}
-
-div#top div#middle input#search {
-    background-color: #ffffff;
-    background-image: url('/css/flexigrid/images/magnifier.png');
-    background-repeat: no-repeat;
-    background-position: right 2px;
-    border: 2px solid #ffffff;
-    -moz-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -chrome-border-radius: 4px;
-    -o-border-radius: 4px;
+div#top div#top_right form {
+    float: left;
+    padding-left: 6px;
 }
 
 div#date {
     position: absolute;
-    right: 20px;
+    top: 10px;
+    right: 21px;
     font-size: 80%;
     text-align: right;
-    color: #606060;
+    color: #808080;
+}
+
+div#top form#set_language {
+}
+
+select#locale {
+    background-color: #ffffff;
+    height: 24px;
+    width: 100px;
+    padding: 2px;
+    border: 1px solid #808080;
+    -moz-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -chrome-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+
+input#search {
+    background-image: url('/css/flexigrid/images/magnifier.png');
+    background-repeat: no-repeat;
+    background-position: right 3px;
+    height: 18px;
+    padding: 2px;
+    border: 1px solid #808080;
+    -moz-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -chrome-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+
+input#search:active {
 }
 
 div#main {
-    margin: 30px 20px 0 20px;
+    margin: 20px 20px 0 20px;
 }
 
 div#footer {
+    clear: both;
+    position: relative;
+    top: 4px;
+    font-size: 90%;
+    margin-left: 20px;
+}
+
+div#footer_left {
+    position: absolute;
+}
+
+div#footer_right {
+    position: absolute;
+    right: 20px;
     text-align: right;
-    font-size: 80%;
-    margin: 4px 30px 0 0;
 }
 
 /* ========== */
 
+div#tabs {
+    margin-top: 14px;
+}
+
 div#tabs h2 {
     margin: 0 0 10px 0;
-    font-size: 110%;
+    font-size: 100%;
 }
 
 div#tabs form {
@@ -178,8 +211,9 @@ div.stats h2 {
 /* ========== */
 
 div#tools {
-    margin: 10px 0;
+    float: right;
     font-size: 80%;
+    margin-top: 2px;
 }
 
 span.lang {
@@ -211,12 +245,15 @@ span.char {
     -o-border-radius: 4px;
 }
 
-.source-wiki {
+.tag-description {
+    color: #808080;
     width: 50%;
 }
 
 form#filter-form {
-    padding-bottom: 20px;
+    margin-top: 10px;
+    clear: both;
+    float: right;
 }
 
 div.canvas {
@@ -247,7 +284,7 @@ div.bar {
     margin: 4px 0 0 6px !important;
     padding: 0 !important;
     height: 8px;
-    background-color: #60c060;
+    background-color: #c0c0c0;
 }
 
 /* ========== */
@@ -387,6 +424,44 @@ table.desc td {
     vertical-align: top;
     background-color: #ffffff;
     padding: 2px;
+}
+
+/* ==========  */
+
+table#index {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table#index h2 {
+    margin: 16px 0 2px 0px;
+}
+
+table#index h2 a {
+    color: #000000;
+    text-decoration: none;
+}
+
+table#index td {
+    vertical-align: bottom;
+}
+
+table#index td.box {
+    vertical-align: top;
+    font-size: 90%;
+    background-color: rgb(90%,89%,85%);
+    padding: 6px;
+    margin-bottom: 10px;
+    -moz-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -chrome-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+
+table#index td.box p {
+    margin: 0;
+    padding: 8px;
 }
 
 /* ==========  */

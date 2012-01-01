@@ -108,7 +108,8 @@ class Taginfo < Sinatra::Base
 
         javascript 'jquery-1.5.1.min'
         javascript 'jquery-ui-1.8.10.custom.min'
-        javascript 'flexigrid-minified'
+#        javascript 'flexigrid-minified'
+        javascript 'flexigrid'
         javascript 'protovis-r3.2'
         javascript 'lang/' + r18n.locale.code
         javascript 'taginfo'
@@ -120,8 +121,6 @@ class Taginfo < Sinatra::Base
         @db = SQL::Database.new('../../data')
 
         @data_until = DATA_UNTIL
-
-        @breadcrumbs = []
     end
 
     after do
@@ -158,14 +157,12 @@ class Taginfo < Sinatra::Base
     %w(about download keys tags).each do |page|
         get '/' + page do
             @title = t.taginfo[page]
-            @breadcrumbs << @title
             erb page.to_sym
         end
     end
 
     get! '/sources' do
         @title = t.taginfo.sources
-        @breadcrumbs << @title
         erb :'sources/index'
     end
 
@@ -184,8 +181,8 @@ class Taginfo < Sinatra::Base
         @key_pp   = pp_key(@key)
 
         @title = [@key_html, t.osm.keys]
-        @breadcrumbs << [t.osm.keys, '/keys']
-        @breadcrumbs << @key_html
+        @section = 'keys'
+        @section_title = t.taginfo[@section]
 
         @filter_type = get_filter()
         @sel = Hash.new('')
@@ -195,7 +192,7 @@ class Taginfo < Sinatra::Base
 
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang=? AND key=? AND value IS NULL", r18n.locale.code, @key).get_first_value())
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang='en' AND key=? AND value IS NULL", @key).get_first_value()) if @desc == ''
-        @desc = "<i>#{ t.pages.key.no_description_in_wiki }</i>" if @desc == ''
+        @desc = "[#{ t.pages.key.no_description_in_wiki }]" if @desc == ''
 
         @prevalent_values = @db.select("SELECT value, count_#{@filter_type} AS count FROM tags").
             condition('key=?', @key).
@@ -258,9 +255,8 @@ class Taginfo < Sinatra::Base
         @value_pp   = pp_value(@value)
 
         @title = [@key_html + '=' + @value_html, t.taginfo.tags]
-        @breadcrumbs << [t.taginfo.tags, '/tags']
-        @breadcrumbs << [@key_html, '/keys/' + @key_uri]
-        @breadcrumbs << ( @value.length > 30 ? escape_html(@value[0,20] + '...') : @value_html)
+        @section = 'tags'
+        @section_title = t.taginfo[@section]
 
         @filter_type = get_filter()
         @sel = Hash.new('')
@@ -270,7 +266,7 @@ class Taginfo < Sinatra::Base
 
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang=? AND key=? AND value=?", r18n.locale.code, @key, @value).get_first_value())
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang='en' AND key=? AND value=?", @key, @value).get_first_value()) if @desc == ''
-        @desc = "<i>#{ t.pages.tag.no_description_in_wiki }</i>" if @desc == ''
+        @desc = "[#{ t.pages.tag.no_description_in_wiki }]" if @desc == ''
 
         erb :tag
     end
@@ -334,7 +330,6 @@ class Taginfo < Sinatra::Base
 
     get '/apidoc' do
         @title = 'API Documentation'
-        @breadcrumbs << @title
         erb :apidoc
     end
 

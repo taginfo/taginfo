@@ -3,17 +3,12 @@ class Taginfo < Sinatra::Base
 
     get! '/sources/potlatch' do
         @title = 'Potlatch'
-        @breadcrumbs << ['Sources', '/sources']
-        @breadcrumbs << ['Potlatch']
 
         erb :'sources/potlatch/index'
     end
 
     get '/sources/potlatch/categories' do
         @title = 'Potlatch Features'
-        @breadcrumbs << ['Sources', '/sources']
-        @breadcrumbs << ['Potlatch', '/sources/potlatch']
-        @breadcrumbs << ['Features']
 
         @categories = @db.execute('SELECT * FROM potlatch.categories ORDER BY name')
 
