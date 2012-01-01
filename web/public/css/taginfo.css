@@ -78,6 +78,8 @@ a.section {
     font-size: 200%;
     position: relative;
     top: -9px;
+    color: #000000;
+    text-decoration: none;
 }
 
 /* ==========  */
