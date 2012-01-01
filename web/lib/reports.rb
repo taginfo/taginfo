@@ -34,10 +34,11 @@ class Report
 
 end
 
-Report.new 'Characters in Keys', :db
-Report.new 'Frequently Used Keys Without Wiki Page', :db, :wiki
-Report.new 'Key Lengths', :db
-Report.new 'Language Comparison Table for Keys in the Wiki', :wiki
+Report.new 'Database statistics', :db
+Report.new 'Characters in keys', :db
+Report.new 'Frequently used keys without wiki page', :db, :wiki
+Report.new 'Key lengths', :db
+Report.new 'Language comparison table for keys in the wiki', :wiki
 Report.new 'Languages', :wiki
-Report.new 'Wiki Pages About Non-Existing Keys', :db, :wiki
+Report.new 'Wiki pages about non-existing keys', :db, :wiki
 

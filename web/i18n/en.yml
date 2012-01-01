@@ -150,8 +150,10 @@ sources:
         description: Configuration data from the Merkaartor OSM editor.
 
 reports:
+    database_statistics:
+        name: Database statistics
     characters_in_keys:
-        name: Characters in Keys
+        name: Characters in keys
         intro: |
             <p>Any valid Unicode character can appear in an OSM key but usually only lower
             case latin letters (a-z) and the underscore (_) are used. Sometimes the colon
@@ -189,11 +191,11 @@ reports:
                 Keys that appear in this list are not necessarily wrong though. But
                 in many cases they are just results of some error.</p>
     frequently_used_keys_without_wiki_page:
-        name: Frequently Used Keys Without Wiki Page
+        name: Frequently used keys without wiki page
     key_lengths:
-        name: Key Lengths
+        name: Key lengths
     language_comparison_table_for_keys_in_the_wiki:
-        name: Language Comparison Table for Keys in the Wiki
+        name: Language comparison table for keys in the wiki
         icons:
             template: Page in wiki available and contains standard template.
             error: Page in wiki available and contains standard template, but couldn't be parsed.
@@ -209,7 +211,7 @@ reports:
             many wiki pages there are in these languages documenting keys and tags,
             respectively.</p>
     wiki_pages_about_non_existing_keys:
-        name: Wiki Pages About Non-Existing Keys
+        name: Wiki pages about non-existing keys
         intro: |
             <p>This table shows keys for which a wiki page exists but there is not a single
             instance in the database. This is not necessarily an error (maybe somebody

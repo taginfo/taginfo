@@ -290,10 +290,7 @@ div.bar {
 /* ========== */
 
 table.list {
-    background-image: url('/img/bg-green.png');
-    background-position: 0 -2px;
-    background-repeat: repeat-x;
-    background-color: #b0f0b0;
+    background-color: #fbfbff0;
     border-collapse: collapse;
     -moz-border-radius: 4px;
     -khtml-border-radius: 4px;
@@ -303,20 +300,16 @@ table.list {
 }
 
 table.list th {
+    background-color: rgb(85%,85%,85%);
     padding: 4px;
     font-weight: normal;
     vertical-align: top;
 }
 
 table.list td {
-    background-color: #ffffff;
+    background-color: rgb(90%,90%,90%);
     padding: 4px 10px;
     vertical-align: top;
-}
-
-table.list td.border {
-    background-color: #b0f0b0;
-    padding: 4px;
 }
 
 /* ========== */
