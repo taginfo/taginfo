@@ -11,6 +11,12 @@ class Report
         end
     end
 
+    def self.each_with_index
+        @@reports.sort_by{ |report| report.title }.each_with_index do |report, idx|
+            yield report, idx
+        end
+    end
+
     def initialize(title, *sources)
         @@reports << self
         @title = title

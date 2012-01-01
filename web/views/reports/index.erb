@@ -3,13 +3,13 @@
 <%= t.pages.reports.index.intro %>
 
 <table class="list">
-    <tr><th colspan="<%= Source.visible.size %>"/><%= t.pages.reports.index.data_sources %></th><th>Report</th></tr>
-<% Report.each do |report| %>
+    <tr><th class="tc" colspan="<%= Source.visible.size %>"/><%= t.pages.reports.index.data_sources %></th><th class="tl">Report</th></tr>
+<% Report.each_with_index do |report, n| c = (n%2!=0) ? ' even' : '' %>
     <tr>
 <% Source.visible.each do |source| %>
-        <td width="35"><%= source.link_img if report.uses_source? source.id %></td>
+        <td class="tc<%= c %>" width="45"><%= source.link_img if report.uses_source? source.id %></td>
 <% end %>
-        <td><a href="<%= report.url %>"><%= t.reports[report.name].name %></a></td>
+        <td class="tl<%= c %>"><a href="<%= report.url %>"><%= t.reports[report.name].name %></a></td>
     </tr>
 <% end %>
 </table>
