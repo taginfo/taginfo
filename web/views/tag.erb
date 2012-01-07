@@ -1,9 +1,3 @@
-<h1><%= link_to_key(@key) %>=<%= @value_pp %></h1>
-
-<div class="tag-description" title="Description from the wiki">
-    <%= @desc %>
-</div>
-
 <div id="tools">
     <% if @count_all < 1000 %>
         <%= xapi_link('*', @key, @value) %> <%= josm_link('*', @key, @value) %>
@@ -22,6 +16,12 @@
         <option value="relations"<%= @sel['relations'] %>><%= t.pages.key.filter.relations %></option>
     </select>
 </form>
+
+<h1><%= link_to_key(@key) %>=<%= @value_pp %></h1>
+
+<div class="tag-description" title="Description from the wiki">
+    <%= @desc %>
+</div>
 
 <div id="tabs">
     <ul>
