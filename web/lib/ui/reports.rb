@@ -9,8 +9,7 @@ class Taginfo < Sinatra::Base
     Report.each do |report|
         get report.url do
             @title = report.title
-            @section = 'reports'
-            @section_title = 'reports'
+            section :reports
             erb ('reports/' + report.name).to_sym
         end
     end

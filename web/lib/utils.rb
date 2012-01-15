@@ -35,6 +35,11 @@ def title
     @title.join(' | ')
 end
 
+def section(id)
+    @section = id.to_s
+    @section_title = t.taginfo[@section]
+end
+
 # Escape tag key or value for XAPI according to
 # http://wiki.openstreetmap.org/wiki/XAPI#Escaping
 def xapi_escape(text)

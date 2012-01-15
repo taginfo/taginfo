@@ -7,8 +7,7 @@ class Taginfo < Sinatra::Base
     end
 
     get! '/test/tags' do
-        @section = 'test'
-        @section_title = 'Test'
+        section :test
         @title = ['Tags', 'Test']
         limit = 300;
         (@min, @max) = @db.select('SELECT min(count) AS min, max(count) AS max FROM popular_keys').get_columns(:min, :max)
@@ -20,8 +19,7 @@ class Taginfo < Sinatra::Base
     end
 
     get '/test/wiki_import' do
-        @section = 'test'
-        @section_title = 'Test'
+        section :test
         @title = ['Wiki Import', 'Test']
         @invalid_page_titles = @db.select('SELECT * FROM invalid_page_titles').execute()
         erb :'test/wiki_import'

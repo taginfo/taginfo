@@ -158,6 +158,8 @@ class Taginfo < Sinatra::Base
         erb :index
     end
 
+    #-------------------------------------
+
     %w(about apidoc download keys sources tags).each do |page|
         get '/' + page do
             @title = t.taginfo[page]
@@ -180,8 +182,7 @@ class Taginfo < Sinatra::Base
         @key_pp   = pp_key(@key)
 
         @title = [@key_html, t.osm.keys]
-        @section = 'keys'
-        @section_title = t.taginfo[@section]
+        section :keys
 
         @filter_type = get_filter()
         @sel = Hash.new('')
@@ -255,8 +256,7 @@ class Taginfo < Sinatra::Base
         @value_pp   = pp_value(@value)
 
         @title = [@key_html + '=' + @value_html, t.taginfo.tags]
-        @section = 'tags'
-        @section_title = t.taginfo[@section]
+        section :tags
 
         @filter_type = get_filter()
         @sel = Hash.new('')

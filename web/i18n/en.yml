@@ -27,6 +27,7 @@ taginfo:
     tags: Tags
     international: International
     apidoc: API Documentation
+    test: Test
     map: Map
     maps: Maps
     combinations: Combinations
