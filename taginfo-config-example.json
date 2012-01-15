@@ -12,9 +12,6 @@
         // URL path to instance icon in the upper left.
         "icon": "/img/logo/world.png"
     },
-    "tagcloud": {
-        "number_of_tags": 260
-    },
     // For the geodistribution map. See the wiki documentation about these settings.
     "geodistribution": {
         "left": -180,
