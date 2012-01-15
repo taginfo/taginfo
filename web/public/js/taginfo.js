@@ -528,15 +528,11 @@ var create_flexigrid_for = {
             create_flexigrid('grid-josm', {
                 url: '/api/2/josm/styles/standard/tags?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value),
                 colModel: [
-                    { display: texts.osm.value, name: 'v',    width: 200, sortable: false },
+                    { display: texts.osm.value, name: 'v',    width: 400, sortable: false },
                     { display: 'Icon', name: 'icon', width: 30, sortable: false, align: 'center' },
                     { display: 'Line', name: 'line', width: 30, sortable: false, align: 'center' },
-                    { display: 'Area', name: 'area', width: 30, sortable: false, align: 'center' },
-                    { display: 'Rule XML', name: 'rule', width: 100, sortable: false }
+                    { display: 'Area', name: 'area', width: 30, sortable: false, align: 'center' }
                 ],
-    /*            searchitems: [
-                    { display: 'Key/Value', name: 'k' }
-                ],*/
                 sortname: 'v',
                 sortorder: 'asc',
                 emptymsg: '[No JOSM styles for this tag]',
@@ -546,8 +542,7 @@ var create_flexigrid_for = {
                             row.v ? link_to_value(row.k, row.v) : row.b ? (row.b + ' (Boolean)') : '*',
                             row.icon ? '<img src="/api/2/josm/styles/images?style=standard&image=' + row.icon + '" title="' + row.icon + '" alt=""/>' : '',
                             '<div>' + (row.line_width > 0 ? '<div title="' + row.line_color + '" style="height: ' + row.line_width + 'px; margin-top: ' + (6 - Math.round(row.line_width/2)) + 'px; padding: 0; background-color: ' + row.line_color + '"></div>' : '') + '</div>',
-                            row.area_color ? '<div title="' + row.area_color + '" style="height: 8px; background-color: ' + row.area_color + '"></div>' : '',
-                            '<span title="' + row.rule + '">XML</span>'
+                            row.area_color ? '<div title="' + row.area_color + '" style="height: 8px; background-color: ' + row.area_color + '"></div>' : ''
                         ] };
                     });
                     return data;
@@ -634,14 +629,10 @@ var create_flexigrid_for = {
             create_flexigrid('grid-josm', {
                 url: '/api/2/josm/styles/standard/keys?key=' + encodeURIComponent(key),
                 colModel: [
-                    { display: texts.osm.value, name: 'v', width: 200, sortable: true },
+                    { display: texts.osm.value, name: 'v', width: 400, sortable: true },
                     { display: 'Icon', name: 'icon', width: 30, sortable: false, align: 'center' },
                     { display: 'Line', name: 'line', width: 30, sortable: false, align: 'center' },
-                    { display: 'Area', name: 'area', width: 30, sortable: false, align: 'center' },
-                    { display: 'Rule XML', name: 'rule', width: 100, sortable: false }
-                ],
-                searchitems: [
-                    { display: texts.osm.value, name: 'v' }
+                    { display: 'Area', name: 'area', width: 30, sortable: false, align: 'center' }
                 ],
                 sortname: 'v',
                 sortorder: 'asc',
@@ -652,8 +643,7 @@ var create_flexigrid_for = {
                             row.v ? link_to_value(row.k, row.v) : row.b ? (row.b + ' (Boolean)') : '*',
                             row.icon ? '<img src="/api/2/josm/styles/images?style=standard&image=' + row.icon + '" title="' + row.icon + '" alt=""/>' : '',
                             '<div>' + (row.line_width > 0 ? '<div title="' + row.line_color + '" style="height: ' + row.line_width + 'px; margin-top: ' + (6 - Math.round(row.line_width/2)) + 'px; padding: 0; background-color: ' + row.line_color + '"></div>' : '') + '</div>',
-                            row.area_color ? '<div title="' + row.area_color + '" style="height: 8px; background-color: ' + row.area_color + '"></div>' : '',
-                            '<span title="' + row.rule + '">XML</span>'
+                            row.area_color ? '<div title="' + row.area_color + '" style="height: 8px; background-color: ' + row.area_color + '"></div>' : ''
                         ] };
                     });
                     return data;
@@ -774,12 +764,11 @@ var create_flexigrid_for = {
             create_flexigrid('grid-rules', {
                 url: '/api/2/josm/styles/' + stylename,
                 colModel: [
-                    { display: texts.osm.key, name: 'k',    width: 200, sortable: true },
-                    { display: texts.osm.value,    name: 'v',    width: 200, sortable: true },
+                    { display: texts.osm.key,   name: 'k', width: 300, sortable: true },
+                    { display: texts.osm.value, name: 'v', width: 300, sortable: true },
                     { display: 'Icon', name: 'icon', width: 30, sortable: false, align: 'center' },
                     { display: 'Line', name: 'line', width: 30, sortable: false, align: 'center' },
-                    { display: 'Area', name: 'area', width: 30, sortable: false, align: 'center' },
-                    { display: 'Rule XML', name: 'rule', width: 100, sortable: false }
+                    { display: 'Area', name: 'area', width: 30, sortable: false, align: 'center' }
                 ],
                 searchitems: [
                     { display: 'Key/Value', name: 'k' }
@@ -793,8 +782,7 @@ var create_flexigrid_for = {
                             row.v ? link_to_value(row.k, row.v) : row.b ? (row.b + ' (Boolean)') : '*',
                             row.icon ? '<img src="/api/2/josm/styles/images?style=standard&image=' + row.icon + '" title="' + row.icon + '" alt=""/>' : '',
                             '<div>' + (row.line_width > 0 ? '<div title="' + row.line_color + '" style="height: ' + row.line_width + 'px; margin-top: ' + (6 - Math.round(row.line_width/2)) + 'px; padding: 0; background-color: ' + row.line_color + '"></div>' : '') + '</div>',
-                            row.area_color ? '<div title="' + row.area_color + '" style="height: 8px; background-color: ' + row.area_color + '"></div>' : '',
-                            '<span title="' + row.rule + '">XML</span>'
+                            row.area_color ? '<div title="' + row.area_color + '" style="height: 8px; background-color: ' + row.area_color + '"></div>' : ''
                         ] };
                     });
                     return data;
