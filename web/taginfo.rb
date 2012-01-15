@@ -156,7 +156,7 @@ class Taginfo < Sinatra::Base
         erb :index
     end
 
-    %w(about download keys sources tags).each do |page|
+    %w(about apidoc download keys sources tags).each do |page|
         get '/' + page do
             @title = t.taginfo[page]
             erb page.to_sym
@@ -323,13 +323,6 @@ class Taginfo < Sinatra::Base
                 },
             },
         }.to_json + ";\n"
-    end
-
-    #--------------------------------------------------------------------------
-
-    get '/apidoc' do
-        @title = 'API Documentation'
-        erb :apidoc
     end
 
     #--------------------------------------------------------------------------

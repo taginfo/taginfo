@@ -26,6 +26,7 @@ taginfo:
     keys: Keys
     tags: Tags
     international: International
+    apidoc: API Documentation
     map: Map
     maps: Maps
     combinations: Combinations
