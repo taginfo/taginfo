@@ -1,24 +1,34 @@
-<h1><%= t.taginfo.download %></h1>
-
-<%= t.pages.download.index.intro %>
-
-<table class="list">
-    <tr>
-        <th class="tl"><%= t.pages.download.index.file %></th>
-        <th class="tr"><%= t.pages.download.index.packed %></th>
-        <th class="tr"><%= t.pages.download.index.unpacked %></th>
-        <th class="tl"><%= t.pages.download.index.description %></th>
-    </tr>
-<% Source.visible.each do |source| %>
-        <td class="tl"><%= source.link_download %></td>
-        <td class="tr"><%= source.dbpack %></td>
-        <td class="tr"><%= source.dbsize %></td>
-        <td class="tl"><%= t.sources[source.id].description %></td>
-    </tr>
+<div class="pre">
+    <h1 class="section"><%= t.taginfo.download %></h1>
+    <%= t.pages.download.index.intro %>
+</div>
+<div class="box resize">
+    <table class="list">
+        <tr>
+            <th class="tl"><%= t.pages.download.index.file %></th>
+            <th class="tr"><%= t.pages.download.index.packed %></th>
+            <th class="tr"><%= t.pages.download.index.unpacked %></th>
+            <th class="tl"><%= t.pages.download.index.description %></th>
+        </tr>
+        <tr>
+            <td class="tl"><a rel="nofollow" href="/download/taginfo-master.db.bz2">taginfo-master.db.bz2</a></td>
+            <td class="tr"><%= File.size("../../download/taginfo-master.db.bz2").to_bytes rescue "<i>#{ t.pages.download.index.unknown }</i>" %></td>
+            <td class="tr"><%= File.size("../../data/taginfo-master.db").to_bytes rescue "<i>#{ t.pages.download.index.unknown }</i>" %></td>
+            <td class="tl"><%= t.sources.master.description %></td>
+        </tr>
+<% Source.visible.each_with_index do |source, n| c = (n%2==0) ? ' even' : '' %>
+        <tr>
+            <td class="tl<%= c %>"><%= source.link_download %></td>
+            <td class="tr<%= c %>"><%= source.dbpack %></td>
+            <td class="tr<%= c %>"><%= source.dbsize %></td>
+            <td class="tl<%= c %>"><%= t.sources[source.id].description %></td>
+        </tr>
 <% end %>
-        <td class="tl"><a rel="nofollow" href="/download/taginfo-master.db.bz2">taginfo-master.db.bz2</a></td>
-        <td class="tr"><%= File.size("../../download/taginfo-master.db.bz2").to_bytes rescue "<i>#{ t.pages.download.index.unknown }</i>" %></td>
-        <td class="tr"><%= File.size("../../data/taginfo-master.db").to_bytes rescue "<i>#{ t.pages.download.index.unknown }</i>" %></td>
-        <td class="tl"><%= t.sources.master.description %></td>
-    </tr>
-</table>
+    </table>
+</div>
+<% javascript do
+    JQuery.ready do
+        JS.raw(%Q{ resize_wrapper(); })
+    end
+end
+%>

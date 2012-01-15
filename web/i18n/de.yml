@@ -49,8 +49,6 @@ pages:
             last_update_run: Letzte Aktualisierung
             data_until_explanation: Alle Änderungen bis zu diesem Zeitpunkt sind auf jeden Fall in den Daten, spätere können unter Umständen auch drin sein.
             to: bis
-            info: |
-                <p>Alle Uhrzeiten in UTC.</p>
     download:
         index:
             intro: |
@@ -71,7 +69,7 @@ pages:
     reports:
         index:
             intro: |
-                <p class="text">Reports zeigen die Daten aus verschiedenen Perspektiven.
+                <p>Reports zeigen die Daten aus verschiedenen Perspektiven.
                 Meist bringen Sie Daten aus verschiedenen Quellen auf interessante Art und
                 Weise zusammen. Manche der Reports helfen dabei, bestimmte Arten von Fehlern
                 zu finden, zum Beispiel häufig verwendete Keys ohne Wiki-Seite.</p>

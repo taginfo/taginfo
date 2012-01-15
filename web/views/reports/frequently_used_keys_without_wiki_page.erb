@@ -1,24 +1,26 @@
-<h1><%= @title %></h1>
-
-<p>This table shows keys that appear more than 10&thinsp;000 times in the OSM
-database but have no wiki page describing them.  If you know anything about one
-of these keys, please create the wiki page by clicking on the link in the
-leftmost column and describe the key. Sometimes it might make sense to create a
-redirect to a different wiki page instead. To do this put just one line with
-<tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>page name</i>]]</tt>
-in the wiki page.</p>
-
-<form method="" type="GET">
-    <input type="checkbox" name="english" id="english"<%= params[:english] == '1' ? ' checked="checked"' : '' %>/> Also show keys that have no English language wiki page but a page in some other language.
-</form>
-<p></p>
-
-<table id="grid-keys">
-</table>
-
+<div class="pre">
+    <h1><%= @title %></h1>
+    <p>This table shows keys that appear more than 10&thinsp;000 times in the OSM
+    database but have no wiki page describing them.  If you know anything about one
+    of these keys, please create the wiki page by clicking on the link in the
+    leftmost column and describe the key. Sometimes it might make sense to create a
+    redirect to a different wiki page instead. To do this put just one line with
+    <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>page name</i>]]</tt>
+    in the wiki page.</p>
+</div>
+<div class="box resize">
+    <div class="boxpre">
+        <form method="" type="GET" style="margin-bottom: 10px;">
+            <input type="checkbox" name="english" id="english"<%= params[:english] == '1' ? ' checked="checked"' : '' %>/> Also show keys that have no English language wiki page but a page in some other language.
+        </form>
+    </div>
+    <table id="grid-keys">
+    </table>
+</div>
 <% javascript do
     JQuery.ready do
         JS.raw(<<"JAVASCRIPT")
+            resize_wrapper(); 
             create_flexigrid_for.reports.frequently_used_keys_without_wiki_page(#{ params[:english] == '1' ? '1' : '0' });
             jQuery('#english').bind('click', function() {
                 jQuery('#grid-keys').flexOptions({

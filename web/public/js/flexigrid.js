@@ -94,6 +94,14 @@
 				);
 				
 			},
+            getRp: function() {
+                return p.rp;
+            },
+            newRp: function(value) {
+                    p.newp = 1;
+                    p.rp = value;
+                    g.populate();
+            },
 			fixHeight: function (newH) {
 					newH = false;
 					if (!newH) newH = $(g.bDiv).height();
@@ -117,7 +125,11 @@
 					var hrH = g.bDiv.offsetTop + newH;
 					if (p.height != 'auto' && p.resizable) hrH = g.vDiv.offsetTop;
 					$(g.rDiv).css({height: hrH});
-				
+			
+                    var width_pDiv = jQuery(g.pDiv).width();
+                    var width_hDiv = jQuery(g.hDiv).find('tr').width() - 1;
+                    jQuery(g.pDiv).find('.pDiv2').width( Math.min(width_pDiv, width_hDiv) );
+                    	
 			},
 			dragStart: function (dragtype,e,obj) { //default drag function start
 				
@@ -250,6 +262,7 @@
 						this.rePosDrag();
 						this.fixHeight();
 						this.colresize = false;
+                        this.populate();
 					}
 				else if (this.vresize)
 					{
@@ -393,6 +406,11 @@
 					if (this.pDiv) {
 						this.domElements.pPageStat.html(p.nomsg);	
 					}
+                    if (p.emptymsg != null) {
+                        jQuery(this.gDiv).replaceWith('<span class="emptymsg">' + p.emptymsg + '</span>');
+                    } else {
+                        jQuery(this.gDiv).remove();
+                    }
 					return false;
 					}
 				
@@ -527,7 +545,7 @@
 				
 				tbody = null; data = null; i = null; 
 				
-				if (p.onSuccess) p.onSuccess();
+				if (p.onSuccess) p.onSuccess(g);
 				if (p.hideOnSubmit) $(g.block).remove();//$(t).show();
 				
 				this.hDiv.scrollLeft = this.bDiv.scrollLeft;
@@ -599,7 +617,7 @@
 					this.domElements.pReload.addClass('loading');
 				}
 				
-				$(g.block).css({top:g.bDiv.offsetTop});
+				$(g.block).css({top:g.bDiv.offsetTop, width: jQuery(g.pDiv).find('.pDiv2').width()});
 				
 				if (p.hideOnSubmit) $(this.gDiv).prepend(g.block); //$(t).hide();
 				
@@ -1168,7 +1186,7 @@
 		{
 		g.pDiv.className = 'pDiv';
 		g.pDiv.innerHTML = '<div class="pDiv2"></div>';
-		$(g.bDiv).after(g.pDiv);
+		$(g.bDiv).parent().prepend(g.pDiv);
 		var html = ' <div class="pGroup"> <div class="pFirst pButton"><span></span></div><div class="pPrev pButton"><span></span></div> </div> <div class="btnseparator"></div> <div class="pGroup"><span class="pcontrol">'+p.pagetext+' <input type="text" size="4" value="1" /> '+p.outof+' <span> 1 </span></span></div> <div class="btnseparator"></div> <div class="pGroup"> <div class="pNext pButton"><span></span></div><div class="pLast pButton"><span></span></div> </div> <div class="btnseparator"></div> <div class="pGroup"> <div class="pReload pButton"><span></span></div> </div> <div class="btnseparator"></div> <div class="pGroup"><span class="pPageStat"></span></div>';
 		$('div',g.pDiv).html(html);
 
@@ -1215,8 +1233,8 @@
 		//add search button
 		if (p.searchitems)
 			{
-				$('.pDiv2',g.pDiv).prepend("<div class='pGroup'> <div class='pSearch pButton'><span></span></div> </div>  <div class='btnseparator'></div>");
-				$('.pSearch',g.pDiv).click(function(){$(g.sDiv).slideToggle('fast',function(){$('.sDiv:visible input:first',g.gDiv).trigger('focus');});});				
+/*				$('.pDiv2',g.pDiv).prepend("<div class='pGroup'> <div class='pSearch pButton'><span></span></div> </div>  <div class='btnseparator'></div>");
+				$('.pSearch',g.pDiv).click(function(){$(g.sDiv).slideToggle('fast',function(){$('.sDiv:visible input:first',g.gDiv).trigger('focus');});});				*/
 				//add search box
 				g.sDiv.className = 'sDiv';
 				
@@ -1235,11 +1253,11 @@
 				
 				if (p.qtype=='') p.qtype = sitems[0].name;
 				
-				$(g.sDiv).append("<div class='sDiv2'>"+p.findtext+" <input type='text' size='30' name='q' class='qsbox' /> <select name='qtype'>"+sopt+"</select> <!--input type='button' value='Clear' /--></div>");
+				$(g.sDiv).append("<div class='btnseparator'></div> <div class='sDiv2'>"/*+p.findtext*/+" <input type='text' size='20' name='q' class='qsbox' />");  // <select name='qtype'>"+sopt+"</select> <!--input type='button' value='Clear' /--></div>");
 
 				$('input[name=q],select[name=qtype]',g.sDiv).keydown(function(e){if(e.keyCode==13) g.doSearch()});
 				$('input[value=Clear]',g.sDiv).click(function(){$('input[name=q]',g.sDiv).val(''); p.query = ''; g.doSearch(); });
-				$(g.bDiv).after(g.sDiv);				
+				$(g.pDiv).children().first().append(g.sDiv);
 				
 			}
 		
@@ -1279,7 +1297,8 @@
 		    gtop = g.bDiv.offsetTop;
 		$(g.block).css(
 		{
-			width: g.bDiv.style.width,
+			//width: g.bDiv.style.width,
+			width: jQuery(g.pDiv).find('.pDiv2').width(),
 			height: gh,
 			background: 'white',
 			position: 'relative',

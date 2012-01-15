@@ -1,7 +1,7 @@
-<h1><%= @title %></h1>
-
-<p><b><%= t.pages.search.results.you_were_searching_for %>:</b> <%= escape_html(@query) %></p>
-
+<div class="pre">
+    <h1 class="section"><%= @title %></h1>
+    <p><b><%= t.pages.search.results.you_were_searching_for %>:</b> <%= escape_html(@query) %></p>
+</div>
 <div id="tabs">
     <ul>
         <li><a href="#tags"><%= t.osm.tags %></a></li>
@@ -12,12 +12,12 @@
         </table>
     </div>
 </div>
-
 <% javascript do
     JQuery.ready do
         JS.raw(%Q{
             var tabs = jQuery('#tabs').tabs({
                 show: function(event, ui) { 
+                    resize_wrapper();
                     window.location.hash = ui.tab.hash;
                     create_flexigrid_for.search[ui.tab.hash.substring(1)](#{ @query.to_json });
                 }

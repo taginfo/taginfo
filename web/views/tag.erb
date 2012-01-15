@@ -1,28 +1,24 @@
-<div id="tools">
-    <% if @count_all < 1000 %>
-        <%= xapi_link('*', @key, @value) %> <%= josm_link('*', @key, @value) %>
-    <% else %>
-        <span class="button disabled" title="Button disabled, because there are too many objects with this key"><img src="/img/link-extern-disabled.gif" alt=""/>XAPI</span>
-        <span class="button disabled" title="Button disabled, because there are too many objects with this key"><img src="/img/link-extern-disabled.gif" alt=""/>JOSM</span>
-    <% end %>
+<div class="pre">
+    <div id="tools">
+        <% if @count_all < 1000 %>
+            <%= xapi_link('*', @key, @value) %> <%= josm_link('*', @key, @value) %>
+        <% else %>
+            <span class="button disabled" title="Button disabled, because there are too many objects with this key"><img src="/img/link-extern-disabled.gif" alt=""/>XAPI</span>
+            <span class="button disabled" title="Button disabled, because there are too many objects with this key"><img src="/img/link-extern-disabled.gif" alt=""/>JOSM</span>
+        <% end %>
+    </div>
+    <form id="filter-form">
+        <label for="filter"><%= t.pages.key.filter.label %></label>
+        <select id="filter" name="filter">
+            <option value="all"<%=       @sel['all']       %>><%= t.pages.key.filter.none %></option>
+            <option value="nodes"<%=     @sel['nodes']     %>><%= t.pages.key.filter.nodes %></option>
+            <option value="ways"<%=      @sel['ways']      %>><%= t.pages.key.filter.ways %></option>
+            <option value="relations"<%= @sel['relations'] %>><%= t.pages.key.filter.relations %></option>
+        </select>
+    </form>
+    <h1><%= link_to_key(@key) %>=<%= @value_pp %></h1>
+    <p><%= @desc %></p>
 </div>
-
-<form id="filter-form">
-    <label for="filter"><%= t.pages.key.filter.label %></label>
-    <select id="filter" name="filter">
-        <option value="all"<%=       @sel['all']       %>><%= t.pages.key.filter.none %></option>
-        <option value="nodes"<%=     @sel['nodes']     %>><%= t.pages.key.filter.nodes %></option>
-        <option value="ways"<%=      @sel['ways']      %>><%= t.pages.key.filter.ways %></option>
-        <option value="relations"<%= @sel['relations'] %>><%= t.pages.key.filter.relations %></option>
-    </select>
-</form>
-
-<h1><%= link_to_key(@key) %>=<%= @value_pp %></h1>
-
-<div class="tag-description" title="Description from the wiki">
-    <%= @desc %>
-</div>
-
 <div id="tabs">
     <ul>
         <li><a href="#overview"><%= t.taginfo.overview %></a></li>
@@ -43,24 +39,27 @@
     </div>
     <div id="wiki">
         <h2><%= t.pages.tag.wiki_pages.title %></h2>
-        <table id="grid-wiki">
-        </table>
+        <% if @wiki_count > 0 %>
+            <table id="grid-wiki">
+            </table>
+        <% else %>
+            <p><i><%= t.pages.tag.wiki_pages.none_found %>.</i></p>
+            <p>[<a href="http://wiki.openstreetmap.org/w/index.php?action=edit&title=Tag:<%= escape(@tag) %>">Create wiki page</a>]</p>
+        <% end %>
     </div>
     <div id="josm">
         <h2><%= t.pages.key.josm_rules.title %></h2>
-        <form>
+<!--        <form>
             <label for="josm-style"><%= t.pages.tag.josm_rules.choice %></label>
             <select id="josm-style" name="josm-style">
                 <option>Standard</option>
             </select>
-        </form>
+        </form>-->
        <table id="grid-josm">
        </table>
     </div>
 </div>
-
 <iframe id="josmiframe" name="josmiframe"></iframe>
-
 <% javascript do
     JQuery.ready do
         JS.raw(<<"JAVASCRIPT")
@@ -76,6 +75,7 @@ jQuery('#filter').bind('change', function() {
 
 var tabs = jQuery('#tabs').tabs({
     show: function(event, ui) { 
+        resize_wrapper();
         window.location.hash = ui.tab.hash;
         create_flexigrid_for.tag[ui.tab.hash.substring(1)](#{ @key.to_json }, #{ @value.to_json }, #{ @filter_type.to_json });
     }

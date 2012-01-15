@@ -1,7 +1,7 @@
-<h1><%= @title %></h1>
-
-<p>Tag keys can be between 0 and 255 (Unicode) characters long. Very short or very long keys are often, but not always, errors.</p>
-
+<div class="pre">
+    <h1><%= @title %></h1>
+    <p>Tag keys can be between 0 and 255 (Unicode) characters long. Very short or very long keys are often, but not always, errors.</p>
+</div>
 <%
     hist = Array.new
     @db.execute('SELECT length(key) AS length, count(*) AS count FROM db.keys GROUP BY length(key) ORDER BY length(key)') do |row|
@@ -9,7 +9,6 @@
     end
     hist = hist.map{ |item| item.nil? ? 0 : item }
 %>
-
 <div id="tabs">
     <ul>
         <li><a href="#keys">Keys</a></li>
@@ -26,12 +25,12 @@
         <div id="canvas"></div>
     </div>
 </div>
-
 <script type="text/javascript">
 
 jQuery(function() {
     var tabs = jQuery('#tabs').tabs({
         show: function(event, ui) { 
+            resize_wrapper();
             window.location.hash = ui.tab.hash;
             create_flexigrid_for.reports.key_lengths[ui.tab.hash.substring(1)]();
         }

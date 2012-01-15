@@ -1,11 +1,14 @@
-<h1 style="text-transform: uppercase;"><%= t.osm.keys %></h1>
-
-<table id="grid-keys">
-</table>
-
+<div class="pre">
+    <h1 class="section"><%= t.osm.keys %></h1>
+    <%= t.pages.keys.intro %>
+</div>
+<div class="box resize">
+    <table id="grid-keys">
+    </table>
+</div>
 <% javascript do
     JQuery.ready do
-        JS.raw(%Q{ create_flexigrid_for.keys.keys(); })
+        JS.raw(%Q{ resize_wrapper(); create_flexigrid_for.keys.keys(); })
     end
 end
 %>

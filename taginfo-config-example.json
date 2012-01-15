@@ -6,14 +6,14 @@
         // url prefix for the site
         "url": "http://localhost:4567",
         // Used in the title of all HTML pages.
-        "name": "Test Taginfo",
-        // Description that appears if you click on the instance icon in the upper left.
-        "description": "This is a Taginfo test instance. To change this text or the icon above change your <tt>taginfo-config.json</tt>.",
+        "name": "OpenStreetMap Taginfo",
+        // Description of this taginfo instance
+        "description": "This is a <b>taginfo test instance</b>. Change this text in your <tt>taginfo-config.json</tt>.",
         // URL path to instance icon in the upper left.
         "icon": "/img/logo/world.png"
     },
     "tagcloud": {
-        "number_of_tags": 100
+        "number_of_tags": 260
     },
     // For the geodistribution map. See the wiki documentation about these settings.
     "geodistribution": {
@@ -24,7 +24,7 @@
         "width": 360,
         "height": 180,
         "scale_image": 2,
-        "background_image": "/img/worldp.png"
+        "background_image": "/img/mapbg/world.png"
     },
     "xapi": {
         // URL prefix for the XAPI/JOSM links on the key and tag pages.

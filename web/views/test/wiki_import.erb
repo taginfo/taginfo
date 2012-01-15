@@ -1,10 +1,13 @@
-<h1>Wiki Import</h1>
-
-<table>
-    <% @invalid_page_titles.each do |row| %>
-        <tr>
-            <td><%= row['reason'] %></td>
-            <td><%= row['title']  %></td>
-        </tr>
-    <% end %>
-</table>
+<div class="pre">
+    <h1 class="section">Wiki Import</h1>
+</div>
+<div class="box">
+    <table>
+        <% @invalid_page_titles.each do |row| %>
+            <tr>
+                <td><%= row['reason'] %></td>
+                <td><%= row['title']  %></td>
+            </tr>
+        <% end %>
+    </table>
+</div>

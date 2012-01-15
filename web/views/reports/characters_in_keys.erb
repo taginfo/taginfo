@@ -1,7 +1,7 @@
-<h1><%= t.reports.characters_in_keys.name %></h1>
-
-<%= t.reports.characters_in_keys.intro %>
-
+<div class="pre">
+    <h1><%= t.reports.characters_in_keys.name %></h1>
+    <%= t.reports.characters_in_keys.intro %>
+</div>
 <div id="tabs">
     <ul>
         <li><a href="#statistics"><%= t.reports.characters_in_keys.statistics.tab %></a></li>
@@ -10,36 +10,45 @@
     </ul>
     <div id="statistics">
         <h2><%= t.reports.characters_in_keys.statistics.title %></h2>
-        <div class="canvas" id="canvas"></div>
-        <p></p>
-        <table id="grid-statistics">
+        <div class="canvas boxpre" id="canvas" style="margin-bottom: 20px;"></div>
+        <table class="list">
+            <tr>
+                <th>&nbsp;</th>
+                <th class="tr"><%= t.misc.count %></th>
+                <th class="tr"><%= t.reports.characters_in_keys.statistics.fraction %></th>
+                <th class="tl"><%= t.reports.characters_in_keys.statistics.characters %></th>
+            </tr>
 <% letter='A'
    colors = { :A => '#2ca02c', :B => '#98df8a', :C => '#dbdb8d', :D => '#d62728', :E => '#ff9896', :F => '#aec7e8' }
-   %w(plain colon letters space problem rest).each do |type| %>
+   %w(plain colon letters space problem rest).each_with_index do |type, n| c = (n%2!=0) ? ' even' : '' %>
             <tr>
-                <td style="background-color: <%= colors[letter.to_sym] %>;"><%= letter %></td>
-                <td><%= @db.stats('characters_in_keys_' + type) %></td>
-                <td><%= sprintf '%.2f', @db.stats('characters_in_keys_' + type) * 100.0 / @db.stats('num_keys') %>%</td>
-                <td><%= t.reports.characters_in_keys.statistics.characters_in_keys[type] %></td>
+                <td class="tc<%= c %>" style="background-color: <%= colors[letter.to_sym] %>;"><%= letter %></td>
+                <td class="tr<%= c %>"><%= @db.stats('characters_in_keys_' + type) %></td>
+                <td class="tr<%= c %>"><%= sprintf '%.2f', @db.stats('characters_in_keys_' + type) * 100.0 / @db.stats('num_keys') %>%</td>
+                <td class="tl<%= c %>"><%= t.reports.characters_in_keys.statistics.characters_in_keys[type] %></td>
             </tr>
 <% letter = letter.succ; end %>
             <tr>
-                <td style="border-top: 1px solid #000000;"></td>
-                <td style="border-top: 1px solid #000000;"><%= @db.stats('num_keys') %></td>
-                <td style="border-top: 1px solid #000000;">100%</td>
-                <td style="border-top: 1px solid #000000;">Total</td>
+                <td class="tc" style="border-top: 1px solid #000000;"></td>
+                <td class="tr" style="border-top: 1px solid #000000;"><%= @db.stats('num_keys') %></td>
+                <td class="tr" style="border-top: 1px solid #000000;">100%</td>
+                <td class="tl" style="border-top: 1px solid #000000;">Total</td>
             </tr>
         </table>
     </div>
     <div id="whitespace">
         <h2><%= t.reports.characters_in_keys.whitespace.title %></h2>
-        <%= t.reports.characters_in_keys.whitespace.intro %>
+        <div class="boxpre">
+            <%= t.reports.characters_in_keys.whitespace.intro %>
+        </div>
         <table id="grid-whitespace">
         </table>
     </div>
     <div id="problematic">
         <h2><%= t.reports.characters_in_keys.problematic.title %></h2>
-        <%= t.reports.characters_in_keys.problematic.intro %>
+        <div class="boxpre">
+            <%= t.reports.characters_in_keys.problematic.intro %>
+        </div>
         <table id="grid-problematic">
         </table>
     </div>
@@ -51,8 +60,11 @@
 
 var tabs = jQuery('#tabs').tabs({
     show: function(event, ui) { 
+        resize_wrapper();
         window.location.hash = ui.tab.hash;
-        create_flexigrid_for.reports.characters_in_keys[ui.tab.hash.substring(1)]();
+        if (create_flexigrid_for.reports.characters_in_keys[ui.tab.hash.substring(1)]) {
+            create_flexigrid_for.reports.characters_in_keys[ui.tab.hash.substring(1)]();
+        }
     }
 });
 

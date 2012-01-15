@@ -1,10 +1,11 @@
-<h1><%= t.reports.languages.name %></h1>
-
-<%= t.reports.languages.intro %>
-
-<table id="grid-langs">
-</table>
-
+<div class="pre">
+    <h1><%= t.reports.languages.name %></h1>
+    <%= t.reports.languages.intro %>
+</div>
+<div class="box">
+    <table id="grid-langs">
+    </table>
+</div>
 <% javascript do
     JQuery.ready do
         JS.raw(%Q{ create_flexigrid_for.reports.languages(); })

@@ -20,27 +20,41 @@ taginfo:
     source: Source
     sources: Sources
     download: Download
-    about: About Taginfo
-    wiki: Wiki
+    about: About taginfo
+    wiki: taginfo wiki page
     reports: Reports
     keys: Keys
     tags: Tags
+    international: International
     map: Map
     maps: Maps
     combinations: Combinations
     key_combinations: Combinations
     overview: Overview
     data_from: Data from
+    data_from_description: Last update of taginfo database
     instance:
-        title: About this Taginfo site
+        title: About this taginfo site
         other: See the <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> for other sites.
 
 pages:
     index:
-        description: Taginfo is a system for finding and aggregating information about OpenStreetMap tags.
-        buttons:
-            show_all_keys: Show all keys
-            reports: Reports
+        keys:
+            intro: |
+                Here are some of the more common tag keys:
+            listkeys: See list of all keys...
+            listtags: See list of the most common tags...
+        reports:
+            listreports: See all reports...
+        about:
+            intro:
+                <p>OpenStreetMap uses <b>tags</b> of the form <b>key=value</b>
+                to add meaning to geographic objects. Taginfo collects information
+                about these tags from several sources to help you understand what
+                they mean and how they are used.</p>
+            more: More about taginfo...
+        international:
+            see: See other taginfo sites...
     sources:
         index:
             intro: |
@@ -52,8 +66,6 @@ pages:
             last_update_run: Last update run
             data_until_explanation: All edits until this time will be in the data, later edits might be.
             to: to
-            info: |
-                <p>All times in UTC.</p>
     download:
         index:
             intro: |
@@ -72,7 +84,7 @@ pages:
     reports:
         index:
             intro: |
-                <p class="text">Reports show the data from different angles.
+                <p>Reports show the tag data from different angles.
                 They often bring together data from several sources in interesting ways. Some
                 of the reports can help with finding specific errors.</p>
             data_sources: Data sources used
@@ -80,6 +92,12 @@ pages:
         results:
             title: Search results
             you_were_searching_for: You were searching for
+    keys:
+        intro: |
+                <p>This table shows all tag keys that exist in the database or in any of the other sources.</p>
+    tags:
+        intro: |
+                <p>This table shows the most common tags in the database.</p>
     key:
         no_description_in_wiki: No description in wiki
         filter:
@@ -114,6 +132,7 @@ pages:
             description: <i>This table shows only the most common combinations of the most common tags.</i>
         wiki_pages:
             title: Wiki pages about this tag
+            none_found: No wiki page available for this tag.
         josm_rules:
             title: JOSM style rules with this tag
             choice: |
@@ -161,7 +180,9 @@ reports:
             (:) is added as a separator character.</p>
         statistics:
             tab: Statistics
-            title: Statistics Overview
+            title: Statistics overview
+            fraction: Fraction
+            characters: Characters in key
             characters_in_keys:
                 plain: Only latin lowercase letters (<span class="char">a</span> to <span class="char">z</span>) and underscore (<span class="char">_</span>), first and last characters are letters.
                 colon: Like A but with one or more colons (<span class="char">:</span>) inside.
@@ -171,7 +192,7 @@ reports:
                 rest: Everything else.
         whitespace:
             tab: Whitespace
-            title: Keys With Whitespace
+            title: Keys with whitespace
             intro: |
                 <p>Keys that contain whitespace characters such as space, tab, new
                 line, carriage return, or whitespace characters from other
@@ -181,7 +202,7 @@ reports:
                 the underscore (_) should be used instead.</p>
         problematic:
             tab: Problematic
-            title: Keys With Possibly Problematic Characters
+            title: Keys with possibly problematic characters
             intro: |
                 <p>Keys that contain possibly problematic characters: <span
                 class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>. These characters

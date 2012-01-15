@@ -1,13 +1,14 @@
-<h1><%= t.reports.wiki_pages_about_non_existing_keys.name %></h1>
-
-<%= t.reports.wiki_pages_about_non_existing_keys.intro %>
-
-<table id="grid-keys">
-</table>
-
+<div class="pre">
+    <h1><%= t.reports.wiki_pages_about_non_existing_keys.name %></h1>
+    <%= t.reports.wiki_pages_about_non_existing_keys.intro %>
+</div>
+<div class="box resize">
+    <table id="grid-keys">
+    </table>
+</div>
 <% javascript do
     JQuery.ready do
-        JS.raw(%Q{ create_flexigrid_for.reports.wiki_pages_about_non_existing_keys(); })
+        JS.raw(%Q{ resize_wrapper(); create_flexigrid_for.reports.wiki_pages_about_non_existing_keys(); })
     end
 end
 %>

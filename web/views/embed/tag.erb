@@ -1,11 +1,11 @@
 <% if @key == '{{{key}}}' && @value == '{{{value}}}' %>
-<a target="_blank" title="More information about tag '<%= escape_html(@key) %>=<%= escape_html(@value) %>' at Taginfo" href="http://taginfo.openstreetmap.org/"><img src="/img/taginfo.24.png" alt="Taginfo"/> <b>Taginfo</b> [More...]</a>
+<a target="_blank" title="More information about tag '<%= escape_html(@key) %>=<%= escape_html(@value) %>' at Taginfo" href="http://taginfo.openstreetmap.org/">tag<b>info</b> [More...]</a>
 <p>Statistics about the tag will appear here.</p>
 <% elsif @dbtag.nil? %>
-<a target="_blank" title="More information about tag '<%= escape_html(@key) %>=<%= escape_html(@value) %>' at Taginfo" href="http://taginfo.openstreetmap.org/tags/?key=<%= escape(@key) %>&value=<%= escape(@value) %>"><img src="/img/taginfo.24.png" alt="Taginfo"/> <b>Taginfo</b> [More...]</a>
+<a target="_blank" title="More information about tag '<%= escape_html(@key) %>=<%= escape_html(@value) %>' at Taginfo" href="http://taginfo.openstreetmap.org/tags/?key=<%= escape(@key) %>&value=<%= escape(@value) %>">tag<b>info</b> [More...]</a>
 <p>This tag does not appear in the OSM database.</p>
 <% else %>
-<a target="_blank" title="More information about tag '<%= escape_html(@key) %>=<%= escape_html(@value) %>' at Taginfo" href="http://taginfo.openstreetmap.org/tags/?key=<%= escape(@key) %>&value=<%= escape(@value) %>"><img src="/img/taginfo.24.png" alt="Taginfo"/> <b>Taginfo</b> [More...]</a>
+<a target="_blank" title="More information about tag '<%= escape_html(@key) %>=<%= escape_html(@value) %>' at Taginfo" href="http://taginfo.openstreetmap.org/tags/?key=<%= escape(@key) %>&value=<%= escape(@value) %>">tag<b>info</b> [More...]</a>
 <div class="content"><table>
     <tr>
         <td class="ft"><img src="/img/types/node.16.png" alt="Nodes" title="Nodes with tag '<%= escape_html(@key) %>=<%= escape_html(@value) %>' in database"></td>

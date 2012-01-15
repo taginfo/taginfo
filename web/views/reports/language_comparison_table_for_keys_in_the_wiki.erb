@@ -9,29 +9,29 @@
     end
     @languages_lookup = @languages.map{ |lang| "'#{lang}': #{lang_lookup[lang]}" }.join(', ')
 %>
-<h1><%= t.reports.language_comparison_table_for_keys_in_the_wiki.name %></h1>
-
-<%= t.reports.language_comparison_table_for_keys_in_the_wiki.intro %>
-
-<table id="grid-keys">
-</table>
-
-<p></p>
-
-<table>
-    
-    <tr><td><img src="/img/sources/wiki/wiki-t.png" alt="[t]"/></td><td><%= t.reports.language_comparison_table_for_keys_in_the_wiki.icons.template %></td></tr>
-    <tr><td><img src="/img/sources/wiki/wiki-e.png" alt="[e]"/></td><td><%= t.reports.language_comparison_table_for_keys_in_the_wiki.icons.error    %></td></tr>
-    <tr><td><img src="/img/sources/wiki/wiki-p.png" alt="[p]"/></td><td><%= t.reports.language_comparison_table_for_keys_in_the_wiki.icons.page     %></td></tr>
-    <tr><td><img src="/img/sources/wiki/wiki-r.png" alt="[r]"/></td><td><%= t.reports.language_comparison_table_for_keys_in_the_wiki.icons.redirect %></td></tr>
-</table>
-
+<div class="pre">
+    <h1><%= t.reports.language_comparison_table_for_keys_in_the_wiki.name %></h1>
+    <%= t.reports.language_comparison_table_for_keys_in_the_wiki.intro %>
+</div>
+<div class="box resize">
+    <table id="grid-keys">
+    </table>
+    <table class="boxpre">
+        <tr><td><img src="/img/sources/wiki/wiki-t.png" alt="[t]"/></td><td><%= t.reports.language_comparison_table_for_keys_in_the_wiki.icons.template %></td></tr>
+        <tr><td><img src="/img/sources/wiki/wiki-e.png" alt="[e]"/></td><td><%= t.reports.language_comparison_table_for_keys_in_the_wiki.icons.error    %></td></tr>
+        <tr><td><img src="/img/sources/wiki/wiki-p.png" alt="[p]"/></td><td><%= t.reports.language_comparison_table_for_keys_in_the_wiki.icons.page     %></td></tr>
+        <tr><td><img src="/img/sources/wiki/wiki-r.png" alt="[r]"/></td><td><%= t.reports.language_comparison_table_for_keys_in_the_wiki.icons.redirect %></td></tr>
+    </table>
+</div>
 <script type="text/javascript">
     jQuery(document).ready(function() {
+        resize_wrapper();
         var lang_to_idx = {
             <%= @languages_lookup %>
         };
-        jQuery('#grid-keys').flexigrid({
+        var rp = calculate_flexigrid_rp(jQuery('div.box')) - 1;
+        current_grid = 'grid-keys';
+        grids[current_grid] = jQuery('#grid-keys').flexigrid({
             url: '/api/2/wiki/keys',
             method: 'GET',
             dataType: 'json',
@@ -49,10 +49,12 @@
             showToggleBtn: false,
             showTableToggleBtn: false,
             usepager: true,
-            useRp: true,
-            rpOptions: [10,15,20,25,50,100],
-            rp: 15,
-            height: 400,
+            useRp: false,
+            rp: rp,
+            height: 'auto',
+            onSuccess: function(grid) {
+                grid.fixHeight();
+            },
             preProcess: function(data) {
                 return {
                     total: data.total,

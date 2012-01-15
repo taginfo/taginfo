@@ -1,18 +1,20 @@
-<h1><%= t.reports.josm_styles.name %></h1>
-
-Select style:
-<select>
-<% ['standard'].each do |style| %>
-    <option id="<%= style %>" name="<%= style %>"><%= style %></option>
-<% end %>
-</select>
-
-<table id="grid-rules">
-</table>
-
+<div class="pre">
+    <h1><%= t.reports.josm_styles.name %></h1>
+<!--
+    Select style:
+    <select>
+    <% ['standard'].each do |style| %>
+        <option id="<%= style %>" name="<%= style %>"><%= style %></option>
+    <% end %>
+    </select>-->
+</div>
+<div class="box resize">
+    <table id="grid-rules">
+    </table>
+</div>
 <% javascript do
     JQuery.ready do
-        JS.raw(%Q{ create_flexigrid_for.reports.josm_styles('standard'); })
+        JS.raw(%Q{ resize_wrapper(); create_flexigrid_for.reports.josm_styles('standard'); })
     end
 end
 %>

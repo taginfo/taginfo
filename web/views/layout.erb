@@ -11,8 +11,11 @@
 <%= javascript_tags %>
     </head>
     <body>
-        <div id="top">
-            <div id="top_right">
+        <div id="header">
+            <div id="header_date" title="<%= t.taginfo.data_from_description %>">
+                <%= t.taginfo.data_from %>: <%= @data_until %> UTC
+            </div>
+            <div id="header_forms">
                 <form id="set_language" action="/switch_locale">
                     <input type="hidden" name="url" value="<%= request.path %>"/>
                     <select id="locale" name="locale">
@@ -22,19 +25,16 @@
                     </select>
                 </form>
                 <form action="/search">
-                    <input type="text" id="search" name="q" value="Search taginfo..." style="color: #d0d0d0;"/>
+                    <input type="text" id="search" name="q" value=""/>
                 </form>
             </div>
-            <div id="date">
-                <%= t.taginfo.data_from %>: <%= @data_until %> UTC
-            </div>
-            <div id="top_left">
-                <a href="/"><img src="<%= TaginfoConfig.get('instance.icon', '/img/logo/world.png') %>" alt="taginfo"/></a>
+            <div id="header_logo">
+                <a href="/"><img width="49" height="49" src="<%= TaginfoConfig.get('instance.icon', '/img/logo/world.png') %>" alt="taginfo"/></a>
 <% if @section %>
-                <a href="/"><img src="/img/logo/taginfo_with_bar.png" alt="taginfo"/></a>
+                <a href="/"><img width="136" height="49" src="/img/logo/taginfo_with_bar.png" alt="taginfo"/></a>
                 <a class="section" href="/<%= @section %>"><%= @section_title %></a>
 <% else %>
-                <a href="/"><img src="/img/logo/taginfo.png" alt="taginfo"/></a>
+                <a href="/"><img width="129" height="49" src="/img/logo/taginfo.png" alt="taginfo"/></a>
 <% end %>
             </div>
         </div>
@@ -43,9 +43,12 @@
         </div>
         <div id="footer">
             <div id="footer_left">
-                <a href="http://www.openstreetmap.org/"><b style="font-style: smallcaps;">OpenStreetMap</b></a>
+                <a href="http://www.openstreetmap.org/"><b style="font-style: smallcaps;">OpenStreetMap</b> - The Free Wiki World Map</a>
             </div>
             <div id="footer_right">
+                <a href="/keys"><%= t.taginfo.keys %></a> &middot;
+                <a href="/tags"><%= t.taginfo.tags %></a> &middot;
+                <a href="/reports"><%= t.taginfo.reports %></a> &middot;
                 <a href="/sources"><%= t.taginfo.sources %></a> &middot;
                 <a href="/download"><%= t.taginfo.download %></a> &middot;
                 <a href="/about"><%= t.taginfo.about %></a> &middot;

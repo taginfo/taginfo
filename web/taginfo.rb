@@ -108,6 +108,8 @@ class Taginfo < Sinatra::Base
 
         javascript 'jquery-1.5.1.min'
         javascript 'jquery-ui-1.8.10.custom.min'
+        javascript 'customSelect.jquery'
+        javascript 'jquery.tipsy'
 #        javascript 'flexigrid-minified'
         javascript 'flexigrid'
         javascript 'protovis-r3.2'
@@ -154,16 +156,11 @@ class Taginfo < Sinatra::Base
         erb :index
     end
 
-    %w(about download keys tags).each do |page|
+    %w(about download keys sources tags).each do |page|
         get '/' + page do
             @title = t.taginfo[page]
             erb page.to_sym
         end
-    end
-
-    get! '/sources' do
-        @title = t.taginfo.sources
-        erb :'sources/index'
     end
 
     #-------------------------------------
@@ -207,6 +204,7 @@ class Taginfo < Sinatra::Base
         end
 
         @wiki_count = @db.count('wiki.wikipages').condition('value IS NULL').condition('key=?', @key).get_first_value().to_i
+        @user_count = @db.select('SELECT users_all FROM db.keys').condition('key=?', @key).get_first_value().to_i
         
         (@merkaartor_type, @merkaartor_link, @merkaartor_selector) = @db.select('SELECT tag_type, link, selector FROM merkaartor.keys').condition('key=?', @key).get_columns(:tag_type, :link, :selector)
         @merkaartor_images = [:node, :way, :area, :relation].map{ |type|
@@ -262,6 +260,7 @@ class Taginfo < Sinatra::Base
         @sel = Hash.new('')
         @sel[@filter_type] = ' selected="selected"'
 
+        @wiki_count = @db.count('wiki.wikipages').condition('value=?', @value).condition('key=?', @key).get_first_value().to_i
         @count_all = @db.select('SELECT count_all FROM db.tags').condition('key = ? AND value = ?', @key, @value).get_first_value().to_i
 
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang=? AND key=? AND value=?", r18n.locale.code, @key, @value).get_first_value())

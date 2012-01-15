@@ -1,55 +1,61 @@
-<table id="index">
+<table class="boxes resize" width="100%">
     <tr>
         <td>
-            <h2><a href="/keys">KEYS</a></h2>
+            <h2><a href="/keys"><%= t.taginfo.keys %></a>
+            / <a href="/tags"><%= t.taginfo.tags %></a></h2>
         </td>
         <td rowspan="4" width="20"></td>
-        <td width="338">
-            <h2><a href="/reports">REPORTS</a></h2>
+        <td width="232">
+            <h2><a href="/reports"><%= t.taginfo.reports %></a></h2>
         </td>
         <td rowspan="4" width="20"></td>
-        <td width="338">
-            <h2><a href="/about">ABOUT TAGINFO</a></h2>
+        <td width="232">
+            <h2><a href="/about"><%= t.taginfo.about %></a></h2>
         </td>
     </tr>
     <tr>
         <td rowspan="3" class="box">
-            <p>Here are some common tag keys. There is also a <a href="/keys">list of all keys</a>
-            or a <a href="/tags">list of the most common tags</a>.</p>
-            <p style="margin-top: 15px; line-height: 200%; text-align: justify;">
-<% @tags.each do |tag| %>
-            <a href="/keys/<%= tag['key'] %>" class="taglink" style="font-size: <%= tagcloud_size(tag) %>px;"><%= tag['key'] %></a>
-<% end %>
-            </p>
+            <p><%= t.pages.index.keys.intro %></p>
+            <div id="tagcloud" style="margin: 15px 0; line-height: 200%; text-align: justify; overflow: hidden;">
+            </div>
+            <p class="emphasis" style="margin-top: 20px;">&#x2794; <a href="/keys"><%= t.pages.index.keys.listkeys %></a></p>
+            <p class="emphasis">&#x2794; <a href="/tags"><%= t.pages.index.keys.listtags %></a></p>
         </td>
         <td rowspan="3" class="box">
-            <%= t.pages.reports.index.intro %>
-            <p style="margin-top: 15px">
+            <p><%= t.pages.reports.index.intro %></p>
+            <ul style="margin: 0 0 0 18px; padding: 0;">
 <% Report.each do |report| %>
-                <a href="<%= report.url %>"><%= t.reports[report.name].name %></a><br/>
+                <li><a href="<%= report.url %>"><%= t.reports[report.name].name %></a></li>
 <% end %>
-            </p>
-            <p style="padding-top: 20px;"><a href="/reports">See all reports...</a></p>
+            </ul>
+            <p class="emphasis" style="margin-top: 20px;">&#x2794; <a href="/reports"><%= t.pages.index.reports.listreports %></a></p>
         </td>
         <td class="box">
-            <p>OpenStreetMap uses <b>tags</b> of the form <b>key=value</b>
-            to add meaning to geographic objects.
-            Taginfo collects information about these tags from several
-            sources and helps you find tags and explore their uses.</p>
-            <p><a href="/about">More about taginfo...</a></p>
+            <%= t.pages.index.about.intro %>
+            <p class="emphasis" style="margin-top: 20px;">&#x2794; <a href="/about"><%= t.pages.index.about.more %></a></p>
         </td>
     </tr>
     <tr>
         <td>
-            <h2><a href="/international">INTERNATIONAL</a></h2>
+            <h2><a href="/international"><%= t.taginfo.international %></a></h2>
         </td>
     </tr>
     <tr>
         <td class="box">
-            <p>This is the main taginfo site. It contains OSM data for
-            the whole planet and is updated daily.</p>
-            <p><a href="/sites">See other taginfo sites showing data for a
-            specific area...</a></p>
+            <p><%= TaginfoConfig.get('instance.description') %></p>
+            <p class="emphasis" style="margin-top: 20px;">&#x2794; <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites"><%= t.pages.index.international.see %></a></p>
         </td>
     </tr>
 </table>
+<% javascript do
+    JS.raw('function tagcloud_data() { return ' + @tags.map{ |tag| [tag['key'], tagcloud_size(tag)] }.to_json.gsub(/\],/, "],\n")) + "; }\n" +
+
+    JQuery.ready do
+        JS.raw(<<"JAVASCRIPT")
+jQuery(window).resize(resize_home);
+resize_home();
+
+JAVASCRIPT
+    end
+end
+%>

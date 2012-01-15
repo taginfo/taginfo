@@ -1,8 +1,17 @@
-<h1>Test</h1>
-
-<p>The test pages are for Taginfo development only.</p>
-
-<ul>
-    <li><a href="/test/tags">Tags</a></li>
-    <li><a href="/test/wiki_import">Wiki import</a></li>
-</ul>
+<div class="pre">
+    <h1 class="section">Test</h1>
+    <p>The test pages are for taginfo development only.</p>
+</div>
+<div class="box resize">
+    <h2>Test pages</h2>
+    <ul>
+        <li><a href="/test/tags">Tags</a></li>
+        <li><a href="/test/wiki_import">Wiki import</a></li>
+    </ul>
+</div>
+<% javascript do
+    JQuery.ready do
+        JS.raw(%Q{ resize_wrapper(); })
+    end
+end
+%>

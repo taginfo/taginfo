@@ -1,11 +1,14 @@
-<h1 style="text-transform: uppercase;"><%= t.osm.tags %></h1>
-
-<table id="grid-tags">
-</table>
-
+<div class="pre">
+    <h1 class="section"><%= t.osm.tags %></h1>
+    <%= t.pages.tags.intro %>
+</div>
+<div class="box resize">
+    <table id="grid-tags">
+    </table>
+</div>
 <% javascript do
     JQuery.ready do
-        JS.raw(%Q{ create_flexigrid_for.tags.tags(); })
+        JS.raw(%Q{ resize_wrapper(); create_flexigrid_for.tags.tags(); })
     end
 end
 %>

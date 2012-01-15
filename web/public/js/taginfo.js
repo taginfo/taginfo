@@ -1,6 +1,73 @@
 // taginfo.js
 
+var grids = {};
+var current_grid = '';
+
+function resize_home() {
+    var tagcloud = jQuery('#tagcloud');
+    tagcloud.empty();
+    tagcloud.height(0);
+
+    resize_wrapper();
+
+    var height = tagcloud.parent().innerHeight();
+    tagcloud.parent().children().each(function(index) {
+        if (this.id != 'tagcloud') {
+            height -= jQuery(this).outerHeight(true);
+        }
+    });
+    tagcloud.height(height - 20);
+
+    var tags = tagcloud_data();
+    var cloud = '';
+    for (var i=0; i < tags.length; i++) {
+        cloud += '<a href="/keys/' + tags[i][0] + '" style="font-size: ' + tags[i][1] + 'px;">' + tags[i][0] + '</a> ';
+    }
+    tagcloud.append(cloud);
+
+    var tags = tagcloud.children().toArray().sort(function(a, b) {
+        return parseInt(jQuery(a).css('font-size')) - parseInt(jQuery(b).css('font-size'));
+    });
+
+    while (tagcloud.get(0).scrollHeight > tagcloud.height()) {
+        jQuery(tags.shift()).remove();
+    }
+}
+
+function resize_window() {
+    resize_wrapper(true);
+}
+
+function resize_wrapper(resize_grid) {
+    var height = jQuery(window).height();
+
+    height -= jQuery('div#header').outerHeight(true);
+    height -= jQuery('div.pre').outerHeight(true);
+    height -= jQuery('.ui-tabs-nav').outerHeight(true);
+    height -= jQuery('div#footer').outerHeight(true);
+
+    var wrapper = jQuery('.resize,.ui-tabs-panel');
+    wrapper.outerHeight(height);
+
+    if (resize_grid) {
+        if (grids[current_grid]) {
+            var grid = grids[current_grid][0].grid;
+            var oldrp = grid.getRp();
+            var rp = calculate_flexigrid_rp(jQuery(grids[current_grid][0]).parents('.ui-tabs-panel, div.box'));
+            if (rp != oldrp) {
+                grid.newRp(rp);
+                grid.fixHeight();
+            }
+        }
+    }
+}
+
 jQuery(document).ready(function() {
+
+    jQuery('select').customStyle();
+    jQuery('*[title]').tipsy({ opacity: 1, delayIn: 500 });
+    jQuery(window).resize(resize_window);
+
     jQuery.getQueryString = (function(a) {
         if (a == "") return {};
         var b = {};
@@ -10,16 +77,6 @@ jQuery(document).ready(function() {
         }
         return b;
     })(window.location.search.substr(1).split('&'))
-
-    jQuery('#instance_description').dialog({
-        autoOpen: false,
-        position: [20, 50],
-        title: texts.instance_description.title
-    });
-
-    jQuery('#instance').click(function() {
-        jQuery('#instance_description').dialog('open');
-    });
 });
 
 function print_wiki_link(title, options) {
@@ -261,21 +318,48 @@ jQuery(document).ready(function() {
 
 /* ============================ */
 
-var grids = {};
-
 var flexigrid_defaults = {
     method        : 'GET',
     dataType      : 'json',
     showToggleBtn : false,
+    height        : 'auto',
     usepager      : true,
-    useRp         : true,
-    rp            : 15,
-    rpOptions     : [10,15,20,25,50,100],
+    useRp         : false,
+    onSuccess     : function(grid) {
+        jQuery('*[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 'w' });
+        grid.fixHeight();
+    }
 };
 
+function calculate_flexigrid_rp(box) {
+    var height = box.innerHeight();
+
+    height -= box.children('h2').outerHeight(true);
+    height -= box.children('.boxpre').outerHeight(true);
+    height -= box.children('.pDiv').outerHeight();
+    height -= box.children('.pHiv').outerHeight();
+    height -= 80; // table tools and header, possibly horizontal scrollbar
+
+    return Math.floor(height / 28);
+}
+
 function create_flexigrid(domid, options) {
+    current_grid = domid;
     if (grids[domid] == null) {
-        grids[domid] = jQuery('#' + domid).flexigrid(jQuery.extend({}, flexigrid_defaults, texts.flexigrid, options));
+        // grid doesn't exist yet, so create it
+        var me = jQuery('#' + domid);
+        var rp = calculate_flexigrid_rp(me.parents('.ui-tabs-panel, div.box'));
+        grids[domid] = me.flexigrid(jQuery.extend({}, flexigrid_defaults, texts.flexigrid, options, { rp: rp }));
+        jQuery('*[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 's' });
+    } else {
+        // grid does exist, make sure it has the right size
+        var grid = grids[domid][0].grid;
+        var oldrp = grid.getRp();
+        var rp = calculate_flexigrid_rp(jQuery(grids[domid][0]).parents('.ui-tabs-panel, div.box'));
+        if (rp != oldrp) {
+            grid.newRp(rp);
+            grid.fixHeight();
+        }
     }
 }
 
@@ -285,14 +369,14 @@ var create_flexigrid_for = {
             create_flexigrid('grid-keys', {
                 url: '/api/2/db/keys?include=prevalent_values',
                 colModel: [
-                    { display: texts.osm.key, name: 'key', width: 180, sortable: true },
-                    { display: '<span title="Number of objects with this key"><img src="/img/types/all.16.png" alt=""/> Total</span>',           name: 'count_all',        width: 250, sortable: true, align: 'center' },
-                    { display: '<span title="Number of nodes with this key"><img src="/img/types/node.16.png" alt=""/> Nodes</span>',            name: 'count_nodes',      width: 250, sortable: true, align: 'center' },
-                    { display: '<span title="Number of ways with this key"><img src="/img/types/way.16.png" alt=""/> Ways</span>',               name: 'count_ways',       width: 250, sortable: true, align: 'center' },
-                    { display: '<span title="Number of relations with this key"><img src="/img/types/relation.16.png" alt=""/> Relation</span>', name: 'count_relations',  width: 250, sortable: true, align: 'center' },
-                    { display: 'Users', name: 'users_all', width: 44, sortable: true, align: 'right' },
-                    { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" title="Wiki"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
-                    { display: '<img src="/img/sources/josm.16.png" alt="JOSM" title="JOSM"/>', name: 'in_josm', width: 20, sortable: true, align: 'center' },
+                    { display: texts.osm.key, name: 'key', width: 160, sortable: true },
+                    { display: '<span title="Number of objects with this key"><img src="/img/types/all.16.png" alt=""/> Total</span>',           name: 'count_all',        width: 200, sortable: true, align: 'center' },
+                    { display: '<span title="Number of nodes with this key"><img src="/img/types/node.16.png" alt=""/> Nodes</span>',            name: 'count_nodes',      width: 220, sortable: true, align: 'center' },
+                    { display: '<span title="Number of ways with this key"><img src="/img/types/way.16.png" alt=""/> Ways</span>',               name: 'count_ways',       width: 220, sortable: true, align: 'center' },
+                    { display: '<span title="Number of relations with this key"><img src="/img/types/relation.16.png" alt=""/> Relation</span>', name: 'count_relations',  width: 220, sortable: true, align: 'center' },
+                    { display: '<span title="Number of users currently owning objects with this key">Users</span>', name: 'users_all', width: 44, sortable: true, align: 'right' },
+                    { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" title="Key has wiki page"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
+                    { display: '<img src="/img/sources/josm.16.png" alt="JOSM" title="Key appears in JOSM config"/>', name: 'in_josm', width: 20, sortable: true, align: 'center' },
                     { display: '<span title="Number of different values for this key">Values</span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
                     { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true }
                 ],
@@ -301,7 +385,6 @@ var create_flexigrid_for = {
                 ],
                 sortname: 'count_all',
                 sortorder: 'desc',
-                height: 420,
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
@@ -338,7 +421,6 @@ var create_flexigrid_for = {
                 ],
                 sortname: 'count_all',
                 sortorder: 'desc',
-                height: 420,
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
@@ -364,7 +446,6 @@ var create_flexigrid_for = {
                 ],
                 usepager: false,
                 useRp: false,
-                height: 130,
                 preProcess: function(data) {
                     return {
                         total: 4,
@@ -392,7 +473,7 @@ var create_flexigrid_for = {
                 ],
                 sortname: 'to_count',
                 sortorder: 'desc',
-                height: 410,
+                emptymsg: '[No combinations found (only checked the most common ones).]',
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
@@ -410,7 +491,7 @@ var create_flexigrid_for = {
                 url: '/api/2/wiki/tags?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value),
                 colModel: [
                     { display: 'Language',      name: 'lang',             width: 150, sortable: false },
-                    { display: 'Wikipage',      name: 'title',            width: 200, sortable: false, align: 'right' },
+                    { display: 'Wiki page',     name: 'title',            width: 200, sortable: false, align: 'right' },
                     { display: 'Description',   name: 'description',      width: 400, sortable: false },
                     { display: 'Image',         name: 'image',            width: 120, sortable: false },
                     { display: 'Objects',       name: 'objects',          width:  80, sortable: false },
@@ -420,7 +501,6 @@ var create_flexigrid_for = {
                 ],
                 usepager: false,
                 useRp: false,
-                height: 300,
                 preProcess: function(data) {
                     return {
                         total: data.size,
@@ -459,7 +539,7 @@ var create_flexigrid_for = {
                 ],*/
                 sortname: 'v',
                 sortorder: 'asc',
-                height: 300,
+                emptymsg: '[No JOSM styles for this tag]',
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
@@ -486,7 +566,6 @@ var create_flexigrid_for = {
                 ],
                 usepager: false,
                 useRp: false,
-                height: 130,
                 preProcess: function(data) {
                     return {
                         total: 4,
@@ -506,20 +585,19 @@ var create_flexigrid_for = {
             create_flexigrid('grid-values', {
                 url: '/api/2/db/keys/values?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type),
                 colModel: [
-                    { display: texts.misc.count, name: 'count', width: 300, sortable: true, align: 'center' },
-                    { display: texts.osm.value, name: 'value', width: 500, sortable: true }
+                    { display: texts.osm.value, name: 'value', width: 500, sortable: true },
+                    { display: texts.misc.count, name: 'count', width: 300, sortable: true, align: 'center' }
                 ],
                 searchitems: [
                     { display: texts.osm.value, name: 'value' }
                 ],
                 sortname: 'count',
                 sortorder: 'desc',
-                height: 410,
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
-                            print_value_with_percent(row.count, row.fraction),
-                            link_to_value(key, row.value)
+                            link_to_value(key, row.value),
+                            print_value_with_percent(row.count, row.fraction)
                         ] };
                     });
                     delete data.data;
@@ -540,7 +618,6 @@ var create_flexigrid_for = {
                 ],
                 sortname: 'to_count',
                 sortorder: 'desc',
-                height: 410,
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
@@ -568,7 +645,7 @@ var create_flexigrid_for = {
                 ],
                 sortname: 'v',
                 sortorder: 'asc',
-                height: 410,
+                emptymsg: '[No JOSM styles for this key]',
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
@@ -588,7 +665,7 @@ var create_flexigrid_for = {
                 url: '/api/2/wiki/keys?key=' + encodeURIComponent(key),
                 colModel: [
                     { display: 'Language',      name: 'lang',             width: 150, sortable: false },
-                    { display: 'Wikipage',      name: 'title',            width: 160, sortable: false, align: 'right' },
+                    { display: 'Wiki page',     name: 'title',            width: 160, sortable: false, align: 'right' },
                     { display: 'Description',   name: 'description',      width: 400, sortable: false },
                     { display: 'Image',         name: 'image',            width: 120, sortable: false },
                     { display: 'Objects',       name: 'objects',          width:  80, sortable: false },
@@ -598,7 +675,6 @@ var create_flexigrid_for = {
                 ],
                 usepager: false,
                 useRp: false,
-                height: 400,
                 preProcess: function(data) {
                     return {
                         total: data.size,
@@ -633,7 +709,6 @@ var create_flexigrid_for = {
                 ],
                 sortname: 'count_all',
                 sortorder: 'desc',
-                height: 420,
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
@@ -655,7 +730,6 @@ var create_flexigrid_for = {
                 ],
                 sortname: 'count_all',
                 sortorder: 'desc',
-                height: 420,
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
@@ -679,7 +753,6 @@ var create_flexigrid_for = {
                 ],
                 sortname: 'count_all',
                 sortorder: 'desc',
-                height: 420,
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
@@ -713,7 +786,6 @@ var create_flexigrid_for = {
                 ],
                 sortname: 'k',
                 sortorder: 'asc',
-                height: 400,
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
@@ -745,7 +817,6 @@ var create_flexigrid_for = {
                 ],
                 sortname: 'count_all',
                 sortorder: 'desc',
-                height: 420,
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         var wikilinks = [];
@@ -775,7 +846,6 @@ var create_flexigrid_for = {
                     { display: 'Wiki Key Pages', name: 'wiki_key_pages', width: 260, sortable: true, align: 'center' },
                     { display: 'Wiki Tag Pages', name: 'wiki_tag_pages', width: 260, sortable: true, align: 'center' }
                 ],
-                height: 540,
                 sortname: 'code',
                 sortorder: 'asc',
                 showToggleBtn: false,
@@ -814,7 +884,6 @@ var create_flexigrid_for = {
                 ],
                 sortname: 'count_all',
                 sortorder: 'desc',
-                height: 420,
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
@@ -831,19 +900,6 @@ var create_flexigrid_for = {
             });
         },
         characters_in_keys: {
-            statistics: function() {
-                create_flexigrid('grid-statistics', {
-                    colModel: [
-                        { display: '&nbsp;', name: 'row', width: 10, sortable: true, align: 'center' },
-                        { display: texts.misc.count, name: 'count', width: 40, sortable: true, align: 'right' },
-                        { display: 'Fraction', name: 'fraction', width: 60, sortable: true, align: 'right' },
-                        { display: 'Characters in Key', name: 'characters', width: 810, sortable: true }
-                    ],
-                    width: 990,
-                    height: 200,
-                    usepager: false
-                });
-            },
             whitespace: function() {
                 create_flexigrid('grid-whitespace', {
                     url: '/api/2/db/keys?filters=characters_space&include=prevalent_values',
@@ -863,7 +919,6 @@ var create_flexigrid_for = {
                     ],
                     sortname: 'count_all',
                     sortorder: 'desc',
-                    height: 420,
                     preProcess: function(data) {
                         data.rows = jQuery.map(data.data, function(row, i) {
                             return { 'cell': [
@@ -901,7 +956,6 @@ var create_flexigrid_for = {
                     ],
                     sortname: 'count_all',
                     sortorder: 'desc',
-                    height: 420,
                     preProcess: function(data) {
                         data.rows = jQuery.map(data.data, function(row, i) {
                             return { 'cell': [
@@ -941,7 +995,6 @@ var create_flexigrid_for = {
                     ],
                     sortname: 'length',
                     sortorder: 'asc',
-                    height: 420,
                     preProcess: function(data) {
                         data.rows = jQuery.map(data.data, function(row, i) {
                             return { 'cell': [
