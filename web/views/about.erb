@@ -1,65 +1,90 @@
 
-<div class="boxes">
-    <h2>Sources</h2>
-    <div class="box">
-        <p>Taginfo integrates data about tags from several sources:</p>
-        <p>From the <b>OSM database</b> statistics about key and tag usage.</p>
-        <p>The <b>Wiki</b> contains some documentation for keys and tags.</p>
-        <p>Icons and styles are taken from the <b>JOSM</b> editor
-        configuration.</p>
-        <p>&#x2794; <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sources">More information about the sources on the wiki...</a></p>
-    </div>
-</div>
+<table class="boxes" width="100%">
+    <tr>
+        <td><h2><a href="/keys"><%= t.taginfo.about %></a></h2></td>
+        <td rowspan="4" width="20"></td>
+        <td width="232"><h2><a href="/sources"><%= t.taginfo.sources %></a></h2></td>
+        <td rowspan="2" width="20"></td>
+        <td width="232"><h2><%= t.taginfo.contact %></h2></td>
+    </tr>
+    <tr>
+        <td class="box">
+            <p>OpenStreetMap uses <b>tags</b> to add meaning to geographic objects. There
+            is no fixed list of those tags. New tags can be invented and used as needed.
+            Everybody can come up with a new tag and add it to new or existing objects.
+            This makes OpenStreetMap enormously flexible, but sometimes also a bit hard
+            to work with.</p>
 
+            <p>Whether you are contributing to OSM or using the OSM data, there are always
+            questions like: What tags do people use for feature X? What tags can I use
+            for feature Y so that it appears properly on the map? Is the tag Z described
+            on the wiki actually in use and where?</p>
 
-<h1>About taginfo</h1>
-<p>OpenStreetMap uses <b>tags</b> to add meaning to geographic objects. There
-is no fixed list of those tags. New tags can be invented and used as needed.
-Everybody can come up with a new tag and add it to new or existing objects.
-This makes OpenStreetMap enormously flexible, but sometimes also a bit hard
-to work with.</p>
+            <p>Taginfo helps you by showing statistics about which tags are actually in the
+            database, how many people use those tags, where they are used and so on. It
+            also gets information about those tags from the wiki and from other places. Taginfo
+            tries to bring together all information about tags to help you understand
+            how they are used and what they mean.</p>
 
-<p>Whether you are contributing to OSM or using the data, there are always
-questions like: What tags do people use for feature X? What tags can I use
-for feature Y so that it appears properly on the map? Is the tag Z described
-on the wiki actually in use and where?</p>
+            <p>The taginfo software was created and is maintained by
+            <a class="extlink" href="http://wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
+            He also maintains the main taginfo site.
+        </td>
+        <td class="box">
+            <p>Taginfo integrates data about tags from several sources:</p>
+            <p>From the <b>OSM database</b> statistics about key and tag usage.</p>
+            <p>The <b>Wiki</b> contains some documentation for keys and tags.</p>
+            <p>Icons and styles are taken from the <b>JOSM</b> editor
+            configuration.</p>
+            <p><a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo/Sources">More information about the sources on the wiki...</a></p>
+        </td>
+        <td class="box">
+            <p>Bug reports should be filed in the
+            <a class="extlink" href="http://trac.openstreetmap.org/query?status=accepted&status=assigned&status=new&status=reopened&component=taginfo&order=priority">OSM bug tracker</a>
+            using the 'taginfo' component.</p>
+            <p>Taginfo developers and site maintainers hang out on the
+            <a class="extlink" href="http://lists.openstreetmap.org/listinfo/taginfo-dev">taginfo mailing list</a>.</p>
+            <p>You can contact the taginfo maintainer at
+            <a class="extlink" href="mailto:jochen@remote.org">jochen@remote.org</a>.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h2>Using taginfo in your own projects</h2>
+        </td>
+        <td colspan="3">
+            <h2>How you can contribute</h2>
+        </td>
+    </tr>
+    <tr>
+        <td class="box">
+            <p>You can use the data behind taginfo in your own projects:</p>
 
-<p>Taginfo helps you by showing statistics about which tags are actually in the
-database, how many people use those tags, where they are used and so on. It
-also gets information about those tags from the wiki and from other places. Taginfo
-tries to bring together all information about tags to help you understand
-how they are used and what they mean.</p>
+            <p>If you want to play around with the data itself, you can <b>download</b> the
+            regularly updated databases used by taginfo. All the preprocessing is done for
+            you. See the <a href="/download">download</a> section for more information.</p>
 
-<h2>Contact</h2>
-
-<p>Taginfo was created and is maintained by <a href="http://wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>. You can contact
-me at <a href="mailto:jochen@remote.org">jochen@remote.org</a>.</p>
-
-<h2>Hack it</h2>
-
-<p>All the parts of Taginfo are Open Source. You are welcome to take Taginfo
-and play around with. See the <img src="/img/link-extern.gif" alt=""/><a
-href="http://wiki.openstreetmap.org/wiki/Taginfo">Taginfo wiki page</a> for
-more information.</p>
-
-<p>If you want to access the databases behind Taginfo, you can use our API.
-Access is through a RESTful HTTP interface. See the API
-section for more information.</p>
-
-<p>If you want to play around with the data itself, you can download the
-regularly updated databases used by Taginfo. All the preprocessing is done for
-you. See the <a href="/download">download</a> section for more information.</p>
-
-<h2>API</h2>
-
-<p>Taginfo data can be accessed through a REST API. The documentation of the
-API calls is <a href="/apidoc">here</a>, some general information
-<a href="http://wiki.openstreetmap.org/wiki/Taginfo/API">on the wiki</a>.</p>
-
-<h3>Terms of Use</h3>
-
-<p>The server running the Taginfo API does not have unlimited resources.
-Please use the API responsibly. Do not create huge amounts of requests to
-get the whole database or large chunks of it, instead use the
-<a href="/download">database downloads</a> provided.</p>
-
+            <p>Taginfo data can also be accessed through a REST <b>API</b>. The documentation of the
+            API calls is <a href="/apidoc">here</a>, some general information is
+            <a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo/API">on the wiki</a>.
+            The server running the Taginfo API does not have unlimited resources.
+            Please use the API responsibly. If in doubt contact the taginfo maintainers.</p>
+        </td>
+        <td class="box" colspan="3">
+            <p>All the parts of taginfo are Open Source. <b>Programmers</b> can
+            <a class="extlink" href="https://github.com/joto/taginfo/">fork taginfo on Github</a>
+            and play around with it. We welcome help developing taginfo.</p>
+            <p>We also need <b>translators</b> for the taginfo user interface. The
+            <a class="extlink" href="https://github.com/joto/taginfo/tree/master/web/i18n">translation
+            files</a> are on Github.</p>
+            <p>You can run your own
+            <a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">taginfo site</a>,
+            for instance with data for just your own country.</p>
+            <p>Contact us on the <a class="extlink" href="http://lists.openstreetmap.org/listinfo/taginfo-dev">taginfo mailing list</a>
+            if you can offer any help.</p>
+            <p>See the
+            <a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo">wiki</a> for
+            more information.</p>
+        </td>
+    </tr>
+</table>

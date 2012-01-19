@@ -18,8 +18,8 @@
             <p><%= t.pages.index.keys.intro %></p>
             <div id="tagcloud" style="margin: 15px 0; line-height: 200%; text-align: justify; overflow: hidden;">
             </div>
-            <p class="emphasis" style="margin-top: 20px;">&#x2794; <a href="/keys"><%= t.pages.index.keys.listkeys %></a></p>
-            <p class="emphasis">&#x2794; <a href="/tags"><%= t.pages.index.keys.listtags %></a></p>
+            <p class="emphasis" style="margin-top: 20px;"><a href="/keys"><%= t.pages.index.keys.listkeys %></a></p>
+            <p class="emphasis"><a href="/tags"><%= t.pages.index.keys.listtags %></a></p>
         </td>
         <td rowspan="3" class="box">
             <p><%= t.pages.reports.index.intro %></p>
@@ -28,11 +28,11 @@
                 <li><a href="<%= report.url %>"><%= t.reports[report.name].name %></a></li>
 <% end %>
             </ul>
-            <p class="emphasis" style="margin-top: 20px;">&#x2794; <a href="/reports"><%= t.pages.index.reports.listreports %></a></p>
+            <p class="emphasis" style="margin-top: 20px;"><a href="/reports"><%= t.pages.index.reports.listreports %></a></p>
         </td>
         <td class="box">
             <%= t.pages.index.about.intro %>
-            <p class="emphasis" style="margin-top: 20px;">&#x2794; <a href="/about"><%= t.pages.index.about.more %></a></p>
+            <p class="emphasis" style="margin-top: 20px;"><a href="/about"><%= t.pages.index.about.more %></a></p>
         </td>
     </tr>
     <tr>
@@ -43,7 +43,7 @@
     <tr>
         <td class="box">
             <p><%= TaginfoConfig.get('instance.description') %></p>
-            <p class="emphasis" style="margin-top: 20px;">&#x2794; <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites"><%= t.pages.index.international.see %></a></p>
+            <p class="emphasis" style="margin-top: 20px;"><a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites"><%= t.pages.index.international.see %></a></p>
         </td>
     </tr>
 </table>

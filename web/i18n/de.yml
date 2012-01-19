@@ -53,10 +53,10 @@ pages:
         index:
             intro: |
                 <p>Hier kannst Du die Datenbanken herunterladen, die von Taginfo verwendet
-                werden. Alle Daten sind in <img src="/img/link-extern.gif" alt=""/><a class="extlink"
+                werden. Alle Daten sind in <a class="extlink"
                 href="http://www.sqlite.org/">Sqlite-Datenbanken</a> gespeichert.
                 Die Datenbank-Dateien sind dann mit
-                <img src="/img/link-extern.gif" alt=""/><a class="extlink"
+                <a class="extlink"
                 href="http://www.bzip.org/">bzip2</a> gepackt.</p>
                 <p>Wenn Du die Datenbanken nicht herunterladen willst, aber trotzdem
                 automatisiert auf die Daten zugreifen willst, kannst Du auch die 

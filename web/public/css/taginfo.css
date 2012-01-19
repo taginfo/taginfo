@@ -11,6 +11,10 @@ img {
     border: 0 none;
 }
 
+img.map {
+    border: 1px solid #b8b8b0;
+}
+
 img.icon_large {
     position: relative;
     top: 3px;
@@ -68,11 +72,12 @@ span.empty {
     font-style: italic;
 }
 
-a.wikilink {
-    color: #832719 !important;
+a.wikilink:before {
+    content: "\2794";
 }
 
-a.extlink {
+a.extlink:before {
+    content: "\2794";
 }
 
 a.section {

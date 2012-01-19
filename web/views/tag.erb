@@ -3,8 +3,8 @@
         <% if @count_all < 1000 %>
             <%= xapi_link('*', @key, @value) %> <%= josm_link('*', @key, @value) %>
         <% else %>
-            <span class="button disabled" title="Button disabled, because there are too many objects with this key"><img src="/img/link-extern-disabled.gif" alt=""/>XAPI</span>
-            <span class="button disabled" title="Button disabled, because there are too many objects with this key"><img src="/img/link-extern-disabled.gif" alt=""/>JOSM</span>
+            <span class="button disabled" title="Button disabled, because there are too many objects with this key">XAPI</span>
+            <span class="button disabled" title="Button disabled, because there are too many objects with this key">JOSM</span>
         <% end %>
     </div>
     <form id="filter-form">

@@ -3,8 +3,8 @@
         <% if @count_all_values < 1000 %>
             <%= xapi_link('*', @key) %> <%= josm_link('*', @key) %>
         <% else %>
-            <span class="button disabled" title="Button disabled, because there are too many objects with this key"><img src="/img/link-extern-disabled.gif" width="14" height="10" alt=""/>XAPI</span>
-            <span class="button disabled" title="Button disabled, because there are too many objects with this key"><img src="/img/link-extern-disabled.gif" width="14" height="10" alt=""/>JOSM</span>
+            <span class="button disabled" title="Button disabled, because there are too many objects with this key">XAPI</span>
+            <span class="button disabled" title="Button disabled, because there are too many objects with this key">JOSM</span>
         <% end %>
     </div>
     <form id="filter-form">
@@ -50,17 +50,17 @@
     <div id="map">
         <h2><%= t.pages.key.geographic_distribution.title %></h2>
         <% if @filter_type == 'all' %>
-            <div style="background-image: url(<%= TaginfoConfig.get('geodistribution.background_image') %>); background-repeat: no-repeat;"/>
-                <img src="/api/3/db/keys/distribution/nodes?key=<%= @key_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>" style="position: absolute;"/>
-                <img src="/api/3/db/keys/distribution/ways?key=<%= @key_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
+            <div style="background-image: url(<%= TaginfoConfig.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: 1px 1px;"/>
+                <img class="map" src="/api/3/db/keys/distribution/nodes?key=<%= @key_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>" style="position: absolute;"/>
+                <img class="map" src="/api/3/db/keys/distribution/ways?key=<%= @key_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
             </div>
         <% elsif @filter_type == 'nodes' %>
-            <div style="background-image: url(<%= TaginfoConfig.get('geodistribution.background_image') %>); background-repeat: no-repeat;"/>
-                <img src="/api/3/db/keys/distribution/nodes?key=<%= @key_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
+            <div style="background-image: url(<%= TaginfoConfig.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: 1px 1px;"/>
+                <img class="map" src="/api/3/db/keys/distribution/nodes?key=<%= @key_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
             </div>
         <% elsif @filter_type == 'ways' %>
-            <div style="background-image: url(<%= TaginfoConfig.get('geodistribution.background_image') %>); background-repeat: no-repeat;"/>
-                <img src="/api/3/db/keys/distribution/ways?key=<%= @key_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
+            <div style="background-image: url(<%= TaginfoConfig.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: 1px 1px;"/>
+                <img class="map" src="/api/3/db/keys/distribution/ways?key=<%= @key_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
             </div>
         <% elsif @filter_type == 'relations' %>
             <p><i><%= t.pages.key.geographic_distribution.relations %></i></p>

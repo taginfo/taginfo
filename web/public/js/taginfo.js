@@ -90,7 +90,7 @@ function print_wiki_link(title, options) {
         path = 'wiki/' + title;
     }
 
-    return '<img src="/img/link-wiki.gif" alt="" width="14" height="10"/><a class="wikilink" href="http://wiki.openstreetmap.org/' + path + '" target="_blank">' + title + '</a>';
+    return '<a class="wikilink" href="http://wiki.openstreetmap.org/' + path + '" target="_blank">' + title + '</a>';
 }
 
 function print_language(code, native_name, english_name) {

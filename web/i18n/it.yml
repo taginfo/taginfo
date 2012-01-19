@@ -48,10 +48,9 @@ pages:
         index:
             intro: |
                 <p>Qui potete scaricare il database usato da Taginfo. Tutti i dati sono memorizzati
-                in un database <img src="/img/link-extern.gif" alt=""/><a class="extlink"
+                in un database <a class="extlink"
                 href="http://www.sqlite.org/">Sqlite</a>. I file del database sono poi
-                compressi con <img src="/img/link-extern.gif" alt=""/><a class="extlink"
-                href="http://www.bzip.org/">bzip2</a>.</p>
+                compressi con <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
                 <p>Se non volete scaricare questi database, ma avete bisogno di avere un accesso automatizzato
                 ai dati, potete anche usare le <a href="/about">API</a>.</p>
             file: File

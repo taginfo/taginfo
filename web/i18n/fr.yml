@@ -51,9 +51,9 @@ pages:
         index:
             intro: |
                 <p>Vous pouvez télécharger les données utilisées par Taginfo. Toutes les données sont stockées
-                dans des bases de données <img src="/img/link-extern.gif" alt=""/><a class="extlink" href="http://www.sqlite.org/">Sqlite</a>.
+                dans des bases de données <a class="extlink" href="http://www.sqlite.org/">Sqlite</a>.
                 Les fichiers de base de données sont ensuite compressés
-                avec <img src="/img/link-extern.gif" alt=""/><a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
+                avec <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
                 <p>Si vous ne voulez pas télécharger les données, vous pouvez toujours y accéder directement grâce à l'<a href="/about">API</a>.</p>
             file: Fichier
             packed: Compressé

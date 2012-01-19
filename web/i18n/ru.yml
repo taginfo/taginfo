@@ -55,10 +55,9 @@ pages:
         index:
             intro: |
                 <p>Здесь можно скачать базы данных, используемые Taginfo. Все данные хранятся
-                в формате <img src="/img/link-extern.gif" alt=""/><a class="extlink"
+                в формате <a class="extlink"
                 href="http://www.sqlite.org/">Sqlite</a>. Затем файлы баз данных сжаты
-                <img src="/img/link-extern.gif" alt=""/><a class="extlink"
-                href="http://www.bzip.org/">bzip2</a>.</p>
+                <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
                 <p>Если вам не нужны эти файлы, а требуется автоматизируемый доступ к данным,
                 воспользуйтесь <a href="/about">API</a>.</p>
             file: Файл

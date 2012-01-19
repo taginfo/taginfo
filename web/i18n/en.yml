@@ -21,6 +21,7 @@ taginfo:
     sources: Sources
     download: Download
     about: About taginfo
+    contact: Contact
     wiki: taginfo wiki page
     reports: Reports
     keys: Keys
@@ -72,10 +73,8 @@ pages:
         index:
             intro: |
                 <p>Here you can download the databases used by Taginfo. All the data is stored
-                in <img src="/img/link-extern.gif" alt=""/><a class="extlink"
-                href="http://www.sqlite.org/">Sqlite</a> databases. The database files are then
-                packed with <img src="/img/link-extern.gif" alt=""/><a class="extlink"
-                href="http://www.bzip.org/">bzip2</a>.</p>
+                in <a class="extlink" href="http://www.sqlite.org/">Sqlite</a> databases.
+                The database files are then packed with <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
                 <p>If you don't want to download these databases, but need automated access to
                 the data, you can also use the <a href="/about">API</a>.</p>
             file: File
