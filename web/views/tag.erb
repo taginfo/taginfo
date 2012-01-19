@@ -43,8 +43,8 @@
             <table id="grid-wiki">
             </table>
         <% else %>
-            <p><i><%= t.pages.tag.wiki_pages.none_found %>.</i></p>
-            <p>[<a href="http://wiki.openstreetmap.org/w/index.php?action=edit&title=Tag:<%= escape(@tag) %>">Create wiki page</a>]</p>
+            <p class="empty"><%= t.pages.tag.wiki_pages.none_found %></p>
+            <p><a class="extlink" rel="nofollow" href="http://wiki.openstreetmap.org/w/index.php?action=edit&title=Tag:<%= escape(@tag) %>">Create wiki page</a></p>
         <% end %>
     </div>
     <div id="josm">

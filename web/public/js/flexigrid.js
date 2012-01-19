@@ -407,7 +407,7 @@
 						this.domElements.pPageStat.html(p.nomsg);	
 					}
                     if (p.emptymsg != null) {
-                        jQuery(this.gDiv).replaceWith('<span class="emptymsg">' + p.emptymsg + '</span>');
+                        jQuery(this.gDiv).replaceWith('<p class="empty">' + p.emptymsg + '</p>');
                     } else {
                         jQuery(this.gDiv).remove();
                     }

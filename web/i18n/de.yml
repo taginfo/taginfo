@@ -65,7 +65,6 @@ pages:
             packed: Gepackt
             unpacked: Ungepackt
             description: Beschreibung
-            unknown: Unbekannt
     reports:
         index:
             intro: |
@@ -79,7 +78,7 @@ pages:
             title: Suchergebnisse
             you_were_searching_for: Du hast gesucht nach
     key:
-        no_description_in_wiki: Keine Beschreibung im Wiki
+        no_description_in_wiki: Keine Beschreibung dieses Keys im Wiki.
         filter:
             label: |
                  Filter:
@@ -103,13 +102,13 @@ pages:
             choice: |
                   Stil auswählen:
     tag:
-        no_description_in_wiki: Keine Beschreibung im Wiki
+        no_description_in_wiki: Keine Beschreibung dieses Tags im Wiki.
         other_tags_used:
             title: Tags, die mit diesem Tag zusammen benutzt werden
             other: Andere Tags
         combinations:
             title: Kombinationen
-            description: <i>Diese Tabelle zeigt nur die häufigsten Kombinationen der häufigsten Tags.</i>
+            description: Diese Tabelle zeigt nur die häufigsten Kombinationen der häufigsten Tags.
         wiki_pages:
             title: Wiki-Seiten über dieses Tag
         josm_rules:
@@ -163,6 +162,8 @@ reports:
 misc:
     values_less_than_one_percent: alle Values haben weniger als 1%
     empty_string: leere Zeichenkette
+    unknown: unbekannt
     count: Anzahl
+    no_image: kein Bild
     all: Alle
 

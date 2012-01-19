@@ -32,8 +32,8 @@ class Source
         @update_end   = update_end
         @visible      = visible
 
-        @dbsize = File.size("../../data/#{ dbname }").to_bytes rescue '<i>unknown</i>'
-        @dbpack = File.size("../../download/#{ dbname }.bz2").to_bytes rescue '<i>unknown</i>'
+        @dbsize = File.size("../../data/#{ dbname }").to_bytes rescue 0
+        @dbpack = File.size("../../download/#{ dbname }.bz2").to_bytes rescue 0
 
         @@sources << self
     end

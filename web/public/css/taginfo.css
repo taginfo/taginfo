@@ -68,8 +68,9 @@ span.whitespace {
     background-color: #e00000;
 }
 
-span.empty {
+.empty {
     font-style: italic;
+    color: #404040;
 }
 
 a.wikilink:before {

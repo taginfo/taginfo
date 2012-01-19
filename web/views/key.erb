@@ -63,7 +63,7 @@
                 <img class="map" src="/api/3/db/keys/distribution/ways?key=<%= @key_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
             </div>
         <% elsif @filter_type == 'relations' %>
-            <p><i><%= t.pages.key.geographic_distribution.relations %></i></p>
+            <p class="empty"><%= t.pages.key.geographic_distribution.relations %></p>
         <% end %>
     </div>
     <div id="wiki">
@@ -72,8 +72,8 @@
             <table id="grid-wiki">
             </table>
         <% else %>
-            <p><i><%= t.pages.key.wiki_pages.none_found %>.</i></p>
-            <p>[<a href="http://wiki.openstreetmap.org/w/index.php?action=edit&title=Key:<%= @key_uri %>">Create wiki page</a>]</p>
+            <p class="empty"><%= t.pages.key.wiki_pages.none_found %></p>
+            <p><a class="extlink" rel="nofollow" href="http://wiki.openstreetmap.org/w/index.php?action=edit&title=Key:<%= @key_uri %>">Create wiki page</a></p>
         <% end %>
     </div>
     <div id="josm">

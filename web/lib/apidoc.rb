@@ -31,7 +31,7 @@ class APIDoc
     end
 
     def show_parameters
-        return '<i>none</i>' unless parameters
+        return '<span class="empty">none</span>' unless parameters
         list = []
         parameters.keys.sort{ |a,b| a.to_s <=> b.to_s }.each do |p|
             list << "<tt>#{p}</tt> &mdash; #{parameters[p]}"
@@ -40,7 +40,7 @@ class APIDoc
     end
 
     def show_filter
-        return '<i>none</i>' unless filter
+        return '<span class="empty">none</span>' unless filter
         list = []
         filter.keys.sort{ |a,b| a.to_s <=> b.to_s }.each do |f|
             list << "<tt>#{f}</tt> &mdash; #{filter[f][:doc]}"
@@ -63,12 +63,12 @@ class APIDoc
     end
 
     def show_sort
-        return '<i>none</i>' unless sort
+        return '<span class="empty">none</span>' unless sort
         sort.map{ |s| "<tt>#{s}</tt>" }.join(', ')
     end
 
     def show_result
-        return '<i>unknown</i>' if result.nil?
+        return '<span class="empty">unknown</span>' if result.nil?
         return result if result.is_a?(String)
         '<pre>' + JSON.pretty_generate(result).gsub(/"(STRING|INT|FLOAT|BOOL)"/, '\1') + '</pre>'
     end

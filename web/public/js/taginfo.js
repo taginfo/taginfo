@@ -90,7 +90,7 @@ function print_wiki_link(title, options) {
         path = 'wiki/' + title;
     }
 
-    return '<a class="wikilink" href="http://wiki.openstreetmap.org/' + path + '" target="_blank">' + title + '</a>';
+    return '<a class="wikilink" rel="nofollow" href="http://wiki.openstreetmap.org/' + path + '" target="_blank">' + title + '</a>';
 }
 
 function print_language(code, native_name, english_name) {
@@ -116,7 +116,7 @@ function print_key_or_tag_list(list) {
 
 function print_prevalent_value_list(key, list) {
     if (list.length == 0) {
-        return '<i>' + texts.misc.values_less_than_one_percent + '</i>';
+        return '<span class="empty">' + texts.misc.values_less_than_one_percent + '</span>';
     }
     return jQuery.map(list, function(item, i) {
         return link_to_value_with_title(key, item.value, '(' + (item.fraction * 100).toFixed(2) + '%)');
@@ -473,7 +473,7 @@ var create_flexigrid_for = {
                 ],
                 sortname: 'to_count',
                 sortorder: 'desc',
-                emptymsg: '[No combinations found (only checked the most common ones).]',
+                emptymsg: 'No combinations found (only checked the most common ones).',
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
@@ -510,7 +510,7 @@ var create_flexigrid_for = {
                                 print_language(row.lang, row.language, row.language_en),
                                 print_wiki_link(row.title),
                                 row.description,
-                                row.image == null ? '<i>no image</i>' : print_wiki_link(row.image),
+                                row.image == ''   ? '<span class="empty">' + texts.misc.no_image + '</span>' : print_wiki_link(row.image),
                                 (row.on_node      ? '<img src="/img/types/node.16.png"     alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
                                 (row.on_way       ? '<img src="/img/types/way.16.png"      alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
                                 (row.on_area      ? '<img src="/img/types/area.16.png"     alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
@@ -535,7 +535,7 @@ var create_flexigrid_for = {
                 ],
                 sortname: 'v',
                 sortorder: 'asc',
-                emptymsg: '[No JOSM styles for this tag]',
+                emptymsg: 'No JOSM styles for this tag.',
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
@@ -636,7 +636,7 @@ var create_flexigrid_for = {
                 ],
                 sortname: 'v',
                 sortorder: 'asc',
-                emptymsg: '[No JOSM styles for this key]',
+                emptymsg: 'No JOSM styles for this key.',
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
@@ -674,7 +674,7 @@ var create_flexigrid_for = {
                                 print_language(row.lang, row.language, row.language_en),
                                 print_wiki_link(row.title),
                                 row.description,
-                                row.image == null ? '<i>no image</i>' : print_wiki_link(row.image),
+                                row.image == ''   ? '<span class="empty">' + texts.misc.no_image + '</span>' : print_wiki_link(row.image),
                                 (row.on_node      ? '<img src="/img/types/node.16.png"     alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>') + ' ' +
                                 (row.on_way       ? '<img src="/img/types/way.16.png"      alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>') + ' ' +
                                 (row.on_area      ? '<img src="/img/types/area.16.png"     alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>') + ' ' +

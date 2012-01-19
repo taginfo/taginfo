@@ -81,7 +81,6 @@ pages:
             packed: Packed
             unpacked: Unpacked
             description: Description
-            unknown: unknown
     reports:
         index:
             intro: |
@@ -100,7 +99,7 @@ pages:
         intro: |
                 <p>This table shows the most common tags in the database.</p>
     key:
-        no_description_in_wiki: No description in wiki
+        no_description_in_wiki: No description for this key in the wiki.
         filter:
             label: |
                  Filter:
@@ -124,13 +123,13 @@ pages:
             choice: |
                   Choose style:
     tag:
-        no_description_in_wiki: No description in wiki
+        no_description_in_wiki: No description for this tag in the wiki.
         other_tags_used:
             title: Other tags used together with this tag
             other: Other tags
         combinations:
             title: Combinations
-            description: <i>This table shows only the most common combinations of the most common tags.</i>
+            description: This table shows only the most common combinations of the most common tags.
         wiki_pages:
             title: Wiki pages about this tag
             none_found: No wiki page available for this tag.
@@ -244,6 +243,8 @@ reports:
 misc:
     values_less_than_one_percent: all values have less than 1%
     empty_string: empty string
+    unknown: unknown
     count: Count
+    no_image: no image
     all: All
 

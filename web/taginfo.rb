@@ -192,7 +192,7 @@ class Taginfo < Sinatra::Base
 
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang=? AND key=? AND value IS NULL", r18n.locale.code, @key).get_first_value())
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang='en' AND key=? AND value IS NULL", @key).get_first_value()) if @desc == ''
-        @desc = "[#{ t.pages.key.no_description_in_wiki }]" if @desc == ''
+        @desc = "<span class='empty'>#{ t.pages.key.no_description_in_wiki }</span>" if @desc == ''
 
         @prevalent_values = @db.select("SELECT value, count_#{@filter_type} AS count FROM tags").
             condition('key=?', @key).
@@ -267,7 +267,7 @@ class Taginfo < Sinatra::Base
 
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang=? AND key=? AND value=?", r18n.locale.code, @key, @value).get_first_value())
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang='en' AND key=? AND value=?", @key, @value).get_first_value()) if @desc == ''
-        @desc = "[#{ t.pages.tag.no_description_in_wiki }]" if @desc == ''
+        @desc = "<span class='empty'>#{ t.pages.tag.no_description_in_wiki }</span>" if @desc == ''
 
         erb :tag
     end
@@ -294,6 +294,7 @@ class Taginfo < Sinatra::Base
                 :values_less_than_one_percent => trans.t.misc.values_less_than_one_percent,
                 :empty_string => trans.t.misc.empty_string,
                 :count => trans.t.misc.count,
+                :no_image => trans.t.misc.no_image,
                 :all => trans.t.misc.all,
             },
             :osm => {
