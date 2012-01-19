@@ -73,10 +73,6 @@ span.whitespace {
     color: #404040;
 }
 
-a.wikilink:before {
-    content: "\2794";
-}
-
 a.extlink:before {
     content: "\2794";
 }
