@@ -15,6 +15,11 @@ img.map {
     border: 1px solid #b8b8b0;
 }
 
+td img {
+    position: relative;
+    top: 3px;
+}
+
 img.icon_large {
     position: relative;
     top: 3px;
@@ -74,7 +79,7 @@ span.whitespace {
 }
 
 a.extlink:before {
-    content: "\2794";
+    content: "\2794\2009";
 }
 
 a.section {
@@ -204,6 +209,7 @@ input#search {
 
 input:focus {
     background-color: #ffffe0 !important;
+    outline: none;
 }
 
 /* ========== */
@@ -309,9 +315,11 @@ div#tools {
 }
 
 span.lang {
+    position: relative;
+    top: -1px;
     background-color: #f0e0f0;
     color: #202020;
-    border: 1px solid #808080;
+    border: 1px solid #b8b8b0;
     font-weight: bold;
     font-size: 80%;
     padding: 0 4px;
@@ -375,8 +383,17 @@ div.bar {
     float: left;
     margin: 4px 0 0 6px !important;
     padding: 0 !important;
-    height: 8px;
+    height: 8px !important;
     background-color: #a0a098;
+}
+
+/* ========== */
+
+span.overflow:hover {
+    position: absolute;
+    padding-right: 6px;
+    background-color: #ffffff;
+    z-index: 100;
 }
 
 /* ========== */

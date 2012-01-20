@@ -56,6 +56,14 @@ function resize_wrapper() {
     }
 }
 
+function hover_expand(text) {
+    return '<span class="overflow">' + text + '</span>';
+}
+
+function empty(text) {
+    return '<span class="empty">' + text + '</span>';
+}
+
 function print_wiki_link(title, options) {
     if (title == '') {
         return '';
@@ -93,7 +101,7 @@ function print_key_or_tag_list(list) {
 
 function print_prevalent_value_list(key, list) {
     if (list.length == 0) {
-        return '<span class="empty">' + texts.misc.values_less_than_one_percent + '</span>';
+        return empty(texts.misc.values_less_than_one_percent);
     }
     return jQuery.map(list, function(item, i) {
         return link_to_value_with_title(key, item.value, '(' + (item.fraction * 100).toFixed(2) + '%)');
@@ -202,18 +210,17 @@ function pp_value_with_highlight(value, highlight) {
 }
 
 function link_to_key_with_highlight(key, highlight) {
-    var k = encodeURIComponent(key),
-        title = html_escape(key);
+    var k = encodeURIComponent(key);
 
     if (key.match(/[=\/]/)) {
-        return '<a class="taglink" href="/keys/?key=' + k + '" title="' + title + '">' + pp_key_with_highlight(key, highlight) + '</a>';
+        return '<a class="taglink" href="/keys/?key=' + k + '">' + pp_key_with_highlight(key, highlight) + '</a>';
     } else {
-        return '<a class="taglink" href="/keys/'      + k + '" title="' + title + '">' + pp_key_with_highlight(key, highlight) + '</a>';
+        return '<a class="taglink" href="/keys/'      + k + '">' + pp_key_with_highlight(key, highlight) + '</a>';
     }
 }
 
 function link_to_value_with_highlight(key, value, highlight) {
-    return '<a class="taglink" href="' + url_to_value(key, value) + '" title="' + html_escape(key) + '=' + html_escape(value) + '">' + pp_value_with_highlight(value, highlight) + '</a>';
+    return '<a class="taglink" href="' + url_to_value(key, value) + '">' + pp_value_with_highlight(value, highlight) + '</a>';
 }
 
 function html_escape(text) {
@@ -221,32 +228,30 @@ function html_escape(text) {
 }
 
 function link_to_key(key) {
-    var k = encodeURIComponent(key),
-        title = html_escape(key);
+    var k = encodeURIComponent(key);
 
     if (key.match(/[=\/]/)) {
-        return '<a class="taglink" href="/keys/?key=' + k + '" title="' + title + '">' + pp_key(key) + '</a>';
+        return '<a class="taglink" href="/keys/?key=' + k + '">' + pp_key(key) + '</a>';
     } else {
-        return '<a class="taglink" href="/keys/'      + k + '" title="' + title + '">' + pp_key(key) + '</a>';
+        return '<a class="taglink" href="/keys/'      + k + '">' + pp_key(key) + '</a>';
     }
 }
 
 function link_to_key_with_highlight(key, highlight) {
-    var k = encodeURIComponent(key),
-        title = html_escape(key);
+    var k = encodeURIComponent(key);
 
     var re = new RegExp('(' + highlight + ')', 'g');
     var hk = key.replace(re, "<b>$1</b>");
 
     if (key.match(/[=\/]/)) {
-        return '<a class="taglink" href="/keys/?key=' + k + '" title="' + title + '">' + hk + '</a>';
+        return '<a class="taglink" href="/keys/?key=' + k + '">' + hk + '</a>';
     } else {
-        return '<a class="taglink" href="/keys/'      + k + '" title="' + title + '">' + hk + '</a>';
+        return '<a class="taglink" href="/keys/'      + k + '">' + hk + '</a>';
     }
 }
 
 function link_to_value(key, value) {
-    return '<a class="taglink" href="' + url_to_value(key, value) + '" title="' + html_escape(key) + '=' + html_escape(value) + '">' + pp_value(value) + '</a>';
+    return '<a class="taglink" href="' + url_to_value(key, value) + '">' + pp_value(value) + '</a>';
 }
 
 function url_to_value(key, value) {
@@ -325,7 +330,6 @@ var flexigrid_defaults = {
     usepager      : true,
     useRp         : false,
     onSuccess     : function(grid) {
-        jQuery('*[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 'w' });
         grid.fixHeight();
     }
 };
@@ -423,7 +427,7 @@ var create_flexigrid_for = {
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
-                            link_to_tag(row.key, row.value),
+                            '<span class="overflow">' + link_to_tag(row.key, row.value) + '</span>',
                             print_value_with_percent(row.count_all,       row.count_all_fraction),
                             print_value_with_percent(row.count_nodes,     row.count_nodes_fraction),
                             print_value_with_percent(row.count_ways,      row.count_ways_fraction),
@@ -509,7 +513,7 @@ var create_flexigrid_for = {
                                 print_language(row.lang, row.language, row.language_en),
                                 print_wiki_link(row.title),
                                 row.description,
-                                row.image == ''   ? '<span class="empty">' + texts.misc.no_image + '</span>' : print_wiki_link(row.image),
+                                row.image == ''   ? empty(texts.misc.no_image) : hover_expand(print_wiki_link(row.image)),
                                 (row.on_node      ? '<img src="/img/types/node.16.png"     alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
                                 (row.on_way       ? '<img src="/img/types/way.16.png"      alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
                                 (row.on_area      ? '<img src="/img/types/area.16.png"     alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
@@ -540,8 +544,8 @@ var create_flexigrid_for = {
                         return { 'cell': [
                             row.v ? link_to_value(row.k, row.v) : row.b ? (row.b + ' (Boolean)') : '*',
                             row.icon ? '<img src="/api/2/josm/styles/images?style=standard&image=' + row.icon + '" title="' + row.icon + '" alt=""/>' : '',
-                            '<div>' + (row.line_width > 0 ? '<div title="' + row.line_color + '" style="height: ' + row.line_width + 'px; margin-top: ' + (6 - Math.round(row.line_width/2)) + 'px; padding: 0; background-color: ' + row.line_color + '"></div>' : '') + '</div>',
-                            row.area_color ? '<div title="' + row.area_color + '" style="height: 8px; background-color: ' + row.area_color + '"></div>' : ''
+                            '<div>' + (row.line_width > 0 ? '<div title="' + row.line_color + '" style="height: ' + row.line_width + 'px; margin-top: ' + (10 - Math.round(row.line_width/2)) + 'px; padding: 0; background-color: ' + row.line_color + '"></div>' : '') + '</div>',
+                            row.area_color ? '<div title="' + row.area_color + '" style="height: 18px; background-color: ' + row.area_color + '"></div>' : ''
                         ] };
                     });
                     return data;
@@ -641,8 +645,8 @@ var create_flexigrid_for = {
                         return { 'cell': [
                             row.v ? link_to_value(row.k, row.v) : row.b ? (row.b + ' (Boolean)') : '*',
                             row.icon ? '<img src="/api/2/josm/styles/images?style=standard&image=' + row.icon + '" title="' + row.icon + '" alt=""/>' : '',
-                            '<div>' + (row.line_width > 0 ? '<div title="' + row.line_color + '" style="height: ' + row.line_width + 'px; margin-top: ' + (6 - Math.round(row.line_width/2)) + 'px; padding: 0; background-color: ' + row.line_color + '"></div>' : '') + '</div>',
-                            row.area_color ? '<div title="' + row.area_color + '" style="height: 8px; background-color: ' + row.area_color + '"></div>' : ''
+                            '<div>' + (row.line_width > 0 ? '<div title="' + row.line_color + '" style="height: ' + row.line_width + 'px; margin-top: ' + (10 - Math.round(row.line_width/2)) + 'px; padding: 0; background-color: ' + row.line_color + '"></div>' : '') + '</div>',
+                            row.area_color ? '<div title="' + row.area_color + '" style="height: 18px; background-color: ' + row.area_color + '"></div>' : ''
                         ] };
                     });
                     return data;
@@ -673,7 +677,7 @@ var create_flexigrid_for = {
                                 print_language(row.lang, row.language, row.language_en),
                                 print_wiki_link(row.title),
                                 row.description,
-                                row.image == ''   ? '<span class="empty">' + texts.misc.no_image + '</span>' : print_wiki_link(row.image),
+                                row.image == ''   ? empty(texts.misc.no_image) : hover_expand(print_wiki_link(row.image)),
                                 (row.on_node      ? '<img src="/img/types/node.16.png"     alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>') + ' ' +
                                 (row.on_way       ? '<img src="/img/types/way.16.png"      alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>') + ' ' +
                                 (row.on_area      ? '<img src="/img/types/area.16.png"     alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>') + ' ' +
@@ -780,8 +784,8 @@ var create_flexigrid_for = {
                             link_to_key(row.k),
                             row.v ? link_to_value(row.k, row.v) : row.b ? (row.b + ' (Boolean)') : '*',
                             row.icon ? '<img src="/api/2/josm/styles/images?style=standard&image=' + row.icon + '" title="' + row.icon + '" alt=""/>' : '',
-                            '<div>' + (row.line_width > 0 ? '<div title="' + row.line_color + '" style="height: ' + row.line_width + 'px; margin-top: ' + (6 - Math.round(row.line_width/2)) + 'px; padding: 0; background-color: ' + row.line_color + '"></div>' : '') + '</div>',
-                            row.area_color ? '<div title="' + row.area_color + '" style="height: 8px; background-color: ' + row.area_color + '"></div>' : ''
+                            '<div>' + (row.line_width > 0 ? '<div title="' + row.line_color + '" style="height: ' + row.line_width + 'px; margin-top: ' + (10 - Math.round(row.line_width/2)) + 'px; padding: 0; background-color: ' + row.line_color + '"></div>' : '') + '</div>',
+                            row.area_color ? '<div title="' + row.area_color + '" style="height: 18px; background-color: ' + row.area_color + '"></div>' : ''
                         ] };
                     });
                     return data;

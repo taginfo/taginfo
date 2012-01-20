@@ -305,7 +305,7 @@
  *
  * http://docs.jquery.com/UI/Autocomplete#theming
  */
-.ui-autocomplete { position: absolute; cursor: default; background-color: #f0f0f0; /*border: 1px solid #c0c0c0;*/ font-size: 80%; }
+.ui-autocomplete { position: absolute; cursor: default; background-color: #ffffff; border: 1px solid #a0a0a0; font-size: 80%; }
 
 /* workarounds */
 * html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
@@ -346,6 +346,7 @@
 }
 .ui-menu .ui-menu-item a.ui-state-hover,
 .ui-menu .ui-menu-item a.ui-state-active {
+    background-color: #ddddd4;
 	font-weight: normal;
 	margin: -1px;
 }
