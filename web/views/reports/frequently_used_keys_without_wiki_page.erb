@@ -20,7 +20,6 @@
 <% javascript do
     JQuery.ready do
         JS.raw(<<"JAVASCRIPT")
-            resize_wrapper(); 
             create_flexigrid_for.reports.frequently_used_keys_without_wiki_page(#{ params[:english] == '1' ? '1' : '0' });
             jQuery('#english').bind('click', function() {
                 jQuery('#grid-keys').flexOptions({

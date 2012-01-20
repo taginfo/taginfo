@@ -288,6 +288,8 @@ jQuery(document).ready(function() {
 
     jQuery('*[title]').tipsy({ opacity: 1, delayIn: 500 });
 
+    resize_wrapper();
+
     if (typeof page_init === 'function') {
         page_init();
     }
