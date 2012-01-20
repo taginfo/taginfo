@@ -30,7 +30,7 @@
 jQuery(function() {
     var tabs = jQuery('#tabs').tabs({
         show: function(event, ui) { 
-            resize_wrapper();
+            resize_box();
             window.location.hash = ui.tab.hash;
             create_flexigrid_for.reports.key_lengths[ui.tab.hash.substring(1)]();
         }

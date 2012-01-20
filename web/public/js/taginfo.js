@@ -8,7 +8,7 @@ function resize_home() {
     tagcloud.empty();
     tagcloud.height(0);
 
-    resize_wrapper();
+    resize_box();
 
     var height = tagcloud.parent().innerHeight();
     tagcloud.parent().children().each(function(index) {
@@ -34,7 +34,7 @@ function resize_home() {
     }
 }
 
-function resize_wrapper() {
+function resize_box() {
     var height = jQuery(window).height();
 
     height -= jQuery('div#header').outerHeight(true);
@@ -44,11 +44,13 @@ function resize_wrapper() {
 
     var wrapper = jQuery('.resize,.ui-tabs-panel');
     wrapper.outerHeight(height);
+}
 
+function resize_grid() {
     if (grids[current_grid]) {
         var grid = grids[current_grid][0].grid;
         var oldrp = grid.getRp();
-        var rp = calculate_flexigrid_rp(jQuery(grids[current_grid][0]).parents('.ui-tabs-panel, div.box'));
+        var rp = calculate_flexigrid_rp(jQuery(grids[current_grid][0]).parents('.resize,.ui-tabs-panel'));
         if (rp != oldrp) {
             grid.newRp(rp);
             grid.fixHeight();
@@ -293,7 +295,7 @@ jQuery(document).ready(function() {
 
     jQuery('*[title]').tipsy({ opacity: 1, delayIn: 500 });
 
-    resize_wrapper();
+    resize_box();
 
     if (typeof page_init === 'function') {
         page_init();
@@ -317,7 +319,10 @@ jQuery(document).ready(function() {
         }
     }).focus();
 
-    jQuery(window).resize(resize_wrapper);
+    jQuery(window).resize(function() {
+        resize_box();
+        resize_grid();
+    });
 });
 
 /* ============================ */
@@ -341,9 +346,11 @@ function calculate_flexigrid_rp(box) {
     height -= box.children('.boxpre').outerHeight(true);
     height -= box.children('.pDiv').outerHeight();
     height -= box.children('.pHiv').outerHeight();
-    height -= 80; // table tools and header, possibly horizontal scrollbar
+    height -= 90; // table tools and header, possibly horizontal scrollbar
 
-    return Math.floor(height / 28);
+    var rp = Math.floor(height / 26);
+    console.log(rp);
+    return rp;
 }
 
 function create_flexigrid(domid, options) {
@@ -351,14 +358,14 @@ function create_flexigrid(domid, options) {
     if (grids[domid] == null) {
         // grid doesn't exist yet, so create it
         var me = jQuery('#' + domid);
-        var rp = calculate_flexigrid_rp(me.parents('.ui-tabs-panel, div.box'));
+        var rp = calculate_flexigrid_rp(me.parents('.resize,.ui-tabs-panel'));
         grids[domid] = me.flexigrid(jQuery.extend({}, flexigrid_defaults, texts.flexigrid, options, { rp: rp }));
         jQuery('*[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 's' });
     } else {
         // grid does exist, make sure it has the right size
         var grid = grids[domid][0].grid;
         var oldrp = grid.getRp();
-        var rp = calculate_flexigrid_rp(jQuery(grids[domid][0]).parents('.ui-tabs-panel, div.box'));
+        var rp = calculate_flexigrid_rp(jQuery(grids[domid][0]).parents('.resize,.ui-tabs-panel'));
         if (rp != oldrp) {
             grid.newRp(rp);
             grid.fixHeight();

@@ -17,7 +17,7 @@
         JS.raw(%Q{
             var tabs = jQuery('#tabs').tabs({
                 show: function(event, ui) { 
-                    resize_wrapper();
+                    resize_box();
                     window.location.hash = ui.tab.hash;
                     create_flexigrid_for.search[ui.tab.hash.substring(1)](#{ @query.to_json });
                 }

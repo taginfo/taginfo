@@ -32,8 +32,10 @@
         </table>
     </div>
     <div id="combinations">
-        <h2><%= t.pages.tag.combinations.title %></h2>
-        <p><%= t.pages.tag.combinations.description %></p>
+        <div class="boxpre">
+            <h2><%= t.pages.tag.combinations.title %></h2>
+            <p><%= t.pages.tag.combinations.description %></p>
+        </div>
         <table id="grid-combinations">
         </table>
     </div>
@@ -75,7 +77,7 @@ function page_init() {
 
     var tabs = jQuery('#tabs').tabs({
         show: function(event, ui) { 
-            resize_wrapper();
+            resize_box();
             window.location.hash = ui.tab.hash;
             create_flexigrid_for.tag[ui.tab.hash.substring(1)](#{ @key.to_json }, #{ @value.to_json }, #{ @filter_type.to_json });
         }
