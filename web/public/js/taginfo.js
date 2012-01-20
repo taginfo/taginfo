@@ -34,7 +34,7 @@ function resize_home() {
     }
 }
 
-function resize_wrapper(resize_grid) {
+function resize_wrapper() {
     var height = jQuery(window).height();
 
     height -= jQuery('div#header').outerHeight(true);
@@ -45,15 +45,13 @@ function resize_wrapper(resize_grid) {
     var wrapper = jQuery('.resize,.ui-tabs-panel');
     wrapper.outerHeight(height);
 
-    if (resize_grid) {
-        if (grids[current_grid]) {
-            var grid = grids[current_grid][0].grid;
-            var oldrp = grid.getRp();
-            var rp = calculate_flexigrid_rp(jQuery(grids[current_grid][0]).parents('.ui-tabs-panel, div.box'));
-            if (rp != oldrp) {
-                grid.newRp(rp);
-                grid.fixHeight();
-            }
+    if (grids[current_grid]) {
+        var grid = grids[current_grid][0].grid;
+        var oldrp = grid.getRp();
+        var rp = calculate_flexigrid_rp(jQuery(grids[current_grid][0]).parents('.ui-tabs-panel, div.box'));
+        if (rp != oldrp) {
+            grid.newRp(rp);
+            grid.fixHeight();
         }
     }
 }
@@ -312,7 +310,7 @@ jQuery(document).ready(function() {
         }
     }).focus();
 
-    jQuery(window).resize(function() { resize_wrapper(true); });
+    jQuery(window).resize(resize_wrapper);
 });
 
 /* ============================ */
