@@ -107,68 +107,66 @@
 </div>
 <iframe id="josmiframe" name="josmiframe"></iframe>
 <% javascript do
-    JQuery.ready do
-        JS.raw(<<"JAVASCRIPT")
+    JS.raw(<<"JAVASCRIPT")
+function page_init() {
+    jQuery('#josm_button').bind('click', function() {
+        jQuery('#josmiframe')[0].src = jQuery('#josm_button')[0].href;
+        return false;
+    });
 
-jQuery('#josm_button').bind('click', function() {
-    jQuery('#josmiframe')[0].src = jQuery('#josm_button')[0].href;
-    return false;
-});
+    jQuery('#filter').bind('change', function() {
+        var value = this.value;
 
-jQuery('#filter').bind('change', function() {
-    var value = this.value;
+        var qs = jQuery.getQueryString;
+        qs['filter'] = value;
 
-    var qs = jQuery.getQueryString;
-    qs['filter'] = value;
+        window.location.search = jQuery.param(qs);
+    });
 
-    window.location.search = jQuery.param(qs);
-});
-
-var tabs = jQuery('#tabs').tabs({
-    show: function(event, ui) { 
-        resize_wrapper();
-        window.location.hash = ui.tab.hash;
-        if (ui.tab.hash.substring(1) in create_flexigrid_for.key) {
-            create_flexigrid_for.key[ui.tab.hash.substring(1)](#{ @key.to_json }, #{ @filter_type.to_json });
+    var tabs = jQuery('#tabs').tabs({
+        show: function(event, ui) { 
+            resize_wrapper();
+            window.location.hash = ui.tab.hash;
+            if (ui.tab.hash.substring(1) in create_flexigrid_for.key) {
+                create_flexigrid_for.key[ui.tab.hash.substring(1)](#{ @key.to_json }, #{ @filter_type.to_json });
+            }
         }
-    }
-});
+    });
 
-var data = #{ @prevalent_values.to_json() };
+    var data = #{ @prevalent_values.to_json() };
 
-var w=160, h=440;
+    var w=160, h=440;
 
-var vis = new pv.Panel()
-    .canvas('canvas-values')
-    .width(w)
-    .height(h + 20);
+    var vis = new pv.Panel()
+        .canvas('canvas-values')
+        .width(w)
+        .height(h + 20);
 
-var scale = pv.Scale.linear(0, #{ @count_all_values }).range(0, h);
+    var scale = pv.Scale.linear(0, #{ @count_all_values }).range(0, h);
 
-vis.add(pv.Layout.Stack)
-    .bottom(10)
-    .order('reverse')
-    .layers(data)
-    .x(10)
-    .y(function(d) { return scale(d.count); })
-  .layer.add(pv.Bar)
-    .width(20)
-    .cursor(function() {
-        return this.data().value == '(other)' ? 'default' : 'pointer';
-    })
-    .event('click', function() {
-        if (this.data().value != '(other)') {
-            window.location = url_to_value(#{ @key_json }, this.data().value);
-        }
-    })
-  .anchor('left')
-    .add(pv.Label)
-    .left(30)
-    .text(function(d) { return d.value; });
+    vis.add(pv.Layout.Stack)
+        .bottom(10)
+        .order('reverse')
+        .layers(data)
+        .x(10)
+        .y(function(d) { return scale(d.count); })
+    .layer.add(pv.Bar)
+        .width(20)
+        .cursor(function() {
+            return this.data().value == '(other)' ? 'default' : 'pointer';
+        })
+        .event('click', function() {
+            if (this.data().value != '(other)') {
+                window.location = url_to_value(#{ @key_json }, this.data().value);
+            }
+        })
+    .anchor('left')
+        .add(pv.Label)
+        .left(30)
+        .text(function(d) { return d.value; });
 
-vis.render();
-
+    vis.render();
+}
 JAVASCRIPT
-    end
 end
 %>

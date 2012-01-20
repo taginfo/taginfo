@@ -61,26 +61,26 @@
 </div>
 <iframe id="josmiframe" name="josmiframe"></iframe>
 <% javascript do
-    JQuery.ready do
-        JS.raw(<<"JAVASCRIPT")
-jQuery('#josm_button').bind('click', function() {
-    jQuery('#josmiframe')[0].src = jQuery('#josm_button')[0].href;
-    return false;
-});
+    JS.raw(<<"JAVASCRIPT")
+function page_init() {
+    jQuery('#josm_button').bind('click', function() {
+        jQuery('#josmiframe')[0].src = jQuery('#josm_button')[0].href;
+        return false;
+    });
 
-jQuery('#filter').bind('change', function() {
-    var value = this.value;
-    window.location.search = 'filter=' + value;
-});
+    jQuery('#filter').bind('change', function() {
+        var value = this.value;
+        window.location.search = 'filter=' + value;
+    });
 
-var tabs = jQuery('#tabs').tabs({
-    show: function(event, ui) { 
-        resize_wrapper();
-        window.location.hash = ui.tab.hash;
-        create_flexigrid_for.tag[ui.tab.hash.substring(1)](#{ @key.to_json }, #{ @value.to_json }, #{ @filter_type.to_json });
-    }
-});
+    var tabs = jQuery('#tabs').tabs({
+        show: function(event, ui) { 
+            resize_wrapper();
+            window.location.hash = ui.tab.hash;
+            create_flexigrid_for.tag[ui.tab.hash.substring(1)](#{ @key.to_json }, #{ @value.to_json }, #{ @filter_type.to_json });
+        }
+    });
+}
 JAVASCRIPT
-    end
 end
 %>
