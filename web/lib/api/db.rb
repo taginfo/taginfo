@@ -118,13 +118,13 @@ class Taginfo < Sinatra::Base
             :data  => res.map{ |row| h = {
                 :key                      => row['key'],
                 :count_all                => row['count_all'].to_i,
-                :count_all_fraction       => row['count_all'].to_f / @db.stats('objects'),
+                :count_all_fraction       => (row['count_all'].to_f / @db.stats('objects')).round_to(4),
                 :count_nodes              => row['count_nodes'].to_i,
-                :count_nodes_fraction     => row['count_nodes'].to_f / @db.stats('nodes_with_tags'),
+                :count_nodes_fraction     => (row['count_nodes'].to_f / @db.stats('nodes_with_tags')).round_to(4),
                 :count_ways               => row['count_ways'].to_i,
-                :count_ways_fraction      => row['count_ways'].to_f / @db.stats('ways'),
+                :count_ways_fraction      => (row['count_ways'].to_f / @db.stats('ways')).round_to(4),
                 :count_relations          => row['count_relations'].to_i,
-                :count_relations_fraction => row['count_relations'].to_f / @db.stats('relations'),
+                :count_relations_fraction => (row['count_relations'].to_f / @db.stats('relations')).round_to(4),
                 :values_all               => row['values_all'].to_i,
                 :users_all                => row['users_all'].to_i,
                 :in_wiki                  => row['in_wiki'].to_i     == 1 ? true : false,
@@ -183,13 +183,13 @@ class Taginfo < Sinatra::Base
                 :key                      => row['skey'],
                 :value                    => row['svalue'],
                 :count_all                => row['count_all'].to_i,
-                :count_all_fraction       => row['count_all'].to_f / @db.stats('objects'),
+                :count_all_fraction       => (row['count_all'].to_f / @db.stats('objects')).round_to(4),
                 :count_nodes              => row['count_nodes'].to_i,
-                :count_nodes_fraction     => row['count_nodes'].to_f / @db.stats('nodes_with_tags'),
+                :count_nodes_fraction     => (row['count_nodes'].to_f / @db.stats('nodes_with_tags')).round_to(4),
                 :count_ways               => row['count_ways'].to_i,
-                :count_ways_fraction      => row['count_ways'].to_f / @db.stats('ways'),
+                :count_ways_fraction      => (row['count_ways'].to_f / @db.stats('ways')).round_to(4),
                 :count_relations          => row['count_relations'].to_i,
-                :count_relations_fraction => row['count_relations'].to_f / @db.stats('relations'),
+                :count_relations_fraction => (row['count_relations'].to_f / @db.stats('relations')).round_to(4),
             } }
         }.to_json
     end
@@ -239,7 +239,7 @@ class Taginfo < Sinatra::Base
                 ['all', 'nodes', 'ways', 'relations'].each do |type|
                     out[type] = {
                         :count          => row['count_'  + type].to_i,
-                        :count_fraction => row['count_'  + type].to_f / get_total(type),
+                        :count_fraction => (row['count_'  + type].to_f / get_total(type)).round_to(4),
                         :values         => row['values_' + type].to_i
                     }
                 end
@@ -265,7 +265,7 @@ class Taginfo < Sinatra::Base
                     out[n] = {
                         :type           => type,
                         :count          => row['count_'  + type].to_i,
-                        :count_fraction => row['count_'  + type].to_f / get_total(type),
+                        :count_fraction => (row['count_'  + type].to_f / get_total(type)).round_to(4),
                         :values         => row['values_' + type].to_i
                     }
                 end
@@ -386,7 +386,7 @@ class Taginfo < Sinatra::Base
             :data  => res.map{ |row| {
                 :value    => row['value'],
                 :count    => row['count_' + filter_type].to_i,
-                :fraction => row['count_' + filter_type].to_f / this_key_count.to_f
+                :fraction => (row['count_' + filter_type].to_f / this_key_count.to_f).round_to(4)
             } }
         }.to_json
     end
@@ -452,8 +452,8 @@ class Taginfo < Sinatra::Base
             :data  => res.map{ |row| {
                 :other_key      => row['other_key'],
                 :together_count => row['together_count'].to_i,
-                :to_fraction    => row['together_count'].to_f / has_this_key.to_f,
-                :from_fraction  => row['from_fraction'].to_f
+                :to_fraction    => (row['together_count'].to_f / has_this_key.to_f).round_to(4),
+                :from_fraction  => row['from_fraction'].to_f.round_to(4)
             } }
         }.to_json
     end
@@ -538,7 +538,7 @@ class Taginfo < Sinatra::Base
                 ['all', 'nodes', 'ways', 'relations'].each do |type|
                     out[type] = {
                         :count          => row['count_'  + type].to_i,
-                        :count_fraction => row['count_'  + type].to_f / get_total(type)
+                        :count_fraction => (row['count_'  + type].to_f / get_total(type)).round_to(4)
                     }
                 end
         end
@@ -564,7 +564,7 @@ class Taginfo < Sinatra::Base
                     out[n] = {
                         :type           => type,
                         :count          => row['count_'  + type].to_i,
-                        :count_fraction => row['count_'  + type].to_f / get_total(type)
+                        :count_fraction => (row['count_'  + type].to_f / get_total(type)).round_to(4)
                     }
                 end
         end
@@ -648,8 +648,8 @@ class Taginfo < Sinatra::Base
                 :other_key      => row['other_key'],
                 :other_value    => row['other_value'],
                 :together_count => row['together_count'].to_i,
-                :to_fraction    => row['together_count'].to_f / has_this_key.to_f,
-                :from_fraction  => row['from_fraction'].to_f
+                :to_fraction    => (row['together_count'].to_f / has_this_key.to_f).round_to(4),
+                :from_fraction  => row['from_fraction'].to_f.round_to(4)
             } }
         }.to_json
     end

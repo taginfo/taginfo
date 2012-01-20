@@ -28,6 +28,12 @@ class Numeric
 
 end
 
+class Float
+    def round_to(n=0)
+        (self * (10.0 ** n)).round * (10.0 ** (-n))
+    end
+end
+
 def title
     @title = [] if @title.nil?
     @title = [@title] unless @title.is_a?(Array)
