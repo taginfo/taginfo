@@ -75,13 +75,7 @@ function page_init() {
         window.location.search = 'filter=' + value;
     });
 
-    var tabs = jQuery('#tabs').tabs({
-        show: function(event, ui) { 
-            resize_box();
-            window.location.hash = ui.tab.hash;
-            create_flexigrid_for.tag[ui.tab.hash.substring(1)](#{ @key.to_json }, #{ @value.to_json }, #{ @filter_type.to_json });
-        }
-    });
+    init_tabs('tag', [#{ @key.to_json }, #{ @value.to_json }, #{ @filter_type.to_json }]);
 }
 JAVASCRIPT
 end

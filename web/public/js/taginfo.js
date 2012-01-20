@@ -349,7 +349,6 @@ function calculate_flexigrid_rp(box) {
     height -= 90; // table tools and header, possibly horizontal scrollbar
 
     var rp = Math.floor(height / 26);
-    console.log(rp);
     return rp;
 }
 
@@ -371,6 +370,24 @@ function create_flexigrid(domid, options) {
             grid.fixHeight();
         }
     }
+}
+
+function init_tabs(page, params) {
+    var tabset = create_flexigrid_for[page];
+    if (tabset === undefined) {
+        tabset = create_flexigrid_for[page.split(/\./)[0]][page.split(/\./)[1]];
+    }
+    return jQuery('#tabs').tabs({
+        show: function(event, ui) { 
+            resize_box();
+            if (ui.index != 0 || window.location.hash != '') {
+                window.location.hash = ui.tab.hash;
+            }
+            if (ui.tab.hash.substring(1) in tabset) {
+                tabset[ui.tab.hash.substring(1)].apply(this, params);
+            }
+        }
+    });
 }
 
 var create_flexigrid_for = {

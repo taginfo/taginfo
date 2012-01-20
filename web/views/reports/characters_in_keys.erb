@@ -58,15 +58,7 @@
     JQuery.ready do
         JS.raw(<<"JAVASCRIPT")
 
-var tabs = jQuery('#tabs').tabs({
-    show: function(event, ui) { 
-        resize_box();
-        window.location.hash = ui.tab.hash;
-        if (create_flexigrid_for.reports.characters_in_keys[ui.tab.hash.substring(1)]) {
-            create_flexigrid_for.reports.characters_in_keys[ui.tab.hash.substring(1)]();
-        }
-    }
-});
+init_tabs('reports.characters_in_keys', []);
 
 var data = #{ i = '@'; %w(plain colon letters space problem rest).map{ |type| i=i.next; [ { :label => i, :value => @db.stats('characters_in_keys_' + type) } ] }.to_json() };
 

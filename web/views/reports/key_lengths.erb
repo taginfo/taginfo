@@ -25,19 +25,13 @@
         <div id="canvas"></div>
     </div>
 </div>
-<script type="text/javascript">
+<% javascript do
+    JQuery.ready do
+        JS.raw(<<"JAVASCRIPT")
 
-jQuery(function() {
-    var tabs = jQuery('#tabs').tabs({
-        show: function(event, ui) { 
-            resize_box();
-            window.location.hash = ui.tab.hash;
-            create_flexigrid_for.reports.key_lengths[ui.tab.hash.substring(1)]();
-        }
-    });
-});
+init_tabs('reports.key_lengths', []);
 
-var data = <%= hist.to_json %>;
+var data = #{ hist.to_json };
 
 var w=900, h=400, bar_width=6;
 
@@ -68,8 +62,8 @@ vis.add(pv.Label)
     .textAlign('center')
     .textAngle(-Math.PI/2);
 
-var x = pv.Scale.linear(0, <%= hist.size %>).range(bar_width, w - bar_width);
-var y = pv.Scale.linear(0, <%= hist.max %>).range(0, h);
+var x = pv.Scale.linear(0, #{ hist.size }).range(bar_width, w - bar_width);
+var y = pv.Scale.linear(0, #{ hist.max }).range(0, h);
 
 var bar = vis.add(pv.Bar)
     .data(data)
@@ -102,4 +96,7 @@ vis.add(pv.Rule)
     
 vis.render();
 
-</script>
+JAVASCRIPT
+    end
+end
+%>
