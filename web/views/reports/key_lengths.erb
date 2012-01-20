@@ -44,23 +44,25 @@ var w=900, h=400, bar_width=6;
 var vis = new pv.Panel()
     .canvas('canvas')
     .fillStyle('#ffffff')
+    .strokeStyle('#d0d0c8')
     .width(w)
     .height(h+4)
     .top(10)
     .right(15)
     .bottom(40)
     .left(60)
-    .strokeStyle('#cccccc')
     .lineWidth(1);
 
 vis.add(pv.Label)
     .data(['Key length'])
+    .font('12px Arial,sans-serif')
     .bottom(-36)
     .left(w/2)
     .textAlign('center');
 
 vis.add(pv.Label)
     .data(['Number of keys'])
+    .font('12px Arial,sans-serif')
     .left(-48)
     .bottom(h/2)
     .textAlign('center')
@@ -72,6 +74,7 @@ var y = pv.Scale.linear(0, <%= hist.max %>).range(0, h);
 var bar = vis.add(pv.Bar)
     .data(data)
     .bottom(1)
+    .fillStyle('#083e76')
     .left(function() { return x(this.index) - bar_width/2; })
     .height(y)
     .title(function(d) { return '' + d + ' keys of length ' + this.index; })
@@ -83,6 +86,7 @@ vis.add(pv.Rule)
     .left(-5)
     .width(-5)
   .anchor("left").add(pv.Label)
+    .font('10px Arial,sans-serif')
     .textMargin(8)
     .text(x.tickFormat);
 
@@ -92,6 +96,7 @@ vis.add(pv.Rule)
     .bottom(-2)
     .height(-5)
   .anchor("bottom").add(pv.Label)
+    .font('10px Arial,sans-serif')
     .textMargin(8)
     .text(x.tickFormat);
     
