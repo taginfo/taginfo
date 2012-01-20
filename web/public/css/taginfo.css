@@ -202,7 +202,8 @@ input#search {
     -o-border-radius: 4px;
 }
 
-input#search:active {
+input:focus {
+    background-color: #ffffe0 !important;
 }
 
 /* ========== */
