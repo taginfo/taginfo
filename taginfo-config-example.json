@@ -1,16 +1,20 @@
-// This is an example of a Taginfo config file.
+// This is an example of a taginfo config file.
 // Copy it to the directory above and name it 'taginfo-config.json', then change your local settings.
 {
     // You probably want to change all these.
     "instance": {
-        // url prefix for the site
+        // URL prefix for the site.
         "url": "http://localhost:4567",
         // Used in the title of all HTML pages.
         "name": "OpenStreetMap Taginfo",
-        // Description of this taginfo instance
+        // Description of this taginfo instance.
         "description": "This is a <b>taginfo test instance</b>. Change this text in your <tt>taginfo-config.json</tt>.",
         // URL path to instance icon in the upper left.
-        "icon": "/img/logo/world.png"
+        "icon": "/img/logo/test.png",
+        // Contact name and email address.
+        "contact": "Anonymous",
+        // Geographical area this taginfo instance covers.
+        "area": "World"
     },
     // For the geodistribution map. See the wiki documentation about these settings.
     "geodistribution": {
