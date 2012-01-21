@@ -293,7 +293,11 @@ jQuery(document).ready(function() {
         return b;
     })(window.location.search.substr(1).split('&'))
 
-    jQuery('*[title]').tipsy({ opacity: 1, delayIn: 500 });
+    jQuery('*[tipsy]').each(function(index, obj) {
+        obj = jQuery(obj);
+        console.log(obj, obj.attr('tipsy'));
+        obj.tipsy({ opacity: 1, delayIn: 500, gravity: obj.attr('tipsy') });
+    });
 
     resize_box();
 
@@ -359,7 +363,7 @@ function create_flexigrid(domid, options) {
         var me = jQuery('#' + domid);
         var rp = calculate_flexigrid_rp(me.parents('.resize,.ui-tabs-panel'));
         grids[domid] = me.flexigrid(jQuery.extend({}, flexigrid_defaults, texts.flexigrid, options, { rp: rp }));
-        jQuery('*[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 's' });
+        jQuery('th span[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 's' });
     } else {
         // grid does exist, make sure it has the right size
         var grid = grids[domid][0].grid;

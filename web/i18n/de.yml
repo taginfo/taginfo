@@ -20,6 +20,7 @@ taginfo:
     download: Download
     about: Über Taginfo
     wiki: Wiki
+    report: Report
     reports: Reports
     keys: Keys
     tags: Tags
@@ -28,6 +29,8 @@ taginfo:
     combinations: Kombinationen
     key_combinations: Kombinationen
     data_from: Daten vom
+    uses_data_from: |
+        Nutzt Daten von:
     instance:
         title: Über dieses Taginfo
         other: Andere Taginfo-Webseiten sind im <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM-Wiki</a> zu finden.
@@ -68,11 +71,12 @@ pages:
     reports:
         index:
             intro: |
-                <p>Reports zeigen die Daten aus verschiedenen Perspektiven.
+                Reports zeigen die Daten aus verschiedenen Perspektiven.
                 Meist bringen Sie Daten aus verschiedenen Quellen auf interessante Art und
                 Weise zusammen. Manche der Reports helfen dabei, bestimmte Arten von Fehlern
-                zu finden, zum Beispiel häufig verwendete Keys ohne Wiki-Seite.</p>
-            data_sources: Daten-<br/>Quellen
+                zu finden, zum Beispiel häufig verwendete Keys ohne Wiki-Seite.
+            list: Alle Reports
+            data_sources: Datenquellen
     search:
         results:
             title: Suchergebnisse

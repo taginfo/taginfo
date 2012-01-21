@@ -23,6 +23,7 @@ taginfo:
     about: About taginfo
     contact: Contact
     wiki: taginfo wiki page
+    report: Report
     reports: Reports
     keys: Keys
     tags: Tags
@@ -35,6 +36,8 @@ taginfo:
     key_combinations: Combinations
     overview: Overview
     data_from: Data from
+    uses_data_from: |
+        Uses data from:
     data_from_description: Last update of taginfo database
     instance:
         title: About this taginfo site
@@ -84,9 +87,10 @@ pages:
     reports:
         index:
             intro: |
-                <p>Reports show the tag data from different angles.
+                Reports show the tag data from different angles.
                 They often bring together data from several sources in interesting ways. Some
-                of the reports can help with finding specific errors.</p>
+                of the reports can help with finding specific errors.
+            list: List of all reports
             data_sources: Data sources used
     search:
         results:

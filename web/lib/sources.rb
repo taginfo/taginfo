@@ -49,18 +49,8 @@ class Source
     end
 
     # Returns img tag for this source
-    def img(size=16)
-        %Q{<img src="#{ imgurl(size) }" alt="#{ name }" title="#{ name }" width="#{ size }" height="#{ size }"/>}
-    end
-
-    # Returns a link to this source
-    def link_img
-        %Q{<a href="#{ url }">#{ img }</a>}
-    end
-
-    # Returns a link to this source
-    def link_name
-        %Q{<a href="#{ url }">#{ name }</a>}
+    def img(size=16, title_prefix='')
+        %Q{<img src="#{ imgurl(size) }" alt="#{ name }" title="#{title_prefix} #{ name }" tipsy="w" width="#{ size }" height="#{ size }"/>}
     end
 
     def dbname

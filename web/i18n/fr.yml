@@ -63,10 +63,11 @@ pages:
     reports:
         index:
             intro: |
-                <p>Les compte-rendus montre les données de différents points de vue.
+                Les compte-rendus montre les données de différents points de vue.
                 Ils agrègent de façon interessante des données d'origines variées.
-                Certains compte-rendus peuvent aider à trouver tous types d'erreurs, comme par exemple des valeurs de tags beaucoup utilisées mais n'ayant pas de page sur le wiki.</p>
-            data_sources: Data<br/>Sources
+                Certains compte-rendus peuvent aider à trouver tous types d'erreurs,
+                comme par exemple des valeurs de tags beaucoup utilisées mais n'ayant pas de page sur le wiki.
+            data_sources: Data Sources
     search:
         results:
             title: Résultats de la recherche
