@@ -1,7 +1,17 @@
 # web/lib/api/main.rb
 class Taginfo < Sinatra::Base
 
-    api(2, 'about', {
+    api(2, 'site', {
+        :description => 'Get information about this taginfo site.',
+        :result => {
+            :url         => :STRING,
+            :name        => :STRING,
+            :description => :STRING,
+            :icon        => :STRING,
+            :contact     => :STRING,
+            :area        => :STRING
+        },
+        :example => { }
     }) do
         data = {}
         [:url, :name, :description, :icon, :contact, :area].each do |k|

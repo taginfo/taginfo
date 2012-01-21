@@ -54,7 +54,11 @@ class APIDoc
         example.each_pair do |k,v|
             params << "#{k}=#{v}"
         end
-        complete_path + '?' + params.join('&')
+        if params.empty?
+            return complete_path
+        else
+            return complete_path + '?' + params.join('&')
+        end
     end
 
     def show_ui
