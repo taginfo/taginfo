@@ -400,20 +400,24 @@ span.overflow:hover {
 
 table.list {
     border-collapse: collapse;
+    font-size: 80%;
 }
 
 table.list th, table.list td {
     border-right: 1px solid #ddddd4;
     padding: 2px 6px;
-    vertical-align: top;
 }
 
 table.list th {
     background-color: #b8b8b0;
+    height: 28px;
+    vertical-align: middle;
 }
 
 table.list td {
     background-color: #e8e8e4;
+    height: 22px;
+    vertical-align: top;
 }
 
 table.list td.even {
