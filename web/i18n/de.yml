@@ -11,6 +11,7 @@ osm:
     ways: Ways
     relation: Relation
     relations: Relations
+    all: Alle
     user: User
     users: Users
 
@@ -19,28 +20,46 @@ taginfo:
     sources: Datenquellen
     download: Download
     about: Über Taginfo
+    contact: Kontakt
     wiki: Wiki
     report: Report
     reports: Reports
     keys: Keys
     tags: Tags
+    international: International
+    apidoc: API-Dokumenatation
+    test: Test
     map: Karte
     maps: Karten
     combinations: Kombinationen
     key_combinations: Kombinationen
+    overview: Übersicht
     data_from: Daten vom
     uses_data_from: |
         Nutzt Daten von:
+    data_from_description: Letzte Aktualisierung der taginfo-Datenbank
     instance:
         title: Über dieses Taginfo
         other: Andere Taginfo-Webseiten sind im <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM-Wiki</a> zu finden.
 
 pages:
     index:
-        description: Taginfo sammelt und aggregiert Informationen über OpenStreetMap-Tags.
-        buttons:
-            show_all_keys: Alle Keys anzeigen
-            reports: Reports
+        keys:
+            intro: |
+                Hier einige der häufigeren Keys:
+            listkeys: Liste aller Keys...
+            listtags: Liste der häufigsten Tags...
+        reports:
+            listreports: All Reports...
+        about:
+            intro:
+                <p>OpenStreetMap benutzt <b>Tags</b> der Form <b>Key=Value</b>,
+                um geographischen Objekten Bedeutungen zuzuweisen. Taginfo sammelt
+                Informationen über solche Tags aus verschiedenen Quellen, um Dir
+                dabei zu helfen, die Bedeutung der Tags und ihre Nutzung zu verstehen.</p>
+            more: Mehr über taginfo...
+        international:
+            see: Andere taginfo-Instanzen...
     sources:
         index:
             intro: |
@@ -81,6 +100,12 @@ pages:
         results:
             title: Suchergebnisse
             you_were_searching_for: Du hast gesucht nach
+    keys:
+        intro: |
+                Diese Tabelle zeigt alle Keys, die in der Datenbank oder einer anderen Quelle vorkommen.
+    tags:
+        intro: |
+                Diese Tabelle zeigt die häufigsten Tags in der Datenbank.
     key:
         no_description_in_wiki: Keine Beschreibung dieses Keys im Wiki.
         filter:
@@ -115,6 +140,7 @@ pages:
             description: Diese Tabelle zeigt nur die häufigsten Kombinationen der häufigsten Tags.
         wiki_pages:
             title: Wiki-Seiten über dieses Tag
+            none_found: Keine Wiki-Seiten für diesen Key vorhanden.
         josm_rules:
             title: JOSM-Stil-Regeln mit diesem Tag
             choice: |

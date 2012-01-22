@@ -98,10 +98,10 @@ pages:
             you_were_searching_for: You were searching for
     keys:
         intro: |
-                <p>This table shows all tag keys that exist in the database or in any of the other sources.</p>
+                This table shows all tag keys that exist in the database or in any of the other sources.
     tags:
         intro: |
-                <p>This table shows the most common tags in the database.</p>
+                This table shows the most common tags in the database.
     key:
         no_description_in_wiki: No description for this key in the wiki.
         filter:
