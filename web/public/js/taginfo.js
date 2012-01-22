@@ -729,6 +729,7 @@ var create_flexigrid_for = {
                 ],
                 sortname: 'count_all',
                 sortorder: 'desc',
+                emptymsg: 'No keys found.',
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
@@ -750,6 +751,7 @@ var create_flexigrid_for = {
                 ],
                 sortname: 'count_all',
                 sortorder: 'desc',
+                emptymsg: 'No values found.',
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
@@ -773,6 +775,7 @@ var create_flexigrid_for = {
                 ],
                 sortname: 'count_all',
                 sortorder: 'desc',
+                emptymsg: 'No tags found.',
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
