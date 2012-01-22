@@ -281,6 +281,8 @@ function link_to_key_or_tag(key, value) {
 }
 
 jQuery(document).ready(function() {
+    jQuery('#javascriptmsg').remove();
+
     jQuery('select').customStyle();
 
     jQuery.getQueryString = (function(a) {
