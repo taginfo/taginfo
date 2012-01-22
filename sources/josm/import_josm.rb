@@ -113,7 +113,7 @@ Dir.chdir(dir + '/svn-source') do
                 File.open(path) do |file|
                     png = file.read
                     pathwostyle = path.sub(%r(^#{style}/), '')
-                    db.execute('INSERT INTO josm_style_images (style, path, png) VALUES (?, ?, ?)', style, pathwostyle, png)
+                    db.execute('INSERT INTO josm_style_images (style, path, png) VALUES (?, ?, ?)', style, pathwostyle, SQLite3::Blob.new(png))
                 end
             end
         end
