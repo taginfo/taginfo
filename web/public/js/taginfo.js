@@ -402,15 +402,15 @@ var create_flexigrid_for = {
                 url: '/api/2/db/keys?include=prevalent_values',
                 colModel: [
                     { display: texts.osm.key, name: 'key', width: 160, sortable: true },
-                    { display: '<span title="Number of objects with this key"><img src="/img/types/all.16.png" alt=""/> Total</span>',           name: 'count_all',        width: 200, sortable: true, align: 'center' },
-                    { display: '<span title="Number of nodes with this key"><img src="/img/types/node.16.png" alt=""/> Nodes</span>',            name: 'count_nodes',      width: 220, sortable: true, align: 'center' },
-                    { display: '<span title="Number of ways with this key"><img src="/img/types/way.16.png" alt=""/> Ways</span>',               name: 'count_ways',       width: 220, sortable: true, align: 'center' },
-                    { display: '<span title="Number of relations with this key"><img src="/img/types/relation.16.png" alt=""/> Relation</span>', name: 'count_relations',  width: 220, sortable: true, align: 'center' },
-                    { display: '<span title="Number of users currently owning objects with this key">Users</span>', name: 'users_all', width: 44, sortable: true, align: 'right' },
-                    { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" title="Key has wiki page"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
+                    { display: '<span title="Number of objects with this key (as absolute value and as percentage of all nodes, ways, and relations)"><img src="/img/types/all.16.png" alt=""/> Total</span>', name: 'count_all', width: 200, sortable: true, align: 'center' },
+                    { display: '<span title="Number of nodes with this key (as absolute value and as percentage of tagged nodes, ie. nodes without any tags are ignored)"><img src="/img/types/node.16.png" alt=""/> Nodes</span>', name: 'count_nodes', width: 220, sortable: true, align: 'center' },
+                    { display: '<span title="Number of ways with this key (as absolute value and as percentage of all ways)"><img src="/img/types/way.16.png" alt=""/> Ways</span>', name: 'count_ways', width: 220, sortable: true, align: 'center' },
+                    { display: '<span title="Number of relations with this key (as absolute value and as percentage of all relations)"><img src="/img/types/relation.16.png" alt=""/> Relation</span>', name: 'count_relations',  width: 220, sortable: true, align: 'center' },
+                    { display: '<span title="Number of different users who last changed objects with this key">Users</span>', name: 'users_all', width: 44, sortable: true, align: 'right' },
+                    { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" title="Key has a wiki page"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
                     { display: '<img src="/img/sources/josm.16.png" alt="JOSM" title="Key appears in JOSM config"/>', name: 'in_josm', width: 20, sortable: true, align: 'center' },
                     { display: '<span title="Number of different values for this key">Values</span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
-                    { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true }
+                    { display: '<span title="Up to ten of the most common values for this key (only if more than 1% of tags with this key have this value)">Prevalent Values</span>', name: 'prevalent_values', width: 500, sortable: true }
                 ],
                 searchitems: [
                     { display: texts.osm.key, name: 'key' }
@@ -443,10 +443,10 @@ var create_flexigrid_for = {
                 url: '/api/2/db/tags',
                 colModel: [
                     { display: texts.osm.tag, name: 'tag', width: 300, sortable: true },
-                    { display: '<span title="Number of objects with this tag"><img src="/img/types/all.16.png" alt=""/> Total</span>',           name: 'count_all',        width: 260, sortable: true, align: 'center' },
-                    { display: '<span title="Number of nodes with this tag"><img src="/img/types/node.16.png" alt=""/> Nodes</span>',            name: 'count_nodes',      width: 220, sortable: true, align: 'center' },
-                    { display: '<span title="Number of ways with this tag"><img src="/img/types/way.16.png" alt=""/> Ways</span>',               name: 'count_ways',       width: 220, sortable: true, align: 'center' },
-                    { display: '<span title="Number of relations with this tag"><img src="/img/types/relation.16.png" alt=""/> Relation</span>', name: 'count_relations',  width: 220, sortable: true, align: 'center' }
+                    { display: '<span title="Number of objects with this tag (as absolute value and as percentage of all nodes, ways, and relations)"><img src="/img/types/all.16.png" alt=""/> Total</span>', name: 'count_all', width: 260, sortable: true, align: 'center' },
+                    { display: '<span title="Number of nodes with this tag (as absolute value and as percentage of tagged nodes, ie. nodes without any tags are ignored)"><img src="/img/types/node.16.png" alt=""/> Nodes</span>', name: 'count_nodes', width: 220, sortable: true, align: 'center' },
+                    { display: '<span title="Number of ways with this tag (as absolute value and as percentage of all ways)"><img src="/img/types/way.16.png" alt=""/> Ways</span>', name: 'count_ways', width: 220, sortable: true, align: 'center' },
+                    { display: '<span title="Number of relations with this tag (as absolute value and as percentage of all relations)"><img src="/img/types/relation.16.png" alt=""/> Relation</span>', name: 'count_relations',  width: 220, sortable: true, align: 'center' }
                 ],
                 searchitems: [
                     { display: texts.osm.tag, name: 'tag' }

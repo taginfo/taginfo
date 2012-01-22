@@ -245,7 +245,7 @@ reports:
             page documents a now obsolete key), but it can also be a typo or other error.</p>
 
 misc:
-    values_less_than_one_percent: all values have less than 1%
+    values_less_than_one_percent: no values with more than 1%
     empty_string: empty string
     unknown: unknown
     count: Count

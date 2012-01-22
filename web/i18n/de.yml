@@ -190,7 +190,7 @@ reports:
         name: Wiki-Seiten über nicht-existierende Keys
 
 misc:
-    values_less_than_one_percent: alle Values haben weniger als 1%
+    values_less_than_one_percent: keine Values mit mehr als 1%
     empty_string: leere Zeichenkette
     unknown: unbekannt
     count: Anzahl
