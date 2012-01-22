@@ -29,11 +29,11 @@
         <li><a href="#josm"><%= t.sources.josm.name %></a></li>
     </ul>
     <div id="overview">
-        <h2><%= t.taginfo.overview %></h2>
         <div style="float: right; text-align: center;">
             <p>Distribution of values</p>
             <div class="canvas" id="canvas-values"></div>
         </div>
+        <h2><%= t.taginfo.overview %></h2>
         <table id="grid-overview">
         </table>
         <p>Objects with this key are owned by <%= @user_count %> different users.</p>
@@ -99,11 +99,11 @@
             <%= @merkaartor_images %>
         </p>
         <h3>Values</h3>
-        <%= @merkaartor_values.map{ |value| link_to_value(@key, value) }.join(', ') %>
+        <%# @merkaartor_values.map{ |value| link_to_value(@key, value) }.join(', ') %>
         <h3>Descriptions</h3>
         <table>
             <% @merkaartor_desc.each do |desc| %>
-                <tr><td><%= desc['lang'] %></td><td><%= desc['description'] %></td></tr>
+                <tr><td><%# desc['lang'] %></td><td><%# desc['description'] %></td></tr>
             <% end %>
         </table>
     </div>-->
