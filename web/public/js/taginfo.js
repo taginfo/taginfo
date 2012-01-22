@@ -295,7 +295,6 @@ jQuery(document).ready(function() {
 
     jQuery('*[tipsy]').each(function(index, obj) {
         obj = jQuery(obj);
-        console.log(obj, obj.attr('tipsy'));
         obj.tipsy({ opacity: 1, delayIn: 500, gravity: obj.attr('tipsy') });
     });
 

@@ -30,13 +30,16 @@
     </ul>
     <div id="overview">
         <h2><%= t.taginfo.overview %></h2>
+        <div style="float: right; text-align: center;">
+            <p>Distribution of values</p>
+            <div class="canvas" id="canvas-values"></div>
+        </div>
         <table id="grid-overview">
         </table>
         <p>Objects with this key are owned by <%= @user_count %> different users.</p>
     </div>
     <div id="values">
         <h2><%= t.pages.key.values_used %></h2>
-        <div class="canvas" id="canvas-values" style="float: right;"></div>
         <div>
             <table id="grid-values">
             </table>
