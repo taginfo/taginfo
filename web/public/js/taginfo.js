@@ -54,7 +54,7 @@ function resize_home() {
     var tags = tagcloud_data();
     var cloud = '';
     for (var i=0; i < tags.length; i++) {
-        cloud += '<a href="' + url_for_key(tags[i][0]) + '" style="font-size: ' + tags[i][1] + 'px;">' + tags[i][0] + '</a> ';
+        cloud += link(url_for_key(tags[i][0]), tags[i][0], { style: 'font-size: ' + tags[i][1] + 'px;' }) + ' ';
     }
     tagcloud.append(cloud);
 
@@ -89,6 +89,18 @@ function empty(text) {
     return '<span class="empty">' + text + '</span>';
 }
 
+function link(url, text, attrs) {
+    if (attrs === undefined) {
+        attrs = {}
+    }
+    attrs.href = url;
+    var attributes = '';
+    for (a in attrs) {
+        attributes += ' ' + a + '="' + attrs[a] + '"';
+    }
+    return '<a' + attributes + '>' + text + '</a>';
+}
+
 function print_wiki_link(title, options) {
     if (title == '') {
         return '';
@@ -100,7 +112,7 @@ function print_wiki_link(title, options) {
         path = 'wiki/' + title;
     }
 
-    return '<a class="extlink" rel="nofollow" href="http://wiki.openstreetmap.org/' + path + '" target="_blank">' + title + '</a>';
+    return link('http://wiki.openstreetmap.org/' + path, title, { target: '_blank', class: 'extlink' });
 }
 
 function print_language(code, native_name, english_name) {
@@ -178,7 +190,7 @@ function link_to_value_with_title(key, value, extra) {
         title = html_escape(value) + ' ' + extra,
         url = url_for_tag(key, value);
 
-    return '<a href="' + url + '" title="' + title + '" tipsy="e">' + pp_value(value) + '</a>';
+    return link(url, pp_value(value), { title: title, tipsy: 'e'});
 }
 
 function print_value_with_percent(value, fraction) {
@@ -235,12 +247,11 @@ function pp_value_with_highlight(value, highlight) {
 }
 
 function link_to_value_with_highlight(key, value, highlight) {
-    return '<a href="' + url_for_tag(key, value) + '">' + pp_value_with_highlight(value, highlight) + '</a>';
+    return link(url_for_tag(key, value), pp_value_with_highlight(value, highlight));
 }
 
 function link_to_key(key, highlight) {
-    var hk, k = encodeURIComponent(key);
-
+    var hk;
     if (highlight === undefined) {
         hk = pp_key(key);
     } else {
@@ -248,11 +259,11 @@ function link_to_key(key, highlight) {
         hk = key.replace(re, "<b>$1</b>");
     }
 
-    return '<a href="' + url_for_key(key) + '">' + hk + '</a>';
+    return link(url_for_key(key), hk);
 }
 
 function link_to_value(key, value) {
-    return '<a href="' + url_for_tag(key, value) + '">' + pp_value(value) + '</a>';
+    return link(url_for_tag(key, value), pp_value(value));
 }
 
 function link_to_tag(key, value) {
