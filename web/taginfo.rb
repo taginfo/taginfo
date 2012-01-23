@@ -162,7 +162,7 @@ class Taginfo < Sinatra::Base
 
     %w(about apidoc download keys sources tags).each do |page|
         get '/' + page do
-            @title = t.taginfo[page]
+            @title = (page =~ /^(keys|tags)$/) ? t.osm[page] : t.taginfo[page]
             erb page.to_sym
         end
     end
