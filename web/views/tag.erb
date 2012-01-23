@@ -64,19 +64,10 @@
 <iframe id="josmiframe" name="josmiframe"></iframe>
 <% javascript do
     JS.raw(<<"JAVASCRIPT")
-function page_init() {
-    jQuery('#josm_button').bind('click', function() {
-        jQuery('#josmiframe')[0].src = jQuery('#josm_button')[0].href;
-        return false;
-    });
-
-    jQuery('#filter').bind('change', function() {
-        var value = this.value;
-        window.location.search = 'filter=' + value;
-    });
-
+function page_init2() {
     init_tabs('tag', [#{ @key.to_json }, #{ @value.to_json }, #{ @filter_type.to_json }]);
 }
 JAVASCRIPT
 end
 %>
+<% javascript "#{ r18n.locale.code }/tag" %>

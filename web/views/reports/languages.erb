@@ -6,9 +6,4 @@
     <table id="grid-langs">
     </table>
 </div>
-<% javascript do
-    JQuery.ready do
-        JS.raw(%Q{ create_flexigrid_for.reports.languages(); })
-    end
-end
-%>
+<% javascript "#{ r18n.locale.code }/reports/languages" %>

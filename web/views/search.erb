@@ -20,9 +20,10 @@
 </div>
 <% javascript do
     JS.raw(%Q{
-function page_init() {
+function page_init2() {
     init_tabs('search', [#{ @query.to_json }]);
 }
     })
 end
 %>
+<% javascript "#{ r18n.locale.code }/search" %>

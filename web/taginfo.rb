@@ -169,6 +169,13 @@ class Taginfo < Sinatra::Base
 
     #-------------------------------------
 
+    get %r{^/js/([a-z][a-z])/(.*).js$} do |lang, js|
+        expires next_update
+        @lang = lang
+        @trans = R18n::I18n.new(lang, 'i18n')
+        erb :"#{js}.js", :layout => false, :content_type => 'text/javascript', :views => 'viewsjs'
+    end
+
     get '/js/lang/:lang.js' do
         expires next_update
         trans = R18n::I18n.new(params[:lang], 'i18n')
