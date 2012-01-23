@@ -138,7 +138,7 @@ function page_init2() {
         })
         .event('click', function() {
             if (this.data().value != '(other)') {
-                window.location = url_to_value(#{ @key_json }, this.data().value);
+                window.location = url_for_tag(#{ @key_json }, this.data().value);
             }
         })
     .anchor('left')

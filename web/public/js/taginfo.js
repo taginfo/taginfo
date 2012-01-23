@@ -54,7 +54,7 @@ function resize_home() {
     var tags = tagcloud_data();
     var cloud = '';
     for (var i=0; i < tags.length; i++) {
-        cloud += '<a href="/keys/' + tags[i][0] + '" style="font-size: ' + tags[i][1] + 'px;">' + tags[i][0] + '</a> ';
+        cloud += '<a href="' + url_for_key(tags[i][0]) + '" style="font-size: ' + tags[i][1] + 'px;">' + tags[i][0] + '</a> ';
     }
     tagcloud.append(cloud);
 
@@ -149,16 +149,36 @@ function print_prevalent_value_list(key, list) {
     }).join(' &bull; ');
 }
 
+function html_escape(text) {
+    return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function url_for_key(key) {
+    var k = encodeURIComponent(key);
+    if (key.match(/[=\/]/)) {
+        return '/keys/?key=' + k;
+    } else {
+        return '/keys/' + k;
+    }
+}
+
+function url_for_tag(key, value) {
+    var k = encodeURIComponent(key),
+        v = encodeURIComponent(value);
+    if (key.match(/[=\/]/) || value.match(/[=\/]/)) {
+        return '/tags/?key=' + k + '&value=' + v;
+    } else {
+        return '/tags/' + k + '=' + v;
+    }
+}
+
 function link_to_value_with_title(key, value, extra) {
     var k = encodeURIComponent(key),
         v = encodeURIComponent(value),
-        title = html_escape(value) + ' ' + extra;
+        title = html_escape(value) + ' ' + extra,
+        url = url_for_tag(key, value);
 
-    if (key.match(/[=\/]/) || value.match(/[=\/]/)) {
-        return '<a href="/tags/?key=' + k + '&value=' + v + '" title="' + title + '" tipsy="e">' + pp_value(value) + '</a>';
-    } else {
-        return '<a href="/tags/' + k + '=' + v + '" title="' + title + '" tipsy="e">' + pp_value(value) + '</a>';
-    }
+    return '<a href="' + url + '" title="' + title + '" tipsy="e">' + pp_value(value) + '</a>';
 }
 
 function print_value_with_percent(value, fraction) {
@@ -215,52 +235,28 @@ function pp_value_with_highlight(value, highlight) {
 }
 
 function link_to_value_with_highlight(key, value, highlight) {
-    return '<a href="' + url_to_value(key, value) + '">' + pp_value_with_highlight(value, highlight) + '</a>';
+    return '<a href="' + url_for_tag(key, value) + '">' + pp_value_with_highlight(value, highlight) + '</a>';
 }
 
-function html_escape(text) {
-    return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-}
+function link_to_key(key, highlight) {
+    var hk, k = encodeURIComponent(key);
 
-function link_to_key(key) {
-    var k = encodeURIComponent(key);
-
-    if (key.match(/[=\/]/)) {
-        return '<a href="/keys/?key=' + k + '">' + pp_key(key) + '</a>';
+    if (highlight === undefined) {
+        hk = pp_key(key);
     } else {
-        return '<a href="/keys/'      + k + '">' + pp_key(key) + '</a>';
+        var re = new RegExp('(' + highlight + ')', 'gi');
+        hk = key.replace(re, "<b>$1</b>");
     }
+
+    return '<a href="' + url_for_key(key) + '">' + hk + '</a>';
 }
 
-function link_to_key_with_highlight(key, highlight) {
-    var k = encodeURIComponent(key);
-
-    var re = new RegExp('(' + highlight + ')', 'gi');
-    var hk = key.replace(re, "<b>$1</b>");
-
-    if (key.match(/[=\/]/)) {
-        return '<a href="/keys/?key=' + k + '">' + hk + '</a>';
-    } else {
-        return '<a href="/keys/'      + k + '">' + hk + '</a>';
-    }
-}
-
-function url_to_value(key, value) {
-    var k = encodeURIComponent(key),
-        v = encodeURIComponent(value);
-    if (key.match(/[=\/]/) || value.match(/[=\/]/)) {
-        return '/tags/?key=' + k + '&value=' + v;
-    } else {
-        return '/tags/' + k + '=' + v;
-    }
+function link_to_value(key, value) {
+    return '<a href="' + url_for_tag(key, value) + '">' + pp_value(value) + '</a>';
 }
 
 function link_to_tag(key, value) {
     return link_to_key(key) + '=' + link_to_value(key, value);
-}
-
-function link_to_value(key, value) {
-    return '<a href="' + url_to_value(key, value) + '">' + pp_value(value) + '</a>';
 }
 
 function link_to_key_or_tag(key, value) {
