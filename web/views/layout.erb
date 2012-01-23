@@ -15,7 +15,7 @@
             <div id="header_date" title="<%= t.taginfo.data_from_description %>" tipsy="ne">
                 <%= t.taginfo.data_from %>: <%= @data_until %> UTC
             </div>
-            <div id="header_forms">
+            <div id="header_forms" class="no-print">
                 <form id="set_language" action="/switch_locale">
                     <input type="hidden" name="url" value="<%= request.path %>"/>
                     <select id="locale" name="locale">
@@ -41,7 +41,7 @@
         <div id="main">
 <%= yield %>
         </div>
-        <div id="footer">
+        <div id="footer" class="no-print">
             <div id="footer_left">
                 <a class="extlink" href="http://www.openstreetmap.org/"><b>OpenStreetMap</b> - The Free Wiki World Map</a>
             </div>

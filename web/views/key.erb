@@ -1,5 +1,5 @@
 <div class="pre">
-    <div id="tools">
+    <div id="tools" class="no-print">
         <% if @count_all_values < 1000 %>
             <%= xapi_link('*', @key) %> <%= josm_link('*', @key) %>
         <% else %>
@@ -20,7 +20,7 @@
     <p><span title="<%= t.pages.key.description_from_wiki %>" tipsy="w"><%= @desc %></span></p>
 </div>
 <div id="tabs">
-    <ul>
+    <ul class="no-print">
         <li><a href="#overview"><%= t.taginfo.overview %></a></li>
         <li><a href="#values"><%= t.osm.values %></a></li>
         <li><a href="#keys"><%= t.taginfo.key_combinations %></a></li>

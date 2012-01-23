@@ -7,6 +7,12 @@ body {
     line-height: 130%;
 }
 
+@media print {
+    .no-print {
+        display: none !important;
+    }
+}
+
 img {
     border: 0 none;
 }
