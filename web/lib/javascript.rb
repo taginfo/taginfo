@@ -39,14 +39,6 @@ class JQuery
     # show up as JQuery class methods. 
     extend R18n::Helpers
 
-    def self.ready
-        page = ''
-        content = yield page
-        "jQuery(document).ready(function() {\n" +
-            (page=='' ? content : page) +
-        "});\n"
-    end
-
     def self.flexigrid(id, options)
         defaults = {
             :method        => 'GET',

@@ -1,14 +1,3 @@
-<%
-    @languages = @db.execute('SELECT language FROM wiki_languages ORDER by language').map do |row|
-        row['language']
-    end
-
-    lang_lookup = Hash.new
-    @languages.each_with_index do |lang, idx|
-        lang_lookup[lang] = idx + 1
-    end
-    @languages_lookup = @languages.map{ |lang| "'#{lang}': #{lang_lookup[lang]}" }.join(', ')
-%>
 <div class="pre">
     <h1><%= t.reports.language_comparison_table_for_keys_in_the_wiki.name %></h1>
     <%= t.reports.language_comparison_table_for_keys_in_the_wiki.intro %>
@@ -23,51 +12,4 @@
         <tr><td><img src="/img/sources/wiki/wiki-r.png" alt="[r]"/></td><td><%= t.reports.language_comparison_table_for_keys_in_the_wiki.icons.redirect %></td></tr>
     </table>
 </div>
-<script type="text/javascript">
-    jQuery(document).ready(function() {
-        var lang_to_idx = {
-            <%= @languages_lookup %>
-        };
-        var rp = calculate_flexigrid_rp(jQuery('div.box')) - 1;
-        current_grid = 'grid-keys';
-        grids[current_grid] = jQuery('#grid-keys').flexigrid({
-            url: '/api/2/wiki/keys',
-            method: 'GET',
-            dataType: 'json',
-            colModel: [
-                { display: '<br/>Key', name: 'key', width: 200, sortable: true },
-                <% @languages.each do |lang| %>
-                { display: '<%= ::Language[lang].native_name %><br /><span class="lang" style="margin-top: 2px;"><%= lang %></span>', name: '<%= lang %>', align: 'center', width: 60, sortable: false },
-                <% end %>
-            ],
-            searchitems: [
-                { display: 'Key', name: 'key' }
-            ],
-            sortname: 'key',
-            sortorder: 'asc',
-            showToggleBtn: false,
-            showTableToggleBtn: false,
-            usepager: true,
-            useRp: false,
-            rp: rp,
-            height: 'auto',
-            onSuccess: function(grid) {
-                grid.fixHeight();
-            },
-            preProcess: function(data) {
-                return {
-                    total: data.total,
-                    page: data.page,
-                    rows: jQuery.map(data.data, function(row, i) {
-                        d = [link_to_key(row.key) <%= @languages.map{ ", ''"}.join() %>];
-                        for (var lang in row.lang) {
-                            ptype = row.lang[lang];
-                            d[lang_to_idx[lang]] = '<img src="/img/sources/wiki/wiki-' + ptype + '.png" alt="[' + ptype + ']"/>';
-                        }
-                        return { 'cell': d };
-                    })
-                };
-            }
-        });
-    });
-</script>
+<% javascript "#{ r18n.locale.code }/reports/language_comparison_table_for_keys_in_the_wiki" %>

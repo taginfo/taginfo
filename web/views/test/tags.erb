@@ -7,8 +7,9 @@
     <a href="/tags/<%= h tag['key'] %>" class="popkey" style="font-size: <%= tagcloud_size(tag) %>px;" title="<%= tag['count'] %>"><%= h tag['key'] %></a>
 <% end %>
 
-<script type="text/javascript">
-    jQuery(document).ready(function() {
+<% javascript do
+    JS.raw(<<"JAVASCRIPT")
+function page_init() {
         jQuery('#popular-keys').flexigrid({
             url: '/api/2/db/popular_keys',
             method: 'GET',
@@ -47,5 +48,7 @@
                 return data;
             }
         });
-    });
-</script>
+}
+JAVASCRIPT
+end
+%>
