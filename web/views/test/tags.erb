@@ -4,7 +4,7 @@
 </table>
 
 <% @tags.each do |tag| %>
-    <a href="/tags/<%= h tag['key'] %>" class="popkey" style="font-size: <%= tagcloud_size(tag) %>px; color: <%= tagcloud_color(tag) %>;" title="<%= tag['count'] %>"><%= h tag['key'] %></a>
+    <a href="/tags/<%= h tag['key'] %>" class="popkey" style="font-size: <%= tagcloud_size(tag) %>px;" title="<%= tag['count'] %>"><%= h tag['key'] %></a>
 <% end %>
 
 <script type="text/javascript">

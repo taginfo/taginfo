@@ -76,21 +76,8 @@ def external_link(id, title, link, new_window=false)
 end
 
 def tagcloud_size(tag)
-    #(Math.log(0.000001 + tag['scale'].to_f * Math::E) * 36 + 12).to_i
     x = tag['scale1'].to_f / 17 / 2 + tag['pos'] / 2
     (x * 32 + 10).to_i
-end
-
-def tagcloud_color(tag)
-    c = 0xa0;
-    if tag['in_wiki'].to_i == 1
-        c -= 0x40;
-    end
-    if tag['in_josm'].to_i == 1
-        c -= 0x60;
-    end
-    sprintf('#%02x%02x%02x', c, c, c)
-    c = '#000000';
 end
 
 def get_filter
