@@ -368,7 +368,7 @@ div.colCopy {
 }
 
 .flexigrid div.hDiv th.thOver div, .flexigrid div.hDiv th.sorted.thOver div {
-    border-bottom: 1px solid orange;
+    background-color: #a0a098 !important;
 }
 
 .flexigrid div.hDiv th.sorted div {
@@ -462,21 +462,8 @@ div.colCopy {
 .flexigrid div.bDiv tr.trOver td.sorted,
 .flexigrid div.bDiv tr.trOver td {
     background: #ffffff;
-    border-bottom: 0px; /*1px dotted #a8d8eb;*/
+    border-bottom: 0px;
 }
-
-/*        .flexigrid div.bDiv tr.trSelected:hover td,
-    .flexigrid div.bDiv tr.trSelected:hover td.sorted,
-    .flexigrid div.bDiv tr.trOver.trSelected td.sorted,
-    .flexigrid div.bDiv tr.trOver.trSelected td,
-    .flexigrid tr.trSelected td.sorted,
-    .flexigrid tr.trSelected td
-        {
-        background: #d5effc url(images/hl.png) repeat-x top;
-        border-right: 1px solid #d2e3ec;
-        border-left: 1px solid #eef8ff;
-        border-bottom: 1px solid #a8d8eb;
-        }*/
 
 /* novstripe adjustments */
 
