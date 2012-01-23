@@ -182,9 +182,6 @@ class Taginfo < Sinatra::Base
                 :nomsg    => trans.t.flexigrid.nomsg,
                 :errormsg => trans.t.flexigrid.errormsg,
             },
-            :instance_description => {
-                :title => trans.t.taginfo.instance.title,
-            },
             :misc => {
                 :values_less_than_one_percent => trans.t.misc.values_less_than_one_percent,
                 :empty_string => trans.t.misc.empty_string,

@@ -87,7 +87,7 @@ class Taginfo < Sinatra::Base
         @value_json = @value.to_json
         @value_pp   = pp_value(@value)
 
-        @title = [@key_html + '=' + @value_html, t.taginfo.tags]
+        @title = [@key_html + '=' + @value_html, t.osm.tags]
         section :tags
 
         @filter_type = get_filter()
