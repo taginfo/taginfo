@@ -101,6 +101,7 @@ pages:
         intro: |
                 This table shows the most common tags in the database.
     key:
+        description_from_wiki: Description of this key from the wiki (if available in your chosen language, otherwise in English).
         no_description_in_wiki: No description for this key in the wiki.
         filter:
             label: |
@@ -128,6 +129,7 @@ pages:
             choice: |
                   Choose style:
     tag:
+        description_from_wiki: Description of this tag from the wiki (if available in your chosen language, otherwise in English).
         no_description_in_wiki: No description for this tag in the wiki.
         other_tags_used:
             title: Other tags used together with this tag

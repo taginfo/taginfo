@@ -105,6 +105,7 @@ pages:
         intro: |
                 Diese Tabelle zeigt die häufigsten Tags in der Datenbank.
     key:
+        description_from_wiki: Beschreibung dieses Keys aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf englisch).
         no_description_in_wiki: Keine Beschreibung dieses Keys im Wiki.
         filter:
             label: |
@@ -132,6 +133,7 @@ pages:
             choice: |
                   Stil auswählen:
     tag:
+        description_from_wiki: Beschreibung dieses Tags aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf englisch).
         no_description_in_wiki: Keine Beschreibung dieses Tags im Wiki.
         other_tags_used:
             title: Tags, die mit diesem Tag zusammen benutzt werden
