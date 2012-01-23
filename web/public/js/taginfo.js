@@ -1,7 +1,40 @@
 // taginfo.js
 
+// capitalize a string
+String.prototype.capitalize = function() {
+    return this.substr(0, 1).toUpperCase() + this.substr(1);
+}
+
+// print a number as percent value with two digits after the decimal point
+Number.prototype.print_as_percent = function() {
+    return (this * 100).toFixed(2) + '%';
+};
+
+/* ============================ */
+
 var grids = {};
 var current_grid = '';
+
+/* ============================ */
+
+function init_tipsy() {
+    jQuery('*[tipsy]').each(function(index, obj) {
+        obj = jQuery(obj);
+        obj.tipsy({ opacity: 1, delayIn: 500, gravity: obj.attr('tipsy') });
+    });
+}
+
+function resize_box() {
+    var height = jQuery(window).height();
+
+    height -= jQuery('div#header').outerHeight(true);
+    height -= jQuery('div.pre').outerHeight(true);
+    height -= jQuery('.ui-tabs-nav').outerHeight(true);
+    height -= jQuery('div#footer').outerHeight(true);
+
+    var wrapper = jQuery('.resize,.ui-tabs-panel');
+    wrapper.outerHeight(height);
+}
 
 function resize_home() {
     var tagcloud = jQuery('#tagcloud');
@@ -34,18 +67,6 @@ function resize_home() {
     }
 }
 
-function resize_box() {
-    var height = jQuery(window).height();
-
-    height -= jQuery('div#header').outerHeight(true);
-    height -= jQuery('div.pre').outerHeight(true);
-    height -= jQuery('.ui-tabs-nav').outerHeight(true);
-    height -= jQuery('div#footer').outerHeight(true);
-
-    var wrapper = jQuery('.resize,.ui-tabs-panel');
-    wrapper.outerHeight(height);
-}
-
 function resize_grid() {
     if (grids[current_grid]) {
         var grid = grids[current_grid][0].grid;
@@ -57,6 +78,8 @@ function resize_grid() {
         }
     }
 }
+
+/* ============================ */
 
 function hover_expand(text) {
     return '<span class="overflow">' + text + '</span>';
@@ -84,61 +107,6 @@ function print_language(code, native_name, english_name) {
     return '<span class="lang" title="' + native_name + ' (' + english_name + ')">' + code + '</span> ' + native_name;
 }
 
-function print_key_list(list) {
-    return jQuery.map(list, function(key, i) {
-        return link_to_key(key);
-    }).join(' &bull; ');
-}
-
-function print_key_or_tag_list(list) {
-    return jQuery.map(list, function(tag, i) {
-        if (tag.match(/=/)) {
-            var el = tag.split('=', 2);
-            return link_to_tag(el[0], el[1]);
-        } else {
-            return link_to_key(tag);
-        }
-    }).join(' &bull; ');
-}
-
-function print_prevalent_value_list(key, list) {
-    if (list.length == 0) {
-        return empty(texts.misc.values_less_than_one_percent);
-    }
-    return jQuery.map(list, function(item, i) {
-        return link_to_value_with_title(key, item.value, '(' + (item.fraction * 100).toFixed(2) + '%)');
-    }).join(' &bull; ');
-}
-
-function link_to_value_with_title(key, value, extra) {
-    var k = encodeURIComponent(key),
-        v = encodeURIComponent(value),
-        title = html_escape(value) + ' ' + extra;
-
-    if (key.match(/[=\/]/) || value.match(/[=\/]/)) {
-        return '<a class="taglink" href="/tags/?key=' + k + '&value=' + v + '" title="' + title + '">' + pp_value(value) + '</a>';
-    } else {
-        return '<a class="taglink" href="/tags/' + k + '=' + v + '" title="' + title + '">' + pp_value(value) + '</a>';
-    }
-}
-
-function print_tag_list(key, list) {
-    return jQuery.map(list, function(value, i) {
-        return link_to_value(key, value);
-    }).join(' &bull; ');
-}
-
-function print_value_with_percent(value, fraction) {
-    var v1 = print_with_ts(value),
-        v2 = fraction.print_as_percent();
-    return '<div class="value">' + v1 + '</div><div class="fraction">' + v2 + '</div><div class="bar" style="width: ' + (fraction*100).toFixed() + 'px;"></div>';
-}
-
-// capitalize a string
-String.prototype.capitalize = function() {
-    return this.substr(0, 1).toUpperCase() + this.substr(1);
-}
-
 function print_image(type) {
     type = type.replace(/s$/, '');
     var name;
@@ -159,10 +127,45 @@ function print_with_ts(value) {
     }
 }
 
-// print a number as percent value with two digits after the decimal point
-Number.prototype.print_as_percent = function() {
-    return (this * 100).toFixed(2) + '%';
-};
+/* ============================ */
+
+function print_key_or_tag_list(list) {
+    return jQuery.map(list, function(tag, i) {
+        if (tag.match(/=/)) {
+            var el = tag.split('=', 2);
+            return link_to_tag(el[0], el[1]);
+        } else {
+            return link_to_key(tag);
+        }
+    }).join(' &bull; ');
+}
+
+function print_prevalent_value_list(key, list) {
+    if (list.length == 0) {
+        return empty(texts.misc.values_less_than_one_percent);
+    }
+    return jQuery.map(list, function(item, i) {
+        return link_to_value_with_title(key, item.value, '(' + item.fraction.print_as_percent() + ')');
+    }).join(' &bull; ');
+}
+
+function link_to_value_with_title(key, value, extra) {
+    var k = encodeURIComponent(key),
+        v = encodeURIComponent(value),
+        title = html_escape(value) + ' ' + extra;
+
+    if (key.match(/[=\/]/) || value.match(/[=\/]/)) {
+        return '<a href="/tags/?key=' + k + '&value=' + v + '" title="' + title + '" tipsy="e">' + pp_value(value) + '</a>';
+    } else {
+        return '<a href="/tags/' + k + '=' + v + '" title="' + title + '" tipsy="e">' + pp_value(value) + '</a>';
+    }
+}
+
+function print_value_with_percent(value, fraction) {
+    var v1 = print_with_ts(value),
+        v2 = fraction.print_as_percent();
+    return '<div class="value">' + v1 + '</div><div class="fraction">' + v2 + '</div><div class="bar" style="width: ' + (fraction*100).toFixed() + 'px;"></div>';
+}
 
 var pp_chars = '!"#$%&()*+,-/;<=>?@[\\]^`{|}~' + "'";
 
@@ -211,18 +214,8 @@ function pp_value_with_highlight(value, highlight) {
     return values.join('<b>' + highlight + '</b>');
 }
 
-function link_to_key_with_highlight(key, highlight) {
-    var k = encodeURIComponent(key);
-
-    if (key.match(/[=\/]/)) {
-        return '<a class="taglink" href="/keys/?key=' + k + '">' + pp_key_with_highlight(key, highlight) + '</a>';
-    } else {
-        return '<a class="taglink" href="/keys/'      + k + '">' + pp_key_with_highlight(key, highlight) + '</a>';
-    }
-}
-
 function link_to_value_with_highlight(key, value, highlight) {
-    return '<a class="taglink" href="' + url_to_value(key, value) + '">' + pp_value_with_highlight(value, highlight) + '</a>';
+    return '<a href="' + url_to_value(key, value) + '">' + pp_value_with_highlight(value, highlight) + '</a>';
 }
 
 function html_escape(text) {
@@ -233,27 +226,23 @@ function link_to_key(key) {
     var k = encodeURIComponent(key);
 
     if (key.match(/[=\/]/)) {
-        return '<a class="taglink" href="/keys/?key=' + k + '">' + pp_key(key) + '</a>';
+        return '<a href="/keys/?key=' + k + '">' + pp_key(key) + '</a>';
     } else {
-        return '<a class="taglink" href="/keys/'      + k + '">' + pp_key(key) + '</a>';
+        return '<a href="/keys/'      + k + '">' + pp_key(key) + '</a>';
     }
 }
 
 function link_to_key_with_highlight(key, highlight) {
     var k = encodeURIComponent(key);
 
-    var re = new RegExp('(' + highlight + ')', 'g');
+    var re = new RegExp('(' + highlight + ')', 'gi');
     var hk = key.replace(re, "<b>$1</b>");
 
     if (key.match(/[=\/]/)) {
-        return '<a class="taglink" href="/keys/?key=' + k + '">' + hk + '</a>';
+        return '<a href="/keys/?key=' + k + '">' + hk + '</a>';
     } else {
-        return '<a class="taglink" href="/keys/'      + k + '">' + hk + '</a>';
+        return '<a href="/keys/'      + k + '">' + hk + '</a>';
     }
-}
-
-function link_to_value(key, value) {
-    return '<a class="taglink" href="' + url_to_value(key, value) + '">' + pp_value(value) + '</a>';
 }
 
 function url_to_value(key, value) {
@@ -270,6 +259,10 @@ function link_to_tag(key, value) {
     return link_to_key(key) + '=' + link_to_value(key, value);
 }
 
+function link_to_value(key, value) {
+    return '<a href="' + url_to_value(key, value) + '">' + pp_value(value) + '</a>';
+}
+
 function link_to_key_or_tag(key, value) {
     var link = link_to_key(key);
     if (value && value != '') {
@@ -279,56 +272,6 @@ function link_to_key_or_tag(key, value) {
     }
     return link;
 }
-
-jQuery(document).ready(function() {
-    jQuery('#javascriptmsg').remove();
-
-    jQuery('select').customStyle();
-
-    jQuery.getQueryString = (function(a) {
-        if (a == "") return {};
-        var b = {};
-        for (var i = 0; i < a.length; i++) {
-            var p=a[i].split('=');
-            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-        }
-        return b;
-    })(window.location.search.substr(1).split('&'))
-
-    jQuery('*[tipsy]').each(function(index, obj) {
-        obj = jQuery(obj);
-        obj.tipsy({ opacity: 1, delayIn: 500, gravity: obj.attr('tipsy') });
-    });
-
-    resize_box();
-
-    if (typeof page_init === 'function') {
-        page_init();
-    }
-
-    jQuery('#locale').bind('change', function() {
-        jQuery('#set_language').submit();
-    });
-
-    jQuery('#search').autocomplete({
-        minLength: 2,
-        source: '/search/suggest?format=simple',
-        delay: 10,
-        select: function(event, ui) {
-            var query = ui.item.value;
-            if (query.match(/=/)) {
-                window.location = '/tags/' + ui.item.value;
-            } else {
-                window.location = '/keys/' + ui.item.value;
-            }
-        }
-    }).focus();
-
-    jQuery(window).resize(function() {
-        resize_box();
-        resize_grid();
-    });
-});
 
 /* ============================ */
 
@@ -340,6 +283,7 @@ var flexigrid_defaults = {
     usepager      : true,
     useRp         : false,
     onSuccess     : function(grid) {
+        init_tipsy();
         grid.fixHeight();
     }
 };
@@ -390,4 +334,53 @@ function init_tabs(params) {
         }
     });
 }
+
+/* ============================ */
+
+jQuery(document).ready(function() {
+    jQuery('#javascriptmsg').remove();
+
+    jQuery('select').customStyle();
+
+    jQuery.getQueryString = (function(a) {
+        if (a == "") return {};
+        var b = {};
+        for (var i = 0; i < a.length; i++) {
+            var p=a[i].split('=');
+            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+        }
+        return b;
+    })(window.location.search.substr(1).split('&'));
+
+    init_tipsy();
+
+    resize_box();
+
+    if (typeof page_init === 'function') {
+        page_init();
+    }
+
+    jQuery('#locale').bind('change', function() {
+        jQuery('#set_language').submit();
+    });
+
+    jQuery('#search').autocomplete({
+        minLength: 2,
+        source: '/search/suggest?format=simple',
+        delay: 10,
+        select: function(event, ui) {
+            var query = ui.item.value;
+            if (query.match(/=/)) {
+                window.location = '/tags/' + ui.item.value;
+            } else {
+                window.location = '/keys/' + ui.item.value;
+            }
+        }
+    }).focus();
+
+    jQuery(window).resize(function() {
+        resize_box();
+        resize_grid();
+    });
+});
 
