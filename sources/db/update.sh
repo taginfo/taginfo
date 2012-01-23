@@ -36,8 +36,7 @@ sqlite3 $DATABASE <../init.sql
 echo "`$DATECMD` Running pre.sql..."
 sqlite3 $DATABASE <pre.sql
 
-echo "`$DATECMD` Running count... "
-
+echo "`$DATECMD` Running tagstats... "
 top=`../../bin/taginfo-config.rb geodistribution.top`
 right=`../../bin/taginfo-config.rb geodistribution.right`
 bottom=`../../bin/taginfo-config.rb geodistribution.bottom`
@@ -45,8 +44,13 @@ left=`../../bin/taginfo-config.rb geodistribution.left`
 width=`../../bin/taginfo-config.rb geodistribution.width`
 height=`../../bin/taginfo-config.rb geodistribution.height`
 
-#valgrind --leak-check=full --show-reachable=yes ./tagstats $PLANETFILE $DATABASE >valgrind.log 2>&1
-./tagstats -T $DIR/interesting_tags.lst --left=$left --bottom=$bottom --top=$top --right=$right --width=$width --height=$height $PLANETFILE $DATABASE
+TAGSTATS=`../../bin/taginfo-config.rb sources.db.tagstats`
+if [ "x" = "x$TAGSTATS" ]; then
+    TAGSTATS="./tagstats"
+fi
+
+#TAGSTATS="valgrind --leak-check=full --show-reachable=yes $TAGSTATS"
+$TAGSTATS -T $DIR/interesting_tags.lst --left=$left --bottom=$bottom --top=$top --right=$right --width=$width --height=$height $PLANETFILE $DATABASE
 
 echo "`$DATECMD` Running update_characters... "
 ./update_characters.pl $DIR
