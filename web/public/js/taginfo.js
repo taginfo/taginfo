@@ -81,12 +81,15 @@ function resize_grid() {
 
 /* ============================ */
 
-function hover_expand(text) {
-    return '<span class="overflow">' + text + '</span>';
-}
-
-function empty(text) {
-    return '<span class="empty">' + text + '</span>';
+function tag(element, text, attrs) {
+    if (attrs === undefined) {
+        attrs = {}
+    }
+    var attributes = '';
+    for (a in attrs) {
+        attributes += ' ' + a + '="' + attrs[a] + '"';
+    }
+    return '<' + element + attributes + '>' + text + '</' + element + '>';
 }
 
 function link(url, text, attrs) {
@@ -94,11 +97,19 @@ function link(url, text, attrs) {
         attrs = {}
     }
     attrs.href = url;
-    var attributes = '';
-    for (a in attrs) {
-        attributes += ' ' + a + '="' + attrs[a] + '"';
-    }
-    return '<a' + attributes + '>' + text + '</a>';
+    return tag('a', text, attrs);
+}
+
+function span(text, c) {
+    return tag('span', text, { class: c });
+}
+
+function hover_expand(text) {
+    return span(text, 'overflow');
+}
+
+function empty(text) {
+    return span(text, 'empty');
 }
 
 function print_wiki_link(title, options) {
@@ -116,7 +127,7 @@ function print_wiki_link(title, options) {
 }
 
 function print_language(code, native_name, english_name) {
-    return '<span class="lang" title="' + native_name + ' (' + english_name + ')">' + code + '</span> ' + native_name;
+    return tag('span', code, { class: 'lang', title: native_name + ' (' + english_name + ')' }) + ' ' + native_name;
 }
 
 function print_image(type) {
@@ -185,25 +196,24 @@ function url_for_tag(key, value) {
 }
 
 function link_to_value_with_title(key, value, extra) {
-    var k = encodeURIComponent(key),
-        v = encodeURIComponent(value),
-        title = html_escape(value) + ' ' + extra,
-        url = url_for_tag(key, value);
-
-    return link(url, pp_value(value), { title: title, tipsy: 'e'});
+    return link(
+        url_for_tag(key, value),
+        pp_value(value),
+        { title: html_escape(value) + ' ' + extra, tipsy: 'e'}
+    );
 }
 
 function print_value_with_percent(value, fraction) {
-    var v1 = print_with_ts(value),
-        v2 = fraction.print_as_percent();
-    return '<div class="value">' + v1 + '</div><div class="fraction">' + v2 + '</div><div class="bar" style="width: ' + (fraction*100).toFixed() + 'px;"></div>';
+    return '<div class="value">' + print_with_ts(value) +
+     '</div><div class="fraction">' + fraction.print_as_percent() +
+     '</div><div class="bar" style="width: ' + (fraction*100).toFixed() + 'px;"></div>';
 }
 
 var pp_chars = '!"#$%&()*+,-/;<=>?@[\\]^`{|}~' + "'";
 
 function pp_key(key) {
     if (key == '') {
-        return '<span class="badchar empty">' + texts.misc.empty_string + '</span>';
+        return span(texts.misc.empty_string, 'badchar empty');
     }
 
     var result = '',
@@ -212,11 +222,11 @@ function pp_key(key) {
     for (var i=0; i<length; i++) {
         var c = key.charAt(i);
         if (pp_chars.indexOf(c) != -1) {
-            result += '<span class="badchar">' + c + '</span>';
+            result += span(c, 'badchar');
         } else if (c == ' ') {
-            result += '<span class="badchar">&#x2423;</span>';
+            result += span('&#x2423;', 'badchar');
         } else if (c.match(/\s/)) {
-            result += '<span class="whitespace">&nbsp;</span>';
+            result += span('&nbsp;', 'whitespace');
         } else {
             result += c;
         }
@@ -225,15 +235,15 @@ function pp_key(key) {
     return result;
 }
 
-function pp_value(value) {
-    if (value == '') {
-        return '<span class="badchar empty">' + texts.misc.empty_string + '</span>';
-    }
-    return value.replace(/ /g, '&#x2423;').replace(/\s/g, '<span class="whitespace">&nbsp;</span>');
+function pp_value_replace(value) {
+    return value.replace(/ /g, '&#x2423;').replace(/\s/g, span('&nbsp;', 'whitespace'));
 }
 
-function pp_value_replace(value) {
-    return value.replace(/ /g, '&#x2423;').replace(/\s/g, '<span class="whitespace">&nbsp;</span>');
+function pp_value(value) {
+    if (value == '') {
+        return span(texts.misc.empty_string, 'badchar empty');
+    }
+    return pp_value_replace(value);
 }
 
 function pp_value_with_highlight(value, highlight) {
@@ -251,15 +261,12 @@ function link_to_value_with_highlight(key, value, highlight) {
 }
 
 function link_to_key(key, highlight) {
-    var hk;
-    if (highlight === undefined) {
-        hk = pp_key(key);
-    } else {
-        var re = new RegExp('(' + highlight + ')', 'gi');
-        hk = key.replace(re, "<b>$1</b>");
-    }
-
-    return link(url_for_key(key), hk);
+    return link(
+        url_for_key(key),
+        highlight === undefined ?
+            pp_key(key) : 
+            key.replace(new RegExp('(' + highlight + ')', 'gi'), "<b>$1</b>")
+    );
 }
 
 function link_to_value(key, value) {
