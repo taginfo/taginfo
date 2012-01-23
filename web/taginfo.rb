@@ -112,7 +112,6 @@ class Taginfo < Sinatra::Base
         javascript 'jquery.tipsy'
 #        javascript 'flexigrid-minified'
         javascript 'flexigrid'
-        javascript 'protovis-r3.2'
         javascript 'lang/' + r18n.locale.code
         javascript 'taginfo'
 
