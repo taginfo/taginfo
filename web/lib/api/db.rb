@@ -332,6 +332,7 @@ class Taginfo < Sinatra::Base
         :description => 'Get values used with a given key.',
         :parameters => {
             :key => 'Tag key (required).',
+            :lang => "Language (optional, default: 'en').",
             :query => 'Only show results where the value matches this query (substring match, optional).'
         },
         :paging => :optional,
@@ -342,11 +343,12 @@ class Taginfo < Sinatra::Base
             :relations => { :doc => 'Only values on tags used on relations.' }
         },
         :sort => %w( value count_all count_nodes count_ways count_relations ),
-        :result => { :value => :STRING, :count => :INT, :fraction => :FLOAT },
+        :result => { :value => :STRING, :count => :INT, :fraction => :FLOAT, :description => :STRING },
         :example => { :key => 'highway', :page => 1, :rp => 10, :sortname => 'count_ways', :sortorder => 'desc' },
         :ui => '/keys/highway#values'
     }) do
         key = params[:key]
+        lang = params[:lang] || 'en'
         filter_type = get_filter()
 
         if params[:sortname] == 'count'
@@ -379,6 +381,20 @@ class Taginfo < Sinatra::Base
             paging(params[:rp], params[:page]).
             execute()
 
+        # Read description for tag from wikipages, first in English then in the chosen
+        # language. This way the chosen language description will overwrite the default
+        # English one.
+        wikidesc = {}
+        ['en', lang].uniq.each do |lang|
+            @db.select('SELECT value, description FROM wiki.wikipages').
+                condition('lang = ?', lang).
+                condition('key = ?', key).
+                condition("value IN (#{ res.map{ |row| "'" + SQLite3::Database.quote(row['value']) + "'" }.join(',') })").
+                execute().each do |row|
+                wikidesc[row['value']] = row['description']
+            end
+        end
+
         return {
             :page  => params[:page].to_i,
             :rp    => params[:rp].to_i,
@@ -386,7 +402,8 @@ class Taginfo < Sinatra::Base
             :data  => res.map{ |row| {
                 :value    => row['value'],
                 :count    => row['count_' + filter_type].to_i,
-                :fraction => (row['count_' + filter_type].to_f / this_key_count.to_f).round_to(4)
+                :fraction => (row['count_' + filter_type].to_f / this_key_count.to_f).round_to(4),
+                :description => wikidesc[row['value']]
             } }
         }.to_json
     end

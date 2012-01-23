@@ -126,7 +126,7 @@ function page_init() {
         window.location.search = jQuery.param(qs);
     });
 
-    init_tabs('key', [#{ @key.to_json }, #{ @filter_type.to_json }]);
+    init_tabs('key', [#{ @key.to_json }, #{ @filter_type.to_json }, #{ r18n.locale.code.to_json }]);
 
     var data = #{ @prevalent_values.to_json() };
 

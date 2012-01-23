@@ -608,12 +608,13 @@ var create_flexigrid_for = {
                 }
             });
         },
-        values: function(key, filter_type) {
+        values: function(key, filter_type, lang) {
             create_flexigrid('grid-values', {
-                url: '/api/2/db/keys/values?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type),
+                url: '/api/2/db/keys/values?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type) + '&lang=' + encodeURIComponent(lang),
                 colModel: [
-                    { display: texts.osm.value, name: 'value', width: 500, sortable: true },
-                    { display: texts.misc.count, name: 'count', width: 300, sortable: true, align: 'center' }
+                    { display: texts.osm.value, name: 'value', width: 200, sortable: true },
+                    { display: texts.misc.count, name: 'count', width: 240, sortable: true, align: 'center' },
+                    { display: 'Description', name: 'description', width: 600, sortable: false, align: 'left' }
                 ],
                 searchitems: [
                     { display: texts.osm.value, name: 'value' }
@@ -623,8 +624,9 @@ var create_flexigrid_for = {
                 preProcess: function(data) {
                     data.rows = jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
-                            link_to_value(key, row.value),
-                            print_value_with_percent(row.count, row.fraction)
+                            hover_expand(link_to_value(key, row.value)),
+                            print_value_with_percent(row.count, row.fraction),
+                            row.description
                         ] };
                     });
                     delete data.data;
