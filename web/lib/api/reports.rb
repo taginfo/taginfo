@@ -27,7 +27,10 @@ class Taginfo < Sinatra::Base
         :ui => '/reports/frequently_used_keys_without_wiki_page'
     }) do
 
-        min_count = params[:min_count].to_i || 10000
+        min_count = params[:min_count].to_i
+        if min_count == 0
+            min_count = 10000
+        end
 
         english = (params[:english] == '1') ? '_en' : ''
 
