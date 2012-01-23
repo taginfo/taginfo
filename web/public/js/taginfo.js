@@ -246,20 +246,6 @@ function pp_value(value) {
     return pp_value_replace(value);
 }
 
-function pp_value_with_highlight(value, highlight) {
-    //var values = value.split(new RegExp(highlight, 'i'));
-    var values = value.split(highlight);
-    values = jQuery.map(values, function(value, i) {
-        return pp_value_replace(value);
-    });
-    highlight = pp_value_replace(highlight);
-    return values.join('<b>' + highlight + '</b>');
-}
-
-function link_to_value_with_highlight(key, value, highlight) {
-    return link(url_for_tag(key, value), pp_value_with_highlight(value, highlight));
-}
-
 function link_to_key(key, highlight) {
     return link(
         url_for_key(key),
@@ -269,8 +255,13 @@ function link_to_key(key, highlight) {
     );
 }
 
-function link_to_value(key, value) {
-    return link(url_for_tag(key, value), pp_value(value));
+function link_to_value(key, value, highlight) {
+    return link(
+        url_for_tag(key, value), 
+        highlight === undefined ?
+            pp_value(value) :
+            value.replace(new RegExp('(' + highlight + ')', 'gi'), "<b>$1</b>")
+    );
 }
 
 function link_to_tag(key, value) {
