@@ -15,7 +15,7 @@
 <% javascript do
     JS.raw(%Q{
 function page_init2() {
-    init_tabs('search', [#{ @query.to_json }]);
+    init_tabs([#{ @query.to_json }]);
 }
     })
 end

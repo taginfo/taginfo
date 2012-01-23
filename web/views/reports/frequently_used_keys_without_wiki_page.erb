@@ -20,7 +20,7 @@
 <% javascript do
     JS.raw(<<"JAVASCRIPT")
 function page_init2() {
-    create_flexigrid_for.reports.frequently_used_keys_without_wiki_page(#{ params[:english] == '1' ? '1' : '0' });
+    create_flexigrid_with_option(#{ params[:english] == '1' ? '1' : '0' });
     jQuery('#english').bind('click', function() {
         jQuery('#grid-keys').flexOptions({
             url: '/api/2/reports/frequently_used_keys_without_wiki_page?english=' + (jQuery('#english')[0].checked ? '1' : '0')

@@ -53,43 +53,4 @@
         </table>
     </div>
 </div>
-
-<% javascript do
-    JS.raw(<<"JAVASCRIPT")
-function page_init2() {
-    init_tabs('reports.characters_in_keys', []);
-
-    var data = #{ i = '@'; %w(plain colon letters space problem rest).map{ |type| i=i.next; [ { :label => i, :value => @db.stats('characters_in_keys_' + type) } ] }.to_json() };
-
-    var w=968, h=50;
-
-    var vis = new pv.Panel()
-        .canvas('canvas')
-        .width(w + 20)
-        .height(h);
-
-    var colors = #{ colors.to_json };
-
-    var scale = pv.Scale.linear(0, #{ @db.stats('num_keys') }).range(0, w);
-
-    vis.add(pv.Layout.Stack)
-        .orient('left-top')
-        .left(10)
-        .layers(data)
-        .x(10)
-        .y(function(d) { return scale(d.value); })
-    .layer.add(pv.Bar)
-        .fillStyle(function(d) { return colors[d.label]; })
-        .height(20)
-    .anchor('bottom')
-        .add(pv.Label)
-        .font('12px Arial,sans-serif')
-        .top(46)
-        .text(function(d) { return d.label; });
-
-    vis.render();
-}
-JAVASCRIPT
-end
-%>
 <% javascript "#{ r18n.locale.code }/reports/characters_in_keys" %>

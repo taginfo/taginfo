@@ -1,145 +1,143 @@
 var create_flexigrid_for = {
-    key: {
-        overview: function(key, filter_type) {
-            create_flexigrid('grid-overview', {
-                url: '/api/3/db/keys/overview?key=' + encodeURIComponent(key),
-                colModel: [
-                    { display: 'Type', name: 'type', width: 100, sortable: true },
-                    { display: 'Number of objects', name: 'count', width: 260, sortable: true, align: 'center' },
-                    { display: 'Number of values', name: 'value', width: 140, sortable: true, align: 'right' }
-                ],
-                usepager: false,
-                useRp: false,
-                preProcess: function(data) {
-                    return {
-                        total: 4,
-                        page: 1,
-                        rows: jQuery.map(data, function(row, i) {
-                            return { 'cell': [
-                                print_image(row.type) + ' ' + texts.osm[row.type],
-                                print_value_with_percent(row.count, row.count_fraction),
-                                print_with_ts(row.values)
-                            ]};
-                        })
-                    };
-                }
-            });
-        },
-        values: function(key, filter_type, lang) {
-            create_flexigrid('grid-values', {
-                url: '/api/2/db/keys/values?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type) + '&lang=' + encodeURIComponent(lang),
-                colModel: [
-                    { display: texts.osm.value, name: 'value', width: 200, sortable: true },
-                    { display: texts.misc.count, name: 'count', width: 240, sortable: true, align: 'center' },
-                    { display: 'Description', name: 'description', width: 600, sortable: false, align: 'left' }
-                ],
-                searchitems: [
-                    { display: texts.osm.value, name: 'value' }
-                ],
-                sortname: 'count',
-                sortorder: 'desc',
-                preProcess: function(data) {
-                    data.rows = jQuery.map(data.data, function(row, i) {
+    overview: function(key, filter_type) {
+        create_flexigrid('grid-overview', {
+            url: '/api/3/db/keys/overview?key=' + encodeURIComponent(key),
+            colModel: [
+                { display: 'Type', name: 'type', width: 100, sortable: true },
+                { display: 'Number of objects', name: 'count', width: 260, sortable: true, align: 'center' },
+                { display: 'Number of values', name: 'value', width: 140, sortable: true, align: 'right' }
+            ],
+            usepager: false,
+            useRp: false,
+            preProcess: function(data) {
+                return {
+                    total: 4,
+                    page: 1,
+                    rows: jQuery.map(data, function(row, i) {
                         return { 'cell': [
-                            hover_expand(link_to_value(key, row.value)),
-                            print_value_with_percent(row.count, row.fraction),
-                            row.description
-                        ] };
-                    });
-                    delete data.data;
-                    return data;
-                }
-            });
-        },
-        keys: function(key, filter_type) {
-            create_flexigrid('grid-keys', {
-                url: '/api/2/db/keys/keys?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type),
-                colModel: [
-                    { display: '<span title="Number of objects with this key that also have the other key">' + texts.misc.count + ' &rarr;</span>', name: 'to_count', width: 320, sortable: true, align: 'center' },
-                    { display: '<span title="Key used together with this key">' + texts.pages.key.other_keys_used.other + '</span>', name: 'other_key', width: 340, sortable: true },
-                    { display: '<span title="Number of objects with other key that also have this key">&rarr; ' + texts.misc.count + '</span>', name: 'from_count', width: 320, sortable: true, align: 'center' }
-                ],
-                searchitems: [
-                    { display: 'Other key', name: 'other_key' }
-                ],
-                sortname: 'to_count',
-                sortorder: 'desc',
-                preProcess: function(data) {
-                    data.rows = jQuery.map(data.data, function(row, i) {
-                        return { 'cell': [
-                            print_value_with_percent(row.together_count, row.to_fraction),
-                            link_to_key(row.other_key),
-                            print_value_with_percent(row.together_count, row.from_fraction),
-                        ] };
-                    });
-                    return data;
-                }
-            });
-        },
-        josm: function(key, filter_type) {
-            create_flexigrid('grid-josm', {
-                url: '/api/2/josm/styles/standard/keys?key=' + encodeURIComponent(key),
-                colModel: [
-                    { display: texts.osm.value, name: 'v', width: 400, sortable: true },
-                    { display: 'Icon', name: 'icon', width: 30, sortable: false, align: 'center' },
-                    { display: 'Line', name: 'line', width: 30, sortable: false, align: 'center' },
-                    { display: 'Area', name: 'area', width: 30, sortable: false, align: 'center' }
-                ],
-                sortname: 'v',
-                sortorder: 'asc',
-                emptymsg: 'No JOSM styles for this key.',
-                preProcess: function(data) {
-                    data.rows = jQuery.map(data.data, function(row, i) {
-                        return { 'cell': [
-                            row.v ? link_to_value(row.k, row.v) : row.b ? (row.b + ' (Boolean)') : '*',
-                            row.icon ? '<img src="/api/2/josm/styles/images?style=standard&image=' + row.icon + '" title="' + row.icon + '" alt=""/>' : '',
-                            '<div>' + (row.line_width > 0 ? '<div title="' + row.line_color + '" style="height: ' + row.line_width + 'px; margin-top: ' + (10 - Math.round(row.line_width/2)) + 'px; padding: 0; background-color: ' + row.line_color + '"></div>' : '') + '</div>',
-                            row.area_color ? '<div title="' + row.area_color + '" style="height: 18px; background-color: ' + row.area_color + '"></div>' : ''
-                        ] };
-                    });
-                    return data;
-                }
-            });
-        },
-        wiki: function(key, filter_type) {
-            create_flexigrid('grid-wiki', {
-                url: '/api/2/wiki/keys?key=' + encodeURIComponent(key),
-                colModel: [
-                    { display: 'Language',      name: 'lang',             width: 150, sortable: false },
-                    { display: 'Wiki page',     name: 'title',            width: 160, sortable: false, align: 'right' },
-                    { display: 'Description',   name: 'description',      width: 400, sortable: false },
-                    { display: 'Image',         name: 'image',            width: 120, sortable: false },
-                    { display: 'Objects',       name: 'objects',          width:  80, sortable: false },
-                    { display: 'Implied Tags',  name: 'tags_implied',     width: 120, sortable: false },
-                    { display: 'Combined Tags', name: 'tags_combination', width: 120, sortable: false },
-                    { display: 'Linked Tags',   name: 'tags_linked',      width: 220, sortable: false }
-                ],
-                usepager: false,
-                useRp: false,
-                preProcess: function(data) {
-                    return {
-                        total: data.size,
-                        page: 1,
-                        rows: jQuery.map(data, function(row, i) {
-                            return { 'cell': [
-                                print_language(row.lang, row.language, row.language_en),
-                                print_wiki_link(row.title),
-                                row.description,
-                                row.image == ''   ? empty(texts.misc.no_image) : hover_expand(print_wiki_link(row.image)),
-                                (row.on_node      ? '<img src="/img/types/node.16.png"     alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>') + ' ' +
-                                (row.on_way       ? '<img src="/img/types/way.16.png"      alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>') + ' ' +
-                                (row.on_area      ? '<img src="/img/types/area.16.png"     alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>') + ' ' +
-                                (row.on_relation  ? '<img src="/img/types/relation.16.png" alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>'),
-                                print_key_or_tag_list(row.tags_implies),
-                                print_key_or_tag_list(row.tags_combination),
-                                print_key_or_tag_list(row.tags_linked)
-                            ]};
-                        })
-                    };
-                }
-            });
-        }
+                            print_image(row.type) + ' ' + texts.osm[row.type],
+                            print_value_with_percent(row.count, row.count_fraction),
+                            print_with_ts(row.values)
+                        ]};
+                    })
+                };
+            }
+        });
     },
+    values: function(key, filter_type, lang) {
+        create_flexigrid('grid-values', {
+            url: '/api/2/db/keys/values?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type) + '&lang=' + encodeURIComponent(lang),
+            colModel: [
+                { display: texts.osm.value, name: 'value', width: 200, sortable: true },
+                { display: texts.misc.count, name: 'count', width: 240, sortable: true, align: 'center' },
+                { display: 'Description', name: 'description', width: 600, sortable: false, align: 'left' }
+            ],
+            searchitems: [
+                { display: texts.osm.value, name: 'value' }
+            ],
+            sortname: 'count',
+            sortorder: 'desc',
+            preProcess: function(data) {
+                data.rows = jQuery.map(data.data, function(row, i) {
+                    return { 'cell': [
+                        hover_expand(link_to_value(key, row.value)),
+                        print_value_with_percent(row.count, row.fraction),
+                        row.description
+                    ] };
+                });
+                delete data.data;
+                return data;
+            }
+        });
+    },
+    keys: function(key, filter_type) {
+        create_flexigrid('grid-keys', {
+            url: '/api/2/db/keys/keys?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type),
+            colModel: [
+                { display: '<span title="Number of objects with this key that also have the other key">' + texts.misc.count + ' &rarr;</span>', name: 'to_count', width: 320, sortable: true, align: 'center' },
+                { display: '<span title="Key used together with this key">' + texts.pages.key.other_keys_used.other + '</span>', name: 'other_key', width: 340, sortable: true },
+                { display: '<span title="Number of objects with other key that also have this key">&rarr; ' + texts.misc.count + '</span>', name: 'from_count', width: 320, sortable: true, align: 'center' }
+            ],
+            searchitems: [
+                { display: 'Other key', name: 'other_key' }
+            ],
+            sortname: 'to_count',
+            sortorder: 'desc',
+            preProcess: function(data) {
+                data.rows = jQuery.map(data.data, function(row, i) {
+                    return { 'cell': [
+                        print_value_with_percent(row.together_count, row.to_fraction),
+                        link_to_key(row.other_key),
+                        print_value_with_percent(row.together_count, row.from_fraction),
+                    ] };
+                });
+                return data;
+            }
+        });
+    },
+    josm: function(key, filter_type) {
+        create_flexigrid('grid-josm', {
+            url: '/api/2/josm/styles/standard/keys?key=' + encodeURIComponent(key),
+            colModel: [
+                { display: texts.osm.value, name: 'v', width: 400, sortable: true },
+                { display: 'Icon', name: 'icon', width: 30, sortable: false, align: 'center' },
+                { display: 'Line', name: 'line', width: 30, sortable: false, align: 'center' },
+                { display: 'Area', name: 'area', width: 30, sortable: false, align: 'center' }
+            ],
+            sortname: 'v',
+            sortorder: 'asc',
+            emptymsg: 'No JOSM styles for this key.',
+            preProcess: function(data) {
+                data.rows = jQuery.map(data.data, function(row, i) {
+                    return { 'cell': [
+                        row.v ? link_to_value(row.k, row.v) : row.b ? (row.b + ' (Boolean)') : '*',
+                        row.icon ? '<img src="/api/2/josm/styles/images?style=standard&image=' + row.icon + '" title="' + row.icon + '" alt=""/>' : '',
+                        '<div>' + (row.line_width > 0 ? '<div title="' + row.line_color + '" style="height: ' + row.line_width + 'px; margin-top: ' + (10 - Math.round(row.line_width/2)) + 'px; padding: 0; background-color: ' + row.line_color + '"></div>' : '') + '</div>',
+                        row.area_color ? '<div title="' + row.area_color + '" style="height: 18px; background-color: ' + row.area_color + '"></div>' : ''
+                    ] };
+                });
+                return data;
+            }
+        });
+    },
+    wiki: function(key, filter_type) {
+        create_flexigrid('grid-wiki', {
+            url: '/api/2/wiki/keys?key=' + encodeURIComponent(key),
+            colModel: [
+                { display: 'Language',      name: 'lang',             width: 150, sortable: false },
+                { display: 'Wiki page',     name: 'title',            width: 160, sortable: false, align: 'right' },
+                { display: 'Description',   name: 'description',      width: 400, sortable: false },
+                { display: 'Image',         name: 'image',            width: 120, sortable: false },
+                { display: 'Objects',       name: 'objects',          width:  80, sortable: false },
+                { display: 'Implied Tags',  name: 'tags_implied',     width: 120, sortable: false },
+                { display: 'Combined Tags', name: 'tags_combination', width: 120, sortable: false },
+                { display: 'Linked Tags',   name: 'tags_linked',      width: 220, sortable: false }
+            ],
+            usepager: false,
+            useRp: false,
+            preProcess: function(data) {
+                return {
+                    total: data.size,
+                    page: 1,
+                    rows: jQuery.map(data, function(row, i) {
+                        return { 'cell': [
+                            print_language(row.lang, row.language, row.language_en),
+                            print_wiki_link(row.title),
+                            row.description,
+                            row.image == ''   ? empty(texts.misc.no_image) : hover_expand(print_wiki_link(row.image)),
+                            (row.on_node      ? '<img src="/img/types/node.16.png"     alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>') + ' ' +
+                            (row.on_way       ? '<img src="/img/types/way.16.png"      alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>') + ' ' +
+                            (row.on_area      ? '<img src="/img/types/area.16.png"     alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>') + ' ' +
+                            (row.on_relation  ? '<img src="/img/types/relation.16.png" alt="yes" width="16" height="16"/>' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/>'),
+                            print_key_or_tag_list(row.tags_implies),
+                            print_key_or_tag_list(row.tags_combination),
+                            print_key_or_tag_list(row.tags_linked)
+                        ]};
+                    })
+                };
+            }
+        });
+    }
 };
 
 function page_init() {

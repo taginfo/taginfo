@@ -65,7 +65,7 @@
 <% javascript do
     JS.raw(<<"JAVASCRIPT")
 function page_init2() {
-    init_tabs('tag', [#{ @key.to_json }, #{ @value.to_json }, #{ @filter_type.to_json }]);
+    init_tabs([#{ @key.to_json }, #{ @value.to_json }, #{ @filter_type.to_json }]);
 }
 JAVASCRIPT
 end
