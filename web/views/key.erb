@@ -36,7 +36,7 @@
         <h2><%= t.taginfo.overview %></h2>
         <table id="grid-overview">
         </table>
-        <p>Objects with this key are owned by <%= @user_count %> different users.</p>
+        <p><span title="<%= t.pages.key.overview.no_endorsement %>" tipsy="n"><%= t.pages.key.overview.objects_last_edited_by(@user_count.to_s_with_ts) %></span></p>
     </div>
     <div id="values">
         <h2><%= t.pages.key.values_used %></h2>

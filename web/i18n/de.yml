@@ -115,6 +115,9 @@ pages:
             relations: Nur Relations
         number_objects: Anzahl Objekte
         values_used: Values für diesen Key
+        overview:
+            objects_last_edited_by: Objekte mit diesem Key wurden zuletzt von %1 verschiedenen Usern editiert.
+            no_endorsement: (Das bedeutet nicht, dass alle diese User den Key befürworten.)
         other_keys_used:
             title: Andere Keys, die mit diesem Key benutzt werden
             other: Andere Keys
