@@ -25,11 +25,11 @@ class Taginfo < Sinatra::Base
     <Contact>#{ TaginfoConfig.get('opensearch.contact') }</Contact>
     <Url type="application/x-suggestions+json" rel="suggestions" template="__URL__/search/suggest?term={searchTerms}"/>
     <Url type="text/html" method="get" template="__URL__/search?q={searchTerms}"/>
-    <Url type="application/opensearchdescription+xml" rel="self" template="__URL__/opensearch.xml"/>
+    <Url type="application/opensearchdescription+xml" rel="self" template="__URL__/search/opensearch.xml"/>
     <Image height="16" width="16" type="image/x-icon">__URL__/favicon.ico</Image>
 </OpenSearchDescription>
 END_XML
-        return opensearch.gsub(/__URL__/, base_url)
+        return opensearch.gsub(/__URL__/, TaginfoConfig.get('instance.url'))
     end
 
     # Returns search suggestions as per OpenSearch standard
@@ -73,7 +73,7 @@ END_XML
                 query, # the query string
                 res, # the list of suggestions
                 res.map{ |item| '' }, # the standard says this is for descriptions, we don't have any so this is empty
-                res.map{ |item| base_url + '/tags/' + item } # the page this search should got to (ignored by FF, Chrome)
+                res.map{ |item| TaginfoConfig.get('instance.url') + '/tags/' + item } # the page this search should got to (ignored by FF, Chrome)
             ].to_json + "\n"
         end
     end

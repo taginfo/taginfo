@@ -43,7 +43,7 @@ end
 
 def section(id)
     @section = id.to_s
-    @section_title = t.taginfo[@section]
+    @section_title = (@section =~ /^(keys|tags)$/) ? t.osm[@section] : t.taginfo[@section]
 end
 
 # Escape tag key or value for XAPI according to
@@ -179,10 +179,5 @@ end
 def api(version, path, doc=nil, &block)
     APIDoc.new(version, path, doc) unless doc.nil?
     get("/api/#{version}/#{path}", &block)
-end
-
-# return the base url for this site
-def base_url
-    request.scheme + '://' + request.host + ':' + request.port.to_s 
 end
 
