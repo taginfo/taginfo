@@ -366,6 +366,7 @@ jQuery(document).ready(function() {
     }
 
     jQuery('#locale').bind('change', function() {
+        jQuery('#url').val(window.location);
         jQuery('#set_language').submit();
     });
 

@@ -17,7 +17,7 @@
             </div>
             <div id="header_forms" class="no-print">
                 <form id="set_language" action="/switch_locale">
-                    <input type="hidden" name="url" value="<%= request.path %>"/>
+                    <input type="hidden" id="url" name="url" value="<%= TaginfoConfig.get('instance.url') + request.path %>"/>
                     <select id="locale" name="locale">
 <% r18n.available_locales.sort{ |a,b| a.title <=> b.title }.each do |locale| %>
                         <option value="<%= locale.code %>"<%= locale.code == r18n.locale.code ? ' selected="selected"' : ''%>><%= locale.title %>&nbsp;</option>

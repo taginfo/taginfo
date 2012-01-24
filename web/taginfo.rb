@@ -141,7 +141,7 @@ class Taginfo < Sinatra::Base
     # It sets a cookie and redirects back to the page the user was coming from.
     get '/switch_locale' do
         response.set_cookie('taginfo_locale', params[:locale])
-        redirect(TaginfoConfig.get('instance.url') + params[:url])
+        redirect(params[:url])
     end
 
     #-------------------------------------
