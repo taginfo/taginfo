@@ -45,7 +45,7 @@
             <table id="grid-wiki">
             </table>
         <% else %>
-            <p class="empty"><%= t.pages.tag.wiki_pages.none_found %></p>
+            <p class="empty"><%= t.pages.tag.wiki_pages.none_found %> <%= @wiki_count_key > 0 ? t.pages.tag.wiki_pages.suggest_key_wiki_page(link_to_key(@key, '#wiki')) : '' %></p>
             <p><a class="extlink" target="_blank" rel="nofollow" href="http://wiki.openstreetmap.org/w/index.php?action=edit&title=Tag:<%= escape(@tag) %>"><%= t.pages.tag.wiki_pages.create %></a></p>
         <% end %>
     </div>

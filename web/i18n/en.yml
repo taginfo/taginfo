@@ -125,7 +125,7 @@ pages:
         wiki_pages:
             title: Wiki pages about this key
             none_found: No wiki page available for this key.
-            create: Create wiki page
+            create: Create wiki page for this key
         josm_rules:
             title: JOSM style rules with this key
             choice: |
@@ -142,7 +142,8 @@ pages:
         wiki_pages:
             title: Wiki pages about this tag
             none_found: No wiki page available for this tag.
-            create: Create wiki page
+            create: Create wiki page for this tag
+            suggest_key_wiki_page: Maybe you can find some more information on the wiki page for the key %1.
         josm_rules:
             title: JOSM style rules with this tag
             choice: |

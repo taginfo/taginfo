@@ -129,7 +129,7 @@ pages:
         wiki_pages:
             title: Wiki-Seiten zu diesem Key
             none_found: Keine Wiki-Seiten für diesen Key vorhanden.
-            create: Wiki-Seite anlegen
+            create: Wiki-Seite für diesen Key anlegen
         josm_rules:
             title: JOSM-Stil-Regeln mit diesem Key
             choice: |
@@ -146,7 +146,8 @@ pages:
         wiki_pages:
             title: Wiki-Seiten zu diesem Tag
             none_found: Keine Wiki-Seiten für diesen Tag vorhanden.
-            create: Wiki-Seite anlegen
+            create: Wiki-Seite für diesen Tag anlegen
+            suggest_key_wiki_page: Vielleicht gibt es auf der Wiki-Seite für den Key %1 mehr Informationen.
         josm_rules:
             title: JOSM-Stil-Regeln mit diesem Tag
             choice: |

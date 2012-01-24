@@ -129,13 +129,13 @@ def pp_value(value)
     return escape_html(value).gsub(/ /, '&#x2423;').gsub(/\s/, '<span class="whitespace">&nbsp;</span>')
 end
 
-def link_to_key(key)
+def link_to_key(key, tab='')
     k = escape(key)
 
     if key.match(/[=\/]/)
-        return '<a href="/keys/?key=' + k + '">' + pp_key(key) + '</a>'
+        return '<a href="/keys/?key=' + k + tab + '">' + pp_key(key) + '</a>'
     else
-        return '<a href="/keys/'      + k + '">' + pp_key(key) + '</a>'
+        return '<a href="/keys/'      + k + tab + '">' + pp_key(key) + '</a>'
     end
 end
 

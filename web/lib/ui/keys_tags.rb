@@ -98,7 +98,10 @@ class Taginfo < Sinatra::Base
         @sel = Hash.new('')
         @sel[@filter_type] = ' selected="selected"'
 
-        @wiki_count = @db.count('wiki.wikipages').condition('value=?', @value).condition('key=?', @key).get_first_value().to_i
+        @wiki_count = @db.count('wiki.wikipages').condition('key=?', @key).condition('value=?', @value).get_first_value().to_i
+        if @wiki_count == 0
+            @wiki_count_key = @db.count('wiki.wikipages').condition('key=?', @key).condition('value IS NULL').get_first_value().to_i
+        end
         @count_all = @db.select('SELECT count_all FROM db.tags').condition('key = ? AND value = ?', @key, @value).get_first_value().to_i
 
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang=? AND key=? AND value=?", r18n.locale.code, @key, @value).get_first_value())
