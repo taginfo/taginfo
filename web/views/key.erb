@@ -23,7 +23,7 @@
     <ul class="no-print">
         <li><a href="#overview"><%= t.taginfo.overview %></a></li>
         <li><a href="#values"><%= t.osm.values %></a></li>
-        <li><a href="#keys"><%= t.taginfo.key_combinations %></a></li>
+        <li><a href="#combinations"><%= t.taginfo.key_combinations %></a></li>
         <li><a href="#map"><%= t.taginfo.map %></a></li>
         <li><a href="#wiki"><%= t.sources.wiki.name %></a></li>
         <li><a href="#josm"><%= t.sources.josm.name %></a></li>
@@ -45,7 +45,7 @@
             </table>
         </div>
     </div>
-    <div id="keys">
+    <div id="combinations">
         <h2><%= t.pages.key.other_keys_used.title %></h2>
         <table id="grid-keys">
         </table>
@@ -90,23 +90,6 @@
        <table id="grid-josm">
        </table>
     </div>
-<!--    <div id="merkaartor">
-        <p>Type: <%= @merkaartor_type %></p>
-        <% if @merkaartor_link %>
-            <p>Link: XXX</p>
-        <% end %>
-        <p>
-            <%= @merkaartor_images %>
-        </p>
-        <h3>Values</h3>
-        <%# @merkaartor_values.map{ |value| link_to_value(@key, value) }.join(', ') %>
-        <h3>Descriptions</h3>
-        <table>
-            <% @merkaartor_desc.each do |desc| %>
-                <tr><td><%# desc['lang'] %></td><td><%# desc['description'] %></td></tr>
-            <% end %>
-        </table>
-    </div>-->
 </div>
 <iframe id="josmiframe" name="josmiframe"></iframe>
 <% javascript 'protovis-r3.2' %>

@@ -55,7 +55,7 @@ var create_flexigrid_for = {
             }
         });
     },
-    keys: function(key, filter_type) {
+    combinations: function(key, filter_type) {
         create_flexigrid('grid-keys', {
             url: '/api/2/db/keys/keys?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type),
             colModel: [
@@ -74,31 +74,6 @@ var create_flexigrid_for = {
                         print_value_with_percent(row.together_count, row.to_fraction),
                         link_to_key(row.other_key),
                         print_value_with_percent(row.together_count, row.from_fraction),
-                    ] };
-                });
-                return data;
-            }
-        });
-    },
-    josm: function(key, filter_type) {
-        create_flexigrid('grid-josm', {
-            url: '/api/2/josm/styles/standard/keys?key=' + encodeURIComponent(key),
-            colModel: [
-                { display: '<%= osm.value %>', name: 'v', width: 400, sortable: true },
-                { display: '<%= misc.icon %>', name: 'icon', width: 40, sortable: false, align: 'center' },
-                { display: '<%= misc.line %>', name: 'line', width: 40, sortable: false, align: 'center' },
-                { display: '<%= misc.area %>', name: 'area', width: 40, sortable: false, align: 'center' }
-            ],
-            sortname: 'v',
-            sortorder: 'asc',
-            emptymsg: '<%= page.josm.no_styles %>',
-            preProcess: function(data) {
-                data.rows = jQuery.map(data.data, function(row, i) {
-                    return { 'cell': [
-                        row.v ? link_to_value(row.k, row.v) : row.b ? (row.b + ' (Boolean)') : '*',
-                        row.icon ? '<img src="/api/2/josm/styles/images?style=standard&image=' + row.icon + '" title="' + row.icon + '" alt=""/>' : '',
-                        '<div>' + (row.line_width > 0 ? '<div title="' + row.line_color + '" style="height: ' + row.line_width + 'px; margin-top: ' + (10 - Math.round(row.line_width/2)) + 'px; padding: 0; background-color: ' + row.line_color + '"></div>' : '') + '</div>',
-                        row.area_color ? '<div title="' + row.area_color + '" style="height: 18px; background-color: ' + row.area_color + '"></div>' : ''
                     ] };
                 });
                 return data;
@@ -140,6 +115,31 @@ var create_flexigrid_for = {
                         ]};
                     })
                 };
+            }
+        });
+    },
+    josm: function(key, filter_type) {
+        create_flexigrid('grid-josm', {
+            url: '/api/2/josm/styles/standard/keys?key=' + encodeURIComponent(key),
+            colModel: [
+                { display: '<%= osm.value %>', name: 'v', width: 400, sortable: true },
+                { display: '<%= misc.icon %>', name: 'icon', width: 40, sortable: false, align: 'center' },
+                { display: '<%= misc.line %>', name: 'line', width: 40, sortable: false, align: 'center' },
+                { display: '<%= misc.area %>', name: 'area', width: 40, sortable: false, align: 'center' }
+            ],
+            sortname: 'v',
+            sortorder: 'asc',
+            emptymsg: '<%= page.josm.no_styles %>',
+            preProcess: function(data) {
+                data.rows = jQuery.map(data.data, function(row, i) {
+                    return { 'cell': [
+                        row.v ? link_to_value(row.k, row.v) : row.b ? (row.b + ' (Boolean)') : '*',
+                        row.icon ? '<img src="/api/2/josm/styles/images?style=standard&image=' + row.icon + '" title="' + row.icon + '" alt=""/>' : '',
+                        '<div>' + (row.line_width > 0 ? '<div title="' + row.line_color + '" style="height: ' + row.line_width + 'px; margin-top: ' + (10 - Math.round(row.line_width/2)) + 'px; padding: 0; background-color: ' + row.line_color + '"></div>' : '') + '</div>',
+                        row.area_color ? '<div title="' + row.area_color + '" style="height: 18px; background-color: ' + row.area_color + '"></div>' : ''
+                    ] };
+                });
+                return data;
             }
         });
     }
