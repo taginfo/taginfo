@@ -63,9 +63,8 @@ pages:
                 chiavi popolari senza una pagini nel wiki.
             data_sources: Fonte dati
     search:
-        results:
-            title: Risultati ricerca
-            you_were_searching_for: Stavi cercando
+        title: Risultati ricerca
+        you_were_searching_for: Stavi cercando
     key:
         no_description_in_wiki: Nessuna descrizione nel wiki
     tag:

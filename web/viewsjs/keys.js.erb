@@ -6,7 +6,7 @@ function page_init() {
     create_flexigrid('grid-keys', {
         url: '/api/2/db/keys?include=prevalent_values',
         colModel: [
-            { display: '<%= @trans.t.osm.key %>', name: 'key', width: 160, sortable: true },
+            { display: '<%= osm.key %>', name: 'key', width: 160, sortable: true },
             { display: '<span title="<%= table.total_tooltip %>"><img src="/img/types/all.16.png" width="16" height="16" alt=""/> <%= table.total %></span>', name: 'count_all', width: 200, sortable: true, align: 'center' },
             { display: '<span title="<%= table.nodes_tooltip %>"><img src="/img/types/node.16.png" width="16" height="16" alt=""/> <%= osm.nodes %></span>', name: 'count_nodes', width: 220, sortable: true, align: 'center' },
             { display: '<span title="<%= table.ways_tooltip %>"><img src="/img/types/way.16.png" width="16" height="16" alt=""/> <%= osm.ways %></span>', name: 'count_ways', width: 220, sortable: true, align: 'center' },
@@ -18,7 +18,7 @@ function page_init() {
             { display: '<span title="<%= table.prevalent_values_tooltip %>"><%= table.prevalent_values %></span>', name: 'prevalent_values', width: 500, sortable: true }
         ],
         searchitems: [
-            { display: '<%= @trans.t.osm.key %>', name: 'key' }
+            { display: '<%= osm.key %>', name: 'key' }
         ],
         sortname: 'count_all',
         sortorder: 'desc',

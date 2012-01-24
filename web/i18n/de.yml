@@ -95,9 +95,11 @@ pages:
             list: Alle Reports
             data_sources: Datenquellen
     search:
-        results:
-            title: Suchergebnisse
-            you_were_searching_for: Du hast gesucht nach
+        title: Suchergebnisse
+        you_were_searching_for: Du hast gesucht nach
+        no_keys: Keine Keys gefunden.
+        no_values: Keine Values gefunden.
+        no_tags: Keine Tags gefunden.
     keys:
         intro: |
                 Diese Tabelle zeigt alle Keys, die in der Datenbank oder einer anderen Quelle vorkommen.

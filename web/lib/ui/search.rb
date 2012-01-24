@@ -3,7 +3,7 @@ class Taginfo < Sinatra::Base
 
     # The search results page
     get '/search' do
-        @title = t.pages.search.results.title
+        @title = t.pages.search.title
 
         @query = params[:q]
         if @query =~ /(.*)=(.*)/

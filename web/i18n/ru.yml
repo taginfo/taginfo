@@ -67,9 +67,8 @@ pages:
                 часто используемые ключи без соответствующих вики-страниц.
             data_sources: Источники данных
     search:
-        results:
-            title: Результаты поиска
-            you_were_searching_for: Вы искали
+        title: Результаты поиска
+        you_were_searching_for: Вы искали
     key:
         no_description_in_wiki: Нет описания в вики
     tag:

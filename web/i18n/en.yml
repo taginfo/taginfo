@@ -91,9 +91,11 @@ pages:
             list: List of all reports
             data_sources: Data sources used
     search:
-        results:
-            title: Search results
-            you_were_searching_for: You were searching for
+        title: Search results
+        you_were_searching_for: You were searching for
+        no_keys: No keys found.
+        no_values: No values found.
+        no_tags: No tags found.
     keys:
         intro: |
                 This table shows all tag keys that exist in the database or in any of the other sources.

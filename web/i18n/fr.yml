@@ -67,9 +67,8 @@ pages:
                 comme par exemple des valeurs de tags beaucoup utilisées mais n'ayant pas de page sur le wiki.
             data_sources: Data Sources
     search:
-        results:
-            title: Résultats de la recherche
-            you_were_searching_for: Vous recherchez
+        title: Résultats de la recherche
+        you_were_searching_for: Vous recherchez
     key:
         no_description_in_wiki: Aucune description dans le wiki
         filter:
