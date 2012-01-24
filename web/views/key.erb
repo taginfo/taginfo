@@ -17,7 +17,7 @@
         </select>
     </form>
     <h1><%= @key_pp %></h1>
-    <p><span title="<%= t.pages.key.description_from_wiki %>" tipsy="w"><%= @desc %></span></p>
+    <p><%= @desc %></p>
 </div>
 <div id="tabs">
     <ul class="no-print">
@@ -30,7 +30,7 @@
     </ul>
     <div id="overview">
         <div style="float: right; text-align: center;">
-            <p>Distribution of values</p>
+            <p><%= t.pages.key.overview.distribution_of_values %></p>
             <div class="canvas" id="canvas-values"></div>
         </div>
         <h2><%= t.taginfo.overview %></h2>
@@ -76,7 +76,7 @@
             </table>
         <% else %>
             <p class="empty"><%= t.pages.key.wiki_pages.none_found %></p>
-            <p><a class="extlink" target="_blank" rel="nofollow" href="http://wiki.openstreetmap.org/w/index.php?action=edit&title=Key:<%= @key_uri %>">Create wiki page</a></p>
+            <p><a class="extlink" target="_blank" rel="nofollow" href="http://wiki.openstreetmap.org/w/index.php?action=edit&title=Key:<%= @key_uri %>"><%= t.pages.key.wiki_pages.create %></a></p>
         <% end %>
     </div>
     <div id="josm">

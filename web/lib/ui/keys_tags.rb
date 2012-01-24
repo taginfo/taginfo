@@ -24,7 +24,11 @@ class Taginfo < Sinatra::Base
 
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang=? AND key=? AND value IS NULL", r18n.locale.code, @key).get_first_value())
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang='en' AND key=? AND value IS NULL", @key).get_first_value()) if @desc == ''
-        @desc = "<span class='empty'>#{ t.pages.key.no_description_in_wiki }</span>" if @desc == ''
+        if @desc == ''
+            @desc = "<span class='empty'>#{ t.pages.key.no_description_in_wiki }</span>"
+        else
+            @desc = "<span title='#{ t.pages.key.description_from_wiki }' tipsy='w'>#{ @desc }</span"
+        end
 
         @prevalent_values = @db.select("SELECT value, count_#{@filter_type} AS count FROM tags").
             condition('key=?', @key).
@@ -99,7 +103,11 @@ class Taginfo < Sinatra::Base
 
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang=? AND key=? AND value=?", r18n.locale.code, @key, @value).get_first_value())
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang='en' AND key=? AND value=?", @key, @value).get_first_value()) if @desc == ''
-        @desc = "<span class='empty'>#{ t.pages.tag.no_description_in_wiki }</span>" if @desc == ''
+        if @desc == ''
+            @desc = "<span class='empty'>#{ t.pages.tag.no_description_in_wiki }</span>"
+        else
+            @desc = "<span title='#{ t.pages.tag.description_from_wiki }' tipsy='w'>#{ @desc }</span"
+        end
 
         erb :tag
     end

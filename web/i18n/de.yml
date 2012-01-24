@@ -119,6 +119,7 @@ pages:
         overview:
             objects_last_edited_by: Objekte mit diesem Key wurden zuletzt von %1 verschiedenen Usern editiert.
             no_endorsement: (Das bedeutet nicht, dass alle diese User den Key befürworten.)
+            distribution_of_values: Aufteilung der Values
         other_keys_used:
             title: Andere Keys, die mit diesem Key benutzt werden
             other: Andere Keys
@@ -126,8 +127,9 @@ pages:
             title: Geographische Verteilung dieses Keys
             relations: Relations haben keinen geographischen Ort, daher kann keine Karte angezeigt werden.
         wiki_pages:
-            title: Wiki-Seiten über diesen Key
-            none_found: Keine Wiki-Seite für diesen Key.
+            title: Wiki-Seiten zu diesem Key
+            none_found: Keine Wiki-Seiten für diesen Key vorhanden.
+            create: Wiki-Seite anlegen
         josm_rules:
             title: JOSM-Stil-Regeln mit diesem Key
             choice: |
@@ -142,8 +144,9 @@ pages:
             title: Kombinationen
             description: Diese Tabelle zeigt nur die häufigsten Kombinationen der häufigsten Tags.
         wiki_pages:
-            title: Wiki-Seiten über dieses Tag
-            none_found: Keine Wiki-Seiten für diesen Key vorhanden.
+            title: Wiki-Seiten zu diesem Tag
+            none_found: Keine Wiki-Seiten für diesen Tag vorhanden.
+            create: Wiki-Seite anlegen
         josm_rules:
             title: JOSM-Stil-Regeln mit diesem Tag
             choice: |
@@ -190,7 +193,7 @@ reports:
     languages:
         name: Sprachen
     wiki_pages_about_non_existing_keys:
-        name: Wiki-Seiten über nicht-existierende Keys
+        name: Wiki-Seiten zu nicht-existierende Keys
 
 misc:
     values_less_than_one_percent: keine Values mit mehr als 1%

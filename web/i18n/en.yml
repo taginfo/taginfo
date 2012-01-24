@@ -115,6 +115,7 @@ pages:
         overview:
             objects_last_edited_by: Objects with this key were last edited by %1 different users.
             no_endorsement: (This does not mean that all those users endorse this key.)
+            distribution_of_values: Distribution of values
         other_keys_used:
             title: Other keys used together with this key
             other: Other keys
@@ -124,6 +125,7 @@ pages:
         wiki_pages:
             title: Wiki pages about this key
             none_found: No wiki page available for this key.
+            create: Create wiki page
         josm_rules:
             title: JOSM style rules with this key
             choice: |
@@ -140,6 +142,7 @@ pages:
         wiki_pages:
             title: Wiki pages about this tag
             none_found: No wiki page available for this tag.
+            create: Create wiki page
         josm_rules:
             title: JOSM style rules with this tag
             choice: |
