@@ -23,9 +23,9 @@ class Javascript
 
     def to_html
         if @file.nil?
-            %Q{        <script type="text/javascript">//<![CDATA[\n#{ @content }//]]></script>\n}
+            %Q{    <script type="text/javascript">//<![CDATA[\n#{ @content }//]]></script>\n}
         else
-            %Q{        <script type="text/javascript" src="/js/#{ @file }.js"></script>\n}
+            %Q{    <script type="text/javascript" src="/js/#{ @file }.js"></script>\n}
         end
     end
 

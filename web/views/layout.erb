@@ -1,60 +1,51 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
-    <head profile="http://a9.com/-/spec/opensearch/1.1/">
-        <title><%= h(title) %></title>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta name="content-language" content="<%= r18n.locale.code %>" />
-        <link rel="stylesheet" type="text/css" href="/css/taginfo.css" />
-        <link rel="stylesheet" type="text/css" href="/css/smoothness/jquery-ui-1.8.10.custom.css" />
-        <link rel="stylesheet" type="text/css" href="/css/flexigrid/flexigrid.css" />
-        <link rel="search" type="application/opensearchdescription+xml" href="/search/opensearch.xml" title="<%= TaginfoConfig.get('opensearch.shortname') %>" />
+<head profile="http://a9.com/-/spec/opensearch/1.1/">
+    <title><%= h(title) %></title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="content-language" content="<%= r18n.locale.code %>" />
+    <link rel="stylesheet" type="text/css" href="/css/taginfo.css" />
+    <link rel="stylesheet" type="text/css" href="/css/smoothness/jquery-ui-1.8.10.custom.css" />
+    <link rel="stylesheet" type="text/css" href="/css/flexigrid/flexigrid.css" />
+    <link rel="search" type="application/opensearchdescription+xml" href="/search/opensearch.xml" title="<%= TaginfoConfig.get('opensearch.shortname') %>" />
 <%= javascript_tags %>
-    </head>
-    <body>
-        <div id="header">
-            <div id="header_date" title="<%= t.taginfo.data_from_description %>" tipsy="ne">
-                <%= t.taginfo.data_from %>: <%= @data_until %> UTC
-            </div>
-            <div id="header_forms" class="no-print">
-                <form id="set_language" action="/switch_locale">
-                    <input type="hidden" id="url" name="url" value="<%= TaginfoConfig.get('instance.url') + request.path %>"/>
-                    <select id="locale" name="locale">
+</head>
+<body>
+    <div id="header">
+        <div id="header_date" title="<%= t.taginfo.data_from_description %>" tipsy="ne"><%= t.taginfo.data_from %>: <%= @data_until %> UTC</div>
+        <div id="header_forms" class="no-print">
+            <form id="set_language" action="/switch_locale">
+                <input type="hidden" id="url" name="url" value="<%= TaginfoConfig.get('instance.url') + request.path %>"/>
+                <select id="locale" name="locale">
 <% r18n.available_locales.sort{ |a,b| a.title <=> b.title }.each do |locale| %>
-                        <option value="<%= locale.code %>"<%= locale.code == r18n.locale.code ? ' selected="selected"' : ''%>><%= locale.title %>&nbsp;</option>
+                    <option value="<%= locale.code %>"<%= locale.code == r18n.locale.code ? ' selected="selected"' : ''%>><%= locale.title %></option>
 <% end %>
-                    </select>
-                </form>
-                <form action="/search">
-                    <input type="text" id="search" name="q" value=""/>
-                </form>
-            </div>
-            <div id="header_logo">
-                <a href="/"><img width="49" height="49" src="<%= TaginfoConfig.get('instance.icon', '/img/logo/world.png') %>" alt="taginfo"/></a>
+                </select>
+            </form>
+            <form action="/search"><input type="text" id="search" name="q" value=""/></form>
+        </div>
+        <div id="header_logo">
+            <a href="/"><img width="49" height="49" src="<%= TaginfoConfig.get('instance.icon', '/img/logo/world.png') %>" alt="taginfo"/></a>
 <% if @section %>
-                <a href="/"><img width="136" height="49" src="/img/logo/taginfo_with_bar.png" alt="taginfo"/></a>
-                <a class="section" href="/<%= @section %>"><%= @section_title %></a>
+            <a href="/"><img width="136" height="49" src="/img/logo/taginfo_with_bar.png" alt="taginfo"/></a>
+            <a class="section" href="/<%= @section %>"><%= @section_title %></a>
 <% else %>
-                <a href="/"><img width="129" height="49" src="/img/logo/taginfo.png" alt="taginfo"/></a>
+            <a href="/"><img width="129" height="49" src="/img/logo/taginfo.png" alt="taginfo"/></a>
 <% end %>
-            </div>
         </div>
-        <div id="main">
+    </div>
+    <div id="main">
 <%= yield %>
+    </div>
+    <div id="footer" class="no-print">
+        <div id="footer_left"><a class="extlink" href="http://www.openstreetmap.org/"><b>OpenStreetMap</b> - The Free Wiki World Map</a></div>
+        <div id="footer_right">
+            <a href="/keys"><%= t.osm.keys %></a> &middot; <a href="/tags"><%= t.osm.tags %></a> &middot;
+            <a href="/reports"><%= t.taginfo.reports %></a> &middot; <a href="/sources"><%= t.taginfo.sources %></a> &middot;
+            <a href="/download"><%= t.taginfo.download %></a> &middot; <a href="/about"><%= t.taginfo.about %></a> &middot;
+            <a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo"><%= t.taginfo.wiki %></a>
         </div>
-        <div id="footer" class="no-print">
-            <div id="footer_left">
-                <a class="extlink" href="http://www.openstreetmap.org/"><b>OpenStreetMap</b> - The Free Wiki World Map</a>
-            </div>
-            <div id="footer_right">
-                <a href="/keys"><%= t.osm.keys %></a> &middot;
-                <a href="/tags"><%= t.osm.tags %></a> &middot;
-                <a href="/reports"><%= t.taginfo.reports %></a> &middot;
-                <a href="/sources"><%= t.taginfo.sources %></a> &middot;
-                <a href="/download"><%= t.taginfo.download %></a> &middot;
-                <a href="/about"><%= t.taginfo.about %></a> &middot;
-                <a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo"><%= t.taginfo.wiki %></a>
-            </div>
-        </div>
-        <div id="javascriptmsg" style="position: absolute; top: 0px; left: 240px; background-color: #f08080; padding: 10px; margin: 20px 40px;">This website only works with Javascript! Please enable Javascript in your browser.</div>
-    </body>
+    </div>
+    <div id="javascriptmsg" style="position: absolute; top: 0px; left: 240px; background-color: #f08080; padding: 10px; margin: 20px 40px;">This website only works with Javascript! Please enable Javascript in your browser.</div>
+</body>
 </html>
