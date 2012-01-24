@@ -101,9 +101,27 @@ pages:
     keys:
         intro: |
                 Diese Tabelle zeigt alle Keys, die in der Datenbank oder einer anderen Quelle vorkommen.
+        table:
+            total: Alle
+            total_tooltip: Anzahl der Objekte mit diesem Key (als Absolutwert und als Bruchteil aller Nodes, Ways und Relations).
+            nodes_tooltip: Anzahl der Nodes mit diesem Key (als Absolutwert und als Bruchteil aller Nodes mit Tags, d.h. Nodes ohne jegliche Tags werden ignoriert).
+            ways_tooltip: Anzahl der Ways mit diesem Key (als Absolutwert und als Bruchteil aller Ways).
+            relations_tooltip: Anzahl der Relations mit diesem Key (als Absolutwert und als Bruchteil aller Relations).
+            users_tooltip: Anzahl unterschiedlicher User, die die Objekte mit diesem Key zuletzt geändert haben.
+            in_wiki_tooltip: Zu diesem Key gibt es mindestens eine Wiki-Seite.
+            in_josm_tooltip: Der Key erscheint in der JOSM-Konfiguration.
+            values_tooltip: Anzahl verschiedener Values zu diesem Key.
+            prevalent_values: Häufige Values
+            prevalent_values_tooltip: Bis zu zehn der häufigsten Values zu diesem Key (Anzeige nur, wenn mehr als 1% der Tags mit diesem Key auch diesen Value haben).
     tags:
         intro: |
                 Diese Tabelle zeigt die häufigsten Tags in der Datenbank.
+        table:
+            total: Alle
+            total_tooltip: Anzahl der Objekte mit diesem Tag (als Absolutwert und als Bruchteil aller Nodes, Ways und Relations).
+            nodes_tooltip: Anzahl der Nodes mit diesem Tag (als Absolutwert und als Bruchteil aller Nodes mit Tags, d.h. Nodes ohne jegliche Tags werden ignoriert).
+            ways_tooltip: Anzahl der Ways mit diesem Tag (als Absolutwert und als Bruchteil aller Ways).
+            relations_tooltip: Anzahl der Relations mit diesem Tag (als Absolutwert und als Bruchteil aller Relations).
     key:
         description_from_wiki: Beschreibung dieses Keys aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf englisch).
         no_description_in_wiki: Keine Beschreibung dieses Keys im Wiki.

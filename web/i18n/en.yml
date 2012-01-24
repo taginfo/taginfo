@@ -97,9 +97,27 @@ pages:
     keys:
         intro: |
                 This table shows all tag keys that exist in the database or in any of the other sources.
+        table:
+            total: Total
+            total_tooltip: Number of objects with this key (as absolute value and as percentage of all nodes, ways, and relations).
+            nodes_tooltip: Number of nodes with this key (as absolute value and as percentage of tagged nodes, ie. nodes without any tags are ignored).
+            ways_tooltip: Number of ways with this key (as absolute value and as percentage of all ways).
+            relations_tooltip: Number of relations with this key (as absolute value and as percentage of all relations).
+            users_tooltip: Number of distinct users who last changed objects with this key.
+            in_wiki_tooltip: Key has at least one wiki page.
+            in_josm_tooltip: Key appears in JOSM config.
+            values_tooltip: Number of different values for this key.
+            prevalent_values: Prevalent values
+            prevalent_values_tooltip: Up to ten of the most common values for this key (only if more than 1% of tags with this key have this value).
     tags:
         intro: |
                 This table shows the most common tags in the database.
+        table:
+            total: Total
+            total_tooltip: Number of objects with this tag (as absolute value and as percentage of all nodes, ways, and relations).
+            nodes_tooltip: Number of nodes with this tag (as absolute value and as percentage of tagged nodes, ie. nodes without any tags are ignored).
+            ways_tooltip: Number of ways with this tag (as absolute value and as percentage of all ways).
+            relations_tooltip: Number of relations with this tag (as absolute value and as percentage of all relations).
     key:
         description_from_wiki: Description of this key from the wiki (if available in your chosen language, otherwise in English).
         no_description_in_wiki: No description for this key in the wiki.
