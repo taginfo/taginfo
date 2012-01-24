@@ -11,9 +11,11 @@ osm:
     ways: Ways
     relation: Relation
     relations: Relations
+    object: Objekt
+    objects: Objekte
     all: Alle
     user: User
-    users: Users
+    users: User
 
 taginfo:
     source: Datenquelle
@@ -48,14 +50,23 @@ misc:
     image: Bild
     no_image: kein Bild
     all: Alle
-    object: Objekt
-    objects: Objekte
     object_type: Typ
     description: Beschreibung
+    length: Länge
     icon: Icon
     line: Linie
     area: Fläche
     language: Sprache
+    objects_tooltip: Anzahl der Objekte (als Absolutwert und als Bruchteil aller Nodes, Ways und Relations).
+    nodes_tooltip: Anzahl der Nodes (als Absolutwert und als Bruchteil aller Nodes mit Tags, d.h. Nodes ohne jegliche Tags werden ignoriert).
+    ways_tooltip: Anzahl der Ways (als Absolutwert und als Bruchteil aller Ways).
+    relations_tooltip: Anzahl der Relations (als Absolutwert und als Bruchteil aller Relations).
+    values_tooltip: Anzahl verschiedener Values zu diesem Key.
+    users_tooltip: Anzahl unterschiedlicher User, die die Objekte mit diesem Key zuletzt geändert haben.
+    prevalent_values: Häufige Values
+    prevalent_values_tooltip: Bis zu zehn der häufigsten Values zu diesem Key (Anzeige nur, wenn mehr als 1% der Tags mit diesem Key auch diesen Value haben).
+    in_wiki_tooltip: Zu diesem Key gibt es mindestens eine Wiki-Seite.
+    in_josm_tooltip: Der Key erscheint in der JOSM-Konfiguration.
 
 pages:
     index:
@@ -117,27 +128,9 @@ pages:
     keys:
         intro: |
                 Diese Tabelle zeigt alle Keys, die in der Datenbank oder einer anderen Quelle vorkommen.
-        table:
-            total: Alle
-            total_tooltip: Anzahl der Objekte mit diesem Key (als Absolutwert und als Bruchteil aller Nodes, Ways und Relations).
-            nodes_tooltip: Anzahl der Nodes mit diesem Key (als Absolutwert und als Bruchteil aller Nodes mit Tags, d.h. Nodes ohne jegliche Tags werden ignoriert).
-            ways_tooltip: Anzahl der Ways mit diesem Key (als Absolutwert und als Bruchteil aller Ways).
-            relations_tooltip: Anzahl der Relations mit diesem Key (als Absolutwert und als Bruchteil aller Relations).
-            users_tooltip: Anzahl unterschiedlicher User, die die Objekte mit diesem Key zuletzt geändert haben.
-            in_wiki_tooltip: Zu diesem Key gibt es mindestens eine Wiki-Seite.
-            in_josm_tooltip: Der Key erscheint in der JOSM-Konfiguration.
-            values_tooltip: Anzahl verschiedener Values zu diesem Key.
-            prevalent_values: Häufige Values
-            prevalent_values_tooltip: Bis zu zehn der häufigsten Values zu diesem Key (Anzeige nur, wenn mehr als 1% der Tags mit diesem Key auch diesen Value haben).
     tags:
         intro: |
                 Diese Tabelle zeigt die häufigsten Tags in der Datenbank.
-        table:
-            total: Alle
-            total_tooltip: Anzahl der Objekte mit diesem Tag (als Absolutwert und als Bruchteil aller Nodes, Ways und Relations).
-            nodes_tooltip: Anzahl der Nodes mit diesem Tag (als Absolutwert und als Bruchteil aller Nodes mit Tags, d.h. Nodes ohne jegliche Tags werden ignoriert).
-            ways_tooltip: Anzahl der Ways mit diesem Tag (als Absolutwert und als Bruchteil aller Ways).
-            relations_tooltip: Anzahl der Relations mit diesem Tag (als Absolutwert und als Bruchteil aller Relations).
     key:
         description_from_wiki: Beschreibung dieses Keys aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf englisch).
         no_description_in_wiki: Keine Beschreibung dieses Keys im Wiki.
@@ -239,14 +232,101 @@ sources:
 reports:
     characters_in_keys:
         name: Zeichen in Keys
+        intro: |
+            <p>Alle gültigen Unicode-Zeichen dürfen in OSM-Keys vorkommen. Typischerweise
+            werden aber nur Kleinbuchstaben (a-z) und der Unterstrich (_) benutzt. Manchmal
+            kommt dazu der Doppelpunkt (:) als Trennzeichen.
+        statistics:
+            tab: Statistik
+            title: Statistik-Übersicht
+            fraction: Anteil
+            characters: Zeichen im Key
+            characters_in_keys:
+                plain: Nur lateinische Kleinbuchstaben (<span class="char">a</span> bis <span class="char">z</span>) und Unterstrich (<span class="char">_</span>), erstes und letztes Zeichen sind Buchstaben.
+                colon: Wie A, aber mit einem oder mehreren Doppelpunkten (<span class="char">:</span>).
+                letters: Wie B, aber mit Großbuchstaben oder Buchstaben aus anderen Alphabeten.
+                space: Wie C, aber mit mindestens einem Whitespace-Zeichen (Leerzeichen, Tabulator, Neue Zeile, Wagenrücklauf, oder aus anderen Alphabeten)
+                problem: Wie C, enthält aber die möglicherweise problematischen Zeichen <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
+                rest: Alles andere.
+                total: Summe
+        whitespace:
+            tab: Leerzeichen
+            title: Keys mit Leerzeichen
+            intro: |
+                <p>Keys, die Whitespace-Zeichen (Leerzeichen, Tabulator, Neue Zeile,
+                Wagenrücklauf, oder aus anderen Alphabeten) enthalten.<br/>
+                Leerräume in Keys können (da sie nicht sichtbar sind) verwirrend sein,
+                besonders am Anfang und am Ende der Keys. Normalerweise sollte
+                stattdessen ein Unterstrich (_) verwenden werden.</p>
+        problematic:
+            tab: Problematisch
+            title: Keys mit möglicherweise problematischen Zeichen
+            intro: |
+                <p>Keys mit möglicherweise problematischen Zeichen: <span
+                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>. Diese Zeichen
+                können problematisch sein, weil sie in verschiedenen Programmiersprachen
+                zum "Zitieren" von Zeichenketten verwendet werden oder weil sie in
+                XML, HTML, URLs oder anderen Zusammenhängen besondere Bedeutung
+                haben. Das Gleichheitszeichen (=) wird bei OSM häufig als Trennzeichen
+                zwischen Tag Keys und Values benutzt.<br/>
+                Keys, die in dieser Liste erscheinen, sind nicht unbedingt falsch. In
+                vielen Fällen sind sie aber das Ergebnis eines Fehlers.</p>
+    database_statistics:
+        name: Datenbank-Statistik
     frequently_used_keys_without_wiki_page:
         name: Häufig benutzte Keys ohne Wiki-Seite
+        intro: |
+            <p>Diese Tabelle zeigt Keys an, die mehr als 10&thinsp;000 mal in der OSM-Datebank
+            vorkommen, zu denen es aber keine Wiki-Seite gibt. Falls Du irgendwas über diesen
+            Key weißt, kannst Du eine Wiki-Seite anlegen, indem Du auf den Link in der linken
+            Spalte klickst. Manchmal ist es sinnvoll einen Verweis auf eine andere Wiki-Seite
+            anzulegen. Dazu trägst Du einfach nur eine Zeile mit
+            <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>Seitenname</i>]]</tt>
+            in die Wiki-Seite ein.</p>
+        also_show_keys: Auch Keys anzeigen, die keine Wiki-Seite in englischer Sprache haben, aber in einer anderen Sprache.
+        table:
+            create_wiki_page: Wiki-Seite anlegen...
+    josm_styles:
+        name: JOSM-Stilregeln
     key_lengths:
         name: Key-Längen
+        intro: |
+            <p>Tag Keys können zwischen 0 und 255 (Unicode-)Zeichen lang sein. Sehr kurze oder sehr lange Keys sind oft (aber nicht immer) ein Fehler.</p>
+        table:
+            number_of_objects: Anzahl Objekte
+        histogram:
+            intro: Dieses Histogramm zeigt wieviele Keys es mit welcher Länge gibt.
+            key_length: Key-Länge
+            number_of_keys: Anzahl Keys
     language_comparison_table_for_keys_in_the_wiki:
         name: Sprach-Vergleichstabelle für Keys aus dem Wiki
+        icons:
+            template: Seite im Wiki vorhanden und enthält Standard-Vorlage.
+            error: Seite im Wiki vorhanden und enthält Standard-Vorlage. Die Vorlage konnte von taginfo aber nicht verstanden werden.
+            page: Seite im Wiki vorhanden, enthält aber keine Standard-Vorlage.
+            redirect: Seite im Wiki ist ein Verweise auf andere Wiki-Seite.
+        intro: |
+            <p>Diese Tabelle zeigt alle Keys zu denen es mindestens eine Wiki-Seite gibt und in
+            welchen Sprachen diese Wiki-Seiten sind.</p>
     languages:
         name: Sprachen
+        intro: |
+            <p>OpenStreetMap ist ein internationales Projekt. Tags und ihre Beschreibungen
+            können in jeder Sprache sein. Diese Tabelle zeigt die Sprachen, die taginfo
+            kennt, und wieviele Wiki-Seiten es in diesen Sprachen gibt, die Keys beziehungsweise
+            Tags dokumentieren.</p>
+        code: Code
+        native_name: Name der Sprache
+        english_name: Englischer Name
+        wiki_key_pages: Wiki-Seiten für Keys
+        wiki_tag_pages: Wiki-Seiten für Tags
     wiki_pages_about_non_existing_keys:
         name: Wiki-Seiten zu nicht-existierende Keys
+        intro: |
+            <p>Diese Tabelle zeigt Keys, zu denen (mindestens) eine Wiki-Seite existiert, die
+            aber in der Datenbank nicht vorkommen. Das ist nicht unbedingt ein Fehler (vielleicht
+            hat jemand die Dokumentation angelegt als Vorbereitung für die Benutzung des Keys
+            oder die Wiki-Seite beschreibt einen früher verwendeten Key, der inzwischen obsolet
+            wurde). Es kann aber auch ein Tippfehler oder anderer Fehler sein.</p>
+        wiki_pages: Wiki-Seiten
 

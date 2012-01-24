@@ -1,4 +1,6 @@
 <%
+    osm = @trans.t.osm
+
     @languages = @db.execute('SELECT language FROM wiki_languages ORDER by language').map do |row|
         row['language']
     end
@@ -20,13 +22,13 @@ function page_init() {
         method: 'GET',
         dataType: 'json',
         colModel: [
-            { display: '<br/>Key', name: 'key', width: 200, sortable: true },
+            { display: '<br/><%= osm.key %>', name: 'key', width: 200, sortable: true },
             <% @languages.each do |lang| %>
             { display: '<%= ::Language[lang].native_name %><br /><span class="lang" style="margin-top: 2px;"><%= lang %></span>', name: '<%= lang %>', align: 'center', width: 60, sortable: false },
             <% end %>
         ],
         searchitems: [
-            { display: 'Key', name: 'key' }
+            { display: '<%= osm.key %>', name: 'key' }
         ],
         sortname: 'key',
         sortorder: 'asc',

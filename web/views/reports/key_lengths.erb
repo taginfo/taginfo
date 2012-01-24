@@ -1,6 +1,6 @@
 <div class="pre">
     <h1><%= @title %></h1>
-    <p>Tag keys can be between 0 and 255 (Unicode) characters long. Very short or very long keys are often, but not always, errors.</p>
+    <%= t.reports.key_lengths.intro %>
 </div>
 <div id="tabs">
     <ul>
@@ -14,7 +14,7 @@
     </div>
     <div id="histogram">
         <h2>Histogram</h2>
-        <p>This histogram shows how many keys there are of each length.<p>
+        <p><%= t.reports.key_lengths.histogram.intro %><p>
         <div id="canvas"></div>
     </div>
 </div>

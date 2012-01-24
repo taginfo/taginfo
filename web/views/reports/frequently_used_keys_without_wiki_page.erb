@@ -1,17 +1,12 @@
 <div class="pre">
     <h1><%= @title %></h1>
-    <p>This table shows keys that appear more than 10&thinsp;000 times in the OSM
-    database but have no wiki page describing them.  If you know anything about one
-    of these keys, please create the wiki page by clicking on the link in the
-    leftmost column and describe the key. Sometimes it might make sense to create a
-    redirect to a different wiki page instead. To do this put just one line with
-    <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>page name</i>]]</tt>
-    in the wiki page.</p>
+    <%= t.reports.frequently_used_keys_without_wiki_page.intro %>
 </div>
 <div class="box resize">
     <div class="boxpre">
         <form method="" type="GET" style="margin-bottom: 10px;">
-            <input type="checkbox" name="english" id="english"<%= params[:english] == '1' ? ' checked="checked"' : '' %>/> Also show keys that have no English language wiki page but a page in some other language.
+            <input type="checkbox" name="english" id="english"<%= params[:english] == '1' ? ' checked="checked"' : '' %>/>
+            <%= t.reports.frequently_used_keys_without_wiki_page.also_show_keys %>
         </form>
     </div>
     <table id="grid-keys">

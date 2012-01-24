@@ -8,15 +8,13 @@ var create_flexigrid_for = {
         create_flexigrid('grid-keys', {
             url: '/api/2/db/keys?include=prevalent_values',
             colModel: [
-                { display: 'Length', name: 'length', width: 60, sortable: true, align: 'right' },
+                { display: '<%= misc.length %>', name: 'length', width: 60, sortable: true, align: 'right' },
                 { display: '<%= osm.key %>', name: 'key', width: 180, sortable: true },
-                { display: 'Number of Objects', name: 'count_all', width: 250, sortable: true, align: 'center' },
-                { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" title="Wiki"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
-                { display: '<img src="/img/sources/josm.16.png" alt="JOSM" title="JOSM"/>', name: 'in_josm', width: 20, sortable: true, align: 'center' },
-                //   { display: '<img src="/img/sources/potlatch.16.png" alt="Potlatch 2" title="Potlatch 2"/>', name: 'in_potlatch', width: 20, sortable: true, align: 'center' },
-                //   { display: '<img src="/img/sources/merkaartor.16.png" alt="Merkaartor" title="Merkaartor"/>', name: 'in_merkaartor', width: 20, sortable: true, align: 'center' },
-                { display: '<span title="Number of different values for this key">Values</span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
-                { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true }
+                { display: '<span title="<%= misc.objects_tooltip %>"><img src="/img/types/all.16.png" width="16" height="16" alt=""/> <%= osm.objects %></span>', name: 'count_all', width: 250, sortable: true, align: 'center' },
+                { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" width="16" height="16" title="<%= misc.in_wiki_tooltip %>"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
+                { display: '<img src="/img/sources/josm.16.png" alt="JOSM" width="16" height="16" title="<%= misc.in_josm_tooltip %>"/>', name: 'in_josm', width: 20, sortable: true, align: 'center' },
+                { display: '<span title="<%= misc.values_tooltip %>"><%= osm.values %></span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
+                { display: '<span title="<%= misc.prevalent_values_tooltip %>"><%= misc.prevalent_values %></span>', name: 'prevalent_values', width: 500, sortable: true }
             ],
             searchitems: [
                 { display: '<%= osm.key %>', name: 'key' }
@@ -70,14 +68,14 @@ function page_init() {
         .lineWidth(1);
 
     vis.add(pv.Label)
-        .data(['Key length'])
+        .data(['<%= page.histogram.key_length %>'])
         .font('12px Arial,sans-serif')
         .bottom(-36)
         .left(w/2)
         .textAlign('center');
 
     vis.add(pv.Label)
-        .data(['Number of keys'])
+        .data(['<%= page.histogram.number_of_keys %>'])
         .font('12px Arial,sans-serif')
         .left(-48)
         .bottom(h/2)

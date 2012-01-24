@@ -1,7 +1,6 @@
 <%
     osm = @trans.t.osm
     misc = @trans.t.misc
-    page = @trans.t.reports.josm_styles
  %>
 function create_flexigrid_with_option(stylename) {
     create_flexigrid('grid-rules', {
@@ -9,9 +8,9 @@ function create_flexigrid_with_option(stylename) {
         colModel: [
             { display: '<%= osm.key %>',   name: 'k', width: 300, sortable: true },
             { display: '<%= osm.value %>', name: 'v', width: 300, sortable: true },
-            { display: 'Icon', name: 'icon', width: 30, sortable: false, align: 'center' },
-            { display: 'Line', name: 'line', width: 30, sortable: false, align: 'center' },
-            { display: 'Area', name: 'area', width: 30, sortable: false, align: 'center' }
+            { display: '<%= misc.icon %>', name: 'icon', width: 40, sortable: false, align: 'center' },
+            { display: '<%= misc.line %>', name: 'line', width: 40, sortable: false, align: 'center' },
+            { display: '<%= misc.area %>', name: 'area', width: 40, sortable: false, align: 'center' }
         ],
         searchitems: [
             { display: '<%= osm.key %>/<%= osm.value %>', name: 'k' }

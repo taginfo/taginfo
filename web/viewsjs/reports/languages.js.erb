@@ -1,12 +1,13 @@
+<% page = @trans.t.reports.languages %>
 function page_init() {
     create_flexigrid('grid-langs', {
         url: '/api/2/reports/languages',
         colModel: [
-            { display: 'Code', name: 'code', width: 60, sortable: true },
-            { display: 'Native Name', name: 'native_name', width: 150, sortable: true },
-            { display: 'English Name', name: 'english_name', width: 150, sortable: true },
-            { display: 'Wiki Key Pages', name: 'wiki_key_pages', width: 260, sortable: true, align: 'center' },
-            { display: 'Wiki Tag Pages', name: 'wiki_tag_pages', width: 260, sortable: true, align: 'center' }
+            { display: '<%= page.code %>', name: 'code', width: 60, sortable: true },
+            { display: '<%= page.native_name %>', name: 'native_name', width: 150, sortable: true },
+            { display: '<%= page.english_name %>', name: 'english_name', width: 150, sortable: true },
+            { display: '<%= page.wiki_key_pages %>', name: 'wiki_key_pages', width: 260, sortable: true, align: 'center' },
+            { display: '<%= page.wiki_tag_pages %>', name: 'wiki_tag_pages', width: 260, sortable: true, align: 'center' }
         ],
         sortname: 'code',
         sortorder: 'asc',

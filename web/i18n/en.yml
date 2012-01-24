@@ -12,6 +12,8 @@ osm:
     ways: Ways
     relation: Relation
     relations: Relations
+    object: Object
+    objects: Objects
     all: All
     user: User
     users: Users
@@ -49,14 +51,23 @@ misc:
     image: Image
     no_image: no image
     all: All
-    object: Object
-    objects: Objects
     object_type: Type
     description: Description
+    length: Length
     icon: Icon
     line: Line
     area: Area
     language: Language
+    objects_tooltip: Number of objects (as absolute value and as percentage of all nodes, ways, and relations).
+    nodes_tooltip: Number of nodes (as absolute value and as percentage of tagged nodes, ie. nodes without any tags are ignored).
+    ways_tooltip: Number of ways (as absolute value and as percentage of all ways).
+    relations_tooltip: Number of relations (as absolute value and as percentage of all relations).
+    values_tooltip: Number of different values for this key.
+    users_tooltip: Number of distinct users who last changed objects with this key.
+    prevalent_values: Prevalent values
+    prevalent_values_tooltip: Up to ten of the most common values for this key (only if more than 1% of tags with this key have this value).
+    in_wiki_tooltip: Key has at least one wiki page.
+    in_josm_tooltip: Key appears in JOSM config.
 
 pages:
     index:
@@ -113,27 +124,9 @@ pages:
     keys:
         intro: |
                 This table shows all tag keys that exist in the database or in any of the other sources.
-        table:
-            total: Total
-            total_tooltip: Number of objects with this key (as absolute value and as percentage of all nodes, ways, and relations).
-            nodes_tooltip: Number of nodes with this key (as absolute value and as percentage of tagged nodes, ie. nodes without any tags are ignored).
-            ways_tooltip: Number of ways with this key (as absolute value and as percentage of all ways).
-            relations_tooltip: Number of relations with this key (as absolute value and as percentage of all relations).
-            users_tooltip: Number of distinct users who last changed objects with this key.
-            in_wiki_tooltip: Key has at least one wiki page.
-            in_josm_tooltip: Key appears in JOSM config.
-            values_tooltip: Number of different values for this key.
-            prevalent_values: Prevalent values
-            prevalent_values_tooltip: Up to ten of the most common values for this key (only if more than 1% of tags with this key have this value).
     tags:
         intro: |
                 This table shows the most common tags in the database.
-        table:
-            total: Total
-            total_tooltip: Number of objects with this tag (as absolute value and as percentage of all nodes, ways, and relations).
-            nodes_tooltip: Number of nodes with this tag (as absolute value and as percentage of tagged nodes, ie. nodes without any tags are ignored).
-            ways_tooltip: Number of ways with this tag (as absolute value and as percentage of all ways).
-            relations_tooltip: Number of relations with this tag (as absolute value and as percentage of all relations).
     key:
         description_from_wiki: Description of this key from the wiki (if available in your chosen language, otherwise in English).
         no_description_in_wiki: No description for this key in the wiki.
@@ -233,10 +226,6 @@ sources:
         description: Configuration data from the Merkaartor OSM editor.
 
 reports:
-    database_statistics:
-        name: Database statistics
-    josm_styles:
-        name: JOSM styles
     characters_in_keys:
         name: Characters in keys
         intro: |
@@ -255,6 +244,7 @@ reports:
                 space: Like C but contains at least one whitespace character (space, tab, new line, carriage return, or from other alphabets).
                 problem: Like C but contains possibly problematic characters <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
                 rest: Everything else.
+                total: Total
         whitespace:
             tab: Whitespace
             title: Keys with whitespace
@@ -277,10 +267,33 @@ reports:
                 between tag keys and values.<br/>
                 Keys that appear in this list are not necessarily wrong though. But
                 in many cases they are just results of some error.</p>
+    database_statistics:
+        name: Database statistics
     frequently_used_keys_without_wiki_page:
         name: Frequently used keys without wiki page
+        intro: |
+            <p>This table shows keys that appear more than 10&thinsp;000 times in the OSM
+            database but have no wiki page describing them.  If you know anything about one
+            of these keys, please create the wiki page by clicking on the link in the
+            leftmost column and describe the key. Sometimes it might make sense to create a
+            redirect to a different wiki page instead. To do this put just one line with
+            <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>page name</i>]]</tt>
+            in the wiki page.</p>
+        also_show_keys: Also show keys that have no English language wiki page but a page in some other language.
+        table:
+            create_wiki_page: Create wiki page...
+    josm_styles:
+        name: JOSM styles
     key_lengths:
         name: Key lengths
+        intro: |
+            <p>Tag keys can be between 0 and 255 (Unicode) characters long. Very short or very long keys are often, but not always, errors.</p>
+        table:
+            number_of_objects: Number of objects
+        histogram:
+            intro: This histogram shows how many keys there are of each length.
+            key_length: Key length
+            number_of_keys: Number of keys
     language_comparison_table_for_keys_in_the_wiki:
         name: Language comparison table for keys in the wiki
         icons:
@@ -294,9 +307,14 @@ reports:
         name: Languages
         intro: |
             <p>OpenStreetMap is an international project. Tags and their descriptions can
-            be in any language. This table lists the languages Taginfo knows about and how
+            be in any language. This table lists the languages taginfo knows about and how
             many wiki pages there are in these languages documenting keys and tags,
             respectively.</p>
+        code: Code
+        native_name: Native name
+        english_name: English name
+        wiki_key_pages: Wiki key pages
+        wiki_tag_pages: Wiki tag pages
     wiki_pages_about_non_existing_keys:
         name: Wiki pages about non-existing keys
         intro: |
@@ -304,4 +322,5 @@ reports:
             instance in the database. This is not necessarily an error (maybe somebody
             added the documentation in the wiki as preparation for using a key or the wiki
             page documents a now obsolete key), but it can also be a typo or other error.</p>
+        wiki_pages: Wiki pages
 

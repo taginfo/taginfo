@@ -1,16 +1,16 @@
 <%
     osm = @trans.t.osm
-    table = @trans.t.pages.tags.table
+    misc = @trans.t.misc
  %>
 function page_init() {
     create_flexigrid('grid-tags', {
         url: '/api/2/db/tags',
         colModel: [
             { display: '<%= osm.tag %>', name: 'tag', width: 300, sortable: true },
-            { display: '<span title="<%= table.total_tooltip %>"><img src="/img/types/all.16.png" width="16" height="16" alt=""/> <%= table.total %></span>', name: 'count_all', width: 260, sortable: true, align: 'center' },
-            { display: '<span title="<%= table.nodes_tooltip %>"><img src="/img/types/node.16.png" width="16" height="16" alt=""/> <%= osm.nodes %></span>', name: 'count_nodes', width: 220, sortable: true, align: 'center' },
-            { display: '<span title="<%= table.ways_tooltip %>"><img src="/img/types/way.16.png" width="16" height="16" alt=""/> <%= osm.ways %></span>', name: 'count_ways', width: 220, sortable: true, align: 'center' },
-            { display: '<span title="<%= table.relations_tooltip %>"><img src="/img/types/relation.16.png" width="16" height="16" alt=""/> <%= osm.relations %></span>', name: 'count_relations',  width: 220, sortable: true, align: 'center' }
+            { display: '<span title="<%= misc.objects_tooltip %>"><img src="/img/types/all.16.png" width="16" height="16" alt=""/> <%= osm.objects %></span>', name: 'count_all', width: 260, sortable: true, align: 'center' },
+            { display: '<span title="<%= misc.nodes_tooltip %>"><img src="/img/types/node.16.png" width="16" height="16" alt=""/> <%= osm.nodes %></span>', name: 'count_nodes', width: 220, sortable: true, align: 'center' },
+            { display: '<span title="<%= misc.ways_tooltip %>"><img src="/img/types/way.16.png" width="16" height="16" alt=""/> <%= osm.ways %></span>', name: 'count_ways', width: 220, sortable: true, align: 'center' },
+            { display: '<span title="<%= misc.relations_tooltip %>"><img src="/img/types/relation.16.png" width="16" height="16" alt=""/> <%= osm.relations %></span>', name: 'count_relations',  width: 220, sortable: true, align: 'center' }
         ],
         searchitems: [
             { display: '<%= osm.tag %>', name: 'tag' }
