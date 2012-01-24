@@ -1,9 +1,14 @@
+<%
+    osm = @trans.t.osm
+    misc = @trans.t.misc
+    page = @trans.t.reports.characters_in_keys
+ %>
 var create_flexigrid_for = {
     whitespace: function() {
         create_flexigrid('grid-whitespace', {
             url: '/api/2/db/keys?filters=characters_space&include=prevalent_values',
             colModel: [
-                { display: texts.osm.key, name: 'key', width: 250, sortable: true },
+                { display: '<%= osm.key %>', name: 'key', width: 250, sortable: true },
                 { display: '<span title="Number of objects with this key"><img src="/img/types/all.16.png" alt=""/> Total</span>',           name: 'count_all',        width: 250, sortable: true, align: 'center' },
                 { display: 'Users', name: 'users_all', width: 44, sortable: true, align: 'right' },
                 { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" title="Wiki"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
@@ -14,7 +19,7 @@ var create_flexigrid_for = {
                 { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true }
             ],
             searchitems: [
-                { display: texts.osm.key, name: 'key' }
+                { display: '<%= osm.key %>', name: 'key' }
             ],
             sortname: 'count_all',
             sortorder: 'desc',
@@ -40,7 +45,7 @@ var create_flexigrid_for = {
         create_flexigrid('grid-problematic', {
             url: '/api/2/db/keys?filters=characters_problematic&include=prevalent_values',
             colModel: [
-                { display: texts.osm.key, name: 'key', width: 250, sortable: true },
+                { display: '<%= osm.key %>', name: 'key', width: 250, sortable: true },
                 { display: '<span title="Number of objects with this key"><img src="/img/types/all.16.png" alt=""/> Total</span>',           name: 'count_all',        width: 250, sortable: true, align: 'center' },
                 { display: 'Users', name: 'users_all', width: 44, sortable: true, align: 'right' },
                 { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" title="Wiki"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
@@ -51,7 +56,7 @@ var create_flexigrid_for = {
                 { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true }
             ],
             searchitems: [
-                { display: texts.osm.key, name: 'key' }
+                { display: '<%= osm.key %>', name: 'key' }
             ],
             sortname: 'count_all',
             sortorder: 'desc',

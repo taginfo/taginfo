@@ -191,8 +191,6 @@ class Taginfo < Sinatra::Base
             :misc => {
                 :values_less_than_one_percent => trans.t.misc.values_less_than_one_percent,
                 :empty_string => trans.t.misc.empty_string,
-                :count => trans.t.misc.count,
-                :no_image => trans.t.misc.no_image,
                 :all => trans.t.misc.all,
             },
             :osm => {
@@ -209,19 +207,6 @@ class Taginfo < Sinatra::Base
                 :relation => trans.t.osm.relation,
                 :relations => trans.t.osm.relations,
                 :all => trans.t.osm.all
-            },
-            :pages => {
-                :key => {
-                    :other_keys_used => {
-                        :other => trans.t.pages.key.other_keys_used.other,
-                    },
-                    :number_objects => trans.t.pages.key.number_objects,
-                },
-                :tag => {
-                    :other_tags_used => {
-                        :other => trans.t.pages.tag.other_tags_used.other,
-                    },
-                },
             },
         }.to_json + ";\n"
     end

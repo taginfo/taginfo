@@ -1,16 +1,21 @@
+<%
+    osm = @trans.t.osm
+    misc = @trans.t.misc
+    page = @trans.t.reports.frequently_used_keys_without_wiki_page
+ %>
 function create_flexigrid_with_option(english) {
     create_flexigrid('grid-keys', {
         url: '/api/2/reports/frequently_used_keys_without_wiki_page?english=' + english,
         colModel: [
             { display: 'Create Wiki Page...', name: 'create_wiki_page', width: 200, sortable: false },
-            { display: texts.osm.key, name: 'key', width: 180, sortable: true },
+            { display: '<%= osm.key %>', name: 'key', width: 180, sortable: true },
             { display: '<span title="Number of objects with this key">Total</span>', name: 'count_all', width: 70, sortable: true, align: 'right' },
             { display: 'Users', name: 'users_all', width: 44, sortable: true, align: 'right' },
             { display: '<span title="Number of different values for this key">Values</span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
             { display: 'Prevalent Values', name: 'prevalent_values', width: 500, sortable: true }
         ],
         searchitems: [
-            { display: texts.osm.key, name: 'key' }
+            { display: '<%= osm.key %>', name: 'key' }
         ],
         sortname: 'count_all',
         sortorder: 'desc',
