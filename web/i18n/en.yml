@@ -163,9 +163,14 @@ pages:
     tag:
         description_from_wiki: Description of this tag from the wiki (if available in your chosen language, otherwise in English).
         no_description_in_wiki: No description for this tag in the wiki.
+        number_objects: Number of objects
         other_tags_used:
             title: Other tags used together with this tag
             other: Other tags
+            to_count_tooltip: Number of objects with this tag that also have the other tag/key.
+            other_key_tooltip: Tags/Keys used together with this tag.
+            from_count_tooltip: Number of objects with other tag/key that also have this tag.
+            none_found: No combinations found (only checked the most common ones).
         combinations:
             title: Combinations
             description: This table shows only the most common combinations of the most common tags.
@@ -174,10 +179,15 @@ pages:
             none_found: No wiki page available for this tag.
             create: Create wiki page for this tag
             suggest_key_wiki_page: Maybe you can find some more information on the wiki page for the key %1.
-        josm_rules:
+            wiki_page: Wiki page
+            implied_tags: Implied Tags
+            combined_tags: Combined Tags
+            linked_tags: Linked Tags
+        josm:
             title: JOSM style rules with this tag
             choice: |
                   Choose style:
+            no_styles: No JOSM styles for this tag.
 
 flexigrid:
     pagetext: Page

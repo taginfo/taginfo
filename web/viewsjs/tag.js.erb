@@ -1,10 +1,15 @@
+<%
+    osm = @trans.t.osm
+    misc = @trans.t.misc
+    page = @trans.t.pages.tag
+ %>
 var create_flexigrid_for = {
     overview: function(key, value, filter_type) {
         create_flexigrid('grid-overview', {
             url: '/api/3/db/tags/overview?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value),
             colModel: [
-                { display: 'Type', name: 'type', width: 100, sortable: true },
-                { display: 'Number of objects', name: 'count', width: 260, sortable: true, align: 'center' }
+                { display: '<%= misc.object_type %>', name: 'type', width: 100, sortable: true },
+                { display: '<%= page.number_objects %>', name: 'count', width: 260, sortable: true, align: 'center' }
             ],
             usepager: false,
             useRp: false,
@@ -26,16 +31,16 @@ var create_flexigrid_for = {
         create_flexigrid('grid-combinations', {
             url: '/api/2/db/tags/combinations?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value) + '&filter=' + encodeURIComponent(filter_type),
             colModel: [
-                { display: '<span title="Number of objects with this tag that also have the other tag">' + texts.misc.count + ' &rarr;</span>', name: 'to_count', width: 320, sortable: true, align: 'center' },
-                { display: '<span title="Tag used together with this tag">' + texts.pages.tag.other_tags_used.other + '</span>', name: 'other_tag', width: 340, sortable: true },
-                { display: '<span title="Number of objects with other tag that also have this tag">&rarr; ' + texts.misc.count + '</span>', name: 'from_count', width: 320, sortable: true, align: 'center' }
+                { display: '<span title="<%= page.other_tags_used.to_count_tooltip %>"><%= misc.count %> &rarr;</span>', name: 'to_count', width: 320, sortable: true, align: 'center' },
+                { display: '<span title="<%= page.other_tags_used.other_key_tooltip %>"><%= page.other_tags_used.other %></span>', name: 'other_tag', width: 340, sortable: true },
+                { display: '<span title="<%= page.other_tags_used.from_count_tooltip %>">&rarr; <%= misc.count %></span>', name: 'from_count', width: 320, sortable: true, align: 'center' }
             ],
             searchitems: [
-                { display: 'Other tag', name: 'other_tag' }
+                { display: '<%= page.other_tags_used.other %>', name: 'other_tag' }
             ],
             sortname: 'to_count',
             sortorder: 'desc',
-            emptymsg: 'No combinations found (only checked the most common ones).',
+            emptymsg: '<%= page.other_tags_used.none_found %>',
             preProcess: function(data) {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
@@ -52,14 +57,14 @@ var create_flexigrid_for = {
         create_flexigrid('grid-wiki', {
             url: '/api/2/wiki/tags?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value),
             colModel: [
-                { display: 'Language',      name: 'lang',             width: 150, sortable: false },
-                { display: 'Wiki page',     name: 'title',            width: 200, sortable: false, align: 'right' },
-                { display: 'Description',   name: 'description',      width: 400, sortable: false },
-                { display: 'Image',         name: 'image',            width: 120, sortable: false },
-                { display: 'Objects',       name: 'objects',          width:  80, sortable: false },
-                { display: 'Implied Tags',  name: 'tags_implied',     width: 120, sortable: false },
-                { display: 'Combined Tags', name: 'tags_combination', width: 120, sortable: false },
-                { display: 'Linked Tags',   name: 'tags_linked',      width: 220, sortable: false }
+                { display: '<%= misc.language %>', name: 'lang', width: 150, sortable: false },
+                { display: '<%= page.wiki_pages.wiki_page %>', name: 'title', width: 200, sortable: false, align: 'right' },
+                { display: '<%= misc.description %>', name: 'description', width: 400, sortable: false },
+                { display: '<%= misc.image %>', name: 'image', width: 120, sortable: false },
+                { display: '<%= misc.objects %>', name: 'objects', width:  80, sortable: false },
+                { display: '<%= page.wiki_pages.implied_tags %>', name: 'tags_implied', width: 120, sortable: false },
+                { display: '<%= page.wiki_pages.combined_tags %>', name: 'tags_combination', width: 120, sortable: false },
+                { display: '<%= page.wiki_pages.linked_tags %>', name: 'tags_linked', width: 220, sortable: false }
             ],
             usepager: false,
             useRp: false,
@@ -72,7 +77,7 @@ var create_flexigrid_for = {
                             print_language(row.lang, row.language, row.language_en),
                             print_wiki_link(row.title),
                             row.description,
-                            row.image == ''   ? empty(texts.misc.no_image) : hover_expand(print_wiki_link(row.image)),
+                            row.image == ''   ? empty('<%= misc.no_image %>') : hover_expand(print_wiki_link(row.image)),
                             (row.on_node      ? '<img src="/img/types/node.16.png"     alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
                             (row.on_way       ? '<img src="/img/types/way.16.png"      alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
                             (row.on_area      ? '<img src="/img/types/area.16.png"     alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
@@ -90,14 +95,14 @@ var create_flexigrid_for = {
         create_flexigrid('grid-josm', {
             url: '/api/2/josm/styles/standard/tags?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value),
             colModel: [
-                { display: texts.osm.value, name: 'v',    width: 400, sortable: false },
-                { display: 'Icon', name: 'icon', width: 30, sortable: false, align: 'center' },
-                { display: 'Line', name: 'line', width: 30, sortable: false, align: 'center' },
-                { display: 'Area', name: 'area', width: 30, sortable: false, align: 'center' }
+                { display: '<%= osm.value %>', name: 'v',    width: 400, sortable: false },
+                { display: '<%= misc.icon %>', name: 'icon', width: 30, sortable: false, align: 'center' },
+                { display: '<%= misc.line %>', name: 'line', width: 30, sortable: false, align: 'center' },
+                { display: '<%= misc.area %>', name: 'area', width: 30, sortable: false, align: 'center' }
             ],
             sortname: 'v',
             sortorder: 'asc',
-            emptymsg: 'No JOSM styles for this tag.',
+            emptymsg: '<%= page.josm.no_styles %>',
             preProcess: function(data) {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [

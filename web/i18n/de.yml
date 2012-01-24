@@ -146,8 +146,8 @@ pages:
             title: Andere Keys, die mit diesem Key benutzt werden
             other: Andere Keys
             to_count_tooltip: Anzahl Objekte mit diesem Key, die auch den anderen Key haben.
-            other_key_tooltip: Andere Keys, die zusammen mit diesem Key vorkommt.
-            from_count_tooltip: Anzahle Objekte mit dem anderen Key, die auch diesen Key haben.
+            other_key_tooltip: Andere Keys, die zusammen mit diesem Key vorkommen.
+            from_count_tooltip: Anzahl Objekte mit dem anderen Key, die auch diesen Key haben.
         geographic_distribution:
             title: Geographische Verteilung dieses Keys
             relations: Relations haben keinen geographischen Ort, daher kann keine Karte angezeigt werden.
@@ -167,9 +167,14 @@ pages:
     tag:
         description_from_wiki: Beschreibung dieses Tags aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf englisch).
         no_description_in_wiki: Keine Beschreibung dieses Tags im Wiki.
+        number_objects: Anzahl Objekte
         other_tags_used:
             title: Tags, die mit diesem Tag zusammen benutzt werden
             other: Andere Tags
+            to_count_tooltip: Anzahl Objekte mit diesem Tag, die auch den anderen Tag/Key haben.
+            other_key_tooltip: Andere Tags/Keys, die zusammen mit diesem Tag vorkommen.
+            from_count_tooltip: Anzahl Objekte mit dem anderen Tag, die auch diesen Tag/Key haben.
+            none_found: Keine Kombinationen gefunden (nur die häufigsten Kombinationen wurden geprüft).
         combinations:
             title: Kombinationen
             description: Diese Tabelle zeigt nur die häufigsten Kombinationen der häufigsten Tags.
@@ -178,10 +183,15 @@ pages:
             none_found: Keine Wiki-Seiten für diesen Tag vorhanden.
             create: Wiki-Seite für diesen Tag anlegen
             suggest_key_wiki_page: Vielleicht gibt es auf der Wiki-Seite für den Key %1 mehr Informationen.
-        josm_rules:
+            wiki_page: Wiki-Seite
+            implied_tags: Implizite Tags
+            combined_tags: Verbundene Tags
+            linked_tags: Ähnliche Tags
+        josm:
             title: JOSM-Stil-Regeln mit diesem Tag
             choice: |
                   Stil auswählen:
+            no_styles: Keine JOSM-Stilregeln für diesen Tag.
 
 flexigrid:
     pagetext: Seite

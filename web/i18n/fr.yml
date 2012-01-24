@@ -99,7 +99,7 @@ pages:
         no_description_in_wiki: Aucune description dans le wiki
         wiki_pages:
             title: Pages du wiki sur cette valeur
-        josm_rules:
+        josm:
             title: Régles de style JOSM sur cette valeur
             choice: |
                   Choix du style :
