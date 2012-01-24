@@ -41,6 +41,23 @@ taginfo:
         title: About this taginfo site
         other: See the <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> for other sites.
 
+misc:
+    values_less_than_one_percent: no values with more than 1%
+    empty_string: empty string
+    unknown: unknown
+    count: Count
+    image: Image
+    no_image: no image
+    all: All
+    object: Object
+    objects: Objects
+    object_type: Type
+    description: Description
+    icon: Icon
+    line: Line
+    area: Area
+    language: Language
+
 pages:
     index:
         keys:
@@ -60,36 +77,33 @@ pages:
         international:
             see: See other taginfo sites...
     sources:
-        index:
-            intro: |
-                <p>Taginfo takes data about OSM tags from several sources and brings them
-                together for easy browsing and discovery.</p>
-                <p>Note that Taginfo only displays this data. If you want to change it, you
-                have to go back to the source.</p>
-            data_until: Data until
-            last_update_run: Last update run
-            data_until_explanation: All edits until this time will be in the data, later edits might be.
-            to: to
+        intro: |
+            <p>Taginfo takes data about OSM tags from several sources and brings them
+            together for easy browsing and discovery.</p>
+            <p>Note that Taginfo only displays this data. If you want to change it, you
+            have to go back to the source.</p>
+        data_until: Data until
+        last_update_run: Last update run
+        data_until_explanation: All edits until this time will be in the data, later edits might be.
+        to: to
     download:
-        index:
-            intro: |
-                <p>Here you can download the databases used by Taginfo. All the data is stored
-                in <a class="extlink" href="http://www.sqlite.org/">Sqlite</a> databases.
-                The database files are then packed with <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
-                <p>If you don't want to download these databases, but need automated access to
-                the data, you can also use the <a href="/about">API</a>.</p>
-            file: File
-            packed: Packed
-            unpacked: Unpacked
-            description: Description
+        intro: |
+            <p>Here you can download the databases used by Taginfo. All the data is stored
+            in <a class="extlink" href="http://www.sqlite.org/">Sqlite</a> databases.
+            The database files are then packed with <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
+            <p>If you don't want to download these databases, but need automated access to
+            the data, you can also use the <a href="/about">API</a>.</p>
+        file: File
+        packed: Packed
+        unpacked: Unpacked
+        description: Description
     reports:
-        index:
-            intro: |
-                Reports show the tag data from different angles.
-                They often bring together data from several sources in interesting ways. Some
-                of the reports can help with finding specific errors.
-            list: List of all reports
-            data_sources: Data sources used
+        intro: |
+            Reports show the tag data from different angles.
+            They often bring together data from several sources in interesting ways. Some
+            of the reports can help with finding specific errors.
+        list: List of all reports
+        data_sources: Data sources used
     search:
         title: Search results
         you_were_searching_for: You were searching for
@@ -290,21 +304,4 @@ reports:
             instance in the database. This is not necessarily an error (maybe somebody
             added the documentation in the wiki as preparation for using a key or the wiki
             page documents a now obsolete key), but it can also be a typo or other error.</p>
-
-misc:
-    values_less_than_one_percent: no values with more than 1%
-    empty_string: empty string
-    unknown: unknown
-    count: Count
-    image: Image
-    no_image: no image
-    all: All
-    object: Object
-    objects: Objects
-    object_type: Type
-    description: Description
-    icon: Icon
-    line: Line
-    area: Area
-    language: Language
 

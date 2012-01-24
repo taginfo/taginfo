@@ -31,37 +31,34 @@ taginfo:
 pages:
     index:
     sources:
-        index:
-            intro: |
-                <p>Taginfo prende i dati dai tags OSM da diverse fonti e li fonde insieme
-                per una facile navigazione e scoperta.</p>
-                <p>Da notare che Taginfo visualizza solo i dati. Se volete cambiarli, dovete tornare alla fonte dei dati.</p>
-            data_until: Dati fino a
-            last_update_run: Ultimo aggiornamento eseguito
-            data_until_explanation: Tutte le modifiche eseguite fino a questo orario saranno presenti nei dati, le modifiche successive potrebbero esserci.
-            to: a
+        intro: |
+            <p>Taginfo prende i dati dai tags OSM da diverse fonti e li fonde insieme
+            per una facile navigazione e scoperta.</p>
+            <p>Da notare che Taginfo visualizza solo i dati. Se volete cambiarli, dovete tornare alla fonte dei dati.</p>
+        data_until: Dati fino a
+        last_update_run: Ultimo aggiornamento eseguito
+        data_until_explanation: Tutte le modifiche eseguite fino a questo orario saranno presenti nei dati, le modifiche successive potrebbero esserci.
+        to: a
     download:
-        index:
-            intro: |
-                <p>Qui potete scaricare il database usato da Taginfo. Tutti i dati sono memorizzati
-                in un database <a class="extlink"
-                href="http://www.sqlite.org/">Sqlite</a>. I file del database sono poi
-                compressi con <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
-                <p>Se non volete scaricare questi database, ma avete bisogno di avere un accesso automatizzato
-                ai dati, potete anche usare le <a href="/about">API</a>.</p>
-            file: File
-            packed: Compressi
-            unpacked: Decompressi
-            description: Descrizione
-            unknown: sconosciuto
+        intro: |
+            <p>Qui potete scaricare il database usato da Taginfo. Tutti i dati sono memorizzati
+            in un database <a class="extlink"
+            href="http://www.sqlite.org/">Sqlite</a>. I file del database sono poi
+            compressi con <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
+            <p>Se non volete scaricare questi database, ma avete bisogno di avere un accesso automatizzato
+            ai dati, potete anche usare le <a href="/about">API</a>.</p>
+        file: File
+        packed: Compressi
+        unpacked: Decompressi
+        description: Descrizione
+        unknown: sconosciuto
     reports:
-        index:
-            intro: |
-                I Reports mostrano i dati da differenti prospettive.
-                Spesso riuniscono i dati da diverse fonti in modi interessanti. Alcuni
-                di questi reports possono aiutare a trovare certi tipi di errori, come ad esempio
-                chiavi popolari senza una pagini nel wiki.
-            data_sources: Fonte dati
+        intro: |
+            I Reports mostrano i dati da differenti prospettive.
+            Spesso riuniscono i dati da diverse fonti in modi interessanti. Alcuni
+            di questi reports possono aiutare a trovare certi tipi di errori, come ad esempio
+            chiavi popolari senza una pagini nel wiki.
+        data_sources: Fonte dati
     search:
         title: Risultati ricerca
         you_were_searching_for: Stavi cercando

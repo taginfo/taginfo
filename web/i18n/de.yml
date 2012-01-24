@@ -40,6 +40,23 @@ taginfo:
         title: Über dieses Taginfo
         other: Andere Taginfo-Webseiten sind im <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM-Wiki</a> zu finden.
 
+misc:
+    values_less_than_one_percent: keine Values mit mehr als 1%
+    empty_string: leere Zeichenkette
+    unknown: unbekannt
+    count: Anzahl
+    image: Bild
+    no_image: kein Bild
+    all: Alle
+    object: Objekt
+    objects: Objekte
+    object_type: Typ
+    description: Beschreibung
+    icon: Icon
+    line: Linie
+    area: Fläche
+    language: Sprache
+
 pages:
     index:
         keys:
@@ -59,41 +76,38 @@ pages:
         international:
             see: Andere taginfo-Instanzen...
     sources:
-        index:
-            intro: |
-                <p>Taginfo führt Daten über OSM-Tags aus verschiedenen Quellen zusammen,
-                zum einfachen Suchen und Finden.</p>
-                <p>Taginfo zeigt diese Daten nur an. Wenn Du sie ändern willst, dann mußt
-                Du sie an der Quelle ändern.</p>
-            data_until: Daten bis
-            last_update_run: Letzte Aktualisierung
-            data_until_explanation: Alle Änderungen bis zu diesem Zeitpunkt sind auf jeden Fall in den Daten, spätere können unter Umständen auch drin sein.
-            to: bis
+        intro: |
+            <p>Taginfo führt Daten über OSM-Tags aus verschiedenen Quellen zusammen,
+            zum einfachen Suchen und Finden.</p>
+            <p>Taginfo zeigt diese Daten nur an. Wenn Du sie ändern willst, dann mußt
+            Du sie an der Quelle ändern.</p>
+        data_until: Daten bis
+        last_update_run: Letzte Aktualisierung
+        data_until_explanation: Alle Änderungen bis zu diesem Zeitpunkt sind auf jeden Fall in den Daten, spätere können unter Umständen auch drin sein.
+        to: bis
     download:
-        index:
-            intro: |
-                <p>Hier kannst Du die Datenbanken herunterladen, die von Taginfo verwendet
-                werden. Alle Daten sind in <a class="extlink"
-                href="http://www.sqlite.org/">Sqlite-Datenbanken</a> gespeichert.
-                Die Datenbank-Dateien sind dann mit
-                <a class="extlink"
-                href="http://www.bzip.org/">bzip2</a> gepackt.</p>
-                <p>Wenn Du die Datenbanken nicht herunterladen willst, aber trotzdem
-                automatisiert auf die Daten zugreifen willst, kannst Du auch die 
-                <a href="/about">API</a> verwenden.</p>
-            file: Datei
-            packed: Gepackt
-            unpacked: Ungepackt
-            description: Beschreibung
+        intro: |
+            <p>Hier kannst Du die Datenbanken herunterladen, die von Taginfo verwendet
+            werden. Alle Daten sind in <a class="extlink"
+            href="http://www.sqlite.org/">Sqlite-Datenbanken</a> gespeichert.
+            Die Datenbank-Dateien sind dann mit
+            <a class="extlink"
+            href="http://www.bzip.org/">bzip2</a> gepackt.</p>
+            <p>Wenn Du die Datenbanken nicht herunterladen willst, aber trotzdem
+            automatisiert auf die Daten zugreifen willst, kannst Du auch die 
+            <a href="/about">API</a> verwenden.</p>
+        file: Datei
+        packed: Gepackt
+        unpacked: Ungepackt
+        description: Beschreibung
     reports:
-        index:
-            intro: |
-                Reports zeigen die Daten aus verschiedenen Perspektiven.
-                Meist bringen Sie Daten aus verschiedenen Quellen auf interessante Art und
-                Weise zusammen. Manche der Reports helfen dabei, bestimmte Arten von Fehlern
-                zu finden, zum Beispiel häufig verwendete Keys ohne Wiki-Seite.
-            list: Alle Reports
-            data_sources: Datenquellen
+        intro: |
+            Reports zeigen die Daten aus verschiedenen Perspektiven.
+            Meist bringen Sie Daten aus verschiedenen Quellen auf interessante Art und
+            Weise zusammen. Manche der Reports helfen dabei, bestimmte Arten von Fehlern
+            zu finden, zum Beispiel häufig verwendete Keys ohne Wiki-Seite.
+        list: Alle Reports
+        data_sources: Datenquellen
     search:
         title: Suchergebnisse
         you_were_searching_for: Du hast gesucht nach
@@ -235,21 +249,4 @@ reports:
         name: Sprachen
     wiki_pages_about_non_existing_keys:
         name: Wiki-Seiten zu nicht-existierende Keys
-
-misc:
-    values_less_than_one_percent: keine Values mit mehr als 1%
-    empty_string: leere Zeichenkette
-    unknown: unbekannt
-    count: Anzahl
-    image: Bild
-    no_image: kein Bild
-    all: Alle
-    object: Objekt
-    objects: Objekte
-    object_type: Typ
-    description: Beschreibung
-    icon: Icon
-    line: Linie
-    area: Fläche
-    language: Sprache
 

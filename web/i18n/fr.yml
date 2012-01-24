@@ -30,6 +30,12 @@ taginfo:
         title: À propos de ce site Taginfo
         other: Visiter la page <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> pour d'autres sites.
 
+misc:
+    values_less_than_one_percent: Toutes les valeurs sont inférieures à 1%
+    empty_string: chaîne de caractère vide
+    count: Quantité
+    all: Tous
+
 pages:
     index:
         description: Taginfo est un outil pour trouver et comptabiliser les informations sur les tags du projet OpenStreetMap.
@@ -37,35 +43,32 @@ pages:
             show_all_keys: Montrer toutes les clés
             reports: Compte-Rendus
     sources:
-        index:
-            intro: |
-                <p>Taginfo retrouve des données sur les tags OSM depuis plusieures sources et les assemble pour en faciliter l'exploration.</p>
-                <p>Il est à noter que pour modifier les données il faut le faire à la source, car Taginfo ne fait que les afficher.</p>
-            data_until: Données jusqu'à
-            last_update_run: Dernière mise à jour
-            data_until_explanation: Toutes les modifications jusqu'à cette date sont présentes, les suivantes le seront peut-être.
-            to: à
+        intro: |
+            <p>Taginfo retrouve des données sur les tags OSM depuis plusieures sources et les assemble pour en faciliter l'exploration.</p>
+            <p>Il est à noter que pour modifier les données il faut le faire à la source, car Taginfo ne fait que les afficher.</p>
+        data_until: Données jusqu'à
+        last_update_run: Dernière mise à jour
+        data_until_explanation: Toutes les modifications jusqu'à cette date sont présentes, les suivantes le seront peut-être.
+        to: à
     download:
-        index:
-            intro: |
-                <p>Vous pouvez télécharger les données utilisées par Taginfo. Toutes les données sont stockées
-                dans des bases de données <a class="extlink" href="http://www.sqlite.org/">Sqlite</a>.
-                Les fichiers de base de données sont ensuite compressés
-                avec <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
-                <p>Si vous ne voulez pas télécharger les données, vous pouvez toujours y accéder directement grâce à l'<a href="/about">API</a>.</p>
-            file: Fichier
-            packed: Compressé
-            unpacked: Decompressé
-            description: Description
-            unknown: inconnu
+        intro: |
+            <p>Vous pouvez télécharger les données utilisées par Taginfo. Toutes les données sont stockées
+            dans des bases de données <a class="extlink" href="http://www.sqlite.org/">Sqlite</a>.
+            Les fichiers de base de données sont ensuite compressés
+            avec <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
+            <p>Si vous ne voulez pas télécharger les données, vous pouvez toujours y accéder directement grâce à l'<a href="/about">API</a>.</p>
+        file: Fichier
+        packed: Compressé
+        unpacked: Decompressé
+        description: Description
+        unknown: inconnu
     reports:
-        index:
-            intro: |
-                Les compte-rendus montre les données de différents points de vue.
-                Ils agrègent de façon interessante des données d'origines variées.
-                Certains compte-rendus peuvent aider à trouver tous types d'erreurs,
-                comme par exemple des valeurs de tags beaucoup utilisées mais n'ayant pas de page sur le wiki.
-            data_sources: Data Sources
+        intro: |
+            Les compte-rendus montre les données de différents points de vue.
+            Ils agrègent de façon interessante des données d'origines variées.
+            Certains compte-rendus peuvent aider à trouver tous types d'erreurs,
+            comme par exemple des valeurs de tags beaucoup utilisées mais n'ayant pas de page sur le wiki.
+        data_sources: Data Sources
     search:
         title: Résultats de la recherche
         you_were_searching_for: Vous recherchez
@@ -190,8 +193,3 @@ reports:
             <p>Cette table affiche les pages du wiki existantes pour documenter des tags non trouvés dans la base de données OSM.
             Ce n'est pas forcément une erreur, si un tag est en cours de préparation, mais ce peut aussi être une erreur suite à une faute de frappe.</p>
 
-misc:
-    values_less_than_one_percent: Toutes les valeurs sont inférieures à 1%
-    empty_string: chaîne de caractère vide
-    count: Quantité
-    all: Tous

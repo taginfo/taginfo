@@ -1,20 +1,20 @@
 <div class="pre">
     <h1 class="section"><%= t.taginfo.sources %></h1>
-    <%= t.pages.sources.index.intro %>
+    <%= t.pages.sources.intro %>
 </div>
 <div class="box resize">
     <table class="list">
         <tr>
-            <th class="tl"><%= t.taginfo.source %></th><th><%= t.pages.sources.index.data_until %>*</th><th><%= t.pages.sources.index.last_update_run %></th>
+            <th class="tl"><%= t.taginfo.source %></th><th><%= t.pages.sources.data_until %>*</th><th><%= t.pages.sources.last_update_run %></th>
         </tr>
     <% Source.visible.each_with_index do |source, n| c = (n%2!=0) ? ' even' : '' %>
         <tr>
             <td class="<%= c %>"><%= source.name %>
             <td class="tc<%= c %>"><%= source.data_until %> UTC</td>
-            <td class="tc<%= c %>"><%= source.update_start + ' ' + t.pages.sources.index.to + ' ' + source.update_end %> UTC</td>
+            <td class="tc<%= c %>"><%= source.update_start + ' ' + t.pages.sources.to + ' ' + source.update_end %> UTC</td>
         </tr>
     <% end %>
     </table>
 
-    <p style="font-size: 80%">* <%= t.pages.sources.index.data_until_explanation %></p>
+    <p style="font-size: 80%">* <%= t.pages.sources.data_until_explanation %></p>
 </div>
