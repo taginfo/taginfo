@@ -91,7 +91,7 @@ pages:
         wiki_pages:
             title: Pages du wiki sur cette clé
             none_found: Aucune page du wiki trouvée.
-        josm_rules:
+        josm:
             title: Régles de style JOSM sur cette clé
             choice: |
                   Choix du style :

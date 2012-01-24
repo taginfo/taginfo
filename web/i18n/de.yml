@@ -135,7 +135,9 @@ pages:
             ways: Nur Ways
             relations: Nur Relations
         number_objects: Anzahl Objekte
+        number_values: Anzahl Values
         values_used: Values für diesen Key
+        tag_description_from_wiki: Beschreibung dieses Tags aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf englisch).
         overview:
             objects_last_edited_by: Objekte mit diesem Key wurden zuletzt von %1 verschiedenen Usern editiert.
             no_endorsement: (Das bedeutet nicht, dass alle diese User den Key befürworten.)
@@ -143,6 +145,9 @@ pages:
         other_keys_used:
             title: Andere Keys, die mit diesem Key benutzt werden
             other: Andere Keys
+            to_count_tooltip: Anzahl Objekte mit diesem Key, die auch den anderen Key haben.
+            other_key_tooltip: Andere Keys, die zusammen mit diesem Key vorkommt.
+            from_count_tooltip: Anzahle Objekte mit dem anderen Key, die auch diesen Key haben.
         geographic_distribution:
             title: Geographische Verteilung dieses Keys
             relations: Relations haben keinen geographischen Ort, daher kann keine Karte angezeigt werden.
@@ -150,10 +155,15 @@ pages:
             title: Wiki-Seiten zu diesem Key
             none_found: Keine Wiki-Seiten für diesen Key vorhanden.
             create: Wiki-Seite für diesen Key anlegen
-        josm_rules:
+            wiki_page: Wiki-Seite
+            implied_tags: Implizite Tags
+            combined_tags: Verbundene Tags
+            linked_tags: Ähnliche Tags
+        josm:
             title: JOSM-Stil-Regeln mit diesem Key
             choice: |
                   Stil auswählen:
+            no_styles: Keine JOSM-Stilregeln für diesen Key.
     tag:
         description_from_wiki: Beschreibung dieses Tags aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf englisch).
         no_description_in_wiki: Keine Beschreibung dieses Tags im Wiki.
@@ -221,6 +231,15 @@ misc:
     empty_string: leere Zeichenkette
     unknown: unbekannt
     count: Anzahl
+    image: Bild
     no_image: kein Bild
     all: Alle
+    object: Objekt
+    objects: Objekte
+    object_type: Typ
+    description: Beschreibung
+    icon: Icon
+    line: Linie
+    area: Fläche
+    language: Sprache
 
