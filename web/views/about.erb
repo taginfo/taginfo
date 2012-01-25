@@ -1,9 +1,8 @@
-
 <table class="boxes" width="100%">
     <tr>
-        <td><h2><a href="/keys"><%= t.taginfo.about %></a></h2></td>
+        <td><h2><%= t.taginfo.about %></h2></td>
         <td rowspan="4" width="20"></td>
-        <td width="232"><h2><a href="/sources"><%= t.taginfo.sources %></a></h2></td>
+        <td width="232"><h2><%= t.taginfo.sources %></h2></td>
         <td rowspan="2" width="20"></td>
         <td width="232"><h2><%= t.taginfo.contact %></h2></td>
     </tr>
@@ -28,8 +27,9 @@
 
             <p>The taginfo software was created and is maintained by
             <a class="extlink" href="http://wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
-            He also maintains the main taginfo site. <a href="http://www.ctd-studio.co.uk/">Christian
-            Topf</a> created the web design.</p>
+            He also maintains the main taginfo web site.
+            <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>
+            created the web design.</p>
         </td>
         <td class="box">
             <p>Taginfo integrates data about tags from several sources:</p>
@@ -37,15 +37,16 @@
             <p>The <b>Wiki</b> contains some documentation for keys and tags.</p>
             <p>Icons and styles are taken from the <b>JOSM</b> editor
             configuration.</p>
+            <p>The data is updated regularly, see <a href="/sources">when this was last done</a>.</p>
             <p><a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo/Sources">More information about the sources on the wiki...</a></p>
         </td>
         <td class="box">
             <p>Bug reports should be filed in the
             <a class="extlink" href="http://trac.openstreetmap.org/query?status=accepted&status=assigned&status=new&status=reopened&component=taginfo&order=priority">OSM bug tracker</a>
             using the 'taginfo' component.</p>
-            <p>Taginfo developers and site maintainers hang out on the
+            <p>Taginfo developers and site maintainers hang out on the<br/>
             <a class="extlink" href="http://lists.openstreetmap.org/listinfo/taginfo-dev">taginfo mailing list</a>.</p>
-            <p>You can contact the taginfo maintainer at
+            <p>You can contact the taginfo maintainer at<br/>
             <a class="extlink" href="mailto:jochen@remote.org">jochen@remote.org</a>.</p>
         </td>
     </tr>
@@ -68,7 +69,7 @@
             <p>Taginfo data can also be accessed through a REST <b>API</b>. See the
             <a href="/taginfo/apidoc">API call documentation</a> for the details, some general information is
             <a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo/API">on the wiki</a>.
-            The server running the Taginfo API does not have unlimited resources.
+            The server running the taginfo API does not have unlimited resources.
             Please use the API responsibly. If in doubt contact the taginfo maintainers.</p>
         </td>
         <td class="box" colspan="3">
