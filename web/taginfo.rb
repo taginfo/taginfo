@@ -147,13 +147,6 @@ class Taginfo < Sinatra::Base
     #-------------------------------------
 
     get '/' do
-        # This is the maximum number of tags in the tag cloud. Javascript code will remove tags if the
-        # window is to small to show all of them.
-        tagcloud_number_of_tags = 260
-        @tags = @db.select("SELECT key, scale1 FROM popular_keys ORDER BY scale1 DESC LIMIT #{ tagcloud_number_of_tags }").
-            execute().
-            each_with_index{ |tag, idx| tag['pos'] = (tagcloud_number_of_tags - idx) / tagcloud_number_of_tags.to_f }.
-            sort_by{ |row| row['key'] }
         erb :index
     end
 

@@ -37,13 +37,4 @@
         </td>
     </tr>
 </table>
-<% javascript do
-    JS.raw('function tagcloud_data() { return ' + @tags.map{ |tag| [tag['key'], tagcloud_size(tag)] }.to_json.gsub(/\],/, "],\n")) + "; }\n" +
-    JS.raw(<<"JAVASCRIPT")
-function page_init() {
-    jQuery(window).resize(resize_home);
-    resize_home();
-}
-JAVASCRIPT
-end
-%>
+<% javascript "#{ r18n.locale.code }/index" %>

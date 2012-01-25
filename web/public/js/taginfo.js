@@ -36,37 +36,6 @@ function resize_box() {
     wrapper.outerHeight(height);
 }
 
-function resize_home() {
-    var tagcloud = jQuery('#tagcloud');
-    tagcloud.empty();
-    tagcloud.height(0);
-
-    resize_box();
-
-    var height = tagcloud.parent().innerHeight();
-    tagcloud.parent().children().each(function(index) {
-        if (this.id != 'tagcloud') {
-            height -= jQuery(this).outerHeight(true);
-        }
-    });
-    tagcloud.height(height - 20);
-
-    var tags = tagcloud_data(),
-        cloud = '';
-    for (var i=0; i < tags.length; i++) {
-        cloud += link(url_for_key(tags[i][0]), tags[i][0], { style: 'font-size: ' + tags[i][1] + 'px;' }) + ' ';
-    }
-    tagcloud.append(cloud);
-
-    var tags_array = tagcloud.children().toArray().sort(function(a, b) {
-        return parseInt(jQuery(a).css('font-size')) - parseInt(jQuery(b).css('font-size'));
-    });
-
-    while (tagcloud.get(0).scrollHeight > tagcloud.height()) {
-        jQuery(tags_array.shift()).remove();
-    }
-}
-
 function resize_grid(the_grid) {
     if (grids[the_grid]) {
         var grid = grids[the_grid][0].grid,
