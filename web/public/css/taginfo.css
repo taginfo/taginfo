@@ -157,6 +157,7 @@ span.customStyleSelectBox {
     -chrome-border-radius: 4px;
     -o-border-radius: 4px;
     font-size: 90%;
+    text-align: left;
 }
 
 span.customStyleSelectBox.changed { }
@@ -191,7 +192,7 @@ div#header div#header_forms form {
     padding-left: 22px;
 }
 
-select#locale {
+select#locale, select#lang {
     font-size: 90%;
     background-color: #ffffff;
     width: 98px;

@@ -1,0 +1,35 @@
+<div class="pre">
+    <h1>Translations of taginfo texts</h1>
+</div>
+<div class="box resize" style="overflow: auto;">
+<% if @error %>
+    <p style="color: red;"><%= @error %></p>
+<% else %>
+    <table class="list">
+        <th></th>
+        <th><a class="extlink" style="float: right;" href="https://github.com/joto/taginfo/blob/master/web/i18n/en.yml">on github</a>English</th>
+        <th><a class="extlink" style="float: right;" href="https://github.com/joto/taginfo/blob/master/web/i18n/<%= @lang %>.yml">on github</a>
+<form action="/taginfo/i18n" method="GET">
+    <select id="lang" name="lang">
+<% r18n.available_locales.sort{ |a,b| a.title <=> b.title }.each do |locale| %>
+        <option value="<%= locale.code %>"<%= @lang == locale.code ? ' selected="selected"' : ''%>><%= locale.title %></option>
+<% end %>
+    </select>
+</form>
+        </th>
+<%= i18n_walk(@line, 0, '', @i18n_en, @i18n_lang) %>
+    </table>
+</div>
+<%
+end
+javascript do
+    JS.raw(<<"JAVASCRIPT")
+function page_init() {
+    jQuery('span[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 'w' });
+    jQuery('#lang').bind('change', function() {
+        jQuery('form').submit();
+    });
+}
+JAVASCRIPT
+end
+%>

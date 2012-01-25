@@ -30,6 +30,7 @@
 require 'rubygems'
 require 'json'
 require 'sqlite3'
+require 'yaml'
 
 require 'sinatra/base'
 require 'sinatra/r18n'
@@ -188,6 +189,7 @@ class Taginfo < Sinatra::Base
     load 'lib/ui/keys_tags.rb'
     load 'lib/ui/reports.rb'
     load 'lib/ui/search.rb'
+    load 'lib/ui/i18n.rb'
     load 'lib/ui/test.rb'
 
     # run application
