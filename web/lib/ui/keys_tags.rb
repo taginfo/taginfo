@@ -58,6 +58,8 @@ class Taginfo < Sinatra::Base
         @img_width  = TaginfoConfig.get('geodistribution.width')  * TaginfoConfig.get('geodistribution.scale_image')
         @img_height = TaginfoConfig.get('geodistribution.height') * TaginfoConfig.get('geodistribution.scale_image')
 
+        javascript 'protovis-r3.2'
+        javascript "#{ r18n.locale.code }/key"
         erb :key
     end
 
@@ -112,6 +114,7 @@ class Taginfo < Sinatra::Base
             @desc = "<span title='#{ t.pages.tag.description_from_wiki }' tipsy='w'>#{ @desc }</span"
         end
 
+        javascript "#{ r18n.locale.code }/tag"
         erb :tag
     end
 

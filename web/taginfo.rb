@@ -147,6 +147,7 @@ class Taginfo < Sinatra::Base
     #-------------------------------------
 
     get '/' do
+        javascript "#{ r18n.locale.code }/index"
         erb :index
     end
 
@@ -155,6 +156,9 @@ class Taginfo < Sinatra::Base
     %w(about download keys sources tags).each do |page|
         get '/' + page do
             @title = (page =~ /^(keys|tags)$/) ? t.osm[page] : t.taginfo[page]
+            if File.exists?("viewsjs/#{ page }.js.erb")
+                javascript "#{ r18n.locale.code }/#{ page }"
+            end
             erb page.to_sym
         end
     end

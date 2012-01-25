@@ -10,6 +10,9 @@ class Taginfo < Sinatra::Base
         get report.url do
             @title = report.title
             section :reports
+            if File.exists?("viewsjs/reports/#{ report.name }.js.erb")
+                javascript "#{ r18n.locale.code }/reports/#{ report.name }"
+            end
             erb ('reports/' + report.name).to_sym
         end
     end

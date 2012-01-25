@@ -5,6 +5,7 @@ class Taginfo < Sinatra::Base
     get '/search' do
         @title = t.pages.search.title
 
+        javascript "#{ r18n.locale.code }/search"
         @query = params[:q]
         if @query =~ /(.*)=(.*)/
             erb :search_tags
