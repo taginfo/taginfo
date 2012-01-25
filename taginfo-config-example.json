@@ -53,5 +53,13 @@
             // The OSM planet file or extract where we read the OSM data from.
             "planetfile": "/osm/planet/var/current-planet.osm.pbf"
         }
+    },
+    // For compiling tagstats.
+    "tagstats": {
+        // Extra compilerflags, for instance to find Osmium.
+        "cxxflags": "-I../../../osmium/osmium/include",
+        // Node location store. For really large OSM files (whole planet or large continent)
+        // this should be "Mmap", otherwise "SparseTable".
+        "geodistribution": "SparseTable"
     }
 }
