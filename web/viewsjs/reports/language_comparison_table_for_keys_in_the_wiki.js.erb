@@ -49,7 +49,7 @@ function page_init() {
                     d = [link_to_key(row.key) <%= @languages.map{ ", ''"}.join() %>];
                     for (var lang in row.lang) {
                         ptype = row.lang[lang];
-                        d[lang_to_idx[lang]] = '<img src="/img/sources/wiki/wiki-' + ptype + '.png" alt="[' + ptype + ']"/>';
+                        d[lang_to_idx[lang]] = '<img width="16" height="16" src="/img/sources/wiki/wiki-' + ptype + '.png" alt="[' + ptype + ']"/>';
                     }
                     return { 'cell': d };
                 })

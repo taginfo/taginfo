@@ -78,10 +78,10 @@ var create_flexigrid_for = {
                             print_wiki_link(row.title),
                             row.description,
                             row.image == ''   ? empty('<%= misc.no_image %>') : hover_expand(print_wiki_link(row.image)),
-                            (row.on_node      ? '<img src="/img/types/node.16.png"     alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
-                            (row.on_way       ? '<img src="/img/types/way.16.png"      alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
-                            (row.on_area      ? '<img src="/img/types/area.16.png"     alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>') + ' ' +
-                            (row.on_relation  ? '<img src="/img/types/relation.16.png" alt="yes"/>' : '<img src="/img/types/none.16.png" alt="no"/>'),
+                            (row.on_node      ? '<img width="16" height="16" src="/img/types/node.16.png"     alt="yes"/>' : '<img width="16" height="16" src="/img/types/none.16.png" alt="no"/>') + ' ' +
+                            (row.on_way       ? '<img width="16" height="16" src="/img/types/way.16.png"      alt="yes"/>' : '<img width="16" height="16" src="/img/types/none.16.png" alt="no"/>') + ' ' +
+                            (row.on_area      ? '<img width="16" height="16" src="/img/types/area.16.png"     alt="yes"/>' : '<img width="16" height="16" src="/img/types/none.16.png" alt="no"/>') + ' ' +
+                            (row.on_relation  ? '<img width="16" height="16" src="/img/types/relation.16.png" alt="yes"/>' : '<img width="16" height="16" src="/img/types/none.16.png" alt="no"/>'),
                             print_key_or_tag_list(row.tags_implies),
                             print_key_or_tag_list(row.tags_combination),
                             print_key_or_tag_list(row.tags_linked)

@@ -48,7 +48,7 @@ class Taginfo < Sinatra::Base
         (@merkaartor_type, @merkaartor_link, @merkaartor_selector) = @db.select('SELECT tag_type, link, selector FROM merkaartor.keys').condition('key=?', @key).get_columns(:tag_type, :link, :selector)
         @merkaartor_images = [:node, :way, :area, :relation].map{ |type|
             name = type.to_s.capitalize
-            '<img src="/img/types/' + (@merkaartor_selector =~ /Type is #{name}/ ? type.to_s : 'none') + '.16.png" alt="' + name + '" title="' + name + '"/>'
+            '<img src="/img/types/' + (@merkaartor_selector =~ /Type is #{name}/ ? type.to_s : 'none') + '.16.png" width="16" height="16" alt="' + name + '" title="' + name + '"/>'
         }.join('&nbsp;')
 
         @merkaartor_values = @db.select('SELECT value FROM merkaartor.tags').condition('key=?', @key).order_by(:value).execute().map{ |row| row['value'] }
