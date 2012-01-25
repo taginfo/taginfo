@@ -109,10 +109,9 @@ class Taginfo < Sinatra::Base
 
         javascript 'jquery-1.5.1.min'
         javascript 'jquery-ui-1.8.10.custom.min'
-        javascript 'customSelect.jquery'
-        javascript 'jquery.tipsy'
-#        javascript 'flexigrid-minified'
-        javascript 'flexigrid'
+        javascript 'customSelect.jquery-minified'
+        javascript 'jquery.tipsy-minified'
+        javascript 'flexigrid-minified'
         javascript r18n.locale.code + '/texts'
         javascript 'taginfo'
 

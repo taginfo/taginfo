@@ -12,8 +12,8 @@ Number.prototype.print_as_percent = function() {
 
 /* ============================ */
 
-var grids = {};
-var current_grid = '';
+var grids = {},
+    current_grid = '';
 
 /* ============================ */
 
@@ -25,14 +25,14 @@ function init_tipsy() {
 }
 
 function resize_box() {
-    var height = jQuery(window).height();
+    var wrapper = jQuery('.resize,.ui-tabs-panel'),
+        height = jQuery(window).height();
 
     height -= jQuery('div#header').outerHeight(true);
     height -= jQuery('div.pre').outerHeight(true);
     height -= jQuery('.ui-tabs-nav').outerHeight(true);
     height -= jQuery('div#footer').outerHeight(true);
 
-    var wrapper = jQuery('.resize,.ui-tabs-panel');
     wrapper.outerHeight(height);
 }
 
@@ -51,27 +51,27 @@ function resize_home() {
     });
     tagcloud.height(height - 20);
 
-    var tags = tagcloud_data();
-    var cloud = '';
+    var tags = tagcloud_data(),
+        cloud = '';
     for (var i=0; i < tags.length; i++) {
         cloud += link(url_for_key(tags[i][0]), tags[i][0], { style: 'font-size: ' + tags[i][1] + 'px;' }) + ' ';
     }
     tagcloud.append(cloud);
 
-    var tags = tagcloud.children().toArray().sort(function(a, b) {
+    var tags_array = tagcloud.children().toArray().sort(function(a, b) {
         return parseInt(jQuery(a).css('font-size')) - parseInt(jQuery(b).css('font-size'));
     });
 
     while (tagcloud.get(0).scrollHeight > tagcloud.height()) {
-        jQuery(tags.shift()).remove();
+        jQuery(tags_array.shift()).remove();
     }
 }
 
-function resize_grid() {
-    if (grids[current_grid]) {
-        var grid = grids[current_grid][0].grid;
-        var oldrp = grid.getRp();
-        var rp = calculate_flexigrid_rp(jQuery(grids[current_grid][0]).parents('.resize,.ui-tabs-panel'));
+function resize_grid(the_grid) {
+    if (grids[the_grid]) {
+        var grid = grids[the_grid][0].grid,
+            oldrp = grid.getRp(),
+            rp = calculate_flexigrid_rp(jQuery(grids[current_grid][0]).parents('.resize,.ui-tabs-panel'));
         if (rp != oldrp) {
             grid.newRp(rp);
             grid.fixHeight();
@@ -86,7 +86,7 @@ function tag(element, text, attrs) {
         attrs = {}
     }
     var attributes = '';
-    for (a in attrs) {
+    for (var a in attrs) {
         attributes += ' ' + a + '="' + attrs[a] + '"';
     }
     return '<' + element + attributes + '>' + text + '</' + element + '>';
@@ -101,7 +101,7 @@ function link(url, text, attrs) {
 }
 
 function span(text, c) {
-    return tag('span', text, { class: c });
+    return tag('span', text, { 'class': c });
 }
 
 function hover_expand(text) {
@@ -123,11 +123,11 @@ function print_wiki_link(title, options) {
         path = 'wiki/' + title;
     }
 
-    return link('http://wiki.openstreetmap.org/' + path, title, { target: '_blank', class: 'extlink' });
+    return link('http://wiki.openstreetmap.org/' + path, title, { target: '_blank', 'class': 'extlink' });
 }
 
 function print_language(code, native_name, english_name) {
-    return tag('span', code, { class: 'lang', title: native_name + ' (' + english_name + ')' }) + ' ' + native_name;
+    return tag('span', code, { 'class': 'lang', title: native_name + ' (' + english_name + ')' }) + ' ' + native_name;
 }
 
 function print_image(type) {
@@ -302,28 +302,21 @@ function calculate_flexigrid_rp(box) {
     height -= box.children('.pHiv').outerHeight();
     height -= 90; // table tools and header, possibly horizontal scrollbar
 
-    var rp = Math.floor(height / 26);
-    return rp;
+    return Math.floor(height / 26);
 }
 
 function create_flexigrid(domid, options) {
     current_grid = domid;
     if (grids[domid] == null) {
         // grid doesn't exist yet, so create it
-        var me = jQuery('#' + domid);
-        var rp = calculate_flexigrid_rp(me.parents('.resize,.ui-tabs-panel'));
+        var me = jQuery('#' + domid),
+            rp = calculate_flexigrid_rp(me.parents('.resize,.ui-tabs-panel'));
         grids[domid] = me.flexigrid(jQuery.extend({}, flexigrid_defaults, texts.flexigrid, options, { rp: rp }));
         jQuery('th *[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 's' });
         jQuery('.sDiv input[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 'e' });
     } else {
         // grid does exist, make sure it has the right size
-        var grid = grids[domid][0].grid;
-        var oldrp = grid.getRp();
-        var rp = calculate_flexigrid_rp(jQuery(grids[domid][0]).parents('.resize,.ui-tabs-panel'));
-        if (rp != oldrp) {
-            grid.newRp(rp);
-            grid.fixHeight();
-        }
+        resize_grid(domid);
     }
 }
 
@@ -387,7 +380,7 @@ jQuery(document).ready(function() {
 
     jQuery(window).resize(function() {
         resize_box();
-        resize_grid();
+        resize_grid(current_grid);
     });
 });
 
