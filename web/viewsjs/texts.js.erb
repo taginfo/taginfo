@@ -1,0 +1,33 @@
+var texts = <%=
+        {
+            :flexigrid => {
+                :pagetext => @trans.t.flexigrid.pagetext,
+                :pagestat => @trans.t.flexigrid.pagestat,
+                :outof    => @trans.t.flexigrid.outof,
+                :findtext => @trans.t.flexigrid.findtext,
+                :procmsg  => @trans.t.flexigrid.procmsg,
+                :nomsg    => @trans.t.flexigrid.nomsg,
+                :errormsg => @trans.t.flexigrid.errormsg,
+            },
+            :misc => {
+                :values_less_than_one_percent => @trans.t.misc.values_less_than_one_percent,
+                :empty_string => @trans.t.misc.empty_string,
+                :all => @trans.t.misc.all,
+            },
+            :osm => {
+                :key => @trans.t.osm.key,
+                :keys => @trans.t.osm.keys,
+                :value => @trans.t.osm.value,
+                :values => @trans.t.osm.values,
+                :tag => @trans.t.osm.tag,
+                :tags => @trans.t.osm.tags,
+                :node => @trans.t.osm.node,
+                :nodes => @trans.t.osm.nodes,
+                :way => @trans.t.osm.way,
+                :ways => @trans.t.osm.ways,
+                :relation => @trans.t.osm.relation,
+                :relations => @trans.t.osm.relations,
+                :all => @trans.t.osm.all
+            },
+        }.to_json
+%>;

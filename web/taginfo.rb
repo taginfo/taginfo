@@ -112,7 +112,7 @@ class Taginfo < Sinatra::Base
         javascript 'jquery.tipsy'
 #        javascript 'flexigrid-minified'
         javascript 'flexigrid'
-        javascript 'lang/' + r18n.locale.code
+        javascript r18n.locale.code + '/texts'
         javascript 'taginfo'
 
         # set to immediate expire on normal pages
@@ -173,42 +173,6 @@ class Taginfo < Sinatra::Base
         @lang = lang
         @trans = R18n::I18n.new(lang, 'i18n')
         erb :"#{js}.js", :layout => false, :content_type => 'text/javascript', :views => 'viewsjs'
-    end
-
-    get '/js/lang/:lang.js' do
-        expires next_update
-        trans = R18n::I18n.new(params[:lang], 'i18n')
-        return 'var texts = ' + {
-            :flexigrid => {
-                :pagetext => trans.t.flexigrid.pagetext,
-                :pagestat => trans.t.flexigrid.pagestat,
-                :outof    => trans.t.flexigrid.outof,
-                :findtext => trans.t.flexigrid.findtext,
-                :procmsg  => trans.t.flexigrid.procmsg,
-                :nomsg    => trans.t.flexigrid.nomsg,
-                :errormsg => trans.t.flexigrid.errormsg,
-            },
-            :misc => {
-                :values_less_than_one_percent => trans.t.misc.values_less_than_one_percent,
-                :empty_string => trans.t.misc.empty_string,
-                :all => trans.t.misc.all,
-            },
-            :osm => {
-                :key => trans.t.osm.key,
-                :keys => trans.t.osm.keys,
-                :value => trans.t.osm.value,
-                :values => trans.t.osm.values,
-                :tag => trans.t.osm.tag,
-                :tags => trans.t.osm.tags,
-                :node => trans.t.osm.node,
-                :nodes => trans.t.osm.nodes,
-                :way => trans.t.osm.way,
-                :ways => trans.t.osm.ways,
-                :relation => trans.t.osm.relation,
-                :relations => trans.t.osm.relations,
-                :all => trans.t.osm.all
-            },
-        }.to_json + ";\n"
     end
 
     #--------------------------------------------------------------------------
