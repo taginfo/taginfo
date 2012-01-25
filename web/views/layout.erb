@@ -22,7 +22,7 @@
 <% end %>
                 </select>
             </form>
-            <form action="/search"><input type="text" id="search" name="q" value=""/></form>
+            <form action="/search"><input type="text" id="search" name="q" value="<%= h(params[:q]) %>"/></form>
         </div>
         <div id="header_logo">
             <a href="/"><img width="49" height="49" src="<%= TaginfoConfig.get('instance.icon', '/img/logo/world.png') %>" alt="taginfo"/></a>
