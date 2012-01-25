@@ -3,8 +3,17 @@
     <p>This section is for developers only.</p>
 </div>
 <div class="box resize">
+    <h2>Menu</h2>
     <ul>
         <li><a href="/taginfo/apidoc"><%= t.taginfo.apidoc %></a></li>
         <li><a href="/taginfo/i18n">taginfo text translations</a></li>
     </ul>
+    <h2>Config Settings</h2>
+    <table class="list">
+        <tr><th class="tl">Variable</th><th class="tl">Setting</th></tr>
+<% [:url, :name, :description, :icon, :contact, :area].each do |k| %>
+        <tr><td><%= k %></td><td><%= TaginfoConfig.get("instance.#{k}") %></td></tr>
+<% end %>
+    </table>
+    <p>These config settings are also available from the <tt>/api/2/site</tt> <a href="/taginfo/apidoc#api_2_site">API call</a>.</p>
 </div>
