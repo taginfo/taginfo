@@ -63,6 +63,7 @@ END_XML
                 map{ |row| row['key'] }
         end
 
+        content_type :json
         if format == 'simple'
             # simple format is used by the search box on the website itself,
             # it is just a list of suggestions
