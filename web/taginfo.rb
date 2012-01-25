@@ -160,7 +160,7 @@ class Taginfo < Sinatra::Base
 
     #-------------------------------------
 
-    %w(about apidoc download keys sources tags).each do |page|
+    %w(about download keys sources tags).each do |page|
         get '/' + page do
             @title = (page =~ /^(keys|tags)$/) ? t.osm[page] : t.taginfo[page]
             erb page.to_sym
@@ -189,7 +189,7 @@ class Taginfo < Sinatra::Base
     load 'lib/ui/keys_tags.rb'
     load 'lib/ui/reports.rb'
     load 'lib/ui/search.rb'
-    load 'lib/ui/i18n.rb'
+    load 'lib/ui/taginfo.rb'
     load 'lib/ui/test.rb'
 
     # run application

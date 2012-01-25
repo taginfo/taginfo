@@ -23,11 +23,12 @@ taginfo:
     download: Download
     about: Über Taginfo
     contact: Kontakt
+    meta: Meta
     wiki: Wiki
     report: Report
     reports: Reports
     international: International
-    apidoc: API-Dokumenatation
+    apidoc: API-Dokumentation
     test: Test
     map: Karte
     maps: Karten

@@ -1,4 +1,4 @@
-# web/lib/ui/i18n.rb
+# web/lib/ui/taginfo.rb
 class Taginfo < Sinatra::Base
 
     def i18n_walk(line, level, path, en, other)
@@ -24,7 +24,14 @@ class Taginfo < Sinatra::Base
         out
     end
 
+    get '/taginfo' do
+        erb :'taginfo/index'
+    end
+
     get '/taginfo/i18n' do
+        @title = 'Translations of taginfo texts'
+        @section = 'taginfo'
+        @section_title = t.taginfo.meta
         @lang = params[:lang] || 'de'
         @i18n_en   = YAML.load_file("i18n/en.yml")
         begin
@@ -40,6 +47,13 @@ class Taginfo < Sinatra::Base
         }
 
         erb :'taginfo/i18n'
+    end
+
+    get '/taginfo/apidoc' do
+        @title = t.taginfo.apidoc
+        @section = 'taginfo'
+        @section_title = t.taginfo.meta
+        erb :'taginfo/apidoc'
     end
 
 end
