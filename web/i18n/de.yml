@@ -58,6 +58,7 @@ misc:
     line: Linie
     area: Fläche
     language: Sprache
+    search_for: Suche nach
     objects_tooltip: Anzahl der Objekte (als Absolutwert und als Bruchteil aller Nodes, Ways und Relations).
     nodes_tooltip: Anzahl der Nodes (als Absolutwert und als Bruchteil aller Nodes mit Tags, d.h. Nodes ohne jegliche Tags werden ignoriert).
     ways_tooltip: Anzahl der Ways (als Absolutwert und als Bruchteil aller Ways).

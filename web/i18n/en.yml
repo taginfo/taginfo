@@ -59,6 +59,7 @@ misc:
     line: Line
     area: Area
     language: Language
+    search_for: Search for
     objects_tooltip: Number of objects (as absolute value and as percentage of all nodes, ways, and relations).
     nodes_tooltip: Number of nodes (as absolute value and as percentage of tagged nodes, ie. nodes without any tags are ignored).
     ways_tooltip: Number of ways (as absolute value and as percentage of all ways).

@@ -1253,7 +1253,7 @@
 				
 				if (p.qtype=='') p.qtype = sitems[0].name;
 				
-				$(g.sDiv).append("<div class='btnseparator'></div> <div class='sDiv2'>"/*+p.findtext*/+" <input type='text' size='20' name='q' class='qsbox' />");  // <select name='qtype'>"+sopt+"</select> <!--input type='button' value='Clear' /--></div>");
+				$(g.sDiv).append("<div class='btnseparator'></div> <div class='sDiv2'>"/*+p.findtext*/+" <input title='" + texts.misc.search_for + ': ' + sitems[0].display + "' type='text' size='20' name='q' class='qsbox' />");  // <select name='qtype'>"+sopt+"</select> <!--input type='button' value='Clear' /--></div>");
 
 				$('input[name=q],select[name=qtype]',g.sDiv).keydown(function(e){if(e.keyCode==13) g.doSearch()});
 				$('input[value=Clear]',g.sDiv).click(function(){$('input[name=q]',g.sDiv).val(''); p.query = ''; g.doSearch(); });
