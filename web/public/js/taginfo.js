@@ -281,7 +281,7 @@ function create_flexigrid(domid, options) {
         var me = jQuery('#' + domid),
             rp = calculate_flexigrid_rp(me.parents('.resize,.ui-tabs-panel'));
         grids[domid] = me.flexigrid(jQuery.extend({}, flexigrid_defaults, texts.flexigrid, options, { rp: rp }));
-        jQuery('th *[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 's' });
+        jQuery('th *[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 's', offset: 3 });
         jQuery('.sDiv input[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 'e' });
     } else {
         // grid does exist, make sure it has the right size

@@ -515,3 +515,8 @@ table.desc td {
 }
 
 /* ==========  */
+
+div.hDiv table th span {
+    display: block;
+}
+
