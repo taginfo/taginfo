@@ -110,11 +110,7 @@ span.button {
     color: #303030;
     border: 1px solid #e8e8e8;
     padding: 2px 4px;
-    -moz-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -chrome-border-radius: 4px;
-    -o-border-radius: 4px;
+    border-radius: 4px;
 }
 
 span.disabled {
@@ -127,7 +123,7 @@ span.disabled {
 .tipsy-inner { background-color: #000; color: #FFF; max-width: 220px; padding: 5px 8px 4px 8px; text-align: center; }
 
 /* Rounded corners */
-.tipsy-inner { border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; }
+.tipsy-inner { border-radius: 4px; }
 
 .tipsy-arrow { position: absolute; width: 0; height: 0; line-height: 0; border: 5px dashed #000; }
 
@@ -153,11 +149,7 @@ span.customStyleSelectBox {
     padding: 1px 4px 0 4px;
     border:1px solid #a0a0a0;
     background-color: #ffffff;
-    -moz-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -chrome-border-radius: 4px;
-    -o-border-radius: 4px;
+    border-radius: 4px;
     font-size: 90%;
     text-align: left;
 }
@@ -209,11 +201,7 @@ input#search {
     width: 228px;
     padding: 2px;
     border: 1px solid #a0a0a0;
-    -moz-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -chrome-border-radius: 4px;
-    -o-border-radius: 4px;
+    border-radius: 4px;
 }
 
 input:focus {
@@ -253,11 +241,7 @@ div#footer_right {
 div.box {
     background-color: #ddddd4;
     padding: 20px;
-    -moz-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -chrome-border-radius: 4px;
-    -o-border-radius: 4px;
+    border-radius: 4px;
 }
 
 .resize, .ui-tabs-panel {
@@ -296,11 +280,7 @@ table.boxes td.box {
     background-color: #ddddd4;
     padding: 8px;
     margin-bottom: 10px;
-    -moz-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -chrome-border-radius: 4px;
-    -o-border-radius: 4px;
+    border-radius: 4px;
 }
 
 /* ==========  */
@@ -332,11 +312,7 @@ span.lang {
     font-weight: bold;
     font-size: 80%;
     padding: 0 4px;
-    -moz-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -chrome-border-radius: 4px;
-    -o-border-radius: 4px;
+    border-radius: 4px;
 }
 
 td.number {
@@ -347,11 +323,7 @@ span.char {
     background-color: #f0f0f0;
     border: 1px solid #e0e0e0;
     padding: 0 2px;
-    -moz-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -chrome-border-radius: 4px;
-    -o-border-radius: 4px;
+    border-radius: 4px;
 }
 
 form#filter-form {
@@ -460,11 +432,7 @@ table.drilldown td.content {
     width: 16em;
     border: 1px solid #d0d0d0;
     background-color: #f0f0f0;
-    -moz-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -chrome-border-radius: 4px;
-    -o-border-radius: 4px;
+    border-radius: 4px;
     padding: 10px 0;
 }
 
@@ -491,11 +459,7 @@ table.drilldown td#feature {
 
 table.desc {
     background-color: #b8b8b0;
-    -moz-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -chrome-border-radius: 4px;
-    -o-border-radius: 4px;
+    border-radius: 4px;
     padding: 6px;
     width: 100%;
 }
