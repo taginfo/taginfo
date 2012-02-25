@@ -32,7 +32,8 @@
         "max_results": 1000,
         // URL prefix for the XAPI/JOSM links on the key and tag pages.
         // "url_prefix": "http://www.informationfreeway.org/api/0.6/"
-        "url_prefix": "http://open.mapquestapi.com/xapi/api/0.6/"
+        // "url_prefix": "http://open.mapquestapi.com/xapi/api/0.6/"
+        "url_prefix": "http://overpass-api.de/api/xapi_meta?"
     },
     "opensearch": {
         // For the OpenSearchDescription. You have to change at least the shortname and the contact for your instance.
