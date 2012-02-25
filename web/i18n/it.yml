@@ -29,7 +29,6 @@ taginfo:
     data_from: Dati da
 
 pages:
-    index:
     sources:
         intro: |
             <p>Taginfo prende i dati dai tags OSM da diverse fonti e li fonde insieme
