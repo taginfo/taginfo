@@ -113,6 +113,10 @@ span.button {
     border-radius: 4px;
 }
 
+span.button a.extlink:before {
+    content: none;
+}
+
 span.disabled {
     color: #808080;
 }
