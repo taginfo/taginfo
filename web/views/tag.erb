@@ -9,7 +9,7 @@
         </select>
     </form>
     <div id="tools">
-        <% if @count_all < 1000 %>
+        <% if @count_all < TaginfoConfig.get('xapi.max_results', 1000) %>
             <%= xapi_link(@filter_xapi, @key, @value) %> <%= josm_link(@filter_xapi, @key, @value) %>
         <% else %>
             <span class="button disabled" title="Button disabled, because there are too many objects with this key">XAPI</span>
