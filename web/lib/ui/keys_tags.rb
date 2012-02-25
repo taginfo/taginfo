@@ -19,6 +19,7 @@ class Taginfo < Sinatra::Base
         @filter_type = get_filter()
         @sel = Hash.new('')
         @sel[@filter_type] = ' selected="selected"'
+        @filter_xapi = { 'all' => '*', nil => '*', 'nodes' => 'node', 'ways' => 'way', 'relations' => 'relation' }[@filter_type];
 
         @count_all_values = @db.select("SELECT count_#{@filter_type} FROM db.keys").condition('key = ?', @key).get_first_value().to_i
 
@@ -99,6 +100,7 @@ class Taginfo < Sinatra::Base
         @filter_type = get_filter()
         @sel = Hash.new('')
         @sel[@filter_type] = ' selected="selected"'
+        @filter_xapi = { 'all' => '*', nil => '*', 'nodes' => 'node', 'ways' => 'way', 'relations' => 'relation' }[@filter_type];
 
         @wiki_count = @db.count('wiki.wikipages').condition('key=?', @key).condition('value=?', @value).get_first_value().to_i
         if @wiki_count == 0

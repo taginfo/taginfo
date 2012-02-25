@@ -298,9 +298,10 @@ div#tabs form {
 /* ========== */
 
 div#tools {
+    clear: both;
     float: right;
     font-size: 80%;
-    margin-top: 2px;
+    margin-top: 4px;
 }
 
 span.lang {
@@ -327,7 +328,7 @@ span.char {
 }
 
 form#filter-form {
-    margin-top: 10px;
+    margin-top: 0px;
     clear: both;
     float: right;
 }
