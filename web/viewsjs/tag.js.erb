@@ -126,7 +126,11 @@ function page_init() {
 
     jQuery('#filter').bind('change', function() {
         var value = this.value;
-        window.location.search = 'filter=' + value;
+
+        var qs = jQuery.getQueryString;
+        qs['filter'] = value;
+
+        window.location.search = jQuery.param(qs);
     });
     
     page_init2();
