@@ -37,7 +37,7 @@ class Taginfo < Sinatra::Base
                 :area_color => row['area_color'] ? h(row['area_color'].sub(/^.*#/, '#')) : '',
                 :line_color => row['line_color'] ? h(row['line_color'].sub(/^.*#/, '#')) : '',
                 :line_width => row['line_width'] ? h(row['line_width']) : 0,
-                :icon => row['icon_source'] && row['icon_source'] != 'misc/deprecated.png' ? h(row['icon_source']) : ''
+                :icon => row['icon_source'] && row['icon_source'] != 'misc/deprecated.png' && row['icon_source'] != 'misc/no_icon.png' ? h(row['icon_source']) : ''
             } }
         }.to_json
     end
