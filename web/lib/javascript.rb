@@ -6,7 +6,7 @@ def javascript(url=nil, &block)
 end
 
 def javascript_tags
-    @javascript.map{ |js| js.to_html }
+    @javascript.map{ |js| js.to_html }.join("\n")
 end
 
 class Javascript
@@ -23,9 +23,9 @@ class Javascript
 
     def to_html
         if @file.nil?
-            %Q{    <script type="text/javascript">//<![CDATA[\n#{ @content }//]]></script>\n}
+            %Q{    <script type="text/javascript">//<![CDATA[\n#{ @content }//]]></script>}
         else
-            %Q{    <script type="text/javascript" src="/js/#{ @file }.js"></script>\n}
+            %Q{    <script type="text/javascript" src="/js/#{ @file }.js"></script>}
         end
     end
 
