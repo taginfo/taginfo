@@ -17,9 +17,17 @@ CXXFLAGS += -DTAGSTATS_COUNT_KEY_COMBINATIONS
 CXXFLAGS += -DTAGSTATS_COUNT_TAG_COMBINATIONS
 
 CXXFLAGS += -DTAGSTATS_GEODISTRIBUTION_INT=uint16_t
-CXXFLAGS += -DTAGSTATS_GEODISTRIBUTION_FOR_WAYS=`../bin/taginfo-config.rb tagstats.geodistribution`
-#CXXFLAGS += -DTAGSTATS_GEODISTRIBUTION_FOR_WAYS=SparseTable
-#CXXFLAGS += -DTAGSTATS_GEODISTRIBUTION_FOR_WAYS=Mmap
+
+BYID := $(shell ../bin/taginfo-config.rb tagstats.geodistribution)
+#BYID := SparseTable
+#BYID := MmapFile
+#BYID := MmapAnon
+
+BYID_LC   := $(shell echo $(BYID) | sed -e 's/\([A-Z]\)/_\0/g' | cut -c2- | tr 'A-Z' 'a-z')
+BYID_INCL := "<osmium/storage/byid/$(BYID_LC).hpp>"
+
+CXXFLAGS += -DTAGSTATS_GEODISTRIBUTION_FOR_WAYS=$(BYID)
+CXXFLAGS += -DTAGSTATS_GEODISTRIBUTION_INCLUDE=$(BYID_INCL)
 
 CXXFLAGS += -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
 

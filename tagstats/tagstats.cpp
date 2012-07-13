@@ -33,10 +33,10 @@ You should have received a copy of the Licenses along with Osmium. If not, see
  */
 typedef TAGSTATS_GEODISTRIBUTION_INT rough_position_t;
 
+// Set BYID in Makefile to SparseTable, MmapFile, or MmapAnon
 #ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
-# include <osmium/storage/byid.hpp>
-// Set TAGSTATS_GEODISTRIBUTION_STORAGE to SparseTable or Mmap in Makefile
-typedef Osmium::Storage::TAGSTATS_GEODISTRIBUTION_FOR_WAYS<rough_position_t> storage_t;
+# include TAGSTATS_GEODISTRIBUTION_INCLUDE
+typedef Osmium::Storage::ById::TAGSTATS_GEODISTRIBUTION_FOR_WAYS<rough_position_t> storage_t;
 #endif // TAGSTATS_GEODISTRIBUTION_FOR_WAYS
 
 #include "geodistribution.hpp"
