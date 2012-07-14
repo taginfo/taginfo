@@ -144,8 +144,6 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    Osmium::init(debug);
-
     if (argc - optind != 2) {
         std::cerr << "Usage: " << argv[0] << " [OPTIONS] OSMFILE DATABASE" << std::endl;
         exit(1);
