@@ -22,6 +22,9 @@ You should have received a copy of the Licenses along with Osmium. If not, see
 
 #include <getopt.h>
 
+#define OSMIUM_WITH_PBF_INPUT
+#define OSMIUM_WITH_XML_INPUT
+
 #include <osmium.hpp>
 
 #include "statistics_handler.hpp"
@@ -154,6 +157,6 @@ int main(int argc, char *argv[]) {
     Osmium::Sqlite::Database db(argv[optind+1]);
     MapToInt<rough_position_t> map_to_int(left, bottom, right, top, width, height);
     TagStatsHandler handler(db, tags_list, map_to_int);
-    infile.read(handler);
+    Osmium::Input::read(infile, handler);
 }
 
