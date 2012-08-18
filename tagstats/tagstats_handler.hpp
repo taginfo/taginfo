@@ -412,7 +412,7 @@ public:
 #endif
     {
 #ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
-        std::ifstream tags_list_file(tags_list, std::ifstream::in);
+        std::ifstream tags_list_file(tags_list.c_str(), std::ifstream::in);
         std::string key_value;
         while (tags_list_file >> key_value) {
             m_key_value_stats[m_string_store.add(key_value.c_str())] = new KeyValueStats();
