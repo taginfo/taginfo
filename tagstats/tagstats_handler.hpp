@@ -132,18 +132,18 @@ public:
     }
 
     void update(const char* value, const Osmium::OSM::Object& object, StringStore& string_store) {
-        key.count[object.get_type()]++;
+        key.count[object.type()]++;
 
         value_hash_map_t::iterator values_iterator(values_hash.find(value));
         if (values_iterator == values_hash.end()) {
             Counter counter;
-            counter.count[object.get_type()] = 1;
+            counter.count[object.type()] = 1;
             values_hash.insert(std::pair<const char*, Counter>(string_store.add(value), counter));
-            values.count[object.get_type()]++;
+            values.count[object.type()]++;
         } else {
-            values_iterator->second.count[object.get_type()]++;
-            if (values_iterator->second.count[object.get_type()] == 1) {
-                values.count[object.get_type()]++;
+            values_iterator->second.count[object.type()]++;
+            if (values_iterator->second.count[object.type()] == 1) {
+                values.count[object.type()]++;
             }
         }
 
@@ -227,9 +227,9 @@ class TagStatsHandler : public Osmium::Handler::Base {
                 key2 = object.tags().get_tag_key(j);
                 key_hash_map_t::iterator tsi2(tags_stat.find(key2));
                 if (strcmp(key1, key2) < 0) {
-                    tsi1->second->add_key_combination(tsi2->first, object.get_type());
+                    tsi1->second->add_key_combination(tsi2->first, object.type());
                 } else {
-                    tsi2->second->add_key_combination(tsi1->first, object.get_type());
+                    tsi2->second->add_key_combination(tsi1->first, object.type());
                 }
             }
         }
@@ -244,9 +244,9 @@ class TagStatsHandler : public Osmium::Handler::Base {
             key_value_hash_map_t::iterator kvi2 = m_key_value_stats.find(key_value2.c_str());
             if (kvi2 != m_key_value_stats.end()) {
                 if (key_value1 < key_value2) {
-                    kvi1->second->add_key_combination(kvi2->first, object.get_type());
+                    kvi1->second->add_key_combination(kvi2->first, object.type());
                 } else {
-                    kvi2->second->add_key_combination(kvi1->first, object.get_type());
+                    kvi2->second->add_key_combination(kvi1->first, object.type());
                 }
             }
 
@@ -256,9 +256,9 @@ class TagStatsHandler : public Osmium::Handler::Base {
             kvi2 = m_key_value_stats.find(key_value2.c_str());
             if (kvi2 != m_key_value_stats.end()) {
                 if (key_value1 < key_value2) {
-                    kvi1->second->add_key_combination(kvi2->first, object.get_type());
+                    kvi1->second->add_key_combination(kvi2->first, object.type());
                 } else {
-                    kvi2->second->add_key_combination(kvi1->first, object.get_type());
+                    kvi2->second->add_key_combination(kvi1->first, object.type());
                 }
             }
         }
@@ -364,7 +364,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
             }
             stat->update(it->value(), object, m_string_store);
 
-            if (object.get_type() == NODE) {
+            if (object.type() == NODE) {
                 try {
                     stat->distribution.add_coordinate(m_map_to_int(static_cast<const Osmium::OSM::Node&>(object).position()));
                 } catch (std::range_error) {
@@ -372,7 +372,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
                 }
             }
 #ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
-            else if (object.get_type() == WAY) {
+            else if (object.type() == WAY) {
                 // This will only add the coordinate of the first node in a way to the
                 // distribution. We'll see how this goes, maybe we need to store the
                 // coordinates of all nodes?

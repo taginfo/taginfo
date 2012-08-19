@@ -101,12 +101,12 @@ public:
             m_stats.max_way_id = m_id;
         }
         m_stats.way_tags += m_tag_count;
-        m_stats.way_nodes += way->node_count();
+        m_stats.way_nodes += way->nodes().size();
         if (m_tag_count > (int64_t) m_stats.max_tags_on_way) {
             m_stats.max_tags_on_way = m_tag_count;
         }
-        if (way->node_count() > (int64_t) m_stats.max_nodes_on_way) {
-            m_stats.max_nodes_on_way = way->node_count();
+        if (way->nodes().size() > (int64_t) m_stats.max_nodes_on_way) {
+            m_stats.max_nodes_on_way = way->nodes().size();
         }
         if (m_version > (int64_t) m_stats.max_way_version) {
             m_stats.max_way_version = m_version;
