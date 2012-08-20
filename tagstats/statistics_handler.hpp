@@ -22,7 +22,7 @@ You should have received a copy of the Licenses along with Osmium. If not, see
 
 */
 
-#include <osmium/utils/sqlite.hpp>
+#include "sqlite.hpp"
 
 /**
  * Osmium handler that collects basic statistics from OSM data and
@@ -32,7 +32,7 @@ class StatisticsHandler : public Osmium::Handler::Base {
 
 public:
 
-    StatisticsHandler(Osmium::Sqlite::Database& database) : Base(), m_database(database) {
+    StatisticsHandler(Sqlite::Database& database) : Base(), m_database(database) {
         // if you change anything in this array, also change the corresponding struct below
         static const char *sn[] = {
             "nodes",
@@ -136,7 +136,7 @@ public:
     }
 
     void final() {
-        Osmium::Sqlite::Statement* statement_insert_into_main_stats = m_database.prepare("INSERT INTO stats (key, value) VALUES (?, ?);");
+        Sqlite::Statement* statement_insert_into_main_stats = m_database.prepare("INSERT INTO stats (key, value) VALUES (?, ?);");
         m_database.begin_transaction();
 
         for (int i=0; m_stat_names[i]; ++i) {
@@ -190,7 +190,7 @@ private:
 
     const char **m_stat_names;
 
-    Osmium::Sqlite::Database& m_database;
+    Sqlite::Database& m_database;
 
     osm_object_id_t m_id;
     osm_version_t   m_version;

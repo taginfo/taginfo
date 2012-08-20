@@ -41,13 +41,16 @@ LDFLAGS = $(LIB_EXPAT) $(LIB_PBF) $(LIB_GD) $(LIB_SQLITE)
 
 .PHONY: all clean install
 
-all: tagstats
+all: tagstats osmstats
+
+osmstats: osmstats.cpp statistics_handler.hpp
+	$(CXX) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
 
 tagstats: tagstats.cpp tagstats_handler.hpp statistics_handler.hpp string_store.hpp geodistribution.hpp
 	$(CXX) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
 
 check:
-	cppcheck --enable=all tagstats.cpp
+	cppcheck --enable=all tagstats.cpp osmstats.cpp
 
 indent:
 	astyle --style=java --indent-namespaces --indent-switches --pad-header --suffix=none \*.hpp \*.cpp
@@ -56,5 +59,5 @@ install:
 	install -m 755 tagstats ../sources/db/tagstats
 
 clean:
-	rm -f *.o core tagstats
+	rm -f *.o core tagstats osmstats
 

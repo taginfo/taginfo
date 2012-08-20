@@ -154,7 +154,7 @@ int main(int argc, char *argv[]) {
 
     GeoDistribution::set_dimensions(width, height);
     Osmium::OSMFile infile(argv[optind]);
-    Osmium::Sqlite::Database db(argv[optind+1]);
+    Sqlite::Database db(argv[optind+1]);
     MapToInt<rough_position_t> map_to_int(left, bottom, right, top, width, height);
     TagStatsHandler handler(db, tags_list, map_to_int);
     Osmium::Input::read(infile, handler);

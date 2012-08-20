@@ -31,7 +31,7 @@ You should have received a copy of the Licenses along with Osmium. If not, see
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
 
-#include <osmium/utils/sqlite.hpp>
+#include "sqlite.hpp"
 #include "string_store.hpp"
 
 /**
@@ -207,7 +207,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
     static const int string_store_size = 1024 * 1024 * 10;
     StringStore m_string_store;
 
-    Osmium::Sqlite::Database& m_database;
+    Sqlite::Database& m_database;
 
     void _timer_info(const char *msg) {
         int duration = time(0) - timer;
@@ -287,7 +287,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
     void _print_and_clear_distribution_images(bool for_nodes) {
         int sum_size=0;
 
-        Osmium::Sqlite::Statement* statement_insert_into_key_distributions = m_database.prepare("INSERT INTO key_distributions (key, object_type, png) VALUES (?, ?, ?);");
+        Sqlite::Statement* statement_insert_into_key_distributions = m_database.prepare("INSERT INTO key_distributions (key, object_type, png) VALUES (?, ?, ?);");
         m_database.begin_transaction();
 
         for (key_hash_map_t::const_iterator it = tags_stat.begin(); it != tags_stat.end(); it++) {
@@ -400,7 +400,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
 public:
 
-    TagStatsHandler(Osmium::Sqlite::Database& database, const std::string& tags_list, MapToInt<rough_position_t>& map_to_int) :
+    TagStatsHandler(Sqlite::Database& database, const std::string& tags_list, MapToInt<rough_position_t>& map_to_int) :
         Base(),
         m_max_timestamp(0),
         m_string_store(string_store_size),
@@ -452,7 +452,7 @@ public:
 
         int size;
         void* ptr = GeoDistribution::create_empty_png(&size);
-        Osmium::Sqlite::Statement* statement_insert_into_key_distributions = m_database.prepare("INSERT INTO key_distributions (png) VALUES (?);");
+        Sqlite::Statement* statement_insert_into_key_distributions = m_database.prepare("INSERT INTO key_distributions (png) VALUES (?);");
         m_database.begin_transaction();
         statement_insert_into_key_distributions
         ->bind_blob(ptr, size) // column: png
@@ -510,29 +510,29 @@ public:
         _print_memory_usage();
         timer = time(0);
 
-        Osmium::Sqlite::Statement *statement_insert_into_keys = m_database.prepare("INSERT INTO keys (key, " \
+        Sqlite::Statement *statement_insert_into_keys = m_database.prepare("INSERT INTO keys (key, " \
                 " count_all,  count_nodes,  count_ways,  count_relations, " \
                 "values_all, values_nodes, values_ways, values_relations, " \
                 " users_all, " \
                 "cells_nodes, cells_ways) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 
-        Osmium::Sqlite::Statement *statement_insert_into_tags = m_database.prepare("INSERT INTO tags (key, value, " \
+        Sqlite::Statement *statement_insert_into_tags = m_database.prepare("INSERT INTO tags (key, value, " \
                 "count_all, count_nodes, count_ways, count_relations) " \
                 "VALUES (?, ?, ?, ?, ?, ?);");
 
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
-        Osmium::Sqlite::Statement* statement_insert_into_key_combinations = m_database.prepare("INSERT INTO keypairs (key1, key2, " \
+        Sqlite::Statement* statement_insert_into_key_combinations = m_database.prepare("INSERT INTO keypairs (key1, key2, " \
                 "count_all, count_nodes, count_ways, count_relations) " \
                 "VALUES (?, ?, ?, ?, ?, ?);");
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
 #ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
-        Osmium::Sqlite::Statement* statement_insert_into_tag_combinations = m_database.prepare("INSERT INTO tagpairs (key1, value1, key2, value2, " \
+        Sqlite::Statement* statement_insert_into_tag_combinations = m_database.prepare("INSERT INTO tagpairs (key1, value1, key2, value2, " \
                 "count_all, count_nodes, count_ways, count_relations) " \
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
 
-        Osmium::Sqlite::Statement* statement_update_meta = m_database.prepare("UPDATE source SET data_until=?");
+        Sqlite::Statement* statement_update_meta = m_database.prepare("UPDATE source SET data_until=?");
 
         m_database.begin_transaction();
 
