@@ -96,8 +96,6 @@ namespace Sqlite {
             }
         }
 
-        Statement* prepare(const char* sql);
-
     }; // class Database
 
     /**
@@ -105,21 +103,15 @@ namespace Sqlite {
     */
     class Statement {
 
-    private:
-
-        Database* m_db;
-        sqlite3_stmt* m_statement;
-        int m_bindnum;
-
     public:
 
-        Statement(Database* db, const char* sql) :
+        Statement(Database& db, const char* sql) :
             m_db(db),
             m_statement(0),
             m_bindnum(1) {
-            sqlite3_prepare_v2(db->get_sqlite3(), sql, -1, &m_statement, 0);
+            sqlite3_prepare_v2(db.get_sqlite3(), sql, -1, &m_statement, 0);
             if (m_statement == 0) {
-                throw Sqlite::Exception("Can't prepare statement", m_db->errmsg());
+                throw Sqlite::Exception("Can't prepare statement", m_db.errmsg());
             }
         }
 
@@ -127,68 +119,70 @@ namespace Sqlite {
             sqlite3_finalize(m_statement);
         }
 
-        Statement* bind_null() {
+        Statement& bind_null() {
             if (SQLITE_OK != sqlite3_bind_null(m_statement, m_bindnum++)) {
-                throw Sqlite::Exception("Can't bind null value", m_db->errmsg());
+                throw Sqlite::Exception("Can't bind null value", m_db.errmsg());
             }
-            return this;
+            return *this;
         }
 
-        Statement* bind_text(const char* value) {
+        Statement& bind_text(const char* value) {
             if (SQLITE_OK != sqlite3_bind_text(m_statement, m_bindnum++, value, -1, SQLITE_STATIC)) {
-                throw Sqlite::Exception("Can't bind text value", m_db->errmsg());
+                throw Sqlite::Exception("Can't bind text value", m_db.errmsg());
             }
-            return this;
+            return *this;
         }
 
-        Statement* bind_text(const std::string& value) {
+        Statement& bind_text(const std::string& value) {
             if (SQLITE_OK != sqlite3_bind_text(m_statement, m_bindnum++, value.c_str(), -1, SQLITE_STATIC)) {
-                throw Sqlite::Exception("Can't bind text value", m_db->errmsg());
+                throw Sqlite::Exception("Can't bind text value", m_db.errmsg());
             }
-            return this;
+            return *this;
         }
 
-        Statement* bind_int(int value) {
+        Statement& bind_int(int value) {
             if (SQLITE_OK != sqlite3_bind_int(m_statement, m_bindnum++, value)) {
-                throw Sqlite::Exception("Can't bind int value", m_db->errmsg());
+                throw Sqlite::Exception("Can't bind int value", m_db.errmsg());
             }
-            return this;
+            return *this;
         }
 
-        Statement* bind_int64(int64_t value) {
+        Statement& bind_int64(int64_t value) {
             if (SQLITE_OK != sqlite3_bind_int64(m_statement, m_bindnum++, value)) {
-                throw Sqlite::Exception("Can't bind int64 value", m_db->errmsg());
+                throw Sqlite::Exception("Can't bind int64 value", m_db.errmsg());
             }
-            return this;
+            return *this;
         }
 
-        Statement* bind_double(double value) {
+        Statement& bind_double(double value) {
             if (SQLITE_OK != sqlite3_bind_double(m_statement, m_bindnum++, value)) {
-                throw Sqlite::Exception("Can't bind double value", m_db->errmsg());
+                throw Sqlite::Exception("Can't bind double value", m_db.errmsg());
             }
-            return this;
+            return *this;
         }
 
-        Statement* bind_blob(const void* value, int length) {
+        Statement& bind_blob(const void* value, int length) {
             if (SQLITE_OK != sqlite3_bind_blob(m_statement, m_bindnum++, value, length, 0)) {
-                throw Sqlite::Exception("Can't bind blob value", m_db->errmsg());
+                throw Sqlite::Exception("Can't bind blob value", m_db.errmsg());
             }
-            return this;
+            return *this;
         }
 
         void execute() {
             sqlite3_step(m_statement);
             if (SQLITE_OK != sqlite3_reset(m_statement)) {
-                throw Sqlite::Exception("Can't execute statement", m_db->errmsg());
+                throw Sqlite::Exception("Can't execute statement", m_db.errmsg());
             }
             m_bindnum = 1;
         }
 
-    }; // class Statement
+    private:
 
-    inline Statement* Database::prepare(const char* sql) {
-        return new Statement(this, sql);
-    }
+        Database& m_db;
+        sqlite3_stmt* m_statement;
+        int m_bindnum;
+
+    }; // class Statement
 
 } // namespace Sqlite
 

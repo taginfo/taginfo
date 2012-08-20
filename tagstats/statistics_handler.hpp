@@ -32,7 +32,9 @@ class StatisticsHandler : public Osmium::Handler::Base {
 
 public:
 
-    StatisticsHandler(Sqlite::Database& database) : Base(), m_database(database) {
+    StatisticsHandler(Sqlite::Database& database) :
+        Base(),
+        m_database(database) {
         // if you change anything in this array, also change the corresponding struct below
         static const char *sn[] = {
             "nodes",
@@ -136,23 +138,21 @@ public:
     }
 
     void final() {
-        Sqlite::Statement* statement_insert_into_main_stats = m_database.prepare("INSERT INTO stats (key, value) VALUES (?, ?);");
+        Sqlite::Statement statement_insert_into_main_stats(m_database, "INSERT INTO stats (key, value) VALUES (?, ?);");
         m_database.begin_transaction();
 
         for (int i=0; m_stat_names[i]; ++i) {
             statement_insert_into_main_stats
-            ->bind_text(m_stat_names[i])
-            ->bind_int64( ((uint64_t *) &m_stats)[i] )
-            ->execute();
+            .bind_text(m_stat_names[i])
+            .bind_int64( ((uint64_t *) &m_stats)[i] )
+            .execute();
         }
         statement_insert_into_main_stats
-        ->bind_text("nodes_with_tags")
-        ->bind_int64( ((uint64_t *) &m_stats)[0] - ((uint64_t *) &m_stats)[1] )
-        ->execute();
+        .bind_text("nodes_with_tags")
+        .bind_int64( ((uint64_t *) &m_stats)[0] - ((uint64_t *) &m_stats)[1] )
+        .execute();
 
         m_database.commit();
-
-        delete statement_insert_into_main_stats;
     }
 
 private:

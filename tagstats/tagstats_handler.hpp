@@ -287,7 +287,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
     void _print_and_clear_distribution_images(bool for_nodes) {
         int sum_size=0;
 
-        Sqlite::Statement* statement_insert_into_key_distributions = m_database.prepare("INSERT INTO key_distributions (key, object_type, png) VALUES (?, ?, ?);");
+        Sqlite::Statement statement_insert_into_key_distributions(m_database, "INSERT INTO key_distributions (key, object_type, png) VALUES (?, ?, ?);");
         m_database.begin_transaction();
 
         for (key_hash_map_t::const_iterator it = tags_stat.begin(); it != tags_stat.end(); it++) {
@@ -304,10 +304,10 @@ class TagStatsHandler : public Osmium::Handler::Base {
             sum_size += size;
 
             statement_insert_into_key_distributions
-            ->bind_text(it->first)             // column: key
-            ->bind_text(for_nodes ? "n" : "w") // column: object_type
-            ->bind_blob(ptr, size)             // column: png
-            ->execute();
+            .bind_text(it->first)             // column: key
+            .bind_text(for_nodes ? "n" : "w") // column: object_type
+            .bind_blob(ptr, size)             // column: png
+            .execute();
 
             stat->distribution.free_png(ptr);
 
@@ -318,7 +318,6 @@ class TagStatsHandler : public Osmium::Handler::Base {
         std::cerr << "sum of location image sizes: " << sum_size << std::endl;
 
         m_database.commit();
-        delete statement_insert_into_key_distributions;
     }
 
     void _print_memory_usage() {
@@ -452,13 +451,12 @@ public:
 
         int size;
         void* ptr = GeoDistribution::create_empty_png(&size);
-        Sqlite::Statement* statement_insert_into_key_distributions = m_database.prepare("INSERT INTO key_distributions (png) VALUES (?);");
+        Sqlite::Statement statement_insert_into_key_distributions(m_database, "INSERT INTO key_distributions (png) VALUES (?);");
         m_database.begin_transaction();
         statement_insert_into_key_distributions
-        ->bind_blob(ptr, size) // column: png
-        ->execute();
+        .bind_blob(ptr, size) // column: png
+        .execute();
         m_database.commit();
-        delete statement_insert_into_key_distributions;
 
         _print_and_clear_distribution_images(true);
         timer = time(0);
@@ -510,36 +508,36 @@ public:
         _print_memory_usage();
         timer = time(0);
 
-        Sqlite::Statement *statement_insert_into_keys = m_database.prepare("INSERT INTO keys (key, " \
+        Sqlite::Statement statement_insert_into_keys(m_database, "INSERT INTO keys (key, " \
                 " count_all,  count_nodes,  count_ways,  count_relations, " \
                 "values_all, values_nodes, values_ways, values_relations, " \
                 " users_all, " \
                 "cells_nodes, cells_ways) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 
-        Sqlite::Statement *statement_insert_into_tags = m_database.prepare("INSERT INTO tags (key, value, " \
+        Sqlite::Statement statement_insert_into_tags(m_database, "INSERT INTO tags (key, value, " \
                 "count_all, count_nodes, count_ways, count_relations) " \
                 "VALUES (?, ?, ?, ?, ?, ?);");
 
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
-        Sqlite::Statement* statement_insert_into_key_combinations = m_database.prepare("INSERT INTO keypairs (key1, key2, " \
+        Sqlite::Statement statement_insert_into_key_combinations(m_database, "INSERT INTO keypairs (key1, key2, " \
                 "count_all, count_nodes, count_ways, count_relations) " \
                 "VALUES (?, ?, ?, ?, ?, ?);");
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
 #ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
-        Sqlite::Statement* statement_insert_into_tag_combinations = m_database.prepare("INSERT INTO tagpairs (key1, value1, key2, value2, " \
+        Sqlite::Statement statement_insert_into_tag_combinations(m_database, "INSERT INTO tagpairs (key1, value1, key2, value2, " \
                 "count_all, count_nodes, count_ways, count_relations) " \
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
 
-        Sqlite::Statement* statement_update_meta = m_database.prepare("UPDATE source SET data_until=?");
+        Sqlite::Statement statement_update_meta(m_database, "UPDATE source SET data_until=?");
 
         m_database.begin_transaction();
 
         struct tm* tm = gmtime(&m_max_timestamp);
         static char max_timestamp_str[20]; // thats enough space for the timestamp generated from the pattern in the next line
         strftime(max_timestamp_str, sizeof(max_timestamp_str), "%Y-%m-%d %H:%M:%S", tm);
-        statement_update_meta->bind_text(max_timestamp_str)->execute();
+        statement_update_meta.bind_text(max_timestamp_str).execute();
 
         uint64_t tags_hash_size=tags_stat.size();
         uint64_t tags_hash_buckets=tags_stat.size()*2; //bucket_count();
@@ -565,13 +563,13 @@ public:
 
             for (value_hash_map_t::const_iterator values_iterator(stat->values_hash.begin()); values_iterator != stat->values_hash.end(); values_iterator++) {
                 statement_insert_into_tags
-                ->bind_text(tags_iterator->first)                   // column: key
-                ->bind_text(values_iterator->first)                 // column: value
-                ->bind_int64(values_iterator->second.all())         // column: count_all
-                ->bind_int64(values_iterator->second.nodes())       // column: count_nodes
-                ->bind_int64(values_iterator->second.ways())        // column: count_ways
-                ->bind_int64(values_iterator->second.relations())   // column: count_relations
-                ->execute();
+                .bind_text(tags_iterator->first)                   // column: key
+                .bind_text(values_iterator->first)                 // column: value
+                .bind_int64(values_iterator->second.all())         // column: count_all
+                .bind_int64(values_iterator->second.nodes())       // column: count_nodes
+                .bind_int64(values_iterator->second.ways())        // column: count_ways
+                .bind_int64(values_iterator->second.relations())   // column: count_relations
+                .execute();
             }
 
 #ifdef TAGSTATS_COUNT_USERS
@@ -580,23 +578,23 @@ public:
 #endif // TAGSTATS_COUNT_USERS
 
             statement_insert_into_keys
-            ->bind_text(tags_iterator->first)      // column: key
-            ->bind_int64(stat->key.all())          // column: count_all
-            ->bind_int64(stat->key.nodes())        // column: count_nodes
-            ->bind_int64(stat->key.ways())         // column: count_ways
-            ->bind_int64(stat->key.relations())    // column: count_relations
-            ->bind_int64(stat->values_hash.size()) // column: values_all
-            ->bind_int64(stat->values.nodes())     // column: values_nodes
-            ->bind_int64(stat->values.ways())      // column: values_ways
-            ->bind_int64(stat->values.relations()) // column: values_relations
+            .bind_text(tags_iterator->first)      // column: key
+            .bind_int64(stat->key.all())          // column: count_all
+            .bind_int64(stat->key.nodes())        // column: count_nodes
+            .bind_int64(stat->key.ways())         // column: count_ways
+            .bind_int64(stat->key.relations())    // column: count_relations
+            .bind_int64(stat->values_hash.size()) // column: values_all
+            .bind_int64(stat->values.nodes())     // column: values_nodes
+            .bind_int64(stat->values.ways())      // column: values_ways
+            .bind_int64(stat->values.relations()) // column: values_relations
 #ifdef TAGSTATS_COUNT_USERS
-            ->bind_int64(stat->user_hash.size())   // column: users_all
+            .bind_int64(stat->user_hash.size())   // column: users_all
 #else
-            ->bind_int64(0)
+            .bind_int64(0)
 #endif // TAGSTATS_COUNT_USERS
-            ->bind_int64(stat->cells.nodes())      // column: cells_nodes
-            ->bind_int64(stat->cells.ways())       // column: cells_ways
-            ->execute();
+            .bind_int64(stat->cells.nodes())      // column: cells_nodes
+            .bind_int64(stat->cells.ways())       // column: cells_ways
+            .execute();
 
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
             key_combination_hash_size    += stat->key_combination_hash.size();
@@ -605,13 +603,13 @@ public:
             for (combination_hash_map_t::const_iterator it(stat->key_combination_hash.begin()); it != stat->key_combination_hash.end(); it++) {
                 const Counter *s = &(it->second);
                 statement_insert_into_key_combinations
-                ->bind_text(tags_iterator->first) // column: key1
-                ->bind_text(it->first)            // column: key2
-                ->bind_int64(s->all())            // column: count_all
-                ->bind_int64(s->nodes())          // column: count_nodes
-                ->bind_int64(s->ways())           // column: count_ways
-                ->bind_int64(s->relations())      // column: count_relations
-                ->execute();
+                .bind_text(tags_iterator->first) // column: key1
+                .bind_text(it->first)            // column: key2
+                .bind_int64(s->all())            // column: count_all
+                .bind_int64(s->nodes())          // column: count_nodes
+                .bind_int64(s->ways())           // column: count_ways
+                .bind_int64(s->relations())      // column: count_relations
+                .execute();
             }
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
@@ -635,15 +633,15 @@ public:
                     kv2.push_back(""); // if there is no = in key, make sure there is an empty value
 
                     statement_insert_into_tag_combinations
-                    ->bind_text(kv1[0])          // column: key1
-                    ->bind_text(kv1[1])          // column: value1
-                    ->bind_text(kv2[0])          // column: key2
-                    ->bind_text(kv2[1])          // column: value2
-                    ->bind_int64(s->all())       // column: count_all
-                    ->bind_int64(s->nodes())     // column: count_nodes
-                    ->bind_int64(s->ways())      // column: count_ways
-                    ->bind_int64(s->relations()) // column: count_relations
-                    ->execute();
+                    .bind_text(kv1[0])          // column: key1
+                    .bind_text(kv1[1])          // column: value1
+                    .bind_text(kv2[0])          // column: key2
+                    .bind_text(kv2[1])          // column: value2
+                    .bind_int64(s->all())       // column: count_all
+                    .bind_int64(s->nodes())     // column: count_nodes
+                    .bind_int64(s->ways())      // column: count_ways
+                    .bind_int64(s->relations()) // column: count_relations
+                    .execute();
                 }
             }
 
@@ -652,16 +650,6 @@ public:
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
 
         m_database.commit();
-
-        delete statement_update_meta;
-#ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
-        delete statement_insert_into_tag_combinations;
-#endif // TAGSTATS_COUNT_TAG_COMBINATIONS
-#ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
-        delete statement_insert_into_key_combinations;
-#endif // TAGSTATS_COUNT_KEY_COMBINATIONS
-        delete statement_insert_into_tags;
-        delete statement_insert_into_keys;
 
         _timer_info("dumping to db");
 
