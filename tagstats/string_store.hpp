@@ -1,5 +1,5 @@
-#ifndef STRING_STORE_HPP
-#define STRING_STORE_HPP
+#ifndef TAGSTATS_STRING_STORE_HPP
+#define TAGSTATS_STRING_STORE_HPP
 
 /*
 
@@ -125,4 +125,4 @@ public:
 
 };
 
-#endif // STRING_STORE_HPP
+#endif // TAGSTATS_STRING_STORE_HPP
