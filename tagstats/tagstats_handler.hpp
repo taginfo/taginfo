@@ -215,15 +215,11 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
     void _update_key_combination_hash(const Osmium::OSM::Object& object) {
-        const char* key1;
-        const char* key2;
-
-        int tag_count = object.tags().size();
-        for (int i=0; i<tag_count; i++) {
-            key1 = object.tags().get_tag_key(i);
+        for (Osmium::OSM::TagList::const_iterator it1 = object.tags().begin(); it1 != object.tags().end(); ++it1) {
+            const char* key1 = it1->key();
             key_hash_map_t::iterator tsi1(tags_stat.find(key1));
-            for (int j=i+1; j<tag_count; j++) {
-                key2 = object.tags().get_tag_key(j);
+            for (Osmium::OSM::TagList::const_iterator it2 = it1+1; it2 != object.tags().end(); ++it2) {
+                const char* key2 = it2->key();
                 key_hash_map_t::iterator tsi2(tags_stat.find(key2));
                 if (strcmp(key1, key2) < 0) {
                     tsi1->second->add_key_combination(tsi2->first, object.type());
@@ -236,10 +232,9 @@ class TagStatsHandler : public Osmium::Handler::Base {
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
 #ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
-    void _update_key_value_combination_hash2(const Osmium::OSM::Object& object, int start, key_value_hash_map_t::iterator kvi1, std::string& key_value1) {
-        int tag_count = object.tags().size();
-        for (int j=start+1; j<tag_count; ++j) {
-            std::string key_value2(object.tags().get_tag_key(j));
+    void _update_key_value_combination_hash2(const Osmium::OSM::Object& object, Osmium::OSM::TagList::const_iterator it, key_value_hash_map_t::iterator kvi1, std::string& key_value1) {
+        for (; it != object.tags().end(); ++it) {
+            std::string key_value2(it->key());
             key_value_hash_map_t::iterator kvi2 = m_key_value_stats.find(key_value2.c_str());
             if (kvi2 != m_key_value_stats.end()) {
                 if (key_value1 < key_value2) {
@@ -250,7 +245,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
             }
 
             key_value2 += "=";
-            key_value2 += object.tags().get_tag_value(j);
+            key_value2 += it->value();
 
             kvi2 = m_key_value_stats.find(key_value2.c_str());
             if (kvi2 != m_key_value_stats.end()) {
@@ -264,20 +259,19 @@ class TagStatsHandler : public Osmium::Handler::Base {
     }
 
     void _update_key_value_combination_hash(const Osmium::OSM::Object& object) {
-        int tag_count = object.tags().size();
-        for (int i=0; i<tag_count; ++i) {
-            std::string key_value1(object.tags().get_tag_key(i));
+        for (Osmium::OSM::TagList::const_iterator it = object.tags().begin(); it != object.tags().end(); ++it) {
+            std::string key_value1(it->key());
             key_value_hash_map_t::iterator kvi1 = m_key_value_stats.find(key_value1.c_str());
             if (kvi1 != m_key_value_stats.end()) {
-                _update_key_value_combination_hash2(object, i, kvi1, key_value1);
+                _update_key_value_combination_hash2(object, it+1, kvi1, key_value1);
             }
 
             key_value1 += "=";
-            key_value1 += object.tags().get_tag_value(i);
+            key_value1 += it->value();
 
             kvi1 = m_key_value_stats.find(key_value1.c_str());
             if (kvi1 != m_key_value_stats.end()) {
-                _update_key_value_combination_hash2(object, i, kvi1, key_value1);
+                _update_key_value_combination_hash2(object, it+1, kvi1, key_value1);
             }
         }
     }
