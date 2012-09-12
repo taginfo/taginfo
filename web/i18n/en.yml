@@ -93,7 +93,7 @@ pages:
         intro: |
             <p>Taginfo takes data about OSM tags from several sources and brings them
             together for easy browsing and discovery.</p>
-            <p>Note that Taginfo only displays this data. If you want to change it, you
+            <p>Note that taginfo only displays this data. If you want to change it, you
             have to go back to the source.</p>
         data_until: Data until
         last_update_run: Last update run
@@ -101,7 +101,7 @@ pages:
         to: to
     download:
         intro: |
-            <p>Here you can download the databases used by Taginfo. All the data is stored
+            <p>Here you can download the databases used by taginfo. All the data is stored
             in <a class="extlink" href="http://www.sqlite.org/">Sqlite</a> databases.
             The database files are then packed with <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>If you don't want to download these databases, but need automated access to
@@ -210,7 +210,7 @@ flexigrid:
 sources:
     master:
         name: Master
-        description: Aggregate statistics and miscellaneous data needed for the Taginfo user interface.
+        description: Aggregate statistics and miscellaneous data needed for the taginfo user interface.
     db:
         name: Database
         description: Statistics about each key and each tag from the main OSM database (planet file).
