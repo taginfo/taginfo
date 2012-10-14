@@ -64,6 +64,14 @@ CREATE TABLE invalid_page_titles (
     title  TEXT
 );
 
+DROP TABLE IF EXISTS words;
+
+CREATE TABLE words (
+    key   TEXT,
+    value TEXT,
+    words TEXT
+);
+
 DROP TABLE IF EXISTS stats;
 
 CREATE TABLE stats (

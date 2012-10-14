@@ -78,4 +78,29 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
+    api(2, 'search/wikipages') do
+        query = params[:q].downcase
+
+        total = @db.count('wiki.words').condition("words LIKE ('%' || ? || '%')", query).get_first_value().to_i
+        sel = @db.select("SELECT key, value FROM wiki.words WHERE words LIKE ('%' || ? || '%')", query)
+
+        res = sel.
+            order_by(params[:sortname], params[:sortorder]) { |o|
+                o.key
+                o.value
+            }.
+            paging(params[:rp], params[:page]).
+            execute()
+
+        return {
+            :page  => params[:page].to_i,
+            :rp    => params[:rp].to_i,
+            :total => total,
+            :data  => res.map{ |row| {
+                :key   => row['key'],
+                :value => row['value']
+            }}
+        }.to_json
+    end
+
 end

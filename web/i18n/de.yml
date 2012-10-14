@@ -124,9 +124,11 @@ pages:
     search:
         title: Suchergebnisse
         you_were_searching_for: Du hast gesucht nach
+        fulltext: Volltext
         no_keys: Keine Keys gefunden.
         no_values: Keine Values gefunden.
         no_tags: Keine Tags gefunden.
+        no_match: Nichts gefunden.
     keys:
         intro: |
                 Diese Tabelle zeigt alle Keys, die in der Datenbank oder einer anderen Quelle vorkommen.
