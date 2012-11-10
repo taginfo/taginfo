@@ -1,0 +1,296 @@
+osm:
+    tag: Tag
+    tags: Tagi
+    key: Klucz
+    keys: Klucze
+    value: Wartość
+    values: Wartości
+    node: Punkt
+    nodes: Punkty
+    way: Linia
+    ways: Linie
+    relation: Relacja
+    relations: Relacje
+    object: Obiekt
+    objects: Obiekty
+    all: Wszystko
+    user: Użytkownik
+    users: Użytkownicy
+
+taginfo:
+    source: Źródło
+    sources: Źródła
+    download: Pobierz
+    about: Info o taginfo
+    contact: Kontakt
+    meta: Meta
+    wiki: taginfo strona wiki
+    report: Raport
+    reports: Raporty
+    international: Międzynarodowy
+    apidoc: Dokumentacja API
+    test: Test
+    map: Mapa
+    maps: Mapy
+    combinations: Kombinacje*
+    key_combinations: Kombinacje
+    overview: Omówienie
+    data_from: Dane z
+    uses_data_from: |
+        Uses data from:
+    data_from_description: Ostatnia aktualizacja bazy taginfo
+    instance:
+        title: O tej stronie taginfo*
+        other: See the <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> for other sites.*
+
+misc:
+    values_less_than_one_percent: brak wartości powyżej 1%
+    empty_string: pusty
+    unknown: nieznany
+    count: Ilość
+    image: Obraz
+    no_image: brak obrazu
+    all: Wszystkie
+    object_type: Rodzaj
+    description: Opis
+    length: Długość
+    icon: Ikona
+    line: Linia
+    area: Obszar
+    language: Język
+    search_for: Szukaj*
+    objects_tooltip: Liczba obiektów (jako wartość bezwzględna i wartość procentowa punktów, linii i relacji).
+    nodes_tooltip: Liczba punktów (jako wartość bezwzględna i wartość procentowa otagowanych punktów, punkty bez tagów są ignorowane).
+    ways_tooltip: Liczba linii (jako wartość bezwzględna i wartość procentowa wszystkich linii).
+    relations_tooltip: Liczba relacji (jako wartość bezwzględna i wartość procentowa wszystkich relacji).
+    values_tooltip: Liczba różnych wartości danego klucza.
+    users_tooltip: Liczba różnych użytkowników, którzy ostatnio zmienili obiekty z tym kluczem.
+    prevalent_values: Najczęstsze wartości
+    prevalent_values_tooltip: Dziesięć najczęściej występujących wartości klucza (tylko jeśli więcej niż 1% tagów z tym kluczem posiada daną wartość).
+    in_wiki_tooltip: Klucz posiada co najmniej jedną wiki stronę.
+    in_josm_tooltip: Klucz dostępny w JOSM.
+
+pages:
+    index:
+        keys:
+            intro: |
+                Oto niektóre z najczęściej używanych kluczy:
+            listkeys: Zobacz listę wszystkich kluczy...
+            listtags: Zobacz listę najpopularniejszych tagów...
+        reports:
+            listreports: Zobacz wszystkie raporty...
+        about:
+            intro:
+                <p>OpenStreetMap używa <b>tagów</b> w formie <b>klucz=wartość</b> aby nadać znaczenie obiektom geograficznym. Taginfo zbiera informacje o tych tagach z kilku źródeł aby łatwiej było zrozumieć co one oznaczają i jak są używane.</p>
+            more: Więcej o taginfo...
+        international:
+            see: Zobacz inne strony taginfo...
+    sources:
+        intro: |
+            <p>Taginfo pobiera dane o OSM z różnych źródeł i zbiera je razem dla łatwiejszego ich przeglądania.</p>
+            <p>Zauważ, że taginfo tylko wyświetla dane, więc jeśli chcesz je zmienić musisz dotrzeć do ich źródła.</p>
+        data_until: Dane z
+        last_update_run: Ostatnia aktualizacja
+        data_until_explanation: Wszystkie zmiany wprowadzone do tego czasu będą uwzględnione, późniejsze mogą być.
+        to: do*
+    download:
+        intro: |
+            <p>Tutaj możesz pobrać pliki bazy danych, z których korzysta taginfo. Wszystkie dane są przechowywane w bazach <a class="extlink" href="http://www.sqlite.org/">Sqlite</a>.
+            Pliki baz danych są skompresowane w <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
+            <p>Jeżeli nie chcesz pobierać tych baz danych, ale potrzebujesz dostępu do nich, możesz użyć <a href="/about">API</a>.</p>
+        file: Plik
+        packed: Spakowany
+        unpacked: Nie spakowany
+        description: Opis
+    reports:
+        intro: |
+            Raporty ukazują dane z różnych punktów widzenia i z różnych źródeł. Niektóre raporty są pomocne przy szukaniu specyficznych błędów.
+        list: Lista wszystkich raportów
+        data_sources: Użyte źródła informacji
+    search:
+        title: Wyniki wyszukiwania
+        you_were_searching_for: Szukałeś
+        fulltext: Pełen tekst
+        no_keys: Nie znaleziono kluczy.
+        no_values: Nie znaleziono wartości.
+        no_tags: Nie znaleziono tagów.
+        no_match: Brak wyników.
+    keys:
+        intro: |
+                Ta tabela pokazuje wszystkie klucze tagów z bazy danych lub innych źródeł.
+    tags:
+        intro: |
+                Ta tabela pokazuje najbardziej rozpowszechnione tagi w bazie danych.
+    key:
+        description_from_wiki: Opis tego klucza z wiki (jeśli dostępne w wybranym języku, w przeciwnym razie po angielsku).
+        no_description_in_wiki: Brak opisu na wiki.
+        filter:
+            label: |
+                 Filtr:
+            none: Bez filtra
+            nodes: Tylko punkty
+            ways: Tylko linie
+            relations: Tylko relacje
+        number_objects: Liczba obiektów
+        number_values: Liczba wartości
+        values_used: Wartości użyte z tym kluczem
+        tag_description_from_wiki: Opis tego tagu z wiki (jeśli dostępne w wybranym języku, w przeciwnym razie po angielsku).
+        overview:
+            objects_last_edited_by: Obiekty z tym kluczem były ostatnio edytowane przez %1 użytkowników.*
+            no_endorsement: (Nie oznacza to, że wszyscy ci użytkownicy popierają ten klucz.)*
+            distribution_of_values: Rozkład wartości
+        other_keys_used:
+            title: Inne klucze użyte wraz z tym kluczem
+            other: Inne klucze
+            to_count_tooltip: Liczba obiektów z tym kluczem, które mają także inne klucze.
+            other_key_tooltip: Klucze użyte wraz z tym kluczem.
+            from_count_tooltip: Liczba obiektów z innym kluczem, które zawierają także ten klucz.
+        geographic_distribution:
+            title: Rozmieszczenie geograficzne tego klucza
+            relations: Relacje nie posiadają współrzędnych geograficznych, więc nie można ich pokazać na mapie.
+        wiki_pages:
+            title: Artykuły wiki o tym kluczu
+            none_found: Brak artykułów wiki o tym kluczu.
+            create: Stwórz artykuł wiki o tym kluczu
+            wiki_page: Strona wiki
+            implied_tags: Wskazane Tagi*
+            combined_tags: Połączone Tagi
+            linked_tags: Linked Tags*
+        josm:
+            title: Styl w JOSM dla tego klucza
+            choice: |
+                  Wybierz styl:
+            no_styles: Brak styli JOSM dla tego klucza.
+    tag:
+        description_from_wiki: Opis tego tagu z wiki (jeśli dostępne w wybranym języku, w przeciwnym razie po angielsku).
+        no_description_in_wiki: Brak opisu na wiki.
+        number_objects: Liczba obiektów
+        other_tags_used:
+            title: Inne tagi użyte wraz z tym tagiem
+            other: Inne tagi
+            to_count_tooltip: Liczba obiektów z tym tagiem, które mają także inne tagi/klucze.
+            other_key_tooltip: Tagi/klucze użyte wraz z tym tagiem.
+            from_count_tooltip: Liczba obiektów z innym tagiem/kluczem, które mają także ten tag.
+            none_found: Brak znalezionych powiązań (tylko najbardziej powrzechne).
+        combinations:
+            title: Połączenia
+            description: Ta tabela pokazuje tylko najbardziej powszechne połączenia najpopularniejszych tagów.
+        wiki_pages:
+            title: Artykuły wiki o tym tagu
+            none_found: Brak artykułów wiki o tym tagu.
+            create: Stwórz stronę wiki o tym tagu
+            suggest_key_wiki_page: Byćmoże znajdziesz więcej informacji na wiki dla klucza %1.
+            wiki_page: Strona wiki
+            implied_tags: Wskazane Tagi*
+            combined_tags: Połączone Tagi
+            linked_tags: Linked Tags*
+        josm:
+            title: Styl w JOSM dla tego tagu
+            choice: |
+                  Wybierz styl:
+            no_styles: Brak styli JOSM dla tego tagu.
+
+flexigrid:
+    pagetext: Strona
+    pagestat: Pokazuję {from} do {to} z {total} obiektów
+    outof: z
+    findtext: Szukaj
+    procmsg: Proszę czekać...
+    nomsg: Brak obiektów do wyświetlenia
+    errormsg: Błąd połączenia
+
+sources:
+    master:
+        name: Master
+        description: Zebrane statystyki i różne dane wykorzystywane przez interfejs taginfo.
+    db:
+        name: Database
+        description: Statystyki o każdym kluczu i każdym tagu z głównej bazy OSM (plik planet).
+    wiki:
+        name: Wiki
+        description: Dane z artykułów o tagach z wiki OSM.
+    josm:
+        name: JOSM
+        description: Dane konfiguracyjne z edytora JOSM.
+    potlatch:
+        name: Potlatch
+        description: Dane konfiguracyjne z edytora Potlatch2.
+    merkaartor:
+        name: Merkaartor
+        description: Dane konfiguracyjne z edytora Merkaartor.
+
+reports:
+    characters_in_keys:
+        name: Znaki w kluczach
+        intro: |
+            <p>Każdy poprawny znak Unicode będzie widoczny w kluczy OSM, ale zwykle małe litery alfabetu łacińskiego i podkreślenie (_) są używane. Niekiedy używa się dwukropku (:) jako separatora.</p>
+        statistics:
+            tab: Statystyki
+            title: Przegląd statystyk
+            fraction: Część
+            characters: Znaki użyte w kluczu
+            characters_in_keys:
+                plain: Tylko małe znaki z alfabetu łacińskiego (<span class="char">a</span> do <span class="char">z</span>) i podkreślnik (<span class="char">_</span>), pierwszy i ostatni znak to litery.
+                colon: Jak w A, ale z jednym lub więcej dwukropków (<span class="char">:</span>) w środku.
+                letters: Jak w B, ale z wielkimi literami i znakami z innych alfabetów.
+                space: Jak w C, ale ze znakami niedrukowalnymi (spacje, tabulacje, nowe linie, znak powrotu do początku linii, albo z innych alfabetów).
+                problem: Jak w C, ale zawierające problematyczne znaki <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
+                rest: Wszystko pozostałe.
+                total: Razem
+        whitespace:
+            tab: Znaki niedrukowalne
+            title: Klucze ze znakami niedrukowalnymi
+            intro: |
+                <p>Klucze zawierające znaki niedrukowalne takie jak spacje, tabulacje, nowe linie, znak powrotu do początku linii, albo z innych alfabetów.<br/>
+                Znaki niedrukowalne w kluczach mogą być dezorientujące, zwłaszcza jeśli znajdują się na początku albo na końcu, gdyż są niewidoczne. Generalnie powinno się używać zamiast nich podkreślnika (_).</p>
+        problematic:
+            tab: Problematyczne
+            title: Klucze z potencjalnie problematycznymi znakami
+            intro: |
+                <p>Klucze zawierające potencjalnie problematyczne znaki: <span
+                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>. Te znaki mogą sprawiać problemy gdyż są one często wykorzystywane w językach programowania w specjalnych funkcjach lub też mają jakieś znaczenie w XML, HTML, URL, i innych. Znak równości jest używany jako separator klucza i wartości tagu.<br/>
+                Klucze pojawiające się na tej liście niekoniecznie muszą być nieprawidłowe. Ale w większości wypadków będą powodowały błędy.</p>
+    database_statistics:
+        name: Statystyka bazy danych
+    frequently_used_keys_without_wiki_page:
+        name: Często używane klucze bez strony w wiki
+        intro: |
+            <p>Ta tabelka pokazuje klucze, które występują w bazie OSM więcej niż 10&thinsp;000 razy, ale nie posiadają opisującego go artykułu w wiki. Jeśli posiadasz jakieś informacje na temat tych kluczy, stwórz nowy artykuł na wiki, wystarczy kliknąć w link w lewej kolumnie. Czasem wystarczy stworzyć przekierowanie do innego artykułu. Aby to zrobić wpisz tylko tą jedną linię: <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>nazwa artykułu</i>]]</tt>.</p>
+        also_show_keys: Pokaż także klucze, które nie posiadają swojej strony po angielskim, ale mają ją w innym języku.
+        table:
+            create_wiki_page: Stwórz stronę wiki...
+    josm_styles:
+        name: Style JOSM
+    key_lengths:
+        name: Długości kluczy
+        intro: |
+            <p>Klucze tagów mogą mieć długość od 0 do 255 znaków (Unicode) długości. Bardzo krótkie bądź bardzo długie klucze są zazwyczaj, ale nie zawsze, błędami.</p>
+        table:
+            number_of_objects: Liczba obiektów
+        histogram:
+            intro: Ten histogram pokazuje ile jest kluczy danej długości.
+            key_length: Długość klucza
+            number_of_keys: Liczba kluczy
+    language_comparison_table_for_keys_in_the_wiki:
+        name: Tabela porównawcza języków w wiki
+        icons:
+            template: Strona w wiki istnieje i zawiera standardowy szablon.
+            error: Strona w wiki istnieje i zawiera standardowy szablon, ale nie mogła zostać przetworzona.
+            page: Strona w wiki istnieje, ale nie zawiera standardowego szablonu.
+            redirect: Strona jest przekierowaniem.
+        intro: |
+            <p>Ta tabela pokazuje wszystkie tagi, dla których istnieją strony na wiki oraz to, w jakich są językach.</p>
+    languages:
+        name: Języki
+        intro: |
+            <p>OpenStreetMap jest międzynarodowym projektem. Tagi i ich opisy mogą być napisane w dowolnych językach. Ta tabela pokazuje znane dla taginfo języki oraz ilość stron wiki, które dokumentują klucze i tagi.</p>
+        code: Kod
+        native_name: Nazwa ojczysta
+        english_name: Nazwa angielska
+        wiki_key_pages: Strony wiki kluczy
+        wiki_tag_pages: Strony wiki tagów
+    wiki_pages_about_non_existing_keys:
+        name: Strony wiki na temat nieistniejących kluczy
+        intro: |
+            <p>Ta tabela pokazuje klucze, które posiadają swoje strony na wiki, ale nie istnieją nawet pojedyncze obiekty w bazie z ich użyciem. Nie musi być to błąd, gdyż ktoś mógł stworzyć dokumentację przed wdrożeniem nowego schematu tagowania. Ale może być to zwykła literówka albo inny błąd.</p>
+        wiki_pages: Strony wiki
