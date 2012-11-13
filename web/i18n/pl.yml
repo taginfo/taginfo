@@ -32,7 +32,7 @@ taginfo:
     test: Test
     map: Mapa
     maps: Mapy
-    combinations: Kombinacje*
+    combinations: Kombinacje
     key_combinations: Kombinacje
     overview: Omówienie
     data_from: Dane z
@@ -40,8 +40,8 @@ taginfo:
         Uses data from:
     data_from_description: Ostatnia aktualizacja bazy taginfo
     instance:
-        title: O tej stronie taginfo*
-        other: See the <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> for other sites.*
+        title: O tej stronie taginfo
+        other: Zobacz <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> dla innych stron.
 
 misc:
     values_less_than_one_percent: brak wartości powyżej 1%
@@ -58,7 +58,7 @@ misc:
     line: Linia
     area: Obszar
     language: Język
-    search_for: Szukaj*
+    search_for: Szukaj
     objects_tooltip: Liczba obiektów (jako wartość bezwzględna i wartość procentowa punktów, linii i relacji).
     nodes_tooltip: Liczba punktów (jako wartość bezwzględna i wartość procentowa otagowanych punktów, punkty bez tagów są ignorowane).
     ways_tooltip: Liczba linii (jako wartość bezwzględna i wartość procentowa wszystkich linii).
@@ -92,7 +92,7 @@ pages:
         data_until: Dane z
         last_update_run: Ostatnia aktualizacja
         data_until_explanation: Wszystkie zmiany wprowadzone do tego czasu będą uwzględnione, późniejsze mogą być.
-        to: do*
+        to: do
     download:
         intro: |
             <p>Tutaj możesz pobrać pliki bazy danych, z których korzysta taginfo. Wszystkie dane są przechowywane w bazach <a class="extlink" href="http://www.sqlite.org/">Sqlite</a>.
@@ -136,8 +136,8 @@ pages:
         values_used: Wartości użyte z tym kluczem
         tag_description_from_wiki: Opis tego tagu z wiki (jeśli dostępne w wybranym języku, w przeciwnym razie po angielsku).
         overview:
-            objects_last_edited_by: Obiekty z tym kluczem były ostatnio edytowane przez %1 użytkowników.*
-            no_endorsement: (Nie oznacza to, że wszyscy ci użytkownicy popierają ten klucz.)*
+            objects_last_edited_by: Obiekty z tym kluczem były ostatnio edytowane przez %1 użytkowników.
+            no_endorsement: (Nie oznacza to, że wszyscy ci użytkownicy popierają ten klucz.)
             distribution_of_values: Rozkład wartości
         other_keys_used:
             title: Inne klucze użyte wraz z tym kluczem
@@ -153,7 +153,7 @@ pages:
             none_found: Brak artykułów wiki o tym kluczu.
             create: Stwórz artykuł wiki o tym kluczu
             wiki_page: Strona wiki
-            implied_tags: Wskazane Tagi*
+            implied_tags: Wskazane Tagi
             combined_tags: Połączone Tagi
             linked_tags: Linked Tags*
         josm:
@@ -181,7 +181,7 @@ pages:
             create: Stwórz stronę wiki o tym tagu
             suggest_key_wiki_page: Byćmoże znajdziesz więcej informacji na wiki dla klucza %1.
             wiki_page: Strona wiki
-            implied_tags: Wskazane Tagi*
+            implied_tags: Wskazane Tagi
             combined_tags: Połączone Tagi
             linked_tags: Linked Tags*
         josm:
