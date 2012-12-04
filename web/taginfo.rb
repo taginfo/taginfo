@@ -135,6 +135,7 @@ class Taginfo < Sinatra::Base
     before '/api/*' do
         content_type :json
         expires next_update
+        headers['Access-Control-Allow-Origin'] = '*'
     end
 
     #-------------------------------------
