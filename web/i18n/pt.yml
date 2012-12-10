@@ -1,0 +1,328 @@
+osm:
+    tag: tag
+    tags: tags
+    key: key
+    keys: Keys
+    value: Value
+    values: Values
+    node: Node
+    nodes: Nodes
+    way: Way
+    ways: Ways
+    relation: Relation
+    relations: Relations
+    object: Object
+    objects: Objects
+    all: All
+    user: usuario
+    users: usuarios
+
+taginfo:
+    source: Source
+    sources: Sources
+    download: Download
+    about: About taginfo
+    contact: Contact
+    meta: Meta
+    wiki: taginfo wiki page
+    report: Report
+    reports: Reports
+    international: International
+    apidoc: API Documentation
+    test: Test
+    map: Map
+    maps: Maps
+    combinations: Combinations
+    key_combinations: Combinations
+    overview: Overview
+    data_from: Data from
+    uses_data_from: |
+        Uses data from:
+    data_from_description: Last update of taginfo database
+    instance:
+        title: About this taginfo site
+        other: See the <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> for other sites.
+
+misc:
+    values_less_than_one_percent: no values with more than 1%
+    empty_string: empty string
+    unknown: unknown
+    count: Count
+    image: Image
+    no_image: no image
+    all: All
+    object_type: Type
+    description: Description
+    length: Length
+    icon: Icon
+    line: Line
+    area: Area
+    language: Language
+    search_for: Search for
+    objects_tooltip: Number of objects (as absolute value and as percentage of all nodes, ways, and relations).
+    nodes_tooltip: Number of nodes (as absolute value and as percentage of tagged nodes, ie. nodes without any tags are ignored).
+    ways_tooltip: Number of ways (as absolute value and as percentage of all ways).
+    relations_tooltip: Number of relations (as absolute value and as percentage of all relations).
+    values_tooltip: Number of different values for this key.
+    users_tooltip: Number of distinct users who last changed objects with this key.
+    prevalent_values: Prevalent values
+    prevalent_values_tooltip: Up to ten of the most common values for this key (only if more than 1% of tags with this key have this value).
+    in_wiki_tooltip: Key has at least one wiki page.
+    in_josm_tooltip: Key appears in JOSM config.
+
+pages:
+    index:
+        keys:
+            intro: |
+                Here are some of the more common tag keys:
+            listkeys: See list of all keys...
+            listtags: See list of the most common tags...
+        reports:
+            listreports: See all reports...
+        about:
+            intro:
+                <p>OpenStreetMap uses <b>tags</b> of the form <b>key=value</b>
+                to add meaning to geographic objects. Taginfo collects information
+                about these tags from several sources to help you understand what
+                they mean and how they are used.</p>
+            more: More about taginfo...
+        international:
+            see: See other taginfo sites...
+    sources:
+        intro: |
+            <p>Taginfo takes data about OSM tags from several sources and brings them
+            together for easy browsing and discovery.</p>
+            <p>Note that taginfo only displays this data. If you want to change it, you
+            have to go back to the source.</p>
+        data_until: Data until
+        last_update_run: Last update run
+        data_until_explanation: All edits until this time will be in the data, later edits might be.
+        to: to
+    download:
+        intro: |
+            <p>Here you can download the databases used by taginfo. All the data is stored
+            in <a class="extlink" href="http://www.sqlite.org/">Sqlite</a> databases.
+            The database files are then packed with <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
+            <p>If you don't want to download these databases, but need automated access to
+            the data, you can also use the <a href="/about">API</a>.</p>
+        file: File
+        packed: Packed
+        unpacked: Unpacked
+        description: Description
+    reports:
+        intro: |
+            Reports show the tag data from different angles.
+            They often bring together data from several sources in interesting ways. Some
+            of the reports can help with finding specific errors.
+        list: List of all reports
+        data_sources: Data sources used
+    search:
+        title: Search results
+        you_were_searching_for: You were searching for
+        fulltext: Full text
+        no_keys: No keys found.
+        no_values: No values found.
+        no_tags: No tags found.
+        no_match: No matches.
+    keys:
+        intro: |
+                This table shows all tag keys that exist in the database or in any of the other sources.
+    tags:
+        intro: |
+                This table shows the most common tags in the database.
+    key:
+        description_from_wiki: Description of this key from the wiki (if available in your chosen language, otherwise in English).
+        no_description_in_wiki: No description for this key in the wiki.
+        filter:
+            label: |
+                 Filter:
+            none: No filter
+            nodes: Nodes only
+            ways: Ways only
+            relations: Relations only
+        number_objects: Number of objects
+        number_values: Number of values
+        values_used: Values used with this key
+        tag_description_from_wiki: Description of the tag from the wiki (if available in your chosen language, otherwise in English).
+        overview:
+            objects_last_edited_by: Objects with this key were last edited by %1 different users.
+            no_endorsement: (This does not mean that all those users endorse this key.)
+            distribution_of_values: Distribution of values
+        other_keys_used:
+            title: Other keys used together with this key
+            other: Other keys
+            to_count_tooltip: Number of objects with this key that also have the other key.
+            other_key_tooltip: Key used together with this key.
+            from_count_tooltip: Number of objects with other key that also have this key.
+        geographic_distribution:
+            title: Geographical distribution of this key
+            relations: Relations do not have a geographical location, so no map can be shown.
+        wiki_pages:
+            title: Wiki pages about this key
+            none_found: No wiki page available for this key.
+            create: Create wiki page for this key
+            wiki_page: Wiki page
+            implied_tags: Implied Tags
+            combined_tags: Combined Tags
+            linked_tags: Linked Tags
+        josm:
+            title: JOSM style rules with this key
+            choice: |
+                  Choose style:
+            no_styles: No JOSM styles for this key.
+    tag:
+        description_from_wiki: Description of this tag from the wiki (if available in your chosen language, otherwise in English).
+        no_description_in_wiki: No description for this tag in the wiki.
+        number_objects: Number of objects
+        other_tags_used:
+            title: Other tags used together with this tag
+            other: Other tags
+            to_count_tooltip: Number of objects with this tag that also have the other tag/key.
+            other_key_tooltip: Tags/Keys used together with this tag.
+            from_count_tooltip: Number of objects with other tag/key that also have this tag.
+            none_found: No combinations found (only checked the most common ones).
+        combinations:
+            title: Combinations
+            description: This table shows only the most common combinations of the most common tags.
+        wiki_pages:
+            title: Wiki pages about this tag
+            none_found: No wiki page available for this tag.
+            create: Create wiki page for this tag
+            suggest_key_wiki_page: Maybe you can find some more information on the wiki page for the key %1.
+            wiki_page: Wiki page
+            implied_tags: Implied Tags
+            combined_tags: Combined Tags
+            linked_tags: Linked Tags
+        josm:
+            title: JOSM style rules with this tag
+            choice: |
+                  Choose style:
+            no_styles: No JOSM styles for this tag.
+
+flexigrid:
+    pagetext: Page
+    pagestat: Displaying {from} to {to} of {total} items
+    outof: of
+    findtext: Find
+    procmsg: Processing, please wait...
+    nomsg: No items
+    errormsg: Connection Error
+
+sources:
+    master:
+        name: Master
+        description: Aggregate statistics and miscellaneous data needed for the taginfo user interface.
+    db:
+        name: Database
+        description: Statistics about each key and each tag from the main OSM database (planet file).
+    wiki:
+        name: Wiki
+        description: Data from the tag and key pages of the OSM wiki.
+    josm:
+        name: JOSM
+        description: Configuration data from the JOSM OSM editor.
+    potlatch:
+        name: Potlatch
+        description: Configuration data from the Potlatch2 OSM editor.
+    merkaartor:
+        name: Merkaartor
+        description: Configuration data from the Merkaartor OSM editor.
+
+reports:
+    characters_in_keys:
+        name: Characters in keys
+        intro: |
+            <p>Any valid Unicode character can appear in an OSM key but usually only lower
+            case latin letters (a-z) and the underscore (_) are used. Sometimes the colon
+            (:) is added as a separator character.</p>
+        statistics:
+            tab: Statistics
+            title: Statistics overview
+            fraction: Fraction
+            characters: Characters in key
+            characters_in_keys:
+                plain: Only latin lowercase letters (<span class="char">a</span> to <span class="char">z</span>) and underscore (<span class="char">_</span>), first and last characters are letters.
+                colon: Like A but with one or more colons (<span class="char">:</span>) inside.
+                letters: Like B but with uppercase latin letters or letters from other alphabets.
+                space: Like C but contains at least one whitespace character (space, tab, new line, carriage return, or from other alphabets).
+                problem: Like C but contains possibly problematic characters <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
+                rest: Everything else.
+                total: Total
+        whitespace:
+            tab: Whitespace
+            title: Keys with whitespace
+            intro: |
+                <p>Keys that contain whitespace characters such as space, tab, new
+                line, carriage return, or whitespace characters from other
+                alphabets.<br/>
+                Whitespace in keys can be confusing, especially at the
+                beginning or end of the key, because they are invisible. Generally
+                the underscore (_) should be used instead.</p>
+        problematic:
+            tab: Problematic
+            title: Keys with possibly problematic characters
+            intro: |
+                <p>Keys that contain possibly problematic characters: <span
+                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>. These characters
+                can be problematic, because they are used to quote strings in
+                different programming languages or have special meanings in XML, HTML,
+                URLs, and other places. The equal sign is used often as separator
+                between tag keys and values.<br/>
+                Keys that appear in this list are not necessarily wrong though. But
+                in many cases they are just results of some error.</p>
+    database_statistics:
+        name: Database statistics
+    frequently_used_keys_without_wiki_page:
+        name: Frequently used keys without wiki page
+        intro: |
+            <p>This table shows keys that appear more than 10&thinsp;000 times in the OSM
+            database but have no wiki page describing them.  If you know anything about one
+            of these keys, please create the wiki page by clicking on the link in the
+            leftmost column and describe the key. Sometimes it might make sense to create a
+            redirect to a different wiki page instead. To do this put just one line with
+            <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>page name</i>]]</tt>
+            in the wiki page.</p>
+        also_show_keys: Also show keys that have no English language wiki page but a page in some other language.
+        table:
+            create_wiki_page: Create wiki page...
+    josm_styles:
+        name: JOSM styles
+    key_lengths:
+        name: Key lengths
+        intro: |
+            <p>Tag keys can be between 0 and 255 (Unicode) characters long. Very short or very long keys are often, but not always, errors.</p>
+        table:
+            number_of_objects: Number of objects
+        histogram:
+            intro: This histogram shows how many keys there are of each length.
+            key_length: Key length
+            number_of_keys: Number of keys
+    language_comparison_table_for_keys_in_the_wiki:
+        name: Language comparison table for keys in the wiki
+        icons:
+            template: Page in wiki available and contains standard template.
+            error: Page in wiki available and contains standard template, but couldn't be parsed.
+            page: Page in wiki available but doesn't contain standard template.
+            redirect: Page is a redirect.
+        intro: |
+            <p>This table shows all tag keys for which there are wiki pages available and in what languages they are.</p>
+    languages:
+        name: Languages
+        intro: |
+            <p>OpenStreetMap is an international project. Tags and their descriptions can
+            be in any language. This table lists the languages taginfo knows about and how
+            many wiki pages there are in these languages documenting keys and tags,
+            respectively.</p>
+        code: Code
+        native_name: Native name
+        english_name: English name
+        wiki_key_pages: Wiki key pages
+        wiki_tag_pages: Wiki tag pages
+    wiki_pages_about_non_existing_keys:
+        name: Wiki pages about non-existing keys
+        intro: |
+            <p>This table shows keys for which a wiki page exists but there is not a single
+            instance in the database. This is not necessarily an error (maybe somebody
+            added the documentation in the wiki as preparation for using a key or the wiki
+            page documents a now obsolete key), but it can also be a typo or other error.</p>
+        wiki_pages: Wiki pages
