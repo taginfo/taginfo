@@ -2,7 +2,7 @@ osm:
     tag: tag
     tags: tags
     key: key
-    keys: Keys
+    keys: keys
     value: Value
     values: Values
     node: Node
@@ -13,7 +13,7 @@ osm:
     relations: Relations
     object: Object
     objects: Objects
-    all: All
+    all: todos
     user: usuario
     users: usuarios
 
