@@ -508,16 +508,8 @@ div.colCopy {
     margin-bottom: 1px;
     background-color: #b8b8b0;
     width: 800px;
-    -moz-border-radius-topleft: 4px;
-    -khtml-border-radius-topleft: 4px;
-    -webkit-border-radius-topleft: 4px;
-    -chrome-border-radius-topleft: 4px;
-    -o-border-radius-topleft: 4px;
-    -moz-border-radius-topright: 4px;
-    -khtml-border-radius-topright: 4px;
-    -webkit-border-radius-topright: 4px;
-    -chrome-border-radius-topright: 4px;
-    -o-border-radius-topright: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
 div.pGroup {
@@ -543,11 +535,7 @@ div.pGroup {
     position: relative;
     top: -2px;
     border: 0px none;
-    -moz-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -chrome-border-radius: 4px;
-    -o-border-radius: 4px;
+    border-radius: 4px;
     margin: 0;
     padding: 2px;
 }
@@ -565,11 +553,7 @@ div.pGroup {
     width: 20px;
     height: 20px;
     border: 1px solid #f0f0f0;
-    -moz-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -chrome-border-radius: 4px;
-    -o-border-radius: 4px;
+    border-radius: 4px;
     cursor: pointer;
 }
 
