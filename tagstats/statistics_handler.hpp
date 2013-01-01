@@ -70,7 +70,7 @@ public:
 
         // initialize all statistics to zero
         for (int i=0; m_stat_names[i]; ++i) {
-            ((uint64_t *) &m_stats)[i] = 0;
+            reinterpret_cast<uint64_t*>(&m_stats)[i] = 0;
         }
     }
 
@@ -80,14 +80,14 @@ public:
         if (m_tag_count == 0) {
             m_stats.nodes_without_tags++;
         }
-        if (m_id > (int64_t) m_stats.max_node_id) {
+        if (m_id > static_cast<int64_t>(m_stats.max_node_id)) {
             m_stats.max_node_id = m_id;
         }
         m_stats.node_tags += m_tag_count;
-        if (m_tag_count > (int64_t) m_stats.max_tags_on_node) {
+        if (m_tag_count > static_cast<int64_t>(m_stats.max_tags_on_node)) {
             m_stats.max_tags_on_node = m_tag_count;
         }
-        if (m_version > (int64_t) m_stats.max_node_version) {
+        if (m_version > static_cast<int64_t>(m_stats.max_node_version)) {
             m_stats.max_node_version = m_version;
         }
         m_stats.sum_node_version += m_version;
@@ -99,18 +99,18 @@ public:
         if (way->is_closed()) {
             m_stats.closed_ways++;
         }
-        if (m_id > (int64_t) m_stats.max_way_id) {
+        if (m_id > static_cast<int64_t>(m_stats.max_way_id)) {
             m_stats.max_way_id = m_id;
         }
         m_stats.way_tags += m_tag_count;
         m_stats.way_nodes += way->nodes().size();
-        if (m_tag_count > (int64_t) m_stats.max_tags_on_way) {
+        if (m_tag_count > static_cast<int64_t>(m_stats.max_tags_on_way)) {
             m_stats.max_tags_on_way = m_tag_count;
         }
-        if (way->nodes().size() > (int64_t) m_stats.max_nodes_on_way) {
+        if (way->nodes().size() > static_cast<int64_t>(m_stats.max_nodes_on_way)) {
             m_stats.max_nodes_on_way = way->nodes().size();
         }
-        if (m_version > (int64_t) m_stats.max_way_version) {
+        if (m_version > static_cast<int64_t>(m_stats.max_way_version)) {
             m_stats.max_way_version = m_version;
         }
         m_stats.sum_way_version += m_version;
@@ -119,19 +119,19 @@ public:
     void relation(const shared_ptr<Osmium::OSM::Relation const>& relation) {
         update_common_stats(*relation);
         m_stats.relations++;
-        if (m_id > (int64_t) m_stats.max_relation_id) {
+        if (m_id > static_cast<int64_t>(m_stats.max_relation_id)) {
             m_stats.max_relation_id = m_id;
         }
         m_stats.relation_tags += m_tag_count;
         osm_sequence_id_t member_count = relation->members().size();
         m_stats.relation_members += member_count;
-        if (m_tag_count > (int64_t) m_stats.max_tags_on_relation) {
+        if (m_tag_count > static_cast<int64_t>(m_stats.max_tags_on_relation)) {
             m_stats.max_tags_on_relation = m_tag_count;
         }
-        if (member_count > (int64_t) m_stats.max_members_on_relation) {
+        if (member_count > static_cast<int64_t>(m_stats.max_members_on_relation)) {
             m_stats.max_members_on_relation = member_count;
         }
-        if (m_version > (int64_t) m_stats.max_relation_version) {
+        if (m_version > static_cast<int64_t>(m_stats.max_relation_version)) {
             m_stats.max_relation_version = m_version;
         }
         m_stats.sum_relation_version += m_version;
@@ -144,12 +144,12 @@ public:
         for (int i=0; m_stat_names[i]; ++i) {
             statement_insert_into_main_stats
             .bind_text(m_stat_names[i])
-            .bind_int64( ((uint64_t *) &m_stats)[i] )
+            .bind_int64(reinterpret_cast<uint64_t*>(&m_stats)[i])
             .execute();
         }
         statement_insert_into_main_stats
         .bind_text("nodes_with_tags")
-        .bind_int64( ((uint64_t *) &m_stats)[0] - ((uint64_t *) &m_stats)[1] )
+        .bind_int64(m_stats.nodes - m_stats.nodes_without_tags)
         .execute();
 
         m_database.commit();
@@ -205,12 +205,12 @@ private:
         if (uid == 0) {
             m_stats.anon_user_objects++;
         }
-        if (uid > (int64_t) m_stats.max_user_id) {
+        if (uid > static_cast<int64_t>(m_stats.max_user_id)) {
             m_stats.max_user_id = uid;
         }
 
         osm_changeset_id_t changeset = object.changeset();
-        if (changeset > (int64_t) m_stats.max_changeset_id) {
+        if (changeset > static_cast<int64_t>(m_stats.max_changeset_id)) {
             m_stats.max_changeset_id = changeset;
         }
     }
