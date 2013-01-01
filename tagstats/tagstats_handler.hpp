@@ -151,7 +151,7 @@ public:
 #endif // TAGSTATS_COUNT_USERS
     }
 
-    void add_key_combination(const char* other_key, osm_object_id_t type) {
+    void add_key_combination(const char* other_key, osm_object_type_t type) {
         key_combination_hash[other_key].count[type]++;
     }
 
@@ -172,7 +172,7 @@ public:
     KeyValueStats() : m_key_value_combination_hash() {
     }
 
-    void add_key_combination(const char* other_key, osm_object_id_t type) {
+    void add_key_combination(const char* other_key, osm_object_type_t type) {
         m_key_value_combination_hash[other_key].count[type]++;
     }
 
@@ -293,7 +293,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
             }
 
             int size;
-            void *ptr = stat->distribution.create_png(&size);
+            void* ptr = stat->distribution.create_png(&size);
             sum_size += size;
 
             statement_insert_into_key_distributions
