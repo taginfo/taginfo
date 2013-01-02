@@ -50,7 +50,7 @@ class Taginfo < Sinatra::Base
                 o.values_all
                 o.users_all
             }.
-            paging(params[:rp], params[:page]).
+            paging(@ap).
             execute()
 
         reshash = Hash.new
@@ -73,8 +73,8 @@ class Taginfo < Sinatra::Base
         end
 
         return {
-            :page  => params[:page].to_i,
-            :rp    => params[:rp].to_i,
+            :page  => @ap.page,
+            :rp    => @ap.results_per_page,
             :total => total,
             :data  => res.map{ |row| {
                 :key                => row['key'],

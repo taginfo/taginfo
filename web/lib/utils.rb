@@ -172,7 +172,7 @@ end
 
 # Like the 'get' method but specific for API calls, includes documentation for API calls
 def api(version, path, doc=nil, &block)
-    APIDoc.new(version, path, doc) unless doc.nil?
+    API.new(version, path, doc) unless doc.nil?
     get("/api/#{version}/#{path}", &block)
 end
 

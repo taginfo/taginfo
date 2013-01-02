@@ -26,12 +26,12 @@ class Taginfo < Sinatra::Base
                 o.key
                 o.count_all
             }.
-            paging(params[:rp], params[:page]).
+            paging(@ap).
             execute()
 
         return {
-            :page  => params[:page].to_i,
-            :rp    => params[:rp].to_i,
+            :page  => @ap.page,
+            :rp    => @ap.results_per_page,
             :total => total,
             :data  => res.map{ |row| {
                 :key       => row['key'],
@@ -84,14 +84,13 @@ class Taginfo < Sinatra::Base
             end
         end
 
-        if params[:page]
-            start = (params[:page].to_i - 1) * params[:rp].to_i
-            entries = entries[start, params[:rp].to_i]
+        if @ap.do_paging?
+            entries = entries[@ap.first_result, @ap.results_per_page]
         end
 
         return {
-            :page  => params[:page].to_i,
-            :rp    => params[:rp].to_i,
+            :page  => @ap.page,
+            :rp    => @ap.results_per_page,
             :total => total,
             :data  => entries.map{ |entry| h = {
                 :type        => entry.type.titlecase,

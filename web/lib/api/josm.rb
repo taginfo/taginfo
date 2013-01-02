@@ -26,8 +26,8 @@ class Taginfo < Sinatra::Base
 
     def get_josm_result(total, res)
         return {
-            :page  => params[:page].to_i,
-            :rp    => params[:rp].to_i,
+            :page  => @ap.page,
+            :rp    => @ap.results_per_page,
             :total => total,
             :data  => res.map{ |row| {
                 :k => row['k'],
@@ -58,7 +58,7 @@ class Taginfo < Sinatra::Base
                 o.v :k
                 o.b
             }.
-            paging(params[:rp], params[:page]).
+            paging(@ap).
             execute()
 
         return get_josm_result(total, res);
@@ -81,7 +81,7 @@ class Taginfo < Sinatra::Base
                 o.v :b
                 o.b
             }.
-            paging(params[:rp], params[:page]).
+            paging(@ap).
             execute()
 
         return get_josm_result(total, res);
@@ -100,7 +100,7 @@ class Taginfo < Sinatra::Base
             condition('k = ?', key).
             condition('v = ?', value).
             order_by([:k, :v]).
-            paging(params[:rp], params[:page]).
+            paging(@ap).
             execute()
 
         return get_josm_result(total, res);

@@ -67,7 +67,7 @@ class Taginfo < Sinatra::Base
                 o.length 'length(key)'
                 o.length :key
             }.
-            paging(params[:rp], params[:page]).
+            paging(@ap).
             execute()
 
         if include_data[:wikipages]
@@ -112,8 +112,8 @@ class Taginfo < Sinatra::Base
         end
 
         return {
-            :page  => params[:page].to_i,
-            :rp    => params[:rp].to_i,
+            :page  => @ap.page,
+            :rp    => @ap.results_per_page,
             :total => total,
             :data  => res.map{ |row| h = {
                 :key                      => row['key'],
@@ -172,12 +172,12 @@ class Taginfo < Sinatra::Base
                 o.count_ways
                 o.count_relations
             }.
-            paging(params[:rp], params[:page]).
+            paging(@ap).
             execute()
 
         return {
-            :page  => params[:page].to_i,
-            :rp    => params[:rp].to_i,
+            :page  => @ap.page,
+            :rp    => @ap.results_per_page,
             :total => total,
             :data  => res.map{ |row| {
                 :key                      => row['skey'],
@@ -378,7 +378,7 @@ class Taginfo < Sinatra::Base
                 o.count_ways
                 o.count_relations
             }.
-            paging(params[:rp], params[:page]).
+            paging(@ap).
             execute()
 
         # Read description for tag from wikipages, first in English then in the chosen
@@ -396,8 +396,8 @@ class Taginfo < Sinatra::Base
         end
 
         return {
-            :page  => params[:page].to_i,
-            :rp    => params[:rp].to_i,
+            :page  => @ap.page,
+            :rp    => @ap.results_per_page,
             :total => total.to_i,
             :data  => res.map{ |row| {
                 :value    => row['value'],
@@ -459,12 +459,12 @@ class Taginfo < Sinatra::Base
                 o.other_key
                 o.from_fraction
             }.
-            paging(params[:rp], params[:page]).
+            paging(@ap).
             execute()
 
         return {
-            :page  => params[:page].to_i,
-            :rp    => params[:rp].to_i,
+            :page  => @ap.page,
+            :rp    => @ap.results_per_page,
             :total => total,
             :data  => res.map{ |row| {
                 :other_key      => row['other_key'],
@@ -491,12 +491,12 @@ class Taginfo < Sinatra::Base
                 o.scale1
                 o.scale2
             }.
-            paging(params[:rp], params[:page]).
+            paging(@ap).
             execute()
 
         return {
-            :page  => params[:page].to_i,
-            :rp    => params[:rp].to_i,
+            :page  => @ap.page,
+            :rp    => @ap.results_per_page,
             :total => total,
             :data  => res.map{ |row| {
                 :key         => row['key'],
@@ -654,12 +654,12 @@ class Taginfo < Sinatra::Base
                 o.other_value
                 o.from_fraction
             }.
-            paging(params[:rp], params[:page]).
+            paging(@ap).
             execute()
 
         return {
-            :page  => params[:page].to_i,
-            :rp    => params[:rp].to_i,
+            :page  => @ap.page,
+            :rp    => @ap.results_per_page,
             :total => total,
             :data  => res.map{ |row| {
                 :other_key      => row['other_key'],

@@ -45,7 +45,7 @@ require 'lib/language.rb'
 require 'lib/sql.rb'
 require 'lib/sources.rb'
 require 'lib/reports.rb'
-require 'lib/apidoc.rb'
+require 'lib/api.rb'
 require 'lib/langtag/bcp47.rb'
 
 #------------------------------------------------------------------------------
@@ -139,6 +139,11 @@ class Taginfo < Sinatra::Base
         content_type :json
         expires next_update
         headers['Access-Control-Allow-Origin'] = '*'
+        begin
+            @ap = APIParameters.new(params)
+        rescue ArgumentError => ex
+            halt 412, { :error => ex.message }.to_json
+        end
     end
 
     #-------------------------------------

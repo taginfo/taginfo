@@ -1,5 +1,5 @@
 
-class APIDoc
+class API
 
     @@paths = {}
 
@@ -75,6 +75,36 @@ class APIDoc
         return '<span class="empty">unknown</span>' if result.nil?
         return result if result.is_a?(String)
         '<pre>' + JSON.pretty_generate(result).gsub(/"(STRING|INT|FLOAT|BOOL)"/, '\1') + '</pre>'
+    end
+
+end
+
+class APIParameters
+
+    attr_reader :page, :results_per_page
+
+    def initialize(p)
+        if p[:rp].nil? || p[:rp] == '0' || p[:rp] == '' || p[:page].nil? || p[:page] == '0' || p[:page] == ''
+            @page = 0
+            @results_per_page = 0
+        else
+            if p[:rp] !~ /^[0-9]{1,3}$/
+                raise ArgumentError, 'results per page must be integer between 0 and 999'
+            end
+            if p[:page] !~ /^[0-9]{1,4}$/
+                raise ArgumentError, 'page must be integer between 0 and 9999'
+            end
+            @page = p[:page].to_i
+            @results_per_page = p[:rp].to_i
+        end
+    end
+
+    def do_paging?
+        @results_per_page != 0
+    end
+
+    def first_result
+        @results_per_page * (@page - 1)
     end
 
 end

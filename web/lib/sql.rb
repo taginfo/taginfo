@@ -125,15 +125,9 @@ module SQL
             self
         end
 
-        def paging(results_per_page, page)
-            unless results_per_page.nil? || page.nil?
-                if results_per_page !~ /^[0-9]{1,3}$/
-                    raise ArgumentError, 'results per page must be integer between 0 and 999'
-                end
-                if page !~ /^[0-9]{1,4}$/
-                    raise ArgumentError, 'page must be integer between 0 and 9999'
-                end
-                limit(results_per_page.to_i, results_per_page.to_i * (page.to_i - 1))
+        def paging(ap)
+            if ap.do_paging?
+                limit(ap.results_per_page, ap.first_result)
             end
             self
         end

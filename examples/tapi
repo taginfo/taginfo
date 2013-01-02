@@ -45,10 +45,10 @@ def api_call(path, params)
     end
     if result.code != '200'
         STDERR.puts "#{result.code} #{result.message}"
+        STDERR.puts result.body
         exit 1
     end
 
-#    puts result.body
     puts JSON.pretty_generate(JSON.parse(result.body))
 end
 

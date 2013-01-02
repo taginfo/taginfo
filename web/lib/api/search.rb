@@ -27,12 +27,12 @@ class Taginfo < Sinatra::Base
                 o.key
                 o.value
             }.
-            paging(params[:rp], params[:page]).
+            paging(@ap).
             execute()
 
         return {
-            :page  => params[:page].to_i,
-            :rp    => params[:rp].to_i,
+            :page  => @ap.page,
+            :rp    => @ap.results_per_page,
             :total => total,
             :data  => res.map{ |row| {
                 :key       => row['key'],
@@ -63,12 +63,12 @@ class Taginfo < Sinatra::Base
                 o.key
                 o.value
             }.
-            paging(params[:rp], params[:page]).
+            paging(@ap).
             execute()
 
         return {
-            :page  => params[:page].to_i,
-            :rp    => params[:rp].to_i,
+            :page  => @ap.page,
+            :rp    => @ap.results_per_page,
             :total => total,
             :data  => res.map{ |row| {
                 :key       => row['key'],
@@ -89,12 +89,12 @@ class Taginfo < Sinatra::Base
                 o.key
                 o.value
             }.
-            paging(params[:rp], params[:page]).
+            paging(@ap).
             execute()
 
         return {
-            :page  => params[:page].to_i,
-            :rp    => params[:rp].to_i,
+            :page  => @ap.page,
+            :rp    => @ap.results_per_page,
             :total => total,
             :data  => res.map{ |row| {
                 :key   => row['key'],
