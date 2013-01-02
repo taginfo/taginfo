@@ -48,4 +48,5 @@ Report.new 'Key lengths', :db
 Report.new 'Language comparison table for keys in the wiki', :wiki
 Report.new 'Languages', :wiki
 Report.new 'Wiki pages about non-existing keys', :db, :wiki
+#Report.new 'Name tags', :db
 

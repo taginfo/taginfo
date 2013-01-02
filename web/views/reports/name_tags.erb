@@ -1,0 +1,48 @@
+<%
+    @filter_type = BCP47.get_filter(params[:filter])
+    @sel = Hash.new('')
+    @sel[@filter_type] = ' selected="selected"'
+%>
+<div class="pre">
+    <h1><%= t.reports.name_tags.name %></h1>
+    <%= t.reports.name_tags.intro %>
+</div>
+<div id="tabs">
+    <ul>
+        <li><a href="#overview"><%= t.reports.name_tags.overview.tab %></a></li>
+        <li><a href="#bcp47"><%= t.reports.name_tags.bcp47.tab %></a></li>
+    </ul>
+    <div id="overview">
+        <h2><%= t.reports.name_tags.overview.title %></h2>
+        <div class="boxpre">
+            <p>Tag keys containing "name".</p>
+        </div>
+        <table id="grid-name">
+        </table>
+    </div>
+    <div id="bcp47">
+        <h2><%= t.reports.name_tags.bcp47.title %></h2>
+        <div class="boxpre">
+            <%= t.reports.name_tags.bcp47.intro %>
+            <form id="subtag-filter-form">
+                <label for="subtag-filter"><%= t.reports.name_tags.bcp47.filter.label %>:</label>
+                <select id="subtag-filter" name="subtag-filter">
+                    <option value="all"<%= @sel[''] %>><%= t.reports.name_tags.bcp47.filter.all %></option>
+<% BCP47::SUBTAG_TYPES.each do |type| %>
+                    <option value="<%= type %>"<%= @sel[type] %>><%= t.reports.name_tags.bcp47.filter[type] %></option>
+<% end %>
+                </select>
+            </form>
+        </div>
+        <table id="grid-bcp47-subtags">
+        </table>
+    </div>
+</div>
+<% javascript do
+    JS.raw(<<"JAVASCRIPT")
+function page_init2() {
+    init_tabs([#{ @filter_type.to_json }]);
+}
+JAVASCRIPT
+end
+%>

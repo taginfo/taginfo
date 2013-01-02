@@ -11,6 +11,14 @@ class Fixnum
 
 end
 
+class String
+
+    def titlecase
+        self[0,1].upcase + self[1,self.size].downcase
+    end
+
+end
+
 class Numeric
 
     def to_bytes

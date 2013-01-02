@@ -46,12 +46,15 @@ require 'lib/sql.rb'
 require 'lib/sources.rb'
 require 'lib/reports.rb'
 require 'lib/apidoc.rb'
+require 'lib/langtag/bcp47.rb'
 
 #------------------------------------------------------------------------------
 
 TaginfoConfig.read
 
 #------------------------------------------------------------------------------
+
+BCP47::read_registry
 
 db = SQL::Database.new('../../data')
 
@@ -183,6 +186,7 @@ class Taginfo < Sinatra::Base
     load 'lib/api/reports.rb'
     load 'lib/api/search.rb'
     load 'lib/api/wiki.rb'
+    load 'lib/api/langtag.rb'
 
     load 'lib/ui/embed.rb'
     load 'lib/ui/keys_tags.rb'
