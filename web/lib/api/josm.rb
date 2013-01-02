@@ -49,7 +49,7 @@ class Taginfo < Sinatra::Base
 
         res = @db.select('SELECT * FROM josm_style_rules').
             condition_if("k LIKE '%' || ? || '%' OR v LIKE '%' || ? || '%'", params[:query], params[:query]).
-            order_by(params[:sortname], params[:sortorder]){ |o|
+            order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.k :k
                 o.k :v
                 o.k :b
@@ -76,7 +76,7 @@ class Taginfo < Sinatra::Base
         res = @db.select('SELECT * FROM josm_style_rules').
             condition('k = ?', key).
             condition_if("v LIKE '%' || ? || '%'", params[:query]).
-            order_by(params[:sortname], params[:sortorder]){ |o|
+            order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.v :v
                 o.v :b
                 o.b
@@ -99,7 +99,7 @@ class Taginfo < Sinatra::Base
         res = @db.select('SELECT * FROM josm_style_rules').
             condition('k = ?', key).
             condition('v = ?', value).
-            order_by([:k, :v]).
+            order_by([:k, :v], 'ASC').
             paging(@ap).
             execute()
 

@@ -81,7 +81,8 @@ end
 
 class APIParameters
 
-    attr_reader :page, :results_per_page
+    attr_reader :page, :results_per_page, :sortorder
+    attr_accessor :sortname
 
     def initialize(p)
         if p[:rp].nil? || p[:rp] == '0' || p[:rp] == '' || p[:page].nil? || p[:page] == '0' || p[:page] == ''
@@ -96,6 +97,18 @@ class APIParameters
             end
             @page = p[:page].to_i
             @results_per_page = p[:rp].to_i
+        end
+
+        if p[:sortname].nil? || p[:sortname] == ''
+            @sortname = nil
+        else
+            @sortname = p[:sortname].gsub(/[^a-z_]/, '_')
+        end
+
+        if p[:sortorder] == 'desc' || p[:sortorder] == 'DESC'
+            @sortorder = 'DESC'
+        else
+            @sortorder = 'ASC'
         end
     end
 

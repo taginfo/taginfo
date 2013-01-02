@@ -22,7 +22,7 @@ class Taginfo < Sinatra::Base
 
         res = @db.select('SELECT * FROM search.ftsearch').
             condition_if("value MATCH ?", query).
-            order_by(params[:sortname], params[:sortorder]) { |o|
+            order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.count_all
                 o.key
                 o.value
@@ -58,7 +58,7 @@ class Taginfo < Sinatra::Base
         end
 
         res = sel.
-            order_by(params[:sortname], params[:sortorder]) { |o|
+            order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.count_all
                 o.key
                 o.value
@@ -85,7 +85,7 @@ class Taginfo < Sinatra::Base
         sel = @db.select("SELECT key, value FROM wiki.words WHERE words LIKE ('%' || ? || '%')", query)
 
         res = sel.
-            order_by(params[:sortname], params[:sortorder]) { |o|
+            order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.key
                 o.value
             }.

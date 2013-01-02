@@ -35,7 +35,7 @@ class Taginfo < Sinatra::Base
 
             res = @db.select('SELECT key, langs FROM wiki.wikipages_keys').
                 condition_if("key LIKE '%' || ? || '%'", params[:query]).
-                order_by(params[:sortname], params[:sortorder]){ |o|
+                order_by(@ap.sortname, @ap.sortorder){ |o|
                     o.key
                 }.
                 paging(@ap).

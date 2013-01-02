@@ -44,7 +44,7 @@ class Taginfo < Sinatra::Base
             condition('count_all > ?', min_count).
             condition("in_wiki#{english} = 0").
             condition_if("key LIKE '%' || ? || '%'", params[:query]).
-            order_by(params[:sortname], params[:sortorder]){ |o|
+            order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.key
                 o.count_all
                 o.values_all
@@ -104,7 +104,7 @@ class Taginfo < Sinatra::Base
         :ui => '/reports/languages'
     }) do
         res = @db.select('SELECT * FROM languages').
-            order_by(params[:sortname], params[:sortorder]){ |o|
+            order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.code
                 o.native_name
                 o.english_name

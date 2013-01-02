@@ -85,7 +85,7 @@ module SQL
             self
         end
 
-        def order_by(values, direction='ASC', &block)
+        def order_by(values, direction, &block)
             if values.is_a?(Array)
                 values = values.compact
             else
@@ -94,13 +94,8 @@ module SQL
 
             o = Order.new(values, &block)
 
-            if direction.nil?
-                direction = 'ASC'
-            else
-                direction = direction.to_s
-                if direction !~ /^(asc|desc)$/i
-                    raise ArgumentError, 'direction must be ASC or DESC'
-                end
+            if direction != 'ASC' && direction != 'DESC'
+                raise ArgumentError, 'direction must be ASC or DESC'
             end
 
             values.each do |value|
@@ -113,7 +108,7 @@ module SQL
             unless values.empty?
                 @order_by = "ORDER BY " + values.map{ |value|
                     value = o.default if value.nil?
-                    o[value.to_s].map{ |oel| oel.to_s(direction.upcase) }.join(',')
+                    o[value.to_s].map{ |oel| oel.to_s(direction) }.join(',')
                 }.join(',')
             end
 

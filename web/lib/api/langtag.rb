@@ -22,7 +22,7 @@ class Taginfo < Sinatra::Base
         res = @db.select('SELECT * FROM db.keys').
             condition("key LIKE '%name%'").
             condition_if("key LIKE '%' || ? || '%'", params[:query]).
-            order_by(params[:sortname], params[:sortorder]) { |o|
+            order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.key
                 o.count_all
             }.
@@ -75,9 +75,9 @@ class Taginfo < Sinatra::Base
 
         total = entries.size
 
-        if params[:sortname] =~ /^(subtag|description|added)$/
-            s = params[:sortname].to_sym
-            if params[:sortorder] == 'asc'
+        if @ap.sortname =~ /^(subtag|description|added)$/
+            s = @ap.sortname.to_sym
+            if @ap.sortorder == 'ASC'
                 entries.sort!{ |a, b| a.send(s) <=> b.send(s) }
             else
                 entries.sort!{ |a, b| b.send(s) <=> a.send(s) }
