@@ -73,6 +73,10 @@ function span(text, c) {
     return tag('span', text, { 'class': c });
 }
 
+function tt(text, c, title) {
+    return tag('tt', text, { 'class': c, 'title': title, 'tipsy': 'w' });
+}
+
 function hover_expand(text) {
     return span(text, 'overflow');
 }

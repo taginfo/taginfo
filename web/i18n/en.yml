@@ -351,9 +351,9 @@ reports:
                 <a href="http://tools.ietf.org/html/bcp47">Tags for Identifying Languages
                 (BCP47)</a>. Language
                 tags consist of one or more <i>subtags</i> describing the language,
-                script, variants, etc. The following list shows the subtags
-                currently registered. For more information see also the <a
-                href="http://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
+                script, variants, etc. The following list shows the subtags currently
+                registered that are relevant for OSM. For more information see also the
+                <a href="http://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
                 entry on IETF language tags</a> and the <a
                 href="http://www.langtag.net/">langtag.net</a> site.</p>
                 <p>Note that the data shown in this table is <b>not</b> from OpenStreetMap,

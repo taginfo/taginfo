@@ -489,3 +489,17 @@ div.hDiv table th span {
     display: block;
 }
 
+/* ==========  */
+
+.good {
+    color: #00a000;
+}
+
+.okay {
+}
+
+.bad {
+    color: #ff0000;
+}
+
+

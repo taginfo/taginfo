@@ -9,6 +9,13 @@ var create_flexigrid_for = {
             colModel: [
                 { display: '<%= osm.key %>', name: 'key', width: 250, sortable: true },
                 { display: '<%= osm.objects %>', name: 'count_all', width: 100, sortable: true, align: 'right' },
+                { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" width="16" height="16" title="<%= misc.in_wiki_tooltip %>"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
+                { display: 'Prefix', name: 'prefix', width: 100, sortable: true },
+                { display: 'Type', name: 'type', width: 100, sortable: true },
+                { display: 'Langtag', name: 'langtag', width: 100, sortable: true },
+                { display: 'Language', name: 'lang', width: 100, sortable: true },
+                { display: 'Script', name: 'script', width: 100, sortable: true },
+                { display: 'Region', name: 'region', width: 100, sortable: true },
                 { display: 'Notes', name: 'notes', width: 500, sortable: true }
             ],
             searchitems: [
@@ -20,8 +27,15 @@ var create_flexigrid_for = {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
                         link_to_key(row.key),
-                        row.count_all,
-                        ''
+                        print_with_ts(row.count_all),
+                        row.in_wiki ? '&#x2714;' : '-',
+                        row.prefix,
+                        row.type,
+                        row.langtag,
+                        tt(row.lang, row.lang_state, row.lang_note),
+                        tt(row.script, row.script_state, row.script_note),
+                        row.region,
+                        row.notes
                     ] };
                 });
                 return data;
