@@ -35,12 +35,12 @@ class Taginfo < Sinatra::Base
             condition('key=?', @key).
             condition('count > ?', @count_all_values * 0.02).
             order_by([:count], 'DESC').
-            execute().map{ |row| [{ 'value' => row['value'], 'count' => row['count'].to_i }] }
+            execute().map{ |row| { 'value' => row['value'], 'count' => row['count'].to_i } }
 
         # add "(other)" label for the rest of the values
-        sum = @prevalent_values.inject(0){ |sum, x| sum += x[0]['count'] }
+        sum = @prevalent_values.inject(0){ |sum, x| sum += x['count'] }
         if sum < @count_all_values
-            @prevalent_values << [{ 'value' => '(other)', 'count' => @count_all_values - sum }]
+            @prevalent_values << { 'value' => '(other)', 'count' => @count_all_values - sum }
         end
 
         @wiki_count = @db.count('wiki.wikipages').condition('value IS NULL').condition('key=?', @key).get_first_value().to_i
@@ -59,7 +59,7 @@ class Taginfo < Sinatra::Base
         @img_width  = TaginfoConfig.get('geodistribution.width')  * TaginfoConfig.get('geodistribution.scale_image')
         @img_height = TaginfoConfig.get('geodistribution.height') * TaginfoConfig.get('geodistribution.scale_image')
 
-        javascript 'protovis-r3.2'
+        javascript 'd3/d3.v3.min'
         javascript "#{ r18n.locale.code }/key"
         erb :key
     end

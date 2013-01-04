@@ -97,40 +97,43 @@
 function page_init2() {
     init_tabs([#{ @key.to_json }, #{ @filter_type.to_json }, #{ r18n.locale.code.to_json }]);
 
-    var data = #{ @prevalent_values.to_json() };
+    var w = 160, h = 440, max = #{ @count_all_values }, data = #{ @prevalent_values.to_json() };
 
-    var w=160, h=440;
+    var y = 0;
+    data.forEach(function(d) {
+        d['y'] = y;
+        y += d['count'];
+    });
 
-    var vis = new pv.Panel()
-        .canvas('canvas-values')
-        .width(w)
-        .height(h + 20);
+    var scale = d3.scale.linear()
+                    .domain([0, max])
+                    .range([0, h]);
+        
+    var color = d3.scale.ordinal()
+                    .range(d3_colors());
 
-    var scale = pv.Scale.linear(0, #{ @count_all_values }).range(0, h);
+    var chart = d3.select('#canvas-values').append('svg')
+                    .attr("width", w)
+                    .attr("height", h);
 
-    vis.add(pv.Layout.Stack)
-        .bottom(10)
-        .order('reverse')
-        .layers(data)
-        .x(10)
-        .y(function(d) { return scale(d.count); })
-    .layer.add(pv.Bar)
-        .width(20)
-        .cursor(function() {
-            return this.data().value == '(other)' ? 'default' : 'pointer';
-        })
-        .event('click', function() {
-            if (this.data().value != '(other)') {
-                window.location = url_for_tag(#{ @key_json }, this.data().value);
-            }
-        })
-    .anchor('left')
-        .add(pv.Label)
-        .font('12px Arial,sans-serif')
-        .left(30)
-        .text(function(d) { return d.value; });
+    chart.selectAll("rect")
+        .data(data)
+        .enter()
+        .append("svg:a")
+            .attr('xlink:href', function(d) { return url_for_tag(#{ @key_json }, d['value']); })
+            .attr('transform', function(d) { return 'translate(10, ' + scale(d['y']) + ')'; })
+            .call(function(c) {
+                c.append("rect")
+                    .attr('width', 20)
+                    .attr('height', function(d) { return scale(d['count']); })
+                    .style('fill', function(d, i) { return color(i); });
+            })
+            .append("text")
+                .attr('x', 25)
+                .attr('y', function(d) { return scale(d['count'] / 2); })
+                .attr('dy', '0.5em')
+                .text(function(d) { return d['value']; });
 
-    vis.render();
 }
 JAVASCRIPT
 end

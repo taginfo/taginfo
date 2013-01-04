@@ -502,4 +502,7 @@ div.hDiv table th span {
     color: #ff0000;
 }
 
+.canvas svg text {
+    font: 12px Arial,sans-serif;
+}
 
