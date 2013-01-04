@@ -74,33 +74,42 @@ var create_flexigrid_for = {
 function page_init() {
     init_tabs([]);
 
-    var data = <%= i = '@'; %w(plain colon letters space problem rest).map{ |type| i=i.next; [ { :label => i, :value => @db.stats('characters_in_keys_' + type) } ] }.to_json %>;
+    var w = 968,
+        h = 50,
+        max = <%= @db.stats('num_keys') %>,
+        data = <%= i = '@'; %w(plain colon letters space problem rest).map{ |type| i=i.next; { :label => i, :value => @db.stats('characters_in_keys_' + type) } }.to_json %>;
 
-    var w=968, h=50;
+    var colors = { 'A': '#2ca02c', 'B': '#98df8a', 'C': '#dbdb8d', 'D': '#d62728', 'E': '#ff9896', 'F': '#aec7e8' };
 
-    var vis = new pv.Panel()
-        .canvas('canvas')
-        .width(w + 20)
-        .height(h);
+    var y = 0;
+    data.forEach(function(d) {
+        d['y'] = y;
+        y += d['value'];
+    });
 
-    var colors = <%= { :A => '#2ca02c', :B => '#98df8a', :C => '#dbdb8d', :D => '#d62728', :E => '#ff9896', :F => '#aec7e8' }.to_json %>;
+    var scale = d3.scale.linear()
+                    .domain([0, max])
+                    .range([0, w]);
+        
+    var chart = d3.select('#canvas').append('svg')
+                    .attr("width", w)
+                    .attr("height", h);
 
-    var scale = pv.Scale.linear(0, <%= @db.stats('num_keys') %>).range(0, w);
+    chart.selectAll("rect")
+        .data(data)
+        .enter()
+        .append("svg:g")
+            .attr('transform', function(d) { return 'translate(' + scale(d['y']) + ', 0)'; })
+            .call(function(c) {
+                c.append("rect")
+                    .attr('height', 20)
+                    .attr('width', function(d) { return scale(d['value']); })
+                    .style('fill', function(d) { return colors[d['label']]; });
+            })
+            .append("text")
+                .attr('x', function(d) { return scale(d['value'] / 2); })
+                .attr('y', 34)
+                .style('text-anchor', 'middle')
+                .text(function(d) { return d['label']; });
 
-    vis.add(pv.Layout.Stack)
-        .orient('left-top')
-        .left(10)
-        .layers(data)
-        .x(10)
-        .y(function(d) { return scale(d.value); })
-    .layer.add(pv.Bar)
-        .fillStyle(function(d) { return colors[d.label]; })
-        .height(20)
-    .anchor('bottom')
-        .add(pv.Label)
-        .font('12px Arial,sans-serif')
-        .top(46)
-        .text(function(d) { return d.label; });
-
-    vis.render();
 }
