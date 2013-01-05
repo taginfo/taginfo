@@ -1,17 +1,20 @@
 <table class="boxes resize" width="100%">
     <tr>
-        <td><h2><a href="/keys"><%= t.osm.keys %></a> / <a href="/tags"><%= t.osm.tags %></a></h2></td>
+        <td width="232" height="20"><h2><a href="/keys"><%= t.osm.keys %></a></h2></td>
         <td rowspan="4" width="20"></td>
-        <td width="232"><h2><a href="/reports"><%= t.taginfo.reports %></a></h2></td>
+        <td height="20"><h2><%= t.pages.index.popular_keys %></h2></td>
         <td rowspan="4" width="20"></td>
-        <td width="232"><h2><a href="/about"><%= t.taginfo.about %></a></h2></td>
+        <td width="232" height="20"><h2><a href="/reports"><%= t.taginfo.reports %></a></h2></td>
+        <td rowspan="4" width="20"></td>
+        <td width="232" height="20"><h2><a href="/about"><%= t.taginfo.about %></a></h2></td>
     </tr>
     <tr>
+        <td class="box">
+            <ul id="key_list" style="margin: 0 0 0 18px; padding: 0;"></ul>
+            <p class="emphasis" style="margin: 20px 0 0 0;"><a href="/keys"><%= t.pages.index.keys.listkeys %></a></p>
+        </td>
         <td rowspan="3" class="box">
-            <p><%= t.pages.index.keys.intro %></p>
             <div id="tagcloud" style="margin: 15px 0; line-height: 200%; text-align: justify; overflow: hidden;"></div>
-            <p class="emphasis" style="margin-top: 20px;"><a href="/keys"><%= t.pages.index.keys.listkeys %></a></p>
-            <p class="emphasis"><a href="/tags"><%= t.pages.index.keys.listtags %></a></p>
         </td>
         <td rowspan="3" class="box">
             <p><%= t.pages.reports.intro %></p>
@@ -28,12 +31,19 @@
         </td>
     </tr>
     <tr>
-        <td><h2><%= t.taginfo.international %></h2></td>
+        <td height="20"><h2><a href="/tags"><%= t.osm.tags %></a></h2></td>
+        <td height="20"><h2><%= t.taginfo.international %></h2></td>
     </tr>
     <tr>
+        <td class="box">
+            <ul id="tag_list" style="margin: 0 0 0 18px; padding: 0;"></ul>
+            <p class="emphasis" style="margin: 20px 0 0 0;"><a href="/tags"><%= t.pages.index.keys.listtags %></a></p>
+        </td>
         <td class="box">
             <p><%= TaginfoConfig.get('instance.description') %></p>
             <p class="emphasis" style="margin-top: 20px;"><a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites"><%= t.pages.index.international.see %></a></p>
         </td>
     </tr>
 </table>
+<% javascript 'd3/d3.v3.min' %>
+<% javascript 'd3/d3.layout.cloud' %>

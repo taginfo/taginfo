@@ -1,14 +1,43 @@
 <%
-# This is the maximum number of tags in the tag cloud. Javascript code will remove tags if the
-# window is to small to show all of them.
-tagcloud_number_of_tags = 260
-tags = @db.select("SELECT key, scale1 FROM popular_keys ORDER BY scale1 DESC LIMIT #{ tagcloud_number_of_tags }").
+# This is the maximum number of tags in the tag cloud. Javascript code will only show
+# as many of them as will fit in the window.
+tagcloud_number_of_keys = 200
+tagcloud_number_of_tags = 40
+keys = @db.select("SELECT key, scale1 FROM popular_keys ORDER BY scale1 DESC LIMIT #{ tagcloud_number_of_keys }").
     execute().
-    each_with_index{ |tag, idx| tag['pos'] = (tagcloud_number_of_tags - idx) / tagcloud_number_of_tags.to_f }.
-    sort_by{ |row| row['key'] }
+    each_with_index{ |tag, idx| tag['pos'] = (tagcloud_number_of_keys - idx) / tagcloud_number_of_keys.to_f }
+tags = @db.select("SELECT skey, svalue FROM db.selected_tags WHERE skey NOT IN ('source', 'source_ref', 'attribution') ORDER BY count_all DESC LIMIT #{ tagcloud_number_of_tags }").execute()
 %>
 
-var tagcloud_data = <%= tags.map{ |tag| [tag['key'], tagcloud_size(tag)] }.to_json.gsub(/\],/, "],\n") %>;
+var keys_data = <%= keys.map{ |tag| { :text => tag['key'], :size => tagcloud_size(tag) } }.to_json.gsub(/\},/, "},\n") %>;
+var tags_data = <%= tags.map{ |entry| [ entry['skey'], entry['svalue'] ] }.to_json.gsub(/\],/, "],\n") %>;
+
+var width, height, font_family = 'Impact', font_weight = 'normal';
+
+function draw(words) {
+    var fill = d3.scale.category20b();
+
+    d3.select("div#tagcloud").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+            .attr("transform", 'translate(' + width/2 + ',' + height/2 + ')')
+            .selectAll("text")
+                .data(words)
+                .enter()
+                .append('svg:a')
+                    .attr('xlink:href', function(d) { return url_for_key(d.text); })
+                    .append("text")
+                    .style("font-size", function(d) { return d.size + "px"; })
+                    .style("font-family", font_family)
+                    .style("font-weight", font_weight)
+                    .style('fill', function(d, i) { return d3.rgb(fill(i)).darker(0.5); })
+                    .attr("text-anchor", "middle")
+                    .attr("transform", function(d) {
+                        return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                    })
+                    .text(function(d) { return d.text; });
+}
 
 function resize_home() {
     var tagcloud = jQuery('#tagcloud');
@@ -17,27 +46,58 @@ function resize_home() {
 
     resize_box();
 
-    var height = tagcloud.parent().innerHeight();
+    fill_lists();
+
+    height = tagcloud.parent().innerHeight();
     tagcloud.parent().children().each(function(index) {
         if (this.id != 'tagcloud') {
             height -= jQuery(this).outerHeight(true);
         }
     });
-    tagcloud.height(height - 20);
+    height -= 50;
+    tagcloud.height(height);
 
-    var cloud = '';
-    for (var i=0; i < tagcloud_data.length; i++) {
-        cloud += link(url_for_key(tagcloud_data[i][0]), tagcloud_data[i][0], { style: 'font-size: ' + tagcloud_data[i][1] + 'px;' }) + ' ';
+    width = tagcloud.parent().width();
+
+    d3.layout.cloud().size([width, height])
+        .words(keys_data)
+        .timeInterval(10)
+        .rotate(function() { return ~~(Math.random() * 5) * 30 - 60; })
+        .font(font_family)
+        .fontWeight(font_weight)
+        .fontSize(function(d) { return d.size; })
+        .on('end', draw)
+        .start();
+}
+
+function fill_lists() {
+    var key_list = jQuery('#key_list'),
+        tag_list = jQuery('#tag_list');
+
+    key_list.empty();
+    tag_list.empty();
+
+    var key_list_height = key_list.parent().height() - key_list.next().outerHeight() - 60,
+        tag_list_height = tag_list.parent().height() - tag_list.next().outerHeight() - 60,
+        i = 0;
+
+    console.log(key_list_height);
+    console.log(tag_list_height);
+
+    while (key_list.outerHeight() < key_list_height) {
+        var d = keys_data[i];
+        key_list.append('<li>' + link_to_key(d.text) + '</li>');
+        i++;
     }
-    tagcloud.append(cloud);
+    key_list.append("<li>...</li>");
 
-    var tags_array = tagcloud.children().toArray().sort(function(a, b) {
-        return parseInt(jQuery(a).css('font-size')) - parseInt(jQuery(b).css('font-size'));
-    });
-
-    while (tagcloud.get(0).scrollHeight > tagcloud.height()) {
-        jQuery(tags_array.shift()).remove();
+    i = 0;
+    while (tag_list.outerHeight() < tag_list_height) {
+        var d = tags_data[i];
+        tag_list.append('<li>' + link_to_tag(d[0], d[1]) + '</li>');
+        i++;
     }
+    tag_list.append("<li>...</li>");
 }
 
 function page_init() {
