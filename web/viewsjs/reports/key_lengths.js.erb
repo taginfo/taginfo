@@ -51,68 +51,80 @@ hist = hist.map{ |item| item.nil? ? 0 : item } %>
 function page_init() {
     init_tabs([]);
 
-    var data = <%= hist.to_json %>;
+    var bar_width = 6,
+        bar_skip = 2,
+        bar_step = bar_width + bar_skip,
+        data = <%= hist.to_json %>,
+        w = bar_step * data.length,
+        h = 400,
+        margin = { top: 10, right: 15, bottom: 60, left: 60 };
 
-    var w=900, h=400, bar_width=6;
+    var scale_y = d3.scale.linear()
+                    .domain([0, <%= hist.max %>])
+                    .range([h, 0]);
 
-    var vis = new pv.Panel()
-        .canvas('canvas')
-        .fillStyle('#ffffff')
-        .strokeStyle('#d0d0c8')
-        .width(w)
-        .height(h+4)
-        .top(10)
-        .right(15)
-        .bottom(40)
-        .left(60)
-        .lineWidth(1);
+    var axis_y = d3.svg.axis()
+                    .scale(scale_y)
+                    .orient('left');
 
-    vis.add(pv.Label)
-        .data(['<%= page.histogram.key_length %>'])
-        .font('12px Arial,sans-serif')
-        .bottom(-36)
-        .left(w/2)
-        .textAlign('center');
+    var chart = d3.select('#canvas-histogram').append('svg')
+                    .attr('width', w + margin.left + margin.right)
+                    .attr('height', h + margin.top + margin.bottom)
+                    .append('g')
+                        .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
+                        .call(function(c) {
+                            c.append('rect')
+                                .attr('width', w)
+                                .attr('height', h + 10)
+                                .attr('y', -5)
+                                .style('fill', 'white')
+                                .style('stroke', '#d0d0c8')
+                        });
 
-    vis.add(pv.Label)
-        .data(['<%= page.histogram.number_of_keys %>'])
-        .font('12px Arial,sans-serif')
-        .left(-48)
-        .bottom(h/2)
-        .textAlign('center')
-        .textAngle(-Math.PI/2);
+    chart.append('g')
+        .attr('class', 'x axis')
+        .attr('transform', 'translate(0, ' + (h + 10) + ')')
+        .append('text')
+            .attr('x', w/2)
+            .attr('y', 36)
+            .style('text-anchor', 'middle')
+            .text('<%= page.histogram.key_length %>');
 
-    var x = pv.Scale.linear(0, <%= hist.size %>).range(bar_width, w - bar_width);
-    var y = pv.Scale.linear(0, <%= hist.max %>).range(0, h);
+    chart.append('g')
+        .attr('class', 'y axis')
+        .call(axis_y)
+        .append('text')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2)
+            .attr('y', -50)
+            .style('text-anchor', 'middle')
+            .text('<%= page.histogram.number_of_keys %>');
 
-    var bar = vis.add(pv.Bar)
+    chart.selectAll('rect')
         .data(data)
-        .bottom(1)
-        .fillStyle('#083e76')
-        .left(function() { return x(this.index) - bar_width/2; })
-        .height(y)
-        .title(function(d) { return '' + d + ' keys of length ' + this.index; })
-        .width(bar_width);
+        .enter()
+        .append('g')
+            .call(function(c) {
+                c.append('g')
+                    .attr('transform', function(d, i) { return 'translate(' + (i * bar_step + bar_step/2) + ', ' + (h+10) + ')';})
+                    .style('display', function(d, i) { return i == 1 || i % 10 == 0 ? '' : 'none'; })
+                    .call(function(t) {
+                        t.append('text')
+                            .attr('y', 16)
+                            .style('text-anchor', 'middle')
+                            .text(function(d, i) { return i; })
+                    })
+                    .append('line')
+                        .style('stroke', 'black')
+                        .style('shape-rendering', 'crispEdges')
+                        .attr('y2', 6);
+            })
+        .append('rect')
+            .style('fill', '#083e76')
+            .attr('x', function(d, i) { return i * bar_step; })
+            .attr('y', function(d) { return scale_y(d); })
+            .attr('width', bar_width)
+            .attr('height', function(d) { return h - scale_y(d); })
+            .attr('title', function(d, i) { return '' + d + ' keys of length ' + i; });
 
-    vis.add(pv.Rule)
-        .data(y.ticks(10))
-        .bottom(y)
-        .left(-5)
-        .width(-5)
-    .anchor("left").add(pv.Label)
-        .font('10px Arial,sans-serif')
-        .textMargin(8)
-        .text(x.tickFormat);
-
-    vis.add(pv.Rule)
-        .data(x.ticks(10))
-        .left(x)
-        .bottom(-2)
-        .height(-5)
-    .anchor("bottom").add(pv.Label)
-        .font('10px Arial,sans-serif')
-        .textMargin(8)
-        .text(x.tickFormat);
-        
-    vis.render();
 }

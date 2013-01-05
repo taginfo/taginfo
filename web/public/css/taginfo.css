@@ -502,7 +502,19 @@ div.hDiv table th span {
     color: #ff0000;
 }
 
+/* ==========  */
+
 .canvas svg text {
     font: 12px Arial,sans-serif;
+}
+
+.canvas .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.canvas .axis path {
+  display: none;
 }
 

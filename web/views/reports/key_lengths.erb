@@ -15,7 +15,7 @@
     <div id="histogram">
         <h2>Histogram</h2>
         <p><%= t.reports.key_lengths.histogram.intro %><p>
-        <div id="canvas"></div>
+        <div class="canvas" id="canvas-histogram"></div>
     </div>
 </div>
-<% javascript 'protovis-r3.2' %>
+<% javascript 'd3/d3.v3.min' %>
