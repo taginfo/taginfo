@@ -31,8 +31,8 @@ function page_init() {
                     print_value_with_percent(row.count_ways,      row.count_ways_fraction),
                     print_value_with_percent(row.count_relations, row.count_relations_fraction),
                     print_with_ts(row.users_all),
-                    row.in_wiki ? '&#x2714;' : '-',
-                    row.in_josm ? '&#x2714;' : '-',
+                    print_checkmark(row.in_wiki),
+                    print_checkmark(row.in_josm),
                     print_with_ts(row.values_all),
                     print_prevalent_value_list(row.key, row.prevalent_values)
                 ] };

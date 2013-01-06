@@ -123,6 +123,10 @@ function print_with_ts(value) {
     }
 }
 
+function print_checkmark(value) {
+    return value ? '&#x2714;' : '-';
+}
+
 /* ============================ */
 
 function print_key_or_tag_list(list) {
