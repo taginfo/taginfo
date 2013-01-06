@@ -1,8 +1,7 @@
-# web/lib/api/main.rb
+# web/lib/api/site.rb
 class Taginfo < Sinatra::Base
 
-    api(2, 'site', {
-        :superseded_by => '4/site',
+    api(4, 'site', {
         :description => 'Get information about this taginfo site.',
         :result => {
             :url         => :STRING,

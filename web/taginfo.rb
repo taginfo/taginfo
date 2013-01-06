@@ -185,6 +185,7 @@ class Taginfo < Sinatra::Base
 
     #--------------------------------------------------------------------------
 
+    # old deprecated API (version 2 and 3)
     load 'lib/api/db.rb'
     load 'lib/api/josm.rb'
     load 'lib/api/main.rb'
@@ -192,6 +193,9 @@ class Taginfo < Sinatra::Base
     load 'lib/api/search.rb'
     load 'lib/api/wiki.rb'
     load 'lib/api/langtag.rb'
+
+    # current API (version 4)
+    load 'lib/api/site.rb'
 
     load 'lib/ui/embed.rb'
     load 'lib/ui/keys_tags.rb'

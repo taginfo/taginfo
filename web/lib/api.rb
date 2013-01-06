@@ -77,6 +77,14 @@ class API
         '<pre>' + JSON.pretty_generate(result).gsub(/"(STRING|INT|FLOAT|BOOL|ARRAY_OF_STRINGS)"/, '\1') + '</pre>'
     end
 
+    def deprecated?
+        return !@superseded_by.nil?
+    end
+
+    def superseded_by
+        return '/api/' + @superseded_by
+    end
+
 end
 
 class APIParameters
