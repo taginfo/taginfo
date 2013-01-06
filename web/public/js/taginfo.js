@@ -107,6 +107,22 @@ function print_type_icon(type, on_or_off) {
      return on_or_off ? '<img src="/img/types/' + type + '.16.png" alt="yes" width="16" height="16"/> ' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/> ';
 }
 
+function print_josm_value(key, value, value_bool) {
+    return value ? link_to_value(key, value) : value_bool ? (value_bool + ' (Boolean)') : '*';
+}
+
+function print_josm_icon(style, icon) {
+    return icon ? '<img src="/api/4/josm/style/image?style=' + style + '&image=' + icon + '" title="' + icon + '" alt=""/>' : '';
+}
+
+function print_josm_line(width, color) {
+    return '<div>' + (width > 0 ? '<div title="' + color + '" style="height: ' + width + 'px; margin-top: ' + (10 - Math.round(width/2)) + 'px; padding: 0; background-color: ' + color + '"></div>' : '') + '</div>';
+}
+
+function print_josm_area(color) {
+    return color ? '<div title="' + color + '" style="height: 18px; background-color: ' + color + '"></div>' : '';
+}
+
 function print_image(type) {
     type = type.replace(/s$/, '');
     var name;

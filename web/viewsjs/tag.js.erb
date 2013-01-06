@@ -106,10 +106,10 @@ var create_flexigrid_for = {
             preProcess: function(data) {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
-                        row.value ? link_to_value(row.key, row.value) : row.value_bool ? (row.value_bool + ' (Boolean)') : '*',
-                        row.icon ? '<img src="/api/4/josm/style/image?style=standard&image=' + row.icon + '" title="' + row.icon + '" alt=""/>' : '',
-                        '<div>' + (row.line_width > 0 ? '<div title="' + row.line_color + '" style="height: ' + row.line_width + 'px; margin-top: ' + (10 - Math.round(row.line_width/2)) + 'px; padding: 0; background-color: ' + row.line_color + '"></div>' : '') + '</div>',
-                        row.area_color ? '<div title="' + row.area_color + '" style="height: 18px; background-color: ' + row.area_color + '"></div>' : ''
+                        print_josm_value(row.key, row.value, row.value_bool),
+                        print_josm_icon('standard', row.icon),
+                        print_josm_line(row.line_width, row.line_color),
+                        print_josm_area(row.area_color)
                     ] };
                 });
                 return data;
