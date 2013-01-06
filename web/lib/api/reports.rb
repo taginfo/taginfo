@@ -114,7 +114,6 @@ class Taginfo < Sinatra::Base
             execute()
 
         return {
-            :page  => 1,
             :total => res.size,
             :data  => res.map{ |row| {
                 :code                    => row['code'],

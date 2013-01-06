@@ -628,16 +628,18 @@
 				if (p.page>p.pages) p.page = p.pages;
 				//var param = {page:p.newp, rp: p.rp, sortname: p.sortname, sortorder: p.sortorder, query: p.query, qtype: p.qtype};
 				var param = [
-					 { name : 'page', value : p.newp }
-					,{ name : 'rp', value : p.rp }
-					,{ name : 'sortname', value : p.sortname}
+					{ name : 'sortname', value : p.sortname}
 					,{ name : 'sortorder', value : p.sortorder }
 				];
+                if (p.usepager) {
+                    param.push({ name: 'page', value: p.newp });
+                    param.push({ name: 'rp', value: p.rp });
+                }
                 if (p.query != '') {
-                    param.push({ name: 'query', value: p.query })
+                    param.push({ name: 'query', value: p.query });
                 }
                 if (p.qtype != '') {
-                    param.push({ name: 'qtype', value: p.qtype })
+                    param.push({ name: 'qtype', value: p.qtype });
                 }
 							 
 				if (p.params)
