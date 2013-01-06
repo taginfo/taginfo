@@ -1,7 +1,7 @@
 <% page = @trans.t.reports.languages %>
 function page_init() {
     create_flexigrid('grid-langs', {
-        url: '/api/2/reports/languages',
+        url: '/api/4/wiki/languages',
         colModel: [
             { display: '<%= page.code %>', name: 'code', width: 60, sortable: true },
             { display: '<%= page.native_name %>', name: 'native_name', width: 150, sortable: true },

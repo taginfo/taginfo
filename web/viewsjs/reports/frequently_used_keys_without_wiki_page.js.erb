@@ -5,7 +5,7 @@
  %>
 function create_flexigrid_with_option(english) {
     create_flexigrid('grid-keys', {
-        url: '/api/2/reports/frequently_used_keys_without_wiki_page?english=' + english,
+        url: '/api/4/keys/without_wiki_page?english=' + english,
         colModel: [
             { display: '<%= page.table.create_wiki_page %>', name: 'create_wiki_page', width: 200, sortable: false },
             { display: '<%= osm.key %>', name: 'key', width: 180, sortable: true },

@@ -3,6 +3,7 @@
 class Taginfo < Sinatra::Base
 
     api(2, 'reports/frequently_used_keys_without_wiki_page', {
+        :superseded_by => '4/keys/without_wiki_page',
         :description => 'Return frequently used tag keys that have no associated wiki page.',
         :parameters => {
             :min_count => 'How many tags with this key must there be at least to show up here? (default 10000).',
@@ -88,6 +89,7 @@ class Taginfo < Sinatra::Base
     end
 
     api(2, 'reports/languages', {
+        :superseded_by => '4/wiki/languages',
         :description => 'List languages Taginfo knows about and how many wiki pages describing keys and tags there are in these languages.',
         :paging => :no,
         :result => {
