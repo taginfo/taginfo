@@ -16,12 +16,6 @@
     JS.raw(<<"JAVASCRIPT")
 function page_init2() {
     create_flexigrid_with_option(#{ params[:english] == '1' ? '1' : '0' });
-    jQuery('#english').bind('click', function() {
-        jQuery('#grid-keys').flexOptions({
-            url: '/api/4/keys/without_wiki_page?english=' + (jQuery('#english')[0].checked ? '1' : '0')
-        });
-        jQuery('#grid-keys').flexReload();
-    });
 }
 JAVASCRIPT
 end

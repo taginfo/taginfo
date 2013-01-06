@@ -97,44 +97,13 @@
 function page_init2() {
     var key = #{ @key.to_json };
     init_tabs([key, #{ @filter_type.to_json }, #{ r18n.locale.code.to_json }]);
-
-    var w = 160, h = 440, max = #{ @count_all_values }, data = #{ @prevalent_values.to_json() };
-
-    var y = 0;
-    data.forEach(function(d) {
-        d['y'] = y;
-        y += d['count'];
+    create_chart({
+        key: key,
+        width: 160,
+        height: 440,
+        max: #{ @count_all_values },
+        data: #{ @prevalent_values.to_json() }
     });
-
-    var scale = d3.scale.linear()
-                    .domain([0, max])
-                    .range([0, h]);
-        
-    var color = d3.scale.ordinal()
-                    .range(d3_colors());
-
-    var chart = d3.select('#canvas-values').append('svg')
-                    .attr("width", w)
-                    .attr("height", h);
-
-    chart.selectAll("rect")
-        .data(data)
-        .enter()
-        .append("svg:a")
-            .attr('xlink:href', function(d) { return url_for_tag(key, d['value']); })
-            .attr('transform', function(d) { return 'translate(10, ' + scale(d['y']) + ')'; })
-            .call(function(c) {
-                c.append("rect")
-                    .attr('width', 20)
-                    .attr('height', function(d) { return scale(d['count']); })
-                    .style('fill', function(d, i) { return color(i); });
-            })
-            .append("text")
-                .attr('x', 25)
-                .attr('y', function(d) { return scale(d['count'] / 2); })
-                .attr('dy', '0.5em')
-                .text(function(d) { return d['value']; });
-
 }
 JAVASCRIPT
 end

@@ -145,6 +145,44 @@ var create_flexigrid_for = {
     }
 };
 
+function create_chart(params) {
+    var y = 0;
+    params.data.forEach(function(d) {
+        d['y'] = y;
+        y += d['count'];
+    });
+
+    var scale = d3.scale.linear()
+                    .domain([0, params.max])
+                    .range([0, params.height]);
+        
+    var color = d3.scale.ordinal()
+                    .range(d3_colors());
+
+    var chart = d3.select('#canvas-values').append('svg')
+                    .attr("width", params.width)
+                    .attr("height", params.height);
+
+    chart.selectAll("rect")
+        .data(params.data)
+        .enter()
+        .append("svg:a")
+            .attr('xlink:href', function(d) { return url_for_tag(params.key, d['value']); })
+            .attr('transform', function(d) { return 'translate(10, ' + scale(d['y']) + ')'; })
+            .call(function(c) {
+                c.append("rect")
+                    .attr('width', 20)
+                    .attr('height', function(d) { return scale(d['count']); })
+                    .style('fill', function(d, i) { return color(i); });
+            })
+            .append("text")
+                .attr('x', 25)
+                .attr('y', function(d) { return scale(d['count'] / 2); })
+                .attr('dy', '0.5em')
+                .text(function(d) { return d['value']; });
+
+}
+
 function page_init() {
     jQuery('#josm_button').bind('click', function() {
         jQuery('#josmiframe')[0].src = jQuery('#josm_button')[0].href;

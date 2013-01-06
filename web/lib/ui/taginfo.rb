@@ -46,6 +46,7 @@ class Taginfo < Sinatra::Base
             "<tr><td class='#{c}' style='padding-left: #{ level * 16 + 6 }px;'><span title='#{ name }'>#{ key }</span></td><td class='#{c}'>#{ en }</td><td class='#{c}'>#{ other }</td></tr>"
         }
 
+        javascript "#{ r18n.locale.code }/taginfo/i18n"
         erb :'taginfo/i18n'
     end
 

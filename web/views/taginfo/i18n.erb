@@ -20,16 +20,4 @@
 <%= i18n_walk(@line, 0, '', @i18n_en, @i18n_lang) %>
     </table>
 </div>
-<%
-end
-javascript do
-    JS.raw(<<"JAVASCRIPT")
-function page_init() {
-    jQuery('span[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 'w' });
-    jQuery('#lang').bind('change', function() {
-        jQuery('form').submit();
-    });
-}
-JAVASCRIPT
-end
-%>
+<% end %>
