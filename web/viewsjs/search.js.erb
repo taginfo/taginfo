@@ -6,7 +6,7 @@
 var create_flexigrid_for = {
     keys: function(query) {
         create_flexigrid('grid-keys', {
-            url: '/api/2/db/keys?query=' + encodeURIComponent(query),
+            url: '/api/4/keys/all?query=' + encodeURIComponent(query),
             colModel: [
                 { display: '<%= misc.count %>', name: 'count_all', width: 80, sortable: true, align: 'right' },
                 { display: '<%= osm.key %>', name: 'key', width: 500, sortable: true }
@@ -27,7 +27,7 @@ var create_flexigrid_for = {
     },
     values: function(query) {
         create_flexigrid('grid-values', {
-            url: '/api/2/search/values?q=' + encodeURIComponent(query),
+            url: '/api/4/search/by_value?query=' + encodeURIComponent(query),
             colModel: [
                 { display: '<%= misc.count %>', name: 'count_all', width: 80, sortable: true, align: 'right' },
                 { display: '<%= osm.key %>', name: 'key', width: 250, sortable: true },
@@ -51,7 +51,7 @@ var create_flexigrid_for = {
     tags: function(query) {
         var q = query.split('=', 2);
         create_flexigrid('grid-tags', {
-            url: '/api/2/search/tags?q=' + encodeURIComponent(query),
+            url: '/api/4/search/by_key_and_value?query=' + encodeURIComponent(query),
             colModel: [
                 { display: '<%= misc.count %>', name: 'count_all', width: 80, sortable: true, align: 'right' },
                 { display: '<%= osm.key %>', name: 'key', width: 300, sortable: true },
@@ -73,9 +73,8 @@ var create_flexigrid_for = {
         });
     },
     fulltext: function(query) {
-        var q = query.split('=', 2);
         create_flexigrid('grid-fulltext', {
-            url: '/api/2/search/wikipages?q=' + encodeURIComponent(query),
+            url: '/api/4/search/by_keyword?query=' + encodeURIComponent(query),
             colModel: [
                 { display: '<%= osm.key %>', name: 'key', width: 300, sortable: true },
                 { display: '<%= osm.value %>', name: 'value', width: 500, sortable: true }
