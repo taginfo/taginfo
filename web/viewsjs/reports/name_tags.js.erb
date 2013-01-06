@@ -5,7 +5,7 @@
 var create_flexigrid_for = {
     "overview": function() {
         create_flexigrid('grid-name', {
-            url: '/api/2/langtag/name',
+            url: '/api/4/keys/name',
             colModel: [
                 { display: '<%= osm.key %>', name: 'key', width: 250, sortable: true },
                 { display: '<%= osm.objects %>', name: 'count_all', width: 100, sortable: true, align: 'right' },
@@ -44,7 +44,7 @@ var create_flexigrid_for = {
     },
     "bcp47": function(filter_type) {
         create_flexigrid('grid-bcp47-subtags', {
-            url: '/api/2/langtag/bcp47?filter=' + encodeURIComponent(filter_type),
+            url: '/api/4/langtags?filter=' + encodeURIComponent(filter_type),
             colModel: [
                 { display: 'Type',        name: 'type',        width:  80, sortable: false },
                 { display: 'Subtag',      name: 'subtag',      width:  80, sortable: true },

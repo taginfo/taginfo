@@ -192,7 +192,6 @@ class Taginfo < Sinatra::Base
     load 'lib/api/reports.rb'
     load 'lib/api/search.rb'
     load 'lib/api/wiki.rb'
-    load 'lib/api/langtag.rb'
 
     # current API (version 4)
     load 'lib/api/site.rb'
@@ -200,6 +199,7 @@ class Taginfo < Sinatra::Base
     load 'lib/api/keys.rb'
     load 'lib/api/tag.rb'
     load 'lib/api/tags.rb'
+#    load 'lib/api/langtag.rb'
 
     load 'lib/ui/embed.rb'
     load 'lib/ui/keys_tags.rb'
