@@ -268,7 +268,7 @@ class Taginfo < Sinatra::Base
         :result => {
             :key        => :STRING,
             :value      => :STRING,
-            :b          => :STRING,
+            :value_bool => :STRING,
             :rule       => :STRING,
             :area_color => :STRING,
             :line_color => :STRING,
