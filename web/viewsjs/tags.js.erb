@@ -4,7 +4,7 @@
  %>
 function page_init() {
     create_flexigrid('grid-tags', {
-        url: '/api/2/db/tags',
+        url: '/api/4/tags/popular',
         colModel: [
             { display: '<%= osm.tag %>', name: 'tag', width: 300, sortable: true },
             { display: '<span title="<%= misc.objects_tooltip %>"><img src="/img/types/all.16.png" width="16" height="16" alt=""/> <%= osm.objects %></span>', name: 'count_all', width: 260, sortable: true, align: 'center' },

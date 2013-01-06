@@ -6,7 +6,7 @@
 var create_flexigrid_for = {
     keys: function() {
         create_flexigrid('grid-keys', {
-            url: '/api/2/db/keys?include=prevalent_values',
+            url: '/api/4/keys/all?include=prevalent_values',
             colModel: [
                 { display: '<%= misc.length %>', name: 'length', width: 60, sortable: true, align: 'right' },
                 { display: '<%= osm.key %>', name: 'key', width: 180, sortable: true },

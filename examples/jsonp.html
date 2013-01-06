@@ -9,7 +9,7 @@ function jsonp(data) {
     result = data;
 }
         </script>
-        <script src="http://taginfo.openstreetmap.org/api/2/db/keys?include=prevalent_values&page=1&rp=15&sortname=count_all&sortorder=desc&qtype=key&callback=jsonp"></script>
+        <script src="http://taginfo.openstreetmap.org/api/4/keys/all?page=1&rp=15&sortname=count_all&sortorder=desc&qtype=key&callback=jsonp"></script>
         <script>
 var key = result.data[0].key;
 alert(key);
