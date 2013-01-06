@@ -1,54 +1,8 @@
-<h1>Tags</h1>
-
-<table id="popular-keys">
-</table>
-
+<div class="pre">
+    <h1>Tags</h1>
+</div>
+<div class="box resize">
 <% @tags.each do |tag| %>
     <a href="/tags/<%= h tag['key'] %>" class="popkey" style="font-size: <%= tagcloud_size(tag) %>px;" title="<%= tag['count'] %>"><%= h tag['key'] %></a>
 <% end %>
-
-<% javascript do
-    JS.raw(<<"JAVASCRIPT")
-function page_init() {
-        jQuery('#popular-keys').flexigrid({
-            url: '/api/2/db/popular_keys',
-            method: 'GET',
-            dataType: 'json',
-            colModel: [
-                { display: 'Key',     name: 'key',         width: 200, sortable: true },
-                { display: 'Count',   name: 'scale_count', width: 150, sortable: true },
-                { display: 'Users',   name: 'scale_users', width: 150, sortable: true },
-                { display: 'Wiki',    name: 'scale_wiki',  width: 150, sortable: true },
-                { display: 'JOSM',    name: 'scale_josm',  width: 150, sortable: true },
-                { display: 'Scale 1', name: 'scale1',      width: 150, sortable: true },
-                { display: 'Scale 2', name: 'scale2',      width: 150, sortable: true }
-            ],
-            searchitems: [
-                { display: 'Key', name: 'key' }
-            ],
-            sortname: 'scale1',
-            sortorder: 'desc',
-            showToggleBtn: false,
-            usepager: true,
-            useRp: true,
-            rp: 15,
-            height: 400,
-            preProcess: function(data) {
-                data.rows = jQuery.map(data.data, function(row, i) {
-                        return { 'cell': [
-                            row.key,
-                            row.scale_count,
-                            row.scale_users,
-                            row.scale_wiki,
-                            row.scale_josm,
-                            row.scale1,
-                            row.scale2
-                        ] };
-                });
-                return data;
-            }
-        });
-}
-JAVASCRIPT
-end
-%>
+</div>
