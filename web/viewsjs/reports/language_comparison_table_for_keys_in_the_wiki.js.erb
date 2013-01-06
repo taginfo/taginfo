@@ -18,7 +18,7 @@ function page_init() {
     var rp = calculate_flexigrid_rp(jQuery('div.box')) - 1;
     current_grid = 'grid-keys';
     grids[current_grid] = jQuery('#grid-keys').flexigrid({
-        url: '/api/2/wiki/keys',
+        url: '/api/4/keys/wiki_pages',
         method: 'GET',
         dataType: 'json',
         colModel: [

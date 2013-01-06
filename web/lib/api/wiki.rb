@@ -1,25 +1,6 @@
 # web/lib/api/wiki.rb
 class Taginfo < Sinatra::Base
 
-    def get_wiki_result(res)
-        return res.map{ |row| {
-                :lang             => h(row['lang']),
-                :language         => h(::Language[row['lang']].native_name),
-                :language_en      => h(::Language[row['lang']].english_name),
-                :title            => h(row['title']),
-                :description      => h(row['description']),
-                :image            => h(row['image']),
-                :on_node          => row['on_node'].to_i     == 1 ? true : false,
-                :on_way           => row['on_way'].to_i      == 1 ? true : false,
-                :on_area          => row['on_area'].to_i     == 1 ? true : false,
-                :on_relation      => row['on_relation'].to_i == 1 ? true : false,
-                :tags_implies     => row['tags_implies'    ].split(','),
-                :tags_combination => row['tags_combination'].split(','),
-                :tags_linked      => row['tags_linked'     ].split(',')
-            }
-        }.to_json
-    end
-
     api(2, 'wiki/keys') do
         key = params[:key]
 

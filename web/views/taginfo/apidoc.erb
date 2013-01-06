@@ -4,13 +4,13 @@
 
 <% if params[:show_deprecated] %>
 <p><span class="button"><a href="/taginfo/apidoc">Do not show deprecated API calls</a></span></p>
+<p style="color: red;">Not all of the older, deprecated API calls are documented!</p>
+
 <% else %>
 <p><span class="button"><a href="/taginfo/apidoc?show_deprecated=true">Also show deprecated API calls</a></span></p>
 <% end %>
 
 <h2>Table of Contents</h2>
-
-<p style="color: red;">This list of API calls and their descriptions are not complete!</p>
 
 <ul>
 <% API.paths.keys.sort.each do |version|

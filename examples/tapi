@@ -12,7 +12,7 @@
 #  You can set the following environment variables (default in brackets):
 #    TAGINFO_API_SERVER   [taginfo.openstreetmap.org]
 #    TAGINFO_API_PORT     [80]
-#    TAGINFO_API_VERSION  [2]
+#    TAGINFO_API_VERSION  [4]
 #
 
 require 'rubygems'
@@ -23,7 +23,7 @@ require 'json'
 
 API_SERVER  = ENV['TAGINFO_API_SERVER']  || 'taginfo.openstreetmap.org'
 API_PORT    = ENV['TAGINFO_API_PORT']    || 80
-API_VERSION = ENV['TAGINFO_API_VERSION'] || '2'
+API_VERSION = ENV['TAGINFO_API_VERSION'] || '4'
 
 def api_call(path, params)
     query = []

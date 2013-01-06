@@ -6,7 +6,7 @@
 var create_flexigrid_for = {
     overview: function(key, value, filter_type) {
         create_flexigrid('grid-overview', {
-            url: '/api/3/db/tags/overview?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value),
+            url: '/api/4/tag/stats?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value),
             colModel: [
                 { display: '<%= misc.object_type %>', name: 'type', width: 100, sortable: true },
                 { display: '<%= page.number_objects %>', name: 'count', width: 260, sortable: true, align: 'center' }
@@ -17,7 +17,7 @@ var create_flexigrid_for = {
                 return {
                     total: 4,
                     page: 1,
-                    rows: jQuery.map(data, function(row, i) {
+                    rows: jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
                             print_image(row.type) + ' ' + texts.osm[row.type],
                             print_value_with_percent(row.count, row.count_fraction)
@@ -29,7 +29,7 @@ var create_flexigrid_for = {
     },
     combinations: function(key, value, filter_type) {
         create_flexigrid('grid-combinations', {
-            url: '/api/2/db/tags/combinations?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value) + '&filter=' + encodeURIComponent(filter_type),
+            url: '/api/4/tag/combinations?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value) + '&filter=' + encodeURIComponent(filter_type),
             colModel: [
                 { display: '<span title="<%= page.other_tags_used.to_count_tooltip %>"><%= misc.count %> &rarr;</span>', name: 'to_count', width: 320, sortable: true, align: 'center' },
                 { display: '<span title="<%= page.other_tags_used.other_key_tooltip %>"><%= page.other_tags_used.other %></span>', name: 'other_tag', width: 340, sortable: true },
@@ -55,7 +55,7 @@ var create_flexigrid_for = {
     },
     wiki: function(key, value) {
         create_flexigrid('grid-wiki', {
-            url: '/api/2/wiki/tags?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value),
+            url: '/api/4/tag/wiki_pages?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value),
             colModel: [
                 { display: '<%= misc.language %>', name: 'lang', width: 150, sortable: false },
                 { display: '<%= page.wiki_pages.wiki_page %>', name: 'title', width: 200, sortable: false, align: 'right' },

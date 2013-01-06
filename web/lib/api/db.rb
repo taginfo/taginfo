@@ -9,6 +9,7 @@ class Taginfo < Sinatra::Base
     }
 
     api(2, 'db/keys', {
+        :superseded_by => '4/keys/all',
         :description => 'Get list of keys that are in the database or mentioned in any other source.',
         :parameters => { :query => 'Only show keys matching this query (substring match, optional).' },
         :paging => :optional,
@@ -138,6 +139,7 @@ class Taginfo < Sinatra::Base
     end
 
     api(2, 'db/tags', {
+        :superseded_by => '4/tags/popular',
         :description => 'Get list of most often used tags.',
         :parameters => { :query => 'Only show tags matching this query (substring match in key and value, optional).' },
         :paging => :optional,
@@ -195,6 +197,7 @@ class Taginfo < Sinatra::Base
     end
 
     api(2, 'db/keys/overview', {
+        :superseded_by => '4/key/stats',
         :description => 'Show statistics for nodes, ways, relations and total for this key.',
         :parameters => { :key => 'Tag key (required).' },
         :paging => :no,
@@ -275,6 +278,7 @@ class Taginfo < Sinatra::Base
     end
 
     api(2, 'db/keys/distribution', {
+        :superseded_by => '4/key/distribution/nodes',
         :description => 'Get map with distribution of this key in the database (nodes only).',
         :parameters => { :key => 'Tag key (required).' },
         :result => 'PNG image.',
@@ -293,6 +297,7 @@ class Taginfo < Sinatra::Base
     end
 
     api(3, 'db/keys/distribution/nodes', {
+        :superseded_by => '4/key/distribution/nodes',
         :description => 'Get map with distribution of this key in the database (nodes only).',
         :parameters => { :key => 'Tag key (required).' },
         :result => 'PNG image.',
@@ -311,6 +316,7 @@ class Taginfo < Sinatra::Base
     end
 
     api(3, 'db/keys/distribution/ways', {
+        :superseded_by => '4/key/distribution/ways',
         :description => 'Get map with distribution of this key in the database (ways only).',
         :parameters => { :key => 'Tag key (required).' },
         :result => 'PNG image.',
@@ -329,6 +335,7 @@ class Taginfo < Sinatra::Base
     end
 
     api(2, 'db/keys/values', {
+        :superseded_by => '4/key/values',
         :description => 'Get values used with a given key.',
         :parameters => {
             :key => 'Tag key (required).',
@@ -409,6 +416,7 @@ class Taginfo < Sinatra::Base
     end
 
     api(2, 'db/keys/keys', {
+        :superseded_by => '4/key/combinations',
         :description => 'Find keys that are used together with a given key.',
         :parameters => {
             :key => 'Tag key (required).',
@@ -511,6 +519,7 @@ class Taginfo < Sinatra::Base
     end
 
     api(2, 'db/tags/overview', {
+        :superseded_by => '4/tag/stats',
         :description => 'Show statistics for nodes, ways, relations and total for this tag.',
         :parameters => {
             :key => 'Tag key (required).',
@@ -590,6 +599,7 @@ class Taginfo < Sinatra::Base
     end
 
     api(2, 'db/tags/combinations', {
+        :superseded_by => '4/tag/combinations',
         :description => 'Find keys and tags that are used together with a given tag.',
         :parameters => {
             :key => 'Tag key (required).',

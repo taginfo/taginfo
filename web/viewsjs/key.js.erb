@@ -6,7 +6,7 @@
 var create_flexigrid_for = {
     overview: function(key, filter_type) {
         create_flexigrid('grid-overview', {
-            url: '/api/3/db/keys/overview?key=' + encodeURIComponent(key),
+            url: '/api/4/key/stats?key=' + encodeURIComponent(key),
             colModel: [
                 { display: '<%= misc.object_type %>', name: 'type', width: 100, sortable: true },
                 { display: '<%= page.number_objects %>', name: 'count', width: 260, sortable: true, align: 'center' },
@@ -18,7 +18,7 @@ var create_flexigrid_for = {
                 return {
                     total: 4,
                     page: 1,
-                    rows: jQuery.map(data, function(row, i) {
+                    rows: jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
                             print_image(row.type) + ' ' + texts.osm[row.type],
                             print_value_with_percent(row.count, row.count_fraction),
@@ -31,7 +31,7 @@ var create_flexigrid_for = {
     },
     values: function(key, filter_type, lang) {
         create_flexigrid('grid-values', {
-            url: '/api/2/db/keys/values?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type) + '&lang=' + encodeURIComponent(lang),
+            url: '/api/4/key/values?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type) + '&lang=' + encodeURIComponent(lang),
             colModel: [
                 { display: '<%= osm.value %>', name: 'value', width: 200, sortable: true },
                 { display: '<%= misc.count %>', name: 'count', width: 240, sortable: true, align: 'center' },
@@ -57,7 +57,7 @@ var create_flexigrid_for = {
     },
     combinations: function(key, filter_type) {
         create_flexigrid('grid-keys', {
-            url: '/api/2/db/keys/keys?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type),
+            url: '/api/4/key/combinations?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type),
             colModel: [
                 { display: '<span title="<%= page.other_keys_used.to_count_tooltip %>"><%= misc.count %> &rarr;</span>', name: 'to_count', width: 320, sortable: true, align: 'center' },
                 { display: '<span title="<%= page.other_keys_used.other_key_tooltip %>"><%= page.other_keys_used.other %></span>', name: 'other_key', width: 340, sortable: true },
@@ -82,7 +82,7 @@ var create_flexigrid_for = {
     },
     wiki: function(key, filter_type) {
         create_flexigrid('grid-wiki', {
-            url: '/api/2/wiki/keys?key=' + encodeURIComponent(key),
+            url: '/api/4/key/wiki_pages?key=' + encodeURIComponent(key),
             colModel: [
                 { display: '<%= misc.language %>', name: 'lang', width: 150, sortable: false },
                 { display: '<%= page.wiki_pages.wiki_page %>', name: 'title', width: 160, sortable: false, align: 'right' },
