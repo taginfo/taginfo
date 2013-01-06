@@ -257,4 +257,49 @@ class Taginfo < Sinatra::Base
         return get_wiki_result(res)
     end
 
+    api(4, 'key/josm/style/rules', {
+        :description => 'List rules and symbols for the given key in JOSM styles.',
+        :parameters => {
+            :style => 'JOSM style (required).',
+            :key   => 'Tag key (required).',
+            :query => 'Only show results where the value matches this query (substring match, optional).'
+        },
+        :paging => :optional,
+        :result => {
+            :key        => :STRING,
+            :value      => :STRING,
+            :b          => :STRING,
+            :rule       => :STRING,
+            :area_color => :STRING,
+            :line_color => :STRING,
+            :line_width => :INT,
+            :icon       => :STRING
+        },
+        :example => { :style => 'standard', :key => 'highway', :page => 1, :rp => 10},
+        :ui => '/keys/highway#josm'
+    }) do
+        style = params[:style]
+        key   = params[:key]
+        
+        total = @db.count('josm_style_rules').
+#            condition('style = ?', style).
+            condition('k = ?', key).
+            condition_if("v LIKE '%' || ? || '%'", params[:query]).
+            get_first_value().to_i
+
+        res = @db.select('SELECT * FROM josm_style_rules').
+#            condition('style = ?', style).
+            condition('k = ?', key).
+            condition_if("v LIKE '%' || ? || '%'", params[:query]).
+            order_by(@ap.sortname, @ap.sortorder) { |o|
+                o.value :v
+                o.value :b
+                o.b
+            }.
+            paging(@ap).
+            execute()
+
+        return get_josm_style_rules_result(total, res);
+    end
+
 end
