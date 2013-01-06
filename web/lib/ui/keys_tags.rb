@@ -8,12 +8,9 @@ class Taginfo < Sinatra::Base
             @key = params[:key]
         end
 
-        @key_html = escape_html(@key)
         @key_uri  = escape(@key)
-        @key_json = @key.to_json
-        @key_pp   = pp_key(@key)
 
-        @title = [@key_html, t.osm.keys]
+        @title = [escape_html(@key), t.osm.keys]
         section :keys
 
         @filter_type = get_filter()
@@ -84,17 +81,9 @@ class Taginfo < Sinatra::Base
         end
         @tag = @key + '=' + @value
 
-        @key_html = escape_html(@key)
         @key_uri  = escape(@key)
-        @key_json = @key.to_json
-        @key_pp   = pp_key(@key)
 
-        @value_html = escape_html(@value)
-        @value_uri  = escape(@value)
-        @value_json = @value.to_json
-        @value_pp   = pp_value(@value)
-
-        @title = [@key_html + '=' + @value_html, t.osm.tags]
+        @title = [escape_html(@key) + '=' + escape_html(@value), t.osm.tags]
         section :tags
 
         @filter_type = get_filter()

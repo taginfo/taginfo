@@ -16,7 +16,7 @@
             <span class="button disabled" title="Button disabled, because there are too many objects with this key">JOSM</span>
         <% end %>
     </div>
-    <h1><%= @key_pp %></h1>
+    <h1><%= pp_key(@key) %></h1>
     <p><%= @desc %></p>
 </div>
 <div id="tabs">
@@ -95,7 +95,8 @@
 <% javascript do
     JS.raw(<<"JAVASCRIPT")
 function page_init2() {
-    init_tabs([#{ @key.to_json }, #{ @filter_type.to_json }, #{ r18n.locale.code.to_json }]);
+    var key = #{ @key.to_json };
+    init_tabs([key, #{ @filter_type.to_json }, #{ r18n.locale.code.to_json }]);
 
     var w = 160, h = 440, max = #{ @count_all_values }, data = #{ @prevalent_values.to_json() };
 
@@ -120,7 +121,7 @@ function page_init2() {
         .data(data)
         .enter()
         .append("svg:a")
-            .attr('xlink:href', function(d) { return url_for_tag(#{ @key_json }, d['value']); })
+            .attr('xlink:href', function(d) { return url_for_tag(key, d['value']); })
             .attr('transform', function(d) { return 'translate(10, ' + scale(d['y']) + ')'; })
             .call(function(c) {
                 c.append("rect")

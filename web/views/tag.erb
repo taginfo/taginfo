@@ -16,7 +16,7 @@
             <span class="button disabled" title="Button disabled, because there are too many objects with this key">JOSM</span>
         <% end %>
     </div>
-    <h1><%= link_to_key(@key) %>=<%= @value_pp %></h1>
+    <h1><%= link_to_key(@key) %>=<%= pp_value(@value) %></h1>
     <p><%= @desc %></p>
 </div>
 <div id="tabs">
