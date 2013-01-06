@@ -103,6 +103,10 @@ function print_language(code, native_name, english_name) {
     return tag('span', code, { 'class': 'lang', title: native_name + ' (' + english_name + ')' }) + ' ' + native_name;
 }
 
+function print_type_icon(type, on_or_off) {
+     return on_or_off ? '<img src="/img/types/' + type + '.16.png" alt="yes" width="16" height="16"/> ' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/> ';
+}
+
 function print_image(type) {
     type = type.replace(/s$/, '');
     var name;

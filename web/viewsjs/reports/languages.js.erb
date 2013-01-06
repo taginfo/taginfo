@@ -20,7 +20,7 @@ function page_init() {
                 page: 1,
                 rows: jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
-                        '<span class="lang">' + row.code + '</span>',
+                        span(row.code, 'lang'),
                         row.native_name,
                         row.english_name,
                         print_value_with_percent(row.wiki_key_pages, row.wiki_key_pages_fraction),
