@@ -74,7 +74,7 @@ class API
     def show_result
         return '<span class="empty">unknown</span>' if result.nil?
         return result if result.is_a?(String)
-        '<pre>' + JSON.pretty_generate(result).gsub(/"(STRING|INT|FLOAT|BOOL)"/, '\1') + '</pre>'
+        '<pre>' + JSON.pretty_generate(result).gsub(/"(STRING|INT|FLOAT|BOOL|ARRAY_OF_STRINGS)"/, '\1') + '</pre>'
     end
 
 end
