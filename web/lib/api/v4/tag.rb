@@ -1,4 +1,4 @@
-# web/lib/api/tag.rb
+# web/lib/api/v4/tag.rb
 class Taginfo < Sinatra::Base
 
     api(4, 'tag/stats', {

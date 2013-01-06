@@ -194,12 +194,14 @@ class Taginfo < Sinatra::Base
     load 'lib/api/wiki.rb'
 
     # current API (version 4)
-    load 'lib/api/site.rb'
-    load 'lib/api/key.rb'
-    load 'lib/api/keys.rb'
-    load 'lib/api/tag.rb'
-    load 'lib/api/tags.rb'
-#    load 'lib/api/langtag.rb'
+    load 'lib/api/v4/josm.rb'
+    load 'lib/api/v4/key.rb'
+    load 'lib/api/v4/keys.rb'
+#    load 'lib/api/v4/langtag.rb'
+    load 'lib/api/v4/site.rb'
+    load 'lib/api/v4/tag.rb'
+    load 'lib/api/v4/tags.rb'
+    load 'lib/api/v4/wiki.rb'
 
     load 'lib/ui/embed.rb'
     load 'lib/ui/keys_tags.rb'

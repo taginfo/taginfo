@@ -1,4 +1,4 @@
-# web/lib/api/keys.rb
+# web/lib/api/v4/keys.rb
 class Taginfo < Sinatra::Base
 
     @@filters = {

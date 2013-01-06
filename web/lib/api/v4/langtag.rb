@@ -1,4 +1,4 @@
-# web/lib/api/langtag.rb
+# web/lib/api/v4/langtag.rb
 class Taginfo < Sinatra::Base
 
     api(4, 'keys/name', {

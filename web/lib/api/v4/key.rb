@@ -1,4 +1,4 @@
-# web/lib/api/key.rb
+# web/lib/api/v4/key.rb
 class Taginfo < Sinatra::Base
 
     api(4, 'key/stats', {

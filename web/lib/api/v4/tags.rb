@@ -1,4 +1,4 @@
-# web/lib/api/tags.rb
+# web/lib/api/v4/tags.rb
 class Taginfo < Sinatra::Base
 
     api(4, 'tags/popular', {
