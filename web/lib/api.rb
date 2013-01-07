@@ -71,10 +71,36 @@ class API
         sort.map{ |s| "<tt>#{s}</tt>" }.join(', ')
     end
 
+    def stack_results(level, stack, result)
+        result.each do |r|
+            stack.push({
+                :level => level,
+                :name => "#{r[0]}:",
+                :type => r[1].to_s.gsub(/_/, ' '),
+                :desc => r[2]
+            })
+            if r[3]
+                stack_results(level+1, stack, r[3])
+            end
+        end
+    end
+
     def show_result
         return '<span class="empty">unknown</span>' if result.nil?
+
         return result if result.is_a?(String)
-        '<pre>' + JSON.pretty_generate(result).gsub(/"(STRING|INT|FLOAT|BOOL|ARRAY_OF_STRINGS)"/, '\1') + '</pre>'
+
+        # old way of documenting now only used for old API versions
+        # this can be removed when all API calls <v4 are removed
+        if result.is_a?(Hash)
+            return '<pre>' + JSON.pretty_generate(result).gsub(/"(STRING|INT|FLOAT|BOOL|ARRAY_OF_STRINGS)"/, '\1') + '</pre>'
+        end
+
+        stack = []
+        stack_results(0, stack, result)
+        return '<table class="apiresults">' +
+               stack.map{ |s| "<tr><td>#{ '&nbsp;&nbsp;&nbsp;&nbsp;' * s[:level] }<tt>#{ s[:name] }</tt></td><td>#{ s[:type] }</td><td>#{ s[:desc] }</td></tr>" }.join("\n") +
+               '</table>'
     end
 
     def deprecated?

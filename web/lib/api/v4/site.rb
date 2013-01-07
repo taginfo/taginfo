@@ -3,14 +3,14 @@ class Taginfo < Sinatra::Base
 
     api(4, 'site/info', {
         :description => 'Get information about this taginfo site.',
-        :result => {
-            :url         => :STRING,
-            :name        => :STRING,
-            :description => :STRING,
-            :icon        => :STRING,
-            :contact     => :STRING,
-            :area        => :STRING
-        },
+        :result => [
+            [:url,         :STRING, 'URL'],
+            [:name,        :STRING, 'Name'],
+            [:description, :STRING, 'Description'],
+            [:icon,        :STRING, 'Path to icon which appears on the lop left corner of all pages.'],
+            [:contact,     :STRING, 'Contact information to admin.'],
+            [:area,        :STRING, 'Description of area covered.']
+        ],
         :example => { }
     }) do
         data = {}
@@ -22,12 +22,12 @@ class Taginfo < Sinatra::Base
 
     api(4, 'site/sources', {
         :description => 'Get information about the data sources used.',
-        :result => {
-            :name         => :STRING,
-            :data_until   => :STRING,
-            :update_start => :STRING,
-            :update_end   => :STRING
-        },
+        :result => [
+            [:name        , :STRING, 'Name'],
+            [:data_until  , :STRING, 'All changes in the source until this date are reflected in taginfo.'],
+            [:update_start, :STRING, 'Date/Timestamp when last update was started.'],
+            [:update_end  , :STRING, 'Date/Timestamp when last update was finished.']
+        ],
         :example => { },
         :ui => '/sources'
     }) do

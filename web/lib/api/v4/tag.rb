@@ -7,12 +7,11 @@ class Taginfo < Sinatra::Base
             :key => 'Tag key (required).',
             :value => 'Tag value (required).'
         },
-        :result => {
-            :type           => :STRING,
-            :count          => :INT,
-            :count_fraction => :FLOAT,
-            :values         => :INT
-        },
+        :result => no_paging_results([
+            [:type,           :STRING, 'Object type ("all", "nodes", "ways", or "relations")'],
+            [:count,          :INT,    'Number of objects with this type and tag.'],
+            [:count_fraction, :FLOAT,  'Number of objects in relation to all objects.']
+        ]),
         :example => { :key => 'amenity', :value => 'school' },
         :ui => '/tags/amenity=school#overview'
     }) do
@@ -59,13 +58,13 @@ class Taginfo < Sinatra::Base
             :relations => { :doc => 'Only values on tags used on relations.' }
         },
         :sort => %w( together_count other_tag from_fraction ),
-        :result => {
-            :other_key      => :STRING,
-            :other_value    => :STRING,
-            :together_count => :INT,
-            :to_fraction    => :FLOAT,
-            :from_fraction  => :FLOAT
-        },
+        :result => paging_results([
+            [:other_key,      :STRING, ''],
+            [:other_value,    :STRING, ''],
+            [:together_count, :INT,    ''],
+            [:to_fraction,    :FLOAT,  ''],
+            [:from_fraction,  :FLOAT,  '']
+        ]),
         :example => { :key => 'highway', :value => 'residential', :page => 1, :rp => 10, :sortname => 'together_count', :sortorder => 'desc' },
         :ui => '/tags/highway=residential#combinations'
     }) do
@@ -130,21 +129,21 @@ class Taginfo < Sinatra::Base
         :description => 'Get list of wiki pages in different languages describing a tag.',
         :parameters => { :key => 'Tag key (required)', :value => 'Tag value (required).' },
         :paging => :no,
-        :result => {
-            :lang             => :STRING,
-            :language         => :STRING,
-            :language_en      => :STRING,
-            :title            => :STRING,
-            :description      => :STRING,
-            :image            => :STRING,
-            :on_node          => :BOOL,
-            :on_way           => :BOOL,
-            :on_area          => :BOOL,
-            :on_relation      => :BOOL,
-            :tags_implies     => :ARRAY_OF_STRINGS,
-            :tags_combination => :ARRAY_OF_STRINGS,
-            :tags_linked      => :ARRAY_OF_STRINGS
-        },
+        :result => no_paging_results([
+            [:lang,             :STRING, ''],
+            [:language,         :STRING, ''],
+            [:language_en,      :STRING, ''],
+            [:title,            :STRING, ''],
+            [:description,      :STRING, ''],
+            [:image,            :STRING, ''],
+            [:on_node,          :BOOL,   ''],
+            [:on_way,           :BOOL,   ''],
+            [:on_area,          :BOOL,   ''],
+            [:on_relation,      :BOOL,   ''],
+            [:tags_implies,     :ARRAY_OF_STRINGS, ''],
+            [:tags_combination, :ARRAY_OF_STRINGS, ''],
+            [:tags_linked,      :ARRAY_OF_STRINGS, '']
+        ]),
         :example => { :key => 'highway', :value => 'residential' },
         :ui => '/tags/highway=residential#wiki'
     }) do
@@ -164,16 +163,16 @@ class Taginfo < Sinatra::Base
             :value => 'Tag value (required).'
         },
         :paging => :optional,
-        :result => {
-            :key        => :STRING,
-            :value      => :STRING,
-            :value_bool => :STRING,
-            :rule       => :STRING,
-            :area_color => :STRING,
-            :line_color => :STRING,
-            :line_width => :INT,
-            :icon       => :STRING
-        },
+        :result => paging_results([
+            [:key,        :STRING, ''],
+            [:value,      :STRING, ''],
+            [:value_bool, :STRING, ''],
+            [:rule,       :STRING, ''],
+            [:area_color, :STRING, ''],
+            [:line_color, :STRING, ''],
+            [:line_width, :INT,    ''],
+            [:icon,       :STRING, '']
+        ]),
         :example => { :style => 'standard', :key => 'highway', :value => 'residential', :page => 1, :rp => 10},
         :ui => '/tags/highway=residential#josm'
     }) do

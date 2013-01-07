@@ -6,11 +6,11 @@ class Taginfo < Sinatra::Base
         :parameters => { :query => 'Value to search for (substring search, required).' },
         :sort => %w( count_all key value ),
         :paging => :optional,
-        :result => {
-            :key       => :STRING,
-            :value     => :STRING,
-            :count_all => :INT
-        },
+        :result => paging_results([
+            [:key,       :STRING, 'Key'],
+            [:value,     :STRING, 'Value'],
+            [:count_all, :INT,    'Number of objects in the database with this tag.']
+        ]),
         :example => { :query => 'foo', :page => 1, :rp => 10 },
         :ui => '/search?q=foo#values'
     }) do
@@ -47,11 +47,11 @@ class Taginfo < Sinatra::Base
         :parameters => { :query => 'Value to search for (substring search, required).' },
         :sort => %w( count_all key value ),
         :paging => :optional,
-        :result => {
-            :key       => :STRING,
-            :value     => :STRING,
-            :count_all => :INT
-        },
+        :result => paging_results([
+            [:key,       :STRING, 'Key'],
+            [:value,     :STRING, 'Value'],
+            [:count_all, :INT,    'Number of objects in the database with this tag.']
+        ]),
         :example => { :query => 'highway%3Dresidential', :page => 1, :rp => 10 },
         :ui => '/search?q=highway%3Dresidential'
     }) do
@@ -95,10 +95,10 @@ class Taginfo < Sinatra::Base
         :parameters => { :query => 'Value to search for (substring search, required).' },
         :sort => %w( count_all key value ),
         :paging => :optional,
-        :result => {
-            :key       => :STRING,
-            :value     => :STRING
-        },
+        :result => paging_results([
+            [:key,   :STRING, 'Key'],
+            [:value, :STRING, 'Value']
+        ]),
         :example => { :query => 'fire', :page => 1, :rp => 10 },
         :ui => '/search?q=fire#fulltext'
     }) do

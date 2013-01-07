@@ -14,22 +14,22 @@ class Taginfo < Sinatra::Base
         :paging => :optional,
         :filter => @@filters,
         :sort => %w( key count_all count_nodes count_ways count_relations values_all users_all in_wiki in_josm in_potlatch length ),
-        :result => {
-            :key                      => :STRING, 
-            :count_all                => :INT,
-            :count_all_fraction       => :FLOAT,
-            :count_nodes              => :INT,
-            :count_nodes_fraction     => :FLOAT,
-            :count_ways               => :INT,
-            :count_ways_fraction      => :FLOAT,
-            :count_relations          => :INT,
-            :count_relations_fraction => :FLOAT,
-            :values_all               => :INT,
-            :users_all                => :INT,
-            :in_wiki                  => :BOOL,
-            :in_josm                  => :BOOL,
-            :in_potlatch              => :BOOL
-        },
+        :result => paging_results([
+            [:key,                      :STRING, 'Key'],
+            [:count_all,                :INT,    'Number of objects in the OSM database with this key.'],
+            [:count_all_fraction,       :FLOAT,  'Number of objects in relation to all objects.'],
+            [:count_nodes,              :INT,    'Number of nodes in the OSM database with this key.'],
+            [:count_nodes_fraction,     :FLOAT,  'Number of nodes in relation to all tagged nodes.'],
+            [:count_ways,               :INT,    'Number of ways in the OSM database with this key.'],
+            [:count_ways_fraction,      :FLOAT,  'Number of ways in relation to all ways.'],
+            [:count_relations,          :INT,    'Number of relations in the OSM database with this key.'],
+            [:count_relations_fraction, :FLOAT,  'Number of relations in relation to all relations.'],
+            [:values_all,               :INT,    ''],
+            [:users_all,                :INT,    ''],
+            [:in_wiki,                  :BOOL,   ''],
+            [:in_josm,                  :BOOL,   ''],
+            [:in_potlatch,              :BOOL,   ''],
+        ]),
         :example => { :page => 1, :rp => 10, :filter => 'in_wiki', :sortname => 'key', :sortorder => 'asc' },
         :ui => '/keys'
     }) do
@@ -142,10 +142,10 @@ class Taginfo < Sinatra::Base
         :parameters => { :query => 'Only show keys matching this query (substring match, optional).' },
         :paging => :optional,
         :sort => %w( key ),
-        :result => {
-            :key  => :STRING, 
-            :lang => "Hash with language codes as keys and values showing what type of wiki page is available"
-        },
+        :result => paging_results([
+            [:key, :STRING, 'Key'], 
+            [:lang, :HASH, 'Hash with language codes as keys and values showing what type of wiki pages are available.']
+        ]),
         :example => { :page => 1, :rp => 10, :sortname => 'key', :sortorder => 'asc' },
         :ui => '/reports/language_comparison_table_for_keys_in_the_wiki'
     }) do
@@ -189,18 +189,18 @@ class Taginfo < Sinatra::Base
         },
         :paging => :optional,
         :sort => %w( key count_all values_all users_all ),
-        :result => {
-            :key                => :STRING,
-            :count_all          => :INT,
-            :count_all_fraction => :FLOAT,
-            :values_all         => :INT,
-            :users_all          => :INT,
-            :prevalent_values   => [{
-                :value    => :STRING,
-                :count    => :INT,
-                :fraction => :FLOAT
-            }]
-        },
+        :result => paging_results([
+            [:key,                :STRING, 'Key'],
+            [:count_all,          :INT,    'Number of occurances in database.'],
+            [:count_all_fraction, :FLOAT,  ''],
+            [:values_all,         :INT,    'Number of different values for this key.'],
+            [:users_all,          :INT,    'Number of different users who own objects with this key.'],
+            [:prevalent_values,   :HASH,   'Often used values.', [
+                [:value,    :STRING, 'Value'],
+                [:count,    :INT,    'Number of occurances of this value.'],
+                [:fraction, :FLOAT,  '']
+            ]]
+        ]),
         :example => { :min_count => 1000, :english => '1', :page => 1, :rp => 10, :sortname => 'count_all', :sortorder => 'desc' },
         :ui => '/reports/frequently_used_keys_without_wiki_page'
     }) do

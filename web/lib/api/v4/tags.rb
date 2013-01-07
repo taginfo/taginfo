@@ -6,18 +6,18 @@ class Taginfo < Sinatra::Base
         :parameters => { :query => 'Only show tags matching this query (substring match in key and value, optional).' },
         :paging => :optional,
         :sort => %w( tag count_all count_nodes count_ways count_relations ),
-        :result => {
-            :key                      => :STRING, 
-            :value                    => :STRING, 
-            :count_all                => :INT,
-            :count_all_fraction       => :FLOAT,
-            :count_nodes              => :INT,
-            :count_nodes_fraction     => :FLOAT,
-            :count_ways               => :INT,
-            :count_ways_fraction      => :FLOAT,
-            :count_relations          => :INT,
-            :count_relations_fraction => :FLOAT,
-        },
+        :result => paging_results([
+            [:key,                      :STRING, 'Key'],
+            [:value,                    :STRING, 'Value'],
+            [:count_all,                :INT,    'Number of objects in the OSM database with this tag.'],
+            [:count_all_fraction,       :FLOAT,  'Number of objects in relation to all objects.'],
+            [:count_nodes,              :INT,    'Number of nodes in the OSM database with this tag.'],
+            [:count_nodes_fraction,     :FLOAT,  'Number of nodes in relation to all tagged nodes.'],
+            [:count_ways,               :INT,    'Number of ways in the OSM database with this tag.'],
+            [:count_ways_fraction,      :FLOAT,  'Number of ways in relation to all ways.'],
+            [:count_relations,          :INT,    'Number of relations in the OSM database with this tag.'],
+            [:count_relations_fraction, :FLOAT,  'Number of relations in relation to all relations.']
+        ]),
         :example => { :page => 1, :rp => 10, :sortname => 'tag', :sortorder => 'asc' },
         :ui => '/tags'
     }) do

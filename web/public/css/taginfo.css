@@ -468,7 +468,7 @@ table.desc {
     width: 100%;
 }
 
-table.desc th {
+table.desc > tbody > tr > th {
     text-align: left;
     vertical-align: top;
     font-weight: normal;
@@ -476,10 +476,19 @@ table.desc th {
     padding: 2px;
 }
 
-table.desc td {
+table.desc > tbody > tr > td {
     vertical-align: top;
-    background-color: #ffffff;
-    padding: 2px;
+    background-color: #e8e8e4;
+    padding: 2px 4px;
+}
+
+table.apiresults {
+}
+
+table.apiresults td {
+    font-size: 80%;
+    padding: 2px 4px;
+    line-height: 100%;
 }
 
 /* ==========  */

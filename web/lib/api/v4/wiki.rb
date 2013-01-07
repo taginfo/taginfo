@@ -4,15 +4,15 @@ class Taginfo < Sinatra::Base
     api(4, 'wiki/languages', {
         :description => 'List languages taginfo knows about and how many wiki pages describing keys and tags there are in these languages.',
         :paging => :no,
-        :result => {
-            :code                    => :STRING,
-            :native_name             => :STRING,
-            :english_name            => :STRING,
-            :wiki_key_pages          => :INT,
-            :wiki_key_pages_fraction => :FLOAT,
-            :wiki_tag_pages          => :INT,
-            :wiki_tag_pages_fraction => :FLOAT
-        },
+        :result => no_paging_results([
+            [:code                   , :STRING, 'Language code.'],
+            [:native_name            , :STRING, 'Name of language in this language.'],
+            [:english_name           , :STRING, 'Name of language in English.'],
+            [:wiki_key_pages         , :INT,    'Number of "Key" wiki pages in this language.'],
+            [:wiki_key_pages_fraction, :FLOAT,  'Number of "Key" wiki pages in this language in relation to the number of keys described in any language in the wiki.'],
+            [:wiki_tag_pages         , :INT,    'Number of "Tag" wiki pages in this language.'],
+            [:wiki_tag_pages_fraction, :FLOAT,  'Number of "Tag" wiki pages in this language in relation to the number of tags described in any language in the wiki.']
+        ]),
         :sort => %w( code native_name english_name wiki_key_pages wiki_tag_pages ),
         :example => { :sortname => 'wiki_key_pages', :sortorder => 'desc' },
         :ui => '/reports/languages'

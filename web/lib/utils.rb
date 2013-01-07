@@ -215,3 +215,19 @@ def get_josm_style_rules_result(total, res)
     }.to_json
 end
 
+def paging_results(array)
+    return [
+        [ :total, :INT, 'Total number of results.' ],
+        [ :page,  :INT, 'Result page number (first has page number 1).' ],
+        [ :rp,    :INT, 'Results per page.' ],
+        [ :data,  :ARRAY_OF_HASHES, 'Array with results.', array ]
+    ];
+end
+
+def no_paging_results(array)
+    return [
+        [ :total, :INT, 'Total number of results.' ],
+        [ :data,  :ARRAY_OF_HASHES, 'Array with results.', array ]
+    ];
+end
+

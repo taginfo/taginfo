@@ -8,16 +8,16 @@ class Taginfo < Sinatra::Base
             :query => 'Only show results where the key or value matches this query (substring match, optional).'
         },
         :paging => :optional,
-        :result => {
-            :key        => :STRING,
-            :value      => :STRING,
-            :value_bool => :STRING,
-            :rule       => :STRING,
-            :area_color => :STRING,
-            :line_color => :STRING,
-            :line_width => :INT,
-            :icon       => :STRING
-        },
+        :result => paging_results([
+            [:key,        :STRING, ''],
+            [:value,      :STRING, ''],
+            [:value_bool, :STRING, ''],
+            [:rule,       :STRING, ''],
+            [:area_color, :STRING, ''],
+            [:line_color, :STRING, ''],
+            [:line_width, :INT,    ''],
+            [:icon,       :STRING, '']
+        ]),
         :example => { :style => 'standard', :page => 1, :rp => 10},
         :ui => '/reports/josm_styles'
     }) do

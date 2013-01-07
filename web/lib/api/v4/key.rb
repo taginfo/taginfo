@@ -4,12 +4,12 @@ class Taginfo < Sinatra::Base
     api(4, 'key/stats', {
         :description => 'Show some database statistics for given key.',
         :parameters => { :key => 'Tag key (required).' },
-        :result => {
-            :type           => :STRING,
-            :count          => :INT,
-            :count_fraction => :FLOAT,
-            :values         => :INT
-        },
+        :result => no_paging_results([
+            [:type,           :STRING, 'Object type ("all", "nodes", "ways", or "relations")'],
+            [:count,          :INT,    'Number of objects with this type and key.'],
+            [:count_fraction, :FLOAT,  'Number of objects in relation to all objects.'],
+            [:values,         :INT,    'Number of different values for this key.']
+        ]),
         :example => { :key => 'amenity' },
         :ui => '/keys/amenity#overview'
     }) do
@@ -91,12 +91,12 @@ class Taginfo < Sinatra::Base
             :relations => { :doc => 'Only values on tags used on relations.' }
         },
         :sort => %w( value count_all count_nodes count_ways count_relations ),
-        :result => {
-            :value       => :STRING,
-            :count       => :INT,
-            :fraction    => :FLOAT,
-            :description => :STRING
-        },
+        :result => paging_results([
+            [:value,       :STRING, 'Value'],
+            [:count,       :INT,    'Number of times this key/value is in the OSM database.'],
+            [:fraction,    :FLOAT,  'Number of times in relation to number of times this key is in the OSM database.'],
+            [:description, :STRING, 'Description of the tag from the wiki.']
+        ]),
         :example => { :key => 'highway', :page => 1, :rp => 10, :sortname => 'count_ways', :sortorder => 'desc' },
         :ui => '/keys/highway#values'
     }) do
@@ -175,12 +175,12 @@ class Taginfo < Sinatra::Base
             :relations => { :doc => 'Only values on tags used on relations.' }
         },
         :sort => %w( together_count other_key from_fraction ),
-        :result => {
-            :other_key      => :STRING,
-            :together_count => :INT,
-            :to_fraction    => :FLOAT,
-            :from_fraction  => :FLOAT
-        },
+        :result => paging_results([
+            [:other_key,      :STRING, ''],
+            [:together_count, :INT,    ''],
+            [:to_fraction,    :FLOAT,  ''],
+            [:from_fraction,  :FLOAT,  '']
+        ]),
         :example => { :key => 'highway', :page => 1, :rp => 10, :sortname => 'together_count', :sortorder => 'desc' },
         :ui => '/keys/highway#keys'
     }) do
@@ -232,21 +232,21 @@ class Taginfo < Sinatra::Base
         :description => 'Get list of wiki pages in different languages describing a key.',
         :parameters => { :key => 'Tag key (required)' },
         :paging => :no,
-        :result => {
-            :lang             => :STRING,
-            :language         => :STRING,
-            :language_en      => :STRING,
-            :title            => :STRING,
-            :description      => :STRING,
-            :image            => :STRING,
-            :on_node          => :BOOL,
-            :on_way           => :BOOL,
-            :on_area          => :BOOL,
-            :on_relation      => :BOOL,
-            :tags_implies     => :ARRAY_OF_STRINGS,
-            :tags_combination => :ARRAY_OF_STRINGS,
-            :tags_linked      => :ARRAY_OF_STRINGS
-        },
+        :result => no_paging_results([
+            [:lang,             :STRING, ''],
+            [:language,         :STRING, ''],
+            [:language_en,      :STRING, ''],
+            [:title,            :STRING, ''],
+            [:description,      :STRING, ''],
+            [:image,            :STRING, ''],
+            [:on_node,          :BOOL,   ''],
+            [:on_way,           :BOOL,   ''],
+            [:on_area,          :BOOL,   ''],
+            [:on_relation,      :BOOL,   ''],
+            [:tags_implies,     :ARRAY_OF_STRINGS, ''],
+            [:tags_combination, :ARRAY_OF_STRINGS, ''],
+            [:tags_linked,      :ARRAY_OF_STRINGS, '']
+        ]),
         :example => { :key => 'highway' },
         :ui => '/keys/highway#wiki'
     }) do
@@ -265,16 +265,16 @@ class Taginfo < Sinatra::Base
             :query => 'Only show results where the value matches this query (substring match, optional).'
         },
         :paging => :optional,
-        :result => {
-            :key        => :STRING,
-            :value      => :STRING,
-            :value_bool => :STRING,
-            :rule       => :STRING,
-            :area_color => :STRING,
-            :line_color => :STRING,
-            :line_width => :INT,
-            :icon       => :STRING
-        },
+        :result => paging_results([
+            [:key,        :STRING, ''],
+            [:value,      :STRING, ''],
+            [:value_bool, :STRING, ''],
+            [:rule,       :STRING, ''],
+            [:area_color, :STRING, ''],
+            [:line_color, :STRING, ''],
+            [:line_width, :INT,    ''],
+            [:icon,       :STRING, '']
+        ]),
         :example => { :style => 'standard', :key => 'highway', :page => 1, :rp => 10},
         :ui => '/keys/highway#josm'
     }) do
