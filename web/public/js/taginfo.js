@@ -206,7 +206,7 @@ function print_value_with_percent(value, fraction) {
      '</div><div class="bar" style="width: ' + (fraction*100).toFixed() + 'px;"></div>';
 }
 
-var pp_chars = '!"#$%&()*+,-/;<=>?@[\\]^`{|}~' + "'";
+var pp_chars = '!"#$%&()*+,/;<=>?@[\\]^`{|}~' + "'";
 
 function pp_key(key) {
     if (key == '') {

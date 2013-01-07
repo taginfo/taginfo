@@ -111,7 +111,7 @@ def pp_key(key)
         return '<span class="badchar empty">empty string</span>'
     end
 
-    pp_chars = '!"#$%&()*+,-/;<=>?@[\\]^`{|}~' + "'";
+    pp_chars = '!"#$%&()*+,/;<=>?@[\\]^`{|}~' + "'";
 
     result = ''
     key.each_char do |c|
