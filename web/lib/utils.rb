@@ -84,8 +84,8 @@ def external_link(id, title, link, new_window=false)
 end
 
 def tagcloud_size(tag)
-    x = tag['scale1'].to_f / 17 / 2 + tag['pos'] / 2
-    (x * 32 + 10).to_i
+    x = tag['scale1'].to_f / 20 + tag['pos'] / 4
+    (x * 40 + 12).to_i
 end
 
 def get_filter
