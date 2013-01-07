@@ -1,48 +1,6 @@
 # web/lib/api/v4/tag.rb
 class Taginfo < Sinatra::Base
 
-    api(4, 'tag/stats', {
-        :description => 'Show some database statistics for given tag.',
-        :parameters => {
-            :key => 'Tag key (required).',
-            :value => 'Tag value (required).'
-        },
-        :result => no_paging_results([
-            [:type,           :STRING, 'Object type ("all", "nodes", "ways", or "relations")'],
-            [:count,          :INT,    'Number of objects with this type and tag.'],
-            [:count_fraction, :FLOAT,  'Number of objects in relation to all objects.']
-        ]),
-        :example => { :key => 'amenity', :value => 'school' },
-        :ui => '/tags/amenity=school#overview'
-    }) do
-        key = params[:key]
-        value = params[:value]
-        out = []
-
-        # default values
-        ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
-            out[n] = { :type => type, :count => 0, :count_fraction => 0.0 }
-        end
-
-        @db.select('SELECT * FROM db.tags').
-            condition('key = ?', key).
-            condition('value = ?', value).
-            execute() do |row|
-                ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
-                    out[n] = {
-                        :type           => type,
-                        :count          => row['count_'  + type].to_i,
-                        :count_fraction => (row['count_'  + type].to_f / get_total(type)).round_to(4)
-                    }
-                end
-        end
-
-        return {
-            :total => 4,
-            :data => out
-        }.to_json
-    end
-
     api(4, 'tag/combinations', {
         :description => 'Find keys and tags that are used together with a given tag.',
         :parameters => {
@@ -125,36 +83,6 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
-    api(4, 'tag/wiki_pages', {
-        :description => 'Get list of wiki pages in different languages describing a tag.',
-        :parameters => { :key => 'Tag key (required)', :value => 'Tag value (required).' },
-        :paging => :no,
-        :result => no_paging_results([
-            [:lang,             :STRING, 'Language code.'],
-            [:language,         :STRING, 'Language name in its language.'],
-            [:language_en,      :STRING, 'Language name in English.'],
-            [:title,            :STRING, 'Wiki page title.'],
-            [:description,      :STRING, 'Short description of tag from wiki page.'],
-            [:image,            :STRING, 'Wiki page title of associated image.'],
-            [:on_node,          :BOOL,   'Is this a tag for nodes?'],
-            [:on_way,           :BOOL,   'Is this a tag for ways?'],
-            [:on_area,          :BOOL,   'Is this a tag for areas?'],
-            [:on_relation,      :BOOL,   'Is this a tag for relations?'],
-            [:tags_implies,     :ARRAY_OF_STRINGS, 'List of keys/tags implied by this tag.'],
-            [:tags_combination, :ARRAY_OF_STRINGS, 'List of keys/tags that can be combined with this tag.'],
-            [:tags_linked,      :ARRAY_OF_STRINGS, 'List of keys/tags related to this tag.']
-        ]),
-        :example => { :key => 'highway', :value => 'residential' },
-        :ui => '/tags/highway=residential#wiki'
-    }) do
-        key   = params[:key]
-        value = params[:value]
-
-        res = @db.execute('SELECT * FROM wikipages WHERE key = ? AND value = ? ORDER BY lang', key, value)
-
-        return get_wiki_result(res)
-    end
-
     api(4, 'tag/josm/style/rules', {
         :description => 'List rules and symbols for the given tag in JOSM styles.',
         :parameters => {
@@ -195,6 +123,78 @@ class Taginfo < Sinatra::Base
             execute()
 
         return get_josm_style_rules_result(total, res);
+    end
+
+    api(4, 'tag/stats', {
+        :description => 'Show some database statistics for given tag.',
+        :parameters => {
+            :key => 'Tag key (required).',
+            :value => 'Tag value (required).'
+        },
+        :result => no_paging_results([
+            [:type,           :STRING, 'Object type ("all", "nodes", "ways", or "relations")'],
+            [:count,          :INT,    'Number of objects with this type and tag.'],
+            [:count_fraction, :FLOAT,  'Number of objects in relation to all objects.']
+        ]),
+        :example => { :key => 'amenity', :value => 'school' },
+        :ui => '/tags/amenity=school#overview'
+    }) do
+        key = params[:key]
+        value = params[:value]
+        out = []
+
+        # default values
+        ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
+            out[n] = { :type => type, :count => 0, :count_fraction => 0.0 }
+        end
+
+        @db.select('SELECT * FROM db.tags').
+            condition('key = ?', key).
+            condition('value = ?', value).
+            execute() do |row|
+                ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
+                    out[n] = {
+                        :type           => type,
+                        :count          => row['count_'  + type].to_i,
+                        :count_fraction => (row['count_'  + type].to_f / get_total(type)).round_to(4)
+                    }
+                end
+        end
+
+        return {
+            :total => 4,
+            :data => out
+        }.to_json
+    end
+
+    api(4, 'tag/wiki_pages', {
+        :description => 'Get list of wiki pages in different languages describing a tag.',
+        :parameters => { :key => 'Tag key (required)', :value => 'Tag value (required).' },
+        :paging => :no,
+        :result => no_paging_results([
+            [:lang,             :STRING, 'Language code.'],
+            [:language,         :STRING, 'Language name in its language.'],
+            [:language_en,      :STRING, 'Language name in English.'],
+            [:title,            :STRING, 'Wiki page title.'],
+            [:description,      :STRING, 'Short description of tag from wiki page.'],
+            [:image,            :STRING, 'Wiki page title of associated image.'],
+            [:on_node,          :BOOL,   'Is this a tag for nodes?'],
+            [:on_way,           :BOOL,   'Is this a tag for ways?'],
+            [:on_area,          :BOOL,   'Is this a tag for areas?'],
+            [:on_relation,      :BOOL,   'Is this a tag for relations?'],
+            [:tags_implies,     :ARRAY_OF_STRINGS, 'List of keys/tags implied by this tag.'],
+            [:tags_combination, :ARRAY_OF_STRINGS, 'List of keys/tags that can be combined with this tag.'],
+            [:tags_linked,      :ARRAY_OF_STRINGS, 'List of keys/tags related to this tag.']
+        ]),
+        :example => { :key => 'highway', :value => 'residential' },
+        :ui => '/tags/highway=residential#wiki'
+    }) do
+        key   = params[:key]
+        value = params[:value]
+
+        res = @db.execute('SELECT * FROM wikipages WHERE key = ? AND value = ? ORDER BY lang', key, value)
+
+        return get_wiki_result(res)
     end
 
 end

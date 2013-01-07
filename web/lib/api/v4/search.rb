@@ -1,47 +1,6 @@
 # web/lib/api/v4/search.rb
 class Taginfo < Sinatra::Base
 
-    api(4, 'search/by_value', {
-        :description => 'Search for tags by value.',
-        :parameters => { :query => 'Value to search for (substring search, required).' },
-        :sort => %w( count_all key value ),
-        :paging => :optional,
-        :result => paging_results([
-            [:key,       :STRING, 'Key'],
-            [:value,     :STRING, 'Value'],
-            [:count_all, :INT,    'Number of objects in the database with this tag.']
-        ]),
-        :example => { :query => 'foo', :page => 1, :rp => 10 },
-        :ui => '/search?q=foo#values'
-    }) do
-        query = params[:query]
-
-        total = @db.count('search.ftsearch').
-            condition_if("value MATCH ?", query).
-            get_first_value().to_i
-
-        res = @db.select('SELECT * FROM search.ftsearch').
-            condition_if("value MATCH ?", query).
-            order_by(@ap.sortname, @ap.sortorder) { |o|
-                o.count_all
-                o.key
-                o.value
-            }.
-            paging(@ap).
-            execute()
-
-        return {
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total,
-            :data  => res.map{ |row| {
-                :key       => row['key'],
-                :value     => row['value'],
-                :count_all => row['count_all'].to_i,
-            }}
-        }.to_json
-    end
-
     api(4, 'search/by_key_and_value', {
         :description => 'Search for tags by key and/or value.',
         :parameters => { :query => 'Value to search for (substring search, required).' },
@@ -122,6 +81,47 @@ class Taginfo < Sinatra::Base
             :data  => res.map{ |row| {
                 :key   => row['key'],
                 :value => row['value']
+            }}
+        }.to_json
+    end
+
+    api(4, 'search/by_value', {
+        :description => 'Search for tags by value.',
+        :parameters => { :query => 'Value to search for (substring search, required).' },
+        :sort => %w( count_all key value ),
+        :paging => :optional,
+        :result => paging_results([
+            [:key,       :STRING, 'Key'],
+            [:value,     :STRING, 'Value'],
+            [:count_all, :INT,    'Number of objects in the database with this tag.']
+        ]),
+        :example => { :query => 'foo', :page => 1, :rp => 10 },
+        :ui => '/search?q=foo#values'
+    }) do
+        query = params[:query]
+
+        total = @db.count('search.ftsearch').
+            condition_if("value MATCH ?", query).
+            get_first_value().to_i
+
+        res = @db.select('SELECT * FROM search.ftsearch').
+            condition_if("value MATCH ?", query).
+            order_by(@ap.sortname, @ap.sortorder) { |o|
+                o.count_all
+                o.key
+                o.value
+            }.
+            paging(@ap).
+            execute()
+
+        return {
+            :page  => @ap.page,
+            :rp    => @ap.results_per_page,
+            :total => total,
+            :data  => res.map{ |row| {
+                :key       => row['key'],
+                :value     => row['value'],
+                :count_all => row['count_all'].to_i,
             }}
         }.to_json
     end

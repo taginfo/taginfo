@@ -1,6 +1,25 @@
 # web/lib/api/v4/josm.rb
 class Taginfo < Sinatra::Base
 
+    api(4, 'josm/style/image', {
+        :description => 'Access images for map features used in JOSM.',
+        :parameters => {
+            :style => 'JOSM style (required).',
+            :image => 'Image path (required).'
+        },
+        :result => 'PNG image.',
+        :example => { :style => 'standard', :image => 'transport/bus.png' },
+        :ui => '/keys/landuse#josm'
+    }) do
+        style = params[:style]
+        image = params[:image]
+        content_type :png
+        @db.select('SELECT png FROM josm.josm_style_images').
+            condition('style = ?', style).
+            condition('path = ?', image).
+            get_first_value()
+    end
+
     api(4, 'josm/style/rules', {
         :description => 'List rules and symbols in JOSM styles.',
         :parameters => {
@@ -44,25 +63,6 @@ class Taginfo < Sinatra::Base
             execute()
 
         return get_josm_style_rules_result(total, res);
-    end
-
-    api(4, 'josm/style/image', {
-        :description => 'Access images for map features used in JOSM.',
-        :parameters => {
-            :style => 'JOSM style (required).',
-            :image => 'Image path (required).'
-        },
-        :result => 'PNG image.',
-        :example => { :style => 'standard', :image => 'transport/bus.png' },
-        :ui => '/keys/landuse#josm'
-    }) do
-        style = params[:style]
-        image = params[:image]
-        content_type :png
-        @db.select('SELECT png FROM josm.josm_style_images').
-            condition('style = ?', style).
-            condition('path = ?', image).
-            get_first_value()
     end
 
 end
