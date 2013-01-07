@@ -122,7 +122,7 @@ class Taginfo < Sinatra::Base
             [:line_width, :INT,    'Line width (if line rule).'],
             [:icon,       :STRING, 'Icon path (if icon rule).']
         ]),
-        :example => { :style => 'standard', :key => 'highway', :page => 1, :rp => 10},
+        :example => { :style => 'standard', :key => 'highway', :page => 1, :rp => 10 },
         :ui => '/keys/highway#josm'
     }) do
         style = params[:style]
@@ -180,7 +180,7 @@ class Taginfo < Sinatra::Base
                         :values         => row['values_' + type].to_i
                     }
                 end
-        end
+            end
 
         return {
             :total => 4,

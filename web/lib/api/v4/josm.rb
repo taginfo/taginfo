@@ -37,7 +37,7 @@ class Taginfo < Sinatra::Base
             [:line_width, :INT,    'Line width (if line rule).'],
             [:icon,       :STRING, 'Icon path (if icon rule).']
         ]),
-        :example => { :style => 'standard', :page => 1, :rp => 10},
+        :example => { :style => 'standard', :page => 1, :rp => 10 },
         :ui => '/reports/josm_styles'
     }) do
         style = params[:style]

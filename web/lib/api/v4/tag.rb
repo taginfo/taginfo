@@ -101,7 +101,7 @@ class Taginfo < Sinatra::Base
             [:line_width, :INT,    'Line width (if line rule).'],
             [:icon,       :STRING, 'Icon path (if icon rule).']
         ]),
-        :example => { :style => 'standard', :key => 'highway', :value => 'residential', :page => 1, :rp => 10},
+        :example => { :style => 'standard', :key => 'highway', :value => 'residential', :page => 1, :rp => 10 },
         :ui => '/tags/highway=residential#josm'
     }) do
         style = params[:style]

@@ -64,9 +64,8 @@ class Taginfo < Sinatra::Base
         query = params[:query].downcase
 
         total = @db.count('wiki.words').condition("words LIKE ('%' || ? || '%')", query).get_first_value().to_i
-        sel = @db.select("SELECT key, value FROM wiki.words WHERE words LIKE ('%' || ? || '%')", query)
 
-        res = sel.
+        res = @db.select("SELECT key, value FROM wiki.words WHERE words LIKE ('%' || ? || '%')", query).
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.key
                 o.value
