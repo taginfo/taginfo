@@ -176,13 +176,13 @@ class Taginfo < Sinatra::Base
         },
         :sort => %w( together_count other_key from_fraction ),
         :result => paging_results([
-            [:other_key,      :STRING, ''],
-            [:together_count, :INT,    ''],
-            [:to_fraction,    :FLOAT,  ''],
-            [:from_fraction,  :FLOAT,  '']
+            [:other_key,      :STRING, 'Other key.'],
+            [:together_count, :INT,    'Number of objects that have both keys.'],
+            [:to_fraction,    :FLOAT,  'Fraction of objects with this key that also have the other key.'],
+            [:from_fraction,  :FLOAT,  'Fraction of objects with other key that also have this key.']
         ]),
         :example => { :key => 'highway', :page => 1, :rp => 10, :sortname => 'together_count', :sortorder => 'desc' },
-        :ui => '/keys/highway#keys'
+        :ui => '/keys/highway#combinations'
     }) do
         key = params[:key]
         filter_type = get_filter()
@@ -233,19 +233,19 @@ class Taginfo < Sinatra::Base
         :parameters => { :key => 'Tag key (required)' },
         :paging => :no,
         :result => no_paging_results([
-            [:lang,             :STRING, ''],
-            [:language,         :STRING, ''],
-            [:language_en,      :STRING, ''],
-            [:title,            :STRING, ''],
-            [:description,      :STRING, ''],
-            [:image,            :STRING, ''],
-            [:on_node,          :BOOL,   ''],
-            [:on_way,           :BOOL,   ''],
-            [:on_area,          :BOOL,   ''],
-            [:on_relation,      :BOOL,   ''],
-            [:tags_implies,     :ARRAY_OF_STRINGS, ''],
-            [:tags_combination, :ARRAY_OF_STRINGS, ''],
-            [:tags_linked,      :ARRAY_OF_STRINGS, '']
+            [:lang,             :STRING, 'Language code.'],
+            [:language,         :STRING, 'Language name in its language.'],
+            [:language_en,      :STRING, 'Language name in English.'],
+            [:title,            :STRING, 'Wiki page title.'],
+            [:description,      :STRING, 'Short description of key from wiki page.'],
+            [:image,            :STRING, 'Wiki page title of associated image.'],
+            [:on_node,          :BOOL,   'Is this a key for nodes?'],
+            [:on_way,           :BOOL,   'Is this a key for ways?'],
+            [:on_area,          :BOOL,   'Is this a key for areas?'],
+            [:on_relation,      :BOOL,   'Is this a key for relations?'],
+            [:tags_implies,     :ARRAY_OF_STRINGS, 'List of keys/tags implied by this key.'],
+            [:tags_combination, :ARRAY_OF_STRINGS, 'List of keys/tags that can be combined with this key.'],
+            [:tags_linked,      :ARRAY_OF_STRINGS, 'List of keys/tags related to this key.']
         ]),
         :example => { :key => 'highway' },
         :ui => '/keys/highway#wiki'
@@ -266,14 +266,14 @@ class Taginfo < Sinatra::Base
         },
         :paging => :optional,
         :result => paging_results([
-            [:key,        :STRING, ''],
-            [:value,      :STRING, ''],
-            [:value_bool, :STRING, ''],
-            [:rule,       :STRING, ''],
-            [:area_color, :STRING, ''],
-            [:line_color, :STRING, ''],
-            [:line_width, :INT,    ''],
-            [:icon,       :STRING, '']
+            [:key,        :STRING, 'Key'],
+            [:value,      :STRING, 'Value'],
+            [:value_bool, :STRING, '"yes" or "no". Null if the value is not boolean.'],
+            [:rule,       :STRING, 'JOSM style rule in XML format.'],
+            [:area_color, :STRING, 'Fill color for area (if area rule).'],
+            [:line_color, :STRING, 'Stroke color for line (if line rule).'],
+            [:line_width, :INT,    'Line width (if line rule).'],
+            [:icon,       :STRING, 'Icon path (if icon rule).']
         ]),
         :example => { :style => 'standard', :key => 'highway', :page => 1, :rp => 10},
         :ui => '/keys/highway#josm'

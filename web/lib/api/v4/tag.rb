@@ -59,11 +59,11 @@ class Taginfo < Sinatra::Base
         },
         :sort => %w( together_count other_tag from_fraction ),
         :result => paging_results([
-            [:other_key,      :STRING, ''],
-            [:other_value,    :STRING, ''],
-            [:together_count, :INT,    ''],
-            [:to_fraction,    :FLOAT,  ''],
-            [:from_fraction,  :FLOAT,  '']
+            [:other_key,      :STRING, 'Other key.'],
+            [:other_value,    :STRING, 'Other value (may be empty).'],
+            [:together_count, :INT,    'Number of objects that have both this tag and other key (or tag).'],
+            [:to_fraction,    :FLOAT,  'Fraction of objects with this tag that also have the other key (or tag).'],
+            [:from_fraction,  :FLOAT,  'Fraction of objects with other key (or tag) that also have this tag.']
         ]),
         :example => { :key => 'highway', :value => 'residential', :page => 1, :rp => 10, :sortname => 'together_count', :sortorder => 'desc' },
         :ui => '/tags/highway=residential#combinations'
@@ -130,19 +130,19 @@ class Taginfo < Sinatra::Base
         :parameters => { :key => 'Tag key (required)', :value => 'Tag value (required).' },
         :paging => :no,
         :result => no_paging_results([
-            [:lang,             :STRING, ''],
-            [:language,         :STRING, ''],
-            [:language_en,      :STRING, ''],
-            [:title,            :STRING, ''],
-            [:description,      :STRING, ''],
-            [:image,            :STRING, ''],
-            [:on_node,          :BOOL,   ''],
-            [:on_way,           :BOOL,   ''],
-            [:on_area,          :BOOL,   ''],
-            [:on_relation,      :BOOL,   ''],
-            [:tags_implies,     :ARRAY_OF_STRINGS, ''],
-            [:tags_combination, :ARRAY_OF_STRINGS, ''],
-            [:tags_linked,      :ARRAY_OF_STRINGS, '']
+            [:lang,             :STRING, 'Language code.'],
+            [:language,         :STRING, 'Language name in its language.'],
+            [:language_en,      :STRING, 'Language name in English.'],
+            [:title,            :STRING, 'Wiki page title.'],
+            [:description,      :STRING, 'Short description of tag from wiki page.'],
+            [:image,            :STRING, 'Wiki page title of associated image.'],
+            [:on_node,          :BOOL,   'Is this a tag for nodes?'],
+            [:on_way,           :BOOL,   'Is this a tag for ways?'],
+            [:on_area,          :BOOL,   'Is this a tag for areas?'],
+            [:on_relation,      :BOOL,   'Is this a tag for relations?'],
+            [:tags_implies,     :ARRAY_OF_STRINGS, 'List of keys/tags implied by this tag.'],
+            [:tags_combination, :ARRAY_OF_STRINGS, 'List of keys/tags that can be combined with this tag.'],
+            [:tags_linked,      :ARRAY_OF_STRINGS, 'List of keys/tags related to this tag.']
         ]),
         :example => { :key => 'highway', :value => 'residential' },
         :ui => '/tags/highway=residential#wiki'
@@ -164,14 +164,14 @@ class Taginfo < Sinatra::Base
         },
         :paging => :optional,
         :result => paging_results([
-            [:key,        :STRING, ''],
-            [:value,      :STRING, ''],
-            [:value_bool, :STRING, ''],
-            [:rule,       :STRING, ''],
-            [:area_color, :STRING, ''],
-            [:line_color, :STRING, ''],
-            [:line_width, :INT,    ''],
-            [:icon,       :STRING, '']
+            [:key,        :STRING, 'Key'],
+            [:value,      :STRING, 'Value'],
+            [:value_bool, :STRING, '"yes" or "no". Null if the value is not boolean.'],
+            [:rule,       :STRING, 'JOSM style rule in XML format.'],
+            [:area_color, :STRING, 'Fill color for area (if area rule).'],
+            [:line_color, :STRING, 'Stroke color for line (if line rule).'],
+            [:line_width, :INT,    'Line width (if line rule).'],
+            [:icon,       :STRING, 'Icon path (if icon rule).']
         ]),
         :example => { :style => 'standard', :key => 'highway', :value => 'residential', :page => 1, :rp => 10},
         :ui => '/tags/highway=residential#josm'

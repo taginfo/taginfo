@@ -9,14 +9,14 @@ class Taginfo < Sinatra::Base
         },
         :paging => :optional,
         :result => paging_results([
-            [:key,        :STRING, ''],
-            [:value,      :STRING, ''],
-            [:value_bool, :STRING, ''],
-            [:rule,       :STRING, ''],
-            [:area_color, :STRING, ''],
-            [:line_color, :STRING, ''],
-            [:line_width, :INT,    ''],
-            [:icon,       :STRING, '']
+            [:key,        :STRING, 'Key'],
+            [:value,      :STRING, 'Value'],
+            [:value_bool, :STRING, '"yes" or "no". Null if the value is not boolean.'],
+            [:rule,       :STRING, 'JOSM style rule in XML format.'],
+            [:area_color, :STRING, 'Fill color for area (if area rule).'],
+            [:line_color, :STRING, 'Stroke color for line (if line rule).'],
+            [:line_width, :INT,    'Line width (if line rule).'],
+            [:icon,       :STRING, 'Icon path (if icon rule).']
         ]),
         :example => { :style => 'standard', :page => 1, :rp => 10},
         :ui => '/reports/josm_styles'

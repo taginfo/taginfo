@@ -24,11 +24,10 @@ class Taginfo < Sinatra::Base
             [:count_ways_fraction,      :FLOAT,  'Number of ways in relation to all ways.'],
             [:count_relations,          :INT,    'Number of relations in the OSM database with this key.'],
             [:count_relations_fraction, :FLOAT,  'Number of relations in relation to all relations.'],
-            [:values_all,               :INT,    ''],
-            [:users_all,                :INT,    ''],
-            [:in_wiki,                  :BOOL,   ''],
-            [:in_josm,                  :BOOL,   ''],
-            [:in_potlatch,              :BOOL,   ''],
+            [:values_all,               :INT,    'Number of different values for this key.'],
+            [:users_all,                :INT,    'Number of users owning objects with this key.'],
+            [:in_wiki,                  :BOOL,   'Has this key at least one wiki page?'],
+            [:in_josm,                  :BOOL,   'Is this key referenced in at least one JOSM style rule?']
         ]),
         :example => { :page => 1, :rp => 10, :filter => 'in_wiki', :sortname => 'key', :sortorder => 'asc' },
         :ui => '/keys'
@@ -128,8 +127,7 @@ class Taginfo < Sinatra::Base
                 :values_all               => row['values_all'].to_i,
                 :users_all                => row['users_all'].to_i,
                 :in_wiki                  => row['in_wiki'].to_i     == 1 ? true : false,
-                :in_josm                  => row['in_josm'].to_i     == 1 ? true : false,
-                :in_potlatch              => row['in_potlatch'].to_i == 1 ? true : false,
+                :in_josm                  => row['in_josm'].to_i     == 1 ? true : false
             } 
             h[:wikipages] = row['wikipages'] if row['wikipages']
             h[:prevalent_values] = row['prevalent_values'][0,10] if row['prevalent_values']
@@ -191,14 +189,14 @@ class Taginfo < Sinatra::Base
         :sort => %w( key count_all values_all users_all ),
         :result => paging_results([
             [:key,                :STRING, 'Key'],
-            [:count_all,          :INT,    'Number of occurances in database.'],
-            [:count_all_fraction, :FLOAT,  ''],
+            [:count_all,          :INT,    'Number of objects in database with this key.'],
+            [:count_all_fraction, :FLOAT,  'Fraction of objects in database with this key.'],
             [:values_all,         :INT,    'Number of different values for this key.'],
             [:users_all,          :INT,    'Number of different users who own objects with this key.'],
             [:prevalent_values,   :HASH,   'Often used values.', [
                 [:value,    :STRING, 'Value'],
                 [:count,    :INT,    'Number of occurances of this value.'],
-                [:fraction, :FLOAT,  '']
+                [:fraction, :FLOAT,  'Fraction of all values.']
             ]]
         ]),
         :example => { :min_count => 1000, :english => '1', :page => 1, :rp => 10, :sortname => 'count_all', :sortorder => 'desc' },
