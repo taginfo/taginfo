@@ -171,7 +171,6 @@ pages:
             to_count_tooltip: Liczba obiektów z tym tagiem, które mają także inne tagi/klucze.
             other_key_tooltip: Tagi/klucze użyte wraz z tym tagiem.
             from_count_tooltip: Liczba obiektów z innym tagiem/kluczem, które mają także ten tag.
-            none_found: Brak znalezionych powiązań (tylko najbardziej powrzechne).
         combinations:
             title: Połączenia
             description: Ta tabela pokazuje tylko najbardziej powszechne połączenia najpopularniejszych tagów.

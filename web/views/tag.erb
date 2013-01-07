@@ -57,8 +57,12 @@
                 <option>Standard</option>
             </select>
         </form>-->
-       <table id="grid-josm">
-       </table>
+<% if @josm_count > 0 %>
+        <table id="grid-josm">
+        </table>
+<% else %>
+        <p class="empty"><%= t.pages.key.josm.no_styles %></p>
+<% end %>
     </div>
 </div>
 <iframe id="josmiframe" name="josmiframe"></iframe>

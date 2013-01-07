@@ -40,6 +40,7 @@ class Taginfo < Sinatra::Base
             @prevalent_values << { 'value' => '(other)', 'count' => @count_all_values - sum }
         end
 
+        @josm_count = @db.count('josm_style_rules').condition('k = ?', @key).get_first_value().to_i
         @wiki_count = @db.count('wiki.wikipages').condition('value IS NULL').condition('key=?', @key).get_first_value().to_i
         @user_count = @db.select('SELECT users_all FROM db.keys').condition('key=?', @key).get_first_value().to_i
         
@@ -91,6 +92,7 @@ class Taginfo < Sinatra::Base
         @sel[@filter_type] = ' selected="selected"'
         @filter_xapi = { 'all' => '*', nil => '*', 'nodes' => 'node', 'ways' => 'way', 'relations' => 'relation' }[@filter_type];
 
+        @josm_count = @db.count('josm_style_rules').condition('k = ?', @key).condition('v = ?', @value).get_first_value().to_i
         @wiki_count = @db.count('wiki.wikipages').condition('key=?', @key).condition('value=?', @value).get_first_value().to_i
         if @wiki_count == 0
             @wiki_count_key = @db.count('wiki.wikipages').condition('key=?', @key).condition('value IS NULL').get_first_value().to_i

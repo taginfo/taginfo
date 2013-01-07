@@ -180,7 +180,6 @@ pages:
             to_count_tooltip: Number of objects with this tag that also have the other tag/key.
             other_key_tooltip: Tags/Keys used together with this tag.
             from_count_tooltip: Number of objects with other tag/key that also have this tag.
-            none_found: No combinations found (only checked the most common ones).
         combinations:
             title: Combinations
             description: This table shows only the most common combinations of the most common tags.

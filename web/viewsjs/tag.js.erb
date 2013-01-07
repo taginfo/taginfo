@@ -40,7 +40,6 @@ var create_flexigrid_for = {
             ],
             sortname: 'to_count',
             sortorder: 'desc',
-            emptymsg: '<%= page.other_tags_used.none_found %>',
             preProcess: function(data) {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
@@ -102,7 +101,6 @@ var create_flexigrid_for = {
             ],
             sortname: 'value',
             sortorder: 'asc',
-            emptymsg: '<%= page.josm.no_styles %>',
             preProcess: function(data) {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [

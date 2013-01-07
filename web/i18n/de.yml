@@ -184,7 +184,6 @@ pages:
             to_count_tooltip: Anzahl Objekte mit diesem Tag, die auch den anderen Tag/Key haben.
             other_key_tooltip: Andere Tags/Keys, die zusammen mit diesem Tag vorkommen.
             from_count_tooltip: Anzahl Objekte mit dem anderen Tag, die auch diesen Tag/Key haben.
-            none_found: Keine Kombinationen gefunden (nur die häufigsten Kombinationen wurden geprüft).
         combinations:
             title: Kombinationen
             description: Diese Tabelle zeigt nur die häufigsten Kombinationen der häufigsten Tags.

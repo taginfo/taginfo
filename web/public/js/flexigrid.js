@@ -406,11 +406,6 @@
 					if (this.pDiv) {
 						this.domElements.pPageStat.html(p.nomsg);	
 					}
-/*                    if (p.emptymsg != null) {
-                        jQuery(this.gDiv).replaceWith('<p class="empty">' + p.emptymsg + '</p>');
-                    } else {
-                        jQuery(this.gDiv).remove();
-                    }*/
 					return false;
 					}
 				

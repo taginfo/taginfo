@@ -13,7 +13,6 @@ var create_flexigrid_for = {
             ],
             sortname: 'count_all',
             sortorder: 'desc',
-            emptymsg: '<%= search.no_keys %>',
             preProcess: function(data) {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
@@ -35,7 +34,6 @@ var create_flexigrid_for = {
             ],
             sortname: 'count_all',
             sortorder: 'desc',
-            emptymsg: '<%= search.no_values %>',
             preProcess: function(data) {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
@@ -59,7 +57,6 @@ var create_flexigrid_for = {
             ],
             sortname: 'count_all',
             sortorder: 'desc',
-            emptymsg: '<%= search.no_tags %>',
             preProcess: function(data) {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
@@ -81,7 +78,6 @@ var create_flexigrid_for = {
             ],
             sortname: 'key',
             sortorder: 'asc',
-            emptymsg: '<%= search.no_match %>',
             preProcess: function(data) {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
