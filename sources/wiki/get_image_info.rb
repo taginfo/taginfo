@@ -63,7 +63,7 @@ until image_titles.empty?
 #    puts some_titles.join(",") + "\n"
 
     begin
-        data = api.query(:prop => 'imageinfo', :iiprop => 'url|size|mime', :titles => some_titles.join('|'), :iiurlwidth => 200, :iiurlheight => 200)
+        data = api.query(:prop => 'imageinfo', :iiprop => 'url|size|mime', :titles => some_titles.join('|'), :iiurlwidth => 10, :iiurlheight => 10)
 
         if !data['query']
             STDERR.puts "Wiki API call failed (no 'query' field):"
@@ -93,6 +93,7 @@ until image_titles.empty?
                 else
                     prefix = nil
                     suffix = nil
+                    puts "Wrong thumbnail format: '#{info['thumburl']}'"
                 end
                 db.execute("INSERT INTO wiki_images (image, width, height, size, mime, image_url, thumb_url_prefix, thumb_url_suffix) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
                     v['title'],
