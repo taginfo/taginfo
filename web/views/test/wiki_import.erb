@@ -2,12 +2,29 @@
     <h1 class="section">Wiki Import</h1>
 </div>
 <div class="box">
-    <table>
-        <% @invalid_page_titles.each do |row| %>
-            <tr>
-                <td><%= row['reason'] %></td>
-                <td><%= row['title']  %></td>
-            </tr>
-        <% end %>
+    <h2>Invalid page titles</h2>
+    <table class="list">
+        <tr>
+            <th>Reason</th><th>Page title</th>
+        </tr>
+<% @invalid_page_titles.each do |row| %>
+        <tr>
+            <td><%= h(row['reason']) %></td>
+            <td><%= h(row['title'])  %></td>
+        </tr>
+<% end %>
+    </table>
+
+    <h2 style="margin-top: 20px">Invalid image titles</h2>
+    <table class="list">
+        <tr>
+            <th>Page title</th><th>Image title</th>
+        </tr>
+<% @invalid_image_titles.each do |row| %>
+        <tr>
+            <td><%= h(row['page_title']) %></td>
+            <td><%= h(row['image_title'])  %></td>
+        </tr>
+<% end %>
     </table>
 </div>

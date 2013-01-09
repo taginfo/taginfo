@@ -276,8 +276,8 @@ File.open(dir + '/tagpages.list') do |wikipages|
                     if !ititle.nil? && ititle.match(%r{^(file|image):(.*)$}i)
                         page.image = "File:#{$2}"
                     else
-                        puts "invalid image: #{reason} #{page.title} #{ititle}"
-                        db.execute('INSERT INTO invalid_image_titles (reason, page_title, image_title) VALUES (?, ?, ?)', reason, page.title, ititle)
+                        puts "invalid image: page='#{page.title}' image='#{ititle}'"
+                        db.execute('INSERT INTO invalid_image_titles (page_title, image_title) VALUES (?, ?)', page.title, ititle)
                         page.image = ''
                     end
                 end
