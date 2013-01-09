@@ -89,9 +89,17 @@ function img_popup(image) {
     var w = image.width,
         h = image.height,
         max_size = 180,
-        thumb = w >= h ? max_size : parseInt(max_size / h * w),
-        url = image.thumb_url_prefix + thumb + image.thumb_url_suffix,
-        title = html_escape('<div class="img_popup"><img src="' + url + '"/></div>');
+        thumb_size = w >= h ? max_size : parseInt(max_size / h * w),
+        other_size = (w >= h ? parseInt(max_size / w * h) : max_size) + 2,
+        url = image.thumb_url_prefix + thumb_size + image.thumb_url_suffix,
+        title;
+
+    if (w < max_size) {
+        title = html_escape('<div class="img_popup" style="width: ' + w + 'px; height:' + h + 'px;"><img src="' + image.image_url + '"/></div>');
+    } else {
+       title = html_escape('<div class="img_popup" style="width: ' + thumb_size + 'px; height:' + other_size + 'px;"><img src="' + url + '"/></div>');
+    }
+
     return '<span class="overflow" tipsy_html="s" title="' + title + '">' + print_wiki_link(image.title) + '</span>';
 }
 

@@ -513,8 +513,6 @@ div.hDiv table th span {
 /* ==========  */
 
 div.img_popup {
-    width: 180px;
-    height: 180px;
     background-image: url(/img/indicator.gif);
     background-position: center center;
     background-repeat: no-repeat;
