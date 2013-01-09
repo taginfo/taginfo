@@ -22,6 +22,10 @@ function init_tipsy() {
         obj = jQuery(obj);
         obj.tipsy({ opacity: 1, delayIn: 500, gravity: obj.attr('tipsy') });
     });
+    jQuery('*[tipsy_html]').each(function(index, obj) {
+        obj = jQuery(obj);
+        obj.tipsy({ opacity: 1, delayIn: 500, gravity: obj.attr('tipsy_html'), html: true });
+    });
 }
 
 function resize_box() {
@@ -79,6 +83,16 @@ function tt(text, c, title) {
 
 function hover_expand(text) {
     return span(text, 'overflow');
+}
+
+function img_popup(image) {
+    var w = image.width,
+        h = image.height,
+        max_size = 180,
+        thumb = w >= h ? max_size : parseInt(max_size / h * w),
+        url = image.thumb_url_prefix + thumb + image.thumb_url_suffix,
+        title = html_escape('<div class="img_popup"><img src="' + url + '"/></div>');
+    return '<span class="overflow" tipsy_html="s" title="' + title + '">' + print_wiki_link(image.title) + '</span>';
 }
 
 function empty(text) {

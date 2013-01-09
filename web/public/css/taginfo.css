@@ -512,6 +512,16 @@ div.hDiv table th span {
 
 /* ==========  */
 
+div.img_popup {
+    width: 180px;
+    height: 180px;
+    background-image: url(/img/indicator.gif);
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+/* ==========  */
+
 .canvas svg text {
     font: 12px Arial,sans-serif;
 }

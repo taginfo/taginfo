@@ -104,7 +104,7 @@ var create_flexigrid_for = {
                             print_language(row.lang, row.language, row.language_en),
                             print_wiki_link(row.title),
                             row.description,
-                            row.image.title ? hover_expand(print_wiki_link(row.image.title)) : empty('<%= misc.no_image %>'),
+                            row.image.title ? img_popup(row.image) : empty('<%= misc.no_image %>'),
                             print_type_icon('node',     row.on_node) + 
                             print_type_icon('way',      row.on_way) + 
                             print_type_icon('area',     row.on_area) + 
