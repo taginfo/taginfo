@@ -184,7 +184,15 @@ def get_wiki_result(res)
             :language_en      => h(::Language[row['lang']].english_name),
             :title            => h(row['title']),
             :description      => h(row['description']),
-            :image            => h(row['image']),
+            :image            => {
+                :title            => h(row['image']),
+                :width            => row['width'].to_i,
+                :height           => row['height'].to_i,
+                :mime             => h(row['mime']),
+                :image_url        => h(row['image_url']),
+                :thumb_url_prefix => h(row['thumb_url_prefix']),
+                :thumb_url_suffix => h(row['thumb_url_suffix'])
+            },
             :on_node          => row['on_node'].to_i     == 1,
             :on_way           => row['on_way'].to_i      == 1,
             :on_area          => row['on_area'].to_i     == 1,

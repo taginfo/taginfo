@@ -26,6 +26,8 @@
 #
 #------------------------------------------------------------------------------
 
+require 'cgi'
+
 module MediaWikiAPI
 
     class API
@@ -42,12 +44,13 @@ module MediaWikiAPI
         end
 
         def build_path(params)
-            @path + params.to_a.map{ |el| el.join('=') }.join('&')
+            @path + params.to_a.map{ |el| CGI::escape(el[0].to_s) + '=' + CGI::escape(el[1].to_s) }.join('&')
         end
 
         def get(params)
             path = build_path(params)
             http = Net::HTTP.start(@host, @port)
+#            puts "Getting path [#{path}]"
             http.get(path, @headers)
         end
 

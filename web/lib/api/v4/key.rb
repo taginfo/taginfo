@@ -283,7 +283,15 @@ class Taginfo < Sinatra::Base
             [:language_en,      :STRING, 'Language name in English.'],
             [:title,            :STRING, 'Wiki page title.'],
             [:description,      :STRING, 'Short description of key from wiki page.'],
-            [:image,            :STRING, 'Wiki page title of associated image.'],
+            [:image,            :HASH,   'Associated image.', [
+                [:title,            :STRING, 'Wiki page title of associated image.' ],
+                [:width,            :INT,    'Width of image.' ],
+                [:height,           :INT,    'Height of image.' ],
+                [:mime,             :STRING, 'MIME type of image.' ],
+                [:image_url,        :STRING, 'Image URL' ],
+                [:thumb_url_prefix, :STRING, 'Prefix of thumbnail URL.' ],
+                [:thumb_url_suffix, :STRING, 'Suffix of thumbnail URL.' ]
+            ]],
             [:on_node,          :BOOL,   'Is this a key for nodes?'],
             [:on_way,           :BOOL,   'Is this a key for ways?'],
             [:on_area,          :BOOL,   'Is this a key for areas?'],
@@ -297,7 +305,7 @@ class Taginfo < Sinatra::Base
     }) do
         key = params[:key]
 
-        res = @db.execute('SELECT * FROM wikipages WHERE value IS NULL AND key = ? ORDER BY lang', key)
+        res = @db.execute('SELECT * FROM wikipages LEFT OUTER JOIN wiki_images USING (image) WHERE value IS NULL AND key = ? ORDER BY lang', key)
 
         return get_wiki_result(res)
     end

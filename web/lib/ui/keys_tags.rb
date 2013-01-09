@@ -1,6 +1,17 @@
 # web/lib/ui/keys_tags.rb
 class Taginfo < Sinatra::Base
 
+    MAX_IMAGE_WIDTH = 300
+
+    def build_image_url(row)
+        w = row['width'].to_i
+        h = row['height'].to_i
+        if w > 0 && h > 0
+            return "#{row['thumb_url_prefix']}#{ h <= w ? MAX_IMAGE_WIDTH : (MAX_IMAGE_WIDTH * w / h).to_i }#{ row['thumb_url_suffix'] }"
+        end
+        return nil
+    end
+
     get %r{^/keys/(.*)} do |key|
         if params[:key].nil?
             @key = key
@@ -27,6 +38,11 @@ class Taginfo < Sinatra::Base
         else
             @desc = "<span title='#{ t.pages.key.description_from_wiki }' tipsy='w'>#{ @desc }</span"
         end
+
+        @db.select("SELECT width, height, thumb_url_prefix, thumb_url_suffix FROM wiki.wikipages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang=? AND key=? AND value IS NULL UNION SELECT width, height, thumb_url_prefix, thumb_url_suffix FROM wiki.wikipages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang='en' AND key=? AND value IS NULL LIMIT 1", r18n.locale.code, @key, @key).
+            execute() do |row|
+                @image_url = build_image_url(row)
+            end
 
         @prevalent_values = @db.select("SELECT value, count_#{@filter_type} AS count FROM tags").
             condition('key=?', @key).
@@ -107,8 +123,14 @@ class Taginfo < Sinatra::Base
             @desc = "<span title='#{ t.pages.tag.description_from_wiki }' tipsy='w'>#{ @desc }</span"
         end
 
+        @db.select("SELECT width, height, thumb_url_prefix, thumb_url_suffix FROM wiki.wikipages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang=? AND key=? AND value=? UNION SELECT width, height, thumb_url_prefix, thumb_url_suffix FROM wiki.wikipages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang='en' AND key=? AND value=? LIMIT 1", r18n.locale.code, @key, @value, @key, @value).
+            execute() do |row|
+                @image_url = build_image_url(row)
+            end
+
         javascript "#{ r18n.locale.code }/tag"
         erb :tag
     end
 
 end
+

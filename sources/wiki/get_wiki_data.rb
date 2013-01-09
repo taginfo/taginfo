@@ -54,10 +54,11 @@ class WikiPage
 
     attr_accessor :content
     attr_accessor :description, :image, :group, :onNode, :onWay, :onArea, :onRelation, :has_templ
-    attr_reader :type, :namespace, :title, :tag, :key, :value, :lang, :ttype, :tags_implies, :tags_combination, :tags_linked, :parsed
+    attr_reader :type, :timestamp, :namespace, :title, :tag, :key, :value, :lang, :ttype, :tags_implies, :tags_combination, :tags_linked, :parsed
 
-    def initialize(type, namespace, title)
+    def initialize(type, timestamp, namespace, title)
         @type      = type       # 'page' or 'redirect'
+        @timestamp = timestamp  # page last touched
         @namespace = namespace  # 'XX' (mediawiki namespace or '')
         @title     = title      # wiki page title
 
@@ -129,7 +130,7 @@ class WikiPage
             content,
             group,
             type,
-            has_templ,
+            has_templ  ? 1 : 0,
             parsed     ? 1 : 0,
             description,
             image,
@@ -239,8 +240,8 @@ File.open(dir + '/tagpages.list') do |wikipages|
     wikipages.each do |line|
         line.chomp!
         t = line.split("\t")
-        page = WikiPage.new(t[0], t[1], t[2])
-        puts "page: (#{page.title}) (#{page.type}) (#{page.namespace}) (#{page.tag})"
+        page = WikiPage.new(t[0], t[1], t[2], t[3])
+        puts "page: (#{page.title}) (#{page.type}) (#{page.timestamp}) (#{page.namespace}) (#{page.tag})"
 
         reason = page.check_title
         if reason == :ok
@@ -271,7 +272,14 @@ File.open(dir + '/tagpages.list') do |wikipages|
                     end
                 end
                 if template.named_parameters['image']
-                    page.image = template.named_parameters['image'][0]
+                    ititle = template.named_parameters['image'][0]
+                    if !ititle.nil? && ititle.match(%r{^(file|image):(.*)$}i)
+                        page.image = "File:#{$2}"
+                    else
+                        puts "invalid image: #{reason} #{page.title} #{ititle}"
+                        db.execute('INSERT INTO invalid_image_titles (reason, page_title, image_title) VALUES (?, ?, ?)', reason, page.title, ititle)
+                        page.image = ''
+                    end
                 end
                 if template.named_parameters['group']
                     page.group = template.named_parameters['group'][0]
