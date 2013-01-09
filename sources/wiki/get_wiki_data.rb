@@ -314,7 +314,7 @@ File.open(dir + '/tagpages.list') do |wikipages|
             page.insert(db)
         else
             puts "invalid page: #{reason} #{page.title}"
-            db.execute('INSERT INTO invalid_page_titles (reason, title) VALUES (?, ?)', reason, page.title)
+            db.execute('INSERT INTO invalid_page_titles (reason, title) VALUES (?, ?)', reason.to_s, page.title)
         end
     end
 end
