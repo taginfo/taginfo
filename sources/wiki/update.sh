@@ -38,6 +38,9 @@ echo "`$DATECMD` Getting page list..."
 echo "`$DATECMD` Getting wiki data..."
 ./get_wiki_data.rb $DIR >$LOGFILE
 
+echo "`$DATECMD` Getting image info..."
+./get_image_info.rb $DIR >$LOGFILE
+
 echo "`$DATECMD` Extracting words..."
 ./extract_words.rb $DIR
 
