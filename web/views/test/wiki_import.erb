@@ -22,7 +22,7 @@
         </tr>
 <% @invalid_image_titles.each do |row| %>
         <tr>
-            <td><%= h(row['page_title']) %></td>
+            <td><%= wiki_link(h(row['page_title'])) %></td>
             <td><%= h(row['image_title'])  %></td>
         </tr>
 <% end %>

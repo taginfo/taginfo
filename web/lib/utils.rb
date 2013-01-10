@@ -83,6 +83,11 @@ def external_link(id, title, link, new_window=false)
     %Q{<a id="#{id}" #{target}rel="nofollow" class="extlink" href="#{link}">#{title}</a>}
 end
 
+def wiki_link(title)
+    prefix = 'http://wiki.openstreetmap.org/wiki/'
+    external_link('wikilink_' + title.gsub(%r{[^A-Za-z0-9]}, '_'), title, prefix + title)
+end
+
 def tagcloud_size(tag)
     x = tag['scale1'].to_f / 20 + tag['pos'] / 4
     (x * 40 + 12).to_i
