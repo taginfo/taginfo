@@ -6,6 +6,9 @@ class Taginfo < Sinatra::Base
     def build_image_url(row)
         w = row['width'].to_i
         h = row['height'].to_i
+        if w <= MAX_IMAGE_WIDTH
+            return row['image_url']
+        end
         if w > 0 && h > 0
             return "#{row['thumb_url_prefix']}#{ h <= w ? MAX_IMAGE_WIDTH : (MAX_IMAGE_WIDTH * w / h).to_i }#{ row['thumb_url_suffix'] }"
         end
@@ -36,10 +39,10 @@ class Taginfo < Sinatra::Base
         if @desc == ''
             @desc = "<span class='empty'>#{ t.pages.key.no_description_in_wiki }</span>"
         else
-            @desc = "<span title='#{ t.pages.key.description_from_wiki }' tipsy='w'>#{ @desc }</span"
+            @desc = "<span title='#{ t.pages.key.description_from_wiki }' tipsy='w'>#{ @desc }</span>"
         end
 
-        @db.select("SELECT width, height, thumb_url_prefix, thumb_url_suffix FROM wiki.wikipages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang=? AND key=? AND value IS NULL UNION SELECT width, height, thumb_url_prefix, thumb_url_suffix FROM wiki.wikipages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang='en' AND key=? AND value IS NULL LIMIT 1", r18n.locale.code, @key, @key).
+        @db.select("SELECT width, height, image_url, thumb_url_prefix, thumb_url_suffix FROM wiki.wikipages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang=? AND key=? AND value IS NULL UNION SELECT width, height, image_url, thumb_url_prefix, thumb_url_suffix FROM wiki.wikipages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang='en' AND key=? AND value IS NULL LIMIT 1", r18n.locale.code, @key, @key).
             execute() do |row|
                 @image_url = build_image_url(row)
             end
@@ -120,10 +123,10 @@ class Taginfo < Sinatra::Base
         if @desc == ''
             @desc = "<span class='empty'>#{ t.pages.tag.no_description_in_wiki }</span>"
         else
-            @desc = "<span title='#{ t.pages.tag.description_from_wiki }' tipsy='w'>#{ @desc }</span"
+            @desc = "<span title='#{ t.pages.tag.description_from_wiki }' tipsy='w'>#{ @desc }</span>"
         end
 
-        @db.select("SELECT width, height, thumb_url_prefix, thumb_url_suffix FROM wiki.wikipages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang=? AND key=? AND value=? UNION SELECT width, height, thumb_url_prefix, thumb_url_suffix FROM wiki.wikipages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang='en' AND key=? AND value=? LIMIT 1", r18n.locale.code, @key, @value, @key, @value).
+        @db.select("SELECT width, height, image_url, thumb_url_prefix, thumb_url_suffix FROM wiki.wikipages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang=? AND key=? AND value=? UNION SELECT width, height, image_url, thumb_url_prefix, thumb_url_suffix FROM wiki.wikipages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang='en' AND key=? AND value=? LIMIT 1", r18n.locale.code, @key, @value, @key, @value).
             execute() do |row|
                 @image_url = build_image_url(row)
             end
