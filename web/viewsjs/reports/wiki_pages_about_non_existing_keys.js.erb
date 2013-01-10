@@ -8,8 +8,8 @@ function page_init() {
         colModel: [
             { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" width="16" height="16" title="Wiki"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
             { display: '<img src="/img/sources/josm.16.png" alt="JOSM" width="16" height="16" title="JOSM"/>', name: 'in_josm', width: 20, sortable: true, align: 'center' },
-            { display: '<%= osm.key %>', name: 'key', width: 260, sortable: true, align: 'left' },
-            { display: '<%= page.wiki_pages %>', name: 'wikipages', width: 400, sortable: false, align: 'left' }
+            { display: '<%= osm.key %>', name: 'key', width: 250, sortable: true, align: 'left' },
+            { display: '<%= page.wiki_pages %>', name: 'wikipages', width: 600, sortable: false, align: 'left' }
         ],
         searchitems: [
             { display: '<%= osm.key %>', name: 'key' }
@@ -20,7 +20,11 @@ function page_init() {
             data.rows = jQuery.map(data.data, function(row, i) {
                 var wikilinks = [];
                 jQuery(row.wikipages).each(function(i, wikipage) {
-                    wikilinks.push(print_wiki_link(wikipage.title));
+                    var w = print_wiki_link(wikipage.title);
+                    if (wikipage.type == 'redirect') {
+                        w += ' (REDIRECT)';
+                    }
+                    wikilinks.push(w);
                 });
                 return { 'cell': [
                     print_checkmark(row.in_wiki),
