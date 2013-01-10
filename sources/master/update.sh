@@ -30,6 +30,7 @@ rm -f $DATABASE
 sqlite3 $DATABASE <languages.sql
 perl -pe "s|__DIR__|$DIR|" master.sql | sqlite3 $DATABASE
 perl -pe "s|__DIR__|$DIR|" interesting_tags.sql | sqlite3 $DATABASE
+perl -pe "s|__DIR__|$DIR|" interesting_relation_types.sql | sqlite3 $DATABASE
 
 echo "`$DATECMD` Done master."
 
