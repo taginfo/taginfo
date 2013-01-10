@@ -54,13 +54,17 @@ api.add_header('User-agent', 'taginfo/0.1 (jochen@remote.org)')
 
 db = SQLite3::Database.new(dir + '/taginfo-wiki.db')
 db.results_as_hash = true
-image_titles = db.execute("SELECT DISTINCT(image) AS title FROM wikipages").map{ |row| row['title'] }.select{ |title| !title.nil? && title.match(%r{^(file|image):}i) }
+image_titles = db.execute("SELECT DISTINCT(image) AS title FROM wikipages WHERE image IS NOT NULL AND image != ''").
+                    map{ |row| row['title'] }.
+                    select{ |title| title.match(%r{^(file|image):}i) }
 
 db.execute('BEGIN TRANSACTION');
 
+puts "Found #{ image_titles.size } different image titles"
+
 until image_titles.empty?
     some_titles = image_titles.slice!(0, 10)
-#    puts some_titles.join(",") + "\n"
+    puts "Get image info for: #{ some_titles.join(' ') }"
 
     begin
         data = api.query(:prop => 'imageinfo', :iiprop => 'url|size|mime', :titles => some_titles.join('|'), :iiurlwidth => 10, :iiurlheight => 10)

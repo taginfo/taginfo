@@ -227,14 +227,45 @@ end
 
 #------------------------------------------------------------------------------
 
+def get_page(db, api, page)
+    db.execute("SELECT * FROM cache.cache_pages WHERE title=? AND timestamp=?", page.title, page.timestamp) do |row|
+        page.content = row['body']
+        puts "Page #{ page.title } in cache (#{ page.timestamp })"
+        return
+    end
+    db.execute("DELETE FROM cache.cache_pages WHERE title=?", page.title);
+    res = api.get(page.params)
+    page.content = res.body
+    db.execute("INSERT INTO cache.cache_pages (title, timestamp, body) VALUES (?, ?, ?)", page.title, page.timestamp, page.content);
+    puts "Page #{ page.title } not in cache (#{ page.timestamp })"
+end
+
+def cleanup_cache(db, current_pagetitles)
+    db.execute("SELECT title FROM cache.cache_pages") do |row|
+        current_pagetitles.delete(row['title'])
+    end
+    to_delete = current_pagetitles.keys
+    puts "Deleting pages from cache: #{ to_delete.join(' ') }"
+    to_delete.each do |title|
+        db.execute("DELETE FROM cache.cache_pages WHERE title=?", title);
+    end
+end
+
+#------------------------------------------------------------------------------
+
 dir = ARGV[0] || '.'
 
 api = MediaWikiAPI::API.new('wiki.openstreetmap.org', 80, '/w/index.php?')
 api.add_header('User-agent', 'taginfo/0.1 (jochen@remote.org)')
 
 db = SQLite3::Database.new(dir + '/taginfo-wiki.db')
+db.results_as_hash = true
 
-db.execute('BEGIN TRANSACTION');
+db.execute("ATTACH DATABASE '#{dir}/wikicache.db' AS cache")
+
+db.execute('BEGIN TRANSACTION')
+
+current_pagetitles = {}
 
 File.open(dir + '/tagpages.list') do |wikipages|
     wikipages.each do |line|
@@ -245,8 +276,9 @@ File.open(dir + '/tagpages.list') do |wikipages|
 
         reason = page.check_title
         if reason == :ok
-            res = api.get(page.params)
-            page.content = res.body
+            current_pagetitles[page.title] = page.timestamp
+
+            get_page(db, api, page)
 
             page.parse_content do |template|
                 puts "Template: #{template.name} [#{template.parameters.join(',')}] #{template.named_parameters.inspect}"
@@ -259,54 +291,54 @@ File.open(dir + '/tagpages.list') do |wikipages|
                 end
                 if template.name =~ /(Key|Value)Description$/
                     page.has_templ = true
-                end
-                if template.named_parameters['description']
-                    desc = []
-                    template.named_parameters['description'].each do |i|
-                        if i.class == Template
-                            desc << ' ' << i.parameters.join('=') << ' '
+                    if template.named_parameters['description']
+                        desc = []
+                        template.named_parameters['description'].each do |i|
+                            if i.class == Template
+                                desc << ' ' << i.parameters.join('=') << ' '
+                            else
+                                desc << i
+                            end
+                            page.description = desc.join('').strip
+                        end
+                    end
+                    if template.named_parameters['image']
+                        ititle = template.named_parameters['image'][0]
+                        if !ititle.nil? && ititle.match(%r{^(file|image):(.*)$}i)
+                            page.image = "File:#{$2}"
                         else
-                            desc << i
-                        end
-                        page.description = desc.join('').strip
-                    end
-                end
-                if template.named_parameters['image']
-                    ititle = template.named_parameters['image'][0]
-                    if !ititle.nil? && ititle.match(%r{^(file|image):(.*)$}i)
-                        page.image = "File:#{$2}"
-                    else
-                        puts "invalid image: page='#{page.title}' image='#{ititle}'"
-                        db.execute('INSERT INTO invalid_image_titles (page_title, image_title) VALUES (?, ?)', page.title, ititle)
-                        page.image = ''
-                    end
-                end
-                if template.named_parameters['group']
-                    page.group = template.named_parameters['group'][0]
-                end
-                if template.named_parameters['onNode'] == ['yes']
-                    page.onNode = true
-                end
-                if template.named_parameters['onWay'] == ['yes']
-                    page.onWay = true
-                end
-                if template.named_parameters['onArea'] == ['yes']
-                    page.onArea = true
-                end
-                if template.named_parameters['onRelation'] == ['yes']
-                    page.onRelation = true
-                end
-                if template.named_parameters['implies']
-                    template.named_parameters['implies'].each do |i|
-                        if i.class == Template
-                            page.tags_implies << i.parameters.join('=')
+                            puts "invalid image: page='#{page.title}' image='#{ititle}'"
+                            db.execute('INSERT INTO invalid_image_titles (page_title, image_title) VALUES (?, ?)', page.title, ititle)
+                            page.image = ''
                         end
                     end
-                end
-                if template.named_parameters['combination']
-                    template.named_parameters['combination'].each do |i|
-                        if i.class == Template
-                            page.tags_combination << i.parameters.join('=')
+                    if template.named_parameters['group']
+                        page.group = template.named_parameters['group'][0]
+                    end
+                    if template.named_parameters['onNode'] == ['yes']
+                        page.onNode = true
+                    end
+                    if template.named_parameters['onWay'] == ['yes']
+                        page.onWay = true
+                    end
+                    if template.named_parameters['onArea'] == ['yes']
+                        page.onArea = true
+                    end
+                    if template.named_parameters['onRelation'] == ['yes']
+                        page.onRelation = true
+                    end
+                    if template.named_parameters['implies']
+                        template.named_parameters['implies'].each do |i|
+                            if i.class == Template
+                                page.tags_implies << i.parameters.join('=')
+                            end
+                        end
+                    end
+                    if template.named_parameters['combination']
+                        template.named_parameters['combination'].each do |i|
+                            if i.class == Template
+                                page.tags_combination << i.parameters.join('=')
+                            end
                         end
                     end
                 end
@@ -319,7 +351,9 @@ File.open(dir + '/tagpages.list') do |wikipages|
     end
 end
 
-db.execute('COMMIT');
+cleanup_cache(db, current_pagetitles)
+
+db.execute('COMMIT')
 
 
 #-- THE END -------------------------------------------------------------------
