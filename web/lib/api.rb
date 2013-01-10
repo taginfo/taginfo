@@ -3,7 +3,7 @@ class API
 
     @@paths = {}
 
-    attr_accessor :version, :path, :parameters, :paging, :filter, :sort, :result, :description, :example, :ui
+    attr_accessor :version, :path, :parameters, :paging, :filter, :sort, :result, :description, :notes, :example, :ui
 
     def self.paths
         @@paths

@@ -300,6 +300,7 @@ class Taginfo < Sinatra::Base
             [:tags_combination, :ARRAY_OF_STRINGS, 'List of keys/tags that can be combined with this key.'],
             [:tags_linked,      :ARRAY_OF_STRINGS, 'List of keys/tags related to this key.']
         ]),
+        :notes => 'To get the complete thumbnail image URL, concatenate <tt>thumb_url_prefix</tt>, width of image in pixels, and <tt>thumb_url_suffix</tt>. The thumbnail image width must be smaller than <tt>width</tt>, use the <tt>image_url</tt> otherwise.',
         :example => { :key => 'highway' },
         :ui => '/keys/highway#wiki'
     }) do
