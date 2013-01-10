@@ -62,6 +62,8 @@ db.execute('BEGIN TRANSACTION');
 
 puts "Found #{ image_titles.size } different image titles"
 
+images_added = {}
+
 until image_titles.empty?
     some_titles = image_titles.slice!(0, 10)
     puts "Get image info for: #{ some_titles.join(' ') }"
@@ -89,7 +91,7 @@ until image_titles.empty?
         end
 
         data['query']['pages'].each do |k,v|
-            if v['imageinfo']
+            if v['imageinfo'] && ! images_added[v['title']]
                 info = v['imageinfo'][0]
                 if info['thumburl'].match(%r{^(.*/)[0-9]{1,4}(px-.*)$})
                     prefix = $1
@@ -99,6 +101,7 @@ until image_titles.empty?
                     suffix = nil
                     puts "Wrong thumbnail format: '#{info['thumburl']}'"
                 end
+                images_added[v['title']] = 1
                 db.execute("INSERT INTO wiki_images (image, width, height, size, mime, image_url, thumb_url_prefix, thumb_url_suffix) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
                     v['title'],
                     info['width'],
