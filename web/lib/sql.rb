@@ -6,18 +6,38 @@ module SQL
     # Wrapper for a database connection.
     class Database
 
-        def initialize(dir)
-            filename = dir + '/taginfo-master.db'
+        # This has to be called once to initialize the context for the database
+        def self.init(dir)
+            @@dir = dir
+
+            db = SQL::Database.new
+
+            db.select('SELECT * FROM sources ORDER BY no').execute().each do |source|
+                Source.new(source['id'], source['name'], source['data_until'], source['update_start'], source['update_end'], source['visible'].to_i == 1)
+            end
+
+            data_until = db.select("SELECT min(data_until) FROM sources").get_first_value().sub(/:..$/, '')
+
+            db.close
+
+            data_until
+        end
+
+        def initialize
+            filename = @@dir + '/taginfo-master.db'
             @db = SQLite3::Database.new(filename)
             @db.results_as_hash = true
-
-            [:db, :wiki, :josm, :potlatch, :merkaartor, :search].each do |dbname|
-                @db.execute("ATTACH DATABASE '#{dir}/taginfo-#{dbname}.db' AS #{dbname}")
-            end
 
             @db.execute('SELECT * FROM languages') do |row|
                 Language.new(row)
             end
+        end
+
+        def attach_sources
+            Source.each do |source|
+                @db.execute("ATTACH DATABASE ? AS ?", "#{ @@dir }/#{ source.dbname }", source.id.to_s)
+            end
+            self
         end
 
         def close

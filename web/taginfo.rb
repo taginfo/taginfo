@@ -56,15 +56,7 @@ TaginfoConfig.read
 
 BCP47::read_registry
 
-db = SQL::Database.new('../../data')
-
-db.select('SELECT * FROM sources ORDER BY no').execute().each do |source|
-    Source.new source['id'], source['name'], source['data_until'], source['update_start'], source['update_end'], source['visible'].to_i == 1
-end
-
-DATA_UNTIL = db.select("SELECT min(data_until) FROM sources").get_first_value().sub(/:..$/, '')
-
-db.close
+DATA_UNTIL = SQL::Database.init('../../data');
 
 class Taginfo < Sinatra::Base
 
@@ -124,7 +116,7 @@ class Taginfo < Sinatra::Base
         # (otherwise switching languages doesn't work)
         expires 0, :no_cache
 
-        @db = SQL::Database.new('../../data')
+        @db = SQL::Database.new.attach_sources
 
         @data_until = DATA_UNTIL
     end
