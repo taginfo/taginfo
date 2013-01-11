@@ -34,7 +34,7 @@ var create_flexigrid_for = {
             url: '/api/4/key/values?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type) + '&lang=' + encodeURIComponent(lang),
             colModel: [
                 { display: '<%= osm.value %>', name: 'value', width: 200, sortable: true },
-                { display: '<%= misc.count %>', name: 'count', width: 240, sortable: true, align: 'center' },
+                { display: '<%= misc.count %>', name: 'count', width: 260, sortable: true, align: 'center' },
                 { display: '<span title="<%= page.tag_description_from_wiki %>"><%= misc.description %></span>', name: 'description', width: 600, sortable: false, align: 'left' }
             ],
             searchitems: [
@@ -59,9 +59,9 @@ var create_flexigrid_for = {
         create_flexigrid('grid-keys', {
             url: '/api/4/key/combinations?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type),
             colModel: [
-                { display: '<span title="<%= page.other_keys_used.to_count_tooltip %>"><%= misc.count %> &rarr;</span>', name: 'to_count', width: 320, sortable: true, align: 'center' },
-                { display: '<span title="<%= page.other_keys_used.other_key_tooltip %>"><%= page.other_keys_used.other %></span>', name: 'other_key', width: 340, sortable: true },
-                { display: '<span title="<%= page.other_keys_used.from_count_tooltip %>">&rarr; <%= misc.count %></span>', name: 'from_count', width: 320, sortable: true, align: 'center' }
+                { display: '<span title="<%= page.other_keys_used.to_count_tooltip %>"><%= misc.count %> &rarr;</span>', name: 'to_count', width: 260, sortable: true, align: 'center' },
+                { display: '<span title="<%= page.other_keys_used.other_key_tooltip %>"><%= page.other_keys_used.other %></span>', name: 'other_key', width: 400, sortable: true },
+                { display: '<span title="<%= page.other_keys_used.from_count_tooltip %>">&rarr; <%= misc.count %></span>', name: 'from_count', width: 260, sortable: true, align: 'center' }
             ],
             searchitems: [
                 { display: '<%= page.other_keys_used.other %>', name: 'other_key' }
