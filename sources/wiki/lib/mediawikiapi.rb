@@ -8,7 +8,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2012  Jochen Topf <jochen@remote.org>
+#  Copyright (C) 2013  Jochen Topf <jochen@remote.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -37,6 +37,7 @@ module MediaWikiAPI
             @port = port
             @path = path
             @headers = {}
+            add_header('User-agent', 'taginfo/1.0 (http://wiki.osm.org/wiki/Taginfo)')
         end
 
         def add_header(name, value)

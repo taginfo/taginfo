@@ -89,7 +89,6 @@ end
 dir = ARGV[0] || '.'
 
 api = MediaWikiAPI::API.new('wiki.openstreetmap.org')
-api.add_header('User-agent', 'taginfo/0.1 (jochen@remote.org)')
 
 namespaces = get_namespaces(api)
 

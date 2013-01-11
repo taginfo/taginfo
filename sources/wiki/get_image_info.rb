@@ -50,7 +50,6 @@ require 'lib/mediawikiapi.rb'
 dir = ARGV[0] || '.'
 
 api = MediaWikiAPI::API.new('wiki.openstreetmap.org')
-api.add_header('User-agent', 'taginfo/0.1 (jochen@remote.org)')
 
 db = SQLite3::Database.new(dir + '/taginfo-wiki.db')
 db.results_as_hash = true
