@@ -10,33 +10,33 @@ class TestSql < Test::Unit::TestCase
 
     def test_order_by_no_block
         assert_kind_of SQL::Select, @select
-        @select.order_by(:foo)
+        @select.order_by(:foo, 'ASC')
         assert_equal 'test ORDER BY foo ASC', @select.build_query
     end
 
     def test_order_by_no_block_desc
         assert_kind_of SQL::Select, @select
-        @select.order_by(:foo, :desc)
+        @select.order_by(:foo, 'DESC')
         assert_equal 'test ORDER BY foo DESC', @select.build_query
     end
 
     def test_order_by_simple
         assert_kind_of SQL::Select, @select
-        @select.order_by(:foo) do |o|
+        @select.order_by(:foo, 'ASC') do |o|
             o.foo
         end
         assert_equal 'test ORDER BY foo ASC', @select.build_query
     end
 
     def test_order_by_desc
-        @select.order_by(:foo, 'desc') do |o|
+        @select.order_by(:foo, 'DESC') do |o|
             o.foo
         end
         assert_equal 'test ORDER BY foo DESC', @select.build_query
     end
 
     def test_order_by_unused
-        @select.order_by([:foo]) do |o|
+        @select.order_by([:foo], 'ASC') do |o|
             o.foo
             o.bar! 'baz'
         end
@@ -44,7 +44,7 @@ class TestSql < Test::Unit::TestCase
     end
 
     def test_order_by_reverse
-        @select.order_by(:bar) do |o|
+        @select.order_by(:bar, 'ASC') do |o|
             o.foo
             o.bar! 'baz'
         end
@@ -52,7 +52,7 @@ class TestSql < Test::Unit::TestCase
     end
 
     def test_order_by_array
-        @select.order_by([:foo, 'bar']) do |o|
+        @select.order_by([:foo, 'bar'], 'ASC') do |o|
             o.bar! 'baz'
             o.foo
         end
@@ -68,7 +68,7 @@ class TestSql < Test::Unit::TestCase
     end
 
     def test_order_by_array_multiple
-        @select.order_by([:bar, :foo], :DESC) do |o|
+        @select.order_by([:bar, :foo], 'DESC') do |o|
             o.foo 'f1'
             o.foo! :f2
             o.bar :baz
@@ -77,7 +77,7 @@ class TestSql < Test::Unit::TestCase
     end
 
     def test_order_by_map
-        @select.order_by(:length) do |o|
+        @select.order_by(:length, 'ASC') do |o|
             o.length 'length(foo)'
             o.length :foo
         end
