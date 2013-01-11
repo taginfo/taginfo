@@ -50,7 +50,7 @@ for source in $SOURCES_DOWNLOAD; do
     echo "====================================="
     echo "Downloading $source..."
     mkdir -p $DIR/$source
-    wget --quiet -O $DIR/download/taginfo-$source.db.bz2 http://taginfo.openstreetmap.org/download/taginfo-$source.db.bz2
+    curl --silent --output $DIR/download/taginfo-$source.db.bz2 http://taginfo.openstreetmap.org/download/taginfo-$source.db.bz2
     bzcat $DIR/download/taginfo-$source.db.bz2 >$DIR/$source/taginfo-$source.db
     echo "Done."
 done

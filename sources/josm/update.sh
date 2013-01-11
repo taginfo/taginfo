@@ -25,7 +25,7 @@ rm -f $DATABASE
 rm -f $ELEMSTYLES
 
 echo "`$DATECMD` Getting styles..."
-wget -O $ELEMSTYLES http://josm.openstreetmap.de/svn/trunk/styles/standard/elemstyles.xml
+curl --silent --output $ELEMSTYLES http://josm.openstreetmap.de/svn/trunk/styles/standard/elemstyles.xml
 
 echo "`$DATECMD` Updating images..."
 if [ -d $DIR/svn-source ]; then

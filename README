@@ -5,15 +5,15 @@ Taginfo
 Brings together information about OpenStreetMap tags and makes it searchable and browsable.
 
 Documentation: http://wiki.openstreetmap.org/wiki/Taginfo
-Live System: http://taginfo.openstreetmap.de/
+Live System: http://taginfo.openstreetmap.org/
 
 
 FILES
 -----
 
-* sources  - import scripts
+* sources  - Import scripts
 * web      - Web User Interface and API
-* examples - script to use the API
+* examples - Some misc example stuff
 * tagstats - C++ program to create database statistics
 
 
@@ -26,13 +26,13 @@ Uses
     * Rack Contrib Gem (for Rack::JSONP)
     * JSON gem (install with gem, Debian/Ubuntu packages are too old and buggy)
     * jQuery (www.jquery.com), necessary files are included
+    * curl binary
     * Flexigrid (Originally from http://code.google.com/p/flexigrid/
         http://www.flexigrid.info/ , the version used and included
-        is the one from http://github.com/joto/flexigrid with
-        some bugfixes.)
+        has some changes and bugfixes.)
 
 Debian/Ubuntu packages:
-    rubygems
+    rubygems curl
 
 Gems:
     gem install mongrel rack rack-contrib sinatra json
@@ -52,7 +52,7 @@ WEB USER INTERFACE
 
 You need a 'data' directory in the parent directory of the directory where
 this README is. It must contain the sqlite database files created in the
-data import step or downloaded from http://taginfo.openstreetmap.de/download .
+data import step or downloaded from http://taginfo.openstreetmap.org/download .
 
 To start the web user interface:
 cd web
@@ -64,6 +64,7 @@ THANKS
 Stefano Tampieri - for the Italian translation
 Ilya Zverev <zverik@textual.ru> - for the Russion translation
 Jocelyn Jaubert <jocelyn.jaubert@gmail.com> - for the French translation
+Jacek Buczyński <jacekzlodzi@gmail.com> - for the Polish translation
 
 
 AUTHOR
