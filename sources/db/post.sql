@@ -22,17 +22,8 @@ CREATE UNIQUE INDEX key_distributions_key_idx ON key_distributions (key, object_
 CREATE        INDEX tagpairs_key1_value1_idx ON tagpairs (key1, value1);
 CREATE        INDEX tagpairs_key2_value2_idx ON tagpairs (key2, value2);
 
-CREATE UNIQUE INDEX relation_types_rtype ON relation_types (rtype);
-CREATE        INDEX relation_roles_rtype ON relation_roles (rtype);
-
-CREATE TABLE selected_tags (
-  skey             VARCHAR,
-  svalue           VARCHAR,
-  count_all        INTEGER DEFAULT 0,
-  count_nodes      INTEGER DEFAULT 0,
-  count_ways       INTEGER DEFAULT 0,
-  count_relations  INTEGER DEFAULT 0
-);
+CREATE UNIQUE INDEX relation_types_rtype_idx ON relation_types (rtype);
+CREATE        INDEX relation_roles_rtype_idx ON relation_roles (rtype);
 
 INSERT INTO selected_tags (skey, svalue)
     SELECT key1, value1 FROM tagpairs WHERE value1 != ''
@@ -92,6 +83,15 @@ INSERT INTO prevalent_values (key, value, count, fraction)
                       AND t.count_all > k.count_all / 100.0;
 
 CREATE INDEX prevalent_values_key_idx ON prevalent_values (key);
+
+
+INSERT INTO prevalent_roles (rtype, role, count, fraction)
+            SELECT t.rtype, r.role, r.count_all, round(CAST(r.count_all AS REAL) / CAST(t.members_all AS REAL), 4) FROM relation_types t, relation_roles r
+                    WHERE t.rtype = r.rtype
+                      AND r.count_all > t.members_all / 100.0;
+
+CREATE INDEX prevalent_roles_rtype_idx ON prevalent_roles (rtype);
+
 
 ANALYZE;
 

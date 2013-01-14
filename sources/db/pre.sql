@@ -117,3 +117,23 @@ CREATE TABLE relation_roles (
   count_relations  INTEGER
 );
 
+DROP TABLE IF EXISTS prevalent_roles;
+
+CREATE TABLE prevalent_roles (
+  rtype    TEXT,
+  role     TEXT,
+  count    INTEGER,
+  fraction REAL
+);
+
+DROP TABLE IF EXISTS selected_tags;
+
+CREATE TABLE selected_tags (
+  skey             VARCHAR,
+  svalue           VARCHAR,
+  count_all        INTEGER DEFAULT 0,
+  count_nodes      INTEGER DEFAULT 0,
+  count_ways       INTEGER DEFAULT 0,
+  count_relations  INTEGER DEFAULT 0
+);
+
