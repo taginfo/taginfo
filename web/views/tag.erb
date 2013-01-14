@@ -16,7 +16,7 @@
             <span class="button disabled" title="Button disabled, because there are too many objects with this key">JOSM</span>
         <% end %>
     </div>
-    <h1><%= link_to_key(@key) %>=<%= pp_value(@value) %></h1>
+    <h1></h1>
     <p><%= @desc %></p>
 </div>
 <div id="tabs">
@@ -50,7 +50,7 @@
             <table id="grid-wiki">
             </table>
         <% else %>
-            <p class="empty"><%= t.pages.tag.wiki_pages.none_found %> <%= @wiki_count_key > 0 ? t.pages.tag.wiki_pages.suggest_key_wiki_page(link_to_key(@key, '#wiki')) : '' %></p>
+            <p class="empty"><%= t.pages.tag.wiki_pages.none_found %> <%= @wiki_count_key > 0 ? t.pages.tag.wiki_pages.suggest_key_wiki_page('<span id="keylink"></span>') : '' %></p>
             <p><a class="extlink" target="_blank" rel="nofollow" href="http://wiki.openstreetmap.org/w/index.php?action=edit&title=Tag:<%= escape(@tag) %>"><%= t.pages.tag.wiki_pages.create %></a></p>
         <% end %>
     </div>
@@ -74,7 +74,11 @@
 <% javascript do
     JS.raw(<<"JAVASCRIPT")
 function page_init2() {
-    init_tabs([#{ @key.to_json }, #{ @value.to_json }, #{ @filter_type.to_json }]);
+    var key = #{ @key.to_json },
+        value = #{ @value.to_json };
+    jQuery('h1').html(link_to_key(key) + '=' + pp_value(value));
+    jQuery('span#keylink').html(link_to_key(key));
+    init_tabs([key, value, #{ @filter_type.to_json }]);
 }
 JAVASCRIPT
 end

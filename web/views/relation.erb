@@ -1,5 +1,5 @@
 <div class="pre">
-    <h1><%= t.pages.relation.name %> '<%= pp_rtype(@rtype) %>'</h1>
+    <h1></h1>
     <p><%= @desc %></p>
 </div>
 <div id="tabs">
@@ -23,7 +23,9 @@
 <% javascript do
     JS.raw(<<"JAVASCRIPT")
 function page_init2() {
-    init_tabs([#{ @rtype.to_json }]);
+    var rtype = #{ @rtype.to_json };
+    jQuery('h1').html("#{ t.pages.relation.name } '" + pp_rtype(rtype) + "'");
+    init_tabs([rtype]);
 }
 JAVASCRIPT
 end
