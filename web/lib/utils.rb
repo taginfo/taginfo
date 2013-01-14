@@ -142,6 +142,29 @@ def pp_value(value)
     return escape_html(value).gsub(/ /, '&#x2423;').gsub(/\s/, '<span class="whitespace">&nbsp;</span>')
 end
 
+def pp_rtype(rtype)
+    if rtype == ''
+        return '<span class="badchar empty">empty string</span>'
+    end
+
+    pp_chars = '!"#$%&()*+,/;<=>?@[\\]^`{|}~' + "'";
+
+    result = ''
+    rtype.each_char do |c|
+        if (!pp_chars.index(c).nil?)
+            result += '<span class="badchar">' + c + '</span>'
+        elsif (c == ' ')
+            result += '<span class="badchar">&#x2423;</span>'
+        elsif (c.match(/\s/))
+            result += '<span class="whitespace">&nbsp;</span>'
+        else
+            result += c;
+        end
+    end
+
+    return result;
+end
+
 def link_to_key(key, tab='')
     k = escape(key)
 

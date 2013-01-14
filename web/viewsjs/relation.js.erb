@@ -1,0 +1,39 @@
+<%
+    osm = @trans.t.osm
+    page = @trans.t.pages.relation
+ %>
+var create_flexigrid_for = {
+    roles: function(rtype) {
+        create_flexigrid('grid-roles', {
+            url: '/api/4/relation/roles?type=' + encodeURIComponent(rtype),
+            colModel: [
+                { display: '<%= osm.relation_member_role %>', name: 'role', width: 250, sortable: true },
+                { display: '<span title="<%= page.roles.objects_tooltip %>"><img src="/img/types/all.16.png" width="16" height="16" alt=""/> <%= osm.relation_members %></span>', name: 'count_all_members', width: 250, sortable: true, align: 'center' },
+                { display: '<span title="<%= page.roles.nodes_tooltip %>"><img src="/img/types/node.16.png" width="16" height="16" alt=""/> <%= osm.relation_member_nodes %></span>', name: 'count_node_members', width: 250, sortable: true, align: 'center' },
+                { display: '<span title="<%= page.roles.ways_tooltip %>"><img src="/img/types/way.16.png" width="16" height="16" alt=""/> <%= osm.relation_member_ways %></span>', name: 'count_way_members', width: 250, sortable: true, align: 'center' },
+                { display: '<span title="<%= page.roles.relations_tooltip %>"><img src="/img/types/relation.16.png" width="16" height="16" alt=""/> <%= osm.relation_member_relations %></span>', name: 'count_relation_members', width: 250, sortable: true, align: 'center' },
+            ],
+            searchitems: [
+                { display: '<%= osm.relation_member_role %>', name: 'role' }
+            ],
+            sortname: 'count_all_members',
+            sortorder: 'desc',
+            preProcess: function(data) {
+                data.rows = jQuery.map(data.data, function(row, i) {
+                    return { 'cell': [
+                        pp_role(row.role),
+                        print_value_with_percent(row.count_all_members, row.count_all_members_fraction),
+                        print_value_with_percent(row.count_node_members, row.count_node_members_fraction),
+                        print_value_with_percent(row.count_way_members, row.count_way_members_fraction),
+                        print_value_with_percent(row.count_relation_members, row.count_relation_members_fraction)
+                    ] };
+                });
+                return data;
+            }
+        });
+    }
+};
+
+function page_init() {
+    page_init2();
+}

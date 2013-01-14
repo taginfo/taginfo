@@ -12,6 +12,15 @@ osm:
     ways: Ways
     relation: Relation
     relations: Relations
+    relation_type: Relation type
+    relation_types: Relation types
+    relation_member: Relation member
+    relation_members: Relation members
+    relation_member_nodes: Member nodes
+    relation_member_ways: Member ways
+    relation_member_relations: Member relations
+    relation_member_role: Role
+    relation_member_roles: Roles
     object: Object
     objects: Objects
     all: All
@@ -33,6 +42,7 @@ taginfo:
     test: Test
     map: Map
     maps: Maps
+    relations: Relations
     combinations: Combinations
     key_combinations: Combinations
     overview: Overview
@@ -130,6 +140,15 @@ pages:
     tags:
         intro: |
                 This table shows the most common tags in the database.
+    relations:
+        name: Relation types
+        intro: Information about the different types of relations (indicated by the <a href="/keys/type?filter=relations">type</a> tag).
+        relations_of_type_tooltip: Number of relations of this type (and as percentage of all relations).
+        prevalent_roles: Prevalent roles
+        prevalent_roles_tooltip: Prevalent roles for this type of relation.
+        no_information: No information
+        roles_less_than_one_percent: no roles with more than 1%
+        empty_role: empty role
     key:
         description_from_wiki: Description of this key from the wiki (if available in your chosen language, otherwise in English).
         no_description_in_wiki: No description for this key in the wiki.
@@ -197,6 +216,18 @@ pages:
             choice: |
                   Choose style:
             no_styles: No JOSM styles for this tag.
+    relation:
+        name: Relation type
+        overview:
+            tab: Overview
+            title: Overview
+        roles:
+            tab: Roles
+            title: Member roles
+            objects_tooltip: Relation members with this role (and as percentage of all members) for this relation type.
+            nodes_tooltip: Relation members of type node with this role (and as percentage of all members of type node) for this relation type.
+            ways_tooltip: Relation members of type way with this role (and as percentage of all members of type way) for this relation type.
+            relations_tooltip: Relation members of type relation with this role (and as percentage of all members of type relation) for this relation type.
 
 flexigrid:
     pagetext: Page

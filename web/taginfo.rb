@@ -156,9 +156,9 @@ class Taginfo < Sinatra::Base
 
     #-------------------------------------
 
-    %w(about download keys sources tags).each do |page|
+    %w(about download keys relations sources tags).each do |page|
         get '/' + page do
-            @title = (page =~ /^(keys|tags)$/) ? t.osm[page] : t.taginfo[page]
+            @title = (page =~ /^(keys|tags|relations)$/) ? t.osm[page] : t.taginfo[page]
             if File.exists?("viewsjs/#{ page }.js.erb")
                 javascript "#{ r18n.locale.code }/#{ page }"
             end
@@ -190,6 +190,8 @@ class Taginfo < Sinatra::Base
     load 'lib/api/v4/key.rb'
     load 'lib/api/v4/keys.rb'
 #    load 'lib/api/v4/langtag.rb'
+    load 'lib/api/v4/relation.rb'
+    load 'lib/api/v4/relations.rb'
     load 'lib/api/v4/search.rb'
     load 'lib/api/v4/site.rb'
     load 'lib/api/v4/tag.rb'
@@ -198,6 +200,7 @@ class Taginfo < Sinatra::Base
 
     load 'lib/ui/embed.rb'
     load 'lib/ui/keys_tags.rb'
+    load 'lib/ui/relation.rb'
     load 'lib/ui/reports.rb'
     load 'lib/ui/search.rb'
     load 'lib/ui/taginfo.rb'

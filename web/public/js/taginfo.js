@@ -214,6 +214,15 @@ function url_for_tag(key, value) {
     }
 }
 
+function url_for_rtype(rtype) {
+    var t = encodeURIComponent(rtype);
+    if (rtype.match(/[=\/]/)) {
+        return '/relations/?rtype=' + t;
+    } else {
+        return '/relations/' + t;
+    }
+}
+
 function link_to_value_with_title(key, value, extra) {
     return link(
         url_for_tag(key, value),
@@ -265,6 +274,54 @@ function pp_value(value) {
     return pp_value_replace(value);
 }
 
+function pp_rtype(rtype) {
+    if (rtype == '') {
+        return span(texts.misc.empty_string, 'badchar empty');
+    }
+
+    var result = '',
+        length = rtype.length;
+
+    for (var i=0; i<length; i++) {
+        var c = rtype.charAt(i);
+        if (pp_chars.indexOf(c) != -1) {
+            result += span(c, 'badchar');
+        } else if (c == ' ') {
+            result += span('&#x2423;', 'badchar');
+        } else if (c.match(/\s/)) {
+            result += span('&nbsp;', 'whitespace');
+        } else {
+            result += c;
+        }
+    }
+
+    return result;
+}
+
+function pp_role(role) {
+    if (role == '') {
+        return span(texts.misc.empty_string, 'badchar empty');
+    }
+
+    var result = '',
+        length = role.length;
+
+    for (var i=0; i<length; i++) {
+        var c = role.charAt(i);
+        if (pp_chars.indexOf(c) != -1) {
+            result += span(c, 'badchar');
+        } else if (c == ' ') {
+            result += span('&#x2423;', 'badchar');
+        } else if (c.match(/\s/)) {
+            result += span('&nbsp;', 'whitespace');
+        } else {
+            result += c;
+        }
+    }
+
+    return result;
+}
+
 function link_to_key(key, highlight) {
     return link(
         url_for_key(key),
@@ -295,6 +352,15 @@ function link_to_key_or_tag(key, value) {
         link += '=*';
     }
     return link;
+}
+
+function link_to_rtype(rtype, highlight) {
+    return link(
+        url_for_rtype(rtype),
+        highlight === undefined ?
+            pp_rtype(rtype) : 
+            rtype.replace(new RegExp('(' + highlight + ')', 'gi'), "<b>$1</b>")
+    );
 }
 
 /* ============================ */
