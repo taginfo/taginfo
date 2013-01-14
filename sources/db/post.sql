@@ -85,6 +85,8 @@ INSERT INTO prevalent_values (key, value, count, fraction)
 CREATE INDEX prevalent_values_key_idx ON prevalent_values (key);
 
 
+INSERT INTO relation_types (rtype, count) SELECT value, count_relations FROM tags WHERE key='type' AND count_relations > 0 AND value NOT IN (SELECT rtype FROM relation_types);
+
 INSERT INTO prevalent_roles (rtype, role, count, fraction)
             SELECT t.rtype, r.role, r.count_all, round(CAST(r.count_all AS REAL) / CAST(t.members_all AS REAL), 4) FROM relation_types t, relation_roles r
                     WHERE t.rtype = r.rtype
