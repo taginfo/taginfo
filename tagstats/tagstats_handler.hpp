@@ -25,6 +25,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <map>
 
 #include <google/sparse_hash_map>
 #include <boost/algorithm/string/split.hpp>
@@ -181,6 +182,15 @@ public:
 typedef google::sparse_hash_map<const char *, KeyValueStats *, djb2_hash, eqstr> key_value_hash_map_t;
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
 
+class RelationTypeStats {
+
+public:
+
+    RelationTypeStats() {
+    }
+
+}; // class RelationTypeStats
+
 /**
  * Osmium handler that creates statistics for Taginfo.
  */
@@ -199,6 +209,8 @@ class TagStatsHandler : public Osmium::Handler::Base {
 #ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
     key_value_hash_map_t m_key_value_stats;
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
+
+    std::map<std::string, RelationTypeStats> m_relation_type_stats;
 
     time_t m_max_timestamp;
 
@@ -392,7 +404,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
 public:
 
-    TagStatsHandler(Sqlite::Database& database, const std::string& tags_list, MapToInt<rough_position_t>& map_to_int) :
+    TagStatsHandler(Sqlite::Database& database, const std::string& tags_list, const std::string& relation_type_list, MapToInt<rough_position_t>& map_to_int) :
         Base(),
         m_max_timestamp(0),
         m_string_store(string_store_size),
@@ -410,6 +422,11 @@ public:
             m_key_value_stats[m_string_store.add(key_value.c_str())] = new KeyValueStats();
         }
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
+        std::ifstream relation_type_list_file(relation_type_list.c_str(), std::ifstream::in);
+        std::string type;
+        while (relation_type_list_file >> type) {
+            m_relation_type_stats[type] = RelationTypeStats();
+        }
     }
 
     void node(const shared_ptr<Osmium::OSM::Node const>& node) {

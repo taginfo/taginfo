@@ -21,5 +21,5 @@ ulimit -c 1000000000
 rm -f core
 
 #./tagstats --left=5.5 --bottom=47 --right=15 --top=55 --width=200 --height=320 $OSMFILE $DATABASE
-./tagstats -T test_tagslist.txt $OSMFILE $DATABASE
+./tagstats --tags test_tags.txt --relation-types test_relation_types.txt $OSMFILE $DATABASE
 
