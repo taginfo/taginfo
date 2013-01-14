@@ -724,22 +724,23 @@ public:
         BOOST_FOREACH(relation_type_stats_map_iterator_t it, m_relation_type_stats) {
             const RelationTypeStats& r = it.second;
             statement_insert_into_relation_types
-            .bind_text(it.first)
-            .bind_int64(r.m_count)
-            .bind_int64(r.m_node_members + r.m_way_members + r.m_relation_members)
-            .bind_int64(r.m_node_members)
-            .bind_int64(r.m_way_members)
-            .bind_int64(r.m_relation_members)
+            .bind_text(it.first)                 // column: rtype
+            .bind_int64(r.m_count)               // column: count
+            .bind_int64(r.m_node_members + r.m_way_members + r.m_relation_members)  // column: members_all
+            .bind_int64(r.m_node_members)        // columns: members_nodes
+            .bind_int64(r.m_way_members)         // columns: members_ways
+            .bind_int64(r.m_relation_members)    // columns: members_relations
             .execute();
 
             BOOST_FOREACH(relation_role_stats_map_iterator_t roleit, r.m_role_counts) {
                 const RelationRoleStats& rstats = roleit.second;
                 statement_insert_into_relation_roles
-                .bind_text(it.first)
-                .bind_text(roleit.first)
-                .bind_int64(rstats.node)
-                .bind_int64(rstats.way)
-                .bind_int64(rstats.relation)
+                .bind_text(it.first)             // column: rtype
+                .bind_text(roleit.first)         // column: role
+                .bind_int64(rstats.node + rstats.way + rstats.relation)  // column: count_all
+                .bind_int64(rstats.node)         // column: count_nodes
+                .bind_int64(rstats.way)          // column: count_ways
+                .bind_int64(rstats.relation)     // column: count_relations
                 .execute();
             }
         }
