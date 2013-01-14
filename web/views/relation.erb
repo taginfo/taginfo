@@ -12,8 +12,12 @@
     </div>
     <div id="roles">
         <h2><%= t.pages.relation.roles.title %></h2>
+<% if @count_relation_roles > 0 %>
         <table id="grid-roles">
         </table>
+<% else %>
+        <p class="empty"><%= t.pages.relation.roles.no_roles_info %></p>
+<% end %>
     </div>
 </div>
 <% javascript do

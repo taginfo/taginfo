@@ -13,6 +13,10 @@ class Taginfo < Sinatra::Base
 
         @desc = 'XXX'
 
+        @count_relation_roles = @db.count('relation_roles').
+            condition("rtype=?", rtype).
+            get_first_value().to_i
+
         javascript "#{ r18n.locale.code }/relation"
         erb :relation
     end
