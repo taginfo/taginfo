@@ -36,6 +36,7 @@ CREATE TABLE keys (
 );
 
 DROP TABLE IF EXISTS prevalent_values;
+
 CREATE TABLE prevalent_values (
   key      TEXT,
   value    TEXT,
@@ -92,5 +93,27 @@ CREATE TABLE tagpairs (
   count_nodes      INTEGER,
   count_ways       INTEGER,
   count_relations  INTEGER 
+);
+
+DROP TABLE IF EXISTS relation_types;
+
+CREATE TABLE relation_types (
+  rtype             VARCHAR,
+  count             INTEGER,
+  members_all       INTEGER,
+  members_nodes     INTEGER,
+  members_ways      INTEGER,
+  members_relations INTEGER
+);
+
+DROP TABLE IF EXISTS relation_roles;
+
+CREATE TABLE relation_roles (
+  rtype            VARCHAR,
+  role             VARCHAR,
+  count_all        INTEGER,
+  count_nodes      INTEGER,
+  count_ways       INTEGER,
+  count_relations  INTEGER
 );
 

@@ -28,6 +28,7 @@
 #include <map>
 
 #include <google/sparse_hash_map>
+#include <boost/foreach.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
 
@@ -182,14 +183,53 @@ public:
 typedef google::sparse_hash_map<const char *, KeyValueStats *, djb2_hash, eqstr> key_value_hash_map_t;
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
 
+struct RelationRoleStats {
+    uint32_t node;
+    uint32_t way;
+    uint32_t relation;
+};
+
 class RelationTypeStats {
 
 public:
 
-    RelationTypeStats() {
+    uint64_t m_count;
+    uint64_t m_node_members;
+    uint64_t m_way_members;
+    uint64_t m_relation_members;
+
+    std::map<std::string, RelationRoleStats> m_role_counts;
+
+    RelationTypeStats() :
+        m_count(0),
+        m_node_members(0),
+        m_way_members(0),
+        m_relation_members(0),
+        m_role_counts() {
+    }
+
+    void add(const Osmium::OSM::Relation& relation) {
+        m_count++;
+
+        BOOST_FOREACH(const Osmium::OSM::RelationMember& member, relation.members()) {
+            RelationRoleStats& r = m_role_counts[member.role()];
+            switch (member.type()) {
+                case 'n': ++r.node;
+                          ++m_node_members;
+                          break;
+                case 'w': ++r.way;
+                          ++m_way_members;
+                          break;
+                case 'r': ++r.relation;
+                          ++m_relation_members;
+                          break;
+            }
+        }
     }
 
 }; // class RelationTypeStats
+
+typedef std::map<std::string, RelationTypeStats> relation_type_stats_map_t;
 
 /**
  * Osmium handler that creates statistics for Taginfo.
@@ -210,7 +250,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
     key_value_hash_map_t m_key_value_stats;
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
 
-    std::map<std::string, RelationTypeStats> m_relation_type_stats;
+    relation_type_stats_map_t m_relation_type_stats;
 
     time_t m_max_timestamp;
 
@@ -449,6 +489,14 @@ public:
     void relation(const shared_ptr<Osmium::OSM::Relation const>& relation) {
         statistics_handler.relation(relation);
         collect_tag_stats(*relation);
+
+        const char* type = relation->tags().get_value_by_key("type");
+        if (type) {
+            relation_type_stats_map_t::iterator it = m_relation_type_stats.find(type);
+            if (it != m_relation_type_stats.end()) {
+                it->second.add(*relation);
+            }
+        }
     }
 
     void before_nodes() {
@@ -539,6 +587,14 @@ public:
                 "count_all, count_nodes, count_ways, count_relations) " \
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
+
+        Sqlite::Statement statement_insert_into_relation_types(m_database, "INSERT INTO relation_types (rtype, count, " \
+                "members_all, members_nodes, members_ways, members_relations) " \
+                "VALUES (?, ?, ?, ?, ?, ?);");
+
+        Sqlite::Statement statement_insert_into_relation_roles(m_database, "INSERT INTO relation_roles (rtype, role, " \
+                "count_all, count_nodes, count_ways, count_relations) " \
+                "VALUES (?, ?, ?, ?, ?, ?);");
 
         Sqlite::Statement statement_update_meta(m_database, "UPDATE source SET data_until=?");
 
@@ -658,6 +714,32 @@ public:
             delete stat; // lets make valgrind happy
         }
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
+
+        typedef std::pair<const std::string, RelationTypeStats> relation_type_stats_map_iterator_t;
+        typedef std::pair<const std::string, RelationRoleStats> relation_role_stats_map_iterator_t;
+
+        BOOST_FOREACH(relation_type_stats_map_iterator_t it, m_relation_type_stats) {
+            const RelationTypeStats& r = it.second;
+            statement_insert_into_relation_types
+                .bind_text(it.first)
+                .bind_int64(r.m_count)
+                .bind_int64(r.m_node_members + r.m_way_members + r.m_relation_members)
+                .bind_int64(r.m_node_members)
+                .bind_int64(r.m_way_members)
+                .bind_int64(r.m_relation_members)
+                .execute();
+
+            BOOST_FOREACH(relation_role_stats_map_iterator_t roleit, r.m_role_counts) {
+                const RelationRoleStats& rstats = roleit.second;
+                statement_insert_into_relation_roles
+                    .bind_text(it.first)
+                    .bind_text(roleit.first)
+                    .bind_int64(rstats.node)
+                    .bind_int64(rstats.way)
+                    .bind_int64(rstats.relation)
+                    .execute();
+            }
+        }
 
         m_database.commit();
 
