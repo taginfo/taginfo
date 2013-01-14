@@ -50,7 +50,7 @@ if [ "x" = "x$TAGSTATS" ]; then
 fi
 
 #TAGSTATS="valgrind --leak-check=full --show-reachable=yes $TAGSTATS"
-$TAGSTATS -T $DIR/interesting_tags.lst --left=$left --bottom=$bottom --top=$top --right=$right --width=$width --height=$height $PLANETFILE $DATABASE
+$TAGSTATS --tags $DIR/interesting_tags.lst --relation-types $DIR/interesting_relation_types.lst --left=$left --bottom=$bottom --top=$top --right=$right --width=$width --height=$height $PLANETFILE $DATABASE
 
 echo "`$DATECMD` Running update_characters... "
 ./update_characters.pl $DIR
