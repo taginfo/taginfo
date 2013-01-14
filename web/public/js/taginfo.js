@@ -195,9 +195,11 @@ function html_escape(text) {
     return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
+var bad_chars_for_url = /[.=\/]/;
+
 function url_for_key(key) {
     var k = encodeURIComponent(key);
-    if (key.match(/[=\/]/)) {
+    if (key.match(bad_chars_for_url)) {
         return '/keys/?key=' + k;
     } else {
         return '/keys/' + k;
@@ -207,7 +209,7 @@ function url_for_key(key) {
 function url_for_tag(key, value) {
     var k = encodeURIComponent(key),
         v = encodeURIComponent(value);
-    if (key.match(/[=\/]/) || value.match(/[=\/]/)) {
+    if (key.match(bad_chars_for_url) || value.match(bad_chars_for_url)) {
         return '/tags/?key=' + k + '&value=' + v;
     } else {
         return '/tags/' + k + '=' + v;
@@ -216,7 +218,7 @@ function url_for_tag(key, value) {
 
 function url_for_rtype(rtype) {
     var t = encodeURIComponent(rtype);
-    if (rtype.match(/[=\/]/)) {
+    if (rtype.match(bad_chars_for_url)) {
         return '/relations/?rtype=' + t;
     } else {
         return '/relations/' + t;
