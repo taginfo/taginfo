@@ -1,10 +1,11 @@
 # web/lib/utils.rb
 
-# patches convenience methods into base classes
+# ------------------------------------------------------------------------------
+# patch some convenience methods into base classes
 
 class Fixnum
 
-    # convert to string with this space as thousand separator
+    # convert to string with thin space as thousand separator
     def to_s_with_ts
         self.to_s.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1&thinsp;")
     end
@@ -37,10 +38,14 @@ class Numeric
 end
 
 class Float
+
     def round_to(n=0)
         (self * (10.0 ** n)).round * (10.0 ** (-n))
     end
+
 end
+
+# ------------------------------------------------------------------------------
 
 def title
     @title = [] if @title.nil?
@@ -53,6 +58,8 @@ def section(id)
     @section = id.to_s
     @section_title = (@section =~ /^(keys|tags)$/) ? t.osm[@section] : t.taginfo[@section]
 end
+
+# ------------------------------------------------------------------------------
 
 # Escape tag key or value for XAPI according to
 # http://wiki.openstreetmap.org/wiki/XAPI#Escaping
@@ -88,6 +95,8 @@ def wiki_link(title)
     external_link('wikilink_' + title.gsub(%r{[^A-Za-z0-9]}, '_'), title, prefix + title)
 end
 
+# ------------------------------------------------------------------------------
+
 def tagcloud_size(tag)
     x = tag['scale1'].to_f / 20 + tag['pos'] / 4
     (x * 40 + 12).to_i
@@ -110,6 +119,8 @@ def get_total(type)
     return @db.stats(key)
 end
 
+# ------------------------------------------------------------------------------
+
 # Like the 'get' method but will add a redirect for the same path with trailing / added
 def get!(path, &block)
     get path, &block
@@ -123,6 +134,8 @@ def api(version, path, doc=nil, &block)
     API.new(version, path, doc) unless doc.nil?
     get("/api/#{version}/#{path}", &block)
 end
+
+# ------------------------------------------------------------------------------
 
 # Used in wiki api calls
 def get_wiki_result(res)
