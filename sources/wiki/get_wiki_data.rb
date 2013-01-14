@@ -17,7 +17,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2012  Jochen Topf <jochen@remote.org>
+#  Copyright (C) 2013  Jochen Topf <jochen@remote.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -148,7 +148,7 @@ class WikiPage
     # and their parameters.
     def parse_content
         @parsed = true
-        text = @content
+        text = @content.gsub(%r{<!--.*?-->}, '')
 
         # dummy template as base context
         context = [ Template.new ]
@@ -280,7 +280,7 @@ File.open(dir + '/tagpages.list') do |wikipages|
             get_page(db, api, page)
 
             page.parse_content do |template|
-                puts "Template: #{template.name} [#{template.parameters.join(',')}] #{template.named_parameters.inspect}"
+                #puts "Template: #{template.name} [#{template.parameters.join(',')}] #{template.named_parameters.inspect}"
                 if template.name == 'Key' || template.name == 'Tag'
                     tag = template.parameters[0]
                     if template.parameters[1]
