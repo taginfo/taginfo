@@ -22,6 +22,9 @@ CREATE UNIQUE INDEX key_distributions_key_idx ON key_distributions (key, object_
 CREATE        INDEX tagpairs_key1_value1_idx ON tagpairs (key1, value1);
 CREATE        INDEX tagpairs_key2_value2_idx ON tagpairs (key2, value2);
 
+CREATE UNIQUE INDEX relation_types_rtype ON relation_types (rtype);
+CREATE        INDEX relation_roles_rtype ON relation_roles (rtype);
+
 CREATE TABLE selected_tags (
   skey             VARCHAR,
   svalue           VARCHAR,
