@@ -105,11 +105,11 @@ int main(int argc, char *argv[]) {
     while (true) {
         int c = getopt_long(argc, argv,
 #ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
-        "dHT:R:t:r:b:l:w:h:",
+                            "dHT:R:t:r:b:l:w:h:",
 #else
-        "dHR:t:r:b:l:w:h:",
+                            "dHR:t:r:b:l:w:h:",
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
-        long_options, 0);
+                            long_options, 0);
         if (c == -1) {
             break;
         }

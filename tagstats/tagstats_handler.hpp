@@ -214,15 +214,18 @@ public:
         BOOST_FOREACH(const Osmium::OSM::RelationMember& member, relation.members()) {
             RelationRoleStats& r = m_role_counts[member.role()];
             switch (member.type()) {
-                case 'n': ++r.node;
-                          ++m_node_members;
-                          break;
-                case 'w': ++r.way;
-                          ++m_way_members;
-                          break;
-                case 'r': ++r.relation;
-                          ++m_relation_members;
-                          break;
+                case 'n':
+                    ++r.node;
+                    ++m_node_members;
+                    break;
+                case 'w':
+                    ++r.way;
+                    ++m_way_members;
+                    break;
+                case 'r':
+                    ++r.relation;
+                    ++m_relation_members;
+                    break;
             }
         }
     }
@@ -721,23 +724,23 @@ public:
         BOOST_FOREACH(relation_type_stats_map_iterator_t it, m_relation_type_stats) {
             const RelationTypeStats& r = it.second;
             statement_insert_into_relation_types
-                .bind_text(it.first)
-                .bind_int64(r.m_count)
-                .bind_int64(r.m_node_members + r.m_way_members + r.m_relation_members)
-                .bind_int64(r.m_node_members)
-                .bind_int64(r.m_way_members)
-                .bind_int64(r.m_relation_members)
-                .execute();
+            .bind_text(it.first)
+            .bind_int64(r.m_count)
+            .bind_int64(r.m_node_members + r.m_way_members + r.m_relation_members)
+            .bind_int64(r.m_node_members)
+            .bind_int64(r.m_way_members)
+            .bind_int64(r.m_relation_members)
+            .execute();
 
             BOOST_FOREACH(relation_role_stats_map_iterator_t roleit, r.m_role_counts) {
                 const RelationRoleStats& rstats = roleit.second;
                 statement_insert_into_relation_roles
-                    .bind_text(it.first)
-                    .bind_text(roleit.first)
-                    .bind_int64(rstats.node)
-                    .bind_int64(rstats.way)
-                    .bind_int64(rstats.relation)
-                    .execute();
+                .bind_text(it.first)
+                .bind_text(roleit.first)
+                .bind_int64(rstats.node)
+                .bind_int64(rstats.way)
+                .bind_int64(rstats.relation)
+                .execute();
             }
         }
 
