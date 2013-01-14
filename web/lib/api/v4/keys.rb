@@ -155,7 +155,7 @@ class Taginfo < Sinatra::Base
             condition_if("key LIKE '%' || ? || '%'", params[:query]).
             get_first_value().to_i
 
-        res = @db.select('SELECT key, langs FROM wiki.wikipages_keys').
+        res = @db.select("SELECT key, coalesce(langs, '') AS langs FROM wiki.wikipages_keys").
             condition_if("key LIKE '%' || ? || '%'", params[:query]).
             order_by(@ap.sortname, @ap.sortorder){ |o|
                 o.key
