@@ -13,6 +13,10 @@ REGISTRY_FILE="$DIR/language-subtag-registry"
 CLDR_URL="http://unicode.org/Public/cldr/latest/core.zip"
 CLDR_FILE="$DIR/cldr-core.zip"
 CLDR_DIR="$DIR/cldr"
+UNICODE_SCRIPTS_URL="http://www.unicode.org/Public/UNIDATA/Scripts.txt"
+UNICODE_SCRIPTS_FILE="$DIR/Scripts.txt"
+PROPERTY_ALIASES_URL="http://www.unicode.org/Public/UNIDATA/PropertyValueAliases.txt"
+PROPERTY_ALIASES_FILE="$DIR/PropertyValueAliases.txt"
 
 DATECMD='date +%Y-%m-%dT%H:%M:%S'
 
@@ -36,7 +40,7 @@ sqlite3 $DATABASE <pre.sql
 echo "`$DATECMD` Getting subtag registry..."
 curl --silent --time-cond $REGISTRY_FILE --output $REGISTRY_FILE $REGISTRY_URL
 
-echo "`$DATECMD` Running import..."
+echo "`$DATECMD` Running subtag import..."
 ./import_subtag_registry.rb $DIR
 
 echo "`$DATECMD` Getting CLDR..."
@@ -46,6 +50,13 @@ echo "`$DATECMD` Unpacking CLDR..."
 rm -fr $CLDR_DIR
 mkdir $CLDR_DIR
 unzip -q -d $CLDR_DIR $CLDR_FILE
+
+echo "`$DATECMD` Getting unicode scripts..."
+curl --silent --location --time-cond $UNICODE_SCRIPTS_FILE --output $UNICODE_SCRIPTS_FILE $UNICODE_SCRIPTS_URL
+curl --silent --location --time-cond $PROPERTY_ALIASES_FILE --output $PROPERTY_ALIASES_FILE $PROPERTY_ALIASES_URL
+
+echo "`$DATECMD` Running unicode scripts import..."
+./import_unicode_scripts.rb $DIR
 
 echo "`$DATECMD` Running post.sql..."
 sqlite3 $DATABASE <post.sql

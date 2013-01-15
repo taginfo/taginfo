@@ -20,3 +20,18 @@ CREATE TABLE subtags (
     prefix          TEXT
 );
 
+DROP TABLE IF EXISTS unicode_scripts;
+
+CREATE TABLE unicode_scripts (
+    script TEXT,
+    name   TEXT
+);
+
+DROP TABLE IF EXISTS unicode_codepoint_script_mapping;
+
+CREATE TABLE unicode_codepoint_script_mapping (
+    codepoint_from TEXT,
+    codepoint_to   TEXT,
+    name           TEXT
+);
+
