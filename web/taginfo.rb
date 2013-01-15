@@ -54,8 +54,6 @@ TaginfoConfig.read
 
 #------------------------------------------------------------------------------
 
-BCP47::read_registry
-
 DATA_UNTIL = SQL::Database.init('../../data');
 
 class Taginfo < Sinatra::Base

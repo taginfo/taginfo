@@ -4,7 +4,6 @@
 # Languages" and the IANA language subtag registry.
 module BCP47
 
-    REGISTRY_FILE = "lib/langtag/language-subtag-registry"
     SUBTAG_TYPES = %w( language script region variant )
 
     def self.get_filter(p)
@@ -13,103 +12,6 @@ module BCP47
         else
             ''
         end
-    end
-
-    class Entry
-
-        @@entries = Array.new
-        @@entry_by_subtag = Hash.new
-
-        attr_accessor :type, :subtag, :added, :suppress_script, :scope
-
-        def self.entries(type = nil)
-            if type.nil? || type == ''
-                @@entries
-            else
-                @@entries.select{ |entry| type == entry.type }
-            end
-        end
-
-        def self.cleanup
-            @@entries = @@entries.select do |entry|
-                SUBTAG_TYPES.include?(entry.type) &&
-                    entry.description != 'Private use' &&
-                    (entry.type != 'language' || entry.scope != 'special') &&
-                    (entry.type != 'script'   || !entry.subtag.match(%r{^Z}) ) &&
-                    (entry.type != 'region'   || entry.subtag.match(%r{^[A-Z]{2}$}) )
-            end
-            SUBTAG_TYPES.each do |type|
-                @@entry_by_subtag[type] = Hash.new
-            end
-            entries.each do |entry|
-                @@entry_by_subtag[entry.type][entry.subtag] = entry
-            end
-        end
-
-        def self.get_by_code(type, code)
-            @@entry_by_subtag[type][code]
-        end
-
-        def description=(value)
-            @descriptions.push(value)
-        end
-
-        def description
-            @descriptions.join('. ')
-        end
-
-        def prefix=(value)
-            @prefixes.push(value)
-        end
-
-        def prefix
-            @prefixes.join(', ')
-        end
-
-        def notes
-            n = ''
-            if suppress_script
-                n += "Default script: #{suppress_script}"
-            end
-            unless @prefixes.empty?
-                n += "Prefixes: #{prefix}"
-            end
-            n
-        end
-
-        def initialize
-            @@entries.push(self)
-            @descriptions = []
-            @prefixes = []
-        end
- 
-    end
-
-    def self.read_registry
-        entry = nil
-        last_key = nil
-        open(REGISTRY_FILE) do |file|
-            file.each do |line|
-                line.chomp!
-                if line == '%%'
-                    entry = Entry.new
-                elsif line =~ /^\s+(.*)/
-                    if entry.respond_to?(last_key)
-                        entry.send(last_key, $1)
-                    end
-                else
-                    (key, value) = line.split(/: /)
-                    key.downcase!
-                    key.gsub!(/[^a-z]/, '_')
-                    s = (key + '=').to_sym
-                    last_key = s
-                    if entry.respond_to?(s)
-                        entry.send(s, value)
-                    end
-                end
-            end
-        end
-        Entry.cleanup
     end
 
     class Nametag
@@ -124,7 +26,15 @@ module BCP47
 
         attr_reader :prefix, :type, :langtag, :langtag_state, :lang, :lang_state, :lang_note, :script, :script_state, :script_note, :region, :region_state, :region_note, :notes
 
-        def initialize(key)
+        def get_by_code(stype, subtag)
+            @db.select("SELECT * FROM languages.subtags WHERE stype=? AND subtag=?", stype, subtag).execute() do |row|
+                return row
+            end
+            return nil
+        end
+
+        def initialize(db, key)
+            @db = db
             @lang = ''
             @lang_state = ''
             @lang_note = ''
@@ -144,11 +54,11 @@ module BCP47
 
                     @lang = subtags.shift
                     if @lang.match(LANG_PATTERN)
-                        @lang_entry = Entry.get_by_code('language', @lang)
-                        if @lang_entry
+                        lang_entry = get_by_code('language', @lang)
+                        if lang_entry
                             @lang_state = 'good'
-                            @lang_note = @lang_entry.description
-                            @default_script = @lang_entry.suppress_script
+                            @lang_note = lang_entry['description']
+                            @default_script = lang_entry['suppress_script']
                         else
                             @lang_state = 'okay'
                             @lang_note = '(Language subtag not in registry)'
@@ -164,11 +74,11 @@ module BCP47
                     if !subtags.empty? && subtags[0].match(SCRIPT_PATTERN_CI)
                         @script = subtags.shift
                         if @script.match(SCRIPT_PATTERN)
-                            @script_entry = Entry.get_by_code('script', @script)
-                            if @script_entry
+                            script_entry = get_by_code('script', @script)
+                            if script_entry
                                 @script_state = 'good'
-                                @script_note = @script_entry.description
-                                @default_script = @script_entry.suppress_script
+                                @script_note = script_entry['description']
+                                @default_script = script_entry['suppress_script']
                             else
                                 @script_state = 'okay'
                                 @script_note = '(Script subtag not in registry)'

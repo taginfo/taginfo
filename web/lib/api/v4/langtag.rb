@@ -47,7 +47,7 @@ class Taginfo < Sinatra::Base
             :rp    => @ap.results_per_page,
             :total => total,
             :data  => res.map{ |row|
-                nt = BCP47::Nametag.new(row['key'])
+                nt = BCP47::Nametag.new(@db, row['key'])
                 {
                 :key           => row['key'],
                 :count_all     => row['count_all'].to_i,
@@ -94,40 +94,39 @@ class Taginfo < Sinatra::Base
 
         @filter_type = BCP47.get_filter(params[:filter])
 
-        entries = BCP47::Entry::entries(@filter_type) 
+        total = @db.count('languages.subtags').
+                condition_if("stype = ?", @filter_type).
+                get_first_value().to_i
 
-        if params[:query]
-            q = params[:query].downcase
-            entries = entries.select do |entry|
-                !entry.subtag.downcase.index(q).nil? || !entry.description.downcase.index(q).nil?
-            end
-        end
-
-        total = entries.size
-
-        if @ap.sortname =~ /^(subtag|description|added)$/
-            s = @ap.sortname.to_sym
-            if @ap.sortorder == 'ASC'
-                entries.sort!{ |a, b| a.send(s) <=> b.send(s) }
-            else
-                entries.sort!{ |a, b| b.send(s) <=> a.send(s) }
-            end
-        end
-
-        if @ap.do_paging?
-            entries = entries[@ap.first_result, @ap.results_per_page]
-        end
+        res = @db.select('SELECT * FROM languages.subtags').
+            condition_if("stype = ?", @filter_type).
+            condition_if("subtag LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%'", params[:query], params[:query]).
+            order_by(@ap.sortname, @ap.sortorder) { |o|
+                o.subtag
+                o.description
+                o.added
+            }.
+            paging(@ap).
+            execute()
 
         return {
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total,
-            :data  => entries.map{ |entry| h = {
-                :type        => entry.type.titlecase,
-                :subtag      => entry.subtag,
-                :description => entry.description,
-                :added       => entry.added,
-                :notes       => entry.notes
+            :data  => res.map{ |row|
+                notes = ''
+                if row['suppress_script']
+                    notes += "Default script: #{ row['suppress_script'] }"
+                end 
+                unless row['prefix'].empty?
+                    notes += "Prefixes: #{ row['prefix'] }"
+                end
+                {
+                :type        => row['stype'].titlecase,
+                :subtag      => row['subtag'],
+                :description => row['description'],
+                :added       => row['added'],
+                :notes       => notes
             }}
         }.to_json
     end
