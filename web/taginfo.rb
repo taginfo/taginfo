@@ -175,6 +175,12 @@ class Taginfo < Sinatra::Base
 
     #--------------------------------------------------------------------------
 
+    not_found do
+        erb :not_found
+    end
+
+    #--------------------------------------------------------------------------
+
     # old deprecated API (version 2 and 3)
     load 'lib/api/db.rb'
     load 'lib/api/josm.rb'

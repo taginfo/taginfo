@@ -82,6 +82,9 @@ misc:
     in_josm_tooltip: Key appears in JOSM config.
 
 pages:
+    not_found:
+        title: Not found
+        intro: Sorry, we could not find the page you were looking for.
     index:
         popular_keys: Some popular keys
         keys:
