@@ -37,6 +37,7 @@ module SQL
             Source.each do |source|
                 @db.execute("ATTACH DATABASE ? AS ?", "#{ @@dir }/#{ source.dbname }", source.id.to_s)
             end
+            @db.execute("ATTACH DATABASE ? AS search", "#{ @@dir }/taginfo-search.db")
             self
         end
 
