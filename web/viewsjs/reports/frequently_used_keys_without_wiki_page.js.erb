@@ -36,6 +36,7 @@ function create_flexigrid_with_option(english) {
 }
 
 function page_init() {
+    up = function() { window.location = '/reports'; };
     page_init2();
     jQuery('#english').bind('click', function() {
         jQuery('#grid-keys').flexOptions({

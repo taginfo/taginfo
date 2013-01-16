@@ -14,6 +14,8 @@ var tags_data = <%= tags.map{ |entry| [ entry['skey'], entry['svalue'] ] }.to_js
 
 var width, height, font_family = 'Impact', font_weight = 'normal';
 
+up = function() {};
+
 function draw(words) {
     var fill = d3.scale.category20b();
 

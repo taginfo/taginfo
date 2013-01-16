@@ -12,6 +12,7 @@
     @languages_lookup = @languages.map{ |lang| "'#{lang}': #{lang_lookup[lang]}" }.join(', ')
 %>
 function page_init() {
+    up = function() { window.location = '/reports'; };
     var lang_to_idx = {
         <%= @languages_lookup %>
     };

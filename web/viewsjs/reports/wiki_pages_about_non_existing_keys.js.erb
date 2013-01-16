@@ -3,6 +3,7 @@
     page = @trans.t.reports.wiki_pages_about_non_existing_keys
  %>
 function page_init() {
+    up = function() { window.location = '/reports'; };
     create_flexigrid('grid-keys', {
         url: '/api/4/keys/all?filters=in_wiki,not_in_db&include=wikipages',
         colModel: [

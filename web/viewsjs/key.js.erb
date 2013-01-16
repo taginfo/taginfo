@@ -183,6 +183,8 @@ function create_chart(params) {
 }
 
 function page_init() {
+    up = function() { window.location = '/keys'; }
+
     jQuery('#josm_button').bind('click', function() {
         jQuery('#josmiframe')[0].src = jQuery('#josm_button')[0].href;
         return false;

@@ -13,7 +13,8 @@ Number.prototype.print_as_percent = function() {
 /* ============================ */
 
 var grids = {},
-    current_grid = '';
+    current_grid = '',
+    up = function() { window.location = '/'; };
 
 /* ============================ */
 
@@ -302,7 +303,7 @@ function pp_rtype(rtype) {
 
 function pp_role(role) {
     if (role == '') {
-        return span(texts.misc.empty_string, 'badchar empty');
+        return span(texts.misc.empty_string, 'empty');
     }
 
     var result = '',
@@ -401,6 +402,16 @@ function create_flexigrid(domid, options) {
         grids[domid] = me.flexigrid(jQuery.extend({}, flexigrid_defaults, texts.flexigrid, options, { rp: rp }));
         jQuery('th *[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 's', offset: 3 });
         jQuery('.sDiv input[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 'e' });
+        jQuery('input.qsbox').bind('keydown', function(event) {
+            if (event.which == 27) { // esc
+                this.blur();
+                return false;
+            }
+            if (event.which == 9) { // tab
+                jQuery('input#search').focus();
+                return false;
+            }
+        });
     } else {
         // grid does exist, make sure it has the right size
         resize_grid(domid);
@@ -469,7 +480,69 @@ jQuery(document).ready(function() {
                 window.location = '/keys/' + ui.item.value;
             }
         }
-    }).focus();
+    });
+
+    jQuery(document).bind('keyup', function(event) {
+        if (event.target == document.body) {
+            if (event.which >= 49 && event.which <= 57) { // digit
+                jQuery("#tabs").tabs("select", event.which - 49);
+            } else {
+                switch (event.which) {
+        /*            case 63: // ?
+                        window.location = '/help';
+                        break;*/
+                    case 70: // f
+                        jQuery('input.qsbox').focus();
+                        break;
+                    case 72: // h
+                        window.location = '/';
+                        break;
+                    case 75: // k
+                        window.location = '/keys';
+                        break;
+                    case 83: // s
+                        jQuery('input#search').focus();
+                        break;
+                    case 84: // t
+                        window.location = '/tags';
+                        break;
+                    case 8: // backspace
+                        up();
+                        break;
+                    case 36: // home
+                        jQuery('div.pFirst:visible').click();
+                        break;
+                    case 33: // page up
+                        jQuery('div.pPrev:visible').click();
+                        break;
+                    case 34: // page down
+                        jQuery('div.pNext:visible').click();
+                        break;
+                    case 35: // end
+                        jQuery('div.pLast:visible').click();
+                        break;
+                }
+            }
+        }
+    });
+
+    jQuery(document).bind('keydown', function(event) {
+        if (event.target == document.body && event.which == 9) {
+            jQuery('input#search').focus();
+            return false;
+        }
+    });
+
+    jQuery('input#search').bind('keydown', function(event) {
+        if (event.which == 27) { // esc
+            this.blur();
+            return false;
+        }
+        if (event.which == 9) { // tab
+            jQuery('input.qsbox:visible').focus();
+            return false;
+        }
+    });
 
     jQuery(window).resize(function() {
         resize_box();

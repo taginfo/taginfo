@@ -74,6 +74,7 @@ var create_flexigrid_for = {
 };
 
 function page_init() {
+    up = function() { window.location = '/reports'; };
     jQuery('#subtag-filter').bind('change', function() {
         var value = this.value;
 

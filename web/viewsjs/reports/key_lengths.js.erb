@@ -47,6 +47,7 @@ end
 hist = hist.map{ |item| item.nil? ? 0 : item } %>
 
 function page_init() {
+    up = function() { window.location = '/reports'; };
     init_tabs([]);
 
     var bar_width = 6,

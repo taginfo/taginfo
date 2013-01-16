@@ -1,5 +1,6 @@
 <% page = @trans.t.reports.languages %>
 function page_init() {
+    up = function() { window.location = '/reports'; };
     create_flexigrid('grid-langs', {
         url: '/api/4/wiki/languages',
         colModel: [
