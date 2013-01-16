@@ -103,8 +103,8 @@ function link_to_value(key, value, attr) {
     );
 }
 
-function link_to_tag(key, value) {
-    return link_to_key(key) + '=' + link_to_value(key, value);
+function link_to_tag(key, value, key_attr, value_attr) {
+    return link_to_key(key, key_attr) + '=' + link_to_value(key, value, value_attr);
 }
 
 function link_to_rtype(rtype, attr) {
@@ -455,7 +455,10 @@ function table_down() {
 function table_right() {
     var current = jQuery('.trOver');
     if (current.size() > 0) {
-        var link = current.find("a");
+        var link = current.find('a.pref');
+        if (link.size() == 0) {
+            link = current.find('a');
+        }
         if (link.size() > 0) {
             window.location = link.attr('href');
         }

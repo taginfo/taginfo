@@ -6,7 +6,7 @@
 function link_to_key_or_tag(key, value) {
     var link = link_to_key(key) + '=';
     if (value && value != '') {
-        link += link_to_value(key, value);
+        link += link_to_value(key, value, { 'class': 'pref' });
     } else {
         link += '*';
     }
