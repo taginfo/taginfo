@@ -3,6 +3,16 @@
     misc = @trans.t.misc
     page = @trans.t.pages.tag
  %>
+function link_to_key_or_tag(key, value) {
+    var link = link_to_key(key) + '=';
+    if (value && value != '') {
+        link += link_to_value(key, value);
+    } else {
+        link += '*';
+    }
+    return link;
+}
+
 var create_flexigrid_for = {
     overview: function(key, value, filter_type) {
         create_flexigrid('grid-overview', {

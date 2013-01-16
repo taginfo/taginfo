@@ -55,13 +55,74 @@ function resize_grid(the_grid) {
 
 /* ============================ */
 
-function tag(element, text, attrs) {
-    if (attrs === undefined) {
-        attrs = {}
+var bad_chars_for_url = /[.=\/]/;
+
+function url_for_key(key) {
+    var k = encodeURIComponent(key);
+    if (key.match(bad_chars_for_url)) {
+        return '/keys/?key=' + k;
+    } else {
+        return '/keys/' + k;
     }
+}
+
+function url_for_tag(key, value) {
+    var k = encodeURIComponent(key),
+        v = encodeURIComponent(value);
+    if (key.match(bad_chars_for_url) || value.match(bad_chars_for_url)) {
+        return '/tags/?key=' + k + '&value=' + v;
+    } else {
+        return '/tags/' + k + '=' + v;
+    }
+}
+
+function url_for_rtype(rtype) {
+    var t = encodeURIComponent(rtype);
+    if (rtype.match(bad_chars_for_url)) {
+        return '/relations/?rtype=' + t;
+    } else {
+        return '/relations/' + t;
+    }
+}
+
+/* ============================ */
+
+function link_to_key(key, attr) {
+    return link(
+        url_for_key(key),
+        pp_key(key),
+        attr
+    );
+}
+
+function link_to_value(key, value, attr) {
+    return link(
+        url_for_tag(key, value), 
+        pp_value(value),
+        attr
+    );
+}
+
+function link_to_tag(key, value) {
+    return link_to_key(key) + '=' + link_to_value(key, value);
+}
+
+function link_to_rtype(rtype, attr) {
+    return link(
+        url_for_rtype(rtype),
+        pp_rtype(rtype),
+        attr
+    );
+}
+
+/* ============================ */
+
+function tag(element, text, attrs) {
     var attributes = '';
-    for (var a in attrs) {
-        attributes += ' ' + a + '="' + attrs[a] + '"';
+    if (attrs !== undefined) {
+        for (var a in attrs) {
+            attributes += ' ' + a + '="' + attrs[a] + '"';
+        }
     }
     return '<' + element + attributes + '>' + text + '</' + element + '>';
 }
@@ -76,10 +137,6 @@ function link(url, text, attrs) {
 
 function span(text, c) {
     return tag('span', text, { 'class': c });
-}
-
-function tt(text, c, title) {
-    return tag('tt', text, { 'class': c, 'title': title, 'tipsy': 'w' });
 }
 
 function hover_expand(text) {
@@ -188,50 +245,12 @@ function print_prevalent_value_list(key, list) {
         return empty(texts.misc.values_less_than_one_percent);
     }
     return jQuery.map(list, function(item, i) {
-        return link_to_value_with_title(key, item.value, '(' + item.fraction.print_as_percent() + ')');
+        return link_to_value(key, item.value, { tipsy: 'e', title: '(' + item.fraction.print_as_percent() + ')' });
     }).join(' &bull; ');
 }
 
 function html_escape(text) {
     return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-}
-
-var bad_chars_for_url = /[.=\/]/;
-
-function url_for_key(key) {
-    var k = encodeURIComponent(key);
-    if (key.match(bad_chars_for_url)) {
-        return '/keys/?key=' + k;
-    } else {
-        return '/keys/' + k;
-    }
-}
-
-function url_for_tag(key, value) {
-    var k = encodeURIComponent(key),
-        v = encodeURIComponent(value);
-    if (key.match(bad_chars_for_url) || value.match(bad_chars_for_url)) {
-        return '/tags/?key=' + k + '&value=' + v;
-    } else {
-        return '/tags/' + k + '=' + v;
-    }
-}
-
-function url_for_rtype(rtype) {
-    var t = encodeURIComponent(rtype);
-    if (rtype.match(bad_chars_for_url)) {
-        return '/relations/?rtype=' + t;
-    } else {
-        return '/relations/' + t;
-    }
-}
-
-function link_to_value_with_title(key, value, extra) {
-    return link(
-        url_for_tag(key, value),
-        pp_value(value),
-        { title: html_escape(value) + ' ' + extra, tipsy: 'e'}
-    );
 }
 
 function print_value_with_percent(value, fraction) {
@@ -323,47 +342,6 @@ function pp_role(role) {
     }
 
     return result;
-}
-
-function link_to_key(key, highlight) {
-    return link(
-        url_for_key(key),
-        highlight === undefined ?
-            pp_key(key) : 
-            key.replace(new RegExp('(' + highlight + ')', 'gi'), "<b>$1</b>")
-    );
-}
-
-function link_to_value(key, value, highlight) {
-    return link(
-        url_for_tag(key, value), 
-        highlight === undefined ?
-            pp_value(value) :
-            value.replace(new RegExp('(' + highlight + ')', 'gi'), "<b>$1</b>")
-    );
-}
-
-function link_to_tag(key, value) {
-    return link_to_key(key) + '=' + link_to_value(key, value);
-}
-
-function link_to_key_or_tag(key, value) {
-    var link = link_to_key(key);
-    if (value && value != '') {
-        link += '=' + link_to_value(key, value);
-    } else {
-        link += '=*';
-    }
-    return link;
-}
-
-function link_to_rtype(rtype, highlight) {
-    return link(
-        url_for_rtype(rtype),
-        highlight === undefined ?
-            pp_rtype(rtype) : 
-            rtype.replace(new RegExp('(' + highlight + ')', 'gi'), "<b>$1</b>")
-    );
 }
 
 /* ============================ */

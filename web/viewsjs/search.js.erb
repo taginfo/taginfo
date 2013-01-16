@@ -3,6 +3,20 @@
     misc = @trans.t.misc
     search = @trans.t.pages.search
  %>
+function link_to_key_with_highlight(key, highlight) {
+    return link(
+        url_for_key(key),
+        key.replace(new RegExp('(' + highlight + ')', 'gi'), "<b>$1</b>")
+    );
+}
+
+function link_to_value_with_highlight(key, value, highlight) {
+    return link(
+        url_for_tag(key, value), 
+        value.replace(new RegExp('(' + highlight + ')', 'gi'), "<b>$1</b>")
+    );
+}
+
 var create_flexigrid_for = {
     keys: function(query) {
         create_flexigrid('grid-keys', {
@@ -17,7 +31,7 @@ var create_flexigrid_for = {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
                         print_with_ts(row.count_all),
-                        link_to_key(row.key, query)
+                        link_to_key_with_highlight(row.key, query)
                     ] };
                 });
                 return data;
@@ -39,7 +53,7 @@ var create_flexigrid_for = {
                     return { 'cell': [
                         print_with_ts(row.count_all),
                         link_to_key(row.key),
-                        link_to_value(row.key, row.value, query)
+                        link_to_value_with_highlight(row.key, row.value, query)
                     ] };
                 });
                 return data;
@@ -61,8 +75,8 @@ var create_flexigrid_for = {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
                         print_with_ts(row.count_all),
-                        link_to_key(row.key, q[0]),
-                        link_to_value(row.key, row.value, q[1])
+                        link_to_key_with_highlight(row.key, q[0]),
+                        link_to_value_with_highlight(row.key, row.value, q[1])
                     ] };
                 });
                 return data;

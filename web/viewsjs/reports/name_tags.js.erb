@@ -2,6 +2,10 @@
     osm = @trans.t.osm
     misc = @trans.t.misc
  %>
+function tt(text, c, title) {
+    return tag('tt', text, { 'class': c, 'title': title, 'tipsy': 'w' });
+}
+
 var create_flexigrid_for = {
     "overview": function() {
         create_flexigrid('grid-name', {
