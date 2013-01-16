@@ -412,6 +412,12 @@ function create_flexigrid(domid, options) {
                 return false;
             }
         });
+        jQuery('div.bDiv:visible').bind('click', function(event) {
+            var row = jQuery(event.target).parents('tr');
+            console.log("click", row);
+            jQuery('div.bDiv:visible tr').removeClass('trOver');
+            jQuery(row).addClass('trOver');
+        });
     } else {
         // grid does exist, make sure it has the right size
         resize_grid(domid);
@@ -436,6 +442,46 @@ function init_tabs(params) {
 
 function d3_colors() {
     return ["#1f77b4","#aec7e8","#ff7f0e","#ffbb78","#2ca02c","#98df8a","#d62728","#ff9896","#9467bd","#c5b0d5","#8c564b","#c49c94","#e377c2","#f7b6d2","#7f7f7f","#c7c7c7","#bcbd22","#dbdb8d","#17becf","#9edae5"];
+}
+
+/* ============================ */
+
+function table_up() {
+    var current = jQuery('.trOver:visible');
+    if (current.size() > 0) {
+        var prev = jQuery('div.bDiv:visible tr.trOver').removeClass('trOver').prev();
+        if (prev.size() > 0) {
+            prev.addClass('trOver');
+        } else {
+            jQuery('div.pPrev:visible').click();
+        }
+    } else {
+        jQuery('div.bDiv:visible tr:last').addClass('trOver');
+    }
+}
+
+function table_down() {
+    var current = jQuery('.trOver:visible');
+    if (current.size() > 0) {
+        var next = jQuery('div.bDiv:visible tr.trOver').removeClass('trOver').next();
+        if (next.size() > 0) {
+            next.addClass('trOver');
+        } else {
+            jQuery('div.pNext:visible').click();
+        }
+    } else {
+        jQuery('div.bDiv:visible tr:first').addClass('trOver');
+    }
+}
+
+function table_right() {
+    var current = jQuery('.trOver');
+    if (current.size() > 0) {
+        var link = current.find("a");
+        if (link.size() > 0) {
+            window.location = link.attr('href');
+        }
+    }
 }
 
 /* ============================ */
@@ -506,9 +552,6 @@ jQuery(document).ready(function() {
                     case 84: // t
                         window.location = '/tags';
                         break;
-                    case 8: // backspace
-                        up();
-                        break;
                     case 36: // home
                         jQuery('div.pFirst:visible').click();
                         break;
@@ -520,6 +563,18 @@ jQuery(document).ready(function() {
                         break;
                     case 35: // end
                         jQuery('div.pLast:visible').click();
+                        break;
+                    case 37: // arrow left
+                        up();
+                        break;
+                    case 38: // arrow up
+                        table_up();
+                        break;
+                    case 39: // arrow right
+                        table_right();
+                        break;
+                    case 40: // arrow down
+                        table_down();
                         break;
                 }
             }
