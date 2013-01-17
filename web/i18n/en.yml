@@ -221,9 +221,14 @@ pages:
             no_styles: No JOSM styles for this tag.
     relation:
         name: Relation type
+        description_from_wiki: Description of this relation type from the wiki (if available in your chosen language, otherwise in English).
+        no_description_in_wiki: No description for this relation type in the wiki.
         overview:
             tab: Overview
             title: Overview
+            member_type: Member type
+            member_count: Number of members
+            see_also: See also the tag page
         roles:
             tab: Roles
             title: Member roles

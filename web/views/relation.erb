@@ -9,6 +9,9 @@
     </ul>
     <div id="overview">
         <h2><%= t.pages.relation.overview.title %></h2>
+        <table id="grid-overview">
+        </table>
+        <p><%= t.pages.relation.overview.see_also %>: type=<span id="taglink"></span></p>
     </div>
     <div id="roles">
         <h2><%= t.pages.relation.roles.title %></h2>
@@ -25,6 +28,7 @@
 function page_init2() {
     var rtype = #{ @rtype.to_json };
     jQuery('h1').html("#{ t.pages.relation.name } '" + fmt_rtype(rtype) + "'");
+    jQuery('span#taglink').html(link_to_value('type', rtype));
     init_tabs([rtype]);
 }
 JAVASCRIPT

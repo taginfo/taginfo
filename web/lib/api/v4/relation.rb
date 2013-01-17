@@ -68,4 +68,39 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
+    api(4, 'relation/stats', {
+        :description => 'Show some database statistics for given relation type.',
+        :parameters => { :rtype => 'Relation type (required).' },
+        :result => no_paging_results([
+            [:type,  :STRING, 'Member type ("all", "nodes", "ways", or "relations")'],
+            [:count, :INT,    'Number of members with this type.']
+        ]),
+        :example => { :rtype => 'multipolygon' },
+        :ui => '/relations/multipolygon#overview'
+    }) do
+        rtype = params[:rtype]
+        out = []
+
+        # default values
+        ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
+            out[n] = { :type => type, :count => 0 }
+        end
+
+        @db.select('SELECT * FROM db.relation_types').
+            condition('rtype = ?', rtype).
+            execute() do |row|
+                ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
+                    out[n] = {
+                        :type   => type,
+                        :count  => row['members_' + type].to_i
+                    }
+                end
+            end
+
+        return {
+            :total => 4,
+            :data => out
+        }.to_json
+    end
+
 end

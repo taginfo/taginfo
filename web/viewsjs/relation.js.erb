@@ -3,6 +3,29 @@
     page = @trans.t.pages.relation
  %>
 var create_flexigrid_for = {
+    overview: function(rtype) {
+        create_flexigrid('grid-overview', {
+            url: '/api/4/relation/stats?rtype=' + encodeURIComponent(rtype),
+            colModel: [
+                { display: '<%= page.overview.member_type %>', name: 'type', width: 100, sortable: true },
+                { display: '<%= page.overview.member_count %>', name: 'count', width: 260, sortable: true, align: 'right' }
+            ],
+            usepager: false,
+            useRp: false,
+            preProcess: function(data) {
+                return {
+                    total: 4,
+                    page: 1,
+                    rows: jQuery.map(data.data, function(row, i) {
+                        return { 'cell': [
+                            fmt_type_image(row.type),
+                            fmt_with_ts(row.count)
+                        ]};
+                    })
+                };
+            }
+        });
+    },
     roles: function(rtype) {
         create_flexigrid('grid-roles', {
             url: '/api/4/relation/roles?type=' + encodeURIComponent(rtype),
