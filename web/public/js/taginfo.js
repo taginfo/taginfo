@@ -1,12 +1,5 @@
 // taginfo.js
 
-// capitalize a string
-String.prototype.capitalize = function() {
-    return this.substr(0, 1).toUpperCase() + this.substr(1);
-}
-
-/* ============================ */
-
 var grids = {},
     current_grid = '',
     up = function() { window.location = '/'; };
