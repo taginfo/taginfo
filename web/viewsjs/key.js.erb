@@ -109,9 +109,9 @@ var create_flexigrid_for = {
                             fmt_type_icon('way',      row.on_way) + 
                             fmt_type_icon('area',     row.on_area) + 
                             fmt_type_icon('relation', row.on_relation),
-                            print_key_or_tag_list(row.tags_implies),
-                            print_key_or_tag_list(row.tags_combination),
-                            print_key_or_tag_list(row.tags_linked)
+                            fmt_key_or_tag_list(row.tags_implies),
+                            fmt_key_or_tag_list(row.tags_combination),
+                            fmt_key_or_tag_list(row.tags_linked)
                         ]};
                     })
                 };

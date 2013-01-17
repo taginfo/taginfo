@@ -380,9 +380,7 @@ function fmt_value_with_percent(value, fraction) {
            tag('div', '', { 'class': 'bar', style: style({ width: (fraction*100).toFixed() + 'px' }) });
 }
 
-/* ============================ */
-
-function print_key_or_tag_list(list) {
+function fmt_key_or_tag_list(list) {
     return jQuery.map(list, function(tag, i) {
         if (tag.match(/=/)) {
             var el = tag.split('=', 2);
@@ -393,7 +391,7 @@ function print_key_or_tag_list(list) {
     }).join(' &bull; ');
 }
 
-function print_prevalent_value_list(key, list) {
+function fmt_prevalent_value_list(key, list) {
     if (list.length == 0) {
         return empty(texts.misc.values_less_than_one_percent);
     }

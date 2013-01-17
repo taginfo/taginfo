@@ -34,7 +34,7 @@ function page_init() {
                     fmt_checkmark(row.in_wiki),
                     fmt_checkmark(row.in_josm),
                     fmt_with_ts(row.values_all),
-                    print_prevalent_value_list(row.key, row.prevalent_values)
+                    fmt_prevalent_value_list(row.key, row.prevalent_values)
                 ] };
             });
             return data;

@@ -22,7 +22,7 @@ function page_init() {
                     link_to_rtype(row.relation_type),
                     fmt_value_with_percent(row.count, row.count_fraction),
                     link_to_tag('type', row.relation_type),
-                    print_prevalent_role_list(row.prevalent_roles)
+                    fmt_prevalent_role_list(row.prevalent_roles)
                 ] };
             });
             return data;
@@ -30,7 +30,7 @@ function page_init() {
     });
 };
 
-function print_prevalent_role_list(list) {
+function fmt_prevalent_role_list(list) {
     if (list === null) {
         return empty('<%= page.no_information %>');
     }
@@ -39,7 +39,7 @@ function print_prevalent_role_list(list) {
     }
     return jQuery.map(list, function(item, i) {
         if (item.role) {
-            return tag('span', item.role, { tipsy: 'e', title: html_escape(item.role) + ' (' + fmt_as_percent(item.fraction) + ')' });
+            return tag('span', fmt_role(item.role), { tipsy: 'e', title: html_escape(item.role) + ' (' + fmt_as_percent(item.fraction) + ')' });
         } else {
             return tag('span', empty('<%= page.empty_role %>'), { tipsy: 'e', title: '(' + fmt_as_percent(item.fraction) + ')' });
         }
