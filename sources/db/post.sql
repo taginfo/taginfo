@@ -65,18 +65,6 @@ INSERT INTO stats (key, value) SELECT 'characters_in_keys_rest',    count(*) FRO
 INSERT INTO stats (key, value) VALUES ('objects',     (SELECT sum(value) FROM stats WHERE key IN ('nodes', 'ways', 'relations')));
 INSERT INTO stats (key, value) VALUES ('object_tags', (SELECT sum(value) FROM stats WHERE key IN ('node_tags', 'way_tags', 'relation_tags')));
 
--- XXX this can probably be removed
-UPDATE keys SET prevalent_values=(
-        SELECT group_concat(value, '|') FROM (
-            SELECT value FROM tags t
-                    WHERE t.key       = keys.key
-                      AND t.count_all > keys.count_all / 100
-                 ORDER BY t.count_all DESC
-                    LIMIT 10
-               
-        )
-    ) WHERE values_all < 1000;
-
 INSERT INTO prevalent_values (key, value, count, fraction)
             SELECT t.key, t.value, t.count_all, CAST(t.count_all AS REAL) / CAST(k.count_all AS REAL) FROM tags t, keys k
                     WHERE t.key       = k.key
