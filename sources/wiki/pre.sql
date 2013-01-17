@@ -33,6 +33,23 @@ CREATE TABLE wikipages (
     status           TEXT
 );
 
+DROP TABLE IF EXISTS relation_pages;
+
+CREATE TABLE relation_pages (
+    lang             TEXT,
+    rtype            TEXT,
+    title            TEXT,
+    body             TEXT,
+    tgroup           TEXT,
+    type             TEXT,
+    has_templ        INTEGER,
+    parsed           INTEGER,
+    description      TEXT,
+    image            TEXT,
+    tags_linked      TEXT,
+    status           TEXT
+);
+
 DROP TABLE IF EXISTS wiki_images;
 
 CREATE TABLE wiki_images (

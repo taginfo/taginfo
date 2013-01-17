@@ -104,7 +104,7 @@ namespaces.keys.sort.each do |namespace|
     get_page_list(api, id, :redirect => false) do |timestamp, page|
         line = ['page', timestamp, namespace, page].join("\t")
         allpages.puts line
-        if page =~ /^([^:]+:)?(Key|Tag):(.+)$/
+        if page =~ /^([^:]+:)?(Key|Tag|Relation):(.+)$/
             tagpages.puts line
         end
     end
@@ -112,7 +112,7 @@ namespaces.keys.sort.each do |namespace|
     get_page_list(api, id, :redirect => true) do |timestamp, page|
         line = ['redirect', timestamp, namespace, page].join("\t")
         allpages.puts line
-        if page =~ /^([^:]+:)?(Key|Tag):(.+)$/
+        if page =~ /^([^:]+:)?(Key|Tag|Relation):(.+)$/
             tagpages.puts line
         end
     end

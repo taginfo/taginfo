@@ -53,43 +53,7 @@ class WikiPage
     @@pages = {}
 
     attr_accessor :content
-    attr_accessor :description, :image, :group, :onNode, :onWay, :onArea, :onRelation, :has_templ
-    attr_reader :type, :timestamp, :namespace, :title, :tag, :key, :value, :lang, :ttype, :tags_implies, :tags_combination, :tags_linked, :parsed
-
-    def initialize(type, timestamp, namespace, title)
-        @type      = type       # 'page' or 'redirect'
-        @timestamp = timestamp  # page last touched
-        @namespace = namespace  # 'XX' (mediawiki namespace or '')
-        @title     = title      # wiki page title
-
-        @tag       = title.gsub(/^([^:]+:)?(Key|Tag):/, '') # complete tag (key=value)
-        @key       = @tag.sub(/=.*/, '')                    # key
-        if @tag =~ /=/
-            @value = @tag.sub(/.*?=/, '')                   # value (if any)
-        end
-        if title =~ /^(.*):(Key|Tag):/
-            @lang  = $1.downcase                            # IETF language tag
-            @ttype = $2.downcase                            # 'tag' or 'key'
-        else
-            @lang  = 'en'
-        end
-
-        @has_templ  = false
-
-        @tags_implies     = []
-        @tags_combination = []
-        @tags_linked      = []
-
-        @group      = ''
-        @onNode     = false
-        @onWay      = false
-        @onArea     = false
-        @onRelation = false
-
-        @parsed = nil
-
-        @@pages[@title] = self
-    end
+    attr_reader :type, :timestamp, :namespace, :title, :description, :image, :tag, :key, :value, :lang, :ttype, :tags_implies, :tags_combination, :tags_linked, :parsed, :has_templ, :group, :onNode, :onWay, :onArea, :onRelation
 
     def self.pages
         @@pages.values.sort{ |a,b| a.title <=> b.title }
@@ -97,6 +61,21 @@ class WikiPage
 
     def self.find(name)
         @@pages[name]
+    end
+
+    def initialize(type, timestamp, namespace, title)
+        @type      = type       # 'page' or 'redirect'
+        @timestamp = timestamp  # page last touched
+        @namespace = namespace  # 'XX' (mediawiki namespace or '')
+        @title     = title      # wiki page title
+
+        @has_templ  = false
+        @parsed = nil
+
+        @tags_linked = []
+        @group = ''
+
+        @@pages[@title] = self
     end
 
     # Has this wiki page a name that we can understand and process?
@@ -117,6 +96,140 @@ class WikiPage
 
     def add_tag_link(tag)
         @tags_linked << tag
+    end
+
+    # Parse content of the wiki page. This will find the templates
+    # and their parameters.
+    def parse_content(db)
+        @parsed = true
+        text = @content.gsub(%r{<!--.*?-->}, '')
+
+        # dummy template as base context
+        context = [ Template.new ]
+
+        loop do
+            # split text into ('before', 'token', 'after')
+            m = /^(.*?)(\{\{|\}\}|[|=])(.*)$/m.match(text)
+
+            # we are done if there are no more tokens
+            if m.nil?
+                return
+            end
+
+            # do the right thing depending on next token
+            case m[2]
+                when '{{' # start of template
+                    context.last.add_parameter(m[1].strip)
+                    context << Template.new()
+                when '}}' # end of template
+                    context.last.add_parameter(m[1].strip)
+                    c = context.pop
+                    parse_template(c, db)
+                    context.last.add_parameter(c)
+                when '|' # template parameter
+                    context.last.add_parameter(m[1].strip)
+                    context.last.parname(nil)
+                when '=' # named template parameter
+                    parameter_name = (m[1].strip == ':') ? 'subkey' : m[1].strip
+                    context.last.parname(parameter_name)
+            end
+
+            # 'after' is our next 'text'
+            text = m[3]
+        end
+    rescue => ex
+        puts "Parsing of page #{title} failed '#{ex.message}'"
+        @parsed = false
+    end
+
+    def parse_template(template, db)
+        puts "Template: #{template.name} [#{template.parameters.join(',')}] #{template.named_parameters.inspect}"
+        if template.name == 'Key' || template.name == 'Tag'
+            tag = template.parameters[0]
+            if template.parameters[1]
+                tag += '=' + template.parameters[1]
+            end
+            add_tag_link(tag)
+        end
+        if template.name =~ /(Key|Value|Relation)Description$/
+            @has_templ = true
+            if template.named_parameters['description']
+                desc = []
+                template.named_parameters['description'].each do |i|
+                    if i.class == Template
+                        desc << ' ' << i.parameters.join('=') << ' '
+                    else
+                        desc << i
+                    end
+                    @description = desc.join('').strip
+                end
+            end
+            if template.named_parameters['image']
+                ititle = template.named_parameters['image'][0]
+                if !ititle.nil? && ititle.match(%r{^(file|image):(.*)$}i)
+                    @image = "File:#{$2}"
+                else
+                    puts "invalid image: page='#{title}' image='#{ititle}'"
+                    db.execute('INSERT INTO invalid_image_titles (page_title, image_title) VALUES (?, ?)', title, ititle)
+                    @image = ''
+                end
+            end
+            if template.named_parameters['group']
+                @group = template.named_parameters['group'][0]
+            end
+            if template.named_parameters['onNode'] == ['yes']
+                @onNode = true
+            end
+            if template.named_parameters['onWay'] == ['yes']
+                @onWay = true
+            end
+            if template.named_parameters['onArea'] == ['yes']
+                @onArea = true
+            end
+            if template.named_parameters['onRelation'] == ['yes']
+                @onRelation = true
+            end
+            if template.named_parameters['implies']
+                template.named_parameters['implies'].each do |i|
+                    if i.class == Template
+                        tags_implies << i.parameters.join('=')
+                    end
+                end
+            end
+            if template.named_parameters['combination']
+                template.named_parameters['combination'].each do |i|
+                    if i.class == Template
+                        tags_combination << i.parameters.join('=')
+                    end
+                end
+            end
+        end
+    end
+end
+
+class KeyOrTagPage < WikiPage
+
+    def initialize(type, timestamp, namespace, title)
+        super(type, timestamp, namespace, title)
+
+        @tag       = title.gsub(/^([^:]+:)?(Key|Tag):/, '') # complete tag (key=value)
+        @key       = @tag.sub(/=.*/, '')                    # key
+        if @tag =~ /=/
+            @value = @tag.sub(/.*?=/, '')                   # value (if any)
+        end
+        if title =~ /^(.*):(Key|Tag):/
+            @lang  = $1.downcase                            # IETF language tag
+            @ttype = $2.downcase                            # 'tag' or 'key'
+        else
+            @lang  = 'en'
+        end
+
+        @tags_implies     = []
+        @tags_combination = []
+        @onNode     = false
+        @onWay      = false
+        @onArea     = false
+        @onRelation = false
     end
 
     def insert(db)
@@ -144,48 +257,44 @@ class WikiPage
         )
     end
 
-    # Parse content of the wiki page. This will find the templates
-    # and their parameters.
-    def parse_content
-        @parsed = true
-        text = @content.gsub(%r{<!--.*?-->}, '')
+end
 
-        # dummy template as base context
-        context = [ Template.new ]
+class KeyPage < KeyOrTagPage
+end
 
-        loop do
-            # split text into ('before', 'token', 'after')
-            m = /^(.*?)(\{\{|\}\}|[|=])(.*)$/m.match(text)
+class TagPage < KeyOrTagPage
+end
 
-            # we are done if there are no more tokens
-            if m.nil?
-                return
-            end
+class RelationPage < WikiPage
 
-            # do the right thing depending on next token
-            case m[2]
-                when '{{' # start of template
-                    context.last.add_parameter(m[1].strip)
-                    context << Template.new()
-                when '}}' # end of template
-                    context.last.add_parameter(m[1].strip)
-                    c = context.pop
-                    yield c
-                    context.last.add_parameter(c)
-                when '|' # template parameter
-                    context.last.add_parameter(m[1].strip)
-                    context.last.parname(nil)
-                when '=' # named template parameter
-                    parameter_name = (m[1].strip == ':') ? 'subkey' : m[1].strip
-                    context.last.parname(parameter_name)
-            end
+    attr_reader :rtype
 
-            # 'after' is our next 'text'
-            text = m[3]
+    def initialize(type, timestamp, namespace, title)
+        super(type, timestamp, namespace, title)
+
+        @rtype = title.gsub(/^([^:]+:)?Relation:/, '') # relation type
+        if title =~ /^(.*):Relation:/
+            @lang  = $1.downcase # IETF language tag
+        else
+            @lang  = 'en'
         end
-    rescue
-        puts "Parsing of page #{title} failed"
-        @parsed = false
+    end
+
+    def insert(db)
+        db.execute(
+            "INSERT INTO relation_pages (lang, rtype, title, body, tgroup, type, has_templ, parsed, description, image, tags_linked) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            lang,
+            rtype,
+            title,
+            content,
+            group,
+            type,
+            has_templ  ? 1 : 0,
+            parsed     ? 1 : 0,
+            description,
+            image,
+            tags_linked.sort.uniq.join(',')
+        )
     end
 
 end
@@ -227,28 +336,42 @@ end
 
 #------------------------------------------------------------------------------
 
-def get_page(db, api, page)
-    db.execute("SELECT * FROM cache.cache_pages WHERE title=? AND timestamp=?", page.title, page.timestamp) do |row|
-        page.content = row['body']
-        puts "Page #{ page.title } in cache (#{ page.timestamp })"
-        return
-    end
-    db.execute("DELETE FROM cache.cache_pages WHERE title=?", page.title);
-    res = api.get(page.params)
-    page.content = res.body
-    db.execute("INSERT INTO cache.cache_pages (title, timestamp, body) VALUES (?, ?, ?)", page.title, page.timestamp, page.content);
-    puts "Page #{ page.title } not in cache (#{ page.timestamp })"
-end
+class Cache
 
-def cleanup_cache(db, current_pagetitles)
-    db.execute("SELECT title FROM cache.cache_pages") do |row|
-        current_pagetitles.delete(row['title'])
+    def initialize(dir, db, api)
+        @db = db
+        @api = api
+        @db.execute("ATTACH DATABASE ? AS cache", dir + '/wikicache.db')
+        @current_pagetitles = {}
     end
-    to_delete = current_pagetitles.keys
-    puts "Deleting pages from cache: #{ to_delete.join(' ') }"
-    to_delete.each do |title|
-        db.execute("DELETE FROM cache.cache_pages WHERE title=?", title);
+
+    def get_page(page)
+        @current_pagetitles[page.title] = page.timestamp
+        @db.execute("SELECT * FROM cache.cache_pages WHERE title=? AND timestamp=?", page.title, page.timestamp) do |row|
+            page.content = row['body']
+            puts "Page #{ page.title } in cache (#{ page.timestamp })"
+            return
+        end
+        @db.execute("DELETE FROM cache.cache_pages WHERE title=?", page.title);
+        res = @api.get(page.params)
+        page.content = res.body
+        @db.execute("INSERT INTO cache.cache_pages (title, timestamp, body) VALUES (?, ?, ?)", page.title, page.timestamp, page.content);
+        puts "Page #{ page.title } not in cache (#{ page.timestamp })"
     end
+
+    # Removes pages from cache that are not in the wiki any more
+    def cleanup
+        @db.execute("SELECT title FROM cache.cache_pages") do |row|
+            @current_pagetitles.delete(row['title'])
+        end
+
+        to_delete = @current_pagetitles.keys
+        puts "Deleting pages from cache: #{ to_delete.join(' ') }"
+        to_delete.each do |title|
+            @db.execute("DELETE FROM cache.cache_pages WHERE title=?", title);
+        end
+    end
+
 end
 
 #------------------------------------------------------------------------------
@@ -260,88 +383,32 @@ api = MediaWikiAPI::API.new('wiki.openstreetmap.org', 80, '/w/index.php?')
 db = SQLite3::Database.new(dir + '/taginfo-wiki.db')
 db.results_as_hash = true
 
-db.execute("ATTACH DATABASE '#{dir}/wikicache.db' AS cache")
+cache = Cache.new(dir, db, api)
 
 db.execute('BEGIN TRANSACTION')
-
-current_pagetitles = {}
 
 File.open(dir + '/tagpages.list') do |wikipages|
     wikipages.each do |line|
         line.chomp!
-        t = line.split("\t")
-        page = WikiPage.new(t[0], t[1], t[2], t[3])
-        puts "page: (#{page.title}) (#{page.type}) (#{page.timestamp}) (#{page.namespace}) (#{page.tag})"
+        (type, timestamp, namespace, title) = line.split("\t")
+
+        if title =~ /(^|:)Key:/
+            page = KeyPage.new(type, timestamp, namespace, title)
+        elsif title =~ /(^|:)Tag:/
+            page = TagPage.new(type, timestamp, namespace, title)
+        elsif title =~ /(^|:)Relation:/
+            page = RelationPage.new(type, timestamp, namespace, title)
+        else
+            puts "Wiki page has wrong format: '#{title}'"
+            next
+        end
+
+        puts "Parsing page: title='#{page.title}' type='#{page.type}' timestamp='#{page.timestamp}' namespace='#{page.namespace}'"
 
         reason = page.check_title
         if reason == :ok
-            current_pagetitles[page.title] = page.timestamp
-
-            get_page(db, api, page)
-
-            page.parse_content do |template|
-                #puts "Template: #{template.name} [#{template.parameters.join(',')}] #{template.named_parameters.inspect}"
-                if template.name == 'Key' || template.name == 'Tag'
-                    tag = template.parameters[0]
-                    if template.parameters[1]
-                        tag += '=' + template.parameters[1]
-                    end
-                    page.add_tag_link(tag)
-                end
-                if template.name =~ /(Key|Value)Description$/
-                    page.has_templ = true
-                    if template.named_parameters['description']
-                        desc = []
-                        template.named_parameters['description'].each do |i|
-                            if i.class == Template
-                                desc << ' ' << i.parameters.join('=') << ' '
-                            else
-                                desc << i
-                            end
-                            page.description = desc.join('').strip
-                        end
-                    end
-                    if template.named_parameters['image']
-                        ititle = template.named_parameters['image'][0]
-                        if !ititle.nil? && ititle.match(%r{^(file|image):(.*)$}i)
-                            page.image = "File:#{$2}"
-                        else
-                            puts "invalid image: page='#{page.title}' image='#{ititle}'"
-                            db.execute('INSERT INTO invalid_image_titles (page_title, image_title) VALUES (?, ?)', page.title, ititle)
-                            page.image = ''
-                        end
-                    end
-                    if template.named_parameters['group']
-                        page.group = template.named_parameters['group'][0]
-                    end
-                    if template.named_parameters['onNode'] == ['yes']
-                        page.onNode = true
-                    end
-                    if template.named_parameters['onWay'] == ['yes']
-                        page.onWay = true
-                    end
-                    if template.named_parameters['onArea'] == ['yes']
-                        page.onArea = true
-                    end
-                    if template.named_parameters['onRelation'] == ['yes']
-                        page.onRelation = true
-                    end
-                    if template.named_parameters['implies']
-                        template.named_parameters['implies'].each do |i|
-                            if i.class == Template
-                                page.tags_implies << i.parameters.join('=')
-                            end
-                        end
-                    end
-                    if template.named_parameters['combination']
-                        template.named_parameters['combination'].each do |i|
-                            if i.class == Template
-                                page.tags_combination << i.parameters.join('=')
-                            end
-                        end
-                    end
-                end
-            end
+            cache.get_page(page)
+            page.parse_content(db)
             page.insert(db)
         else
             puts "invalid page: #{reason} #{page.title}"
@@ -350,7 +417,7 @@ File.open(dir + '/tagpages.list') do |wikipages|
     end
 end
 
-cleanup_cache(db, current_pagetitles)
+cache.cleanup
 
 db.execute('COMMIT')
 
