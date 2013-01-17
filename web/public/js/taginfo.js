@@ -217,11 +217,32 @@ function span(text, c) {
     return tag('span', text, { 'class': c });
 }
 
+function empty(text) {
+    return span(text, 'empty');
+}
+
 function hover_expand(text) {
     return span(text, 'overflow');
 }
 
-function img_popup(image) {
+/* ============================ */
+
+function fmt_wiki_link(title, options) {
+    if (title == '') {
+        return '';
+    }
+
+    var path;
+    if (options && options.edit) {
+        path = 'w/index.php?action=edit&title=' + title;
+    } else {
+        path = 'wiki/' + title;
+    }
+
+    return link('http://wiki.openstreetmap.org/' + path, title, { target: '_blank', 'class': 'extlink' });
+}
+
+function fmt_img_popup(image) {
     var w = image.width,
         h = image.height,
         max_size = 180,
@@ -233,36 +254,22 @@ function img_popup(image) {
     if (w < max_size) {
         title = html_escape('<div class="img_popup" style="width: ' + w + 'px; height:' + h + 'px;"><img src="' + image.image_url + '"/></div>');
     } else {
-       title = html_escape('<div class="img_popup" style="width: ' + thumb_size + 'px; height:' + other_size + 'px;"><img src="' + url + '"/></div>');
+        title = html_escape('<div class="img_popup" style="width: ' + thumb_size + 'px; height:' + other_size + 'px;"><img src="' + url + '"/></div>');
     }
 
-    return '<span class="overflow" tipsy_html="s" title="' + title + '">' + print_wiki_link(image.title) + '</span>';
+    return '<span class="overflow" tipsy_html="s" title="' + title + '">' + fmt_wiki_link(image.title) + '</span>';
 }
 
-function empty(text) {
-    return span(text, 'empty');
-}
-
-function print_wiki_link(title, options) {
-    if (title == '') {
-        return '';
-    }
-
-    if (options && options.edit) {
-        path = 'w/index.php?action=edit&title=' + title;
-    } else {
-        path = 'wiki/' + title;
-    }
-
-    return link('http://wiki.openstreetmap.org/' + path, title, { target: '_blank', 'class': 'extlink' });
-}
-
-function print_language(code, native_name, english_name) {
+function fmt_language(code, native_name, english_name) {
     return tag('span', code, { 'class': 'lang', title: native_name + ' (' + english_name + ')' }) + ' ' + native_name;
 }
 
-function print_type_icon(type, on_or_off) {
-     return on_or_off ? '<img src="/img/types/' + type + '.16.png" alt="yes" width="16" height="16"/> ' : '<img src="/img/types/none.16.png" alt="no" width="16" height="16"/> ';
+function fmt_type_icon(type, on_or_off) {
+    return '<img src="/img/types/' +
+           (on_or_off ? type : 'none') +
+           '.16.png" alt="' +
+           (on_or_off ? 'yes' : 'no') +
+           '" width="16" height="16"/> ';
 }
 
 function print_josm_value(key, value, value_bool) {
