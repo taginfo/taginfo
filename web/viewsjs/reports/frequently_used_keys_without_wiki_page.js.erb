@@ -41,7 +41,6 @@ function page_init() {
     jQuery('#english').bind('click', function() {
         jQuery('#grid-keys').flexOptions({
             url: '/api/4/keys/without_wiki_page?english=' + (jQuery('#english')[0].checked ? '1' : '0')
-        });
-        jQuery('#grid-keys').flexReload();
+        }).flexReload();
     });
 }

@@ -65,7 +65,7 @@ var create_flexigrid_for = {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
                         row.type,
-                        '<tt>' + row.subtag + '</tt>',
+                        tag('tt', row.subtag),
                         row.description,
                         row.added,
                         row.notes

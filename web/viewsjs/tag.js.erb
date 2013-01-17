@@ -29,7 +29,7 @@ var create_flexigrid_for = {
                     page: 1,
                     rows: jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
-                            fmt_image(row.type) + ' ' + texts.osm[row.type],
+                            fmt_type_image(row.type),
                             fmt_value_with_percent(row.count, row.count_fraction)
                         ]};
                     })
@@ -86,7 +86,7 @@ var create_flexigrid_for = {
                             fmt_language(row.lang, row.language, row.language_en),
                             link_to_wiki(row.title),
                             row.description,
-                            row.image.title ? fmt_img_popup(row.image) : empty('<%= misc.no_image %>'),
+                            fmt_wiki_image_popup(row.image),
                             fmt_type_icon('node',     row.on_node) + 
                             fmt_type_icon('way',      row.on_way) + 
                             fmt_type_icon('area',     row.on_area) + 

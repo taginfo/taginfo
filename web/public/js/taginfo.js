@@ -265,7 +265,11 @@ function hover_expand(text) {
 
 /* ============================ */
 
-function fmt_img_popup(image) {
+function fmt_wiki_image_popup(image) {
+    if (! image.title) {
+        return empty(texts.misc.no_image);
+    }
+
     var w = image.width,
         h = image.height,
         max_size = 180,
@@ -340,21 +344,16 @@ function fmt_josm_area(color) {
     });
 }
 
-function fmt_image(type) {
+function fmt_type_image(type) {
     type = type.replace(/s$/, '');
-    var name;
-    if (type == 'all') {
-        name = texts.misc.all;
-    } else {
-        name = texts.osm[type];
-    }
+    var name = html_escape(texts.osm[type]);
     return img({
         src: '/img/types/' + encodeURIComponent(type) + '.16.png',
-        alt: '[' + html_escape(name) + ']',
-        title: html_escape(name),
+        alt: '[' + name + ']',
+        title: name,
         width: 16,
         height: 16
-    });
+    }) + ' ' + name;
 }
 
 // format a number with thousand separator

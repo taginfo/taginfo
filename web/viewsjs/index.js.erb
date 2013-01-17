@@ -88,18 +88,18 @@ function fill_lists() {
 
     while (key_list.outerHeight() < key_list_height) {
         var d = keys_data[i];
-        key_list.append('<li>' + link_to_key(d.text) + '</li>');
+        key_list.append(tag('li', link_to_key(d.text)));
         i++;
     }
-    key_list.append("<li>...</li>");
+    key_list.append(tag('li', '...'));
 
     i = 0;
     while (tag_list.outerHeight() < tag_list_height) {
         var d = tags_data[i];
-        tag_list.append('<li>' + link_to_tag(d[0], d[1]) + '</li>');
+        tag_list.append(tag('li', link_to_tag(d[0], d[1])));
         i++;
     }
-    tag_list.append("<li>...</li>");
+    tag_list.append(tag('li', '...'));
 }
 
 function page_init() {
