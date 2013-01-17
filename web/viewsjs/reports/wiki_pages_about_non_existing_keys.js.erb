@@ -21,7 +21,7 @@ function page_init() {
             data.rows = jQuery.map(data.data, function(row, i) {
                 var wikilinks = [];
                 jQuery(row.wikipages).each(function(i, wikipage) {
-                    var w = fmt_wiki_link(wikipage.title);
+                    var w = link_to_wiki(wikipage.title);
                     if (wikipage.type == 'redirect') {
                         w += ' (REDIRECT)';
                     }

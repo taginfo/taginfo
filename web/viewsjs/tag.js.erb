@@ -84,7 +84,7 @@ var create_flexigrid_for = {
                     rows: jQuery.map(data, function(row, i) {
                         return { 'cell': [
                             fmt_language(row.lang, row.language, row.language_en),
-                            fmt_wiki_link(row.title),
+                            link_to_wiki(row.title),
                             row.description,
                             row.image.title ? fmt_img_popup(row.image) : empty('<%= misc.no_image %>'),
                             fmt_type_icon('node',     row.on_node) + 

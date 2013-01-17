@@ -85,6 +85,15 @@ function url_for_rtype(rtype) {
     }
 }
 
+function url_for_wiki(title, options) {
+    var path = 'http://wiki.openstreetmap.org/';
+    if (options && options.edit) {
+        return path + 'w/index.php?action=edit&title=' + encodeURIComponent(title);
+    } else {
+        return path + 'wiki/' + encodeURIComponent(title);
+    }
+}
+
 /* ============================ */
 
 var bad_chars_for_keys = '!"#$%&()*+,/;<=>?@[\\]^`{|}~' + "'";
@@ -193,6 +202,18 @@ function link_to_rtype(rtype, attr) {
     );
 }
 
+function link_to_wiki(title, options) {
+    if (title == '') {
+        return '';
+    }
+
+    return link(
+        url_for_wiki(title, options),
+        title,
+        { target: '_blank', 'class': 'extlink' }
+    );
+}
+
 /* ============================ */
 
 function tag(element, text, attrs) {
@@ -227,21 +248,6 @@ function hover_expand(text) {
 
 /* ============================ */
 
-function fmt_wiki_link(title, options) {
-    if (title == '') {
-        return '';
-    }
-
-    var path;
-    if (options && options.edit) {
-        path = 'w/index.php?action=edit&title=' + title;
-    } else {
-        path = 'wiki/' + title;
-    }
-
-    return link('http://wiki.openstreetmap.org/' + path, title, { target: '_blank', 'class': 'extlink' });
-}
-
 function fmt_img_popup(image) {
     var w = image.width,
         h = image.height,
@@ -257,7 +263,7 @@ function fmt_img_popup(image) {
         title = html_escape('<div class="img_popup" style="width: ' + thumb_size + 'px; height:' + other_size + 'px;"><img src="' + url + '"/></div>');
     }
 
-    return '<span class="overflow" tipsy_html="s" title="' + title + '">' + fmt_wiki_link(image.title) + '</span>';
+    return '<span class="overflow" tipsy_html="s" title="' + title + '">' + link_to_wiki(image.title) + '</span>';
 }
 
 function fmt_language(code, native_name, english_name) {
