@@ -587,6 +587,9 @@ jQuery(document).ready(function() {
                     case 75: // k
                         window.location = '/keys';
                         break;
+                    case 82: // r
+                        window.location = '/relations';
+                        break;
                     case 83: // s
                         jQuery('input#search').focus();
                         break;
