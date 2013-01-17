@@ -5,11 +5,6 @@ String.prototype.capitalize = function() {
     return this.substr(0, 1).toUpperCase() + this.substr(1);
 }
 
-// print a number as percent value with two digits after the decimal point
-Number.prototype.print_as_percent = function() {
-    return (this * 100).toFixed(2) + '%';
-};
-
 /* ============================ */
 
 var grids = {},
@@ -358,8 +353,8 @@ function fmt_image(type) {
     });
 }
 
-// print a number with thousand separator
-function print_with_ts(value) {
+// format a number with thousand separator
+function fmt_with_ts(value) {
     if (value === null) {
         return '-';
     } else {
@@ -367,7 +362,11 @@ function print_with_ts(value) {
     }
 }
 
-function print_checkmark(value) {
+function fmt_as_percent(value) {
+    return (value * 100).toFixed(2) + '%';
+}
+
+function fmt_checkmark(value) {
     return value ? '&#x2714;' : '-';
 }
 
@@ -389,7 +388,7 @@ function print_prevalent_value_list(key, list) {
         return empty(texts.misc.values_less_than_one_percent);
     }
     return jQuery.map(list, function(item, i) {
-        return link_to_value(key, item.value, { tipsy: 'e', title: '(' + item.fraction.print_as_percent() + ')' });
+        return link_to_value(key, item.value, { tipsy: 'e', title: '(' + fmt_as_percent(item.fraction) + ')' });
     }).join(' &bull; ');
 }
 
@@ -398,8 +397,8 @@ function html_escape(text) {
 }
 
 function print_value_with_percent(value, fraction) {
-    return '<div class="value">' + print_with_ts(value) +
-     '</div><div class="fraction">' + fraction.print_as_percent() +
+    return '<div class="value">' + fmt_with_ts(value) +
+     '</div><div class="fraction">' + fmt_as_percent(fraction) +
      '</div><div class="bar" style="width: ' + (fraction*100).toFixed() + 'px;"></div>';
 }
 

@@ -30,10 +30,10 @@ function page_init() {
                     print_value_with_percent(row.count_nodes,     row.count_nodes_fraction),
                     print_value_with_percent(row.count_ways,      row.count_ways_fraction),
                     print_value_with_percent(row.count_relations, row.count_relations_fraction),
-                    print_with_ts(row.users_all),
-                    print_checkmark(row.in_wiki),
-                    print_checkmark(row.in_josm),
-                    print_with_ts(row.values_all),
+                    fmt_with_ts(row.users_all),
+                    fmt_checkmark(row.in_wiki),
+                    fmt_checkmark(row.in_josm),
+                    fmt_with_ts(row.values_all),
                     print_prevalent_value_list(row.key, row.prevalent_values)
                 ] };
             });

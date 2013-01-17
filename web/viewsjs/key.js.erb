@@ -22,7 +22,7 @@ var create_flexigrid_for = {
                         return { 'cell': [
                             fmt_image(row.type) + ' ' + texts.osm[row.type],
                             print_value_with_percent(row.count, row.count_fraction),
-                            print_with_ts(row.values)
+                            fmt_with_ts(row.values)
                         ]};
                     })
                 };

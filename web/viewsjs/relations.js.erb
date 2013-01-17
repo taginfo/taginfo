@@ -39,9 +39,9 @@ function print_prevalent_role_list(list) {
     }
     return jQuery.map(list, function(item, i) {
         if (item.role) {
-            return tag('span', item.role, { tipsy: 'e', title: html_escape(item.role) + ' (' + item.fraction.print_as_percent() + ')' });
+            return tag('span', item.role, { tipsy: 'e', title: html_escape(item.role) + ' (' + fmt_as_percent(item.fraction) + ')' });
         } else {
-            return tag('span', empty('<%= page.empty_role %>'), { tipsy: 'e', title: '(' + item.fraction.print_as_percent() + ')' });
+            return tag('span', empty('<%= page.empty_role %>'), { tipsy: 'e', title: '(' + fmt_as_percent(item.fraction) + ')' });
         }
     }).join(' &bull; ');
 }

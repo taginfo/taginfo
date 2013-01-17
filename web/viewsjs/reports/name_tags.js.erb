@@ -31,8 +31,8 @@ var create_flexigrid_for = {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
                         link_to_key(row.key),
-                        print_with_ts(row.count_all),
-                        print_checkmark(row.in_wiki),
+                        fmt_with_ts(row.count_all),
+                        fmt_checkmark(row.in_wiki),
                         row.prefix,
                         row.type,
                         row.langtag,
