@@ -211,6 +211,10 @@ function link_to_wiki(title, options) {
 
 /* ============================ */
 
+function html_escape(text) {
+    return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
 function tag(element, text, attrs) {
     var attributes = '';
     if (attrs !== undefined) {
@@ -370,6 +374,12 @@ function fmt_checkmark(value) {
     return value ? '&#x2714;' : '-';
 }
 
+function fmt_value_with_percent(value, fraction) {
+    return tag('div', fmt_with_ts(value), { 'class': 'value' }) +
+           tag('div', fmt_as_percent(fraction), { 'class': 'fraction' }) +
+           tag('div', '', { 'class': 'bar', style: style({ width: (fraction*100).toFixed() + 'px' }) });
+}
+
 /* ============================ */
 
 function print_key_or_tag_list(list) {
@@ -390,16 +400,6 @@ function print_prevalent_value_list(key, list) {
     return jQuery.map(list, function(item, i) {
         return link_to_value(key, item.value, { tipsy: 'e', title: '(' + fmt_as_percent(item.fraction) + ')' });
     }).join(' &bull; ');
-}
-
-function html_escape(text) {
-    return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-}
-
-function print_value_with_percent(value, fraction) {
-    return '<div class="value">' + fmt_with_ts(value) +
-     '</div><div class="fraction">' + fmt_as_percent(fraction) +
-     '</div><div class="bar" style="width: ' + (fraction*100).toFixed() + 'px;"></div>';
 }
 
 /* ============================ */

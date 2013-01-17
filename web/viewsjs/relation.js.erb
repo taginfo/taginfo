@@ -22,10 +22,10 @@ var create_flexigrid_for = {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
                         fmt_role(row.role),
-                        print_value_with_percent(row.count_all_members, row.count_all_members_fraction),
-                        print_value_with_percent(row.count_node_members, row.count_node_members_fraction),
-                        print_value_with_percent(row.count_way_members, row.count_way_members_fraction),
-                        print_value_with_percent(row.count_relation_members, row.count_relation_members_fraction)
+                        fmt_value_with_percent(row.count_all_members, row.count_all_members_fraction),
+                        fmt_value_with_percent(row.count_node_members, row.count_node_members_fraction),
+                        fmt_value_with_percent(row.count_way_members, row.count_way_members_fraction),
+                        fmt_value_with_percent(row.count_relation_members, row.count_relation_members_fraction)
                     ] };
                 });
                 return data;

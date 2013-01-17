@@ -30,7 +30,7 @@ var create_flexigrid_for = {
                     rows: jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
                             fmt_image(row.type) + ' ' + texts.osm[row.type],
-                            print_value_with_percent(row.count, row.count_fraction)
+                            fmt_value_with_percent(row.count, row.count_fraction)
                         ]};
                     })
                 };
@@ -53,9 +53,9 @@ var create_flexigrid_for = {
             preProcess: function(data) {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
-                        print_value_with_percent(row.together_count, row.to_fraction),
+                        fmt_value_with_percent(row.together_count, row.to_fraction),
                         link_to_key_or_tag(row.other_key, row.other_value),
-                        print_value_with_percent(row.together_count, row.from_fraction),
+                        fmt_value_with_percent(row.together_count, row.from_fraction),
                     ] };
                 });
                 return data;

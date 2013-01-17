@@ -21,10 +21,10 @@ function page_init() {
             data.rows = jQuery.map(data.data, function(row, i) {
                 return { 'cell': [
                     hover_expand(link_to_tag(row.key, row.value, {}, { 'class': 'pref' })),
-                    print_value_with_percent(row.count_all,       row.count_all_fraction),
-                    print_value_with_percent(row.count_nodes,     row.count_nodes_fraction),
-                    print_value_with_percent(row.count_ways,      row.count_ways_fraction),
-                    print_value_with_percent(row.count_relations, row.count_relations_fraction)
+                    fmt_value_with_percent(row.count_all,       row.count_all_fraction),
+                    fmt_value_with_percent(row.count_nodes,     row.count_nodes_fraction),
+                    fmt_value_with_percent(row.count_ways,      row.count_ways_fraction),
+                    fmt_value_with_percent(row.count_relations, row.count_relations_fraction)
                 ] };
             });
             return data;

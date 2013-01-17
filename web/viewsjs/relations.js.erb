@@ -20,7 +20,7 @@ function page_init() {
             data.rows = jQuery.map(data.data, function(row, i) {
                 return { 'cell': [
                     link_to_rtype(row.relation_type),
-                    print_value_with_percent(row.count, row.count_fraction),
+                    fmt_value_with_percent(row.count, row.count_fraction),
                     link_to_tag('type', row.relation_type),
                     print_prevalent_role_list(row.prevalent_roles)
                 ] };

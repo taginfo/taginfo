@@ -24,8 +24,8 @@ function page_init() {
                         span(row.code, 'lang'),
                         row.native_name,
                         row.english_name,
-                        print_value_with_percent(row.wiki_key_pages, row.wiki_key_pages_fraction),
-                        print_value_with_percent(row.wiki_tag_pages, row.wiki_tag_pages_fraction)
+                        fmt_value_with_percent(row.wiki_key_pages, row.wiki_key_pages_fraction),
+                        fmt_value_with_percent(row.wiki_tag_pages, row.wiki_tag_pages_fraction)
                     ]};
                 })
             };
