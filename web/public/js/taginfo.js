@@ -87,6 +87,84 @@ function url_for_rtype(rtype) {
 
 /* ============================ */
 
+var bad_chars_for_keys = '!"#$%&()*+,/;<=>?@[\\]^`{|}~' + "'";
+
+function translate(str, fn) {
+    var result = '';
+
+    for (var i=0; i < str.length; i++) {
+        result += fn(str.charAt(i));
+    }
+
+    return result;
+}
+
+function pp_key(key) {
+    if (key == '') {
+        return span(texts.misc.empty_string, 'badchar empty');
+    }
+
+    return translate(key, function(c) {
+        if (bad_chars_for_keys.indexOf(c) != -1) {
+            return span(c, 'badchar');
+        } else if (c == ' ') {
+            return span('&#x2423;', 'badchar');
+        } else if (c.match(/\s/)) {
+            return span('&nbsp;', 'whitespace');
+        } else {
+            return c;
+        }
+    });
+}
+
+function pp_value(value) {
+    if (value == '') {
+        return span(texts.misc.empty_string, 'badchar empty');
+    }
+
+    return value
+            .replace(/ /g, '&#x2423;')
+            .replace(/\s/g, span('&nbsp;', 'whitespace'));
+}
+
+function pp_rtype(rtype) {
+    if (rtype == '') {
+        return span(texts.misc.empty_string, 'badchar empty');
+    }
+
+    return translate(rtype, function(c) {
+        if (c == ' ') {
+            return span('&#x2423;', 'badchar');
+        } else if (c.match(/\s/)) {
+            return span('&nbsp;', 'whitespace');
+        } else if (c.match(/[a-zA-Z0-9_:]/)) {
+            return c;
+        } else {
+            return span(c, 'badchar');
+        }
+    });
+}
+
+function pp_role(role) {
+    if (role == '') {
+        return span(texts.misc.empty_string, 'empty');
+    }
+
+    return translate(role, function(c) {
+        if (bad_chars_for_keys.indexOf(c) != -1) {
+            return span(c, 'badchar');
+        } else if (c == ' ') {
+            return span('&#x2423;', 'badchar');
+        } else if (c.match(/\s/)) {
+            return span('&nbsp;', 'whitespace');
+        } else {
+            return c;
+        }
+    });
+}
+
+/* ============================ */
+
 function link_to_key(key, attr) {
     return link(
         url_for_key(key),
@@ -257,91 +335,6 @@ function print_value_with_percent(value, fraction) {
     return '<div class="value">' + print_with_ts(value) +
      '</div><div class="fraction">' + fraction.print_as_percent() +
      '</div><div class="bar" style="width: ' + (fraction*100).toFixed() + 'px;"></div>';
-}
-
-var pp_chars = '!"#$%&()*+,/;<=>?@[\\]^`{|}~' + "'";
-
-function pp_key(key) {
-    if (key == '') {
-        return span(texts.misc.empty_string, 'badchar empty');
-    }
-
-    var result = '',
-        length = key.length;
-
-    for (var i=0; i<length; i++) {
-        var c = key.charAt(i);
-        if (pp_chars.indexOf(c) != -1) {
-            result += span(c, 'badchar');
-        } else if (c == ' ') {
-            result += span('&#x2423;', 'badchar');
-        } else if (c.match(/\s/)) {
-            result += span('&nbsp;', 'whitespace');
-        } else {
-            result += c;
-        }
-    }
-
-    return result;
-}
-
-function pp_value_replace(value) {
-    return value.replace(/ /g, '&#x2423;').replace(/\s/g, span('&nbsp;', 'whitespace'));
-}
-
-function pp_value(value) {
-    if (value == '') {
-        return span(texts.misc.empty_string, 'badchar empty');
-    }
-    return pp_value_replace(value);
-}
-
-function pp_rtype(rtype) {
-    if (rtype == '') {
-        return span(texts.misc.empty_string, 'badchar empty');
-    }
-
-    var result = '',
-        length = rtype.length;
-
-    for (var i=0; i<length; i++) {
-        var c = rtype.charAt(i);
-        if (pp_chars.indexOf(c) != -1) {
-            result += span(c, 'badchar');
-        } else if (c == ' ') {
-            result += span('&#x2423;', 'badchar');
-        } else if (c.match(/\s/)) {
-            result += span('&nbsp;', 'whitespace');
-        } else {
-            result += c;
-        }
-    }
-
-    return result;
-}
-
-function pp_role(role) {
-    if (role == '') {
-        return span(texts.misc.empty_string, 'empty');
-    }
-
-    var result = '',
-        length = role.length;
-
-    for (var i=0; i<length; i++) {
-        var c = role.charAt(i);
-        if (pp_chars.indexOf(c) != -1) {
-            result += span(c, 'badchar');
-        } else if (c == ' ') {
-            result += span('&#x2423;', 'badchar');
-        } else if (c.match(/\s/)) {
-            result += span('&nbsp;', 'whitespace');
-        } else {
-            result += c;
-        }
-    }
-
-    return result;
 }
 
 /* ============================ */
