@@ -36,7 +36,7 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        all_relations = @db.stats('relations')
+        all_relations = @db.stats('relations').to_i
 
         prevroles = @db.select('SELECT rtype, role, count, fraction FROM db.prevalent_roles').
             condition("rtype IN (#{ res.map{ |row| "'" + SQLite3::Database.quote(row['rtype']) + "'" }.join(',') })").
@@ -63,7 +63,7 @@ class Taginfo < Sinatra::Base
             :data  => res.map{ |row| {
                 :relation_type   => row['rtype'],
                 :count           => row['count'].to_i,
-                :count_fraction  => row['count'].to_i / all_relations,
+                :count_fraction  => row['count'].to_f / all_relations,
                 :prevalent_roles => row['members_all'] ? pr[row['rtype']][0,10] : nil
             } }
         }.to_json
