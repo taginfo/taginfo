@@ -223,7 +223,21 @@ function tag(element, text, attrs) {
             attributes += ' ' + a + '="' + attrs[a] + '"';
         }
     }
-    return '<' + element + attributes + '>' + text + '</' + element + '>';
+    if (text === null) {
+        return '<' + element + attributes + '/>';
+    } else {
+        return '<' + element + attributes + '>' + text + '</' + element + '>';
+    }
+}
+
+function style(styles) {
+    var css = '';
+
+    for (var s in styles) {
+        css += html_escape(s) + ':' + html_escape(styles[s]) + ';';
+    }
+
+    return css;
 }
 
 function link(url, text, attrs) {
@@ -232,6 +246,10 @@ function link(url, text, attrs) {
     }
     attrs.href = url;
     return tag('a', text, attrs);
+}
+
+function img(attrs) {
+    return tag('img', null, attrs);
 }
 
 function span(text, c) {
@@ -254,47 +272,76 @@ function fmt_img_popup(image) {
         max_size = 180,
         thumb_size = w >= h ? max_size : parseInt(max_size / h * w),
         other_size = (w >= h ? parseInt(max_size / w * h) : max_size) + 2,
-        url = image.thumb_url_prefix + thumb_size + image.thumb_url_suffix,
-        title;
+        url = image.thumb_url_prefix + thumb_size + image.thumb_url_suffix;
 
     if (w < max_size) {
-        title = html_escape('<div class="img_popup" style="width: ' + w + 'px; height:' + h + 'px;"><img src="' + image.image_url + '"/></div>');
+        url = image.image_url;
     } else {
-        title = html_escape('<div class="img_popup" style="width: ' + thumb_size + 'px; height:' + other_size + 'px;"><img src="' + url + '"/></div>');
+        w = thumb_size;
+        h = other_size;
     }
 
-    return '<span class="overflow" tipsy_html="s" title="' + title + '">' + link_to_wiki(image.title) + '</span>';
+    return tag('span', link_to_wiki(image.title), {
+        'class': 'overflow',
+        tipsy_html: 's',
+        title: html_escape(tag('div', img({ src: url }), {
+            'class': 'img_popup',
+            style: style({ width: w + 'px', height: h + 'px' })
+        }))
+    });
 }
 
 function fmt_language(code, native_name, english_name) {
-    return tag('span', code, { 'class': 'lang', title: native_name + ' (' + english_name + ')' }) + ' ' + native_name;
+    return tag('span', html_escape(code), {
+        'class': 'lang',
+        title: html_escape(native_name + ' (' + english_name + ')')
+    }) + ' ' + html_escape(native_name);
 }
 
 function fmt_type_icon(type, on_or_off) {
-    return '<img src="/img/types/' +
-           (on_or_off ? type : 'none') +
-           '.16.png" alt="' +
-           (on_or_off ? 'yes' : 'no') +
-           '" width="16" height="16"/> ';
+    return img({
+        src: '/img/types/' + (on_or_off ? encodeURIComponent(type) : 'none') + '.16.png',
+        alt: on_or_off ? 'yes' : 'no',
+        width: 16,
+        height: 16
+    }) + ' ';
 }
 
-function print_josm_value(key, value, value_bool) {
-    return value ? link_to_value(key, value) : value_bool ? (value_bool + ' (Boolean)') : '*';
+function fmt_josm_value(key, value, value_bool) {
+    return value ? link_to_value(key, value) : value_bool ? (html_escape(value_bool) + ' (Boolean)') : '*';
 }
 
-function print_josm_icon(style, icon) {
-    return icon ? '<img src="/api/4/josm/style/image?style=' + style + '&image=' + icon + '" title="' + icon + '" alt=""/>' : '';
+function fmt_josm_icon(style, icon) {
+    if (!icon) return '';
+
+    return img({
+        src: '/api/4/josm/style/image?style=' + encodeURIComponent(style) + '&image=' + encodeURIComponent(icon),
+        title: html_escape(icon),
+        alt: ''
+    });
 }
 
-function print_josm_line(width, color) {
-    return '<div>' + (width > 0 ? '<div title="' + color + '" style="height: ' + width + 'px; margin-top: ' + (10 - Math.round(width/2)) + 'px; padding: 0; background-color: ' + color + '"></div>' : '') + '</div>';
+function fmt_josm_line(width, color) {
+    var inner = '';
+    if (width > 0) {
+        inner = tag('div', '', {
+            title: color,
+            style: style({ height: width + 'px', 'margin-top': (10 - Math.round(width/2)) + 'px', padding: 0, 'background-color': color })
+        });
+    }
+    return tag('div', inner);
 }
 
-function print_josm_area(color) {
-    return color ? '<div title="' + color + '" style="height: 18px; background-color: ' + color + '"></div>' : '';
+function fmt_josm_area(color) {
+    if (!color) return '';
+
+    return tag('div', '', {
+        title: html_escape(color),
+        style: style({ height: '18px', 'background-color': html_escape(color) })
+    });
 }
 
-function print_image(type) {
+function fmt_image(type) {
     type = type.replace(/s$/, '');
     var name;
     if (type == 'all') {
@@ -302,7 +349,13 @@ function print_image(type) {
     } else {
         name = texts.osm[type];
     }
-    return '<img src="/img/types/' + type + '.16.png" alt="[' + name + ']" title="' + name + '" width="16" height="16"/>';
+    return img({
+        src: '/img/types/' + encodeURIComponent(type) + '.16.png',
+        alt: '[' + html_escape(name) + ']',
+        title: html_escape(name),
+        width: 16,
+        height: 16
+    });
 }
 
 // print a number with thousand separator
@@ -341,7 +394,7 @@ function print_prevalent_value_list(key, list) {
 }
 
 function html_escape(text) {
-    return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 function print_value_with_percent(value, fraction) {

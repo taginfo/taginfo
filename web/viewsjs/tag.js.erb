@@ -29,7 +29,7 @@ var create_flexigrid_for = {
                     page: 1,
                     rows: jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
-                            print_image(row.type) + ' ' + texts.osm[row.type],
+                            fmt_image(row.type) + ' ' + texts.osm[row.type],
                             print_value_with_percent(row.count, row.count_fraction)
                         ]};
                     })
@@ -114,10 +114,10 @@ var create_flexigrid_for = {
             preProcess: function(data) {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
-                        print_josm_value(row.key, row.value, row.value_bool),
-                        print_josm_icon('standard', row.icon),
-                        print_josm_line(row.line_width, row.line_color),
-                        print_josm_area(row.area_color)
+                        fmt_josm_value(row.key, row.value, row.value_bool),
+                        fmt_josm_icon('standard', row.icon),
+                        fmt_josm_line(row.line_width, row.line_color),
+                        fmt_josm_area(row.area_color)
                     ] };
                 });
                 return data;
