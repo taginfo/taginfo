@@ -105,7 +105,7 @@
     JS.raw(<<"JAVASCRIPT")
 function page_init2() {
     var key = #{ @key.to_json };
-    jQuery('h1').html(pp_key(key));
+    jQuery('h1').html(fmt_key(key));
     init_tabs([key, #{ @filter_type.to_json }, #{ r18n.locale.code.to_json }]);
     create_chart({
         key: key,

@@ -99,7 +99,7 @@ function translate(str, fn) {
     return result;
 }
 
-function pp_key(key) {
+function fmt_key(key) {
     if (key == '') {
         return span(texts.misc.empty_string, 'badchar empty');
     }
@@ -117,7 +117,7 @@ function pp_key(key) {
     });
 }
 
-function pp_value(value) {
+function fmt_value(value) {
     if (value == '') {
         return span(texts.misc.empty_string, 'badchar empty');
     }
@@ -127,7 +127,7 @@ function pp_value(value) {
             .replace(/\s/g, span('&nbsp;', 'whitespace'));
 }
 
-function pp_rtype(rtype) {
+function fmt_rtype(rtype) {
     if (rtype == '') {
         return span(texts.misc.empty_string, 'badchar empty');
     }
@@ -145,7 +145,7 @@ function pp_rtype(rtype) {
     });
 }
 
-function pp_role(role) {
+function fmt_role(role) {
     if (role == '') {
         return span(texts.misc.empty_string, 'empty');
     }
@@ -168,7 +168,7 @@ function pp_role(role) {
 function link_to_key(key, attr) {
     return link(
         url_for_key(key),
-        pp_key(key),
+        fmt_key(key),
         attr
     );
 }
@@ -176,7 +176,7 @@ function link_to_key(key, attr) {
 function link_to_value(key, value, attr) {
     return link(
         url_for_tag(key, value), 
-        pp_value(value),
+        fmt_value(value),
         attr
     );
 }
@@ -188,7 +188,7 @@ function link_to_tag(key, value, key_attr, value_attr) {
 function link_to_rtype(rtype, attr) {
     return link(
         url_for_rtype(rtype),
-        pp_rtype(rtype),
+        fmt_rtype(rtype),
         attr
     );
 }

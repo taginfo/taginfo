@@ -21,7 +21,7 @@ var create_flexigrid_for = {
             preProcess: function(data) {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
-                        pp_role(row.role),
+                        fmt_role(row.role),
                         print_value_with_percent(row.count_all_members, row.count_all_members_fraction),
                         print_value_with_percent(row.count_node_members, row.count_node_members_fraction),
                         print_value_with_percent(row.count_way_members, row.count_way_members_fraction),

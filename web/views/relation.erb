@@ -24,7 +24,7 @@
     JS.raw(<<"JAVASCRIPT")
 function page_init2() {
     var rtype = #{ @rtype.to_json };
-    jQuery('h1').html("#{ t.pages.relation.name } '" + pp_rtype(rtype) + "'");
+    jQuery('h1').html("#{ t.pages.relation.name } '" + fmt_rtype(rtype) + "'");
     init_tabs([rtype]);
 }
 JAVASCRIPT

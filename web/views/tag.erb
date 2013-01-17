@@ -77,7 +77,7 @@ function page_init2() {
     var key = #{ @key.to_json },
         value = #{ @value.to_json };
     up = function() { window.location = url_for_key(key); };
-    jQuery('h1').html(link_to_key(key) + '=' + pp_value(value));
+    jQuery('h1').html(link_to_key(key) + '=' + fmt_value(value));
     jQuery('span#keylink').html(link_to_key(key));
     init_tabs([key, value, #{ @filter_type.to_json }]);
 }
