@@ -452,13 +452,25 @@ function create_flexigrid(domid, options) {
 
 function init_tabs(params) {
     return jQuery('#tabs').tabs({
-        show: function(event, ui) { 
+        activate: function (event, ui) { 
             resize_box();
-            if (ui.index != 0 || window.location.hash != '') {
-                window.location.hash = ui.tab.hash;
+            var index = ui.newTab.closest("li").index();
+            if (index != 0 || window.location.hash != '') {
+                window.location.hash = ui.newTab.context.hash;
             }
-            if (ui.tab.hash.substring(1) in create_flexigrid_for) {
-                create_flexigrid_for[ui.tab.hash.substring(1)].apply(this, params);
+            if (ui.newTab.context.hash.substring(1) in create_flexigrid_for) {
+                create_flexigrid_for[ui.newTab.context.hash.substring(1)].apply(this, params);
+            }
+        },
+        create: function (event, ui) { 
+            resize_box();
+            var index = jQuery(this).tabs("option", "selected"),
+                id = jQuery(jQuery(this).children()[index+1]).attr('id');
+            if (index != 0 || window.location.hash != '') {
+                window.location.hash = id;
+            }
+            if (id in create_flexigrid_for) {
+                create_flexigrid_for[id].apply(this, params);
             }
         }
     });
@@ -518,7 +530,7 @@ function table_right() {
 jQuery(document).ready(function() {
     jQuery('#javascriptmsg').remove();
 
-    jQuery('select').customStyle();
+    jQuery('select').customSelect();
 
     jQuery.getQueryString = (function(a) {
         if (a == "") return {};

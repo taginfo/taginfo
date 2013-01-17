@@ -25,11 +25,7 @@ Uses
     * Sinatra web framework http://www.sinatrarb.com/
     * Rack Contrib Gem (for Rack::JSONP)
     * JSON gem (install with gem, Debian/Ubuntu packages are too old and buggy)
-    * jQuery (www.jquery.com), necessary files are included
     * curl binary
-    * Flexigrid (Originally from http://code.google.com/p/flexigrid/
-        http://www.flexigrid.info/ , the version used and included
-        has some changes and bugfixes.)
 
 Debian/Ubuntu packages:
     rubygems curl
@@ -57,6 +53,21 @@ data import step or downloaded from http://taginfo.openstreetmap.org/download .
 To start the web user interface:
 cd web
 ./taginfo.rb
+
+
+JAVASCRIPT
+----------
+
+Taginfo uses the following Javascript libraries:
+* jQuery 1.9.0
+* jQuery UI 1.9.2
+* customSelect (http://adam.co/lab/jquery/customselect/)
+* tipsy (http://onehackoranother.com/projects/jquery/tipsy/)
+* Flexigrid (Originally from http://code.google.com/p/flexigrid/
+    http://www.flexigrid.info/ , the version used and included
+    has some changes and bugfixes.)
+
+All the Javascript and CSS needed is already included.
 
 
 THANKS

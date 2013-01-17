@@ -102,9 +102,10 @@ class Taginfo < Sinatra::Base
             params[:locale] = request.cookies['taginfo_locale']
         end
 
-        javascript 'jquery-1.5.1.min'
-        javascript 'jquery-ui-1.8.10.custom.min'
-        javascript 'customSelect.jquery-minified'
+        javascript 'jquery-1.9.0.min'
+        javascript 'jquery-migrate-1.0.0' # needed for flexigrid
+        javascript 'jquery-ui-1.9.2.custom.min'
+        javascript 'customSelect.jquery.min'
         javascript 'jquery.tipsy-minified'
         javascript 'flexigrid-minified'
         javascript r18n.locale.code + '/texts'

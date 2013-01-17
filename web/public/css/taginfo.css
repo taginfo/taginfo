@@ -148,7 +148,7 @@ span.disabled {
 
 /* ========== */
 
-span.customStyleSelectBox { 
+span.customSelect { 
     margin: 0;
     padding: 1px 4px 0 4px;
     border:1px solid #a0a0a0;
@@ -158,9 +158,7 @@ span.customStyleSelectBox {
     text-align: left;
 }
 
-span.customStyleSelectBox.changed { }
-
-.customStyleSelectBoxInner {
+.customSelectInner {
     background:url(/img/arrow.png) no-repeat center right;
 }
 
