@@ -103,10 +103,6 @@ SUBTAG_TYPES = %w( language script region variant )
 
 db.execute('BEGIN TRANSACTION');
 
-if file_date
-    db.execute("UPDATE source SET data_until=?", "#{file_date} 00:00:00")
-end
-
 Subtag.entries.each do |entry|
     if SUBTAG_TYPES.include?(entry.type) &&
         entry.description != 'Private use' &&
