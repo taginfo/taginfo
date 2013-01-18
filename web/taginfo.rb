@@ -103,7 +103,7 @@ class Taginfo < Sinatra::Base
         end
 
         javascript 'jquery-1.9.0.min'
-        javascript 'jquery-migrate-1.0.0' # needed for flexigrid
+        javascript 'jquery-migrate-1.0.0.min' # needed for flexigrid
         javascript 'jquery-ui-1.9.2.custom.min'
         javascript 'customSelect.jquery.min'
         javascript 'jquery.tipsy-minified'
