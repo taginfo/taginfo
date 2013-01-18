@@ -21,6 +21,11 @@ class Taginfo < Sinatra::Base
             @desc = "<span title='#{ t.pages.relation.description_from_wiki }' tipsy='w'>#{ @desc }</span>"
         end
 
+        @db.select("SELECT width, height, image_url, thumb_url_prefix, thumb_url_suffix FROM wiki.relation_pages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang=? AND rtype=? UNION SELECT width, height, image_url, thumb_url_prefix, thumb_url_suffix FROM wiki.relation_pages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang='en' AND rtype=? LIMIT 1", r18n.locale.code, @rtype, @rtype).
+            execute() do |row|
+                @image_url = build_image_url(row)
+            end
+
         @count_relation_roles = @db.count('relation_roles').
             condition("rtype=?", rtype).
             get_first_value().to_i

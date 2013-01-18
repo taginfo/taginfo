@@ -142,6 +142,16 @@ class WikiPage
         @parsed = false
     end
 
+    def set_image(ititle, db)
+        if !ititle.nil? && ititle.match(%r{^(file|image):(.*)$}i)
+            @image = "File:#{$2}"
+        else
+            puts "invalid image: page='#{title}' image='#{ititle}'"
+            db.execute('INSERT INTO invalid_image_titles (page_title, image_title) VALUES (?, ?)', title, ititle)
+            @image = ''
+        end
+    end
+
     def parse_template(template, db)
         puts "Template: #{template.name} [#{template.parameters.join(',')}] #{template.named_parameters.inspect}"
         if template.name == 'Key' || template.name == 'Tag'
@@ -165,14 +175,7 @@ class WikiPage
                 end
             end
             if template.named_parameters['image']
-                ititle = template.named_parameters['image'][0]
-                if !ititle.nil? && ititle.match(%r{^(file|image):(.*)$}i)
-                    @image = "File:#{$2}"
-                else
-                    puts "invalid image: page='#{title}' image='#{ititle}'"
-                    db.execute('INSERT INTO invalid_image_titles (page_title, image_title) VALUES (?, ?)', title, ititle)
-                    @image = ''
-                end
+                set_image(template.named_parameters['image'][0], db)
             end
             if template.named_parameters['group']
                 @group = template.named_parameters['group'][0]
@@ -278,6 +281,10 @@ class RelationPage < WikiPage
         else
             @lang  = 'en'
         end
+    end
+
+    def set_image(ititle, db)
+        @image = "File:#{ititle}"
     end
 
     def insert(db)

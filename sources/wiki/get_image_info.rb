@@ -80,6 +80,7 @@ until image_titles.empty?
         if normalized
             normalized.each do |n|
                 db.execute('UPDATE wikipages SET image=? WHERE image=?', n['to'], n['from'])
+                db.execute('UPDATE relation_pages SET image=? WHERE image=?', n['to'], n['from'])
             end
         end
 

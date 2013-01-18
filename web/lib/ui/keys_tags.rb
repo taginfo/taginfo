@@ -1,20 +1,6 @@
 # web/lib/ui/keys_tags.rb
 class Taginfo < Sinatra::Base
 
-    MAX_IMAGE_WIDTH = 300
-
-    def build_image_url(row)
-        w = row['width'].to_i
-        h = row['height'].to_i
-        if w <= MAX_IMAGE_WIDTH
-            return row['image_url']
-        end
-        if w > 0 && h > 0
-            return "#{row['thumb_url_prefix']}#{ h <= w ? MAX_IMAGE_WIDTH : (MAX_IMAGE_WIDTH * w / h).to_i }#{ row['thumb_url_suffix'] }"
-        end
-        return nil
-    end
-
     get %r{^/keys/(.*)} do |key|
         if params[:key].nil?
             @key = key

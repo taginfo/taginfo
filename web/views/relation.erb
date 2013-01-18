@@ -17,6 +17,11 @@
     </ul>
     <div id="overview">
         <h2><%= t.pages.relation.overview.title %></h2>
+<% if @image_url %>
+        <div style="float: right;">
+            <img src="<%= @image_url %>" style="border: 1px solid #a0a0a0; border-radius: 4px; padding: 1px;" alt=""/>
+        </div>
+<% end %>
         <table id="grid-overview">
         </table>
         <p><%= t.pages.relation.overview.see_also %>: type=<span id="taglink"></span></p>
