@@ -111,19 +111,19 @@ help:
         tags_page: Tags-Seite
         relations_page: Relations-Seite
         first_page: Erste Seite
-        prev_page: Vorhergehende Seite
+        prev_page: Vorhergeh. Seite
         next_page: Folgende Seite
         last_page: Letzte Seite
         help_page: Diese Hilfe
         activate_search: Suchfeld aktivieren
         activate_filter: Filter-Suche aktivieren
-        prev_entry: Vorhergehender Eintrag
+        prev_entry: Vorhergeh. Eintrag
         next_entry: Folgender Eintrag
         enter_entry: Zum Eintrag springen
         switch_tab: Reiter wechseln
         deactivate: Eingabefelder deaktivieren
-        up: Nach oben in der Seitenhierarchie
-        switch_input: Wechsel zwischen den Eingabefeldern
+        up: Übergeordn. Seite
+        switch_input: Wechsel der Eingabef.
 
 pages:
     not_found:

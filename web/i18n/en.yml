@@ -103,8 +103,8 @@ help:
         keys:
             home: Home
             end: End
-            pageup: PageUp
-            pagedown: PageDown
+            pageup: PgUp
+            pagedown: PgDn
             esc: Esc
             tab: TAB
         home_page: Home page
@@ -115,7 +115,7 @@ help:
         prev_page: Previous page
         next_page: Next page
         last_page: Last page
-        help_page: This help page
+        help_page: This help
         activate_search: Activate search input
         activate_filter: Activate filter input field
         prev_entry: Previous entry
