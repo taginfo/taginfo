@@ -3,16 +3,18 @@
 # as many of them as will fit in the window.
 tagcloud_number_of_keys = 200
 tagcloud_number_of_tags = 40
+tagcloud_number_of_relations = 40
 keys = @db.select("SELECT key, scale1 FROM popular_keys ORDER BY scale1 DESC LIMIT #{ tagcloud_number_of_keys }").
     execute().
     each_with_index{ |tag, idx| tag['pos'] = (tagcloud_number_of_keys - idx) / tagcloud_number_of_keys.to_f }
 tags = @db.select("SELECT skey, svalue FROM db.selected_tags WHERE skey NOT IN ('source', 'source_ref', 'attribution') ORDER BY count_all DESC LIMIT #{ tagcloud_number_of_tags }").execute()
+relations = @db.select("SELECT rtype FROM db.relation_types ORDER BY count DESC LIMIT #{ tagcloud_number_of_relations }").execute()
 %>
 
-var keys_data = <%= keys.map{ |tag| { :text => tag['key'], :size => tagcloud_size(tag) } }.to_json.gsub(/\},/, "},\n") %>;
-var tags_data = <%= tags.map{ |entry| [ entry['skey'], entry['svalue'] ] }.to_json.gsub(/\],/, "],\n") %>;
-
-var width, height, font_family = 'Impact', font_weight = 'normal';
+var keys_data = <%= keys.map{ |tag| { :text => tag['key'], :size => tagcloud_size(tag) } }.to_json.gsub(/\},/, "},\n") %>,
+    tags_data = <%= tags.map{ |entry| [ entry['skey'], entry['svalue'] ] }.to_json.gsub(/\],/, "],\n") %>,
+    relations_data = <%= relations.map{ |row| row['rtype'] }.to_json.gsub(/\],/, "],\n") %>,
+    width, height, font_family = 'Impact', font_weight = 'normal';
 
 up = function() {};
 
@@ -73,33 +75,39 @@ function resize_home() {
 }
 
 function fill_lists() {
-    var key_list = jQuery('#key_list'),
-        tag_list = jQuery('#tag_list');
-
-    key_list.empty();
-    tag_list.empty();
-
-    var key_list_height = key_list.parent().height() - key_list.next().outerHeight() - 60,
-        tag_list_height = tag_list.parent().height() - tag_list.next().outerHeight() - 60,
+    var key_list = jQuery('#key_list').empty(),
+        tag_list = jQuery('#tag_list').empty(),
+        relation_list = jQuery('#relation_list').empty(),
+        title_td_height = 42,
+        reserve_height = 64,
+        max_height = jQuery('table').height() / 3 - title_td_height - reserve_height;
         i = 0;
 
-    console.log(key_list_height);
-    console.log(tag_list_height);
-
-    while (key_list.outerHeight() < key_list_height) {
+    while (key_list.outerHeight() < max_height) {
         var d = keys_data[i];
-        key_list.append(tag('li', link_to_key(d.text)));
+        key_list.append(link_to_key(d.text));
+        key_list.append(' &bull; ');
         i++;
     }
-    key_list.append(tag('li', '...'));
+    key_list.append('...');
 
     i = 0;
-    while (tag_list.outerHeight() < tag_list_height) {
+    while (tag_list.outerHeight() < max_height) {
         var d = tags_data[i];
-        tag_list.append(tag('li', link_to_tag(d[0], d[1])));
+        tag_list.append(link_to_tag(d[0], d[1]));
+        tag_list.append(' &bull; ');
         i++;
     }
-    tag_list.append(tag('li', '...'));
+    tag_list.append('...');
+
+    i = 0;
+    while (relation_list.outerHeight() < max_height) {
+        var d = relations_data[i];
+        relation_list.append(link_to_rtype(d));
+        relation_list.append(' &bull; ');
+        i++;
+    }
+    relation_list.append('...');
 }
 
 function page_init() {

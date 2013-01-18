@@ -53,7 +53,7 @@ p {
     max-width: 60em;
 }
 
-p.emphasis {
+.emphasis {
     font-weight: bold;
     font-size: 110%;
 }

@@ -73,9 +73,8 @@ misc:
 pages:
     index:
         keys:
-            intro: |
-                Oto niektóre z najczęściej używanych kluczy:
             listkeys: Zobacz listę wszystkich kluczy...
+        tags:
             listtags: Zobacz listę najpopularniejszych tagów...
         reports:
             listreports: Zobacz wszystkie raporty...
