@@ -5,7 +5,7 @@ class Taginfo < Sinatra::Base
     api(4, 'relation/roles', {
         :description => 'Member role statistics for a relation of given type.',
         :parameters => {
-            :type => 'Relation type (required).',
+            :rtype => 'Relation type (required).',
             :query => 'Only show results where the role matches this query (substring match, optional).'
         },
         :paging => :optional,
@@ -22,10 +22,10 @@ class Taginfo < Sinatra::Base
             [:count_relation_members,          :INT,    'Number of members of type relation with this role.'],
             [:count_relation_members_fraction, :FLOAT,  'Number of members of type relation with this role devided by all members of type relation.']
         ]),
-        :example => { :role => 'multipolygon', :page => 1, :rp => 10 },
+        :example => { :rtype => 'multipolygon', :page => 1, :rp => 10 },
         :ui => '/reports/relation_types#roles'
     }) do
-        rtype = params[:type]
+        rtype = params[:rtype]
 
         relation_type_info = @db.select('SELECT * FROM relation_types').
             condition("rtype=?", rtype).
