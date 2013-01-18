@@ -1,4 +1,12 @@
 <div class="pre">
+    <div id="tools" class="no-print">
+        <% if @count_all_values < TaginfoConfig.get('xapi.max_results', 1000) %>
+            <%= xapi_link('relation', 'type', @rtype) %> <%= josm_link('relation', 'type', @rtype) %>
+        <% else %>
+            <span class="button disabled" title="Button disabled, because there are too many objects with this key">XAPI</span>
+            <span class="button disabled" title="Button disabled, because there are too many objects with this key">JOSM</span>
+        <% end %>
+    </div>
     <h1></h1>
     <p><%= @desc %></p>
 </div>
@@ -23,6 +31,7 @@
 <% end %>
     </div>
 </div>
+<iframe id="josmiframe" name="josmiframe"></iframe>
 <% javascript do
     JS.raw(<<"JAVASCRIPT")
 function page_init2() {

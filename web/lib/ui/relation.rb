@@ -11,6 +11,8 @@ class Taginfo < Sinatra::Base
         @title = [escape_html(@rtype), t.osm.relations]
         section :relations
 
+        @count_all_values = @db.select("SELECT count_relations FROM db.keys").condition('key = ?', @rtype).get_first_value().to_i
+
         @desc = h(@db.select("SELECT description FROM wiki.relation_pages WHERE lang=? AND rtype=?", r18n.locale.code, @rtype).get_first_value())
         @desc = h(@db.select("SELECT description FROM wiki.relation_pages WHERE lang='en' AND rtype=?", @rtype).get_first_value()) if @desc == ''
         if @desc == ''

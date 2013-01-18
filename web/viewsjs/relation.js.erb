@@ -58,6 +58,11 @@ var create_flexigrid_for = {
 };
 
 function page_init() {
+    jQuery('#josm_button').bind('click', function() {
+        jQuery('#josmiframe')[0].src = jQuery('#josm_button')[0].href;
+        return false;
+    });
+
     up = function() { window.location = '/relations'; };
     page_init2();
 }
