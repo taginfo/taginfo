@@ -27,12 +27,12 @@
         <li><a href="#josm"><%= t.sources.josm.name %></a></li>
     </ul>
     <div id="overview">
-        <h2><%= t.taginfo.overview %></h2>
 <% if @image_url %>
-        <div style="float: right;">
-            <img src="<%= @image_url %>" style="border: 1px solid #a0a0a0; border-radius: 4px; padding: 1px;" alt=""/>
+        <div class="wiki_image">
+            <img src="<%= @image_url %>" alt=""/>
         </div>
 <% end %>
+        <h2><%= t.taginfo.overview %></h2>
         <table id="grid-overview">
         </table>
     </div>
