@@ -58,6 +58,15 @@ p.emphasis {
     font-size: 110%;
 }
 
+div#javascriptmsg {
+    position: absolute;
+    top: 0px;
+    left: 380px;
+    background-color: #f08080;
+    padding: 10px;
+    margin: 20px 40px;
+}
+
 iframe {
     display: none;
 }
@@ -510,6 +519,10 @@ div.hDiv table th span {
 }
 
 /* ==========  */
+
+div#help {
+    display: none;
+}
 
 table.help_table {
     width: 100%;
