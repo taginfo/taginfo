@@ -85,8 +85,46 @@ misc:
 help:
     search:
         title: Search
+        intro: Use the search box in the upper right corner to search for tag keys and values.
+        string: You can search for tag keys and values
+        substring: Just part of the key/value also works
+        complete_tags: You can search for complete tags
+        values_only: You can also search for tag values only
+        suggestions: |
+            For your convenience popular keys and tags will be suggested
+            while you type. Use your cursor keys to choose one and hit
+            <span class="key">Enter</span>.
+            You will jump directly to that key or tag page.
     keyboard:
         title: Keyboard shortcuts
+        site_navigation: Site navigation
+        page_navigation: Page navigation
+        table_navigation: Table navigation
+        keys:
+            home: Home
+            end: End
+            pageup: PageUp
+            pagedown: PageDown
+            esc: Esc
+            tab: TAB
+        home_page: Home page
+        keys_page: Keys page
+        tags_page: Tags page
+        relations_page: Relations page
+        first_page: First page
+        prev_page: Previous page
+        next_page: Next page
+        last_page: Last page
+        help_page: This help page
+        activate_search: Activate search input
+        activate_filter: Activate filter input field
+        prev_entry: Previous entry
+        next_entry: Next entry
+        enter_entry: Jump to entry
+        switch_tab: Switch tab
+        deactivate: Deactivate input fields
+        up: Up in page hierarchy
+        switch_input: Switch between input fields
 
 pages:
     not_found:
