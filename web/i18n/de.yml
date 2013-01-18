@@ -11,6 +11,15 @@ osm:
     ways: Ways
     relation: Relation
     relations: Relations
+    relation_type: Relation-Typ
+    relation_types: Relation-Typen
+    relation_member: Relation Member
+    relation_members: Relation Members
+    relation_member_nodes: Member Nodes
+    relation_member_ways: Member Ways
+    relation_member_relations: Member Relations
+    relation_member_role: Role
+    relation_member_roles: Roles
     object: Objekt
     objects: Objekte
     all: Alle
@@ -32,6 +41,7 @@ taginfo:
     test: Test
     map: Karte
     maps: Karten
+    relations: Relations
     combinations: Kombinationen
     key_combinations: Kombinationen
     overview: Übersicht
@@ -71,7 +81,54 @@ misc:
     in_wiki_tooltip: Zu diesem Key gibt es mindestens eine Wiki-Seite.
     in_josm_tooltip: Der Key erscheint in der JOSM-Konfiguration.
 
+help:
+    search:
+        title: Suche
+        intro: Ein Eingabefeld für die Suche nach Keys und Values befindet sich in der Ecke oben rechts.
+        string: Suche nach Tag Keys und Values
+        substring: Teile eines Keys/Values gehen auch
+        complete_tags: Suche nach kompletten Tags
+        values_only: Suche nur in den Tag Values
+        suggestions: |
+            Beim Tippen werden häufig verwendete Keys und Tags
+            automatisch vorgeschlagen. Sie können mit den Cursortasten
+            ausgewählt und mit <span class="key">Enter</span>
+            angezeigt werden.
+    keyboard:
+        title: Tastenkürzel
+        site_navigation: Taginfo-Navigation
+        page_navigation: Seiten-Navigation
+        table_navigation: Tabellen-Navigation
+        keys:
+            home: Pos1
+            end: Ende
+            pageup: Bild↑
+            pagedown: Bild↓
+            esc: Esc
+            tab: TAB
+        home_page: Homepage
+        keys_page: Keys-Seite
+        tags_page: Tags-Seite
+        relations_page: Relations-Seite
+        first_page: Erste Seite
+        prev_page: Vorhergehende Seite
+        next_page: Folgende Seite
+        last_page: Letzte Seite
+        help_page: Diese Hilfe
+        activate_search: Suchfeld aktivieren
+        activate_filter: Filter-Suche aktivieren
+        prev_entry: Vorhergehender Eintrag
+        next_entry: Folgender Eintrag
+        enter_entry: Zum Eintrag springen
+        switch_tab: Reiter wechseln
+        deactivate: Eingabefelder deaktivieren
+        up: Nach oben in der Seitenhierarchie
+        switch_input: Wechsel zwischen den Eingabefeldern
+
 pages:
+    not_found:
+        title: Nicht gefunden
+        intro: Wir konnten die gewünschte Seite leider nicht finden.
     index:
         popular_keys: Weitverbreitete Keys
         keys:
@@ -135,8 +192,17 @@ pages:
     tags:
         intro: |
                 Diese Tabelle zeigt die häufigsten Tags in der Datenbank.
+    relations:
+        name: Relations-Typen
+        intro: Information zu den verschiedenen Typen von Relations (zu erkennen am <a href="/keys/type?filter=relations">type</a> tag).
+        relations_of_type_tooltip: Anzahl Relations mit diesem Typ (und als Prozentsatz aller Relations).
+        prevalent_roles: Häufig verwendete Roles
+        prevalent_roles_tooltip: Häufig verwendete Roles für diesen Relations-Typ.
+        no_information: Keine Informationen
+        roles_less_than_one_percent: Keine Roles mit mehr als 1%
+        empty_role: Role ist leer
     key:
-        description_from_wiki: Beschreibung dieses Keys aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf englisch).
+        description_from_wiki: Beschreibung dieses Keys aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf Englisch).
         no_description_in_wiki: Keine Beschreibung dieses Keys im Wiki.
         filter:
             label: |
@@ -148,7 +214,7 @@ pages:
         number_objects: Anzahl Objekte
         number_values: Anzahl Values
         values_used: Values für diesen Key
-        tag_description_from_wiki: Beschreibung dieses Tags aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf englisch).
+        tag_description_from_wiki: Beschreibung dieses Tags aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf Englisch).
         overview:
             objects_last_edited_by: Objekte mit diesem Key wurden zuletzt von %1 verschiedenen Usern editiert.
             no_endorsement: (Das bedeutet nicht, dass alle diese User den Key befürworten.)
@@ -176,7 +242,7 @@ pages:
                   Stil auswählen:
             no_styles: Keine JOSM-Stilregeln für diesen Key.
     tag:
-        description_from_wiki: Beschreibung dieses Tags aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf englisch).
+        description_from_wiki: Beschreibung dieses Tags aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf Englisch).
         no_description_in_wiki: Keine Beschreibung dieses Tags im Wiki.
         number_objects: Anzahl Objekte
         other_tags_used:
@@ -202,6 +268,24 @@ pages:
             choice: |
                   Stil auswählen:
             no_styles: Keine JOSM-Stilregeln für diesen Tag.
+    relation:
+        name: Relation-Typ
+        description_from_wiki: Beschreibung dieses Relations-Types aus dem Wiki  (falls vorhanden in der gewählten Sprache, sonst auf Englisch).
+        no_description_in_wiki: Keine Beschreibung dieser Relation im Wiki.
+        overview:
+            tab: Übersicht
+            title: Übersicht
+            member_type: Member-Typ
+            member_count: Anzahl Member
+            see_also: Siehe auch auf der Tag-Seite
+        roles:
+            tab: Roles
+            title: Member Roles
+            objects_tooltip: Relation Members mit dieser Role (und als Prozentsatz aller Members) für diesen Relation-Typ.
+            nodes_tooltip: Relation Members vom Typ Node mit dieser Rolle (und als Prozentsatz aller Members von Typ Node) für diesen Relation-Typ.
+            ways_tooltip:  Relation Members vom Typ Way mit dieser Rolle (und als Prozentsatz aller Members von Typ Way) für diesen Relation-Typ.
+            relations_tooltip:  Relation Members vom Typ Relation mit dieser Rolle (und als Prozentsatz aller Members von Typ Relation) für diesen Relation-Typ.
+            no_roles_info: Zu diesem Relation-Typ gibt es keine Informationen über Roles (wahrscheinlich weil es nur sehr wenige dieser Relations gibt).
 
 flexigrid:
     pagetext: Seite
