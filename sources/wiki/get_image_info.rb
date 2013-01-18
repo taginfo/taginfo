@@ -53,7 +53,7 @@ api = MediaWikiAPI::API.new('wiki.openstreetmap.org')
 
 db = SQLite3::Database.new(dir + '/taginfo-wiki.db')
 db.results_as_hash = true
-image_titles = db.execute("SELECT DISTINCT(image) AS title FROM wikipages WHERE image IS NOT NULL AND image != ''").
+image_titles = db.execute("SELECT DISTINCT(image) AS title FROM wikipages WHERE image IS NOT NULL AND image != '' UNION SELECT DISTINCT(image) AS title FROM relation_pages WHERE image IS NOT NULL AND image != ''").
                     map{ |row| row['title'] }.
                     select{ |title| title.match(%r{^(file|image):}i) }
 
