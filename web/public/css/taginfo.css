@@ -195,10 +195,11 @@ select#locale, select#lang {
     border: none;
 }
 
-input#search {
+input#search, p.search {
     background-image: url('/css/flexigrid/images/magnifier.png');
     background-repeat: no-repeat;
     background-position: right 3px;
+    background-color: #ffffff;
     height: 18px;
     width: 228px;
     padding: 2px;
@@ -506,6 +507,37 @@ div.hDiv table th span {
 
 .bad {
     color: #ff0000;
+}
+
+/* ==========  */
+
+table.help_table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table.help_table td {
+    vertical-align: top;
+    padding: 2px 6px 2px 0;
+}
+
+table.help_table th {
+    padding-bottom: 10px;
+    text-align: left;
+}
+
+span.key {
+    position: relative;
+    top: -1px;
+    border: 1px solid #e8e8e8;
+    padding: 1px 4px;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    font-family: monospace;
+}
+
+p.search {
+    margin: 0 0 16px 0;
 }
 
 /* ==========  */

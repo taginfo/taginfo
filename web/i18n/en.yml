@@ -64,6 +64,7 @@ misc:
     all: All
     object_type: Type
     description: Description
+    help: Help
     length: Length
     icon: Icon
     line: Line
@@ -80,6 +81,12 @@ misc:
     prevalent_values_tooltip: Up to ten of the most common values for this key (only if more than 1% of tags with this key have this value).
     in_wiki_tooltip: Key has at least one wiki page.
     in_josm_tooltip: Key appears in JOSM config.
+
+help:
+    search:
+        title: Search
+    keyboard:
+        title: Keyboard shortcuts
 
 pages:
     not_found:

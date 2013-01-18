@@ -527,10 +527,29 @@ function table_right() {
 
 /* ============================ */
 
+function open_help() {
+    jQuery('#help').dialog({
+        modal: true,
+        resizable: false,
+        title: texts.misc.help,
+        minWidth: 800,
+        minHeight: 400,
+        position: { my: 'top', at: 'top+100' },
+        create: function(event, ui) {
+            jQuery('#help_tabs').tabs();
+        }
+    });
+    return false;
+}
+
+/* ============================ */
+
 jQuery(document).ready(function() {
     jQuery('#javascriptmsg').remove();
 
     jQuery('select').customSelect();
+
+    jQuery('#help_link').bind('click', open_help);
 
     jQuery.getQueryString = (function(a) {
         if (a == "") return {};
@@ -570,14 +589,17 @@ jQuery(document).ready(function() {
     });
 
     jQuery(document).bind('keyup', function(event) {
+        if (event.ctrlKey || event.altKey || event.metaKey) {
+            return;
+        }
         if (event.target == document.body) {
             if (event.which >= 49 && event.which <= 57) { // digit
                 jQuery("#tabs").tabs("select", event.which - 49);
             } else {
                 switch (event.which) {
-        /*            case 63: // ?
-                        window.location = '/help';
-                        break;*/
+                    case 63: // ?
+                        open_help();
+                        break;
                     case 70: // f
                         jQuery('input.qsbox').focus();
                         break;

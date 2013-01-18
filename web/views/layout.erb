@@ -44,9 +44,16 @@
             <a href="/keys"><%= t.osm.keys %></a> &middot; <a href="/tags"><%= t.osm.tags %></a> &middot; <a href="/relations"><%= t.osm.relations %></a> &middot;
             <a href="/reports"><%= t.taginfo.reports %></a> &middot; <a href="/sources"><%= t.taginfo.sources %></a> &middot;
             <a href="/download"><%= t.taginfo.download %></a> &middot; <a href="/about"><%= t.taginfo.about %></a> &middot;
+            <a id="help_link" href="#help"><%= t.misc.help %></a> &middot;
             <a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo"><%= t.taginfo.wiki %></a>
         </div>
     </div>
     <div id="javascriptmsg" style="position: absolute; top: 0px; left: 240px; background-color: #f08080; padding: 10px; margin: 20px 40px;">This website only works with Javascript! Please enable Javascript in your browser.</div>
+    <div id="help" style="display: none;"><div id="help_tabs">
+        <ul>
+            <li><a href="/help/search"><%= t.help.search.title %></a></li>
+            <li><a href="/help/keyboard"><%= t.help.keyboard.title %></a></li>
+        </ul>
+    </div></div>
 </body>
 </html>

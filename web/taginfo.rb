@@ -204,6 +204,7 @@ class Taginfo < Sinatra::Base
     load 'lib/api/v4/wiki.rb'
 
     load 'lib/ui/embed.rb'
+    load 'lib/ui/help.rb'
     load 'lib/ui/keys_tags.rb'
     load 'lib/ui/relation.rb'
     load 'lib/ui/reports.rb'

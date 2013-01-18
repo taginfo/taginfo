@@ -53,6 +53,7 @@ misc:
     all: Alle
     object_type: Typ
     description: Beschreibung
+    help: Hilfe
     length: Länge
     icon: Icon
     line: Linie
