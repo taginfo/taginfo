@@ -8,9 +8,9 @@ class Taginfo < Sinatra::Base
             :query => 'Only show results where the relation type matches this query (substring match, optional).'
         },
         :paging => :optional,
-        :sort => %w( relation_type count ),
+        :sort => %w( rtype count ),
         :result => paging_results([
-            [:relation_type,   :STRING, 'Relation type'],
+            [:rtype,           :STRING, 'Relation type'],
             [:count,           :INT,    'Number of relations with this type.'],
             [:count_fraction,  :INT,    'Number of relations with this type divided by the overall number of relations.'],
             [:prevalent_roles, :ARRAY,  'Prevalent member roles.', [
@@ -21,7 +21,7 @@ class Taginfo < Sinatra::Base
         ]),
         :notes => "prevalent_roles can be null if taginfo doesn't have role information for this relation type, or an empty array when there are no roles with more than 1% of members",
         :example => { :page => 1, :rp => 10 },
-        :ui => '/reports/relation_types#types'
+        :ui => '/relations'
     }) do
         total = @db.count('relation_types').
             condition_if("rtype LIKE '%' || ? || '%'", params[:query]).
@@ -30,7 +30,7 @@ class Taginfo < Sinatra::Base
         res = @db.select('SELECT * FROM relation_types').
             condition_if("rtype LIKE '%' || ? || '%'", params[:query]).
             order_by(@ap.sortname, @ap.sortorder) { |o|
-                o.relation_type :rtype
+                o.rtype
                 o.count
             }.
             paging(@ap).
@@ -61,7 +61,7 @@ class Taginfo < Sinatra::Base
             :rp    => @ap.results_per_page,
             :total => total,
             :data  => res.map{ |row| {
-                :relation_type   => row['rtype'],
+                :rtype           => row['rtype'],
                 :count           => row['count'].to_i,
                 :count_fraction  => row['count'].to_f / all_relations,
                 :prevalent_roles => row['members_all'] ? pr[row['rtype']][0,10] : nil

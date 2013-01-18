@@ -11,7 +11,7 @@ class Taginfo < Sinatra::Base
         :paging => :optional,
         :sort => %w( role count_all_members count_node_members count_way_members count_relation_members ),
         :result => paging_results([
-            [:relation_type,                   :STRING, 'Relation type'],
+            [:rtype,                           :STRING, 'Relation type'],
             [:role,                            :STRING, 'Relation member role.'],
             [:count_all_members,               :INT,    'Number of members with this role.'],
             [:count_all_members_fraction,      :FLOAT,  'Number of members with this role devided by all members.'],
@@ -23,7 +23,7 @@ class Taginfo < Sinatra::Base
             [:count_relation_members_fraction, :FLOAT,  'Number of members of type relation with this role devided by all members of type relation.']
         ]),
         :example => { :rtype => 'multipolygon', :page => 1, :rp => 10 },
-        :ui => '/reports/relation_types#roles'
+        :ui => '/relations/multipolygon#roles'
     }) do
         rtype = params[:rtype]
 
@@ -54,7 +54,7 @@ class Taginfo < Sinatra::Base
             :rp    => @ap.results_per_page,
             :total => total,
             :data  => res.map{ |row| {
-                :relation_type                   =>  row['rtype'],
+                :rtype                           =>  row['rtype'],
                 :role                            =>  row['role'],
                 :count_all_members               =>  row['count_all'].to_i,
                 :count_all_members_fraction      => (row['count_all'].to_f / relation_type_info['members_all'].to_i).round_to(4),
