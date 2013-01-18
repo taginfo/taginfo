@@ -1,8 +1,0 @@
-<div class="pre">
-    <h1>Tags</h1>
-</div>
-<div class="box resize">
-<% @tags.each do |tag| %>
-    <a href="/tags/<%= h tag['key'] %>" class="popkey" style="font-size: <%= tagcloud_size(tag) %>px;" title="<%= tag['count'] %>"><%= h tag['key'] %></a>
-<% end %>
-</div>
