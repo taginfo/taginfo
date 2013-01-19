@@ -580,13 +580,13 @@ public:
                 "VALUES (?, ?, ?, ?, ?, ?);");
 
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
-        Sqlite::Statement statement_insert_into_key_combinations(m_database, "INSERT INTO keypairs (key1, key2, " \
+        Sqlite::Statement statement_insert_into_key_combinations(m_database, "INSERT INTO key_combinations (key1, key2, " \
                 "count_all, count_nodes, count_ways, count_relations) " \
                 "VALUES (?, ?, ?, ?, ?, ?);");
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
 #ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
-        Sqlite::Statement statement_insert_into_tag_combinations(m_database, "INSERT INTO tagpairs (key1, value1, key2, value2, " \
+        Sqlite::Statement statement_insert_into_tag_combinations(m_database, "INSERT INTO tag_combinations (key1, value1, key2, value2, " \
                 "count_all, count_nodes, count_ways, count_relations) " \
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS

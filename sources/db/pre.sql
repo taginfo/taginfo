@@ -70,9 +70,9 @@ CREATE TABLE tags (
   in_merkaartor    INTEGER DEFAULT 0
 );
 
-DROP TABLE IF EXISTS keypairs;
+DROP TABLE IF EXISTS key_combinations;
 
-CREATE TABLE keypairs (
+CREATE TABLE key_combinations (
   key1             VARCHAR,
   key2             VARCHAR,
   count_all        INTEGER,
@@ -81,9 +81,9 @@ CREATE TABLE keypairs (
   count_relations  INTEGER 
 );
 
-DROP TABLE IF EXISTS tagpairs;
+DROP TABLE IF EXISTS tag_combinations;
 
-CREATE TABLE tagpairs (
+CREATE TABLE tag_combinations (
   key1             VARCHAR,
   value1           VARCHAR,
   key2             VARCHAR,
