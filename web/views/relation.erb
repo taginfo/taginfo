@@ -14,6 +14,7 @@
     <ul>
         <li><a href="#overview"><%= t.pages.relation.overview.tab %></a></li>
         <li><a href="#roles"><%= t.pages.relation.roles.tab %></a></li>
+        <li><a href="#graph"><%= t.pages.relation.graph.tab %></a></li>
     </ul>
     <div id="overview">
 <% if @image_url %>
@@ -35,15 +36,22 @@
         <p class="empty"><%= t.pages.relation.roles.no_roles_info %></p>
 <% end %>
     </div>
+    <div id="graph">
+        <h2><%= t.pages.relation.graph.title %></h2>
+        <div class="canvas">
+        </div>
+    </div>
 </div>
 <iframe id="josmiframe" name="josmiframe"></iframe>
 <% javascript do
     JS.raw(<<"JAVASCRIPT")
 function page_init2() {
-    var rtype = #{ @rtype.to_json };
+    var rtype = #{ @rtype.to_json },
+        roles = #{ @roles.to_json.gsub(/\},/, "},\n") };
     jQuery('h1').html("#{ t.pages.relation.name } '" + fmt_rtype(rtype) + "'");
     jQuery('span#taglink').html(link_to_value('type', rtype));
     init_tabs([rtype]);
+    create_role_chart(roles);
 }
 JAVASCRIPT
 end

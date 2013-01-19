@@ -285,6 +285,9 @@ pages:
             ways_tooltip: Relation members of type way with this role (and as percentage of all members of type way) for this relation type.
             relations_tooltip: Relation members of type relation with this role (and as percentage of all members of type relation) for this relation type.
             no_roles_info: There is no information about roles for this relation type (most likely because there are only very few of those relations).
+        graph:
+            tab: Roles Graph
+            title: Roles Graph
 
 flexigrid:
     pagetext: Page

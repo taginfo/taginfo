@@ -57,6 +57,151 @@ var create_flexigrid_for = {
     }
 };
 
+// Marimekko chart based on http://bl.ocks.org/1005090
+function create_role_chart(data) {
+    var width = 800,
+        height = 360,
+        margin = 20;
+
+    var x = d3.scale.linear() .range([0, width  - 3 * margin]);
+    var y = d3.scale.linear() .range([0, height - 2 * margin]);
+
+    var z = d3.scale.category10();
+
+    var n = d3.format(",d"),
+        p = d3.format("%");
+
+    var svg = d3.select("div.canvas").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+            .attr("transform", "translate(" + 2 * margin + "," + margin + ")");
+
+    var offset = 0;
+
+    // Nest values by member type. We assume each member type+role is unique.
+    var member_types = d3.nest()
+        .key(function(d) { return d.type; })
+        .entries(data);
+
+    // Compute the total sum, the per-type sum, and the per-role offset.
+    // You can use reduce rather than reduceRight to reverse the ordering.
+    // We also record a reference to the parent type for each role.
+    var sum = member_types.reduce(function(v, p) {
+        return (p.offset = v) + (p.sum = p.values.reduceRight(function(v, d) {
+            d.parent = p;
+            return (d.offset = v) + d.value;
+        }, 0));
+    }, 0);
+
+    // Add x-axis ticks.
+    var xtick = svg.selectAll(".x")
+        .data(x.ticks(10))
+        .enter().append("g")
+            .attr("class", "x")
+            .attr("transform", function(d) { return "translate(" + x(d) + "," + y(1) + ")"; });
+
+    xtick.append("line")
+        .attr("y2", 6)
+        .style("stroke", "#000");
+
+    xtick.append("text")
+        .attr("y", 8)
+        .attr("text-anchor", "middle")
+        .attr("dy", ".71em")
+        .text(p);
+
+    // Add y-axis ticks.
+    var ytick = svg.selectAll(".y")
+        .data(y.ticks(10))
+        .enter().append("g")
+            .attr("class", "y")
+            .attr("transform", function(d) { return "translate(0," + y(1 - d) + ")"; });
+
+    ytick.append("line")
+        .attr("x1", -6)
+        .style("stroke", "#000");
+
+    ytick.append("text")
+        .attr("x", -8)
+        .attr("text-anchor", "end")
+        .attr("dy", ".35em")
+        .text(p);
+
+    // Add a group for each member type.
+    var member_types_svg = svg.selectAll(".member_types")
+        .data(member_types)
+        .enter().append("g")
+            .attr("class", "member_types")
+            .attr("xlink:title", function(d) { return d.key; })
+            .attr("transform", function(d) { return "translate(" + x(d.offset / sum) + ")"; })
+            .call(function(c) {
+                c.append("line")
+                    .attr("x1", 0)
+                    .attr("y1", -9.5)
+                    .attr("x2", function(d) { return x(d.sum/sum); } )
+                    .attr("y2", -9.5)
+                    .style("stroke", "#000");
+                c.append("text")
+                    .attr("x", 0)
+                    .attr("y", -6)
+                    .attr("text-anchor", "start")
+                    .text(function(d) { return x(d.sum/sum/2) > 6 ? '<' : ''; });
+                c.append("text")
+                    .attr("x", function(d) { return x(d.sum/sum); } )
+                    .attr("y", -6)
+                    .attr("text-anchor", "end")
+                    .text(function(d) { return x(d.sum/sum/2) > 6 ? '>' : ''; });
+                c.append("text")
+                    .attr("x", function(d) { return x(d.sum/sum/2); } )
+                    .attr("y", -6)
+                    .attr("text-anchor", "middle")
+                    .style("stroke", "#ddddd4")
+                    .style("stroke-width", 4)
+                    .style("fill", "#000")
+                    .text(function(d) { return x(d.sum/sum/2) > 20 ? texts.osm[d.key] : ''; });
+                c.append("text")
+                    .attr("x", function(d) { return x(d.sum/sum/2); } )
+                    .attr("y", -6)
+                    .attr("text-anchor", "middle")
+                    .style("fill", "#000")
+                    .text(function(d) { return x(d.sum/sum/2) > 20 ? texts.osm[d.key] : ''; });
+            })
+
+    // Add a rect for each role.
+    var roles = member_types_svg.selectAll(".role")
+        .data(function(d) { return d.values; })
+            .enter().append("a")
+                .attr("class", "role")
+                .attr("xlink:title", function(d) {
+                    if (d.role == '...') {
+                        return "" + d.value + " member " + d.parent.key + " with other roles";
+                    } else {
+                        return "" + d.value + " member " + d.parent.key + " with role '" + d.role + "'";
+                    }
+                })
+                .call(function(c) {
+                    c.append("rect")
+                        .attr("y", function(d) { return y(d.offset / d.parent.sum); })
+                        .attr("height", function(d) { return y(d.value / d.parent.sum); })
+                        .attr("width", function(d) { return x(d.parent.sum / sum); })
+                        .style("fill", function(d) { return z(d.role); });
+                    c.append("text")
+                        .attr("x", function(d) { return x(d.parent.sum / sum / 2); } )
+                        .attr("y", function(d) { return y(d.value / d.parent.sum / 2); } )
+                        .attr("dy", function(d) { return y(d.offset / d.parent.sum) + 4; })
+                        .attr("text-anchor", "middle")
+                        .style("fill", "#fff")
+                        .text(function(d) {
+                            if (x(d.parent.sum / sum) > 40 && y(d.value / d.parent.sum) > 12) {
+                                return d.role == '' ? '(empty)' : d.role;
+                            } else {
+                                return '';
+                            }
+                        });
+                });
+}
+
 function page_init() {
     jQuery('#josm_button').bind('click', function() {
         jQuery('#josmiframe')[0].src = jQuery('#josm_button')[0].href;
