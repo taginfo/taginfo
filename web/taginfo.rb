@@ -102,7 +102,7 @@ class Taginfo < Sinatra::Base
             params[:locale] = request.cookies['taginfo_locale']
         end
 
-        javascript_for(:jquery)
+        javascript_for(:common)
         javascript_for(:taginfo)
         javascript r18n.locale.code + '/texts'
 
