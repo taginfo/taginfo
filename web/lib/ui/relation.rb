@@ -27,7 +27,7 @@ class Taginfo < Sinatra::Base
             end
 
         @count_relation_roles = @db.count('relation_roles').
-            condition("rtype=?", rtype).
+            condition("rtype=?", @rtype).
             get_first_value().to_i
 
         sum_count_all = @db.select("SELECT members_all FROM db.relation_types WHERE rtype=?", @rtype).get_first_value().to_i
