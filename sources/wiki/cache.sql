@@ -12,5 +12,5 @@ CREATE TABLE cache_pages (
     body      TEXT
 );
 
-CREATE INDEX cache_pages_title_timestamp ON cache_pages (title, timestamp);
+CREATE INDEX cache_pages_title_timestamp_idx ON cache_pages (title, timestamp);
 

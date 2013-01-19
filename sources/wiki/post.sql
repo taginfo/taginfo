@@ -20,7 +20,7 @@ UPDATE relation_pages SET status='e' WHERE type='page' AND has_templ='true' AND 
 
 CREATE INDEX relation_pages_rtype_idx ON relation_pages(rtype);
 
-CREATE INDEX wiki_images_image ON wiki_images(image);
+CREATE INDEX wiki_images_image_idx ON wiki_images(image);
 
 INSERT INTO wikipages_keys (key,        langs, lang_count) SELECT key,        group_concat(lang || ' ' || status), count(*) FROM wikipages WHERE value IS     NULL GROUP BY key;
 INSERT INTO wikipages_tags (key, value, langs, lang_count) SELECT key, value, group_concat(lang || ' ' || status), count(*) FROM wikipages WHERE value IS NOT NULL GROUP BY key, value;
