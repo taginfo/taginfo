@@ -6,10 +6,32 @@ def javascript(url=nil, &block)
 end
 
 def javascript_tags
-    @javascript.map{ |js| js.to_html }.join("\n")
+    @javascript.flatten.uniq.map{ |js| js.to_html }.join("\n")
+end
+
+def javascript_for(*ids)
+    (@javascript ||= [] ) << Javascript.init(ids)
 end
 
 class Javascript
+
+    @@js_files = {
+        :jquery    => [ 'jquery-1.9.0.min', 'jquery-ui-1.9.2.custom.min', 'customSelect.jquery.min', 'jquery.tipsy-minified' ],
+        :taginfo   => [ 'taginfo' ],
+        :flexigrid => [ 'jquery-migrate-1.0.0.min', 'flexigrid-minified' ],
+        :d3        => [ 'd3/d3.v3.min' ],
+        :d3_cloud  => [ 'd3/d3.layout.cloud' ],
+    }
+
+    def self.init(ids)
+        js = []
+        ids.each do |id|
+            @@js_files[id].each do |file|
+                js << self.new(file)
+            end
+        end
+        js
+    end
 
     def initialize(file)
         if file.nil?

@@ -102,14 +102,9 @@ class Taginfo < Sinatra::Base
             params[:locale] = request.cookies['taginfo_locale']
         end
 
-        javascript 'jquery-1.9.0.min'
-        javascript 'jquery-migrate-1.0.0.min' # needed for flexigrid
-        javascript 'jquery-ui-1.9.2.custom.min'
-        javascript 'customSelect.jquery.min'
-        javascript 'jquery.tipsy-minified'
-        javascript 'flexigrid-minified'
+        javascript_for(:jquery)
+        javascript_for(:taginfo)
         javascript r18n.locale.code + '/texts'
-        javascript 'taginfo'
 
         # set to immediate expire on normal pages
         # (otherwise switching languages doesn't work)
@@ -155,12 +150,21 @@ class Taginfo < Sinatra::Base
 
     #-------------------------------------
 
-    %w(about download keys relations sources tags).each do |page|
+    %w(about download sources).each do |page|
         get '/' + page do
-            @title = (page =~ /^(keys|tags|relations)$/) ? t.osm[page] : t.taginfo[page]
+            @title = t.taginfo[page]
             if File.exists?("viewsjs/#{ page }.js.erb")
                 javascript "#{ r18n.locale.code }/#{ page }"
             end
+            erb page.to_sym
+        end
+    end
+
+    %w(keys tags relations).each do |page|
+        get '/' + page do
+            @title = t.osm[page]
+            javascript_for(:flexigrid)
+            javascript "#{ r18n.locale.code }/#{ page }"
             erb page.to_sym
         end
     end

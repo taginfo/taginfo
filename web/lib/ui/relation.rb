@@ -50,7 +50,7 @@ class Taginfo < Sinatra::Base
             end
         end
 
-        javascript 'd3/d3.v3.min'
+        javascript_for(:flexigrid, :d3)
         javascript "#{ r18n.locale.code }/relation"
         erb :relation
     end

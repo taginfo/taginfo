@@ -62,7 +62,7 @@ class Taginfo < Sinatra::Base
         @img_width  = TaginfoConfig.get('geodistribution.width')  * TaginfoConfig.get('geodistribution.scale_image')
         @img_height = TaginfoConfig.get('geodistribution.height') * TaginfoConfig.get('geodistribution.scale_image')
 
-        javascript 'd3/d3.v3.min'
+        javascript_for(:flexigrid, :d3)
         javascript "#{ r18n.locale.code }/key"
         erb :key
     end
@@ -117,6 +117,7 @@ class Taginfo < Sinatra::Base
                 @image_url = build_image_url(row)
             end
 
+        javascript_for(:flexigrid)
         javascript "#{ r18n.locale.code }/tag"
         erb :tag
     end

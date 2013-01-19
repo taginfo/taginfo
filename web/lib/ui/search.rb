@@ -7,6 +7,7 @@ class Taginfo < Sinatra::Base
 
         javascript "#{ r18n.locale.code }/search"
         @query = params[:q]
+        javascript_for(:flexigrid)
         if @query =~ /(.*)=(.*)/
             erb :search_tags
         else
