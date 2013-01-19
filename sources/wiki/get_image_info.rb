@@ -71,7 +71,7 @@ until image_titles.empty?
         data = api.query(:prop => 'imageinfo', :iiprop => 'url|size|mime', :titles => some_titles.join('|'), :iiurlwidth => 10, :iiurlheight => 10)
 
         if !data['query']
-            STDERR.puts "Wiki API call failed (no 'query' field):"
+            puts "Wiki API call failed (no 'query' field):"
             pp data
             next
         end
@@ -85,7 +85,7 @@ until image_titles.empty?
         end
 
         if !data['query']['pages']
-            STDERR.puts "Wiki API call failed (no 'pages' field):"
+            puts "Wiki API call failed (no 'pages' field):"
             pp data
             next
         end
