@@ -27,6 +27,8 @@ INSERT INTO wikipages_tags (key, value, langs, lang_count) SELECT key, value, gr
 
 INSERT INTO wiki_languages (language, count_pages) SELECT lang, count(*) FROM wikipages GROUP BY lang;
 
+INSERT INTO stats (key, value) SELECT 'wiki_images', count(*) FROM wiki_images;
+
 INSERT INTO stats (key, value) SELECT 'wiki_keys_described',                  count(*) FROM wikipages_keys;
 INSERT INTO stats (key, value) SELECT 'wiki_pages_for_keys',                  count(*) FROM wikipages WHERE value IS     NULL;
 INSERT INTO stats (key, value) SELECT 'wiki_pages_for_keys_redirect',         count(*) FROM wikipages WHERE value IS     NULL AND status='r';
@@ -40,6 +42,12 @@ INSERT INTO stats (key, value) SELECT 'wiki_pages_for_tags_redirect',         co
 INSERT INTO stats (key, value) SELECT 'wiki_pages_for_tags_without_template', count(*) FROM wikipages WHERE value IS NOT NULL AND status='p';
 INSERT INTO stats (key, value) SELECT 'wiki_pages_for_tags_with_template',    count(*) FROM wikipages WHERE value IS NOT NULL AND status='t';
 INSERT INTO stats (key, value) SELECT 'wiki_pages_for_tags_with_error',       count(*) FROM wikipages WHERE value IS NOT NULL AND status='e';
+
+INSERT INTO stats (key, value) SELECT 'wiki_pages_for_relation_types',                  count(*) FROM relation_pages;
+INSERT INTO stats (key, value) SELECT 'wiki_pages_for_relation_types_redirect',         count(*) FROM relation_pages WHERE status='r';
+INSERT INTO stats (key, value) SELECT 'wiki_pages_for_relation_types_without_template', count(*) FROM relation_pages WHERE status='p';
+INSERT INTO stats (key, value) SELECT 'wiki_pages_for_relation_types_with_template',    count(*) FROM relation_pages WHERE status='t';
+INSERT INTO stats (key, value) SELECT 'wiki_pages_for_relation_types_with_error',       count(*) FROM relation_pages WHERE status='e';
 
 INSERT INTO stats (key, value) SELECT 'wiki_languages', count(*) FROM wiki_languages;
 
