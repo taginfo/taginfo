@@ -35,6 +35,9 @@
         <h2><%= t.taginfo.overview %></h2>
         <table id="grid-overview">
         </table>
+<% if @has_rtype_link %>
+        <p><%= t.pages.tag.overview.see_also %>: <span id="relationlink"></span></p>
+<% end %>
     </div>
     <div id="combinations">
         <div class="boxpre">
@@ -79,6 +82,7 @@ function page_init2() {
     up = function() { window.location = url_for_key(key); };
     jQuery('h1').html(link_to_key(key) + '=' + fmt_value(value));
     jQuery('span#keylink').html(link_to_key(key));
+    jQuery('span#relationlink').html(link_to_rtype(value));
     init_tabs([key, value, #{ @filter_type.to_json }]);
 }
 JAVASCRIPT

@@ -248,6 +248,8 @@ pages:
         description_from_wiki: Beschreibung dieses Tags aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf Englisch).
         no_description_in_wiki: Keine Beschreibung dieses Tags im Wiki.
         number_objects: Anzahl Objekte
+        overview:
+            see_also: Siehe auch auf der Relation-Typ-Seite
         other_tags_used:
             title: Tags, die mit diesem Tag zusammen benutzt werden
             other: Andere Tags

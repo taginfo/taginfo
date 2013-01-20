@@ -244,6 +244,8 @@ pages:
         description_from_wiki: Description of this tag from the wiki (if available in your chosen language, otherwise in English).
         no_description_in_wiki: No description for this tag in the wiki.
         number_objects: Number of objects
+        overview:
+            see_also: See also the relation type page
         other_tags_used:
             title: Other tags used together with this tag
             other: Other tags

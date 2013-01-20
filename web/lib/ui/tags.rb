@@ -49,6 +49,11 @@ class Taginfo < Sinatra::Base
                 @image_url = build_image_url(row)
             end
 
+        @has_rtype_link = false
+        if @key == 'type' && @db.count('relation_types').condition('rtype = ?', @value).get_first_value().to_i > 0
+            @has_rtype_link = true
+        end
+
         javascript_for(:flexigrid)
         javascript "#{ r18n.locale.code }/tag"
         erb :tag
