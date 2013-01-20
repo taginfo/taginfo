@@ -209,11 +209,12 @@ class Taginfo < Sinatra::Base
 
     load 'lib/ui/embed.rb'
     load 'lib/ui/help.rb'
-    load 'lib/ui/keys_tags.rb'
+    load 'lib/ui/keys.rb'
     load 'lib/ui/relation.rb'
     load 'lib/ui/reports.rb'
     load 'lib/ui/search.rb'
     load 'lib/ui/taginfo.rb'
+    load 'lib/ui/tags.rb'
     load 'lib/ui/test.rb'
 
     # run application
