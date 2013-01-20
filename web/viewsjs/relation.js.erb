@@ -87,6 +87,10 @@ var create_flexigrid_for = {
 
 // Marimekko chart based on http://bl.ocks.org/1005090
 function create_role_chart(data) {
+    if (data.length == 0) {
+        return;
+    }
+
     var width = 800,
         height = 360,
         margin = 20;
