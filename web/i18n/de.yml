@@ -289,6 +289,14 @@ pages:
             ways_tooltip:  Relation Members vom Typ Way mit dieser Rolle (und als Prozentsatz aller Members von Typ Way) für diesen Relation-Typ.
             relations_tooltip:  Relation Members vom Typ Relation mit dieser Rolle (und als Prozentsatz aller Members von Typ Relation) für diesen Relation-Typ.
             no_roles_info: Zu diesem Relation-Typ gibt es keine Informationen über Roles (wahrscheinlich weil es nur sehr wenige dieser Relations gibt).
+        graph:
+            tab: Role-Diagramm
+            title: Role-Diagramm
+        wiki_pages:
+            title: Wiki-Seiten zu diesem Relation-Typ
+            none_found: Keine Wiki-Seiten für diesen Relation-Typ vorhanden.
+            create: Wiki-Seite für diesen Relation-Typ anlegen
+            wiki_page: Wiki-Seite
 
 flexigrid:
     pagetext: Seite

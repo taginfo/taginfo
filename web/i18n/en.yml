@@ -288,6 +288,11 @@ pages:
         graph:
             tab: Roles Graph
             title: Roles Graph
+        wiki_pages:
+            title: Wiki pages about this relation type
+            none_found: No wiki page available for this relation type.
+            create: Create wiki page for this relation type
+            wiki_page: Wiki page
 
 flexigrid:
     pagetext: Page

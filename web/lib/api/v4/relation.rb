@@ -103,4 +103,51 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
+    api(4, 'relation/wiki_pages', {
+        :description => 'Get list of wiki pages in different languages describing a relation type.',
+        :parameters => { :rtype => 'Relation type (required)' },
+        :paging => :no,
+        :result => no_paging_results([
+            [:lang,             :STRING, 'Language code.'],
+            [:language,         :STRING, 'Language name in its language.'],
+            [:language_en,      :STRING, 'Language name in English.'],
+            [:title,            :STRING, 'Wiki page title.'],
+            [:description,      :STRING, 'Short description of key from wiki page.'],
+            [:image,            :HASH,   'Associated image.', [
+                [:title,            :STRING, 'Wiki page title of associated image.' ],
+                [:width,            :INT,    'Width of image.' ],
+                [:height,           :INT,    'Height of image.' ],
+                [:mime,             :STRING, 'MIME type of image.' ],
+                [:image_url,        :STRING, 'Image URL' ],
+                [:thumb_url_prefix, :STRING, 'Prefix of thumbnail URL.' ],
+                [:thumb_url_suffix, :STRING, 'Suffix of thumbnail URL.' ]
+            ]]
+        ]),
+        :notes => 'To get the complete thumbnail image URL, concatenate <tt>thumb_url_prefix</tt>, width of image in pixels, and <tt>thumb_url_suffix</tt>. The thumbnail image width must be smaller than <tt>width</tt>, use the <tt>image_url</tt> otherwise.',
+        :example => { :rtype => 'multipolygon' },
+        :ui => '/relations/multipolygon#wiki'
+    }) do
+        rtype = params[:rtype]
+
+        res = @db.execute('SELECT * FROM wiki.relation_pages LEFT OUTER JOIN wiki.wiki_images USING (image) WHERE rtype = ? ORDER BY lang', rtype)
+
+        return res.map{ |row| {
+                :lang             => h(row['lang']),
+                :language         => h(::Language[row['lang']].native_name),
+                :language_en      => h(::Language[row['lang']].english_name),
+                :title            => h(row['title']),
+                :description      => h(row['description']),
+                :image            => {
+                    :title            => h(row['image']),
+                    :width            => row['width'].to_i,
+                    :height           => row['height'].to_i,
+                    :mime             => h(row['mime']),
+                    :image_url        => h(row['image_url']),
+                    :thumb_url_prefix => h(row['thumb_url_prefix']),
+                    :thumb_url_suffix => h(row['thumb_url_suffix'])
+                }
+            }
+        }.to_json
+    end
+
 end

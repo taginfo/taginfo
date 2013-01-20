@@ -15,6 +15,7 @@
         <li><a href="#overview"><%= t.pages.relation.overview.tab %></a></li>
         <li><a href="#roles"><%= t.pages.relation.roles.tab %></a></li>
         <li><a href="#graph"><%= t.pages.relation.graph.tab %></a></li>
+        <li><a href="#wiki"><%= t.sources.wiki.name %></a></li>
     </ul>
     <div id="overview">
 <% if @image_url %>
@@ -40,6 +41,16 @@
         <h2><%= t.pages.relation.graph.title %></h2>
         <div class="canvas">
         </div>
+    </div>
+    <div id="wiki">
+        <h2><%= t.pages.relation.wiki_pages.title %></h2>
+        <% if @wiki_count > 0 %>
+            <table id="grid-wiki">
+            </table>
+        <% else %>
+            <p class="empty"><%= t.pages.relation.wiki_pages.none_found %></p>
+            <p><a class="extlink" target="_blank" rel="nofollow" href="http://wiki.openstreetmap.org/w/index.php?action=edit&title=Relation:<%= @rtype_uri %>"><%= t.pages.relation.wiki_pages.create %></a></p>
+        <% end %>
     </div>
 </div>
 <iframe id="josmiframe" name="josmiframe"></iframe>
