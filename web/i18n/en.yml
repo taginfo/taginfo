@@ -322,6 +322,9 @@ sources:
     merkaartor:
         name: Merkaartor
         description: Configuration data from the Merkaartor OSM editor.
+    languages:
+        name: Languages
+        description: Language names, codes, etc. from IANA and Unicode registries
 
 reports:
     characters_in_keys:
