@@ -6,6 +6,7 @@
     <ul>
         <li><a href="#keys"><%= t.osm.keys %></a></li>
         <li><a href="#values"><%= t.osm.values %></a></li>
+        <li><a href="#relations"><%= t.osm.relation_types %></a></li>
         <li><a href="#roles"><%= t.osm.relation_member_roles %></a></li>
         <li><a href="#fulltext"><%= t.pages.search.fulltext %></a></li>
     </ul>
@@ -17,6 +18,11 @@
     <div id="values">
         <h2><%= t.osm.values %></h2>
         <table id="grid-values">
+        </table>
+    </div>
+    <div id="relations">
+        <h2><%= t.osm.relation_types %></h2>
+        <table id="grid-relations">
         </table>
     </div>
     <div id="roles">
