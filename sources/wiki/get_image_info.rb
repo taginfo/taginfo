@@ -43,7 +43,7 @@ require 'uri'
 require 'json'
 require 'sqlite3'
 
-require 'lib/mediawikiapi.rb'
+require './lib/mediawikiapi.rb'
 
 #------------------------------------------------------------------------------
 

@@ -44,7 +44,7 @@ require 'net/http'
 require 'uri'
 require 'sqlite3'
 
-require 'lib/mediawikiapi.rb'
+require './lib/mediawikiapi.rb'
 
 #------------------------------------------------------------------------------
 

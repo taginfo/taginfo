@@ -52,7 +52,8 @@ require 'net/http'
 require 'uri'
 require 'json'
 
-require 'lib/mediawikiapi.rb'
+
+require './lib/mediawikiapi.rb'
 
 #------------------------------------------------------------------------------
 
