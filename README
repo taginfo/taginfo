@@ -21,17 +21,18 @@ PREREQUISITES
 -------------
 
 Uses
-    * Mongrel
+    * Mongrel or Apache2 mod_passenger
     * Sinatra web framework http://www.sinatrarb.com/
     * Rack Contrib Gem (for Rack::JSONP)
     * JSON gem (install with gem, Debian/Ubuntu packages are too old and buggy)
     * curl binary
+    * sqlite3 binary and ruby libs
 
 Debian/Ubuntu packages:
-    rubygems curl
+    curl sqlite3 ruby-sqlite3 ruby-passenger libapache2-mod-passenger
 
 Gems:
-    gem install mongrel rack rack-contrib sinatra json
+    gem install rack rack-contrib sinatra sinatra-r18n json
 
 There is a developer mailing list at
 http://lists.openstreetmap.org/listinfo/taginfo-dev
