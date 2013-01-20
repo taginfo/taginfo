@@ -46,16 +46,40 @@ module SQL
             @db = nil
         end
 
+        def wrap_query(query, *params)
+            t1 = Time.now
+            out = yield
+            duration = Time.now - t1
+
+            min_duration = TaginfoConfig.get('logging.min_duration', 0)
+            if duration > min_duration
+                if params.size > 0
+                    p = ' params=[' + params.map{ |p| "'#{p}'" }.join(', ') + ']'
+                else
+                    p = ''
+                end
+                puts %Q{SQL duration=#{ duration } query="#{ query };"} + p
+            end
+
+            out
+        end
+
         def execute(*args, &block)
-            @db.execute(*args, &block)
+            wrap_query(*args) do
+                @db.execute(*args, &block)
+            end
         end
 
         def get_first_row(*args)
-            @db.get_first_row(*args)
+            wrap_query(*args) do
+                @db.get_first_row(*args)
+            end
         end
 
         def get_first_value(*args)
-            @db.get_first_value(*args)
+            wrap_query(*args) do
+                @db.get_first_value(*args)
+            end
         end
 
         def select(query, *params)
@@ -164,29 +188,18 @@ module SQL
             @query.compact.join(' ')
         end
 
-        def log_query(query, params)
-            if params.size > 0
-                puts "Query: #{query}; (with params: #{params.map{ |p| "'#{p}'" }.join(', ')})"
-            else
-                puts "Query: #{query};"
-            end
-        end
-
         def execute(&block)
             q = build_query()
-            log_query(q, @params)
             @db.execute(q, *@params, &block)
         end
 
         def get_first_value
             q = build_query()
-            log_query(q, @params)
             @db.get_first_value(q, *@params)
         end
 
         def get_columns(*columns)
             q = build_query()
-            log_query(q, @params)
             row = @db.get_first_row(q, *@params)
             return [nil] * columns.size if row.nil?;
             columns.map{ |column| row[column.to_s] }

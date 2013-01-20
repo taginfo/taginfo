@@ -57,6 +57,10 @@
             "planetfile": "/osm/planet/var/current-planet.osm.pbf"
         }
     },
+    "logging": {
+        // SQL queries longer than this many seconds are logged
+        "min_duration": 0.01
+    },
     // For compiling tagstats.
     "tagstats": {
         // Extra compilerflags, for instance to find Osmium.
