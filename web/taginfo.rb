@@ -73,11 +73,9 @@ class Taginfo < Sinatra::Base
             set :port, ARGV[0]
             set :environment, :production
 
-            # Disable rack-protection library because it messes up embedding
-            # taginfo in an iframe. This should probably be done more
-            # selectively, but there is no documentation on what rack-protection
-            # is actually doing...
-            disable :protection
+            # Enable Rack::Protection except for X-Frame-Options
+            # because it messes up embedding taginfo in an iframe.
+            set :protection, :except => :frame_options
         else
             # test
             enable :logging
