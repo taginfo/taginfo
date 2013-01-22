@@ -52,7 +52,9 @@ module MediaWikiAPI
             path = build_path(params)
             http = Net::HTTP.start(@host, @port)
 #            puts "Getting path [#{path}]"
-            http.get(path, @headers)
+            result = http.get(path, @headers)
+            result.body.force_encoding('UTF-8')
+            result
         end
 
         def query(params)
