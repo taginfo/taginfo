@@ -18,6 +18,12 @@ fi
 
 echo "`$DATECMD` Start wiki..."
 
+EXEC_RUBY="$TAGINFO_RUBY"
+if [ "x$EXEC_RUBY" = "x" ]; then
+    EXEC_RUBY=ruby
+fi
+echo "Running with ruby set as '${EXEC_RUBY}'"
+
 DATABASE=$DIR/taginfo-wiki.db
 CACHEDB=$DIR/wikicache.db
 LOGFILE_WIKI_DATA=$DIR/get_wiki_data.log
@@ -39,16 +45,16 @@ echo "`$DATECMD` Running pre.sql..."
 sqlite3 $DATABASE <pre.sql
 
 echo "`$DATECMD` Getting page list..."
-./get_page_list.rb $DIR
+$EXEC_RUBY ./get_page_list.rb $DIR
 
 echo "`$DATECMD` Getting wiki data..."
-./get_wiki_data.rb $DIR >$LOGFILE_WIKI_DATA
+$EXEC_RUBY ./get_wiki_data.rb $DIR >$LOGFILE_WIKI_DATA
 
 echo "`$DATECMD` Getting image info..."
-./get_image_info.rb $DIR >$LOGFILE_IMAGE_INFO
+$EXEC_RUBY ./get_image_info.rb $DIR >$LOGFILE_IMAGE_INFO
 
 echo "`$DATECMD` Extracting words..."
-./extract_words.rb $DIR
+$EXEC_RUBY ./extract_words.rb $DIR
 
 echo "`$DATECMD` Running post.sql..."
 sqlite3 $DATABASE <post.sql

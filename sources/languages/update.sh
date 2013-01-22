@@ -27,6 +27,12 @@ fi
 
 echo "`$DATECMD` Start languages..."
 
+EXEC_RUBY="$TAGINFO_RUBY"
+if [ "x$EXEC_RUBY" = "x" ]; then
+    EXEC_RUBY=ruby
+fi
+echo "Running with ruby set as '${EXEC_RUBY}'"
+
 DATABASE=$DIR/taginfo-languages.db
 
 rm -f $DATABASE
@@ -41,7 +47,7 @@ echo "`$DATECMD` Getting subtag registry..."
 curl --silent --time-cond $REGISTRY_FILE --output $REGISTRY_FILE $REGISTRY_URL
 
 echo "`$DATECMD` Running subtag import..."
-./import_subtag_registry.rb $DIR
+$EXEC_RUBY ./import_subtag_registry.rb $DIR
 
 echo "`$DATECMD` Getting CLDR..."
 curl --silent --location --time-cond $CLDR_FILE --output $CLDR_FILE $CLDR_URL
@@ -56,7 +62,7 @@ curl --silent --location --time-cond $UNICODE_SCRIPTS_FILE --output $UNICODE_SCR
 curl --silent --location --time-cond $PROPERTY_ALIASES_FILE --output $PROPERTY_ALIASES_FILE $PROPERTY_ALIASES_URL
 
 echo "`$DATECMD` Running unicode scripts import..."
-./import_unicode_scripts.rb $DIR
+$EXEC_RUBY ./import_unicode_scripts.rb $DIR
 
 echo "`$DATECMD` Running post.sql..."
 sqlite3 $DATABASE <post.sql

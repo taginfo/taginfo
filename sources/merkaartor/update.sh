@@ -18,6 +18,12 @@ fi
 
 echo "`$DATECMD` Start merkaartor..."
 
+EXEC_RUBY="$TAGINFO_RUBY"
+if [ "x$EXEC_RUBY" = "x" ]; then
+    EXEC_RUBY=ruby
+fi
+echo "Running with ruby set as '${EXEC_RUBY}'"
+
 DATABASE=$DIR/taginfo-merkaartor.db
 
 rm -f $DATABASE
@@ -38,7 +44,7 @@ echo "`$DATECMD` Running pre.sql..."
 sqlite3 $DATABASE <pre.sql
 
 echo "`$DATECMD` Running import..."
-./import_merkaartor.rb $DIR
+$EXEC_RUBY ./import_merkaartor.rb $DIR
 
 echo "`$DATECMD` Running post.sql..."
 sqlite3 $DATABASE <post.sql
