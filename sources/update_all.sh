@@ -34,7 +34,7 @@ DATECMD='date +%Y-%m-%dT%H:%M:%S'
 DIR=$1
 
 if [ "x" = "x$DIR" ]; then
-    echo "Usage: update.sh DIR"
+    echo "Usage: update_all.sh DIR"
     exit 1
 fi
 
@@ -80,6 +80,7 @@ done
 
 echo "Running bzip2..."
 bzip2 -9 -c $DIR/taginfo-master.db >$DIR/download/taginfo-master.db.bz2
+bzip2 -9 -c $DIR/taginfo-search.db >$DIR/download/taginfo-search.db.bz2
 echo "Done."
 
 echo "====================================="
