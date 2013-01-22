@@ -8,7 +8,7 @@ require './taginfo.rb'
 set :run, false
 set :environment, :production
 
-log = File.new("/osm/taginfo/log/taginfo.log", "a+")
+log = File.new("/osm/taginfo/var/log/taginfo.log", "a+")
 $stdout.reopen(log)
 $stderr.reopen(log)
 
