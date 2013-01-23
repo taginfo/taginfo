@@ -146,13 +146,13 @@ def get_wiki_result(res)
             :title            => h(row['title']),
             :description      => h(row['description']),
             :image            => {
-                :title            => h(row['image']),
+                :title            => row['image'],
                 :width            => row['width'].to_i,
                 :height           => row['height'].to_i,
-                :mime             => h(row['mime']),
-                :image_url        => h(row['image_url']),
-                :thumb_url_prefix => h(row['thumb_url_prefix']),
-                :thumb_url_suffix => h(row['thumb_url_suffix'])
+                :mime             => row['mime'],
+                :image_url        => row['image_url'],
+                :thumb_url_prefix => row['thumb_url_prefix'],
+                :thumb_url_suffix => row['thumb_url_suffix']
             },
             :on_node          => row['on_node'].to_i     == 1,
             :on_way           => row['on_way'].to_i      == 1,
