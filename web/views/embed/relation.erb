@@ -1,0 +1,16 @@
+<% if @rtype == '{{{type}}}' %>
+<a target="_blank" title="More information about relation type '<%= escape_html(@rtype) %>' at Taginfo" href="http://taginfo.openstreetmap.org/">tag<b>info</b> [More...]</a>
+<p>Statistics about the relation type will appear here.</p>
+<% elsif @dbrtype.nil? %>
+<a target="_blank" title="More information about relation type '<%= escape_html(@rtype) %>' at Taginfo" href="http://taginfo.openstreetmap.org/relations/?rtype=<%= escape(@rtype) %>">tag<b>info</b> [More...]</a>
+<p>This relation type does not appear in the OSM database.</p>
+<% else %>
+<a target="_blank" title="More information about relation type '<%= escape_html(@rtype) %>' at Taginfo" href="http://taginfo.openstreetmap.org/relations/?rtype=<%= escape(@rtype) %>">tag<b>info</b> [More...]</a>
+<p>There are<br/>
+<b><%= @dbrtype['count'].to_i.to_s_with_ts %> relations</b><br/>
+of type '<%= escape_html(@rtype) %>' with<br/>
+<b><%= @dbrtype['members_all'].to_i.to_s_with_ts %> members</b>.</p>
+<% unless @roles.empty? %>
+<p>Prevalent roles:<br/><%= @roles.join(', ') %></p>
+<% end 
+end %>
