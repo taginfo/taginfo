@@ -53,7 +53,7 @@ fi
 $TAGSTATS --tags $DIR/interesting_tags.lst --relation-types $DIR/interesting_relation_types.lst --left=$left --bottom=$bottom --top=$top --right=$right --width=$width --height=$height $PLANETFILE $DATABASE
 
 echo "`$DATECMD` Running update_characters... "
-./update_characters.pl $DIR
+./update_characters.rb $DIR
 
 echo "`$DATECMD` Running post.sql... "
 sqlite3 $DATABASE <post.sql
