@@ -2,7 +2,7 @@
 <a target="_blank" title="More information about key '<%= escape_html(@key) %>' at Taginfo" href="http://taginfo.openstreetmap.org/">tag<b>info</b> [More...]</a>
 <p>Statistics about the key will appear here.</p>
 <% elsif @dbkey.nil? %>
-<a target="_blank" title="More information about key '<%= escape_html(@key) %>' at Taginfo" href="http://taginfo.openstreetmap.org/tags/?key=<%= escape(@key) %>&value=<%= escape(@value) %>">tag<b>info</b> [More...]</a>
+<a target="_blank" title="More information about key '<%= escape_html(@key) %>' at Taginfo" href="http://taginfo.openstreetmap.org/keys/?key=<%= escape(@key) %>">tag<b>info</b> [More...]</a>
 <p>This key does not appear in the OSM database.</p>
 <% else %>
 <a target="_blank" title="More information about key '<%= escape_html(@key) %>' at Taginfo" href="http://taginfo.openstreetmap.org/keys/?key=<%= escape(@key) %>">tag<b>info</b> [More...]</a>

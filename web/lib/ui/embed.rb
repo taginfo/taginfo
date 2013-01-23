@@ -15,4 +15,11 @@ class Taginfo < Sinatra::Base
         erb :'embed/tag', :layout => :'embed/layout'
     end
 
+    get '/embed/relation' do
+        @rtype = params[:rtype]
+        @dbrtype = @db.select("SELECT * FROM db.relation_types").condition('rtype = ?', @rtype).execute()[0]
+        @roles = @db.select("SELECT role FROM db.prevalent_roles WHERE rtype=? ORDER BY count DESC LIMIT 10", @rtype).execute().map{ |row| row['role'] == '' ? '<i>(empty role)</i>' : row['role'] }
+        erb :'embed/relation', :layout => :'embed/layout'
+    end
+
 end
