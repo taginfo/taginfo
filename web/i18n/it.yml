@@ -1,4 +1,3 @@
-
 osm:
     tag: Tag
     tags: Tags
@@ -12,8 +11,21 @@ osm:
     ways: Ways
     relation: Relazione
     relations: Relazioni
+    relation_type: Tipo di Relazione
+    relation_types: Tipi di Relazioni
+    relation_member: Membro della Relazione
+    relation_members: Membri della Relazione
+    relation_member_nodes: Membri dei nodi
+    relation_member_ways: Membri delle ways
+    relation_member_relations: Membri delle Relazioni
+    relation_member_role: Ruolo
+    relation_member_roles: Ruoli
+    object: Oggetto
+    objects: Oggetti
+    all: Tutti
     user: Utente
     users: Utenti
+
 
 taginfo:
     source: Fonte
@@ -23,10 +35,51 @@ taginfo:
     wiki: Wiki
     report: Report
     reports: Reports
+    international: International
+    apidoc: API Documentation
+    test: Test
     map: Mappa
     maps: Mappe
-    key_combinations: Combinazioni
-    data_from: Dati da
+    relations: Relazioni
+    combinations: Combinazioni
+    key_combinations: Combinazioni delle Chiavi
+    overview: Panoramica
+    data_from: Fonte Dati
+    uses_data_from: |
+        Fonte dati usati:
+    data_from_description: Ultimo aggiornamento al database taginfo
+    instance:
+        title: Informazioni sul sito taginfo
+        other: Vedere <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> per gli altri siti.
+        
+misc:
+    values_less_than_one_percent: Nessuno dei valori con più dell' 1%
+    empty_string: stringa vuota
+    unknown: sconosciuto
+    count: Conteggio
+    image: Immagine
+    no_image: Nessuna Immagine
+    all: Tutto
+    object_type: Tipo Oggetto
+    description: Descrizione
+    help: Aiuto
+    length: Lunghezza
+    icon: Icona
+    line: Linea
+    area: Area
+    language: Lingua
+    search_for: Ricerca per
+    objects_tooltip: Numero di oggetti (come valore assoluto e come percentuale di tutti i nodi, ways, e relazioni).
+    nodes_tooltip: Numero di nodi (come valore assoluto e come percentuale di nodi taggati, per es. i nodi senza nessun tags vengono ignorati).
+    ways_tooltip: Numero di ways (come valore e percentuale di tutte le ways).
+    relations_tooltip: Numero delle relazioni (come valore assoluto e come percentuale di tutte le relazioni).
+    values_tooltip: Numero dei valori differenti per questa chiave.
+    users_tooltip: Numero di singoli utenti che hanno usato recentemente questa chiave.
+    prevalent_values: Valori prevalenti
+    prevalent_values_tooltip: Fino a 10 dei valori più usati per questa chiave (solamente se almeno l'1% delle chiavi hanno questo valore).
+    in_wiki_tooltip: La chiave ha almeno una pagina pagina nel wiki.
+    in_josm_tooltip: La chiave appare nelle impostazioni di JOSM.
+
 
 pages:
     sources:
