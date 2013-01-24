@@ -202,11 +202,12 @@ class Taginfo < Sinatra::Base
             :ways      => { :doc => 'Only values on tags used on ways.' },
             :relations => { :doc => 'Only values on tags used on relations.' }
         },
-        :sort => %w( value count_all count_nodes count_ways count_relations ),
+        :sort => %w( value count_all count_nodes count_ways count_relations in_wiki ),
         :result => paging_results([
             [:value,       :STRING, 'Value'],
             [:count,       :INT,    'Number of times this key/value is in the OSM database.'],
             [:fraction,    :FLOAT,  'Number of times in relation to number of times this key is in the OSM database.'],
+            [:in_wiki,     :BOOL,   'Is there at least one wiki page for this tag.'],
             [:description, :STRING, 'Description of the tag from the wiki.']
         ]),
         :example => { :key => 'highway', :page => 1, :rp => 10, :sortname => 'count_ways', :sortorder => 'desc' },
@@ -242,6 +243,8 @@ class Taginfo < Sinatra::Base
                 o.count_nodes
                 o.count_ways
                 o.count_relations
+                o.in_wiki :in_wiki
+                o.in_wiki! :value
             }.
             paging(@ap).
             execute()
@@ -273,6 +276,7 @@ class Taginfo < Sinatra::Base
                 :value    => row['value'],
                 :count    => row['count_' + filter_type].to_i,
                 :fraction => (row['count_' + filter_type].to_f / this_key_count.to_f).round_to(4),
+                :in_wiki  => row['in_wiki'] == 1,
                 :description => wikidesc[row['value']]
             } }
         }.to_json

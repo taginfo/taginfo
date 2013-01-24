@@ -35,6 +35,7 @@ var create_flexigrid_for = {
             colModel: [
                 { display: '<%= osm.value %>', name: 'value', width: 200, sortable: true },
                 { display: '<%= misc.count %>', name: 'count', width: 260, sortable: true, align: 'center' },
+                { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" width="16" height="16" title="<%= misc.in_wiki_tooltip %>"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
                 { display: '<span title="<%= page.tag_description_from_wiki %>"><%= misc.description %></span>', name: 'description', width: 600, sortable: false, align: 'left' }
             ],
             searchitems: [
@@ -47,6 +48,7 @@ var create_flexigrid_for = {
                     return { 'cell': [
                         hover_expand(link_to_value(key, row.value)),
                         fmt_value_with_percent(row.count, row.fraction),
+                        fmt_checkmark(row.in_wiki),
                         row.description
                     ] };
                 });
