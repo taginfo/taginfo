@@ -9,7 +9,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2012  Jochen Topf <jochen@remote.org>
+#  Copyright (C) 2013  Jochen Topf <jochen@remote.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
-require 'rubygems'
 require 'json'
 require 'sqlite3'
 require 'yaml'
