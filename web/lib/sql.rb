@@ -58,7 +58,7 @@ module SQL
                 else
                     p = ''
                 end
-                puts %Q{SQL duration=#{ duration } query="#{ query };"} + p
+                ($queries_log||$stdout).puts %Q{SQL duration=#{ duration } query="#{ query };"} + p
             end
 
             out
