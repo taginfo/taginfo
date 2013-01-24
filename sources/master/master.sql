@@ -63,8 +63,16 @@ UPDATE db.keys SET in_josm=1    WHERE key IN (SELECT distinct k   FROM josm.josm
 -- potlatch XXX
 UPDATE db.keys SET in_merkaartor=1 WHERE key IN (SELECT key FROM merkaartor.keys);
 
+-- ============================================================================
+
 -- too slow, so we drop it for now
 -- INSERT INTO db.tags (key, value) SELECT DISTINCT key, value FROM wiki.wikipages WHERE key || '=XX=' || value NOT IN (SELECT key || '=XX=' || value FROM db.tags);
+
+UPDATE db.tags SET in_wiki=1    WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*') AND key || '=' || value IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*');
+UPDATE db.tags SET in_wiki_en=1 WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en') AND key || '=' || value IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en');
+
+UPDATE db.selected_tags SET in_wiki=1    WHERE skey || '=' || svalue IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*');
+UPDATE db.selected_tags SET in_wiki_en=1 WHERE skey || '=' || svalue IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en');
 
 -- ============================================================================
 

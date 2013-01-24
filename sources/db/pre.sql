@@ -133,6 +133,8 @@ CREATE TABLE selected_tags (
   count_all        INTEGER DEFAULT 0,
   count_nodes      INTEGER DEFAULT 0,
   count_ways       INTEGER DEFAULT 0,
-  count_relations  INTEGER DEFAULT 0
+  count_relations  INTEGER DEFAULT 0,
+  in_wiki          INTEGER,
+  in_wiki_en       INTEGER
 );
 
