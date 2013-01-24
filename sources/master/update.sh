@@ -25,6 +25,7 @@ fi
 echo "Running with ruby set as '${EXEC_RUBY}'"
 
 DATABASE=$DIR/taginfo-master.db
+HISTORYDB=$DIR/taginfo-history.db
 
 echo "`$DATECMD` Create search database..."
 
@@ -33,10 +34,17 @@ $EXEC_RUBY -pe "\$_.sub!(/__DIR__/, '$DIR')" search.sql | sqlite3 $DIR/taginfo-s
 
 rm -f $DATABASE
 
+echo "`$DATECMD` Create master database..."
 sqlite3 $DATABASE <languages.sql
 $EXEC_RUBY -pe "\$_.sub!(/__DIR__/, '$DIR')" master.sql | sqlite3 $DATABASE
 $EXEC_RUBY -pe "\$_.sub!(/__DIR__/, '$DIR')" interesting_tags.sql | sqlite3 $DATABASE
 $EXEC_RUBY -pe "\$_.sub!(/__DIR__/, '$DIR')" interesting_relation_types.sql | sqlite3 $DATABASE
+
+echo "`$DATECMD` Updating history database..."
+if [ ! -e $HISTORYDB ]; then
+    sqlite3 $HISTORYDB < history_init.sql
+fi
+$EXEC_RUBY -pe "\$_.sub!(/__DIR__/, '$DIR')" history_update.sql | sqlite3 $HISTORYDB
 
 echo "`$DATECMD` Done master."
 
