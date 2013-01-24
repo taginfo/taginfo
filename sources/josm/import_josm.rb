@@ -7,7 +7,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2012  Jochen Topf <jochen@remote.org>
+#  Copyright (C) 2013  Jochen Topf <jochen@remote.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -24,8 +24,6 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 #------------------------------------------------------------------------------
-
-require 'rubygems'
 
 require 'find'
 require 'pp'
@@ -65,62 +63,61 @@ class Rule
 
 end
 
-dir = ARGV[0] || '.'
+#------------------------------------------------------------------------------
 
+dir = ARGV[0] || '.'
 db = SQLite3::Database.new(dir + '/taginfo-josm.db')
 
-db.execute('BEGIN TRANSACTION');
+#------------------------------------------------------------------------------
 
-file = File.new(dir + '/elemstyles.xml')
-doc = REXML::Document.new(file)
+db.transaction do |db|
+    file = File.new(dir + '/elemstyles.xml')
+    doc = REXML::Document.new(file)
 
-doc.elements.each('/rules/rule') do |rule_element|
-    rule = Rule.new(rule_element.to_s)
-    rule_element.elements.each do |element|
-        case element.name
-            when 'condition'
-                rule.k = element.attributes['k']
-                rule.v = element.attributes['v']
-                rule.b = element.attributes['b']
-            when 'scale_min'
-                rule.scale_min = element.text
-            when 'scale_max'
-                rule.scale_max = element.text
-            when 'icon'
-                rule.icon_source = element.attributes['src']
-            when 'area'
-                rule.area_color = element.attributes['colour']
-            when 'line'
-                rule.line_color = element.attributes['colour']
-                rule.line_width = element.attributes['width']
-                rule.line_realwidth = element.attributes['realwidth']
+    doc.elements.each('/rules/rule') do |rule_element|
+        rule = Rule.new(rule_element.to_s)
+        rule_element.elements.each do |element|
+            case element.name
+                when 'condition'
+                    rule.k = element.attributes['k']
+                    rule.v = element.attributes['v']
+                    rule.b = element.attributes['b']
+                when 'scale_min'
+                    rule.scale_min = element.text
+                when 'scale_max'
+                    rule.scale_max = element.text
+                when 'icon'
+                    rule.icon_source = element.attributes['src']
+                when 'area'
+                    rule.area_color = element.attributes['colour']
+                when 'line'
+                    rule.line_color = element.attributes['colour']
+                    rule.line_width = element.attributes['width']
+                    rule.line_realwidth = element.attributes['realwidth']
+            end
         end
-    end
 #    pp "rule #{rule.k} #{rule.v}"
-    rule.insert(db)
+        rule.insert(db)
+    end
 end
 
-db.execute('COMMIT');
-
-db.execute('BEGIN TRANSACTION');
-
-Dir.chdir(dir + '/svn-source') do
-    Dir.foreach(dir + '/svn-source') do |style|
-        Find.find(style) do |path|
-            if FileTest.directory?(path) && File.basename(path) =~ /^\./
-                Find.prune
-            elsif FileTest.file?(path)
-                File.open(path) do |file|
-                    png = file.read
-                    pathwostyle = path.sub(%r(^#{style}/), '')
-                    db.execute('INSERT INTO josm_style_images (style, path, png) VALUES (?, ?, ?)', style, pathwostyle, SQLite3::Blob.new(png))
+db.transaction do |db|
+    Dir.chdir(dir + '/svn-source') do
+        Dir.foreach(dir + '/svn-source') do |style|
+            Find.find(style) do |path|
+                if FileTest.directory?(path) && File.basename(path) =~ /^\./
+                    Find.prune
+                elsif FileTest.file?(path)
+                    File.open(path) do |file|
+                        png = file.read
+                        pathwostyle = path.sub(%r(^#{style}/), '')
+                        db.execute('INSERT INTO josm_style_images (style, path, png) VALUES (?, ?, ?)', style, pathwostyle, SQLite3::Blob.new(png))
+                    end
                 end
             end
         end
     end
 end
-
-db.execute('COMMIT');
 
 
 #-- THE END -------------------------------------------------------------------

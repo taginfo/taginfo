@@ -31,6 +31,8 @@ dir = ARGV[0] || '.'
 db = SQLite3::Database.new(dir + '/taginfo-db.db')
 db.results_as_hash = true
 
+#------------------------------------------------------------------------------
+
 regexes = [
     [ 'plain',   %r{^[a-z]([a-z_]*[a-z])?$} ],
     [ 'colon',   %r{^[a-z][a-z_:]*[a-z]$} ],
@@ -50,11 +52,10 @@ db.execute("SELECT key FROM keys").map{ |row| row['key'] }.each do |key|
     end 
 end
 
-db.execute('BEGIN TRANSACTION');
-
-keys.each do |key, type|
-    db.execute("UPDATE keys SET characters=? WHERE key=?", type, key);
+db.transaction do |db|
+    keys.each do |key, type|
+        db.execute("UPDATE keys SET characters=? WHERE key=?", type, key);
+    end
 end
 
-db.execute('COMMIT');
-
+#-- THE END -------------------------------------------------------------------

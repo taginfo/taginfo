@@ -25,48 +25,47 @@
 #
 #------------------------------------------------------------------------------
 
-require 'rubygems'
-
 require 'sqlite3'
 
 dir = ARGV[0] || '.'
-
 db = SQLite3::Database.new(dir + '/taginfo-languages.db')
+
+#------------------------------------------------------------------------------
 
 property_value_alias_file = "#{dir}/PropertyValueAliases.txt"
 codepoint_script_mapping_file = "#{dir}/Scripts.txt"
 
-db.execute('BEGIN TRANSACTION');
+db.transaction do |db|
+    open(property_value_alias_file) do |file|
+        file.each do |line|
+            line.chomp!
+            if line.match(%r{^sc ;})
+                (sc, script, name) = line.split(%r{\s*;\s*})
+                db.execute("INSERT INTO unicode_scripts (script, name) VALUES (?, ?)", script, name)
+            end
+        end
+    end
 
-open(property_value_alias_file) do |file|
-    file.each do |line|
-        line.chomp!
-        if line.match(%r{^sc ;})
-            (sc, script, name) = line.split(%r{\s*;\s*})
-            db.execute("INSERT INTO unicode_scripts (script, name) VALUES (?, ?)", script, name)
+    open(codepoint_script_mapping_file) do |file|
+        file.each do |line|
+            line.chomp!
+            line.sub!(%r{\s*#.*}, '')
+            next if line.match(%r{^$})
+            (codes, script) = line.split(%r{\s+;\s+})
+            if codes.match(%r{^[0-9A-F]{4,5}$})
+                from = codes
+                to   = codes
+            elsif codes.match(%r{^([0-9A-F]{4,5})..([0-9A-F]{4,5})$})
+                from = $1
+                to   = $2
+            else
+                puts "Line does not match: #{line}"
+                next
+            end
+            db.execute("INSERT INTO unicode_codepoint_script_mapping (codepoint_from, codepoint_to, name) VALUES (?, ?, ?)", from, to, script)
         end
     end
 end
 
-open(codepoint_script_mapping_file) do |file|
-    file.each do |line|
-        line.chomp!
-        line.sub!(%r{\s*#.*}, '')
-        next if line.match(%r{^$})
-        (codes, script) = line.split(%r{\s+;\s+})
-        if codes.match(%r{^[0-9A-F]{4,5}$})
-            from = codes
-            to   = codes
-        elsif codes.match(%r{^([0-9A-F]{4,5})..([0-9A-F]{4,5})$})
-            from = $1
-            to   = $2
-        else
-            puts "Line does not match: #{line}"
-            next
-        end
-        db.execute("INSERT INTO unicode_codepoint_script_mapping (codepoint_from, codepoint_to, name) VALUES (?, ?, ?)", from, to, script)
-    end
-end
 
-db.execute('COMMIT');
-
+#-- THE END -------------------------------------------------------------------

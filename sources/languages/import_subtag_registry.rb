@@ -25,8 +25,6 @@
 #
 #------------------------------------------------------------------------------
 
-require 'rubygems'
-
 require 'sqlite3'
 
 class Subtag
@@ -63,9 +61,12 @@ class Subtag
 
 end
 
-dir = ARGV[0] || '.'
+#------------------------------------------------------------------------------
 
+dir = ARGV[0] || '.'
 db = SQLite3::Database.new(dir + '/taginfo-languages.db')
+
+#------------------------------------------------------------------------------
 
 registry_file = "#{dir}/language-subtag-registry"
 
@@ -101,27 +102,25 @@ end
 
 SUBTAG_TYPES = %w( language script region variant )
 
-db.execute('BEGIN TRANSACTION');
-
-Subtag.entries.each do |entry|
-    if SUBTAG_TYPES.include?(entry.type) &&
-        entry.description != 'Private use' &&
-        (entry.type != 'language' || (entry.scope != 'special' && entry.scope != 'collection')) &&
-        (entry.type != 'script'   || !entry.subtag.match(%r{^Z}) ) &&
-        (entry.type != 'region'   || entry.subtag.match(%r{^[A-Z]{2}$}) )
-        db.execute("INSERT INTO subtags (stype, subtag, added, suppress_script, scope, description, prefix) VALUES (?, ?, ?, ?, ?, ?, ?)",
-            entry.type,
-            entry.subtag,
-            entry.added,
-            entry.suppress_script,
-            entry.scope,
-            entry.description,
-            entry.prefix
-        )
+db.transaction do |db|
+    Subtag.entries.each do |entry|
+        if SUBTAG_TYPES.include?(entry.type) &&
+            entry.description != 'Private use' &&
+            (entry.type != 'language' || (entry.scope != 'special' && entry.scope != 'collection')) &&
+            (entry.type != 'script'   || !entry.subtag.match(%r{^Z}) ) &&
+            (entry.type != 'region'   || entry.subtag.match(%r{^[A-Z]{2}$}) )
+            db.execute("INSERT INTO subtags (stype, subtag, added, suppress_script, scope, description, prefix) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                entry.type,
+                entry.subtag,
+                entry.added,
+                entry.suppress_script,
+                entry.scope,
+                entry.description,
+                entry.prefix
+            )
+        end
     end
 end
-
-db.execute('COMMIT');
 
 
 #-- THE END -------------------------------------------------------------------

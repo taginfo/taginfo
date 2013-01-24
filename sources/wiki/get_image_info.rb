@@ -34,8 +34,6 @@
 #
 #------------------------------------------------------------------------------
 
-require 'rubygems'
-
 require 'pp'
 
 require 'net/http'
@@ -48,79 +46,79 @@ require './lib/mediawikiapi.rb'
 #------------------------------------------------------------------------------
 
 dir = ARGV[0] || '.'
+db = SQLite3::Database.new(dir + '/taginfo-wiki.db')
+db.results_as_hash = true
+
+#------------------------------------------------------------------------------
 
 api = MediaWikiAPI::API.new('wiki.openstreetmap.org')
 
-db = SQLite3::Database.new(dir + '/taginfo-wiki.db')
-db.results_as_hash = true
 image_titles = db.execute("SELECT DISTINCT(image) AS title FROM wikipages WHERE image IS NOT NULL AND image != '' UNION SELECT DISTINCT(image) AS title FROM relation_pages WHERE image IS NOT NULL AND image != ''").
                     map{ |row| row['title'] }.
                     select{ |title| title.match(%r{^(file|image):}i) }
 
-db.execute('BEGIN TRANSACTION');
+db.transaction do |db|
+    puts "Found #{ image_titles.size } different image titles"
 
-puts "Found #{ image_titles.size } different image titles"
+    images_added = {}
 
-images_added = {}
+    until image_titles.empty?
+        some_titles = image_titles.slice!(0, 10)
+        puts "Get image info for: #{ some_titles.join(' ') }"
 
-until image_titles.empty?
-    some_titles = image_titles.slice!(0, 10)
-    puts "Get image info for: #{ some_titles.join(' ') }"
+        begin
+            data = api.query(:prop => 'imageinfo', :iiprop => 'url|size|mime', :titles => some_titles.join('|'), :iiurlwidth => 10, :iiurlheight => 10)
 
-    begin
-        data = api.query(:prop => 'imageinfo', :iiprop => 'url|size|mime', :titles => some_titles.join('|'), :iiurlwidth => 10, :iiurlheight => 10)
-
-        if !data['query']
-            puts "Wiki API call failed (no 'query' field):"
-            pp data
-            next
-        end
-
-        normalized = data['query']['normalized']
-        if normalized
-            normalized.each do |n|
-                db.execute('UPDATE wikipages SET image=? WHERE image=?', n['to'], n['from'])
-                db.execute('UPDATE relation_pages SET image=? WHERE image=?', n['to'], n['from'])
+            if !data['query']
+                puts "Wiki API call failed (no 'query' field):"
+                pp data
+                next
             end
-        end
 
-        if !data['query']['pages']
-            puts "Wiki API call failed (no 'pages' field):"
-            pp data
-            next
-        end
-
-        data['query']['pages'].each do |k,v|
-            if v['imageinfo'] && ! images_added[v['title']]
-                info = v['imageinfo'][0]
-                if info['thumburl'].match(%r{^(.*/)[0-9]{1,4}(px-.*)$})
-                    prefix = $1
-                    suffix = $2
-                else
-                    prefix = nil
-                    suffix = nil
-                    puts "Wrong thumbnail format: '#{info['thumburl']}'"
+            normalized = data['query']['normalized']
+            if normalized
+                normalized.each do |n|
+                    db.execute('UPDATE wikipages SET image=? WHERE image=?', n['to'], n['from'])
+                    db.execute('UPDATE relation_pages SET image=? WHERE image=?', n['to'], n['from'])
                 end
-                images_added[v['title']] = 1
-                db.execute("INSERT INTO wiki_images (image, width, height, size, mime, image_url, thumb_url_prefix, thumb_url_suffix) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                    v['title'],
-                    info['width'],
-                    info['height'],
-                    info['size'],
-                    info['mime'],
-                    info['url'],
-                    prefix,
-                    suffix
-                )
             end
+
+            if !data['query']['pages']
+                puts "Wiki API call failed (no 'pages' field):"
+                pp data
+                next
+            end
+
+            data['query']['pages'].each do |k,v|
+                if v['imageinfo'] && ! images_added[v['title']]
+                    info = v['imageinfo'][0]
+                    if info['thumburl'].match(%r{^(.*/)[0-9]{1,4}(px-.*)$})
+                        prefix = $1
+                        suffix = $2
+                    else
+                        prefix = nil
+                        suffix = nil
+                        puts "Wrong thumbnail format: '#{info['thumburl']}'"
+                    end
+                    images_added[v['title']] = 1
+                    db.execute("INSERT INTO wiki_images (image, width, height, size, mime, image_url, thumb_url_prefix, thumb_url_suffix) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                        v['title'],
+                        info['width'],
+                        info['height'],
+                        info['size'],
+                        info['mime'],
+                        info['url'],
+                        prefix,
+                        suffix
+                    )
+                end
+            end
+        rescue
+            puts "Wiki API call error:"
+            pp data
         end
-    rescue
-        puts "Wiki API call error:"
-        pp data
     end
 end
-
-db.execute('COMMIT');
 
 
 #-- THE END -------------------------------------------------------------------

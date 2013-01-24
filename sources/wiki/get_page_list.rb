@@ -26,7 +26,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2012  Jochen Topf <jochen@remote.org>
+#  Copyright (C) 2013  Jochen Topf <jochen@remote.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -44,14 +44,9 @@
 #
 #------------------------------------------------------------------------------
 
-require 'rubygems'
-
-require 'pp'
-
 require 'net/http'
 require 'uri'
 require 'json'
-
 
 require './lib/mediawikiapi.rb'
 
@@ -72,7 +67,6 @@ def get_page_list(api, namespaceid, options)
     apfrom = ''
     loop do
         data = api.query(:generator => 'allpages', :gaplimit => 'max', :gapfrom => apfrom, :gapnamespace => namespaceid, :gapfilterredir => options[:redirect] ? 'redirects' : 'nonredirects', :prop => 'info')
-#        pp data
         data['query']['pages'].each do |k,v|
             yield v['touched'], v['title'].gsub(/\s/, '_')
         end
@@ -121,5 +115,6 @@ end
 
 tagpages.close
 allpages.close
+
 
 #-- THE END -------------------------------------------------------------------

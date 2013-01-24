@@ -35,10 +35,6 @@
 #
 #------------------------------------------------------------------------------
 
-require 'rubygems'
-
-require 'pp'
-
 require 'json'
 require 'net/http'
 require 'uri'
@@ -210,6 +206,8 @@ class WikiPage
     end
 end
 
+#------------------------------------------------------------------------------
+
 class KeyOrTagPage < WikiPage
 
     def initialize(type, timestamp, namespace, title)
@@ -261,6 +259,8 @@ class KeyOrTagPage < WikiPage
     end
 
 end
+
+#------------------------------------------------------------------------------
 
 class KeyPage < KeyOrTagPage
 end
@@ -384,49 +384,49 @@ end
 #------------------------------------------------------------------------------
 
 dir = ARGV[0] || '.'
-
-api = MediaWikiAPI::API.new('wiki.openstreetmap.org', 80, '/w/index.php?')
-
 db = SQLite3::Database.new(dir + '/taginfo-wiki.db')
 db.results_as_hash = true
 
+#------------------------------------------------------------------------------
+
+api = MediaWikiAPI::API.new('wiki.openstreetmap.org', 80, '/w/index.php?')
+
 cache = Cache.new(dir, db, api)
 
-db.execute('BEGIN TRANSACTION')
+db.transaction do |db|
 
-File.open(dir + '/tagpages.list') do |wikipages|
-    wikipages.each do |line|
-        line.chomp!
-        (type, timestamp, namespace, title) = line.split("\t")
+    File.open(dir + '/tagpages.list') do |wikipages|
+        wikipages.each do |line|
+            line.chomp!
+            (type, timestamp, namespace, title) = line.split("\t")
 
-        if title =~ /(^|:)Key:/
-            page = KeyPage.new(type, timestamp, namespace, title)
-        elsif title =~ /(^|:)Tag:/
-            page = TagPage.new(type, timestamp, namespace, title)
-        elsif title =~ /(^|:)Relation:/
-            page = RelationPage.new(type, timestamp, namespace, title)
-        else
-            puts "Wiki page has wrong format: '#{title}'"
-            next
-        end
+            if title =~ /(^|:)Key:/
+                page = KeyPage.new(type, timestamp, namespace, title)
+            elsif title =~ /(^|:)Tag:/
+                page = TagPage.new(type, timestamp, namespace, title)
+            elsif title =~ /(^|:)Relation:/
+                page = RelationPage.new(type, timestamp, namespace, title)
+            else
+                puts "Wiki page has wrong format: '#{title}'"
+                next
+            end
 
-        puts "Parsing page: title='#{page.title}' type='#{page.type}' timestamp='#{page.timestamp}' namespace='#{page.namespace}'"
+            puts "Parsing page: title='#{page.title}' type='#{page.type}' timestamp='#{page.timestamp}' namespace='#{page.namespace}'"
 
-        reason = page.check_title
-        if reason == :ok
-            cache.get_page(page)
-            page.parse_content(db)
-            page.insert(db)
-        else
-            puts "invalid page: #{reason} #{page.title}"
-            db.execute('INSERT INTO invalid_page_titles (reason, title) VALUES (?, ?)', reason.to_s, page.title)
+            reason = page.check_title
+            if reason == :ok
+                cache.get_page(page)
+                page.parse_content(db)
+                page.insert(db)
+            else
+                puts "invalid page: #{reason} #{page.title}"
+                db.execute('INSERT INTO invalid_page_titles (reason, title) VALUES (?, ?)', reason.to_s, page.title)
+            end
         end
     end
+
+    cache.cleanup
 end
-
-cache.cleanup
-
-db.execute('COMMIT')
 
 
 #-- THE END -------------------------------------------------------------------

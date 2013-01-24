@@ -9,7 +9,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2012  Jochen Topf <jochen@remote.org>
+#  Copyright (C) 2013  Jochen Topf <jochen@remote.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -26,8 +26,6 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 #------------------------------------------------------------------------------
-
-require 'rubygems'
 
 require 'sqlite3'
 
@@ -126,6 +124,8 @@ dir = ARGV[0] || '.'
 db = SQLite3::Database.new(dir + '/taginfo-wiki.db')
 db.results_as_hash = true
 
+#------------------------------------------------------------------------------
+
 words = Words.new
 we = WordExtractor.new(words)
 
@@ -141,10 +141,11 @@ words.invert
 #    puts "#{key}=#{value}: #{words}"
 #end
 
-db.execute('BEGIN TRANSACTION');
-words.dump do |key, value, words|
-    db.execute('INSERT INTO words (key, value, words) VALUES (?, ?, ?)', key, value, words)
+db.transaction do |db|
+    words.dump do |key, value, words|
+        db.execute('INSERT INTO words (key, value, words) VALUES (?, ?, ?)', key, value, words)
+    end
 end
-db.execute('COMMIT');
+
 
 #-- THE END -------------------------------------------------------------------
