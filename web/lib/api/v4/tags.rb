@@ -9,6 +9,7 @@ class Taginfo < Sinatra::Base
         :result => paging_results([
             [:key,                      :STRING, 'Key'],
             [:value,                    :STRING, 'Value'],
+            [:in_wiki,                  :BOOL,   'In there a page in the wiki for this tag?'],
             [:count_all,                :INT,    'Number of objects in the OSM database with this tag.'],
             [:count_all_fraction,       :FLOAT,  'Number of objects in relation to all objects.'],
             [:count_nodes,              :INT,    'Number of nodes in the OSM database with this tag.'],
@@ -31,6 +32,7 @@ class Taginfo < Sinatra::Base
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.tag :skey
                 o.tag :svalue
+                o.in_wiki
                 o.count_all
                 o.count_nodes
                 o.count_ways
@@ -46,6 +48,7 @@ class Taginfo < Sinatra::Base
             :data  => res.map{ |row| {
                 :key                      => row['skey'],
                 :value                    => row['svalue'],
+                :in_wiki                  => row['in_wiki'],
                 :count_all                => row['count_all'].to_i,
                 :count_all_fraction       => (row['count_all'].to_f / @db.stats('objects')).round_to(4),
                 :count_nodes              => row['count_nodes'].to_i,
