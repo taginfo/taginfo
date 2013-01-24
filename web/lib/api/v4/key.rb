@@ -246,17 +246,22 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
+        values_with_wiki_page = res.select{ |row| row['in_wiki'].to_i == 1 }.map{ |row| "'" + SQLite3::Database.quote(row['value']) + "'" }.join(',')
+
         # Read description for tag from wikipages, first in English then in the chosen
         # language. This way the chosen language description will overwrite the default
         # English one.
         wikidesc = {}
-        ['en', lang].uniq.each do |lang|
-            @db.select('SELECT value, description FROM wiki.wikipages').
-                condition('lang = ?', lang).
-                condition('key = ?', key).
-                condition("value IN (#{ res.map{ |row| "'" + SQLite3::Database.quote(row['value']) + "'" }.join(',') })").
-                execute().each do |row|
-                wikidesc[row['value']] = row['description']
+
+        if values_with_wiki_page != ''
+            ['en', lang].uniq.each do |lang|
+                @db.select('SELECT value, description FROM wiki.wikipages').
+                    condition('lang = ?', lang).
+                    condition('key = ?', key).
+                    condition("value IN (#{ values_with_wiki_page })").
+                    execute().each do |row|
+                    wikidesc[row['value']] = row['description']
+                end
             end
         end
 
