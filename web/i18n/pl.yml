@@ -41,6 +41,7 @@ taginfo:
     test: Test
     map: Mapa
     maps: Mapy
+    relations: Relacje
     combinations: Kombinacje
     key_combinations: Kombinacje
     overview: Omówienie
@@ -79,6 +80,7 @@ misc:
     prevalent_values_tooltip: Dziesięć najczęściej występujących wartości klucza (tylko jeśli więcej niż 1% tagów z tym kluczem posiada daną wartość).
     in_wiki_tooltip: Klucz posiada co najmniej jedną wiki stronę.
     in_josm_tooltip: Klucz dostępny w JOSM.
+
 help:
     search:
         title: Szukaj
@@ -121,23 +123,22 @@ help:
         up: W górę w hierarchii strony
         switch_input: Przełączanie pomiędzy wyszukiwarką a filtrem
 
-
 pages:
-	not_found:
+    not_found:
         title: Nie znaleziono
         intro: Przykro nam, ale strona, której szukasz nie została znaleziona.
     index:
         keys:
             listkeys: Zobacz listę wszystkich kluczy...
-			popular_keys: Popularne klucze
+            popular_keys: Popularne klucze
         tags:
             listtags: Zobacz listę najpopularniejszych tagów...
-		relations:
+        relations:
             listrelations: Zobacz wszystkie typy relacji...
         reports:
             listreports: Zobacz wszystkie raporty...
         about:
-            intro:
+            intro: |
                 <p>OpenStreetMap używa <b>tagów</b> w formie <b>klucz=wartość</b> aby nadać znaczenie obiektom geograficznym. Taginfo zbiera informacje o tych tagach z kilku źródeł aby łatwiej było zrozumieć co one oznaczają i jak są używane.</p>
             more: Więcej o taginfo...
         international:
@@ -178,7 +179,7 @@ pages:
     tags:
         intro: |
                 Ta tabela pokazuje najbardziej rozpowszechnione tagi w bazie danych.
-	relation:
+    relation:
         name: Rodzaj relacji
         description_from_wiki: Opis tego rodzaju relacji w wiki (jeśli dostępne w wybranym języku, w przeciwnym razie po angielsku)
         no_description_in_wiki: Brak opisu na wiki.
@@ -213,7 +214,7 @@ pages:
         no_information: Brak informacji
         roles_less_than_one_percent: brak roli powyżej 1%
         empty_role: pusta rola
-	key:
+    key:
         description_from_wiki: Opis tego klucza z wiki (jeśli dostępne w wybranym języku, w przeciwnym razie po angielsku).
         no_description_in_wiki: Brak opisu na wiki.
         filter:
@@ -257,7 +258,7 @@ pages:
         description_from_wiki: Opis tego tagu z wiki (jeśli dostępne w wybranym języku, w przeciwnym razie po angielsku).
         no_description_in_wiki: Brak opisu na wiki.
         number_objects: Liczba obiektów
-		overview:
+        overview:
             see_also: Zobacz także stronę rodzajów relacji
         other_tags_used:
             title: Inne tagi użyte wraz z tym tagiem
@@ -387,7 +388,7 @@ reports:
         intro: |
             <p>Ta tabela pokazuje klucze, które posiadają swoje strony na wiki, ale nie istnieją nawet pojedyncze obiekty w bazie z ich użyciem. Nie musi być to błąd, gdyż ktoś mógł stworzyć dokumentację przed wdrożeniem nowego schematu tagowania. Ale może być to zwykła literówka albo inny błąd.</p>
         wiki_pages: Strony wiki
-	name_tags:
+    name_tags:
         name: Warianty tagu name
         intro: |
             <p>Ten raport pokazuje informacje związane z obiektami używającymi tagu <tt>name</tt> tag i jego wariacji.</p>
