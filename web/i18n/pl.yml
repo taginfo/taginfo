@@ -11,6 +11,15 @@ osm:
     ways: Linie
     relation: Relacja
     relations: Relacje
+    relation_type: Rodzaj relacji
+    relation_types: Rodzaje relacji
+    relation_member: Członek relacji
+    relation_members: Członkowie relacji
+    relation_member_nodes: Członek punkt
+    relation_member_ways: Członek linia
+    relation_member_relations: Członek relacja
+    relation_member_role: Rola
+    relation_member_roles: Role
     object: Obiekt
     objects: Obiekty
     all: Wszystko
@@ -54,6 +63,7 @@ misc:
     object_type: Rodzaj
     description: Opis
     length: Długość
+    help: Pomoc
     icon: Ikona
     line: Linia
     area: Obszar
@@ -69,13 +79,61 @@ misc:
     prevalent_values_tooltip: Dziesięć najczęściej występujących wartości klucza (tylko jeśli więcej niż 1% tagów z tym kluczem posiada daną wartość).
     in_wiki_tooltip: Klucz posiada co najmniej jedną wiki stronę.
     in_josm_tooltip: Klucz dostępny w JOSM.
+help:
+    search:
+        title: Szukaj
+        intro: Użyj wyszukiwarki w górnym lewym rogu aby wyszukać kluczy i wartości tagów.
+        string: Możesz wyszukać klucze i wartości tagów
+        substring: Nawet fragment słowa może być wyszukany
+        complete_tags: Możesz szukać kompletnych tagów
+        values_only: Możesz także wyszukać jedynie wartość klucza
+        suggestions: |
+            Dla wygodniejszego wyszukiwania najbardziej popularne klucze i tagi pojawią jako sugestia podczas wpisywania. Za pomocą kursora wybierz jeden i wcśnij <span class="key">Enter</span>.
+            Zostaniesz przekierowany do strony wskazanego klucza lub tagu.
+    keyboard:
+        title: Skróty klawiaturowe
+        site_navigation: Nawigacja w witrynie
+        page_navigation: Nawigacja na stronie
+        table_navigation: Nawigacja w tabeli
+        keys:
+            home: Home
+            end: End
+            pageup: PgUp
+            pagedown: PgDn
+            esc: Esc
+            tab: TAB
+        home_page: Strona startowa
+        keys_page: Strona kluczy
+        tags_page: Strona tagów
+        relations_page: Strona relacji
+        first_page: Pierwsza strona
+        prev_page: poprzednia strona
+        next_page: Następna strona
+        last_page: Ostatnia strona
+        help_page: To okienko pomocy
+        activate_search: Aktywuje pole wyszukiwarki
+        activate_filter: Aktywuje pole filtru
+        prev_entry: Poprzedni wpis
+        next_entry: Następny wpis
+        enter_entry: Skocz do wpisu
+        switch_tab: Przełączanie zakładek
+        deactivate: Deaktywacja wyszukiwarki
+        up: W górę w hierarchii strony
+        switch_input: Przełączanie pomiędzy wyszukiwarką a filtrem
+
 
 pages:
+	not_found:
+        title: Nie znaleziono
+        intro: Przykro nam, ale strona, której szukasz nie została znaleziona.
     index:
         keys:
             listkeys: Zobacz listę wszystkich kluczy...
+			popular_keys: Popularne klucze
         tags:
             listtags: Zobacz listę najpopularniejszych tagów...
+		relations:
+            listrelations: Zobacz wszystkie typy relacji...
         reports:
             listreports: Zobacz wszystkie raporty...
         about:
@@ -120,7 +178,42 @@ pages:
     tags:
         intro: |
                 Ta tabela pokazuje najbardziej rozpowszechnione tagi w bazie danych.
-    key:
+	relation:
+        name: Rodzaj relacji
+        description_from_wiki: Opis tego rodzaju relacji w wiki (jeśli dostępne w wybranym języku, w przeciwnym razie po angielsku)
+        no_description_in_wiki: Brak opisu na wiki.
+        overview:
+            tab: Omówienie
+            title: Omówienie
+            member_type: Rodzaj członka
+            member_count: Ilość członków
+            see_also: Zobacz także stronę tagu
+        roles:
+            tab: Role
+            title: Role członków
+            objects_tooltip: Członkowie relacji z tą rolą (także jako procent wszystkich członków) dla tego typu relacji.
+            nodes_tooltip: Członkowie relacji w postaci punktu z tą rolą (także jako procent wszystkich członków) dla tego typu relacji.
+            ways_tooltip: Członkowie relacji w postaci linii z tą rolą (także jako procent wszystkich członków) dla tego typu relacji.
+            relations_tooltip: Członkowie relacji w postaci relacji z tą rolą (także jako procent wszystkich członków) dla tego typu relacji
+            no_roles_info: Brak informacji o rolach dla tego typu relacji (pradwopodobnie jest bardzo mało takich relacji).
+        graph:
+            tab: Wykres ról
+            title: Wykres ról
+        wiki_pages:
+            title: Strona wiki o tym rodzaju relacji
+            none_found: Brak stroy wiki o tego rodzaju relacji.
+            create: Stwórz stronę wiki dla tego typu relacji
+            wiki_page: Strona Wiki
+    relations:
+        name: Typy relacji
+        intro: Informacjie o różnych typach relacji (oznaczonych tagiem <a href="/keys/type?filter=relations">type</a>).
+        relations_of_type_tooltip: Liczba relacji tej strony (i jako procent wszystkich relacji).
+        prevalent_roles: Powrzechne role
+        prevalent_roles_tooltip: Powrzechne role dla tego typu relacji.
+        no_information: Brak informacji
+        roles_less_than_one_percent: brak roli powyżej 1%
+        empty_role: pusta rola
+	key:
         description_from_wiki: Opis tego klucza z wiki (jeśli dostępne w wybranym języku, w przeciwnym razie po angielsku).
         no_description_in_wiki: Brak opisu na wiki.
         filter:
@@ -164,6 +257,8 @@ pages:
         description_from_wiki: Opis tego tagu z wiki (jeśli dostępne w wybranym języku, w przeciwnym razie po angielsku).
         no_description_in_wiki: Brak opisu na wiki.
         number_objects: Liczba obiektów
+		overview:
+            see_also: Zobacz także stronę rodzajów relacji
         other_tags_used:
             title: Inne tagi użyte wraz z tym tagiem
             other: Inne tagi
@@ -292,3 +387,30 @@ reports:
         intro: |
             <p>Ta tabela pokazuje klucze, które posiadają swoje strony na wiki, ale nie istnieją nawet pojedyncze obiekty w bazie z ich użyciem. Nie musi być to błąd, gdyż ktoś mógł stworzyć dokumentację przed wdrożeniem nowego schematu tagowania. Ale może być to zwykła literówka albo inny błąd.</p>
         wiki_pages: Strony wiki
+	name_tags:
+        name: Warianty tagu name
+        intro: |
+            <p>Ten raport pokazuje informacje związane z obiektami używającymi tagu <tt>name</tt> tag i jego wariacji.</p>
+        overview:
+            tab: Omówienie
+            title: Omówienie
+        bcp47:
+            tab: BCP47 Subtags
+            title: BCP47 Subtags
+            filter:
+                label: Show only subtags of type
+                all: All
+                language: Language
+                script: Script
+                region: Region
+                variant: Variant
+            intro: |
+                <p><a href="http://www.ietf.org/">IETF</a> definiuje <i>znaczniki języków</i> in its standard
+                <a href="http://tools.ietf.org/html/bcp47">Znaczniki dla Identyfikacji Języków
+                (BCP47)</a>. Znaczniki języka zawierają jeden lub więcej <i>znaczników podrzędnych</i> opisujących język, skrypt, warianty itp. Poniższa lista pokazuje obecnie zarejestrowane podrzędne znaczniki istotne dla OSM. Więcej informacji znajdziesz w artukule 
+                <a href="http://en.wikipedia.org/wiki/IETF_language_tag">Wikipedii o znacznikach językowych IETF</a> oraz na stronie <a
+                href="http://www.langtag.net/">langtag.net</a>.</p>
+                <p>Zwróć uwagę, że dane w tej tabeli <b>nie pochodzą</b> z bazy OpenStreetMap,
+                i jedynie pokazują elementy, które mogą być użyte by opisać języki niezależnie od tego, w jaki sposób są użyte w OSM.
+                </p>
+
