@@ -132,11 +132,11 @@ class Taginfo < Sinatra::Base
         res = @db.execute('SELECT * FROM wiki.relation_pages LEFT OUTER JOIN wiki.wiki_images USING (image) WHERE rtype = ? ORDER BY lang', rtype)
 
         return res.map{ |row| {
-                :lang             => h(row['lang']),
-                :language         => h(::Language[row['lang']].native_name),
-                :language_en      => h(::Language[row['lang']].english_name),
-                :title            => h(row['title']),
-                :description      => h(row['description']),
+                :lang             => row['lang'],
+                :language         => ::Language[row['lang']].native_name,
+                :language_en      => ::Language[row['lang']].english_name,
+                :title            => row['title'],
+                :description      => row['description'],
                 :image            => {
                     :title            => row['image'],
                     :width            => row['width'].to_i,

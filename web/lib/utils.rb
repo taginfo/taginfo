@@ -140,11 +140,11 @@ end
 # Used in wiki api calls
 def get_wiki_result(res)
     return res.map{ |row| {
-            :lang             => h(row['lang']),
-            :language         => h(::Language[row['lang']].native_name),
-            :language_en      => h(::Language[row['lang']].english_name),
-            :title            => h(row['title']),
-            :description      => h(row['description']),
+            :lang             => row['lang'],
+            :language         => ::Language[row['lang']].native_name,
+            :language_en      => ::Language[row['lang']].english_name,
+            :title            => row['title'],
+            :description      => row['description'],
             :image            => {
                 :title            => row['image'],
                 :width            => row['width'].to_i,
@@ -175,7 +175,7 @@ def get_josm_style_rules_result(total, res)
             :key        => row['k'],
             :value      => row['v'],
             :value_bool => row['b'],
-            :rule       => h(row['rule']),
+            :rule       => row['rule'],
             :area_color => row['area_color'] ? h(row['area_color'].sub(/^.*#/, '#')) : '',
             :line_color => row['line_color'] ? h(row['line_color'].sub(/^.*#/, '#')) : '',
             :line_width => row['line_width'] ? row['line_width'].to_i : 0,

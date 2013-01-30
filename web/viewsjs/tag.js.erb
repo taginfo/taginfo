@@ -85,7 +85,7 @@ var create_flexigrid_for = {
                         return { 'cell': [
                             fmt_language(row.lang, row.language, row.language_en),
                             link_to_wiki(row.title),
-                            row.description,
+                            html_escape(row.description),
                             fmt_wiki_image_popup(row.image),
                             fmt_type_icon('node',     row.on_node) + 
                             fmt_type_icon('way',      row.on_way) + 

@@ -197,7 +197,7 @@ function link_to_wiki(title, options) {
 
     return link(
         url_for_wiki(title, options),
-        title,
+        html_escape(title),
         { target: '_blank', 'class': 'extlink' }
     );
 }
