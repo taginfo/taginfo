@@ -19,7 +19,7 @@
         <td rowspan="5" class="box">
             <p><%= t.pages.reports.intro %></p>
             <ul style="margin: 0 0 0 18px; padding: 0;">
-<% Report.each do |report| %>
+<% Report.each_visible do |report| %>
                 <li><a href="<%= report.url %>"><%= t.reports[report.name].name %></a></li>
 <% end %>
             </ul>

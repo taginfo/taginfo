@@ -6,7 +6,7 @@
     <h2><%= t.pages.reports.list %></h2>
     <table class="list">
         <tr><th class="tc" colspan="<%= Source.visible.size %>"/><%= t.pages.reports.data_sources %></th><th class="tl"><%= t.taginfo.report %></th></tr>
-    <% Report.each_with_index do |report, n| c = (n%2!=0) ? ' even' : '' %>
+    <% Report.each_visible_with_index do |report, n| c = (n%2!=0) ? ' even' : '' %>
         <tr>
     <% Source.visible.each do |source| %>
             <td class="tc<%= c %>" width="40"><%= source.img(16, t.taginfo.uses_data_from) if report.uses_source?(source.id) %></td>

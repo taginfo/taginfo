@@ -1,7 +1,7 @@
 # web/lib/api/v4/langtag.rb
 class Taginfo < Sinatra::Base
 
-    api(4, 'keys/name', {
+    api(0, 'keys/name', {
         :description => 'Get list of keys from the database that contain the string "name".',
         :parameters => { :query => 'Only show keys matching this query (substring match, optional).' },
         :paging => :optional,
@@ -75,7 +75,7 @@ class Taginfo < Sinatra::Base
         @@bcp47_filters[type.to_sym] = { :expr => type, :doc => "Show entries of type '#{type}' only." };
     end
 
-    api(4, 'langtags', {
+    api(0, 'langtags', {
         :description => 'Get official subtags from the IETF BCP47 registry.',
         :parameters => { :query => 'Only show entries matching this query (case insensitive substring match on subtags and description; optional).' },
         :paging => :optional,

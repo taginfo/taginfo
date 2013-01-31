@@ -203,7 +203,6 @@ class Taginfo < Sinatra::Base
     load 'lib/api/v4/josm.rb'
     load 'lib/api/v4/key.rb'
     load 'lib/api/v4/keys.rb'
-#    load 'lib/api/v4/langtag.rb'
     load 'lib/api/v4/relation.rb'
     load 'lib/api/v4/relations.rb'
     load 'lib/api/v4/search.rb'
@@ -211,6 +210,9 @@ class Taginfo < Sinatra::Base
     load 'lib/api/v4/tag.rb'
     load 'lib/api/v4/tags.rb'
     load 'lib/api/v4/wiki.rb'
+
+    # test API (unstable, do not use)
+    load 'lib/api/test/langtag.rb'
 
     load 'lib/ui/embed.rb'
     load 'lib/ui/help.rb'
