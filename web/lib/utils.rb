@@ -176,10 +176,10 @@ def get_josm_style_rules_result(total, res)
             :value      => row['v'],
             :value_bool => row['b'],
             :rule       => row['rule'],
-            :area_color => row['area_color'] ? h(row['area_color'].sub(/^.*#/, '#')) : '',
-            :line_color => row['line_color'] ? h(row['line_color'].sub(/^.*#/, '#')) : '',
+            :area_color => row['area_color'] ? row['area_color'].sub(/^.*#/, '#') : '',
+            :line_color => row['line_color'] ? row['line_color'].sub(/^.*#/, '#') : '',
             :line_width => row['line_width'] ? row['line_width'].to_i : 0,
-            :icon       => row['icon_source'] && row['icon_source'] != 'misc/deprecated.png' && row['icon_source'] != 'misc/no_icon.png' ? h(row['icon_source']) : ''
+            :icon       => row['icon_source'] && row['icon_source'] != 'misc/deprecated.png' && row['icon_source'] != 'misc/no_icon.png' ? row['icon_source'] : ''
         } }
     }.to_json
 end

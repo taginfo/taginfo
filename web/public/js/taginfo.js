@@ -321,7 +321,7 @@ function fmt_josm_line(width, color) {
     var inner = '';
     if (width > 0) {
         inner = tag('div', '', {
-            title: color,
+            title: html_escape(color),
             style: style({ height: width + 'px', 'margin-top': (10 - Math.round(width/2)) + 'px', padding: 0, 'background-color': color })
         });
     }
@@ -333,7 +333,7 @@ function fmt_josm_area(color) {
 
     return tag('div', '', {
         title: html_escape(color),
-        style: style({ height: '18px', 'background-color': html_escape(color) })
+        style: style({ height: '18px', 'background-color': color })
     });
 }
 
