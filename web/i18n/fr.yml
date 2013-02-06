@@ -69,7 +69,7 @@ misc:
     line: Ligne
     area: Surface
     language: Langue
-    search_for: Rechercher :
+    search_for: Rechercher
     objects_tooltip: Nombre d'objets (en absolu, et en pourcentage de tous les nœuds, chemins et relations).
     nodes_tooltip: Nombre de nœuds (en absolu, et en pourcentage des nœuds taggués, les nœuds sans tags étant ignorés).
     ways_tooltip: Nombre de chemins (en absolu, et en pourcentage de tous les chemins).
@@ -218,7 +218,7 @@ pages:
         overview:
             objects_last_edited_by: Les objets ayant cette clé ont été édités en dernier par %1 utilisateurs différents.
             no_endorsement: (ce qui ne signifie pas que tous ces utilisateurs approuvent cette clé)
-	distribution_of_values: Distributions des valeurs
+            distribution_of_values: Distributions des valeurs
         other_keys_used:
             title: Autres clés utilisées avec cette clé
             other: Autres clés
