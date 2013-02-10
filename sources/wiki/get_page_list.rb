@@ -71,7 +71,7 @@ def get_page_list(api, namespaceid, options)
             yield v['touched'], v['title'].gsub(/\s/, '_')
         end
         if data['query-continue']
-            apfrom = data['query-continue']['allpages']['gapfrom'].gsub(/\s/, '_')
+            apfrom = data['query-continue']['allpages']['gapcontinue'].gsub(/\s/, '_')
 #            puts "apfrom=#{apfrom}"
         else
             return
