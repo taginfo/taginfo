@@ -277,7 +277,7 @@ class Taginfo < Sinatra::Base
                 :count    => row['count_' + filter_type].to_i,
                 :fraction => (row['count_' + filter_type].to_f / this_key_count.to_f).round_to(4),
                 :in_wiki  => row['in_wiki'] == 1,
-                :description => wikidesc[row['value']]
+                :description => wikidesc[row['value']] || ''
             } }
         }.to_json
     end
