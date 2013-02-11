@@ -144,7 +144,7 @@ def get_wiki_result(res)
             :language         => ::Language[row['lang']].native_name,
             :language_en      => ::Language[row['lang']].english_name,
             :title            => row['title'],
-            :description      => row['description'],
+            :description      => row['description'] || '',
             :image            => {
                 :title            => row['image'],
                 :width            => row['width'].to_i,
