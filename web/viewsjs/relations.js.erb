@@ -6,13 +6,13 @@ function page_init() {
     create_flexigrid('grid-relations', {
         url: '/api/4/relations/all',
         colModel: [
-            { display: '<%= osm.relation_type %>', name: 'rtype', width: 220, sortable: true },
-            { display: '<span title="<%= page.relations_of_type_tooltip %>"><%= osm.relations %></span>', name: 'count', width: 250, sortable: true, align: 'center' },
-            { display: '<%= osm.tag %>', name: 'tag', width: 250, sortable: false },
-            { display: '<span title="<%= page.prevalent_roles_tooltip %>"><%= page.prevalent_roles %></span>', name: 'prevalent_roles', width: 550, sortable: false }
+            { display: '<%= h(osm.relation_type) %>', name: 'rtype', width: 220, sortable: true },
+            { display: '<span title="<%= h(page.relations_of_type_tooltip) %>"><%= h(osm.relations) %></span>', name: 'count', width: 250, sortable: true, align: 'center' },
+            { display: '<%= h(osm.tag) %>', name: 'tag', width: 250, sortable: false },
+            { display: '<span title="<%= h(page.prevalent_roles_tooltip) %>"><%= h(page.prevalent_roles) %></span>', name: 'prevalent_roles', width: 550, sortable: false }
         ],
         searchitems: [
-            { display: '<%= osm.relation_type %>', name: 'rtype' }
+            { display: '<%= h(osm.relation_type) %>', name: 'rtype' }
         ],
         sortname: 'count',
         sortorder: 'desc',
@@ -32,7 +32,7 @@ function page_init() {
 
 function fmt_prevalent_role_list(list) {
     if (list === null) {
-        return empty('<%= page.no_information %>');
+        return empty('<%= h(page.no_information) %>');
     }
     if (list.length == 0) {
         return empty(page.roles_less_than_one_percent);
@@ -41,7 +41,7 @@ function fmt_prevalent_role_list(list) {
         if (item.role) {
             return tag('span', fmt_role(item.role), { tipsy: 'e', title: html_escape(item.role) + ' (' + fmt_as_percent(item.fraction) + ')' });
         } else {
-            return tag('span', empty('<%= page.empty_role %>'), { tipsy: 'e', title: '(' + fmt_as_percent(item.fraction) + ')' });
+            return tag('span', empty('<%= h(page.empty_role) %>'), { tipsy: 'e', title: '(' + fmt_as_percent(item.fraction) + ')' });
         }
     }).join(' &bull; ');
 }

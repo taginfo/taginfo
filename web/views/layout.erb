@@ -12,13 +12,13 @@
 </head>
 <body>
     <div id="header">
-        <div id="header_date" title="<%= t.taginfo.data_from_description %>" tipsy="ne"><%= t.taginfo.data_from %>: <%= @data_until %> UTC</div>
+        <div id="header_date" title="<%= h(t.taginfo.data_from_description) %>" tipsy="ne"><%= h(t.taginfo.data_from) %>: <%= @data_until %> UTC</div>
         <div id="header_forms" class="no-print">
             <form id="set_language" action="/switch_locale">
                 <input type="hidden" id="url" name="url" value="<%= TaginfoConfig.get('instance.url') + request.path %>"/>
                 <select id="locale" name="locale">
 <% r18n.available_locales.sort{ |a,b| a.title <=> b.title }.each do |locale| %>
-                    <option value="<%= locale.code %>"<%= locale.code == r18n.locale.code ? ' selected="selected"' : ''%>><%= locale.title %></option>
+                    <option value="<%= locale.code %>"<%= locale.code == r18n.locale.code ? ' selected="selected"' : ''%>><%= h(locale.title) %></option>
 <% end %>
                 </select>
             </form>
@@ -41,18 +41,18 @@
         <div id="footer_left"><a class="extlink" href="http://www.openstreetmap.org/"><b>OpenStreetMap</b> - The Free Wiki World Map</a> &middot;
             <a href="http://www.openstreetmap.org/copyright">Data &copy; OpenStreetMap contributors (ODbL)</a></div>
         <div id="footer_right">
-            <a href="/keys"><%= t.osm.keys %></a> &middot; <a href="/tags"><%= t.osm.tags %></a> &middot; <a href="/relations"><%= t.osm.relations %></a> &middot;
-            <a href="/reports"><%= t.taginfo.reports %></a> &middot; <a href="/sources"><%= t.taginfo.sources %></a> &middot;
-            <a href="/download"><%= t.taginfo.download %></a> &middot; <a href="/about"><%= t.taginfo.about %></a> &middot;
-            <a id="help_link" href="#help"><%= t.misc.help %></a> &middot;
-            <a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo"><%= t.taginfo.wiki %></a>
+            <a href="/keys"><%= h(t.osm.keys) %></a> &middot; <a href="/tags"><%= h(t.osm.tags) %></a> &middot; <a href="/relations"><%= h(t.osm.relations) %></a> &middot;
+            <a href="/reports"><%= h(t.taginfo.reports) %></a> &middot; <a href="/sources"><%= h(t.taginfo.sources) %></a> &middot;
+            <a href="/download"><%= h(t.taginfo.download) %></a> &middot; <a href="/about"><%= h(t.taginfo.about) %></a> &middot;
+            <a id="help_link" href="#help"><%= h(t.misc.help) %></a> &middot;
+            <a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo"><%= h(t.taginfo.wiki) %></a>
         </div>
     </div>
     <div id="javascriptmsg">This website only works with Javascript! Please enable Javascript in your browser.</div>
     <div id="help"><div id="help_tabs">
         <ul>
-            <li><a href="/help/search"><%= t.help.search.title %></a></li>
-            <li><a href="/help/keyboard"><%= t.help.keyboard.title %></a></li>
+            <li><a href="/help/search"><%= h(t.help.search.title) %></a></li>
+            <li><a href="/help/keyboard"><%= h(t.help.keyboard.title) %></a></li>
         </ul>
     </div></div>
 </body>

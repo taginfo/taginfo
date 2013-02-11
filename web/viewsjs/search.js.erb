@@ -34,8 +34,8 @@ var create_flexigrid_for = {
         create_flexigrid('grid-keys', {
             url: '/api/4/keys/all?query=' + encodeURIComponent(query),
             colModel: [
-                { display: '<%= misc.count %>', name: 'count_all', width: 80, sortable: true, align: 'right' },
-                { display: '<%= osm.key %>', name: 'key', width: 500, sortable: true }
+                { display: '<%= h(misc.count) %>', name: 'count_all', width: 80, sortable: true, align: 'right' },
+                { display: '<%= h(osm.key) %>', name: 'key', width: 500, sortable: true }
             ],
             sortname: 'count_all',
             sortorder: 'desc',
@@ -54,9 +54,9 @@ var create_flexigrid_for = {
         create_flexigrid('grid-values', {
             url: '/api/4/search/by_value?query=' + encodeURIComponent(query),
             colModel: [
-                { display: '<%= misc.count %>', name: 'count_all', width: 80, sortable: true, align: 'right' },
-                { display: '<%= osm.key %>', name: 'key', width: 250, sortable: true },
-                { display: '<%= osm.value %>', name: 'value', width: 500, sortable: true }
+                { display: '<%= h(misc.count) %>', name: 'count_all', width: 80, sortable: true, align: 'right' },
+                { display: '<%= h(osm.key) %>', name: 'key', width: 250, sortable: true },
+                { display: '<%= h(osm.value) %>', name: 'value', width: 500, sortable: true }
             ],
             sortname: 'count_all',
             sortorder: 'desc',
@@ -76,8 +76,8 @@ var create_flexigrid_for = {
         create_flexigrid('grid-relations', {
             url: '/api/4/relations/all?query=' + encodeURIComponent(query),
             colModel: [
-                { display: '<%= misc.count %>', name: 'count', width: 80, sortable: true, align: 'right' },
-                { display: '<%= osm.relation_type %>', name: 'rtype', width: 500, sortable: true }
+                { display: '<%= h(misc.count) %>', name: 'count', width: 80, sortable: true, align: 'right' },
+                { display: '<%= h(osm.relation_type) %>', name: 'rtype', width: 500, sortable: true }
             ],
             sortname: 'count',
             sortorder: 'desc',
@@ -96,9 +96,9 @@ var create_flexigrid_for = {
         create_flexigrid('grid-roles', {
             url: '/api/4/search/by_role?query=' + encodeURIComponent(query),
             colModel: [
-                { display: '<%= misc.count %>', name: 'count_all', width: 80, sortable: true, align: 'right' },
-                { display: '<%= osm.relation_types %>', name: 'rtype', width: 250, sortable: true },
-                { display: '<%= osm.relation_member_roles %>', name: 'role', width: 500, sortable: true }
+                { display: '<%= h(misc.count) %>', name: 'count_all', width: 80, sortable: true, align: 'right' },
+                { display: '<%= h(osm.relation_types) %>', name: 'rtype', width: 250, sortable: true },
+                { display: '<%= h(osm.relation_member_roles) %>', name: 'role', width: 500, sortable: true }
             ],
             sortname: 'count_all',
             sortorder: 'desc',
@@ -119,9 +119,9 @@ var create_flexigrid_for = {
         create_flexigrid('grid-tags', {
             url: '/api/4/search/by_key_and_value?query=' + encodeURIComponent(query),
             colModel: [
-                { display: '<%= misc.count %>', name: 'count_all', width: 80, sortable: true, align: 'right' },
-                { display: '<%= osm.key %>', name: 'key', width: 300, sortable: true },
-                { display: '<%= osm.value %>', name: 'value', width: 500, sortable: true }
+                { display: '<%= h(misc.count) %>', name: 'count_all', width: 80, sortable: true, align: 'right' },
+                { display: '<%= h(osm.key) %>', name: 'key', width: 300, sortable: true },
+                { display: '<%= h(osm.value) %>', name: 'value', width: 500, sortable: true }
             ],
             sortname: 'count_all',
             sortorder: 'desc',
@@ -141,8 +141,8 @@ var create_flexigrid_for = {
         create_flexigrid('grid-fulltext', {
             url: '/api/4/search/by_keyword?query=' + encodeURIComponent(query),
             colModel: [
-                { display: '<%= osm.key %>', name: 'key', width: 300, sortable: true },
-                { display: '<%= osm.value %>', name: 'value', width: 500, sortable: true }
+                { display: '<%= h(osm.key) %>', name: 'key', width: 300, sortable: true },
+                { display: '<%= h(osm.value) %>', name: 'value', width: 500, sortable: true }
             ],
             sortname: 'key',
             sortorder: 'asc',

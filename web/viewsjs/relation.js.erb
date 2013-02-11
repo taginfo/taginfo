@@ -8,8 +8,8 @@ var create_flexigrid_for = {
         create_flexigrid('grid-overview', {
             url: '/api/4/relation/stats?rtype=' + encodeURIComponent(rtype),
             colModel: [
-                { display: '<%= page.overview.member_type %>', name: 'type', width: 100, sortable: true },
-                { display: '<%= page.overview.member_count %>', name: 'count', width: 260, sortable: true, align: 'right' }
+                { display: '<%= h(page.overview.member_type) %>', name: 'type', width: 100, sortable: true },
+                { display: '<%= h(page.overview.member_count) %>', name: 'count', width: 260, sortable: true, align: 'right' }
             ],
             usepager: false,
             useRp: false,
@@ -31,14 +31,14 @@ var create_flexigrid_for = {
         create_flexigrid('grid-roles', {
             url: '/api/4/relation/roles?rtype=' + encodeURIComponent(rtype),
             colModel: [
-                { display: '<%= osm.relation_member_role %>', name: 'role', width: 250, sortable: true },
-                { display: '<span title="<%= page.roles.objects_tooltip %>"><img src="/img/types/all.16.png" width="16" height="16" alt=""/> <%= osm.relation_members %></span>', name: 'count_all_members', width: 250, sortable: true, align: 'center' },
-                { display: '<span title="<%= page.roles.nodes_tooltip %>"><img src="/img/types/node.16.png" width="16" height="16" alt=""/> <%= osm.relation_member_nodes %></span>', name: 'count_node_members', width: 250, sortable: true, align: 'center' },
-                { display: '<span title="<%= page.roles.ways_tooltip %>"><img src="/img/types/way.16.png" width="16" height="16" alt=""/> <%= osm.relation_member_ways %></span>', name: 'count_way_members', width: 250, sortable: true, align: 'center' },
-                { display: '<span title="<%= page.roles.relations_tooltip %>"><img src="/img/types/relation.16.png" width="16" height="16" alt=""/> <%= osm.relation_member_relations %></span>', name: 'count_relation_members', width: 250, sortable: true, align: 'center' },
+                { display: '<%= h(osm.relation_member_role) %>', name: 'role', width: 250, sortable: true },
+                { display: '<span title="<%= h(page.roles.objects_tooltip) %>"><img src="/img/types/all.16.png" width="16" height="16" alt=""/> <%= h(osm.relation_members) %></span>', name: 'count_all_members', width: 250, sortable: true, align: 'center' },
+                { display: '<span title="<%= h(page.roles.nodes_tooltip) %>"><img src="/img/types/node.16.png" width="16" height="16" alt=""/> <%= h(osm.relation_member_nodes) %></span>', name: 'count_node_members', width: 250, sortable: true, align: 'center' },
+                { display: '<span title="<%= h(page.roles.ways_tooltip) %>"><img src="/img/types/way.16.png" width="16" height="16" alt=""/> <%= h(osm.relation_member_ways) %></span>', name: 'count_way_members', width: 250, sortable: true, align: 'center' },
+                { display: '<span title="<%= h(page.roles.relations_tooltip) %>"><img src="/img/types/relation.16.png" width="16" height="16" alt=""/> <%= h(osm.relation_member_relations) %></span>', name: 'count_relation_members', width: 250, sortable: true, align: 'center' },
             ],
             searchitems: [
-                { display: '<%= osm.relation_member_role %>', name: 'role' }
+                { display: '<%= h(osm.relation_member_role) %>', name: 'role' }
             ],
             sortname: 'count_all_members',
             sortorder: 'desc',
@@ -60,10 +60,10 @@ var create_flexigrid_for = {
         create_flexigrid('grid-wiki', {
             url: '/api/4/relation/wiki_pages?rtype=' + encodeURIComponent(rtype),
             colModel: [
-                { display: '<%= misc.language %>', name: 'lang', width: 150, sortable: false },
-                { display: '<%= page.wiki_pages.wiki_page %>', name: 'title', width: 160, sortable: false, align: 'right' },
-                { display: '<%= misc.description %>', name: 'description', width: 500, sortable: false },
-                { display: '<%= misc.image %>', name: 'image', width: 300, sortable: false }
+                { display: '<%= h(misc.language) %>', name: 'lang', width: 150, sortable: false },
+                { display: '<%= h(page.wiki_pages.wiki_page) %>', name: 'title', width: 160, sortable: false, align: 'right' },
+                { display: '<%= h(misc.description) %>', name: 'description', width: 500, sortable: false },
+                { display: '<%= h(misc.image) %>', name: 'image', width: 300, sortable: false }
             ],
             usepager: false,
             useRp: false,

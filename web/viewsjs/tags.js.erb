@@ -6,15 +6,15 @@ function page_init() {
     create_flexigrid('grid-tags', {
         url: '/api/4/tags/popular',
         colModel: [
-            { display: '<%= osm.tag %>', name: 'tag', width: 300, sortable: true },
-            { display: '<span title="<%= misc.objects_tooltip %>"><img src="/img/types/all.16.png" width="16" height="16" alt=""/> <%= osm.objects %></span>', name: 'count_all', width: 220, sortable: true, align: 'center' },
-            { display: '<span title="<%= misc.nodes_tooltip %>"><img src="/img/types/node.16.png" width="16" height="16" alt=""/> <%= osm.nodes %></span>', name: 'count_nodes', width: 220, sortable: true, align: 'center' },
-            { display: '<span title="<%= misc.ways_tooltip %>"><img src="/img/types/way.16.png" width="16" height="16" alt=""/> <%= osm.ways %></span>', name: 'count_ways', width: 220, sortable: true, align: 'center' },
-            { display: '<span title="<%= misc.relations_tooltip %>"><img src="/img/types/relation.16.png" width="16" height="16" alt=""/> <%= osm.relations %></span>', name: 'count_relations',  width: 220, sortable: true, align: 'center' },
-            { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" width="16" height="16" title="<%= misc.in_wiki_tooltip %>"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' }
+            { display: '<%= h(osm.tag) %>', name: 'tag', width: 300, sortable: true },
+            { display: '<span title="<%= h(misc.objects_tooltip) %>"><img src="/img/types/all.16.png" width="16" height="16" alt=""/> <%= h(osm.objects) %></span>', name: 'count_all', width: 220, sortable: true, align: 'center' },
+            { display: '<span title="<%= h(misc.nodes_tooltip) %>"><img src="/img/types/node.16.png" width="16" height="16" alt=""/> <%= h(osm.nodes) %></span>', name: 'count_nodes', width: 220, sortable: true, align: 'center' },
+            { display: '<span title="<%= h(misc.ways_tooltip) %>"><img src="/img/types/way.16.png" width="16" height="16" alt=""/> <%= h(osm.ways) %></span>', name: 'count_ways', width: 220, sortable: true, align: 'center' },
+            { display: '<span title="<%= h(misc.relations_tooltip) %>"><img src="/img/types/relation.16.png" width="16" height="16" alt=""/> <%= h(osm.relations) %></span>', name: 'count_relations',  width: 220, sortable: true, align: 'center' },
+            { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" width="16" height="16" title="<%= h(misc.in_wiki_tooltip) %>"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' }
         ],
         searchitems: [
-            { display: '<%= osm.tag %>', name: 'tag' }
+            { display: '<%= h(osm.tag) %>', name: 'tag' }
         ],
         sortname: 'count_all',
         sortorder: 'desc',

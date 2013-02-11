@@ -4,11 +4,11 @@ function page_init() {
     create_flexigrid('grid-langs', {
         url: '/api/4/wiki/languages',
         colModel: [
-            { display: '<%= page.code %>', name: 'code', width: 60, sortable: true },
-            { display: '<%= page.native_name %>', name: 'native_name', width: 150, sortable: true },
-            { display: '<%= page.english_name %>', name: 'english_name', width: 150, sortable: true },
-            { display: '<%= page.wiki_key_pages %>', name: 'wiki_key_pages', width: 260, sortable: true, align: 'center' },
-            { display: '<%= page.wiki_tag_pages %>', name: 'wiki_tag_pages', width: 260, sortable: true, align: 'center' }
+            { display: '<%= h(page.code) %>', name: 'code', width: 60, sortable: true },
+            { display: '<%= h(page.native_name) %>', name: 'native_name', width: 150, sortable: true },
+            { display: '<%= h(page.english_name) %>', name: 'english_name', width: 150, sortable: true },
+            { display: '<%= h(page.wiki_key_pages) %>', name: 'wiki_key_pages', width: 260, sortable: true, align: 'center' },
+            { display: '<%= h(page.wiki_tag_pages) %>', name: 'wiki_tag_pages', width: 260, sortable: true, align: 'center' }
         ],
         sortname: 'code',
         sortorder: 'asc',

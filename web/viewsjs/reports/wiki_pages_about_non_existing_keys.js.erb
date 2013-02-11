@@ -9,11 +9,11 @@ function page_init() {
         colModel: [
             { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" width="16" height="16" title="Wiki"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
             { display: '<img src="/img/sources/josm.16.png" alt="JOSM" width="16" height="16" title="JOSM"/>', name: 'in_josm', width: 20, sortable: true, align: 'center' },
-            { display: '<%= osm.key %>', name: 'key', width: 250, sortable: true, align: 'left' },
-            { display: '<%= page.wiki_pages %>', name: 'wikipages', width: 600, sortable: false, align: 'left' }
+            { display: '<%= h(osm.key) %>', name: 'key', width: 250, sortable: true, align: 'left' },
+            { display: '<%= h(page.wiki_pages) %>', name: 'wikipages', width: 600, sortable: false, align: 'left' }
         ],
         searchitems: [
-            { display: '<%= osm.key %>', name: 'key' }
+            { display: '<%= h(osm.key) %>', name: 'key' }
         ],
         sortname: 'count_all',
         sortorder: 'desc',

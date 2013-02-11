@@ -8,9 +8,9 @@ var create_flexigrid_for = {
         create_flexigrid('grid-overview', {
             url: '/api/4/key/stats?key=' + encodeURIComponent(key),
             colModel: [
-                { display: '<%= misc.object_type %>', name: 'type', width: 100, sortable: true },
-                { display: '<%= page.number_objects %>', name: 'count', width: 260, sortable: true, align: 'center' },
-                { display: '<%= page.number_values %>', name: 'value', width: 140, sortable: true, align: 'right' }
+                { display: '<%= h(misc.object_type) %>', name: 'type', width: 100, sortable: true },
+                { display: '<%= h(page.number_objects) %>', name: 'count', width: 260, sortable: true, align: 'center' },
+                { display: '<%= h(page.number_values) %>', name: 'value', width: 140, sortable: true, align: 'right' }
             ],
             usepager: false,
             useRp: false,
@@ -33,13 +33,13 @@ var create_flexigrid_for = {
         create_flexigrid('grid-values', {
             url: '/api/4/key/values?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type) + '&lang=' + encodeURIComponent(lang),
             colModel: [
-                { display: '<%= osm.value %>', name: 'value', width: 200, sortable: true },
-                { display: '<%= misc.count %>', name: 'count', width: 260, sortable: true, align: 'center' },
-                { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" width="16" height="16" title="<%= misc.in_wiki_tooltip %>"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
-                { display: '<span title="<%= page.tag_description_from_wiki %>"><%= misc.description %></span>', name: 'description', width: 600, sortable: false, align: 'left' }
+                { display: '<%= h(osm.value) %>', name: 'value', width: 200, sortable: true },
+                { display: '<%= h(misc.count) %>', name: 'count', width: 260, sortable: true, align: 'center' },
+                { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" width="16" height="16" title="<%= h(misc.in_wiki_tooltip) %>"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
+                { display: '<span title="<%= h(page.tag_description_from_wiki) %>"><%= h(misc.description) %></span>', name: 'description', width: 600, sortable: false, align: 'left' }
             ],
             searchitems: [
-                { display: '<%= osm.value %>', name: 'value' }
+                { display: '<%= h(osm.value) %>', name: 'value' }
             ],
             sortname: 'count',
             sortorder: 'desc',
@@ -61,12 +61,12 @@ var create_flexigrid_for = {
         create_flexigrid('grid-keys', {
             url: '/api/4/key/combinations?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type),
             colModel: [
-                { display: '<span title="<%= page.other_keys_used.to_count_tooltip %>"><%= misc.count %> &rarr;</span>', name: 'to_count', width: 260, sortable: true, align: 'center' },
-                { display: '<span title="<%= page.other_keys_used.other_key_tooltip %>"><%= page.other_keys_used.other %></span>', name: 'other_key', width: 400, sortable: true },
-                { display: '<span title="<%= page.other_keys_used.from_count_tooltip %>">&rarr; <%= misc.count %></span>', name: 'from_count', width: 260, sortable: true, align: 'center' }
+                { display: '<span title="<%= h(page.other_keys_used.to_count_tooltip) %>"><%= h(misc.count) %> &rarr;</span>', name: 'to_count', width: 260, sortable: true, align: 'center' },
+                { display: '<span title="<%= h(page.other_keys_used.other_key_tooltip) %>"><%= h(page.other_keys_used.other) %></span>', name: 'other_key', width: 400, sortable: true },
+                { display: '<span title="<%= h(page.other_keys_used.from_count_tooltip) %>">&rarr; <%= h(misc.count) %></span>', name: 'from_count', width: 260, sortable: true, align: 'center' }
             ],
             searchitems: [
-                { display: '<%= page.other_keys_used.other %>', name: 'other_key' }
+                { display: '<%= h(page.other_keys_used.other) %>', name: 'other_key' }
             ],
             sortname: 'to_count',
             sortorder: 'desc',
@@ -86,14 +86,14 @@ var create_flexigrid_for = {
         create_flexigrid('grid-wiki', {
             url: '/api/4/key/wiki_pages?key=' + encodeURIComponent(key),
             colModel: [
-                { display: '<%= misc.language %>', name: 'lang', width: 150, sortable: false },
-                { display: '<%= page.wiki_pages.wiki_page %>', name: 'title', width: 160, sortable: false, align: 'right' },
-                { display: '<%= misc.description %>', name: 'description', width: 400, sortable: false },
-                { display: '<%= misc.image %>', name: 'image', width: 120, sortable: false },
-                { display: '<%= osm.objects %>', name: 'objects', width:  80, sortable: false },
-                { display: '<%= page.wiki_pages.implied_tags %>', name: 'tags_implied', width: 120, sortable: false },
-                { display: '<%= page.wiki_pages.combined_tags %>', name: 'tags_combination', width: 120, sortable: false },
-                { display: '<%= page.wiki_pages.linked_tags %>', name: 'tags_linked', width: 220, sortable: false }
+                { display: '<%= h(misc.language) %>', name: 'lang', width: 150, sortable: false },
+                { display: '<%= h(page.wiki_pages.wiki_page) %>', name: 'title', width: 160, sortable: false, align: 'right' },
+                { display: '<%= h(misc.description) %>', name: 'description', width: 400, sortable: false },
+                { display: '<%= h(misc.image) %>', name: 'image', width: 120, sortable: false },
+                { display: '<%= h(osm.objects) %>', name: 'objects', width:  80, sortable: false },
+                { display: '<%= h(page.wiki_pages.implied_tags) %>', name: 'tags_implied', width: 120, sortable: false },
+                { display: '<%= h(page.wiki_pages.combined_tags) %>', name: 'tags_combination', width: 120, sortable: false },
+                { display: '<%= h(page.wiki_pages.linked_tags) %>', name: 'tags_linked', width: 220, sortable: false }
             ],
             usepager: false,
             useRp: false,
@@ -124,10 +124,10 @@ var create_flexigrid_for = {
         create_flexigrid('grid-josm', {
             url: '/api/4/key/josm/style/rules?style=standard&key=' + encodeURIComponent(key),
             colModel: [
-                { display: '<%= osm.value %>', name: 'value', width: 400, sortable: true },
-                { display: '<%= misc.icon %>', name: 'icon', width: 40, sortable: false, align: 'center' },
-                { display: '<%= misc.line %>', name: 'line', width: 40, sortable: false, align: 'center' },
-                { display: '<%= misc.area %>', name: 'area', width: 40, sortable: false, align: 'center' }
+                { display: '<%= h(osm.value) %>', name: 'value', width: 400, sortable: true },
+                { display: '<%= h(misc.icon) %>', name: 'icon', width: 40, sortable: false, align: 'center' },
+                { display: '<%= h(misc.line) %>', name: 'line', width: 40, sortable: false, align: 'center' },
+                { display: '<%= h(misc.area) %>', name: 'area', width: 40, sortable: false, align: 'center' }
             ],
             sortname: 'value',
             sortorder: 'asc',

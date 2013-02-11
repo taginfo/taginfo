@@ -23,13 +23,13 @@ function page_init() {
         method: 'GET',
         dataType: 'json',
         colModel: [
-            { display: '<br/><%= osm.key %>', name: 'key', width: 200, sortable: true },
+            { display: '<br/><%= h(osm.key) %>', name: 'key', width: 200, sortable: true },
             <% @languages.each do |lang| %>
-            { display: '<%= ::Language[lang].native_name %><br /><span class="lang" style="margin-top: 2px;"><%= lang %></span>', name: '<%= lang %>', align: 'center', width: 60, sortable: false },
+            { display: '<%= ::Language[lang].native_name %><br /><span class="lang" style="margin-top: 2px;"><%= h(lang) %></span>', name: '<%= h(lang) %>', align: 'center', width: 60, sortable: false },
             <% end %>
         ],
         searchitems: [
-            { display: '<%= osm.key %>', name: 'key' }
+            { display: '<%= h(osm.key) %>', name: 'key' }
         ],
         sortname: 'key',
         sortorder: 'asc',

@@ -6,14 +6,14 @@ function create_flexigrid_with_option(stylename) {
     create_flexigrid('grid-rules', {
         url: '/api/4/josm/style/rules?style=' + stylename,
         colModel: [
-            { display: '<%= osm.key %>',   name: 'key', width: 300, sortable: true },
-            { display: '<%= osm.value %>', name: 'value', width: 300, sortable: true },
-            { display: '<%= misc.icon %>', name: 'icon', width: 40, sortable: false, align: 'center' },
-            { display: '<%= misc.line %>', name: 'line', width: 40, sortable: false, align: 'center' },
-            { display: '<%= misc.area %>', name: 'area', width: 40, sortable: false, align: 'center' }
+            { display: '<%= h(osm.key) %>',   name: 'key', width: 300, sortable: true },
+            { display: '<%= h(osm.value) %>', name: 'value', width: 300, sortable: true },
+            { display: '<%= h(misc.icon) %>', name: 'icon', width: 40, sortable: false, align: 'center' },
+            { display: '<%= h(misc.line) %>', name: 'line', width: 40, sortable: false, align: 'center' },
+            { display: '<%= h(misc.area) %>', name: 'area', width: 40, sortable: false, align: 'center' }
         ],
         searchitems: [
-            { display: '<%= osm.key %>/<%= osm.value %>', name: 'key' }
+            { display: '<%= h(osm.key) %>/<%= h(osm.value) %>', name: 'key' }
         ],
         sortname: 'key',
         sortorder: 'asc',

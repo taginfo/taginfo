@@ -1,9 +1,9 @@
 <div class="pre">
-    <h1 class="section"><%= t.taginfo.reports %></h1>
-    <p><%= t.pages.reports.intro %></p>
+    <h1 class="section"><%= h(t.taginfo.reports) %></h1>
+    <p><%= h(t.pages.reports.intro) %></p>
 </div>
 <div class="box resize">
-    <h2><%= t.pages.reports.list %></h2>
+    <h2><%= h(t.pages.reports.list) %></h2>
     <table class="list">
         <tr><th class="tc" colspan="<%= Source.visible.size %>"/><%= t.pages.reports.data_sources %></th><th class="tl"><%= t.taginfo.report %></th></tr>
     <% Report.each_visible_with_index do |report, n| c = (n%2!=0) ? ' even' : '' %>

@@ -1,22 +1,22 @@
 <div class="pre">
-    <h1><%= t.reports.characters_in_keys.name %></h1>
+    <h1><%= h(t.reports.characters_in_keys.name) %></h1>
     <%= t.reports.characters_in_keys.intro %>
 </div>
 <div id="tabs">
     <ul>
-        <li><a href="#statistics"><%= t.reports.characters_in_keys.statistics.tab %></a></li>
-        <li><a href="#whitespace"><span style="background-color: #d62727;">&nbsp;&nbsp;&nbsp;</span> <%= t.reports.characters_in_keys.whitespace.tab %></a></li>
-        <li><a href="#problematic"><span style="background-color: #ff9896;">&nbsp;&nbsp;&nbsp;</span> <%= t.reports.characters_in_keys.problematic.tab %></a></li>
+        <li><a href="#statistics"><%= h(t.reports.characters_in_keys.statistics.tab) %></a></li>
+        <li><a href="#whitespace"><span style="background-color: #d62727;">&nbsp;&nbsp;&nbsp;</span> <%= h(t.reports.characters_in_keys.whitespace.tab) %></a></li>
+        <li><a href="#problematic"><span style="background-color: #ff9896;">&nbsp;&nbsp;&nbsp;</span> <%= h(t.reports.characters_in_keys.problematic.tab) %></a></li>
     </ul>
     <div id="statistics">
-        <h2><%= t.reports.characters_in_keys.statistics.title %></h2>
+        <h2><%= h(t.reports.characters_in_keys.statistics.title) %></h2>
         <div class="canvas boxpre" id="canvas" style="margin: 20px 0;"></div>
         <table class="list">
             <tr>
                 <th>&nbsp;</th>
-                <th class="tr"><%= t.misc.count %></th>
-                <th class="tr"><%= t.reports.characters_in_keys.statistics.fraction %></th>
-                <th class="tl"><%= t.reports.characters_in_keys.statistics.characters %></th>
+                <th class="tr"><%= h(t.misc.count) %></th>
+                <th class="tr"><%= h(t.reports.characters_in_keys.statistics.fraction) %></th>
+                <th class="tl"><%= h(t.reports.characters_in_keys.statistics.characters) %></th>
             </tr>
 <% letter='A'
    colors = { :A => '#2ca02c', :B => '#98df8a', :C => '#dbdb8d', :D => '#d62728', :E => '#ff9896', :F => '#aec7e8' }
@@ -37,7 +37,7 @@
         </table>
     </div>
     <div id="whitespace">
-        <h2><%= t.reports.characters_in_keys.whitespace.title %></h2>
+        <h2><%= h(t.reports.characters_in_keys.whitespace.title) %></h2>
         <div class="boxpre">
             <%= t.reports.characters_in_keys.whitespace.intro %>
         </div>
@@ -45,7 +45,7 @@
         </table>
     </div>
     <div id="problematic">
-        <h2><%= t.reports.characters_in_keys.problematic.title %></h2>
+        <h2><%= h(t.reports.characters_in_keys.problematic.title) %></h2>
         <div class="boxpre">
             <%= t.reports.characters_in_keys.problematic.intro %>
         </div>

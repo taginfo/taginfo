@@ -1,20 +1,20 @@
 <div class="pre">
-    <h1 class="section"><%= t.taginfo.download %></h1>
+    <h1 class="section"><%= h(t.taginfo.download) %></h1>
     <%= t.pages.download.intro %>
 </div>
 <div class="box resize">
     <table class="list">
         <tr>
-            <th class="tl"><%= t.pages.download.file %></th>
-            <th class="tr"><%= t.pages.download.packed %></th>
-            <th class="tr"><%= t.pages.download.unpacked %></th>
-            <th class="tl"><%= t.pages.download.description %></th>
+            <th class="tl"><%= h(t.pages.download.file) %></th>
+            <th class="tr"><%= h(t.pages.download.packed) %></th>
+            <th class="tr"><%= h(t.pages.download.unpacked) %></th>
+            <th class="tl"><%= h(t.pages.download.description) %></th>
         </tr>
         <tr>
             <td class="tl"><a rel="nofollow" href="/download/taginfo-master.db.bz2">taginfo-master.db.bz2</a></td>
-            <td class="tr"><%= File.size("../../download/taginfo-master.db.bz2").to_bytes rescue "<span class='empty'>#{ t.misc.unknown }</span>" %></td>
-            <td class="tr"><%= File.size("../../data/taginfo-master.db").to_bytes rescue "<span class='empty'>#{ t.misc.unknown }</span>" %></td>
-            <td class="tl"><%= t.sources.master.description %></td>
+            <td class="tr"><%= File.size("../../download/taginfo-master.db.bz2").to_bytes rescue "<span class='empty'>#{ h(t.misc.unknown) }</span>" %></td>
+            <td class="tr"><%= File.size("../../data/taginfo-master.db").to_bytes rescue "<span class='empty'>#{ h(t.misc.unknown) }</span>" %></td>
+            <td class="tl"><%= h(t.sources.master.description) %></td>
         </tr>
 <% Source.visible.each_with_index do |source, n| c = (n%2==0) ? ' even' : '' %>
         <tr>

@@ -1,11 +1,11 @@
 <div class="pre">
     <form id="filter-form">
-        <label for="filter"><%= t.pages.key.filter.label %></label>
+        <label for="filter"><%= h(t.pages.key.filter.label) %></label>
         <select id="filter" name="filter">
-            <option value="all"<%=       @sel['all']       %>><%= t.pages.key.filter.none %></option>
-            <option value="nodes"<%=     @sel['nodes']     %>><%= t.pages.key.filter.nodes %></option>
-            <option value="ways"<%=      @sel['ways']      %>><%= t.pages.key.filter.ways %></option>
-            <option value="relations"<%= @sel['relations'] %>><%= t.pages.key.filter.relations %></option>
+            <option value="all"<%=       @sel['all']       %>><%= h(t.pages.key.filter.none) %></option>
+            <option value="nodes"<%=     @sel['nodes']     %>><%= h(t.pages.key.filter.nodes) %></option>
+            <option value="ways"<%=      @sel['ways']      %>><%= h(t.pages.key.filter.ways) %></option>
+            <option value="relations"<%= @sel['relations'] %>><%= h(t.pages.key.filter.relations) %></option>
         </select>
     </form>
     <div id="tools">
@@ -21,10 +21,10 @@
 </div>
 <div id="tabs">
     <ul>
-        <li><a href="#overview"><%= t.taginfo.overview %></a></li>
-        <li><a href="#combinations"><%= t.taginfo.combinations %></a></li>
-        <li><a href="#wiki"><%= t.sources.wiki.name %></a></li>
-        <li><a href="#josm"><%= t.sources.josm.name %></a></li>
+        <li><a href="#overview"><%= h(t.taginfo.overview) %></a></li>
+        <li><a href="#combinations"><%= h(t.taginfo.combinations) %></a></li>
+        <li><a href="#wiki"><%= h(t.sources.wiki.name) %></a></li>
+        <li><a href="#josm"><%= h(t.sources.josm.name) %></a></li>
     </ul>
     <div id="overview">
 <% if @image_url %>
@@ -32,35 +32,35 @@
             <img src="<%= @image_url %>" alt=""/>
         </div>
 <% end %>
-        <h2><%= t.taginfo.overview %></h2>
+        <h2><%= h(t.taginfo.overview) %></h2>
         <table id="grid-overview">
         </table>
 <% if @has_rtype_link %>
-        <p><%= t.pages.tag.overview.see_also %>: <span id="relationlink"></span></p>
+        <p><%= h(t.pages.tag.overview.see_also) %>: <span id="relationlink"></span></p>
 <% end %>
     </div>
     <div id="combinations">
         <div class="boxpre">
-            <h2><%= t.pages.tag.combinations.title %></h2>
-            <p><%= t.pages.tag.combinations.description %></p>
+            <h2><%= h(t.pages.tag.combinations.title) %></h2>
+            <p><%= h(t.pages.tag.combinations.description) %></p>
         </div>
         <table id="grid-combinations">
         </table>
     </div>
     <div id="wiki">
-        <h2><%= t.pages.tag.wiki_pages.title %></h2>
+        <h2><%= h(t.pages.tag.wiki_pages.title) %></h2>
         <% if @wiki_count > 0 %>
             <table id="grid-wiki">
             </table>
         <% else %>
-            <p class="empty"><%= t.pages.tag.wiki_pages.none_found %> <%= @wiki_count_key > 0 ? t.pages.tag.wiki_pages.suggest_key_wiki_page('<span id="keylink"></span>') : '' %></p>
-            <p><a class="extlink" target="_blank" rel="nofollow" href="http://wiki.openstreetmap.org/w/index.php?action=edit&title=Tag:<%= escape(@tag) %>"><%= t.pages.tag.wiki_pages.create %></a></p>
+            <p class="empty"><%= h(t.pages.tag.wiki_pages.none_found) %> <%= @wiki_count_key > 0 ? t.pages.tag.wiki_pages.suggest_key_wiki_page('<span id="keylink"></span>') : '' %></p>
+            <p><a class="extlink" target="_blank" rel="nofollow" href="http://wiki.openstreetmap.org/w/index.php?action=edit&title=Tag:<%= escape(@tag) %>"><%= h(t.pages.tag.wiki_pages.create) %></a></p>
         <% end %>
     </div>
     <div id="josm">
-        <h2><%= t.pages.tag.josm.title %></h2>
+        <h2><%= h(t.pages.tag.josm.title) %></h2>
 <!--        <form>
-            <label for="josm-style"><%= t.pages.tag.josm.choice %></label>
+            <label for="josm-style"><%= h(t.pages.tag.josm.choice) %></label>
             <select id="josm-style" name="josm-style">
                 <option>Standard</option>
             </select>
@@ -69,7 +69,7 @@
         <table id="grid-josm">
         </table>
 <% else %>
-        <p class="empty"><%= t.pages.key.josm.no_styles %></p>
+        <p class="empty"><%= h(t.pages.key.josm.no_styles) %></p>
 <% end %>
     </div>
 </div>

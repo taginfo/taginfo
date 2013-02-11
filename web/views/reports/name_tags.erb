@@ -4,16 +4,16 @@
     @sel[@filter_type] = ' selected="selected"'
 %>
 <div class="pre">
-    <h1><%= t.reports.name_tags.name %></h1>
+    <h1><%= h(t.reports.name_tags.name) %></h1>
     <%= t.reports.name_tags.intro %>
 </div>
 <div id="tabs">
     <ul>
-        <li><a href="#overview"><%= t.reports.name_tags.overview.tab %></a></li>
-        <li><a href="#bcp47"><%= t.reports.name_tags.bcp47.tab %></a></li>
+        <li><a href="#overview"><%= h(t.reports.name_tags.overview.tab) %></a></li>
+        <li><a href="#bcp47"><%= h(t.reports.name_tags.bcp47.tab) %></a></li>
     </ul>
     <div id="overview">
-        <h2><%= t.reports.name_tags.overview.title %></h2>
+        <h2><%= h(t.reports.name_tags.overview.title) %></h2>
         <div class="boxpre">
             <p>Tag keys containing "name".</p>
         </div>
@@ -21,11 +21,11 @@
         </table>
     </div>
     <div id="bcp47">
-        <h2><%= t.reports.name_tags.bcp47.title %></h2>
+        <h2><%= h(t.reports.name_tags.bcp47.title) %></h2>
         <div class="boxpre">
             <%= t.reports.name_tags.bcp47.intro %>
             <form id="subtag-filter-form">
-                <label for="subtag-filter"><%= t.reports.name_tags.bcp47.filter.label %>:</label>
+                <label for="subtag-filter"><%= h(t.reports.name_tags.bcp47.filter.label) %>:</label>
                 <select id="subtag-filter" name="subtag-filter">
                     <option value="all"<%= @sel[''] %>><%= t.reports.name_tags.bcp47.filter.all %></option>
 <% BCP47::SUBTAG_TYPES.each do |type| %>

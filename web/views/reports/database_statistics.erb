@@ -1,10 +1,10 @@
-<h1><%= t.reports.database_statistics.name %></h1>
+<h1><%= h(t.reports.database_statistics.name) %></h1>
 
 <table class="boxes">
     <tr>
-        <td><h2><img class="icon_large" src="/img/types/all.20.png" alt=""/> <%= t.osm.objects %></h2></td>
+        <td><h2><img class="icon_large" src="/img/types/all.20.png" alt=""/> <%= h(t.osm.objects) %></h2></td>
         <td rowspan="4" width="20"></td>
-        <td><h2><img class="icon_large" src="/img/types/tag.20.png" alt=""/> <%= t.osm.tags %></h2></td>
+        <td><h2><img class="icon_large" src="/img/types/tag.20.png" alt=""/> <%= h(t.osm.tags) %></h2></td>
         <td rowspan="4" width="20"></td>
         <td></td>
     </tr>
@@ -24,9 +24,9 @@
         <td></td>
     </tr>
     <tr>
-        <td><h2><img class="icon_large" src="/img/types/node.20.png" alt=""/> <%= t.osm.nodes %></h2></td>
-        <td><h2><img class="icon_large" src="/img/types/way.20.png" alt=""/> <%= t.osm.ways %></h2></td>
-        <td><h2><img class="icon_large" src="/img/types/relation.20.png" alt=""/> <%= t.osm.relations %></h2></td>
+        <td><h2><img class="icon_large" src="/img/types/node.20.png" alt=""/> <%= h(t.osm.nodes) %></h2></td>
+        <td><h2><img class="icon_large" src="/img/types/way.20.png" alt=""/> <%= h(t.osm.ways) %></h2></td>
+        <td><h2><img class="icon_large" src="/img/types/relation.20.png" alt=""/> <%= h(t.osm.relations) %></h2></td>
     </tr>
     <tr>
         <td class="box">

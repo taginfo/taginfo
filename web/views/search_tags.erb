@@ -1,13 +1,13 @@
 <div class="pre">
     <h1 class="section"><%= @title %></h1>
-    <p><b><%= t.pages.search.you_were_searching_for %>:</b> <%= escape_html(@query) %></p>
+    <p><b><%= h(t.pages.search.you_were_searching_for) %>:</b> <%= escape_html(@query) %></p>
 </div>
 <div id="tabs">
     <ul>
-        <li><a href="#tags"><%= t.osm.tags %></a></li>
+        <li><a href="#tags"><%= h(t.osm.tags) %></a></li>
     </ul>
     <div id="tags">
-        <h2><%= t.osm.tags %></h2>
+        <h2><%= h(t.osm.tags) %></h2>
         <table id="grid-tags">
         </table>
     </div>
