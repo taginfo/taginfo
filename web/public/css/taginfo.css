@@ -21,7 +21,7 @@ img.map {
     border: 1px solid #b8b8b0;
 }
 
-td img {
+td img, span.button img {
     position: relative;
     top: 3px;
 }

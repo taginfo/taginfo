@@ -6,6 +6,7 @@
             <span class="button disabled" title="Button disabled, because there are too many objects with this key">XAPI</span>
             <span class="button disabled" title="Button disabled, because there are too many objects with this key">JOSM</span>
         <% end %>
+        <%= turbo_link('relations', 'type', @rtype) %>
     </div>
     <h1></h1>
     <p><%= @desc %></p>

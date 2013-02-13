@@ -85,6 +85,25 @@ def josm_link(element, key, value=nil)
     '<span class="button">' + external_link('josm_button', 'JOSM', 'http://localhost:8111/import?url=' + Rack::Utils::escape(xapi_url(element, key, value)), true) + '</span>'
 end
 
+def turbo_link(filter, key, value=nil)
+    template = 'key';
+    parameters = { :key => Rack::Utils::escape(key) }
+
+    unless value.nil?
+        parameters[:value] = Rack::Utils::escape(value);
+        template += '-value'
+    end
+
+    if filter != 'all'
+        template += '-type'
+        parameters[:type] = filter.chop
+    end
+    parameters[:template] = template
+    
+    url = TaginfoConfig.get('turbo.url_prefix', 'http://overpass-turbo.eu/?') + Rack::Utils::build_query(parameters)
+    return '<span class="button">' + external_link('turbo_button', '<img src="/img/turbo.png" title="Turbo"/>', url, true) + '</span>'
+end
+
 def external_link(id, title, link, new_window=false)
     target = new_window ? 'target="_blank" ' : ''
     %Q{<a id="#{id}" #{target}rel="nofollow" class="extlink" href="#{link}">#{title}</a>}

@@ -15,6 +15,7 @@
             <span class="button disabled" title="Button disabled, because there are too many objects with this key">XAPI</span>
             <span class="button disabled" title="Button disabled, because there are too many objects with this key">JOSM</span>
         <% end %>
+        <%= turbo_link(@filter_type, @key) %>
     </div>
     <h1></h1>
     <p><%= @desc %></p>
