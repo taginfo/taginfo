@@ -21,7 +21,7 @@ class Taginfo < Sinatra::Base
 
         @key_uri  = escape(@key)
 
-        @title = [escape_html(@key) + '=' + escape_html(@value), t.osm.tags]
+        @title = [@key + '=' + @value, t.osm.tags]
         section :tags
 
         @filter_type = get_filter()

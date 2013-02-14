@@ -87,10 +87,10 @@ end
 
 def turbo_link(filter, key, value=nil)
     template = 'key';
-    parameters = { :key => Rack::Utils::escape(key) }
+    parameters = { :key => key }
 
     unless value.nil?
-        parameters[:value] = Rack::Utils::escape(value);
+        parameters[:value] = value;
         template += '-value'
     end
 

@@ -42,7 +42,7 @@
         <h2><%= h(t.taginfo.overview) %></h2>
         <table id="grid-overview">
         </table>
-        <p><span title="<%= h(t.pages.key.overview.no_endorsement) %>" tipsy="n"><%= h(t.pages.key.overview.objects_last_edited_by(@user_count.to_s_with_ts)) %></span></p>
+        <p><span title="<%= h(t.pages.key.overview.no_endorsement) %>" tipsy="n"><%= t.pages.key.overview.objects_last_edited_by(@user_count.to_s_with_ts) %></span></p>
     </div>
     <div id="values">
         <h2><%= h(t.pages.key.values_used) %></h2>
