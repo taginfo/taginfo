@@ -171,10 +171,16 @@ class WikiPage
                 end
             end
             if template.named_parameters['image']
-                set_image(template.named_parameters['image'][0], db)
+                img = template.named_parameters['image'][0]
+                if img.class != Template
+                    set_image(img, db)
+                end
             end
             if template.named_parameters['group']
-                @group = template.named_parameters['group'][0]
+                group = template.named_parameters['group'][0]
+                if group.class != Template
+                    @group = group
+                end
             end
             if template.named_parameters['onNode'] == ['yes']
                 @onNode = true
