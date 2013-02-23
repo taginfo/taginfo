@@ -61,7 +61,7 @@ module MediaWikiAPI
             params[:action] = 'query'
             params[:format] = 'json'
             result = get(params)
-            JSON.parse(result.body)
+            JSON.parse(result.body, { :create_additions => false })
         end
 
     end

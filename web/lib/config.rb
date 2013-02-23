@@ -6,7 +6,7 @@ class TaginfoConfig
 
     def self.read
         open(File.expand_path(File.dirname(__FILE__)) + '/../../../taginfo-config.json') do |file|
-            @@config = JSON.parse(file.gets(nil))
+            @@config = JSON.parse(file.gets(nil), { :create_additions => false })
         end
     end
 
