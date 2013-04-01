@@ -265,7 +265,7 @@ pages:
             implied_tags: Подразумеваемые теги
             combined_tags: Используется с тегами
             linked_tags: Связанные теги
-                    josm:
+        josm:
             title: Фрагменты стилей JOSM для этого тега
             choice: |
                   Выберите стиль:
