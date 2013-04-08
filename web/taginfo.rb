@@ -32,6 +32,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'json'
 require 'sqlite3'
 require 'yaml'
+require 'date'
 
 require 'sinatra/base'
 require 'sinatra/r18n'

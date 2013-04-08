@@ -28,6 +28,16 @@ class Taginfo < Sinatra::Base
         erb :'taginfo/index'
     end
 
+    get '/taginfo/status' do
+        content_type 'text/plain'
+        age_in_days = DateTime.now() - DateTime.parse(@data_until)
+        if age_in_days.to_f > 1.5
+            halt 400, "data_too_old\n"
+        else
+            return "ok\n"
+        end
+    end
+
     get '/taginfo/i18n' do
         @title = 'Translations of taginfo texts'
         @section = 'taginfo'
