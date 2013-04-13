@@ -1,4 +1,3 @@
-
 osm:
     tag: Tag
     tags: Tags
@@ -13,7 +12,7 @@ osm:
     relation: Relation
     relations: Relations
     relation_type: Type de relation
-    relation_types: Types de relaton
+    relation_types: Types de relation
     relation_member: Membre de relation
     relation_members: Membres de relation
     relation_member_nodes: Nœuds membres
@@ -31,10 +30,10 @@ taginfo:
     source: Source
     sources: Sources
     download: Téléchargement
-    about: À Propos de taginfo
+    about: À Propos de Taginfo
     contact: Contact
     meta: Meta
-    wiki: page wiki de taginfo
+    wiki: page wiki de Taginfo
     report: Compte-Rendu
     reports: Comptes-Rendus
     international: International
@@ -48,9 +47,9 @@ taginfo:
     data_from: Données datant du
     uses_data_from: |
         Utilise des données provenant de :
-    data_from_description: Dernière mise à jour de la base de données de taginfo
+    data_from_description: Dernière mise à jour de la base de données de Taginfo
     instance:
-        title: À propos de ce site taginfo
+        title: À propos de ce site Taginfo
         other: Visiter la page <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> pour d'autres sites.
 
 misc:
@@ -90,9 +89,9 @@ help:
         complete_tags: Vous pouvez rechercher des tags complets 
         values_only: Vous pouvez aussi rechercher une valeur uniquement
         suggestions: |
-            Pour vous faciliter la tâche, les cles et valeurs les plus populaires
+            Pour vous faciliter la tâche, les clés et valeurs les plus populaires
             seront suggérés au fur et à mesure de la frappe. Veuillez utiliser les
-            touches de direction pour choisir une suggestion, et frapper
+            touches de direction pour choisir une suggestion, et appuyer sur
             <span class="key">Enter</span>.
             Vous irez alors directement vers la page correspondant à cette clé ou valeur.
     keyboard:
@@ -143,31 +142,31 @@ pages:
         about:
             intro:
                 <p>OpenStreetMap utilises des <b>tags</b> de la forme <b>clé=valeur</b>
-                pour rajouter des informations au objets géographiques. Taginfo rassemble
+                pour rajouter des informations aux objets géographiques. Taginfo rassemble
                 les informations sur ces tags de plusieurs sources afin de vous aider à
                 comprendre ce qu'ils signifient, et comment ils sont utilisés.
             more: Plus d'information…
         international:
-            see: Voir d'autres sites taginfo…
+            see: Voir d'autres sites Taginfo…
 
     sources:
         intro: |
-            <p>Taginfo retrouve des données sur les tags OSM depuis plusieures sources et les assemble pour en faciliter l'exploration.</p>
-            <p>Il est à noter que pour modifier les données il faut le faire à la source, car taginfo ne fait que les afficher.</p>
+            <p>Taginfo retrouve des données sur les tags OSM depuis plusieurs sources et les assemble pour en faciliter l'exploration.</p>
+            <p>Il est à noter que pour modifier les données il faut le faire à la source, car Taginfo ne fait que les afficher.</p>
         data_until: Données jusqu'à
         last_update_run: Dernière mise à jour
         data_until_explanation: Toutes les modifications jusqu'à cette date sont présentes, les suivantes le seront peut-être.
         to: à
     download:
         intro: |
-            <p>Vous pouvez télécharger les données utilisées par taginfo. Toutes les données sont stockées
-            dans des bases de données <a class="extlink" href="http://www.sqlite.org/">Sqlite</a>.
+            <p>Vous pouvez télécharger les données utilisées par Taginfo. Toutes les données sont stockées
+            dans des bases de données <a class="extlink" href="http://www.sqlite.org/">SQLite</a>.
             Les fichiers de base de données sont ensuite compressés
             avec <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>Si vous ne voulez pas télécharger les données, vous pouvez toujours y accéder directement grâce à l'<a href="/about">API</a>.</p>
         file: Fichier
         packed: Compressé
-        unpacked: Decompressé
+        unpacked: Décompressé
         description: Description
         unknown: inconnu
     reports:
@@ -228,7 +227,7 @@ pages:
         geographic_distribution:
             title: Distribution géographique de cette clé
             relations: |
-                    Les relations n'ont pas de position géographique: elles ne peuvent donc
+                    Les relations n'ont pas de position géographique : Elles ne peuvent donc
                     pas être affichées sur une carte.
         wiki_pages:
             title: Pages du wiki sur cette clé
@@ -267,7 +266,7 @@ pages:
             combined_tags: Tags combinés
             linked_tags: Tags liés
         josm:
-            title: Régles de style JOSM sur cette valeur
+            title: Règles de style JOSM sur cette valeur
             choice: |
                   Choix du style :
             no_styles: Pas de style JOSM pour ce tag.
@@ -335,12 +334,12 @@ reports:
         name: Caractères utilisés dans les clés
         intro: |
             <p>Tout caractère Unicode peut apparaitre dans les clés de tags OSM mais seulement les lettres latines minuscules (a-z) et le caractère souligné (_)
-            sont utilisés. Il est aussi possible d'utiliser le caractère deux-points (:) comme separateur.</p>
+            sont utilisés. Il est aussi possible d'utiliser le caractère deux-points (:) comme séparateur.</p>
         statistics:
             tab: Statistiques
             title: Statistiques globales
             characters_in_keys:
-                plain: Seulement les lettres latines minuscules (<span class="char">a</span> à <span class="char">z</span>) et le souligné (<span class="char">_</span>), le première et dernière caractère est une lettre .
+                plain: Seulement les lettres latines minuscules (<span class="char">a</span> à <span class="char">z</span>) et le souligné (<span class="char">_</span>), le première et dernière caractère est une lettre.
                 colon: Comme la règle A mais contenant un ou plusieurs caractères deux-points (<span class="char">:</span>).
                 letters: Comme la règle B mais avec des lettres latines majuscules ou des lettres d'autres alphabets.
                 space: Comme la règle C mais peut contenir au moins un symbole d'espacement (espace, tabulation, nouvelle ligne, retour chariot, et selon d'autres alphabets).
@@ -351,8 +350,8 @@ reports:
             title: Clés contenant des espaces
             intro: |
                 <p>Les tags dont la clé contient des symboles d'espacement comme l'espace, tabulation, nouvelle ligne, retour chariot, ou autre selon les alphabets.
-                <br/>Les espaces dans les clés des tags est source d'erreur, surtout s'ils sont placés au début ou la fin de la clé ; 
-                il est donc préférable d'utiliser le caractère de souligment (<span class="char">_</span>) à la place.
+                <br/>Les espaces dans les clés des tags sont sources d'erreur, surtout s'ils sont placés au début ou la fin de la clé ; 
+                il est donc préférable d'utiliser le caractère de soulignement (<span class="char">_</span>) à la place.
                 </p>
         problematic:
             tab: Problématiques
@@ -361,7 +360,7 @@ reports:
                 <p>Les tags dont la clé contient des symboles problématiques : <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
                 Ces caractères peuvent poser des problèmes car ils peuvent avoir des interprétations particulières par les outils employés pour les traitements des données (sql, xml, html...).
                 Par exemple le signe égal (<span class="char">=</span>) est utilisé pour séparer la clé et la valeur d'un tag.
-                <br/>Les clés de tag apparaissant dans cette liste ne sont pas forcément faux, mais ils riques d'être source d'erreur.</p>
+                <br/>Les clés de tag apparaissant dans cette liste ne sont pas forcément faux, mais ils risquent d'être source d'erreur.</p>
     frequently_used_keys_without_wiki_page:
         name: Clés fréquentes sans page de Wiki associée
     key_lengths:
