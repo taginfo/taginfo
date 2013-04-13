@@ -34,8 +34,8 @@ taginfo:
     contact: Contact
     meta: Meta
     wiki: page wiki de Taginfo
-    report: Compte-Rendu
-    reports: Comptes-Rendus
+    report: Compte-rendu
+    reports: Comptes-rendus
     international: International
     apidoc: Documentation de l'API
     map: Carte
@@ -121,7 +121,7 @@ help:
         next_entry: Entrée suivante
         enter_entry: Aller à l'entrée
         switch_tab: Change d'onglet
-        deactivate: Déselectionner les champs de saisie
+        deactivate: Désélectionner les champs de saisie
         up: Remonter dans la hiérarchie des pages
         switch_input: Changer de champ de saisie
 
@@ -171,9 +171,9 @@ pages:
         unknown: inconnu
     reports:
         intro: |
-            Les compte-rendus montre les données de différents points de vue.
+            Les comptes-rendus montrent les données de différents points de vue.
             Ils agrègent de façon intéressante des données d'origines variées.
-            Certains compte-rendus peuvent aider à trouver certains types d'erreurs.
+            Certains comptes-rendus peuvent aider à trouver certains types d'erreurs.
         list: Liste de tous les rapports
         data_sources: Sources de données utilisés
     search:
@@ -186,10 +186,10 @@ pages:
         no_match: Aucune correspondance.
     keys:
         intro: |
-                Cette table affiche toutes les clés qui existent dans la base de donnée ou dans une autre source.
+                Cette table affiche toutes les clés qui existent dans la base de données ou dans une autre source.
     tags:
         intro: |
-                Cette table affiche les tags les plus fréquents dans la base de donnée.
+                Cette table affiche les tags les plus fréquents dans la base de données.
     relations:
         name: Types de relation
         intro: Information sur les différents type de relations (indiquée par le tag <a href="/keys/type?filter=relations">type</a>).
@@ -238,7 +238,7 @@ pages:
             combined_tags: Tags combinés
             linked_tags: Tags liés
         josm:
-            title: Régles de style JOSM sur cette clé
+            title: Règles de style JOSM sur cette clé
             choice: |
                   Choix du style :
             no_styles: Pas de style JOSM pour cette clé.
@@ -358,7 +358,7 @@ reports:
             title: Clés avec des caractères problématiques
             intro: |
                 <p>Les tags dont la clé contient des symboles problématiques : <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
-                Ces caractères peuvent poser des problèmes car ils peuvent avoir des interprétations particulières par les outils employés pour les traitements des données (sql, xml, html...).
+                Ces caractères peuvent poser des problèmes car ils peuvent avoir des interprétations particulières par les outils employés pour les traitements des données (SQL, XML, HTML...).
                 Par exemple le signe égal (<span class="char">=</span>) est utilisé pour séparer la clé et la valeur d'un tag.
                 <br/>Les clés de tag apparaissant dans cette liste ne sont pas forcément faux, mais ils risquent d'être source d'erreur.</p>
     frequently_used_keys_without_wiki_page:
