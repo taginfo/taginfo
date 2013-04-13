@@ -1,3 +1,4 @@
+
 osm:
     tag: Tag
     tags: Tags
@@ -44,7 +45,7 @@ taginfo:
     combinations: Combinaisons
     key_combinations: Combinaisons
     overview: Vue d'ensemble
-    data_from: Données datant du
+    data_from: Données datant du 
     uses_data_from: |
         Utilise des données provenant de :
     data_from_description: Dernière mise à jour de la base de données de Taginfo
@@ -83,7 +84,7 @@ misc:
 help:
     search:
         title: Aide
-        intro: La boîte de recherche située au coin haut droit permet de rechercher des clés et des valeurs de tags.
+        intro: La boîte de recherche (située au coin haut droit) permet de rechercher des clés et des valeurs de tags.
         string: Vous pouvez rechercher des clés ou/et valeurs 
         substring: Vous pouvez aussi vous contenter d'une partie 
         complete_tags: Vous pouvez rechercher des tags complets 
@@ -201,23 +202,23 @@ pages:
         empty_role: rôle vide
 
     key:
-        description_from_wiki: Description de cette clé dans le wiki (dans votre langue choisie si possible, sinon en anglais).
+        description_from_wiki: Description de cette clé depuis le wiki (dans votre langue choisie si possible, sinon en anglais).
         no_description_in_wiki: Aucune description dans le wiki
         filter:
             label: |
                  Filtre :
-            none: Désactivé
-            nodes: Seulement les nodes
-            ways: Seulement les ways
+            none: aucun filtre
+            nodes: seulement les nodes
+            ways: seulement les ways
             relations: Seulement les relations
         number_objects: Nombre d'objets
         number_values: Nombre de valeurs
         values_used: Valeurs utilisées par cette clé
-        tag_description_from_wiki: Description de ce tag dans le wiki (dans votre langue choisie si possible, sinon en anglais).
+        tag_description_from_wiki: Description de ce tag depuis le wiki (dans votre langue choisie si possible, sinon en anglais).
         overview:
             objects_last_edited_by: Les objets ayant cette clé ont été édités en dernier par %1 utilisateurs différents.
             no_endorsement: (ce qui ne signifie pas que tous ces utilisateurs approuvent cette clé)
-            distribution_of_values: Distributions des valeurs
+            distribution_of_values: Répartition des valeurs
         other_keys_used:
             title: Autres clés utilisées avec cette clé
             other: Autres clés
@@ -225,7 +226,7 @@ pages:
             other_key_tooltip: Autre clé utilisée avec cette clé.
             from_count_tooltip: Nombre d'objets de cette autre clé qui ont aussi cette clé.
         geographic_distribution:
-            title: Distribution géographique de cette clé
+            title: Répartition géographique de cette clé
             relations: |
                     Les relations n'ont pas de position géographique : Elles ne peuvent donc
                     pas être affichées sur une carte.
@@ -243,7 +244,7 @@ pages:
                   Choix du style :
             no_styles: Pas de style JOSM pour cette clé.
     tag:
-        description_from_wiki: Description de ce tag dans le wiki (dans votre langue choisie si possible, sinon en anglais).
+        description_from_wiki: Description de ce tag depuis le wiki (dans votre langue choisie si possible, sinon en anglais).
         no_description_in_wiki: Aucune description dans le wiki
         number_objects: Nombre d'objets
         overview:
