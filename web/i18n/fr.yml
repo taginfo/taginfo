@@ -13,7 +13,7 @@ osm:
     relation: Relation
     relations: Relations
     relation_type: Type de relation
-    relation_types: Types de relaton
+    relation_types: Types de relation
     relation_member: Membre de relation
     relation_members: Membres de relation
     relation_member_nodes: Nœuds membres
@@ -31,12 +31,12 @@ taginfo:
     source: Source
     sources: Sources
     download: Téléchargement
-    about: À Propos de taginfo
+    about: À Propos de Taginfo
     contact: Contact
     meta: Meta
-    wiki: page wiki de taginfo
-    report: Compte-Rendu
-    reports: Comptes-Rendus
+    wiki: page wiki de Taginfo
+    report: Compte-rendu
+    reports: Comptes-rendus
     international: International
     apidoc: Documentation de l'API
     map: Carte
@@ -45,12 +45,12 @@ taginfo:
     combinations: Combinaisons
     key_combinations: Combinaisons
     overview: Vue d'ensemble
-    data_from: Données datant du
+    data_from: Données datant du 
     uses_data_from: |
         Utilise des données provenant de :
-    data_from_description: Dernière mise à jour de la base de données de taginfo
+    data_from_description: Dernière mise à jour de la base de données de Taginfo
     instance:
-        title: À propos de ce site taginfo
+        title: À propos de ce site Taginfo
         other: Visiter la page <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> pour d'autres sites.
 
 misc:
@@ -84,15 +84,15 @@ misc:
 help:
     search:
         title: Aide
-        intro: La boîte de recherche située au coin haut droit permet de rechercher des clés et des valeurs de tags.
+        intro: La boîte de recherche (située au coin haut droit) permet de rechercher des clés et des valeurs de tags.
         string: Vous pouvez rechercher des clés ou/et valeurs 
         substring: Vous pouvez aussi vous contenter d'une partie 
         complete_tags: Vous pouvez rechercher des tags complets 
         values_only: Vous pouvez aussi rechercher une valeur uniquement
         suggestions: |
-            Pour vous faciliter la tâche, les cles et valeurs les plus populaires
+            Pour vous faciliter la tâche, les clés et valeurs les plus populaires
             seront suggérés au fur et à mesure de la frappe. Veuillez utiliser les
-            touches de direction pour choisir une suggestion, et frapper
+            touches de direction pour choisir une suggestion, et appuyer sur
             <span class="key">Enter</span>.
             Vous irez alors directement vers la page correspondant à cette clé ou valeur.
     keyboard:
@@ -122,7 +122,7 @@ help:
         next_entry: Entrée suivante
         enter_entry: Aller à l'entrée
         switch_tab: Change d'onglet
-        deactivate: Déselectionner les champs de saisie
+        deactivate: Désélectionner les champs de saisie
         up: Remonter dans la hiérarchie des pages
         switch_input: Changer de champ de saisie
 
@@ -143,38 +143,38 @@ pages:
         about:
             intro:
                 <p>OpenStreetMap utilises des <b>tags</b> de la forme <b>clé=valeur</b>
-                pour rajouter des informations au objets géographiques. Taginfo rassemble
+                pour rajouter des informations aux objets géographiques. Taginfo rassemble
                 les informations sur ces tags de plusieurs sources afin de vous aider à
                 comprendre ce qu'ils signifient, et comment ils sont utilisés.
             more: Plus d'information…
         international:
-            see: Voir d'autres sites taginfo…
+            see: Voir d'autres sites Taginfo…
 
     sources:
         intro: |
-            <p>Taginfo retrouve des données sur les tags OSM depuis plusieures sources et les assemble pour en faciliter l'exploration.</p>
-            <p>Il est à noter que pour modifier les données il faut le faire à la source, car taginfo ne fait que les afficher.</p>
+            <p>Taginfo retrouve des données sur les tags OSM depuis plusieurs sources et les assemble pour en faciliter l'exploration.</p>
+            <p>Il est à noter que pour modifier les données il faut le faire à la source, car Taginfo ne fait que les afficher.</p>
         data_until: Données jusqu'à
         last_update_run: Dernière mise à jour
         data_until_explanation: Toutes les modifications jusqu'à cette date sont présentes, les suivantes le seront peut-être.
         to: à
     download:
         intro: |
-            <p>Vous pouvez télécharger les données utilisées par taginfo. Toutes les données sont stockées
-            dans des bases de données <a class="extlink" href="http://www.sqlite.org/">Sqlite</a>.
+            <p>Vous pouvez télécharger les données utilisées par Taginfo. Toutes les données sont stockées
+            dans des bases de données <a class="extlink" href="http://www.sqlite.org/">SQLite</a>.
             Les fichiers de base de données sont ensuite compressés
             avec <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>Si vous ne voulez pas télécharger les données, vous pouvez toujours y accéder directement grâce à l'<a href="/about">API</a>.</p>
         file: Fichier
         packed: Compressé
-        unpacked: Decompressé
+        unpacked: Décompressé
         description: Description
         unknown: inconnu
     reports:
         intro: |
-            Les compte-rendus montre les données de différents points de vue.
+            Les comptes-rendus montrent les données de différents points de vue.
             Ils agrègent de façon intéressante des données d'origines variées.
-            Certains compte-rendus peuvent aider à trouver certains types d'erreurs.
+            Certains comptes-rendus peuvent aider à trouver certains types d'erreurs.
         list: Liste de tous les rapports
         data_sources: Sources de données utilisés
     search:
@@ -187,10 +187,10 @@ pages:
         no_match: Aucune correspondance.
     keys:
         intro: |
-                Cette table affiche toutes les clés qui existent dans la base de donnée ou dans une autre source.
+                Cette table affiche toutes les clés qui existent dans la base de données ou dans une autre source.
     tags:
         intro: |
-                Cette table affiche les tags les plus fréquents dans la base de donnée.
+                Cette table affiche les tags les plus fréquents dans la base de données.
     relations:
         name: Types de relation
         intro: Information sur les différents type de relations (indiquée par le tag <a href="/keys/type?filter=relations">type</a>).
@@ -202,23 +202,23 @@ pages:
         empty_role: rôle vide
 
     key:
-        description_from_wiki: Description de cette clé dans le wiki (dans votre langue choisie si possible, sinon en anglais).
+        description_from_wiki: Description de cette clé depuis le wiki (dans votre langue choisie si possible, sinon en anglais).
         no_description_in_wiki: Aucune description dans le wiki
         filter:
             label: |
                  Filtre :
-            none: Désactivé
-            nodes: Seulement les nodes
-            ways: Seulement les ways
+            none: aucun filtre
+            nodes: seulement les nodes
+            ways: seulement les ways
             relations: Seulement les relations
         number_objects: Nombre d'objets
         number_values: Nombre de valeurs
         values_used: Valeurs utilisées par cette clé
-        tag_description_from_wiki: Description de ce tag dans le wiki (dans votre langue choisie si possible, sinon en anglais).
+        tag_description_from_wiki: Description de ce tag depuis le wiki (dans votre langue choisie si possible, sinon en anglais).
         overview:
             objects_last_edited_by: Les objets ayant cette clé ont été édités en dernier par %1 utilisateurs différents.
             no_endorsement: (ce qui ne signifie pas que tous ces utilisateurs approuvent cette clé)
-            distribution_of_values: Distributions des valeurs
+            distribution_of_values: Répartition des valeurs
         other_keys_used:
             title: Autres clés utilisées avec cette clé
             other: Autres clés
@@ -226,9 +226,9 @@ pages:
             other_key_tooltip: Autre clé utilisée avec cette clé.
             from_count_tooltip: Nombre d'objets de cette autre clé qui ont aussi cette clé.
         geographic_distribution:
-            title: Distribution géographique de cette clé
+            title: Répartition géographique de cette clé
             relations: |
-                    Les relations n'ont pas de position géographique: elles ne peuvent donc
+                    Les relations n'ont pas de position géographique : Elles ne peuvent donc
                     pas être affichées sur une carte.
         wiki_pages:
             title: Pages du wiki sur cette clé
@@ -239,12 +239,12 @@ pages:
             combined_tags: Tags combinés
             linked_tags: Tags liés
         josm:
-            title: Régles de style JOSM sur cette clé
+            title: Règles de style JOSM sur cette clé
             choice: |
                   Choix du style :
             no_styles: Pas de style JOSM pour cette clé.
     tag:
-        description_from_wiki: Description de ce tag dans le wiki (dans votre langue choisie si possible, sinon en anglais).
+        description_from_wiki: Description de ce tag depuis le wiki (dans votre langue choisie si possible, sinon en anglais).
         no_description_in_wiki: Aucune description dans le wiki
         number_objects: Nombre d'objets
         overview:
@@ -267,7 +267,7 @@ pages:
             combined_tags: Tags combinés
             linked_tags: Tags liés
         josm:
-            title: Régles de style JOSM sur cette valeur
+            title: Règles de style JOSM sur cette valeur
             choice: |
                   Choix du style :
             no_styles: Pas de style JOSM pour ce tag.
@@ -335,12 +335,12 @@ reports:
         name: Caractères utilisés dans les clés
         intro: |
             <p>Tout caractère Unicode peut apparaitre dans les clés de tags OSM mais seulement les lettres latines minuscules (a-z) et le caractère souligné (_)
-            sont utilisés. Il est aussi possible d'utiliser le caractère deux-points (:) comme separateur.</p>
+            sont utilisés. Il est aussi possible d'utiliser le caractère deux-points (:) comme séparateur.</p>
         statistics:
             tab: Statistiques
             title: Statistiques globales
             characters_in_keys:
-                plain: Seulement les lettres latines minuscules (<span class="char">a</span> à <span class="char">z</span>) et le souligné (<span class="char">_</span>), le première et dernière caractère est une lettre .
+                plain: Seulement les lettres latines minuscules (<span class="char">a</span> à <span class="char">z</span>) et le souligné (<span class="char">_</span>), le première et dernière caractère est une lettre.
                 colon: Comme la règle A mais contenant un ou plusieurs caractères deux-points (<span class="char">:</span>).
                 letters: Comme la règle B mais avec des lettres latines majuscules ou des lettres d'autres alphabets.
                 space: Comme la règle C mais peut contenir au moins un symbole d'espacement (espace, tabulation, nouvelle ligne, retour chariot, et selon d'autres alphabets).
@@ -351,17 +351,17 @@ reports:
             title: Clés contenant des espaces
             intro: |
                 <p>Les tags dont la clé contient des symboles d'espacement comme l'espace, tabulation, nouvelle ligne, retour chariot, ou autre selon les alphabets.
-                <br/>Les espaces dans les clés des tags est source d'erreur, surtout s'ils sont placés au début ou la fin de la clé ; 
-                il est donc préférable d'utiliser le caractère de souligment (<span class="char">_</span>) à la place.
+                <br/>Les espaces dans les clés des tags sont sources d'erreur, surtout s'ils sont placés au début ou la fin de la clé ; 
+                il est donc préférable d'utiliser le caractère de soulignement (<span class="char">_</span>) à la place.
                 </p>
         problematic:
             tab: Problématiques
             title: Clés avec des caractères problématiques
             intro: |
                 <p>Les tags dont la clé contient des symboles problématiques : <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
-                Ces caractères peuvent poser des problèmes car ils peuvent avoir des interprétations particulières par les outils employés pour les traitements des données (sql, xml, html...).
+                Ces caractères peuvent poser des problèmes car ils peuvent avoir des interprétations particulières par les outils employés pour les traitements des données (SQL, XML, HTML...).
                 Par exemple le signe égal (<span class="char">=</span>) est utilisé pour séparer la clé et la valeur d'un tag.
-                <br/>Les clés de tag apparaissant dans cette liste ne sont pas forcément faux, mais ils riques d'être source d'erreur.</p>
+                <br/>Les clés de tag apparaissant dans cette liste ne sont pas forcément faux, mais ils risquent d'être source d'erreur.</p>
     frequently_used_keys_without_wiki_page:
         name: Clés fréquentes sans page de Wiki associée
     key_lengths:
