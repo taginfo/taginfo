@@ -4,10 +4,10 @@
 #
 #------------------------------------------------------------------------------
 
-CXX = g++
+CXX ?= g++
 
 #CXXFLAGS = -g
-CXXFLAGS = -O3
+CXXFLAGS ?= -O3
 
 CXXFLAGS += -Wall -Wextra -Wredundant-decls -Wdisabled-optimization -pedantic
 
