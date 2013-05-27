@@ -22,7 +22,7 @@ BYID := $(shell ../bin/taginfo-config.rb tagstats.geodistribution)
 #BYID := MmapFile
 #BYID := MmapAnon
 
-BYID_LC   := $(shell echo $(BYID) | sed -e 's/\([A-Z]\)/_\0/g' | cut -c2- | tr 'A-Z' 'a-z')
+BYID_LC   := $(shell echo $(BYID) | sed -e 's/\([A-Z]\)/_\1/g' | cut -c2- | tr 'A-Z' 'a-z')
 BYID_INCL := "<osmium/storage/byid/$(BYID_LC).hpp>"
 
 CXXFLAGS += -DTAGSTATS_GEODISTRIBUTION_FOR_WAYS=$(BYID)
