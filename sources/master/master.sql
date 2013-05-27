@@ -13,7 +13,6 @@ ATTACH DATABASE '__DIR__/wiki/taginfo-wiki.db'             AS wiki;
 ATTACH DATABASE '__DIR__/languages/taginfo-languages.db'   AS languages;
 ATTACH DATABASE '__DIR__/josm/taginfo-josm.db'             AS josm; 
 ATTACH DATABASE '__DIR__/potlatch/taginfo-potlatch.db'     AS potlatch; 
-ATTACH DATABASE '__DIR__/merkaartor/taginfo-merkaartor.db' AS merkaartor; 
 
 -- ============================================================================
 
@@ -35,8 +34,7 @@ INSERT INTO sources SELECT 1, 1, * FROM db.source
               UNION SELECT 2, 1, * FROM wiki.source
               UNION SELECT 3, 1, * FROM languages.source
               UNION SELECT 4, 1, * FROM josm.source
-              UNION SELECT 5, 0, * FROM potlatch.source
-              UNION SELECT 6, 0, * FROM merkaartor.source;
+              UNION SELECT 5, 0, * FROM potlatch.source;
 
 DROP TABLE IF EXISTS master_stats;
 CREATE TABLE master_stats (
@@ -47,21 +45,18 @@ CREATE TABLE master_stats (
 INSERT INTO master_stats SELECT * FROM db.stats
                    UNION SELECT * FROM wiki.stats
                    UNION SELECT * FROM josm.stats
-                   UNION SELECT * FROM potlatch.stats
-                   UNION SELECT * FROM merkaartor.stats;
+                   UNION SELECT * FROM potlatch.stats;
 
 -- ============================================================================
 
 INSERT INTO db.keys (key) SELECT DISTINCT key FROM wiki.wikipages        WHERE key NOT IN (SELECT key FROM db.keys);
 INSERT INTO db.keys (key) SELECT DISTINCT k   FROM josm.josm_style_rules WHERE k   NOT IN (SELECT key FROM db.keys);
 -- potlatch XXX
--- INSERT INTO db.keys (key) SELECT DISTINCT key FROM merkaartor.keys       WHERE key NOT IN (SELECT key FROM db.keys);
 
 UPDATE db.keys SET in_wiki=1    WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NULL);
 UPDATE db.keys SET in_wiki_en=1 WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NULL AND lang='en');
 UPDATE db.keys SET in_josm=1    WHERE key IN (SELECT distinct k   FROM josm.josm_style_rules);
 -- potlatch XXX
-UPDATE db.keys SET in_merkaartor=1 WHERE key IN (SELECT key FROM merkaartor.keys);
 
 -- ============================================================================
 
