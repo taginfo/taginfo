@@ -5,7 +5,7 @@
  %>
 
 function highlight(str, query) {
-    return str.replace(new RegExp('(' + query + ')', 'gi'), "<b>$1</b>")
+    return html_escape(str).replace(new RegExp('(' + html_escape(query) + ')', 'gi'), "<b>$1</b>");
 }
 
 function link_to_key_with_highlight(key, query) {
@@ -107,7 +107,7 @@ var create_flexigrid_for = {
                     return { 'cell': [
                         fmt_with_ts(row.count_all),
                         link_to_rtype(row.rtype),
-                        highlight(html_escape(row.role), query)
+                        highlight(row.role, query)
                     ] };
                 });
                 return data;
