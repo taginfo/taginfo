@@ -17,8 +17,9 @@ CREATE TABLE interesting_relation_types (
     rtype TEXT
 );
 
+-- MIN_COUNT_RELATIONS_PER_TYPE setting: sources.master.min_count_relations_per_type
 INSERT INTO interesting_relation_types (rtype)
-    SELECT value FROM db.tags WHERE key='type' AND count_relations > 100;
+    SELECT value FROM db.tags WHERE key='type' AND count_relations > __MIN_COUNT_RELATIONS_PER_TYPE__;
 
 ANALYZE interesting_relation_types;
 

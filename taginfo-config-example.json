@@ -58,6 +58,16 @@
             "tagstats": "./tagstats",
             // The OSM planet file or extract where we read the OSM data from.
             "planetfile": "/osm/planet/var/current-planet.osm.pbf"
+        },
+        "master": {
+            // Minimum number of occurances of a tag to make it
+            // potentially "interesting", ie. create tag combination
+            // statistics for it.
+            "min_count_tags": 10000,
+            // Minimum number of relations per type to make this
+            // relation type "interesting", ie. to make it show
+            // up as a relation type.
+            "min_count_relations_per_type": 100
         }
     },
     "logging": {

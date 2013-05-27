@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
 #
-#  taginfo-config.rb [KEY]
+#  taginfo-config.rb KEY [DEFAULT]
 #
 
 require 'rubygems'
@@ -10,7 +10,7 @@ require File.expand_path(File.dirname(__FILE__)) + '/../web/lib/config.rb'
 
 TaginfoConfig.read
 
-value = TaginfoConfig.get(ARGV[0])
+value = TaginfoConfig.get(ARGV[0], ARGV[1])
 if value.nil?
     puts ''
     exit 1
