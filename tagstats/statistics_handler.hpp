@@ -22,6 +22,8 @@
 
 */
 
+#include <boost/foreach.hpp>
+
 #include "sqlite.hpp"
 
 /**
@@ -52,6 +54,9 @@ public:
             "relations",
             "relation_tags",
             "relation_members",
+            "relation_member_nodes",
+            "relation_member_ways",
+            "relation_member_relations",
             "max_relation_id",
             "max_tags_on_relation",
             "max_members_on_relation",
@@ -135,6 +140,20 @@ public:
             m_stats.max_relation_version = m_version;
         }
         m_stats.sum_relation_version += m_version;
+
+        BOOST_FOREACH(const Osmium::OSM::RelationMember& member, relation->members()) {
+            switch (member.type()) {
+                case 'n':
+                    ++m_stats.relation_member_nodes;
+                    break;
+                case 'w':
+                    ++m_stats.relation_member_ways;
+                    break;
+                case 'r':
+                    ++m_stats.relation_member_relations;
+                    break;
+            }
+        }
     }
 
     void final() {
@@ -174,6 +193,9 @@ private:
         uint64_t relations;
         uint64_t relation_tags;
         uint64_t relation_members;
+        uint64_t relation_member_nodes;
+        uint64_t relation_member_ways;
+        uint64_t relation_member_relations;
         uint64_t max_relation_id;
         uint64_t max_tags_on_relation;
         uint64_t max_members_on_relation;
