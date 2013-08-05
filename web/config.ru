@@ -11,7 +11,9 @@ set :environment, :production
 today = Time.now.strftime('%Y-%m-%d')
 log = File.new("/osm/taginfo/var/log/taginfo-#{ today }.log", "a")
 log.sync = true
-$stdout.reopen(log)
+
+# https://github.com/joto/taginfo/issues/34
+#$stdout.reopen(log)
 $stderr.reopen(log)
 
 $queries_log = File.new("/osm/taginfo/var/log/queries-#{ today }.log", "a")
