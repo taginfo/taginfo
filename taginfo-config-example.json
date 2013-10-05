@@ -80,6 +80,8 @@
         "cxxflags": "-I../../../osmium/osmium/include",
         // Node location store. For really large OSM files (whole planet or large continent)
         // this should be "MmapAnon", otherwise "SparseTable".
-        "geodistribution": "SparseTable"
+        "geodistribution": "SparseTable",
+        // C++ type used for geodistribution
+        "geodistribution_int": "uint16_t"
     }
 }
