@@ -423,7 +423,10 @@ class TagStatsHandler : public Osmium::Handler::Base {
                 // This will only add the coordinate of the first node in a way to the
                 // distribution. We'll see how this goes, maybe we need to store the
                 // coordinates of all nodes?
-                stat->distribution.add_coordinate(m_storage[static_cast<const Osmium::OSM::Way&>(object).nodes().front().ref()]);
+                const Osmium::OSM::WayNodeList& wnl = static_cast<const Osmium::OSM::Way&>(object).nodes();
+                if (!wnl.empty()) {
+                    stat->distribution.add_coordinate(m_storage[wnl.front().ref()]);
+                }
             }
 #endif // TAGSTATS_GEODISTRIBUTION_FOR_WAYS
         }
