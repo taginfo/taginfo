@@ -82,6 +82,9 @@
         // this should be "MmapAnon", otherwise "SparseTable".
         "geodistribution": "SparseTable",
         // C++ type used for geodistribution
-        "geodistribution_int": "uint16_t"
+        "geodistribution_int": "uint16_t",
+        // Tag combination not appearing at least this often are not written
+        // to database.
+        "min_tag_combination_count": 1000
     }
 }
