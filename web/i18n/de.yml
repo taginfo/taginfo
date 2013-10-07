@@ -206,7 +206,7 @@ pages:
         empty_role: Role ist leer
     key:
         description_from_wiki: Beschreibung dieses Keys aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf Englisch).
-        no_description_in_wiki: Keine Beschreibung dieses Keys im Wiki.
+        no_description_in_wiki: Keine deutschsprachige Beschreibung dieses Keys im Wiki. (Siehe auch im "Wiki"-Tab.)
         filter:
             label: |
                  Filter:
@@ -246,7 +246,7 @@ pages:
             no_styles: Keine JOSM-Stilregeln für diesen Key.
     tag:
         description_from_wiki: Beschreibung dieses Tags aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf Englisch).
-        no_description_in_wiki: Keine Beschreibung dieses Tags im Wiki.
+        no_description_in_wiki: Keine deutschsprachige Beschreibung dieses Tags im Wiki. (Siehe auch im "Wiki"-Tab.)
         number_objects: Anzahl Objekte
         overview:
             see_also: Siehe auch auf der Relation-Typ-Seite
@@ -276,7 +276,7 @@ pages:
     relation:
         name: Relation-Typ
         description_from_wiki: Beschreibung dieses Relations-Types aus dem Wiki  (falls vorhanden in der gewählten Sprache, sonst auf Englisch).
-        no_description_in_wiki: Keine Beschreibung dieser Relation im Wiki.
+        no_description_in_wiki: Keine deutschsprachige Beschreibung dieser Relation im Wiki. (Siehe auch im "Wiki"-Tab.)
         overview:
             tab: Übersicht
             title: Übersicht
