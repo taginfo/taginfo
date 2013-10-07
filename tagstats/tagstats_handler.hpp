@@ -243,7 +243,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
      * Tag combination not appearing at least this often are not written
      * to database.
      */
-    static const unsigned int min_tag_combination_count = 1000;
+    unsigned int m_min_tag_combination_count;
 
     time_t timer;
 
@@ -446,8 +446,9 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
 public:
 
-    TagStatsHandler(Sqlite::Database& database, const std::string& tags_list, const std::string& relation_type_list, MapToInt<rough_position_t>& map_to_int) :
+    TagStatsHandler(Sqlite::Database& database, const std::string& tags_list, const std::string& relation_type_list, MapToInt<rough_position_t>& map_to_int, unsigned int min_tag_combination_count) :
         Base(),
+        m_min_tag_combination_count(min_tag_combination_count),
         m_max_timestamp(0),
         m_string_store(string_store_size),
         m_database(database),
@@ -691,7 +692,7 @@ public:
             for (combination_hash_map_t::const_iterator it = stat->m_key_value_combination_hash.begin(); it != stat->m_key_value_combination_hash.end(); ++it) {
                 const Counter* s = &(it->second);
 
-                if (s->all() >= min_tag_combination_count) {
+                if (s->all() >= m_min_tag_combination_count) {
                     std::vector<std::string> kv2;
                     boost::split(kv2, it->first, boost::is_any_of("="));
                     kv2.push_back(""); // if there is no = in key, make sure there is an empty value

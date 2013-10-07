@@ -43,6 +43,7 @@ bottom=`../../bin/taginfo-config.rb geodistribution.bottom`
 left=`../../bin/taginfo-config.rb geodistribution.left`
 width=`../../bin/taginfo-config.rb geodistribution.width`
 height=`../../bin/taginfo-config.rb geodistribution.height`
+min_tag_combination_count=`../../bin/taginfo-config.rb sources.master.min_tag_combination_count 1000`
 
 TAGSTATS=`../../bin/taginfo-config.rb sources.db.tagstats`
 if [ "x" = "x$TAGSTATS" ]; then
@@ -50,7 +51,7 @@ if [ "x" = "x$TAGSTATS" ]; then
 fi
 
 #TAGSTATS="valgrind --leak-check=full --show-reachable=yes $TAGSTATS"
-$TAGSTATS --tags $DIR/interesting_tags.lst --relation-types $DIR/interesting_relation_types.lst --left=$left --bottom=$bottom --top=$top --right=$right --width=$width --height=$height $PLANETFILE $DATABASE
+$TAGSTATS --tags $DIR/interesting_tags.lst --min-tag-combination-count=$min_tag_combination_count --relation-types $DIR/interesting_relation_types.lst --left=$left --bottom=$bottom --top=$top --right=$right --width=$width --height=$height $PLANETFILE $DATABASE
 
 echo "`$DATECMD` Running update_characters... "
 ./update_characters.rb $DIR
