@@ -243,7 +243,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
      * Tag combination not appearing at least this often are not written
      * to database.
      */
-    static const unsigned int min_tag_combination_count = 1000;
+    static const unsigned int min_tag_combination_count = TAGSTATS_MIN_TAG_COMBINATION_COUNT;
 
     time_t timer;
 
