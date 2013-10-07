@@ -412,11 +412,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
             stat->update(it->value(), object, m_string_store);
 
             if (object.type() == NODE) {
-                try {
-                    stat->distribution.add_coordinate(m_map_to_int(static_cast<const Osmium::OSM::Node&>(object).position()));
-                } catch (std::range_error) {
-                    // ignore
-                }
+                stat->distribution.add_coordinate(m_map_to_int(static_cast<const Osmium::OSM::Node&>(object).position()));
             }
 #ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
             else if (object.type() == WAY) {
@@ -479,11 +475,7 @@ public:
         statistics_handler.node(node);
         collect_tag_stats(*node);
 #ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
-        try {
-            m_storage.set(node->id(), m_map_to_int(node->position()));
-        } catch (std::range_error) {
-            // ignore
-        }
+        m_storage.set(node->id(), m_map_to_int(node->position()));
 #endif
     }
 

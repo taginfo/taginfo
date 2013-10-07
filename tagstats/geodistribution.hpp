@@ -32,6 +32,9 @@
  * Osmium::OSM::Position to a bounding box, reduces the resolution
  * of the coordinates and returns an integer.
  *
+ * If the position is outside the bounding box, std::numeric_limits<T>::max()
+ * is returned.
+ *
  * @tparam T Result type after conversion. Must be an unsigned integer type.
  */
 template <typename T>
@@ -54,14 +57,15 @@ public:
         m_minx(minx), m_miny(miny), m_maxx(maxx), m_maxy(maxy),
         m_width(width), m_height(height),
         m_dx(maxx - minx), m_dy(maxy - miny) {
-        if (size() > std::numeric_limits<T>::max()) {
+        if (size() >= std::numeric_limits<T>::max()) {
             throw std::range_error("width*height must be smaller than MAXINT for type T");
         }
     }
 
     T operator()(const Osmium::OSM::Position& p) const {
         if (p.lon() < m_minx || p.lat() < m_miny || p.lon() >= m_maxx || p.lat() >= m_maxy) {
-            throw std::range_error("position out of bounds");
+            // if the position is out of bounds we return MAXINT for type T
+            return std::numeric_limits<T>::max();
         }
         int x = (p.lon() - m_minx) / m_dx * m_width;
         int y = (m_maxy - p.lat()) / m_dy * m_height;
@@ -149,6 +153,10 @@ public:
      * Add the given coordinate to the distribution store.
      */
     void add_coordinate(rough_position_t n) {
+        if (n == std::numeric_limits<rough_position_t>::max()) {
+            // ignore positions that are out of bounds
+            return;
+        }
         if (m_cells == 0) {
             m_location = n;
             m_cells++;
