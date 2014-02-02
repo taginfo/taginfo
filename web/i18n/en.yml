@@ -363,7 +363,8 @@ reports:
             title: Keys with possibly problematic characters
             intro: |
                 <p>Keys that contain possibly problematic characters: <span
-                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>. These characters
+                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> or control
+                characters. These characters
                 can be problematic, because they are used to quote strings in
                 different programming languages or have special meanings in XML, HTML,
                 URLs, and other places. The equal sign is used often as separator

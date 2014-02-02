@@ -366,7 +366,7 @@ reports:
             title: Keys mit möglicherweise problematischen Zeichen
             intro: |
                 <p>Keys mit möglicherweise problematischen Zeichen: <span
-                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>. Diese Zeichen
+                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> und Control-Zeichen. Diese Zeichen
                 können problematisch sein, weil sie in verschiedenen Programmiersprachen
                 zum "Zitieren" von Zeichenketten verwendet werden oder weil sie in
                 XML, HTML, URLs oder anderen Zusammenhängen besondere Bedeutung
