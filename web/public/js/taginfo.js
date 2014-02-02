@@ -85,6 +85,7 @@ function url_for_wiki(title, options) {
 /* ============================ */
 
 var bad_chars_for_keys = '!"#$%&()*+,/;<=>?@[\\]^`{|}~' + "'";
+var non_printable = "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u0009\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f\u0080\u0081\u0082\u0083\u0084\u0085\u0086\u0087\u0088\u0089\u008a\u008b\u008c\u008d\u008f\u0090\u0091\u0092\u0093\u0094\u0095\u0096\u0097\u0098\u0099\u009a\u009b\u009c\u009d\u009f\u200e\u200f";
 
 function translate(str, fn) {
     var result = '';
@@ -104,6 +105,8 @@ function fmt_key(key) {
     return translate(key, function(c) {
         if (bad_chars_for_keys.indexOf(c) != -1) {
             return span(c, 'badchar');
+        } else if (non_printable.indexOf(c) != -1) {
+            return span("\ufffd", 'badchar');
         } else if (c == ' ') {
             return span('&#x2423;', 'badchar');
         } else if (c.match(/\s/)) {
