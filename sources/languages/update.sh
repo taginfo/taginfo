@@ -8,7 +8,7 @@
 set -e
 
 DIR=$1
-REGISTRY_URL="http://www.iana.org/assignments/language-subtag-registry"
+REGISTRY_URL="http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry"
 REGISTRY_FILE="$DIR/language-subtag-registry"
 CLDR_URL="http://unicode.org/Public/cldr/latest/core.zip"
 CLDR_FILE="$DIR/cldr-core.zip"
