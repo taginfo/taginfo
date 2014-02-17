@@ -25,6 +25,11 @@ class Taginfo < Sinatra::Base
     end
 
     get '/taginfo' do
+        begin
+            @commit = `git rev-parse HEAD`.chop
+        rescue
+            @commit = 'unknown'
+        end
         erb :'taginfo/index'
     end
 
