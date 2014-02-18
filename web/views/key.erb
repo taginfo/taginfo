@@ -36,7 +36,7 @@
         </div>
 <% if @image_url %>
         <div class="wiki_image">
-            <img src="<%= @image_url %>" alt=""/>
+            <img src="<%= @image_url.sub(/^http:/, '') %>" alt=""/>
         </div>
 <% end %>
         <h2><%= h(t.taginfo.overview) %></h2>
