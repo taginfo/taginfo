@@ -1,11 +1,11 @@
 <% if @key == '{{{key}}}' %>
-<a target="_blank" title="More information about key '<%= escape_html(@key) %>' at Taginfo" href="http://taginfo.openstreetmap.org/">tag<b>info</b> [More...]</a>
+<a target="_blank" title="More information about key '<%= escape_html(@key) %>' at Taginfo" href="//taginfo.openstreetmap.org/">tag<b>info</b> [More...]</a>
 <p>Statistics about the key will appear here.</p>
 <% elsif @dbkey.nil? %>
-<a target="_blank" title="More information about key '<%= escape_html(@key) %>' at Taginfo" href="http://taginfo.openstreetmap.org/keys/?key=<%= escape(@key) %>">tag<b>info</b> [More...]</a>
+<a target="_blank" title="More information about key '<%= escape_html(@key) %>' at Taginfo" href="//taginfo.openstreetmap.org/keys/?key=<%= escape(@key) %>">tag<b>info</b> [More...]</a>
 <p>This key does not appear in the OSM database.</p>
 <% else %>
-<a target="_blank" title="More information about key '<%= escape_html(@key) %>' at Taginfo" href="http://taginfo.openstreetmap.org/keys/?key=<%= escape(@key) %>">tag<b>info</b> [More...]</a>
+<a target="_blank" title="More information about key '<%= escape_html(@key) %>' at Taginfo" href="//taginfo.openstreetmap.org/keys/?key=<%= escape(@key) %>">tag<b>info</b> [More...]</a>
 <div class="content"><table>
     <tr>
         <td class="ft"><img src="/img/types/node.16.png" width="16" height="16" alt="Nodes" title="Nodes with key '<%= escape_html(@key) %>' in database"></td>
