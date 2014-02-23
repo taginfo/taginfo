@@ -110,7 +110,7 @@ def external_link(id, title, link, new_window=false)
 end
 
 def wiki_link(title)
-    prefix = 'http://wiki.openstreetmap.org/wiki/'
+    prefix = '//wiki.openstreetmap.org/wiki/'
     external_link('wikilink_' + title.gsub(%r{[^A-Za-z0-9]}, '_'), title, prefix + title)
 end
 

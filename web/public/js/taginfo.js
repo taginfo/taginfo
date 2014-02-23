@@ -74,7 +74,7 @@ function url_for_rtype(rtype) {
 }
 
 function url_for_wiki(title, options) {
-    var path = 'http://wiki.openstreetmap.org/';
+    var path = '//wiki.openstreetmap.org/';
     if (options && options.edit) {
         return path + 'w/index.php?action=edit&title=' + encodeURIComponent(title);
     } else {
