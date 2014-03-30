@@ -1,0 +1,464 @@
+
+osm:
+    tag: Etiqueta
+    tags: Etiquetas
+    key: Chave
+    keys: Chaves
+    value: Valor
+    values: Valores
+    node: Ponto
+    nodes: Pontos
+    way: Linha
+    ways: Linhas
+    relation: Relação
+    relations: Relações
+    relation_type: Tipo de relação
+    relation_types: Tipos de relações
+    relation_member: Componente de relação
+    relation_members: Componentes de relação
+    relation_member_nodes: Pontos componentes
+    relation_member_ways: Linhas componentes
+    relation_member_relations: Relações componentes
+    relation_member_role: Papel
+    relation_member_roles: Papéis
+    object: Objeto
+    objects: Objetos
+    all: Todos
+    user: Usuário
+    users: Usuários
+
+taginfo:
+    source: Fonte
+    sources: Fontes
+    download: Baixar
+    about: Sobre taginfo
+    contact: Contato
+    meta: Meta
+    wiki: Página do taginfo na wiki
+    report: Relatório
+    reports: Relatórios
+    international: Internacional
+    apidoc: Documentação da API
+    test: Teste
+    map: Mapa
+    maps: Mapas
+    relations: Relações
+    combinations: Combinações
+    key_combinations: Combinações
+    overview: Visão geral
+    data_from: Dados de
+    uses_data_from: |
+        Usa dados de:
+    data_from_description: Última atualização do banco de dados do taginfo
+    instance:
+        title: Sobre o site taginfo
+        other: Veja <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">a wiki do OSM</a> para outros sites.
+
+misc:
+    values_less_than_one_percent: nenhum valor com mais que 1%
+    empty_string: sequência de caracteres vazia
+    unknown: desconhecido
+    count: Contagem
+    image: Imagem
+    no_image: Sem imagem
+    all: Todos
+    object_type: Tipo
+    description: Descrição
+    help: Ajuda
+    length: Comprimento
+    icon: Ícone
+    line: Linha
+    area: Área
+    language: Linguagem
+    search_for: Pesquisar por
+    objects_tooltip: Número de objetos (como valor absoluto e como porcentagem de todos os pontos, linhas, e relações).
+    nodes_tooltip: Número de pontos (como valor absoluto e como porcentagem de pontos etiquetas, i.e. pontos sem nenhuma etiqueta são ignorados).
+    ways_tooltip: Número de linhas (como valor absoluto e como porcentagem de todas as linhas).
+    relations_tooltip: Número de relações (como valor absoluto e como porcentagem de todas as relações).
+    values_tooltip: Número de valores diferentes para esta chave.
+    users_tooltip: Número de usuários distintos que mudaram objetos com esta chave pela última vez.
+    prevalent_values: Valores prevalentes
+    prevalent_values_tooltip: Até dez dos valores mais comuns para esta chave (somente se mais de 1% das etiquetas com esta chave possuem este valor).
+    in_wiki_tooltip: Tem pelo menos uma página na wiki.
+    in_josm_tooltip: Chave aparece na configuração do JOSM.
+
+help:
+    search:
+        title: Pesquisar
+        intro: Use a caixa de pesquisa no canto superior direito para procurar por chaves e valores de etiquetas.
+        string: Você pode procurar por chaves e valores de etiquetas
+        substring: Pesquisar usando só uma parte de uma chave ou valor também funciona
+        complete_tags: Você também pode procurar por etiquetas completas
+        values_only: Você também pode procurar somente por valores
+        suggestions: |
+            Para a sua conveniência, chaves e etiquetas populares são ver 
+            sugeridas enquanto você digita. Use as teclas direcionais do seu
+            teclado para escolher um item e pressione 
+            <span class="key">Enter</span>.
+            Você vai pular diretamente para a página daquela chave ou etiqueta.
+    keyboard:
+        title: Atalhos de teclado
+        site_navigation: Navegação do site
+        page_navigation: Navegação da página
+        table_navigation: Navegação da tabela
+        keys:
+            home: Home
+            end: End
+            pageup: PgUp
+            pagedown: PgDn
+            esc: Esc
+            tab: TAB
+        home_page: Página inicial
+        keys_page: Página de chaves
+        tags_page: Página de etiquetas
+        relations_page: Página de relações
+        first_page: Primeira página
+        prev_page: Página anterior
+        next_page: Próxima página
+        last_page: Última página
+        help_page: Esta janela de ajuda
+        activate_search: Ativar campo de pesquisa
+        activate_filter: Ativar campo de filtragem
+        prev_entry: Resultado anterior
+        next_entry: Próximo resultado
+        enter_entry: Ir para o resultado selecionada
+        switch_tab: Trocar de guia
+        deactivate: Desativas campos de entrada
+        up: Para cima na hierarquia da página
+        switch_input: Trocar entre campos de entrada
+
+pages:
+    not_found:
+        title: Não encontrado
+        intro: Desculpe, mas não foi possível encontrar a página que você estava procurand
+    index:
+        popular_keys: Algumas chaves populares
+        keys:
+            listkeys: Ver todas as chaves...
+        tags:
+            listtags: Ver as etiquetas mais comuns...
+        relations:
+            listrelations: Ver todos os tipos de relações...
+        reports:
+            listreports: Ver todos os relatórios...
+        about:
+            intro:
+                <p>OpenStreetMap uses <b>tags</b> of the form <b>key=value</b>
+                to add meaning to geographic objects. Taginfo collects information
+                about these tags from several sources to help you understand what
+                they mean and how they are used.</p>
+            more: Mais sobre taginfo...
+        international:
+            see: See other taginfo sites...
+    sources:
+        intro: |
+            <p>Taginfo takes data about OSM tags from several sources and brings them
+            together for easy browsing and discovery.</p>
+            <p>Note that taginfo only displays this data. If you want to change it, you
+            have to go back to the source.</p>
+        data_until: Data until
+        last_update_run: Last update run
+        data_until_explanation: All edits until this time will be in the data, later edits might be.
+        to: to
+    download:
+        intro: |
+            <p>Here you can download the databases used by taginfo. All the data is stored
+            in <a class="extlink" href="http://www.sqlite.org/">Sqlite</a> databases.
+            The database files are then packed with <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
+            <p>If you don't want to download these databases, but need automated access to
+            the data, you can also use the <a href="/about">API</a>.</p>
+        file: Arquivo
+        packed: Compactado
+        unpacked: Descompactado
+        description: Descrição
+    reports:
+        intro: |
+            Relatórios mostram dados sobre etiquetas de ângulos diferentes.
+            Geralmente eles juntam dados de vários fonte de formas interessantes. Alguns
+            dos relatórios podem lhe ajudar a encontrar erros específicos.
+        list: Listagem de todos os relatórios
+        data_sources: Fontes de dados utilizadas
+    search:
+        title: Resultados da pesquisa
+        you_were_searching_for: Você estava procurando por
+        fulltext: Texto completo
+        no_keys: Nenhuma chave encontrada.
+        no_values: Nenhum valor encontrado.
+        no_tags: Nenhuma etiqueta encontrada.
+        no_match: Nenhum resultado.
+    keys:
+        intro: |
+                Esta tabela mostra todas as etiquetas que existem no banco de dados ou em qualquer uma das outras fontes.
+    tags:
+        intro: |
+                Esta tabela mostra as etiquetas mais comuns no banco de dados.
+    relations:
+        name: Tipos de relação
+        intro: Information about the different types of relations (indicated by the <a href="/keys/type?filter=relations">type</a> tag).
+        relations_of_type_tooltip: Number of relations of this type (and as percentage of all relations).
+        prevalent_roles: Papéis prevalentes
+        prevalent_roles_tooltip: Prevalent roles for this type of relation.
+        no_information: Nenhuma informação
+        roles_less_than_one_percent: no roles with more than 1%
+        empty_role: empty role
+    key:
+        description_from_wiki: Description of this key from the wiki (if available in your chosen language, otherwise in English).
+        no_description_in_wiki: No English language description for this key in the wiki. (See also the "Wiki" tab.)
+        filter:
+            label: |
+                 Filter:
+            none: Nenhum filtro
+            nodes: Somente pontos
+            ways: Somente linhas
+            relations: Somente relações
+        number_objects: Número de objetos
+        number_values: Número de valores
+        values_used: Valores usados com esta chave
+        tag_description_from_wiki: Description of the tag from the wiki (if available in your chosen language, otherwise in English).
+        overview:
+            objects_last_edited_by: Objects with this key were last edited by %1 different users.
+            no_endorsement: (This does not mean that all those users endorse this key.)
+            distribution_of_values: Distribution of values
+        other_keys_used:
+            title: Outras chaves usadas com esta chave
+            other: Outras chaves
+            to_count_tooltip: Number of objects with this key that also have the other key.
+            other_key_tooltip: Key used together with this key.
+            from_count_tooltip: Number of objects with other key that also have this key.
+        geographic_distribution:
+            title: Geographical distribution of this key
+            relations: Relations do not have a geographical location, so no map can be shown.
+        wiki_pages:
+            title: Wiki pages about this key
+            none_found: No wiki page available for this key.
+            create: Create wiki page for this key
+            wiki_page: Wiki page
+            implied_tags: Etiquetas implícitas
+            combined_tags: Combinações de etiquetas
+            linked_tags: Linked Tags
+        josm:
+            title: Regras de estilo JOSM com esta chave
+            choice: |
+                  Escolher estilo:
+            no_styles: Nenhum estilo JOSM com esta chave.
+    tag:
+        description_from_wiki: Descrição desta etiqueta na wiki (se estiver disponível, na sua linguagem, caso contrário, em inglês).
+        no_description_in_wiki: No English language description for this tag in the wiki. (See also the "Wiki" tab.)
+        number_objects: Número de objetos
+        overview:
+            see_also: See also the relation type page
+        other_tags_used:
+            title: Outras etiquetas utilizadas com esta etiqueta
+            other: Outras etiquetas
+            to_count_tooltip: Number of objects with this tag that also have the other tag/key.
+            other_key_tooltip: Tags/Keys used together with this tag.
+            from_count_tooltip: Number of objects with other tag/key that also have this tag.
+        combinations:
+            title: Combinações
+            description: This table shows only the most common combinations of the most common tags.
+        wiki_pages:
+            title: Páginas na wiki sobre esta etiqueta
+            none_found: Nenhuma página na wiki disponível sobre esta etiqueta.
+            create: Criar uma página na wiki para esta etiqueta
+            suggest_key_wiki_page: Maybe you can find some more information on the wiki page for the key %1.
+            wiki_page: Página na wiki
+            implied_tags: Etiquetas implícitas
+            combined_tags: Combinações de etiquetas
+            linked_tags: Linked Tags
+        josm:
+            title: JOSM style rules with this tag
+            choice: |
+                  Choose style:
+            no_styles: No JOSM styles for this tag.
+    relation:
+        name: Tipo da relação
+        description_from_wiki: Description of this relation type from the wiki (if available in your chosen language, otherwise in English).
+        no_description_in_wiki: No English language description for this relation type in the wiki. (See also the "Wiki" tab.)
+        overview:
+            tab: Visão geral
+            title: Visão geral
+            member_type: Tipo do componente
+            member_count: Número de componentes
+            see_also: Veja também sobre a página da etiqueta
+        roles:
+            tab: Roles
+            title: Member roles
+            objects_tooltip: Relation members with this role (and as percentage of all members) for this relation type.
+            nodes_tooltip: Relation members of type node with this role (and as percentage of all members of type node) for this relation type.
+            ways_tooltip: Relation members of type way with this role (and as percentage of all members of type way) for this relation type.
+            relations_tooltip: Relation members of type relation with this role (and as percentage of all members of type relation) for this relation type.
+            no_roles_info: There is no information about roles for this relation type (most likely because there are only very few of those relations).
+        graph:
+            tab: Roles Graph
+            title: Roles Graph
+        wiki_pages:
+            title: Wiki pages about this relation type
+            none_found: No wiki page available for this relation type.
+            create: Create wiki page for this relation type
+            wiki_page: Wiki page
+
+flexigrid:
+    pagetext: Página
+    pagestat: Exibindo do {from} ao {to} de {total} itens
+    outof: de
+    findtext: Pesquisar
+    procmsg: Processando, por favor aguarde...
+    nomsg: Nenhum item
+    errormsg: Erro de conexão
+
+sources:
+    master:
+        name: Master
+        description: Aggregate statistics and miscellaneous data needed for the taginfo user interface.
+    db:
+        name: Database
+        description: Statistics about each key and each tag from the main OSM database (planet file).
+    wiki:
+        name: Wiki
+        description: Data from the tag and key pages of the OSM wiki.
+    josm:
+        name: JOSM
+        description: Configuration data from the JOSM OSM editor.
+    potlatch:
+        name: Potlatch
+        description: Configuration data from the Potlatch2 OSM editor.
+    merkaartor:
+        name: Merkaartor
+        description: Configuration data from the Merkaartor OSM editor.
+    languages:
+        name: Languages
+        description: Language names, codes, etc. from IANA and Unicode registries.
+
+reports:
+    characters_in_keys:
+        name: Characters in keys
+        intro: |
+            <p>Any valid Unicode character can appear in an OSM key but usually only lower
+            case latin letters (a-z) and the underscore (_) are used. Sometimes the colon
+            (:) is added as a separator character.</p>
+        statistics:
+            tab: Statistics
+            title: Statistics overview
+            fraction: Fraction
+            characters: Characters in key
+            characters_in_keys:
+                plain: Only latin lowercase letters (<span class="char">a</span> to <span class="char">z</span>) and underscore (<span class="char">_</span>), first and last characters are letters.
+                colon: Like A but with one or more colons (<span class="char">:</span>) inside.
+                letters: Like B but with uppercase latin letters or letters from other alphabets.
+                space: Like C but contains at least one whitespace character (space, tab, new line, carriage return, or from other alphabets).
+                problem: Like C but contains possibly problematic characters <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
+                rest: Everything else.
+                total: Total
+        whitespace:
+            tab: Whitespace
+            title: Keys with whitespace
+            intro: |
+                <p>Keys that contain whitespace characters such as space, tab, new
+                line, carriage return, or whitespace characters from other
+                alphabets.<br/>
+                Whitespace in keys can be confusing, especially at the
+                beginning or end of the key, because they are invisible. Generally
+                the underscore (_) should be used instead.</p>
+        problematic:
+            tab: Problematic
+            title: Keys with possibly problematic characters
+            intro: |
+                <p>Keys that contain possibly problematic characters: <span
+                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> or control
+                characters. These characters
+                can be problematic, because they are used to quote strings in
+                different programming languages or have special meanings in XML, HTML,
+                URLs, and other places. The equal sign is used often as separator
+                between tag keys and values.<br/>
+                Keys that appear in this list are not necessarily wrong though. But
+                in many cases they are just results of some error.</p>
+    database_statistics:
+        name: Estatísticas do banco de dados
+    frequently_used_keys_without_wiki_page:
+        name: Chaves frequentemente usadas sem páginas na wiki
+        intro: |
+            <p>This table shows keys that appear more than 10&thinsp;000 times in the OSM
+            database but have no wiki page describing them.  If you know anything about one
+            of these keys, please create the wiki page by clicking on the link in the
+            leftmost column and describe the key. Sometimes it might make sense to create a
+            redirect to a different wiki page instead. To do this put just one line with
+            <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>page name</i>]]</tt>
+            in the wiki page.</p>
+        also_show_keys: Also show keys that have no English language wiki page but a page in some other language.
+        table:
+            create_wiki_page: Criar página na wiki...
+    josm_styles:
+        name: Estilos do JOSM
+    key_lengths:
+        name: Comprimento das chaves
+        intro: |
+            <p>As chaves das etiquetas podem ter de 0 a 255 caracteres (Unicode). Chaves que são muito grandes ou muito pequenas geralmente são erros, mas nem sempre.</p>
+        table:
+            number_of_objects: Número de objetos
+        histogram:
+            intro: Este histograma mostra quantas chaves existem para cada comprimento.
+            key_length: Comprimento da chave
+            number_of_keys: Número de chaves
+    language_comparison_table_for_keys_in_the_wiki:
+        name: Language comparison table for keys in the wiki
+        icons:
+            template: Page in wiki available and contains standard template.
+            error: Page in wiki available and contains standard template, but couldn't be parsed.
+            page: Page in wiki available but doesn't contain standard template.
+            redirect: Page is a redirect.
+        intro: |
+            <p>This table shows all tag keys for which there are wiki pages available and in what languages they are.</p>
+    languages:
+        name: Linguagens
+        intro: |
+            <p>OpenStreetMap é um projeto internacional. As etiquetas e as suas descrições 
+            podem estar em qualquer linguagem. Esta tabela lista as linguagens que o taginfo
+            conhece e quantas páginas da wiki existem nessas linguagens documentando chaves
+            e etiquetas, respectivamente.</p>
+        code: Código
+        native_name: Nome nativo
+        english_name: Nome em inglês
+        wiki_key_pages: Páginas de chaves na wiki
+        wiki_tag_pages: Páginas de etiquetas na wiki
+    wiki_pages_about_non_existing_keys:
+        name: Wiki pages about non-existing keys
+        intro: |
+            <p>This table shows keys for which a wiki page exists but there is not a single
+            instance in the database. This is not necessarily an error (maybe somebody
+            added the documentation in the wiki as preparation for using a key or the wiki
+            page documents a now obsolete key), but it can also be a typo or other error.</p>
+        wiki_pages: Wiki pages
+    name_tags:
+        name: Variants of name tags
+        intro: |
+            <p>This report shows information related to the naming of objects in OSM
+            using the <tt>name</tt> tag and its variants.</p>
+        overview:
+            tab: Visão geral
+            title: Visão geral
+        bcp47:
+            tab: BCP47 Subtags
+            title: BCP47 Subtags
+            filter:
+                label: Show only subtags of type
+                all: All
+                language: Linguagem
+                script: Script
+                region: Região
+                variant: Variante
+            intro: |
+                <p>The <a href="http://www.ietf.org/">IETF</a> defines <i>language
+                tags</i> in its standard
+                <a href="http://tools.ietf.org/html/bcp47">Tags for Identifying Languages
+                (BCP47)</a>. Language
+                tags consist of one or more <i>subtags</i> describing the language,
+                script, variants, etc. The following list shows the subtags currently
+                registered that are relevant for OSM. For more information see also the
+                <a href="http://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
+                entry on IETF language tags</a> and the <a
+                href="http://www.langtag.net/">langtag.net</a> site.</p>
+                <p>Note that the data shown in this table is <b>not</b> from OpenStreetMap,
+                it just shows the building blocks that can be used to describe languages
+                irrespective of whether they are actually used in OSM.
+                </p>
+
