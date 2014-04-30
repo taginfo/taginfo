@@ -152,10 +152,12 @@ class WikiPage
         puts "Template: #{template.name} [#{template.parameters.join(',')}] #{template.named_parameters.inspect}"
         if template.name == 'Key' || template.name == 'Tag'
             tag = template.parameters[0]
-            if template.parameters[1]
-                tag += '=' + template.parameters[1]
+            if tag
+                if template.parameters[1]
+                    tag += '=' + template.parameters[1]
+                end
+                add_tag_link(tag)
             end
-            add_tag_link(tag)
         end
         if template.name =~ /(Key|Value|Relation)Description$/
             @has_templ = true
