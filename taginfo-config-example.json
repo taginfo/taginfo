@@ -66,6 +66,8 @@
             "min_count_tags": 10000,
             // Tag combinations not appearing this often are not written to database.
             "min_tag_combination_count": 1000,
+            // Minimum number of occurances for creating a map
+            "min_count_for_map": 1000,
             // Minimum number of relations per type to make this
             // relation type "interesting", ie. to make it show
             // up as a relation type.
