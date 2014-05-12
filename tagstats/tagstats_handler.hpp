@@ -524,8 +524,9 @@ public:
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
 
         std::ifstream map_tags_list_file(map_tags_list.c_str(), std::ifstream::in);
-        while (map_tags_list_file >> key_value) {
+        while (std::getline(map_tags_list_file, key_value)) {
             m_key_value_geodistribution[m_string_store.add(key_value.c_str())] = new GeoDistribution();
+            key_value.clear();
         }
 
         std::ifstream relation_type_list_file(relation_type_list.c_str(), std::ifstream::in);
