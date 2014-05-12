@@ -3,7 +3,7 @@
 
 /*
 
-  Copyright 2012 Jochen Topf <jochen@topf.org>.
+  Copyright 2012-2014 Jochen Topf <jochen@topf.org>.
 
   This file is part of Tagstats.
 
@@ -181,6 +181,7 @@ public:
 }; // class KeyValueStats
 
 typedef google::sparse_hash_map<const char *, KeyValueStats *, djb2_hash, eqstr> key_value_hash_map_t;
+typedef google::sparse_hash_map<const char *, GeoDistribution *, djb2_hash, eqstr> key_value_geodistribution_hash_map_t;
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
 
 struct RelationRoleStats {
@@ -252,6 +253,8 @@ class TagStatsHandler : public Osmium::Handler::Base {
 #ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
     key_value_hash_map_t m_key_value_stats;
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
+
+    key_value_geodistribution_hash_map_t m_key_value_geodistribution;
 
     relation_type_stats_map_t m_relation_type_stats;
 
@@ -332,7 +335,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
     }
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
 
-    void _print_and_clear_distribution_images(bool for_nodes) {
+    void _print_and_clear_key_distribution_images(bool for_nodes) {
         int sum_size=0;
 
         Sqlite::Statement statement_insert_into_key_distributions(m_database, "INSERT INTO key_distributions (key, object_type, png) VALUES (?, ?, ?);");
@@ -363,7 +366,46 @@ class TagStatsHandler : public Osmium::Handler::Base {
         }
 
         std::cerr << "gridcells_all: " << GeoDistribution::count_all_set_cells() << std::endl;
-        std::cerr << "sum of location image sizes: " << sum_size << std::endl;
+        std::cerr << "sum of location image sizes: " << sum_size << " bytes\n";
+
+        m_database.commit();
+    }
+
+    void _print_and_clear_tag_distribution_images(bool for_nodes) {
+        int sum_size=0;
+
+        Sqlite::Statement statement_insert_into_tag_distributions(m_database, "INSERT INTO tag_distributions (key, value, object_type, png) VALUES (?, ?, ?, ?);");
+        m_database.begin_transaction();
+
+        for (key_value_geodistribution_hash_map_t::const_iterator it = m_key_value_geodistribution.begin(); it != m_key_value_geodistribution.end(); it++) {
+            GeoDistribution* geo = it->second;
+
+            int size;
+            void* ptr = geo->create_png(&size);
+            sum_size += size;
+
+            std::vector<std::string> kv;
+            boost::split(kv, it->first, boost::is_any_of("="));
+            kv.push_back(""); // if there is no = in key, make sure there is an empty value
+
+            statement_insert_into_tag_distributions
+            .bind_text(kv[0].c_str())         // column: key
+            .bind_text(kv[1].c_str())         // column: value
+            .bind_text(for_nodes ? "n" : "w") // column: object_type
+            .bind_blob(ptr, size)             // column: png
+            .execute();
+
+            geo->free_png(ptr);
+
+            if (for_nodes) {
+                geo->clear();
+            } else {
+                delete geo;
+            }
+        }
+
+        std::cerr << "gridcells_all: " << GeoDistribution::count_all_set_cells() << std::endl;
+        std::cerr << "sum of location image sizes: " << sum_size << " bytes\n";
 
         m_database.commit();
     }
@@ -411,8 +453,17 @@ class TagStatsHandler : public Osmium::Handler::Base {
             }
             stat->update(it->value(), object, m_string_store);
 
+            std::string keyvalue = it->key();
+            keyvalue += "=";
+            keyvalue += it->value();
+
             if (object.type() == NODE) {
-                stat->distribution.add_coordinate(m_map_to_int(static_cast<const Osmium::OSM::Node&>(object).position()));
+                rough_position_t location = m_map_to_int(static_cast<const Osmium::OSM::Node&>(object).position());
+                stat->distribution.add_coordinate(location);
+                key_value_geodistribution_hash_map_t::iterator gd_it = m_key_value_geodistribution.find(keyvalue.c_str());
+                if (gd_it != m_key_value_geodistribution.end()) {
+                    gd_it->second->add_coordinate(location);
+                }
             }
 #ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
             else if (object.type() == WAY) {
@@ -421,7 +472,12 @@ class TagStatsHandler : public Osmium::Handler::Base {
                 // coordinates of all nodes?
                 const Osmium::OSM::WayNodeList& wnl = static_cast<const Osmium::OSM::Way&>(object).nodes();
                 if (!wnl.empty()) {
-                    stat->distribution.add_coordinate(m_storage[wnl.front().ref()]);
+                    rough_position_t location = m_storage[wnl.front().ref()];
+                    stat->distribution.add_coordinate(location);
+                    key_value_geodistribution_hash_map_t::iterator gd_it = m_key_value_geodistribution.find(keyvalue.c_str());
+                    if (gd_it != m_key_value_geodistribution.end()) {
+                        gd_it->second->add_coordinate(location);
+                    }
                 }
             }
 #endif // TAGSTATS_GEODISTRIBUTION_FOR_WAYS
@@ -446,7 +502,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
 public:
 
-    TagStatsHandler(Sqlite::Database& database, const std::string& tags_list, const std::string& relation_type_list, MapToInt<rough_position_t>& map_to_int, unsigned int min_tag_combination_count) :
+    TagStatsHandler(Sqlite::Database& database, const std::string& tags_list, const std::string& map_tags_list, const std::string& relation_type_list, MapToInt<rough_position_t>& map_to_int, unsigned int min_tag_combination_count) :
         Base(),
         m_min_tag_combination_count(min_tag_combination_count),
         m_max_timestamp(0),
@@ -458,13 +514,20 @@ public:
         , m_storage()
 #endif
     {
+        std::string key_value;
+
 #ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
         std::ifstream tags_list_file(tags_list.c_str(), std::ifstream::in);
-        std::string key_value;
         while (tags_list_file >> key_value) {
             m_key_value_stats[m_string_store.add(key_value.c_str())] = new KeyValueStats();
         }
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
+
+        std::ifstream map_tags_list_file(map_tags_list.c_str(), std::ifstream::in);
+        while (map_tags_list_file >> key_value) {
+            m_key_value_geodistribution[m_string_store.add(key_value.c_str())] = new GeoDistribution();
+        }
+
         std::ifstream relation_type_list_file(relation_type_list.c_str(), std::ifstream::in);
         std::string type;
         while (relation_type_list_file >> type) {
@@ -515,7 +578,10 @@ public:
         .execute();
         m_database.commit();
 
-        _print_and_clear_distribution_images(true);
+        gdFree(ptr);
+
+        _print_and_clear_key_distribution_images(true);
+        _print_and_clear_tag_distribution_images(true);
         timer = time(0);
         _timer_info("dumping images");
         _print_memory_usage();
@@ -528,7 +594,8 @@ public:
     void after_ways() {
         _timer_info("processing ways");
 #ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
-        _print_and_clear_distribution_images(false);
+        _print_and_clear_key_distribution_images(false);
+        _print_and_clear_tag_distribution_images(false);
 #endif
         _print_memory_usage();
     }

@@ -52,6 +52,15 @@ CREATE TABLE key_distributions (
   png              BLOB
 );
 
+DROP TABLE IF EXISTS tag_distributions;
+
+CREATE TABLE tag_distributions (
+  key              VARCHAR,
+  value            VARCHAR,
+  object_type      VARCHAR(1),          -- (n)ode, (w)ay,
+  png              BLOB
+);
+
 DROP TABLE IF EXISTS tags;
 
 CREATE TABLE tags (

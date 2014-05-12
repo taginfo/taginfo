@@ -1,6 +1,6 @@
 /*
 
-  Copyright 2012 Jochen Topf <jochen@topf.org>.
+  Copyright 2012-2014 Jochen Topf <jochen@topf.org>.
 
   This file is part of Tagstats.
 
@@ -80,6 +80,7 @@ int main(int argc, char *argv[]) {
         {"tags",                      required_argument, 0, 'T'},
         {"min-tag-combination-count", required_argument, 0, 'm'},
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
+        {"map-tags",       required_argument, 0, 'M'},
         {"relation-types", required_argument, 0, 'R'},
         {"top",            required_argument, 0, 't'},
         {"right",          required_argument, 0, 'r'},
@@ -91,6 +92,7 @@ int main(int argc, char *argv[]) {
     };
 
     std::string tags_list;
+    std::string map_tags_list;
     std::string relation_type_list;
 
     double top    =   90;
@@ -106,9 +108,9 @@ int main(int argc, char *argv[]) {
     while (true) {
         int c = getopt_long(argc, argv,
 #ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
-                            "dHR:t:r:b:l:w:h:T:m:",
+                            "dHR:t:r:b:l:w:h:M:T:m:",
 #else
-                            "dHR:t:r:b:l:w:h:",
+                            "dHR:t:r:b:l:w:h:M:",
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
                             long_options, 0);
         if (c == -1) {
@@ -122,6 +124,9 @@ int main(int argc, char *argv[]) {
 #ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
             case 'T':
                 tags_list = optarg;
+                break;
+            case 'M':
+                map_tags_list = optarg;
                 break;
             case 'm':
                 min_tag_combination_count = atoi(optarg);
@@ -162,7 +167,9 @@ int main(int argc, char *argv[]) {
     Osmium::OSMFile infile(argv[optind]);
     Sqlite::Database db(argv[optind+1]);
     MapToInt<rough_position_t> map_to_int(left, bottom, right, top, width, height);
-    TagStatsHandler handler(db, tags_list, relation_type_list, map_to_int, min_tag_combination_count);
+    TagStatsHandler handler(db, tags_list, map_tags_list, relation_type_list, map_to_int, min_tag_combination_count);
     Osmium::Input::read(infile, handler);
+
+    google::protobuf::ShutdownProtobufLibrary();
 }
 
