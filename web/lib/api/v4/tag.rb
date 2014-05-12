@@ -83,6 +83,46 @@ class Taginfo < Sinatra::Base
         }.to_json
     end
 
+    api(4, 'tag/distribution/nodes', {
+        :description => 'Get map with distribution of this tag in the database (nodes only). Will return empty image if there is no map available for this tag.',
+        :parameters => { :key => 'Tag key (required).', :value => 'Tag value (required).' },
+        :result => 'PNG image.',
+        :example => { :key => 'amenity', :value => 'post_box' },
+        :ui => '/tags/amenit=post_boxy#map'
+    }) do
+        key   = params[:key]
+        value = params[:value]
+        content_type :png
+        @db.select('SELECT png FROM db.tag_distributions').
+            condition("object_type='n'").
+            condition('key = ?', key).
+            condition('value = ?', value).
+            get_first_value() ||
+        @db.select('SELECT png FROM db.key_distributions').
+            condition('key IS NULL').
+            get_first_value()
+    end
+
+    api(4, 'tag/distribution/ways', {
+        :description => 'Get map with distribution of this tag in the database (ways only). Will return empty image if there is no map available for this tag.',
+        :parameters => { :key => 'Tag key (required).', :value => 'Tag value (required).' },
+        :result => 'PNG image.',
+        :example => { :key => 'highway', :value => 'residential' },
+        :ui => '/tags/highway=residential#map'
+    }) do
+        key   = params[:key]
+        value = params[:value]
+        content_type :png
+        @db.select('SELECT png FROM db.tag_distributions').
+            condition("object_type='w'").
+            condition('key = ?', key).
+            condition('value = ?', value).
+            get_first_value() ||
+        @db.select('SELECT png FROM db.key_distributions').
+            condition('key IS NULL').
+            get_first_value()
+    end
+
     api(4, 'tag/josm/style/rules', {
         :description => 'List rules and symbols for the given tag in JOSM styles.',
         :parameters => {
