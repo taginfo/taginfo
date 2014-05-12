@@ -9,7 +9,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013  Jochen Topf <jochen@remote.org>
+#  Copyright (C) 2010-2014  Jochen Topf <jochen@remote.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -200,14 +200,6 @@ class Taginfo < Sinatra::Base
 
     #--------------------------------------------------------------------------
 
-    # old deprecated API (version 2 and 3)
-    load 'lib/api/db.rb'
-    load 'lib/api/josm.rb'
-    load 'lib/api/main.rb'
-    load 'lib/api/reports.rb'
-    load 'lib/api/search.rb'
-    load 'lib/api/wiki.rb'
-
     # current API (version 4)
     load 'lib/api/v4/josm.rb'
     load 'lib/api/v4/key.rb'
@@ -223,6 +215,7 @@ class Taginfo < Sinatra::Base
     # test API (unstable, do not use)
     load 'lib/api/test/langtag.rb'
 
+    # user interface
     load 'lib/ui/embed.rb'
     load 'lib/ui/help.rb'
     load 'lib/ui/keys.rb'
