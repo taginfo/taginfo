@@ -471,11 +471,13 @@ class TagStatsHandler : public Osmium::Handler::Base {
                 // coordinates of all nodes?
                 const Osmium::OSM::WayNodeList& wnl = static_cast<const Osmium::OSM::Way&>(object).nodes();
                 if (!wnl.empty()) {
-                    rough_position_t location = m_storage[wnl.front().ref()];
-                    stat->distribution.add_coordinate(location);
                     key_value_geodistribution_hash_map_t::iterator gd_it = m_key_value_geodistribution.find(keyvalue.c_str());
-                    if (gd_it != m_key_value_geodistribution.end()) {
-                        gd_it->second->add_coordinate(location);
+                    for (Osmium::OSM::WayNodeList::const_iterator it = wnl.begin(); it != wnl.end(); ++it) {
+                        rough_position_t location = m_storage[it->ref()];
+                        stat->distribution.add_coordinate(location);
+                        if (gd_it != m_key_value_geodistribution.end()) {
+                            gd_it->second->add_coordinate(location);
+                        }
                     }
                 }
             }
