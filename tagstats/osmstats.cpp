@@ -37,17 +37,8 @@ int main(int argc, char *argv[]) {
 
     Osmium::OSMFile infile(argv[1]);
 
-    Sqlite::Database db(argv[2]);
-    sqlite3* sqlite_db = db.get_sqlite3();
-    if (SQLITE_OK != sqlite3_exec(sqlite_db, \
-                                  "CREATE TABLE stats (" \
-                                  "  key    TEXT, " \
-                                  "  value  INT64 " \
-                                  ");", 0, 0, 0)) {
-        std::cerr << "Database error: " << sqlite3_errmsg(sqlite_db) << "\n";
-        sqlite3_close(sqlite_db);
-        exit(1);
-    }
+    Sqlite::Database db(argv[2], SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE);
+    db.exec("CREATE TABLE stats (key TEXT, value INT64);");
 
     StatisticsHandler handler(db);
     Osmium::Input::read(infile, handler);

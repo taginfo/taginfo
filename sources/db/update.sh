@@ -27,6 +27,7 @@ fi
 echo "`$DATECMD` Start db..."
 
 DATABASE=$DIR/taginfo-db.db
+SELECTION_DB=$DIR/selection.db
 
 rm -f $DATABASE
 
@@ -50,18 +51,17 @@ if [ "x" = "x$TAGSTATS" ]; then
     TAGSTATS="./tagstats"
 fi
 
-if [ ! -f $DIR/interesting_tags.lst ]; then
-    echo "File $DIR/interesting_tags.lst missing. Not creating combination statistics."
-    echo "  The next taginfo update should automatically correct this."
-fi
-
-if [ ! -f $DIR/frequent_tags.lst ]; then
-    echo "File $DIR/frequent_tags.lst missing. Not creating maps for tags."
+if [ -f $SELECTION_DB ]; then
+    OPEN_SELECTION_DB="--selection-db=$SELECTION_DB"
+    echo "Reading selection database '$SELECTION_DB'"
+else
+    OPEN_SELECTION_DB=""
+    echo "Selection database '$SELECTION_DB' not found. Not creating some statistics."
     echo "  The next taginfo update should automatically correct this."
 fi
 
 #TAGSTATS="valgrind --leak-check=full --show-reachable=yes $TAGSTATS"
-$TAGSTATS --tags $DIR/interesting_tags.lst --map-tags $DIR/frequent_tags.lst --min-tag-combination-count=$min_tag_combination_count --relation-types $DIR/interesting_relation_types.lst --left=$left --bottom=$bottom --top=$top --right=$right --width=$width --height=$height $PLANETFILE $DATABASE
+$TAGSTATS $OPEN_SELECTION_DB --min-tag-combination-count=$min_tag_combination_count --left=$left --bottom=$bottom --top=$top --right=$right --width=$width --height=$height $PLANETFILE $DATABASE
 
 echo "`$DATECMD` Running update_characters... "
 ./update_characters.rb $DIR

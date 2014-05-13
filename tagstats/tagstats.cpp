@@ -57,15 +57,13 @@ void print_help() {
               << "This program is part of Taginfo. It calculates statistics\n" \
               << "on OSM tags from OSMFILE and puts them into DATABASE (an SQLite database).\n" \
               << "\nOptions:\n" \
-              << "  -H, --help                    This help message\n";
+              << "  -H, --help                    This help message\n" \
+              << "  -s, --selection-db=DATABASE   Name of selection database\n";
 #ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
-    std::cout << "  -T, --tags=FILENAME           File with tags we are interested in\n" \
-              << "  -m, --min-tag-combination-count=N  Tag combinations not appearing this often\n" \
+    std::cout << "  -m, --min-tag-combination-count=N  Tag combinations not appearing this often\n" \
               << "                                     are not written to database\n";
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
-    std::cout << "  -M, --map-tags=FILENAME       File with tags we want maps for\n" \
-              << "  -R, --relation-types=FILENAME File with relation types we are interested in\n" \
-              << "  -t, --top=NUMBER              Top of bounding box for distribution images\n" \
+    std::cout << "  -t, --top=NUMBER              Top of bounding box for distribution images\n" \
               << "  -r, --right=NUMBER            Right of bounding box for distribution images\n" \
               << "  -b, --bottom=NUMBER           Bottom of bounding box for distribution images\n" \
               << "  -l, --left=NUMBER             Left of bounding box for distribution images\n" \
@@ -78,11 +76,9 @@ int main(int argc, char *argv[]) {
     static struct option long_options[] = {
         {"help",           no_argument, 0, 'H'},
 #ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
-        {"tags",                      required_argument, 0, 'T'},
         {"min-tag-combination-count", required_argument, 0, 'm'},
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
-        {"map-tags",       required_argument, 0, 'M'},
-        {"relation-types", required_argument, 0, 'R'},
+        {"selection-db",   required_argument, 0, 's'},
         {"top",            required_argument, 0, 't'},
         {"right",          required_argument, 0, 'r'},
         {"bottom",         required_argument, 0, 'b'},
@@ -92,9 +88,7 @@ int main(int argc, char *argv[]) {
         {0, 0, 0, 0}
     };
 
-    std::string tags_list;
-    std::string map_tags_list;
-    std::string relation_type_list;
+    std::string selection_database_name;
 
     double top    =   90;
     double right  =  180;
@@ -109,9 +103,9 @@ int main(int argc, char *argv[]) {
     while (true) {
         int c = getopt_long(argc, argv,
 #ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
-                            "dHR:t:r:b:l:w:h:M:T:m:",
+                            "dHt:r:b:l:w:h:s:m:",
 #else
-                            "dHR:t:r:b:l:w:h:M:",
+                            "dHt:r:b:l:w:h:s:",
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
                             long_options, 0);
         if (c == -1) {
@@ -122,20 +116,14 @@ int main(int argc, char *argv[]) {
             case 'H':
                 print_help();
                 exit(0);
-#ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
-            case 'T':
-                tags_list = optarg;
+            case 's':
+                selection_database_name = optarg;
                 break;
+#ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
             case 'm':
                 min_tag_combination_count = atoi(optarg);
                 break;
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
-            case 'M':
-                map_tags_list = optarg;
-                break;
-            case 'R':
-                relation_type_list = optarg;
-                break;
             case 't':
                 top = atof(optarg);
                 break;
@@ -166,9 +154,9 @@ int main(int argc, char *argv[]) {
 
     GeoDistribution::set_dimensions(width, height);
     Osmium::OSMFile infile(argv[optind]);
-    Sqlite::Database db(argv[optind+1]);
+    Sqlite::Database db(argv[optind+1], SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE);
     MapToInt<rough_position_t> map_to_int(left, bottom, right, top, width, height);
-    TagStatsHandler handler(db, tags_list, map_tags_list, relation_type_list, map_to_int, min_tag_combination_count);
+    TagStatsHandler handler(db, selection_database_name, map_to_int, min_tag_combination_count);
     Osmium::Input::read(infile, handler);
 
     google::protobuf::ShutdownProtobufLibrary();

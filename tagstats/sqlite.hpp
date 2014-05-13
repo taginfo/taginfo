@@ -1,24 +1,13 @@
-#ifndef TAGSTATS_SQLITE_HPP
-#define TAGSTATS_SQLITE_HPP
+#ifndef SQLITE_HPP
+#define SQLITE_HPP
 
 /*
 
-  Copyright 2012 Jochen Topf <jochen@topf.org>.
+  Author: Jochen Topf <jochen@topf.org>
 
-  This file is part of Tagstats.
+  https://github.com/joto/sqlite-cpp-wrapper
 
-  Tagstats is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-
-  Tagstats is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with Tagstats.  If not, see <http://www.gnu.org/licenses/>.
+  This code is released into the Public Domain.
 
 */
 
@@ -30,13 +19,13 @@
 #include <sqlite3.h>
 
 /**
-*  @brief The %Sqlite classes wrap the %Sqlite C library.
-*/
+ *  @brief The %Sqlite classes wrap the %Sqlite C library.
+ */
 namespace Sqlite {
 
     /**
-    *  Exception returned by Sqlite wrapper classes when there are errors in the Sqlite3 lib
-    */
+     *  Exception returned by Sqlite wrapper classes when there are errors in the Sqlite3 lib
+     */
     class Exception : public std::runtime_error {
 
     public:
@@ -47,23 +36,18 @@ namespace Sqlite {
 
     };
 
-    class Statement;
-
     /**
-    *  Wrapper class for Sqlite database
-    */
+     *  Wrapper class for Sqlite database
+     */
     class Database {
-
-    private:
-
-        sqlite3* m_db;
 
     public:
 
-        Database(const char* filename) {
-            if (sqlite3_open_v2(filename, &m_db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, 0)) {
+        Database(const char* filename, const int flags) {
+            if (SQLITE_OK != sqlite3_open_v2(filename, &m_db, flags, 0)) {
+                std::string error = errmsg();
                 sqlite3_close(m_db);
-                throw Sqlite::Exception("Can't open database", errmsg());
+                throw Sqlite::Exception("Can't open database", error);
             }
         }
 
@@ -71,36 +55,47 @@ namespace Sqlite {
             sqlite3_close(m_db);
         }
 
-        const std::string& errmsg() const {
-            static std::string error = std::string(sqlite3_errmsg(m_db));
-            return error;
+        std::string errmsg() {
+            if (m_db) {
+                return std::string(sqlite3_errmsg(m_db));
+            } else {
+                return std::string("Database is not open");
+            }
         }
 
         sqlite3* get_sqlite3() {
             return m_db;
         }
 
-        void begin_transaction() {
-            if (SQLITE_OK != sqlite3_exec(m_db, "BEGIN TRANSACTION;", 0, 0, 0)) {
-                std::cerr << "Database error: " << sqlite3_errmsg(m_db) << "\n";
+        void exec(const std::string& sql) {
+            if (SQLITE_OK != sqlite3_exec(m_db, sql.c_str(), 0, 0, 0)) {
+                std::string error = errmsg();
                 sqlite3_close(m_db);
-                throw std::runtime_error("Sqlite error");
+                throw Sqlite::Exception("Database error", error);
             }
         }
 
-        void commit() {
-            if (SQLITE_OK != sqlite3_exec(m_db, "COMMIT;", 0, 0, 0)) {
-                std::cerr << "Database error: " << sqlite3_errmsg(m_db) << "\n";
-                sqlite3_close(m_db);
-                throw std::runtime_error("Sqlite error");
-            }
+        void begin_transaction() {
+            exec("BEGIN TRANSACTION;");
         }
+
+        void commit() {
+            exec("COMMIT;");
+        }
+
+        void rollback() {
+            exec("ROLLBACK;");
+        }
+
+    private:
+
+        sqlite3* m_db;
 
     }; // class Database
 
     /**
-    * Wrapper class for Sqlite prepared statement.
-    */
+     * Wrapper class for Sqlite prepared statement.
+     */
     class Statement {
 
     public:
@@ -140,28 +135,28 @@ namespace Sqlite {
             return *this;
         }
 
-        Statement& bind_int(int value) {
+        Statement& bind_int(const int value) {
             if (SQLITE_OK != sqlite3_bind_int(m_statement, m_bindnum++, value)) {
                 throw Sqlite::Exception("Can't bind int value", m_db.errmsg());
             }
             return *this;
         }
 
-        Statement& bind_int64(int64_t value) {
+        Statement& bind_int64(const int64_t value) {
             if (SQLITE_OK != sqlite3_bind_int64(m_statement, m_bindnum++, value)) {
                 throw Sqlite::Exception("Can't bind int64 value", m_db.errmsg());
             }
             return *this;
         }
 
-        Statement& bind_double(double value) {
+        Statement& bind_double(const double value) {
             if (SQLITE_OK != sqlite3_bind_double(m_statement, m_bindnum++, value)) {
                 throw Sqlite::Exception("Can't bind double value", m_db.errmsg());
             }
             return *this;
         }
 
-        Statement& bind_blob(const void* value, int length) {
+        Statement& bind_blob(const void* value, const int length) {
             if (SQLITE_OK != sqlite3_bind_blob(m_statement, m_bindnum++, value, length, 0)) {
                 throw Sqlite::Exception("Can't bind blob value", m_db.errmsg());
             }
@@ -176,6 +171,39 @@ namespace Sqlite {
             m_bindnum = 1;
         }
 
+        bool read() {
+            switch (sqlite3_step(m_statement)) {
+                case SQLITE_ROW:
+                    return true;
+                case SQLITE_DONE:
+                    return false;
+                default:
+                    throw Sqlite::Exception("Sqlite error", m_db.errmsg());
+            }
+        }
+
+        int column_count() {
+            return sqlite3_column_count(m_statement);
+        }
+
+        std::string get_text(int column) {
+            if (column >= column_count()) {
+                throw Sqlite::Exception("Column larger than max columns", "");
+            }
+            const char* textptr = reinterpret_cast<const char*>(sqlite3_column_text(m_statement, column));
+            if (!textptr) {
+                throw Sqlite::Exception("Error reading text column", m_db.errmsg());
+            }
+            return std::string(textptr);
+        }
+
+        int get_int(int column) {
+            if (column >= column_count()) {
+                throw Sqlite::Exception("Column larger than max columns", m_db.errmsg());
+            }
+            return sqlite3_column_int(m_statement, column);
+        }
+
     private:
 
         Database& m_db;
@@ -186,4 +214,4 @@ namespace Sqlite {
 
 } // namespace Sqlite
 
-#endif // TAGSTATS_SQLITE_HPP
+#endif // SQLITE_HPP

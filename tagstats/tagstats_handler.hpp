@@ -501,7 +501,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
 public:
 
-    TagStatsHandler(Sqlite::Database& database, const std::string& tags_list, const std::string& map_tags_list, const std::string& relation_type_list, MapToInt<rough_position_t>& map_to_int, unsigned int min_tag_combination_count) :
+    TagStatsHandler(Sqlite::Database& database, const std::string& selection_database_name, MapToInt<rough_position_t>& map_to_int, unsigned int min_tag_combination_count) :
         Base(),
         m_min_tag_combination_count(min_tag_combination_count),
         m_max_timestamp(0),
@@ -513,25 +513,39 @@ public:
         , m_storage()
 #endif
     {
-        std::string key_value;
+        if (!selection_database_name.empty()) {
+            Sqlite::Database sdb(selection_database_name.c_str(), SQLITE_OPEN_READONLY);
 
 #ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
-        std::ifstream tags_list_file(tags_list.c_str(), std::ifstream::in);
-        while (tags_list_file >> key_value) {
-            m_key_value_stats[m_string_store.add(key_value.c_str())] = new KeyValueStats();
-        }
+            {
+                Sqlite::Statement select(sdb, "SELECT key FROM interesting_tags WHERE value IS NULL;");
+                while (select.read()) {
+                    std::string key_value = select.get_text(0);
+                    m_key_value_stats[m_string_store.add(key_value.c_str())] = new KeyValueStats();
+                }
+            }
+            {
+                Sqlite::Statement select(sdb, "SELECT key || '=' || value FROM interesting_tags WHERE value IS NOT NULL;");
+                while (select.read()) {
+                    std::string key_value = select.get_text(0);
+                    m_key_value_stats[m_string_store.add(key_value.c_str())] = new KeyValueStats();
+                }
+            }
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
-
-        std::ifstream map_tags_list_file(map_tags_list.c_str(), std::ifstream::in);
-        while (std::getline(map_tags_list_file, key_value)) {
-            m_key_value_geodistribution[m_string_store.add(key_value.c_str())] = new GeoDistribution();
-            key_value.clear();
-        }
-
-        std::ifstream relation_type_list_file(relation_type_list.c_str(), std::ifstream::in);
-        std::string type;
-        while (relation_type_list_file >> type) {
-            m_relation_type_stats[type] = RelationTypeStats();
+            {
+                Sqlite::Statement select(sdb, "SELECT key || '=' || value FROM frequent_tags;");
+                while (select.read()) {
+                    std::string key_value = select.get_text(0);
+                    m_key_value_geodistribution[m_string_store.add(key_value.c_str())] = new GeoDistribution();
+                }
+            }
+            {
+                Sqlite::Statement select(sdb, "SELECT rtype FROM interesting_relation_types;");
+                while (select.read()) {
+                    std::string rtype = select.get_text(0);
+                    m_relation_type_stats[rtype] = RelationTypeStats();
+                }
+            }
         }
     }
 
