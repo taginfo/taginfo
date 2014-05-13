@@ -28,9 +28,10 @@ Uses
     * JSON gem (install with gem, Debian/Ubuntu packages are too old and buggy)
     * curl binary
     * sqlite3 binary and ruby libs
+    * m4 binary
 
 Debian/Ubuntu packages:
-    curl sqlite3 ruby-sqlite3 ruby-passenger libapache2-mod-passenger
+    curl m4 sqlite3 ruby-sqlite3 ruby-passenger libapache2-mod-passenger
 
 Gems:
     gem install rack rack-contrib sinatra sinatra-r18n json

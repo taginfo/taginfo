@@ -26,6 +26,7 @@ echo "Running with ruby set as '${EXEC_RUBY}'"
 
 DATABASE=$DIR/taginfo-master.db
 HISTORYDB=$DIR/taginfo-history.db
+SELECTION_DB=$DIR/selection.db
 
 echo "`$DATECMD` Create search database..."
 
@@ -33,6 +34,7 @@ rm -f $DIR/taginfo-search.db
 $EXEC_RUBY -pe "\$_.sub!(/__DIR__/, '$DIR')" search.sql | sqlite3 $DIR/taginfo-search.db
 
 rm -f $DATABASE
+rm -f $SELECTION_DB
 
 echo "`$DATECMD` Create master database..."
 min_count_tags=`../../bin/taginfo-config.rb sources.master.min_count_tags 10000`
@@ -43,6 +45,14 @@ $EXEC_RUBY -pe "\$_.sub!(/__DIR__/, '$DIR')" master.sql | sqlite3 $DATABASE
 $EXEC_RUBY -pe "\$_.sub!(/__DIR__/, '$DIR')" interesting_tags.sql | $EXEC_RUBY -pe "\$_.sub!(/__MIN_COUNT_TAGS__/, '$min_count_tags')" | sqlite3 $DATABASE
 $EXEC_RUBY -pe "\$_.sub!(/__DIR__/, '$DIR')" frequent_tags.sql | $EXEC_RUBY -pe "\$_.sub!(/__MIN_COUNT_FOR_MAP__/, '$min_count_for_map')" | sqlite3 $DATABASE
 $EXEC_RUBY -pe "\$_.sub!(/__DIR__/, '$DIR')" interesting_relation_types.sql | $EXEC_RUBY -pe "\$_.sub!(/__MIN_COUNT_RELATIONS_PER_TYPE__/, '$min_count_relations_per_type')" | sqlite3 $DATABASE
+
+echo "`$DATECMD` Create selection database..."
+
+m4 -D __DIR__=$DIR \
+   -D __MIN_COUNT_FOR_MAP__=$min_count_for_map \
+   -D __MIN_COUNT_TAGS__=$min_count_tags \
+   -D __MIN_COUNT_RELATIONS_PER_TYPE__=$min_count_relations_per_type \
+   selection.sql | sqlite3 $SELECTION_DB
 
 echo "`$DATECMD` Updating history database..."
 if [ ! -e $HISTORYDB ]; then
