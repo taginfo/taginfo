@@ -25,13 +25,13 @@ SELECTION_DB=$DIR/selection.db
 echo "`$DATECMD` Create search database..."
 
 rm -f $DIR/taginfo-search.db
-m4 -D __DIR__=$DIR search.sql | sqlite3 $DIR/taginfo-search.db
+m4 --prefix-builtins -D __DIR__=$DIR search.sql | sqlite3 $DIR/taginfo-search.db
 
 echo "`$DATECMD` Create master database..."
 
 rm -f $MASTER_DB
 sqlite3 $MASTER_DB <languages.sql
-m4 -D __DIR__=$DIR master.sql | sqlite3 $MASTER_DB
+m4 --prefix-builtins -D __DIR__=$DIR master.sql | sqlite3 $MASTER_DB
 
 echo "`$DATECMD` Create selection database..."
 
@@ -40,7 +40,8 @@ min_count_for_map=`../../bin/taginfo-config.rb sources.master.min_count_for_map 
 min_count_relations_per_type=`../../bin/taginfo-config.rb sources.master.min_count_relations_per_type 100`
 
 rm -f $SELECTION_DB
-m4 -D __DIR__=$DIR \
+m4 --prefix-builtins \
+   -D __DIR__=$DIR \
    -D __MIN_COUNT_FOR_MAP__=$min_count_for_map \
    -D __MIN_COUNT_TAGS__=$min_count_tags \
    -D __MIN_COUNT_RELATIONS_PER_TYPE__=$min_count_relations_per_type \
@@ -52,7 +53,7 @@ if [ ! -e $HISTORY_DB ]; then
     sqlite3 $HISTORY_DB < history_init.sql
 fi
 
-m4 -D __DIR__=$DIR history_update.sql | sqlite3 $HISTORY_DB
+m4 --prefix-builtins -D __DIR__=$DIR history_update.sql | sqlite3 $HISTORY_DB
 
 # Remove old *.lst files. This is only temporary and can be removed once
 # everybody has the new version which doesn't create these files any more
