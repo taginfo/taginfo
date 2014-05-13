@@ -255,6 +255,10 @@ pages:
         combinations:
             title: Combinations
             description: This table shows only the most common combinations of the most common tags.
+        geographic_distribution:
+            title: Geographical distribution of this tag
+            relations: Relations do not have a geographical location, so no map can be shown.
+            no_map: Sorry. The map can only be created for the most frequent tags. Try the overpass turbo link.
         wiki_pages:
             title: Wiki pages about this tag
             none_found: No wiki page available for this tag.

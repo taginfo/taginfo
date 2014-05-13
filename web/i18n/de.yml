@@ -176,7 +176,7 @@ pages:
     reports:
         intro: |
             Reports zeigen die Daten aus verschiedenen Perspektiven.
-            Meist bringen Sie Daten aus verschiedenen Quellen auf interessante Art und
+            Meist bringen sie Daten aus verschiedenen Quellen auf interessante Art und
             Weise zusammen. Manche der Reports helfen dabei, bestimmte Arten von Fehlern
             zu finden, zum Beispiel häufig verwendete Keys ohne Wiki-Seite.
         list: Alle Reports
@@ -259,6 +259,10 @@ pages:
         combinations:
             title: Kombinationen
             description: Diese Tabelle zeigt nur die häufigsten Kombinationen der häufigsten Tags.
+        geographic_distribution:
+            title: Geographische Verteilung dieses Tags
+            relations: Relations haben keinen geographischen Ort, daher kann keine Karte angezeigt werden.
+            no_map: Sorry. Die Karte kann nur für die häufigsten Tags generiert werden. Probieren Sie den overpass turbo link.
         wiki_pages:
             title: Wiki-Seiten zu diesem Tag
             none_found: Keine Wiki-Seiten für diesen Tag vorhanden.

@@ -24,6 +24,7 @@
     <ul>
         <li><a href="#overview"><%= h(t.taginfo.overview) %></a></li>
         <li><a href="#combinations"><%= h(t.taginfo.combinations) %></a></li>
+<!--        <li><a href="#map"><%= h(t.taginfo.map) %></a></li>-->
         <li><a href="#wiki"><%= h(t.sources.wiki.name) %></a></li>
         <li><a href="#josm"><%= h(t.sources.josm.name) %></a></li>
     </ul>
@@ -48,6 +49,29 @@
         <table id="grid-combinations">
         </table>
     </div>
+<!--    <div id="map">
+        <h2><%= h(t.pages.tag.geographic_distribution.title) %></h2>
+        <% if @has_map %>
+            <% if @filter_type == 'all' %>
+                <div style="background-image: url(<%= TaginfoConfig.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: 1px 1px;"/>
+                    <img class="map" src="/api/4/tag/distribution/nodes?key=<%= @key_uri %>&value=<%= @value_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>" style="position: absolute;"/>
+                    <img class="map" src="/api/4/tag/distribution/ways?key=<%= @key_uri %>&value=<%= @value_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
+                </div>
+            <% elsif @filter_type == 'nodes' %>
+                <div style="background-image: url(<%= TaginfoConfig.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: 1px 1px;"/>
+                    <img class="map" src="/api/4/tag/distribution/nodes?key=<%= @key_uri %>&value=<%= @value_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
+                </div>
+            <% elsif @filter_type == 'ways' %>
+                <div style="background-image: url(<%= TaginfoConfig.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: 1px 1px;"/>
+                    <img class="map" src="/api/4/tag/distribution/ways?key=<%= @key_uri %>&value=<%= @value_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
+                </div>
+            <% elsif @filter_type == 'relations' %>
+                <p class="empty"><%= h(t.pages.tag.geographic_distribution.relations) %></p>
+            <% end %>
+        <% else %>
+            <p class="empty"><%= h(t.pages.tag.geographic_distribution.no_map) %></p>
+        <% end %>
+    </div>-->
     <div id="wiki">
         <h2><%= h(t.pages.tag.wiki_pages.title) %></h2>
         <% if @wiki_count > 0 %>
