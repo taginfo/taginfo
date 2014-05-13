@@ -24,7 +24,7 @@
     <ul>
         <li><a href="#overview"><%= h(t.taginfo.overview) %></a></li>
         <li><a href="#combinations"><%= h(t.taginfo.combinations) %></a></li>
-<!--        <li><a href="#map"><%= h(t.taginfo.map) %></a></li>-->
+        <li><a href="#map"><%= h(t.taginfo.map) %></a></li>
         <li><a href="#wiki"><%= h(t.sources.wiki.name) %></a></li>
         <li><a href="#josm"><%= h(t.sources.josm.name) %></a></li>
     </ul>
@@ -49,7 +49,7 @@
         <table id="grid-combinations">
         </table>
     </div>
-<!--    <div id="map">
+    <div id="map">
         <h2><%= h(t.pages.tag.geographic_distribution.title) %></h2>
         <% if @has_map %>
             <% if @filter_type == 'all' %>
@@ -71,7 +71,7 @@
         <% else %>
             <p class="empty"><%= h(t.pages.tag.geographic_distribution.no_map) %></p>
         <% end %>
-    </div>-->
+    </div>
     <div id="wiki">
         <h2><%= h(t.pages.tag.wiki_pages.title) %></h2>
         <% if @wiki_count > 0 %>
