@@ -101,7 +101,7 @@ def turbo_link(filter, key, value=nil)
     parameters[:template] = template
     
     url = TaginfoConfig.get('turbo.url_prefix', 'http://overpass-turbo.eu/?') + Rack::Utils::build_query(parameters)
-    return '<span class="button">' + external_link('turbo_button', '<img src="/img/turbo.png" title="Turbo"/>', url, true) + '</span>'
+    return '<span class="button">' + external_link('turbo_button', '<img src="/img/turbo.png" title="overpass turbo"/>', url, true) + '</span>'
 end
 
 def external_link(id, title, link, new_window=false)
