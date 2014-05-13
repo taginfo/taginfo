@@ -325,9 +325,6 @@ sources:
     potlatch:
         name: Potlatch
         description: Configuration data from the Potlatch2 OSM editor.
-    merkaartor:
-        name: Merkaartor
-        description: Configuration data from the Merkaartor OSM editor.
     languages:
         name: Languages
         description: Language names, codes, etc. from IANA and Unicode registries.

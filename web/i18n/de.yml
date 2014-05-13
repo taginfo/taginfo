@@ -329,9 +329,6 @@ sources:
     potlatch:
         name: Potlatch
         description: Einstellungen des OSM-Editors "Potlatch2".
-    merkaartor:
-        name: Merkaartor
-        description: Einstellungen des OSM-Editors "Merkaartor".
     languages:
         name: Sprachen
         description: Namen, Codes, usw. zu Sprachen aus IANA- und Unicode-Registrierungen.

@@ -322,9 +322,6 @@ sources:
     potlatch:
         name: Potlatch
         description: Конфигурационные файлы редактора Potlatch 2.
-    merkaartor:
-        name: Merkaartor
-        description: Конфигурационные файлы редактора Merkaartor.
     languages:
         name: Languages
         description: Языковые названия, коды, и прочее из реестров IANA и Unicode.

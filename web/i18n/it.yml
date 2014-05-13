@@ -144,9 +144,6 @@ sources:
     potlatch:
         name: Potlatch
         description: Dati di configurazione dall'editor Potlatch2 di OSM.
-    merkaartor:
-        name: Merkaartor
-        description: Dati di configurazione dall'editor Merkaartor di OSM.
 
 reports:
     characters_in_keys:

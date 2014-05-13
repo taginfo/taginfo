@@ -309,9 +309,6 @@ sources:
     potlatch:
         name: Potlatch
         description: Dane konfiguracyjne z edytora Potlatch2.
-    merkaartor:
-        name: Merkaartor
-        description: Dane konfiguracyjne z edytora Merkaartor.
 
 reports:
     characters_in_keys:
