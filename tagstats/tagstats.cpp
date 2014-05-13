@@ -63,7 +63,8 @@ void print_help() {
               << "  -m, --min-tag-combination-count=N  Tag combinations not appearing this often\n" \
               << "                                     are not written to database\n";
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
-    std::cout << "  -R, --relation-types=FILENAME File with relation types we are interested in\n" \
+    std::cout << "  -M, --map-tags=FILENAME       File with tags we want maps for\n" \
+              << "  -R, --relation-types=FILENAME File with relation types we are interested in\n" \
               << "  -t, --top=NUMBER              Top of bounding box for distribution images\n" \
               << "  -r, --right=NUMBER            Right of bounding box for distribution images\n" \
               << "  -b, --bottom=NUMBER           Bottom of bounding box for distribution images\n" \
@@ -125,13 +126,13 @@ int main(int argc, char *argv[]) {
             case 'T':
                 tags_list = optarg;
                 break;
-            case 'M':
-                map_tags_list = optarg;
-                break;
             case 'm':
                 min_tag_combination_count = atoi(optarg);
                 break;
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
+            case 'M':
+                map_tags_list = optarg;
+                break;
             case 'R':
                 relation_type_list = optarg;
                 break;

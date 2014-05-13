@@ -366,7 +366,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
         }
 
         std::cerr << "gridcells_all: " << GeoDistribution::count_all_set_cells() << std::endl;
-        std::cerr << "sum of location image sizes: " << sum_size << " bytes\n";
+        std::cerr << "sum of key location image sizes: " << sum_size << " bytes\n";
 
         m_database.commit();
     }
@@ -404,8 +404,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
             }
         }
 
-        std::cerr << "gridcells_all: " << GeoDistribution::count_all_set_cells() << std::endl;
-        std::cerr << "sum of location image sizes: " << sum_size << " bytes\n";
+        std::cerr << "sum of tag location image sizes: " << sum_size << " bytes\n";
 
         m_database.commit();
     }
