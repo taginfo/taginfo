@@ -55,7 +55,7 @@
         "create": "db",
         "db": {
             // Path to the 'tagstats' program (absolute path or relative to sources/db directory).
-            "tagstats": "./tagstats",
+            "tagstats": "../../tagstats/tagstats",
             // The OSM planet file or extract where we read the OSM data from.
             "planetfile": "/osm/planet/var/current-planet.osm.pbf"
         },
