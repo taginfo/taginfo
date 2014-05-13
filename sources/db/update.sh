@@ -27,7 +27,7 @@ fi
 echo "`$DATECMD` Start db..."
 
 DATABASE=$DIR/taginfo-db.db
-SELECTION_DB=$DIR/selection.db
+SELECTION_DB=$DIR/../selection.db
 
 rm -f $DATABASE
 
@@ -46,10 +46,7 @@ width=`../../bin/taginfo-config.rb geodistribution.width`
 height=`../../bin/taginfo-config.rb geodistribution.height`
 min_tag_combination_count=`../../bin/taginfo-config.rb sources.master.min_tag_combination_count 1000`
 
-TAGSTATS=`../../bin/taginfo-config.rb sources.db.tagstats`
-if [ "x" = "x$TAGSTATS" ]; then
-    TAGSTATS="./tagstats"
-fi
+TAGSTATS=`../../bin/taginfo-config.rb sources.db.tagstats ../../tagstats/tagstats`
 
 if [ -f $SELECTION_DB ]; then
     OPEN_SELECTION_DB="--selection-db=$SELECTION_DB"

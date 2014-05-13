@@ -18,47 +18,45 @@ fi
 
 echo "`$DATECMD` Start master..."
 
-EXEC_RUBY="$TAGINFO_RUBY"
-if [ "x$EXEC_RUBY" = "x" ]; then
-    EXEC_RUBY=ruby
-fi
-echo "Running with ruby set as '${EXEC_RUBY}'"
-
-DATABASE=$DIR/taginfo-master.db
-HISTORYDB=$DIR/taginfo-history.db
+MASTER_DB=$DIR/taginfo-master.db
+HISTORY_DB=$DIR/taginfo-history.db
 SELECTION_DB=$DIR/selection.db
 
 echo "`$DATECMD` Create search database..."
 
 rm -f $DIR/taginfo-search.db
-$EXEC_RUBY -pe "\$_.sub!(/__DIR__/, '$DIR')" search.sql | sqlite3 $DIR/taginfo-search.db
-
-rm -f $DATABASE
-rm -f $SELECTION_DB
+m4 -D __DIR__=$DIR search.sql | sqlite3 $DIR/taginfo-search.db
 
 echo "`$DATECMD` Create master database..."
-min_count_tags=`../../bin/taginfo-config.rb sources.master.min_count_tags 10000`
-min_count_for_map=`../../bin/taginfo-config.rb sources.master.min_count_for_map 1000`
-min_count_relations_per_type=`../../bin/taginfo-config.rb sources.master.min_count_relations_per_type 100`
-sqlite3 $DATABASE <languages.sql
-$EXEC_RUBY -pe "\$_.sub!(/__DIR__/, '$DIR')" master.sql | sqlite3 $DATABASE
-$EXEC_RUBY -pe "\$_.sub!(/__DIR__/, '$DIR')" interesting_tags.sql | $EXEC_RUBY -pe "\$_.sub!(/__MIN_COUNT_TAGS__/, '$min_count_tags')" | sqlite3 $DATABASE
-$EXEC_RUBY -pe "\$_.sub!(/__DIR__/, '$DIR')" frequent_tags.sql | $EXEC_RUBY -pe "\$_.sub!(/__MIN_COUNT_FOR_MAP__/, '$min_count_for_map')" | sqlite3 $DATABASE
-$EXEC_RUBY -pe "\$_.sub!(/__DIR__/, '$DIR')" interesting_relation_types.sql | $EXEC_RUBY -pe "\$_.sub!(/__MIN_COUNT_RELATIONS_PER_TYPE__/, '$min_count_relations_per_type')" | sqlite3 $DATABASE
+
+rm -f $MASTER_DB
+sqlite3 $MASTER_DB <languages.sql
+m4 -D __DIR__=$DIR master.sql | sqlite3 $MASTER_DB
 
 echo "`$DATECMD` Create selection database..."
 
+min_count_tags=`../../bin/taginfo-config.rb sources.master.min_count_tags 10000`
+min_count_for_map=`../../bin/taginfo-config.rb sources.master.min_count_for_map 1000`
+min_count_relations_per_type=`../../bin/taginfo-config.rb sources.master.min_count_relations_per_type 100`
+
+rm -f $SELECTION_DB
 m4 -D __DIR__=$DIR \
    -D __MIN_COUNT_FOR_MAP__=$min_count_for_map \
    -D __MIN_COUNT_TAGS__=$min_count_tags \
    -D __MIN_COUNT_RELATIONS_PER_TYPE__=$min_count_relations_per_type \
    selection.sql | sqlite3 $SELECTION_DB
 
-echo "`$DATECMD` Updating history database..."
-if [ ! -e $HISTORYDB ]; then
-    sqlite3 $HISTORYDB < history_init.sql
+echo "`$DATECMD` Update history database..."
+
+if [ ! -e $HISTORY_DB ]; then
+    sqlite3 $HISTORY_DB < history_init.sql
 fi
-$EXEC_RUBY -pe "\$_.sub!(/__DIR__/, '$DIR')" history_update.sql | sqlite3 $HISTORYDB
+
+m4 -D __DIR__=$DIR history_update.sql | sqlite3 $HISTORY_DB
+
+# Remove old *.lst files. This is only temporary and can be removed once
+# everybody has the new version which doesn't create these files any more
+rm -f frequent_tags.lst interesting_relation_types.lst interesting_tags.lst
 
 echo "`$DATECMD` Done master."
 
