@@ -31,6 +31,12 @@ dir = ARGV[0] || '.'
 db = SQLite3::Database.new(dir + '/taginfo-db.db')
 db.results_as_hash = true
 
+db.execute("PRAGMA journal_mode  = OFF");
+db.execute("PRAGMA synchronous   = OFF");
+db.execute("PRAGMA count_changes = OFF");
+db.execute("PRAGMA temp_store    = MEMORY;");
+db.execute("PRAGMA cache_size    = 5000000;");
+
 #------------------------------------------------------------------------------
 
 regexes = [
