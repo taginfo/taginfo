@@ -1,10 +1,10 @@
 <div class="pre">
     <div id="tools" class="no-print">
-        <% if @count_all_values < TaginfoConfig.get('xapi.max_results', 1000) %>
+        <% if @count_all_values <= TaginfoConfig.get('xapi.max_results', 1000) %>
             <%= xapi_link('relation', 'type', @rtype) %> <%= josm_link('relation', 'type', @rtype) %>
         <% else %>
-            <span class="button disabled" title="Button disabled, because there are too many objects with this key">XAPI</span>
-            <span class="button disabled" title="Button disabled, because there are too many objects with this key">JOSM</span>
+            <span class="button disabled" title="<%= h(t.pages.relation.button_disabled) %>">XAPI</span>
+            <span class="button disabled" title="<%= h(t.pages.relation.button_disabled) %>">JOSM</span>
         <% end %>
         <%= turbo_link('relations', 'type', @rtype) %>
     </div>

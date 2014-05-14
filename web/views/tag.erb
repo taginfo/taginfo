@@ -12,14 +12,14 @@
         <% if @count_all < TaginfoConfig.get('xapi.max_results', 1000) %>
             <%= xapi_link(@filter_xapi, @key, @value) %> <%= josm_link(@filter_xapi, @key, @value) %>
         <% else %>
-            <span class="button disabled" title="Button disabled, because there are too many objects with this key">XAPI</span>
-            <span class="button disabled" title="Button disabled, because there are too many objects with this key">JOSM</span>
+            <span class="button disabled" title="<%= h(t.pages.tag.button_disabled) %>">XAPI</span>
+            <span class="button disabled" title="<%= h(t.pages.tag.button_disabled) %>">JOSM</span>
         <% end %>
         <%= turbo_link(@filter_type, @key, @value) %>
         <% if @count_all <= TaginfoConfig.get('level0.max_results', 10) %>
             <%= level0_link() %>
         <% else %>
-            <span class="button disabled" title="Button disabled, because there are too many objects with this tag">Level0 Editor</span>
+            <span class="button disabled" title="<%= h(t.pages.tag.button_disabled) %>">Level0 Editor</span>
         <% end %>
     </div>
     <h1></h1>

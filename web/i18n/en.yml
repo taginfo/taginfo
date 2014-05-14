@@ -210,6 +210,7 @@ pages:
             nodes: Nodes only
             ways: Ways only
             relations: Relations only
+        button_disabled: Button disabled, because there are too many objects with this key.
         number_objects: Number of objects
         number_values: Number of values
         values_used: Values used with this key
@@ -243,6 +244,7 @@ pages:
     tag:
         description_from_wiki: Description of this tag from the wiki (if available in your chosen language, otherwise in English).
         no_description_in_wiki: No English language description for this tag in the wiki. (See also the "Wiki" tab.)
+        button_disabled: Button disabled, because there are too many objects with this tag.
         number_objects: Number of objects
         overview:
             see_also: See also the relation type page
@@ -277,6 +279,7 @@ pages:
         name: Relation type
         description_from_wiki: Description of this relation type from the wiki (if available in your chosen language, otherwise in English).
         no_description_in_wiki: No English language description for this relation type in the wiki. (See also the "Wiki" tab.)
+        button_disabled: Button disabled, because there are too many objects with this relation type.
         overview:
             tab: Overview
             title: Overview

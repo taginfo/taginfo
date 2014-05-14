@@ -214,6 +214,7 @@ pages:
             nodes: Nur Nodes
             ways: Nur Ways
             relations: Nur Relations
+        button_disabled: Button deaktiviert, weil es zu viele Objekte mit diesem Key gibt.
         number_objects: Anzahl Objekte
         number_values: Anzahl Values
         values_used: Values für diesen Key
@@ -247,6 +248,7 @@ pages:
     tag:
         description_from_wiki: Beschreibung dieses Tags aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf Englisch).
         no_description_in_wiki: Keine deutschsprachige Beschreibung dieses Tags im Wiki. (Siehe auch im "Wiki"-Tab.)
+        button_disabled: Button deaktiviert, weil es zu viele Objekte mit diesem Tag gibt.
         number_objects: Anzahl Objekte
         overview:
             see_also: Siehe auch auf der Relation-Typ-Seite
@@ -281,6 +283,7 @@ pages:
         name: Relation-Typ
         description_from_wiki: Beschreibung dieses Relations-Types aus dem Wiki  (falls vorhanden in der gewählten Sprache, sonst auf Englisch).
         no_description_in_wiki: Keine deutschsprachige Beschreibung dieser Relation im Wiki. (Siehe auch im "Wiki"-Tab.)
+        button_disabled: Button deaktiviert, weil es zu viele Objekte mit diesem Relation-Typ gibt.
         overview:
             tab: Übersicht
             title: Übersicht
