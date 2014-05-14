@@ -19,7 +19,7 @@
         <% if @count_all <= TaginfoConfig.get('level0.max_results', 10) %>
             <%= level0_link() %>
         <% else %>
-            <span class="button disabled" title="Button disabled, because there are too many objects with this key">Level0 Editor</span>
+            <span class="button disabled" title="Button disabled, because there are too many objects with this tag">Level0 Editor</span>
         <% end %>
     </div>
     <h1></h1>
@@ -115,7 +115,7 @@ function page_init2() {
     jQuery('span#keylink').html(link_to_key(key));
     jQuery('span#relationlink').html(link_to_rtype(value));
     jQuery('#level0_button').bind('click', function() {
-        level0_editor('#{ TaginfoConfig.get('level0.overpass_url_prefix') }', '#{ TaginfoConfig.get('level0.level0_url_prefix') }', filter, key, undefined);
+        level0_editor('#{ TaginfoConfig.get('level0.overpass_url_prefix') }', '#{ TaginfoConfig.get('level0.level0_url_prefix') }', filter, key, value);
     });
 
     init_tabs([key, value, filter]);
