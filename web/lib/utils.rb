@@ -105,7 +105,7 @@ def turbo_link(filter, key, value=nil)
 end
 
 def level0_link()
-    return '<span class="button">' + external_link('level0_button', 'Level0 Editor', '#', false) + '</span>'
+    return '<span class="button">' + external_link('level0_button', 'Level0 Editor', '#', true) + '</span>'
 end
 
 def external_link(id, title, link, new_window=false)

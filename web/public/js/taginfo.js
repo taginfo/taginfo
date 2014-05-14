@@ -560,6 +560,8 @@ function level0_editor(overpass_url_prefix, level0_url_prefix, filter, key, valu
         var level0_url = level0_url_prefix + 'url=' + objects.join(',');
         window.open(level0_url, '_blank');
     });
+
+    return false;
 }
 
 /* ============================ */

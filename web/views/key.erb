@@ -114,7 +114,7 @@ function page_init2() {
         key = #{ @key.to_json };
     jQuery('h1').html(fmt_key(key));
     jQuery('#level0_button').bind('click', function() {
-        level0_editor('#{ TaginfoConfig.get('level0.overpass_url_prefix') }', '#{ TaginfoConfig.get('level0.level0_url_prefix') }', filter, key, undefined);
+        return level0_editor('#{ TaginfoConfig.get('level0.overpass_url_prefix') }', '#{ TaginfoConfig.get('level0.level0_url_prefix') }', filter, key, undefined);
     });
 
     init_tabs([key, filter, #{ r18n.locale.code.to_json }]);

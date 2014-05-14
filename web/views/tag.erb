@@ -115,7 +115,7 @@ function page_init2() {
     jQuery('span#keylink').html(link_to_key(key));
     jQuery('span#relationlink').html(link_to_rtype(value));
     jQuery('#level0_button').bind('click', function() {
-        level0_editor('#{ TaginfoConfig.get('level0.overpass_url_prefix') }', '#{ TaginfoConfig.get('level0.level0_url_prefix') }', filter, key, value);
+        return level0_editor('#{ TaginfoConfig.get('level0.overpass_url_prefix') }', '#{ TaginfoConfig.get('level0.level0_url_prefix') }', filter, key, value);
     });
 
     init_tabs([key, value, filter]);
