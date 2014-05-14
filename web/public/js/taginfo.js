@@ -530,6 +530,40 @@ function table_right() {
 
 /* ============================ */
 
+function quote_double(text) {
+    return text.replace(/["\\]/, '\\$&', 'gm')
+}
+
+function level0_editor(overpass_url_prefix, level0_url_prefix, filter, key, value) {
+    var query = '["' + quote_double(key);
+    if (value !== undefined) {
+        query += '"="' + quote_double(value);
+    }
+    query += '"];'
+
+    if (filter == 'nodes') {
+        query = 'node' + query;
+    } else if (filter == 'ways') {
+        query = 'way' + query;
+    } else if (filter == 'relations') {
+        query = 'rel' + query;
+    } else {
+        query = '(node' + query + 'way' + query + 'rel' + query + ');';
+    }
+
+    var overpass_url = overpass_url_prefix + 'data=[out:json];' + query + 'out body;';
+
+    jQuery.getJSON(overpass_url, function(data) {
+        var objects = jQuery.map(data.elements, function(el) {
+            return el.type.substr(0,1) + el.id + (el.type == 'way' ? '!' : '');
+        });
+        var level0_url = level0_url_prefix + 'url=' + objects.join(',');
+        window.open(level0_url, '_blank');
+    });
+}
+
+/* ============================ */
+
 function open_help() {
     jQuery('#help').dialog({
         modal: true,

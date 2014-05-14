@@ -9,13 +9,18 @@
         </select>
     </form>
     <div id="tools" class="no-print">
-        <% if @count_all_values < TaginfoConfig.get('xapi.max_results', 1000) %>
+        <% if @count_all_values <= TaginfoConfig.get('xapi.max_results', 1000) %>
             <%= xapi_link(@filter_xapi, @key) %> <%= josm_link(@filter_xapi, @key) %>
         <% else %>
             <span class="button disabled" title="Button disabled, because there are too many objects with this key">XAPI</span>
             <span class="button disabled" title="Button disabled, because there are too many objects with this key">JOSM</span>
         <% end %>
         <%= turbo_link(@filter_type, @key) %>
+        <% if @count_all_values <= TaginfoConfig.get('level0.max_results', 10) %>
+            <%= level0_link() %>
+        <% else %>
+            <span class="button disabled" title="Button disabled, because there are too many objects with this key">Level0 Editor</span>
+        <% end %>
     </div>
     <h1></h1>
     <p><%= @desc %></p>
@@ -105,9 +110,14 @@
 <% javascript do
     JS.raw(<<"JAVASCRIPT")
 function page_init2() {
-    var key = #{ @key.to_json };
+    var filter = #{ @filter_type.to_json },
+        key = #{ @key.to_json };
     jQuery('h1').html(fmt_key(key));
-    init_tabs([key, #{ @filter_type.to_json }, #{ r18n.locale.code.to_json }]);
+    jQuery('#level0_button').bind('click', function() {
+        level0_editor('#{ TaginfoConfig.get('level0.overpass_url_prefix') }', '#{ TaginfoConfig.get('level0.level0_url_prefix') }', filter, key, undefined);
+    });
+
+    init_tabs([key, filter, #{ r18n.locale.code.to_json }]);
     create_chart({
         key: key,
         width: 160,

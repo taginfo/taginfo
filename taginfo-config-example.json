@@ -38,6 +38,11 @@
     "turbo": {
         "url_prefix": "http://overpass-turbo.eu/?"
     },
+    "level0": {
+        "max_results": 50,
+        "overpass_url_prefix": "http://overpass.osm.rambler.ru/cgi/interpreter?",
+        "level0_url_prefix": "http://level0.osmz.ru/?"
+    },
     "opensearch": {
         // For the OpenSearchDescription. You have to change at least the shortname and the contact for your instance.
         "shortname": "Taginfo Test Instance",
