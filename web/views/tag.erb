@@ -15,12 +15,12 @@
             <span class="button disabled" title="<%= h(t.pages.tag.button_disabled) %>">XAPI</span>
             <span class="button disabled" title="<%= h(t.pages.tag.button_disabled) %>">JOSM</span>
         <% end %>
-        <%= turbo_link(@filter_type, @key, @value) %>
         <% if @count_all <= TaginfoConfig.get('level0.max_results', 10) %>
             <%= level0_link() %>
         <% else %>
             <span class="button disabled" title="<%= h(t.pages.tag.button_disabled) %>">Level0 Editor</span>
         <% end %>
+        <%= turbo_link(@filter_type, @key, @value) %>
     </div>
     <h1></h1>
     <p><%= @desc %></p>
