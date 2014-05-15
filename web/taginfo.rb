@@ -218,6 +218,7 @@ class Taginfo < Sinatra::Base
     # user interface
     load 'lib/ui/embed.rb'
     load 'lib/ui/help.rb'
+    load 'lib/ui/key_comparison.rb'
     load 'lib/ui/keys.rb'
     load 'lib/ui/relation.rb'
     load 'lib/ui/reports.rb'
