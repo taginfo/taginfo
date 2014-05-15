@@ -26,6 +26,7 @@
 #include <fstream>
 #include <iostream>
 #include <map>
+#include <utility>
 
 #include <google/sparse_hash_map>
 #include <boost/foreach.hpp>
@@ -50,6 +51,13 @@ struct djb2_hash {
 
         return hash;
     }
+
+    size_t operator()(std::pair<const char *, const char*> p) const {
+        std::string s = p.first;
+        s += '=';
+        s += p.second;
+        return operator()(s.c_str());
+    }
 };
 
 /**
@@ -58,6 +66,10 @@ struct djb2_hash {
 struct eqstr {
     bool operator()(const char* s1, const char* s2) const {
         return (s1 == s2) || (s1 && s2 && strcmp(s1, s2) == 0);
+    }
+
+    bool operator()(std::pair<const char*, const char*> p1, std::pair<const char*, const char*> p2) const {
+        return operator()(p1.first, p2.first) && operator()(p1.second, p2.second);
     }
 };
 
@@ -181,7 +193,7 @@ public:
 }; // class KeyValueStats
 
 typedef google::sparse_hash_map<const char *, KeyValueStats *, djb2_hash, eqstr> key_value_hash_map_t;
-typedef google::sparse_hash_map<const char *, GeoDistribution *, djb2_hash, eqstr> key_value_geodistribution_hash_map_t;
+typedef google::sparse_hash_map<std::pair<const char*, const char*>, GeoDistribution *, djb2_hash, eqstr> key_value_geodistribution_hash_map_t;
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
 
 struct RelationRoleStats {
@@ -384,13 +396,9 @@ class TagStatsHandler : public Osmium::Handler::Base {
             void* ptr = geo->create_png(&size);
             sum_size += size;
 
-            std::vector<std::string> kv;
-            boost::split(kv, it->first, boost::is_any_of("="));
-            kv.push_back(""); // if there is no = in key, make sure there is an empty value
-
             statement_insert_into_tag_distributions
-            .bind_text(kv[0].c_str())         // column: key
-            .bind_text(kv[1].c_str())         // column: value
+            .bind_text(it->first.first)       // column: key
+            .bind_text(it->first.second)      // column: value
             .bind_text(for_nodes ? "n" : "w") // column: object_type
             .bind_blob(ptr, size)             // column: png
             .execute();
@@ -452,14 +460,12 @@ class TagStatsHandler : public Osmium::Handler::Base {
             }
             stat->update(it->value(), object, m_string_store);
 
-            std::string keyvalue = it->key();
-            keyvalue += "=";
-            keyvalue += it->value();
+            std::pair<const char*, const char*> keyvalue = std::make_pair(it->key(), it->value());
 
             if (object.type() == NODE) {
                 rough_position_t location = m_map_to_int(static_cast<const Osmium::OSM::Node&>(object).position());
                 stat->distribution.add_coordinate(location);
-                key_value_geodistribution_hash_map_t::iterator gd_it = m_key_value_geodistribution.find(keyvalue.c_str());
+                key_value_geodistribution_hash_map_t::iterator gd_it = m_key_value_geodistribution.find(keyvalue);
                 if (gd_it != m_key_value_geodistribution.end()) {
                     gd_it->second->add_coordinate(location);
                 }
@@ -471,7 +477,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
                 // coordinates of all nodes?
                 const Osmium::OSM::WayNodeList& wnl = static_cast<const Osmium::OSM::Way&>(object).nodes();
                 if (!wnl.empty()) {
-                    key_value_geodistribution_hash_map_t::iterator gd_it = m_key_value_geodistribution.find(keyvalue.c_str());
+                    key_value_geodistribution_hash_map_t::iterator gd_it = m_key_value_geodistribution.find(keyvalue);
                     for (Osmium::OSM::WayNodeList::const_iterator it = wnl.begin(); it != wnl.end(); ++it) {
                         rough_position_t location = m_storage[it->ref()];
                         stat->distribution.add_coordinate(location);
@@ -535,10 +541,11 @@ public:
             }
 #endif // TAGSTATS_COUNT_TAG_COMBINATIONS
             {
-                Sqlite::Statement select(sdb, "SELECT key || '=' || value FROM frequent_tags;");
+                Sqlite::Statement select(sdb, "SELECT key, value FROM frequent_tags;");
                 while (select.read()) {
-                    std::string key_value = select.get_text(0);
-                    m_key_value_geodistribution[m_string_store.add(key_value.c_str())] = new GeoDistribution();
+                    std::string key   = select.get_text(0);
+                    std::string value = select.get_text(1);
+                    m_key_value_geodistribution[std::make_pair(m_string_store.add(key.c_str()), m_string_store.add(value.c_str()))] = new GeoDistribution();
                 }
             }
             {
