@@ -36,7 +36,10 @@
         "url_prefix": "http://overpass-api.de/api/xapi_meta?"
     },
     "turbo": {
-        "url_prefix": "http://overpass-turbo.eu/?"
+        "max_auto": 100,
+        "url_prefix": "http://overpass-turbo.eu/?",
+        "wizard_url_prefix": "http://overpass-turbo.eu/master?",
+        "wizard_area": "global"
     },
     "level0": {
         "max_results": 50,

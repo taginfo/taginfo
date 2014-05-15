@@ -85,22 +85,36 @@ def josm_link(element, key, value=nil)
     '<span class="button">' + external_link('josm_button', 'JOSM', 'http://localhost:8111/import?url=' + Rack::Utils::escape(xapi_url(element, key, value)), true) + '</span>'
 end
 
-def turbo_link(filter, key, value=nil)
-    template = 'key';
-    parameters = { :key => key }
+def quote_double(text)
+    text.gsub(/["\\]/, "\\\\\\0")
+end
 
-    unless value.nil?
-        parameters[:value] = value;
-        template += '-value'
-    end
+def turbo_link(count, filter, key, value=nil)
+    if count <= TaginfoConfig.get('turbo.max_auto', 100)
+        key = quote_double(key)
+        if value.nil?
+            value = '*'
+        else
+            value = '"' + quote_double(value) + '"'
+        end
+        url = TaginfoConfig.get('turbo.wizard_url_prefix', 'http://overpass-turbo.eu/master?') + 'w=' + Rack::Utils::escape('"' + key + '"=' + value + ' ' + TaginfoConfig.get('turbo.wizard_area', 'global')) + '&R'
+    else
+        template = 'key';
+        parameters = { :key => key }
 
-    if filter != 'all'
-        template += '-type'
-        parameters[:type] = filter.chop
+        unless value.nil?
+            parameters[:value] = value;
+            template += '-value'
+        end
+
+        if filter != 'all'
+            template += '-type'
+            parameters[:type] = filter.chop
+        end
+        parameters[:template] = template
+
+        url = TaginfoConfig.get('turbo.url_prefix', 'http://overpass-turbo.eu/?') + Rack::Utils::build_query(parameters)
     end
-    parameters[:template] = template
-    
-    url = TaginfoConfig.get('turbo.url_prefix', 'http://overpass-turbo.eu/?') + Rack::Utils::build_query(parameters)
     return '<span class="button">' + external_link('turbo_button', '<img src="/img/turbo.png"/> overpass turbo', url, true) + '</span>'
 end
 
