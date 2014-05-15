@@ -161,7 +161,6 @@ public:
 
 typedef google::sparse_hash_map<const char *, KeyStats *, djb2_hash, eqstr> key_hash_map_t;
 
-#ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
 /**
  * A KeyValueStats object holds some statistics for an OSM tag (key/value pair).
  */
@@ -182,7 +181,6 @@ public:
 
 typedef google::sparse_hash_map<const char *, KeyValueStats *, djb2_hash, eqstr> key_value_hash_map_t;
 typedef google::sparse_hash_map<std::pair<const char*, const char*>, GeoDistribution *, djb2_hash, eqstr> key_value_geodistribution_hash_map_t;
-#endif // TAGSTATS_COUNT_TAG_COMBINATIONS
 
 struct RelationRoleStats {
     uint32_t node;
@@ -250,9 +248,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
     key_hash_map_t tags_stat;
 
-#ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
     key_value_hash_map_t m_key_value_stats;
-#endif // TAGSTATS_COUNT_TAG_COMBINATIONS
 
     key_value_geodistribution_hash_map_t m_key_value_geodistribution;
 
@@ -287,7 +283,6 @@ class TagStatsHandler : public Osmium::Handler::Base {
         }
     }
 
-#ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
     void _update_key_value_combination_hash2(const Osmium::OSM::Object& object, Osmium::OSM::TagList::const_iterator it, key_value_hash_map_t::iterator kvi1, std::string& key_value1) {
         for (; it != object.tags().end(); ++it) {
             std::string key_value2(it->key());
@@ -331,7 +326,6 @@ class TagStatsHandler : public Osmium::Handler::Base {
             }
         }
     }
-#endif // TAGSTATS_COUNT_TAG_COMBINATIONS
 
     void _print_and_clear_key_distribution_images(bool for_nodes) {
         int sum_size=0;
@@ -477,10 +471,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
         }
 
         _update_key_combination_hash(object);
-
-#ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
         _update_key_value_combination_hash(object);
-#endif // TAGSTATS_COUNT_TAG_COMBINATIONS
     }
 
     StatisticsHandler statistics_handler;
@@ -508,7 +499,6 @@ public:
         if (!selection_database_name.empty()) {
             Sqlite::Database sdb(selection_database_name.c_str(), SQLITE_OPEN_READONLY);
 
-#ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
             {
                 Sqlite::Statement select(sdb, "SELECT key FROM interesting_tags WHERE value IS NULL;");
                 while (select.read()) {
@@ -523,7 +513,6 @@ public:
                     m_key_value_stats[m_string_store.add(key_value.c_str())] = new KeyValueStats();
                 }
             }
-#endif // TAGSTATS_COUNT_TAG_COMBINATIONS
             {
                 Sqlite::Statement select(sdb, "SELECT key, value FROM frequent_tags;");
                 while (select.read()) {
@@ -647,11 +636,9 @@ public:
                 "count_all, count_nodes, count_ways, count_relations) " \
                 "VALUES (?, ?, ?, ?, ?, ?);");
 
-#ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
         Sqlite::Statement statement_insert_into_tag_combinations(m_database, "INSERT INTO tag_combinations (key1, value1, key2, value2, " \
                 "count_all, count_nodes, count_ways, count_relations) " \
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
-#endif // TAGSTATS_COUNT_TAG_COMBINATIONS
 
         Sqlite::Statement statement_insert_into_relation_types(m_database, "INSERT INTO relation_types (rtype, count, " \
                 "members_all, members_nodes, members_ways, members_relations) " \
@@ -735,7 +722,6 @@ public:
             delete stat; // lets make valgrind happy
         }
 
-#ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
         for (key_value_hash_map_t::const_iterator tags_iterator = m_key_value_stats.begin(); tags_iterator != m_key_value_stats.end(); ++tags_iterator) {
             KeyValueStats* stat = tags_iterator->second;
 
@@ -766,7 +752,6 @@ public:
 
             delete stat; // lets make valgrind happy
         }
-#endif // TAGSTATS_COUNT_TAG_COMBINATIONS
 
         typedef std::pair<const std::string, RelationTypeStats> relation_type_stats_map_iterator_t;
         typedef std::pair<const std::string, RelationRoleStats> relation_role_stats_map_iterator_t;

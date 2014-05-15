@@ -58,12 +58,10 @@ void print_help() {
               << "on OSM tags from OSMFILE and puts them into DATABASE (an SQLite database).\n" \
               << "\nOptions:\n" \
               << "  -H, --help                    This help message\n" \
-              << "  -s, --selection-db=DATABASE   Name of selection database\n";
-#ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
-    std::cout << "  -m, --min-tag-combination-count=N  Tag combinations not appearing this often\n" \
-              << "                                     are not written to database\n";
-#endif // TAGSTATS_COUNT_TAG_COMBINATIONS
-    std::cout << "  -t, --top=NUMBER              Top of bounding box for distribution images\n" \
+              << "  -s, --selection-db=DATABASE   Name of selection database\n" \
+              << "  -m, --min-tag-combination-count=N  Tag combinations not appearing this often\n" \
+              << "                                     are not written to database\n" \
+              << "  -t, --top=NUMBER              Top of bounding box for distribution images\n" \
               << "  -r, --right=NUMBER            Right of bounding box for distribution images\n" \
               << "  -b, --bottom=NUMBER           Bottom of bounding box for distribution images\n" \
               << "  -l, --left=NUMBER             Left of bounding box for distribution images\n" \
@@ -75,9 +73,7 @@ void print_help() {
 int main(int argc, char *argv[]) {
     static struct option long_options[] = {
         {"help",           no_argument, 0, 'H'},
-#ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
         {"min-tag-combination-count", required_argument, 0, 'm'},
-#endif // TAGSTATS_COUNT_TAG_COMBINATIONS
         {"selection-db",   required_argument, 0, 's'},
         {"top",            required_argument, 0, 't'},
         {"right",          required_argument, 0, 'r'},
@@ -102,11 +98,7 @@ int main(int argc, char *argv[]) {
 
     while (true) {
         int c = getopt_long(argc, argv,
-#ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
                             "dHt:r:b:l:w:h:s:m:",
-#else
-                            "dHt:r:b:l:w:h:s:",
-#endif // TAGSTATS_COUNT_TAG_COMBINATIONS
                             long_options, 0);
         if (c == -1) {
             break;
@@ -119,11 +111,9 @@ int main(int argc, char *argv[]) {
             case 's':
                 selection_database_name = optarg;
                 break;
-#ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
             case 'm':
                 min_tag_combination_count = atoi(optarg);
                 break;
-#endif // TAGSTATS_COUNT_TAG_COMBINATIONS
             case 't':
                 top = atof(optarg);
                 break;
