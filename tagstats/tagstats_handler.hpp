@@ -101,9 +101,7 @@ struct Counter {
 
 typedef google::sparse_hash_map<const char *, Counter, djb2_hash, eqstr> value_hash_map_t;
 
-#ifdef TAGSTATS_COUNT_USERS
 typedef google::sparse_hash_map<osm_user_id_t, uint32_t> user_hash_map_t;
-#endif // TAGSTATS_COUNT_USERS
 
 typedef google::sparse_hash_map<const char *, Counter, djb2_hash, eqstr> combination_hash_map_t;
 
@@ -122,9 +120,7 @@ public:
     combination_hash_map_t key_combination_hash;
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
-#ifdef TAGSTATS_COUNT_USERS
     user_hash_map_t user_hash;
-#endif // TAGSTATS_COUNT_USERS
 
     value_hash_map_t values_hash;
 
@@ -137,9 +133,7 @@ public:
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
           key_combination_hash(),
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
-#ifdef TAGSTATS_COUNT_USERS
           user_hash(),
-#endif // TAGSTATS_COUNT_USERS
           values_hash(),
           distribution() {
     }
@@ -160,9 +154,7 @@ public:
             }
         }
 
-#ifdef TAGSTATS_COUNT_USERS
         user_hash[object.uid()]++;
-#endif // TAGSTATS_COUNT_USERS
     }
 
     void add_key_combination(const char* other_key, osm_object_type_t type) {
@@ -639,9 +631,7 @@ public:
         std::cerr << "sizeof(key_combination_hash_map_t) = " << sizeof(combination_hash_map_t) << std::endl;
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
-#ifdef TAGSTATS_COUNT_USERS
         std::cerr << "sizeof(user_hash_map_t) = " << sizeof(user_hash_map_t) << std::endl;
-#endif // TAGSTATS_COUNT_USERS
 
         std::cerr << "sizeof(GeoDistribution) = " << sizeof(GeoDistribution) << std::endl;
         std::cerr << "sizeof(KeyStats) = " << sizeof(KeyStats) << std::endl << std::endl;
@@ -705,10 +695,8 @@ public:
         uint64_t key_combination_hash_buckets=0;
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
-#ifdef TAGSTATS_COUNT_USERS
         uint64_t user_hash_size=0;
         uint64_t user_hash_buckets=0;
-#endif // TAGSTATS_COUNT_USERS
 
         for (key_hash_map_t::const_iterator tags_iterator(tags_stat.begin()); tags_iterator != tags_stat.end(); tags_iterator++) {
             KeyStats *stat = tags_iterator->second;
@@ -727,10 +715,8 @@ public:
                 .execute();
             }
 
-#ifdef TAGSTATS_COUNT_USERS
             user_hash_size    += stat->user_hash.size();
             user_hash_buckets += stat->user_hash.bucket_count();
-#endif // TAGSTATS_COUNT_USERS
 
             statement_insert_into_keys
             .bind_text(tags_iterator->first)      // column: key
@@ -742,11 +728,7 @@ public:
             .bind_int64(stat->values.nodes())     // column: values_nodes
             .bind_int64(stat->values.ways())      // column: values_ways
             .bind_int64(stat->values.relations()) // column: values_relations
-#ifdef TAGSTATS_COUNT_USERS
             .bind_int64(stat->user_hash.size())   // column: users_all
-#else
-            .bind_int64(0)
-#endif // TAGSTATS_COUNT_USERS
             .bind_int64(stat->cells.nodes())      // column: cells_nodes
             .bind_int64(stat->cells.ways())       // column: cells_ways
             .execute();
@@ -843,9 +825,7 @@ public:
         std::cerr << "  key combinations: size=" << key_combination_hash_size << " buckets=" << key_combination_hash_buckets << " sizeof(Counter)=" << sizeof(Counter) << " *=" << key_combination_hash_size * sizeof(Counter) << std::endl;
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
-#ifdef TAGSTATS_COUNT_USERS
         std::cerr << "  users:    size=" << user_hash_size << " buckets=" << user_hash_buckets << " sizeof(uint32_t)=" << sizeof(uint32_t) << " *=" << user_hash_size * sizeof(uint32_t) << std::endl;
-#endif // TAGSTATS_COUNT_USERS
 
         std::cerr << "  sum: " <<
                   tags_hash_size * sizeof(KeyStats)
@@ -853,9 +833,7 @@ public:
 #ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
                   + key_combination_hash_size * sizeof(Counter)
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
-#ifdef TAGSTATS_COUNT_USERS
                   + user_hash_size * sizeof(uint32_t)
-#endif // TAGSTATS_COUNT_USERS
                   << std::endl;
 
         std::cerr << std::endl << "total memory for hashes:" << std::endl;
@@ -867,9 +845,7 @@ public:
         std::cerr << " key combinations: " << ((sizeof(const char*)*8 + sizeof(Counter)*8 + 3) * key_combination_hash_buckets / 8 ) << std::endl;
 #endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
-#ifdef TAGSTATS_COUNT_USERS
         std::cerr << " users:    " << ((sizeof(osm_user_id_t)*8 + sizeof(uint32_t)*8 + 3) * user_hash_buckets / 8 )  << std::endl;
-#endif // TAGSTATS_COUNT_USERS
 
         std::cerr << std::endl;
 
