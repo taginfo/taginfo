@@ -49,9 +49,6 @@ int GeoDistribution::c_height;
 
 #include "tagstats_handler.hpp"
 
-
-/* ================================================== */
-
 void print_help() {
     std::cout << "tagstats [OPTIONS] OSMFILE DATABASE\n\n" \
               << "This program is part of taginfo. It calculates statistics on OSM tags\n" \
