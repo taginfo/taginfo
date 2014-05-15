@@ -54,13 +54,13 @@ int GeoDistribution::c_height;
 
 void print_help() {
     std::cout << "tagstats [OPTIONS] OSMFILE DATABASE\n\n" \
-              << "This program is part of Taginfo. It calculates statistics\n" \
-              << "on OSM tags from OSMFILE and puts them into DATABASE (an SQLite database).\n" \
+              << "This program is part of taginfo. It calculates statistics on OSM tags\n" \
+              << "from OSMFILE and puts them into DATABASE (an SQLite database).\n" \
               << "\nOptions:\n" \
-              << "  -H, --help                    This help message\n" \
-              << "  -s, --selection-db=DATABASE   Name of selection database\n" \
+              << "  -H, --help                    Print this help message and exit\n" \
               << "  -m, --min-tag-combination-count=N  Tag combinations not appearing this often\n" \
               << "                                     are not written to database\n" \
+              << "  -s, --selection-db=DATABASE   Name of selection database\n" \
               << "  -t, --top=NUMBER              Top of bounding box for distribution images\n" \
               << "  -r, --right=NUMBER            Right of bounding box for distribution images\n" \
               << "  -b, --bottom=NUMBER           Bottom of bounding box for distribution images\n" \
@@ -72,17 +72,19 @@ void print_help() {
 
 int main(int argc, char *argv[]) {
     static struct option long_options[] = {
-        {"help",           no_argument, 0, 'H'},
+        {"help",                      no_argument,       0, 'H'},
         {"min-tag-combination-count", required_argument, 0, 'm'},
-        {"selection-db",   required_argument, 0, 's'},
-        {"top",            required_argument, 0, 't'},
-        {"right",          required_argument, 0, 'r'},
-        {"bottom",         required_argument, 0, 'b'},
-        {"left",           required_argument, 0, 'l'},
-        {"width",          required_argument, 0, 'w'},
-        {"height",         required_argument, 0, 'h'},
+        {"selection-db",              required_argument, 0, 's'},
+        {"top",                       required_argument, 0, 't'},
+        {"right",                     required_argument, 0, 'r'},
+        {"bottom",                    required_argument, 0, 'b'},
+        {"left",                      required_argument, 0, 'l'},
+        {"width",                     required_argument, 0, 'w'},
+        {"height",                    required_argument, 0, 'h'},
         {0, 0, 0, 0}
     };
+
+    unsigned int min_tag_combination_count = 1000;
 
     std::string selection_database_name;
 
@@ -94,12 +96,8 @@ int main(int argc, char *argv[]) {
     unsigned int width  = 360;
     unsigned int height = 180;
 
-    unsigned int min_tag_combination_count = 1000;
-
     while (true) {
-        int c = getopt_long(argc, argv,
-                            "dHt:r:b:l:w:h:s:m:",
-                            long_options, 0);
+        int c = getopt_long(argc, argv, "Hm:s:t:r:b:l:w:h:", long_options, 0);
         if (c == -1) {
             break;
         }
