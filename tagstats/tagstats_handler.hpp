@@ -616,12 +616,13 @@ public:
     }
 
     void init(Osmium::OSM::Meta&) {
-        std::cerr << "sizeof(value_hash_map_t) = " << sizeof(value_hash_map_t) << std::endl;
-        std::cerr << "sizeof(Counter) = " << sizeof(Counter) << std::endl;
-        std::cerr << "sizeof(key_combination_hash_map_t) = " << sizeof(combination_hash_map_t) << std::endl;
-        std::cerr << "sizeof(user_hash_map_t) = " << sizeof(user_hash_map_t) << std::endl;
-        std::cerr << "sizeof(GeoDistribution) = " << sizeof(GeoDistribution) << std::endl;
-        std::cerr << "sizeof(KeyStats) = " << sizeof(KeyStats) << std::endl << std::endl;
+        std::cerr << "Sizes of some important data structures:\n";
+        std::cerr << "  sizeof(value_hash_map_t)           = " << sizeof(value_hash_map_t) << "\n";
+        std::cerr << "  sizeof(Counter)                    = " << sizeof(Counter) << "\n";
+        std::cerr << "  sizeof(key_combination_hash_map_t) = " << sizeof(combination_hash_map_t) << "\n";
+        std::cerr << "  sizeof(user_hash_map_t)            = " << sizeof(user_hash_map_t) << "\n";
+        std::cerr << "  sizeof(GeoDistribution)            = " << sizeof(GeoDistribution) << "\n";
+        std::cerr << "  sizeof(KeyStats)                   = " << sizeof(KeyStats) << "\n\n";
 
         _print_memory_usage();
         std::cerr << "init done" << std::endl << std::endl;
