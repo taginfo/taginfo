@@ -116,9 +116,7 @@ public:
     Counter values;
     Counter cells;
 
-#ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
     combination_hash_map_t key_combination_hash;
-#endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
     user_hash_map_t user_hash;
 
@@ -130,9 +128,7 @@ public:
         : key(),
           values(),
           cells(),
-#ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
           key_combination_hash(),
-#endif // TAGSTATS_COUNT_KEY_COMBINATIONS
           user_hash(),
           values_hash(),
           distribution() {
@@ -275,7 +271,6 @@ class TagStatsHandler : public Osmium::Handler::Base {
         std::cerr << msg << " took " << duration << " seconds (about " << duration / 60 << " minutes)" << std::endl;
     }
 
-#ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
     void _update_key_combination_hash(const Osmium::OSM::Object& object) {
         for (Osmium::OSM::TagList::const_iterator it1 = object.tags().begin(); it1 != object.tags().end(); ++it1) {
             const char* key1 = it1->key();
@@ -291,7 +286,6 @@ class TagStatsHandler : public Osmium::Handler::Base {
             }
         }
     }
-#endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
 #ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
     void _update_key_value_combination_hash2(const Osmium::OSM::Object& object, Osmium::OSM::TagList::const_iterator it, key_value_hash_map_t::iterator kvi1, std::string& key_value1) {
@@ -482,9 +476,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
 #endif // TAGSTATS_GEODISTRIBUTION_FOR_WAYS
         }
 
-#ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
         _update_key_combination_hash(object);
-#endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
 #ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
         _update_key_value_combination_hash(object);
@@ -626,13 +618,8 @@ public:
     void init(Osmium::OSM::Meta&) {
         std::cerr << "sizeof(value_hash_map_t) = " << sizeof(value_hash_map_t) << std::endl;
         std::cerr << "sizeof(Counter) = " << sizeof(Counter) << std::endl;
-
-#ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
         std::cerr << "sizeof(key_combination_hash_map_t) = " << sizeof(combination_hash_map_t) << std::endl;
-#endif // TAGSTATS_COUNT_KEY_COMBINATIONS
-
         std::cerr << "sizeof(user_hash_map_t) = " << sizeof(user_hash_map_t) << std::endl;
-
         std::cerr << "sizeof(GeoDistribution) = " << sizeof(GeoDistribution) << std::endl;
         std::cerr << "sizeof(KeyStats) = " << sizeof(KeyStats) << std::endl << std::endl;
 
@@ -655,11 +642,9 @@ public:
                 "count_all, count_nodes, count_ways, count_relations) " \
                 "VALUES (?, ?, ?, ?, ?, ?);");
 
-#ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
         Sqlite::Statement statement_insert_into_key_combinations(m_database, "INSERT INTO key_combinations (key1, key2, " \
                 "count_all, count_nodes, count_ways, count_relations) " \
                 "VALUES (?, ?, ?, ?, ?, ?);");
-#endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
 #ifdef TAGSTATS_COUNT_TAG_COMBINATIONS
         Sqlite::Statement statement_insert_into_tag_combinations(m_database, "INSERT INTO tag_combinations (key1, value1, key2, value2, " \
@@ -690,10 +675,8 @@ public:
         uint64_t values_hash_size=0;
         uint64_t values_hash_buckets=0;
 
-#ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
         uint64_t key_combination_hash_size=0;
         uint64_t key_combination_hash_buckets=0;
-#endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
         uint64_t user_hash_size=0;
         uint64_t user_hash_buckets=0;
@@ -733,7 +716,6 @@ public:
             .bind_int64(stat->cells.ways())       // column: cells_ways
             .execute();
 
-#ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
             key_combination_hash_size    += stat->key_combination_hash.size();
             key_combination_hash_buckets += stat->key_combination_hash.bucket_count();
 
@@ -748,7 +730,6 @@ public:
                 .bind_int64(s->relations())      // column: count_relations
                 .execute();
             }
-#endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
             delete stat; // lets make valgrind happy
         }
@@ -820,19 +801,13 @@ public:
         std::cerr << std::endl << "hash map sizes:" << std::endl;
         std::cerr << "  tags:     size=" <<   tags_hash_size << " buckets=" <<   tags_hash_buckets << " sizeof(KeyStats)="  << sizeof(KeyStats)  << " *=" <<   tags_hash_size * sizeof(KeyStats) << std::endl;
         std::cerr << "  values:   size=" << values_hash_size << " buckets=" << values_hash_buckets << " sizeof(Counter)=" << sizeof(Counter) << " *=" << values_hash_size * sizeof(Counter) << std::endl;
-
-#ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
         std::cerr << "  key combinations: size=" << key_combination_hash_size << " buckets=" << key_combination_hash_buckets << " sizeof(Counter)=" << sizeof(Counter) << " *=" << key_combination_hash_size * sizeof(Counter) << std::endl;
-#endif // TAGSTATS_COUNT_KEY_COMBINATIONS
-
         std::cerr << "  users:    size=" << user_hash_size << " buckets=" << user_hash_buckets << " sizeof(uint32_t)=" << sizeof(uint32_t) << " *=" << user_hash_size * sizeof(uint32_t) << std::endl;
 
         std::cerr << "  sum: " <<
                   tags_hash_size * sizeof(KeyStats)
                   + values_hash_size * sizeof(Counter)
-#ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
                   + key_combination_hash_size * sizeof(Counter)
-#endif // TAGSTATS_COUNT_KEY_COMBINATIONS
                   + user_hash_size * sizeof(uint32_t)
                   << std::endl;
 
@@ -841,9 +816,7 @@ public:
         std::cerr << " tags:     " << ((sizeof(const char*)*8 + sizeof(KeyStats *)*8 + 3) * tags_hash_buckets / 8 ) + sizeof(KeyStats) * tags_hash_size << std::endl;
         std::cerr << "  (sizeof(hash key) + sizeof(hash value  ) + 2.5 bit overhead) * bucket_count" << std::endl;
         std::cerr << " values:   " << ((sizeof(const char*)*8 + sizeof(Counter)*8 + 3) * values_hash_buckets / 8 ) << std::endl;
-#ifdef TAGSTATS_COUNT_KEY_COMBINATIONS
         std::cerr << " key combinations: " << ((sizeof(const char*)*8 + sizeof(Counter)*8 + 3) * key_combination_hash_buckets / 8 ) << std::endl;
-#endif // TAGSTATS_COUNT_KEY_COMBINATIONS
 
         std::cerr << " users:    " << ((sizeof(osm_user_id_t)*8 + sizeof(uint32_t)*8 + 3) * user_hash_buckets / 8 )  << std::endl;
 
