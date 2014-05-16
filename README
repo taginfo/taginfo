@@ -66,6 +66,7 @@ Taginfo uses the following Javascript libraries:
 * jQuery UI 1.9.2
 * customSelect (http://adam.co/lab/jquery/customselect/)
 * tipsy (http://onehackoranother.com/projects/jquery/tipsy/)
+* jQuery Cookie (https://github.com/carhartl/jquery-cookie/)
 * Flexigrid (Originally from http://code.google.com/p/flexigrid/
     http://www.flexigrid.info/ , the version used and included
     has some changes and bugfixes.)

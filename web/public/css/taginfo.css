@@ -338,6 +338,17 @@ span.char {
     border-radius: 4px;
 }
 
+form#list-form {
+    margin: 0 20px 0 0;
+    float: right;
+}
+
+select#list {
+    background-color: #ffffff;
+    color: #083e76;
+    width: 200px;
+}
+
 form#filter-form {
     margin-top: 0px;
     clear: both;

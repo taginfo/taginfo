@@ -15,7 +15,7 @@ class Taginfo < Sinatra::Base
             params[:key].each_with_index do |key, index|
                 @data << {
                     :key => key,
-                    :value => (params[:value].is_a?(Array) ? params[:value][index] : nil)
+                    :value => (params[:value].is_a?(Array) ? (params[:value][index] == '' ? nil : params[:value][index]) : nil)
                 }
             end
         end

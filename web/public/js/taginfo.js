@@ -443,7 +443,6 @@ function create_flexigrid(domid, options) {
         });
         jQuery('div.bDiv:visible').bind('click', function(event) {
             var row = jQuery(event.target).parents('tr');
-            console.log("click", row);
             jQuery('div.bDiv:visible tr').removeClass('trOver');
             jQuery(row).addClass('trOver');
         });
@@ -580,6 +579,71 @@ function open_help() {
     });
     return false;
 }
+
+/* ============================ */
+
+function get_comparison_list() {
+    return jQuery.cookie('taginfo_comparison_list') || [];
+}
+
+function set_comparison_list(list) {
+    jQuery.cookie('taginfo_comparison_list', list, { expires: 1, path: '/' });
+}
+
+function comparison_list_update() {
+    var cl = jQuery('#list option:first').html();
+    cl = cl.replace(/([0-9]+)/, String(get_comparison_list().length));
+    jQuery('#list option:first').html(cl);
+    jQuery('#list').val('title').change();
+}
+
+function comparison_list_item_clean(text) {
+    return text === null || text.match(/^[a-zA-Z:_]+$/) !== null;
+}
+
+function comparison_list_url(list) {
+    var okay = true;
+    jQuery.each(list, function(index, item) {
+        if (!comparison_list_item_clean(item[0]) ||
+            !comparison_list_item_clean(item[1])) {
+            okay = false;
+        }
+    });
+
+    if (okay) {
+        return '/comparison/' + jQuery.map(list, function(item, i) {
+            return item[0] + (item[1] === null ? '' : ('=' + item[1]));
+        }).join('/');
+    } else {
+        var keys = [];
+        var values = [];
+        jQuery.each(list, function(index, item) {
+            keys.push(item[0]);
+            values.push(item[1] === null ? '' : item[1]);
+        });
+        return '/comparison/?' + jQuery.param({ 'key': keys, 'value': values });
+    }
+}
+
+function comparison_list_change(key, value) {
+    var list = get_comparison_list(),
+        command = jQuery('#list').val();
+
+    if (command == 'title') {
+        return true;
+    } else if (command == 'add') {
+        list.push([key, value]);
+        set_comparison_list(list);
+    } else if (command == 'clear') {
+        set_comparison_list([]);
+    } else if (command == 'compare') {
+        window.location = comparison_list_url(list);
+    }
+
+    comparison_list_update();
+    return false;
+}
+
 
 /* ============================ */
 

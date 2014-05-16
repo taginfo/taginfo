@@ -313,6 +313,14 @@ flexigrid:
     nomsg: No items
     errormsg: Connection Error
 
+comparison:
+    list: Comparison list
+    items: items
+    add_key: Add this key to list
+    add_tag: Add this tag to list
+    clear: Clear comparison list
+    compare: Compare keys/tags
+
 sources:
     master:
         name: Master

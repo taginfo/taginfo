@@ -8,6 +8,14 @@
             <option value="relations"<%= @sel['relations'] %>><%= h(t.pages.key.filter.relations) %></option>
         </select>
     </form>
+    <form id="list-form">
+        <select id="list" name="list">
+            <option value="title" selected="selected" style="color: #000000"><%= h(t.comparison.list) %> (0 <%= h(t.comparison.items) %>)</option>
+            <option value="add"><%= h(t.comparison.add_key) %></option>
+            <option value="clear"><%= h(t.comparison.clear) %></option>
+            <option value="compare"><%= h(t.comparison.compare) %></option>
+        </select>
+    </form>
     <div id="tools" class="no-print">
         <% if @count_all_values <= TaginfoConfig.get('xapi.max_results', 1000) %>
             <%= xapi_link(@filter_xapi, @key) %> <%= josm_link(@filter_xapi, @key) %>
@@ -113,6 +121,13 @@ function page_init2() {
     var filter = #{ @filter_type.to_json },
         key = #{ @key.to_json };
     jQuery('h1').html(fmt_key(key));
+
+    jQuery.cookie.json = true;
+    comparison_list_update();
+    jQuery('#list').bind('change', function() {
+        comparison_list_change(key);
+    });
+
     jQuery('#level0_button').bind('click', function() {
         return level0_editor('#{ TaginfoConfig.get('level0.overpass_url_prefix') }', '#{ TaginfoConfig.get('level0.level0_url_prefix') }', filter, key, undefined);
     });

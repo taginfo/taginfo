@@ -317,6 +317,14 @@ flexigrid:
     nomsg: Keine Einträge
     errormsg: Fehler in der Verbindung
 
+comparison:
+    list: Vergleichsliste
+    items: Einträge
+    add_key: Diesen Key hinzufügen
+    add_tag: Diesen Tag hinzufügen
+    clear: Vergleichsliste löschen
+    compare: Keys/Tags vergleichen
+
 sources:
     master:
         name: Master
