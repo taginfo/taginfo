@@ -208,6 +208,7 @@ def get_josm_style_rules_result(total, res)
         :page  => @ap.page,
         :rp    => @ap.results_per_page,
         :total => total,
+        :url   => request.url,
         :data  => res.map{ |row| {
             :key        => row['k'],
             :value      => row['v'],
@@ -226,6 +227,7 @@ def paging_results(array)
         [ :total, :INT, 'Total number of results.' ],
         [ :page,  :INT, 'Result page number (first has page number 1).' ],
         [ :rp,    :INT, 'Results per page.' ],
+        [ :url,   :STRING, 'URL of the request.' ],
         [ :data,  :ARRAY_OF_HASHES, 'Array with results.', array ]
     ];
 end
@@ -233,6 +235,7 @@ end
 def no_paging_results(array)
     return [
         [ :total, :INT, 'Total number of results.' ],
+        [ :url,   :STRING, 'URL of the request.' ],
         [ :data,  :ARRAY_OF_HASHES, 'Array with results.', array ]
     ];
 end

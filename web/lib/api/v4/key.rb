@@ -59,6 +59,7 @@ class Taginfo < Sinatra::Base
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total,
+            :url   => request.url,
             :data  => res.map{ |row| {
                 :other_key      => row['other_key'],
                 :together_count => row['together_count'].to_i,
@@ -184,7 +185,8 @@ class Taginfo < Sinatra::Base
 
         return {
             :total => 4,
-            :data => out
+            :url   => request.url,
+            :data  => out
         }.to_json
     end
 
@@ -272,6 +274,7 @@ class Taginfo < Sinatra::Base
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total.to_i,
+            :url   => request.url,
             :data  => res.map{ |row| {
                 :value    => row['value'],
                 :count    => row['count_' + filter_type].to_i,

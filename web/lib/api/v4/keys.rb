@@ -114,6 +114,7 @@ class Taginfo < Sinatra::Base
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total,
+            :url   => request.url,
             :data  => res.map{ |row| h = {
                 :key                      => row['key'],
                 :count_all                => row['count_all'].to_i,
@@ -167,6 +168,7 @@ class Taginfo < Sinatra::Base
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total,
+            :url   => request.url,
             :data  => res.map{ |row|
                 lang_hash = Hash.new
                 row['langs'].split(',').each{ |l|
@@ -252,6 +254,7 @@ class Taginfo < Sinatra::Base
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total,
+            :url   => request.url,
             :data  => res.map{ |row| {
                 :key                => row['key'],
                 :count_all          => row['count_all'].to_i,

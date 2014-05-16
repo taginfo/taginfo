@@ -84,6 +84,7 @@ class Taginfo < Sinatra::Base
 
         return {
             :total => res.size,
+            :url   => request.url,
             :data  => res.map{ |row| {
                 :key                      => row['key'],
                 :value                    => row['value'],
@@ -149,6 +150,7 @@ class Taginfo < Sinatra::Base
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total,
+            :url   => request.url,
             :data  => res.map{ |row| {
                 :key                      => row['skey'],
                 :value                    => row['svalue'],

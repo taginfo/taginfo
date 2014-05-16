@@ -73,6 +73,7 @@ class Taginfo < Sinatra::Base
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total,
+            :url   => request.url,
             :data  => res.map{ |row| {
                 :other_key      => row['other_key'],
                 :other_value    => row['other_value'],
@@ -203,7 +204,8 @@ class Taginfo < Sinatra::Base
 
         return {
             :total => 4,
-            :data => out
+            :url   => request.url,
+            :data  => out
         }.to_json
     end
 

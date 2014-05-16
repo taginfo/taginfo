@@ -60,6 +60,7 @@ class Taginfo < Sinatra::Base
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total,
+            :url   => request.url,
             :data  => res.map{ |row| {
                 :rtype           => row['rtype'],
                 :count           => row['count'].to_i,

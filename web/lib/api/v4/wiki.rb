@@ -29,6 +29,7 @@ class Taginfo < Sinatra::Base
 
         return {
             :total => res.size,
+            :url   => request.url,
             :data  => res.map{ |row| {
                 :code                    => row['code'],
                 :native_name             => row['native_name'],
