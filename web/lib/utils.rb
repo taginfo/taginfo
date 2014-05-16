@@ -97,7 +97,10 @@ def turbo_link(count, filter, key, value=nil)
         else
             value = '"' + quote_double(value) + '"'
         end
-        url = TaginfoConfig.get('turbo.wizard_url_prefix', 'http://overpass-turbo.eu/master?') + 'w=' + Rack::Utils::escape('"' + key + '"=' + value + ' ' + TaginfoConfig.get('turbo.wizard_area', 'global')) + '&R'
+        if filter != 'all'
+            filter_condition = ' and type:' + filter.chop
+        end
+        url = TaginfoConfig.get('turbo.wizard_url_prefix', 'http://overpass-turbo.eu/master?') + 'w=' + Rack::Utils::escape('"' + key + '"=' + value + filter_condition.to_s + ' ' + TaginfoConfig.get('turbo.wizard_area', 'global')) + '&R'
     else
         template = 'key';
         parameters = { :key => key }
