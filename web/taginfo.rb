@@ -216,9 +216,9 @@ class Taginfo < Sinatra::Base
     load 'lib/api/test/langtag.rb'
 
     # user interface
+    load 'lib/ui/comparison.rb'
     load 'lib/ui/embed.rb'
     load 'lib/ui/help.rb'
-    load 'lib/ui/key_comparison.rb'
     load 'lib/ui/keys.rb'
     load 'lib/ui/relation.rb'
     load 'lib/ui/reports.rb'

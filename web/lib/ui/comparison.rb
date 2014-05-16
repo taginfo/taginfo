@@ -1,7 +1,7 @@
-# web/lib/ui/key_comparison.rb
+# web/lib/ui/comparison.rb
 class Taginfo < Sinatra::Base
 
-    get %r{^/key_comparison/(.*)} do |items|
+    get %r{^/comparison/(.*)} do |items|
         @data = []
 
         if !items.nil?
@@ -66,8 +66,8 @@ class Taginfo < Sinatra::Base
         @img_width  = TaginfoConfig.get('geodistribution.width')
         @img_height = TaginfoConfig.get('geodistribution.height')
 
-        javascript "#{ r18n.locale.code }/key_comparison"
-        erb :key_comparison
+        javascript "#{ r18n.locale.code }/comparison"
+        erb :comparison
     end
 
 end
