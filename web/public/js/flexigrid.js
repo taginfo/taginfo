@@ -650,6 +650,8 @@
 					   success: function(data){g.addData(data);},
 					   error: function(XMLHttpRequest, textStatus, errorThrown) { try { if (p.onError) p.onError(XMLHttpRequest, textStatus, errorThrown); } catch (e) {} }
 					 });
+
+                    $('.pJSON a').attr('href', p.url + ( p.url.indexOf('?') == -1 ? '?' : '&') + jQuery.param(param));
 			},
 			doSearch: function () {
 				p.query = $('input[name=q]',g.sDiv).val();
@@ -1184,7 +1186,7 @@
 		g.pDiv.className = 'pDiv';
 		g.pDiv.innerHTML = '<div class="pDiv2"></div>';
 		$(g.bDiv).parent().prepend(g.pDiv);
-		var html = ' <div class="pGroup"> <div class="pFirst pButton"><span></span></div><div class="pPrev pButton"><span></span></div> </div> <div class="btnseparator"></div> <div class="pGroup"><span class="pcontrol">'+p.pagetext+' <input type="text" size="4" value="1" /> '+p.outof+' <span> 1 </span></span></div> <div class="btnseparator"></div> <div class="pGroup"> <div class="pNext pButton"><span></span></div><div class="pLast pButton"><span></span></div> </div> <div class="btnseparator"></div> <div class="pGroup"> <div class="pReload pButton"><span></span></div> </div> <div class="btnseparator"></div> <div class="pGroup"><span class="pPageStat"></span></div>';
+		var html = ' <div class="pGroup"> <div class="pFirst pButton"><span></span></div><div class="pPrev pButton"><span></span></div> </div> <div class="btnseparator"></div> <div class="pGroup"><span class="pcontrol">'+p.pagetext+' <input type="text" size="4" value="1" /> '+p.outof+' <span> 1 </span></span></div> <div class="btnseparator"></div> <div class="pGroup"> <div class="pNext pButton"><span></span></div><div class="pLast pButton"><span></span></div> </div> <div class="btnseparator"></div> <div class="pGroup"> <div class="pReload pButton"><span></span></div> </div> <div class="btnseparator"></div> <div class="pGroup"> <div class="pJSON pButton"><a href="" target="_blank">JSON</a></div> </div> <div class="btnseparator"></div> <div class="pGroup"><span class="pPageStat"></span></div>';
 		$('div',g.pDiv).html(html);
 
 		g.domElements = {
@@ -1193,7 +1195,7 @@
 			pcontrol_input: $('.pcontrol input', g.pDiv),
 			pcontrol_span: $('.pcontrol span', g.pDiv)
 		};
-		
+
 		g.domElements.pReload.click(function(){g.populate()});
 		$('.pFirst',g.pDiv).click(function(){g.changePage('first')});
 		$('.pPrev',g.pDiv).click(function(){g.changePage('prev')});

@@ -549,6 +549,22 @@ div.pGroup {
     overflow: hidden;
 }
 
+.flexigrid div.pDiv  div.pButton.pJSON {
+    width: 42px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 1px 0;
+}
+
+.flexigrid div.pDiv  div.pButton.pJSON:hover {
+    width: 40px;
+    padding: 0;
+}
+
+.flexigrid div.pDiv  div.pJSON a {
+    text-decoration: none !important;
+}
+
 .flexigrid div.pDiv  div.pButton:hover, .flexigrid div.pDiv  div.pButton.pBtnOver {
     width: 20px;
     height: 20px;
