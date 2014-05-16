@@ -590,11 +590,18 @@ function set_comparison_list(list) {
     jQuery.cookie('taginfo_comparison_list', list, { expires: 1, path: '/' });
 }
 
-function comparison_list_update() {
+function comparison_list_update(key, value) {
     var l = get_comparison_list().length;
+
     var cl = jQuery('#list option:first').html();
     cl = cl.replace(/([0-9]+)/, String(l));
     jQuery('#list option:first').html(cl);
+
+    if (comparison_list_contains(get_comparison_list(), key, value)) {
+        jQuery('#list option:eq(1)').attr('style', 'color: #e0e0e0');
+    } else {
+        jQuery('#list option:eq(1)').attr('style', '');
+    }
     if (l == 0) {
         jQuery('#list option:eq(2)').attr('style', 'color: #e0e0e0');
     } else {
@@ -605,6 +612,7 @@ function comparison_list_update() {
     } else {
         jQuery('#list option:eq(3)').attr('style', '');
     }
+
     jQuery('#list').val('title').change();
 }
 
@@ -636,13 +644,25 @@ function comparison_list_url(list) {
     }
 }
 
+function comparison_list_contains(list, key, value) {
+    var contains = false;
+
+    jQuery.each(list, function(index, item) {
+        if (item[0] == key && item[1] == value) {
+            contains = true;
+        }
+    });
+
+    return contains;
+}
+
 function comparison_list_change(key, value) {
     var list = get_comparison_list(),
         command = jQuery('#list').val();
 
     if (command == 'title') {
         return true;
-    } else if (command == 'add') {
+    } else if (command == 'add' && !comparison_list_contains(list, key, value)) {
         list.push([key, value]);
         set_comparison_list(list);
     } else if (command == 'clear') {
@@ -651,7 +671,7 @@ function comparison_list_change(key, value) {
         window.location = comparison_list_url(list);
     }
 
-    comparison_list_update();
+    comparison_list_update(key, value);
     return false;
 }
 

@@ -123,7 +123,7 @@ function page_init2() {
     jQuery('h1').html(fmt_key(key));
 
     jQuery.cookie.json = true;
-    comparison_list_update();
+    comparison_list_update(key);
     jQuery('#list').bind('change', function() {
         comparison_list_change(key);
     });
