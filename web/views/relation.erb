@@ -6,7 +6,7 @@
             <span class="button disabled" title="<%= h(t.pages.relation.button_disabled) %>">XAPI</span>
             <span class="button disabled" title="<%= h(t.pages.relation.button_disabled) %>">JOSM</span>
         <% end %>
-        <%= turbo_link('relations', 'type', @rtype) %>
+        <%= turbo_link(@count_all_values, 'relations', 'type', @rtype) %>
     </div>
     <h1></h1>
     <p><%= @desc %></p>
