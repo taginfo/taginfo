@@ -11,6 +11,7 @@ class Taginfo < Sinatra::Base
         @desc = []
         @prevalent_values = []
         @wiki_pages = []
+        @has_map = []
 
         @keys.each_with_index do |key, num|
             @count_all << @db.select("SELECT count_all FROM db.keys").condition('key = ?', key).get_first_value().to_i
@@ -31,6 +32,8 @@ class Taginfo < Sinatra::Base
             wiki_pages = @db.select("SELECT DISTINCT lang FROM wiki.wikipages WHERE key=? AND value IS NULL ORDER BY lang", key).
                 execute().map{ |row| row['lang'] }
             @wiki_pages << wiki_pages
+
+            @has_map << (@db.count('tag_distributions').condition('key = ?', key).get_first_value().to_i > 0)
 
         end
 
