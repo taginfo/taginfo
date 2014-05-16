@@ -54,7 +54,7 @@
         <% @data.each_with_index do |data, num| %>
         <td class="data item<%= num %> wiki">
             <p><b><%= data[:value].nil? ? h(t.pages.key.wiki_pages.title) : h(t.pages.tag.wiki_pages.title) %>:</b></p>
-            <%= data[:wiki_pages].map{ |lang| '<span class="lang" title="' + ::Language[lang].native_name + '">' + lang + '</span>' }.join(' ') %>
+            <%= data[:wiki_pages].map{ |lang| '<span class="lang" title="' + ::Language[lang].native_name.to_s + '">' + lang + '</span>' }.join(' ') %>
         </td>
         <% end %>
     </tr>
