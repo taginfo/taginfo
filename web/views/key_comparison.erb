@@ -1,41 +1,41 @@
 <div class="pre">
-    <h1 class="section"><%= h(t.taginfo.key_comparison) %></h1>
+    <h1 class="section"><%= h(t.taginfo.comparison) %></h1>
 </div>
 <table class="comparison">
     <tr>
-        <% (0..@keys.size-1).each do |num| %>
-        <td class="data first key<%= num %>" style="width: <%= 100/@keys.size %>%">
+        <% @data.each_with_index do |data, num| %>
+        <td class="data first item<%= num %>" style="width: <%= 100/@data.size %>%">
             <h2></h2>
-            <p><%= @desc[num] %></p>
+            <p><%= data[:desc] %></p>
         </td>
         <% end %>
     </tr>
     <tr>
-        <% @keys.each_with_index do |key, num| %>
-        <td class="data key<%= num %>">
+        <% @data.each_with_index do |data, num| %>
+        <td class="data item<%= num %>">
             <table class="compstat">
                 <tr>
                     <td class="spacer"></td>
-                    <th><img width="16" height="16" title="All" alt="" src="/img/types/all.16.png"/> <%= h(t.osm.all) %></th>
-                    <td><%= @count_all[num].to_s_with_ts %></td>
+                    <th><img width="16" height="16" alt="" src="/img/types/all.16.png"/> <%= h(t.osm.all) %></th>
+                    <td><%= data[:count_all].to_s_with_ts %></td>
                     <td class="spacer"></td>
                 </tr>
                 <tr>
                     <td class="spacer"></td>
-                    <th><img width="16" height="16" title="Node" alt="" src="/img/types/node.16.png"/> <%= h(t.osm.nodes) %></th>
-                    <td><%= @count_nodes[num].to_s_with_ts %></td>
+                    <th><img width="16" height="16" alt="" src="/img/types/node.16.png"/> <%= h(t.osm.nodes) %></th>
+                    <td><%= data[:count_nodes].to_s_with_ts %></td>
                     <td class="spacer"></td>
                 </tr>
                 <tr>
                     <td class="spacer"></td>
-                    <th><img width="16" height="16" title="Way" alt="" src="/img/types/way.16.png"/> <%= h(t.osm.ways) %></th>
-                    <td><%= @count_ways[num].to_s_with_ts %></td>
+                    <th><img width="16" height="16" alt="" src="/img/types/way.16.png"/> <%= h(t.osm.ways) %></th>
+                    <td><%= data[:count_ways].to_s_with_ts %></td>
                     <td class="spacer"></td>
                 </tr>
                 <tr>
                     <td class="spacer"></td>
-                    <th><img width="16" height="16" title="Relation" alt="" src="/img/types/relation.16.png"/> <%= h(t.osm.relations) %></th>
-                    <td><%= @count_relations[num].to_s_with_ts %></td>
+                    <th><img width="16" height="16" alt="" src="/img/types/relation.16.png"/> <%= h(t.osm.relations) %></th>
+                    <td><%= data[:count_relations].to_s_with_ts %></td>
                     <td class="spacer"></td>
                 </tr>
             </table>
@@ -43,35 +43,36 @@
         <% end %>
     </tr>
     <tr>
-        <% @keys.each_with_index do |key, num| %>
-        <td class="data key<%= num %>">
-            <p><b><%= h(t.misc.prevalent_values) %>:</b></p>
-            <div class="prevalent_values"></div>
+        <% @data.each_with_index do |data, num| %>
+        <td class="data item<%= num %> prevalent_values">
+            <p><b></b></p>
+            <div></div>
         </td>
         <% end %>
     </tr>
     <tr>
-        <% @keys.each_with_index do |key, num| %>
-        <td class="data key<%= num %>">
-            <p><b><%= h(t.pages.key.wiki_pages.title) %>:</b></p>
-            <%= @wiki_pages[num].map{ |lang| '<span class="lang" title="' + ::Language[lang].native_name + '">' + lang + '</span>' }.join(' ') %>
+        <% @data.each_with_index do |data, num| %>
+        <td class="data item<%= num %> wiki">
+            <p><b><%= data[:value].nil? ? h(t.pages.key.wiki_pages.title) : h(t.pages.tag.wiki_pages.title) %>:</b></p>
+            <%= data[:wiki_pages].map{ |lang| '<span class="lang" title="' + ::Language[lang].native_name + '">' + lang + '</span>' }.join(' ') %>
         </td>
         <% end %>
     </tr>
     <tr>
-        <% @keys.each_with_index do |key, num| %>
-        <td class="data key<%= num %>">
-            <% if @has_map[num] %>
+        <% @data.each_with_index do |data, num| %>
+        <td class="data item<%= num %> map">
+            <% if data[:has_map] %>
             <div style="background-image: url(<%= TaginfoConfig.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: center 4px; background-size: <%= @img_width %>px <%= @img_height %>px; position: relative;"/>
-                <img class="map" src="/api/4/key/distribution/nodes?key=<%= key %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>" style="position: absolute;"/>
-                <img class="map" src="/api/4/key/distribution/ways?key=<%= key %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
+                <% key_or_tag = data[:value].nil? ? 'key' : 'tag' %>
+                <img class="map" src="/api/4/<%= key_or_tag %>/distribution/nodes?key=<%= data[:key] %><%= data[:value].nil? ? '' : ('&amp;value=' + data[:value]) %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>" style="position: absolute;"/>
+                <img class="map" src="/api/4/<%= key_or_tag %>/distribution/ways?key=<%= data[:key] %><%= data[:value].nil? ? '' : ('&amp;value=' + data[:value]) %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
             </div>
             <% end %>
         </td>
         <% end %>
     </tr>
     <tr>
-        <% @keys.each do |key| %>
+        <% @data.each_with_index do |data, num| %>
         <td class="data last"></td>
         <% end %>
     </tr>
@@ -79,13 +80,18 @@
 <% javascript do
     JS.raw(<<"JAVASCRIPT")
 function page_init2() {
-    var keys = #{ @keys.to_json },
-        prevalent_values = #{ @prevalent_values.to_json };
-    jQuery.each(keys, function(index, key) {
-        jQuery('.key' + index + ' h2').html(link_to_key(key));
-        jQuery('.key' + index + ' div.prevalent_values').html(fmt_prevalent_value_list(key, prevalent_values[index]));
+    var data = #{ @data.to_json };
+    jQuery.each(data, function(index, data) {
+        if (data.value) {
+            jQuery('.item' + index + ' h2').html(link_to_tag(data.key, data.value));
+        } else {
+            jQuery('.item' + index + ' h2').html(link_to_key(data.key));
+            jQuery('.item' + index + '.prevalent_values p b').html('#{ h(t.misc.prevalent_values)}:');
+            jQuery('.item' + index + '.prevalent_values div').html(fmt_prevalent_value_list(data.key, data.prevalent_values));
+        }
     });
-    jQuery('div.prevalent_values a').tipsy({ opacity: 1, delayIn: 500, gravity: 'e' });
+    jQuery('div.prevalent_values a').tipsy({ opacity: 1, delayIn: 500, gravity: 'w' });
+    jQuery('span.lang').tipsy({ opacity: 1, delayIn: 500, gravity: 'n' });
 }
 JAVASCRIPT
 end

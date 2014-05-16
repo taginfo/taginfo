@@ -44,7 +44,7 @@ taginfo:
     relations: Relations
     combinations: Kombinationen
     key_combinations: Kombinationen
-    key_comparison: Key-Vergleich
+    comparison: Key/Tag-Vergleich
     overview: Übersicht
     data_from: Daten vom
     uses_data_from: |
