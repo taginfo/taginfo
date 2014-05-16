@@ -22,11 +22,10 @@ class Taginfo < Sinatra::Base
             desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang='en' AND key=? AND value IS NULL", key).get_first_value()) if desc == ''
             @desc << desc
 
-            prevalent_values = @db.select("SELECT value, count_all AS count FROM tags").
+            prevalent_values = @db.select("SELECT value, count, fraction FROM db.prevalent_values").
                 condition('key=?', key).
-                condition('count > ?', @count_all[num] * 0.02).
                 order_by([:count], 'DESC').
-                execute().map{ |row| { 'value' => row['value'], 'count' => row['count'].to_i } }
+                execute().map{ |row| { 'value' => row['value'], 'count' => row['count'].to_i, 'fraction' => row['fraction'].to_f } }
             @prevalent_values << prevalent_values
 
             wiki_pages = @db.select("SELECT DISTINCT lang FROM wiki.wikipages WHERE key=? AND value IS NULL ORDER BY lang", key).

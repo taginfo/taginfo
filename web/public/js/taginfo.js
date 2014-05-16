@@ -391,7 +391,7 @@ function fmt_prevalent_value_list(key, list) {
         return empty(texts.misc.values_less_than_one_percent);
     }
     return jQuery.map(list, function(item, i) {
-        return link_to_value(key, item.value, { tipsy: 'e', title: '(' + fmt_as_percent(item.fraction) + ')' });
+        return link_to_value(key, item.value, { tipsy: 'e', title: fmt_as_percent(item.fraction) });
     }).join(' &bull; ');
 }
 

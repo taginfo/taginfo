@@ -46,7 +46,7 @@
         <% @keys.each_with_index do |key, num| %>
         <td class="data key<%= num %>">
             <p><b><%= h(t.misc.prevalent_values) %>:</b></p>
-            <%= @prevalent_values[num].map{ |pv| "#{ pv['value'] } (#{ pv['count'].to_s_with_ts })" }.join(' &bull; ') %>
+            <div class="prevalent_values"></div>
         </td>
         <% end %>
     </tr>
@@ -77,10 +77,13 @@
 <% javascript do
     JS.raw(<<"JAVASCRIPT")
 function page_init2() {
-    var keys = #{ @keys.to_json };
+    var keys = #{ @keys.to_json },
+        prevalent_values = #{ @prevalent_values.to_json };
     jQuery.each(keys, function(index, key) {
         jQuery('.key' + index + ' h2').html(link_to_key(key));
+        jQuery('.key' + index + ' div.prevalent_values').html(fmt_prevalent_value_list(key, prevalent_values[index]));
     });
+    jQuery('div.prevalent_values a').tipsy({ opacity: 1, delayIn: 500, gravity: 'e' });
 }
 JAVASCRIPT
 end
