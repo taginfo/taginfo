@@ -591,9 +591,20 @@ function set_comparison_list(list) {
 }
 
 function comparison_list_update() {
+    var l = get_comparison_list().length;
     var cl = jQuery('#list option:first').html();
-    cl = cl.replace(/([0-9]+)/, String(get_comparison_list().length));
+    cl = cl.replace(/([0-9]+)/, String(l));
     jQuery('#list option:first').html(cl);
+    if (l == 0) {
+        jQuery('#list option:eq(2)').attr('style', 'color: #e0e0e0');
+    } else {
+        jQuery('#list option:eq(2)').attr('style', '');
+    }
+    if (l < 2) {
+        jQuery('#list option:eq(3)').attr('style', 'color: #e0e0e0');
+    } else {
+        jQuery('#list option:eq(3)').attr('style', '');
+    }
     jQuery('#list').val('title').change();
 }
 
@@ -636,7 +647,7 @@ function comparison_list_change(key, value) {
         set_comparison_list(list);
     } else if (command == 'clear') {
         set_comparison_list([]);
-    } else if (command == 'compare') {
+    } else if (command == 'compare' && list.length >= 2) {
         window.location = comparison_list_url(list);
     }
 
