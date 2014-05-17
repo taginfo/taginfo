@@ -267,31 +267,31 @@ class TagStatsHandler : public Osmium::Handler::Base {
         std::cerr << "  " << msg << " took " << duration << " seconds (about " << duration / 60 << " minutes)\n\n";
     }
 
-    void _update_key_combination_hash(const Osmium::OSM::Object& object) {
-        for (Osmium::OSM::TagList::const_iterator it1 = object.tags().begin(); it1 != object.tags().end(); ++it1) {
+    void _update_key_combination_hash(osm_object_type_t type, Osmium::OSM::TagList::const_iterator it1, Osmium::OSM::TagList::const_iterator end) {
+        for (; it1 != end; ++it1) {
             const char* key1 = it1->key();
             key_hash_map_t::iterator tsi1(tags_stat.find(key1));
-            for (Osmium::OSM::TagList::const_iterator it2 = it1+1; it2 != object.tags().end(); ++it2) {
+            for (Osmium::OSM::TagList::const_iterator it2 = it1+1; it2 != end; ++it2) {
                 const char* key2 = it2->key();
                 key_hash_map_t::iterator tsi2(tags_stat.find(key2));
                 if (strcmp(key1, key2) < 0) {
-                    tsi1->second->add_key_combination(tsi2->first, object.type());
+                    tsi1->second->add_key_combination(tsi2->first, type);
                 } else {
-                    tsi2->second->add_key_combination(tsi1->first, object.type());
+                    tsi2->second->add_key_combination(tsi1->first, type);
                 }
             }
         }
     }
 
-    void _update_key_value_combination_hash2(const Osmium::OSM::Object& object, Osmium::OSM::TagList::const_iterator it, key_value_hash_map_t::iterator kvi1, std::string& key_value1) {
-        for (; it != object.tags().end(); ++it) {
+    void _update_key_value_combination_hash2(osm_object_type_t type, Osmium::OSM::TagList::const_iterator it, Osmium::OSM::TagList::const_iterator end, key_value_hash_map_t::iterator kvi1, std::string& key_value1) {
+        for (; it != end; ++it) {
             std::string key_value2(it->key());
             key_value_hash_map_t::iterator kvi2 = m_key_value_stats.find(key_value2.c_str());
             if (kvi2 != m_key_value_stats.end()) {
                 if (key_value1 < key_value2) {
-                    kvi1->second->add_key_combination(kvi2->first, object.type());
+                    kvi1->second->add_key_combination(kvi2->first, type);
                 } else {
-                    kvi2->second->add_key_combination(kvi1->first, object.type());
+                    kvi2->second->add_key_combination(kvi1->first, type);
                 }
             }
 
@@ -301,20 +301,20 @@ class TagStatsHandler : public Osmium::Handler::Base {
             kvi2 = m_key_value_stats.find(key_value2.c_str());
             if (kvi2 != m_key_value_stats.end()) {
                 if (key_value1 < key_value2) {
-                    kvi1->second->add_key_combination(kvi2->first, object.type());
+                    kvi1->second->add_key_combination(kvi2->first, type);
                 } else {
-                    kvi2->second->add_key_combination(kvi1->first, object.type());
+                    kvi2->second->add_key_combination(kvi1->first, type);
                 }
             }
         }
     }
 
-    void _update_key_value_combination_hash(const Osmium::OSM::Object& object) {
-        for (Osmium::OSM::TagList::const_iterator it = object.tags().begin(); it != object.tags().end(); ++it) {
+    void _update_key_value_combination_hash(osm_object_type_t type, Osmium::OSM::TagList::const_iterator it, Osmium::OSM::TagList::const_iterator end) {
+        for (; it != end; ++it) {
             std::string key_value1(it->key());
             key_value_hash_map_t::iterator kvi1 = m_key_value_stats.find(key_value1.c_str());
             if (kvi1 != m_key_value_stats.end()) {
-                _update_key_value_combination_hash2(object, it+1, kvi1, key_value1);
+                _update_key_value_combination_hash2(type, it+1, end, kvi1, key_value1);
             }
 
             key_value1 += "=";
@@ -322,7 +322,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
             kvi1 = m_key_value_stats.find(key_value1.c_str());
             if (kvi1 != m_key_value_stats.end()) {
-                _update_key_value_combination_hash2(object, it+1, kvi1, key_value1);
+                _update_key_value_combination_hash2(type, it+1, end, kvi1, key_value1);
             }
         }
     }
@@ -426,9 +426,15 @@ class TagStatsHandler : public Osmium::Handler::Base {
             m_max_timestamp = object.timestamp();
         }
 
+        Osmium::OSM::TagList::const_iterator begin = object.tags().begin();
+        Osmium::OSM::TagList::const_iterator end   = object.tags().end();
+
+        if (begin == end) {
+            return;
+        }
+
         KeyStats* stat;
-        Osmium::OSM::TagList::const_iterator end = object.tags().end();
-        for (Osmium::OSM::TagList::const_iterator it = object.tags().begin(); it != end; ++it) {
+        for (Osmium::OSM::TagList::const_iterator it = begin; it != end; ++it) {
             const char* key = it->key();
 
             key_hash_map_t::iterator tags_iterator(tags_stat.find(key));
@@ -470,8 +476,8 @@ class TagStatsHandler : public Osmium::Handler::Base {
 #endif // TAGSTATS_GEODISTRIBUTION_FOR_WAYS
         }
 
-        _update_key_combination_hash(object);
-        _update_key_value_combination_hash(object);
+        _update_key_combination_hash(object.type(), begin, end);
+        _update_key_value_combination_hash(object.type(), begin, end);
     }
 
     StatisticsHandler statistics_handler;
