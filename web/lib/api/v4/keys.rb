@@ -76,9 +76,12 @@ class Taginfo < Sinatra::Base
                 row['wikipages'] = Array.new
             end
 
+            key_list = res.map do |row|
+                "'" + SQLite3::Database.quote(row['key']) + "'"
+            end
+
             wikipages = @db.select('SELECT key, lang, title, type FROM wiki.wikipages').
-                condition("value IS NULL").
-                condition("key IN (#{ res.map{ |row| "'" + SQLite3::Database.quote(row['key']) + "'" }.join(',') })").
+                condition("key IN (#{ key_list.join(',') }) AND value IS NULL").
                 order_by([:key, :lang], 'ASC').
                 execute()
 
@@ -96,8 +99,12 @@ class Taginfo < Sinatra::Base
                 row['prevalent_values'] = Array.new
             end
 
+            key_list = res.map do |row|
+                "'" + SQLite3::Database.quote(row['key']) + "'"
+            end
+
             prevvalues = @db.select('SELECT key, value, count, fraction FROM db.prevalent_values').
-                condition("key IN (#{ res.map{ |row| "'" + SQLite3::Database.quote(row['key']) + "'" }.join(',') })").
+                condition("key IN (#{ key_list.join(',') })").
                 order_by([:count], 'DESC').
                 execute()
 

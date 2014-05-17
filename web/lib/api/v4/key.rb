@@ -83,7 +83,7 @@ class Taginfo < Sinatra::Base
             condition('key = ?', key).
             get_first_value() ||
         @db.select('SELECT png FROM db.key_distributions').
-            condition('key IS NULL').
+            is_null('key').
             get_first_value()
     end
 
@@ -101,7 +101,7 @@ class Taginfo < Sinatra::Base
             condition('key = ?', key).
             get_first_value() ||
         @db.select('SELECT png FROM db.key_distributions').
-            condition('key IS NULL').
+            is_null('key').
             get_first_value()
     end
 

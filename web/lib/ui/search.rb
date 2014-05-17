@@ -60,7 +60,7 @@ END_XML
         else
             res = sel.
                 condition_if("key LIKE ? || '%'", query).
-                condition("value IS NULL").
+                is_null('value').
                 execute().
                 map{ |row| row['key'] }
         end

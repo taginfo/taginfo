@@ -100,7 +100,7 @@ class Taginfo < Sinatra::Base
             condition('value = ?', value).
             get_first_value() ||
         @db.select('SELECT png FROM db.key_distributions').
-            condition('key IS NULL').
+            is_null('key').
             get_first_value()
     end
 
@@ -120,7 +120,7 @@ class Taginfo < Sinatra::Base
             condition('value = ?', value).
             get_first_value() ||
         @db.select('SELECT png FROM db.key_distributions').
-            condition('key IS NULL').
+            is_null('key').
             get_first_value()
     end
 
@@ -190,8 +190,7 @@ class Taginfo < Sinatra::Base
         end
 
         @db.select('SELECT * FROM db.tags').
-            condition('key = ?', key).
-            condition('value = ?', value).
+            condition('key = ? AND value = ?', key, value).
             execute() do |row|
                 ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
                     out[n] = {

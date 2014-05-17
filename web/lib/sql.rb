@@ -116,6 +116,10 @@ module SQL
             self
         end
 
+        def is_null(attribute)
+            condition("#{attribute} IS NULL")
+        end
+
         def condition_if(expression, *param)
             if param.first.to_s != ''
                 condition(expression, *param)

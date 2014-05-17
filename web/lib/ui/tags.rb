@@ -30,10 +30,10 @@ class Taginfo < Sinatra::Base
         @sel[@filter_type] = ' selected="selected"'
         @filter_xapi = { 'all' => '*', nil => '*', 'nodes' => 'node', 'ways' => 'way', 'relations' => 'relation' }[@filter_type];
 
-        @josm_count = @db.count('josm_style_rules').condition('k = ?', @key).condition('v = ?', @value).get_first_i
-        @wiki_count = @db.count('wiki.wikipages').condition('key=?', @key).condition('value=?', @value).get_first_i
+        @josm_count = @db.count('josm_style_rules').condition('k=? AND v=?', @key, @value).get_first_i
+        @wiki_count = @db.count('wiki.wikipages').condition('key=? AND value=?', @key, @value).get_first_i
         if @wiki_count == 0
-            @wiki_count_key = @db.count('wiki.wikipages').condition('key=?', @key).condition('value IS NULL').get_first_i
+            @wiki_count_key = @db.count('wiki.wikipages').condition('key=? AND value IS NULL', @key).get_first_i
         end
         @count_all = @db.select("SELECT count_#{@filter_type} FROM db.tags").condition('key = ? AND value = ?', @key, @value).get_first_i
 
@@ -55,7 +55,7 @@ class Taginfo < Sinatra::Base
             @has_rtype_link = true
         end
 
-        @has_map = @db.count('tag_distributions').condition('key = ?', @key).condition('value = ?', @value).get_first_i > 0
+        @has_map = @db.count('tag_distributions').condition('key=? AND value=?', @key, @value).get_first_i > 0
 
         @img_width  = TaginfoConfig.get('geodistribution.width')  * TaginfoConfig.get('geodistribution.scale_image')
         @img_height = TaginfoConfig.get('geodistribution.height') * TaginfoConfig.get('geodistribution.scale_image')
