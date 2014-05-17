@@ -27,10 +27,10 @@ class Taginfo < Sinatra::Base
             value = data[:value]
 
             if value.nil?
-                data[:count_all]       = @db.select("SELECT count_all FROM db.keys").condition('key = ?', key).get_first_value().to_i
-                data[:count_nodes]     = @db.select("SELECT count_nodes FROM db.keys").condition('key = ?', key).get_first_value().to_i
-                data[:count_ways]      = @db.select("SELECT count_ways FROM db.keys").condition('key = ?', key).get_first_value().to_i
-                data[:count_relations] = @db.select("SELECT count_relations FROM db.keys").condition('key = ?', key).get_first_value().to_i
+                data[:count_all]       = @db.select("SELECT count_all FROM db.keys").condition('key = ?', key).get_first_i
+                data[:count_nodes]     = @db.select("SELECT count_nodes FROM db.keys").condition('key = ?', key).get_first_i
+                data[:count_ways]      = @db.select("SELECT count_ways FROM db.keys").condition('key = ?', key).get_first_i
+                data[:count_relations] = @db.select("SELECT count_relations FROM db.keys").condition('key = ?', key).get_first_i
 
                 desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang=? AND key=? AND value IS NULL", r18n.locale.code, key).get_first_value())
                 desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang='en' AND key=? AND value IS NULL", key).get_first_value()) if desc == ''
@@ -46,10 +46,10 @@ class Taginfo < Sinatra::Base
 
                 data[:has_map] = data[:count_all] > 0
             else
-                data[:count_all]       = @db.select("SELECT count_all FROM db.tags").condition('key = ?', key).condition('value = ?', value).get_first_value().to_i
-                data[:count_nodes]     = @db.select("SELECT count_nodes FROM db.tags").condition('key = ?', key).condition('value = ?', value).get_first_value().to_i
-                data[:count_ways]      = @db.select("SELECT count_ways FROM db.tags").condition('key = ?', key).condition('value = ?', value).get_first_value().to_i
-                data[:count_relations] = @db.select("SELECT count_relations FROM db.tags").condition('key = ?', key).condition('value = ?', value).get_first_value().to_i
+                data[:count_all]       = @db.select("SELECT count_all FROM db.tags").condition('key = ?', key).condition('value = ?', value).get_first_i
+                data[:count_nodes]     = @db.select("SELECT count_nodes FROM db.tags").condition('key = ?', key).condition('value = ?', value).get_first_i
+                data[:count_ways]      = @db.select("SELECT count_ways FROM db.tags").condition('key = ?', key).condition('value = ?', value).get_first_i
+                data[:count_relations] = @db.select("SELECT count_relations FROM db.tags").condition('key = ?', key).condition('value = ?', value).get_i
 
                 desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang=? AND key=? AND value=?", r18n.locale.code, key, value).get_first_value())
                 desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang='en' AND key=? AND value=?", key, value).get_first_value()) if desc == ''
@@ -59,7 +59,7 @@ class Taginfo < Sinatra::Base
 
                 data[:wiki_pages] = @db.select("SELECT DISTINCT lang FROM wiki.wikipages WHERE key=? AND value=? ORDER BY lang", key, value).execute().map{ |row| row['lang'] }
 
-                data[:has_map] = (@db.count('tag_distributions').condition('key = ?', key).condition('value = ?', value).get_first_value().to_i > 0)
+                data[:has_map] = (@db.count('tag_distributions').condition('key = ?', key).condition('value = ?', value).get_first_i > 0)
             end
         end
 

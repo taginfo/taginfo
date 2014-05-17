@@ -198,6 +198,10 @@ module SQL
             @db.get_first_value(q, *@params)
         end
 
+        def get_first_i
+            get_first_value().to_i
+        end
+
         def get_columns(*columns)
             q = build_query()
             row = @db.get_first_row(q, *@params)

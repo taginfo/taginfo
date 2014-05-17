@@ -18,7 +18,7 @@ class Taginfo < Sinatra::Base
         @sel[@filter_type] = ' selected="selected"'
         @filter_xapi = { 'all' => '*', nil => '*', 'nodes' => 'node', 'ways' => 'way', 'relations' => 'relation' }[@filter_type];
 
-        @count_all_values = @db.select("SELECT count_#{@filter_type} FROM db.keys").condition('key = ?', @key).get_first_value().to_i
+        @count_all_values = @db.select("SELECT count_#{@filter_type} FROM db.keys").condition('key = ?', @key).get_first_i
 
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang=? AND key=? AND value IS NULL", r18n.locale.code, @key).get_first_value())
         @desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang='en' AND key=? AND value IS NULL", @key).get_first_value()) if @desc == ''
@@ -45,9 +45,9 @@ class Taginfo < Sinatra::Base
             @prevalent_values << { 'value' => '(other)', 'count' => @count_all_values - sum }
         end
 
-        @josm_count = @db.count('josm_style_rules').condition('k = ?', @key).get_first_value().to_i
-        @wiki_count = @db.count('wiki.wikipages').condition('value IS NULL').condition('key=?', @key).get_first_value().to_i
-        @user_count = @db.select('SELECT users_all FROM db.keys').condition('key=?', @key).get_first_value().to_i
+        @josm_count = @db.count('josm_style_rules').condition('k = ?', @key).get_first_i
+        @wiki_count = @db.count('wiki.wikipages').condition('value IS NULL').condition('key=?', @key).get_first_i
+        @user_count = @db.select('SELECT users_all FROM db.keys').condition('key=?', @key).get_first_i
         
         @img_width  = TaginfoConfig.get('geodistribution.width')  * TaginfoConfig.get('geodistribution.scale_image')
         @img_height = TaginfoConfig.get('geodistribution.height') * TaginfoConfig.get('geodistribution.scale_image')

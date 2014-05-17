@@ -13,8 +13,8 @@ class Taginfo < Sinatra::Base
         @title = [escape_html(@rtype), t.osm.relations]
         section :relations
 
-        @wiki_count = @db.count('wiki.relation_pages').condition('rtype=?', @rtype).get_first_value().to_i
-        @count_all_values = @db.select("SELECT count FROM db.relation_types").condition('rtype = ?', @rtype).get_first_value().to_i
+        @wiki_count = @db.count('wiki.relation_pages').condition('rtype=?', @rtype).get_first_i
+        @count_all_values = @db.select("SELECT count FROM db.relation_types").condition('rtype = ?', @rtype).get_first_i
 
         @desc = h(@db.select("SELECT description FROM wiki.relation_pages WHERE lang=? AND rtype=?", r18n.locale.code, @rtype).get_first_value())
         @desc = h(@db.select("SELECT description FROM wiki.relation_pages WHERE lang='en' AND rtype=?", @rtype).get_first_value()) if @desc == ''
@@ -29,11 +29,9 @@ class Taginfo < Sinatra::Base
                 @image_url = build_image_url(row)
             end
 
-        @count_relation_roles = @db.count('relation_roles').
-            condition("rtype=?", @rtype).
-            get_first_value().to_i
+        @count_relation_roles = @db.count('relation_roles').condition("rtype=?", @rtype).get_first_i
 
-        sum_count_all = @db.select("SELECT members_all FROM db.relation_types WHERE rtype=?", @rtype).get_first_value().to_i
+        sum_count_all = @db.select("SELECT members_all FROM db.relation_types WHERE rtype=?", @rtype).get_first_i
 
         @roles = []
         sum = { 'nodes' => 0, 'ways' => 0, 'relations' => 0 }
