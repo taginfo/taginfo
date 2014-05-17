@@ -12,11 +12,13 @@
 #                       directory where Osmium is.
 #  CXXFLAGS           - Extra compiler flags.
 #  LDFLAGS            - Extra linker flags.
-#  
+#
 #------------------------------------------------------------------------------
 
 CXXFLAGS += -O3
 #CXXFLAGS += -g
+#CXXFLAGS += -g -pg
+#CXXFLAGS += -g -fprofile-arcs -ftest-coverage
 CXXFLAGS += -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
 CXXFLAGS += `../bin/taginfo-config.rb tagstats.cxxflags`
 
@@ -35,7 +37,7 @@ CXXFLAGS_FEATURES += -DTAGSTATS_GEODISTRIBUTION_INCLUDE=$(BYID_INCL)
 CXXFLAGS_WARNINGS := -Wall -Wextra -Wredundant-decls -Wdisabled-optimization -pedantic
 
 LIB_EXPAT  := -lexpat
-LIB_PBF    := -lz -lpthread -lprotobuf-lite -losmpbf
+LIB_PBF    := -pthread -lz -lprotobuf-lite -losmpbf
 LIB_GD     := -lgd -lz -lm
 LIB_SQLITE := -lsqlite3
 
@@ -59,5 +61,5 @@ install:
 	install -m 755 tagstats ../sources/db/tagstats
 
 clean:
-	rm -f *.o core tagstats osmstats
+	rm -f *.o *.gcno *.gcda *.gcov gmon.out core tagstats osmstats
 

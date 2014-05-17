@@ -28,5 +28,6 @@ else
     selection_option=""
 fi
 
+#valgrind --leak-check=full --show-reachable=yes
 ./tagstats $selection_option --min-tag-combination-count=100 $IMAGE_OPTIONS $OSMFILE $DATABASE
 
