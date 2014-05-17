@@ -11,15 +11,22 @@ set -x
 
 DATABASE=taginfo-db.db
 OSMFILE=$1
+SELECTION_DB=selection.db
+#IMAGE_OPTIONS="--left=5.5 --bottom=47 --right=15 --top=55 --width=200 --height=320"
 
 rm -f $DATABASE
 
 sqlite3 $DATABASE <../sources/init.sql
 sqlite3 $DATABASE <../sources/db/pre.sql
 
-ulimit -c 1000000000
-rm -f core
+#ulimit -c unlimited
+rm -f core.*
 
-#./tagstats --left=5.5 --bottom=47 --right=15 --top=55 --width=200 --height=320 $OSMFILE $DATABASE
-./tagstats --tags test_tags.txt --min-tag-combination-count=100 --relation-types test_relation_types.txt $OSMFILE $DATABASE
+if [ -f $SELECTION_DB ]; then
+    selection_option="--selection-db=$SELECTION_DB"
+else
+    selection_option=""
+fi
+
+./tagstats $selection_option --min-tag-combination-count=100 $IMAGE_OPTIONS $OSMFILE $DATABASE
 

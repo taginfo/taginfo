@@ -1,3 +1,0 @@
-highway
-amenity
-name

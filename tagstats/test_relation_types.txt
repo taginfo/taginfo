@@ -1,4 +1,0 @@
-multipolygon
-site
-route
-associatedStreet
