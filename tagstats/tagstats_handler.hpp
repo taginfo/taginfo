@@ -456,11 +456,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
                     gd_it->second->add_coordinate(location);
                 }
             }
-#ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
             else if (object.type() == WAY) {
-                // This will only add the coordinate of the first node in a way to the
-                // distribution. We'll see how this goes, maybe we need to store the
-                // coordinates of all nodes?
                 const Osmium::OSM::WayNodeList& wnl = static_cast<const Osmium::OSM::Way&>(object).nodes();
                 if (!wnl.empty()) {
                     key_value_geodistribution_hash_map_t::iterator gd_it = m_key_value_geodistribution.find(keyvalue);
@@ -473,7 +469,6 @@ class TagStatsHandler : public Osmium::Handler::Base {
                     }
                 }
             }
-#endif // TAGSTATS_GEODISTRIBUTION_FOR_WAYS
         }
 
         _update_key_combination_hash(object.type(), begin, end);
@@ -484,9 +479,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
     MapToInt<rough_position_t> m_map_to_int;
 
-#ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
     storage_t m_storage;
-#endif
 
 public:
 
@@ -497,10 +490,8 @@ public:
         m_string_store(string_store_size),
         m_database(database),
         statistics_handler(database),
-        m_map_to_int(map_to_int)
-#ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
-        , m_storage()
-#endif
+        m_map_to_int(map_to_int),
+        m_storage()
     {
         if (!selection_database_name.empty()) {
             Sqlite::Database sdb(selection_database_name.c_str(), SQLITE_OPEN_READONLY);
@@ -540,9 +531,7 @@ public:
     void node(const shared_ptr<Osmium::OSM::Node const>& node) {
         statistics_handler.node(node);
         collect_tag_stats(*node);
-#ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
         m_storage.set(node->id(), m_map_to_int(node->position()));
-#endif
     }
 
     void way(const shared_ptr<Osmium::OSM::Way const>& way) {
@@ -599,10 +588,8 @@ public:
 
     void after_ways() {
         _timer_info("processing ways");
-#ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
         _print_and_clear_key_distribution_images(false);
         _print_and_clear_tag_distribution_images(false);
-#endif
         _print_memory_usage();
     }
 

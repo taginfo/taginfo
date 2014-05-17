@@ -36,10 +36,8 @@
 typedef TAGSTATS_GEODISTRIBUTION_INT rough_position_t;
 
 // Set BYID in Makefile to SparseTable, MmapFile, or MmapAnon
-#ifdef TAGSTATS_GEODISTRIBUTION_FOR_WAYS
-# include TAGSTATS_GEODISTRIBUTION_INCLUDE
+#include TAGSTATS_GEODISTRIBUTION_INCLUDE
 typedef Osmium::Storage::ById::TAGSTATS_GEODISTRIBUTION_FOR_WAYS<rough_position_t> storage_t;
-#endif // TAGSTATS_GEODISTRIBUTION_FOR_WAYS
 
 #include "geodistribution.hpp"
 
