@@ -45,12 +45,12 @@ class Taginfo < Sinatra::Base
         end
 
         total = @db.count('db.keys').
-            condition_if("key LIKE '%' || ? || '%'", params[:query]).
+            condition_if("key LIKE ? ESCAPE '@'", like_contains(params[:query])).
             conditions(filters).
             get_first_value().to_i
         
         res = @db.select('SELECT * FROM db.keys').
-            condition_if("key LIKE '%' || ? || '%'", params[:query]).
+            condition_if("key LIKE ? ESCAPE '@'", like_contains(params[:query])).
             conditions(filters).
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.key
@@ -160,11 +160,11 @@ class Taginfo < Sinatra::Base
         end
 
         total = @db.count('wiki.wikipages_keys').
-            condition_if("key LIKE '%' || ? || '%'", params[:query]).
+            condition_if("key LIKE ? ESCAPE '@'", like_contains(params[:query])).
             get_first_value().to_i
 
         res = @db.select("SELECT key, coalesce(langs, '') AS langs FROM wiki.wikipages_keys").
-            condition_if("key LIKE '%' || ? || '%'", params[:query]).
+            condition_if("key LIKE ? ESCAPE '@'", like_contains(params[:query])).
             order_by(@ap.sortname, @ap.sortorder){ |o|
                 o.key
             }.
@@ -222,13 +222,13 @@ class Taginfo < Sinatra::Base
         total = @db.count('db.keys').
             condition('count_all > ?', min_count).
             condition("in_wiki#{english} = 0").
-            condition_if("key LIKE '%' || ? || '%'", params[:query]).
+            condition_if("key LIKE ? ESCAPE '@'", like_contains(params[:query])).
             get_first_value().to_i
         
         res = @db.select('SELECT * FROM db.keys').
             condition('count_all > ?', min_count).
             condition("in_wiki#{english} = 0").
-            condition_if("key LIKE '%' || ? || '%'", params[:query]).
+            condition_if("key LIKE ? ESCAPE '@'", like_contains(params[:query])).
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.key
                 o.count_all

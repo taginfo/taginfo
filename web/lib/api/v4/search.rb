@@ -64,9 +64,9 @@ class Taginfo < Sinatra::Base
     }) do
         query = params[:query].downcase
 
-        total = @db.count('wiki.words').condition("words LIKE ('%' || ? || '%')", query).get_first_value().to_i
+        total = @db.count('wiki.words').condition("words LIKE ? ESCAPE '@'", like_contains(query)).get_first_i
 
-        res = @db.select("SELECT key, value FROM wiki.words WHERE words LIKE ('%' || ? || '%')", query).
+        res = @db.select("SELECT key, value FROM wiki.words WHERE words LIKE ? ESCAPE '@'", like_contains(query)).
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.key
                 o.value
@@ -102,11 +102,11 @@ class Taginfo < Sinatra::Base
         query = params[:query]
 
         total = @db.count('db.relation_roles').
-            condition_if("role LIKE '%' || ? || '%'", query).
+            condition_if("role LIKE ? ESCAPE '@'", like_contains(query)).
             get_first_value().to_i
 
         res = @db.select('SELECT * FROM db.relation_roles').
-            condition_if("role LIKE '%' || ? || '%'", query).
+            condition_if("role LIKE ? ESCAPE '@'", like_contains(query)).
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.count_all
                 o.rtype

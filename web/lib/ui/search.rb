@@ -46,20 +46,20 @@ END_XML
         if query =~ /^=(.*)/
             value = $1
             res = sel.
-                condition_if("value LIKE ? || '%'", value).
+                condition_if("value LIKE ? ESCAPE '@'", like_prefix(value)).
                 execute().
                 map{ |row| row['key'] + '=' + row['value'].to_s }
         elsif query =~ /^([^=]+)=(.*)/
             key = $1
             value = $2
             res = sel.
-                condition_if("key LIKE ? || '%'", key).
-                condition_if("value LIKE ? || '%'", value).
+                condition_if("key LIKE ? ESCAPE '@'", like_prefix(key)).
+                condition_if("value LIKE ? ESCAPE '@'", like_prefix(value)).
                 execute().
                 map{ |row| row['key'] + '=' + row['value'].to_s }
         else
             res = sel.
-                condition_if("key LIKE ? || '%'", query).
+                condition_if("key LIKE ? ESCAPE '@'", like_prefix(query)).
                 is_null('value').
                 execute().
                 map{ |row| row['key'] }

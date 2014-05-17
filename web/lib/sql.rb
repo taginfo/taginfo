@@ -118,10 +118,11 @@ module SQL
 
         def is_null(attribute)
             condition("#{attribute} IS NULL")
+            self
         end
 
         def condition_if(expression, *param)
-            if param.first.to_s != ''
+            unless param.first.to_s.match(/^%?%?$/)
                 condition(expression, *param)
             end
             self

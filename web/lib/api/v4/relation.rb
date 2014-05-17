@@ -33,12 +33,12 @@ class Taginfo < Sinatra::Base
 
         total = @db.count('relation_roles').
             condition("rtype=?", rtype).
-            condition_if("role LIKE '%' || ? || '%'", params[:query]).
+            condition_if("role LIKE ? ESCAPE '@'", like_contains(params[:query])).
             get_first_value().to_i
 
         res = @db.select('SELECT * FROM relation_roles').
             condition("rtype=?", rtype).
-            condition_if("role LIKE '%' || ? || '%'", params[:query]).
+            condition_if("role LIKE ? ESCAPE '@'", like_contains(params[:query])).
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.role
                 o.count_all_members      :count_all

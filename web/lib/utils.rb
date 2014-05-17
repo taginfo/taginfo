@@ -161,6 +161,23 @@ end
 
 # ------------------------------------------------------------------------------
 
+# Escape % and _ special characters with @.
+# The @ was chosen because it is not a special character in SQL, in Regexes,
+# and isn't seen often in OSM tags. You must use "ESCAPE '@'" clause with LIKE!
+def like_escape(param)
+    param.to_s.gsub(/[_%@]/, '@\0')
+end
+
+def like_prefix(param)
+    like_escape(param) + '%'
+end
+
+def like_contains(param)
+    '%' + like_escape(param) + '%'
+end
+
+# ------------------------------------------------------------------------------
+
 # Like the 'get' method but will add a redirect for the same path with trailing / added
 def get!(path, &block)
     get path, &block

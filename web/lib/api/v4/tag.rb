@@ -29,6 +29,7 @@ class Taginfo < Sinatra::Base
         key = params[:key]
         value = params[:value]
         filter_type = get_filter()
+        query_substr = like_contains(params[:query])
 
         if @ap.sortname == 'to_count'
             @ap.sortname = ['together_count']
@@ -40,8 +41,8 @@ class Taginfo < Sinatra::Base
 
         cq = @db.count('db.tag_combinations')
         total = (params[:query].to_s != '' ?
-                cq.condition("(key1=? AND value1=? AND (key2 LIKE '%' || ? || '%' OR value2 LIKE '%' || ? || '%')) OR (key2=? AND value2=? AND (key1 LIKE '%' || ? || '%' OR value2 LIKE '%' || ? || '%'))",
-                    key, value, params[:query], params[:query], key, value, params[:query], params[:query]) :
+                cq.condition("(key1=? AND value1=? AND (key2 LIKE ? ESCAPE '@' OR value2 LIKE ? ESCAPE '@')) OR (key2=? AND value2=? AND (key1 LIKE ? ESCAPE '@' OR value2 LIKE ? ESCAPE '@'))",
+                                    key,         value,           query_substr,               query_substr,           key,         value,           query_substr,               query_substr) :
                 cq.condition('(key1=? AND value1=?) OR (key2=? AND value2=?)', key, value, key, value)).
             condition("count_#{filter_type} > 0").
             get_first_value().to_i
@@ -52,10 +53,10 @@ class Taginfo < Sinatra::Base
             get_first_value()
 
         res = (params[:query].to_s != '' ?
-            @db.select("SELECT p.key1 AS other_key, p.value1 AS other_value, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.tag_combinations p, db.selected_tags k WHERE p.key1=k.skey AND p.value1=k.svalue AND k.svalue != '' AND p.key2=? AND p.value2=? AND ((p.key1 LIKE '%' || ? || '%') OR (p.value1 LIKE '%' || ? || '%')) AND p.count_#{filter_type} > 0
-                    UNION SELECT p.key1 AS other_key, p.value1 AS other_value, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.tag_combinations p, db.keys k WHERE p.key1=k.key AND p.value1='' AND p.key2=? AND p.value2=? AND ((p.key1 LIKE '%' || ? || '%') OR (p.value1 LIKE '%' || ? || '%')) AND p.count_#{filter_type} > 0
-                    UNION SELECT p.key2 AS other_key, p.value2 AS other_value, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.tag_combinations p, db.selected_tags k WHERE p.key2=k.skey AND p.value2=k.svalue AND k.svalue != '' AND p.key1=? AND p.value1=? AND ((p.key2 LIKE '%' || ? || '%') OR (p.value2 LIKE '%' || ? || '%')) AND p.count_#{filter_type} > 0
-                    UNION SELECT p.key2 AS other_key, p.value2 AS other_value, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.tag_combinations p, db.keys k WHERE p.key2=k.key AND p.value2='' AND p.key1=? AND p.value1=? AND ((p.key2 LIKE '%' || ? || '%') OR (p.value2 LIKE '%' || ? || '%')) AND p.count_#{filter_type} > 0", key, value, params[:query], params[:query], key, value, params[:query], params[:query], key, value, params[:query], params[:query], key, value, params[:query], params[:query]) :
+            @db.select("SELECT p.key1 AS other_key, p.value1 AS other_value, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.tag_combinations p, db.selected_tags k WHERE p.key1=k.skey AND p.value1=k.svalue AND k.svalue != '' AND p.key2=? AND p.value2=? AND ((p.key1 LIKE ? ESCAPE '@') OR (p.value1 LIKE ? ESCAPE '@')) AND p.count_#{filter_type} > 0
+                    UNION SELECT p.key1 AS other_key, p.value1 AS other_value, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.tag_combinations p, db.keys k WHERE p.key1=k.key AND p.value1='' AND p.key2=? AND p.value2=? AND ((p.key1 LIKE ? ESCAPE '@') OR (p.value1 LIKE ? ESCAPE '@')) AND p.count_#{filter_type} > 0
+                    UNION SELECT p.key2 AS other_key, p.value2 AS other_value, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.tag_combinations p, db.selected_tags k WHERE p.key2=k.skey AND p.value2=k.svalue AND k.svalue != '' AND p.key1=? AND p.value1=? AND ((p.key2 LIKE ? ESCAPE '@') OR (p.value2 LIKE ? ESCAPE '@')) AND p.count_#{filter_type} > 0
+                    UNION SELECT p.key2 AS other_key, p.value2 AS other_value, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.tag_combinations p, db.keys k WHERE p.key2=k.key AND p.value2='' AND p.key1=? AND p.value1=? AND ((p.key2 LIKE ? ESCAPE '@') OR (p.value2 LIKE ? ESCAPE '@')) AND p.count_#{filter_type} > 0", key, value, query_substr, query_substr, key, value, query_substr, query_substr, key, value, query_substr, query_substr, key, value, query_substr, query_substr) :
             @db.select("SELECT p.key1 AS other_key, p.value1 AS other_value, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.tag_combinations p, db.selected_tags k WHERE p.key1=k.skey AND p.value1=k.svalue AND k.svalue != '' AND p.key2=? AND p.value2=? AND p.count_#{filter_type} > 0 
                     UNION SELECT p.key1 AS other_key, '' AS other_value, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.tag_combinations p, db.keys k WHERE p.key1=k.key AND p.value1 = '' AND p.key2=? AND p.value2=? AND p.count_#{filter_type} > 0 
                     UNION SELECT p.key2 AS other_key, p.value2 AS other_value, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.tag_combinations p, db.selected_tags k WHERE p.key2=k.skey AND p.value2=k.svalue AND k.svalue != '' AND p.key1=? AND p.value1=? AND p.count_#{filter_type} > 0

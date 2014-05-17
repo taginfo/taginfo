@@ -24,11 +24,11 @@ class Taginfo < Sinatra::Base
         :ui => '/relations'
     }) do
         total = @db.count('relation_types').
-            condition_if("rtype LIKE '%' || ? || '%'", params[:query]).
+            condition_if("rtype LIKE ? ESCAPE '@'", like_contains(params[:query])).
             get_first_value().to_i
 
         res = @db.select('SELECT * FROM relation_types').
-            condition_if("rtype LIKE '%' || ? || '%'", params[:query]).
+            condition_if("rtype LIKE ? ESCAPE '@'", like_contains(params[:query])).
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.rtype
                 o.count

@@ -44,12 +44,12 @@ class Taginfo < Sinatra::Base
 
         total = @db.count('josm_style_rules').
 #            condition('style = ?', style).
-            condition_if("k LIKE '%' || ? || '%' OR v LIKE '%' || ? || '%'", params[:query], params[:query]).
+            condition_if("k LIKE ? ESCAPE '@' OR v LIKE ? ESCAPE '@'", like_contains(params[:query]), like_contains(params[:query])).
             get_first_value().to_i
 
         res = @db.select('SELECT * FROM josm_style_rules').
 #            condition('style = ?', style).
-            condition_if("k LIKE '%' || ? || '%' OR v LIKE '%' || ? || '%'", params[:query], params[:query]).
+            condition_if("k LIKE ? ESCAPE '@' OR v LIKE ? ESCAPE '@'", like_contains(params[:query]), like_contains(params[:query])).
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.key :k
                 o.key :v
