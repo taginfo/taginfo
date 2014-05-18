@@ -1,6 +1,6 @@
 <h1><%= h(t.reports.database_statistics.name) %></h1>
 
-<table class="boxes">
+<table class="boxes" style="margin-bottom: 10px;">
     <tr>
         <td><h2><img class="icon_large" src="/img/types/all.20.png" alt=""/> <%= h(t.osm.objects) %></h2></td>
         <td rowspan="4" width="20"></td>
@@ -11,14 +11,14 @@
     <tr>
         <td class="box">
             <table>
-                <tr><td style="width: 7em;">There are </td><td style="width: 7em;" class="number"><%= @db.stats('objects').to_s_with_ts %></td><td> objects in the database</td></tr>
-                <tr><td>with together </td><td class="number"><%= @db.stats('object_tags').to_s_with_ts %></td><td> tags</td></tr>
+                <tr><td><%= t.reports.database_statistics.objects_in_db %>:</td><td class="number"><%= @db.stats('objects').to_s_with_ts %></td></tr>
+                <tr><td><%= t.reports.database_statistics.tags_in_db %>:</td><td class="number"><%= @db.stats('object_tags').to_s_with_ts %></td></tr>
             </table>
         </td>
         <td class="box">
             <table>
-                <tr><td style="width: 7em;">There are </td><td style="width: 7em;" class="number"><%= @db.stats('num_keys').to_s_with_ts %></td><td> different keys</td></tr>
-                <tr><td>and </td><td class="number"><%= @db.stats('num_tags').to_s_with_ts %></td><td> different tags</td></tr>
+                <tr><td><%= t.reports.database_statistics.distinct_keys %>:</td><td class="number"><%= @db.stats('num_keys').to_s_with_ts %></td></tr>
+                <tr><td><%= t.reports.database_statistics.distinct_tags %>:</td><td class="number"><%= @db.stats('num_tags').to_s_with_ts %></td></tr>
             </table>
         </td>
         <td></td>
@@ -31,26 +31,26 @@
     <tr>
         <td class="box">
             <table>
-                <tr><td style="width: 7em;">There are </td><td style="width: 7em;" class="number"><%= @db.stats('nodes').to_s_with_ts %></td><td> nodes</td></tr>
-                <tr><td>of which </td><td class="number"><%= @db.stats('nodes_with_tags').to_s_with_ts %></td><td> have at least one tag</td></tr>
-                <tr><td>(thats </td><td class="number"><%= (10000.0 * @db.stats('nodes_with_tags') / @db.stats('nodes')).to_i.to_f / 100 %></td><td> %)</td></tr>
-                <tr><td>with together </td><td class="number"><%= @db.stats('node_tags').to_s_with_ts %></td><td> tags</td></tr>
-                <tr><td>(or about </td><td class="number"><%= ( 100.0 * @db.stats('node_tags') / @db.stats('nodes_with_tags')).to_i.to_f / 100 %></td><td> tags per tagged node)</td></tr>
+                <tr><td><%= t.reports.database_statistics.nodes_in_db %>:</td><td class="number"><%= @db.stats('nodes').to_s_with_ts %></td></tr>
+                <tr><td><%= t.reports.database_statistics.nodes_with_tags_in_db %>:</td><td class="number"><%= @db.stats('nodes_with_tags').to_s_with_ts %></td></tr>
+                <tr><td><%= t.reports.database_statistics.nodes_with_tags_in_db_percent %>:</td><td class="number"><%= (10000.0 * @db.stats('nodes_with_tags') / @db.stats('nodes')).to_i.to_f / 100 %>%</td></tr>
+                <tr><td><%= t.reports.database_statistics.tags_on_nodes %>:</td><td class="number"><%= @db.stats('node_tags').to_s_with_ts %></td></tr>
+                <tr><td><%= t.reports.database_statistics.avg_tags_per_tagged_node %>:</td><td class="number"><%= ( 100.0 * @db.stats('node_tags') / @db.stats('nodes_with_tags')).to_i.to_f / 100 %></td></tr>
             </table>
         </td>
         <td class="box">
             <table>
-                <tr><td style="width: 7em;">There are </td><td style="width: 7em;" class="number"><%= @db.stats('ways').to_s_with_ts %></td><td> ways</td></tr>
-                <tr><td>(of which </td><td class="number"><%= @db.stats('closed_ways').to_s_with_ts %></td><td> are closed)</td></tr>
-                <tr><td>with together </td><td class="number"><%= @db.stats('way_tags').to_s_with_ts %></td><td> tags</td></tr>
-                <tr><td>(or about </td><td class="number"><%= ( 100.0 * @db.stats('way_tags') / @db.stats('ways')).to_i.to_f / 100 %></td><td> tags per way)</td></tr>
+                <tr><td><%= t.reports.database_statistics.ways_in_db %>:</td><td class="number"><%= @db.stats('ways').to_s_with_ts %></td></tr>
+                <tr><td><%= t.reports.database_statistics.closed_ways_in_db %>:</td><td class="number"><%= @db.stats('closed_ways').to_s_with_ts %></td></tr>
+                <tr><td><%= t.reports.database_statistics.tags_on_ways %>:</td><td class="number"><%= @db.stats('way_tags').to_s_with_ts %></td></tr>
+                <tr><td><%= t.reports.database_statistics.avg_tags_per_way %>:</td><td class="number"><%= ( 100.0 * @db.stats('way_tags') / @db.stats('ways')).to_i.to_f / 100 %></td></tr>
             </table>
         </td>
         <td class="box">
             <table>
-                <tr><td style="width: 7em;">There are </td><td style="width: 7em;" class="number"><%= @db.stats('relations').to_s_with_ts %></td><td> relations</td></tr>
-                <tr><td>with together </td><td class="number"><%= @db.stats('relation_tags').to_s_with_ts %></td><td> tags</td></tr>
-                <tr><td>(or about </td><td class="number"><%= ( 100.0 * @db.stats('relation_tags') / @db.stats('relations')).to_i.to_f / 100 %></td><td> tags per relation)</td></tr>
+                <tr><td><%= t.reports.database_statistics.relations_in_db %>:</td><td class="number"><%= @db.stats('relations').to_s_with_ts %></td></tr>
+                <tr><td><%= t.reports.database_statistics.tags_on_relations %>:</td><td class="number"><%= @db.stats('relation_tags').to_s_with_ts %></td></tr>
+                <tr><td><%= t.reports.database_statistics.avg_tags_per_relation %>:</td><td class="number"><%= ( 100.0 * @db.stats('relation_tags') / @db.stats('relations')).to_i.to_f / 100 %></td></tr>
             </table>
         </td>
     </tr>

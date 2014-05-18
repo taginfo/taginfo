@@ -392,6 +392,22 @@ reports:
                 vielen Fällen sind sie aber das Ergebnis eines Fehlers.</p>
     database_statistics:
         name: Datenbank-Statistik
+        objects_in_db: Anzahl Objekte in der Datenbank
+        tags_in_db: Anzahl Tags in der Datenbank
+        distinct_keys: Anzahl unterschiedlicher Keys
+        distinct_tags: Anzahl unterschiedlicher Tags
+        nodes_in_db: Anzahl Nodes in der Datenbank
+        nodes_with_tags_in_db: Anzahl Nodes mit mindestens einem Tag
+        nodes_with_tags_in_db_percent: Anteil der Nodes mit mindestens einem Tag
+        tags_on_nodes: Anzahl Tags an Nodes
+        avg_tags_per_tagged_node: Durchschnittliche Anzahl Tags pro Node
+        ways_in_db: Anzahl Ways in der Datenbank
+        closed_ways_in_db: Anzahl geschlossener Ways
+        tags_on_ways: Anzahl Tags an Ways
+        avg_tags_per_way: Durchschnittliche Anzahl Tags pro Way
+        relations_in_db: Anzahl Relations in der Datenbank
+        tags_on_relations: Anzahl Tags an Relations
+        avg_tags_per_relation: Durchschnittliche Anzahl Tags pro Relation
     frequently_used_keys_without_wiki_page:
         name: Häufig benutzte Keys ohne Wiki-Seite
         intro: |

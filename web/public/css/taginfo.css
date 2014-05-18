@@ -294,6 +294,10 @@ table.boxes td.box {
     border-radius: 4px;
 }
 
+table.boxes td.box table {
+    width: 100%;
+}
+
 /* ==========  */
 
 div#tabs h2, div.box h2 {
@@ -329,6 +333,7 @@ span.lang {
 
 td.number {
     text-align: right;
+    width: 8em;
 }
 
 span.char {
