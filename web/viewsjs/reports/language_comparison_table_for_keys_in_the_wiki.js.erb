@@ -18,10 +18,8 @@ function page_init() {
     };
     var rp = calculate_flexigrid_rp(jQuery('div.box')) - 1;
     current_grid = 'grid-keys';
-    grids[current_grid] = jQuery('#grid-keys').flexigrid({
+    grids[current_grid] = jQuery('#grid-keys').flexigrid(jQuery.extend({}, flexigrid_defaults, texts.flexigrid, {
         url: '/api/4/keys/wiki_pages',
-        method: 'GET',
-        dataType: 'json',
         colModel: [
             { display: '<br/><%= h(osm.key) %>', name: 'key', width: 200, sortable: true },
             <% @languages.each do |lang| %>
@@ -33,12 +31,8 @@ function page_init() {
         ],
         sortname: 'key',
         sortorder: 'asc',
-        showToggleBtn: false,
         showTableToggleBtn: false,
-        usepager: true,
-        useRp: false,
         rp: rp,
-        height: 'auto',
         onSuccess: function(grid) {
             grid.fixHeight();
         },
@@ -56,5 +50,5 @@ function page_init() {
                 })
             };
         }
-    });
+    }));
 }

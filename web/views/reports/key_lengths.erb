@@ -1,19 +1,19 @@
 <div class="pre">
-    <h1><%= @title %></h1>
+    <h1><%= t.reports.key_lengths.name %></h1>
     <%= t.reports.key_lengths.intro %>
 </div>
 <div id="tabs">
     <ul>
-        <li><a href="#keys">Keys</a></li>
-        <li><a href="#histogram">Histogram</a></li>
+        <li><a href="#keys"><%= t.osm.keys %></a></li>
+        <li><a href="#histogram"><%= t.reports.key_lengths.histogram.name %></a></li>
     </ul>
     <div id="keys">
-        <h2>Keys</h2>
+        <h2><%= t.osm.keys %></h2>
         <table id="grid-keys">
         </table>
     </div>
     <div id="histogram">
-        <h2>Histogram</h2>
+        <h2><%= t.reports.key_lengths.histogram.name %></h2>
         <p><%= t.reports.key_lengths.histogram.intro %><p>
         <div class="canvas" id="canvas-histogram"></div>
     </div>

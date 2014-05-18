@@ -414,6 +414,7 @@ reports:
         table:
             number_of_objects: Anzahl Objekte
         histogram:
+            name: Histogramm
             intro: Dieses Histogramm zeigt wieviele Keys es mit welcher Länge gibt.
             key_length: Key-Länge
             number_of_keys: Anzahl Keys
