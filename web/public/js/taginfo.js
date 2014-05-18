@@ -630,7 +630,7 @@ function comparison_list_url(list) {
     });
 
     if (okay) {
-        return '/comparison/' + jQuery.map(list, function(item, i) {
+        return '/compare/' + jQuery.map(list, function(item, i) {
             return item[0] + (item[1] === null ? '' : ('=' + item[1]));
         }).join('/');
     } else {
@@ -640,7 +640,7 @@ function comparison_list_url(list) {
             keys.push(item[0]);
             values.push(item[1] === null ? '' : item[1]);
         });
-        return '/comparison/?' + jQuery.param({ 'key': keys, 'value': values });
+        return '/compare/?' + jQuery.param({ 'key': keys, 'value': values });
     }
 }
 
