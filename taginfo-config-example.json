@@ -35,13 +35,19 @@
         // "url_prefix": "http://open.mapquestapi.com/xapi/api/0.6/"
         "url_prefix": "http://overpass-api.de/api/xapi_meta?"
     },
+    // "overpass turbo" button on key/tag pages
     "turbo": {
+        // if there are more objects than this with a key/tag, the normal Overpass Turbo
+        // will be called, if less the Wizard will be used with autorun and autozoom
         "max_auto": 100,
         "url_prefix": "http://overpass-turbo.eu/?",
         "wizard_url_prefix": "http://overpass-turbo.eu/master?",
+        // set this to "global" or "in <area>" where <area> is a country name or other region found by Nominatim
         "wizard_area": "global"
     },
+    // "Level0 Editor" button on key/tag pages
     "level0": {
+        // disable Level0 Editor button if there are more than this many objects with a key/tag
         "max_results": 50,
         "overpass_url_prefix": "http://overpass.osm.rambler.ru/cgi/interpreter?",
         "level0_url_prefix": "http://level0.osmz.ru/?"
@@ -74,7 +80,7 @@
             "min_count_tags": 10000,
             // Tag combinations not appearing this often are not written to database.
             "min_tag_combination_count": 1000,
-            // Minimum number of occurances for creating a map
+            // Minimum number of tag occurances for creating a map
             "min_count_for_map": 1000,
             // Minimum number of relations per type to make this
             // relation type "interesting", ie. to make it show
