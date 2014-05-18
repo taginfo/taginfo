@@ -232,7 +232,8 @@ pages:
             from_count_tooltip: Nombre d'objets de cette autre clé qui ont aussi cette clé.
         geographic_distribution:
             title: Répartition géographique de cette clé
-            relations: Les relations n'ont pas de position géographique : Elles ne peuvent donc pas être affichées sur une carte.
+            relations: |
+                Les relations n'ont pas de position géographique : Elles ne peuvent donc pas être affichées sur une carte.
         wiki_pages:
             title: Pages du wiki sur cette clé
             none_found: Aucune page du wiki trouvée.
@@ -387,10 +388,7 @@ reports:
         intro: |
             <p>Ce tableau présente les clés qui apparaissent plus de 10&thinsp;000 fois dans la base de donnée OSM mais qui n’ont pas de page de description sur le wiki. Si vous maitrisez l’une d’entre elle, cliquez sur le lien de la colonne de gauche pour créer une page wiki et détailler la clé. Si un lien vers une page déjà existante est plus adapté, il suffit de rajouter la ligne suivante dans la page wiki.
             <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>page name</i>]]</tt>
-           </p>
-
-
-
+            </p>
         also_show_keys: Montrer aussi les clés qui n’ont pas de page wiki en anglais mais qui ont une page dans une autre langue.
         table:
             create_wiki_page: Créer une page wiki…
@@ -432,7 +430,7 @@ reports:
             <p>Cette table affiche les pages du wiki existantes pour documenter des tags non trouvés dans la base de données OSM.
             Ce n'est pas forcément une erreur, si un tag est en cours de préparation, mais ce peut aussi être une erreur suite à une faute de frappe.</p>
         wiki_pages: Pages wiki
-    name_tags:	
+    name_tags:
         name: Variations des tags 'name'
         intro: |
             <p>Ce rapport affiche des informations sur le nommage des objets dans OSM
