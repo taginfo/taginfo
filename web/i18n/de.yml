@@ -190,6 +190,8 @@ pages:
         no_values: Keine Values gefunden.
         no_tags: Keine Tags gefunden.
         no_match: Nichts gefunden.
+    compare:
+        nothing_to_compare: Keine Keys/Tags zum Vergleichen vorhanden. Sie können auf den Key/Tag-Seiten in die Vergleichliste aufgenommen werden.
     keys:
         intro: |
                 Diese Tabelle zeigt alle Keys, die in der Datenbank oder einer anderen Quelle vorkommen.

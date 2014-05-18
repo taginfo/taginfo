@@ -186,6 +186,8 @@ pages:
         no_values: No values found.
         no_tags: No tags found.
         no_match: No matches.
+    compare:
+        nothing_to_compare: There are no keys/tags to compare. Go to any key or tag page and add them.
     keys:
         intro: |
                 This table shows all tag keys that exist in the database or in any of the other sources.

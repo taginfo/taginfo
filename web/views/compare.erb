@@ -1,6 +1,9 @@
 <div class="pre">
     <h1 class="section"><%= h(t.taginfo.comparison) %></h1>
 </div>
+<% if @data.size == 0 %>
+<p class="empty"><%= h(t.pages.compare.nothing_to_compare) %></p>
+<% else %>
 <table class="comparison">
     <tr>
         <% @data.each_with_index do |data, num| %>
@@ -78,6 +81,7 @@
         <% end %>
     </tr>
 </table>
+<% end %>
 <% javascript do
     JS.raw(<<"JAVASCRIPT")
 function page_init2() {
