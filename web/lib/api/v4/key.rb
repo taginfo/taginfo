@@ -55,7 +55,7 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return {
+        return JSON.generate({
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total,
@@ -66,7 +66,7 @@ class Taginfo < Sinatra::Base
                 :to_fraction    => (row['together_count'].to_f / has_this_key.to_f).round_to(4),
                 :from_fraction  => row['from_fraction'].to_f.round_to(4)
             } }
-        }.to_json
+        }, json_opts(params[:format]))
     end
 
     api(4, 'key/distribution/nodes', {
@@ -183,11 +183,11 @@ class Taginfo < Sinatra::Base
                 end
             end
 
-        return {
+        return JSON.generate({
             :total => 4,
             :url   => request.url,
             :data  => out
-        }.to_json
+        }, json_opts(params[:format]))
     end
 
     api(4, 'key/values', {
@@ -270,7 +270,7 @@ class Taginfo < Sinatra::Base
             end
         end
 
-        return {
+        return JSON.generate({
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total.to_i,
@@ -282,7 +282,7 @@ class Taginfo < Sinatra::Base
                 :in_wiki  => row['in_wiki'] == 1,
                 :description => wikidesc[row['value']] || ''
             } }
-        }.to_json
+        }, json_opts(params[:format]))
     end
 
     api(4, 'key/wiki_pages', {

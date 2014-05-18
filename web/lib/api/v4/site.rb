@@ -17,7 +17,7 @@ class Taginfo < Sinatra::Base
         [:url, :name, :description, :icon, :contact, :area].each do |k|
             data[k] = TaginfoConfig.get("instance.#{k}") 
         end
-        return data.to_json
+        return JSON.generate(data, json_opts(params[:format]))
     end
 
     api(4, 'site/sources', {
@@ -31,12 +31,12 @@ class Taginfo < Sinatra::Base
         :example => { },
         :ui => '/sources'
     }) do
-        return Source.visible.map{ |source| {
+        return JSON.generate(Source.visible.map{ |source| {
             :name         => source.name,
             :data_until   => source.data_until,
             :update_start => source.update_start,
             :update_end   => source.update_end
-        }}.to_json
+        }}, json_opts(params[:format]))
     end
 
 end

@@ -49,7 +49,7 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return {
+        return JSON.generate({
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total,
@@ -66,7 +66,7 @@ class Taginfo < Sinatra::Base
                 :count_relation_members          =>  row['count_relations'].to_i,
                 :count_relation_members_fraction =>  relation_type_info['members_relations'].to_i == 0 ? 0 : (row['count_relations'].to_f / relation_type_info['members_relations'].to_i).round_to(4),
             } }
-        }.to_json
+        }, json_opts(params[:format]))
     end
 
     api(4, 'relation/stats', {
@@ -98,11 +98,11 @@ class Taginfo < Sinatra::Base
                 end
             end
 
-        return {
+        return JSON.generate({
             :total => 4,
             :url   => request.url,
             :data  => out
-        }.to_json
+        }, json_opts(params[:format]))
     end
 
     api(4, 'relation/wiki_pages', {
@@ -133,7 +133,7 @@ class Taginfo < Sinatra::Base
 
         res = @db.execute('SELECT * FROM wiki.relation_pages LEFT OUTER JOIN wiki.wiki_images USING (image) WHERE rtype = ? ORDER BY lang', rtype)
 
-        return res.map{ |row| {
+        return JSON.generate(res.map{ |row| {
                 :lang             => row['lang'],
                 :language         => ::Language[row['lang']].native_name,
                 :language_en      => ::Language[row['lang']].english_name,
@@ -149,7 +149,7 @@ class Taginfo < Sinatra::Base
                     :thumb_url_suffix => row['thumb_url_suffix']
                 }
             }
-        }.to_json
+        }, json_opts(params[:format]))
     end
 
 end

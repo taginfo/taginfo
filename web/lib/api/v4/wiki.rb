@@ -27,7 +27,7 @@ class Taginfo < Sinatra::Base
             }.
             execute()
 
-        return {
+        return JSON.generate({
             :total => res.size,
             :url   => request.url,
             :data  => res.map{ |row| {
@@ -39,7 +39,7 @@ class Taginfo < Sinatra::Base
                 :wiki_tag_pages          => row['wiki_tag_pages'].to_i,
                 :wiki_tag_pages_fraction => row['wiki_tag_pages'].to_f / @db.stats('wiki_tags_described'),
             } }
-        }.to_json
+        }, json_opts(params[:format]))
     end
 
 end

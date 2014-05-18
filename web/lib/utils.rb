@@ -59,6 +59,14 @@ def section(id)
     @section_title = (@section =~ /^(keys|tags)$/) ? t.osm[@section] : t.taginfo[@section]
 end
 
+def json_opts(format)
+    if format == 'json_pretty'
+        return { :indent => '  ', :space => ' ', :object_nl => "\n" }
+    else
+        return {}
+    end
+end
+
 # ------------------------------------------------------------------------------
 
 # Escape tag key or value for XAPI according to
@@ -196,7 +204,7 @@ end
 
 # Used in wiki api calls
 def get_wiki_result(res)
-    return res.map{ |row| {
+    return JSON.generate(res.map{ |row| {
             :lang             => row['lang'],
             :language         => ::Language[row['lang']].native_name,
             :language_en      => ::Language[row['lang']].english_name,
@@ -219,12 +227,12 @@ def get_wiki_result(res)
             :tags_combination => row['tags_combination'].split(','),
             :tags_linked      => row['tags_linked'     ].split(',')
         }
-    }.to_json
+    }, json_opts(params[:format]))
 end
 
 # Used in josm api calls
 def get_josm_style_rules_result(total, res)
-    return {
+    return JSON.generate({
         :page  => @ap.page,
         :rp    => @ap.results_per_page,
         :total => total,
@@ -239,7 +247,7 @@ def get_josm_style_rules_result(total, res)
             :line_width => row['line_width'] ? row['line_width'].to_i : 0,
             :icon       => row['icon_source'] && row['icon_source'] != 'misc/deprecated.png' && row['icon_source'] != 'misc/no_icon.png' ? row['icon_source'] : ''
         } }
-    }.to_json
+    }, json_opts(params[:format]))
 end
 
 def paging_results(array)

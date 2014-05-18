@@ -42,7 +42,7 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return {
+        return JSON.generate({
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total,
@@ -67,7 +67,7 @@ class Taginfo < Sinatra::Base
                 :region_note   => nt.region_note,
                 :notes         => nt.notes
             }} 
-        }.to_json
+        }, json_opts(params[:format]))
     end
 
     @@bcp47_filters = {};
@@ -109,7 +109,7 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return {
+        return JSON.generate({
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total,
@@ -128,7 +128,7 @@ class Taginfo < Sinatra::Base
                 :added       => row['added'],
                 :notes       => notes
             }}
-        }.to_json
+        }, json_opts(params[:format]))
     end
 
 end

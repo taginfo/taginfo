@@ -56,7 +56,7 @@ class Taginfo < Sinatra::Base
             pr[rtype] << pv
         end
 
-        return {
+        return JSON.generate({
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total,
@@ -67,7 +67,7 @@ class Taginfo < Sinatra::Base
                 :count_fraction  => row['count'].to_f / all_relations,
                 :prevalent_roles => row['members_all'] ? pr[row['rtype']][0,10] : nil
             } }
-        }.to_json
+        }, json_opts(params[:format]))
     end
 
 end

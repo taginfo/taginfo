@@ -117,7 +117,7 @@ class Taginfo < Sinatra::Base
             end
         end
 
-        return {
+        return JSON.generate({
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total,
@@ -140,7 +140,7 @@ class Taginfo < Sinatra::Base
             h[:wikipages] = row['wikipages'] if row['wikipages']
             h[:prevalent_values] = row['prevalent_values'][0,10] if row['prevalent_values']
             h }
-        }.to_json
+        }, json_opts(params[:format]))
     end
 
     api(4, 'keys/wiki_pages', {
@@ -171,7 +171,7 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return {
+        return JSON.generate({
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total,
@@ -184,7 +184,7 @@ class Taginfo < Sinatra::Base
                 }
                 { :key => row['key'], :lang => lang_hash }
             }
-        }.to_json
+        }, json_opts(params[:format]))
     end
 
     api(4, 'keys/without_wiki_page', {
@@ -257,7 +257,7 @@ class Taginfo < Sinatra::Base
             reshash[key]['prevalent_values'] << pv
         end
 
-        return {
+        return JSON.generate({
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total,
@@ -270,7 +270,7 @@ class Taginfo < Sinatra::Base
                 :users_all          => row['users_all'].to_i,
                 :prevalent_values   => row['prevalent_values']
             } }
-        }.to_json
+        }, json_opts(params[:format]))
     end
 
 end

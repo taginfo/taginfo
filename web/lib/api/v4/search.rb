@@ -37,7 +37,7 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return {
+        return JSON.generate({
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total,
@@ -47,7 +47,7 @@ class Taginfo < Sinatra::Base
                 :value     => row['value'],
                 :count_all => row['count_all'].to_i,
             }}
-        }.to_json
+        }, json_opts(params[:format]))
     end
 
     api(4, 'search/by_keyword', {
@@ -74,7 +74,7 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return {
+        return JSON.generate({
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total,
@@ -83,7 +83,7 @@ class Taginfo < Sinatra::Base
                 :key   => row['key'],
                 :value => row['value']
             }}
-        }.to_json
+        }, json_opts(params[:format]))
     end
 
     api(4, 'search/by_role', {
@@ -115,7 +115,7 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return {
+        return JSON.generate({
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total,
@@ -125,7 +125,7 @@ class Taginfo < Sinatra::Base
                 :role      => row['role'],
                 :count_all => row['count_all'].to_i,
             }}
-        }.to_json
+        }, json_opts(params[:format]))
     end
 
     api(4, 'search/by_value', {
@@ -157,7 +157,7 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return {
+        return JSON.generate({
             :page  => @ap.page,
             :rp    => @ap.results_per_page,
             :total => total,
@@ -167,7 +167,7 @@ class Taginfo < Sinatra::Base
                 :value     => row['value'],
                 :count_all => row['count_all'].to_i,
             }}
-        }.to_json
+        }, json_opts(params[:format]))
     end
 
 end
