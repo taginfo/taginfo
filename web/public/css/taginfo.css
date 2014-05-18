@@ -439,8 +439,7 @@ table.list th.tr, table.list td.tr {
 
 table.comparison {
     border-spacing: 10px 1px;
-    margin-left: -10px;
-    margin-right: -10px;
+    margin: 0 -10px 10px -10px;
 }
 
 table.comparison a.close {
