@@ -7,16 +7,16 @@
 .bail ON
 
 UPDATE wikipages SET status='r' WHERE type='redirect';
-UPDATE wikipages SET status='p' WHERE type='page' AND has_templ='false';
-UPDATE wikipages SET status='t' WHERE type='page' AND has_templ='true' AND parsed=1;
-UPDATE wikipages SET status='e' WHERE type='page' AND has_templ='true' AND parsed=0;
+UPDATE wikipages SET status='p' WHERE type='page' AND has_templ=0;
+UPDATE wikipages SET status='t' WHERE type='page' AND has_templ=1 AND parsed=1;
+UPDATE wikipages SET status='e' WHERE type='page' AND has_templ=1 AND parsed=0;
 
 CREATE INDEX wikipages_key_value_idx ON wikipages(key, value);
 
 UPDATE relation_pages SET status='r' WHERE type='redirect';
-UPDATE relation_pages SET status='p' WHERE type='page' AND has_templ='false';
-UPDATE relation_pages SET status='t' WHERE type='page' AND has_templ='true' AND parsed=1;
-UPDATE relation_pages SET status='e' WHERE type='page' AND has_templ='true' AND parsed=0;
+UPDATE relation_pages SET status='p' WHERE type='page' AND has_templ=0;
+UPDATE relation_pages SET status='t' WHERE type='page' AND has_templ=1 AND parsed=1;
+UPDATE relation_pages SET status='e' WHERE type='page' AND has_templ=1 AND parsed=0;
 
 CREATE INDEX relation_pages_rtype_idx ON relation_pages(rtype);
 
