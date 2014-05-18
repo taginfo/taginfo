@@ -111,6 +111,7 @@ help:
         keys_page: Keys-Seite
         tags_page: Tags-Seite
         relations_page: Relations-Seite
+        compare_page: Vergleichs-Seite
         first_page: Erste Seite
         prev_page: Vorhergeh. Seite
         next_page: Folgende Seite

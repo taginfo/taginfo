@@ -121,7 +121,6 @@ function page_init2() {
     up = function() { window.location = url_for_key(key); };
     jQuery('h1').html(link_to_key(key) + '=' + fmt_value(value));
 
-    jQuery.cookie.json = true;
     comparison_list_update(key, value);
     jQuery('#list').bind('change', function() {
         comparison_list_change(key, value);

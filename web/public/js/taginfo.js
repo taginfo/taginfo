@@ -685,6 +685,8 @@ jQuery(document).ready(function() {
 
     jQuery('#help_link').bind('click', open_help);
 
+    jQuery.cookie.json = true;
+
     jQuery.getQueryString = (function(a) {
         if (a == "") return {};
         var b = {};
@@ -733,6 +735,9 @@ jQuery(document).ready(function() {
                 switch (event.which) {
                     case 63: // ?
                         open_help();
+                        break;
+                    case 67: // c
+                        window.location = comparison_list_url(get_comparison_list());
                         break;
                     case 70: // f
                         jQuery('input.qsbox').focus();

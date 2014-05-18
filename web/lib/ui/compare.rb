@@ -66,7 +66,6 @@ class Taginfo < Sinatra::Base
         @img_width  = TaginfoConfig.get('geodistribution.width')
         @img_height = TaginfoConfig.get('geodistribution.height')
 
-        javascript_for(:cookie)
         javascript "#{ r18n.locale.code }/compare"
         erb :compare
     end

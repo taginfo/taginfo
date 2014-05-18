@@ -86,7 +86,6 @@
     JS.raw(<<"JAVASCRIPT")
 function page_init2() {
     var data = #{ @data.to_json };
-    jQuery.cookie.json = true;
     var items = []
     jQuery.each(data, function(index, item) {
         items.push([ item.key, (item.value === null ? undefined : item.value) ]);

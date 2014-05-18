@@ -112,6 +112,7 @@ help:
         keys_page: Keys page
         tags_page: Tags page
         relations_page: Relations page
+        compare_page: Comparison page
         first_page: First page
         prev_page: Previous page
         next_page: Next page
