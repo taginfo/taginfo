@@ -804,6 +804,10 @@ jQuery(document).ready(function() {
         }
     });
 
+    jQuery('#search_form').bind('submit', function(event) {
+        return jQuery('input#search').val() != '';
+    });
+
     jQuery(window).resize(function() {
         resize_box();
         resize_grid(current_grid);

@@ -143,6 +143,17 @@ class Taginfo < Sinatra::Base
     }) do
         query = params[:query]
 
+        # searching for the empty string is very expensive, so we'll just return an empty result
+        if query == ''
+            return JSON.generate({
+                :page  => 0,
+                :rp    => 0,
+                :total => 0,
+                :url   => request.url,
+                :data  => []
+            }, json_opts(params[:format]))
+        end
+
         total = @db.count('search.ftsearch').
             condition_if("value MATCH ?", query).
             get_first_value().to_i
