@@ -443,9 +443,16 @@ table.comparison {
     margin-right: -10px;
 }
 
+table.comparison a.close {
+    float: right;
+}
+
 table.comparison td.data h2 {
-    margin-top: 4px;
-    margin-bottom: 8px;
+    position: relative;
+    clear: both;
+    top: -12px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 table.comparison th.data, table.comparison td.data {

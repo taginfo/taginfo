@@ -5,6 +5,7 @@
     <tr>
         <% @data.each_with_index do |data, num| %>
         <td class="data first item<%= num %>" style="width: <%= 100/@data.size %>%">
+            <a class="close" href="#"><img src="/img/close.png" width="16" height="16"/></a>
             <h2></h2>
             <p><%= data[:desc] %></p>
         </td>
@@ -81,13 +82,20 @@
     JS.raw(<<"JAVASCRIPT")
 function page_init2() {
     var data = #{ @data.to_json };
-    jQuery.each(data, function(index, data) {
-        if (data.value) {
-            jQuery('.item' + index + ' h2').html(link_to_tag(data.key, data.value));
+    jQuery.each(data, function(index, item) {
+        var datac = [];
+        jQuery.each(data, function(i, item) {
+            if (i != index) {
+                datac.push([item['key'], item['value']]);
+            }
+        });
+        jQuery('.item' + index + ' a.close').attr('href', comparison_list_url(datac));
+        if (item.value) {
+            jQuery('.item' + index + ' h2').html(link_to_tag(item.key, item.value));
         } else {
-            jQuery('.item' + index + ' h2').html(link_to_key(data.key));
+            jQuery('.item' + index + ' h2').html(link_to_key(item.key));
             jQuery('.item' + index + '.prevalent_values p b').html('#{ h(t.misc.prevalent_values)}:');
-            jQuery('.item' + index + '.prevalent_values div').html(fmt_prevalent_value_list(data.key, data.prevalent_values));
+            jQuery('.item' + index + '.prevalent_values div').html(fmt_prevalent_value_list(item.key, item.prevalent_values));
         }
     });
     jQuery('div.prevalent_values a').tipsy({ opacity: 1, delayIn: 500, gravity: 'w' });
