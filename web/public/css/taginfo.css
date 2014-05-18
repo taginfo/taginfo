@@ -445,6 +445,15 @@ table.comparison {
 
 table.comparison a.close {
     float: right;
+    display: block;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #e8e8e4;
+    border-radius: 4px;
+}
+
+table.comparison a.close:hover {
+    border: 1px solid #d0d0d0;
 }
 
 table.comparison td.data h2 {

@@ -8,7 +8,7 @@
     <tr>
         <% @data.each_with_index do |data, num| %>
         <td class="data first item<%= num %>" style="width: <%= 100/@data.size %>%">
-            <a class="close" href="#"><img src="/img/close.png" width="16" height="16"/></a>
+            <a class="close ui-icon ui-icon-closethick" href="#"></a>
             <h2></h2>
             <p><%= data[:desc] %></p>
         </td>
