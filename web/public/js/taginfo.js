@@ -617,7 +617,7 @@ function comparison_list_update(key, value) {
 }
 
 function comparison_list_item_clean(text) {
-    return text === null || text.match(/^[a-zA-Z:_]+$/) !== null;
+    return text === null || text.match(/^[a-zA-Z0-9:_]+$/) !== null;
 }
 
 function comparison_list_url(list) {
