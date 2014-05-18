@@ -39,11 +39,13 @@ taginfo:
     reports: Comptes-rendus
     international: International
     apidoc: Documentation de l'API
+    test: Test
     map: Carte
     maps: Cartes
     relations: Relations
     combinations: Combinaisons
     key_combinations: Combinaisons
+    comparison: Comparaison clé/tag
     overview: Vue d'ensemble
     data_from: Données datant du 
     uses_data_from: |
@@ -185,6 +187,8 @@ pages:
         no_values: Aucune valeur trouvée.
         no_tags: Aucun tag trouvée.
         no_match: Aucune correspondance.
+    compare:
+        nothing_to_compare: Il n’y a aucun élément à comparer. Rendez-vous sur une page clé/tag pour en ajouter.
     keys:
         intro: |
                 Cette table affiche toutes les clés qui existent dans la base de données ou dans une autre source.
@@ -211,6 +215,7 @@ pages:
             nodes: seulement les nodes
             ways: seulement les ways
             relations: Seulement les relations
+        button_disabled: Bouton désactivé, il y a trop d’objets comprenant cette clé
         number_objects: Nombre d'objets
         number_values: Nombre de valeurs
         values_used: Valeurs utilisées par cette clé
@@ -227,9 +232,7 @@ pages:
             from_count_tooltip: Nombre d'objets de cette autre clé qui ont aussi cette clé.
         geographic_distribution:
             title: Répartition géographique de cette clé
-            relations: |
-                    Les relations n'ont pas de position géographique : Elles ne peuvent donc
-                    pas être affichées sur une carte.
+            relations: Les relations n'ont pas de position géographique : Elles ne peuvent donc pas être affichées sur une carte.
         wiki_pages:
             title: Pages du wiki sur cette clé
             none_found: Aucune page du wiki trouvée.
@@ -246,6 +249,7 @@ pages:
     tag:
         description_from_wiki: Description de ce tag depuis le wiki (dans votre langue choisie si possible, sinon en anglais).
         no_description_in_wiki: Aucune description dans le wiki
+        button_disabled: Bouton désactivé, il y a trop d’objets comprenant ce tag.
         number_objects: Nombre d'objets
         overview:
             see_also: Voir aussi la page des types de relation
@@ -258,10 +262,15 @@ pages:
         combinations:
             title: Combinaisons
             description: Cette table n'affiche que les combinaisons les plus fréquentes des tags les plus fréquente.
+        geographic_distribution:
+            title: Distribution géographique de ce tag.
+            relations: Les relations ne sont pas géolocalisées, il n’existe donc aucune carte.
+            no_map: Désolé, la carte ne peut être créée que pour les tags les plus fréquents. Essayez le lien overpass turbo.
         wiki_pages:
             title: Pages du wiki sur cette valeur
             none_found: Aucune page du wiki trouvée.
             create: Créer une page du wiki pour ce tag
+            suggest_key_wiki_page: Vous trouverez peut-être plus d’information sur la page wiki pour les clés 1%.
             wiki_page: Page du wiki
             implied_tags: Tags implicites
             combined_tags: Tags combinés
@@ -275,6 +284,7 @@ pages:
         name: Type de relation
         description_from_wiki: Description de ce type de relation dans le wiki (dans votre langue choisie si possible, sinon en anglais).
         no_description_in_wiki: Aucune description dans le wiki
+        button_disabled: Bouton désactivé, il y a trop d’objets comprenant ce type de relation.
         overview:
             tab: Vue d'ensemble
             title: Vue d'ensemble
@@ -307,6 +317,14 @@ flexigrid:
     nomsg: Aucun élément
     errormsg: Erreur de connexion
 
+comparison:
+    list: liste de comparaison
+    items: éléments
+    add_key: Ajouter cette clé à la liste
+    add_tag: Ajouter ce tag à la liste
+    clear: Effacer la liste de comparaison
+    compare: Comparer les clés/tags
+
 sources:
     master:
         name: Maître
@@ -336,6 +354,8 @@ reports:
         statistics:
             tab: Statistiques
             title: Statistiques globales
+            fraction: Fraction
+            characters: caractères utilisés dans les clés
             characters_in_keys:
                 plain: Seulement les lettres latines minuscules (<span class="char">a</span> à <span class="char">z</span>) et le souligné (<span class="char">_</span>), le première et dernière caractère est une lettre.
                 colon: Comme la règle A mais contenant un ou plusieurs caractères deux-points (<span class="char">:</span>).
@@ -343,6 +363,7 @@ reports:
                 space: Comme la règle C mais peut contenir au moins un symbole d'espacement (espace, tabulation, nouvelle ligne, retour chariot, et selon d'autres alphabets).
                 problem: Comme la règle C mais peut contenir des caractères problématiques <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
                 rest: Toutes les autres possibilités.
+                total: Total
         whitespace:
             tab: Espacement
             title: Clés contenant des espaces
@@ -359,10 +380,32 @@ reports:
                 Ces caractères peuvent poser des problèmes car ils peuvent avoir des interprétations particulières par les outils employés pour les traitements des données (SQL, XML, HTML...).
                 Par exemple le signe égal (<span class="char">=</span>) est utilisé pour séparer la clé et la valeur d'un tag.
                 <br/>Les clés de tag apparaissant dans cette liste ne sont pas forcément faux, mais ils risquent d'être source d'erreur.</p>
+    database_statistics:
+        name: Statistiques de la base de données
     frequently_used_keys_without_wiki_page:
         name: Clés fréquentes sans page de Wiki associée
+        intro: |
+            <p>Ce tableau présente les clés qui apparaissent plus de 10&thinsp;000 fois dans la base de donnée OSM mais qui n’ont pas de page de description sur le wiki. Si vous maitrisez l’une d’entre elle, cliquez sur le lien de la colonne de gauche pour créer une page wiki et détailler la clé. Si un lien vers une page déjà existante est plus adapté, il suffit de rajouter la ligne suivante dans la page wiki.
+            <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>page name</i>]]</tt>
+           </p>
+
+
+
+        also_show_keys: Montrer aussi les clés qui n’ont pas de page wiki en anglais mais qui ont une page dans une autre langue.
+        table:
+            create_wiki_page: Créer une page wiki…
+    josm_styles:
+        name: styles JOSM
     key_lengths:
         name: Longueurs des clés
+        intro: |
+            <p>Les clés des tags doivent avoir une longueur comprise entre 0 et 255 caractères (Unicode). Les clés très courtes ou très longues sont souvent (mais pas systématiquement) des erreurs.</p>
+        table:
+            number_of_objects: Nombre d’objets
+        histogram:
+            intro: Cet histogramme montre combien il y a de clés de chaque longueur.
+            key_length: Longueur de la clé
+            number_of_keys: Nombre de des clés
     language_comparison_table_for_keys_in_the_wiki:
         name: Comparaison par langue des clés présentées sur le wiki
         icons:
@@ -388,7 +431,8 @@ reports:
         intro: |
             <p>Cette table affiche les pages du wiki existantes pour documenter des tags non trouvés dans la base de données OSM.
             Ce n'est pas forcément une erreur, si un tag est en cours de préparation, mais ce peut aussi être une erreur suite à une faute de frappe.</p>
-    name_tags:
+        wiki_pages: Pages wiki
+    name_tags:	
         name: Variations des tags 'name'
         intro: |
             <p>Ce rapport affiche des informations sur le nommage des objets dans OSM
