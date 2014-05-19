@@ -53,6 +53,16 @@ class Taginfo < Sinatra::Base
         end
     end
 
+    get '/taginfo/config' do
+        @title = 'Configuration'
+        @section = 'taginfo'
+        @section_title = t.taginfo.meta
+
+        @config = TaginfoConfig.sanitized_config
+
+        erb :'taginfo/config'
+    end
+
     get '/taginfo/translations' do
         @title = 'Translations Overview'
         @section = 'taginfo'

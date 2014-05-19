@@ -1,0 +1,7 @@
+<div class="pre">
+    <h1>Config</h1>
+    <p>Configuration of this taginfo instance. Not all configuration settings are shown.</p>
+</div>
+<div class="box">
+    <pre><%= h(JSON.generate(@config, json_opts('json_pretty'))).gsub(/&quot;[a-z0-9_]+&quot;:/, '<span style="color: #404040">\0</span>') %></pre>
+</div>
