@@ -7,7 +7,8 @@
 <%   percent = (@num_texts[locale.code].to_f / @num_texts['en'].to_f * 100).to_i %>
         <tr>
             <td><span class="lang"><%= locale.code %></span></td>
-            <td><%= locale.title %></td>
+            <td><%= h(::Language[locale.code].english_name) %></td>
+            <td><%= h(::Language[locale.code].native_name) %></td>
             <td class="tr"><%= @num_texts[locale.code] %>/<%= @num_texts['en'] %></td>
             <td class="tr <%= percent > 90 ? 'good' : ( percent <= 80 ? 'bad' : 'okay' ) %>"><%= percent %>%</td>
             <td><a href="/taginfo/i18n?lang=<%= locale.code %>">see texts</a></td>
