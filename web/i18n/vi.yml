@@ -1,0 +1,492 @@
+
+osm:
+    tag: Thẻ
+    tags: Thẻ
+    key: Chìa khóa
+    keys: Chìa khóa
+    value: Giá trị
+    values: Giá trị
+    node: Nốt
+    nodes: Nốt
+    way: Lối
+    ways: Lối
+    relation: Quan hệ
+    relations: Quan hệ
+    relation_type: Kiểu quan hệ
+    relation_types: Kiểu quan hệ
+    relation_member: Thành viên quan hệ
+    relation_members: Thành viên quan hệ
+    relation_member_nodes: Nốt thành viên
+    relation_member_ways: Lối thành viên
+    relation_member_relations: Quan hệ thành viên
+    relation_member_role: Vai trò
+    relation_member_roles: Vai trò
+    object: Đối tượng
+    objects: Đối tượng
+    all: Tất cả
+    user: Người dùng
+    users: Người dùng
+
+taginfo:
+    source: Nguồn
+    sources: Nguồn
+    download: Tải về
+    about: Giới thiệu về taginfo
+    contact: Liên lạc
+    meta: Meta
+    wiki: Trang wiki về taginfo
+    report: Thống kê
+    reports: Thống kê
+    international: Quốc tế
+    apidoc: Tài liệu API
+    test: Thử
+    map: Bản đồ
+    maps: Bản đồ
+    relations: Quan hệ
+    combinations: Tổ hợp
+    key_combinations: Tổ hợp
+    comparison: So sánh chìa khóa/thẻ
+    overview: Tóm lược
+    data_from: Dữ liệu từ
+    uses_data_from: |
+        Lấy dữ liệu từ:
+    data_from_description: Cơ sở dữ liệu taginfo được cập nhật lần cuối vào
+    instance:
+        title: Giới thiệu về trang taginfo này
+        other: Xem các trang khác tại <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">wiki OSM</a>.
+
+misc:
+    values_less_than_one_percent: không có giá trị hơn 1%
+    empty_string: chuỗi rỗng
+    unknown: không rõ
+    count: Tổng số
+    image: Hình ảnh
+    no_image: không có hình ảnh
+    all: Tất cả
+    object_type: Kiểu
+    description: Miêu tả
+    help: Trợ giúp
+    length: Độ dài
+    icon: Hình tượng
+    line: Đường kẻ
+    area: Khu vực
+    language: Ngôn ngữ
+    search_for: Tìm kiếm
+    objects_tooltip: Số đối tượng (giá trị tuyệt đối cũng như số phần trăm các nốt, lối, và quan hệ).
+    nodes_tooltip: Số nốt (giá trị tuyệt đối cũng như số phần trăm các nốt có thẻ, tức bỏ qua các nốt không có thẻ).
+    ways_tooltip: Số lối (giá trị tuyệt đối cũng như số phần trăm các lối).
+    relations_tooltip: Số quan hệ (giá trị tuyệt đối cũng như số phần trăm các quan hệ).
+    values_tooltip: Số giá trị khác nhau của chìa khóa này.
+    users_tooltip: Số người dùng khác nhau đã thay đổi đối tượng lần cuối cùng có chìa khóa này.
+    prevalent_values: Giá trị phổ biến
+    prevalent_values_tooltip: Cho tới 10 giá trị phổ biến nhất của chìa khóa này (chỉ khi nào hơn 1% các thẻ có chìa khóa này có giá trị này).
+    in_wiki_tooltip: Có ít nhất một trang wiki.
+    in_josm_tooltip: Chìa khóa xuất hiện trong cấu hình JOSM.
+
+help:
+    search:
+        title: Tìm kiếm
+        intro: Sử dụng hộp tìm kiếm ở phía trên bên phải để tìm kiếm các chìa khóa và giá trị thẻ.
+        string: Bạn có thể tìm kiếm các chìa khóa và giá trị thẻ
+        substring: Cũng có thể nhập một phần của chìa khóa hoặc giá trị
+        complete_tags: Cũng có thể tìm kiếm các thẻ đầy đủ
+        values_only: Cũng có thể chỉ tìm kiếm các giá trị thẻ
+        suggestions: |
+            Để thuận tiện hơn, các chìa khóa và thẻ phổ biến sẽ được gợi ý
+            trong lúc gõ. Bấm các phím mũi tên để chọn một gợi ý rồi bấm
+            <span class="key">Enter</span>.
+            Trang của chìa khóa hoặc thẻ sẽ xuất hiện ngay.
+    keyboard:
+        title: Phím tắt
+        site_navigation: Chuyển hướng trang Web
+        page_navigation: Chuyển hướng trang
+        table_navigation: Chuyển hướng bảng
+        keys:
+            home: Home
+            end: End
+            pageup: PgUp
+            pagedown: PgDn
+            esc: Esc
+            tab: Tab
+        home_page: Trang chủ
+        keys_page: Trang chìa khóa
+        tags_page: Trang thẻ
+        relations_page: Trang quan hệ
+        compare_page: Trang so sánh
+        first_page: Trang đầu
+        prev_page: Trang trước
+        next_page: Trang sau
+        last_page: Trang cuối
+        help_page: Trang trợ giúp này
+        activate_search: Bắt đầu nhập vào hộp tìm kiếm
+        activate_filter: Bắt đầu nhập vào hộp bộ lọc
+        prev_entry: Mục trước
+        next_entry: Mục sau
+        enter_entry: Chuyển tới mục
+        switch_tab: Đổi thẻ
+        deactivate: Thoát khỏi hộp nhập văn bản
+        up: Lên trang mẹ
+        switch_input: Luân chuyển qua các hộp nhập văn bản
+
+pages:
+    not_found:
+        title: Không tìm thấy
+        intro: Rất tiếc, không tìm thấy trang mà bạn yêu cầu.
+    index:
+        popular_keys: Một số chìa khóa phổ biến
+        keys:
+            listkeys: Xem tất cả các chìa khóa…
+        tags:
+            listtags: Xem các thẻ phổ biến nhất…
+        relations:
+            listrelations: Xem các loại quan hệ…
+        reports:
+            listreports: Xem tất cả các thống kế…
+        about:
+            intro:
+                <p>OpenStreetMap sử dụng các <b>thẻ</b> có dạng <b>chìa khóa=giá trị</b>
+                để định nghĩa các đối tượng địa lý. Taginfo thu thập thông tin
+                về các thẻ này từ nhiều nguồn để giúp bạn tìm hiểu
+                ý nghĩa và cách sử dụng các thẻ.</p>
+            more: Tìm hiểu thêm về taginfo…
+        international:
+            see: Xem các trang taginfo khác…
+    sources:
+        intro: |
+            <p>Taginfo lấy dữ liệu về thẻ OSM từ nhiều nguồn gốc và thu thập dữ liệu
+            để duyệt và khám phá một cách dễ dàng.</p>
+            <p>Lưu ý rằng taginfo chỉ hiển thị dữ liệu này. Các dữ liệu phải được sửa đổi tại nguồn gốc.</p>
+        data_until: Dữ liệu cho tới
+        last_update_run: Cập nhật lần cuối
+        data_until_explanation: Tất cả các sửa đổi cho tới lúc này sẽ xuất hiện trong dữ liệu; các sửa đổi về sau có thể xuất hiện.
+        to: đến
+    download:
+        intro: |
+            <p>Ở đây bạn có thể tải về các cơ sở dữ liệu được sử dụng bởi taginfo. Tất cả dữ liệu được lưu giữ
+            trong CSDL <a class="extlink" href="http://www.sqlite.org/">SQLite</a>.
+            Sau đó, các tập tin CSDL được nén bằng <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
+            <p>Nếu bạn không muốn tải về các CSDL này mà vẫn muốn truy cập dữ liệu một cách tự động,
+            bạn cũng có thể dùng <a href="/about">API</a>.</p>
+        file: Tập tin
+        packed: Nén
+        unpacked: Giải nén
+        description: Miêu tả
+    reports:
+        intro: |
+            Các trang thống kế này hiển thị các mặt khác nhau của dữ liệu.
+            Dữ liệu được thu thập từ nhiều nguồn một cách sáng tạo. Một số
+            thống kế có thể giúp tìm lỗi cụ thể.
+        list: Danh sách các thống kê
+        data_sources: Nguồn dữ liệu
+    search:
+        title: Kết quả tìm kiếm
+        you_were_searching_for: Bạn tìm kiếm
+        fulltext: Văn bản đầy đủ
+        no_keys: Không tìm thấy chìa khóa.
+        no_values: Không tìm thấy giá trị.
+        no_tags: Không tìm thấy thẻ.
+        no_match: Không tìm thấy kết quả.
+    compare:
+        nothing_to_compare: Không có chìa khóa/thẻ để so sánh. Mở trang chìa khóa hoặc thẻ nào để cộng thêm.
+    keys:
+        intro: |
+                Bảng này có các chìa khóa thẻ tồn tại trong cơ sở dữ liệu hoặc trong những nguồn gốc khác.
+    tags:
+        intro: |
+                Bảng này có các thẻ phổ biến nhất trong cơ sở dữ liệu.
+    relations:
+        name: Loại quan hệ
+        intro: Thông tin về các loại quan hệ (theo thẻ <a href="/keys/type?filter=relations">type</a>).
+        relations_of_type_tooltip: Số quan hệ loại này (cũng như số phần trăm các quan hệ).
+        prevalent_roles: Vai trò phổ biến
+        prevalent_roles_tooltip: Các vai trò phổ biến của các quan hệ loại này.
+        no_information: Không có thông tin
+        roles_less_than_one_percent: không có vai trò nào hơn 1%
+        empty_role: vai trò trống
+    key:
+        description_from_wiki: Lời miêu tả chìa khóa này trên wiki (trong ngôn ngữ của bạn nếu có sẵn, nếu không thì trong tiếng Anh).
+        no_description_in_wiki: Không có lời miêu tả chìa khóa này trong tiếng Anh trên wiki. (Xem thêm thẻ “Wiki”.)
+        filter:
+            label: |
+                 Bộ lọc:
+            none: Không lọc
+            nodes: Chỉ nốt
+            ways: Chỉ lối
+            relations: Chỉ quan hệ
+        button_disabled: Nút bị vô hiệu vì có quá nhiều đối tượng với chìa khóa này.
+        number_objects: Số đối tượng
+        number_values: Số giá trị
+        values_used: Các giá trị được dùng với chìa khóa này
+        tag_description_from_wiki: Lời miêu tả thẻ này trên wiki (trong ngôn ngữ của bạn nếu có sẵn, nếu không thì trong tiếng Anh).
+        overview:
+            objects_last_edited_by: Các đối tượng có chìa khóa này được sửa đổi lần cuối bởi %1 người dùng khác nhau.
+            no_endorsement: (Không có nghĩa rằng tất cả mọi người này sử dụng chìa khóa này.)
+            distribution_of_values: Phân phối giá trị
+        other_keys_used:
+            title: Chìa khóa khác được dùng với chìa khóa này
+            other: Chìa khóa khác
+            to_count_tooltip: Số đối tượng có chìa khóa này mà cũng có chìa khóa kia.
+            other_key_tooltip: Chìa khóa được dùng với chìa khóa này.
+            from_count_tooltip: Số đối tượng có chìa khóa kia cũng có chìa khóa này.
+        geographic_distribution:
+            title: Phân phối địa lý của chìa khóa này
+            relations: Quan hệ không có vị trí địa lý nên không thể hiển thị bản đồ.
+        wiki_pages:
+            title: Trang wiki về chìa khóa này
+            none_found: Không có sẵn trang wiki nào về chìa khóa này.
+            create: Tạo trang wiki về chìa khóa này
+            wiki_page: Trang wiki
+            implied_tags: Thẻ được ngụ ý
+            combined_tags: Thẻ tổ hợp
+            linked_tags: Thẻ liên kết
+        josm:
+            title: Quy tắc kiểu JOSM có chìa khóa này
+            choice: |
+                  Chọn kiểu:
+            no_styles: Không có kiểu JOSM cho chìa khóa này.
+    tag:
+        description_from_wiki: Lời miêu tả thẻ này trên wiki (trong ngôn ngữ của bạn nếu có sẵn, nếu không thì trong tiếng Anh).
+        no_description_in_wiki: Không có lời miêu tả thẻ này trong tiếng Anh trên wiki. (Xem thêm thẻ “Wiki”.)
+        button_disabled: Nút bị vô hiệu vì có quá nhiều đối tượng với thẻ này.
+        number_objects: Số đối tượng
+        overview:
+            see_also: Xem thêm trang loại quan hệ
+        other_tags_used:
+            title: Các thẻ khác được dùng với thẻ này
+            other: Thẻ khác
+            to_count_tooltip: Số đối tượng với thẻ này cũng có thẻ/chìa khóa kia.
+            other_key_tooltip: Thẻ/chìa khóa được dùng với thẻ này.
+            from_count_tooltip: Số đối tượng có thẻ/chìa khóa kia cũng có thẻ này.
+        combinations:
+            title: Tổ hợp
+            description: Bảng này chỉ hiển thị các tổ hợp phổ biến nhất của các thẻ phổ biến nhất.
+        geographic_distribution:
+            title: Phân phố địa lý của thẻ này
+            relations: Quan hệ không có vị trí địa lý nên không thể hiển thị bản đồ.
+            no_map: Rất tiếc, chỉ có thể tạo bản đồ cho các thẻ phổ biến nhất. Hãy thử liên kết overpass turbo.
+        wiki_pages:
+            title: Trang wiki về thẻ này
+            none_found: Không có sẵn trang wiki nào về thẻ này.
+            create: Tạo trang wiki về thẻ này
+            suggest_key_wiki_page: Có lẽ có thể tìm kiếm thêm chi tiết tại trang wiki về chìa khóa %1.
+            wiki_page: Trang wiki
+            implied_tags: Thẻ ngụ ý
+            combined_tags: Thẻ tổ hợp
+            linked_tags: Thẻ liên kết
+        josm:
+            title: Quy tắc kiểu JOSM có thẻ này
+            choice: |
+                  Chọn kiểu:
+            no_styles: Không có kiểu JOSM cho thẻ này.
+    relation:
+        name: Loại quan hệ
+        description_from_wiki: Lời miêu tả loại quan hệ này trên wiki (trong ngôn ngữ của bạn nếu có sẵn, nếu không thì trong tiếng Anh).
+        no_description_in_wiki: Không có lời miêu tả loại quan hệ này trong tiếng Anh trên wiki. (Xem thêm thẻ “Wiki”.)
+        button_disabled: Nút bị vô hiệu vì có quá nhiều đối tượng với loại quan hệ này.
+        overview:
+            tab: Tóm lược
+            title: Tóm lược
+            member_type: Kiểu thành viên
+            member_count: Số thành viên
+            see_also: Xem thêm trang thẻ
+        roles:
+            tab: Vai trò
+            title: Vai trò thành viên
+            objects_tooltip: Thành viên quan hệ có vai trò này (cũng như số phần trăm các thành viên) cho loại quan hệ này.
+            nodes_tooltip: Nốt thành viên quan hệ có vai trò này (cũng như số phần trăm các nốt thành viên) cho loại quan hệ này.
+            ways_tooltip: Lối thành viên quan hệ có vai trò này (cũng như số phần trăm các lối thành viên) cho loại quan hệ này.
+            relations_tooltip: Quan hệ thành viên quan hệ có vai trò này (cũng như số phần trăm các quan hệ thành viên) cho loại quan hệ này.
+            no_roles_info: Không có thông tin về vai trò cho loại quan hệ này (có lẽ vì không có nhiều quan hệ loại này).
+        graph:
+            tab: Biểu đồ vai trò
+            title: Biểu đồ vai trò
+        wiki_pages:
+            title: Trang wiki về loại quan hệ này
+            none_found: Không có sẵn trang wiki nào về loại quan hệ này.
+            create: Tạo trang wiki về loại quan hệ này
+            wiki_page: Trang wiki
+
+flexigrid:
+    pagetext: Trang
+    pagestat: Đang xem các mục từ {from} đến {to} trên {total}
+    outof: trên
+    findtext: Tìm kiếm
+    procmsg: Đang xử lý, xin chờ đợi…
+    nomsg: Không có mục
+    errormsg: Lỗi kết nối
+
+comparison:
+    list: Danh sách so sánh
+    items: mục
+    add_key: Thêm chìa khóa này vào danh sách
+    add_tag: Thêm thẻ này vào danh sách
+    clear: Xóa sạch danh sách so sánh
+    compare: So sánh chìa khóa/thẻ
+
+sources:
+    master:
+        name: Chính
+        description: Thống kê thu thập và dữ liệu linh tinh cần thiết cho giao diện taginfo.
+    db:
+        name: Cơ sở dữ liệu
+        description: Thống kê về mỗi chìa khóa và mỗi thẻ từ cơ sở dữ liệu OSM chính (tập tin địa cầu).
+    wiki:
+        name: Wiki
+        description: Dữ liệu từ các trang thẻ và chìa khóa trên wiki OSM.
+    josm:
+        name: JOSM
+        description: Dữ liệu cấu hình từ trình vẽ OSM JOSM.
+    potlatch:
+        name: Potlatch
+        description: Dữ liệu cấu hình từ trình vẽ OSM Potlatch 2.
+    languages:
+        name: Ngôn ngữ
+        description: Tên ngôn ngữ, mã ngôn ngữ, v.v. từ các kho IANA và Unicode.
+
+reports:
+    characters_in_keys:
+        name: Ký tự trong chìa khóa
+        intro: |
+            <p>Bất kỳ ký tự Unicode hợp lệ có thể xuất hiện trong một chìa khóa OSM, nhưng thường thường chỉ dùng
+            các chữ thường Latinh (a–z) và dấu gạch dưới (_). Đôi khi dấu hai chấm
+            (:) được dùng để phân cách.</p>
+        statistics:
+            tab: Thống kê
+            title: Tóm lược thống kê
+            fraction: Phân số
+            characters: Ký tự trong chìa khóa
+            characters_in_keys:
+                plain: Chỉ có các chữ thường Latinh (<span class="char">a</span> đến <span class="char">z</span>) và dấu hai chấm (<span class="char">_</span>) và các ký tự đầu và cuối được coi là chữ.
+                colon: Giống A nhưng có một dấu hai chấm (<span class="char">:</span>) trở lên.
+                letters: Giống B nhưng có chữ hoa Latinh hoặc bộ chữ cái khác.
+                space: Giống C nhưng có khoảng cách (dấu cách, thẻ, dòng mới, về đầu dòng, hoặc bộ chữ cái khác).
+                problem: Giống C nhưng có các ký tự có thể gây vấn đề <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
+                rest: Những cái gì khác.
+                total: Tổng số
+        whitespace:
+            tab: Khoảng cách
+            title: Chìa khóa có khoảng cách
+            intro: |
+                <p>Chìa khóa có khoảng cách chẳng hạn như dấu cách, thẻ, dòng mới,
+                về đầu dòng, hoặc dấu khoảng cách từ hệ chữ viết khác.<br/>
+                Khoảng cách trong chìa khóa có thể gây nhầm lẫn, nhất là tại
+                đầu hoặc cuối chìa khóa, vì không nhìn thấy nó được. Nói chung,
+                dấu gạch dưới (_) nên được dùng thay thế.</p>
+        problematic:
+            tab: Gây vấn đề
+            title: Chìa khóa có ký tự có thể gây vấn đề
+            intro: |
+                <p>Các chìa khóa có ký tự có thể gây vấn đề: <span
+                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> hoặc các ký tự
+                điều khiển. Các ký tự này
+                gây vấn đề vì có thể được sử dụng để giới hạn chuỗi trong
+                các ngôn ngữ lập trình hoặc có ý nghĩa đặc biệt trong XML, HTML,
+                các URL, và các nơi khác. Dấu bằng thường được dùng để phân cách
+                chìa khóa và giá trị trong thẻ.<br/>
+                Các chìa khóa xuất hiện trong danh sách này không nhất thiết là sai. Tuy nhiên,
+                các chìa khóa này rất có thể xảy ra do nhầm lẫn.</p>
+    database_statistics:
+        name: Thống kê cơ sở dữ liệu
+        objects_in_db: Số đối tượng trong cơ sở dữ liệu
+        tags_in_db: Số thẻ trong cơ sở dữ liệu
+        distinct_keys: Số chìa khóa khác nhau
+        distinct_tags: Số thẻ khác nhau
+        nodes_in_db: Số nốt trong cơ sở dữ liệu
+        nodes_with_tags_in_db: Số nốt có ít nhất một thẻ
+        nodes_with_tags_in_db_percent: Số phần trăm các nốt có ít nhất một thẻ
+        tags_on_nodes: Số thẻ trong nốt
+        avg_tags_per_tagged_node: Số thẻ trung bình trên nốt có thẻ
+        ways_in_db: Số lối trong cơ sở dữ liệu
+        closed_ways_in_db: Số lối đóng
+        tags_on_ways: Số thẻ trong lối
+        avg_tags_per_way: Số thẻ trung bình trên lối
+        relations_in_db: Số quan hệ trong cơ sở dữ liệu
+        tags_on_relations: Số thẻ trong quan hệ
+        avg_tags_per_relation: Số thẻ trung bình trên quan hệ
+    frequently_used_keys_without_wiki_page:
+        name: Frequently used keys without wiki page
+        intro: |
+            <p>Bảng này có các chìa khóa xuất hiện hơn 10.000 lần trong cơ sở dữ liệu
+            OSM mà không có trang nào miêu tả trên wiki. Nếu bạn biết gì về một trong
+            những chìa khóa này, xin vui lòng nhất chuột vào liên kết vào cột cực tả
+            để tạo trang wiki rồi miêu tả chìa khóa. Đôi khi nên tạo trang đổi hướng
+            đến một trang wiki khác thay thế. Để đổi hướng trang, tạo trang wiki chỉ có nội dung là
+            <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>tên trang</i>]]</tt>.</p>
+        also_show_keys: Cũng hiển thị các chìa khóa không có trang wiki trong tiếng Anh mà có trang trong ngôn ngữ khác.
+        table:
+            create_wiki_page: Tạo trang wiki…
+    josm_styles:
+        name: Kiểu JOSM
+    key_lengths:
+        name: Độ dài chìa khóa
+        intro: |
+            <p>Chìa khóa thẻ có thể có từ 0 đến 255 ký tự Unicode. Nhiều khi các chìa khóa rất ngắn hoặc rất dài là lỗi (nhưng không nhất thiết là lỗi).</p>
+        table:
+            number_of_objects: Số đối tượng
+        histogram:
+            name: Biểu đồ tần suất
+            intro: Biểu đồ tần suất này cho biết số chìa khóa theo độ dài.
+            key_length: Độ dài chìa khóa
+            number_of_keys: Số chìa khóa
+    language_comparison_table_for_keys_in_the_wiki:
+        name: Bảng so sánh ngôn ngữ theo chìa khóa trên wiki
+        icons:
+            template: Trang wiki có sẵn và có bản mẫu chuẩn.
+            error: Trang wiki có sẵn và có bản mẫu chuẩn nhưng không thể phân tích.
+            page: Trang wiki có sẵn nhưng không có bản mẫu chuẩn.
+            redirect: Trang đổi hướng.
+        intro: |
+            <p>Bảng này có các chìa khóa thẻ có sẵn trang wiki và có các ngôn ngữ của các trang wiki.</p>
+    languages:
+        name: Ngôn ngữ
+        intro: |
+            <p>OpenStreetMap là một dự án quốc tế. Các thẻ và lời miêu tả có trong bất kỳ
+            ngôn ngữ. Bảng này có các ngôn ngữ được nhận ra bởi taginfo và bao nhiêu trang
+            wiki giải thích chìa khóa và thẻ có sẵn trong các ngôn ngữ đó.</p>
+        code: Mã
+        native_name: Tên bản ngữ
+        english_name: Tên tiếng Anh
+        wiki_key_pages: Số trang chìa khóa wiki
+        wiki_tag_pages: Số trang thẻ wiki
+    wiki_pages_about_non_existing_keys:
+        name: Trang wiki về chìa khóa không dùng
+        intro: |
+            <p>Bảng này có các chìa khóa có trang wiki miêu tả mà không xuất hiện một lần nào trong
+            cơ sở dữ liệu. Việc này không nhất thiết phải là lỗi (có thể ai đó đã viết tài liệu
+            trên wiki để chuẩn bị sử dụng một chìa khóa hoặc trang wiki giải thích về một chìa khóa
+            không dùng nữa), nhưng cũng có thể là lỗi chính tả hoặc lỗi khác.</p>
+        wiki_pages: Trang wiki
+    name_tags:
+        name: Biến thể của thẻ name
+        intro: |
+            <p>Trang này cho biết về các thẻ đặt tên đối tượng trong OSM
+            dùng thẻ <tt>name</tt> và các biến thể.</p>
+        overview:
+            tab: Tóm lược
+            title: Tóm lược
+        bcp47:
+            tab: Thẻ phụ BCP 47
+            title: Thẻ phụ BCP 47
+            filter:
+                label: Chỉ hiển thị thẻ phụ loại
+                all: Tất cả
+                language: Ngôn ngữ
+                script: Hệ chữ viết
+                region: Khu vực
+                variant: Biến thể
+            intro: |
+                <p><a href="http://www.ietf.org/">IETF</a> định rõ các <i>thẻ
+                ngôn ngữ</i> trong tiêu chuẩn
+                <a href="http://tools.ietf.org/html/bcp47">Tags for Identifying Languages
+                (BCP 47)</a>. Thẻ ngôn ngữ
+                có ít nhất một <i>thẻ phụ</i> miêu tả ngôn ngữ,
+                hệ chữ viết, biến thể, v.v. Danh sách sau có các thẻ phụ đã đăng ký
+                có liên quan đến OSM. Để tìm hiểu thêm, hãy đọc
+                <a href="http://en.wikipedia.org/wiki/IETF_language_tag">bài Wikipedia
+                về thẻ ngôn ngữ IETF</a> và trang Web <a
+                href="http://www.langtag.net/">langtag.net</a>.</p>
+                <p>Lưu ý rằng dữ liệu trong bảng này <b>không phải</b> lấy từ OpenStreetMap,
+                nó chỉ hiển thị căn bản để miêu tả ngôn ngữ
+                không kể nó thực sự được dùng trong OSM hay không.
+                </p>
+
