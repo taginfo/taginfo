@@ -1,6 +1,16 @@
 # web/lib/ui/taginfo.rb
 class Taginfo < Sinatra::Base
 
+    def count_texts(data)
+        data.values.map{ |value|
+            if value.is_a?(Hash)
+                count_texts(value)
+            else
+                1
+            end
+        }.inject(0, :+)
+    end
+
     def i18n_walk(line, level, path, en, other)
         out = ''
         en.keys.sort.each do |key|
@@ -41,6 +51,20 @@ class Taginfo < Sinatra::Base
         else
             return "ok\n"
         end
+    end
+
+    get '/taginfo/translations' do
+        @title = 'Translations Overview'
+        @section = 'taginfo'
+        @section_title = t.taginfo.meta
+
+        @num_texts = {}
+        r18n.available_locales.each do |lang|
+            data = YAML.load_file("i18n/#{lang.code}.yml")
+            @num_texts[lang.code] = count_texts(data)
+        end
+
+        erb :'taginfo/translations'
     end
 
     get '/taginfo/i18n' do

@@ -1,0 +1,17 @@
+<div class="pre">
+    <h1>Translations Overview</h1>
+</div>
+<div class="box resize">
+    <table class="list">
+<% r18n.available_locales.sort{ |a,b| a.code <=> b.code }.each do |locale| %>
+<%   percent = (@num_texts[locale.code].to_f / @num_texts['en'].to_f * 100).to_i %>
+        <tr>
+            <td><span class="lang"><%= locale.code %></span></td>
+            <td><%= locale.title %></td>
+            <td class="tr"><%= @num_texts[locale.code] %>/<%= @num_texts['en'] %></td>
+            <td class="tr <%= percent > 90 ? 'good' : ( percent <= 80 ? 'bad' : 'okay' ) %>"><%= percent %>%</td>
+            <td><a href="/taginfo/i18n?lang=<%= locale.code %>">see texts</a></td>
+        </tr>
+<% end %>
+    </table>
+</div>
