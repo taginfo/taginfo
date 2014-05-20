@@ -282,6 +282,10 @@ table.boxes {
     text-decoration: none;
 }
 
+.boxes h3 {
+    margin: 12px 0 2px 0;
+}
+
 table.boxes td {
     vertical-align: bottom;
 }

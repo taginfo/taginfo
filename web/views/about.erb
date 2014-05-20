@@ -1,7 +1,9 @@
 <table class="boxes" width="100%">
     <tr>
         <td><h2><%= h(t.taginfo.about) %></h2></td>
-        <td rowspan="6" width="20"></td>
+        <td rowspan="4" width="20"></td>
+        <td><h2>Building on taginfo</h2></td>
+        <td rowspan="4" width="20"></td>
         <td><h2>The taginfo Software</h2></td>
     </tr>
     <tr>
@@ -21,9 +23,36 @@
             database, how many people use those tags, where they are used and so on. It
             also gets information about those tags from the wiki and from other places. Taginfo
             tries to bring together all information about tags to help you understand
-            how they are used and what they mean.</p>
+            how they are used and what they mean. See a <a href="/sources">list of sources</a>
+            taginfo uses.</p>
         </td>
-        <td rowspan="5" class="box">
+        <td rowspan="3" class="box">
+            <p>You can use the data from taginfo in your own projects:</p>
+
+            <h3>API</h3>
+
+            <p>Taginfo data can be accessed through a REST API. See the
+            <a href="/taginfo/apidoc">API documentation</a> for the details, some general information is
+            <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">on the OSM wiki</a>.
+            The servers running the taginfo API do not have unlimited resources.
+            Please use the API responsibly. If in doubt contact the maintainers of the
+            site you are using or talk to us on the mailing list.</p>
+
+            <h3>Download</h3>
+
+            <p>If you want to play around with the data used by taginfo, you can download the
+            regularly updated Sqlite database files. All the preprocessing is done for you.
+            See the <a href="/download">download page</a> for a list of files. Note that
+            some of these files can get quite large. If you want to download them regularly,
+            talk to us first on the mailing list.</p>
+
+            <h3>License</h3>
+            <p>The data available through taginfo is licenced under ODbL, the
+            <a class="extlink" href="//www.openstreetmap.org/copyright">same
+            license as the OpenStreetMap data</a>.</p>
+
+        </td>
+        <td rowspan="3" class="box">
 
             <p>The software behind the taginfo sites is Open Source. It is available on
             <a class="extlink" href="https://github.com/joto/taginfo">GitHub</a>. We
@@ -39,18 +68,21 @@
             <p>We need translators for the taginfo user interface. See the <a
             href="/taginfo/translations">translations overview</a> for languages that need
             some work. Or you can always contribute translations into a new language. The
-            <a class="extlink" href="https://github.com/joto/taginfo/tree/master/web/i18n">translation
-            files</a> are on Github. More info on how to translate is on the
+            <a class="extlink" href="https://github.com/joto/taginfo/tree/master/web/i18n">translations
+            are done on GitHub</a>. More information on how to help is on the
             <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM wiki</a>.</p>
 
             <h3>Code</h3>
 
             <p>Programmers can
-            <a class="extlink" href="https://github.com/joto/taginfo/">fork taginfo on Github</a>
-            and play around with it. Each <a href="/sources">source</a> has its own import files
+            <a class="extlink" href="https://github.com/joto/taginfo/">fork taginfo on GitHub</a>
+            and play around with it. Each <a href="/sources">source</a> has its own import scripts
             (mostly shell scripts, Ruby, and SQL). The web interface is written in Ruby using
             the <a class="extlink" href="http://www.sinatrarb.com/">Sinatra</a> toolkit and
             with lots of Javascript.</p>
+            <p>Also see the page about the <a class="extlink"
+            href="https://wiki.openstreetmap.org/wiki/Taginfo/Architecture">taginfo
+            architecture</a> on the OSM wiki.</p>
 
             <h3>Running your own instance</h3>
 
@@ -72,7 +104,7 @@
             <a class="extlink" href="//lists.openstreetmap.org/listinfo/taginfo-dev">taginfo-dev mailing list</a>
             if you have questions or want to help.</p>
             <p>If you are running your own taginfo instance, we recommend you join this list, too,
-            so that you get important updates when the software changes.</p>
+            so that you get notified when the software is updated or if there are other issues.</p>
 
         </td>
     </tr>
@@ -86,34 +118,6 @@
             <p>Several <a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">taginfo sites</a>
             are operated by different people.</p>
             <p><%= TaginfoConfig.get('instance.description') %></p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <h2>Using taginfo in your own projects</h2>
-        </td>
-    </tr>
-    <tr>
-        <td class="box">
-            <p>You can use the data from taginfo in your own projects:</p>
-
-            <h3>API</h3>
-
-            <p>Taginfo data can be accessed through a REST API. See the
-            <a href="/taginfo/apidoc">API call documentation</a> for the details, some general information is
-            <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">on the wiki</a>.
-            The server running the taginfo API does not have unlimited resources.
-            Please use the API responsibly. If in doubt contact the taginfo maintainers
-            through the mailing list.</p>
-
-            <h3>Download</h3>
-
-            <p>The data available through taginfo is available under the
-            <a class="extlink" href="//www.openstreetmap.org/copyright">same
-            license as OpenStreetMap itself</a>.</p>
-            <p>If you want to play around with the data itself, you can download the
-            regularly updated databases used by taginfo. All the preprocessing is done for
-            you. See the <a href="/download">download page</a> for more information.</p>
         </td>
     </tr>
 </table>
