@@ -1,10 +1,8 @@
 <table class="boxes" width="100%">
     <tr>
         <td><h2><%= h(t.taginfo.about) %></h2></td>
-        <td rowspan="4" width="20"></td>
-        <td width="232"><h2><%= h(t.taginfo.sources) %></h2></td>
-        <td rowspan="2" width="20"></td>
-        <td width="232"><h2><%= h(t.taginfo.contact) %></h2></td>
+        <td rowspan="6" width="20"></td>
+        <td><h2>The taginfo Software</h2></td>
     </tr>
     <tr>
         <td class="box">
@@ -24,72 +22,98 @@
             also gets information about those tags from the wiki and from other places. Taginfo
             tries to bring together all information about tags to help you understand
             how they are used and what they mean.</p>
+        </td>
+        <td rowspan="5" class="box">
+
+            <p>The software behind the taginfo sites is Open Source. It is available on
+            <a class="extlink" href="https://github.com/joto/taginfo">GitHub</a>. We
+            welcome any contributions.</p>
 
             <p>The taginfo software was created and is maintained by
             <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
-            He also maintains the main taginfo web site.
-            <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>
-            created the web design.</p>
+            The web design was created by
+            <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
+
+            <h3>Translations</h3>
+
+            <p>We need translators for the taginfo user interface. See the <a
+            href="/taginfo/translations">translations overview</a> for languages that need
+            some work. Or you can always contribute translations into a new language. The
+            <a class="extlink" href="https://github.com/joto/taginfo/tree/master/web/i18n">translation
+            files</a> are on Github. More info on how to translate is on the
+            <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM wiki</a>.</p>
+
+            <h3>Code</h3>
+
+            <p>Programmers can
+            <a class="extlink" href="https://github.com/joto/taginfo/">fork taginfo on Github</a>
+            and play around with it. Each <a href="/sources">source</a> has its own import files
+            (mostly shell scripts, Ruby, and SQL). The web interface is written in Ruby using
+            the <a class="extlink" href="http://www.sinatrarb.com/">Sinatra</a> toolkit and
+            with lots of Javascript.</p>
+
+            <h3>Running your own instance</h3>
+
+            <p>You can run your own
+            <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">taginfo site</a>,
+            for instance with data for just your own country. Instructions are
+            <a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo/Running">on the OSM
+            wiki</a>.</p>
+
+            <h3>Bug reports and feature requests</h3>
+
+            <p>Bug reports and feature requests should be directed to the <a class="extlink"
+            href="https://github.com/joto/taginfo/issues">GitHub issue tracker</a>. Or you can
+            come talk to us on the mailing list.</p>
+
+            <h3>Contact/Mailing list</h3>
+
+            <p>Contact us on the
+            <a class="extlink" href="//lists.openstreetmap.org/listinfo/taginfo-dev">taginfo-dev mailing list</a>
+            if you have questions or want to help.</p>
+            <p>If you are running your own taginfo instance, we recommend you join this list, too,
+            so that you get important updates when the software changes.</p>
+
         </td>
-        <td class="box">
-            <p>Taginfo integrates data about tags from several sources:</p>
-            <p>From the <b>OSM database</b> statistics about key and tag usage.</p>
-            <p>The <b>Wiki</b> contains some documentation for keys and tags.</p>
-            <p>Icons and styles are taken from the <b>JOSM</b> editor
-            configuration.</p>
-            <p>The data is updated regularly, see <a href="/sources">when this was last done</a>.</p>
-            <p><a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sources">More information about the sources on the wiki...</a></p>
+    </tr>
+    <tr>
+        <td>
+            <h2>About this taginfo site</h2>
         </td>
+    </tr>
+    <tr>
         <td class="box">
-            <p>Bug reports should be filed in the
-            <a class="extlink" href="//trac.openstreetmap.org/query?status=accepted&status=assigned&status=new&status=reopened&component=taginfo&order=priority">OSM bug tracker</a>
-            using the 'taginfo' component.</p>
-            <p>Taginfo developers and site maintainers hang out on the<br/>
-            <a class="extlink" href="//lists.openstreetmap.org/listinfo/taginfo-dev">taginfo mailing list</a>.</p>
-            <p>You can contact the taginfo maintainer at<br/>
-            <a class="extlink" href="mailto:jochen@remote.org">jochen@remote.org</a>.</p>
+            <p>Several <a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">taginfo sites</a>
+            are operated by different people.</p>
+            <p><%= TaginfoConfig.get('instance.description') %></p>
         </td>
     </tr>
     <tr>
         <td>
             <h2>Using taginfo in your own projects</h2>
         </td>
-        <td colspan="3">
-            <h2>How you can contribute</h2>
-        </td>
     </tr>
     <tr>
         <td class="box">
-            <p>You can use the data behind taginfo in your own projects:</p>
+            <p>You can use the data from taginfo in your own projects:</p>
 
-            <p>If you want to play around with the data itself, you can <b>download</b> the
-            regularly updated databases used by taginfo. All the preprocessing is done for
-            you. See the <a href="/download">download page</a> for more information.</p>
+            <h3>API</h3>
 
-            <p>Taginfo data can also be accessed through a REST <b>API</b>. See the
+            <p>Taginfo data can be accessed through a REST API. See the
             <a href="/taginfo/apidoc">API call documentation</a> for the details, some general information is
             <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">on the wiki</a>.
             The server running the taginfo API does not have unlimited resources.
-            Please use the API responsibly. If in doubt contact the taginfo maintainers.</p>
-            <p>The data available through taginfo is available under the <a href="//www.openstreetmap.org/copyright">same
+            Please use the API responsibly. If in doubt contact the taginfo maintainers
+            through the mailing list.</p>
+
+            <h3>Download</h3>
+
+            <p>The data available through taginfo is available under the
+            <a class="extlink" href="//www.openstreetmap.org/copyright">same
             license as OpenStreetMap itself</a>.</p>
-        </td>
-        <td class="box" colspan="3">
-            <p>All the parts of taginfo are Open Source. <b>Programmers</b> can
-            <a class="extlink" href="https://github.com/joto/taginfo/">fork taginfo on Github</a>
-            and play around with it. We welcome help developing taginfo.</p>
-            <p>We also need <b>translators</b> for the taginfo user interface. The
-            <a class="extlink" href="https://github.com/joto/taginfo/tree/master/web/i18n">translation
-            files</a> are on Github. More info on how to translate on the 
-            <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">wiki</a>.</p>
-            <p>You can run your own
-            <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">taginfo site</a>,
-            for instance with data for just your own country.</p>
-            <p>Contact us on the <a class="extlink" href="//lists.openstreetmap.org/listinfo/taginfo-dev">taginfo mailing list</a>
-            if you can offer any help.</p>
-            <p>See the
-            <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo">wiki</a> for
-            more information.</p>
+            <p>If you want to play around with the data itself, you can download the
+            regularly updated databases used by taginfo. All the preprocessing is done for
+            you. See the <a href="/download">download page</a> for more information.</p>
         </td>
     </tr>
 </table>
