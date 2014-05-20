@@ -7,8 +7,10 @@
         "url": "http://localhost:4567",
         // Used in the title of all HTML pages.
         "name": "OpenStreetMap Taginfo",
-        // Description of this taginfo instance.
+        // Description of this taginfo instance. Will appear on the home page and about page.
         "description": "This is a <b>taginfo test instance</b>. Change this text in your <tt>taginfo-config.json</tt>.",
+        // Additional description that will only appear on the about page.
+        "about": "<p>This site is maintained by XXX.</p><p>There isn't just one taginfo site, there are several. The main site is at <a class='extlink' href='http://taginfo.openstreetmap.org/'>taginfo.openstreetmap.org</a>, but several <a class='extlink' href='http://wiki.openstreetmap.org/wiki/Taginfo/Sites'>other taginfo sites</a> are operated by different people.</p>",
         // URL path to instance icon in the upper left.
         "icon": "/img/logo/test.png",
         // Contact name and email address.
