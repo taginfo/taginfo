@@ -156,6 +156,21 @@ pages:
             zum einfachen Suchen und Finden.</p>
             <p>Taginfo zeigt diese Daten nur an. Wenn Du sie ändern willst, dann mußt
             Du sie an der Quelle ändern.</p>
+        list:
+            title: Die Datenquellen
+            intro: Dies ist eine Liste der derzeit verwendeten Datenquellen. Weitere Datenquellen werden in der Zukunft vielleicht ergänzt.
+        description:
+            db: |
+                <p>Statistiken über Keys, Tags, und Relations-Typen, sowie Karten für die geographische Verteilung der Nodes und Ways, werden aus der <a class="extlink" href="http://planet.openstreetmap.org/">OSM-Datenbank</a> (oder einem Extrakt) generiert.</p>
+            wiki: |
+                <p>Das <a class="extlink" href="http://wiki.openstreetmap.org/">OSM Wiki</a> wird gelesen und alle Key:*-, Tag:*-, und Relation:*-Seiten (in allen Sprachen) analysiert. Beschreibungen, Bilder, verwandte Tags, usw. werden aus den Seiten extrahiert.</p>
+            languages: |
+                <p>Taginfo bekommt Informationen über die verschiedenen Sprachen dieser Welt, ihre Codes, Namen, usw. aus diversen Datenbanken der <a class="extlink" href="http://www.iana.org/">IANA</a> und vom <a class="extlink" href="http://www.unicode.org/">Unicode Consortium</a>.</p>
+            josm: |
+                <p>Icons und Stile werden aus der Konfiguration des Editors <a class="extlink" href="http://josm.openstreetmap.de/">JOSM</a> übernommen.</p>
+        updates:
+            title: Aktualisierung
+            intro: Die Taginfo-Daten werden regelmäßig aktualisiert.
         data_until: Daten bis
         last_update_run: Letzte Aktualisierung
         data_until_explanation: Alle Änderungen bis zu diesem Zeitpunkt sind auf jeden Fall in den Daten, spätere können unter Umständen auch drin sein.

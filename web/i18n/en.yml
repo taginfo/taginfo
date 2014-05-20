@@ -153,10 +153,25 @@ pages:
             see: See other taginfo sites...
     sources:
         intro: |
-            <p>Taginfo takes data about OSM tags from several sources and brings them
+            <p>Taginfo collects data about OSM tags from several sources and brings them
             together for easy browsing and discovery.</p>
             <p>Note that taginfo only displays this data. If you want to change it, you
             have to go back to the source.</p>
+        list:
+            title: List of Sources
+            intro: Here is a list of currently used sources. More sources might be integrated in the future.
+        description:
+            db: |
+                <p>Statistics about keys, tags, and relation types are generated from the <a class="extlink" href="http://planet.openstreetmap.org/">OSM database</a> (or an extract) as well as the maps that show the geographic distribution of nodes and ways.</p>
+            wiki: |
+                <p>The <a class="extlink" href="http://wiki.openstreetmap.org/">OSM Wiki</a> is read and all Key:*, Tag:*, and Relation:* pages (in all the different languages) are analyzed. Descriptions, images, related tags, etc. are extracted from them.</p>
+            languages: |
+                <p>Taginfo gets information about the different languages of the world, their codes, names, etc. from several <a class="extlink" href="http://www.iana.org/">IANA</a> and <a class="extlink" href="http://www.unicode.org/">Unicode</a> registries.</p>
+            josm: |
+                <p>Icons and styles are taken from the <a class="extlink" href="http://josm.openstreetmap.de/">JOSM editor</a> configuration.</p>
+        updates:
+            title: Updates
+            intro: The taginfo data is updated regularly from the sources.
         data_until: Data until
         last_update_run: Last update run
         data_until_explanation: All edits until this time will be in the data, later edits might be.

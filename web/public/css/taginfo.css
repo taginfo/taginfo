@@ -331,6 +331,10 @@ span.lang {
     border-radius: 4px;
 }
 
+.note {
+    font-size: 80%;
+}
+
 td.number {
     text-align: right;
     width: 8em;
@@ -438,6 +442,10 @@ table.list th.tc, table.list td.tc {
 
 table.list th.tr, table.list td.tr {
     text-align: right;
+}
+
+table.list td.nowrap {
+    white-space: nowrap;
 }
 
 /* ========== */

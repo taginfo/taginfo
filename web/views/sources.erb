@@ -2,19 +2,37 @@
     <h1 class="section"><%= h(t.taginfo.sources) %></h1>
     <%= t.pages.sources.intro %>
 </div>
-<div class="box resize">
-    <table class="list">
-        <tr>
-            <th class="tl"><%= h(t.taginfo.source) %></th><th><%= h(t.pages.sources.data_until) %>*</th><th><%= h(t.pages.sources.last_update_run) %></th>
-        </tr>
-    <% Source.visible.each_with_index do |source, n| c = (n%2!=0) ? ' even' : '' %>
-        <tr>
-            <td class="<%= c %>"><%= h(source.name) %>
-            <td class="tc<%= c %>"><%= h(source.data_until) %> UTC</td>
-            <td class="tc<%= c %>"><%= h(source.update_start + ' ' + t.pages.sources.to + ' ' + source.update_end) %> UTC</td>
-        </tr>
-    <% end %>
-    </table>
-
-    <p style="font-size: 80%">* <%= h(t.pages.sources.data_until_explanation) %></p>
-</div>
+<table class="boxes" width="100%">
+    <tr>
+        <td><h2><%= h(t.pages.sources.list.title) %></h2></td>
+        <td rowspan="2" width="20"></td>
+        <td><h2><%= h(t.pages.sources.updates.title) %></h2></td>
+    </tr>
+    <tr>
+        <td class="box">
+            <p><%= h(t.pages.sources.list.intro) %></p>
+<% Source.visible.each_with_index do |source, n| c = (n%2!=0) ? ' even' : '' %>
+            <h2><img src="<%= source.imgurl(24) %>" width="24" height="24" alt=""/> <%= h(source.name) %></h2>
+            <%= t.pages.sources.description[source.id] %>
+<% end %>
+        </td>
+        <td class="box">
+            <p><%= h(t.pages.sources.updates.intro) %></p>
+            <table class="list">
+                <tr>
+                    <th class="tl"><%= h(t.taginfo.source) %></th>
+                    <th><%= h(t.pages.sources.data_until) %>*</th>
+                    <th><%= h(t.pages.sources.last_update_run) %></th>
+                </tr>
+<% Source.visible.each_with_index do |source, n| c = (n%2!=0) ? ' even' : '' %>
+                <tr>
+                    <td class="<%= c %>"><img src="<%= source.imgurl(16) %>" width="16" height="16" alt=""/>&nbsp;&nbsp;<%= h(source.name) %>
+                    <td class="tc<%= c %> nowrap"><%= h(source.data_until) %> UTC</td>
+                    <td class="tc<%= c %> nowrap"><%= h(source.update_start + ' ' + t.pages.sources.to + ' ' + source.update_end) %> UTC</td>
+                </tr>
+<% end %>
+            </table>
+            <p class="note">* <%= h(t.pages.sources.data_until_explanation) %></p>
+        </td>
+    </tr>
+</table>
