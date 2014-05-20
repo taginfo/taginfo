@@ -70,6 +70,7 @@
                 <% key_or_tag = data[:value].nil? ? 'key' : 'tag' %>
                 <img class="map" src="/api/4/<%= key_or_tag %>/distribution/nodes?key=<%= data[:key] %><%= data[:value].nil? ? '' : ('&amp;value=' + data[:value]) %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>" style="position: absolute;"/>
                 <img class="map" src="/api/4/<%= key_or_tag %>/distribution/ways?key=<%= data[:key] %><%= data[:value].nil? ? '' : ('&amp;value=' + data[:value]) %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
+                <div class="note"><%= TaginfoConfig.get('geodistribution.image_attribution') %></div>
             </div>
             <% end %>
         </td>

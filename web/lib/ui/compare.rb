@@ -63,8 +63,8 @@ class Taginfo < Sinatra::Base
             end
         end
 
-        @img_width  = TaginfoConfig.get('geodistribution.width')
-        @img_height = TaginfoConfig.get('geodistribution.height')
+        @img_width  = (TaginfoConfig.get('geodistribution.width')*TaginfoConfig.get('geodistribution.scale_compare_image')).to_i
+        @img_height = (TaginfoConfig.get('geodistribution.height')*TaginfoConfig.get('geodistribution.scale_compare_image')).to_i
 
         javascript "#{ r18n.locale.code }/compare"
         erb :compare
