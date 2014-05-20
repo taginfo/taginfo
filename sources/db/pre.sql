@@ -30,7 +30,6 @@ CREATE TABLE keys (
   in_wiki_en       INTEGER DEFAULT 0,
   in_josm          INTEGER DEFAULT 0,
   in_potlatch      INTEGER DEFAULT 0,
-  in_merkaartor    INTEGER DEFAULT 0,
   characters       VARCHAR
 );
 
@@ -75,8 +74,7 @@ CREATE TABLE tags (
   in_wiki          INTEGER DEFAULT 0,
   in_wiki_en       INTEGER DEFAULT 0,
   in_josm          INTEGER DEFAULT 0,
-  in_potlatch      INTEGER DEFAULT 0,
-  in_merkaartor    INTEGER DEFAULT 0
+  in_potlatch      INTEGER DEFAULT 0
 );
 
 DROP TABLE IF EXISTS key_combinations;

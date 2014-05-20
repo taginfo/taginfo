@@ -81,7 +81,6 @@ CREATE TABLE popular_keys (
     in_wiki_en    INTEGER DEFAULT 0,
     in_josm       INTEGER DEFAULT 0,
     in_potlatch   INTEGER DEFAULT 0,
-    in_merkaartor INTEGER DEFAULT 0,
     scale_count   REAL,
     scale_users   REAL,
     scale_wiki    REAL,
