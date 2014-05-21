@@ -16,10 +16,10 @@ end
 class Javascript
 
     @@js_files = {
-#        :common    => [ 'jquery-1.9.0.min', 'jquery-ui-1.9.2.custom.min', 'customSelect.jquery.min', 'jquery.tipsy-minified' ],
-        :common    => [ 'common', 'jquery.cookie-minified' ],
+#        :common    => [ 'jquery-1.11.1.min', 'jquery-ui-1.9.2.custom.min', 'customSelect.jquery.min', 'jquery.tipsy-minified', 'jquery.cookie-minified' ],
+        :common    => [ 'common' ],
         :taginfo   => [ 'taginfo' ],
-        :flexigrid => [ 'jquery-migrate-1.0.0.min', 'flexigrid-minified' ],
+        :flexigrid => [ 'jquery-migrate-1.2.1.min', 'flexigrid-minified' ],
         :d3        => [ 'd3/d3.v3.min' ],
         :d3_cloud  => [ 'd3/d3.layout.cloud' ],
     }
