@@ -407,6 +407,23 @@ var flexigrid_defaults = {
     onSuccess     : function(grid) {
         init_tipsy();
         grid.fixHeight();
+        jQuery('th *[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 's', offset: 3 });
+        jQuery('.sDiv input[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 'e' });
+        jQuery('input.qsbox').bind('keydown', function(event) {
+            if (event.which == 27) { // esc
+                this.blur();
+                return false;
+            }
+            if (event.which == 9) { // tab
+                jQuery('input#search').focus();
+                return false;
+            }
+        });
+        jQuery('div.bDiv:visible').bind('click', function(event) {
+            var row = jQuery(event.target).parents('tr');
+            jQuery('div.bDiv:visible tr').removeClass('trOver');
+            jQuery(row).addClass('trOver');
+        });
     }
 };
 
@@ -429,23 +446,6 @@ function create_flexigrid(domid, options) {
         var me = jQuery('#' + domid),
             rp = calculate_flexigrid_rp(me.parents('.resize,.ui-tabs-panel'));
         grids[domid] = me.flexigrid(jQuery.extend({}, flexigrid_defaults, texts.flexigrid, options, { rp: rp }));
-        jQuery('th *[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 's', offset: 3 });
-        jQuery('.sDiv input[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 'e' });
-        jQuery('input.qsbox').bind('keydown', function(event) {
-            if (event.which == 27) { // esc
-                this.blur();
-                return false;
-            }
-            if (event.which == 9) { // tab
-                jQuery('input#search').focus();
-                return false;
-            }
-        });
-        jQuery('div.bDiv:visible').bind('click', function(event) {
-            var row = jQuery(event.target).parents('tr');
-            jQuery('div.bDiv:visible tr').removeClass('trOver');
-            jQuery(row).addClass('trOver');
-        });
     } else {
         // grid does exist, make sure it has the right size
         resize_grid(domid);
