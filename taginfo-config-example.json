@@ -29,14 +29,14 @@
         "scale_image": 2,
         "scale_compare_image" : 1,
         "background_image": "/img/mapbg/world.png",
+        // optional attribution for base image, will show up below all maps
         "image_attribution": ""
     },
+    // "XAPI" and "JOSM" buttons on key/tag pages
     "xapi": {
         // XAPI/JOSM buttons are disabled if more than this many results are expected
         "max_results": 1000,
         // URL prefix for the XAPI/JOSM links on the key and tag pages.
-        // "url_prefix": "http://www.informationfreeway.org/api/0.6/"
-        // "url_prefix": "http://open.mapquestapi.com/xapi/api/0.6/"
         "url_prefix": "http://overpass-api.de/api/xapi_meta?"
     },
     // "overpass turbo" button on key/tag pages
@@ -76,6 +76,8 @@
             // The OSM planet file or extract where we read the OSM data from.
             "planetfile": "/osm/planet/var/current-planet.osm.pbf"
         },
+        // If you change any of the following you have to run the update
+        // twice for it to take effect.
         "master": {
             // Minimum number of occurances of a tag to make it
             // potentially "interesting", ie. create tag combination
@@ -95,7 +97,7 @@
         // directory for log files
         "directory": "/osm/taginfo/var/log",
         // SQL queries longer than this many seconds are logged
-        "min_duration": 0.01
+        "min_duration": 0.1
     },
     // For compiling tagstats.
     "tagstats": {
