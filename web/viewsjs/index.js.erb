@@ -83,7 +83,7 @@ function fill_lists() {
         max_height = jQuery('table').height() / 3 - title_td_height - reserve_height;
         i = 0;
 
-    while (key_list.outerHeight() < max_height) {
+    while (key_list.outerHeight() < max_height && keys_data[i]) {
         var d = keys_data[i];
         key_list.append(link_to_key(d.text));
         key_list.append(' &bull; ');
@@ -92,7 +92,7 @@ function fill_lists() {
     key_list.append('...');
 
     i = 0;
-    while (tag_list.outerHeight() < max_height) {
+    while (tag_list.outerHeight() < max_height && tags_data[i]) {
         var d = tags_data[i];
         tag_list.append(link_to_tag(d[0], d[1]));
         tag_list.append(' &bull; ');
@@ -101,7 +101,7 @@ function fill_lists() {
     tag_list.append('...');
 
     i = 0;
-    while (relation_list.outerHeight() < max_height) {
+    while (relation_list.outerHeight() < max_height && relations_data[i]) {
         var d = relations_data[i];
         relation_list.append(link_to_rtype(d));
         relation_list.append(' &bull; ');
