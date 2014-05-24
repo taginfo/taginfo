@@ -155,11 +155,11 @@ class Taginfo < Sinatra::Base
         end
 
         total = @db.count('search.ftsearch').
-            condition_if("value MATCH ?", query).
+            condition("value MATCH ?", query).
             get_first_value().to_i
 
         res = @db.select('SELECT * FROM search.ftsearch').
-            condition_if("value MATCH ?", query).
+            condition("value MATCH ?", query).
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.count_all
                 o.key
