@@ -572,7 +572,8 @@ reports:
                 de idioma</i> en sus estándares
                 <a href="http://tools.ietf.org/html/bcp47">Etiquetas para Identificación de Idiomas
                 (BCP47)</a>. Las etiquetas
-                de idioma consisten en una o más <i>subetiquetas</i> describiendo el idioma, escritura, variantes, etc. La siguiente lista muestra las subetiquetas registradas
+                de idioma consisten en una o más <i>subetiquetas</i> describiendo el idioma,
+                escritura, variantes, etc. La siguiente lista muestra las subetiquetas registradas
                 actualmente que son relevantes para la OSM. Para más información véase también el
                 <a href="http://en.wikipedia.org/wiki/IETF_language_tag">artículo de la Wikipedia
                 sobre etiquetas de idioma IETF</a> y el sitio <a
