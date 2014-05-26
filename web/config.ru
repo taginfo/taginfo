@@ -2,6 +2,8 @@
 #  For use with Phusion Passenger
 #
 
+Encoding.default_external = 'UTF-8'
+
 require 'sinatra'
 require './taginfo.rb'
 require 'json'
