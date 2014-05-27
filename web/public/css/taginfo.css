@@ -359,7 +359,6 @@ form#list-form {
 select#list {
     background-color: #ffffff;
     color: #083e76;
-    width: 200px;
 }
 
 form#filter-form {
@@ -369,7 +368,7 @@ form#filter-form {
 }
 
 select#filter {
-    width: 146px;
+    min-width: 146px;
     background-color: #ffffff;
 }
 
