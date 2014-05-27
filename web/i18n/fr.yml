@@ -211,9 +211,9 @@ pages:
         filter:
             label: |
                  Filtre :
-            none: aucun filtre
-            nodes: seulement les nodes
-            ways: seulement les ways
+            none: Aucun filtre
+            nodes: Seulement les nodes
+            ways: Seulement les ways
             relations: Seulement les relations
         button_disabled: Bouton désactivé, il y a trop d’objets comprenant cette clé
         number_objects: Nombre d'objets
@@ -319,7 +319,7 @@ flexigrid:
     errormsg: Erreur de connexion
 
 comparison:
-    list: liste de comparaison
+    list: Liste de comparaison
     items: éléments
     add_key: Ajouter cette clé à la liste
     add_tag: Ajouter ce tag à la liste
@@ -393,7 +393,7 @@ reports:
         table:
             create_wiki_page: Créer une page wiki…
     josm_styles:
-        name: styles JOSM
+        name: Styles JOSM
     key_lengths:
         name: Longueurs des clés
         intro: |
