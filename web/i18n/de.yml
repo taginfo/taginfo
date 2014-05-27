@@ -480,4 +480,22 @@ reports:
             oder die Wiki-Seite beschreibt einen früher verwendeten Key, der inzwischen obsolet
             wurde). Es kann aber auch ein Tippfehler oder anderer Fehler sein.</p>
         wiki_pages: Wiki-Seiten
+    name_tags:
+        name: Name-Tag-Varianten
+        intro: |
+            <p>Dieser Report zeigt Informationen über die Benennung von Objekten in OSM
+            mit dem <tt>name</tt> Tag und seinen Varianten.</p>
+        overview:
+            tab: Übersicht
+            title: Übersicht
+        bcp47:
+            tab: BCP47 Subtags
+            title: BCP47 Subtags
+            filter:
+                label: Nur Subtags anzeigen vom Typ
+                all: Alle
+                language: Sprache
+                script: Schrift
+                region: Region
+                variant: Variante
 
