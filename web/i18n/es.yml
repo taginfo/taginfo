@@ -160,7 +160,7 @@ pages:
                 Todo el mundo puede venir con una etiqueta nueva y agregarla a objetos nuevos o existentes.
                 Esto hace OpenStreetMap enormemente flexible, pero a veces también un poco difícil
                 de trabajar.</p>
-                <p>Si usted está contribuyendo a OSM o utilizando los datos de OSM, siempre hay
+                <p>Si usted está contribuyendo a OSM o está utilizando los datos de OSM, siempre habrán
                 preguntas como: ¿Qué etiquetas utilizan las personas para la característica X? ¿Qué etiquetas puedo usar
                 para la característica Y de modo que aparezca correctamente en el mapa? ¿La etiqueta Z está descrita
                 en la wiki en uso y dónde?</p>
@@ -182,7 +182,7 @@ pages:
                 encuentra <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">en la wiki de OSM</a>.
                 Los servidores que ejecutan la API de taginfo no tiene recursos ilimitados.
                 Por favor, utilice la API responsablemente. En caso de duda contáctese con los responsables del
-                sitio que está utilizando o hable con nosotros en la lista de correo.</p>
+                sitio que está utilizando o comuníquese con nosotros en la lista de correo.</p>
                 <h3>Descargar</h3>
                 <p>Si desea jugar un poco con los datos utilizados por taginfo, puede descargar los
                 archivos de la base de datos Sqlite actualizados regularmente. Todo el preprocesamiento es hecho para usted.
@@ -218,9 +218,9 @@ pages:
                 <a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo/Running">en la wiki
                 de OSM</a>.</p>
                 <h3>Informes de errores y solicitudes de funcionalidad</h3>
-                <p>Informes de errores y solicitudes de funcionalidad deben ser dirigidas al <a class="extlink"
-                href="https://github.com/joto/taginfo/issues">gestor de incidencias de GitHub</a>. O usted pueder
-                venir a hablar con nosotros en la lista de correo.</p>
+                <p>Los informes de errores y solicitudes de funcionalidad deben ser dirigidos al <a class="extlink"
+                href="https://github.com/joto/taginfo/issues">gestor de incidencias de GitHub</a>. O usted puede
+                comunicarse con nosotros en la lista de correo.</p>
                 <h3>Contacto/Lista de correo</h3>
                 <p>Contáctese con nosotros en la
                 <a class="extlink" href="//lists.openstreetmap.org/listinfo/taginfo-dev">lista de correo taginfo-dev</a>
@@ -263,10 +263,10 @@ pages:
         description: Descripción
     reports:
         intro: |
-            Los informes muestran los datos de las etiquetas desde diferentes ángulos.
+            Los reportes muestran los datos de las etiquetas desde diferentes ángulos.
             A menudo reúnen datos de varias fuentes de maneras interesantes. Algunos
-            de los informes pueden ayudar a encontrar errores específicos
-        list: Lista de todos los informes
+            de los reportes pueden ayudar a encontrar errores específicos
+        list: Lista de todos los reportes
         data_sources: Fuentes de datos utilizadas
     search:
         title: Resultados de la búsqueda
@@ -495,7 +495,7 @@ reports:
         tags_on_relations: Número de etiquetas en las relaciones
         avg_tags_per_relation: Número promedio de etiquetas por relación
     frequently_used_keys_without_wiki_page:
-        name: Teclas de uso frecuente sin página wiki
+        name: Claves de uso frecuente sin página wiki
         intro: |
             <p>Esta tabla muestra las claves que aparecen más de 10&thinsp;000 veces en la base
             datos de OSM, pero no tienen ninguna página wiki describiéndolos. Si sabe algo acercad de
@@ -552,7 +552,7 @@ reports:
     name_tags:
         name: Variantes de nombres de las etiquetas
         intro: |
-            <p>Este informe muestra la información relacionada con el nombramiento de objetos en OSM
+            <p>Este reporte muestra la información relacionada con el nombramiento de objetos en OSM
             usando la etiqueta <tt>name</tt> y sus variantes.</p>
         overview:
             tab: Resumen
