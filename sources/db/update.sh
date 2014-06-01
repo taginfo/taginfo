@@ -51,6 +51,8 @@ TAGSTATS=`../../bin/taginfo-config.rb sources.db.tagstats ../../tagstats/tagstat
 if [ -f $SELECTION_DB ]; then
     OPEN_SELECTION_DB="--selection-db=$SELECTION_DB"
     echo "Reading selection database '$SELECTION_DB'"
+    echo "Selection database contents:"
+    sqlite3 $SELECTION_DB < show_selection_stats.sql
 else
     OPEN_SELECTION_DB=""
     echo "Selection database '$SELECTION_DB' not found. Not creating some statistics."

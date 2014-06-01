@@ -47,6 +47,9 @@ m4 --prefix-builtins \
    -D __MIN_COUNT_RELATIONS_PER_TYPE__=$min_count_relations_per_type \
    selection.sql | sqlite3 $SELECTION_DB
 
+echo "Selection database contents:"
+sqlite3 $SELECTION_DB < ../db/show_selection_stats.sql
+
 echo "`$DATECMD` Update history database..."
 
 if [ ! -e $HISTORY_DB ]; then
