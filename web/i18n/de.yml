@@ -1,30 +1,30 @@
 osm:
-    tag: Tag
-    tags: Tags
-    key: Key
-    keys: Keys
-    value: Value
-    values: Values
-    node: Node
-    nodes: Nodes
-    way: Way
-    ways: Ways
+    tag: Eigenschaft
+    tags: Eigenschaften
+    key: Schlüssel
+    keys: Schlüssel
+    value: Wert
+    values: Werte
+    node: Punkt
+    nodes: Punkte
+    way: Linie
+    ways: Linien
     relation: Relation
-    relations: Relations
+    relations: Relationen
     relation_type: Relation-Typ
     relation_types: Relation-Typen
-    relation_member: Relation Member
-    relation_members: Relation Members
-    relation_member_nodes: Member Nodes
-    relation_member_ways: Member Ways
-    relation_member_relations: Member Relations
-    relation_member_role: Role
-    relation_member_roles: Roles
+    relation_member: Relationselement
+    relation_members: Relationselemente
+    relation_member_nodes: Elementpunkte
+    relation_member_ways: Elementlinien
+    relation_member_relations: Elementrelationen
+    relation_member_role: Rolle
+    relation_member_roles: Rollen
     object: Objekt
     objects: Objekte
     all: Alle
-    user: User
-    users: User
+    user: Anwender
+    users: Anwender
 
 taginfo:
     source: Datenquelle
