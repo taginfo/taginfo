@@ -3,7 +3,7 @@
 
 /*
 
-  Copyright 2012 Jochen Topf <jochen@topf.org>.
+  Copyright 2012, 2014 Jochen Topf <jochen@topf.org>.
 
   This file is part of Tagstats.
 
@@ -22,17 +22,20 @@
 
 */
 
+#include <cassert>
+#include <cstdlib>
+#include <cstring>
 #include <list>
 #include <stdexcept>
-#include <new>
-#include <cstring>
+#include <string>
 
 /**
  * class StringStore
  *
  * Storage of lots of strings (const char *). Memory is allocated in chunks.
  * If a string is added and there is no space in the current chunk, a new
- * chunk will be allocated.
+ * chunk will be allocated. Strings added to the store must not be larger
+ * than the chunk size.
  *
  * All memory is released when the destructor is called. There is no other way
  * to release all or part of the memory.
@@ -40,51 +43,21 @@
  */
 class StringStore {
 
-    int chunk_size;
+    size_t m_chunk_size;
 
-    // number of bytes that are available in the current chunk
-    int current_rest_length;
+    std::list<std::string> m_chunks;
 
-    // pointer where the next string is stored
-    char *current_ptr;
-
-    // list of chunks
-    std::list<void *> chunks;
-
-    const char *_add_chunk() {
-        current_ptr = (char *) malloc(chunk_size);
-        if (! current_ptr) {
-            throw std::bad_alloc();
-        }
-        current_rest_length = chunk_size;
-        chunks.push_back(current_ptr);
-        return current_ptr;
-    }
-
-    bool _add(const char *string) {
-        if (current_rest_length <= 1) {
-            _add_chunk();
-        }
-        char *next_ptr = (char *) memccpy(current_ptr, string, 0, current_rest_length);
-        if (next_ptr) {
-            current_rest_length -= (next_ptr - current_ptr);
-            current_ptr = next_ptr;
-            return true;
-        }
-        return false;
+    void add_chunk() {
+        m_chunks.push_front(std::string());
+        m_chunks.front().reserve(m_chunk_size);
     }
 
 public:
 
-    StringStore(int chunk_size) : chunk_size(chunk_size) {
-        _add_chunk();
-    }
-
-    ~StringStore() {
-        while (! chunks.empty()) {
-            free(chunks.back());
-            chunks.pop_back();
-        }
+    StringStore(size_t chunk_size) :
+        m_chunk_size(chunk_size),
+        m_chunks() {
+        add_chunk();
     }
 
     /**
@@ -92,35 +65,36 @@ public:
      * automatically get more memory if we are out.
      * Returns a pointer to the copy of the string we have
      * allocated.
-     *
-     * Throws std::length_error if the string we want to
-     * add is longer then the chunk size.
      */
-    const char *add(const char *string) {
-        const char *string_ptr = current_ptr;
+    const char* add(const char* string) {
+        size_t len = std::strlen(string) + 1;
 
-        if (! _add(string)) {
-            string_ptr = _add_chunk();
-            if (! _add(string)) {
-                throw std::length_error("strings added to StringStore must be shorter than chunk_size");
-            }
+        assert(len <= m_chunk_size);
+
+        size_t chunk_len = m_chunks.front().size();
+        if (chunk_len + len > m_chunks.front().capacity()) {
+            add_chunk();
+            chunk_len = 0;
         }
 
-        return string_ptr;
+        m_chunks.front().append(string);
+        m_chunks.front().append(1, '\0');
+
+        return m_chunks.front().c_str() + chunk_len;
     }
 
     // These functions get you some idea how much memory was
     // used.
     int get_chunk_size() const {
-        return chunk_size;
+        return m_chunk_size;
     }
 
     int get_chunk_count() const {
-        return chunks.size();
+        return m_chunks.size();
     }
 
     int get_used_bytes_in_last_chunk() const {
-        return chunk_size - current_rest_length;
+        return m_chunks.front().size();
     }
 
 };
