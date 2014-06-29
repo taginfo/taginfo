@@ -661,6 +661,12 @@ div.img_popup {
 
 /* ==========  */
 
+div#tagcloud a:hover {
+    text-decoration: none;
+}
+
+/* ==========  */
+
 .canvas svg text {
     font: 12px Arial,sans-serif;
 }
