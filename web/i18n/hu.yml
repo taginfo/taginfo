@@ -276,7 +276,7 @@ pages:
             title: A címkéről szóló wiki-lap
             none_found: Nem érhető el wiki-lap a címkéhez.
             create: Készíts wiki-lapot a címkéhez
-            suggest_key_wiki_page: %1 kulcsról bővebb információt találhatsz a wikin.
+            suggest_key_wiki_page: "%1 kulcsról bővebb információt találhatsz a wikin."
             wiki_page: Wiki-lap
             implied_tags: Benne foglalt címkék
             combined_tags: Kombinálható címkék
