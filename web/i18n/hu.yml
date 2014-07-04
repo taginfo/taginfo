@@ -12,8 +12,8 @@ osm:
     ways: Vonalak
     relation: Kapcsolat
     relations: Kapcsolatok
-    relation_type: Kapcsolat típus
-    relation_types: Kapcsolat típusok
+    relation_type: Kapcsolattípus
+    relation_types: Kapcsolattípusok
     relation_member: Kapcsolat tag
     relation_members: Kapcsolat tagok
     relation_member_nodes: Tag pontok
@@ -31,7 +31,7 @@ taginfo:
     source: Forrás
     sources: Források
     download: Letöltés
-    about: A taginfo névjegye
+    about: Névjegy
     contact: Kapcsolat
     meta: Meta
     wiki: taginfo wiki oldal
@@ -50,13 +50,13 @@ taginfo:
     data_from: Adatok frissítve
     uses_data_from: |
         Felhasznált adatok dátuma:
-    data_from_description: A taginfo adatbázis utolsó frissítése Last update of taginfo database
+    data_from_description: A taginfo adatbázis utolsó frissítése
     instance:
         title: Ezen taginfo webhely névjegye
         other: A többi webhely listáját az <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wikiben</a> találod.
 
 misc:
-    values_less_than_one_percent: nincs 1%-nál gyakoribb érték no values with more than 1%
+    values_less_than_one_percent: nincs 1%-nál gyakoribb érték
     empty_string: üres karakterlánc
     unknown: ismeretlen
     count: Darab
@@ -72,14 +72,14 @@ misc:
     area: Terület
     language: Nyelv
     search_for: Keresés
-    objects_tooltip: Objektumok száma (abszolut értékként és minden pont, vonal és kapcsolat százalékában).
-    nodes_tooltip: Pontok száma (abszolut értékként és az összes felcímkézett pont százalékában (vagyis a címkézetlen pontok nem számítanak bele)).
-    ways_tooltip: Vonalak száma (abszolut értékként és az összes vonal százalékában).
-    relations_tooltip: Kapcsolatok száma (abszolut értékként és az összes kapcsolat százalékában).
+    objects_tooltip: Objektumok száma (abszolút értékként és minden pont, vonal és kapcsolat százalékában).
+    nodes_tooltip: Pontok száma (abszolút értékként és az összes felcímkézett pont százalékában (vagyis a címkézetlen pontok nem számítanak bele)).
+    ways_tooltip: Vonalak száma (abszolút értékként és az összes vonal százalékában).
+    relations_tooltip: Kapcsolatok száma (abszolút értékként és az összes kapcsolat százalékában).
     values_tooltip: A kulcs különböző értékeinek a száma.
     users_tooltip: Az adott kulcsú objektumot utoljára szerkesztő különböző felhasználók száma.
     prevalent_values: Leggyakoribb értékek
-    prevalent_values_tooltip: A kulcs legfeljebb tíz leggyakoribb értéke (csak ha a címkékt több, mint 1% ilyen értékű).
+    prevalent_values_tooltip: A kulcs legfeljebb tíz leggyakoribb értéke (csak ha a címkék több, mint 1%-a ilyen értékű).
     in_wiki_tooltip: Van legalább egy wiki oldala.
     in_josm_tooltip: A kulcs megjelenik a JOSM-ben.
 
@@ -112,6 +112,7 @@ help:
         keys_page: Kulcs lap
         tags_page: Címke lap
         relations_page: Kapcsolat lap
+        compare_page: Összehasonlító lap
         first_page: Első oldal
         prev_page: Előző oldal
         next_page: Következő oldal
@@ -124,7 +125,7 @@ help:
         enter_entry: Elemre ugrás
         switch_tab: Fülváltás
         deactivate: Beviteli mezők inaktiválása
-        up: Feljebb az oldalhierarhiában
+        up: Feljebb az oldalhierarchiában
         switch_input: Váltás a beviteli mezők között
 
 pages:
@@ -141,4 +142,234 @@ pages:
             listrelations: Leggyakoribb kapcsolatok megtekintése...
         reports:
             listreports: Összes jelentés megtekintése...
+        about:
+            intro:
+                <p>Az OpenStreetMap <b>kulcs/érték</b> formájú <b>címkéket</b> használ
+                a földrajzi objektumok leírására. A taginfo ezekről a címkékről gyűjt
+                adatokat különböző forrásokból azért, hogy könnyebben tudd értelmezni,
+                mit jelentenek és hogyan használják őket.</p>
+            more: A taginfóról bővebben...
+        international:
+            see: Lásd a többi taginfo oldalt...
+    sources:
+        intro: |
+            <p>A taginfo az OSM címkéket különböző forrásokból gyűjti be, majd egyesíti őket
+            a könnyű kereshetőség és felfedezés érdekében.</p>
+            <p> Megjegyzendő, hogy a taginfo csak megjeleníti ezeket az adatokat. 
+            Ha módosítani szeretnéd, vissza kell menned a forráshoz.</p>
+        list:
+            title: Források listája
+            intro: Ez egy lista a jelenleg használt forrásokról. A jövőben további források is beépítésre kerülhetnek.
+        description:
+        updates:
+            title: Frissítések
+            intro: A taginfo adatok rendszeresen frissülnek a forrásokból.
+        data_until: Adatgyűjtés kezdete
+        last_update_run: Frissítés utolsó futtatása
+        data_until_explanation: Eddig az időpontig az összes szerkesztés benne van az adatokban, a későbbi szerkesztések talán.
+        to: –
+    download:
+        intro: |
+            <p>Itt tudod letölteni a taginfo által használt adatbázisokat. Az összes adat
+            <a class="extlink" href="http://www.sqlite.org/">Sqlite</a> adatbázisokban tárolódik.
+            Az adatbázisfájlok <a class="extlink" href="http://www.bzip.org/">bzip2</a>-vel vannak csomagolva.</p>
+            <p>Ha nem szeretnéd letölteni az adatbázisokat, viszont automatizáltan érnéd el az adatokat,
+            érdemes az <a href="/about">API</a>-t használnod.</p>
+        file: Fájl
+        packed: Csomagolva
+        unpacked: Kicsomagolva
+        description: Leírás
+    reports:
+        intro: |
+            A jelentések a címkék adatait mutatják meg különböző szemszögből.
+            A különböző forrásból származó adatokat gyakran összevonják, hogy az eredmény érdekesebb legyen.
+            Egyes jelentések segíthetnek a típushibák felderítésében.
+        list: Összes jelentés listája
+        data_sources: Felhasznált adatforrások
+    search:
+        title: Keresési eredmények
+        you_were_searching_for: Erre kerestél
+        fulltext: Teljes szöveg
+        no_keys: Kulcs nem található
+        no_values: Érték nem található
+        no_tags: Címke nem található
+        no_match: Nincs egyezés
+    compare:
+        nothing_to_compare: Nincsenek összehasonlítható kulcsok/értékek. Menj egy kulcs vagy címke lapjára és add a listához.
+    keys:
+        intro: |
+                Ez a táblázat az adatbázisban és egyéb forrásokban található összes kulcsot tartalmazza.
+    tags:
+        intro: |
+                Ez a táblázat az adatbázisban található leggyakoribb címkéket tartalmazza.
+    relations:
+        name: Kapcsolattípusok
+        intro: Információk a különböző típusú kapcsolatokról (a <a href="/keys/type?filter=relations">type</a> címke alapján).
+        relations_of_type_tooltip: Az ilyen típusú kapcsolatok száma és aránya.
+        prevalent_roles: Leggyakoribb szerepek
+        prevalent_roles_tooltip: Az ilyen típusú kapcsolatok leggyakoribb szerepei.
+        no_information: Nincs információ
+        roles_less_than_one_percent: nincs 1%-nál gyakoribb szerep
+        empty_role: üres szerep
+    key:
+        description_from_wiki: A kulcs leírása a wikiből (ha elérhető, a kiválasztott nyelven, egyébként angolul).
+        no_description_in_wiki: A kulcsnak nincs angol nyelvű leírása a wikiben. (Lásd még "Wiki" fül.)
+        filter:
+            label: |
+                 Szűrő:
+            none: Nincs szűrés
+            nodes: Csak pontok
+            ways: Csak vonalak
+            relations: Csak kapcsolatok
+        button_disabled: Gomb letiltva, mert túl sok objektum található ilyen kulccsal.
+        number_objects: Objektumok száma
+        number_values: Értékek száma
+        values_used: A kulcshoz használt értékek
+        tag_description_from_wiki: A címke leírása a wikiből (ha elérhető, a kiválasztott nyelven, egyébként angolul).
+        overview:
+            objects_last_edited_by: Az ilyen kulcsú objektumokat %1 különböző felhasználó szerkesztette utoljára.
+            no_endorsement: (Ez nem jelenti azt, hogy az összes szerkesztő jóváhagyta ezt a kulcsot.)
+            distribution_of_values: Értékek eloszlása
+        other_keys_used:
+            title: Más, ezzel a kulccsal együtt használt kulcsok
+            other: Más kulcsok
+            to_count_tooltip: A kiválasztott kulcsú objektumok száma, amik a másik kulccsal is el vannak látva.
+            other_key_tooltip: A kiválasztott kulccsal együtt használt kulcs.
+            from_count_tooltip: Olyan kulcsú objektumok száma, amik a kiválasztott kulccsal is el vannak látva.
+        geographic_distribution:
+            title: A kulcs földrajzi eloszlása
+            relations: A kapcsolatoknak nincsen földrajzi helye, ezért nem jeleníthető meg térkép.
+        wiki_pages:
+            title: A kulcsról szóló wiki-lap
+            none_found: Nem érhető el wiki-lap a kulcshoz.
+            create: Készíts wiki-lapot a kulcshoz
+            wiki_page: Wiki-lap
+            implied_tags: Benne foglalt címkék
+            combined_tags: Kombinálható címkék
+            linked_tags: Hivatkozott címkék
+        josm:
+            title: JOSM stílusszabályok a kulcshoz
+            choice: |
+                  Choose style:
+            no_styles: Nincs a kulcshoz JOSM stílus.
+    tag:
+        description_from_wiki: A címke leírása a wikiből (ha elérhető, a kiválasztott nyelven, egyébként angolul).
+        no_description_in_wiki: A címkéhez nincs angol nyelvű leírás a wikiben. (Lásd még a "Wiki" fület.)
+        button_disabled: Gomb letiltva, mert túl sok mert túl sok objektum található ilyen címkével.
+        number_objects: Objektumok száma
+        overview:
+            see_also: Lásd még a kapcsolattípus lapot
+        other_tags_used:
+            title: Más, ezzel a címkével együtt használt címkék
+            other: Más címkék
+            to_count_tooltip: A kiválasztott címkéjű objektumok száma, amik a másik címkével/kulccsal is el vannak látva.
+            other_key_tooltip: A kiválasztott címkével/kulccsal együtt használt címke.
+            from_count_tooltip: Olyan címkéjű/kulcsú objektumok száma, amik a kiválasztott címkével is el vannak látva.
+        combinations:
+            title: Kombinációk
+            description: Ez a táblázat csak a leggyakoribb címkék leggyakoribb kombinációit mutatja.
+        geographic_distribution:
+            title: A címke földrajzi eloszlása
+            relations: A kapcsolatoknak nincsen földrajzi helye, ezért nem jeleníthető meg térkép.
+            no_map: Sajnálom, csak a leggyakoribb címkékhez lehet térképet készíteni. Próbáld az Overpass Turbo linket.
+        wiki_pages:
+            title: A címkéről szóló wiki-lap
+            none_found: Nem érhető el wiki-lap a címkéhez.
+            create: Készíts wiki-lapot a címkéhez
+            suggest_key_wiki_page: %1 kulcsról bővebb információt találhatsz a wikin.
+            wiki_page: Wiki-lap
+            implied_tags: Benne foglalt címkék
+            combined_tags: Kombinálható címkék
+            linked_tags: Hivatkozott címkék
+        josm:
+            title: JOSM stílusszabályok a címkéhez
+            choice: |
+                  Choose style:
+            no_styles: Nincs a címkéhez JOSM stílus.
+    relation:
+        name: Kapcsolattípus
+        description_from_wiki: A kapcsolat leírása a wikiből (ha elérhető, a kiválasztott nyelven, egyébként angolul).
+        no_description_in_wiki: A kapcsolathoz nincs angol nyelvű leírás a wikiben. (Lásd még a "Wiki" fület.)
+        button_disabled: Gomb letiltva, mert túl sok mert túl sok objektum található ilyen kapcsolattípussal.
+        overview:
+            tab: Áttekintés
+            title: Áttekintés
+            member_type: Tagtípus
+            member_count: Tagok száma
+            see_also: Lásd még a címke lapot
+        roles:
+            tab: Szerepek
+            title: Kapcsolattag szerepek
+            objects_tooltip: Kapcsolattagok ezzel a szereppel (és az összes tag arányában)
+            nodes_tooltip: Pont típusú kapcsolattagok ezzel a szereppel (és az összes pont típusú tag arányában) ehhez a kapcsolattípushoz.
+            ways_tooltip: Vonal típusú kapcsolattagok ezzel a szereppel (és az összes vonal típusú tag arányában) ehhez a kapcsolattípushoz.
+            relations_tooltip:  Kapcsolat típusú kapcsolattagok ezzel a szereppel (és az összes kapcsolat típusú tag arányában) ehhez a kapcsolattípushoz.
+            no_roles_info: Nincs információ a kapcsolattípus szerepéről (feltehetőleg azért, mert nagyon kevés az ilyen kapcsolat).
+        graph:
+            tab: Szerep diagram
+            title: Szerep diagram
+        wiki_pages:
+            title: A kapcsolattípusról szóló wiki-lap
+            none_found: Nem érhető el wiki-lap a kapcsolattípushoz.
+            create: Készíts wiki-lapot a kapcsolattípushoz
+            wiki_page: Wiki-lap
 
+flexigrid:
+    pagetext: Oldal
+    pagestat: Elemek megjelenítve {from} - {to}, összesen {total}
+    outof: /
+    findtext: Keresés
+    procmsg: Feldolgozás, kérlek várj...
+    nomsg: Nincsenek ilyen elemek
+    errormsg: Kapcsolódási hiba
+
+comparison:
+    list: Összehasonlító lista
+    items: elemek
+    add_key: Kulcs hozzáadása a listához
+    add_tag: Címke hozzáadása a listához
+    clear: Összehasonlító lista törlése
+    compare: kulcsok/címkék összehasonlítása
+
+sources:
+    master:
+        name: Master
+        description: Aggregált statisztikák és különféle adatok, amik a taginfo felhasználói felületéhez kellenek.
+    db:
+        name: Adatbázis
+        description: Statisztikák az egyes kulcsokról és címkékről a fő OSM adatbázisból (planet fájl).
+    wiki:
+        name: Wiki
+        description: Az OSM wiki címke és kulcs leírólapjairól származó adatok.
+    josm:
+        name: JOSM
+        description: A JOSM szerkesztő konfigurációs fájljaiból származó adatok.
+    potlatch:
+        name: Potlatch
+        description: A Potlatch2 szerkesztő konfigurációs fájljaiból származó adatok.
+    languages:
+        name: Nyelvek
+        description: Nyelvek nevei, kótjai, stb. az IANA és Unicode nyilvántartásokból.
+
+reports:
+    characters_in_keys:
+        name: Kulcsokban előforduló karakterek
+        statistics:
+            tab: Statisztikák
+            title: Statisztikai áttekintés
+            fraction: Arány
+            characters: Karakterek a kulcsokban
+            characters_in_keys:
+                plain: Csak kisbetűs latin karakterek (<span class="char">a</span>-tól <span class="char">z</span>-ig) és alulvonás (<span class="char">_</span>), első és utolsó karakterek betűk.
+                colon: Mint A, de tartalmaz egy vagy két kettőspontot (<span class="char">:</span>).
+                letters: Mint B, de nagybetűs latin betűkkel, vagy más ábécéből származó betűkkel.
+                space: Mint C, de tartalmaz legalább egy whitespace karaktert (szóköz, tabulátor, új sor, kocsi vissza, vagy más ábécék jelei).
+                problem: Mint C, de tartalmaz olyan karaktereket, amik problémát okozhatnak <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
+                rest: Bármi más.
+                total: Összes
+        whitespace:
+            tab: Szököz
+            title: Szóközt tartalmazó kulcsok
+        problematic:
+            tab: Problémásak
+            title: Problémás karaktereket tartalmazó kulcsok
