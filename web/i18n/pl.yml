@@ -148,77 +148,8 @@ pages:
     about:
         about_taginfo:
             title: O taginfo
-            text: |
-                <p>OpenStreetMap uses <b>tags</b> to add meaning to geographic objects. There
-                is no fixed list of those tags. New tags can be invented and used as needed.
-                Everybody can come up with a new tag and add it to new or existing objects.
-                This makes OpenStreetMap enormously flexible, but sometimes also a bit hard
-                to work with.</p>
-                <p>Whether you are contributing to OSM or using the OSM data, there are always
-                questions like: What tags do people use for feature X? What tags can I use
-                for feature Y so that it appears properly on the map? Is the tag Z described
-                on the wiki actually in use and where?</p>
-                <p>Taginfo helps you by showing statistics about which tags are actually in the
-                database, how many people use those tags, where they are used and so on. It
-                also gets information about tags from the wiki and from other places. Taginfo
-                tries to bring together all information about tags to help you understand
-                how they are used and what they mean. See a <a href="/sources">list of sources</a>
-                taginfo uses.</p>
         about_site:
             title: O tej stronie
-        building_on_taginfo:
-            title: Building on taginfo
-            text: |
-                <p>You can use the data from taginfo in your own projects:</p>
-                <h3>API</h3>
-                <p>Taginfo data can be accessed through a REST API. See the
-                <a href="/taginfo/apidoc">API documentation</a> for the details, some general information is
-                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">on the OSM wiki</a>.
-                The servers running the taginfo API do not have unlimited resources.
-                Please use the API responsibly. If in doubt contact the maintainers of the
-                site you are using or talk to us on the mailing list.</p>
-                <h3>Download</h3>
-                <p>If you want to play around with the data used by taginfo, you can download the
-                regularly updated Sqlite database files. All the preprocessing is done for you.
-                See the <a href="/download">download page</a> for a list of files. Note that
-                some of these files can get quite large. If you want to download them regularly,
-                contact the maintainers of the site you are using or talk to us on the mailing list.</p>
-                <h3>License</h3>
-                <p>The data available through taginfo is licenced under ODbL, the
-                <a class="extlink" href="//www.openstreetmap.org/copyright">same
-                license as the OpenStreetMap data</a>.</p>
-        software:
-            title: The taginfo software
-            text: |
-                <p>The taginfo software was created and is maintained by
-                <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
-                The web design was created by
-                <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
-                <h3>Translations</h3>
-                <p>We need translators for the taginfo user interface. See the <a
-                href="/taginfo/translations">translations overview</a> for languages that need
-                some work. More information on how to help is on the
-                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM wiki</a>.</p>
-                <h3>Code</h3>
-                <p>All the software behind the taginfo sites is Open Source. You can get it on
-                <a class="extlink" href="https://github.com/joto/taginfo/">GitHub</a>. For an overview
-                see the page about the <a class="extlink"
-                href="https://wiki.openstreetmap.org/wiki/Taginfo/Architecture">taginfo
-                architecture</a> on the OSM wiki.</p>
-                <h3>Running your own instance</h3>
-                <p>You can run your own
-                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">taginfo site</a>,
-                for instance with data for just your own country. Instructions are
-                <a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo/Running">on the OSM
-                wiki</a>.</p>
-                <h3>Bug reports and feature requests</h3>
-                <p>Bug reports and feature requests should be directed to the <a class="extlink"
-                href="https://github.com/joto/taginfo/issues">GitHub issue tracker</a>. Or you can
-                come talk to us on the mailing list.</p>
-                <h3>Contact/Mailing list</h3>
-                <p>Contact us on the
-                <a class="extlink" href="//lists.openstreetmap.org/listinfo/taginfo-dev">taginfo-dev mailing list</a>
-                if you have questions or want to help.</p>
     sources:
         intro: |
             <p>Taginfo pobiera dane o OSM z różnych źródeł i zbiera je razem dla łatwiejszego ich przeglądania.</p>
