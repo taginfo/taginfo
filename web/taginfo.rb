@@ -80,16 +80,16 @@ class Taginfo < Sinatra::Base
             set :host, 'localhost'
             set :port, ARGV[0]
             set :environment, :production
-
-            # Disable rack-protection library because it messes up embedding
-            # taginfo in an iframe. This should probably be done more
-            # selectively, but there is no documentation on what rack-protection
-            # is actually doing...
-            disable :protection
         else
             # test
             enable :logging
         end
+
+        # Disable rack-protection library because it messes up embedding
+        # taginfo in an iframe. This should probably be done more
+        # selectively, but there is no documentation on what rack-protection
+        # is actually doing...
+        disable :protection
     end
 
     # make h() method for escaping HTML available
