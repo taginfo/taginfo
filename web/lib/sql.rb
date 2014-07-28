@@ -16,7 +16,7 @@ module SQL
                 Source.new(source['id'], source['name'], source['data_until'], source['update_start'], source['update_end'], source['visible'].to_i == 1)
             end
 
-            data_until = db.select("SELECT min(data_until) FROM sources").get_first_value().sub(/:..$/, '')
+            data_until = db.select("SELECT min(data_until) FROM sources WHERE id='db'").get_first_value().sub(/:..$/, '')
 
             db.close
 
