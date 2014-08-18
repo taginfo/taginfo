@@ -28,7 +28,7 @@
                 <tr>
                     <td class="<%= c %>"><img src="<%= source.imgurl(16) %>" width="16" height="16" alt=""/>&nbsp;&nbsp;<%= h(source.name) %>
                     <td class="tc<%= c %> nowrap"><%= h(source.data_until) %> UTC</td>
-                    <td class="tc<%= c %> nowrap"><%= h(source.update_start + ' ' + t.pages.sources.to + ' ' + source.update_end) %> UTC</td>
+                    <td class="tc<%= c %> nowrap"><%= h(source.update_start.to_s + ' ' + t.pages.sources.to + ' ' + source.update_end.to_s) %> UTC</td>
                 </tr>
 <% end %>
             </table>
