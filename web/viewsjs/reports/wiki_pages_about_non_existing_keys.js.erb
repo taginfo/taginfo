@@ -5,7 +5,7 @@
 function page_init() {
     up = function() { window.location = '/reports'; };
     create_flexigrid('grid-keys', {
-        url: '/api/4/keys/all?filters=in_wiki,not_in_db&include=wikipages',
+        url: '/api/4/keys/all?filter=in_wiki,not_in_db&include=wikipages',
         colModel: [
             { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" width="16" height="16" title="Wiki"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
             { display: '<img src="/img/sources/josm.16.png" alt="JOSM" width="16" height="16" title="JOSM"/>', name: 'in_josm', width: 20, sortable: true, align: 'center' },

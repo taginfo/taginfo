@@ -33,7 +33,9 @@ class Taginfo < Sinatra::Base
         :ui => '/keys'
     }) do
 
-        if params[:filters]
+        if params[:filter]
+            filters = params[:filter].split(',').map{ |f| @@filters[f.to_sym][:expr] }.compact
+        elsif params[:filters] # old param name for backwards compatibility
             filters = params[:filters].split(',').map{ |f| @@filters[f.to_sym][:expr] }.compact
         else
             filters = []

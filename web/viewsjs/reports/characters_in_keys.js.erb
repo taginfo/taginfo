@@ -5,7 +5,7 @@
 var create_flexigrid_for = {
     whitespace: function() {
         create_flexigrid('grid-whitespace', {
-            url: '/api/4/keys/all?filters=characters_space&include=prevalent_values',
+            url: '/api/4/keys/all?filter=characters_space&include=prevalent_values',
             colModel: [
                 { display: '<%= h(osm.key) %>', name: 'key', width: 250, sortable: true },
                 { display: '<span title="<%= h(misc.objects_tooltip) %>"><img src="/img/types/all.16.png" width="16" height="16" alt=""/> <%= h(osm.objects) %></span>', name: 'count_all', width: 150, sortable: true, align: 'center' },
@@ -38,7 +38,7 @@ var create_flexigrid_for = {
     },
     problematic: function() {
         create_flexigrid('grid-problematic', {
-            url: '/api/4/keys/all?filters=characters_problematic&include=prevalent_values',
+            url: '/api/4/keys/all?filter=characters_problematic&include=prevalent_values',
             colModel: [
                 { display: '<%= h(osm.key) %>', name: 'key', width: 250, sortable: true },
                 { display: '<span title="<%= h(misc.objects_tooltip) %>"><img src="/img/types/all.16.png" width="16" height="16" alt=""/> <%= h(osm.objects) %></span>', name: 'count_all', width: 150, sortable: true, align: 'center' },
