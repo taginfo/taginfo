@@ -25,7 +25,8 @@
 #
 #------------------------------------------------------------------------------
 
-require 'net/http'
+require 'net/https'
+require 'uri'
 require 'sqlite3'
 require 'time'
 
@@ -48,21 +49,28 @@ end
 projects.each do |id, url|
     puts "  #{id} #{url}"
     uri = URI(url)
-    Net::HTTP.start(uri.host, uri.port) do |http|
-        request = Net::HTTP::Get.new(uri)
-        response = http.request(request)
-        last_modified = Time.parse(response['Last-Modified']).utc.iso8601
-        db.execute("INSERT INTO projects (id, json_url, last_modified, fetch_date, fetch_status, fetch_json, fetch_result, data_updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-            id,
-            url,
-            last_modified,
-            Time.now.utc.iso8601,
-            response.code,
-            response.body,
-            (response.code == '200' ? 'OK' : 'FETCH ERROR'),
-            last_modified
-        );
+    http = Net::HTTP.new(uri.host, uri.port)
+    if uri.scheme == 'https'
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     end
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    begin
+        last_modified = Time.parse(response['Last-Modified'] || response['Date']).utc.iso8601
+    rescue
+        last_modified = Time.now.utc
+    end
+    db.execute("INSERT INTO projects (id, json_url, last_modified, fetch_date, fetch_status, fetch_json, fetch_result, data_updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        id,
+        url,
+        last_modified,
+        Time.now.utc.iso8601,
+        response.code,
+        response.body,
+        (response.code == '200' ? 'OK' : 'FETCH ERROR'),
+        last_modified
+    );
 end
 
 
