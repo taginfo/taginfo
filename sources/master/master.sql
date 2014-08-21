@@ -11,8 +11,9 @@
 ATTACH DATABASE '__DIR__/db/taginfo-db.db'                 AS db;
 ATTACH DATABASE '__DIR__/wiki/taginfo-wiki.db'             AS wiki;
 ATTACH DATABASE '__DIR__/languages/taginfo-languages.db'   AS languages;
-ATTACH DATABASE '__DIR__/josm/taginfo-josm.db'             AS josm; 
-ATTACH DATABASE '__DIR__/potlatch/taginfo-potlatch.db'     AS potlatch; 
+ATTACH DATABASE '__DIR__/josm/taginfo-josm.db'             AS josm;
+ATTACH DATABASE '__DIR__/projects/taginfo-projects.db'     AS projects;
+ATTACH DATABASE '__DIR__/potlatch/taginfo-potlatch.db'     AS potlatch;
 
 -- ============================================================================
 
@@ -34,7 +35,8 @@ INSERT INTO sources SELECT 1, 1, * FROM db.source
               UNION SELECT 2, 1, * FROM wiki.source
               UNION SELECT 3, 1, * FROM languages.source
               UNION SELECT 4, 1, * FROM josm.source
-              UNION SELECT 5, 0, * FROM potlatch.source;
+              UNION SELECT 5, 1, * FROM projects.source
+              UNION SELECT 6, 0, * FROM potlatch.source;
 
 DROP TABLE IF EXISTS master_stats;
 CREATE TABLE master_stats (
