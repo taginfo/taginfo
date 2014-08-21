@@ -1,0 +1,23 @@
+function page_init() {
+    create_flexigrid('grid-projects', {
+        url: '/api/4/projects/all',
+        colModel: [
+            { display: '<%= h(@trans.t.taginfo.project) %>', name: 'name', width: 300, sortable: true },
+            { display: '<%= h(@trans.t.misc.description) %>', name: 'description', width: 600, sortable: false }
+        ],
+        searchitems: [
+            { display: '<%= h(@trans.t.taginfo.project) %>/<%= h(@trans.t.misc.description) %>', name: 'name' }
+        ],
+        sortname: 'name',
+        sortorder: 'asc',
+        preProcess: function(data) {
+            data.rows = jQuery.map(data.data, function(row, i) {
+                return { 'cell': [
+                    link_to_project(row.id, row.name),
+                    html_escape(row.description)
+                ] };
+            });
+            return data;
+        }
+    });
+}

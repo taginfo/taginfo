@@ -38,6 +38,8 @@ taginfo:
     reports: Reports
     international: International
     apidoc: API-Dokumentation
+    project: Projekt
+    projects: Projekte
     test: Test
     map: Karte
     maps: Karten
@@ -168,6 +170,8 @@ pages:
                 <p>Taginfo bekommt Informationen über die verschiedenen Sprachen dieser Welt, ihre Codes, Namen, usw. aus diversen Datenbanken der <a class="extlink" href="http://www.iana.org/">IANA</a> und vom <a class="extlink" href="http://www.unicode.org/">Unicode Consortium</a>.</p>
             josm: |
                 <p>Icons und Stile werden aus der Konfiguration des Editors <a class="extlink" href="http://josm.openstreetmap.de/">JOSM</a> übernommen.</p>
+            projects: |
+                <p>Projekte, die OSM-Tags in irgendeiner Weise nutzen, zum Beispiel Editoren, Karten, Router, usw. Siehe auch die <a href="/projects">Projektliste</a>.</p>
         updates:
             title: Aktualisierung
             intro: Die Taginfo-Daten werden regelmäßig aktualisiert.
@@ -223,6 +227,9 @@ pages:
         no_information: Keine Informationen
         roles_less_than_one_percent: Keine Roles mit mehr als 1%
         empty_role: Role ist leer
+    projects:
+        intro: |
+            Diese Tabelle zeigt alle Projekte, die taginfo kennt, und die OSM-Tags in irgendeiner Weise nutzen.
     key:
         description_from_wiki: Beschreibung dieses Keys aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf Englisch).
         no_description_in_wiki: Keine deutschsprachige Beschreibung dieses Keys im Wiki. (Siehe auch im "Wiki"-Tab.)
@@ -264,6 +271,8 @@ pages:
             choice: |
                   Stil auswählen:
             no_styles: Keine JOSM-Stilregeln für diesen Key.
+        projects:
+            title: Projekte, die diesen Key benutzen
     tag:
         description_from_wiki: Beschreibung dieses Tags aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf Englisch).
         no_description_in_wiki: Keine deutschsprachige Beschreibung dieses Tags im Wiki. (Siehe auch im "Wiki"-Tab.)
@@ -298,6 +307,8 @@ pages:
             choice: |
                   Stil auswählen:
             no_styles: Keine JOSM-Stilregeln für diesen Tag.
+        projects:
+            title: Projekte, die diesen Tag benutzen
     relation:
         name: Relation-Typ
         description_from_wiki: Beschreibung dieses Relations-Types aus dem Wiki  (falls vorhanden in der gewählten Sprache, sonst auf Englisch).
@@ -325,6 +336,16 @@ pages:
             none_found: Keine Wiki-Seiten für diesen Relation-Typ vorhanden.
             create: Wiki-Seite für diesen Relation-Typ anlegen
             wiki_page: Wiki-Seite
+    project:
+        overview:
+            project_name: Projektname
+            project_url: Projekt-URL
+            description: Beschreibung
+            documentation_url: Dokumentation
+            last_update: Letzte Aktualisierung
+        tags:
+            title: Tags, die von diesem Projekt verwenden werden
+            intro: Die folgenden Daten wurden von dem Projekt zur Verfügung gestellt. Sie sind nicht notwendigerweise komplett. Für Details schau bitte in die Projekt-Dokumentation.
 
 flexigrid:
     pagetext: Seite

@@ -73,6 +73,10 @@ function url_for_rtype(rtype) {
     }
 }
 
+function url_for_project(id) {
+    return '/projects/' + encodeURIComponent(id);
+}
+
 function url_for_wiki(title, options) {
     var path = '//wiki.openstreetmap.org/';
     if (options && options.edit) {
@@ -193,6 +197,14 @@ function link_to_rtype(rtype, attr) {
     );
 }
 
+function link_to_project(id, name, attr) {
+    return /*img({ src: '/api/v4/project/icon?project=' + id, alt: '' }) + ' ' +*/ link(
+        url_for_project(id),
+        html_escape(name),
+        attr
+    );
+}
+
 function link_to_wiki(title, options) {
     if (title == '') {
         return '';
@@ -201,6 +213,14 @@ function link_to_wiki(title, options) {
     return link(
         url_for_wiki(title, options),
         html_escape(title),
+        { target: '_blank', 'class': 'extlink' }
+    );
+}
+
+function link_to_url(url) {
+    return link(
+        encodeURI(url),
+        html_escape(url.replace(/^http:\/\//, '')),
         { target: '_blank', 'class': 'extlink' }
     );
 }
@@ -685,6 +705,21 @@ function comparison_list_change(key, value) {
     return false;
 }
 
+/* ============================ */
+
+function project_tag_desc(description, icon, url) {
+    var out = '';
+    if (icon) {
+        out += img({src: icon, alt: '', width: 16, height: 16}) + ' ';
+    }
+    if (description) {
+        out += html_escape(description) + ' ';
+    }
+    if (url) {
+        out += '[' + link(url, 'More...', { target: '_blank', 'class': 'extlink' }) + ']'
+    }
+    return out;
+}
 
 /* ============================ */
 
@@ -757,6 +792,9 @@ jQuery(document).ready(function() {
                         break;
                     case 75: // k
                         window.location = '/keys';
+                        break;
+                    case 80: // p
+                        window.location = '/projects';
                         break;
                     case 82: // r
                         window.location = '/relations';

@@ -1,0 +1,40 @@
+<h1 class="section">Projects</h1>
+
+<table class="list">
+    <tr>
+        <th>Icon</th>
+        <th>Project ID<br/>Project Name</th>
+        <th>Fetch Date<br/>Updated</th><th>Code</th><th>Res</th>
+        <th>JSON URL<br/>Data URL</th><th>Fmt<br/>Vers</th>
+        <th>Project URL<br/>Doc URL</th><th>Contact</th>
+        <th>Description</th>
+    </tr>
+<% Project.each_with_index do |project, n| c = (n%2!=0) ? ' even' : '' %>
+    <tr>
+        <td class="tc<%= c %> nowrap">
+            <img src="<%= h(project.icon_url) %>" width="16" height="16" alt=""/>
+        </td>
+        <td class="<%= c %> nowrap">
+            <a href="/projects/<%= h(project.id) %>"><%= h(project.id) %></a><br/>
+            <%= h(project.name) %>
+        </td>
+        <td class="<%= c %> nowrap">
+            <%= h(project.fetch_date) %><br/>
+            <%= h(project.data_updated) %>
+        </td>
+        <td class="tc<%= c %> nowrap"><%= h(project.fetch_status) %></td>
+        <td class="tc<%= c %> nowrap"><%= h(project.fetch_result) %></td>
+        <td class="<%= c %> nowrap">
+            <a href="<%= h(project.json_url) %>"><%= h(project.json_url) %></a><br/>
+            <a href="<%= h(project.data_url) %>"><%= h(project.data_url) %></a>
+        </td>
+        <td class="tc<%= c %> nowrap"><%= h(project.data_format) %></td>
+        <td class="<%= c %> nowrap">
+            <a href="<%= h(project.project_url) %>"><%= h(project.project_url) %></a><br/>
+            <a href="<%= h(project.doc_url) %>"><%= h(project.doc_url) %></a>
+        </td>
+        <td class="<%= c %> nowrap"><%= h(project.contact_name) %><br/><%= h(project.contact_email) %></td>
+        <td class="<%= c %>"><%= h(project.description) %></td>
+    </tr>
+<% end %>
+</table>

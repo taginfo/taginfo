@@ -558,7 +558,7 @@ table.drilldown td#feature {
 /* ==========  */
 
 table.desc {
-    background-color: #b8b8b0;
+    background-color: #ddddd4;
     border-radius: 4px;
     padding: 6px;
     width: 100%;
@@ -574,8 +574,9 @@ table.desc > tbody > tr > th {
 
 table.desc > tbody > tr > td {
     vertical-align: top;
-    background-color: #e8e8e4;
+    background-color: #f8f8f8;
     padding: 2px 4px;
+    border-radius: 1px;
 }
 
 table.apiresults {

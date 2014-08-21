@@ -248,4 +248,67 @@ class Taginfo < Sinatra::Base
         return get_wiki_result(res)
     end
 
+    api(4, 'tag/projects', {
+        :description => 'Get projects using a given key or tag.',
+        :parameters => {
+            :key => 'Tag key (required).',
+            :value => 'Tag value (optional).',
+            :query => 'Only show results where the value matches this query (substring match, optional).'
+        },
+        :paging => :optional,
+        :sort => %w( project_name key value ),
+        :result => paging_results([
+            [:project_id,   :STRING, 'Project ID'],
+            [:project_name, :STRING, 'Project name'],
+            [:key,          :STRING, 'Key'],
+            [:value,        :STRING, 'Value'],
+            [:description,  :STRING, 'Description'],
+            [:doc_url,      :STRING, 'Documentation URL'],
+            [:icon_url,     :STRING, 'Icon URL']
+        ]),
+        :example => { :key => 'highway', :value => 'residential', :page => 1, :rp => 10, :sortname => 'project_name', :sortorder => 'asc' },
+        :ui => '/keys/highway=residential#projects'
+    }) do
+        key = params[:key]
+        value = params[:value]
+        q = like_contains(params[:query])
+        total = @db.select('SELECT count(*) FROM projects.projects p, projects.project_tags t ON p.id=t.project_id').
+            condition('key = ?', key).
+            condition_if('value = ? OR VALUE IS NULL', value).
+            condition_if("value LIKE ? ESCAPE '@' OR name LIKE ? ESCAPE '@'", q, q).
+            get_first_value().to_i
+
+        res = @db.select('SELECT t.project_id, p.name, t.key, t.value, t.description, t.doc_url, t.icon_url FROM projects.projects p, projects.project_tags t ON p.id=t.project_id').
+            condition('key = ?', key).
+            condition_if('value = ? OR VALUE IS NULL', value).
+            condition_if("value LIKE ? ESCAPE '@' OR name LIKE ? ESCAPE '@'", q, q).
+            order_by(@ap.sortname, @ap.sortorder) { |o|
+                o.project_name 'p.name'
+                o.project_name :key
+                o.project_name :value
+                o.key :key
+                o.key :value
+                o.value :value
+                o.value :key
+            }.
+            paging(@ap).
+            execute()
+
+        return JSON.generate({
+            :page  => @ap.page,
+            :rp    => @ap.results_per_page,
+            :total => total.to_i,
+            :url   => request.url,
+            :data  => res.map{ |row| {
+                :project_id   => row['project_id'],
+                :project_name => row['name'],
+                :key          => row['key'],
+                :value        => row['value'],
+                :description  => row['description'],
+                :doc_url      => row['doc_url'],
+                :icon_url     => row['icon_url']
+            } }
+        }, json_opts(params[:format]))
+    end
+
 end

@@ -106,4 +106,11 @@ class Taginfo < Sinatra::Base
         erb :'taginfo/apidoc'
     end
 
+    get '/taginfo/projects' do
+        @title = t.taginfo.projects
+        @section = 'taginfo'
+        @section_title = t.taginfo.meta
+        erb :'taginfo/projects'
+    end
+
 end
