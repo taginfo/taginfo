@@ -15,7 +15,7 @@
         <div id="header_date" title="<%= h(t.taginfo.data_from_description) %>" tipsy="ne"><%= h(t.taginfo.data_from) %>: <%= @data_until %> UTC</div>
         <div id="header_forms" class="no-print">
             <form id="set_language" action="/switch_locale">
-                <input type="hidden" id="url" name="url" value="<%= TaginfoConfig.get('instance.url') + request.path %>"/>
+                <input type="hidden" id="url" name="url" value="<%= request.path %>"/>
                 <select id="locale" name="locale">
 <% r18n.available_locales.sort{ |a,b| a.title <=> b.title }.each do |locale| %>
                     <option value="<%= locale.code %>"<%= locale.code == r18n.locale.code ? ' selected="selected"' : ''%>><%= h(::Language[locale.code].native_name) %></option>

@@ -751,7 +751,7 @@ jQuery(document).ready(function() {
     }
 
     jQuery('#locale').bind('change', function() {
-        jQuery('#url').val(window.location);
+        jQuery('#url').val(window.location.pathname);
         jQuery('#set_language').submit();
     });
 
