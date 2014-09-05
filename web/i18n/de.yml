@@ -229,7 +229,7 @@ pages:
         empty_role: Role ist leer
     projects:
         intro: |
-            Diese Tabelle zeigt alle Projekte, die taginfo kennt, und die OSM-Tags in irgendeiner Weise nutzen.
+            Diese Tabelle zeigt alle Projekte, die taginfo kennt, und die OSM-Tags in irgendeiner Weise nutzen.<br/>Mehr über diese Funktion im <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">Wiki</a>.
     key:
         description_from_wiki: Beschreibung dieses Keys aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf Englisch).
         no_description_in_wiki: Keine deutschsprachige Beschreibung dieses Keys im Wiki. (Siehe auch im "Wiki"-Tab.)
@@ -343,6 +343,8 @@ pages:
             description: Beschreibung
             documentation_url: Dokumentation
             last_update: Letzte Aktualisierung
+            json_url: JSON Projekt-Datei
+            info: Diese Daten sind taginfo vom Projekt in einer 'JSON Projekt-Datei' zur Verfügung gestellt worden, die oben verlinkt ist. Im <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">Wiki</a> gibt es eine Formatbeschreibung.
         tags:
             title: Tags, die von diesem Projekt verwenden werden
             intro: Die folgenden Daten wurden von dem Projekt zur Verfügung gestellt. Sie sind nicht notwendigerweise komplett. Für Details schau bitte in die Projekt-Dokumentation.

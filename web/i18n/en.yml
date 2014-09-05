@@ -299,7 +299,7 @@ pages:
         empty_role: empty role
     projects:
         intro: |
-                This table shows all projects known to taginfo that use OSM tags in some way.
+                This table shows all projects known to taginfo that use OSM tags in some way.<br/>For more about this functionality see the <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
     key:
         description_from_wiki: Description of this key from the wiki (if available in your chosen language, otherwise in English).
         no_description_in_wiki: No English language description for this key in the wiki. (See also the "Wiki" tab.)
@@ -413,9 +413,11 @@ pages:
             description: Description
             documentation_url: Documentation
             last_update: Last update
+            json_url: JSON project file
+            info: This data is provided by the project for taginfo though the 'JSON project file' linked from above. See the <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a> for a format description.
         tags:
             title: Tags used by this project
-            intro: This data is supplied by the project and not necessarily complete. Please see the project documentation for details.
+            intro: This data is provided by the project and not necessarily complete. Please see the project documentation for details.
 
 flexigrid:
     pagetext: Page
