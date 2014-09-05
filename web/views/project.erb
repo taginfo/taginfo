@@ -9,7 +9,7 @@
     </ul>
     <div id="overview">
         <table class="desc">
-            <tr><th><%= h(t.pages.project.overview.project_name) %>:</th><td><%= h(@project.name) %></td></tr>
+            <tr><th><%= h(t.pages.project.overview.project_name) %>:</th><td><span id="icon_url"></span> <%= h(@project.name) %></td></tr>
             <tr><th><%= h(t.pages.project.overview.project_url) %>:</th><td id="project_url"></td></tr>
             <tr><th><%= h(t.pages.project.overview.description) %>:</th><td><%= h(@project.description) %></td></tr>
 <% if @project.doc_url %>
@@ -33,10 +33,14 @@ function page_init2() {
     var project = #{ @project_id.to_json },
         project_url = #{ @project.project_url.to_json },
         json_url = #{ @project.json_url.to_json },
+        icon_url = #{ @project.icon_url.to_json },
         doc_url = #{ @project.doc_url.to_json };
 
     if (project_url) {
         jQuery('#project_url').html(link_to_url(project_url));
+    }
+    if (icon_url) {
+        jQuery('#icon_url').html(img({ src: icon_url, width: 16, height: 16, alt: ''}));
     }
     if (json_url) {
         jQuery('#json_url').html(link_to_url(json_url));

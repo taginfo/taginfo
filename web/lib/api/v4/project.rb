@@ -57,10 +57,14 @@ class Taginfo < Sinatra::Base
         :ui => '/projects'
     }) do
         project_id = params[:project]
-        content_type :png
-        @db.select('SELECT icon FROM projects.projects').
+        url = @db.select('SELECT icon_url FROM projects.projects').
             condition('id = ?', project_id).
             get_first_value()
+        if url.nil? || url == ''
+            redirect '/img/generic_project_icon.png'
+        else
+            redirect url
+        end
     end
 
 end

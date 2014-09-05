@@ -129,7 +129,7 @@ var create_flexigrid_for = {
         create_flexigrid('grid-projects', {
             url: '/api/4/tag/projects?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value),
             colModel: [
-                { display: '<%= h(taginfo.project) %>', name: 'project_name', width: 200, sortable: true },
+                { display: '<%= h(taginfo.project) %>', name: 'project_name', width: 280, sortable: true },
                 { display: '<%= h(osm.tag) %>', name: 'key', width: 220, sortable: true },
                 { display: '<%= h(misc.description) %>', name: 'description', width: 600, sortable: false, align: 'left' }
             ],
