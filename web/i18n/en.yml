@@ -114,6 +114,7 @@ help:
         keys_page: Keys page
         tags_page: Tags page
         relations_page: Relations page
+        projects_page: Projects page
         compare_page: Comparison page
         first_page: First page
         prev_page: Previous page
