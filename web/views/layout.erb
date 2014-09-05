@@ -38,14 +38,15 @@
 <%= yield %>
     </div>
     <div id="footer" class="no-print">
-        <div id="footer_left"><a class="extlink" href="//www.openstreetmap.org/"><b>OpenStreetMap</b> - The Free Wiki World Map</a> &middot;
-            <a href="//www.openstreetmap.org/copyright">Data &copy; OpenStreetMap contributors (ODbL)</a></div>
+        <div id="footer_left"><a class="extlink" href="//www.openstreetmap.org/"><b>OpenStreetMap</b></a> &middot;
+            <a href="//www.openstreetmap.org/copyright">Data &copy; OSM contributors (ODbL)</a></div>
         <div id="footer_right">
             <a href="/keys"><%= h(t.osm.keys) %></a> &middot;
             <a href="/tags"><%= h(t.osm.tags) %></a> &middot;
             <a href="/relations"><%= h(t.osm.relations) %></a> &middot;
             <a href="/reports"><%= h(t.taginfo.reports) %></a> &middot;
             <a href="/sources"><%= h(t.taginfo.sources) %></a> &middot;
+            <a href="/projects"><%= h(t.taginfo.projects) %></a> &middot;
             <a href="/download"><%= h(t.taginfo.download) %></a> &middot;
             <a href="/taginfo/apidoc">API</a> &middot;
             <a href="/about"><%= h(t.taginfo.about) %></a> &middot;
