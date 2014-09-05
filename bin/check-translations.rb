@@ -19,6 +19,20 @@ lang = ARGV[1]
 i18n_en   = YAML.load_file("#{dir}/en.yml")
 i18n_lang = YAML.load_file("#{dir}/#{lang}.yml")
 
+def look_for_error(path, data)
+    if data.nil?
+        puts "No data for #{path.sub(/^\./, '')}"
+        return true
+    elsif data.class == Hash
+        data.keys.sort.each do |key|
+            if look_for_error(path + '.' + key, data[key])
+                return true
+            end
+        end
+    end
+    return false
+end
+
 def walk(path, en, other)
     en.keys.sort.each do |key|
         name = path.sub(/^\./, '') + '.' + key
@@ -35,6 +49,11 @@ def walk(path, en, other)
             end 
         end
     end
+end
+
+
+if look_for_error('', i18n_lang)
+    exit 1
 end
 
 walk('', i18n_en, i18n_lang)
