@@ -1,5 +1,5 @@
 id_editor https://raw.githubusercontent.com/joto/taginfo/master/projects/id_editor.json
-osmcoastline https://raw.githubusercontent.com/joto/osmcoastline/master/taginfo-project.json
+osmcoastline https://raw.githubusercontent.com/joto/osmcoastline/master/taginfo.json
 osrm https://raw.githubusercontent.com/Project-OSRM/osrm-backend/develop/taginfo.json
 waymarkedtrails http://mapstatic.waymarkedtrails.org/taginfo.json
 nominatim http://nominatim.openstreetmap.org/taginfo.json
