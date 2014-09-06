@@ -15,11 +15,14 @@ class Taginfo < Sinatra::Base
             @project_id = params[:project]
         end
 
-        @project = Project.get(@project_id)
+        @project = @db.select("SELECT * FROM projects.projects").
+            condition("id = ?", @project_id).execute()[0]
 
-        if @project
-            @title = [h(@project.name), t.taginfo.projects]
+        if !@project
+            halt 404
         end
+
+        @title = [h(@project['name']), t.taginfo.projects]
 
         section :projects
 

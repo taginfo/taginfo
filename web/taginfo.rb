@@ -53,7 +53,6 @@ require 'lib/language.rb'
 require 'lib/sql.rb'
 require 'lib/sources.rb'
 require 'lib/reports.rb'
-require 'lib/projects.rb'
 require 'lib/api.rb'
 require 'lib/langtag/bcp47.rb'
 
@@ -64,7 +63,6 @@ TaginfoConfig.read
 #------------------------------------------------------------------------------
 
 DATA_UNTIL = SQL::Database.init('../../data');
-Project.init
 
 class Taginfo < Sinatra::Base
 

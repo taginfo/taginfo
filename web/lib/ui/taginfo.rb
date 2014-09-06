@@ -110,6 +110,9 @@ class Taginfo < Sinatra::Base
         @title = t.taginfo.projects
         @section = 'taginfo'
         @section_title = t.taginfo.meta
+
+        @projects = @db.select("SELECT * FROM projects.projects ORDER BY name").execute();
+
         erb :'taginfo/projects'
     end
 
