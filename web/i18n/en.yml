@@ -421,6 +421,7 @@ pages:
         tags:
             title: Tags used by this project
             intro: This data is provided by the project and not necessarily complete. Please see the project documentation for details.
+            description: How this key/tag is used in the project
 
 flexigrid:
     pagetext: Page

@@ -351,6 +351,7 @@ pages:
         tags:
             title: Tags, die von diesem Projekt verwenden werden
             intro: Die folgenden Daten wurden von dem Projekt zur Verfügung gestellt. Sie sind nicht notwendigerweise komplett. Für Details schau bitte in die Projekt-Dokumentation.
+            description: Wie dieser Key/Tag im Projekt benutzt wird
 
 flexigrid:
     pagetext: Seite

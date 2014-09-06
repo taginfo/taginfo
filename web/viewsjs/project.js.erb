@@ -1,6 +1,7 @@
 <%
     osm = @trans.t.osm
     misc = @trans.t.misc
+    page = @trans.t.pages.project
  %>
 var create_flexigrid_for = {
     tags: function(project) {
@@ -9,7 +10,7 @@ var create_flexigrid_for = {
             colModel: [
                 { display: '<%= h(osm.tag) %>', name: 'tag', width: 260, sortable: true },
                 { display: '<%= h(osm.objects) %>', name: 'objects', width:  80, sortable: false },
-                { display: '<%= h(misc.description) %>', name: 'description', width: 800, sortable: false, align: 'left' }
+                { display: '<%= h(page.tags.description) %>', name: 'description', width: 800, sortable: false, align: 'left' }
             ],
             searchitems: [
                 { display: '<%= h(osm.key) %>/<%= h(osm.value) %>', name: 'key_value' }
@@ -24,7 +25,7 @@ var create_flexigrid_for = {
                         fmt_type_icon('way',      row.on_way) +
                         fmt_type_icon('area',     row.on_area) +
                         fmt_type_icon('relation', row.on_relation),
-                        project_tag_desc(row.description, row.doc_url, row.icon_url)
+                        project_tag_desc(row.description, row.icon_url, row.doc_url)
                     ] };
                 });
                 delete data.data;
