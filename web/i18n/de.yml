@@ -274,6 +274,7 @@ pages:
             no_styles: Keine JOSM-Stilregeln für diesen Key.
         projects:
             title: Projekte, die diesen Key benutzen
+            description: Wie dieser Key im Projekt benutzt wird
     tag:
         description_from_wiki: Beschreibung dieses Tags aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf Englisch).
         no_description_in_wiki: Keine deutschsprachige Beschreibung dieses Tags im Wiki. (Siehe auch im "Wiki"-Tab.)
@@ -310,6 +311,7 @@ pages:
             no_styles: Keine JOSM-Stilregeln für diesen Tag.
         projects:
             title: Projekte, die diesen Tag benutzen
+            description: Wie dieser Tag im Projekt benutzt wird
     relation:
         name: Relation-Typ
         description_from_wiki: Beschreibung dieses Relations-Types aus dem Wiki  (falls vorhanden in der gewählten Sprache, sonst auf Englisch).
@@ -386,6 +388,9 @@ sources:
     languages:
         name: Sprachen
         description: Namen, Codes, usw. zu Sprachen aus IANA- und Unicode-Registrierungen.
+    projects:
+        name: Projekte
+        description: Externe Projekte und die OSM-Keys und -Tags, die sie benutzen.
 
 reports:
     characters_in_keys:

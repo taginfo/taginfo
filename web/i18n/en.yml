@@ -344,6 +344,7 @@ pages:
             no_styles: No JOSM styles for this key.
         projects:
             title: Projects using this key
+            description: How this key is used in the project
     tag:
         description_from_wiki: Description of this tag from the wiki (if available in your chosen language, otherwise in English).
         no_description_in_wiki: No English language description for this tag in the wiki. (See also the "Wiki" tab.)
@@ -380,6 +381,7 @@ pages:
             no_styles: No JOSM styles for this tag.
         projects:
             title: Projects using this tag
+            description: How this tag is used in the project
     relation:
         name: Relation type
         description_from_wiki: Description of this relation type from the wiki (if available in your chosen language, otherwise in English).
@@ -456,6 +458,9 @@ sources:
     languages:
         name: Languages
         description: Language names, codes, etc. from IANA and Unicode registries.
+    projects:
+        name: Projects
+        description: External projects and the OSM keys/tags they use.
 
 reports:
     characters_in_keys:

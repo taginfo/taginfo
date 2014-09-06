@@ -131,7 +131,7 @@ var create_flexigrid_for = {
             colModel: [
                 { display: '<%= h(taginfo.project) %>', name: 'project_name', width: 280, sortable: true },
                 { display: '<%= h(osm.tag) %>', name: 'key', width: 220, sortable: true },
-                { display: '<%= h(misc.description) %>', name: 'description', width: 600, sortable: false, align: 'left' }
+                { display: '<%= h(page.projects.description) %>', name: 'description', width: 600, sortable: false, align: 'left' }
             ],
             searchitems: [
                 { display: '<%= h(taginfo.project) %>/<%= h(osm.value) %>', name: 'project_value' }
