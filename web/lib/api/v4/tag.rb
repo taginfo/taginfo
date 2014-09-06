@@ -262,6 +262,10 @@ class Taginfo < Sinatra::Base
             [:project_name, :STRING, 'Project name'],
             [:key,          :STRING, 'Key'],
             [:value,        :STRING, 'Value'],
+            [:on_node,      :BOOL,   'For nodes?'],
+            [:on_way,       :BOOL,   'For ways?'],
+            [:on_relation,  :BOOL,   'For relations?'],
+            [:on_area,      :BOOL,   'For areas?'],
             [:description,  :STRING, 'Description'],
             [:doc_url,      :STRING, 'Documentation URL'],
             [:icon_url,     :STRING, 'Icon URL']
@@ -278,7 +282,7 @@ class Taginfo < Sinatra::Base
             condition_if("value LIKE ? ESCAPE '@' OR name LIKE ? ESCAPE '@'", q, q).
             get_first_value().to_i
 
-        res = @db.select('SELECT t.project_id, p.name, t.key, t.value, t.description, t.doc_url, t.icon_url FROM projects.projects p, projects.project_tags t ON p.id=t.project_id').
+        res = @db.select('SELECT t.project_id, p.name, t.key, t.value, t.description, t.doc_url, t.icon_url, t.on_node, t.on_way, t.on_relation, t.on_area FROM projects.projects p, projects.project_tags t ON p.id=t.project_id').
             condition('key = ?', key).
             condition_if('value = ? OR VALUE IS NULL', value).
             condition_if("value LIKE ? ESCAPE '@' OR name LIKE ? ESCAPE '@'", q, q).
@@ -304,6 +308,10 @@ class Taginfo < Sinatra::Base
                 :project_name => row['name'],
                 :key          => row['key'],
                 :value        => row['value'],
+                :on_node      => row['on_node'].to_i     == 1,
+                :on_way       => row['on_way'].to_i      == 1,
+                :on_relation  => row['on_relation'].to_i == 1,
+                :on_area      => row['on_area'].to_i     == 1,
                 :description  => row['description'],
                 :doc_url      => row['doc_url'],
                 :icon_url     => row['icon_url']

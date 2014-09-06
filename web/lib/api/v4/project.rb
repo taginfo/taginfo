@@ -9,6 +9,10 @@ class Taginfo < Sinatra::Base
         :result => paging_results([
             [:key,         :STRING, 'Key'],
             [:value,       :STRING, 'Value'],
+            [:on_node,     :BOOL,   'For nodes?'],
+            [:on_way,      :BOOL,   'For ways?'],
+            [:on_relation, :BOOL,   'For relations?'],
+            [:on_area,     :BOOL,   'For areas?'],
             [:description, :STRING, 'Description'],
             [:doc_url,     :STRING, 'Documentation URL'],
             [:icon_url,    :STRING, 'Icon URL']
@@ -42,6 +46,10 @@ class Taginfo < Sinatra::Base
             :data  => res.map{ |row| {
                 :key         => row['key'],
                 :value       => row['value'],
+                :on_node     => row['on_node'].to_i     == 1,
+                :on_way      => row['on_way'].to_i      == 1,
+                :on_relation => row['on_relation'].to_i == 1,
+                :on_area     => row['on_area'].to_i     == 1,
                 :description => row['description'],
                 :doc_url     => row['doc_url'],
                 :icon_url    => row['icon_url']

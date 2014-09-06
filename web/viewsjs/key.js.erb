@@ -108,9 +108,9 @@ var create_flexigrid_for = {
                             link_to_wiki(row.title),
                             html_escape(row.description),
                             fmt_wiki_image_popup(row.image),
-                            fmt_type_icon('node',     row.on_node) + 
-                            fmt_type_icon('way',      row.on_way) + 
-                            fmt_type_icon('area',     row.on_area) + 
+                            fmt_type_icon('node',     row.on_node) +
+                            fmt_type_icon('way',      row.on_way) +
+                            fmt_type_icon('area',     row.on_area) +
                             fmt_type_icon('relation', row.on_relation),
                             fmt_key_or_tag_list(row.tags_implies),
                             fmt_key_or_tag_list(row.tags_combination),
@@ -151,6 +151,7 @@ var create_flexigrid_for = {
             colModel: [
                 { display: '<%= h(taginfo.project) %>', name: 'project_name', width: 280, sortable: true },
                 { display: '<%= h(osm.tag) %>', name: 'key', width: 220, sortable: true },
+                { display: '<%= h(osm.objects) %>', name: 'objects', width:  80, sortable: false },
                 { display: '<%= h(page.projects.description) %>', name: 'description', width: 600, sortable: false, align: 'left' }
             ],
             searchitems: [
@@ -163,6 +164,10 @@ var create_flexigrid_for = {
                     return { 'cell': [
                         link_to_project(row.project_id, row.project_name),
                         row.value ? link_to_tag(row.key, row.value) : (link_to_key(row.key) + '=*'),
+                        fmt_type_icon('node',     row.on_node) +
+                        fmt_type_icon('way',      row.on_way) +
+                        fmt_type_icon('area',     row.on_area) +
+                        fmt_type_icon('relation', row.on_relation),
                         project_tag_desc(row.description, row.icon_url, row.doc_url)
                     ] };
                 });

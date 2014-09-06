@@ -8,6 +8,7 @@ var create_flexigrid_for = {
             url: '/api/4/project/tags?project=' + encodeURIComponent(project),
             colModel: [
                 { display: '<%= h(osm.tag) %>', name: 'tag', width: 260, sortable: true },
+                { display: '<%= h(osm.objects) %>', name: 'objects', width:  80, sortable: false },
                 { display: '<%= h(misc.description) %>', name: 'description', width: 800, sortable: false, align: 'left' }
             ],
             searchitems: [
@@ -19,6 +20,10 @@ var create_flexigrid_for = {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
                         row.value ? link_to_tag(row.key, row.value) : (link_to_key(row.key) + '=*'),
+                        fmt_type_icon('node',     row.on_node) +
+                        fmt_type_icon('way',      row.on_way) +
+                        fmt_type_icon('area',     row.on_area) +
+                        fmt_type_icon('relation', row.on_relation),
                         project_tag_desc(row.description, row.doc_url, row.icon_url)
                     ] };
                 });

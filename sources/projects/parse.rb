@@ -65,13 +65,25 @@ projects.each do |id, json|
 
             if data[:tags]
                 data[:tags].each do |d|
-                    db.execute("INSERT INTO project_tags (project_id, key, value, description, doc_url, icon_url) VALUES (?, ?, ?, ?, ?, ?)",
+                    on = { 'node' => 0, 'way' => 0, 'relation' => 0, 'area' => 0 }
+                    if d[:object_types] && d[:object_types].class == Array
+                        d[:object_types].each do |type|
+                            on[type] = 1
+                        end
+                    else
+                        on = { 'node' => 1, 'way' => 1, 'relation' => 1, 'area' => 1 }
+                    end
+                    db.execute("INSERT INTO project_tags (project_id, key, value, description, doc_url, icon_url, on_node, on_way, on_relation, on_area) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                         id,
                         d[:key],
                         d[:value],
                         d[:description],
                         d[:doc_url],
-                        d[:icon_url]
+                        d[:icon_url],
+                        on['node'],
+                        on['way'],
+                        on['relation'],
+                        on['area'],
                     );
                 end
             end
