@@ -710,7 +710,7 @@ function comparison_list_change(key, value) {
 function project_tag_desc(description, icon, url) {
     var out = '';
     if (icon) {
-        out += img({src: icon, alt: '', width: 16, height: 16}) + ' ';
+        out += img({src: icon, alt: '', style: 'max-width: 16px; max-height: 16px;'}) + ' ';
     }
     if (description) {
         out += html_escape(description) + ' ';
