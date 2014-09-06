@@ -52,7 +52,7 @@ class Taginfo < Sinatra::Base
     api(4, 'project/icon', {
         :description => 'Access logo icon for project.',
         :parameters => { :project => 'Project ID' },
-        :result => 'PNG image.',
+        :result => 'Redirect to project image.',
         :example => { :project => 'osmcoastline' },
         :ui => '/projects'
     }) do
