@@ -197,8 +197,11 @@ function link_to_rtype(rtype, attr) {
     );
 }
 
-function link_to_project(id, name, attr) {
-    return img({ src: '/api/4/project/icon?project=' + id, width: 16, height: 16, alt: '' }) + ' ' + link(
+function link_to_project(id, name, icon_url, attr) {
+    if (icon_url === null) {
+        icon_url = '/img/generic_project_icon.png';
+    }
+    return img({ src: icon_url, width: 16, height: 16, alt: '' }) + ' ' + link(
         url_for_project(id),
         html_escape(name),
         attr

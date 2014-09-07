@@ -258,17 +258,18 @@ class Taginfo < Sinatra::Base
         :paging => :optional,
         :sort => %w( project_name key value ),
         :result => paging_results([
-            [:project_id,   :STRING, 'Project ID'],
-            [:project_name, :STRING, 'Project name'],
-            [:key,          :STRING, 'Key'],
-            [:value,        :STRING, 'Value'],
-            [:on_node,      :BOOL,   'For nodes?'],
-            [:on_way,       :BOOL,   'For ways?'],
-            [:on_relation,  :BOOL,   'For relations?'],
-            [:on_area,      :BOOL,   'For areas?'],
-            [:description,  :STRING, 'Description'],
-            [:doc_url,      :STRING, 'Documentation URL'],
-            [:icon_url,     :STRING, 'Icon URL']
+            [:project_id,       :STRING, 'Project ID'],
+            [:project_name,     :STRING, 'Project name'],
+            [:project_icon_url, :STRING, 'Project icon URL'],
+            [:key,              :STRING, 'Key'],
+            [:value,            :STRING, 'Value'],
+            [:on_node,          :BOOL,   'For nodes?'],
+            [:on_way,           :BOOL,   'For ways?'],
+            [:on_relation,      :BOOL,   'For relations?'],
+            [:on_area,          :BOOL,   'For areas?'],
+            [:description,      :STRING, 'Description'],
+            [:doc_url,          :STRING, 'Documentation URL'],
+            [:icon_url,         :STRING, 'Icon URL']
         ]),
         :example => { :key => 'highway', :value => 'residential', :page => 1, :rp => 10, :sortname => 'project_name', :sortorder => 'asc' },
         :ui => '/keys/highway=residential#projects'
@@ -282,7 +283,7 @@ class Taginfo < Sinatra::Base
             condition_if("value LIKE ? ESCAPE '@' OR name LIKE ? ESCAPE '@'", q, q).
             get_first_value().to_i
 
-        res = @db.select('SELECT t.project_id, p.name, t.key, t.value, t.description, t.doc_url, t.icon_url, t.on_node, t.on_way, t.on_relation, t.on_area FROM projects.projects p, projects.project_tags t ON p.id=t.project_id').
+        res = @db.select('SELECT t.project_id, p.name, p.icon_url AS project_icon_url, t.key, t.value, t.description, t.doc_url, t.icon_url, t.on_node, t.on_way, t.on_relation, t.on_area FROM projects.projects p, projects.project_tags t ON p.id=t.project_id').
             condition('key = ?', key).
             condition_if('value = ? OR VALUE IS NULL', value).
             condition_if("value LIKE ? ESCAPE '@' OR name LIKE ? ESCAPE '@'", q, q).
@@ -304,17 +305,18 @@ class Taginfo < Sinatra::Base
             :total => total.to_i,
             :url   => request.url,
             :data  => res.map{ |row| {
-                :project_id   => row['project_id'],
-                :project_name => row['name'],
-                :key          => row['key'],
-                :value        => row['value'],
-                :on_node      => row['on_node'].to_i     == 1,
-                :on_way       => row['on_way'].to_i      == 1,
-                :on_relation  => row['on_relation'].to_i == 1,
-                :on_area      => row['on_area'].to_i     == 1,
-                :description  => row['description'],
-                :doc_url      => row['doc_url'],
-                :icon_url     => row['icon_url']
+                :project_id       => row['project_id'],
+                :project_name     => row['name'],
+                :project_icon_url => row['project_icon_url'],
+                :key              => row['key'],
+                :value            => row['value'],
+                :on_node          => row['on_node'].to_i     == 1,
+                :on_way           => row['on_way'].to_i      == 1,
+                :on_relation      => row['on_relation'].to_i == 1,
+                :on_area          => row['on_area'].to_i     == 1,
+                :description      => row['description'],
+                :doc_url          => row['doc_url'],
+                :icon_url         => row['icon_url']
             } }
         }, json_opts(params[:format]))
     end

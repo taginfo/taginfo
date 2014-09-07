@@ -57,22 +57,4 @@ class Taginfo < Sinatra::Base
         }, json_opts(params[:format]))
     end
 
-    api(4, 'project/icon', {
-        :description => 'Access logo icon for project.',
-        :parameters => { :project => 'Project ID' },
-        :result => 'Redirect to project image.',
-        :example => { :project => 'osmcoastline' },
-        :ui => '/projects'
-    }) do
-        project_id = params[:project]
-        url = @db.select('SELECT icon_url FROM projects.projects').
-            condition('id = ?', project_id).
-            get_first_value()
-        if url.nil? || url == ''
-            redirect '/img/generic_project_icon.png'
-        else
-            redirect url
-        end
-    end
-
 end

@@ -9,7 +9,9 @@ class Taginfo < Sinatra::Base
         :result => paging_results([
             [:id,          :STRING, 'Project id'],
             [:name,        :STRING, 'Project name'],
-            [:url,         :STRING, 'Project URL'],
+            [:project_url, :STRING, 'Project URL'],
+            [:icon_url,    :STRING, 'Icon URL'],
+            [:doc_url,     :STRING, 'Documentation URL'],
             [:description, :STRING, 'Project description']
         ]),
         :example => { :page => 1, :rp => 10, :sortname => 'name', :sortorder => 'asc' },
@@ -44,7 +46,9 @@ class Taginfo < Sinatra::Base
             :data  => res.map{ |row| {
                 :id          => row['id'],
                 :name        => row['name'],
-                :url         => row['project_url'],
+                :project_url => row['project_url'],
+                :icon_url    => row['icon_url'],
+                :doc_url     => row['doc_url'],
                 :description => row['description'],
             }}
         }, json_opts(params[:format]))

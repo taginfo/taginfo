@@ -13,7 +13,7 @@ function page_init() {
         preProcess: function(data) {
             data.rows = jQuery.map(data.data, function(row, i) {
                 return { 'cell': [
-                    link_to_project(row.id, row.name),
+                    link_to_project(row.id, row.name, row.icon_url),
                     html_escape(row.description)
                 ] };
             });
