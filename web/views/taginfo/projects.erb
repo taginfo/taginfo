@@ -4,7 +4,7 @@
     <tr>
         <th>Icon</th>
         <th>Project ID<br/>Project Name</th>
-        <th>Fetch Date<br/>Updated</th><th>Code</th><th>Res</th>
+        <th>Fetch Date<br/>Updated</th><th>Code</th><th>Status</th>
         <th>JSON URL<br/>Data URL</th><th>Fmt<br/>Vers</th>
         <th>Project URL<br/>Doc URL</th><th>Contact</th>
         <th>Description</th>
@@ -23,7 +23,12 @@
             <%= h(project['data_updated']) %>
         </td>
         <td class="tc<%= c %> nowrap"><%= h(project['fetch_status']) %></td>
-        <td class="tc<%= c %> nowrap"><%= h(project['status']) %></td>
+        <td class="tc<%= c %> nowrap">
+            <%= h(project['status']) %></br>
+            <% if project['error_log'] != '' %>
+                <a href="projects/<%= project['id'] %>/error_log"><img src="/img/error.png" width="16" height="16" alt="ERROR" title="Show warnings/errors"/></a>
+            <% end %>
+        </td>
         <td class="<%= c %> nowrap">
             <a href="<%= h(project['json_url']) %>"><%= h(project['json_url']) %></a><br/>
             <a href="<%= h(project['data_url']) %>"><%= h(project['data_url']) %></a>

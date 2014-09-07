@@ -18,10 +18,10 @@ CREATE TABLE projects (
     fetch_status  TEXT, -- HTTP status code
     fetch_json    TEXT, -- HTTP body
     status        TEXT, -- 'OK', 'FETCH ERROR', 'PARSE ERROR'
+    error_log     TEXT,
     data_format   INTEGER,
     data_updated  DATE,
     data_url      TEXT,
-    icon          BLOB,
     name          TEXT,
     description   TEXT,
     project_url   TEXT,

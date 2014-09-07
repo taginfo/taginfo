@@ -40,8 +40,10 @@ projects = db.execute("SELECT id, fetch_json FROM projects WHERE status='OK' ORD
 
 projects.each do |id, json|
     puts "  #{id}..."
+    error_log = ''
     begin
         data = JSON.parse(json, { :symbolize_names => true, :create_additions => false })
+
         db.transaction do |db|
             db.execute("UPDATE projects SET data_format=?, data_url=? WHERE id=?", data[:data_format], data[:data_url], id)
 
@@ -51,6 +53,27 @@ projects.each do |id, json|
 
             if data[:project]
                 p = data[:project]
+
+                if ! p[:name]
+                    error_log += "ERROR: MISSING project.name\n"
+                end
+
+                if ! p[:description]
+                    error_log += "ERROR: MISSING project.description\n"
+                end
+
+                if ! p[:project_url]
+                    error_log += "ERROR: MISSING project.project_url\n"
+                end
+
+                if ! p[:contact_name]
+                    error_log += "ERROR: MISSING project.contact_name\n"
+                end
+
+                if ! p[:contact_email]
+                    error_log += "ERROR: MISSING project.contact_email\n"
+                end
+
                 db.execute("UPDATE projects SET name=?, description=?, project_url=?, doc_url=?, icon_url=?, contact_name=?, contact_email=? WHERE id=?",
                     p[:name],
                     p[:description],
@@ -61,6 +84,8 @@ projects.each do |id, json|
                     p[:contact_email],
                     id
                 )
+            else
+                error_log += "ERROR: MISSING project\n"
             end
 
             if data[:tags]
@@ -86,7 +111,11 @@ projects.each do |id, json|
                         on['area'],
                     );
                 end
+            else
+                error_log += "ERROR: MISSING tags\n"
             end
+
+            db.execute("UPDATE projects SET error_log=? WHERE id=?", error_log, id)
         end
     rescue JSON::ParserError
         db.execute("UPDATE projects SET status='PARSE_ERROR' WHERE id=?", id)

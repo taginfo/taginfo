@@ -111,9 +111,21 @@ class Taginfo < Sinatra::Base
         @section = 'taginfo'
         @section_title = t.taginfo.meta
 
-        @projects = @db.select("SELECT * FROM projects.projects ORDER BY name").execute();
+        @projects = @db.select("SELECT * FROM projects.projects ORDER BY name").execute()
 
         erb :'taginfo/projects'
+    end
+
+    get %r{/taginfo/projects/([a-z_]+)/error_log} do |id|
+        @title = "Error log for project #{h(id)}"
+        @section = 'taginfo'
+        @section_title = t.taginfo.meta
+
+        @data = @db.select("SELECT name, error_log FROM projects.projects").
+            condition("id = ?", id).
+            execute()[0]
+
+        erb :'taginfo/project_error_log'
     end
 
 end
