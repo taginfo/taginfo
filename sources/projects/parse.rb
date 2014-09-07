@@ -36,7 +36,7 @@ db = SQLite3::Database.new(dir + '/taginfo-projects.db')
 
 #------------------------------------------------------------------------------
 
-projects = db.execute("SELECT id, fetch_json FROM projects WHERE fetch_result='OK' ORDER BY id")
+projects = db.execute("SELECT id, fetch_json FROM projects WHERE status='OK' ORDER BY id")
 
 projects.each do |id, json|
     puts "  #{id}..."
@@ -89,7 +89,7 @@ projects.each do |id, json|
             end
         end
     rescue JSON::ParserError
-        db.execute("UPDATE projects SET fetch_result='PARSE_ERROR' WHERE id=?", id)
+        db.execute("UPDATE projects SET status='PARSE_ERROR' WHERE id=?", id)
     end
 end
 

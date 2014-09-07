@@ -61,7 +61,7 @@ projects.each do |id, url|
     rescue
         last_modified = Time.now.utc
     end
-    db.execute("INSERT INTO projects (id, json_url, last_modified, fetch_date, fetch_status, fetch_json, fetch_result, data_updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+    db.execute("INSERT INTO projects (id, json_url, last_modified, fetch_date, fetch_status, fetch_json, status, data_updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
         id,
         url,
         last_modified,

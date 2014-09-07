@@ -25,12 +25,12 @@ class Taginfo < Sinatra::Base
 
         q = like_contains(params[:query])
         total = @db.count('projects.projects').
-            condition("fetch_result=?", status).
+            condition("status=?", status).
             condition_if("name LIKE ? ESCAPE '@' OR description LIKE ? ESCAPE '@'", q, q).
             get_first_value().to_i
 
         res = @db.select('SELECT * FROM projects.projects').
-            condition("fetch_result=?", status).
+            condition("status=?", status).
             condition_if("name LIKE ? ESCAPE '@' OR description LIKE ? ESCAPE '@'", q, q).
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.name 'lower(name)'

@@ -17,7 +17,7 @@ CREATE TABLE projects (
     fetch_date    DATE,
     fetch_status  TEXT, -- HTTP status code
     fetch_json    TEXT, -- HTTP body
-    fetch_result  TEXT, -- 'OK', 'FETCH ERROR', 'PARSE ERROR'
+    status        TEXT, -- 'OK', 'FETCH ERROR', 'PARSE ERROR'
     data_format   INTEGER,
     data_updated  DATE,
     data_url      TEXT,
