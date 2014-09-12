@@ -10,17 +10,17 @@
     <tr>
         <td class="ft"><img src="/img/types/node.16.png" width="16" height="16" alt="Nodes" title="Nodes with tag '<%= escape_html(@key) %>=<%= escape_html(@value) %>' in database"></td>
         <td class="ft" title="Nodes with tag '<%= escape_html(@key) %>=<%= escape_html(@value) %>' in database"><%= @dbtag['count_nodes'].to_i.to_s_with_ts %></td>
-        <td title="Fraction of all nodes with key '<%= escape_html(@key) %>'"><%= '%.2f' % (@dbtag['count_nodes'].to_f / @dbkey['count_nodes'].to_f * 100) %>&thinsp;%</td>
+        <td title="Fraction of all nodes with key '<%= escape_html(@key) %>'"><%= @dbkey['count_nodes'] == 0 ? '0' : ('%.2f' % (@dbtag['count_nodes'].to_f / @dbkey['count_nodes'].to_f * 100)) %>&thinsp;%</td>
     </tr>
     <tr>
         <td class="ft"><img src="/img/types/way.16.png" width="16" height="16" alt="Ways" title="Ways with tag '<%= escape_html(@key) %>=<%= escape_html(@value) %>' in database"></td>
         <td class="ft" title="Ways with tag '<%= escape_html(@key) %>=<%= escape_html(@value) %>' in database"><%= @dbtag['count_ways'].to_i.to_s_with_ts %></td>
-        <td title="Fraction of all ways with key '<%= escape_html(@key) %>'"><%= '%.2f' % (@dbtag['count_ways'].to_f / @dbkey['count_ways'].to_f * 100) %>&thinsp;%</td>
+        <td title="Fraction of all ways with key '<%= escape_html(@key) %>'"><%= @dbkey['count_ways'] == 0 ? '0' : ('%.2f' % (@dbtag['count_ways'].to_f / @dbkey['count_ways'].to_f * 100)) %>&thinsp;%</td>
     </tr>
     <tr>
         <td class="ft"><img src="/img/types/relation.16.png" width="16" height="16" alt="Relations" title="Relations with tag '<%= escape_html(@key) %>=<%= escape_html(@value) %>' in database"></td>
         <td class="ft" title="Relations with tag '<%= escape_html(@key) %>=<%= escape_html(@value) %>' in database"><%= @dbtag['count_relations'].to_i.to_s_with_ts %></td>
-        <td title="Fraction of all relations with key '<%= escape_html(@key) %>'"><%= '%.2f' % (@dbtag['count_relations'].to_f / @dbkey['count_relations'].to_f * 100) %>&thinsp;%</td>
+        <td title="Fraction of all relations with key '<%= escape_html(@key) %>'"><%= @dbkey['count_relations'] == 0 ? '0' : ('%.2f' % (@dbtag['count_relations'].to_f / @dbkey['count_relations'].to_f * 100)) %>&thinsp;%</td>
     </tr>
 </table></div>
 <% end %>
