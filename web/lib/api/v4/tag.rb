@@ -249,10 +249,10 @@ class Taginfo < Sinatra::Base
     end
 
     api(4, 'tag/projects', {
-        :description => 'Get projects using a given key or tag.',
+        :description => 'Get projects using a given tag.',
         :parameters => {
             :key => 'Tag key (required).',
-            :value => 'Tag value (optional).',
+            :value => 'Tag value (required).',
             :query => 'Only show results where the value matches this query (substring match, optional).'
         },
         :paging => :optional,
@@ -272,7 +272,7 @@ class Taginfo < Sinatra::Base
             [:icon_url,         :STRING, 'Icon URL']
         ]),
         :example => { :key => 'highway', :value => 'residential', :page => 1, :rp => 10, :sortname => 'project_name', :sortorder => 'asc' },
-        :ui => '/keys/highway=residential#projects'
+        :ui => '/tags/highway=residential#projects'
     }) do
         key = params[:key]
         value = params[:value]
@@ -280,14 +280,14 @@ class Taginfo < Sinatra::Base
         total = @db.select('SELECT count(*) FROM projects.projects p, projects.project_tags t ON p.id=t.project_id').
             condition("status = 'OK'").
             condition('key = ?', key).
-            condition_if('value = ? OR VALUE IS NULL', value).
+            condition('value = ? OR VALUE IS NULL', value).
             condition_if("value LIKE ? ESCAPE '@' OR name LIKE ? ESCAPE '@'", q, q).
             get_first_value().to_i
 
         res = @db.select('SELECT t.project_id, p.name, p.icon_url AS project_icon_url, t.key, t.value, t.description, t.doc_url, t.icon_url, t.on_node, t.on_way, t.on_relation, t.on_area FROM projects.projects p, projects.project_tags t ON p.id=t.project_id').
             condition("status = 'OK'").
             condition('key = ?', key).
-            condition_if('value = ? OR VALUE IS NULL', value).
+            condition('value = ? OR VALUE IS NULL', value).
             condition_if("value LIKE ? ESCAPE '@' OR name LIKE ? ESCAPE '@'", q, q).
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.project_name 'p.name'
