@@ -5,8 +5,8 @@
         <th>Icon</th>
         <th>Project ID<br/>Project Name</th>
         <th>Fetch Date<br/>Updated</th><th>Code</th><th>Status</th>
-        <th>JSON URL<br/>Data URL</th><th>Fmt<br/>Vers</th>
-        <th>Project URL<br/>Doc URL</th><th>Contact</th>
+        <th>JSON URL<br/>Data URL<br/>Project URL<br/>Doc URL</th><th>Fmt<br/>Vers</th>
+        <th>Contact</th>
         <th>Description</th>
     </tr>
 <% @projects.each_with_index do |project, n| c = (n%2!=0) ? ' even' : '' %>
@@ -31,13 +31,11 @@
         </td>
         <td class="<%= c %> nowrap">
             <a href="<%= h(project['json_url']) %>"><%= h(project['json_url']) %></a><br/>
-            <a href="<%= h(project['data_url']) %>"><%= h(project['data_url']) %></a>
-        </td>
-        <td class="tc<%= c %> nowrap"><%= h(project['data_format']) %></td>
-        <td class="<%= c %> nowrap">
+            <a href="<%= h(project['data_url']) %>"><%= h(project['data_url']) %></a><br/>
             <a href="<%= h(project['project_url']) %>"><%= h(project['project_url']) %></a><br/>
             <a href="<%= h(project['doc_url']) %>"><%= h(project['doc_url']) %></a>
         </td>
+        <td class="tc<%= c %> nowrap"><%= h(project['data_format']) %></td>
         <td class="<%= c %> nowrap"><%= h(project['contact_name']) %><br/><%= h(project['contact_email']) %></td>
         <td class="<%= c %>"><%= h(project['description']) %></td>
     </tr>

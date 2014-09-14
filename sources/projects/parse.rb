@@ -52,7 +52,7 @@ projects.each do |id, json|
             end
 
             if data[:project]
-                p = data[:project]
+                p = data[:project].clone
 
                 if ! p[:name]
                     error_log += "ERROR: MISSING project.name\n"
@@ -84,6 +84,18 @@ projects.each do |id, json|
                     p[:contact_email],
                     id
                 )
+
+                p.delete(:name)
+                p.delete(:description)
+                p.delete(:project_url)
+                p.delete(:doc_url)
+                p.delete(:icon_url)
+                p.delete(:contact_name)
+                p.delete(:contact_email)
+
+                p.each_key do |key|
+                    error_log += "WARNING: project HAS UNKNOWN KEY '#{key}'\n"
+                end
             else
                 error_log += "ERROR: MISSING project\n"
             end
