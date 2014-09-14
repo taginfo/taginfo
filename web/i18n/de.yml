@@ -339,6 +339,9 @@ pages:
             none_found: Keine Wiki-Seiten für diesen Relation-Typ vorhanden.
             create: Wiki-Seite für diesen Relation-Typ anlegen
             wiki_page: Wiki-Seite
+        projects:
+            title: Projekte, die diesen Relation-Typ benutzen
+            description: Wie dieser Relation-Typ im Projekt benutzt wird
     project:
         overview:
             project_name: Projektname

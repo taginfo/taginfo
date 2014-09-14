@@ -152,4 +152,65 @@ class Taginfo < Sinatra::Base
         }, json_opts(params[:format]))
     end
 
+    api(4, 'relation/projects', {
+        :description => 'Get projects using a given relation type.',
+        :parameters => {
+            :rtype => 'Relation type (required)',
+            :query => 'Only show results where the value matches this query (substring match, optional).'
+        },
+        :paging => :optional,
+        :sort => %w( project_name ),
+        :result => paging_results([
+            [:project_id,       :STRING, 'Project ID'],
+            [:project_name,     :STRING, 'Project name'],
+            [:project_icon_url, :STRING, 'Project icon URL'],
+            [:key,              :STRING, 'Key'],
+            [:value,            :STRING, 'Value'],
+            [:on_node,          :BOOL,   'For nodes?'],
+            [:on_way,           :BOOL,   'For ways?'],
+            [:on_relation,      :BOOL,   'For relations?'],
+            [:on_area,          :BOOL,   'For areas?'],
+            [:description,      :STRING, 'Description'],
+            [:doc_url,          :STRING, 'Documentation URL'],
+            [:icon_url,         :STRING, 'Icon URL']
+        ]),
+        :example => { :rtype => 'route', :page => 1, :rp => 10, :sortname => 'project_name', :sortorder => 'asc' },
+        :ui => '/relations/route#projects'
+    }) do
+        rtype = params[:rtype]
+        q = like_contains(params[:query])
+
+        total = @db.select('SELECT count(*) FROM projects.projects p, projects.project_tags t ON p.id=t.project_id').
+            condition("status = 'OK' AND on_relation = 1").
+            condition("key = 'type' AND value = ?", rtype).
+            condition_if("value LIKE ? ESCAPE '@' OR name LIKE ? ESCAPE '@'", q, q).
+            get_first_value().to_i
+
+        res = @db.select('SELECT t.project_id, p.name, p.icon_url AS project_icon_url, t.value, t.description, t.doc_url, t.icon_url FROM projects.projects p, projects.project_tags t ON p.id=t.project_id').
+            condition("status = 'OK' AND on_relation = 1").
+            condition("key = 'type' AND value = ?", rtype).
+            condition_if("value LIKE ? ESCAPE '@' OR name LIKE ? ESCAPE '@'", q, q).
+            order_by(@ap.sortname, @ap.sortorder) { |o|
+                o.project_name 'lower(p.name)'
+            }.
+            paging(@ap).
+            execute()
+
+        return JSON.generate({
+            :page  => @ap.page,
+            :rp    => @ap.results_per_page,
+            :total => total.to_i,
+            :url   => request.url,
+            :data  => res.map{ |row| {
+                :project_id       => row['project_id'],
+                :project_name     => row['name'],
+                :project_icon_url => row['project_icon_url'],
+                :rtype            => row['value'],
+                :description      => row['description'],
+                :doc_url          => row['doc_url'],
+                :icon_url         => row['icon_url']
+            } }
+        }, json_opts(params[:format]))
+    end
+
 end

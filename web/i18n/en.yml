@@ -409,6 +409,9 @@ pages:
             none_found: No wiki page available for this relation type.
             create: Create wiki page for this relation type
             wiki_page: Wiki page
+        projects:
+            title: Projects using this relation type
+            description: How this relation type is used in the project
     project:
         overview:
             project_name: Project name

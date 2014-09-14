@@ -17,6 +17,7 @@
         <li><a href="#roles"><%= h(t.pages.relation.roles.tab) %></a></li>
         <li><a href="#graph"><%= h(t.pages.relation.graph.tab) %></a></li>
         <li><a href="#wiki"><%= h(t.sources.wiki.name) %></a></li>
+        <li><a href="#projects"><%= h(t.taginfo.projects) %></a></li>
     </ul>
     <div id="overview">
 <% if @image_url %>
@@ -56,6 +57,11 @@
             <p class="empty"><%= h(t.pages.relation.wiki_pages.none_found) %></p>
             <p><a class="extlink" target="_blank" rel="nofollow" href="//wiki.openstreetmap.org/w/index.php?action=edit&title=Relation:<%= @rtype_uri %>"><%= h(t.pages.relation.wiki_pages.create) %></a></p>
         <% end %>
+    </div>
+    <div id="projects">
+        <h2><%= h(t.pages.relation.projects.title) %></h2>
+        <table id="grid-projects">
+        </table>
     </div>
 </div>
 <iframe id="josmiframe" name="josmiframe"></iframe>

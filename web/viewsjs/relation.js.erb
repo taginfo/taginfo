@@ -1,6 +1,7 @@
 <%
     osm = @trans.t.osm
     misc = @trans.t.misc
+    taginfo = @trans.t.taginfo
     page = @trans.t.pages.relation
  %>
 var create_flexigrid_for = {
@@ -80,6 +81,29 @@ var create_flexigrid_for = {
                         ]};
                     })
                 };
+            }
+        });
+    },
+    projects: function(rtype) {
+        create_flexigrid('grid-projects', {
+            url: '/api/4/relation/projects?rtype=' + encodeURIComponent(rtype),
+            colModel: [
+                { display: '<%= h(taginfo.project) %>', name: 'project_name', width: 280, sortable: true },
+                { display: '<%= h(page.projects.description) %>', name: 'description', width: 600, sortable: false, align: 'left' }
+            ],
+            searchitems: [
+                { display: '<%= h(taginfo.project) %>/<%= h(osm.value) %>', name: 'project_value' }
+            ],
+            sortname: 'project_name',
+            sortorder: 'asc',
+            preProcess: function(data) {
+                data.rows = jQuery.map(data.data, function(row, i) {
+                    return { 'cell': [
+                        link_to_project(row.project_id, row.project_name, row.project_icon_url),
+                        project_tag_desc(row.description, row.icon_url, row.doc_url)
+                    ] };
+                });
+                return data;
             }
         });
     }
