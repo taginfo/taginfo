@@ -6,8 +6,10 @@
 
 .bail ON
 
--- CREATE INDEX project_keys_idx ON project_tags (key) WHERE value IS NULL;
--- CREATE INDEX project_tags_idx ON project_tags (key, value) WHERE value IS NOT NULL;
+INSERT INTO stats (key, value) SELECT 'projects', count(*) FROM projects;
+INSERT INTO stats (key, value) SELECT 'projects_ok', count(*) FROM projects WHERE status='OK';
+INSERT INTO stats (key, value) SELECT 'project_keys', count(*) FROM project_tags WHERE value IS NULL;
+INSERT INTO stats (key, value) SELECT 'project_tags', count(*) FROM project_tags WHERE value IS NOT NULL;
 
 ANALYZE;
 
