@@ -330,6 +330,12 @@ class Taginfo < Sinatra::Base
             :query => 'Only show results where the value matches this query (substring match, optional).'
         },
         :paging => :optional,
+        :filter => {
+            :all       => { :doc => 'No filter.' },
+            :nodes     => { :doc => 'Only values on tags used on nodes.' },
+            :ways      => { :doc => 'Only values on tags used on ways.' },
+            :relations => { :doc => 'Only values on tags used on relations.' }
+        },
         :sort => %w( project_name tag ),
         :result => paging_results([
             [:project_id,       :STRING, 'Project ID'],
@@ -350,16 +356,24 @@ class Taginfo < Sinatra::Base
     }) do
         key = params[:key]
         q = like_contains(params[:query])
+        filter_type = get_filter()
+
         total = @db.select('SELECT count(*) FROM projects.projects p, projects.project_tags t ON p.id=t.project_id').
             condition("status = 'OK'").
             condition('key = ?', key).
             condition_if("value LIKE ? ESCAPE '@' OR name LIKE ? ESCAPE '@'", q, q).
+            condition_if("on_node = ?",                    filter_type == 'nodes'     ? 1 : '').
+            condition_if("on_way = ? OR on_area = 1",      filter_type == 'ways'      ? 1 : '').
+            condition_if("on_relation = ? OR on_area = 1", filter_type == 'relations' ? 1 : '').
             get_first_value().to_i
 
         res = @db.select('SELECT t.project_id, p.name, p.icon_url AS project_icon_url, t.key, t.value, t.description, t.doc_url, t.icon_url, t.on_node, t.on_way, t.on_relation, t.on_area FROM projects.projects p, projects.project_tags t ON p.id=t.project_id').
             condition("status = 'OK'").
             condition('key = ?', key).
             condition_if("value LIKE ? ESCAPE '@' OR name LIKE ? ESCAPE '@'", q, q).
+            condition_if("on_node = ?",                    filter_type == 'nodes'     ? 1 : '').
+            condition_if("on_way = ? OR on_area = 1",      filter_type == 'ways'      ? 1 : '').
+            condition_if("on_relation = ? OR on_area = 1", filter_type == 'relations' ? 1 : '').
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.project_name 'lower(p.name)'
                 o.project_name :value

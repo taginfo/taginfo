@@ -125,9 +125,9 @@ var create_flexigrid_for = {
             }
         });
     },
-    projects: function(key, value) {
+    projects: function(key, value, filter_type) {
         create_flexigrid('grid-projects', {
-            url: '/api/4/tag/projects?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value),
+            url: '/api/4/tag/projects?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value) + '&filter=' + encodeURIComponent(filter_type),
             colModel: [
                 { display: '<%= h(taginfo.project) %>', name: 'project_name', width: 280, sortable: true },
                 { display: '<%= h(osm.tag) %>', name: 'tag', width: 220, sortable: true },
