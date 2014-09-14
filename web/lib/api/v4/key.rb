@@ -361,11 +361,10 @@ class Taginfo < Sinatra::Base
             condition('key = ?', key).
             condition_if("value LIKE ? ESCAPE '@' OR name LIKE ? ESCAPE '@'", q, q).
             order_by(@ap.sortname, @ap.sortorder) { |o|
-                o.project_name 'p.name'
-                o.project_name :key
+                o.project_name 'lower(p.name)'
                 o.project_name :value
                 o.tag :value
-                o.tag 'p.name'
+                o.tag 'lower(p.name)'
             }.
             paging(@ap).
             execute()

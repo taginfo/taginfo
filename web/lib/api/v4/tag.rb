@@ -256,7 +256,7 @@ class Taginfo < Sinatra::Base
             :query => 'Only show results where the value matches this query (substring match, optional).'
         },
         :paging => :optional,
-        :sort => %w( project_name key value ),
+        :sort => %w( project_name tag ),
         :result => paging_results([
             [:project_id,       :STRING, 'Project ID'],
             [:project_name,     :STRING, 'Project name'],
@@ -277,26 +277,21 @@ class Taginfo < Sinatra::Base
         key = params[:key]
         value = params[:value]
         q = like_contains(params[:query])
-        total = @db.select('SELECT count(*) FROM projects.projects p, projects.project_tags t ON p.id=t.project_id').
+        total = @db.select('SELECT count(distinct project_id) FROM projects.projects p, projects.project_tags t ON p.id=t.project_id').
             condition("status = 'OK'").
             condition('key = ?', key).
             condition('value = ? OR VALUE IS NULL', value).
             condition_if("value LIKE ? ESCAPE '@' OR name LIKE ? ESCAPE '@'", q, q).
             get_first_value().to_i
 
-        res = @db.select('SELECT t.project_id, p.name, p.icon_url AS project_icon_url, t.key, t.value, t.description, t.doc_url, t.icon_url, t.on_node, t.on_way, t.on_relation, t.on_area FROM projects.projects p, projects.project_tags t ON p.id=t.project_id').
-            condition("status = 'OK'").
-            condition('key = ?', key).
-            condition('value = ? OR VALUE IS NULL', value).
+        res = @db.select("SELECT p.name, p.icon_url AS project_icon_url, t.* FROM (SELECT project_id, key, MAX(value) AS value FROM projects.project_tags WHERE key=? AND (value=? OR value IS NULL) GROUP BY project_id, key) AS s JOIN projects.project_tags t JOIN projects.projects p ON p.id=t.project_id AND t.project_id=s.project_id AND t.key=s.key AND (t.value=s.value OR (t.value IS NULL AND s.value IS NULL))", key, value).
+            condition("p.status = 'OK'").
             condition_if("value LIKE ? ESCAPE '@' OR name LIKE ? ESCAPE '@'", q, q).
             order_by(@ap.sortname, @ap.sortorder) { |o|
-                o.project_name 'p.name'
-                o.project_name :key
+                o.project_name 'lower(p.name)'
                 o.project_name :value
-                o.key :key
-                o.key :value
-                o.value :value
-                o.value :key
+                o.tag :value
+                o.tag 'lower(p.name)'
             }.
             paging(@ap).
             execute()

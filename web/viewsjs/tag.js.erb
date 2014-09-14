@@ -130,14 +130,14 @@ var create_flexigrid_for = {
             url: '/api/4/tag/projects?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value),
             colModel: [
                 { display: '<%= h(taginfo.project) %>', name: 'project_name', width: 280, sortable: true },
-                { display: '<%= h(osm.tag) %>', name: 'key', width: 220, sortable: true },
+                { display: '<%= h(osm.tag) %>', name: 'tag', width: 220, sortable: true },
                 { display: '<%= h(osm.objects) %>', name: 'objects', width:  80, sortable: false },
                 { display: '<%= h(page.projects.description) %>', name: 'description', width: 600, sortable: false, align: 'left' }
             ],
             searchitems: [
                 { display: '<%= h(taginfo.project) %>/<%= h(osm.value) %>', name: 'project_value' }
             ],
-            sortname: 'key',
+            sortname: 'tag',
             sortorder: 'asc',
             preProcess: function(data) {
                 data.rows = jQuery.map(data.data, function(row, i) {
