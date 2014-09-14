@@ -343,9 +343,6 @@ sources:
     josm:
         name: JOSM
         description: A JOSM szerkesztő konfigurációs fájljaiból származó adatok.
-    potlatch:
-        name: Potlatch
-        description: A Potlatch2 szerkesztő konfigurációs fájljaiból származó adatok.
     languages:
         name: Nyelvek
         description: Nyelvek nevei, kótjai, stb. az IANA és Unicode nyilvántartásokból.

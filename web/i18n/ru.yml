@@ -319,9 +319,6 @@ sources:
     josm:
         name: JOSM
         description: Конфигурационные файлы редактора JOSM.
-    potlatch:
-        name: Potlatch
-        description: Конфигурационные файлы редактора Potlatch 2.
     languages:
         name: Languages
         description: Языковые названия, коды, и прочее из реестров IANA и Unicode.

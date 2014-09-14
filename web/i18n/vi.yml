@@ -336,9 +336,6 @@ sources:
     josm:
         name: JOSM
         description: Dữ liệu cấu hình từ trình vẽ OSM JOSM.
-    potlatch:
-        name: Potlatch
-        description: Dữ liệu cấu hình từ trình vẽ OSM Potlatch 2.
     languages:
         name: Ngôn ngữ
         description: Tên ngôn ngữ, mã ngôn ngữ, v.v. từ các kho IANA và Unicode.

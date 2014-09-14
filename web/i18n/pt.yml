@@ -319,9 +319,6 @@ sources:
     josm:
         name: JOSM
         description: Configuration data from the JOSM OSM editor.
-    potlatch:
-        name: Potlatch
-        description: Configuration data from the Potlatch2 OSM editor.
     languages:
         name: Languages
         description: Language names, codes, etc. from IANA and Unicode registries.

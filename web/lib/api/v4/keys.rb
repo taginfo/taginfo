@@ -13,7 +13,7 @@ class Taginfo < Sinatra::Base
         :parameters => { :query => 'Only show keys matching this query (substring match, optional).' },
         :paging => :optional,
         :filter => @@filters,
-        :sort => %w( key count_all count_nodes count_ways count_relations values_all users_all in_wiki in_josm in_potlatch length ),
+        :sort => %w( key count_all count_nodes count_ways count_relations values_all users_all in_wiki in_josm length ),
         :result => paging_results([
             [:key,                      :STRING, 'Key'],
             [:count_all,                :INT,    'Number of objects in the OSM database with this key.'],
@@ -64,7 +64,6 @@ class Taginfo < Sinatra::Base
                 o.users_all
                 o.in_wiki
                 o.in_josm
-                o.in_potlatch
                 o.length 'length(key)'
                 o.length :key
             }.

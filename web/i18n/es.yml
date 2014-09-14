@@ -426,9 +426,6 @@ sources:
     josm:
         name: JOSM
         description: Datos de la configuración del editor JOSM de OSM.
-    potlatch:
-        name: Potlatch
-        description: Datos de la configuración del editor Potlatch2 de OSM.
     languages:
         name: Idiomas
         description: Nombres de idiomas, códigos, etc. de los registros IANA y Unicode.

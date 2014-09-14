@@ -141,9 +141,6 @@ sources:
     josm:
         name: JOSM
         description: Dati di configurazione dall'editor JOSM di OSM.
-    potlatch:
-        name: Potlatch
-        description: Dati di configurazione dall'editor Potlatch2 di OSM.
 
 reports:
     characters_in_keys:

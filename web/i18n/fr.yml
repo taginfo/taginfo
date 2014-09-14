@@ -339,9 +339,6 @@ sources:
     josm:
         name: JOSM
         description: Configuration pour l'éditeur JOSM.
-    potlatch:
-        name: Potlatch
-        description: Configuration pour l'éditeur Potlatch2.
     languages:
         name: Langues
         description: Noms et codes des langues, depuis les registres IANA et Unicode.

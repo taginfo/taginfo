@@ -345,9 +345,6 @@ sources:
     josm:
         name: JOSM
         description: Dane konfiguracyjne z edytora JOSM.
-    potlatch:
-        name: Potlatch
-        description: Dane konfiguracyjne z edytora Potlatch2.
     languages:
         name: Języki
         description: Język nazw, kodów, itd. z IANA i rejestrów Unicode.
