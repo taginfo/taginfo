@@ -772,7 +772,7 @@ jQuery(document).ready(function() {
         }
     });
 
-    jQuery(document).bind('keyup', function(event) {
+    jQuery(document).bind('keypress', function(event) {
         if (event.ctrlKey || event.altKey || event.metaKey) {
             return;
         }
@@ -784,55 +784,65 @@ jQuery(document).ready(function() {
                     case 63: // ?
                         open_help();
                         break;
-                    case 67: // c
+                    case 99: // c
                         window.location = comparison_list_url(get_comparison_list());
                         break;
-                    case 70: // f
+                    case 102: // f
                         jQuery('input.qsbox').focus();
                         break;
-                    case 72: // h
+                    case 104: // h
                         window.location = '/';
                         break;
-                    case 75: // k
+                    case 107: // k
                         window.location = '/keys';
                         break;
-                    case 80: // p
+                    case 112: // p
                         window.location = '/projects';
                         break;
-                    case 82: // r
+                    case 114: // r
                         window.location = '/relations';
                         break;
-                    case 83: // s
+                    case 115: // s
                         jQuery('input#search').focus();
                         break;
-                    case 84: // t
+                    case 116: // t
                         window.location = '/tags';
                         break;
-                    case 36: // home
-                        jQuery('div.pFirst:visible').click();
-                        break;
-                    case 33: // page up
-                        jQuery('div.pPrev:visible').click();
-                        break;
-                    case 34: // page down
-                        jQuery('div.pNext:visible').click();
-                        break;
-                    case 35: // end
-                        jQuery('div.pLast:visible').click();
-                        break;
-                    case 37: // arrow left
-                        up();
-                        break;
-                    case 38: // arrow up
-                        table_up();
-                        break;
-                    case 39: // arrow right
-                        table_right();
-                        break;
-                    case 40: // arrow down
-                        table_down();
-                        break;
                 }
+            }
+        }
+    });
+
+    jQuery(document).bind('keyup', function(event) {
+        if (event.ctrlKey || event.altKey || event.metaKey) {
+            return;
+        }
+        if (event.target == document.body) {
+            switch (event.which) {
+                case 36: // home
+                    jQuery('div.pFirst:visible').click();
+                    break;
+                case 33: // page up
+                    jQuery('div.pPrev:visible').click();
+                    break;
+                case 34: // page down
+                    jQuery('div.pNext:visible').click();
+                    break;
+                case 35: // end
+                    jQuery('div.pLast:visible').click();
+                    break;
+                case 37: // arrow left
+                    up();
+                    break;
+                case 38: // arrow up
+                    table_up();
+                    break;
+                case 39: // arrow right
+                    table_right();
+                    break;
+                case 40: // arrow down
+                    table_down();
+                    break;
             }
         }
     });
