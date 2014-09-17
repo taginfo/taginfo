@@ -31,7 +31,7 @@ taginfo:
     source: Fonte
     sources: Fontes
     download: Baixar
-    about: Sobre taginfo
+    about: Sobre o taginfo
     contact: Contato
     meta: Meta
     wiki: Página do taginfo na wiki
@@ -91,9 +91,9 @@ help:
         complete_tags: Você também pode procurar por etiquetas completas
         values_only: Você também pode procurar somente por valores
         suggestions: |
-            Para a sua conveniência, chaves e etiquetas populares são ver 
-            sugeridas enquanto você digita. Use as teclas direcionais do seu
-            teclado para escolher um item e pressione 
+            Para a sua conveniência, chaves e etiquetas populares são
+            sugeridas enquanto você digita. Use as teclas direcionais de seu
+            teclado para escolher um item e pressione
             <span class="key">Enter</span>.
             Você vai pular diretamente para a página daquela chave ou etiqueta.
     keyboard:
@@ -121,16 +121,16 @@ help:
         activate_filter: Ativar campo de filtragem
         prev_entry: Resultado anterior
         next_entry: Próximo resultado
-        enter_entry: Ir para o resultado selecionada
+        enter_entry: Ir para o resultado selecionado
         switch_tab: Trocar de guia
-        deactivate: Desativas campos de entrada
+        deactivate: Desativar campos de entrada
         up: Para cima na hierarquia da página
         switch_input: Trocar entre campos de entrada
 
 pages:
     not_found:
         title: Não encontrado
-        intro: Desculpe, mas não foi possível encontrar a página que você estava procurand
+        intro: Desculpe, não foi possível encontrar a página que você estava procurando
     index:
         popular_keys: Algumas chaves populares
         keys:
@@ -143,30 +143,57 @@ pages:
             listreports: Ver todos os relatórios...
         about:
             intro:
-                <p>OpenStreetMap uses <b>tags</b> of the form <b>key=value</b>
-                to add meaning to geographic objects. Taginfo collects information
-                about these tags from several sources to help you understand what
-                they mean and how they are used.</p>
-            more: Mais sobre taginfo...
+                <p>O OpenStreetMap usa <b>etiquetas</b> na forma <b>key=value</b>
+                para adicionar significado a objetos geográficos. Taginfo é um software
+                que coleta informação a respeito daquelas etiquetas, partindo de várias
+                fontes, para ajudar você a entender o que significam e como usá-las.</p>
+            more: Saiba mais...
         international:
-            see: See other taginfo sites...
+            see: Conheça outros sites taginfo...
     sources:
         intro: |
-            <p>Taginfo takes data about OSM tags from several sources and brings them
-            together for easy browsing and discovery.</p>
-            <p>Note that taginfo only displays this data. If you want to change it, you
-            have to go back to the source.</p>
-        data_until: Data until
-        last_update_run: Last update run
-        data_until_explanation: All edits until this time will be in the data, later edits might be.
-        to: to
+            <p>Taginfo obtém dados sobre etiquetas OSM a partir de fontes diversas, e os
+            unifica para facilitar navegação e consulta.</p>
+            <p>O sistema apenas exibe esses dados. Se você quer alterá-los, precisa
+            voltar a aquelas fontes.</p>
+        list:
+            title: Lista de Fontes
+            intro: Aqui está uma lista das fontes usadas atualmente. Mais fontes poderão ser incorporadas no futuro.
+        description:
+            db: |
+                <p>Estatísticas sobre chaves, etiquetas e tipos de relação são geradas a partir da
+                <a class="extlink" href="http://planet.openstreetmap.org/">base de dados do OpenStreetMap</a>
+                (ou de um <i>extract</i>), assim como os mapas que mostram a distribuição geográfica de pontos e linhas.</p>
+            wiki: |
+                <p>A <a class="extlink" href="http://wiki.openstreetmap.org/">wiki do OpenStreetMap</a>
+                é lida e todas as páginas Key:*, Tag:* e Relation:* são analisadas. Em todos os idiomas.
+                Descrições, imagens, etiquetas relacionadas, entre outras coisas, são extraídas dali.</p>
+            languages: |
+                <p>O taginfo pega informação a respeito dos vários idiomas do mundo, seus códigos, nomes,
+                e outras coisas, a partir de registros
+                <a class="extlink" href="http://www.iana.org/">IANA</a> e
+                <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+            josm: |
+                <p>Ícones e estilos são pegos das configurações do
+                <a class="extlink" href="http://josm.openstreetmap.de/">editor JOSM</a>.</p>
+            projects: |
+                <p>Projetos que usam etiquetas OSM de alguma maneira, tais como editores, mapas,
+                aplicações de roteamento, etc. Veja a <a href="/projects">lista de projetos</a>.</p>
+        updates:
+            title: Atualizações
+            intro: Os dados do taginfo são atualizados periodicamente a partir dessas fontes.
+        data_until: Data na origem
+        last_update_run: Data da última coleta
+        data_until_explanation: Somente as edições realizadas até este momento serão processadas.
+        to: a
     download:
         intro: |
-            <p>Here you can download the databases used by taginfo. All the data is stored
-            in <a class="extlink" href="http://www.sqlite.org/">Sqlite</a> databases.
-            The database files are then packed with <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
-            <p>If you don't want to download these databases, but need automated access to
-            the data, you can also use the <a href="/about">API</a>.</p>
+            <p>Aqui você pode baixar os bancos de dados usados pelo taginfo. Todos os dados são
+            armazenados em <a class="extlink" href="http://www.sqlite.org/">Sqlite</a>.
+            Os arquivos de banco de dados são compactados com
+            <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
+            <p>Se você não quer baixá-los mas precisa acessar os dados
+            de forma automatizada, você pode usar a <a href="/about">API</a>.</p>
         file: Arquivo
         packed: Compactado
         unpacked: Descompactado
@@ -194,16 +221,16 @@ pages:
                 Esta tabela mostra as etiquetas mais comuns no banco de dados.
     relations:
         name: Tipos de relação
-        intro: Information about the different types of relations (indicated by the <a href="/keys/type?filter=relations">type</a> tag).
-        relations_of_type_tooltip: Number of relations of this type (and as percentage of all relations).
+        intro: Informação sobre os diferentes tipos de relação (indicados pela etiqueta <a href="/keys/type?filter=relations">type</a>).
+        relations_of_type_tooltip: Número de relações deste tipo (e como percentual de todas as relações).
         prevalent_roles: Papéis prevalentes
-        prevalent_roles_tooltip: Prevalent roles for this type of relation.
+        prevalent_roles_tooltip: Papéis prevalentes para este tipo de relação.
         no_information: Nenhuma informação
-        roles_less_than_one_percent: no roles with more than 1%
-        empty_role: empty role
+        roles_less_than_one_percent: nenhum papel com mais que 1%
+        empty_role: sem papel
     key:
-        description_from_wiki: Description of this key from the wiki (if available in your chosen language, otherwise in English).
-        no_description_in_wiki: No English language description for this key in the wiki. (See also the "Wiki" tab.)
+        description_from_wiki: Descrição desta chave na wiki (se disponível, no seu idioma, e noutro caso, em inglês).
+        no_description_in_wiki: Na wiki não há descrição em inglês para esta chave. (Veja também a guia "Wiki".)
         filter:
             label: |
                  Filter:
@@ -214,11 +241,11 @@ pages:
         number_objects: Número de objetos
         number_values: Número de valores
         values_used: Valores usados com esta chave
-        tag_description_from_wiki: Description of the tag from the wiki (if available in your chosen language, otherwise in English).
+        tag_description_from_wiki: Descrição desta etiqueta na wiki (se disponível, no seu idioma, e noutro caso, em inglês).
         overview:
             objects_last_edited_by: Objects with this key were last edited by %1 different users.
-            no_endorsement: (This does not mean that all those users endorse this key.)
-            distribution_of_values: Distribution of values
+            no_endorsement: (Isso não significa que todos aqueles usuários endossam esta chave.)
+            distribution_of_values: Distribuição de valores
         other_keys_used:
             title: Outras chaves usadas com esta chave
             other: Outras chaves
@@ -226,13 +253,13 @@ pages:
             other_key_tooltip: Key used together with this key.
             from_count_tooltip: Number of objects with other key that also have this key.
         geographic_distribution:
-            title: Geographical distribution of this key
-            relations: Relations do not have a geographical location, so no map can be shown.
+            title: Distribuição geográfica para esta chave
+            relations: Relações não possuem uma localização geográfica, então nenhum mapa pode ser mostrado.
         wiki_pages:
-            title: Wiki pages about this key
-            none_found: No wiki page available for this key.
-            create: Create wiki page for this key
-            wiki_page: Wiki page
+            title: Páginas wiki sobre esta chave
+            none_found: Não há página wiki para esta chave.
+            create: Crie uma página wiki para esta chave
+            wiki_page: Página wiki
             implied_tags: Etiquetas implícitas
             combined_tags: Combinações de etiquetas
             linked_tags: Linked Tags
@@ -242,38 +269,38 @@ pages:
                   Escolher estilo:
             no_styles: Nenhum estilo JOSM com esta chave.
     tag:
-        description_from_wiki: Descrição desta etiqueta na wiki (se estiver disponível, na sua linguagem, caso contrário, em inglês).
-        no_description_in_wiki: No English language description for this tag in the wiki. (See also the "Wiki" tab.)
+        description_from_wiki: Descrição desta etiqueta na wiki (se disponível, no seu idioma, e noutro caso, em inglês).
+        no_description_in_wiki: Na wiki não há descrição em inglês para esta etiqueta. (Veja também a guia "Wiki".)
         number_objects: Número de objetos
         overview:
-            see_also: See also the relation type page
+            see_also: Veja também a página de tipos de relação
         other_tags_used:
             title: Outras etiquetas utilizadas com esta etiqueta
             other: Outras etiquetas
-            to_count_tooltip: Number of objects with this tag that also have the other tag/key.
-            other_key_tooltip: Tags/Keys used together with this tag.
-            from_count_tooltip: Number of objects with other tag/key that also have this tag.
+            to_count_tooltip: Número de objetos com esta etiqueta e também outra etiqueta/chave.
+            other_key_tooltip: Etiquetas ou chaves combinadas com esta etiqueta.
+            from_count_tooltip: Número de objetos com outra etiqueta/chave e também com esta etiqueta.
         combinations:
             title: Combinações
-            description: This table shows only the most common combinations of the most common tags.
+            description: Esta tabela mostra somente as combinações mais comuns das etiquetas mais comuns.
         wiki_pages:
             title: Páginas na wiki sobre esta etiqueta
             none_found: Nenhuma página na wiki disponível sobre esta etiqueta.
-            create: Criar uma página na wiki para esta etiqueta
+            create: Criar uma página wiki para esta etiqueta
             suggest_key_wiki_page: Maybe you can find some more information on the wiki page for the key %1.
             wiki_page: Página na wiki
             implied_tags: Etiquetas implícitas
             combined_tags: Combinações de etiquetas
             linked_tags: Linked Tags
         josm:
-            title: JOSM style rules with this tag
+            title: Regras de estilo JOSM com esta etiqueta
             choice: |
-                  Choose style:
-            no_styles: No JOSM styles for this tag.
+                  Escolha o estilo:
+            no_styles: Nenhum estilo JOSM com esta etiqueta.
     relation:
         name: Tipo da relação
-        description_from_wiki: Description of this relation type from the wiki (if available in your chosen language, otherwise in English).
-        no_description_in_wiki: No English language description for this relation type in the wiki. (See also the "Wiki" tab.)
+        description_from_wiki: Descrição deste tipo de relação na wiki (se disponível, no seu idioma, e noutro caso, em inglês).
+        no_description_in_wiki: Na wiki não há descrição em inglês para este tipo de relação. (Veja também a guia "Wiki".)
         overview:
             tab: Visão geral
             title: Visão geral
@@ -311,17 +338,17 @@ sources:
         name: Master
         description: Aggregate statistics and miscellaneous data needed for the taginfo user interface.
     db:
-        name: Database
-        description: Statistics about each key and each tag from the main OSM database (planet file).
+        name: Banco de dados
+        description: Estatísticas sobre cada chave e cada etiqueta a partir do banco de dados principal do OpenStreetMap (arquivo do planeta).
     wiki:
         name: Wiki
-        description: Data from the tag and key pages of the OSM wiki.
+        description: Dados colhidos das páginas de etiquetas e chaves da wiki do projeto OpenStreetMap.
     josm:
         name: JOSM
-        description: Configuration data from the JOSM OSM editor.
+        description: Dados extraídos das configurações do editor JOSM.
     languages:
-        name: Languages
-        description: Language names, codes, etc. from IANA and Unicode registries.
+        name: Idiomas
+        description: Os nomes dos idiomas, seus códigos, etc. a partir de registros IANA e Unicode.
 
 reports:
     characters_in_keys:
@@ -331,8 +358,8 @@ reports:
             case latin letters (a-z) and the underscore (_) are used. Sometimes the colon
             (:) is added as a separator character.</p>
         statistics:
-            tab: Statistics
-            title: Statistics overview
+            tab: Estatísticas
+            title: Visualização de estatísticas
             fraction: Fraction
             characters: Characters in key
             characters_in_keys:
