@@ -26,7 +26,6 @@ osm:
     user: Utente
     users: Utenti
 
-
 taginfo:
     source: Fonte
     sources: Fonti
@@ -51,7 +50,7 @@ taginfo:
     instance:
         title: Informazioni sul sito taginfo
         other: Vedere <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> per gli altri siti.
-        
+
 misc:
     values_less_than_one_percent: Nessuno dei valori con più dell' 1%
     empty_string: stringa vuota

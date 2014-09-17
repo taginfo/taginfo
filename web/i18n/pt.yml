@@ -432,7 +432,7 @@ reports:
     languages:
         name: Linguagens
         intro: |
-            <p>OpenStreetMap é um projeto internacional. As etiquetas e as suas descrições 
+            <p>OpenStreetMap é um projeto internacional. As etiquetas e as suas descrições
             podem estar em qualquer linguagem. Esta tabela lista as linguagens que o taginfo
             conhece e quantas páginas da wiki existem nessas linguagens documentando chaves
             e etiquetas, respectivamente.</p>

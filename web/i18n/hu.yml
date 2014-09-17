@@ -155,7 +155,7 @@ pages:
         intro: |
             <p>A taginfo az OSM címkéket különböző forrásokból gyűjti be, majd egyesíti őket
             a könnyű kereshetőség és felfedezés érdekében.</p>
-            <p> Megjegyzendő, hogy a taginfo csak megjeleníti ezeket az adatokat. 
+            <p> Megjegyzendő, hogy a taginfo csak megjeleníti ezeket az adatokat.
             Ha módosítani szeretnéd, vissza kell menned a forráshoz.</p>
         list:
             title: Források listája

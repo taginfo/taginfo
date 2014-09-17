@@ -189,7 +189,7 @@ pages:
             <a class="extlink"
             href="http://www.bzip.org/">bzip2</a> gepackt.</p>
             <p>Wenn Du die Datenbanken nicht herunterladen willst, aber trotzdem
-            automatisiert auf die Daten zugreifen willst, kannst Du auch die 
+            automatisiert auf die Daten zugreifen willst, kannst Du auch die
             <a href="/about">API</a> verwenden.</p>
         file: Datei
         packed: Gepackt

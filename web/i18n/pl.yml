@@ -461,7 +461,7 @@ reports:
             intro: |
                 <p><a href="http://www.ietf.org/">IETF</a> definiuje <i>znaczniki języków</i> in its standard
                 <a href="http://tools.ietf.org/html/bcp47">Znaczniki dla Identyfikacji Języków
-                (BCP47)</a>. Znaczniki języka zawierają jeden lub więcej <i>znaczników podrzędnych</i> opisujących język, skrypt, warianty itp. Poniższa lista pokazuje obecnie zarejestrowane podrzędne znaczniki istotne dla OSM. Więcej informacji znajdziesz w artukule 
+                (BCP47)</a>. Znaczniki języka zawierają jeden lub więcej <i>znaczników podrzędnych</i> opisujących język, skrypt, warianty itp. Poniższa lista pokazuje obecnie zarejestrowane podrzędne znaczniki istotne dla OSM. Więcej informacji znajdziesz w artukule
                 <a href="http://en.wikipedia.org/wiki/IETF_language_tag">Wikipedii o znacznikach językowych IETF</a> oraz na stronie <a
                 href="http://www.langtag.net/">langtag.net</a>.</p>
                 <p>Zwróć uwagę, że dane w tej tabeli <b>nie pochodzą</b> z bazy OpenStreetMap,

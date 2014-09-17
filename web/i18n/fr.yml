@@ -47,7 +47,7 @@ taginfo:
     key_combinations: Combinaisons
     comparison: Comparaison clé/tag
     overview: Vue d'ensemble
-    data_from: Données datant du 
+    data_from: Données datant du
     uses_data_from: |
         Utilise des données provenant de :
     data_from_description: Dernière mise à jour de la base de données de Taginfo
@@ -367,7 +367,7 @@ reports:
             title: Clés contenant des espaces
             intro: |
                 <p>Les tags dont la clé contient des symboles d'espacement comme l'espace, tabulation, nouvelle ligne, retour chariot, ou autre selon les alphabets.
-                <br/>Les espaces dans les clés des tags sont sources d'erreur, surtout s'ils sont placés au début ou la fin de la clé ; 
+                <br/>Les espaces dans les clés des tags sont sources d'erreur, surtout s'ils sont placés au début ou la fin de la clé ;
                 il est donc préférable d'utiliser le caractère de soulignement (<span class="char">_</span>) à la place.
                 </p>
         problematic:
