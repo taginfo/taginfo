@@ -67,6 +67,39 @@ UPDATE db.selected_tags SET in_wiki_en=1 WHERE skey || '=' || svalue IN (SELECT 
 
 -- ============================================================================
 
+-- currently unused future replacement for db.selected_tags
+
+DROP TABLE IF EXISTS top_tags;
+CREATE TABLE top_tags (
+  skey            VARCHAR,
+  svalue          VARCHAR,
+  count_all       INTEGER DEFAULT 0,
+  count_nodes     INTEGER DEFAULT 0,
+  count_ways      INTEGER DEFAULT 0,
+  count_relations INTEGER DEFAULT 0,
+  in_wiki         INTEGER DEFAULT 0,
+  in_wiki_en      INTEGER DEFAULT 0,
+  in_projects     INTEGER DEFAULT 0
+);
+
+INSERT INTO top_tags (skey, svalue)
+    SELECT key1, value1 FROM db.tag_combinations WHERE value1 != ''
+    UNION
+    SELECT key2, value2 FROM db.tag_combinations WHERE value2 != '';
+
+UPDATE top_tags SET
+    count_all       = (SELECT t.count_all       FROM db.tags t WHERE t.key=skey AND t.value=svalue),
+    count_nodes     = (SELECT t.count_nodes     FROM db.tags t WHERE t.key=skey AND t.value=svalue),
+    count_ways      = (SELECT t.count_ways      FROM db.tags t WHERE t.key=skey AND t.value=svalue),
+    count_relations = (SELECT t.count_relations FROM db.tags t WHERE t.key=skey AND t.value=svalue);
+
+UPDATE top_tags SET in_wiki=1    WHERE skey || '=' || svalue IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*');
+UPDATE top_tags SET in_wiki_en=1 WHERE skey || '=' || svalue IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en');
+
+CREATE UNIQUE INDEX top_tags_key_value_idx ON top_tags (skey, svalue);
+
+-- ============================================================================
+
 DROP TABLE IF EXISTS popular_keys;
 CREATE TABLE popular_keys (
     key           VARCHAR,
