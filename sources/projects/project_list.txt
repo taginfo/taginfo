@@ -1,4 +1,5 @@
 id_editor https://raw.githubusercontent.com/openstreetmap/iD/master/data/taginfo.json
+josm_main_mappaint_style http://josm.openstreetmap.de/download/taginfo/taginfo_style.json
 nominatim http://nominatim.openstreetmap.org/taginfo.json
 osm_mug https://raw.githubusercontent.com/joto/taginfo/master/projects/osm-mug.json
 osmcoastline https://raw.githubusercontent.com/joto/osmcoastline/master/taginfo.json
