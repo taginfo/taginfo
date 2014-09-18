@@ -151,16 +151,5 @@ UPDATE suggestions SET score = count * (1+in_wiki);
 
 -- ============================================================================
 
--- temporary hack to pull over JOSM data from old JOSM format into new projects format
-
-INSERT INTO projects.projects (id, json_url, status, name, description) VALUES ('josm', '', 'OK', 'JOSM Editor', 'JOSM offline OSM Editor');
-
-INSERT INTO projects.project_tags (project_id, key, value, on_node, on_way, on_relation, on_area, icon_url) SELECT 'josm', k, v, 1, 0, 0, 0, '/api/4/josm/style/image?style=standard&image=' || icon_source FROM josm.josm_style_rules WHERE icon_source IS NOT NULL;
--- INSERT INTO projects.project_tags (project_id, key, value, on_node, on_way, on_relation, on_area, icon_url) SELECT 'josm', k, v, 0, 1, 0, 0, 'https://chart.googleapis.com/chart?cht=bhs&chs=16x16&chf=bg,s,' || substr(line_color, 1+instr(line_color, '#')) FROM josm.josm_style_rules WHERE line_color IS NOT NULL;
--- INSERT INTO projects.project_tags (project_id, key, value, on_node, on_way, on_relation, on_area, icon_url) SELECT 'josm', k, v, 0, 0, 0, 1, 'https://chart.googleapis.com/chart?cht=bhs&chs=16x16&chf=bg,s,' || substr(area_color, 1+instr(area_color, '#')) FROM josm.josm_style_rules WHERE area_color IS NOT NULL;
-
-
--- ============================================================================
-
 ANALYZE;
 
