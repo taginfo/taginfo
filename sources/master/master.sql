@@ -50,11 +50,9 @@ INSERT INTO master_stats SELECT * FROM db.stats
 -- ============================================================================
 
 INSERT INTO db.keys (key) SELECT DISTINCT key FROM wiki.wikipages        WHERE key NOT IN (SELECT key FROM db.keys);
-INSERT INTO db.keys (key) SELECT DISTINCT k   FROM josm.josm_style_rules WHERE k   NOT IN (SELECT key FROM db.keys);
 
 UPDATE db.keys SET in_wiki=1    WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NULL);
 UPDATE db.keys SET in_wiki_en=1 WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NULL AND lang='en');
-UPDATE db.keys SET in_josm=1    WHERE key IN (SELECT distinct k   FROM josm.josm_style_rules);
 
 -- ============================================================================
 
@@ -82,7 +80,6 @@ CREATE TABLE popular_keys (
     scale_count   REAL,
     scale_users   REAL,
     scale_wiki    REAL,
-    scale_josm    REAL,
     scale_name    REAL,
     scale1        REAL,
     scale2        REAL
@@ -96,7 +93,6 @@ UPDATE popular_keys SET wikipages = (SELECT count(*) FROM wiki.wikipages w WHERE
 
 UPDATE popular_keys SET in_wiki=1    WHERE key IN (SELECT distinct key FROM wiki.wikipages);
 UPDATE popular_keys SET in_wiki_en=1 WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE lang='en');
-UPDATE popular_keys SET in_josm=1    WHERE key IN (SELECT distinct k   FROM josm.josm_style_rules);
 
 -- ============================================================================
 
@@ -117,11 +113,10 @@ INSERT INTO popular_metadata (keys, count_min, count_max, count_delta, users_min
 UPDATE popular_keys SET scale_count = CAST (count - (SELECT count_min FROM popular_metadata) AS REAL) / (SELECT count_delta FROM popular_metadata);
 UPDATE popular_keys SET scale_users = CAST (users - (SELECT users_min FROM popular_metadata) AS REAL) / (SELECT users_delta FROM popular_metadata);
 UPDATE popular_keys SET scale_wiki  = CAST (wikipages AS REAL) / (SELECT max(wikipages) FROM popular_keys);
-UPDATE popular_keys SET scale_josm  = in_josm;
 UPDATE popular_keys SET scale_name  = 1;
 UPDATE popular_keys SET scale_name  = 0 WHERE key LIKE '%:%';
 
-UPDATE popular_keys SET scale1 = 10 * scale_count + 8 * scale_users + 2 * scale_wiki + 1 * scale_josm + 2 * scale_name;
+UPDATE popular_keys SET scale1 = 10 * scale_count + 8 * scale_users + 2 * scale_wiki + 2 * scale_name;
 
 -- ============================================================================
 
