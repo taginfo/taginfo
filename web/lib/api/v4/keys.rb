@@ -27,7 +27,7 @@ class Taginfo < Sinatra::Base
             [:values_all,               :INT,    'Number of different values for this key.'],
             [:users_all,                :INT,    'Number of users owning objects with this key.'],
             [:in_wiki,                  :BOOL,   'Has this key at least one wiki page?'],
-            [:in_josm,                  :BOOL,   'Is this key referenced in at least one JOSM style rule?']
+            [:in_josm,                  :BOOL,   'DEPRECATED. Now always false.']
         ]),
         :example => { :page => 1, :rp => 10, :filter => 'in_wiki', :sortname => 'key', :sortorder => 'asc' },
         :ui => '/keys'
@@ -135,8 +135,8 @@ class Taginfo < Sinatra::Base
                 :count_relations_fraction => (row['count_relations'].to_f / @db.stats('relations')).round_to(4),
                 :values_all               => row['values_all'].to_i,
                 :users_all                => row['users_all'].to_i,
-                :in_wiki                  => row['in_wiki'].to_i     == 1 ? true : false,
-                :in_josm                  => row['in_josm'].to_i     == 1 ? true : false
+                :in_wiki                  => row['in_wiki'].to_i == 1 ? true : false,
+                :in_josm                  => false
             } 
             h[:wikipages] = row['wikipages'] if row['wikipages']
             h[:prevalent_values] = row['prevalent_values'][0,10] if row['prevalent_values']
