@@ -13,7 +13,6 @@ function page_init() {
             { display: '<span title="<%= h(misc.relations_tooltip) %>"><img src="/img/types/relation.16.png" width="16" height="16" alt=""/> <%= h(osm.relations) %></span>', name: 'count_relations',  width: 250, sortable: true, align: 'center' },
             { display: '<span title="<%= h(misc.users_tooltip) %>"><%= h(osm.users) %></span>', name: 'users_all', width: 44, sortable: true, align: 'right' },
             { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" width="16" height="16" title="<%= h(misc.in_wiki_tooltip) %>"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
-            { display: '<img src="/img/sources/josm.16.png" alt="JOSM" width="16" height="16" title="<%= h(misc.in_josm_tooltip) %>"/>', name: 'in_josm', width: 20, sortable: true, align: 'center' },
             { display: '<span title="<%= h(misc.values_tooltip) %>"><%= h(osm.values) %></span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
             { display: '<span title="<%= h(misc.prevalent_values_tooltip) %>"><%= h(misc.prevalent_values) %></span>', name: 'prevalent_values', width: 500, sortable: true }
         ],
@@ -32,7 +31,6 @@ function page_init() {
                     fmt_value_with_percent(row.count_relations, row.count_relations_fraction),
                     fmt_with_ts(row.users_all),
                     fmt_checkmark(row.in_wiki),
-                    fmt_checkmark(row.in_josm),
                     fmt_with_ts(row.values_all),
                     fmt_prevalent_value_list(row.key, row.prevalent_values)
                 ] };
