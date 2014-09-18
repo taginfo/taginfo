@@ -49,7 +49,7 @@ INSERT INTO master_stats SELECT * FROM db.stats
 
 -- ============================================================================
 
-INSERT INTO db.keys (key) SELECT DISTINCT key FROM wiki.wikipages        WHERE key NOT IN (SELECT key FROM db.keys);
+INSERT INTO db.keys (key) SELECT DISTINCT key FROM wiki.wikipages WHERE key NOT IN (SELECT key FROM db.keys);
 
 UPDATE db.keys SET in_wiki=1    WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NULL);
 UPDATE db.keys SET in_wiki_en=1 WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NULL AND lang='en');
@@ -75,7 +75,6 @@ CREATE TABLE popular_keys (
     wikipages     INTEGER DEFAULT 0,
     in_wiki       INTEGER DEFAULT 0,
     in_wiki_en    INTEGER DEFAULT 0,
-    in_josm       INTEGER DEFAULT 0,
     in_potlatch   INTEGER DEFAULT 0,
     scale_count   REAL,
     scale_users   REAL,
