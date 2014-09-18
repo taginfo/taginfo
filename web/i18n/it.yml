@@ -44,8 +44,6 @@ taginfo:
     key_combinations: Combinazioni delle Chiavi
     overview: Panoramica
     data_from: Fonte Dati
-    uses_data_from: |
-        Fonte dati usati:
     data_from_description: Ultimo aggiornamento al database taginfo
     instance:
         title: Informazioni sul sito taginfo

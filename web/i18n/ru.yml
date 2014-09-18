@@ -46,8 +46,6 @@ taginfo:
     key_combinations: Сочетания
     overview: Обзор
     data_from: Данные от
-    uses_data_from: |
-        Использует данные от:
     data_from_description: Дата последнего обновления базы Taginfo
     instance:
         title: Об этом сайте Taginfo

@@ -4,15 +4,9 @@
 </div>
 <div class="box resize">
     <h2><%= h(t.pages.reports.list) %></h2>
-    <table class="list">
-        <tr><th class="tc" colspan="<%= Source.visible.size %>"/><%= t.pages.reports.data_sources %></th><th class="tl"><%= t.taginfo.report %></th></tr>
-    <% Report.each_visible_with_index do |report, n| c = (n%2!=0) ? ' even' : '' %>
-        <tr>
-    <% Source.visible.each do |source| %>
-            <td class="tc<%= c %>" width="40"><%= source.img(16, t.taginfo.uses_data_from) if report.uses_source?(source.id) %></td>
-    <% end %>
-            <td class="tl<%= c %>"><a href="<%= report.url %>"><%= t.reports[report.name].name %></a></td>
-        </tr>
-    <% end %>
-    </table>
+    <ul>
+<% Report.each_visible_with_index do |report, n| c = (n%2!=0) ? ' even' : '' %>
+        <li><a href="<%= report.url %>"><%= t.reports[report.name].name %></a></li>
+<% end %>
+    </ul>
 </div>

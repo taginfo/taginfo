@@ -46,8 +46,6 @@ taginfo:
     key_combinations: Сполучення
     overview: Огляд
     data_from: Дані від
-    uses_data_from: |
-        Використовує дані від:
     data_from_description: Дата останнього оновлення бази Taginfo
     instance:
         title: Про цей сайтTaginfo

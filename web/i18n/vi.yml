@@ -48,8 +48,6 @@ taginfo:
     comparison: So sánh chìa khóa/thẻ
     overview: Tóm lược
     data_from: Dữ liệu từ
-    uses_data_from: |
-        Lấy dữ liệu từ:
     data_from_description: Cơ sở dữ liệu taginfo được cập nhật lần cuối vào
     instance:
         title: Giới thiệu về trang taginfo này

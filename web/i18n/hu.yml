@@ -48,8 +48,6 @@ taginfo:
     comparison: Kulcs/Címke összehasonlítás
     overview: Áttekintés
     data_from: Adatok frissítve
-    uses_data_from: |
-        Felhasznált adatok dátuma:
     data_from_description: A taginfo adatbázis utolsó frissítése
     instance:
         title: Ezen taginfo webhely névjegye

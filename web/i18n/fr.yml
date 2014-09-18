@@ -48,8 +48,6 @@ taginfo:
     comparison: Comparaison clé/tag
     overview: Vue d'ensemble
     data_from: Données datant du
-    uses_data_from: |
-        Utilise des données provenant de :
     data_from_description: Dernière mise à jour de la base de données de Taginfo
     instance:
         title: À propos de ce site Taginfo

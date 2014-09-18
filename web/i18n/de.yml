@@ -49,8 +49,6 @@ taginfo:
     comparison: Key/Tag-Vergleich
     overview: Übersicht
     data_from: Daten vom
-    uses_data_from: |
-        Nutzt Daten von:
     data_from_description: Letzte Aktualisierung der taginfo-Datenbank
     instance:
         title: Über dieses Taginfo

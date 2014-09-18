@@ -47,8 +47,6 @@ taginfo:
     key_combinations: Combinações
     overview: Visão geral
     data_from: Dados de
-    uses_data_from: |
-        Usa dados de:
     data_from_description: Última atualização do banco de dados do taginfo
     instance:
         title: Sobre o site taginfo

@@ -48,8 +48,6 @@ taginfo:
     comparison: Comparación de Clave/Etiqueta
     overview: Descripción general
     data_from: Datos de
-    uses_data_from: |
-        Utiliza datos de:
     data_from_description: Última actualización de la base de datos de taginfo
     instance:
         title: Acerca de este sitio de taginfo
