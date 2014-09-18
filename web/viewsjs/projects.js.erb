@@ -2,8 +2,8 @@ function page_init() {
     create_flexigrid('grid-projects', {
         url: '/api/4/projects/all',
         colModel: [
-            { display: '<%= h(@trans.t.taginfo.project) %>', name: 'name', width: 300, sortable: true },
-            { display: '<%= h(@trans.t.misc.description) %>', name: 'description', width: 600, sortable: false }
+            { display: '<%= h(@trans.t.taginfo.project) %>', name: 'name', width: 400, sortable: true },
+            { display: '<%= h(@trans.t.misc.description) %>', name: 'description', width: 800, sortable: false }
         ],
         searchitems: [
             { display: '<%= h(@trans.t.taginfo.project) %>/<%= h(@trans.t.misc.description) %>', name: 'name' }
