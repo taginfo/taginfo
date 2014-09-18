@@ -20,6 +20,23 @@ PROPERTY_ALIASES_FILE="$DIR/PropertyValueAliases.txt"
 
 DATECMD='date +%Y-%m-%dT%H:%M:%S'
 
+update_file() {
+    file=$1
+    url=$2
+
+    if curl --silent --fail --location --time-cond $file --output $file $url; then
+        return 0
+    else
+        error=$?
+        if [ "$error" = "22" ]; then
+            echo "WARNING: Getting ${url} failed. Using old version."
+        else
+            echo "ERROR: Could not get ${url}: curl error: $error"
+            exit 1
+        fi
+    fi
+}
+
 if [ "x" = "x$DIR" ]; then
     echo "Usage: update.sh DIR"
     exit 1
@@ -44,13 +61,13 @@ echo "`$DATECMD` Running pre.sql..."
 sqlite3 $DATABASE <pre.sql
 
 echo "`$DATECMD` Getting subtag registry..."
-curl --silent --time-cond $REGISTRY_FILE --output $REGISTRY_FILE $REGISTRY_URL
+update_file $REGISTRY_FILE $REGISTRY_URL
 
 echo "`$DATECMD` Running subtag import..."
 $EXEC_RUBY ./import_subtag_registry.rb $DIR
 
 echo "`$DATECMD` Getting CLDR..."
-curl --silent --location --time-cond $CLDR_FILE --output $CLDR_FILE $CLDR_URL
+update_file $CLDR_FILE $CLDR_URL
 
 echo "`$DATECMD` Unpacking CLDR..."
 rm -fr $CLDR_DIR
@@ -58,8 +75,8 @@ mkdir $CLDR_DIR
 unzip -q -d $CLDR_DIR $CLDR_FILE
 
 echo "`$DATECMD` Getting unicode scripts..."
-curl --silent --location --time-cond $UNICODE_SCRIPTS_FILE --output $UNICODE_SCRIPTS_FILE $UNICODE_SCRIPTS_URL
-curl --silent --location --time-cond $PROPERTY_ALIASES_FILE --output $PROPERTY_ALIASES_FILE $PROPERTY_ALIASES_URL
+update_file $UNICODE_SCRIPTS_FILE $UNICODE_SCRIPTS_URL
+update_file $PROPERTY_ALIASES_FILE $PROPERTY_ALIASES_URL
 
 echo "`$DATECMD` Running unicode scripts import..."
 $EXEC_RUBY ./import_unicode_scripts.rb $DIR
