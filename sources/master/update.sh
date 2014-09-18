@@ -58,9 +58,5 @@ fi
 
 m4 --prefix-builtins -D __DIR__=$DIR history_update.sql | sqlite3 $HISTORY_DB
 
-# Remove old *.lst files. This is only temporary and can be removed once
-# everybody has the new version which doesn't create these files any more
-rm -f frequent_tags.lst interesting_relation_types.lst interesting_tags.lst
-
 echo "`$DATECMD` Done master."
 
