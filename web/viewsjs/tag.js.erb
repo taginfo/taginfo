@@ -101,30 +101,6 @@ var create_flexigrid_for = {
             }
         });
     },
-    josm: function(key, value) {
-        create_flexigrid('grid-josm', {
-            url: '/api/4/tag/josm/style/rules?style=standard&key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value),
-            colModel: [
-                { display: '<%= h(osm.value) %>', name: 'value', width: 400, sortable: false },
-                { display: '<%= h(misc.icon) %>', name: 'icon', width: 40, sortable: false, align: 'center' },
-                { display: '<%= h(misc.line) %>', name: 'line', width: 40, sortable: false, align: 'center' },
-                { display: '<%= h(misc.area) %>', name: 'area', width: 40, sortable: false, align: 'center' }
-            ],
-            sortname: 'value',
-            sortorder: 'asc',
-            preProcess: function(data) {
-                data.rows = jQuery.map(data.data, function(row, i) {
-                    return { 'cell': [
-                        fmt_josm_value(row.key, row.value, row.value_bool),
-                        fmt_josm_icon('standard', row.icon),
-                        fmt_josm_line(row.line_width, row.line_color),
-                        fmt_josm_area(row.area_color)
-                    ] };
-                });
-                return data;
-            }
-        });
-    },
     projects: function(key, value, filter_type) {
         create_flexigrid('grid-projects', {
             url: '/api/4/tag/projects?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value) + '&filter=' + encodeURIComponent(filter_type),
