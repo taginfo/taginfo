@@ -51,7 +51,7 @@ class Taginfo < Sinatra::Base
 
     get '/taginfo/version' do
         get_commit
-        "#{@commit} #{@commit_date}"
+        "#{@commit} #{@commit_date}\n"
     end
 
     get '/taginfo/status' do
