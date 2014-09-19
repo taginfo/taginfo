@@ -34,13 +34,24 @@ class Taginfo < Sinatra::Base
         out
     end
 
-    get '/taginfo' do
+    def get_commit
         begin
             @commit = `git rev-parse HEAD`.chop
+            @commit_date = Time.parse(`git show -s --format=%ci HEAD`.chop).utc.iso8601
         rescue
             @commit = 'unknown'
+            @commit_date = 'unknown'
         end
+    end
+
+    get '/taginfo' do
+        get_commit
         erb :'taginfo/index'
+    end
+
+    get '/taginfo/version' do
+        get_commit
+        "#{@commit} #{@commit_date}"
     end
 
     get '/taginfo/status' do
