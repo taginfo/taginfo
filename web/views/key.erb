@@ -110,6 +110,17 @@
 <iframe id="josmiframe" name="josmiframe"></iframe>
 <% javascript do
     JS.raw(<<"JAVASCRIPT")
+function redraw_chart() {
+    jQuery('#canvas-values').html('');
+    var max_height = jQuery(window).height() - 300;
+    create_chart({
+        key: #{ @key.to_json },
+        width: 160,
+        height: Math.min(440, max_height),
+        max: #{ @count_all_values },
+        data: #{ @prevalent_values.to_json() }
+    });
+}
 function page_init2() {
     var filter = #{ @filter_type.to_json },
         key = #{ @key.to_json };
@@ -129,13 +140,9 @@ function page_init2() {
     });
 
     init_tabs([key, filter, #{ r18n.locale.code.to_json }]);
-    create_chart({
-        key: key,
-        width: 160,
-        height: 440,
-        max: #{ @count_all_values },
-        data: #{ @prevalent_values.to_json() }
-    });
+
+    redraw_chart();
+    jQuery(window).resize(redraw_chart);
 }
 JAVASCRIPT
 end
