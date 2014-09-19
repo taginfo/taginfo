@@ -96,6 +96,8 @@ UPDATE top_tags SET
 UPDATE top_tags SET in_wiki=1    WHERE skey || '=' || svalue IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*');
 UPDATE top_tags SET in_wiki_en=1 WHERE skey || '=' || svalue IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en');
 
+UPDATE top_tags SET in_projects=(SELECT num FROM projects.project_counts p WHERE p.key=skey AND p.value=svalue);
+
 CREATE UNIQUE INDEX top_tags_key_value_idx ON top_tags (skey, svalue);
 
 -- ============================================================================
