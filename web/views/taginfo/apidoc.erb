@@ -8,11 +8,9 @@
 <%  API.paths.keys.sort.each do |version|
         if version > 0
             API.paths[version].keys.sort.each do |path|
-                doc = API.paths[version][path]
-                if !doc.deprecated? || params[:show_deprecated] %>
-    <li><a href="#<%= doc.complete_path.tr('/', '_')[1,1000] %>"><%= doc.complete_path %></a><%= doc.deprecated? ? " <span class='bad'>Deprecated. Use <a href='##{ doc.superseded_by.tr('/', '_')[1,1000] }'>#{ doc.superseded_by }</a> instead.</span>" : '' %></li>
-<%              end
-            end
+                doc = API.paths[version][path] %>
+    <li><a href="#<%= doc.complete_path.tr('/', '_')[1,1000] %>"><%= doc.complete_path %></a><%= doc.deprecated? ? " <span class='bad'>Deprecated</span>" : '' %></li>
+<%          end
         end
     end %>
 </ul>
@@ -21,10 +19,9 @@
         if version > 0
             API.paths[version].keys.sort.each do |path|
                 doc = API.paths[version][path]
-                if !doc.deprecated? || params[:show_deprecated]
-                    hashpath = doc.complete_path.tr('/', '_')[1,1000] %>
+                hashpath = doc.complete_path.tr('/', '_')[1,1000] %>
 <a name="<%= hashpath %>"></a>
-<h2><%= doc.complete_path %><%= doc.deprecated? ? " <span class='bad'>Deprecated. Use <a href='##{ doc.superseded_by.tr('/', '_')[1,1000] }'>#{ doc.superseded_by }</a> instead.</span>" : '' %></h2>
+<h2><%= doc.complete_path %><%= doc.deprecated? ? " <span class='bad'>Deprecated</span>" : '' %></h2>
 <table class="desc">
     <tr>
         <th>Path:</th>
@@ -69,7 +66,6 @@
     </tr>
 <% end %>
 </table>
-<%              end
-            end
+<%          end
         end
     end %>

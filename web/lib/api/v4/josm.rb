@@ -2,7 +2,8 @@
 class Taginfo < Sinatra::Base
 
     api(4, 'josm/style/image', {
-        :description => 'Access images for map features used in JOSM.',
+        :superseded_by => '',
+        :description => 'DEPRECATED. Access images for map features used in JOSM.',
         :parameters => {
             :style => 'JOSM style (required).',
             :image => 'Image path (required).'
@@ -21,6 +22,7 @@ class Taginfo < Sinatra::Base
     end
 
     api(4, 'josm/style/rules', {
+        :superseded_by => '',
         :description => 'List rules and symbols in JOSM styles.',
         :parameters => {
             :style => 'JOSM style (required).',

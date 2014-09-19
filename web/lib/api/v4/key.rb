@@ -106,6 +106,7 @@ class Taginfo < Sinatra::Base
     end
 
     api(4, 'key/josm/style/rules', {
+        :superseded_by => '',
         :description => 'List rules and symbols for the given key in JOSM styles.',
         :parameters => {
             :style => 'JOSM style (required).',
