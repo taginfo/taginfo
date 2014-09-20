@@ -8,3 +8,4 @@ vespucci https://osmeditor4android.googlecode.com/svn/trunk/taginfo.json
 waymarkedtrails http://mapstatic.waymarkedtrails.org/taginfo.json
 osm_inspector_public_transport_railways http://tools.geofabrik.de/osmi/osmi_pubtrans_railways.json
 osm_inspector_public_transport_stops http://tools.geofabrik.de/osmi/osmi_pubtrans_stops.json
+bano http://bano.openstreetmap.fr/bano_taginfo.json
