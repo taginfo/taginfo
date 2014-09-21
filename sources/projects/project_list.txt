@@ -10,3 +10,4 @@ osmcoastline https://raw.githubusercontent.com/joto/osmcoastline/master/taginfo.
 osrm https://raw.githubusercontent.com/Project-OSRM/osrm-backend/develop/taginfo.json
 vespucci https://osmeditor4android.googlecode.com/svn/trunk/taginfo.json
 waymarkedtrails http://mapstatic.waymarkedtrails.org/taginfo.json
+townlands_ie http://www.townlands.ie/taginfo.json
