@@ -39,6 +39,8 @@ taginfo:
     reports: Reportes
     international: Internacional
     apidoc: Documentación de la API
+    project: Proyecto
+    projects: Proyectos
     test: Prueba
     map: Mapa
     maps: Mapas
@@ -110,6 +112,7 @@ help:
         keys_page: Keys page
         tags_page: Página de claves
         relations_page: Página de relaciones
+        projects_page: Página de proyectos
         compare_page: Página de comparación
         first_page: Primera página
         prev_page: Página anterior
@@ -241,6 +244,8 @@ pages:
                 <p>Taginfo obtiene información acerca de los diferentes idiomas del mundo, sus códigos, nombres, etc. de varios registros de <a class="extlink" href="http://www.iana.org/">IANA</a> y <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
             josm: |
                 <p>Los iconos y estilos se toman de la configuraión del <a class="extlink" href="http://josm.openstreetmap.de/">editor de JOSM</a>.</p>
+            projects: |
+                <p>Proyectos que utilizan etiquetas OSM de alguna manera, tales como editores, mapas, enrutadores, etc. Ver <a href="/projects">la lista de proyectos</a>.</p>
         updates:
             title: Actualizaciones
             intro: Los datos taginfo se actualizan regularmente desde las fuentes.
@@ -291,6 +296,9 @@ pages:
         no_information: No hay información
         roles_less_than_one_percent: no hay roles con más del 1%
         empty_role: rol vacío
+    projects:
+        intro: |
+                Esta tabla muestra todos los proyectos conocidos por taginfo que utilizan etiquetas OSM de alguna manera.<br/>Para más información sobre esta funcionalidad ver la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
     key:
         description_from_wiki: Descripción de esta clave desde la wiki (si está disponible en su idioma elegido, si no en Inglés).
         no_description_in_wiki: No hay descripción en el idioma Inglés para esta clave en la wiki. (Véase también la pestaña "Wiki".)
@@ -332,6 +340,9 @@ pages:
             choice: |
                   Elegir estilo:
             no_styles: No hay estilos JOSM para esta clave.
+        projects:
+            title: Proyectos que utilizan esta clave
+            description: Cómo se utiliza esta clave en el proyecto
     tag:
         description_from_wiki: Descripción de esta etiqueta desde la wiki (si está disponible en su idioma elegido, si no en Inglés).
         no_description_in_wiki: No hay descripción en el idioma Inglés para esta etiqueta en la wiki. (Véase también la pestaña "Wiki".)
@@ -366,6 +377,9 @@ pages:
             choice: |
                   Elegir estilo:
             no_styles: No hay estilos JOSM para esta etiqueta.
+        projects:
+            title: Proyectos que utilizan esta etiqueta
+            description: Cómo se utiliza esta etiqueta en el proyecto
     relation:
         name: Tipo de relación
         description_from_wiki: Descripción de este tipo de relación desde la wiki (si está disponible en su idioma elegido, si no en Inglés).
@@ -393,6 +407,22 @@ pages:
             none_found: No hay páginas wiki disponibles para este tipo de relación.
             create: Crear la página wiki para este tipo de relación
             wiki_page: Página wiki
+        projects:
+            title: Proyectos que utilizan este tipo de relación
+            description: Cómo se utiliza este tipo de relación en el proyecto
+    project:
+        overview:
+            project_name: Nombre del proyecto
+            project_url: URL del proyecto
+            description: Descripción
+            documentation_url: Documentación
+            last_update: Última actualización
+            json_url: Archivo JSON del proyecto
+            info: Este dato es proporcionado por el proyecto para taginfo a través del 'archivo JSON del proyecto' vinculado desde arriba. Ver la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a> para una descripción del formato.
+        tags:
+            title: Etiquetas utilizadas por este proyecto
+            intro: Este dato es proporcionado por el proyecto y no necesariamente está completo. Por favor, consulte la documentación del proyecto para obtener más información.
+            description: Cómo se utiliza esta clave/etiqueta en el proyecto
 
 flexigrid:
     pagetext: Página
@@ -427,6 +457,9 @@ sources:
     languages:
         name: Idiomas
         description: Nombres de idiomas, códigos, etc. de los registros IANA y Unicode.
+    projects:
+        name: Proyectos
+        description: Proyectos externos y las claves/etiquetas OSM que utilizan.
 
 reports:
     characters_in_keys:
