@@ -27,7 +27,6 @@ CREATE TABLE keys (
   cells_nodes      INTEGER DEFAULT 0,
   cells_ways       INTEGER DEFAULT 0,
   in_wiki          INTEGER DEFAULT 0,
-  in_wiki_en       INTEGER DEFAULT 0,
   in_projects      INTEGER DEFAULT 0,
   characters       VARCHAR
 );
@@ -71,7 +70,6 @@ CREATE TABLE tags (
   object_type      VARCHAR(1),          -- (n)ode, (w)ay, (r)elation
   object_id        INTEGER,
   in_wiki          INTEGER DEFAULT 0,
-  in_wiki_en       INTEGER DEFAULT 0,
   in_projects      INTEGER DEFAULT 0
 );
 
@@ -139,7 +137,6 @@ CREATE TABLE selected_tags (
   count_nodes      INTEGER DEFAULT 0,
   count_ways       INTEGER DEFAULT 0,
   count_relations  INTEGER DEFAULT 0,
-  in_wiki          INTEGER,
-  in_wiki_en       INTEGER
+  in_wiki          INTEGER
 );
 
