@@ -62,12 +62,7 @@ UPDATE db.keys SET in_wiki_en=1 WHERE key IN (SELECT distinct key FROM wiki.wiki
 UPDATE db.tags SET in_wiki=1    WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*') AND key || '=' || value IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*');
 UPDATE db.tags SET in_wiki_en=1 WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en') AND key || '=' || value IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en');
 
-UPDATE db.selected_tags SET in_wiki=1    WHERE skey || '=' || svalue IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*');
-UPDATE db.selected_tags SET in_wiki_en=1 WHERE skey || '=' || svalue IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en');
-
 -- ============================================================================
-
--- currently unused future replacement for db.selected_tags
 
 DROP TABLE IF EXISTS top_tags;
 CREATE TABLE top_tags (

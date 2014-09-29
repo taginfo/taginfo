@@ -7,7 +7,7 @@ tagcloud_number_of_relations = 30
 keys = @db.select("SELECT key, scale1 FROM popular_keys ORDER BY scale1 DESC LIMIT #{ tagcloud_number_of_keys }").
     execute().
     each_with_index{ |tag, idx| tag['pos'] = (tagcloud_number_of_keys - idx) / tagcloud_number_of_keys.to_f }
-tags = @db.select("SELECT skey, svalue FROM db.selected_tags WHERE skey NOT IN ('source', 'source_ref', 'attribution') ORDER BY count_all DESC LIMIT #{ tagcloud_number_of_tags }").execute()
+tags = @db.select("SELECT skey, svalue FROM top_tags WHERE skey NOT IN ('source', 'source_ref', 'attribution') ORDER BY count_all DESC LIMIT #{ tagcloud_number_of_tags }").execute()
 relations = @db.select("SELECT rtype FROM db.relation_types ORDER BY count DESC LIMIT #{ tagcloud_number_of_relations }").execute()
 %>
 

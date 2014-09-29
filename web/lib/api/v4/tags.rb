@@ -128,11 +128,11 @@ class Taginfo < Sinatra::Base
         :ui => '/tags'
     }) do
 
-        total = @db.count('db.selected_tags').
+        total = @db.count('top_tags').
             condition_if("(skey LIKE ? ESCAPE '@') OR (svalue LIKE ? ESCAPE '@')", like_contains(params[:query]), like_contains(params[:query])).
             get_first_value().to_i
-        
-        res = @db.select('SELECT * FROM db.selected_tags').
+
+        res = @db.select('SELECT * FROM top_tags').
             condition_if("(skey LIKE ? ESCAPE '@') OR (svalue LIKE ? ESCAPE '@')", like_contains(params[:query]), like_contains(params[:query])).
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.tag :skey

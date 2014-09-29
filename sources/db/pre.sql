@@ -134,8 +134,8 @@ CREATE TABLE prevalent_roles (
   fraction REAL
 );
 
+-- deprecated: can be removed soon
 DROP TABLE IF EXISTS selected_tags;
-
 CREATE TABLE selected_tags (
   skey             VARCHAR,
   svalue           VARCHAR,

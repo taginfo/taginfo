@@ -27,6 +27,9 @@ CREATE        INDEX tag_combinations_key2_value2_idx ON tag_combinations (key2, 
 CREATE UNIQUE INDEX relation_types_rtype_idx ON relation_types (rtype);
 CREATE        INDEX relation_roles_rtype_idx ON relation_roles (rtype);
 
+-- ============================================================================
+-- deprecated: can be removed soon
+
 INSERT INTO selected_tags (skey, svalue)
     SELECT key1, value1 FROM tag_combinations WHERE value1 != ''
     UNION
@@ -41,6 +44,8 @@ UPDATE selected_tags SET
 ANALYZE selected_tags;
 
 CREATE UNIQUE INDEX selected_tags_key_value_idx ON selected_tags (skey, svalue);
+
+-- ============================================================================
 
 INSERT INTO stats (key, value) SELECT 'num_keys',                  count(*) FROM keys;
 INSERT INTO stats (key, value) SELECT 'num_keys_on_nodes',         count(*) FROM keys WHERE count_nodes     > 0;
