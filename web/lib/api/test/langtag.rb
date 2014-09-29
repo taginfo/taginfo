@@ -7,7 +7,7 @@ class Taginfo < Sinatra::Base
         :paging => :optional,
         :sort => %w( key count_all ),
         :result => {
-            :key           => :STRING, 
+            :key           => :STRING,
             :count_all     => :INT,
             :in_wiki       => :BOOL,
             :prefix        => :STRING,
@@ -31,7 +31,7 @@ class Taginfo < Sinatra::Base
             condition("key LIKE '%name%'").
             condition_if("key LIKE '%' || ? || '%'", params[:query]).
             get_first_value().to_i
-        
+
         res = @db.select('SELECT * FROM db.keys').
             condition("key LIKE '%name%'").
             condition_if("key LIKE '%' || ? || '%'", params[:query]).
@@ -66,7 +66,7 @@ class Taginfo < Sinatra::Base
                 :region_state  => nt.region_state,
                 :region_note   => nt.region_note,
                 :notes         => nt.notes
-            }} 
+            }}
         }, json_opts(params[:format]))
     end
 
@@ -117,7 +117,7 @@ class Taginfo < Sinatra::Base
                 notes = ''
                 if row['suppress_script']
                     notes += "Default script: #{ row['suppress_script'] }"
-                end 
+                end
                 unless row['prefix'].empty?
                     notes += "Prefixes: #{ row['prefix'] }"
                 end

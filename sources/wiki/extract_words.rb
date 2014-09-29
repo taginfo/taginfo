@@ -71,7 +71,7 @@ class Words
         @kvw.sort.uniq.each do |key, value, word|
             if key != lastkey || value != lastvalue
                 yield lastkey, lastvalue, words.join(',')
-                words = []    
+                words = []
                 lastkey = key
                 lastvalue = value
             else

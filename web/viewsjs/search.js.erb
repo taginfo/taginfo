@@ -17,7 +17,7 @@ function link_to_key_with_highlight(key, query) {
 
 function link_to_value_with_highlight(key, value, query) {
     return link(
-        url_for_tag(key, value), 
+        url_for_tag(key, value),
         highlight(value, query)
     );
 }

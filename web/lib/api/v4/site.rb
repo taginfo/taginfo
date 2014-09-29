@@ -15,7 +15,7 @@ class Taginfo < Sinatra::Base
     }) do
         data = {}
         [:url, :name, :description, :icon, :contact, :area].each do |k|
-            data[k] = TaginfoConfig.get("instance.#{k}") 
+            data[k] = TaginfoConfig.get("instance.#{k}")
         end
         return JSON.generate(data, json_opts(params[:format]))
     end

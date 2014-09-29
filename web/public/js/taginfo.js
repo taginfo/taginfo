@@ -179,7 +179,7 @@ function link_to_key(key, attr) {
 
 function link_to_value(key, value, attr) {
     return link(
-        url_for_tag(key, value), 
+        url_for_tag(key, value),
         fmt_value(value),
         attr
     );
@@ -477,7 +477,7 @@ function create_flexigrid(domid, options) {
 
 function init_tabs(params) {
     return jQuery('#tabs').tabs({
-        activate: function (event, ui) { 
+        activate: function (event, ui) {
             resize_box();
             var index = ui.newTab.closest("li").index();
             if (index != 0 || window.location.hash != '') {
@@ -487,7 +487,7 @@ function init_tabs(params) {
                 create_flexigrid_for[ui.newTab.context.hash.substring(1)].apply(this, params);
             }
         },
-        create: function (event, ui) { 
+        create: function (event, ui) {
             resize_box();
             var index = jQuery(this).tabs("option", "selected"),
                 id = jQuery(jQuery(this).children()[index+1]).attr('id');

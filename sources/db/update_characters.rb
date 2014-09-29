@@ -55,7 +55,7 @@ db.execute("SELECT key FROM keys").map{ |row| row['key'] }.each do |key|
             keys[key] = type
             break
         end
-    end 
+    end
 end
 
 db.transaction do |db|

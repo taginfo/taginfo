@@ -46,7 +46,7 @@ def walk(path, en, other)
 #            puts "#{name} [#{en[key]}] [#{other[key]}]"
             if other.nil?|| ! other[key]
                 puts "MISSING: #{name} [en=#{en[key]}]"
-            end 
+            end
         end
     end
 end

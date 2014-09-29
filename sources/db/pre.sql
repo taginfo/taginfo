@@ -81,7 +81,7 @@ CREATE TABLE key_combinations (
   count_all        INTEGER,
   count_nodes      INTEGER,
   count_ways       INTEGER,
-  count_relations  INTEGER 
+  count_relations  INTEGER
 );
 
 DROP TABLE IF EXISTS tag_combinations;
@@ -94,7 +94,7 @@ CREATE TABLE tag_combinations (
   count_all        INTEGER,
   count_nodes      INTEGER,
   count_ways       INTEGER,
-  count_relations  INTEGER 
+  count_relations  INTEGER
 );
 
 DROP TABLE IF EXISTS relation_types;

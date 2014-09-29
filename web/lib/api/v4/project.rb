@@ -27,7 +27,7 @@ class Taginfo < Sinatra::Base
             condition("project_id=?", project_id).
             condition_if("key LIKE ? ESCAPE '@' OR value LIKE ? ESCAPE '@'", q, q).
             get_first_value().to_i
-        
+
         res = @db.select('SELECT * FROM projects.project_tags').
             condition("project_id=?", project_id).
             condition_if("key LIKE ? ESCAPE '@' OR value LIKE ? ESCAPE '@'", q, q).

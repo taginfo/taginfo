@@ -12,5 +12,5 @@ of type '<%= escape_html(@rtype) %>' with<br/>
 <b><%= @dbrtype['members_all'].to_i.to_s_with_ts %> members</b>.</p>
 <% unless @roles.empty? %>
 <p>Prevalent roles:<br/><%= @roles.join(', ') %></p>
-<% end 
+<% end
 end %>

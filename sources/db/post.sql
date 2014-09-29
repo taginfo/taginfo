@@ -10,7 +10,7 @@ PRAGMA journal_mode  = OFF;
 PRAGMA synchronous   = OFF;
 PRAGMA count_changes = OFF;
 PRAGMA temp_store    = MEMORY;
-PRAGMA cache_size    = 5000000; 
+PRAGMA cache_size    = 5000000;
 
 CREATE UNIQUE INDEX keys_key_idx ON keys (key);
 CREATE        INDEX tags_key_idx ON tags (key);

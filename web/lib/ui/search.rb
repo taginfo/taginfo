@@ -17,7 +17,7 @@ class Taginfo < Sinatra::Base
 
     # Return opensearch description (see www.opensearch.org)
     get '/search/opensearch.xml' do
-        content_type :opensearch 
+        content_type :opensearch
         opensearch = <<END_XML
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">

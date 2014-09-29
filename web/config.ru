@@ -12,7 +12,7 @@ require 'lib/config.rb'
 TaginfoConfig.read
 
 LOGDIR=TaginfoConfig.get('logging.directory', '/osm/taginfo/var/log');
- 
+
 set :run, false
 set :environment, :production
 

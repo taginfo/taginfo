@@ -227,7 +227,7 @@ module SQL
 
         def to_s(direction)
             dir = @reverse ? @@DIRECTION[direction.upcase] : direction.upcase
-            "#{@column} #{dir}" 
+            "#{@column} #{dir}"
         end
 
     end

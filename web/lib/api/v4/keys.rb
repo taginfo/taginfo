@@ -50,7 +50,7 @@ class Taginfo < Sinatra::Base
             condition_if("key LIKE ? ESCAPE '@'", like_contains(params[:query])).
             conditions(filters).
             get_first_value().to_i
-        
+
         res = @db.select('SELECT * FROM db.keys').
             condition_if("key LIKE ? ESCAPE '@'", like_contains(params[:query])).
             conditions(filters).
@@ -137,7 +137,7 @@ class Taginfo < Sinatra::Base
                 :users_all                => row['users_all'].to_i,
                 :in_wiki                  => row['in_wiki'].to_i == 1 ? true : false,
                 :in_josm                  => false
-            } 
+            }
             h[:wikipages] = row['wikipages'] if row['wikipages']
             h[:prevalent_values] = row['prevalent_values'][0,10] if row['prevalent_values']
             h }
@@ -150,7 +150,7 @@ class Taginfo < Sinatra::Base
         :paging => :optional,
         :sort => %w( key ),
         :result => paging_results([
-            [:key, :STRING, 'Key'], 
+            [:key, :STRING, 'Key'],
             [:lang, :HASH, 'Hash with language codes as keys and values showing what type of wiki pages are available.']
         ]),
         :example => { :page => 1, :rp => 10, :sortname => 'key', :sortorder => 'asc' },
@@ -225,7 +225,7 @@ class Taginfo < Sinatra::Base
             condition("in_wiki#{english} = 0").
             condition_if("key LIKE ? ESCAPE '@'", like_contains(params[:query])).
             get_first_value().to_i
-        
+
         res = @db.select('SELECT * FROM db.keys').
             condition('count_all > ?', min_count).
             condition("in_wiki#{english} = 0").

@@ -87,7 +87,7 @@ function page_init() {
     var scale = d3.scale.linear()
                     .domain([0, max])
                     .range([0, w]);
-        
+
     var chart = d3.select('#canvas').append('svg')
                     .attr("width", w)
                     .attr("height", h);

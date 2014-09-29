@@ -59,7 +59,7 @@ class JQuery
     # "include" the convenience methods from R18n::Helpers.
     # Uses extend instead of include, because we want this
     # to work not with instances of JQuery but they should
-    # show up as JQuery class methods. 
+    # show up as JQuery class methods.
     extend R18n::Helpers
 
     def self.flexigrid(id, options)

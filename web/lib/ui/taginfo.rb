@@ -28,7 +28,7 @@ class Taginfo < Sinatra::Base
                     out += line.call(level, key, name, en[key], '<span style="color: red;">MISSING</span>')
                 else
                     out += line.call(level, key, name, en[key], other[key])
-                end 
+                end
             end
         end
         out
@@ -98,10 +98,10 @@ class Taginfo < Sinatra::Base
             @i18n_lang = YAML.load_file("i18n/#{@lang}.yml")
         rescue
             @error = "Unknown language: #{@lang}"
-        end 
+        end
 
         c = 'even'
-        @line = lambda { |level, key, name, en, other|    
+        @line = lambda { |level, key, name, en, other|
             c = (c == '') ? 'even': ''
             "<tr><td class='#{c}' style='padding-left: #{ level * 16 + 6 }px;'><span title='#{ name }'>#{ key }</span></td><td class='#{c}'>#{ en }</td><td class='#{c}'>#{ other }</td></tr>"
         }
