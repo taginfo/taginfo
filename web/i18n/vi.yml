@@ -79,7 +79,6 @@ misc:
     prevalent_values: Giá trị phổ biến
     prevalent_values_tooltip: Cho tới 10 giá trị phổ biến nhất của chìa khóa này (chỉ khi nào hơn 1% các thẻ có chìa khóa này có giá trị này).
     in_wiki_tooltip: Có ít nhất một trang wiki.
-    in_josm_tooltip: Chìa khóa xuất hiện trong cấu hình JOSM.
 
 help:
     search:

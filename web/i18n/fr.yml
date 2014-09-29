@@ -79,7 +79,6 @@ misc:
     prevalent_values: Valeurs dominantes
     prevalent_values_tooltip: Jusqu'à dix des valeurs les plus fréquentes pour cette clé (seulement pour les valeurs présentes plus de %1).
     in_wiki_tooltip: Possède au moins une page wiki.
-    in_josm_tooltip: Cette clé apparaît dans la configuration de JOSM.
 
 help:
     search:

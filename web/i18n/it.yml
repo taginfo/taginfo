@@ -75,8 +75,6 @@ misc:
     prevalent_values: Valori prevalenti
     prevalent_values_tooltip: Fino a 10 dei valori più usati per questa chiave (solamente se almeno l'1% delle chiavi hanno questo valore).
     in_wiki_tooltip: La chiave ha almeno una pagina pagina nel wiki.
-    in_josm_tooltip: La chiave appare nelle impostazioni di JOSM.
-
 
 pages:
     sources:

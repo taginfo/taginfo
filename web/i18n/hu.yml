@@ -79,7 +79,6 @@ misc:
     prevalent_values: Leggyakoribb értékek
     prevalent_values_tooltip: A kulcs legfeljebb tíz leggyakoribb értéke (csak ha a címkék több, mint 1%-a ilyen értékű).
     in_wiki_tooltip: Van legalább egy wiki oldala.
-    in_josm_tooltip: A kulcs megjelenik a JOSM-ben.
 
 help:
     search:

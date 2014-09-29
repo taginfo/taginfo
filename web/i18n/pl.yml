@@ -78,7 +78,6 @@ misc:
     prevalent_values: Najczęstsze wartości
     prevalent_values_tooltip: Dziesięć najczęściej występujących wartości klucza (tylko jeśli więcej niż 1% tagów z tym kluczem posiada daną wartość).
     in_wiki_tooltip: Klucz posiada co najmniej jedną wiki stronę.
-    in_josm_tooltip: Klucz dostępny w JOSM.
 
 help:
     search:

@@ -81,7 +81,6 @@ misc:
     prevalent_values: Valores frecuentes
     prevalent_values_tooltip: Hasta diez de los valores más comunes para esta clave (sólo si más del 1% de las etiquetas con esta clave tienen este valor).
     in_wiki_tooltip: Tiene al menos una página wiki.
-    in_josm_tooltip: La clave aparece en la configuración de JOSM.
 
 help:
     search:

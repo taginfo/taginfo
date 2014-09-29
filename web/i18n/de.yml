@@ -80,7 +80,6 @@ misc:
     prevalent_values: Häufige Values
     prevalent_values_tooltip: Bis zu zehn der häufigsten Values zu diesem Key (Anzeige nur, wenn mehr als 1% der Tags mit diesem Key auch diesen Value haben).
     in_wiki_tooltip: Zu diesem Objekt gibt es mindestens eine Wiki-Seite.
-    in_josm_tooltip: Der Key erscheint in der JOSM-Konfiguration.
 
 help:
     search:

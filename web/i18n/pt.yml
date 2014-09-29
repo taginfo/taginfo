@@ -78,7 +78,6 @@ misc:
     prevalent_values: Valores prevalentes
     prevalent_values_tooltip: Até dez dos valores mais comuns para esta chave (somente se mais de 1% das etiquetas com esta chave possuem este valor).
     in_wiki_tooltip: Tem pelo menos uma página na wiki.
-    in_josm_tooltip: Chave aparece na configuração do JOSM.
 
 help:
     search:
