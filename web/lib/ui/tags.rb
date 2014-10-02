@@ -30,7 +30,6 @@ class Taginfo < Sinatra::Base
         @sel[@filter_type] = ' selected="selected"'
         @filter_xapi = { 'all' => '*', nil => '*', 'nodes' => 'node', 'ways' => 'way', 'relations' => 'relation' }[@filter_type];
 
-        @josm_count = @db.count('josm_style_rules').condition('k=? AND v=?', @key, @value).get_first_i
         @wiki_count = @db.count('wiki.wikipages').condition('key=? AND value=?', @key, @value).get_first_i
         if @wiki_count == 0
             @wiki_count_key = @db.count('wiki.wikipages').condition('key=? AND value IS NULL', @key).get_first_i

@@ -147,24 +147,8 @@ class Taginfo < Sinatra::Base
         :example => { :style => 'standard', :key => 'highway', :value => 'residential', :page => 1, :rp => 10 },
         :ui => '/tags/highway=residential#josm'
     }) do
-        style = params[:style]
-        key   = params[:key]
-        value = params[:value]
-
-        total = @db.count('josm_style_rules').
-#            condition('style = ?', style).
-            condition('k = ?', key).
-            condition('v = ?', value).
-            get_first_value().to_i
-
-        res = @db.select('SELECT * FROM josm_style_rules').
-#            condition('style = ?', style).
-            condition('k = ?', key).
-            condition('v = ?', value).
-            order_by([:k, :v], 'ASC').
-            paging(@ap).
-            execute()
-
+        total = 0
+        res = []
         return get_josm_style_rules_result(total, res);
     end
 

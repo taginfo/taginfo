@@ -45,7 +45,6 @@ class Taginfo < Sinatra::Base
             @prevalent_values << { 'value' => '(other)', 'count' => @count_all_values - sum }
         end
 
-        @josm_count = @db.count('josm_style_rules').condition('k = ?', @key).get_first_i
         @wiki_count = @db.count('wiki.wikipages').condition('key=? AND value IS NULL', @key).get_first_i
         @user_count = @db.select('SELECT users_all FROM db.keys').condition('key=?', @key).get_first_i
 

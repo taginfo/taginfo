@@ -127,27 +127,8 @@ class Taginfo < Sinatra::Base
         :example => { :style => 'standard', :key => 'highway', :page => 1, :rp => 10 },
         :ui => '/keys/highway#josm'
     }) do
-        style = params[:style]
-        key   = params[:key]
-
-        total = @db.count('josm_style_rules').
-#            condition('style = ?', style).
-            condition('k = ?', key).
-            condition_if("v LIKE ? ESCAPE '@'", like_contains(params[:query])).
-            get_first_value().to_i
-
-        res = @db.select('SELECT * FROM josm_style_rules').
-#            condition('style = ?', style).
-            condition('k = ?', key).
-            condition_if("v LIKE ? ESCAPE '@'", like_contains(params[:query])).
-            order_by(@ap.sortname, @ap.sortorder) { |o|
-                o.value :v
-                o.value :b
-                o.b
-            }.
-            paging(@ap).
-            execute()
-
+        total = 0
+        res = []
         return get_josm_style_rules_result(total, res);
     end
 

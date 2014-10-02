@@ -42,28 +42,8 @@ class Taginfo < Sinatra::Base
         :example => { :style => 'standard', :page => 1, :rp => 10 },
         :ui => '/reports/josm_styles'
     }) do
-        style = params[:style]
-
-        total = @db.count('josm_style_rules').
-#            condition('style = ?', style).
-            condition_if("k LIKE ? ESCAPE '@' OR v LIKE ? ESCAPE '@'", like_contains(params[:query]), like_contains(params[:query])).
-            get_first_value().to_i
-
-        res = @db.select('SELECT * FROM josm_style_rules').
-#            condition('style = ?', style).
-            condition_if("k LIKE ? ESCAPE '@' OR v LIKE ? ESCAPE '@'", like_contains(params[:query]), like_contains(params[:query])).
-            order_by(@ap.sortname, @ap.sortorder) { |o|
-                o.key :k
-                o.key :v
-                o.key :b
-                o.value :v
-                o.value :b
-                o.value :k
-                o.b
-            }.
-            paging(@ap).
-            execute()
-
+        total = 0
+        res = []
         return get_josm_style_rules_result(total, res);
     end
 
