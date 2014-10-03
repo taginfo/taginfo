@@ -195,6 +195,7 @@ class Taginfo < Sinatra::Base
     #--------------------------------------------------------------------------
 
     not_found do
+        content_type :html
         erb :not_found
     end
 
