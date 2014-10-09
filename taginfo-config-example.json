@@ -16,7 +16,12 @@
         // Contact name and email address.
         "contact": "Anonymous",
         // Geographical area this taginfo instance covers.
-        "area": "World"
+        "area": "World",
+        // Add CORS header Access-Control-Allow-Origin with the given value
+        // to all /api responses. Use "" to not set this header, disallowing
+        // external services to use your API from a browser. Set to "*" to
+        // allow anybody.
+        "access_control_allow_origin": "*"
     },
     // For the geodistribution map. See the wiki documentation about these settings.
     "geodistribution": {

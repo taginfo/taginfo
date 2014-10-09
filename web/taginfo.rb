@@ -138,7 +138,10 @@ class Taginfo < Sinatra::Base
     before '/api/*' do
         content_type :json
         expires next_update
-        headers['Access-Control-Allow-Origin'] = '*'
+        cors = TaginfoConfig.get('instance.access_control_allow_origin', '')
+        if cors != ""
+            headers['Access-Control-Allow-Origin'] = cors
+        end
         begin
             @ap = APIParameters.new(params)
         rescue ArgumentError => ex
