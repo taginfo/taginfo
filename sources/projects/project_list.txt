@@ -11,3 +11,4 @@ osrm https://raw.githubusercontent.com/Project-OSRM/osrm-backend/develop/taginfo
 vespucci https://osmeditor4android.googlecode.com/svn/trunk/taginfo.json
 waymarkedtrails http://mapstatic.waymarkedtrails.org/taginfo.json
 townlands_ie http://www.townlands.ie/taginfo.json
+opensnowmap.org http://www.opensnowmap.org/opensnowmap_taginfo.json
