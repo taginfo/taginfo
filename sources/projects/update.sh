@@ -8,7 +8,7 @@
 set -e
 
 DIR=$1
-PROJECT_LIST=project_list.txt
+PROJECT_LIST=$DIR/taginfo-projects/project_list.txt
 
 DATECMD='date +%Y-%m-%dT%H:%M:%S'
 
@@ -28,6 +28,15 @@ echo "Running with ruby set as '${EXEC_RUBY}'"
 DATABASE=$DIR/taginfo-projects.db
 
 rm -f $DATABASE
+
+echo "`$DATECMD` Updating projects list..."
+if [ -d $DIR/taginfo-projects ]; then
+    cd $DIR/taginfo-projects
+    git pull
+    cd -
+else
+    git clone https://github.com/joto/taginfo-projects.git $DIR/taginfo-projects
+fi
 
 echo "`$DATECMD` Running init.sql..."
 sqlite3 $DATABASE <../init.sql
