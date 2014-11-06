@@ -39,6 +39,8 @@ taginfo:
     reports: Comptes-rendus
     international: International
     apidoc: Documentation de l'API
+    project: Projet
+    projects: Projets
     test: Test
     map: Carte
     maps: Cartes
@@ -110,6 +112,8 @@ help:
         keys_page: Liste des clés
         tags_page: Liste des tags
         relations_page: Liste des relations
+        projects_page: Liste des projets
+        compare_page: Comparaisons
         first_page: Première page
         prev_page: Page précédente
         next_page: Page suivante
@@ -141,7 +145,7 @@ pages:
             listreports: Voir tous les rapports…
         about:
             intro:
-                <p>OpenStreetMap utilises des <b>tags</b> de la forme <b>clé=valeur</b>
+                <p>OpenStreetMap utilise des <b>tags</b> de la forme <b>clé=valeur</b>
                 pour rajouter des informations aux objets géographiques. Taginfo rassemble
                 les informations sur ces tags de plusieurs sources afin de vous aider à
                 comprendre ce qu'ils signifient, et comment ils sont utilisés.
@@ -149,10 +153,39 @@ pages:
         international:
             see: Voir d'autres sites Taginfo…
 
+    about:
+        about_taginfo:
+            title: À propos de taginfo
+            text: |
+                <p>OpenStreetMap utilise des <b>tags</b> pour décrire des objets géographiques.
+                Il n'existe pas de liste déterminée de tous ces tags. De nouveaux tags peuvent
+                être créés et utilisés à tout moment. Tout le monde peut donc
+                imaginer un nouveau tag, et l'utiliser sur des nouveaux éléments, ou des
+                éléments existants. Ceci rend OpenStreetMap très flexible, mais ne facilite pas
+                toujours la réutilisation des données.<p>
+                <p>Lors d'une contribution à OpenStreetMap, ou même lors de
+                l'utilisation des données, de nombreuses questions se posent, comme: Quels tags
+                utilisent les gens pour la caractéristique X ? Quels tags
+                dois-je utiliser pour la caractéristique Y afin qu'elle soit affichée sur un
+                rendu ? Est-ce que le tag Z décrit sur une page du wike est vraiment utilisé,
+                et si oui, à quel endroit ?</p>
+                <p>Taginfo vous permet d'afficher des statistiques sur quels
+                tags sont dans la base de donnée, combien de gens utilisent ces tags, où est-ce
+                qu'ils sont utilisés, etc. Le site affiche également des informations sur les
+                tags provenant du wiki, entre autres sources. Taginfo essaye de réunir ensemble
+                toutes les informations disponibles sur les tags afin de vous aider à
+                comprendre comment ils sont utilisés, et ce qu'ils signifient. La <a
+                href="/sources">liste des sources</a> les rassemble.
+        about_site:
+            title: À propos de ce site
+
     sources:
         intro: |
             <p>Taginfo retrouve des données sur les tags OSM depuis plusieurs sources et les assemble pour en faciliter l'exploration.</p>
             <p>Il est à noter que pour modifier les données il faut le faire à la source, car Taginfo ne fait que les afficher.</p>
+        updates:
+            title: Mises à jour
+            intro: Les données de taginfo sont régulièrement mises à jour.
         data_until: Données jusqu'à
         last_update_run: Dernière mise à jour
         data_until_explanation: Toutes les modifications jusqu'à cette date sont présentes, les suivantes le seront peut-être.
@@ -201,7 +234,9 @@ pages:
         no_information: Pas d'information
         roles_less_than_one_percent: pas de rôles au-dessus de %1
         empty_role: rôle vide
-
+    projects:
+        intro: |
+                Cette table affiche tous les projets connus par taginfo qui utilisent des tags OSM.<br/>Pour plus d'informations sur cette fonctionalité, merci de lire le <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
     key:
         description_from_wiki: Description de cette clé depuis le wiki (dans votre langue choisie si possible, sinon en anglais).
         no_description_in_wiki: Aucune description dans le wiki
@@ -244,6 +279,10 @@ pages:
             choice: |
                   Choix du style :
             no_styles: Pas de style JOSM pour cette clé.
+        projects:
+            title: Projets utilisant cette clé
+            description: Utilisation par ce projet
+
     tag:
         description_from_wiki: Description de ce tag depuis le wiki (dans votre langue choisie si possible, sinon en anglais).
         no_description_in_wiki: Aucune description dans le wiki
@@ -278,6 +317,9 @@ pages:
             choice: |
                   Choix du style :
             no_styles: Pas de style JOSM pour ce tag.
+        projects:
+            title: Projets utilisant cette clé
+            description: Utilisation par ce projet
     relation:
         name: Type de relation
         description_from_wiki: Description de ce type de relation dans le wiki (dans votre langue choisie si possible, sinon en anglais).
@@ -305,6 +347,23 @@ pages:
             none_found: Aucune page du wiki trouvée.
             create: Créer une page du wiki pour ce type de relation
             wiki_page: Page wiki
+        projects:
+            title: Projets utilisant ce type de relation
+            description: Utilisation par ce projet
+    project:
+        overview:
+            project_name: Nom du projet
+            project_url: Lien du project
+            description: Description
+            documentation_url: Documentation
+            last_update: Dernière mise à jour
+            json_url: Fichier JSON
+            info: Ces données sont fournies à taginfo via des le 'Fichier JSON' lié ci-dessus. Voir le <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a> pour la description du format
+        tags:
+            title: Tags utilisés par ce projet
+            intro: Ces informations sont fournies par le projet, et ne sont pas forcément complètes. Veuillez lire la documentation du projet pour en savoir plus.
+            description: Utilisation de ce tag/clé
+
 
 flexigrid:
     pagetext: Page
@@ -339,6 +398,9 @@ sources:
     languages:
         name: Langues
         description: Noms et codes des langues, depuis les registres IANA et Unicode.
+    projects:
+        name: Projets
+        description: Projets externes, et les clés/tags associés.
 
 reports:
     characters_in_keys:
@@ -377,6 +439,23 @@ reports:
                 <br/>Les clés de tag apparaissant dans cette liste ne sont pas forcément faux, mais ils risquent d'être source d'erreur.</p>
     database_statistics:
         name: Statistiques de la base de données
+        objects_in_db: Nombre d'objets
+        tags_in_db: Nombre de tags
+        distinct_keys: Nombre de clés distinctes
+        distinct_tags: Nombre de tags distincts
+        nodes_in_db: Nombre de nœuds
+        nodes_with_tags_in_db: Nombre de nœuds avec au moins un tag
+        nodes_with_tags_in_db_percent: Pourcentage de nœuds avec au moins un tag
+        tags_on_nodes: Nombre de tags sur les nodes
+        avg_tags_per_tagged_node: Nombre moyen de tags par nœud taggué
+        ways_in_db: Nombre de chemins
+        closed_ways_in_db: Nombre de chemins fermés
+        tags_on_ways: Nombre de tags sur les chemins
+        avg_tags_per_way: Nombre moyen de tag par chemin
+        relations_in_db: Nombre de relations
+        tags_on_relations: Nombre de tags sur les relations
+        avg_tags_per_relation: Nombre moyen de tag par relation
+
     frequently_used_keys_without_wiki_page:
         name: Clés fréquentes sans page de Wiki associée
         intro: |
@@ -395,6 +474,7 @@ reports:
         table:
             number_of_objects: Nombre d’objets
         histogram:
+            name: Histogramme
             intro: Cet histogramme montre combien il y a de clés de chaque longueur.
             key_length: Longueur de la clé
             number_of_keys: Nombre de des clés
