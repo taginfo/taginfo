@@ -1,0 +1,486 @@
+
+osm:
+    tag: Tag
+    tags: Tags
+    key: Key
+    keys: Keys
+    value: Valor
+    values: Valores
+    node: Ponto
+    nodes: Pontos
+    way: Linha
+    ways: Linhas
+    relation: Relação
+    relations: Relações
+    relation_type: Tipo de relação
+    relation_types: Tipos de relações
+    relation_member: Componente de relação
+    relation_members: Componentes de relação
+    relation_member_nodes: Pontos componentes
+    relation_member_ways: Linhas componentes
+    relation_member_relations: Relações componentes
+    relation_member_role: Papel
+    relation_member_roles: Papéis
+    object: Objeto
+    objects: Objetos
+    all: Todos
+    user: Usuário
+    users: Usuários
+
+taginfo:
+    source: Fonte
+    sources: Fontes
+    download: Baixar
+    about: Sobre o taginfo
+    contact: Contato
+    meta: Meta
+    wiki: Página do taginfo no wiki
+    report: Relatório
+    reports: Relatórios
+    international: Internacional
+    apidoc: Documentação da API
+    project: Projeto
+    projects: Projetos
+    test: Teste
+    map: Mapa
+    maps: Mapas
+    relations: Relações
+    combinations: Combinações
+    key_combinations: Combinações
+    comparison: Comparação de Keys/Tags
+    overview: Visão geral
+    data_from: Dados de
+    data_from_description: Última atualização do banco de dados do taginfo
+    instance:
+        title: Sobre o site taginfo
+        other: Veja <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">a wiki do OSM</a> para outros sites.
+
+misc:
+    values_less_than_one_percent: nenhum valor com mais que 1%
+    empty_string: sequência de caracteres vazia
+    unknown: desconhecido
+    count: Contagem
+    image: Imagem
+    no_image: Sem imagem
+    all: Todos
+    object_type: Tipo
+    description: Descrição
+    help: Ajuda
+    length: Comprimento
+    icon: Ícone
+    line: Linha
+    area: Área
+    language: Idioma
+    search_for: Pesquisar por
+    objects_tooltip: Número de objetos (como valor absoluto e como porcentagem de todos os pontos, linhas e relações).
+    nodes_tooltip: Número de pontos (como valor absoluto e como porcentagem de pontos tags, i.e. pontos sem nenhuma tag são ignorados).
+    ways_tooltip: Número de linhas (como valor absoluto e como porcentagem de todas as linhas).
+    relations_tooltip: Número de relações (como valor absoluto e como porcentagem de todas as relações).
+    values_tooltip: Número de valores diferentes para esta key.
+    users_tooltip: Número de usuários distintos que mudaram objetos com esta key pela última vez.
+    prevalent_values: Valores prevalentes
+    prevalent_values_tooltip: Até dez dos valores mais comuns para esta key (somente se mais de 1% das tags com esta key possuem este valor).
+    in_wiki_tooltip: Tem pelo menos uma página no wiki.
+
+help:
+    search:
+        title: Pesquisar
+        intro: Use a caixa de pesquisa no canto superior direito para procurar por keys e valores de tags.
+        string: Você pode procurar por keys e valores de tags
+        substring: Pesquisar usando só uma parte de uma key ou valor também funciona
+        complete_tags: Você também pode procurar por tags completas
+        values_only: Você também pode procurar somente por valores
+        suggestions: |
+            Para a sua conveniência, keys e tags populares são
+            sugeridas enquanto você digita. Use as teclas direcionais de seu
+            teclado para escolher um item e pressione
+            <span class="key">Enter</span>.
+            Você vai pular diretamente para a página daquela key ou tag.
+    keyboard:
+        title: Atalhos de teclado
+        site_navigation: Navegação do site
+        page_navigation: Navegação da página
+        table_navigation: Navegação da tabela
+        keys:
+            home: Home
+            end: End
+            pageup: PgUp
+            pagedown: PgDn
+            esc: Esc
+            tab: TAB
+        home_page: Página inicial
+        keys_page: Página de keys
+        tags_page: Página de tags
+        relations_page: Página de relações
+        projects_page: Página de projetos
+        compare_page: Página de comparação
+        first_page: Primeira página
+        prev_page: Página anterior
+        next_page: Próxima página
+        last_page: Última página
+        help_page: Esta janela de ajuda
+        activate_search: Ativar campo de pesquisa
+        activate_filter: Ativar campo de filtragem
+        prev_entry: Resultado anterior
+        next_entry: Próximo resultado
+        enter_entry: Ir para o resultado selecionado
+        switch_tab: Trocar de guia
+        deactivate: Desativar campos de entrada
+        up: Para cima na hierarquia da página
+        switch_input: Trocar entre campos de entrada
+
+pages:
+    not_found:
+        title: Não encontrado
+        intro: Desculpe, não foi possível encontrar a página que você estava procurando
+    index:
+        popular_keys: Algumas keys populares
+        keys:
+            listkeys: Ver todas as keys...
+        tags:
+            listtags: Ver as tags mais comuns...
+        relations:
+            listrelations: Ver todos os tipos de relações...
+        reports:
+            listreports: Ver todos os relatórios...
+        about:
+            intro:
+                <p>O OpenStreetMap usa <b>tags</b> na forma <b>key=valor</b>
+                para dar significado a feições geográficos. Taginfo é um software
+                que coleta informação a respeito dessas tags a partir de várias
+                fontes para ajudar você a entender o que significam e como usá-las.</p>
+            more: Saiba mais...
+        international:
+            see: Conheça outros sites taginfo...
+    about:
+        about_taginfo:
+            title: Sobre o taginfo
+    sources:
+        intro: |
+            <p>Taginfo obtém dados sobre tags OSM a partir de diversas fontes, e os
+            unifica para facilitar navegação e consulta.</p>
+            <p>O sistema apenas exibe esses dados. Se você quer alterá-los, precisa
+            ir à fonte.</p>
+        list:
+            title: Lista de Fontes
+            intro: Aqui está uma lista das fontes usadas atualmente. Mais fontes poderão ser incorporadas no futuro.
+        description:
+            db: |
+                <p>Estatísticas sobre keys, tags e tipos de relação são geradas a partir da
+                <a class="extlink" href="http://planet.openstreetmap.org/">base de dados do OpenStreetMap</a>
+                (ou de um <i>extract</i>), assim como os mapas que mostram a distribuição geográfica de pontos e linhas.</p>
+            wiki: |
+                <p>A <a class="extlink" href="http://wiki.openstreetmap.org/">wiki do OpenStreetMap</a>
+                é lida e todas as páginas Key:*, Tag:* e Relation:* são analisadas. Em todos os idiomas.
+                Descrições, imagens, tags relacionadas, entre outras coisas, são extraídas dali.</p>
+            languages: |
+                <p>O taginfo pega informação a respeito dos vários idiomas do mundo, seus códigos, nomes,
+                e outras coisas, a partir de registros
+                <a class="extlink" href="http://www.iana.org/">IANA</a> e
+                <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+            josm: |
+                <p>Ícones e estilos são pegos das configurações do
+                <a class="extlink" href="http://josm.openstreetmap.de/">editor JOSM</a>.</p>
+            projects: |
+                <p>Projetos que usam tags OSM de alguma maneira, tais como editores, mapas,
+                aplicações de roteamento, etc. Veja a <a href="/projects">lista de projetos</a>.</p>
+        updates:
+            title: Atualizações
+            intro: Os dados do taginfo são atualizados periodicamente a partir dessas fontes.
+        data_until: Dados até
+        last_update_run: Data da última atualização
+        data_until_explanation: Somente as edições realizadas até este momento serão processadas.
+        to: a
+    download:
+        intro: |
+            <p>Aqui você pode baixar os bancos de dados usados pelo taginfo. Todos os dados são
+            armazenados em <a class="extlink" href="http://www.sqlite.org/">Sqlite</a>.
+            Os arquivos de banco de dados são compactados com
+            <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
+            <p>Se você não quer baixá-los mas precisa acessar os dados
+            de forma automatizada, você pode usar a <a href="/about">API</a>.</p>
+        file: Arquivo
+        packed: Compactado
+        unpacked: Descompactado
+        description: Descrição
+    reports:
+        intro: |
+            Relatórios mostram dados sobre tags de ângulos diferentes.
+            Geralmente eles juntam dados de vários fonte de formas interessantes. Alguns
+            dos relatórios podem lhe ajudar a encontrar erros específicos.
+        list: Listagem de todos os relatórios
+        data_sources: Fontes de dados utilizadas
+    search:
+        title: Resultados da pesquisa
+        you_were_searching_for: Você estava procurando por
+        fulltext: Texto completo
+        no_keys: Nenhuma key encontrada.
+        no_values: Nenhum valor encontrado.
+        no_tags: Nenhuma tag encontrada.
+        no_match: Nenhum resultado.
+    compare:
+        nothing_to_compare: Não há keys/tags para comparar. Vá para a página de algumas keys ou tags e adicione-as.
+    keys:
+        intro: |
+                Esta tabela mostra todas as tags que existem no banco de dados ou em qualquer uma das outras fontes.
+    tags:
+        intro: |
+                Esta tabela mostra as tags mais comuns no banco de dados.
+    relations:
+        name: Tipos de relação
+        intro: Informação sobre os diferentes tipos de relação (indicados pela tag <a href="/keys/type?filter=relations">type</a>).
+        relations_of_type_tooltip: Número de relações deste tipo (e como percentual de todas as relações).
+        prevalent_roles: Papéis prevalentes
+        prevalent_roles_tooltip: Papéis prevalentes para este tipo de relação.
+        no_information: Nenhuma informação
+        roles_less_than_one_percent: nenhum papel com mais que 1%
+        empty_role: sem papel
+    key:
+        description_from_wiki: Descrição desta key no wiki (se disponível, no seu idioma, e noutro caso, em inglês).
+        no_description_in_wiki: Não há descrição em inglês para esta key no wiki. (Veja também a guia "Wiki".)
+        filter:
+            label: |
+                 Filter:
+            none: Nenhum filtro
+            nodes: Somente pontos
+            ways: Somente linhas
+            relations: Somente relações
+        button_disabled: Botão desativado, porque existem objetos demais com esta key.
+        number_objects: Número de objetos
+        number_values: Número de valores
+        values_used: Valores usados com esta key
+        tag_description_from_wiki: Descrição desta tag no wiki (se disponível, no seu idioma, e noutro caso, em inglês).
+        overview:
+            objects_last_edited_by: Objetos com esta key foram editados pela última vez por %1 usuários diferentes.
+            no_endorsement: (Isso não significa que todos aqueles usuários endossam esta key.)
+            distribution_of_values: Distribuição de valores
+        other_keys_used:
+            title: Outras keys usadas com esta key
+            other: Outras keys
+            to_count_tooltip: Número de objetos com esta key que também possuem a outra key.
+            other_key_tooltip: Key utilizada junto com esta key.
+            from_count_tooltip: Número de objetos com outra key que também possuem esta key.
+        geographic_distribution:
+            title: Distribuição geográfica desta key
+            relations: Relações não possuem uma localização geográfica, então nenhum mapa pode ser mostrado.
+        wiki_pages:
+            title: Páginas wiki sobre esta key
+            none_found: Não há página wiki para esta key.
+            create: Crie uma página wiki para esta key
+            wiki_page: Página wiki
+            implied_tags: Tags implícitas
+            combined_tags: Combinações de tags
+            linked_tags: Tags conectadas
+        josm:
+            title: Regras de estilo JOSM com esta key
+            choice: |
+                  Escolher estilo:
+            no_styles: Nenhum estilo JOSM com esta key.
+    tag:
+        description_from_wiki: Descrição desta tag no wiki (se disponível, no seu idioma, e noutro caso, em inglês).
+        no_description_in_wiki: Não há descrição em inglês para esta tag no wiki. (Veja também a guia "Wiki".)
+        button_disabled: Botão desativado, porque existem objetos demais com esta tag.
+        number_objects: Número de objetos
+        overview:
+            see_also: Veja também a página de tipos de relação
+        other_tags_used:
+            title: Outras tags utilizadas com esta tag
+            other: Outras tags
+            to_count_tooltip: Número de objetos com esta tag e também outra tag/key.
+            other_key_tooltip: Tags ou keys combinadas com esta tag.
+            from_count_tooltip: Número de objetos com outra tag/key e também com esta tag.
+        combinations:
+            title: Combinações
+            description: Esta tabela mostra somente as combinações mais comuns das tags mais comuns.
+        geographic_distribution:
+            title: Distribuição geográfica desta tag
+            relations: Relações não possuem uma localização geográfica, portanto elas não aparecem no mapa.
+            no_map: Desculpe. O mapa só é criado para as tags mais frequentes. Tente utilizar a ferramenta overpass turbo.
+        wiki_pages:
+            title: Páginas no wiki sobre esta tag
+            none_found: Nenhuma página no wiki disponível sobre esta tag.
+            create: Criar uma página wiki para esta tag
+            suggest_key_wiki_page: Talvez você possa encontrar mais informações na página wiki para a key %1.
+            wiki_page: Página no wiki
+            implied_tags: Tags implícitas
+            combined_tags: Combinações de tags
+            linked_tags: Tags conectadas
+        josm:
+            title: Regras de estilo JOSM com esta tag
+            choice: |
+                  Escolha o estilo:
+            no_styles: Nenhum estilo JOSM com esta tag.
+        projects:
+            title: Projetos utilizando esta tag
+            description: Como esta tag é utilizada no projeto
+    relation:
+        name: Tipo da relação
+        description_from_wiki: Descrição deste tipo de relação no wiki (se disponível, no seu idioma, e noutro caso, em inglês).
+        no_description_in_wiki: Não há descrição em inglês para este tipo de relação no wiki. (Veja também a guia "Wiki".)
+        button_disabled: Botão desativado, porque existem objetos demais com este tipo de relação.
+        overview:
+            tab: Visão geral
+            title: Visão geral
+            member_type: Tipo do componente
+            member_count: Número de componentes
+            see_also: Veja também sobre a página da tag
+        roles:
+            tab: Papéis
+            title: Papéis de membros
+            objects_tooltip: Membros da relação com este papél (e como porcentagem de todos os membros) para este tipo de relação.
+            nodes_tooltip: Membros da relação de tipo ponto com este papél (e como porcentagem de todos os membros de tipo ponto) para este tipo de relação.
+            ways_tooltip: Membros da relação de tipo linha com este papél (e como porcentagem de todos os membros de tipo linha) para este tipo de relação.
+            relations_tooltip: Membros da relação de tipo relação com este papél (e como porcentagem de todos os membros de tipo relação) para este tipo de relação.
+            no_roles_info: Não há informação sobre papéis para este tipo de relação (provavelmente porque existem poucas dessas relações).
+        graph:
+            tab: Grafo de papéis
+            title: Grafo de papéis
+        wiki_pages:
+            title: Páginas wiki sobre este tipo de relação
+            none_found: Nenhuma página wiki disponível para este tipo de relação.
+            create: Criar página wiki para este tipo de relação
+            wiki_page: Página wiki
+        projects:
+            title: Projetos utilizando este tipo de relação
+            description: Como este tipo de relação é utilizado no projeto
+    project:
+        overview:
+            project_name: Nome do projeto
+            project_url: URL do projeto
+            description: Descrição
+            documentation_url: Documentação
+            last_update: Última atualização
+            json_url: Arquivo JSON do projeto
+            info: Esses dados são disponibilizados pelo projeto para o taginfo por meio do 'arquivo JSON do projeto' que está ligado acima. Veja o <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a> para uma descrição do formato.
+        tags:
+            title: Tags utilizadas por este projeto
+            intro: Esses dados são disponibilizados pelo projeto e não são necessariamente completos. Por favor veja a documentação do projeto para mais detalhes.
+            description: Como esta key/tag é utilizada no projeto
+
+flexigrid:
+    pagetext: Página
+    pagestat: Exibindo de {from} à {to} de {total} itens
+    outof: de
+    findtext: Pesquisar
+    procmsg: Processando, por favor aguarde...
+    nomsg: Nenhum item
+    errormsg: Erro de conexão
+
+comparison:
+    list: Lista de comparação
+    items: itens
+    add_key: Adicionar esta key na lista
+    add_tag: Adicionar esta tag na lista
+    clear: Limpar lista de comparação
+    compare: Comparar keys/tags
+
+sources:
+    master:
+        name: Mestre
+        description: Estatísticas agregadas e dados miscelâneos necessários para a interface de usuário do taginfo.
+    db:
+        name: Banco de dados
+        description: Estatísticas sobre cada key e cada tag a partir do banco de dados principal do OpenStreetMap (arquivo do planeta).
+    wiki:
+        name: Wiki
+        description: Dados colhidos das páginas de tags e keys da wiki do projeto OpenStreetMap.
+    josm:
+        name: JOSM
+        description: Dados extraídos das configurações do editor JOSM.
+    languages:
+        name: Idiomas
+        description: Os nomes dos idiomas, seus códigos, etc. a partir de registros IANA e Unicode.
+    projects:
+        name: Projetos
+        description: Projetos externos e as keys/tags OSM que utilizam.
+
+reports:
+    characters_in_keys:
+        name: Caracteres em keys
+        intro: |
+            <p>Qualquer caractere Unicode válido pode ser utilizado em uma key do OSM, mas
+            geralmente somente letras latinas de caixa baixa (a-z) e o underline (_) são utilizados.
+            Às vezes o dois pontos (:) é utilizado como um caractere separados.</p>
+        statistics:
+            tab: Estatísticas
+            title: Visualização de estatísticas
+            fraction: Fração
+            characters: Caracteres na key
+            characters_in_keys:
+                rest: Todo o resto.
+                total: Total
+        whitespace:
+            tab: Espaço em branco
+            title: Keys com espaços em branco
+        problematic:
+            tab: Problemático
+            title: Keys com caracteres possivelmente problemáticos
+    database_statistics:
+        name: Estatísticas do banco de dados
+    frequently_used_keys_without_wiki_page:
+        name: Keys frequentemente usadas sem páginas no wiki
+        also_show_keys: Também mostrar keys que não tenham uma página em inglês no wiki, mas existem em outro idioma.
+        table:
+            create_wiki_page: Criar página no wiki...
+    josm_styles:
+        name: Estilos do JOSM
+    key_lengths:
+        name: Comprimento das keys
+        intro: |
+            <p>As keys das tags podem ter de 0 a 255 caracteres (Unicode). Keys que são muito grandes ou muito pequenas geralmente são erros, mas nem sempre.</p>
+        table:
+            number_of_objects: Número de objetos
+        histogram:
+            name: Histograma
+            intro: Este histograma mostra quantas keys existem para cada comprimento.
+            key_length: Comprimento da key
+            number_of_keys: Número de keys
+    language_comparison_table_for_keys_in_the_wiki:
+        name: Tabela de comparação de idiomas para keys no wiki
+        icons:
+            template: Página disponível no wiki e contém predefinição padrão.
+            error: Página no wiki disponível e contém predefinição padrão, porém ela não pode ser interpretada.
+            page: Página no wiki disponível, porém não contém predefinição padrão.
+            redirect: A página é um redirecionamento.
+        intro: |
+            <p>Esta tabela mostra todas as keys de tags que possuem páginas no wiki,
+             e em que idiomas elas estão disponíveis.</p>
+    languages:
+        name: Idiomas
+        intro: |
+            <p>OpenStreetMap é um projeto internacional. As tags e as suas descrições
+            podem estar em qualquer idioma. Esta tabela lista os idiomas que o taginfo
+            conhece e quantas páginas da wiki existem nestes idiomas documentando keys
+            e tags, respectivamente.</p>
+        code: Código
+        native_name: Nome nativo
+        english_name: Nome em inglês
+        wiki_key_pages: Páginas de keys no wiki
+        wiki_tag_pages: Páginas de tags no wiki
+    wiki_pages_about_non_existing_keys:
+        name: Páginas wiki sobre keys que não existem
+        intro: |
+            <p>Esta tabela mostra keys que possuem uma página wiki, mas não são utilizadas
+            nenhuma vez no banco de dados do OSM. Isto não é necessariamente um erro (talvez alguém
+            criou documentou a key no wiki como preparação para o uso da key ou a página wiki pode
+            estar documentando uma key que se tornou obsoleta), mas também pode ser um erro de
+            digitação ou outro tipo de erro.</p>
+        wiki_pages: Páginas wiki
+    name_tags:
+        name: Variantes de tags de nomes
+        intro: |
+            <p>Este relatório mostra informações relacionadas à nomeação de objetos no OSM
+            utilizando a key <tt>name</tt> e suas variantes.</p>
+        overview:
+            tab: Visão geral
+            title: Visão geral
+        bcp47:
+            tab: Subtags BCP47
+            title: Subtags BCP47
+            filter:
+                label: Mostrar somente tags do tipo
+                all: Todas
+                language: Idioma
+                script: Script
+                region: Região
+                variant: Variante
