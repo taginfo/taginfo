@@ -188,7 +188,7 @@ class Taginfo < Sinatra::Base
 
     #-------------------------------------
 
-    get %r{^/js/([a-z][a-z])/(.*).js$} do |lang, js|
+    get %r{^/js/([a-z][a-z](-[a-zA-Z]+)?)/(.*).js$} do |lang, dummy, js|
         expires next_update
         @lang = lang
         @trans = R18n::I18n.new(lang, 'i18n')
