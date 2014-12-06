@@ -57,7 +57,7 @@ INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('tr', 
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('uk',      'uk', 'Ukrainian', 'Українська');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('vi',      'vi', 'Vietnamese', 'Tiếng Việt');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('zh',      'zh', 'Chinese', '中文');
-INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('zh-hans', NULL, 'Simplified Chinese', '简体字');
-INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('zh-hant', NULL, 'Traditional Chinese', '簡體字');
+INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('zh-hans', NULL, 'Simplified Chinese', '简体中文');
+INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('zh-hant', NULL, 'Traditional Chinese', '繁體中文');
 -- INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('', '', '', '');
 
