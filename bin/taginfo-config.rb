@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 #
 #  taginfo-config.rb KEY [DEFAULT]
 #
