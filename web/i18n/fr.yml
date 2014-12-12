@@ -1,4 +1,3 @@
-
 osm:
     tag: Tag
     tags: Tags
@@ -53,7 +52,8 @@ taginfo:
     data_from_description: Dernière mise à jour de la base de données de Taginfo
     instance:
         title: À propos de ce site Taginfo
-        other: Visiter la page <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> pour d'autres sites.
+        other: |
+            Visiter la page <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> pour d'autres sites.
 
 misc:
     values_less_than_one_percent: Toutes les valeurs sont inférieures à %1
@@ -245,7 +245,7 @@ pages:
                 <p>Icons and styles are taken from the <a class="extlink" href="http://josm.openstreetmap.de/">JOSM editor</a> configuration.</p>
             projects: |
                 <p>Projects that use OSM tags in some way, such as editors, maps, routers, etc. See <a href="/projects">the project list</a>.</p>
-       updates:
+        updates:
             title: Mises à jour
             intro: Les données de taginfo sont régulièrement mises à jour.
         data_until: Données jusqu'à
@@ -325,7 +325,8 @@ pages:
             from_count_tooltip: Nombre d'objets de cette autre clé qui ont aussi cette clé.
         geographic_distribution:
             title: Répartition géographique de cette clé
-            relations: Les relations n'ont pas de position géographique : Elles ne peuvent donc pas être affichées sur une carte.
+            relations: |
+                Les relations n'ont pas de position géographique : Elles ne peuvent donc pas être affichées sur une carte.
         wiki_pages:
             title: Pages du wiki sur cette clé
             none_found: Aucune page du wiki trouvée.
