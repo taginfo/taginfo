@@ -51,7 +51,7 @@ taginfo:
     data_from_description: Cơ sở dữ liệu taginfo được cập nhật lần cuối vào
     instance:
         title: Giới thiệu về trang taginfo này
-        other: Xem các trang khác tại <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">wiki OSM</a>.
+        other: Xem các trang khác tại <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">wiki OSM</a>.
 
 misc:
     values_less_than_one_percent: không có giá trị hơn 1%

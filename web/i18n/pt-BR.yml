@@ -53,7 +53,7 @@ taginfo:
     data_from_description: Última atualização do banco de dados do taginfo
     instance:
         title: Sobre o site taginfo
-        other: Veja <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">a wiki do OSM</a> para outros sites.
+        other: Veja <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">a wiki do OSM</a> para outros sites.
 
 misc:
     values_less_than_one_percent: nenhum valor com mais que 1%
@@ -170,7 +170,7 @@ pages:
                 <a class="extlink" href="http://planet.openstreetmap.org/">base de dados do OpenStreetMap</a>
                 (ou de um <i>extract</i>), assim como os mapas que mostram a distribuição geográfica de pontos e linhas.</p>
             wiki: |
-                <p>A <a class="extlink" href="http://wiki.openstreetmap.org/">wiki do OpenStreetMap</a>
+                <p>A <a class="extlink" href="//wiki.openstreetmap.org/">wiki do OpenStreetMap</a>
                 é lida e todas as páginas Key:*, Tag:* e Relation:* são analisadas. Em todos os idiomas.
                 Descrições, imagens, tags relacionadas, entre outras coisas, são extraídas dali.</p>
             languages: |

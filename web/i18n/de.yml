@@ -52,7 +52,7 @@ taginfo:
     data_from_description: Letzte Aktualisierung der taginfo-Datenbank
     instance:
         title: Über dieses Taginfo
-        other: Andere Taginfo-Webseiten sind im <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM-Wiki</a> zu finden.
+        other: Andere Taginfo-Webseiten sind im <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM-Wiki</a> zu finden.
 
 misc:
     values_less_than_one_percent: keine Values mit mehr als 1%
@@ -163,7 +163,7 @@ pages:
             db: |
                 <p>Statistiken über Keys, Tags, und Relations-Typen, sowie Karten für die geographische Verteilung der Nodes und Ways, werden aus der <a class="extlink" href="http://planet.openstreetmap.org/">OSM-Datenbank</a> (oder einem Extrakt) generiert.</p>
             wiki: |
-                <p>Das <a class="extlink" href="http://wiki.openstreetmap.org/">OSM Wiki</a> wird gelesen und alle Key:*-, Tag:*-, und Relation:*-Seiten (in allen Sprachen) analysiert. Beschreibungen, Bilder, verwandte Tags, usw. werden aus den Seiten extrahiert.</p>
+                <p>Das <a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> wird gelesen und alle Key:*-, Tag:*-, und Relation:*-Seiten (in allen Sprachen) analysiert. Beschreibungen, Bilder, verwandte Tags, usw. werden aus den Seiten extrahiert.</p>
             languages: |
                 <p>Taginfo bekommt Informationen über die verschiedenen Sprachen dieser Welt, ihre Codes, Namen, usw. aus diversen Datenbanken der <a class="extlink" href="http://www.iana.org/">IANA</a> und vom <a class="extlink" href="http://www.unicode.org/">Unicode Consortium</a>.</p>
             josm: |

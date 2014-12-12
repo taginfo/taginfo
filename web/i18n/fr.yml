@@ -53,7 +53,7 @@ taginfo:
     instance:
         title: À propos de ce site Taginfo
         other: |
-            Visiter la page <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> pour d'autres sites.
+            Visiter la page <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> pour d'autres sites.
 
 misc:
     values_less_than_one_percent: Toutes les valeurs sont inférieures à %1
@@ -198,24 +198,24 @@ pages:
             text: |
                 <p>Le logiciel taginfo a été créé et maintenu par
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
-                La design web a été conçu par 
+                La design web a été conçu par
                 <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Traductions</h3>
                 <p>Nous avons besoin de traducteurs pour l'interface utilisateur de taginfo. Regardez la <a
-                href="/taginfo/translations">vue d'ensemble des traductions</a> pour les langues qui nécescitent 
-                des mises à jour. Vous trouverez plus d'information sur comment vous pouvez nous aider dans 
+                href="/taginfo/translations">vue d'ensemble des traductions</a> pour les langues qui nécescitent
+                des mises à jour. Vous trouverez plus d'information sur comment vous pouvez nous aider dans
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">le wiki d'OSM</a>.</p>
                 <h3>Code</h3>
                 <p>Tous le code des sites taginfo est Open Source. Vous pouvez l'obtenir sur
                 <a class="extlink" href="https://github.com/joto/taginfo/">GitHub</a>. Pour avoir une vue d'ensemble
                 regardez la page à propos de l'<a class="extlink"
-                href="https://wiki.openstreetmap.org/wiki/Taginfo/Architecture">architecture de 
+                href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">architecture de
                 taginfo</a> sur le wiki d'OSM.</p>
                 <h3>Faites tourner votre propre serveur</h3>
                 <p>Vous pouvez lancer votre propre
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">site taginfo</a>,
-                avec par exemple les données concernant votre propre pays. Les instructions se trouvent 
-                <a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo/Running">dans le wiki d'OSM
+                avec par exemple les données concernant votre propre pays. Les instructions se trouvent
+                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Running">dans le wiki d'OSM
                 </a>.</p>
                 <h3>Signaler des bugs et demander des améliorations</h3>
                 <p>Les signalements de bugset les demandes d'améliorations doivent être faites sur le <a class="extlink"
@@ -238,7 +238,7 @@ pages:
             db: |
                 <p>Statistics about keys, tags, and relation types are generated from the <a class="extlink" href="http://planet.openstreetmap.org/">OSM database</a> (or an extract) as well as the maps that show the geographic distribution of nodes and ways.</p>
             wiki: |
-                <p>The <a class="extlink" href="http://wiki.openstreetmap.org/">OSM Wiki</a> is read and all Key:*, Tag:*, and Relation:* pages (in all the different languages) are analyzed. Descriptions, images, related tags, etc. are extracted from them.</p>
+                <p>The <a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> is read and all Key:*, Tag:*, and Relation:* pages (in all the different languages) are analyzed. Descriptions, images, related tags, etc. are extracted from them.</p>
             languages: |
                 <p>Taginfo gets information about the different languages of the world, their codes, names, etc. from several <a class="extlink" href="http://www.iana.org/">IANA</a> and <a class="extlink" href="http://www.unicode.org/">Unicode</a> registries.</p>
             josm: |

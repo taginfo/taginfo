@@ -49,7 +49,7 @@ taginfo:
     data_from_description: Дата останнього оновлення бази Taginfo
     instance:
         title: Про цей сайтTaginfo
-        other: Див. <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">статтю в Вікі</a> про інші сайти.
+        other: Див. <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">статтю в Вікі</a> про інші сайти.
 
 misc:
     values_less_than_one_percent: частка кожного значення не більше 1%

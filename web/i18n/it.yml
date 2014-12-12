@@ -47,7 +47,7 @@ taginfo:
     data_from_description: Ultimo aggiornamento al database taginfo
     instance:
         title: Informazioni sul sito taginfo
-        other: Vedere <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> per gli altri siti.
+        other: Vedere <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> per gli altri siti.
 
 misc:
     values_less_than_one_percent: Nessuno dei valori con più dell' 1%

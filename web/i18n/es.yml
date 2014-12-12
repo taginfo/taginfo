@@ -53,7 +53,7 @@ taginfo:
     data_from_description: Última actualización de la base de datos de taginfo
     instance:
         title: Acerca de este sitio de taginfo
-        other: Véase la <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">wiki de OSM</a> para otros sitios.
+        other: Véase la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">wiki de OSM</a> para otros sitios.
 
 misc:
     values_less_than_one_percent: no hay valores con más del 1%
@@ -209,13 +209,13 @@ pages:
                 <p>Todo el software detrás de los sitios de taginfo es Open Source. Puede conseguirlo en
                 <a class="extlink" href="https://github.com/joto/taginfo/">GitHub</a>. Para una visión general
                 véase la página sobre la <a class="extlink"
-                href="https://wiki.openstreetmap.org/wiki/Taginfo/Architecture">aquitectura
+                href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">aquitectura
                 de taginfo</a> en la wiki de OSM.</p>
                 <h3>Ejecución de su propia instancia</h3>
                 <p>Puede ejecutar su propio
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">sitio de taginfo</a>,
                 por ejemplo, con los datos de su propio país solamente. Las instrucciones están
-                <a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo/Running">en la wiki
+                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Running">en la wiki
                 de OSM</a>.</p>
                 <h3>Informes de errores y solicitudes de funcionalidad</h3>
                 <p>Los informes de errores y solicitudes de funcionalidad deben ser dirigidos al <a class="extlink"
@@ -238,7 +238,7 @@ pages:
             db: |
                 <p>Las estadísticas sobre las claves, etiquetas y tipos de relación son generadas a partir de la <a class="extlink" href="http://planet.openstreetmap.org/">base de datos de OSM</a> (o un extracto) así como los mapas que muestran la distribución geográfica de los nodos y vías.</p>
             wiki: |
-                <p>La <a class="extlink" href="http://wiki.openstreetmap.org/">wiki de OSM</a> es leída y se analizan todas las páginas Key:*, Tag:*, y Relation:* (en todos los idiomas diferentes). Descripciones, imágenes, etiquetas relacionadas, etc. se extraen de ellas.</p>
+                <p>La <a class="extlink" href="//wiki.openstreetmap.org/">wiki de OSM</a> es leída y se analizan todas las páginas Key:*, Tag:*, y Relation:* (en todos los idiomas diferentes). Descripciones, imágenes, etiquetas relacionadas, etc. se extraen de ellas.</p>
             languages: |
                 <p>Taginfo obtiene información acerca de los diferentes idiomas del mundo, sus códigos, nombres, etc. de varios registros de <a class="extlink" href="http://www.iana.org/">IANA</a> y <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
             josm: |

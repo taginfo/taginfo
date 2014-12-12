@@ -53,7 +53,7 @@ taginfo:
     data_from_description: Last update of taginfo database
     instance:
         title: About this taginfo site
-        other: See the <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> for other sites.
+        other: See the <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> for other sites.
 
 misc:
     values_less_than_one_percent: no values with more than 1%
@@ -209,13 +209,13 @@ pages:
                 <p>All the software behind the taginfo sites is Open Source. You can get it on
                 <a class="extlink" href="https://github.com/joto/taginfo/">GitHub</a>. For an overview
                 see the page about the <a class="extlink"
-                href="https://wiki.openstreetmap.org/wiki/Taginfo/Architecture">taginfo
+                href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">taginfo
                 architecture</a> on the OSM wiki.</p>
                 <h3>Running your own instance</h3>
                 <p>You can run your own
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">taginfo site</a>,
                 for instance with data for just your own country. Instructions are
-                <a class="extlink" href="http://wiki.openstreetmap.org/wiki/Taginfo/Running">on the OSM
+                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Running">on the OSM
                 wiki</a>.</p>
                 <h3>Bug reports and feature requests</h3>
                 <p>Bug reports and feature requests should be directed to the <a class="extlink"
@@ -238,7 +238,7 @@ pages:
             db: |
                 <p>Statistics about keys, tags, and relation types are generated from the <a class="extlink" href="http://planet.openstreetmap.org/">OSM database</a> (or an extract) as well as the maps that show the geographic distribution of nodes and ways.</p>
             wiki: |
-                <p>The <a class="extlink" href="http://wiki.openstreetmap.org/">OSM Wiki</a> is read and all Key:*, Tag:*, and Relation:* pages (in all the different languages) are analyzed. Descriptions, images, related tags, etc. are extracted from them.</p>
+                <p>The <a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> is read and all Key:*, Tag:*, and Relation:* pages (in all the different languages) are analyzed. Descriptions, images, related tags, etc. are extracted from them.</p>
             languages: |
                 <p>Taginfo gets information about the different languages of the world, their codes, names, etc. from several <a class="extlink" href="http://www.iana.org/">IANA</a> and <a class="extlink" href="http://www.unicode.org/">Unicode</a> registries.</p>
             josm: |

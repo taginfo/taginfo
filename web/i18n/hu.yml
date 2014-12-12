@@ -51,7 +51,7 @@ taginfo:
     data_from_description: A taginfo adatbázis utolsó frissítése
     instance:
         title: Ezen taginfo webhely névjegye
-        other: A többi webhely listáját az <a href="http://wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wikiben</a> találod.
+        other: A többi webhely listáját az <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wikiben</a> találod.
 
 misc:
     values_less_than_one_percent: nincs 1%-nál gyakoribb érték
