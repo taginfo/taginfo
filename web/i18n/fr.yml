@@ -30,7 +30,7 @@ taginfo:
     source: Source
     sources: Sources
     download: Téléchargement
-    about: À Propos de Taginfo
+    about: À Propos de…
     contact: Contact
     meta: Méta
     wiki: page wiki de Taginfo
@@ -48,7 +48,7 @@ taginfo:
     key_combinations: Combinaisons
     comparison: Comparaison de clés/tags
     overview: Vue d'ensemble
-    data_from: Données datant du
+    data_from: Données du
     data_from_description: Dernière mise à jour de la base de données de Taginfo
     instance:
         title: À propos de ce site Taginfo
@@ -137,7 +137,7 @@ pages:
         keys:
             listkeys: Voir toutes les clés…
         tags:
-            listtags: Voir les tags fréquents…
+            listtags: Voir les tags les plus fréquents…
         relations:
             listrelations: Voir tous les types…
         reports:
@@ -305,8 +305,8 @@ pages:
             label: |
                  Filtre :
             none: Aucun filtre
-            nodes: Seulement les nodes
-            ways: Seulement les ways
+            nodes: Seulement les nœuds
+            ways: Seulement les chemins
             relations: Seulement les relations
         button_disabled: Bouton désactivé, il y a trop d’objets comprenant cette clé
         number_objects: Nombre d'objets
