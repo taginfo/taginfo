@@ -37,6 +37,7 @@ INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('he', 
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('hr',      'hr', 'Croatian', 'Hrvatski');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('ht',      'ht', 'Haitian Creole', 'Kreyòl ayisyen');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('hu',      'hu', 'Hungarian', 'Magyar');
+INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('id',      'id', 'Indonesian', 'Bahasa Indonesia');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('it',      'it', 'Italian', 'Italiano');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('ja',      'ja', 'Japanese', '日本語');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('ko',      'ko', 'Korean', '한국어 (韓國語)');
@@ -50,6 +51,7 @@ INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('pt-BR
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('ro',      'ro', 'Romanian', 'Română');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('ro-md',   NULL, 'Moldovan', 'Română (Moldova)');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('ru',      'ru', 'Russian', 'Русский');
+INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('sh',      'sh', 'Serbo-Croatian', 'Serbo-Croatian');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('sk',      'sk', 'Slovak', 'Slovenský');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('sq',      'sq', 'Albanian', 'Shqip');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('sv',      'sv', 'Swedish', 'Svenska');
