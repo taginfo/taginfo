@@ -30,12 +30,12 @@ taginfo:
     source: Source
     sources: Sources
     download: Téléchargement
-    about: À Propos de Taginfo
+    about: À Propos de…
     contact: Contact
-    meta: Meta
+    meta: Méta
     wiki: page wiki de Taginfo
     report: Compte-rendu
-    reports: Comptes-rendus
+    reports: Rapports
     international: International
     apidoc: Documentation de l'API
     project: Projet
@@ -46,9 +46,9 @@ taginfo:
     relations: Relations
     combinations: Combinaisons
     key_combinations: Combinaisons
-    comparison: Comparaison clé/tag
+    comparison: Comparaison de clés/tags
     overview: Vue d'ensemble
-    data_from: Données datant du
+    data_from: Données du
     data_from_description: Dernière mise à jour de la base de données de Taginfo
     instance:
         title: À propos de ce site Taginfo
@@ -56,7 +56,7 @@ taginfo:
             Visiter la page <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> pour d'autres sites.
 
 misc:
-    values_less_than_one_percent: Toutes les valeurs sont inférieures à %1
+    values_less_than_one_percent: Toutes les valeurs sont inférieures à 1%
     empty_string: chaîne de caractère vide
     unknown: inconnu
     count: Quantité
@@ -79,7 +79,7 @@ misc:
     values_tooltip: Nombre de valeurs différentes pour cette clé.
     users_tooltip: Nombre d'utilisateurs ayant édité en dernier les objets de cette clé.
     prevalent_values: Valeurs dominantes
-    prevalent_values_tooltip: Jusqu'à dix des valeurs les plus fréquentes pour cette clé (seulement pour les valeurs présentes plus de %1).
+    prevalent_values_tooltip: Jusqu'à dix des valeurs les plus fréquentes pour cette clé (seulement pour les valeurs présentes plus de 1%).
     in_wiki_tooltip: Possède au moins une page wiki.
 
 help:
@@ -137,7 +137,7 @@ pages:
         keys:
             listkeys: Voir toutes les clés…
         tags:
-            listtags: Voir les tags fréquents…
+            listtags: Voir les tags les plus fréquents…
         relations:
             listrelations: Voir tous les types…
         reports:
@@ -160,7 +160,7 @@ pages:
                 être créés et utilisés suivant les besoins. Tout le monde peut donc
                 imaginer un nouveau tag, et l'ajouter à un nouvel objet ou à des objets existants. Cela rend OpenStreetMap très flexible, mais ne facilite pas
                 toujours la réutilisation des données.<p>
-                <p>En tant que contributeur à OSM ou en tant que utilisateur des données d'OSM, de nombreuses
+                <p>En tant que contributeur ou en tant qu'utilisateur des données OSM, de nombreuses
                 questions se posent telles que : Quels tags utilise-t-on pour l'objet X ? Quels tags dois-je utiliser
                 pour l'objet Y pour qu'il apparaisse correctement sur une carte ? Est-ce que le tag Z décrit
                 sur le wiki est vraiment utilisé et si oui, où ?</p>
@@ -233,18 +233,18 @@ pages:
             devez le faire à leur source.</p>
         list:
             title: Liste des sources
-            intro: Here is a list of currently used sources. More sources might be integrated in the future.
+            intro: Voici la liste des sources utilisées. D'autres sources pourront être intégrées dans le futur.
         description:
             db: |
-                <p>Statistics about keys, tags, and relation types are generated from the <a class="extlink" href="http://planet.openstreetmap.org/">OSM database</a> (or an extract) as well as the maps that show the geographic distribution of nodes and ways.</p>
+                <p>Les statistiques sur les clés, tags, et types de relation types sont générés depuis la <a class="extlink" href="http://planet.openstreetmap.org/">base de données OSM</a> (ou un extrait) ainsi que des cartes montrant la distribution géographique des nœuds et des chemins.</p>
             wiki: |
-                <p>The <a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> is read and all Key:*, Tag:*, and Relation:* pages (in all the different languages) are analyzed. Descriptions, images, related tags, etc. are extracted from them.</p>
+                <p>Le <a class="extlink" href="//wiki.openstreetmap.org/">wiki OSM</a> est lu et toutes les pages Key:*, Tag:*, et Relation:* (dans toutes les langues différentes) sont analysées. Descriptions, images, tags relatifs, etc. en sont extraits.</p>
             languages: |
-                <p>Taginfo gets information about the different languages of the world, their codes, names, etc. from several <a class="extlink" href="http://www.iana.org/">IANA</a> and <a class="extlink" href="http://www.unicode.org/">Unicode</a> registries.</p>
+                <p>Taginfo fournit les informations sur les différentes langues du monde, leurs codes, noms, etc. depuis plusieurs registres de l'<a class="extlink" href="http://www.iana.org/">IANA</a> et d'<a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
             josm: |
-                <p>Icons and styles are taken from the <a class="extlink" href="http://josm.openstreetmap.de/">JOSM editor</a> configuration.</p>
+                <p>Les icônes et les styles sont issues des paramètres de l'<a class="extlink" href="http://josm.openstreetmap.de/">éditeur JOSM</a>.</p>
             projects: |
-                <p>Projects that use OSM tags in some way, such as editors, maps, routers, etc. See <a href="/projects">the project list</a>.</p>
+                <p>Les projects utilisants les tags OSM, commes les éditeurs, les cartes, les routeurs, etc. Regardez <a href="/projects">la liste des projets</a>.</p>
         updates:
             title: Mises à jour
             intro: Les données de taginfo sont régulièrement mises à jour.
@@ -265,9 +265,9 @@ pages:
         description: Description
     reports:
         intro: |
-            Les comptes-rendus montrent les données de différents points de vue.
+            Les rapports montrent les données de différents points de vue.
             Ils agrègent de façon intéressante des données d'origines variées.
-            Certains comptes-rendus peuvent aider à trouver certains types d'erreurs.
+            Certains rapports peuvent aider à trouver certains types d'erreurs.
         list: Liste de tous les rapports
         data_sources: Sources de données utilisés
     search:
@@ -293,7 +293,7 @@ pages:
         prevalent_roles: Rôles dominants
         prevalent_roles_tooltip: Rôles dominants pour ce type de relation
         no_information: Pas d'information
-        roles_less_than_one_percent: pas de rôles au-dessus de %1
+        roles_less_than_one_percent: pas de rôles au-dessus de 1%
         empty_role: rôle vide
     projects:
         intro: |
@@ -305,8 +305,8 @@ pages:
             label: |
                  Filtre :
             none: Aucun filtre
-            nodes: Seulement les nodes
-            ways: Seulement les ways
+            nodes: Seulement les nœuds
+            ways: Seulement les chemins
             relations: Seulement les relations
         button_disabled: Bouton désactivé, il y a trop d’objets comprenant cette clé
         number_objects: Nombre d'objets
@@ -314,7 +314,7 @@ pages:
         values_used: Valeurs utilisées par cette clé
         tag_description_from_wiki: Description de ce tag depuis le wiki (dans votre langue choisie si possible, sinon en anglais).
         overview:
-            objects_last_edited_by: Les objets ayant cette clé ont été édités en dernier par %1 utilisateurs différents.
+            objects_last_edited_by: Les objets ayant cette clé ont été édités en dernier par 1% utilisateurs différents.
             no_endorsement: (ce qui ne signifie pas que tous ces utilisateurs approuvent cette clé)
             distribution_of_values: Répartition des valeurs
         other_keys_used:
@@ -367,7 +367,7 @@ pages:
             title: Pages du wiki sur cette valeur
             none_found: Aucune page du wiki trouvée.
             create: Créer une page du wiki pour ce tag
-            suggest_key_wiki_page: Vous trouverez peut-être plus d’information sur la page wiki pour les clés %1.
+            suggest_key_wiki_page: Vous trouverez peut-être plus d’information sur la page wiki pour les clés 1%.
             wiki_page: Page du wiki
             implied_tags: Tags implicites
             combined_tags: Tags combinés
@@ -444,35 +444,35 @@ comparison:
 sources:
     master:
         name: Maître
-        description: Agrégation de statistiques et de données diverses nécessaire à l'interface de Taginfo.
+        description: Agrégation des statistiques et des données diverses nécessaire à l'interface utilisateur de Taginfo.
     db:
         name: Base de données
-        description: Statistiques pour chaque clé et valeur des tags pour la France (métropole) d'OSM
+        description: Statistiques pour chaque clé et chaque tag depuis la base de données principale OSM (fichier planet) 
     wiki:
         name: Wiki
         description: Clés et valeurs des tags sur le wiki d'OSM.
     josm:
         name: JOSM
-        description: Configuration pour l'éditeur JOSM.
+        description: Données de configuration de l'éditeur JOSM.
     languages:
         name: Langues
-        description: Noms et codes des langues, depuis les registres IANA et Unicode.
+        description: Noms, codes de langues, etc. des registres del'IANA et d'Unicode.
     projects:
         name: Projets
-        description: Projets externes, et les clés/tags associés.
+        description: Projets externes, et les clés/tags qu'ils utilisent.
 
 reports:
     characters_in_keys:
         name: Caractères utilisés dans les clés
         intro: |
-            <p>Tout caractère Unicode peut apparaitre dans les clés de tags OSM mais seulement les
-            lettres latines minuscules (a-z) et le caractère souligné (_) sont utilisés. Il est aussi possible d'utiliser le caractère deux-points
-            (:) comme séparateur.</p>
+            <p>Tout caractère Unicode valide peut apparaitre dans les clés OSM mais habituellement les
+            lettres latines minuscules (a-z) et le caractère souligné (_) sont utilisés. Parfois le caractère deux-points
+            (:) est ajouté comme séparateur.</p>
         statistics:
             tab: Statistiques
             title: Statistiques globales
             fraction: Fraction
-            characters: caractères utilisés dans les clés
+            characters: Caractères utilisés dans les clés
             characters_in_keys:
                 plain: Seulement les lettres latines minuscules (<span class="char">a</span> à <span class="char">z</span>) et le souligné (<span class="char">_</span>), le première et dernière caractère est une lettre.
                 colon: Comme la règle A mais contenant un ou plusieurs caractères deux-points (<span class="char">:</span>).
@@ -488,7 +488,7 @@ reports:
                 <p>Les tags dont la clé contient des symboles d'espacement comme espace, tabulation, nouvelle
                 ligne, retour chariot, ou d'autres selon les
                 alphabets.<br/>
-                Les espaces dans les clés des tags sont sources d'erreur, surtout s'ils sont placés au
+                Les espaces dans les clés sont sources d'erreur, en particulier au
                 début ou la fin de la clé, car ils sont invisibles. Généralement
                 le caractère de soulignement (<span class="char">_</span>) devrait être utilisé à la place.</p>
         problematic:
@@ -513,7 +513,7 @@ reports:
         nodes_in_db: Nombre de nœuds
         nodes_with_tags_in_db: Nombre de nœuds avec au moins un tag
         nodes_with_tags_in_db_percent: Pourcentage de nœuds avec au moins un tag
-        tags_on_nodes: Nombre de tags sur les nodes
+        tags_on_nodes: Nombre de tags sur les nœuds
         avg_tags_per_tagged_node: Nombre moyen de tags par nœud taggué
         ways_in_db: Nombre de chemins
         closed_ways_in_db: Nombre de chemins fermés
@@ -523,18 +523,18 @@ reports:
         tags_on_relations: Nombre de tags sur les relations
         avg_tags_per_relation: Nombre moyen de tag par relation
     frequently_used_keys_without_wiki_page:
-        name: Clés fréquentes sans page de Wiki associée
+        name: Clés fréquement utilisées sans page de wiki
         intro: |
             <p>Ce tableau présente les clés qui apparaissent plus de 10&thinsp;000 fois dans la
             base de donnée OSM mais qui n’ont pas de description dans le wiki. Si vous maitrisez l’une
             d’entre elles, ajoutez s'il vous plaît une page dans le wiki en cliquant sur le lien de la
             colonne la plus à gauche et décrivez la. Parfois il est plus judicieux de créer à la place une
-            redirection vers une autre page du wiki. Pour cela rajoutez une ligne contenant
+            redirection vers une autre page du wiki. Pour cela rajoutez juste une ligne contenant
             <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>page name</i>]]</tt>
             dans la page du wiki.</p>
         also_show_keys: Montrer aussi les clés qui n’ont pas de page wiki en anglais mais qui ont une page dans une autre langue.
         table:
-            create_wiki_page: Créer une page wiki…
+            create_wiki_page: Créer la page wiki…
     josm_styles:
         name: Styles JOSM
     key_lengths:
@@ -567,12 +567,12 @@ reports:
         code: Code
         native_name: Nom natif
         english_name: Nom anglais
-        wiki_key_pages: Pages des clés du wiki
-        wiki_tag_pages: Pages des tags du wiki
+        wiki_key_pages: Clés dans le wiki
+        wiki_tag_pages: Tags dans le wiki
     wiki_pages_about_non_existing_keys:
         name: Pages du wiki concernant des clés inexistantes
         intro: |
-            <p>Ce tableau affiche les clés décritent dasn le wiki existantes mais qui n'ont même pas une seule
+            <p>Ce tableau affiche les clés décritent dans le wiki mais qui n'ont pas d'
             instance dans la base de données OSM. Ce n'est pas forcément une erreur (peut-être que quelqu'un
             à décrit une clé préalablement à son utilisation ou les
             pages du wiki décrivent une clé devenue obsolète), mais c'est peut aussi une faute de frappe ou une autre erreur.</p>
