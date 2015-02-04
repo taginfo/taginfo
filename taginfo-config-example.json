@@ -95,7 +95,13 @@
             // Minimum number of relations per type to make this
             // relation type "interesting", ie. to make it show
             // up as a relation type.
-            "min_count_relations_per_type": 100
+            "min_count_relations_per_type": 100,
+	    // Tokenizer for sqlite full-text search. Complex or custom
+	    // tokenizers, e.g., icu and unicode61, may be more suitable for
+	    // some locales. You may need newer sqlite3 or to recompile
+	    // sqlite3 to use those tokenizers.
+	    // See http://www.sqlite.org/fts3.html#tokenizer for detail.
+	    "tokenizer": "simple"
         }
     },
     "logging": {

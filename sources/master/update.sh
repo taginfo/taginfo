@@ -25,8 +25,9 @@ SELECTION_DB=$DIR/selection.db
 
 echo "`$DATECMD` Create search database..."
 
+tokenizer=`../../bin/taginfo-config.rb sources.master.tokenizer simple`
 rm -f $DIR/taginfo-search.db
-$M4 --prefix-builtins -D __DIR__=$DIR search.sql | sqlite3 $DIR/taginfo-search.db
+$M4 --prefix-builtins -D __DIR__=$DIR -D __TOKENIZER__=$tokenizer search.sql | sqlite3 $DIR/taginfo-search.db
 
 echo "`$DATECMD` Create master database..."
 
