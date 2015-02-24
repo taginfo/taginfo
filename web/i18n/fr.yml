@@ -147,7 +147,7 @@ pages:
                 <p>OpenStreetMap utilise des <b>tags</b> de la forme <b>clé=valeur</b>
                 pour rajouter des informations aux objets géographiques. Taginfo rassemble
                 les informations sur ces tags de plusieurs sources afin de vous aider à
-                comprendre ce qu'ils signifient, et comment ils sont utilisés.
+                comprendre ce qu'ils signifient, et comment ils sont utilisés.</p>
             more: Plus d'information…
         international:
             see: Voir d'autres sites Taginfo…
