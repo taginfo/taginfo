@@ -46,6 +46,7 @@ width=`../../bin/taginfo-config.rb geodistribution.width`
 height=`../../bin/taginfo-config.rb geodistribution.height`
 min_tag_combination_count=`../../bin/taginfo-config.rb sources.master.min_tag_combination_count 1000`
 
+BINDIR=`../../bin/taginfo-config.rb sources.db.bindir ../../tagstats`
 TAGSTATS=`../../bin/taginfo-config.rb sources.db.tagstats ../../tagstats/tagstats`
 
 if [ -f $SELECTION_DB ]; then
@@ -61,6 +62,13 @@ fi
 
 #TAGSTATS="valgrind --leak-check=full --show-reachable=yes $TAGSTATS"
 $TAGSTATS $OPEN_SELECTION_DB --min-tag-combination-count=$min_tag_combination_count --left=$left --bottom=$bottom --top=$top --right=$right --width=$width --height=$height $PLANETFILE $DATABASE
+
+if [ -e $BINDIR/similarity ]; then
+    echo "`$DATECMD` Running similarity... "
+    $BINDIR/similarity $DATABASE
+else
+    echo "WARNING: Not running 'similarity', because binary not found. Please compile it."
+fi
 
 echo "`$DATECMD` Running update_characters... "
 ./update_characters.rb $DIR
