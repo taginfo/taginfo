@@ -4,31 +4,6 @@
     search = @trans.t.pages.search
  %>
 
-function highlight(str, query) {
-    return html_escape(str).replace(new RegExp('(' + html_escape(query) + ')', 'gi'), "<b>$1</b>");
-}
-
-function link_to_key_with_highlight(key, query) {
-    return link(
-        url_for_key(key),
-        highlight(key, query)
-    );
-}
-
-function link_to_value_with_highlight(key, value, query) {
-    return link(
-        url_for_tag(key, value),
-        highlight(value, query)
-    );
-}
-
-function link_to_rtype_with_highlight(rtype, query) {
-    return link(
-        url_for_rtype(rtype),
-        highlight(rtype, query)
-    );
-}
-
 var create_flexigrid_for = {
     keys: function(query) {
         create_flexigrid('grid-keys', {
