@@ -188,6 +188,67 @@ class Taginfo < Sinatra::Base
         }, json_opts(params[:format]))
     end
 
+    api(4, 'keys/similar', {
+        :description => 'Get list of pairs of similar keys, one used very often, one used rarely.',
+        :parameters => { :query => 'Only show keys matching this query (substring match, optional).' },
+        :paging => :optional,
+        :sort => %w( key_common key_rare count_all_common count_all_rare similarity ),
+        :result => paging_results([
+            [:key_common,       :STRING, 'Key thats used often in OSM database'],
+            [:count_all_common, :INT,    'Number of objects in the OSM database with the common key.'],
+            [:key_rare,         :STRING, 'Key thats used rarely in OSM database'],
+            [:count_all_rare,   :INT,    'Number of objects in the OSM database with the rare key.'],
+            [:similarity,       :INT,    'An integer measuring the similarity of the two keys, smaller is more similar.']
+        ]),
+        :example => { :page => 1, :rp => 10, :sortname => 'count_all_common', :sortorder => 'desc' },
+        :ui => '/reports/similar_keys'
+    }) do
+        query = like_contains(params[:query])
+
+        cond = "(similarity != 0 OR lower(key_common) = lower(key_rare)) AND count_all_common >= 10000"
+
+        total = @db.select("SELECT count(*) FROM similar_keys_common_rare").
+                        condition(cond).
+                        condition_if("(key_common LIKE ? ESCAPE '@' OR key_rare LIKE ? ESCAPE '@')", query, query).
+                        get_first_value().to_i
+
+        res = @db.select("SELECT * FROM similar_keys_common_rare").
+                        condition(cond).
+                        condition_if("(key_common LIKE ? ESCAPE '@' OR key_rare LIKE ? ESCAPE '@')", query, query).
+                        order_by(@ap.sortname, @ap.sortorder) { |o|
+                            o.key_common :key_common
+                            o.key_common :key_rare
+                            o.key_rare :key_rare
+                            o.key_rare :key_common
+                            o.count_all_common :count_all_common
+                            o.count_all_common! :count_all_rare
+                            o.count_all_common! :similarity
+                            o.count_all_rare :count_all_rare
+                            o.count_all_rare! :count_all_common
+                            o.count_all_rare :similarity
+                            o.similarity :similarity
+                            o.similarity! :count_all_common
+                            o.similarity! :count_all_rare
+                        }.
+                        paging(@ap).
+                        execute()
+
+        return JSON.generate({
+            :page  => @ap.page,
+            :rp    => @ap.results_per_page,
+            :total => total,
+            :url   => request.url,
+            :data  => res.map{ |row| {
+                    :key_common       => row['key_common'],
+                    :key_rare         => row['key_rare'],
+                    :count_all_common => row['count_all_common'],
+                    :count_all_rare   => row['count_all_rare'],
+                    :similarity       => row['similarity']
+                }
+            }
+        }, json_opts(params[:format]))
+    end
+
     api(4, 'keys/without_wiki_page', {
         :description => 'Return frequently used tag keys that have no associated wiki page.',
         :parameters => {

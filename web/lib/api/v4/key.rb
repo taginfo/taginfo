@@ -69,6 +69,62 @@ class Taginfo < Sinatra::Base
         }, json_opts(params[:format]))
     end
 
+    api(4, 'key/similar', {
+        :description => 'Find keys that are similar to a given key.',
+        :parameters => {
+            :key => 'Tag key (required).',
+            :query => 'Only show results where the other_key matches this query (substring match, optional).'
+        },
+        :paging => :optional,
+        :sort => %w( other_key count_all similarity ),
+        :result => paging_results([
+            [:other_key,  :STRING, 'Other key.'],
+            [:count_all,  :INT,    'Number of objects that have the other key.'],
+            [:similarity, :INT,    'An integer measuring the similarity of the two keys, smaller is more similar.']
+        ]),
+        :example => { :key => 'highway', :page => 1, :rp => 10, :sortname => 'other_key', :sortorder => 'asc' },
+        :ui => '/keys/highway#similar'
+    }) do
+        key = params[:key]
+        query = like_contains(params[:query])
+
+        if params[:query].to_s != ''
+            total = @db.select("SELECT count(*) FROM db.similar_keys s WHERE (s.key1 LIKE ? ESCAPE '@') AND s.key2=?
+                                                                          OR (s.key2 LIKE ? ESCAPE '@') AND s.key1=?", query, key, query, key).get_first_value().to_i
+        else
+            total = @db.count('db.similar_keys').
+                        condition("key1=? OR key2=?", key, key).
+                        get_first_value().to_i
+        end
+
+        rows = (params[:query].to_s != '' ?
+            @db.select("SELECT key1 AS other_key, count_all1 AS count_all, similarity FROM db.similar_keys WHERE (key1 LIKE ? ESCAPE '@') AND key2=?
+                  UNION SELECT key2 AS other_key, count_all2 AS count_all, similarity FROM db.similar_keys WHERE (key2 LIKE ? ESCAPE '@') AND key1=?", query, key, query, key) :
+            @db.select("SELECT key1 AS other_key, count_all1 AS count_all, similarity FROM db.similar_keys WHERE key2=?
+                  UNION SELECT key2 AS other_key, count_all2 AS count_all, similarity FROM db.similar_keys WHERE key1=?", key, key)).
+                    order_by(@ap.sortname, @ap.sortorder) { |o|
+                        o.similarity :similarity
+                        o.similarity :count_all
+                        o.other_key
+                        o.count_all :count_all
+                        o.count_all :similarity
+                    }.
+                    paging(@ap).
+                    execute()
+
+        return JSON.generate({
+            :page  => @ap.page,
+            :rp    => @ap.results_per_page,
+            :total => total,
+            :url   => request.url,
+            :data  => rows.map{ |row| {
+                :other_key  => row['other_key'],
+                :count_all  => row['count_all'],
+                :similarity => row['similarity']
+            } }
+        }, json_opts(params[:format]))
+    end
+
     api(4, 'key/distribution/nodes', {
         :description => 'Get map with distribution of this key in the database (nodes only).',
         :parameters => { :key => 'Tag key (required).' },
