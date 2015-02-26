@@ -1,0 +1,16 @@
+<div class="pre">
+    <h1><%= t.reports.similar_keys.name %></h1>
+    <%= t.reports.similar_keys.intro %>
+</div>
+<div class="box resize">
+    <table id="grid-keys">
+    </table>
+</div>
+<% javascript do
+    JS.raw(<<"JAVASCRIPT")
+function page_init2() {
+//    create_flexigrid();
+}
+JAVASCRIPT
+end
+%>

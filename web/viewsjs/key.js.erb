@@ -83,6 +83,31 @@ var create_flexigrid_for = {
             }
         });
     },
+    similar: function(key) {
+        create_flexigrid('grid-similar', {
+            url: '/api/4/key/similar?key=' + encodeURIComponent(key),
+            colModel: [
+                { display: '<%= h(page.similar.other) %>', name: 'other_key', width: 500, sortable: true },
+                { display: '<span title="<%= h(page.similar.count_all_tooltip) %>"><%= h(misc.count) %></span>', name: 'count_all', width: 160, sortable: true, align: 'right' },
+                { display: '<span title="<%= h(page.similar.similarity_tooltip) %>"><%= h(page.similar.similarity) %></span>', name: 'similarity', width: 100, sortable: true, align: 'right' }
+            ],
+            searchitems: [
+                { display: '<%= h(page.similar.other) %>', name: 'other_key' }
+            ],
+            sortname: 'other_key',
+            sortorder: 'asc',
+            preProcess: function(data) {
+                data.rows = jQuery.map(data.data, function(row, i) {
+                    return { 'cell': [
+                        link_to_key_with_highlight(row.other_key, key),
+                        row.count_all,
+                        row.similarity
+                    ] };
+                });
+                return data;
+            }
+        });
+    },
     wiki: function(key, filter_type) {
         create_flexigrid('grid-wiki', {
             url: '/api/4/key/wiki_pages?key=' + encodeURIComponent(key),
