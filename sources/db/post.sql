@@ -85,6 +85,9 @@ INSERT INTO stats (key, value) SELECT 'num_keys_on_nodes',         count(*) FROM
 INSERT INTO stats (key, value) SELECT 'num_keys_on_ways',          count(*) FROM keys WHERE count_ways      > 0;
 INSERT INTO stats (key, value) SELECT 'num_keys_on_relations',     count(*) FROM keys WHERE count_relations > 0;
 
+INSERT INTO stats (key, value) SELECT 'num_similar_keys',             count(*) FROM similar_keys;
+INSERT INTO stats (key, value) SELECT 'num_similar_keys_common_rare', count(*) FROM similar_keys_common_rare;
+
 INSERT INTO stats (key, value) SELECT 'num_tags',                  count(*) FROM tags;
 INSERT INTO stats (key, value) SELECT 'num_tags_on_nodes',         count(*) FROM tags WHERE count_nodes     > 0;
 INSERT INTO stats (key, value) SELECT 'num_tags_on_ways',          count(*) FROM tags WHERE count_ways      > 0;
