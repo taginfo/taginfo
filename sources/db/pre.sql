@@ -49,6 +49,18 @@ CREATE TABLE key_distributions (
   png              BLOB
 );
 
+
+DROP TABLE IF EXISTS similar_keys;
+
+CREATE TABLE similar_keys (
+  key1       VARCHAR,
+  key2       VARCHAR,
+  count_all1 INTEGER DEFAULT 0,
+  count_all2 INTEGER DEFAULT 0,
+  similarity INTEGER
+);
+
+
 DROP TABLE IF EXISTS tag_distributions;
 
 CREATE TABLE tag_distributions (

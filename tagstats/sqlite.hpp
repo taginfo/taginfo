@@ -196,6 +196,17 @@ namespace Sqlite {
             return std::string(textptr);
         }
 
+        const char* get_string(int column) {
+            if (column >= column_count()) {
+                throw Sqlite::Exception("Column larger than max columns", "");
+            }
+            const char* textptr = reinterpret_cast<const char*>(sqlite3_column_text(m_statement, column));
+            if (!textptr) {
+                throw Sqlite::Exception("Error reading text column", m_db.errmsg());
+            }
+            return textptr;
+        }
+
         int get_int(int column) {
             if (column >= column_count()) {
                 throw Sqlite::Exception("Column larger than max columns", m_db.errmsg());
