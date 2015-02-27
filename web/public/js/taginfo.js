@@ -228,6 +228,14 @@ function link_to_url(url) {
     );
 }
 
+function link_to_url_nofollow(url) {
+    return link(
+        encodeURI(url),
+        html_escape(url.replace(/^http:\/\//, '')),
+        { target: '_blank', 'class': 'extlink', 'rel': 'nofollow' }
+    );
+}
+
 function highlight(str, query) {
     return html_escape(str).replace(new RegExp('(' + html_escape(query) + ')', 'gi'), "<b>$1</b>");
 }

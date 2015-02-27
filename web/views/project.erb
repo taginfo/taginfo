@@ -37,16 +37,16 @@ function page_init2() {
         doc_url = #{ @project['doc_url'].to_json };
 
     if (project_url) {
-        jQuery('#project_url').html(link_to_url(project_url));
+        jQuery('#project_url').html(link_to_url_nofollow(project_url));
     }
     if (icon_url) {
         jQuery('#icon_url').html(img({ src: icon_url, width: 16, height: 16, alt: ''}));
     }
     if (json_url) {
-        jQuery('#json_url').html(link_to_url(json_url));
+        jQuery('#json_url').html(link_to_url_nofollow(json_url));
     }
     if (doc_url) {
-        jQuery('#doc_url').html(link_to_url(doc_url));
+        jQuery('#doc_url').html(link_to_url_nofollow(doc_url));
     }
 
     init_tabs([project]);
