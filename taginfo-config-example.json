@@ -48,7 +48,7 @@
     "turbo": {
         // if there are more objects than this with a key/tag, the normal Overpass Turbo
         // will be called, if less the Wizard will be used with autorun and autozoom
-        "max_auto": 100,
+        "max_auto": 1000,
         "url_prefix": "http://overpass-turbo.eu/?",
         // set this to "global" or "in <area>" where <area> is a country name or other region found by Nominatim
         "wizard_area": "global"
