@@ -38,6 +38,7 @@ module SQL
                 @db.execute("ATTACH DATABASE ? AS ?", "#{ @@dir }/#{ source.dbname }", source.id.to_s)
             end
             @db.execute("ATTACH DATABASE ? AS search", "#{ @@dir }/taginfo-search.db")
+            @db.execute("ATTACH DATABASE ? AS history", "#{ @@dir }/taginfo-history.db")
             self
         end
 

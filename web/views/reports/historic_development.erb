@@ -1,0 +1,24 @@
+<div class="pre">
+    <h1><%= t.reports.historic_development.name %></h1>
+    <%= t.reports.historic_development.intro %>
+</div>
+<div id="tabs">
+    <ul>
+        <li><a href="#num_keys"><%= t.osm.keys %></a></li>
+        <li><a href="#num_tags"><%= t.osm.tags %></a></li>
+        <li><a href="#relation_types"><%= t.osm.relation_types %></a></li>
+    </ul>
+    <div id="num_keys">
+        <h2><%= t.reports.historic_development.keys.title %></h2>
+        <div class="canvas" id="canvas_num_keys"></div>
+    </div>
+    <div id="num_tags">
+        <h2><%= t.reports.historic_development.tags.title %></h2>
+        <div class="canvas" id="canvas_num_tags"></div>
+    </div>
+    <div id="relation_types">
+        <h2><%= t.reports.historic_development.relation_types.title %></h2>
+        <div class="canvas" id="canvas_relation_types"></div>
+    </div>
+</div>
+<% javascript_for(:d3) %>

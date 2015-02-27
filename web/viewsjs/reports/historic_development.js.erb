@@ -1,0 +1,95 @@
+<%
+page = @trans.t.reports.historic_development
+
+data = {}
+['num_keys', 'num_tags', 'relation_types'].each do |key|
+    data[key] = @db.execute("SELECT udate, value FROM history.history_stats WHERE key=? ORDER BY udate", key).map do |row|
+        [ row['udate'], row['value'].to_i ]
+    end
+end
+%>
+
+var create_flexigrid_for = {
+}
+
+function init_stat(key, data) {
+    var radius = 1.5,
+        w = 900,
+        h = 400,
+        margin = { top: 10, right: 15, bottom: 60, left: 80 };
+
+    data.forEach(function(d) {
+        d[0] = new Date(d[0]);
+    });
+
+    var t0 = data[0][0];
+        t1 = data[data.length - 1][0];
+
+    var max = d3.max(data, function(d) {
+        return d[1];
+    });
+
+    var scale_x = d3.time.scale()
+                    .domain([t0, t1])
+                    .range([0, w]);
+
+    var axis_x = d3.svg.axis()
+                    .scale(scale_x)
+                    .orient('bottom')
+                    .tickFormat(d3.time.format('%b %Y'));
+
+    var scale_y = d3.scale.linear()
+                    .domain([0, max])
+                    .range([h, 0]);
+
+    var axis_y = d3.svg.axis()
+                    .scale(scale_y)
+                    .orient('left');
+
+    var chart = d3.select('#canvas_' + key).append('svg')
+                    .attr('width', w + margin.left + margin.right)
+                    .attr('height', h + margin.top + margin.bottom)
+                    .append('g')
+                        .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
+                        .call(function(c) {
+                            c.append('rect')
+                                .attr('width', w + 10)
+                                .attr('height', h + 10)
+                                .attr('x', -5)
+                                .attr('y', -5)
+                                .style('fill', 'white')
+                                .style('stroke', '#d0d0c8')
+                        });
+
+    chart.append('g')
+        .attr('class', 'x axis')
+        .attr('transform', 'translate(0, ' + (h + 5) + ')')
+        .call(axis_x);
+
+    chart.append('g')
+        .attr('class', 'y axis')
+        .attr('transform', 'translate(-5, 0)')
+        .call(axis_y);
+
+    chart.selectAll('circle')
+        .data(data)
+        .enter()
+        .append('circle')
+            .style('fill', '#083e76')
+            .attr('cx', function(d, i) { return scale_x(d[0]); })
+            .attr('cy', function(d) { return scale_y(d[1]); })
+            .attr('r', radius)
+            .attr('title', function(d, i) { return d3.time.format('%Y-%m-%d')(d[0]) + ': ' + d[1]; });
+
+}
+
+function page_init() {
+    up = function() { window.location = '/reports'; };
+    init_tabs([]);
+    var data = <%= data.to_json %>;
+
+    Object.keys(data).forEach(function(key) {
+        init_stat(key, data[key]);
+    });
+}
+
