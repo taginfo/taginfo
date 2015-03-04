@@ -60,6 +60,6 @@ Report.new 'Language comparison table for keys in the wiki', :wiki
 Report.new 'Languages', :wiki
 Report.new 'Wiki pages about non-existing keys', :db, :wiki
 Report.new 'Name tags' #disabled
-Report.new 'Similar keys' #disabled, :db
+Report.new 'Similar keys', :db
 Report.new 'Historic development', :db
 

@@ -3,14 +3,10 @@
     <%= t.reports.similar_keys.intro %>
 </div>
 <div class="box resize">
+<% begin @db.count('db.similar_keys_common_rare').execute() %>
     <table id="grid-keys">
     </table>
+<% rescue %>
+    <p><i>Report not available due to missing database table. Please run update!</i></p>
+<% end %>
 </div>
-<% javascript do
-    JS.raw(<<"JAVASCRIPT")
-function page_init2() {
-//    create_flexigrid();
-}
-JAVASCRIPT
-end
-%>
