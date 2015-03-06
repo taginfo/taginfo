@@ -459,6 +459,9 @@ sources:
     master:
         name: Master
         description: Zusammengefaßte Statistiken und Verschiedenes für die Taginfo-Webseite.
+    history:
+        name: History
+        description: Zusammengefaßte Statistiken über die Zeit.
     db:
         name: Datenbank
         description: Statistik über jeden Key und Tag aus der OSM-Datenbank (Planet-Datei).

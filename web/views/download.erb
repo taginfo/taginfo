@@ -16,7 +16,13 @@
             <td class="tr"><%= File.size("../../data/taginfo-master.db").to_bytes rescue "<span class='empty'>#{ h(t.misc.unknown) }</span>" %></td>
             <td class="tl"><%= h(t.sources.master.description) %></td>
         </tr>
-<% Source.visible.each_with_index do |source, n| c = (n%2==0) ? ' even' : '' %>
+        <tr>
+            <td class="tl even"><a rel="nofollow" href="/download/taginfo-history.db.bz2">taginfo-history.db.bz2</a></td>
+            <td class="tr even"><%= File.size("../../download/taginfo-history.db.bz2").to_bytes rescue "<span class='empty'>#{ h(t.misc.unknown) }</span>" %></td>
+            <td class="tr even"><%= File.size("../../data/taginfo-history.db").to_bytes rescue "<span class='empty'>#{ h(t.misc.unknown) }</span>" %></td>
+            <td class="tl even"><%= h(t.sources.history.description) %></td>
+        </tr>
+<% Source.visible.each_with_index do |source, n| c = (n%2==0) ? '' : ' even' %>
         <tr>
             <td class="tl<%= c %>"><%= source.link_download %></td>
             <td class="tr<%= c %>"><%= source.dbpack != 0 ? source.dbpack : "<span class='empty'>#{ t.misc.unknown }</span>" %></td>

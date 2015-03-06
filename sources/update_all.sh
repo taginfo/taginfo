@@ -77,8 +77,10 @@ for source in $SOURCES_CREATE; do
     bzip2 -9 -c $DIR/$source/taginfo-$source.db >$DIR/download/taginfo-$source.db.bz2 &
 done
 sleep 5 # wait for bzip2 on the smaller dbs to finish
-bzip2 -9 -c $DIR/taginfo-master.db >$DIR/download/taginfo-master.db.bz2 &
-bzip2 -9 -c $DIR/taginfo-search.db >$DIR/download/taginfo-search.db.bz2 &
+
+for db in master history search; do
+    bzip2 -9 -c $DIR/taginfo-$db.db >$DIR/download/taginfo-$db.db.bz2 &
+done
 
 wait
 echo "Done."

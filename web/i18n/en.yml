@@ -439,6 +439,9 @@ sources:
     master:
         name: Master
         description: Aggregate statistics and miscellaneous data needed for the taginfo user interface.
+    history:
+        name: History
+        description: Aggregate statistics over time.
     db:
         name: Database
         description: Statistics about each key and each tag from the main OSM database (planet file).
