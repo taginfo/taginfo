@@ -61,24 +61,6 @@ CREATE UNIQUE INDEX relation_types_rtype_idx ON relation_types (rtype);
 CREATE        INDEX relation_roles_rtype_idx ON relation_roles (rtype);
 
 -- ============================================================================
--- deprecated: can be removed soon
-
-INSERT INTO selected_tags (skey, svalue)
-    SELECT key1, value1 FROM tag_combinations WHERE value1 != ''
-    UNION
-    SELECT key2, value2 FROM tag_combinations WHERE value2 != '';
-
-UPDATE selected_tags SET
-    count_all       = (SELECT t.count_all       FROM tags t WHERE t.key=skey AND t.value=svalue),
-    count_nodes     = (SELECT t.count_nodes     FROM tags t WHERE t.key=skey AND t.value=svalue),
-    count_ways      = (SELECT t.count_ways      FROM tags t WHERE t.key=skey AND t.value=svalue),
-    count_relations = (SELECT t.count_relations FROM tags t WHERE t.key=skey AND t.value=svalue);
-
-ANALYZE selected_tags;
-
-CREATE UNIQUE INDEX selected_tags_key_value_idx ON selected_tags (skey, svalue);
-
--- ============================================================================
 
 INSERT INTO stats (key, value) SELECT 'num_keys',                  count(*) FROM keys;
 INSERT INTO stats (key, value) SELECT 'num_keys_on_nodes',         count(*) FROM keys WHERE count_nodes     > 0;
