@@ -14,54 +14,6 @@ PRAGMA cache_size    = 5000000;
 
 -- ============================================================================
 
--- For all keys found to be similar earlier, we get the counts how often they
--- appear in the OSM database and store this data in the same table for easy
--- access.
-UPDATE similar_keys SET count_all1=(SELECT k.count_all FROM keys k WHERE k.key=similar_keys.key1);
-UPDATE similar_keys SET count_all2=(SELECT k.count_all FROM keys k WHERE k.key=similar_keys.key2);
-
-CREATE INDEX similar_keys_key1_idx ON similar_keys (key1);
-CREATE INDEX similar_keys_key2_idx ON similar_keys (key2);
-
-ANALYZE similar_keys;
-
-DROP TABLE IF EXISTS similar_keys_common_rare;
-
-CREATE TABLE similar_keys_common_rare (
-  key_common       VARCHAR,
-  key_rare         VARCHAR,
-  count_all_common INTEGER DEFAULT 0,
-  count_all_rare   INTEGER DEFAULT 0,
-  similarity       INTEGER
-);
-
-INSERT INTO similar_keys_common_rare (key_common, key_rare, count_all_common, count_all_rare, similarity)
-    SELECT key1, key2, count_all1, count_all2, similarity
-        FROM similar_keys WHERE count_all1 >= 1000 AND count_all2 <= 10 AND count_all2 > 0;
-
-INSERT INTO similar_keys_common_rare (key_common, key_rare, count_all_common, count_all_rare, similarity)
-    SELECT key2, key1, count_all2, count_all1, similarity
-        FROM similar_keys WHERE count_all2 >= 1000 AND count_all1 <= 10 AND count_all1 > 0;
-
--- ============================================================================
-
-CREATE UNIQUE INDEX keys_key_idx ON keys (key);
-CREATE        INDEX tags_key_idx ON tags (key);
--- CREATE UNIQUE INDEX tags_key_value_idx ON tags (key, value);
-CREATE        INDEX key_combinations_key1_idx ON key_combinations (key1);
-CREATE        INDEX key_combinations_key2_idx ON key_combinations (key2);
-CREATE UNIQUE INDEX key_distributions_key_idx ON key_distributions (key, object_type);
-
-CREATE UNIQUE INDEX tag_distributions_key_value_idx ON tag_distributions (key, value, object_type);
-
-CREATE        INDEX tag_combinations_key1_value1_idx ON tag_combinations (key1, value1);
-CREATE        INDEX tag_combinations_key2_value2_idx ON tag_combinations (key2, value2);
-
-CREATE UNIQUE INDEX relation_types_rtype_idx ON relation_types (rtype);
-CREATE        INDEX relation_roles_rtype_idx ON relation_roles (rtype);
-
--- ============================================================================
-
 INSERT INTO stats (key, value) SELECT 'num_keys',                  count(*) FROM keys;
 INSERT INTO stats (key, value) SELECT 'num_keys_on_nodes',         count(*) FROM keys WHERE count_nodes     > 0;
 INSERT INTO stats (key, value) SELECT 'num_keys_on_ways',          count(*) FROM keys WHERE count_ways      > 0;

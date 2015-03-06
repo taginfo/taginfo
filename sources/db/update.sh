@@ -70,8 +70,14 @@ else
     echo "WARNING: Not running 'similarity', because binary not found. Please compile it."
 fi
 
+echo "`$DATECMD` Running post_similar_keys.sql... "
+sqlite3 $DATABASE <post_similar_keys.sql
+
 echo "`$DATECMD` Running update_characters... "
 ./update_characters.rb $DIR
+
+echo "`$DATECMD` Running post_indexes.sql... "
+sqlite3 $DATABASE <post_indexes.sql
 
 echo "`$DATECMD` Running post.sql... "
 sqlite3 $DATABASE <post.sql
