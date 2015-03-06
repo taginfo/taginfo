@@ -13,6 +13,11 @@ PRAGMA cache_size    = 5000000;
 
 -- ============================================================================
 
+-- need this index now...
+CREATE UNIQUE INDEX keys_key_idx ON keys (key);
+
+-- ============================================================================
+
 -- For all keys found to be similar earlier, we get the counts how often they
 -- appear in the OSM database and store this data in the same table for easy
 -- access.
