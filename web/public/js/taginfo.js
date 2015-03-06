@@ -743,6 +743,26 @@ function comparison_list_change(key, value) {
 
 /* ============================ */
 
+function activate_josm_button() {
+    if (window.location.protocol == "https:") {
+        var url = jQuery('#josm_button')[0].href.replace('http://localhost:8111/', 'https://localhost:8112/');
+        jQuery('#josm_button')[0].href = url;
+    }
+
+    jQuery('#josm_button').bind('click', function() {
+        var url = jQuery('#josm_button')[0].href;
+        jQuery.get(url, function(data) {
+            if (data.substring(0, 2) != 'OK') {
+                alert("Problem contacting JOSM. Is it running? Is remote control activated?");
+                console.log("Answer from JOSM: [" + data + "]");
+            }
+        });
+        return false;
+    });
+}
+
+/* ============================ */
+
 function project_tag_desc(description, icon, url) {
     var out = '';
     if (icon) {
