@@ -1,20 +1,20 @@
 <div class="pre">
-    <h1><%= t.reports.key_lengths.name %></h1>
-    <%= t.reports.key_lengths.intro %>
+    <h1><%= h(t.reports.key_lengths.name) %></h1>
+    <p><%= h(t.reports.key_lengths.intro) %></p>
 </div>
 <div id="tabs">
     <ul>
-        <li><a href="#keys"><%= t.osm.keys %></a></li>
-        <li><a href="#histogram"><%= t.reports.key_lengths.histogram.name %></a></li>
+        <li><a href="#keys"><%= h(t.osm.keys) %></a></li>
+        <li><a href="#histogram"><%= h(t.reports.key_lengths.histogram.name) %></a></li>
     </ul>
     <div id="keys">
-        <h2><%= t.osm.keys %></h2>
+        <h2><%= h(t.osm.keys) %></h2>
         <table id="grid-keys">
         </table>
     </div>
     <div id="histogram">
-        <h2><%= t.reports.key_lengths.histogram.name %></h2>
-        <p><%= t.reports.key_lengths.histogram.intro %><p>
+        <h2><%= h(t.reports.key_lengths.histogram.name) %></h2>
+        <p><%= h(t.reports.key_lengths.histogram.intro) %><p>
         <div class="canvas" id="canvas-histogram"></div>
     </div>
 </div>

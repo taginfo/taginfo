@@ -1,6 +1,6 @@
 <div class="pre">
-    <h1><%= t.reports.similar_keys.name %></h1>
-    <%= t.reports.similar_keys.intro %>
+    <h1><%= h(t.reports.similar_keys.name) %></h1>
+    <p><%= h(t.reports.similar_keys.intro) %></p>
 </div>
 <div class="box resize">
 <% begin @db.count('db.similar_keys_common_rare').execute() %>

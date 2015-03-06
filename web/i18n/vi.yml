@@ -236,11 +236,6 @@ pages:
             implied_tags: Thẻ được ngụ ý
             combined_tags: Thẻ tổ hợp
             linked_tags: Thẻ liên kết
-        josm:
-            title: Quy tắc kiểu JOSM có chìa khóa này
-            choice: |
-                  Chọn kiểu:
-            no_styles: Không có kiểu JOSM cho chìa khóa này.
     tag:
         description_from_wiki: Lời miêu tả thẻ này trên wiki (trong ngôn ngữ của bạn nếu có sẵn, nếu không thì trong tiếng Anh).
         no_description_in_wiki: Không có lời miêu tả thẻ này trong tiếng Anh trên wiki. (Xem thêm thẻ “Wiki”.)
@@ -270,11 +265,6 @@ pages:
             implied_tags: Thẻ ngụ ý
             combined_tags: Thẻ tổ hợp
             linked_tags: Thẻ liên kết
-        josm:
-            title: Quy tắc kiểu JOSM có thẻ này
-            choice: |
-                  Chọn kiểu:
-            no_styles: Không có kiểu JOSM cho thẻ này.
     relation:
         name: Loại quan hệ
         description_from_wiki: Lời miêu tả loại quan hệ này trên wiki (trong ngôn ngữ của bạn nếu có sẵn, nếu không thì trong tiếng Anh).
@@ -330,9 +320,6 @@ sources:
     wiki:
         name: Wiki
         description: Dữ liệu từ các trang thẻ và chìa khóa trên wiki OSM.
-    josm:
-        name: JOSM
-        description: Dữ liệu cấu hình từ trình vẽ OSM JOSM.
     languages:
         name: Ngôn ngữ
         description: Tên ngôn ngữ, mã ngôn ngữ, v.v. từ các kho IANA và Unicode.
@@ -341,9 +328,9 @@ reports:
     characters_in_keys:
         name: Ký tự trong chìa khóa
         intro: |
-            <p>Bất kỳ ký tự Unicode hợp lệ có thể xuất hiện trong một chìa khóa OSM, nhưng thường thường chỉ dùng
+            Bất kỳ ký tự Unicode hợp lệ có thể xuất hiện trong một chìa khóa OSM, nhưng thường thường chỉ dùng
             các chữ thường Latinh (a–z) và dấu gạch dưới (_). Đôi khi dấu hai chấm
-            (:) được dùng để phân cách.</p>
+            (:) được dùng để phân cách.
         statistics:
             tab: Thống kê
             title: Tóm lược thống kê
@@ -409,12 +396,10 @@ reports:
         also_show_keys: Cũng hiển thị các chìa khóa không có trang wiki trong tiếng Anh mà có trang trong ngôn ngữ khác.
         table:
             create_wiki_page: Tạo trang wiki…
-    josm_styles:
-        name: Kiểu JOSM
     key_lengths:
         name: Độ dài chìa khóa
         intro: |
-            <p>Chìa khóa thẻ có thể có từ 0 đến 255 ký tự Unicode. Nhiều khi các chìa khóa rất ngắn hoặc rất dài là lỗi (nhưng không nhất thiết là lỗi).</p>
+            Chìa khóa thẻ có thể có từ 0 đến 255 ký tự Unicode. Nhiều khi các chìa khóa rất ngắn hoặc rất dài là lỗi (nhưng không nhất thiết là lỗi).
         table:
             number_of_objects: Số đối tượng
         histogram:
@@ -430,13 +415,13 @@ reports:
             page: Trang wiki có sẵn nhưng không có bản mẫu chuẩn.
             redirect: Trang đổi hướng.
         intro: |
-            <p>Bảng này có các chìa khóa thẻ có sẵn trang wiki và có các ngôn ngữ của các trang wiki.</p>
+            Bảng này có các chìa khóa thẻ có sẵn trang wiki và có các ngôn ngữ của các trang wiki.
     languages:
         name: Ngôn ngữ
         intro: |
-            <p>OpenStreetMap là một dự án quốc tế. Các thẻ và lời miêu tả có trong bất kỳ
+            OpenStreetMap là một dự án quốc tế. Các thẻ và lời miêu tả có trong bất kỳ
             ngôn ngữ. Bảng này có các ngôn ngữ được nhận ra bởi taginfo và bao nhiêu trang
-            wiki giải thích chìa khóa và thẻ có sẵn trong các ngôn ngữ đó.</p>
+            wiki giải thích chìa khóa và thẻ có sẵn trong các ngôn ngữ đó.
         code: Mã
         native_name: Tên bản ngữ
         english_name: Tên tiếng Anh
@@ -445,10 +430,10 @@ reports:
     wiki_pages_about_non_existing_keys:
         name: Trang wiki về chìa khóa không dùng
         intro: |
-            <p>Bảng này có các chìa khóa có trang wiki miêu tả mà không xuất hiện một lần nào trong
+            Bảng này có các chìa khóa có trang wiki miêu tả mà không xuất hiện một lần nào trong
             cơ sở dữ liệu. Việc này không nhất thiết phải là lỗi (có thể ai đó đã viết tài liệu
             trên wiki để chuẩn bị sử dụng một chìa khóa hoặc trang wiki giải thích về một chìa khóa
-            không dùng nữa), nhưng cũng có thể là lỗi chính tả hoặc lỗi khác.</p>
+            không dùng nữa), nhưng cũng có thể là lỗi chính tả hoặc lỗi khác.
         wiki_pages: Trang wiki
     name_tags:
         name: Biến thể của thẻ name

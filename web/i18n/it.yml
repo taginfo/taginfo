@@ -133,9 +133,6 @@ sources:
     wiki:
         name: Wiki
         description: Dati dalle pagine della wiki OSM dei tag e delle chiavi.
-    josm:
-        name: JOSM
-        description: Dati di configurazione dall'editor JOSM di OSM.
 
 reports:
     characters_in_keys:

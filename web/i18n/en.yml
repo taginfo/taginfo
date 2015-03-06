@@ -241,8 +241,6 @@ pages:
                 <p>The <a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> is read and all Key:*, Tag:*, and Relation:* pages (in all the different languages) are analyzed. Descriptions, images, related tags, etc. are extracted from them.</p>
             languages: |
                 <p>Taginfo gets information about the different languages of the world, their codes, names, etc. from several <a class="extlink" href="http://www.iana.org/">IANA</a> and <a class="extlink" href="http://www.unicode.org/">Unicode</a> registries.</p>
-            josm: |
-                <p>Icons and styles are taken from the <a class="extlink" href="http://josm.openstreetmap.de/">JOSM editor</a> configuration.</p>
             projects: |
                 <p>Projects that use OSM tags in some way, such as editors, maps, routers, etc. See <a href="/projects">the project list</a>.</p>
         updates:
@@ -334,11 +332,6 @@ pages:
             implied_tags: Implied Tags
             combined_tags: Combined Tags
             linked_tags: Linked Tags
-        josm:
-            title: JOSM style rules with this key
-            choice: |
-                  Choose style:
-            no_styles: No JOSM styles for this key.
         projects:
             title: Projects using this key
             description: How this key is used in the project
@@ -378,11 +371,6 @@ pages:
             implied_tags: Implied Tags
             combined_tags: Combined Tags
             linked_tags: Linked Tags
-        josm:
-            title: JOSM style rules with this tag
-            choice: |
-                  Choose style:
-            no_styles: No JOSM styles for this tag.
         projects:
             title: Projects using this tag
             description: How this tag is used in the project
@@ -457,9 +445,6 @@ sources:
     wiki:
         name: Wiki
         description: Data from the tag and key pages of the OSM wiki.
-    josm:
-        name: JOSM
-        description: Configuration data from the JOSM OSM editor.
     languages:
         name: Languages
         description: Language names, codes, etc. from IANA and Unicode registries.
@@ -471,9 +456,9 @@ reports:
     characters_in_keys:
         name: Characters in keys
         intro: |
-            <p>Any valid Unicode character can appear in an OSM key but usually only lower
+            Any valid Unicode character can appear in an OSM key but usually only lower
             case latin letters (a-z) and the underscore (_) are used. Sometimes the colon
-            (:) is added as a separator character.</p>
+            (:) is added as a separator character.
         statistics:
             tab: Statistics
             title: Statistics overview
@@ -541,12 +526,10 @@ reports:
         also_show_keys: Also show keys that have no English language wiki page but a page in some other language.
         table:
             create_wiki_page: Create wiki page...
-    josm_styles:
-        name: JOSM styles
     key_lengths:
         name: Key lengths
         intro: |
-            <p>Tag keys can be between 0 and 255 (Unicode) characters long. Very short or very long keys are often, but not always, errors.</p>
+            Tag keys can be between 0 and 255 (Unicode) characters long. Very short or very long keys are often, but not always, errors.
         table:
             number_of_objects: Number of objects
         histogram:
@@ -562,14 +545,14 @@ reports:
             page: Page in wiki available but doesn't contain standard template.
             redirect: Page is a redirect.
         intro: |
-            <p>This table shows all tag keys for which there are wiki pages available and in what languages they are.</p>
+            This table shows all tag keys for which there are wiki pages available and in what languages they are.
     languages:
         name: Languages
         intro: |
-            <p>OpenStreetMap is an international project. Tags and their descriptions can
+            OpenStreetMap is an international project. Tags and their descriptions can
             be in any language. This table lists the languages taginfo knows about and how
             many wiki pages there are in these languages documenting keys and tags,
-            respectively.</p>
+            respectively.
         code: Code
         native_name: Native name
         english_name: English name
@@ -578,10 +561,10 @@ reports:
     wiki_pages_about_non_existing_keys:
         name: Wiki pages about non-existing keys
         intro: |
-            <p>This table shows keys for which a wiki page exists but there is not a single
+            This table shows keys for which a wiki page exists but there is not a single
             instance in the database. This is not necessarily an error (maybe somebody
             added the documentation in the wiki as preparation for using a key or the wiki
-            page documents a now obsolete key), but it can also be a typo or other error.</p>
+            page documents a now obsolete key), but it can also be a typo or other error.
         wiki_pages: Wiki pages
     name_tags:
         name: Variants of name tags
@@ -621,7 +604,9 @@ reports:
         intro: |
             This reports shows keys used very often and similar keys used very
             rarely. This exposes many misspellings of common keys, but is not
-            perfect. Take care when fixing the data!
+            perfect. Take care when fixing the data! Do NOT just mechanically
+            edit those keys with search-and-replace. Look at each case individually
+            and also fix other problems that you see.
         key_common: Commonly used keys
         key_rare: Rarely used keys
         count_common: Count

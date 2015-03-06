@@ -178,9 +178,6 @@ pages:
                 e outras coisas, a partir de registros
                 <a class="extlink" href="http://www.iana.org/">IANA</a> e
                 <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
-            josm: |
-                <p>Ícones e estilos são pegos das configurações do
-                <a class="extlink" href="http://josm.openstreetmap.de/">editor JOSM</a>.</p>
             projects: |
                 <p>Projetos que usam etiquetas OSM de alguma maneira, tais como editores, mapas,
                 aplicações de roteamento, etc. Veja a <a href="/projects">lista de projetos</a>.</p>
@@ -271,11 +268,6 @@ pages:
             implied_tags: Etiquetas implícitas
             combined_tags: Combinações de etiquetas
             linked_tags: Etiquetas relacionadas
-        josm:
-            title: Regras de estilo JOSM com esta chave
-            choice: |
-                  Escolher estilo:
-            no_styles: Nenhum estilo JOSM com esta chave.
     tag:
         description_from_wiki: Descrição desta etiqueta no wiki (se disponível, no seu idioma, e noutro caso, em inglês).
         no_description_in_wiki: Não há descrição em inglês para esta etiqueta no wiki. (Veja também a guia "Wiki".)
@@ -305,11 +297,6 @@ pages:
             implied_tags: Etiquetas implícitas
             combined_tags: Combinações de etiquetas
             linked_tags: Etiquetas relacionadas
-        josm:
-            title: Regras de estilo JOSM com esta etiqueta
-            choice: |
-                  Escolha o estilo:
-            no_styles: Nenhum estilo JOSM com esta etiqueta.
         projects:
             title: Projetos utilizando esta etiqueta
             description: Como esta etiqueta é utilizada no projeto
@@ -384,9 +371,6 @@ sources:
     wiki:
         name: Wiki
         description: Dados colhidos das páginas de etiquetas e chaves da wiki do projeto OpenStreetMap.
-    josm:
-        name: JOSM
-        description: Dados extraídos das configurações do editor JOSM.
     languages:
         name: Idiomas
         description: Os nomes dos idiomas, seus códigos, etc. a partir de registros IANA e Unicode.
@@ -398,9 +382,9 @@ reports:
     characters_in_keys:
         name: Caracteres em chaves
         intro: |
-            <p>Qualquer caractere Unicode válido pode ser utilizado em uma chave do OSM, mas
+            Qualquer caractere Unicode válido pode ser utilizado em uma chave do OSM, mas
             geralmente somente letras latinas de caixa baixa (a-z) e o underline (_) são utilizados.
-            Às vezes o dois pontos (:) é utilizado como um caractere separados.</p>
+            Às vezes o dois pontos (:) é utilizado como um caractere separados.
         statistics:
             tab: Estatísticas
             title: Visualização de estatísticas
@@ -422,12 +406,10 @@ reports:
         also_show_keys: Também mostrar chaves que não tenham uma página em inglês no wiki, mas existem em outro idioma.
         table:
             create_wiki_page: Criar página no wiki...
-    josm_styles:
-        name: Estilos do JOSM
     key_lengths:
         name: Comprimento das chaves
         intro: |
-            <p>As chaves das etiquetas podem ter de 0 a 255 caracteres (Unicode). Chaves que são muito grandes ou muito pequenas geralmente são erros, mas nem sempre.</p>
+            As chaves das etiquetas podem ter de 0 a 255 caracteres (Unicode). Chaves que são muito grandes ou muito pequenas geralmente são erros, mas nem sempre.
         table:
             number_of_objects: Número de objetos
         histogram:
@@ -443,15 +425,15 @@ reports:
             page: Página no wiki disponível, porém não contém predefinição padrão.
             redirect: A página é um redirecionamento.
         intro: |
-            <p>Esta tabela mostra todas as chaves de etiquetas que possuem páginas no wiki,
-             e em que idiomas elas estão disponíveis.</p>
+            Esta tabela mostra todas as chaves de etiquetas que possuem páginas no wiki,
+            e em que idiomas elas estão disponíveis.
     languages:
         name: Idiomas
         intro: |
-            <p>OpenStreetMap é um projeto internacional. As etiquetas e as suas descrições
+            OpenStreetMap é um projeto internacional. As etiquetas e as suas descrições
             podem estar em qualquer idioma. Esta tabela lista os idiomas que o taginfo
             conhece e quantas páginas da wiki existem nestes idiomas documentando chaves
-            e etiquetas, respectivamente.</p>
+            e etiquetas, respectivamente.
         code: Código
         native_name: Nome nativo
         english_name: Nome em inglês
@@ -460,11 +442,11 @@ reports:
     wiki_pages_about_non_existing_keys:
         name: Páginas wiki sobre chaves que não existem
         intro: |
-            <p>Esta tabela mostra chaves que possuem uma página wiki, mas não são utilizadas
+            Esta tabela mostra chaves que possuem uma página wiki, mas não são utilizadas
             nenhuma vez no banco de dados do OSM. Isto não é necessariamente um erro (talvez alguém
             criou documentou a chave no wiki como preparação para o uso da chave ou a página wiki pode
             estar documentando uma chave que se tornou obsoleta), mas também pode ser um erro de
-            digitação ou outro tipo de erro.</p>
+            digitação ou outro tipo de erro.
         wiki_pages: Páginas wiki
     name_tags:
         name: Variantes de etiquetas de nomes

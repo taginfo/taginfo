@@ -256,8 +256,6 @@ pages:
                 <p>Das <a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> wird gelesen und alle Key:*-, Tag:*-, und Relation:*-Seiten (in allen Sprachen) analysiert. Beschreibungen, Bilder, verwandte Tags, usw. werden aus den Seiten extrahiert.</p>
             languages: |
                 <p>Taginfo bekommt Informationen über die verschiedenen Sprachen dieser Welt, ihre Codes, Namen, usw. aus diversen Datenbanken der <a class="extlink" href="http://www.iana.org/">IANA</a> und vom <a class="extlink" href="http://www.unicode.org/">Unicode Consortium</a>.</p>
-            josm: |
-                <p>Icons und Stile werden aus der Konfiguration des Editors <a class="extlink" href="http://josm.openstreetmap.de/">JOSM</a> übernommen.</p>
             projects: |
                 <p>Projekte, die OSM-Tags in irgendeiner Weise nutzen, zum Beispiel Editoren, Karten, Router, usw. Siehe auch die <a href="/projects">Projektliste</a>.</p>
         updates:
@@ -354,11 +352,6 @@ pages:
             implied_tags: Implizite Tags
             combined_tags: Verbundene Tags
             linked_tags: Ähnliche Tags
-        josm:
-            title: JOSM-Stil-Regeln mit diesem Key
-            choice: |
-                  Stil auswählen:
-            no_styles: Keine JOSM-Stilregeln für diesen Key.
         projects:
             title: Projekte, die diesen Key benutzen
             description: Wie dieser Key im Projekt benutzt wird
@@ -398,11 +391,6 @@ pages:
             implied_tags: Implizite Tags
             combined_tags: Verbundene Tags
             linked_tags: Ähnliche Tags
-        josm:
-            title: JOSM-Stil-Regeln mit diesem Tag
-            choice: |
-                  Stil auswählen:
-            no_styles: Keine JOSM-Stilregeln für diesen Tag.
         projects:
             title: Projekte, die diesen Tag benutzen
             description: Wie dieser Tag im Projekt benutzt wird
@@ -477,9 +465,6 @@ sources:
     wiki:
         name: Wiki
         description: Daten von den Tag- und Key-Seiten des OSM-Wikis.
-    josm:
-        name: JOSM
-        description: Einstellungen des OSM-Editors "JOSM".
     languages:
         name: Sprachen
         description: Namen, Codes, usw. zu Sprachen aus IANA- und Unicode-Registrierungen.
@@ -491,7 +476,7 @@ reports:
     characters_in_keys:
         name: Zeichen in Keys
         intro: |
-            <p>Alle gültigen Unicode-Zeichen dürfen in OSM-Keys vorkommen. Typischerweise
+            Alle gültigen Unicode-Zeichen dürfen in OSM-Keys vorkommen. Typischerweise
             werden aber nur Kleinbuchstaben (a-z) und der Unterstrich (_) benutzt. Manchmal
             kommt dazu der Doppelpunkt (:) als Trennzeichen.
         statistics:
@@ -560,12 +545,10 @@ reports:
         also_show_keys: Auch Keys anzeigen, die keine Wiki-Seite in englischer Sprache haben, aber in einer anderen Sprache.
         table:
             create_wiki_page: Wiki-Seite anlegen...
-    josm_styles:
-        name: JOSM-Stilregeln
     key_lengths:
         name: Key-Längen
         intro: |
-            <p>Tag Keys können zwischen 0 und 255 (Unicode-)Zeichen lang sein. Sehr kurze oder sehr lange Keys sind oft (aber nicht immer) ein Fehler.</p>
+            Tag Keys können zwischen 0 und 255 (Unicode-)Zeichen lang sein. Sehr kurze oder sehr lange Keys sind oft (aber nicht immer) ein Fehler.
         table:
             number_of_objects: Anzahl Objekte
         histogram:
@@ -581,15 +564,15 @@ reports:
             page: Seite im Wiki vorhanden, enthält aber keine Standard-Vorlage.
             redirect: Seite im Wiki ist ein Verweise auf andere Wiki-Seite.
         intro: |
-            <p>Diese Tabelle zeigt alle Keys zu denen es mindestens eine Wiki-Seite gibt und in
-            welchen Sprachen diese Wiki-Seiten sind.</p>
+            Diese Tabelle zeigt alle Keys zu denen es mindestens eine Wiki-Seite gibt und in
+            welchen Sprachen diese Wiki-Seiten sind.
     languages:
         name: Sprachen
         intro: |
-            <p>OpenStreetMap ist ein internationales Projekt. Tags und ihre Beschreibungen
+            OpenStreetMap ist ein internationales Projekt. Tags und ihre Beschreibungen
             können in jeder Sprache sein. Diese Tabelle zeigt die Sprachen, die taginfo
             kennt, und wieviele Wiki-Seiten es in diesen Sprachen gibt, die Keys beziehungsweise
-            Tags dokumentieren.</p>
+            Tags dokumentieren.
         code: Code
         native_name: Name der Sprache
         english_name: Englischer Name
@@ -598,11 +581,11 @@ reports:
     wiki_pages_about_non_existing_keys:
         name: Wiki-Seiten zu nicht-existierende Keys
         intro: |
-            <p>Diese Tabelle zeigt Keys, zu denen (mindestens) eine Wiki-Seite existiert, die
+            Diese Tabelle zeigt Keys, zu denen (mindestens) eine Wiki-Seite existiert, die
             aber in der Datenbank nicht vorkommen. Das ist nicht unbedingt ein Fehler (vielleicht
             hat jemand die Dokumentation angelegt als Vorbereitung für die Benutzung des Keys
             oder die Wiki-Seite beschreibt einen früher verwendeten Key, der inzwischen obsolet
-            wurde). Es kann aber auch ein Tippfehler oder anderer Fehler sein.</p>
+            wurde). Es kann aber auch ein Tippfehler oder anderer Fehler sein.
         wiki_pages: Wiki-Seiten
     name_tags:
         name: Name-Tag-Varianten
@@ -643,7 +626,10 @@ reports:
             Dieser Report zeigt häufig benutzte Keys an, zusammen mit
             ähnlichen, sehr selten benutzten Keys. Dies zeigt viele Tippfehler
             üblicher Keys, ist aber nicht perfekt. Pass auf, wenn Du die Daten
-            korrigierst!
+            korrigierst! Bitte benutze nicht einfach die Suchen-Ersetzen-Funktion,
+            um Tippfehler mechanisch zu bearbeiten, sondern schau Dir jeden
+            Einzelfall and und koorigiere auch weitere Probleme, die das Objekt
+            eventuell hat.
         key_common: Oft benutzte Keys
         key_rare: Selten benutzte Keys
         count_common: Anzahl

@@ -6,7 +6,7 @@
     <h2><%= h(t.pages.reports.list) %></h2>
     <ul>
 <% Report.each_visible_with_index do |report, n| c = (n%2!=0) ? ' even' : '' %>
-        <li><a href="<%= report.url %>"><%= t.reports[report.name].name %></a></li>
+        <li><a href="<%= report.url %>"><%= h(t.reports[report.name].name) %></a></li>
 <% end %>
     </ul>
 </div>

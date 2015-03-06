@@ -1,12 +1,12 @@
 <div class="pre">
-    <h1><%= t.reports.frequently_used_keys_without_wiki_page.name %></h1>
+    <h1><%= h(t.reports.frequently_used_keys_without_wiki_page.name) %></h1>
     <%= t.reports.frequently_used_keys_without_wiki_page.intro %>
 </div>
 <div class="box resize">
     <div class="boxpre">
         <form method="" type="GET" style="margin-bottom: 10px;">
             <input type="checkbox" name="english" id="english"<%= params[:english] == '1' ? ' checked="checked"' : '' %>/>
-            <%= t.reports.frequently_used_keys_without_wiki_page.also_show_keys %>
+            <%= h(t.reports.frequently_used_keys_without_wiki_page.also_show_keys) %>
         </form>
     </div>
     <table id="grid-keys">

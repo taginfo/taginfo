@@ -161,8 +161,6 @@ pages:
                 <p><a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> jest czytana i wszystkie strony Key:*, Tag:*, i Relation:* (w róźnych językach) są analizowane. Opisy, obrazy, powiązane tagi, itd. są wyciągane z niej.</p>
             languages: |
                 <p>Taginfo pobiera informacje o róźnych językach świata, ich kodów, nazw, itd. z <a class="extlink" href="http://www.iana.org/">IANA</a> i <a class="extlink" href="http://www.unicode.org/">Unicode</a> rejestrów.</p>
-            josm: |
-                <p>Ikony i style są pobierane z konfiguracji <a class="extlink" href="http://josm.openstreetmap.de/">edytora JOSM</a>.</p>
         updates:
             title: Aktualizacje
             intro: Baza taginfo jest regularnie aktualizowana ze źródeł.
@@ -245,11 +243,6 @@ pages:
             implied_tags: Wskazane Tagi
             combined_tags: Połączone Tagi
             linked_tags: Linked Tags*
-        josm:
-            title: Styl w JOSM dla tego klucza
-            choice: |
-                  Wybierz styl:
-            no_styles: Brak styli JOSM dla tego klucza.
     tag:
         description_from_wiki: Opis tego tagu z wiki (jeśli dostępne w wybranym języku, w przeciwnym razie po angielsku).
         no_description_in_wiki: Brak opisu na wiki.
@@ -279,11 +272,6 @@ pages:
             implied_tags: Wskazane Tagi
             combined_tags: Połączone Tagi
             linked_tags: Linked Tags*
-        josm:
-            title: Styl w JOSM dla tego tagu
-            choice: |
-                  Wybierz styl:
-            no_styles: Brak styli JOSM dla tego tagu.
     relation:
         name: Rodzaj relacji
         description_from_wiki: Opis tego rodzaju relacji w wiki (jeśli dostępne w wybranym języku, w przeciwnym razie po angielsku)
@@ -339,9 +327,6 @@ sources:
     wiki:
         name: Wiki
         description: Dane z artykułów o tagach z wiki OSM.
-    josm:
-        name: JOSM
-        description: Dane konfiguracyjne z edytora JOSM.
     languages:
         name: Języki
         description: Język nazw, kodów, itd. z IANA i rejestrów Unicode.
@@ -350,7 +335,7 @@ reports:
     characters_in_keys:
         name: Znaki w kluczach
         intro: |
-            <p>Każdy poprawny znak Unicode będzie widoczny w kluczy OSM, ale zwykle małe litery alfabetu łacińskiego i podkreślenie (_) są używane. Niekiedy używa się dwukropku (:) jako separatora.</p>
+            Każdy poprawny znak Unicode będzie widoczny w kluczy OSM, ale zwykle małe litery alfabetu łacińskiego i podkreślenie (_) są używane. Niekiedy używa się dwukropku (:) jako separatora.
         statistics:
             tab: Statystyki
             title: Przegląd statystyk
@@ -402,12 +387,10 @@ reports:
         also_show_keys: Pokaż także klucze, które nie posiadają swojej strony po angielskim, ale mają ją w innym języku.
         table:
             create_wiki_page: Stwórz stronę wiki...
-    josm_styles:
-        name: Style JOSM
     key_lengths:
         name: Długości kluczy
         intro: |
-            <p>Klucze tagów mogą mieć długość od 0 do 255 znaków (Unicode) długości. Bardzo krótkie bądź bardzo długie klucze są zazwyczaj, ale nie zawsze, błędami.</p>
+            Klucze tagów mogą mieć długość od 0 do 255 znaków (Unicode) długości. Bardzo krótkie bądź bardzo długie klucze są zazwyczaj, ale nie zawsze, błędami.
         table:
             number_of_objects: Liczba obiektów
         histogram:
@@ -423,11 +406,11 @@ reports:
             page: Strona w wiki istnieje, ale nie zawiera standardowego szablonu.
             redirect: Strona jest przekierowaniem.
         intro: |
-            <p>Ta tabela pokazuje wszystkie tagi, dla których istnieją strony na wiki oraz to, w jakich są językach.</p>
+            Ta tabela pokazuje wszystkie tagi, dla których istnieją strony na wiki oraz to, w jakich są językach.
     languages:
         name: Języki
         intro: |
-            <p>OpenStreetMap jest międzynarodowym projektem. Tagi i ich opisy mogą być napisane w dowolnych językach. Ta tabela pokazuje znane dla taginfo języki oraz ilość stron wiki, które dokumentują klucze i tagi.</p>
+            OpenStreetMap jest międzynarodowym projektem. Tagi i ich opisy mogą być napisane w dowolnych językach. Ta tabela pokazuje znane dla taginfo języki oraz ilość stron wiki, które dokumentują klucze i tagi.
         code: Kod
         native_name: Nazwa ojczysta
         english_name: Nazwa angielska
@@ -436,7 +419,7 @@ reports:
     wiki_pages_about_non_existing_keys:
         name: Strony wiki na temat nieistniejących kluczy
         intro: |
-            <p>Ta tabela pokazuje klucze, które posiadają swoje strony na wiki, ale nie istnieją nawet pojedyncze obiekty w bazie z ich użyciem. Nie musi być to błąd, gdyż ktoś mógł stworzyć dokumentację przed wdrożeniem nowego schematu tagowania. Ale może być to zwykła literówka albo inny błąd.</p>
+            Ta tabela pokazuje klucze, które posiadają swoje strony na wiki, ale nie istnieją nawet pojedyncze obiekty w bazie z ich użyciem. Nie musi być to błąd, gdyż ktoś mógł stworzyć dokumentację przed wdrożeniem nowego schematu tagowania. Ale może być to zwykła literówka albo inny błąd.
         wiki_pages: Strony wiki
     name_tags:
         name: Warianty tagu name
