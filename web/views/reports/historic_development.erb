@@ -7,6 +7,11 @@
         <li><a href="#num_keys"><%= h(t.osm.keys) %></a></li>
         <li><a href="#num_tags"><%= h(t.osm.tags) %></a></li>
         <li><a href="#relation_types"><%= h(t.osm.relation_types) %></a></li>
+<% if reports = TaginfoConfig.get('user_interface.historic_development', false) %>
+  <% reports.keys.each do |report| %>
+        <li><a href="#<%= report %>"><%= h(reports[report]["tab_name"]) %></a></li>
+  <% end %>
+<% end %>
     </ul>
     <div id="num_keys">
         <h2><%= h(t.reports.historic_development.keys.title) %></h2>
@@ -20,5 +25,13 @@
         <h2><%= h(t.reports.historic_development.relation_types.title) %></h2>
         <div class="canvas" id="canvas_relation_types"></div>
     </div>
+<% if reports = TaginfoConfig.get('user_interface.historic_development', false) %>
+  <% reports.keys.each do |report| %>
+    <div id="<%= report %>">
+        <h2><%= h(reports[report]["tab_title"]) %></h2>
+        <div class="canvas" id="canvas_<%= report %>"></div>
+    </div>
+  <% end %>
+<% end %>
 </div>
 <% javascript_for(:d3) %>
