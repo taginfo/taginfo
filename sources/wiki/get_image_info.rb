@@ -100,6 +100,14 @@ db.transaction do |db|
                         suffix = nil
                         puts "Wrong thumbnail format: '#{info['thumburl']}'"
                     end
+
+                    # The OSM wiki reports the wrong thumbnail URL for images
+                    # transcluded from Wikimedia Commons. This fixes those
+                    # URLs.
+                    if info['url'].match(%r{^http://upload.wikimedia.org/wikipedia/commons})
+                        prefix.sub!('http://wiki.openstreetmap.org/w/images', 'http://upload.wikimedia.org/wikipedia/commons')
+                    end
+
                     images_added[v['title']] = 1
                     db.execute("INSERT INTO wiki_images (image, width, height, size, mime, image_url, thumb_url_prefix, thumb_url_suffix) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
                         v['title'],
