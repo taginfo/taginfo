@@ -194,7 +194,7 @@ def parse_and_check(id, data, log, db)
                 on['way'],
                 on['relation'],
                 on['area'],
-            );
+            )
         end
     end
 end

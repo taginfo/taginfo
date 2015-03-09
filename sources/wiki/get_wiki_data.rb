@@ -367,10 +367,10 @@ class Cache
             puts "Page #{ page.title } in cache (#{ page.timestamp })"
             return
         end
-        @db.execute("DELETE FROM cache.cache_pages WHERE title=?", page.title);
+        @db.execute("DELETE FROM cache.cache_pages WHERE title=?", page.title)
         res = @api.get(page.params)
         page.content = res.body
-        @db.execute("INSERT INTO cache.cache_pages (title, timestamp, body) VALUES (?, ?, ?)", page.title, page.timestamp, page.content);
+        @db.execute("INSERT INTO cache.cache_pages (title, timestamp, body) VALUES (?, ?, ?)", page.title, page.timestamp, page.content)
         puts "Page #{ page.title } not in cache (#{ page.timestamp })"
     end
 
@@ -383,7 +383,7 @@ class Cache
         to_delete = @current_pagetitles.keys
         puts "Deleting pages from cache: #{ to_delete.join(' ') }"
         to_delete.each do |title|
-            @db.execute("DELETE FROM cache.cache_pages WHERE title=?", title);
+            @db.execute("DELETE FROM cache.cache_pages WHERE title=?", title)
         end
     end
 

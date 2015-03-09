@@ -31,11 +31,11 @@ dir = ARGV[0] || '.'
 db = SQLite3::Database.new(dir + '/taginfo-db.db')
 db.results_as_hash = true
 
-db.execute("PRAGMA journal_mode  = OFF");
-db.execute("PRAGMA synchronous   = OFF");
-db.execute("PRAGMA count_changes = OFF");
-db.execute("PRAGMA temp_store    = MEMORY;");
-db.execute("PRAGMA cache_size    = 5000000;");
+db.execute("PRAGMA journal_mode  = OFF")
+db.execute("PRAGMA synchronous   = OFF")
+db.execute("PRAGMA count_changes = OFF")
+db.execute("PRAGMA temp_store    = MEMORY")
+db.execute("PRAGMA cache_size    = 5000000")
 
 #------------------------------------------------------------------------------
 
@@ -45,7 +45,7 @@ regexes = [
     [ 'letters', %r{^[\p{L}\p{M}]([\p{L}\p{M}\p{N}_:]*[\p{L}\p{M}\p{N}])?$}u ],
     [ 'space',   %r{[\s\p{Z}]}u ],
     [ 'problem', %r{[=+/&<>;\@'"?%#\\,\p{C}]}u ]
-];
+]
 
 keys = {}
 db.execute("SELECT key FROM keys").map{ |row| row['key'] }.each do |key|
@@ -60,7 +60,7 @@ end
 
 db.transaction do |db|
     keys.each do |key, type|
-        db.execute("UPDATE keys SET characters=? WHERE key=?", type, key);
+        db.execute("UPDATE keys SET characters=? WHERE key=?", type, key)
     end
 end
 
