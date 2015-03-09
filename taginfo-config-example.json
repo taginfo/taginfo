@@ -109,7 +109,7 @@
     // Settings for the web user interface
     "user_interface": {
         "key_page": {
-            "show_tab_similar": false
+            "show_tab_similar": true
         }
     },
     "logging": {
