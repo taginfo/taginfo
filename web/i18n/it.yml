@@ -104,7 +104,7 @@ pages:
             I Reports mostrano i dati da differenti prospettive.
             Spesso riuniscono i dati da diverse fonti in modi interessanti. Alcuni
             di questi reports possono aiutare a trovare certi tipi di errori, come ad esempio
-            chiavi popolari senza una pagini nel wiki.
+            chiavi popolari senza una pagina nel wiki.
         data_sources: Fonte dati
     search:
         title: Risultati ricerca
