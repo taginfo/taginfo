@@ -79,8 +79,6 @@ CREATE TABLE tags (
   count_nodes      INTEGER DEFAULT 0,
   count_ways       INTEGER DEFAULT 0,
   count_relations  INTEGER DEFAULT 0,
-  object_type      VARCHAR(1),          -- (n)ode, (w)ay, (r)elation
-  object_id        INTEGER,
   in_wiki          INTEGER DEFAULT 0,
   in_projects      INTEGER DEFAULT 0
 );
