@@ -2,10 +2,12 @@
     osm = @trans.t.osm
     misc = @trans.t.misc
  %>
-var create_flexigrid_for = {
-    whitespace: function() {
-        create_flexigrid('grid-whitespace', {
-            url: '/api/4/keys/all?filter=characters_space&include=prevalent_values',
+var create_flexigrid_for = {};
+
+['plain', 'colon', 'letters', 'space', 'problem', 'rest'].forEach(function(category) {
+    create_flexigrid_for[category] = function() {
+        create_flexigrid('grid-' + category, {
+            url: '/api/4/keys/all?filter=characters_' + category + '&include=prevalent_values',
             colModel: [
                 { display: '<%= h(osm.key) %>', name: 'key', width: 250, sortable: true },
                 { display: '<span title="<%= h(misc.objects_tooltip) %>"><img src="/img/types/all.16.png" width="16" height="16" alt=""/> <%= h(osm.objects) %></span>', name: 'count_all', width: 150, sortable: true, align: 'center' },
@@ -33,39 +35,8 @@ var create_flexigrid_for = {
                 return data;
             }
         });
-    },
-    problematic: function() {
-        create_flexigrid('grid-problematic', {
-            url: '/api/4/keys/all?filter=characters_problematic&include=prevalent_values',
-            colModel: [
-                { display: '<%= h(osm.key) %>', name: 'key', width: 250, sortable: true },
-                { display: '<span title="<%= h(misc.objects_tooltip) %>"><img src="/img/types/all.16.png" width="16" height="16" alt=""/> <%= h(osm.objects) %></span>', name: 'count_all', width: 150, sortable: true, align: 'center' },
-                { display: '<span title="<%= h(misc.users_tooltip) %>"><%= h(osm.users) %></span>', name: 'users_all', width: 44, sortable: true, align: 'right' },
-                { display: '<img src="/img/sources/wiki.16.png" width="16" height="16" alt="Wiki" title="<%= h(misc.in_wiki_tooltip) %>"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
-                { display: '<span title="<%= h(misc.values_tooltip) %>"><%= h(osm.values) %></span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
-                { display: '<span title="<%= h(misc.prevalent_values_tooltip) %>"><%= h(misc.prevalent_values) %></span>', name: 'prevalent_values', width: 600, sortable: true }
-            ],
-            searchitems: [
-                { display: '<%= h(osm.key) %>', name: 'key' }
-            ],
-            sortname: 'count_all',
-            sortorder: 'desc',
-            preProcess: function(data) {
-                data.rows = jQuery.map(data.data, function(row, i) {
-                    return { 'cell': [
-                        link_to_key(row.key),
-                        fmt_value_with_percent(row.count_all, row.count_all_fraction),
-                        fmt_with_ts(row.users_all),
-                        fmt_checkmark(row.in_wiki),
-                        fmt_with_ts(row.values_all),
-                        fmt_prevalent_value_list(row.key, row.prevalent_values)
-                    ] };
-                });
-                return data;
-            }
-        });
-    }
-};
+    };
+});
 
 function page_init() {
     up = function() { window.location = '/reports'; };

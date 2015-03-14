@@ -349,13 +349,13 @@ reports:
                 problem: Jak w C, ale zawierające problematyczne znaki <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
                 rest: Wszystko pozostałe.
                 total: Razem
-        whitespace:
+        space:
             tab: Znaki niedrukowalne
             title: Klucze ze znakami niedrukowalnymi
             intro: |
                 <p>Klucze zawierające znaki niedrukowalne takie jak spacje, tabulacje, nowe linie, znak powrotu do początku linii, albo z innych alfabetów.<br/>
                 Znaki niedrukowalne w kluczach mogą być dezorientujące, zwłaszcza jeśli znajdują się na początku albo na końcu, gdyż są niewidoczne. Generalnie powinno się używać zamiast nich podkreślnika (_).</p>
-        problematic:
+        problem:
             tab: Problematyczne
             title: Klucze z potencjalnie problematycznymi znakami
             intro: |

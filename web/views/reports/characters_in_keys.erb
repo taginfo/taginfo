@@ -1,3 +1,14 @@
+<%
+categories = [
+    { category: 'A', name: 'plain',   color: '#2ca02c' },
+    { category: 'B', name: 'colon',   color: '#98df8a' },
+    { category: 'C', name: 'letters', color: '#dbdb8d' },
+    { category: 'D', name: 'space',   color: '#d62727' },
+    { category: 'E', name: 'problem', color: '#ff9896' },
+    { category: 'F', name: 'rest',    color: '#aec7e8' },
+]
+%>
+
 <div class="pre">
     <h1><%= h(t.reports.characters_in_keys.name) %></h1>
     <p><%= h(t.reports.characters_in_keys.intro) %></p>
@@ -5,8 +16,10 @@
 <div id="tabs">
     <ul>
         <li><a href="#statistics"><%= h(t.reports.characters_in_keys.statistics.tab) %></a></li>
-        <li><a href="#whitespace"><span style="background-color: #d62727;">&nbsp;&nbsp;&nbsp;</span> <%= h(t.reports.characters_in_keys.whitespace.tab) %></a></li>
-        <li><a href="#problematic"><span style="background-color: #ff9896;">&nbsp;&nbsp;&nbsp;</span> <%= h(t.reports.characters_in_keys.problematic.tab) %></a></li>
+<% categories.each do |c| %>
+        <li><a href="#<%= c[:name] %>"><span style="background-color: <%= c[:color] %>; border: 1px solid #ffffff;">&nbsp;<%= c[:category] %>&nbsp;</span>
+            <%= h(t.reports.characters_in_keys[c[:name]].tab) %></a></li>
+<% end %>
     </ul>
     <div id="statistics">
         <h2><%= h(t.reports.characters_in_keys.statistics.title) %></h2>
@@ -18,39 +31,31 @@
                 <th class="tr"><%= h(t.reports.characters_in_keys.statistics.fraction) %></th>
                 <th class="tl"><%= h(t.reports.characters_in_keys.statistics.characters) %></th>
             </tr>
-<% letter='A'
-   colors = { :A => '#2ca02c', :B => '#98df8a', :C => '#dbdb8d', :D => '#d62728', :E => '#ff9896', :F => '#aec7e8' }
-   %w(plain colon letters space problem rest).each_with_index do |type, n| c = (n%2!=0) ? ' even' : '' %>
+<% categories.each_with_index do |category, n| c = (n%2!=0) ? ' even' : '' %>
             <tr>
-                <td class="tc<%= c %>" style="background-color: <%= colors[letter.to_sym] %>;"><%= letter %></td>
-                <td class="tr<%= c %>"><%= @db.stats('characters_in_keys_' + type) %></td>
-                <td class="tr<%= c %>"><%= sprintf '%.2f', @db.stats('characters_in_keys_' + type) * 100.0 / @db.stats('num_keys') %>%</td>
-                <td class="tl<%= c %>"><%= t.reports.characters_in_keys.statistics.characters_in_keys[type] %></td>
+                <td class="tc<%= c %>" style="background-color: <%= category[:color] %>;"><%= category[:category] %></td>
+                <td class="tr<%= c %>"><%= @db.stats('characters_in_keys_' + category[:name]) %></td>
+                <td class="tr<%= c %>"><%= sprintf '%.2f', @db.stats('characters_in_keys_' + category[:name]) * 100.0 / @db.stats('num_keys') %>%</td>
+                <td class="tl<%= c %>"><%= t.reports.characters_in_keys.statistics.characters_in_keys[category[:name]] %></td>
             </tr>
-<% letter = letter.succ; end %>
+<% end %>
             <tr>
                 <td class="tc" style="border-top: 1px solid #000000;"></td>
                 <td class="tr" style="border-top: 1px solid #000000;"><%= @db.stats('num_keys') %></td>
                 <td class="tr" style="border-top: 1px solid #000000;">100%</td>
-                <td class="tl" style="border-top: 1px solid #000000;"><%= t.reports.characters_in_keys.statistics.characters_in_keys.total %></td>
+                <td class="tl" style="border-top: 1px solid #000000;"><%= h(t.reports.characters_in_keys.statistics.characters_in_keys.total) %></td>
             </tr>
         </table>
     </div>
-    <div id="whitespace">
-        <h2><%= h(t.reports.characters_in_keys.whitespace.title) %></h2>
+<% categories.map{ |c| c[:name] }.each do |category| %>
+    <div id="<%= category %>">
+        <h2><%= h(t.reports.characters_in_keys[category].title) %></h2>
         <div class="boxpre">
-            <%= t.reports.characters_in_keys.whitespace.intro %>
+            <%= t.reports.characters_in_keys[category].intro %>
         </div>
-        <table id="grid-whitespace">
+        <table id="grid-<%= category %>">
         </table>
     </div>
-    <div id="problematic">
-        <h2><%= h(t.reports.characters_in_keys.problematic.title) %></h2>
-        <div class="boxpre">
-            <%= t.reports.characters_in_keys.problematic.intro %>
-        </div>
-        <table id="grid-problematic">
-        </table>
-    </div>
+<% end %>
 </div>
 <% javascript_for(:d3) %>

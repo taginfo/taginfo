@@ -466,7 +466,7 @@ reports:
                 problem: Comme la règle C mais peut contenir des caractères problématiques <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
                 rest: Toutes les autres possibilités.
                 total: Total
-        whitespace:
+        space:
             tab: Espaces
             title: Clés contenant des espaces
             intro: |
@@ -476,7 +476,7 @@ reports:
                 Les espaces dans les clés sont sources d'erreur, en particulier au
                 début ou la fin de la clé, car ils sont invisibles. Généralement
                 le caractère de soulignement (<span class="char">_</span>) devrait être utilisé à la place.</p>
-        problematic:
+        problem:
             tab: Problématiques
             title: Clés avec des caractères potentiellement problématiques
             intro: |

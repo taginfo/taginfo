@@ -459,9 +459,10 @@ reports:
     characters_in_keys:
         name: Characters in keys
         intro: |
-            Any valid Unicode character can appear in an OSM key but usually only lower
-            case latin letters (a-z) and the underscore (_) are used. Sometimes the colon
-            (:) is added as a separator character.
+            Any valid Unicode character can appear in an OSM key but usually
+            only lower case latin letters (a-z) and the underscore (_) are
+            used. The colon (:) is often used as a separator character. This
+            report categorizes all keys according the the characters they use.
         statistics:
             tab: Statistics
             title: Statistics overview
@@ -471,33 +472,66 @@ reports:
                 plain: Only latin lowercase letters (<span class="char">a</span> to <span class="char">z</span>) and underscore (<span class="char">_</span>), first and last characters are letters.
                 colon: Like A but with one or more colons (<span class="char">:</span>) inside.
                 letters: Like B but with uppercase latin letters or letters from other alphabets.
-                space: Like C but contains at least one whitespace character (space, tab, new line, carriage return, or from other alphabets).
-                problem: Like C but contains possibly problematic characters <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
+                space: At least one whitespace character (space, tab, new line, carriage return, or from other alphabets).
+                problem: Contains possibly problematic characters <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
                 rest: Everything else.
                 total: Total
-        whitespace:
+        plain:
+            tab: Plain
+            title: Plain keys
+            intro: |
+                <p>Keys containing only lowercase latin letters (<span
+                class="char">a</span> to <span class="char">z</span>) and the
+                underscore (<span class="char">_</span>). First and last
+                characters must be letters. Most simple keys should fall into
+                this category.</p>
+        colon:
+            tab: Colon
+            title: Keys with colon
+            intro: |
+                <p>Keys that have one or more colon (<span
+                class="char">:</span>) characters inside in addition to the
+                letters (<span class="char">a</span> to <span
+                class="char">z</span>) and underscores (<span
+                class="char">_</span>). The colon is often used as a hierarchy
+                separator character.</p>
+        letters:
+            tab: Letters
+            title: Keys with uppercase letters or letters from other scripts
+            intro: |
+                <p>Lowercase letters from the latin script are usually
+                preferred for keys, but sometimes uppercase letters are used
+                (for instance for known abbreviations) or letters from other
+                scripts (for instance for keys only relevant to an area where
+                that script is used predominantly).</p>
+        space:
             tab: Whitespace
             title: Keys with whitespace
             intro: |
-                <p>Keys that contain whitespace characters such as space, tab, new
-                line, carriage return, or whitespace characters from other
-                alphabets.<br/>
-                Whitespace in keys can be confusing, especially at the
-                beginning or end of the key, because they are invisible. Generally
-                the underscore (_) should be used instead.</p>
-        problematic:
+                <p>Keys that contain whitespace characters such as space, tab,
+                new line, carriage return, or whitespace characters from other
+                alphabets. Whitespace in keys can be confusing, especially at
+                the beginning or end of the key, because they are invisible.
+                Generally the whitespace should be removed or the underscore
+                (<span class="char">_</span>) used instead.</p>
+        problem:
             tab: Problematic
             title: Keys with possibly problematic characters
             intro: |
                 <p>Keys that contain possibly problematic characters: <span
                 class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> or control
-                characters. These characters
-                can be problematic, because they are used to quote strings in
-                different programming languages or have special meanings in XML, HTML,
-                URLs, and other places. The equal sign is used often as separator
-                between tag keys and values.<br/>
-                Keys that appear in this list are not necessarily wrong though. But
-                in many cases they are just results of some error.</p>
+                characters. These characters can be problematic, because they
+                are used to quote strings in different programming languages or
+                have special meanings in XML, HTML, URLs, and other places. The
+                equal sign is used often as separator between tag keys and
+                values. Keys that appear in this list are not necessarily wrong
+                though. But in many cases they are just results of some error
+                and should be fixed.</p>
+        rest:
+            tab: Rest
+            title: All other keys
+            intro: |
+                <p>Keys that don't fit in any of the other categories.</p>
     database_statistics:
         name: Database statistics
         objects_in_db: Number of objects in the database

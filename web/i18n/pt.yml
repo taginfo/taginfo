@@ -393,10 +393,10 @@ reports:
             characters_in_keys:
                 rest: Todo o resto.
                 total: Total
-        whitespace:
+        space:
             tab: Espaço em branco
             title: Chaves com espaços em branco
-        problematic:
+        problem:
             tab: Problemático
             title: Chaves com caracteres possivelmente problemáticos
     database_statistics:

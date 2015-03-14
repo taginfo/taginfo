@@ -2,8 +2,12 @@
 class Taginfo < Sinatra::Base
 
     @@filters = {
-        :characters_space       => { :expr => "characters='space'",   :doc => 'Only show keys with spaces.' },
-        :characters_problematic => { :expr => "characters='problem'", :doc => 'Only show keys with problematic characters.' },
+        :characters_plain       => { :expr => "characters='plain'",   :doc => 'Category A: Only show keys with latin lowercase letters (a to z) or underscore (_), first and last characters must be letters.' },
+        :characters_colon       => { :expr => "characters='colon'",   :doc => 'Category B: Only show keys like category A but with one ore more colons (:) inside.' },
+        :characters_letters     => { :expr => "characters='letters'", :doc => 'Category C: Only show keys like category B but with uppercase latin letters or letters from other scripts.' },
+        :characters_space       => { :expr => "characters='space'",   :doc => 'Category D: Only show keys with at least one whitespace character (space, tab, new line, carriage return, or from other scripts).' },
+        :characters_problem     => { :expr => "characters='problem'", :doc => 'Category E: Only show keys with problematic characters.' },
+        :characters_rest        => { :expr => "characters='rest'",    :doc => 'Category F: Only show keys not fitting in category A through E.' },
         :in_wiki                => { :expr => "in_wiki=1",            :doc => 'Only show keys that appear in the wiki.' },
         :not_in_db              => { :expr => "count_all=0",          :doc => 'Only show keys that do not appear in the database.' }
     }

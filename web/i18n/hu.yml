@@ -347,9 +347,9 @@ reports:
                 problem: Mint C, de tartalmaz olyan karaktereket, amik problémát okozhatnak <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
                 rest: Bármi más.
                 total: Összes
-        whitespace:
+        space:
             tab: Szököz
             title: Szóközt tartalmazó kulcsok
-        problematic:
+        problem:
             tab: Problémásak
             title: Problémás karaktereket tartalmazó kulcsok

@@ -465,7 +465,7 @@ reports:
                 problem: Como C pero contiene caracteres posiblemente problemáticos <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
                 rest: Todo lo demás.
                 total: Total
-        whitespace:
+        space:
             tab: Whitespace
             title: Claves con espacios en blanco
             intro: |
@@ -475,7 +475,7 @@ reports:
                 Espacio en blanco en las claves pueden ser confusos, especialmente al
                 principio o al final de la clave, porque son invisibles. Generalmente
                 puede usarse el guión abajo (_) en su lugar.</p>
-        problematic:
+        problem:
             tab: Problemático
             title: Claves con caracteres posiblemente problemáticos
             intro: |

@@ -479,9 +479,11 @@ reports:
     characters_in_keys:
         name: Zeichen in Keys
         intro: |
-            Alle gültigen Unicode-Zeichen dürfen in OSM-Keys vorkommen. Typischerweise
-            werden aber nur Kleinbuchstaben (a-z) und der Unterstrich (_) benutzt. Manchmal
-            kommt dazu der Doppelpunkt (:) als Trennzeichen.
+            Alle gültigen Unicode-Zeichen dürfen in OSM-Keys vorkommen.
+            Typischerweise werden aber nur Kleinbuchstaben (a-z) und der
+            Unterstrich (_) benutzt. Manchmal kommt dazu der Doppelpunkt (:)
+            als Trennzeichen. Dieser Report teilt alle Keys nach den Zeichen,
+            die darin benutzt werden, in Kategorien ein.
         statistics:
             tab: Statistik
             title: Statistik-Übersicht
@@ -491,32 +493,70 @@ reports:
                 plain: Nur lateinische Kleinbuchstaben (<span class="char">a</span> bis <span class="char">z</span>) und Unterstrich (<span class="char">_</span>), erstes und letztes Zeichen sind Buchstaben.
                 colon: Wie A, aber mit einem oder mehreren Doppelpunkten (<span class="char">:</span>).
                 letters: Wie B, aber mit Großbuchstaben oder Buchstaben aus anderen Alphabeten.
-                space: Wie C, aber mit mindestens einem Whitespace-Zeichen (Leerzeichen, Tabulator, Neue Zeile, Wagenrücklauf, oder aus anderen Alphabeten)
-                problem: Wie C, enthält aber die möglicherweise problematischen Zeichen <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
+                space: Key mit mindestens einem Whitespace-Zeichen (Leerzeichen, Tabulator, Neue Zeile, Wagenrücklauf, oder aus anderen Alphabeten).
+                problem: Key enthält möglicherweise problematische Zeichen <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
                 rest: Alles andere.
                 total: Summe
-        whitespace:
+        plain:
+            tab: Einfach
+            title: Einfache keys
+            intro: |
+                <p>Keys, die nur lateinische Kleinbuchstaben (<span
+                class="char">a</span> bis <span class="char">z</span>) und
+                den Unterstrich (<span class="char">_</span>) enthalten. Das
+                erste und letzte Zeichen müssen Buchstaben sein. Die meisten
+                einfachen Keys sollten in diese Kategorie fallen.</p>
+        colon:
+            tab: Doppelpunkt
+            title: Keys mit Doppelpunkt
+            intro: |
+                <p>Keys, die einen oder mehrere Doppelpunkte (<span
+                class="char">:</span>) enthalten zusätzlich zu lateinischen
+                Kleinbuchstaben (<span class="char">a</span> bis <span
+                class="char">z</span>) und dem Unterstrich (<span
+                class="char">_</span>). Der Doppelpunkt wird oft als
+                Trennzeichen für eine Hierarchie von "Unter-Keys" verwendet.</p>
+        letters:
+            tab: Buchstaben
+            title: Keys mit Großbuchstaben und Buchstaben aus anderen Alphabeten.
+            intro: |
+                <p>Kleinbuchstaben aus dem lateinischen Alphabet werden für
+                Keys üblicherweise vorgezogen. Manchmal werden aber auch
+                Großbuchstaben benutzt (z.B. für bekannte Abkürzungen) oder
+                Buchstaben aus anderen Alphabeten (z.B. für Keys, die nur in
+                einem Gebiet relevant sind, wo dieses Alphabet üblicherweise
+                benutzt wird).</p>
+        space:
             tab: Leerzeichen
             title: Keys mit Leerzeichen
             intro: |
-                <p>Keys, die Whitespace-Zeichen (Leerzeichen, Tabulator, Neue Zeile,
-                Wagenrücklauf, oder aus anderen Alphabeten) enthalten.<br/>
-                Leerräume in Keys können (da sie nicht sichtbar sind) verwirrend sein,
-                besonders am Anfang und am Ende der Keys. Normalerweise sollte
-                stattdessen ein Unterstrich (_) verwenden werden.</p>
-        problematic:
+                <p>Keys, die Whitespace-Zeichen (Leerzeichen, Tabulator, Neue
+                Zeile, Wagenrücklauf, oder aus anderen Alphabeten) enthalten.
+                Leerräume in Keys können (da sie nicht sichtbar sind)
+                verwirrend sein, besonders am Anfang und am Ende der Keys.
+                Normalerweise sollte das Whitespace entfernt oder stattdessen
+                ein Unterstrich (<span class="char">_</span>) verwenden
+                werden.</p>
+        problem:
             tab: Problematisch
             title: Keys mit möglicherweise problematischen Zeichen
             intro: |
                 <p>Keys mit möglicherweise problematischen Zeichen: <span
-                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> und Control-Zeichen. Diese Zeichen
-                können problematisch sein, weil sie in verschiedenen Programmiersprachen
-                zum "Zitieren" von Zeichenketten verwendet werden oder weil sie in
-                XML, HTML, URLs oder anderen Zusammenhängen besondere Bedeutung
-                haben. Das Gleichheitszeichen (=) wird bei OSM häufig als Trennzeichen
-                zwischen Tag Keys und Values benutzt.<br/>
-                Keys, die in dieser Liste erscheinen, sind nicht unbedingt falsch. In
-                vielen Fällen sind sie aber das Ergebnis eines Fehlers.</p>
+                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> und
+                Control-Zeichen. Diese Zeichen können problematisch sein, weil
+                sie in verschiedenen Programmiersprachen zum "Zitieren" von
+                Zeichenketten verwendet werden oder weil sie in XML, HTML, URLs
+                oder anderen Zusammenhängen besondere Bedeutung haben. Das
+                Gleichheitszeichen (<span class="char">=</span>) wird bei OSM
+                häufig als Trennzeichen zwischen Tag Keys und Values
+                benutzt.<br/> Keys, die in dieser Liste erscheinen, sind nicht
+                unbedingt falsch. In vielen Fällen sind sie aber das Ergebnis
+                eines Fehlers.</p>
+        rest:
+            tab: Sonstige
+            title: Alle anderen Keys
+            intro: |
+                <p>Keys, die in keine der anderen Kategorien passen.</p>
     database_statistics:
         name: Datenbank-Statistik
         objects_in_db: Anzahl Objekte in der Datenbank

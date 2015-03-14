@@ -344,7 +344,7 @@ reports:
                 problem: Giống C nhưng có các ký tự có thể gây vấn đề <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
                 rest: Những cái gì khác.
                 total: Tổng số
-        whitespace:
+        space:
             tab: Khoảng cách
             title: Chìa khóa có khoảng cách
             intro: |
@@ -353,7 +353,7 @@ reports:
                 Khoảng cách trong chìa khóa có thể gây nhầm lẫn, nhất là tại
                 đầu hoặc cuối chìa khóa, vì không nhìn thấy nó được. Nói chung,
                 dấu gạch dưới (_) nên được dùng thay thế.</p>
-        problematic:
+        problem:
             tab: Gây vấn đề
             title: Chìa khóa có ký tự có thể gây vấn đề
             intro: |
