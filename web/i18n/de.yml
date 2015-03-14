@@ -690,4 +690,12 @@ reports:
             title: Tags
         relation_types:
             title: Relation-Typen
+    wiki_images:
+        name: Bilder aus dem Wiki
+        intro: |
+            Bilder, die im Wiki benutzt werden, um Keys in verschiedenen
+            Sprachen zu symbolisieren. Manchmal sind die Bilder in der einen
+            oder anderen Sprachversion besser. Manchmal ist es aber wegen
+            verschiedener kultureller Hintergründe oder dergleichen auch
+            sinnvoll, unterschiedliche Bilder zu benutzen.
 

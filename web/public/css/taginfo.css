@@ -682,3 +682,49 @@ div#tagcloud a:hover {
   display: none;
 }
 
+/* ==========  */
+
+table.wiki-images {
+    border-spacing: 4px;
+}
+
+table.wiki-images td.key {
+    background-color: #ffffff;
+    padding: 0 10px;
+}
+
+table.wiki-images td.images {
+    padding: 0;
+}
+
+table.wiki-images td.images div.langimg {
+    position:relative;
+    width: 50px;
+    height: 50px;
+    float: left;
+    z-index: 0;
+    margin-right: 4px;
+}
+
+table.wiki-images td.images div div {
+    position: absolute;
+    bottom: 0px;
+    width: 50px;
+    height: 12px;
+    text-align: center;
+    font-size: 80%;
+    line-height: 1;
+    z-index: 2;
+    background-color: #202020;
+    color: #ffffff;
+}
+
+table.wiki-images td.images div img {
+    z-index: 1;
+    margin: 0 auto;
+    display: block;
+    max-width: 50px;
+    max-height: 50px;
+    top: 0;
+}
+

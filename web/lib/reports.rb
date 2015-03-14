@@ -61,4 +61,5 @@ Report.new 'Wiki pages about non-existing keys', :db, :wiki
 Report.new 'Name tags' #disabled
 Report.new 'Similar keys', :db
 Report.new 'Historic development', :db
+Report.new 'Wiki images', :wiki
 

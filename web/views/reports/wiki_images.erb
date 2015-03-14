@@ -1,0 +1,26 @@
+<div class="pre">
+    <h1><%= h(t.reports.wiki_images.name) %></h1>
+    <p><%= h(t.reports.wiki_images.intro) %></p>
+</div>
+<div class="box">
+    <table class="wiki-images"><tr><td colspan="2">
+<%  lastkey = ''
+    @db.select("SELECT p.key, p.title, p.lang, i.width, i.height, i.image_url, i.thumb_url_prefix, i.thumb_url_suffix FROM wiki.wikipages p, wiki.wiki_images i WHERE i.image=p.image AND p.value IS NULL ORDER BY p.key, p.lang").execute() do |row| %>
+<%  if lastkey != row['key']
+      lastkey = row['key'] %>
+    </td></tr><tr><td class="key"><a class="keyimg" href=""></a></td><td class="images">
+<% end %>
+    <div class="langimg">
+        <div><%= row['lang'] %></div>
+<%  imagesize = 50
+    if row['width'].to_i <= imagesize && row['height'].to_i <= imagesize
+        src = row['image_url']
+    else
+        src = row['thumb_url_prefix'] + imagesize.to_s + row['thumb_url_suffix']
+    end
+%>
+        <a href="http://wiki.openstreetmap.org/wiki/<%= row['title'] %>"><img src="<%= src %>"/></a>
+    </div>
+<% end %>
+    </td></tr></table>
+</div>
