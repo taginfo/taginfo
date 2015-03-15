@@ -653,7 +653,7 @@ reports:
         name: Historic development
         intro: |
             Development of some important statistics over time. This data has
-            been collected by taginfo, gaps are possible when taginfo did't run
+            been collected by taginfo, gaps are possible when taginfo didn't run
             on a day for some reason.
         keys:
             title: Unique keys
