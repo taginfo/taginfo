@@ -639,7 +639,7 @@ reports:
     similar_keys:
         name: Similar keys
         intro: |
-            This reports shows keys used very often and similar keys used very
+            This report shows keys used very often and similar keys used very
             rarely. This exposes many misspellings of common keys, but is not
             perfect. Take care when fixing the data! Do NOT just mechanically
             edit those keys with search-and-replace. Look at each case individually
