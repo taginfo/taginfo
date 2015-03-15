@@ -362,39 +362,6 @@ function fmt_type_icon(type, on_or_off) {
     }) + ' ';
 }
 
-function fmt_josm_value(key, value, value_bool) {
-    return value ? link_to_value(key, value) : value_bool ? (html_escape(value_bool) + ' (Boolean)') : '*';
-}
-
-function fmt_josm_icon(style, icon) {
-    if (!icon) return '';
-
-    return img({
-        src: '/api/4/josm/style/image?style=' + encodeURIComponent(style) + '&image=' + encodeURIComponent(icon),
-        title: html_escape(icon),
-        alt: ''
-    });
-}
-
-function fmt_josm_line(width, color) {
-    var inner = '';
-    if (width > 0) {
-        inner = tag('div', '', {
-            title: html_escape(color),
-            style: style({ height: width + 'px', 'margin-top': (10 - Math.round(width/2)) + 'px', padding: 0, 'background-color': color })
-        });
-    }
-    return tag('div', inner);
-}
-
-function fmt_josm_area(color) {
-    if (!color) return '';
-
-    return tag('div', '', {
-        title: html_escape(color),
-        style: style({ height: '18px', 'background-color': color })
-    });
-}
 
 function fmt_type_image(type) {
     type = type.replace(/s$/, '');
