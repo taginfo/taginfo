@@ -31,7 +31,7 @@ taginfo:
     source: Nguồn
     sources: Nguồn
     download: Tải về
-    about: Giới thiệu về taginfo
+    about: Giới thiệu
     contact: Liên lạc
     meta: Meta
     wiki: Trang wiki về taginfo
@@ -39,6 +39,8 @@ taginfo:
     reports: Thống kê
     international: Quốc tế
     apidoc: Tài liệu API
+    project: Dự án
+    projects: Dự án
     test: Thử
     map: Bản đồ
     maps: Bản đồ
@@ -109,6 +111,7 @@ help:
         keys_page: Trang chìa khóa
         tags_page: Trang thẻ
         relations_page: Trang quan hệ
+        projects_page: Trang dự án
         compare_page: Trang so sánh
         first_page: Trang đầu
         prev_page: Trang trước
@@ -148,10 +151,30 @@ pages:
             more: Tìm hiểu thêm về taginfo…
         international:
             see: Xem các trang taginfo khác…
+    about:
+        about_taginfo:
+            title: Giới thiệu về taginfo
+        about_site:
+            title: Giới thiệu về trang này
+        building_on_taginfo:
+            title: Xây dựng trên taginfo
+        software:
+            title: Phần mềm taginfo
+            db: |
+                <p>Thống kê về các chìa khóa, thẻ, và loại quan hệ được tạo ra từ <a class="extlink" href="http://planet.openstreetmap.org/">cơ sở dữ liệu OSM</a> (hoặc một bản trích) cũng như các bản đồ trình bày sự phân phối địa lý của các nốt và lối.</p>
+            wiki: |
+                <p><a class="extlink" href="//wiki.openstreetmap.org/wiki/Vi:Main_Page">Wiki OSM</a> được truy cập và tất cả mọi trang Key:*, Tag:*, và Relation:* (trong các ngôn ngữ) được phân tích. Các miêu tả, hình ảnh, thẻ liên quan, v.v. được lấy từ các trang này.</p>
+            languages: |
+                <p>Taginfo lấy thông tin về các ngôn ngữ trên thế giới, từ các mã, tên, v.v., từ một số cơ sở dữ liệu <a class="extlink" href="http://www.iana.org/">IANA</a> và <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+            projects: |
+                <p>Các dự án sử dụng thẻ OSM một cách nào đó, thí dụ như trình vẽ, bản đồ, trình chỉ đường, v.v. Xem <a href="/projects">danh sách dự án</a>.</p>
+        updates:
+            title: Cập nhật
     sources:
         intro: |
             <p>Taginfo lấy dữ liệu về thẻ OSM từ nhiều nguồn gốc và thu thập dữ liệu
             để duyệt và khám phá một cách dễ dàng.</p>
+            <p>Lưu ý rằng taginfo chỉ hiển thị dữ liệu này. Các dữ liệu phải được sửa đổi tại nguồn gốc.</p>
             <p>Lưu ý rằng taginfo chỉ hiển thị dữ liệu này. Các dữ liệu phải được sửa đổi tại nguồn gốc.</p>
         data_until: Dữ liệu cho tới
         last_update_run: Cập nhật lần cuối
@@ -236,6 +259,16 @@ pages:
             implied_tags: Thẻ được ngụ ý
             combined_tags: Thẻ tổ hợp
             linked_tags: Thẻ liên kết
+        projects:
+            title: Dự án sử dụng chìa khóa này
+            description: Dự án sử dụng chìa khóa này làm sao
+        similar:
+            tab: Tương tự
+            title: Chìa khóa tương tự
+            other: Chìa khóa tương tự
+            count_all_tooltip: Số đối tượng có chìa khóa tương tự
+            similarity: Độ tương tự
+            similarity_tooltip: Số nhỏ có nghĩa tương tự hơn
     tag:
         description_from_wiki: Lời miêu tả thẻ này trên wiki (trong ngôn ngữ của bạn nếu có sẵn, nếu không thì trong tiếng Anh).
         no_description_in_wiki: Không có lời miêu tả thẻ này trong tiếng Anh trên wiki. (Xem thêm thẻ “Wiki”.)
@@ -265,6 +298,9 @@ pages:
             implied_tags: Thẻ ngụ ý
             combined_tags: Thẻ tổ hợp
             linked_tags: Thẻ liên kết
+        projects:
+            title: Dự án sử dụng thẻ này
+            description: Dự án sử dụng thẻ này làm sao
     relation:
         name: Loại quan hệ
         description_from_wiki: Lời miêu tả loại quan hệ này trên wiki (trong ngôn ngữ của bạn nếu có sẵn, nếu không thì trong tiếng Anh).
@@ -292,6 +328,21 @@ pages:
             none_found: Không có sẵn trang wiki nào về loại quan hệ này.
             create: Tạo trang wiki về loại quan hệ này
             wiki_page: Trang wiki
+        projects:
+            title: Dự án sử dụng loại quan hệ này
+            description: Dự án sử dụng loại quan hệ này làm sao
+    project:
+        overview:
+            project_name: Tên dự án
+            project_url: URL dự án
+            description: Miêu tả
+            documentation_url: Tài liệu
+            last_update: Cập nhật lần cuối cùng
+            json_url: Tập tin dự án JSON
+            info: Dữ liệu này do dự án cung cấp cho taginfo qua 'tập tin dự án JSON' được liên kết bên trên. Xem miêu tả định dạng tại <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
+        tags:
+            title: Các thẻ được sử dụng bởi dự án này
+            intro: Dữ liệu này do dự án cung cấp và không nhất thiết phải hoàn thành. Xem chi tiết trong tài liệu dự án.
 
 flexigrid:
     pagetext: Trang
@@ -314,6 +365,9 @@ sources:
     master:
         name: Chính
         description: Thống kê thu thập và dữ liệu linh tinh cần thiết cho giao diện taginfo.
+    history:
+        name: Lịch sử
+        description: Thống kê tập hợp lại qua thời gian.
     db:
         name: Cơ sở dữ liệu
         description: Thống kê về mỗi chìa khóa và mỗi thẻ từ cơ sở dữ liệu OSM chính (tập tin địa cầu).
@@ -323,6 +377,9 @@ sources:
     languages:
         name: Ngôn ngữ
         description: Tên ngôn ngữ, mã ngôn ngữ, v.v. từ các kho IANA và Unicode.
+    projects:
+        name: Dự án
+        description: Dự án bên ngoài và các chìa khóa/thẻ OSM được sử dụng.
 
 reports:
     characters_in_keys:
@@ -468,4 +525,27 @@ reports:
                 nó chỉ hiển thị căn bản để miêu tả ngôn ngữ
                 không kể nó thực sự được dùng trong OSM hay không.
                 </p>
+    similar_keys:
+        name: Chìa khóa tương tự
+        intro: |
+            Bản thống kê này trình bày các chìa khóa rất phổ biến và các chìa khóa tương tự rất hiếm.
+            Điều này cho biết nhiều lỗi chính tả về chìa khóa phổ biến nhưng không phải hoàn hảo.
+            Hãy cẩn thận khi chỉnh sửa dữ liệu! ĐỪNG có sửa đổi các chìa khóa này một cách máy móc bằng cách tìm-và-thay.
+            Hãy xem xét mỗi một trường hợp riêng và cũng sửa những vấn đề khác mà bạn nhận thấy.
+        key_common: Chìa khóa phổ biến
+        key_rare: Chìa khóa hiếm
+        count_common: Số
+        count_rare: Số
+        similarity: Độ tương tự
+    historic_development:
+        name: Tiến triển lịch sử
+        intro: |
+            Sự tiến triển của một số thống kê quan trọng qua thời gian.
+            Dữ liệu này do taginfo tập hợp lại; có thể có kẽ khi nào taginfo không chạy được vào một ngày vì lý do nào đó.
+        keys:
+            title: Chìa khóa duy nhất
+        tags:
+            title: Thẻ duy nhất
+        relation_types:
+            title: Loại quan hệ duy nhất
 
