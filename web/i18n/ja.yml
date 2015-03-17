@@ -45,8 +45,8 @@ taginfo:
     map: 地図
     maps: 地図
     relations: リレーション
-    combinations: Combinations
-    key_combinations: Combinations
+    combinations: 組み合わせ
+    key_combinations: 組み合わせ
     comparison: Key/Tag Comparison
     overview: 概要
     data_from: データ更新
@@ -60,8 +60,8 @@ misc:
     empty_string: empty string
     unknown: unknown
     count: Count
-    image: Image
-    no_image: no image
+    image: 画像
+    no_image: 画像なし
     all: All
     object_type: Type
     description: Description
@@ -107,21 +107,21 @@ help:
             pagedown: PgDn
             esc: Esc
             tab: TAB
-        home_page: Home page
-        keys_page: Keys page
-        tags_page: Tags page
-        relations_page: Relations page
-        projects_page: Projects page
-        compare_page: Comparison page
-        first_page: First page
-        prev_page: Previous page
-        next_page: Next page
-        last_page: Last page
-        help_page: This help
+        home_page: ホームページ
+        keys_page: 「キー」ページ
+        tags_page: 「タグ」ページ
+        relations_page: 「リレーション」ページ
+        projects_page: 「プロジェクト」ページ
+        compare_page: 「比較」ページ
+        first_page: 先頭のページ
+        prev_page: 前ページ
+        next_page: 次ページ
+        last_page: 最後のページ
+        help_page: このヘルプ
         activate_search: Activate search input
         activate_filter: Activate filter input field
-        prev_entry: Previous entry
-        next_entry: Next entry
+        prev_entry: 前の項目
+        next_entry: 次の項目
         enter_entry: Jump to entry
         switch_tab: Switch tab
         deactivate: Deactivate input fields
@@ -305,14 +305,14 @@ pages:
             ways: Ways only
             relations: Relations only
         button_disabled: Button disabled, because there are too many objects with this key.
-        number_objects: Number of objects
-        number_values: Number of values
-        values_used: Values used with this key
-        tag_description_from_wiki: Description of the tag from the wiki (if available in your chosen language, otherwise in English).
+        number_objects: オブジェクトの数
+        number_values: 値の数
+        values_used: このキーで使われている値
+        tag_description_from_wiki: Wikiでのタグの説明です（あれば選択された言語、なければ英語で）
         overview:
             objects_last_edited_by: Objects with this key were last edited by %1 different users.
             no_endorsement: (This does not mean that all those users endorse this key.)
-            distribution_of_values: Distribution of values
+            distribution_of_values: 値の分布
         other_keys_used:
             title: Other keys used together with this key
             other: Other keys
@@ -334,12 +334,12 @@ pages:
             title: Projects using this key
             description: How this key is used in the project
         similar:
-            tab: Similar
-            title: Similar keys
-            other: Similar keys
-            count_all_tooltip: Number of objects with the similar key
-            similarity: Similarity
-            similarity_tooltip: Smaller numbers mean more similar
+            tab: 類似
+            title: 類似するキー
+            other: 類似するキー
+            count_all_tooltip: 類似するキーを持つオブジェクトの数です
+            similarity: 類似性
+            similarity_tooltip: 値が小さい方が類似しています
     tag:
         description_from_wiki: Description of this tag from the wiki (if available in your chosen language, otherwise in English).
         no_description_in_wiki: No English language description for this tag in the wiki. (See also the "Wiki" tab.)
@@ -354,10 +354,10 @@ pages:
             other_key_tooltip: Tags/Keys used together with this tag.
             from_count_tooltip: Number of objects with other tag/key that also have this tag.
         combinations:
-            title: Combinations
-            description: This table shows only the most common combinations of the most common tags.
+            title: 組み合わせ
+            description: この表はよく使われるタグの良くある組み合わせのみを表示しています。
         geographic_distribution:
-            title: Geographical distribution of this tag
+            title: このタグの地理的な分布
             relations: Relations do not have a geographical location, so no map can be shown.
             no_map: Sorry. The map can only be created for the most frequent tags. Try the overpass turbo link.
         wiki_pages:
@@ -373,13 +373,13 @@ pages:
             title: Projects using this tag
             description: How this tag is used in the project
     relation:
-        name: Relation type
+        name: リレーション種別
         description_from_wiki: Description of this relation type from the wiki (if available in your chosen language, otherwise in English).
         no_description_in_wiki: No English language description for this relation type in the wiki. (See also the "Wiki" tab.)
         button_disabled: Button disabled, because there are too many objects with this relation type.
         overview:
-            tab: Overview
-            title: Overview
+            tab: 概要
+            title: 概要
             member_type: Member type
             member_count: Number of members
             see_also: See also the tag page
