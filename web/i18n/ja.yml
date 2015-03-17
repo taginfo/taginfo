@@ -12,8 +12,8 @@ osm:
     ways: ウェイ
     relation: リレーション
     relations: リレーション
-    relation_type: リレーションの種別
-    relation_types: リレーションの種別
+    relation_type: リレーション種別
+    relation_types: リレーション種別
     relation_member: リレーションのメンバー
     relation_members: リレーションのメンバー
     relation_member_nodes: メンバーノード
@@ -30,29 +30,29 @@ osm:
 taginfo:
     source: Source
     sources: Sources
-    download: Download
-    about: About
+    download: ダウンロード
+    about: 概要
     contact: Contact
     meta: Meta
     wiki: taginfo wiki page
-    report: Report
-    reports: Reports
+    report: レポート
+    reports: レポート
     international: International
-    apidoc: API Documentation
-    project: Project
-    projects: Projects
-    test: Test
-    map: Map
-    maps: Maps
-    relations: Relations
+    apidoc: API仕様書
+    project: プロジェクト
+    projects: プロジェクト
+    test: テスト
+    map: 地図
+    maps: 地図
+    relations: リレーション
     combinations: Combinations
     key_combinations: Combinations
     comparison: Key/Tag Comparison
-    overview: Overview
-    data_from: Data from
-    data_from_description: Last update of taginfo database
+    overview: 概要
+    data_from: データ更新
+    data_from_description: taginfoデータベースの最終更新
     instance:
-        title: About this taginfo site
+        title: このtaginfoサイトについて
         other: See the <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> for other sites.
 
 misc:
@@ -84,7 +84,7 @@ misc:
 
 help:
     search:
-        title: Search
+        title: 検索
         intro: Use the search box in the upper right corner to search for tag keys and values.
         string: You can search for tag keys and values
         substring: Just part of the key/value also works
@@ -96,7 +96,7 @@ help:
             <span class="key">Enter</span>.
             You will jump directly to that key or tag page.
     keyboard:
-        title: Keyboard shortcuts
+        title: キーボードショートカット
         site_navigation: Site navigation
         page_navigation: Page navigation
         table_navigation: Table navigation
@@ -130,30 +130,28 @@ help:
 
 pages:
     not_found:
-        title: Not found
-        intro: Sorry, we could not find the page you were looking for.
+        title: 見つかりません
+        intro: 恐れ入りますが、お探しのページは見つかりませんでした。
     index:
-        popular_keys: Some popular keys
+        popular_keys: よく使われているキー
         keys:
-            listkeys: See all keys...
+            listkeys: すべてのキーを表示...
         tags:
-            listtags: See most common tags...
+            listtags: よく使われているタグを表示...
         relations:
-            listrelations: See all relation types...
+            listrelations: すべてのリレーション種別を表示...
         reports:
-            listreports: See all reports...
+            listreports: すべてのレポートを表示...
         about:
             intro:
-                <p>OpenStreetMap uses <b>tags</b> of the form <b>key=value</b>
-                to add meaning to geographic objects. Taginfo collects information
-                about these tags from several sources to help you understand what
-                they mean and how they are used.</p>
-            more: More about taginfo...
+                <p>OpenStreetMap は地理的なオブジェクトに意味づけするために<b>キー=値</b>という形の<b>タグ</b>を使います。
+                taginfo はこのようなタグに関する情報を様々な情報源から収集し、どのような意味なのか、どのように使われているかを分かりやすくします。</p>
+            more: taginfo についての詳細...
         international:
-            see: See other taginfo sites...
+            see: 他の taginfo サイトを表示...
     about:
         about_taginfo:
-            title: About taginfo
+            title: taginfo について
             text: |
                 <p>OpenStreetMap uses <b>tags</b> to add meaning to geographic objects. There
                 is no fixed list of those tags. New tags can be invented and used as needed.
@@ -171,7 +169,7 @@ pages:
                 how they are used and what they mean. See a <a href="/sources">list of sources</a>
                 taginfo uses.</p>
         about_site:
-            title: About This Site
+            title: このサイトについて
         building_on_taginfo:
             title: Building on taginfo
             text: |
