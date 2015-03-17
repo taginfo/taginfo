@@ -1,31 +1,31 @@
 
 osm:
-    tag: Tag
-    tags: Tags
-    key: Key
-    keys: Keys
-    value: Value
-    values: Values
-    node: Node
-    nodes: Nodes
-    way: Way
-    ways: Ways
-    relation: Relation
-    relations: Relations
-    relation_type: Relation type
-    relation_types: Relation types
-    relation_member: Relation member
-    relation_members: Relation members
-    relation_member_nodes: Member nodes
-    relation_member_ways: Member ways
-    relation_member_relations: Member relations
-    relation_member_role: Role
-    relation_member_roles: Roles
-    object: Object
-    objects: Objects
-    all: All
-    user: User
-    users: Users
+    tag: タグ
+    tags: タグ
+    key: キー
+    keys: キー
+    value: 値
+    values: 値
+    node: ノード
+    nodes: ノード
+    way: ウェイ
+    ways: ウェイ
+    relation: リレーション
+    relations: リレーション
+    relation_type: リレーションの種別
+    relation_types: リレーションの種別
+    relation_member: リレーションのメンバー
+    relation_members: リレーションのメンバー
+    relation_member_nodes: メンバーノード
+    relation_member_ways: メンバーウェイ
+    relation_member_relations: メンバーリレーション
+    relation_member_role: ロール
+    relation_member_roles: ロール
+    object: オブジェクト
+    objects: オブジェクト
+    all: すべて
+    user: ユーザー
+    users: ユーザー
 
 taginfo:
     source: Source
