@@ -417,13 +417,13 @@ pages:
             description: How this key/tag is used in the project
 
 flexigrid:
-    pagetext: Page
-    pagestat: Displaying {from} to {to} of {total} items
+    pagetext: ページ
+    pagestat: {total}項目中{from}件目から{to}件目を表示しています
     outof: of
     findtext: Find
-    procmsg: Processing, please wait...
+    procmsg: 処理中です。お待ちください...
     nomsg: No items
-    errormsg: Connection Error
+    errormsg: 接続エラー
 
 comparison:
     list: Comparison list
