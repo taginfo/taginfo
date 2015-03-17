@@ -72,15 +72,15 @@ misc:
     area: Area
     language: Language
     search_for: Search for
-    objects_tooltip: Number of objects (as absolute value and as percentage of all nodes, ways, and relations).
-    nodes_tooltip: Number of nodes (as absolute value and as percentage of tagged nodes, ie. nodes without any tags are ignored).
-    ways_tooltip: Number of ways (as absolute value and as percentage of all ways).
-    relations_tooltip: Number of relations (as absolute value and as percentage of all relations).
-    values_tooltip: Number of different values for this key.
-    users_tooltip: Number of distinct users who last changed objects with this key.
-    prevalent_values: Prevalent values
-    prevalent_values_tooltip: Up to ten of the most common values for this key (only if more than 1% of tags with this key have this value).
-    in_wiki_tooltip: Has at least one wiki page.
+    objects_tooltip: オブジェクトの数（実数と、すべてのノード、ウェイ、リレーションに対する割合）。
+    nodes_tooltip: ノードの数（実数と、全ノードに対するタグ付けされたノードの数の割合）。
+    ways_tooltip: ウェイの数（実数と、全ウェイに対する割合）。
+    relations_tooltip: リレーションの数（実数と、全リレーションに対する割合）。
+    values_tooltip: このキーに設定された値の種類。
+    users_tooltip: このキーを持つオブジェクトを最後に変更したユーザーの数。
+    prevalent_values: 代表的な値
+    prevalent_values_tooltip: このキーでよく使われている値の上位10件まで（このキーを持つタグの中で1%以上使われている値のみ）。
+    in_wiki_tooltip: Wikiページが1ページでもあるかどうか。
 
 help:
     search:
