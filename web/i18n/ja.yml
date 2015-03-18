@@ -1,0 +1,180 @@
+
+osm:
+    tag: タグ
+    tags: タグ
+    key: キー
+    keys: キー
+    value: 値
+    values: 値
+    node: ノード
+    nodes: ノード
+    way: ウェイ
+    ways: ウェイ
+    relation: リレーション
+    relations: リレーション
+    relation_type: リレーション種別
+    relation_types: リレーション種別
+    relation_member: リレーションのメンバー
+    relation_members: リレーションのメンバー
+    relation_member_nodes: メンバーノード
+    relation_member_ways: メンバーウェイ
+    relation_member_relations: メンバーリレーション
+    relation_member_role: ロール
+    relation_member_roles: ロール
+    object: オブジェクト
+    objects: オブジェクト
+    all: すべて
+    user: ユーザー
+    users: ユーザー
+
+taginfo:
+    source: ソース
+    sources: ソース
+    download: ダウンロード
+    about: 概要
+    contact: 連絡先
+    meta: メタ
+    wiki: taginfo wiki ページ
+    report: レポート
+    reports: レポート
+    international: 各国のtaginfo
+    apidoc: API仕様書
+    project: プロジェクト
+    projects: プロジェクト
+    test: テスト
+    map: 地図
+    maps: 地図
+    relations: リレーション
+    combinations: 組み合わせ
+    key_combinations: 組み合わせ
+    comparison: キー/タグの比較
+    overview: 概要
+    data_from: データ更新
+    data_from_description: taginfoデータベースの最終更新
+    instance:
+        title: このtaginfoサイトについて
+        other: 他のサイトについては <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> を参照してください。
+
+misc:
+    values_less_than_one_percent: 1%以上の値がありません
+    empty_string: 空の文字列
+    unknown: 不明
+    count: 件数
+    image: 画像
+    no_image: 画像なし
+    all: すべて
+    object_type: 種別
+    description: 説明
+    help: ヘルプ
+    length: 長さ
+    icon: アイコン
+    line: ライン
+    area: エリア
+    language: 言語
+    search_for: 検索
+    objects_tooltip: オブジェクトの数（実数と、すべてのノード、ウェイ、リレーションに対する割合）。
+    nodes_tooltip: ノードの数（実数と、全ノードに対するタグ付けされたノードの数の割合）。
+    ways_tooltip: ウェイの数（実数と、全ウェイに対する割合）。
+    relations_tooltip: リレーションの数（実数と、全リレーションに対する割合）。
+    values_tooltip: このキーに設定された値の種類。
+    users_tooltip: このキーを持つオブジェクトを最後に変更したユーザーの数。
+    prevalent_values: 代表的な値
+    prevalent_values_tooltip: このキーでよく使われている値の上位10件まで（このキーを持つタグの中で1%以上使われている値のみ）。
+    in_wiki_tooltip: Wikiページが1ページでもあるかどうか。
+
+help:
+    search:
+        title: 検索
+        intro: タグのキーや値を検索する場合は、右上の検索ボックスを使用してください。
+        string: タグのキーや値を検索できます
+        substring: キーや値の一部だけでも検索できます
+        complete_tags: 完全なタグを検索できます
+        values_only: タグの値だけでも検索できます
+        suggestions: |
+            利便性のために、入力中によく使われているキーやタグの候補を表示します。
+            カーソルキーを使って選択し、<span class="key">Enter</span>を押して下さい。
+            そのキーやタグのページに直接ジャンプします。
+
+    keyboard:
+        title: キーボードショートカット
+        site_navigation: サイトの操作
+        page_navigation: ページの操作
+        table_navigation: 表の操作
+        keys:
+            home: Home
+            end: End
+            pageup: PgUp
+            pagedown: PgDn
+            esc: Esc
+            tab: Tab
+        home_page: ホームページ
+        keys_page: キーのページ
+        tags_page: タグのページ
+        relations_page: リレーションのページ
+        projects_page: プロジェクトのページ
+        compare_page: 比較のページ
+        first_page: 先頭のページ
+        prev_page: 前ページ
+        next_page: 次ページ
+        last_page: 最後のページ
+        help_page: このヘルプ
+        activate_search: 検索ボックスに移動
+        activate_filter: フィルタの入力ボックスに移動
+        prev_entry: 前の項目
+        next_entry: 次の項目
+        enter_entry: 項目に移動
+        switch_tab: タブを切り替え
+        deactivate: 入力ボックスから戻る
+        up: 1階層上に移動
+        switch_input: 入力ボックス間を移動
+
+pages:
+    not_found:
+        title: 見つかりません
+        intro: 恐れ入りますが、お探しのページは見つかりませんでした。
+    index:
+        popular_keys: よく使われているキー
+        keys:
+            listkeys: すべてのキーを表示...
+        tags:
+            listtags: よく使われているタグを表示...
+        relations:
+            listrelations: すべてのリレーション種別を表示...
+        reports:
+            listreports: すべてのレポートを表示...
+        about:
+            intro:
+                <p>OpenStreetMap は<b>キー=値</b>という形の<b>タグ</b>を使って、
+                地理的なオブジェクトに意味づけしています。 taginfo
+                はこのようなタグに関する情報を様々な情報源から収集し、どのような意味なのか、
+                どのように使われているかを分かりやすくします。</p>
+            more: taginfo についての詳細...
+        international:
+            see: 他の taginfo サイトを表示...
+    about:
+        about_taginfo:
+            title: taginfo について
+            text: |
+                <p>OpenStreetMap は<b>タグ</b>を使って地理的なオブジェクトに意味づけします。
+                このタグの固定した一覧はありません。必要に応じて新しいタグが開発されることがあります。
+                誰もが新しいタグを導入し、新旧のオブジェクトに追加することができます。
+                これによって OpenStreetMap は非常に柔軟になりますが、作業することが少し難しくなることがあります。</p>
+                <p>OSMに協力するにせよOSMのデータを利用するにせよ、次のような疑問が常に付きまといます。
+                Xという地物や特徴のために人々はどのタグを使用しているのか？
+                Yという地物や特徴のために度のタグを使用すあれば、正しく地図上に現れるのか？
+                Wikiで説明されているZタグは実際に使われているのか？どこで？</p>
+                <p>taginfo は、どのタグが実際にはデータベース上にあるのか、どれだけの人がタグを使っているのか、
+                どこで使用されているのかなどを、統計を表示することでお役に立ちます。
+                wikiやその他の場所からの情報を得ることもできます。
+                taginfo はタグについて、どのように使われているか、どのような意味なのかを理解しやすくするために情報を集約しようとしています。
+                taginfo が使用している<a href="/sources">情報源の一覧</a>を参照してください。
+                </p>
+        about_site:
+            title: このサイトについて
+
+flexigrid:
+    pagetext: ページ
+    pagestat: {total}項目中{from}件目から{to}件目を表示しています
+    procmsg: 処理中です。お待ちください...
+    nomsg: 項目なし
+    errormsg: 接続エラー
