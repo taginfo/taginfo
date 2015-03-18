@@ -174,7 +174,8 @@ pages:
 
 flexigrid:
     pagetext: ページ
-    pagestat: {total}項目中{from}件目から{to}件目を表示しています
+    pagestat: |
+        {total}項目中{from}件目から{to}件目を表示しています
     procmsg: 処理中です。お待ちください...
     nomsg: 項目なし
     errormsg: 接続エラー
