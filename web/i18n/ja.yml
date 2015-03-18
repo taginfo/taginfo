@@ -85,8 +85,21 @@ misc:
 help:
     search:
         title: 検索
+        intro: タグのキーや値を検索する場合は、右上の検索ボックスを使用してください。
+        string: タグのキーや値を検索できます
+        substring: キーや値の一部だけでも検索できます
+        complete_tags: 完全なタグを検索できます
+        values_only: タグの値だけでも検索できます
+        suggestions: |
+            利便性のために、入力中によく使われているキーやタグの候補を表示します。
+            カーソルキーを使って選択し、<span class="key">Enter</span>を押して下さい。
+            そのキーやタグのページに直接ジャンプします。
+
     keyboard:
         title: キーボードショートカット
+        site_navigation: サイトの操作
+        page_navigation: ページの操作
+        table_navigation: 表の操作
         keys:
             home: Home
             end: End
@@ -95,18 +108,25 @@ help:
             esc: Esc
             tab: Tab
         home_page: ホームページ
-        keys_page: 「キー」ページ
-        tags_page: 「タグ」ページ
-        relations_page: 「リレーション」ページ
-        projects_page: 「プロジェクト」ページ
-        compare_page: 「比較」ページ
+        keys_page: キーのページ
+        tags_page: タグのページ
+        relations_page: リレーションのページ
+        projects_page: プロジェクトのページ
+        compare_page: 比較のページ
         first_page: 先頭のページ
         prev_page: 前ページ
         next_page: 次ページ
         last_page: 最後のページ
         help_page: このヘルプ
+        activate_search: 検索ボックスに移動
+        activate_filter: フィルタの入力ボックスに移動
         prev_entry: 前の項目
         next_entry: 次の項目
+        enter_entry: 項目に移動
+        switch_tab: タブを切り替え
+        deactivate: 入力ボックスから戻る
+        up: 1階層上に移動
+        switch_input: 入力ボックス間を移動
 
 pages:
     not_found:
@@ -124,8 +144,10 @@ pages:
             listreports: すべてのレポートを表示...
         about:
             intro:
-                <p>OpenStreetMap は地理的なオブジェクトに意味づけするために<b>キー=値</b>という形の<b>タグ</b>を使います。
-                taginfo はこのようなタグに関する情報を様々な情報源から収集し、どのような意味なのか、どのように使われているかを分かりやすくします。</p>
+                <p>OpenStreetMap は<b>キー=値</b>という形の<b>タグ</b>を使って、
+                地理的なオブジェクトに意味づけしています。 taginfo
+                はこのようなタグに関する情報を様々な情報源から収集し、どのような意味なのか、
+                どのように使われているかを分かりやすくします。</p>
             more: taginfo についての詳細...
         international:
             see: 他の taginfo サイトを表示...
@@ -133,11 +155,11 @@ pages:
         about_taginfo:
             title: taginfo について
             text: |
-                <p>OpenStreetMap は地理的なオブジェクトに意味づけするために<b>タグ</b>を使います。
-                このタグの固定された一覧はありません。必要に応じて新しいタグが開発されることがあります。
+                <p>OpenStreetMap は<b>タグ</b>を使って地理的なオブジェクトに意味づけします。
+                このタグの固定した一覧はありません。必要に応じて新しいタグが開発されることがあります。
                 誰もが新しいタグを導入し、新旧のオブジェクトに追加することができます。
                 これによって OpenStreetMap は非常に柔軟になりますが、作業することが少し難しくなることがあります。</p>
-                <p>OSMに協力する場合にしろOSMのデータを利用する場合にしろ、次のような疑問が常に付きまといます。
+                <p>OSMに協力するにせよOSMのデータを利用するにせよ、次のような疑問が常に付きまといます。
                 Xという地物や特徴のために人々はどのタグを使用しているのか？
                 Yという地物や特徴のために度のタグを使用すあれば、正しく地図上に現れるのか？
                 Wikiで説明されているZタグは実際に使われているのか？どこで？</p>
