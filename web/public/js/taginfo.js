@@ -566,11 +566,11 @@ function level0_editor(overpass_url_prefix, level0_url_prefix, filter, key, valu
     if (filter == 'nodes') {
         query = 'node' + query;
     } else if (filter == 'ways') {
-        query = 'way' + query;
+        query = 'way' + query + '>;';
     } else if (filter == 'relations') {
         query = 'rel' + query;
     } else {
-        query = '(node' + query + 'way' + query + 'rel' + query + ');';
+        query = '(node' + query + 'way' + query + '>;rel' + query + ');';
     }
 
     var overpass_url = overpass_url_prefix + 'data=' + encodeURIComponent('[out:xml];' + query + 'out meta;');
