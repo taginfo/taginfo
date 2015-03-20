@@ -16,9 +16,9 @@ osm:
     relation_types: リレーション種別
     relation_member: リレーションのメンバー
     relation_members: リレーションのメンバー
-    relation_member_nodes: メンバーノード
-    relation_member_ways: メンバーウェイ
-    relation_member_relations: メンバーリレーション
+    relation_member_nodes: メンバーのノード
+    relation_member_ways: メンバーのウェイ
+    relation_member_relations: メンバーのリレーション
     relation_member_role: ロール
     relation_member_roles: ロール
     object: オブジェクト
@@ -34,7 +34,7 @@ taginfo:
     about: 概要
     contact: 連絡先
     meta: メタ
-    wiki: taginfo wiki ページ
+    wiki: taginfo Wikiページ
     report: レポート
     reports: レポート
     international: 各国のtaginfo
@@ -47,16 +47,16 @@ taginfo:
     relations: リレーション
     combinations: 組み合わせ
     key_combinations: 組み合わせ
-    comparison: キー/タグの比較
+    comparison: キーやタグの比較
     overview: 概要
     data_from: データ更新
     data_from_description: taginfoデータベースの最終更新
     instance:
         title: このtaginfoサイトについて
-        other: 他のサイトについては <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> を参照してください。
+        other: 他のサイトについては <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM Wiki</a>を参照してください。
 
 misc:
-    values_less_than_one_percent: 1%以上の値がありません
+    values_less_than_one_percent: 1%以上使われている値はありません
     empty_string: 空の文字列
     unknown: 不明
     count: 件数
@@ -144,37 +144,251 @@ pages:
             listreports: すべてのレポートを表示...
         about:
             intro:
-                <p>OpenStreetMap は<b>キー=値</b>という形の<b>タグ</b>を使って、
-                地理的なオブジェクトに意味づけしています。 taginfo
-                はこのようなタグに関する情報を様々な情報源から収集し、どのような意味なのか、
-                どのように使われているかを分かりやすくします。</p>
-            more: taginfo についての詳細...
+                <p>OpenStreetMapは<b>キー=値</b>という形の<b>タグ</b>を使って、
+                地理的なオブジェクトに意味づけしています。
+                taginfoはこのようなタグに関する情報を様々な情報源から収集し、
+                どのような意味なのか、どのように使われているかを分かりやすくします。</p>
+            more: taginfoについての詳細...
         international:
-            see: 他の taginfo サイトを表示...
+            see: 他のtaginfoサイトを表示...
     about:
         about_taginfo:
-            title: taginfo について
+            title: taginfoについて
             text: |
-                <p>OpenStreetMap は<b>タグ</b>を使って地理的なオブジェクトに意味づけします。
+                <p>OpenStreetMapは<b>タグ</b>を使って地理的なオブジェクトに意味づけします。
                 このタグの固定した一覧はありません。必要に応じて新しいタグが開発されることがあります。
                 誰もが新しいタグを導入し、新旧のオブジェクトに追加することができます。
-                これによって OpenStreetMap は非常に柔軟になりますが、作業することが少し難しくなることがあります。</p>
+                これによってOpenStreetMapは非常に柔軟になりますが、
+                作業することが少し難しくなることがあります。</p>
                 <p>OSMに協力するにせよOSMのデータを利用するにせよ、次のような疑問が常に付きまといます。
                 Xという地物や特徴のために人々はどのタグを使用しているのか？
                 Yという地物や特徴のために度のタグを使用すあれば、正しく地図上に現れるのか？
                 Wikiで説明されているZタグは実際に使われているのか？どこで？</p>
-                <p>taginfo は、どのタグが実際にはデータベース上にあるのか、どれだけの人がタグを使っているのか、
+                <p>taginfoは、どのタグが実際にはデータベース上にあるのか、どれだけの人がタグを使っているのか、
                 どこで使用されているのかなどを、統計を表示することでお役に立ちます。
-                wikiやその他の場所からの情報を得ることもできます。
-                taginfo はタグについて、どのように使われているか、どのような意味なのかを理解しやすくするために情報を集約しようとしています。
-                taginfo が使用している<a href="/sources">情報源の一覧</a>を参照してください。
+                Wikiやその他の場所からの情報を得ることもできます。
+                taginfoは、タグがどのように使われているか、どのような意味なのかを理解しやすくするために情報を集約しようとしています。
+                taginfoが使用している<a href="/sources">情報源の一覧</a>を参照してください。
                 </p>
         about_site:
             title: このサイトについて
+        building_on_taginfo:
+            title: taginfoを使った開発
+            text: |
+                <p>taginfoからのデータを自分のプロジェクトで使うことができます。</p>
+                <h3>API</h3>
+                <p>taginfoのデータにはREST APIを通してアクセスできます。詳細は
+                <a href="/taginfo/apidoc">API説明書</a>を参照してください。一般的な情報の一部は
+                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">OSM Wiki上</a>にあります。
+                taginfo APIを実行するサーバは、無限のリソースを持っている訳ではありません。
+                責任をもってAPIを使用してください。不明な点は、あなたがお使いのサイトの
+                管理者に連絡を取るか、メーリングリストで私たちに連絡するかしてください。</p>
+                <h3>ダウンロード</h3>
+                <p>taginfoで使用しているデータで遊んでみたい場合は、定期的に更新される
+                Sqliteデータベースファイルをダウンロードすることができます。すべての前処理が完了した状態です。
+                ファイルの一覧は<a href="/download">ダウンロードページ</a>を参照してください。
+                なお、ファイルによっては非常に大容量になります。定期的にダウンロードしたいのであれば、
+                あなたがお使いのサイトの管理者に連絡を取るか、メーリングリストで私たちに連絡するかしてください。</p>
+                <h3>ライセンス</h3>
+                <p>taginfoを通して提供されるデータは、<a class="extlink" 
+                href="//www.openstreetmap.org/copyright">OpenStreetMapのデータと同じく</a>、ODbLの下にライセンスされます。
+                </p>
+        software:
+            title: taginfoソフトウェアについて
+            text: |
+                <p>taginfoソフトウェアは<a class="extlink" 
+                href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>が作成し、メンテナンスしています。
+                ウェブのデザインは<a class="extlink" 
+                href="http://www.ctd-studio.co.uk/">Christian Topf</a>が作成しました。</p>
+                <h3>翻訳</h3>
+                <p>私たちはtaginfoのユーザーインタフェースの翻訳者を必要としています。作業が必要な言語については<a
+                href="/taginfo/translations">翻訳の状況</a>を参照してください。
+                協力する方法について、詳しくは<a class="extlink" 
+                href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM Wiki</a>を参照してください。</p>
+                <h3>コード</h3>
+                <p>taginfoサイトに関するソフトウェアはすべてオープンソースです。<a 
+                class="extlink" href="https://github.com/joto/taginfo/">GitHub</a>から入手することができます。
+                全体構造については、OSM Wikiの<a class="extlink"
+                href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">taginfoの構造</a>
+                に関するページをお読みください。</p>
+                <h3>独自のインスタンスを実行する</h3>
+                <p>例えば、自分の国のデータだけ持つサイトなど、独自の<a class="extlink" 
+                href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">taginfoサイト</a>
+                を構築することができます。説明は、
+                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Running">OSM Wiki</a>
+                を参照してください。</p>
+                <h3>バグ報告と機能のリクエスト</h3>
+                <p>バグ報告と機能のリクエストは、<a class="extlink"
+                href="https://github.com/joto/taginfo/issues">GitHub issue tracker</a>に書いてください。
+                または、メーリングリストで話し合うこともできます。</p>
+                <h3>連絡先/メーリングリスト</h3>
+                <p>質問をしたい場合やヘルプがほしい場合は、
+                <a class="extlink" href="//lists.openstreetmap.org/listinfo/taginfo-dev">taginfo-devメーリングリスト</a>
+                に連絡してください。</p>
+    search:
+        title: 検索結果
+        you_were_searching_for: 検索文字列
+        fulltext: 全文検索
+        no_keys: キーが見つかりません。
+        no_values: 値が見つかりません。
+        no_tags: タグが見つかりません。
+        no_match: 一致するものがありません。
+    compare:
+        nothing_to_compare: 比較するキーやタグがありません。キーまたはタグのページに移動して追加してください。
+    keys:
+        intro: |
+                この表ではデータベースやその他のリソースに存在するすべてのタグのキーを表示しています。
+    tags:
+        intro: |
+                この表ではデータベース中でよく使われているタグを表示しています。
+    relations:
+        name: リレーション種別
+        intro: リレーションの各種別についての情報（<a href="/keys/type?filter=relations">type</a>タグで識別されるもの）です。
+        relations_of_type_tooltip: この種別のリレーションの数（と、全リレーションに対する割合）
+        prevalent_roles: よく使われているロール
+        prevalent_roles_tooltip: この種類のリレーションでよく使われているロールです。
+        no_information: 情報なし
+        roles_less_than_one_percent: 1%以上使われているロールはありません
+        empty_role: 空のロール
+    projects:
+        intro: |
+                この表では、OSMタグの使い方からtaginfoが把握しているすべてのプロジェクトを表示しています。<br/>この機能についての詳細は、<a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">Wiki</a>を参照してください。
+    key:
+        description_from_wiki: Wikiによるこのキーの説明です（選択している言語に存在する場合、なければ英語）。
+        no_description_in_wiki: このキーの英語での説明がWikiにありません（"Wiki"タブを参照してください）。
+        filter:
+            label: |
+                 絞り込み:
+            none: 条件なし
+            nodes: ノードのみ
+            ways: ウェイのみ
+            relations: リレーションのみ
+        button_disabled: このキーが設定されたオブジェクトが多すぎるため、ボタンは無効です。
+        number_objects: オブジェクトの件数
+        number_values: 値の数
+        values_used: このキーで使われている値
+        tag_description_from_wiki: Wikiによるこのタグの説明です（選択している言語に存在する場合、なければ英語）。
+        overview:
+            objects_last_edited_by: このキーを持つオブジェクトを最終したのは%1人です。
+            no_endorsement: （これらのユーザー全員がこのキーを支持している訳ではありません。）
+            distribution_of_values: 値の分布
+        other_keys_used:
+            title: このキーと一緒に使われている他のキー
+            other: 他のキー
+            to_count_tooltip: このキーが設定されたオブジェクトのうち、他のキーを持っている数です。
+            other_key_tooltip: このキーと一緒に使われているキーです。
+            from_count_tooltip: 他のキーが設定されたオブジェクトのうち、このキーを持っている数です。
+        geographic_distribution:
+            title: このキーの地理的な分布
+            relations: リレーションは地理的な位置を持っていないので、地図は表示できません。
+        wiki_pages:
+            title: このキーに関するWikiページ
+            none_found: このキーに関するWikiページは利用できません。
+            create: このキーのWikiページを作成
+            wiki_page: Wikiページ
+            implied_tags: 暗黙に仮定されるタグ
+            combined_tags: 有用な組み合わせのタグ
+            linked_tags: リンクしているタグ
+        projects:
+            title: このキーを使用しているプロジェクト
+            description: プロジェクトでこのキーがどのように使われているか
+        similar:
+            tab: 類似
+            title: 類似のタグ
+            other: 類似のタグ
+            count_all_tooltip: 類似するキーを持つオブジェクトの数
+            similarity: 類似性
+            similarity_tooltip: 数値が小さいほど似ています
+    tag:
+        description_from_wiki: Wikiによるこのタグの説明です（選択している言語に存在する場合、なければ英語）。
+        no_description_in_wiki: このタグの英語での説明がWikiにありません（"Wiki"タブを参照してください）。
+        button_disabled: このタグが設定されたオブジェクトが多すぎるため、ボタンは無効です。
+        number_objects: オブジェクトの件数
+        overview:
+            see_also: リレーションの種別ページも参照してください
+        other_tags_used:
+            title: このタグと一緒に使われている他のタグ
+            other: 他のタグ
+            to_count_tooltip: このタグが設定されたオブジェクトのうち、他のタグ/キーを持っている数です。
+            other_key_tooltip: このキーと一緒に使われているタグ/キーです。
+            from_count_tooltip: 他のタグ/キーが設定されたオブジェクトのうち、このキーを持っている数です。
+        combinations:
+            title: 組み合わせ
+            description: この表ではよく使われるタグのよく使われる組み合わせのみを表示しています。
+        geographic_distribution:
+            title: このタグの地理的な分布
+            relations: リレーションは地理的な位置を持っていないので、地図は表示できません。
+            no_map: 済みません。地図はよく使われるタグにのみ作成されます。overpass turboのリンクを使用してみてください。
+        wiki_pages:
+            title: このタグに関するWikiページ
+            none_found: このタグに関するWikiページは利用できません。
+            create: このタグのWikiページを作成
+            suggest_key_wiki_page: %1キーのWikiページでもっと情報が見つかるかもしれません。
+            wiki_page: Wikiページ
+            implied_tags: 暗黙に仮定されるタグ
+            combined_tags: 有用な組み合わせのタグ
+            linked_tags: リンクしているタグ
+        projects:
+            title: このタグを使用しているプロジェクト
+            description: プロジェクトでこのタグがどのように使われているか
+    relation:
+        name: リレーション種別
+        description_from_wiki: Wikiによるこのリレーション種別の説明です（選択している言語に存在する場合、なければ英語）。
+        no_description_in_wiki: このリレーション種別の英語での説明がWikiにありません（"Wiki"タブを参照してください）。
+        button_disabled: このリレーション種別が設定されたオブジェクトが多すぎるため、ボタンは無効です。
+        overview:
+            tab: 概要
+            title: 概要
+            member_type: メンバーの種別
+            member_count: メンバーの件数
+            see_also: 関連するタグページ
+        roles:
+            tab: ロール
+            title: メンバーのロール
+            objects_tooltip: このリレーション種別における、このロールを持つメンバーの数（とメンバーすべてに対する割合）です。
+            nodes_tooltip: このリレーション種別における、このロールを持つメンバーのノードの数（とメンバーのノードすべてに対する割合）です。
+            ways_tooltip: このリレーション種別における、このロールを持つメンバーのウェイの数（とメンバーのウェイすべてに対する割合）です。
+            relations_tooltip: このリレーション種別における、このロールを持つメンバーのリレーションの数（とメンバーのリレーションすべてに対する割合）です。
+            no_roles_info: このリレーション種別におけるロールについての情報がありません（リレーションの中でごくわずかしか使われていない場合など）。
+        graph:
+            tab: ロールのグラフ
+            title: ロールのグラフ
+        wiki_pages:
+            title: このリレーション種別に関するWikiページ
+            none_found: このリレーション種別に関するWikiページは利用できません。
+            create: このリレーション種別のWikiページを作成
+            wiki_page: Wikiページ
+        projects:
+            title: このリレーション種別を使用しているプロジェクト
+            description: このリレーション種別がプロジェクト内でどのように使用されているか
+    project:
+        overview:
+            project_name: プロジェクト名
+            project_url: プロジェクトのURL
+            description: 説明
+            documentation_url: 説明書
+            last_update: 最終更新
+            json_url: JSONプロジェクトファイル
+            info: このデータは上記の場所からリンクされている'JSONプロジェクトファイル'を通してプロジェクトからtaginfoに提供されています。書式の説明については<a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">Wiki</a>を参照してください。
+        tags:
+            title: このプロジェクトで使用されているタグ
+            intro: このデータはプロジェクトによって提供されており、完成させる必要はありません。詳細はプロジェクトの説明書を参照してください。
+            description: プロジェクトでキーやタグがどのように使われているか
 
 flexigrid:
     pagetext: ページ
     pagestat: {total}項目中{from}件目から{to}件目を表示しています
+    outof: /
+    findtext: 検索
     procmsg: 処理中です。お待ちください...
     nomsg: 項目なし
     errormsg: 接続エラー
+
+comparison:
+    list: 比較リスト
+    items: 項目
+    add_key: このキーをリストに追加
+    add_tag: このタグをリストに追加
+    clear: 比較リストをクリア
+    compare: キーやタグを比較
+
