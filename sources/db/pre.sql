@@ -28,7 +28,8 @@ CREATE TABLE keys (
   cells_ways       INTEGER DEFAULT 0,
   in_wiki          INTEGER DEFAULT 0,
   in_projects      INTEGER DEFAULT 0,
-  characters       VARCHAR
+  characters       VARCHAR,
+  grade            CHAR DEFAULT 'u'
 );
 
 DROP TABLE IF EXISTS prevalent_values;

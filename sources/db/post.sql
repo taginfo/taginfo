@@ -38,6 +38,13 @@ INSERT INTO stats (key, value) SELECT 'characters_in_keys_space',   count(*) FRO
 INSERT INTO stats (key, value) SELECT 'characters_in_keys_problem', count(*) FROM keys WHERE characters='problem';
 INSERT INTO stats (key, value) SELECT 'characters_in_keys_rest',    count(*) FROM keys WHERE characters='rest';
 
+INSERT INTO stats (key, value) SELECT 'grade_bad',     count(*) FROM keys WHERE grade='b';
+INSERT INTO stats (key, value) SELECT 'grade_unknown', count(*) FROM keys WHERE grade='u';
+INSERT INTO stats (key, value) SELECT 'grade_good',    count(*) FROM keys WHERE grade='g';
+INSERT INTO stats (key, value) SELECT 'grade_key_count_bad',     sum(count_all) FROM keys WHERE grade='b';
+INSERT INTO stats (key, value) SELECT 'grade_key_count_unknown', sum(count_all) FROM keys WHERE grade='u';
+INSERT INTO stats (key, value) SELECT 'grade_key_count_good',    sum(count_all) FROM keys WHERE grade='g';
+
 INSERT INTO stats (key, value) VALUES ('objects',     (SELECT sum(value) FROM stats WHERE key IN ('nodes', 'ways', 'relations')));
 INSERT INTO stats (key, value) VALUES ('object_tags', (SELECT sum(value) FROM stats WHERE key IN ('node_tags', 'way_tags', 'relation_tags')));
 
