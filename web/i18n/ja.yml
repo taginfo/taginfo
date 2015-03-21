@@ -465,3 +465,105 @@ reports:
             title: その他のキーすべて
             intro: |
                 <p>他の分類に合わないキーです。</p>
+    database_statistics:
+        name: データベースの統計
+        objects_in_db: データベース中のオブジェクトの数
+        tags_in_db: データベース中のタグの数
+        distinct_keys: 識別されたキーの数
+        distinct_tags: 識別されたタグの数
+        nodes_in_db: データベース中のノードの数
+        nodes_with_tags_in_db: 1つ以上のタグが付いたノードの数
+        nodes_with_tags_in_db_percent: 1つ以上のタグが付いたノードの割合
+        tags_on_nodes: ノード上のタグの数
+        avg_tags_per_tagged_node: タグ付けされたノードあたりの平均タグ数
+        ways_in_db: データベース中のウェイの数
+        closed_ways_in_db: 閉じたウェイの数
+        tags_on_ways: ウェイ上のタグの数
+        avg_tags_per_way: ウェイあたりの平均タグ数
+        relations_in_db: データベース中のリレーションの数
+        tags_on_relations: リレーション上のタグの数
+        avg_tags_per_relation: リレーションあたりの平均タグ数
+    frequently_used_keys_without_wiki_page:
+        name: Wikiページのないよく使われているキー
+        intro: |
+            <p>この表ではOSMデータベースで10,000件以上使用されているものの、
+            説明するWikiページがないキーを表示しています。
+            もし以下のキーの1つでも何かご存知であれば、左端の列のリンクをクリックして
+            Wikiページを作成し、キーについて説明してください。
+            他のWikiページへのリダイレクトを作成することに意味がある場合もあります。
+            この場合はWikiページに、
+            <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>page name</i>]]</tt>
+            と1行書くだけです。</p>
+        also_show_keys: 英語版がなくても、他の言語版のWikiページがあるキーも表示する。
+        table:
+            create_wiki_page: Wikiページを作成...
+    key_lengths:
+        name: キーの長さ
+        intro: |
+            タグのキーの長さはUnicodeで0～255文字です。非常に短いキーや、非常に長いキーは、必ずとは言いませんが、ほとんどはエラーです。
+        table:
+            number_of_objects: オブジェクトの数
+        histogram:
+            name: 分布表
+            intro: この分布表はそれぞれの長さにおけるキーがどれだけあるかを表示しています。
+            key_length: キーの長さ
+            number_of_keys: キーの数
+    language_comparison_table_for_keys_in_the_wiki:
+        name: Wiki上のキーの言語比較表
+        icons:
+            template: Wiki上にページがあり、標準テンプレートを使用している。
+            error: Wiki上にページがあり、標準テンプレートを使用しているが、解析できない。
+            page: Wiki上にページがあるが、標準テンプレートを使用していない。
+            redirect: リダイレクトページ。
+        intro: |
+            この表はWikiページがあるすべてのタグと、どの言語のページがあるかを表示しています。
+    languages:
+        name: 言語
+        intro: |
+            OpenStreetMapは国際的なプロジェクトです。タグやその説明は各言語に翻訳できます。
+            この表ではtaginfoが把握している言語と、
+            その言語でキーやタグを説明するWikiページがそれぞれいくつあるかを表示しています。
+        code: コード
+        native_name: 原語名
+        english_name: 英語名
+        wiki_key_pages: キーのWikiページの数
+        wiki_tag_pages: タグのWikiページの数
+    wiki_pages_about_non_existing_keys:
+        name: 存在しないキーに関するWikiページ
+        intro: |
+            この表では、Wikiページがあるものの、データベース中で1つも存在しないキーを表示しています。
+            誤りであるとは限りませんが（誰かが使い始める前の準備としてWikiに説明を追加したか、
+            既に使われなくなったキーを説明するWikiページの場合）、
+            綴りミスやその他のエラーである可能性もあります。
+        wiki_pages: Wikiページ
+    name_tags:
+        name: nameタグの変化形
+    similar_keys:
+        name: 類似のキー名
+        intro: |
+            このレポートはよく使われているキーで、まれによく似た名前のキーが使われているものを表示しています。
+            これはよく使われるキーのスペルミスを多くをあぶりだしますが、完璧ではありません。
+            データの修正には注意を払ってください。検索と置換による機械的なキーの編集は行わないでください。
+            それぞれの場合を個別に確認して、確認できたその他の問題も同時に修正してください。
+        key_common: よく使われているキー
+        key_rare: 珍しいキー
+        count_common: 数
+        count_rare: 数
+        similarity: 類似性
+    historic_development:
+        name: 発展の歴史
+        intro: |
+            一部の重要な統計についての時系列の発展状況です。このデータはtaginfoによって収集されたもので、隙間はtaginfoが何らかの理由で動作していなかった日です。
+        keys:
+            title: キーの種類の数
+        tags:
+            title: タグの種類の数
+        relation_types:
+            title: リレーション種別の数
+    wiki_images:
+        name: Wikiの画像
+        intro: |
+            それぞれの言語におけるキーを象徴するためにWikiで使われている画像です。
+            画像は同一だったり、言語によって異なったほうが良かったりします。
+            しかし、文化的背景の違いなどによって異なる画像が使われることがわかる場合もあります。
+
