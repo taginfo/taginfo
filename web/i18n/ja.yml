@@ -323,7 +323,8 @@ pages:
             title: このタグに関するWikiページ
             none_found: このタグに関するWikiページは利用できません。
             create: このタグのWikiページを作成
-            suggest_key_wiki_page: %1キーのWikiページでもっと情報が見つかるかもしれません。
+            suggest_key_wiki_page: |
+                %1キーのWikiページでもっと情報が見つかるかもしれません。
             wiki_page: Wikiページ
             implied_tags: 暗黙に仮定されるタグ
             combined_tags: 有用な組み合わせのタグ
