@@ -24,6 +24,9 @@ UPDATE keys SET grade='b' WHERE characters IS NULL;
 -- All other keys not used at least 10 times with strange characters in them.
 UPDATE keys SET grade='b' WHERE count_all < 10 AND characters='rest';
 
+-- All keys with less than three characters are bad
+UPDATE keys SET grade='b' WHERE length(key) < 3;
+
 -- ============================================================================
 
 -- GOOD KEYS:
