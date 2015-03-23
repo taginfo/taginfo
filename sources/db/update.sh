@@ -76,6 +76,9 @@ sqlite3 $DATABASE <post_similar_keys.sql
 echo "`$DATECMD` Running update_characters... "
 ./update_characters.rb $DIR
 
+#echo "`$DATECMD` Running taginfo_unicode... "
+#./taginfo_unicode $DATABASE
+
 echo "`$DATECMD` Running post_grades.sql... "
 sqlite3 $DATABASE <post_grades.sql
 

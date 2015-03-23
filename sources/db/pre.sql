@@ -139,3 +139,16 @@ CREATE TABLE prevalent_roles (
   fraction REAL
 );
 
+DROP TABLE IF EXISTS key_characters;
+
+CREATE TABLE key_characters (
+  key       TEXT,
+  num       INTEGER,
+  utf8      TEXT,
+  codepoint TEXT,
+  block     INTEGER,
+  category  TEXT,
+  direction INTEGER,
+  name      TEXT
+);
+

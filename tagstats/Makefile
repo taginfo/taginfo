@@ -40,10 +40,13 @@ LIB_EXPAT  := -lexpat
 LIB_PBF    := -pthread -lz -lprotobuf-lite -losmpbf
 LIB_GD     := -lgd -lz -lm
 LIB_SQLITE := -lsqlite3
+LIB_ICU    := `pkg-config --libs icu-uc icu-io`
+
+CXXFLAGS_ICU := `pkg-config --cflags icu-uc icu-io`
 
 .PHONY: all check indent install clean
 
-all: tagstats osmstats similarity
+all: tagstats osmstats similarity taginfo_unicode
 
 osmstats: osmstats.cpp statistics_handler.hpp
 	$(CXX) $(CXXFLAGS) $(CXXFLAGS_WARNINGS) -o $@ $< $(LDFLAGS) $(LIB_EXPAT) $(LIB_PBF) $(LIB_SQLITE)
@@ -53,6 +56,9 @@ tagstats: tagstats.cpp tagstats_handler.hpp statistics_handler.hpp string_store.
 
 similarity: similarity.cpp sqlite.hpp
 	$(CXX) $(CXXFLAGS) $(CXXFLAGS_WARNINGS) $(CXXFLAGS_FEATURES) -o $@ $< $(LDFLAGS) $(LIB_SQLITE)
+
+taginfo_unicode: taginfo_unicode.cpp sqlite.hpp
+	$(CXX) $(CXXFLAGS) $(CXXFLAGS_WARNINGS) $(CXXFLAGS_FEATURES) $(CXXFLAGS_ICU) -o $@ $< $(LDFLAGS) $(LIB_SQLITE) $(LIB_ICU)
 
 check:
 	cppcheck --enable=all tagstats.cpp osmstats.cpp
