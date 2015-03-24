@@ -53,6 +53,12 @@ $EXEC_RUBY ./get_wiki_data.rb $DIR >$LOGFILE_WIKI_DATA
 echo "`$DATECMD` Getting image info..."
 $EXEC_RUBY ./get_image_info.rb $DIR >$LOGFILE_IMAGE_INFO
 
+#echo "`$DATECMD` Getting links to Key/Tag/Relation pages..."
+#$EXEC_RUBY ./get_links.rb $DIR >$DIR/links.list
+
+#echo "`$DATECMD` Classifying links..."
+#$EXEC_RUBY ./classify_links.rb $DIR
+
 echo "`$DATECMD` Extracting words..."
 $EXEC_RUBY ./extract_words.rb $DIR
 

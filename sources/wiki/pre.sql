@@ -87,6 +87,20 @@ CREATE TABLE wiki_languages (
     count_pages INTEGER
 );
 
+DROP TABLE IF EXISTS wiki_links;
+
+CREATE TABLE wiki_links (
+    link_class TEXT,
+    from_title TEXT,
+    from_lang  TEXT,
+    from_type  TEXT,
+    from_name  TEXT,
+    to_title   TEXT,
+    to_lang    TEXT,
+    to_type    TEXT,
+    to_name    TEXT
+);
+
 DROP TABLE IF EXISTS invalid_page_title;
 
 CREATE TABLE invalid_page_titles (
