@@ -64,5 +64,5 @@ install:
 	install -m 755 tagstats ../sources/db/tagstats
 
 clean:
-	rm -f *.o *.gcno *.gcda *.gcov gmon.out core tagstats osmstats
+	rm -f *.o *.gcno *.gcda *.gcov gmon.out core tagstats osmstats similarity
 
