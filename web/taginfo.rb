@@ -9,7 +9,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2010-2014  Jochen Topf <jochen@remote.org>
+#  Copyright (C) 2010-2015  Jochen Topf <jochen@remote.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -163,6 +163,11 @@ class Taginfo < Sinatra::Base
     get '/' do
         javascript "#{ r18n.locale.code }/index"
         erb :index
+    end
+
+    get '/test-index' do
+        javascript "#{ r18n.locale.code }/test-index"
+        erb :'test-index'
     end
 
     #-------------------------------------
