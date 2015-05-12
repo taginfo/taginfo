@@ -204,14 +204,17 @@ select#locale, select#lang {
     border: none;
 }
 
-input#search, p.search {
-    background-image: url('/css/flexigrid/images/magnifier.png');
-    background-repeat: no-repeat;
-    background-position: right 3px;
-    background-color: #ffffff;
+div#header input#search {
     height: 18px;
     width: 228px;
     padding: 2px;
+}
+
+input#search, p.search {
+    background-image: url('/css/flexigrid/images/magnifier.png');
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-color: #ffffff;
     border: 1px solid #a0a0a0;
     border-radius: 4px;
 }
