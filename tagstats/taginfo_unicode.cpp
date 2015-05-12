@@ -110,7 +110,7 @@ void get_unicode_info(const char* text, const icu::UnicodeString& us, Sqlite::St
             UCharDirection direction = u_charDirection(codepoint);
             int32_t block = u_getIntPropertyValue(codepoint, UCHAR_BLOCK);
 
-            icu::UnicodeString::UnicodeString ustr(codepoint);
+            icu::UnicodeString ustr(codepoint);
             std::string str;
             ustr.toUTF8String(str);
 
