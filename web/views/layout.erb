@@ -8,6 +8,11 @@
     <link rel="stylesheet" type="text/css" href="/css/smoothness/jquery-ui-1.8.10.custom-minified.css" />
     <link rel="stylesheet" type="text/css" href="/css/flexigrid/flexigrid-minified.css" />
     <link rel="search" type="application/opensearchdescription+xml" href="/search/opensearch.xml" title="<%= TaginfoConfig.get('opensearch.shortname') %>" />
+<% if @css %>
+    <style type="text/css"><!--
+<%= @css %>
+--></style>
+<% end %>
 <%= javascript_tags %>
 </head>
 <body>
@@ -22,7 +27,9 @@
 <% end %>
                 </select>
             </form>
+<% unless @nosearch %>
             <form id="search_form" action="/search"><input type="text" id="search" name="q" value="<%= h(params[:q]) %>"/></form>
+<% end %>
         </div>
         <div id="header_logo">
             <a href="/"><img width="49" height="49" src="<%= TaginfoConfig.get('instance.icon', '/img/logo/world.png') %>" alt="taginfo"/></a>
