@@ -108,6 +108,17 @@
     },
     // Settings for the web user interface
     "user_interface": {
+        // Optional extra reports from history_stats table
+        "historic_development": {
+            "objects": {
+                "tab_name": "Objects",
+                "tab_title": "Object count"
+            },
+            "projects": {
+                "tab_name": "Projects",
+                "tab_title": "Project count"
+            }
+        },
         "key_page": {
             "show_tab_similar": true
         }

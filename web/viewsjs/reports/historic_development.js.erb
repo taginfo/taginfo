@@ -1,8 +1,13 @@
 <%
 page = @trans.t.reports.historic_development
-
+history_stats = ['num_keys', 'num_tags', 'relation_types']
+if reports = TaginfoConfig.get('user_interface.historic_development', false)
+    reports.keys.each do |report|
+        history_stats.push(report)
+    end
+end
 data = {}
-['num_keys', 'num_tags', 'relation_types'].each do |key|
+history_stats.each do |key|
     data[key] = @db.execute("SELECT udate, value FROM history.history_stats WHERE key=? ORDER BY udate", key).map do |row|
         [ row['udate'], row['value'].to_i ]
     end
