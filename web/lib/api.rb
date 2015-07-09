@@ -127,8 +127,8 @@ class APIParameters
             if p[:rp] !~ /^[0-9]{1,3}$/
                 raise ArgumentError, 'results per page must be integer between 0 and 999'
             end
-            if p[:page] !~ /^[0-9]{1,4}$/
-                raise ArgumentError, 'page must be integer between 0 and 9999'
+            if p[:page] !~ /^[0-9]{1,6}$/
+                raise ArgumentError, 'page must be integer between 0 and 999999'
             end
             @page = p[:page].to_i
             @results_per_page = p[:rp].to_i
