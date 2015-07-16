@@ -27,6 +27,7 @@ CREATE TABLE keys (
   cells_nodes      INTEGER DEFAULT 0,
   cells_ways       INTEGER DEFAULT 0,
   in_wiki          INTEGER DEFAULT 0,
+  in_wiki_en       INTEGER DEFAULT 0,
   in_projects      INTEGER DEFAULT 0,
   characters       VARCHAR,
   grade            CHAR DEFAULT 'u'
@@ -81,6 +82,7 @@ CREATE TABLE tags (
   count_ways       INTEGER DEFAULT 0,
   count_relations  INTEGER DEFAULT 0,
   in_wiki          INTEGER DEFAULT 0,
+  in_wiki_en       INTEGER DEFAULT 0,
   in_projects      INTEGER DEFAULT 0
 );
 

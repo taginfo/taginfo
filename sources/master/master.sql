@@ -48,14 +48,16 @@ INSERT INTO master_stats SELECT * FROM db.stats
 
 INSERT INTO db.keys (key) SELECT DISTINCT key FROM wiki.wikipages WHERE key NOT IN (SELECT key FROM db.keys);
 
-UPDATE db.keys SET in_wiki=1 WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NULL);
+UPDATE db.keys SET in_wiki=1    WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NULL);
+UPDATE db.keys SET in_wiki_en=1 WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NULL AND lang='en');
 
 -- ============================================================================
 
 -- too slow, so we drop it for now
 -- INSERT INTO db.tags (key, value) SELECT DISTINCT key, value FROM wiki.wikipages WHERE key || '=XX=' || value NOT IN (SELECT key || '=XX=' || value FROM db.tags);
 
-UPDATE db.tags SET in_wiki=1 WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*') AND key || '=' || value IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*');
+UPDATE db.tags SET in_wiki=1    WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*') AND key || '=' || value IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*');
+UPDATE db.tags SET in_wiki_en=1 WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en') AND key || '=' || value IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en');
 
 -- ============================================================================
 
@@ -68,6 +70,7 @@ CREATE TABLE top_tags (
   count_ways      INTEGER DEFAULT 0,
   count_relations INTEGER DEFAULT 0,
   in_wiki         INTEGER DEFAULT 0,
+  in_wiki_en      INTEGER DEFAULT 0,
   in_projects     INTEGER DEFAULT 0
 );
 
@@ -82,7 +85,8 @@ UPDATE top_tags SET
     count_ways      = (SELECT t.count_ways      FROM db.tags t WHERE t.key=skey AND t.value=svalue),
     count_relations = (SELECT t.count_relations FROM db.tags t WHERE t.key=skey AND t.value=svalue);
 
-UPDATE top_tags SET in_wiki=1 WHERE skey || '=' || svalue IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*');
+UPDATE top_tags SET in_wiki=1    WHERE skey || '=' || svalue IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*');
+UPDATE top_tags SET in_wiki_en=1 WHERE skey || '=' || svalue IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en');
 
 UPDATE top_tags SET in_projects=(SELECT num FROM projects.project_counts p WHERE p.key=skey AND p.value=svalue);
 
@@ -97,6 +101,7 @@ CREATE TABLE popular_keys (
     users         INTEGER,
     wikipages     INTEGER DEFAULT 0,
     in_wiki       INTEGER DEFAULT 0,
+    in_wiki_en    INTEGER DEFAULT 0,
     scale_count   REAL,
     scale_users   REAL,
     scale_wiki    REAL,
@@ -112,6 +117,7 @@ INSERT INTO popular_keys (key, count, users)
 UPDATE popular_keys SET wikipages = (SELECT count(*) FROM wiki.wikipages w WHERE w.key=popular_keys.key);
 
 UPDATE popular_keys SET in_wiki=1    WHERE key IN (SELECT distinct key FROM wiki.wikipages);
+UPDATE popular_keys SET in_wiki_en=1 WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE lang='en');
 
 -- ============================================================================
 
