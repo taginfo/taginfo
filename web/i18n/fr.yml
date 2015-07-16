@@ -483,7 +483,7 @@ reports:
                 <p>Les clés contenant des symboles problématiques : <span
                 class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> ou les caractères
                 de contrôle. Ces caractères
-                peuvent poser des problèmes, car ils sont utilisés pour délimiter les chaines de caratères dans
+                peuvent poser des problèmes, car ils sont utilisés pour délimiter les chaines de caractères dans
                 les langages de programmation. Ils ont une sens particulier en XML, HTML, dans les
                 URLs, et ailleurs aussi. Le signe égal (<span class="char">=</span>) est souvent utilisé comme séparateur
                 entre les clés et les valeurs des tags.<br/>
