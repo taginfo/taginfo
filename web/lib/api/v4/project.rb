@@ -17,7 +17,7 @@ class Taginfo < Sinatra::Base
             [:doc_url,     :STRING, 'Documentation URL'],
             [:icon_url,    :STRING, 'Icon URL']
         ]),
-        :example => { :page => 1, :rp => 10, :sortname => 'key', :sortorder => 'asc' },
+        :example => { :page => 1, :rp => 10, :sortname => 'tag', :sortorder => 'asc' },
         :ui => '/projects/id_editor'
     }) do
         project_id = params[:project]
