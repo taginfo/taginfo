@@ -177,13 +177,22 @@ div#header {
     padding: 15px 20px 20px 20px;
 }
 
+div#header_logo {
+    display: inline-block;
+    float: left;
+}
+
 div#header_date {
+    display: inline-block;
+    float: right;
     font-size: 80%;
     text-align: right;
     color: #808080;
 }
 
 div#header div#header_forms {
+    float: right;
+    clear: right;
 }
 
 div#header div#header_forms form {
