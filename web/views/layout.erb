@@ -17,6 +17,15 @@
 </head>
 <body>
     <div id="header">
+        <div id="header_logo">
+            <a href="/"><img width="49" height="49" src="<%= TaginfoConfig.get('instance.icon', '/img/logo/world.png') %>" alt="taginfo"/></a>
+<% if @section %>
+            <a href="/"><img width="136" height="49" src="/img/logo/taginfo_with_bar.png" alt="taginfo"/></a>
+            <a class="section" href="/<%= @section %>"><%= @section_title %></a>
+<% else %>
+            <a href="/"><img width="129" height="49" src="/img/logo/taginfo.png" alt="taginfo"/></a>
+<% end %>
+        </div>
         <div id="header_date" title="<%= h(t.taginfo.data_from_description) %>" tipsy="ne"><%= h(t.taginfo.data_from) %>: <%= @data_until %> UTC</div>
         <div id="header_forms" class="no-print">
             <form id="set_language" action="/switch_locale">
@@ -29,15 +38,6 @@
             </form>
 <% unless @nosearch %>
             <form id="search_form" action="/search"><input type="text" id="search" name="q" value="<%= h(params[:q]) %>"/></form>
-<% end %>
-        </div>
-        <div id="header_logo">
-            <a href="/"><img width="49" height="49" src="<%= TaginfoConfig.get('instance.icon', '/img/logo/world.png') %>" alt="taginfo"/></a>
-<% if @section %>
-            <a href="/"><img width="136" height="49" src="/img/logo/taginfo_with_bar.png" alt="taginfo"/></a>
-            <a class="section" href="/<%= @section %>"><%= @section_title %></a>
-<% else %>
-            <a href="/"><img width="129" height="49" src="/img/logo/taginfo.png" alt="taginfo"/></a>
 <% end %>
         </div>
     </div>
