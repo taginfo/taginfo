@@ -178,18 +178,12 @@ div#header {
 }
 
 div#header_date {
-    position: absolute;
-    top: 12px;
-    right: 20px;
     font-size: 80%;
     text-align: right;
     color: #808080;
 }
 
 div#header div#header_forms {
-    position: absolute;
-    right: 20px;
-    top: 31px;
 }
 
 div#header div#header_forms form {
