@@ -163,7 +163,14 @@ CREATE TABLE suggestions (
 INSERT INTO suggestions (key, value, count) SELECT key, NULL, count_all FROM db.keys WHERE count_all > 10000 OR in_wiki = 1;
 INSERT INTO suggestions (key, value, count) SELECT key, value, count FROM db.prevalent_values WHERE count > 1000;
 
-INSERT INTO suggestions (key, value, in_wiki) SELECT key, value, 1 FROM wiki.wikipages WHERE value IS NOT NULL AND key || '=' || value NOT IN (SELECT key || '=' || value FROM suggestions);
+CREATE TEMP TABLE tmp_s (
+    key     TEXT,
+    value   TEXT
+);
+
+INSERT INTO tmp_s (key, value) SELECT DISTINCT key, value FROM wiki.wikipages WHERE value IS NOT NULL AND key || '=' || value NOT IN (SELECT key || '=' || value FROM suggestions WHERE value IS NOT NULL);
+INSERT INTO suggestions (key, value, count, in_wiki) SELECT t.key, t.value, t.count_all, 1 FROM tmp_s s, tags t WHERE s.key=t.key AND s.value=t.value;
+DROP TABLE tmp_s;
 
 DELETE FROM suggestions WHERE count < 100;
 
