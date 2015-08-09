@@ -1,7 +1,7 @@
 # web/lib/api/v4/tags.rb
 class Taginfo < Sinatra::Base
 
-    api(0, 'tags/list', {
+    api(4, 'tags/list', {
         :description => 'Get information on given tags or all tags documented on the wiki with given key.',
         :parameters => { :key => 'Key (optional)', :tags => 'Comma-separated list of tags in format key1=value1a,value1b,...,key2=value2a,value2b,... (optional).' },
         :paging => :no,
