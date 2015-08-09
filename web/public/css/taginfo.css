@@ -182,9 +182,10 @@ div#header_logo {
     float: left;
 }
 
-div#header_date {
+div#footer_date {
     display: inline-block;
     float: right;
+    clear: right;
     font-size: 80%;
     text-align: right;
     color: #808080;

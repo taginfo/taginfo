@@ -26,7 +26,6 @@
             <a href="/"><img width="129" height="49" src="/img/logo/taginfo.png" alt="taginfo"/></a>
 <% end %>
         </div>
-        <div id="header_date" title="<%= h(t.taginfo.data_from_description) %>" tipsy="ne"><%= h(t.taginfo.data_from) %>: <%= @data_until %> UTC</div>
         <div id="header_forms" class="no-print">
             <form id="set_language" action="/switch_locale">
                 <input type="hidden" id="url" name="url" value="<%= request.path %>"/>
@@ -60,6 +59,7 @@
             <a id="help_link" href="#help"><%= h(t.misc.help) %></a> &middot;
             <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo"><%= h(t.taginfo.wiki) %></a>
         </div>
+        <div id="footer_date" title="<%= h(t.taginfo.data_from_description) %>" tipsy="ne"><%= h(t.taginfo.data_from) %>: <%= @data_until %> UTC</div>
     </div>
     <div id="javascriptmsg">This website only works with Javascript! Please enable Javascript in your browser.</div>
     <div id="help"><div id="help_tabs">
