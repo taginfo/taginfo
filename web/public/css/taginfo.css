@@ -245,12 +245,11 @@ div#footer {
 }
 
 div#footer_left {
-    position: absolute;
+    float: left;
 }
 
 div#footer_right {
-    position: absolute;
-    right: 0px;
+    float: right;
     text-align: right;
 }
 
