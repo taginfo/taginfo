@@ -1,4 +1,6 @@
 <div class="pre">
+    <h1></h1>
+    <p><%= @desc %></p>
     <form id="filter-form">
         <label for="filter"><%= h(t.pages.key.filter.label) %></label>
         <select id="filter" name="filter">
@@ -30,8 +32,6 @@
         <% end %>
         <%= turbo_link(@count_all, @filter_type, @key, @value) %>
     </div>
-    <h1></h1>
-    <p><%= @desc %></p>
 </div>
 <div id="tabs">
     <ul>
