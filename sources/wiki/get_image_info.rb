@@ -104,8 +104,8 @@ db.transaction do |db|
                     # The OSM wiki reports the wrong thumbnail URL for images
                     # transcluded from Wikimedia Commons. This fixes those
                     # URLs.
-                    if info['url'].match(%r{^http://upload.wikimedia.org/wikipedia/commons})
-                        prefix.sub!('http://wiki.openstreetmap.org/w/images', 'http://upload.wikimedia.org/wikipedia/commons')
+                    if info['url'].match(%r{^https?://upload\.wikimedia\.org/wikipedia/commons})
+                        prefix.sub!(%r{^https?://wiki\.openstreetmap\.org/w/images}, 'https://upload.wikimedia.org/wikipedia/commons')
                     end
 
                     images_added[v['title']] = 1
