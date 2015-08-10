@@ -108,7 +108,9 @@ a.section {
     text-decoration: none;
 }
 
-div.pre {
+div#pre-text {
+    float: left;
+    max-width: 60em;
     margin-bottom: 20px;
 }
 

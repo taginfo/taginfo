@@ -1,6 +1,8 @@
 <div class="pre">
-    <h1></h1>
-    <p><%= @desc %></p>
+    <div id="pre-text">
+        <h1></h1>
+        <p><%= @desc %></p>
+    </div>
     <div id="tools" class="no-print">
         <% if @count_all_values <= TaginfoConfig.get('xapi.max_results', 1000) %>
             <%= xapi_link('relation', 'type', @rtype) %> <%= josm_link('relation', 'type', @rtype) %>
