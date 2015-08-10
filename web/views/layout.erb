@@ -17,7 +17,7 @@
 <%= javascript_tags %>
 </head>
 <body>
-    <div id="header">
+    <div id="header" class="ui-helper-clearfix">
         <div id="header_logo">
             <a href="/"><img width="49" height="49" src="<%= TaginfoConfig.get('instance.icon', '/img/logo/world.png') %>" alt="taginfo"/></a>
 <% if @section %>
@@ -44,7 +44,7 @@
     <div id="main">
 <%= yield %>
     </div>
-    <div id="footer" class="no-print">
+    <div id="footer" class="ui-helper-clearfix" class="no-print">
         <div id="footer_left"><a class="extlink" href="//www.openstreetmap.org/"><b>OpenStreetMap</b></a> &middot;
             <a href="//www.openstreetmap.org/copyright">Data &copy; OSM contributors (ODbL)</a></div>
         <div id="footer_right">

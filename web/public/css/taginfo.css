@@ -241,11 +241,9 @@ div#main {
 
 div#footer {
     clear: both;
-    position: relative;
     font-size: 90%;
     margin: 0 20px;
     padding: 4px 0;
-    height: 20px;
 }
 
 div#footer_left {
@@ -739,4 +737,3 @@ table.wiki-images td.images div img {
     max-height: 50px;
     top: 0;
 }
-
