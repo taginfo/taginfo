@@ -322,7 +322,7 @@ div#tabs form {
 /* ========== */
 
 div#tools {
-    clear: both;
+    clear: right;
     float: right;
     font-size: 80%;
     margin-top: 4px;
@@ -368,7 +368,6 @@ select#list {
 
 form#filter-form {
     margin-top: 0px;
-    clear: both;
     float: right;
 }
 
