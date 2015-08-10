@@ -232,6 +232,7 @@ input:focus {
 
 div#main {
     margin: 0 20px;
+    clear: both;
 }
 
 /* ========== */
@@ -309,6 +310,10 @@ table.boxes td.box table {
 }
 
 /* ==========  */
+
+div#tabs {
+    clear: both;
+}
 
 div#tabs h2, div.box h2 {
     margin: 0 0 10px 0;
