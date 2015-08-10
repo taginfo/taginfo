@@ -26,6 +26,10 @@ function resize_box() {
     height -= jQuery('.ui-tabs-nav').outerHeight(true);
     height -= jQuery('div#footer').outerHeight(true);
 
+    if (height < 440) {
+        height = 440;
+    }
+
     wrapper.outerHeight(height);
 }
 
