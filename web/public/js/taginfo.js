@@ -451,12 +451,11 @@ var flexigrid_defaults = {
 };
 
 function calculate_flexigrid_rp(box) {
-    var height = box.innerHeight();
+    var height = box.height();
 
     height -= box.children('h2').outerHeight(true);
-    height -= box.children('.boxpre').outerHeight(true);
     height -= box.children('.pDiv').outerHeight();
-    height -= box.children('.pHiv').outerHeight();
+    height -= box.children('.hDiv').outerHeight();
     height -= 90; // table tools and header, possibly horizontal scrollbar
 
     return Math.floor(height / 26);
