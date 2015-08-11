@@ -212,6 +212,11 @@ module SQL
             @db.execute(q, *@params, &block)
         end
 
+        def get_first_row
+            q = build_query()
+            @db.get_first_row(q, *@params)
+        end
+
         def get_first_value
             q = build_query()
             @db.get_first_value(q, *@params)

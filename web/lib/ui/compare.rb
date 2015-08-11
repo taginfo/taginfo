@@ -27,10 +27,11 @@ class Taginfo < Sinatra::Base
             value = data[:value]
 
             if value.nil?
-                data[:count_all]       = @db.select("SELECT count_all FROM db.keys").condition('key = ?', key).get_first_i
-                data[:count_nodes]     = @db.select("SELECT count_nodes FROM db.keys").condition('key = ?', key).get_first_i
-                data[:count_ways]      = @db.select("SELECT count_ways FROM db.keys").condition('key = ?', key).get_first_i
-                data[:count_relations] = @db.select("SELECT count_relations FROM db.keys").condition('key = ?', key).get_first_i
+                result = @db.select("SELECT count_all, count_nodes, count_ways, count_relations FROM db.keys").condition('key = ?', key).get_first_row()
+                data[:count_all]       = result['count_all']
+                data[:count_nodes]     = result['count_nodes']
+                data[:count_ways]      = result['count_ways']
+                data[:count_relations] = result['count_relations']
 
                 desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang=? AND key=? AND value IS NULL", r18n.locale.code, key).get_first_value())
                 desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang='en' AND key=? AND value IS NULL", key).get_first_value()) if desc == ''
@@ -46,10 +47,11 @@ class Taginfo < Sinatra::Base
 
                 data[:has_map] = data[:count_all] > 0
             else
-                data[:count_all]       = @db.select("SELECT count_all FROM db.tags").condition('key=? AND value=?', key, value).get_first_i
-                data[:count_nodes]     = @db.select("SELECT count_nodes FROM db.tags").condition('key=? AND value=?', key, value).get_first_i
-                data[:count_ways]      = @db.select("SELECT count_ways FROM db.tags").condition('key=? AND value=?', key, value).get_first_i
-                data[:count_relations] = @db.select("SELECT count_relations FROM db.tags").condition('key=? AND value=?', key, value).get_first_i
+                result = @db.select("SELECT count_all, count_nodes, count_ways, count_relations FROM db.tags").condition('key=? AND value=?', key, value).get_first_row()
+                data[:count_all]       = result['count_all']
+                data[:count_nodes]     = result['count_nodes']
+                data[:count_ways]      = result['count_ways']
+                data[:count_relations] = result['count_relations']
 
                 desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang=? AND key=? AND value=?", r18n.locale.code, key, value).get_first_value())
                 desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang='en' AND key=? AND value=?", key, value).get_first_value()) if desc == ''
