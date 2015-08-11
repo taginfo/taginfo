@@ -86,6 +86,11 @@ wait
 echo "Done."
 
 echo "====================================="
+echo "`$DATECMD` Creating extra indexes..."
+sqlite3 $DIR/taginfo-db.db <db/add_extra_indexes.sql
+echo "Done."
+
+echo "====================================="
 echo "`$DATECMD` Done update_all."
 
 
