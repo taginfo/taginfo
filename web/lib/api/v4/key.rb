@@ -38,7 +38,7 @@ class Taginfo < Sinatra::Base
                     cq.condition("(key1=? AND key2 LIKE ? ESCAPE '@') OR (key2=? AND key1 LIKE ? ESCAPE '@')", key, like_contains(params[:query]), key, like_contains(params[:query])) :
                     cq.condition('key1 = ? OR key2 = ?', key, key)
                 ).
-            condition("count_#{filter_type} > 0").
+            condition_if_true("count_#{filter_type} > 0", filter_type != 'all').
             get_first_value().to_i
 
         has_this_key = @db.select("SELECT count_#{filter_type} FROM db.keys").

@@ -135,6 +135,13 @@ module SQL
             self
         end
 
+        def condition_if_true(expression, value)
+            if value
+                condition(expression)
+            end
+            self
+        end
+
         def conditions(cond)
             cond.each do |cond|
                 condition(cond)
