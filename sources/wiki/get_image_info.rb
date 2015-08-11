@@ -16,7 +16,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013  Jochen Topf <jochen@remote.org>
+#  Copyright (C) 2013-2015  Jochen Topf <jochen@remote.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -101,11 +101,14 @@ db.transaction do |db|
                         puts "Wrong thumbnail format: '#{info['thumburl']}'"
                     end
 
+                    info['url'].sub!('http:', 'https:')
+                    prefix.sub!('http:', 'https:')
+
                     # The OSM wiki reports the wrong thumbnail URL for images
                     # transcluded from Wikimedia Commons. This fixes those
                     # URLs.
-                    if info['url'].match(%r{^https?://upload\.wikimedia\.org/wikipedia/commons})
-                        prefix.sub!(%r{^https?://wiki\.openstreetmap\.org/w/images}, 'https://upload.wikimedia.org/wikipedia/commons')
+                    if info['url'].match(%r{^https://upload\.wikimedia\.org/wikipedia/commons})
+                        prefix.sub!('https://wiki.openstreetmap.org/w/images', 'https://upload.wikimedia.org/wikipedia/commons')
                     end
 
                     images_added[v['title']] = 1
