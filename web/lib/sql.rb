@@ -25,20 +25,26 @@ module SQL
 
         def initialize
             filename = @@dir + '/taginfo-master.db'
-            @db = SQLite3::Database.new(filename)
+            @db = SQLite3::Database.new(filename, { :readonly => true })
             @db.results_as_hash = true
 
+            @db.execute('PRAGMA journal_mode = OFF')
             @db.execute('SELECT * FROM languages') do |row|
                 Language.new(row)
             end
         end
 
+        def attach_source(filename, name)
+            @db.execute('ATTACH DATABASE ? AS ?', "#{ @@dir }/#{ filename }", name)
+            @db.execute("PRAGMA #{ name }.journal_mode = OFF")
+        end
+
         def attach_sources
             Source.each do |source|
-                @db.execute("ATTACH DATABASE ? AS ?", "#{ @@dir }/#{ source.dbname }", source.id.to_s)
+                attach_source(source.dbname, source.id.to_s)
             end
-            @db.execute("ATTACH DATABASE ? AS search", "#{ @@dir }/taginfo-search.db")
-            @db.execute("ATTACH DATABASE ? AS history", "#{ @@dir }/taginfo-history.db")
+            attach_source('taginfo-search.db', 'search')
+            attach_source('taginfo-history.db', 'history')
             self
         end
 
