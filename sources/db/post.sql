@@ -55,6 +55,26 @@ INSERT INTO prevalent_values (key, value, count, fraction)
 
 CREATE INDEX prevalent_values_key_idx ON prevalent_values (key);
 
+INSERT INTO prevalent_values_ext (key, value, count_all, count_nodes, count_ways, count_relations, fraction_all, fraction_nodes, fraction_ways, fraction_relations)
+            SELECT t.key,
+                   t.value,
+                   t.count_all,
+                   t.count_nodes,
+                   t.count_ways,
+                   t.count_relations,
+                   CAST(t.count_all       AS REAL) / CAST(k.count_all       AS REAL),
+                   CAST(t.count_nodes     AS REAL) / CAST(k.count_nodes     AS REAL),
+                   CAST(t.count_ways      AS REAL) / CAST(k.count_ways      AS REAL),
+                   CAST(t.count_relations AS REAL) / CAST(k.count_relations AS REAL)
+                    FROM tags t, keys k
+                    WHERE t.key = k.key
+                      AND ((t.count_all       > k.count_all       / 100.0) OR
+                           (t.count_nodes     > k.count_nodes     / 100.0) OR
+                           (t.count_ways      > k.count_ways      / 100.0) OR
+                           (t.count_relations > k.count_relations / 100.0));
+
+CREATE INDEX prevalent_values_ext_key_idx ON prevalent_values_ext (key);
+
 INSERT INTO stats (key, value) SELECT 'relation_types_with_detail', count(*) FROM relation_types;
 
 INSERT INTO relation_types (rtype, count) SELECT value, count_relations FROM tags WHERE key='type' AND count_relations > 0 AND value NOT IN (SELECT rtype FROM relation_types);
