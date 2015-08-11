@@ -66,8 +66,8 @@ class Taginfo < Sinatra::Base
             :data  => res.map{ |row| {
                 :other_key      => row['other_key'],
                 :together_count => row['together_count'].to_i,
-                :to_fraction    => (row['together_count'].to_f / has_this_key.to_f).round_to(4),
-                :from_fraction  => row['from_fraction'].to_f.round_to(4)
+                :to_fraction    => (row['together_count'].to_f / has_this_key.to_f).round(4),
+                :from_fraction  => row['from_fraction'].to_f.round(4)
             } }
         }, json_opts(params[:format]))
     end
@@ -191,7 +191,7 @@ class Taginfo < Sinatra::Base
                     out[n] = {
                         :type           => type,
                         :count          => row['count_'  + type].to_i,
-                        :count_fraction => (row['count_'  + type].to_f / get_total(type)).round_to(4),
+                        :count_fraction => (row['count_'  + type].to_f / get_total(type)).round(4),
                         :values         => row['values_' + type].to_i
                     }
                 end
@@ -292,7 +292,7 @@ class Taginfo < Sinatra::Base
             :data  => res.map{ |row| {
                 :value    => row['value'],
                 :count    => row['count_' + filter_type].to_i,
-                :fraction => (row['count_' + filter_type].to_f / this_key_count.to_f).round_to(4),
+                :fraction => (row['count_' + filter_type].to_f / this_key_count.to_f).round(4),
                 :in_wiki  => row['in_wiki'] == 1,
                 :description => wikidesc[row['value']] || ''
             } }

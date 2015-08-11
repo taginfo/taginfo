@@ -128,13 +128,13 @@ class Taginfo < Sinatra::Base
             :data  => res.map{ |row| h = {
                 :key                      => row['key'],
                 :count_all                => row['count_all'].to_i,
-                :count_all_fraction       => (row['count_all'].to_f / @db.stats('objects')).round_to(4),
+                :count_all_fraction       => (row['count_all'].to_f / @db.stats('objects')).round(4),
                 :count_nodes              => row['count_nodes'].to_i,
-                :count_nodes_fraction     => (row['count_nodes'].to_f / @db.stats('nodes_with_tags')).round_to(4),
+                :count_nodes_fraction     => (row['count_nodes'].to_f / @db.stats('nodes_with_tags')).round(4),
                 :count_ways               => row['count_ways'].to_i,
-                :count_ways_fraction      => (row['count_ways'].to_f / @db.stats('ways')).round_to(4),
+                :count_ways_fraction      => (row['count_ways'].to_f / @db.stats('ways')).round(4),
                 :count_relations          => row['count_relations'].to_i,
-                :count_relations_fraction => (row['count_relations'].to_f / @db.stats('relations')).round_to(4),
+                :count_relations_fraction => (row['count_relations'].to_f / @db.stats('relations')).round(4),
                 :values_all               => row['values_all'].to_i,
                 :users_all                => row['users_all'].to_i,
                 :in_wiki                  => row['in_wiki'].to_i == 1 ? true : false
