@@ -39,7 +39,7 @@ class Taginfo < Sinatra::Base
         tags = nil
 
         if params[:tags].nil?
-            tags = @db.execute("SELECT DISTINCT value FROM wikipages WHERE key=? AND value IS NOT NULL AND type='page' ORDER BY value", pkey).map{ |row| [ pkey, row['value'] ] }
+            tags = @db.execute("SELECT DISTINCT value FROM wiki.wikipages WHERE key=? AND value IS NOT NULL AND type='page' ORDER BY value", pkey).map{ |row| [ pkey, row['value'] ] }
         else
             last_key = nil
             tags = params[:tags].split(',').map{ |tag|
@@ -58,7 +58,7 @@ class Taginfo < Sinatra::Base
 
             if data
                 if data['in_wiki'].to_i == 1
-                    wiki = @db.execute("SELECT * FROM wikipages LEFT OUTER JOIN wiki_images USING (image) WHERE key=? AND value=? ORDER BY lang", key, value)
+                    wiki = @db.execute("SELECT * FROM wiki.wikipages LEFT OUTER JOIN wiki_images USING (image) WHERE key=? AND value=? ORDER BY lang", key, value)
 
                     data['wiki'] = {}
                     wiki.each do |w|

@@ -228,7 +228,7 @@ class Taginfo < Sinatra::Base
         key   = params[:key]
         value = params[:value]
 
-        res = @db.execute('SELECT * FROM wikipages LEFT OUTER JOIN wiki_images USING (image) WHERE key = ? AND value = ? ORDER BY lang', key, value)
+        res = @db.execute('SELECT * FROM wiki.wikipages LEFT OUTER JOIN wiki_images USING (image) WHERE key = ? AND value = ? ORDER BY lang', key, value)
 
         return get_wiki_result(res)
     end

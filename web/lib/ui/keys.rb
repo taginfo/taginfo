@@ -33,7 +33,7 @@ class Taginfo < Sinatra::Base
                 @image_url = build_image_url(row)
             end
 
-        @prevalent_values = @db.select("SELECT value, count_#{@filter_type} AS count FROM tags").
+        @prevalent_values = @db.select("SELECT value, count_#{@filter_type} AS count FROM db.tags").
             condition('key=?', @key).
             condition('count > ?', @count_all_values * 0.02).
             order_by([:count], 'DESC').
