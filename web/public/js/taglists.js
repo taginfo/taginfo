@@ -86,18 +86,19 @@ var taginfo_taglist = (function(){
         return names[lang][column];
     }
 
+    function get_lang(data, lang) {
+        if (data.wiki && data.wiki[lang]) {
+            return lang;
+        }
+        return 'en';
+    }
+
     var print_column = {
         'key': function(lang, data) {
-            if (!data.wiki[lang]) {
-                lang = 'en';
-            }
-            return wiki_key_link(lang, data.key);
+            return wiki_key_link(get_lang(data, lang), data.key);
         },
         'value': function(lang, data) {
-            if (!data.wiki[lang]) {
-                lang = 'en';
-            }
-            return wiki_tag_link(lang, data.key, data.value);
+            return wiki_tag_link(get_lang(data, lang), data.key, data.value);
         },
         'element': function(lang, data) {
             var types = '';
@@ -108,17 +109,21 @@ var taginfo_taglist = (function(){
             return types;
         },
         'description': function(lang, data) {
-            var d = data.wiki[lang] || data.wiki['en'];
-            if (d && d.description) {
-                return html_escape(d.description);
+            if (data.wiki) {
+                var d = data.wiki[lang] || data.wiki['en'];
+                if (d && d.description) {
+                    return html_escape(d.description);
+                }
             }
             return "";
         },
         'image': function(lang, data) {
-            var d = data.wiki[lang] || data.wiki['en'];
-            if (d && d.image) {
-                return link_to_noescape(url_for_wiki('wiki/' + d.image.image),
-                                        '<img src="' + d.image.thumb_url_prefix + '100' + d.image.thumb_url_suffix + '"/>');
+            if (data.wiki) {
+                var d = data.wiki[lang] || data.wiki['en'];
+                if (d && d.image) {
+                    return link_to_noescape(url_for_wiki(d.image.image),
+                                            '<img src="' + d.image.thumb_url_prefix + '100' + d.image.thumb_url_suffix + '"/>');
+                }
             }
             return "";
         },
@@ -152,7 +157,7 @@ var taginfo_taglist = (function(){
     }
 
     function insert_table(element, tags, options) {
-        var url = url_for_taginfo('/api/4/tags/list?');
+        var url = url_for_taginfo('api/4/tags/list?');
 
         if (! options.lang) {
             options.lang = 'en';
