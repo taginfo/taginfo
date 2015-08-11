@@ -34,7 +34,10 @@ class Taginfo < Sinatra::Base
         end
 
         cq = @db.count('db.key_combinations')
-        total = (params[:query].to_s != '' ? cq.condition("(key1=? AND key2 LIKE ? ESCAPE '@') OR (key2=? AND key1 LIKE ? ESCAPE '@')", key, like_contains(params[:query]), key, like_contains(params[:query])) : cq.condition('key1 = ? OR key2 = ?', key, key)).
+        total = (params[:query].to_s != '' ?
+                    cq.condition("(key1=? AND key2 LIKE ? ESCAPE '@') OR (key2=? AND key1 LIKE ? ESCAPE '@')", key, like_contains(params[:query]), key, like_contains(params[:query])) :
+                    cq.condition('key1 = ? OR key2 = ?', key, key)
+                ).
             condition("count_#{filter_type} > 0").
             get_first_value().to_i
 
