@@ -17,7 +17,7 @@ class Taginfo < Sinatra::Base
         :parameters => { :query => 'Only show keys matching this query (substring match, optional).' },
         :paging => :optional,
         :filter => @@filters,
-        :sort => %w( key count_all count_nodes count_ways count_relations values_all users_all in_wiki in_josm length ),
+        :sort => %w( key count_all count_nodes count_ways count_relations values_all users_all in_wiki length ),
         :result => paging_results([
             [:key,                      :STRING, 'Key'],
             [:count_all,                :INT,    'Number of objects in the OSM database with this key.'],
@@ -30,8 +30,7 @@ class Taginfo < Sinatra::Base
             [:count_relations_fraction, :FLOAT,  'Number of relations in relation to all relations.'],
             [:values_all,               :INT,    'Number of different values for this key.'],
             [:users_all,                :INT,    'Number of users owning objects with this key.'],
-            [:in_wiki,                  :BOOL,   'Has this key at least one wiki page?'],
-            [:in_josm,                  :BOOL,   'DEPRECATED. Now always false.']
+            [:in_wiki,                  :BOOL,   'Has this key at least one wiki page?']
         ]),
         :example => { :page => 1, :rp => 10, :filter => 'in_wiki', :sortname => 'key', :sortorder => 'asc' },
         :ui => '/keys'
@@ -67,7 +66,6 @@ class Taginfo < Sinatra::Base
                 o.values_all
                 o.users_all
                 o.in_wiki
-                o.in_josm
                 o.length 'length(key)'
                 o.length :key
             }.
@@ -139,8 +137,7 @@ class Taginfo < Sinatra::Base
                 :count_relations_fraction => (row['count_relations'].to_f / @db.stats('relations')).round_to(4),
                 :values_all               => row['values_all'].to_i,
                 :users_all                => row['users_all'].to_i,
-                :in_wiki                  => row['in_wiki'].to_i == 1 ? true : false,
-                :in_josm                  => false
+                :in_wiki                  => row['in_wiki'].to_i == 1 ? true : false
             }
             h[:wikipages] = row['wikipages'] if row['wikipages']
             h[:prevalent_values] = row['prevalent_values'][0,10] if row['prevalent_values']

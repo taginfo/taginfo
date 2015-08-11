@@ -210,7 +210,6 @@ class Taginfo < Sinatra::Base
     #--------------------------------------------------------------------------
 
     # current API (version 4)
-    load 'lib/api/v4/josm.rb'
     load 'lib/api/v4/key.rb'
     load 'lib/api/v4/keys.rb'
     load 'lib/api/v4/project.rb'

@@ -125,33 +125,6 @@ class Taginfo < Sinatra::Base
             get_first_value()
     end
 
-    api(4, 'tag/josm/style/rules', {
-        :superseded_by => '',
-        :description => 'List rules and symbols for the given tag in JOSM styles.',
-        :parameters => {
-            :style => 'JOSM style (required).',
-            :key   => 'Tag key (required).',
-            :value => 'Tag value (required).'
-        },
-        :paging => :optional,
-        :result => paging_results([
-            [:key,        :STRING, 'Key'],
-            [:value,      :STRING, 'Value'],
-            [:value_bool, :STRING, '"yes" or "no". Null if the value is not boolean.'],
-            [:rule,       :STRING, 'JOSM style rule in XML format.'],
-            [:area_color, :STRING, 'Fill color for area (if area rule).'],
-            [:line_color, :STRING, 'Stroke color for line (if line rule).'],
-            [:line_width, :INT,    'Line width (if line rule).'],
-            [:icon,       :STRING, 'Icon path (if icon rule).']
-        ]),
-        :example => { :style => 'standard', :key => 'highway', :value => 'residential', :page => 1, :rp => 10 },
-        :ui => '/tags/highway=residential#josm'
-    }) do
-        total = 0
-        res = []
-        return get_josm_style_rules_result(total, res);
-    end
-
     api(4, 'tag/stats', {
         :description => 'Show some database statistics for given tag.',
         :parameters => {
