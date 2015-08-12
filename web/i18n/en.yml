@@ -261,6 +261,7 @@ pages:
         packed: Packed
         unpacked: Unpacked
         description: Description
+        note: Some indexes are not in the databases available for download here. The 'Packed' size is the size without those indexes, the 'Unpacked' size includes the indexes you probably want to build after downloading.
     reports:
         intro: |
             Reports show the tag data from different angles.

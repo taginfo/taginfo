@@ -6,8 +6,8 @@
     <table class="list">
         <tr>
             <th class="tl"><%= h(t.pages.download.file) %></th>
-            <th class="tr"><%= h(t.pages.download.packed) %></th>
-            <th class="tr"><%= h(t.pages.download.unpacked) %></th>
+            <th class="tr"><%= h(t.pages.download.packed) %>*</th>
+            <th class="tr"><%= h(t.pages.download.unpacked) %>*</th>
             <th class="tl"><%= h(t.pages.download.description) %></th>
         </tr>
         <tr>
@@ -31,4 +31,5 @@
         </tr>
 <% end %>
     </table>
+    <p class="note">* <%= h(t.pages.download.note) %></p>
 </div>

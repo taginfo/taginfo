@@ -280,6 +280,7 @@ pages:
         packed: Gepackt
         unpacked: Ungepackt
         description: Beschreibung
+        note: Manche Indizes sind nicht in den Datenbankfiles, die hier zum Download angeboten werden. Die 'Gepackt'-Größe ist die Größe ohne diese Indizes. Die 'Ungepackt'-Größe enthält aber die Indizes, die Sie wahrscheinlich bauen wollen.
     reports:
         intro: |
             Reports zeigen die Daten aus verschiedenen Perspektiven.
