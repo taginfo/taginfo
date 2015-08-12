@@ -30,7 +30,9 @@ CREATE TABLE wikipages (
     tags_implies     TEXT,
     tags_combination TEXT,
     tags_linked      TEXT,
-    status           TEXT
+    status           TEXT,
+    statuslink       TEXT,
+    wikidata         TEXT
 );
 
 DROP TABLE IF EXISTS relation_pages;
@@ -99,6 +101,18 @@ CREATE TABLE wiki_links (
     to_lang    TEXT,
     to_type    TEXT,
     to_name    TEXT
+);
+
+DROP TABLE IF EXISTS problems;
+
+CREATE TABLE problems (
+    category TEXT,
+    reason   TEXT,
+    title    TEXT,
+    lang     TEXT,
+    key      TEXT,
+    value    TEXT,
+    info     TEXT
 );
 
 DROP TABLE IF EXISTS invalid_page_title;
