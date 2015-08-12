@@ -361,7 +361,7 @@ pages:
         geographic_distribution:
             title: このタグの地理的な分布
             relations: リレーションは地理的な位置を持っていないので、地図は表示できません。
-            no_map: 済みません。地図はよく使われるタグにのみ作成されます。overpass turboのリンクを使用してみてください。
+            no_map: 申し訳ありませんが、地図はよく使われるタグにのみ作成されます。 overpass turbo のリンクを使用してみてください。
         wiki_pages:
             title: このタグに関するウィキページ
             none_found: このタグに関するウィキページは利用できません。
