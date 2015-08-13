@@ -4,6 +4,7 @@
     <title><%= h(title) %></title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="content-language" content="<%= r18n.locale.code %>" />
+    <meta name=viewport content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/css/taginfo.css" />
     <link rel="stylesheet" type="text/css" href="/css/smoothness/jquery-ui-1.8.10.custom-minified.css" />
     <link rel="stylesheet" type="text/css" href="/css/flexigrid/flexigrid-minified.css" />
@@ -16,7 +17,16 @@
 <%= javascript_tags %>
 </head>
 <body>
-    <div id="header">
+    <div id="header" class="ui-helper-clearfix">
+        <div id="header_logo">
+            <a href="/"><img width="49" height="49" src="<%= TaginfoConfig.get('instance.icon', '/img/logo/world.png') %>" alt="taginfo"/></a>
+<% if @section %>
+            <a href="/"><img width="136" height="49" src="/img/logo/taginfo_with_bar.png" alt="taginfo"/></a>
+            <a class="section" href="/<%= @section %>"><%= @section_title %></a>
+<% else %>
+            <a href="/"><img width="129" height="49" src="/img/logo/taginfo.png" alt="taginfo"/></a>
+<% end %>
+        </div>
         <div id="header_date" title="<%= h(t.taginfo.data_from_description) %>" tipsy="ne"><%= h(t.taginfo.data_from) %>: <%= @data_until %> UTC</div>
         <div id="header_forms" class="no-print">
             <form id="set_language" action="/switch_locale">
@@ -31,20 +41,11 @@
             <form id="search_form" action="/search"><input type="text" id="search" name="q" value="<%= h(params[:q]) %>"/></form>
 <% end %>
         </div>
-        <div id="header_logo">
-            <a href="/"><img width="49" height="49" src="<%= TaginfoConfig.get('instance.icon', '/img/logo/world.png') %>" alt="taginfo"/></a>
-<% if @section %>
-            <a href="/"><img width="136" height="49" src="/img/logo/taginfo_with_bar.png" alt="taginfo"/></a>
-            <a class="section" href="/<%= @section %>"><%= @section_title %></a>
-<% else %>
-            <a href="/"><img width="129" height="49" src="/img/logo/taginfo.png" alt="taginfo"/></a>
-<% end %>
-        </div>
     </div>
     <div id="main">
 <%= yield %>
     </div>
-    <div id="footer" class="no-print">
+    <div id="footer" class="ui-helper-clearfix no-print">
         <div id="footer_left"><a class="extlink" href="//www.openstreetmap.org/"><b>OpenStreetMap</b></a> &middot;
             <a href="//www.openstreetmap.org/copyright">Data &copy; OSM contributors (ODbL)</a></div>
         <div id="footer_right">

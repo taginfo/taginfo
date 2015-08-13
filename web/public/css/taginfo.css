@@ -108,7 +108,9 @@ a.section {
     text-decoration: none;
 }
 
-div.pre {
+div#pre-text {
+    float: left;
+    max-width: 60em;
     margin-bottom: 20px;
 }
 
@@ -177,19 +179,22 @@ div#header {
     padding: 15px 20px 20px 20px;
 }
 
+div#header_logo {
+    display: inline-block;
+    float: left;
+}
+
 div#header_date {
-    position: absolute;
-    top: 12px;
-    right: 20px;
+    display: inline-block;
+    float: right;
     font-size: 80%;
     text-align: right;
     color: #808080;
 }
 
 div#header div#header_forms {
-    position: absolute;
-    right: 20px;
-    top: 31px;
+    float: right;
+    clear: right;
 }
 
 div#header div#header_forms form {
@@ -228,26 +233,24 @@ input:focus {
 
 div#main {
     margin: 0 20px;
+    clear: both;
 }
 
 /* ========== */
 
 div#footer {
     clear: both;
-    position: relative;
     font-size: 90%;
     margin: 0 20px;
     padding: 4px 0;
-    height: 20px;
 }
 
 div#footer_left {
-    position: absolute;
+    float: left;
 }
 
 div#footer_right {
-    position: absolute;
-    right: 0px;
+    float: right;
     text-align: right;
 }
 
@@ -307,6 +310,10 @@ table.boxes td.box table {
 
 /* ==========  */
 
+div#tabs {
+    clear: both;
+}
+
 div#tabs h2, div.box h2 {
     margin: 0 0 10px 0;
     font-size: 120%;
@@ -320,7 +327,7 @@ div#tabs form {
 /* ========== */
 
 div#tools {
-    clear: both;
+    clear: right;
     float: right;
     font-size: 80%;
     margin-top: 4px;
@@ -366,7 +373,6 @@ select#list {
 
 form#filter-form {
     margin-top: 0px;
-    clear: both;
     float: right;
 }
 
@@ -730,4 +736,3 @@ table.wiki-images td.images div img {
     max-height: 50px;
     top: 0;
 }
-

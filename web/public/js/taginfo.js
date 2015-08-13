@@ -25,6 +25,11 @@ function resize_box() {
     height -= jQuery('div.pre').outerHeight(true);
     height -= jQuery('.ui-tabs-nav').outerHeight(true);
     height -= jQuery('div#footer').outerHeight(true);
+    height -= 16 // extra spacing for the footer
+
+    if (height < 440) {
+        height = 440;
+    }
 
     wrapper.outerHeight(height);
 }
@@ -451,12 +456,11 @@ var flexigrid_defaults = {
 };
 
 function calculate_flexigrid_rp(box) {
-    var height = box.innerHeight();
+    var height = box.height();
 
     height -= box.children('h2').outerHeight(true);
-    height -= box.children('.boxpre').outerHeight(true);
     height -= box.children('.pDiv').outerHeight();
-    height -= box.children('.pHiv').outerHeight();
+    height -= box.children('.hDiv').outerHeight();
     height -= 90; // table tools and header, possibly horizontal scrollbar
 
     return Math.floor(height / 26);
