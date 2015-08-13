@@ -19,3 +19,5 @@ CREATE INDEX tags_key_count_nodes_idx     ON tags (key, count_nodes     DESC);
 CREATE INDEX tags_key_count_ways_idx      ON tags (key, count_ways      DESC);
 CREATE INDEX tags_key_count_relations_idx ON tags (key, count_relations DESC);
 
+CREATE UNIQUE INDEX tags_key_value_idx ON tags (key, value);
+

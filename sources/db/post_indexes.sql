@@ -14,7 +14,7 @@ PRAGMA cache_size    = 5000000;
 -- ============================================================================
 
 CREATE        INDEX tags_key_idx ON tags (key);
--- CREATE UNIQUE INDEX tags_key_value_idx ON tags (key, value);
+
 CREATE        INDEX key_combinations_key1_idx ON key_combinations (key1);
 CREATE        INDEX key_combinations_key2_idx ON key_combinations (key2);
 CREATE UNIQUE INDEX key_distributions_key_idx ON key_distributions (key, object_type);
