@@ -25,6 +25,7 @@ function resize_box() {
     height -= jQuery('div.pre').outerHeight(true);
     height -= jQuery('.ui-tabs-nav').outerHeight(true);
     height -= jQuery('div#footer').outerHeight(true);
+    height -= 16 // extra spacing for the footer
 
     if (height < 440) {
         height = 440;
