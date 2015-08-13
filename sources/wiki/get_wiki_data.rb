@@ -52,7 +52,20 @@ PROBLEMATIC_DESCRIPTION = %r{[<>{}\[\]]}
 WIKIDATA_FORMAT = %r{^Q[0-9]+}
 
 # The format of a mediawiki page title.
-PAGE_TITLE_FORMAT = %r{^[-a-zA-Z0-9_:.,= ()]+$}
+PAGE_TITLE_FORMAT = %r{^([-_:.,= ()]|[[:alnum:]])+$}
+
+# Format of image titles
+IMAGE_TITLE_FORMAT = %r{^(file|image):(.*)$}i
+
+# Language code format (something link 'en', or 'en_GB')
+LANGUAGE_CODE = %r{^[a-z][a-z](_[a-z]+)?$}i
+
+CONTAINS_SLASH = %r{/}
+
+HTML_COMMENT = %r{<!--.*?-->}
+
+# All the template names this script knows about
+KNOWN_TEMPLATES = %r{^(?:template:)?(?:[a-z][a-z](?:-[a-z]+)?:)?(rtl|ar|relatedterm|relatedtermlist|wikipedia|key|tag|icon(node|way|area|relation)|wikiicon|(key|value|relation)description)$}i
 
 class WikiPage
 
@@ -95,8 +108,8 @@ class WikiPage
         return :lang_en           if @title =~ /^en:/i
         return :value_for_key     if @ttype == 'key' && ! @value.nil?
         return :no_value_for_tag  if @ttype == 'tag' &&   @value.nil?
-        return :slash_in_key      if @key   =~ %r{/}
-        return :slash_in_value    if @value =~ %r{/}
+        return :slash_in_key      if CONTAINS_SLASH.match(@key)
+        return :slash_in_value    if CONTAINS_SLASH.match(@value)
         return :ok
     end
 
@@ -113,10 +126,10 @@ class WikiPage
     # and their parameters.
     def parse_content(db)
         @parsed = true
-        text = @content.gsub(%r{<!--.*?-->}, '')
+        text = @content.gsub(HTML_COMMENT, '')
 
         # dummy template as base context
-        context = [ Template.new ]
+        context = [ Template.new('dummy') ]
 
         loop do
             # split text into ('before', 'token', 'after')
@@ -131,7 +144,7 @@ class WikiPage
             case m[2]
                 when '{{' # start of template
                     context.last.add_parameter(m[1].strip)
-                    context << Template.new()
+                    context << Template.new
                 when '}}' # end of template
                     context.last.add_parameter(m[1].strip)
                     c = context.pop
@@ -152,8 +165,10 @@ class WikiPage
             text = m[3]
         end
     rescue => ex
-        puts "ERROR: Parsing of page '#{title}' failed '#{ex.message}'"
+        puts "FATAL: Parsing of page '#{title}' failed '#{ex.message}':"
+        puts ex.backtrace.join("\n")
         @parsed = false
+        db.execute("INSERT INTO problems (category, reason, title, lang, key, value) VALUES ('page', 'parse_failed', ?, ?, ?, ?)", title, lang, key, value)
     end
 
     def set_image(ititle, db)
@@ -161,7 +176,7 @@ class WikiPage
         if ititle.nil?
             puts "ERROR: invalid image: page='#{title}' image=nil"
             db.execute("INSERT INTO problems (category, reason, title, lang, key, value) VALUES ('image_title', 'no_image', ?, ?, ?, ?)", title, lang, key, value)
-        elsif ititle.match(%r{^(file|image):(.*)$}i)
+        elsif IMAGE_TITLE_FORMAT.match(ititle)
             @image = "File:#{$2}"
             if ! PAGE_TITLE_FORMAT.match(ititle)
                 puts "WARN: possible invalid character in image title: page='#{title}' image='#{ititle}'"
@@ -173,102 +188,156 @@ class WikiPage
     end
 
     def parse_type(category, param, db)
+        if param.is_a?(Array)
+            if param.size > 1
+                puts "ERROR: multiple values for #{category} field: #{param}"
+                db.execute("INSERT INTO problems (category, reason, title, lang, key, value, info) VALUES (?, 'multiple_values', ?, ?, ?, ?, ?)", category, title, lang, key, value, param.join(', '))
+                return
+            end
+            param = param[0]
+        end
         if param
-            if param == ['yes']
+            if param == 'yes'
                 return true
-            elsif param == ['no']
+            elsif param == 'no'
                 return false
             else
+                puts "ERROR: invalid value for field: category=#{category} title=#{title} lang=#{lang} key=#{key} value=#{value} param=#{param}"
                 db.execute("INSERT INTO problems (category, reason, title, lang, key, value, info) VALUES (?, 'invalid_value', ?, ?, ?, ?, ?)", category, title, lang, key, value, param)
             end
         end
         return false
     end
 
+    def parse_template_key_tag(template, level, db)
+        tag = template.parameters[0]
+        if tag
+            if template.parameters[1]
+                tag += '=' + template.parameters[1]
+            end
+            add_tag_link(tag)
+        end
+    end
+
+    def parse_template_related_term(template, level, db)
+        if template.parameters.size > 1
+            lang = template.parameters.shift
+        else
+            lang = 'en'
+        end
+        term = template.parameters.shift
+        if template.parameters.size != 0
+            puts "ERROR: More than two parameters on RelatedTerm template"
+        end
+        puts "#{ "  " * level }Related term: lang='#{lang}' term='#{term}'"
+        if LANGUAGE_CODE.match(lang)
+            db.execute("INSERT INTO related_terms (key, value, lang, term) VALUES (?, ?, ?, ?)", @key, @value, lang, term)
+        else
+            puts "ERROR: Language in related term template looks wrong: '#{lang}'"
+            db.execute("INSERT INTO problems (category, reason, title, lang, key, value, info) VALUES ('related_term', 'wrong_lang_format', ?, ?, ?, ?, ?)", title, self.lang, key, value, lang)
+        end
+    end
+
+    def parse_template_wikipedia(template, level, db)
+        lang = template.parameters[0]
+        title = template.parameters[1]
+        puts "#{ "  " * level }Wikipedia link: lang='#{lang}' title='#{title}'"
+        if LANGUAGE_CODE.match(lang)
+            db.execute("INSERT INTO wikipedia_links (key, value, lang, title) VALUES (?, ?, ?, ?)", @key, @value, lang, title)
+        else
+            puts "ERROR: Language in wikipedia link template looks wrong: '#{lang}'"
+            db.execute("INSERT INTO problems (category, reason, title, lang, key, value, info) VALUES ('wikipedia_link', 'wrong_lang_format', ?, ?, ?, ?, ?)", title, self.lang, key, value, lang)
+        end
+    end
+
+    def parse_template_description(template, level, db)
+        @has_templ = true
+
+        if template.parameters != []
+            puts "ERROR: positional parameter on description template"
+            db.execute("INSERT INTO problems (category, reason, title, lang, key, value, info) VALUES ('description_template', 'has_positional_parameter', ?, ?, ?, ?, ?)", title, lang, key, value, template.parameters.join(','))
+        end
+
+        if template.named_parameters['description']
+            desc = []
+            template.named_parameters['description'].each do |i|
+                if i.class == Template
+                    desc << ' ' << i.parameters.join('=') << ' '
+                else
+                    desc << i
+                end
+                @description = desc.join('').strip
+                if PROBLEMATIC_DESCRIPTION.match(@description)
+                    puts "ERROR: problematic description: #{ @description }"
+                    db.execute("INSERT INTO problems (category, reason, title, lang, key, value, info) VALUES ('description_field', 'description_should_only_contain_plain_text', ?, ?, ?, ?, ?)", title, lang, key, value, description)
+                end
+            end
+        end
+        if template.named_parameters['image']
+            img = template.named_parameters['image'][0]
+            if img.class != Template
+                set_image(img, db)
+            end
+        end
+        if template.named_parameters['group']
+            group = template.named_parameters['group'][0]
+            if group.class != Template
+                @group = group
+            end
+        end
+
+        @onNode     = parse_type('onNode_field',     template.named_parameters['onNode'],     db)
+        @onWay      = parse_type('onWay_field',      template.named_parameters['onWay'],      db)
+        @onArea     = parse_type('onArea_field',     template.named_parameters['onArea'],     db)
+        @onRelation = parse_type('onRelation_field', template.named_parameters['onRelation'], db)
+
+        if template.named_parameters['implies']
+            template.named_parameters['implies'].each do |i|
+                if i.class == Template
+                    tags_implies << i.parameters.join('=')
+                end
+            end
+        end
+        if template.named_parameters['combination']
+            template.named_parameters['combination'].each do |i|
+                if i.class == Template
+                    tags_combination << i.parameters.join('=')
+                end
+            end
+        end
+        if template.named_parameters['status']
+            @status = template.named_parameters['status'].join('')
+        end
+        if template.named_parameters['statuslink']
+            @statuslink = template.named_parameters['statuslink'][0]
+        end
+        if template.named_parameters['wikidata']
+            wikidata = template.named_parameters['wikidata'][0]
+            if WIKIDATA_FORMAT.match(wikidata)
+                @wikidata = wikidata
+            else
+                db.execute("INSERT INTO problems (category, reason, title, lang, key, value, info) VALUES ('wikidata_field', 'does_not_match_QNUMBER', ?, ?, ?, ?, ?)", title, lang, key, value, wikidata)
+            end
+        end
+    end
+
     def parse_template(template, level, db)
-        spaces = "  " * (level + 1)
+        spaces = "  " * level
         puts "#{spaces}Template: #{template.name} [#{template.parameters.join(',')}]"
         template.named_parameters.each do |k, v|
             puts "#{spaces}  #{k}: #{v}"
         end
         if template.name == 'key' || template.name == 'tag'
-            tag = template.parameters[0]
-            if tag
-                if template.parameters[1]
-                    tag += '=' + template.parameters[1]
-                end
-                add_tag_link(tag)
-            end
+            parse_template_key_tag(template, level, db)
+        end
+        if template.name == 'relatedterm'
+            parse_template_related_term(template, level, db)
+        end
+        if template.name == 'wikipedia'
+            parse_template_wikipedia(template, level, db)
         end
         if template.name =~ /(key|value|relation)description$/
-            @has_templ = true
-
-            if template.parameters != []
-                puts "ERROR: positional parameter on description template"
-                db.execute("INSERT INTO problems (category, reason, title, lang, key, value, info) VALUES ('description_template', 'has_positional_parameter', ?, ?, ?, ?, ?)", title, lang, key, value, template.parameters.join(','))
-            end
-
-            if template.named_parameters['description']
-                desc = []
-                template.named_parameters['description'].each do |i|
-                    if i.class == Template
-                        desc << ' ' << i.parameters.join('=') << ' '
-                    else
-                        desc << i
-                    end
-                    @description = desc.join('').strip
-                    if PROBLEMATIC_DESCRIPTION.match(@description)
-                        puts "ERROR: problematic description: #{ @description }"
-                        db.execute("INSERT INTO problems (category, reason, title, lang, key, value, info) VALUES ('description_field', 'description_should_only_contain_plain_text', ?, ?, ?, ?, ?)", title, lang, key, value, description)
-                    end
-                end
-            end
-            if template.named_parameters['image']
-                img = template.named_parameters['image'][0]
-                if img.class != Template
-                    set_image(img, db)
-                end
-            end
-            if template.named_parameters['group']
-                group = template.named_parameters['group'][0]
-                if group.class != Template
-                    @group = group
-                end
-            end
-
-            @onNode     = parse_type('onNode_field',     template.named_parameters['onNode'],     db)
-            @onWay      = parse_type('onWay_field',      template.named_parameters['onWay'],      db)
-            @onArea     = parse_type('onArea_field',     template.named_parameters['onArea'],     db)
-            @onRelation = parse_type('onRelation_field', template.named_parameters['onRelation'], db)
-
-            if template.named_parameters['implies']
-                template.named_parameters['implies'].each do |i|
-                    if i.class == Template
-                        tags_implies << i.parameters.join('=')
-                    end
-                end
-            end
-            if template.named_parameters['combination']
-                template.named_parameters['combination'].each do |i|
-                    if i.class == Template
-                        tags_combination << i.parameters.join('=')
-                    end
-                end
-            end
-            if template.named_parameters['status']
-                @status = template.named_parameters['status'].join('')
-            end
-            if template.named_parameters['statuslink']
-                @statuslink = template.named_parameters['statuslink'][0]
-            end
-            if template.named_parameters['wikidata']
-                wikidata = template.named_parameters['wikidata'][0]
-                if WIKIDATA_FORMAT.match(wikidata)
-                    @wikidata = wikidata
-                else
-                    db.execute("INSERT INTO problems (category, reason, title, lang, key, value, info) VALUES ('wikidata_field', 'does_not_match_QNUMBER', ?, ?, ?, ?, ?)", title, lang, key, value, wikidata)
-                end
-            end
+            parse_template_description(template, level, db)
         end
     end
 end
@@ -382,8 +451,8 @@ class Template
 
     attr_reader :name, :parameters, :named_parameters
 
-    def initialize()
-        @name             = nil
+    def initialize(name=nil)
+        @name             = name
         @parname          = nil
         @parameters       = []
         @named_parameters = {}
@@ -398,8 +467,8 @@ class Template
             if @parname.nil? # positional parameter
                 # first parameter is really the name of this template
                 if @name.nil?
-                    if value.is_a?(String) && %r{^(rtl|ar|key|tag|icon(node|way|area|relation)|wikiicon|(key|value|relation)description)$}i.match(value)
-                        @name = value.downcase
+                    if value.is_a?(String) && m = KNOWN_TEMPLATES.match(value)
+                        @name = m[1].downcase
                     else
                         puts "WARN: Unknown template: #{ value }"
                         @name = value

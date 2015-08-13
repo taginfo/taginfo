@@ -103,6 +103,24 @@ CREATE TABLE wiki_links (
     to_name    TEXT
 );
 
+DROP TABLE IF EXISTS related_terms;
+
+CREATE TABLE related_terms (
+    key   TEXT,
+    value TEXT,
+    lang  TEXT,
+    term  TEXT
+);
+
+DROP TABLE IF EXISTS wikipedia_links;
+
+CREATE TABLE wikipedia_links (
+    key   TEXT,
+    value TEXT,
+    lang  TEXT,
+    title TEXT
+);
+
 DROP TABLE IF EXISTS problems;
 
 CREATE TABLE problems (
@@ -113,21 +131,6 @@ CREATE TABLE problems (
     key      TEXT,
     value    TEXT,
     info     TEXT
-);
-
-DROP TABLE IF EXISTS invalid_page_title;
-
-CREATE TABLE invalid_page_titles (
-    reason TEXT,
-    title  TEXT
-);
-
-DROP TABLE IF EXISTS invalid_image_titles;
-
-CREATE TABLE invalid_image_titles (
-    reason      TEXT,
-    page_title  TEXT,
-    image_title TEXT
 );
 
 DROP TABLE IF EXISTS words;
