@@ -65,7 +65,7 @@ module SQL
                 else
                     p = ''
                 end
-                ($queries_log||$stdout).puts %Q{SQL duration=#{ duration } query="#{ query };"} + p
+                ($queries_log||$stdout).puts %Q{SQL duration=#{ duration.round(2) } query="#{ query };"} + p
             end
 
             out
