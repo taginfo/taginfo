@@ -124,7 +124,7 @@ CREATE TABLE wikipedia_links (
 DROP TABLE IF EXISTS problems;
 
 CREATE TABLE problems (
-    category TEXT,
+    location TEXT,
     reason   TEXT,
     title    TEXT,
     lang     TEXT,
