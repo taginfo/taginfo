@@ -24,8 +24,8 @@ class Taginfo < Sinatra::Base
             total = @db.execute('SELECT count(*) FROM search.ftsearch WHERE key MATCH ?', query_key)[0][0].to_i
             sel = @db.select('SELECT * FROM search.ftsearch WHERE key MATCH ?', query_key)
         else
-            total = @db.execute('SELECT count(*) FROM (SELECT * FROM search.ftsearch WHERE key MATCH ? INTERSECT SELECT * FROM search.ftsearch WHERE value MATCH ?)', query_key, query_value)[0][0].to_i
-            sel = @db.select('SELECT * FROM search.ftsearch WHERE key MATCH ? INTERSECT SELECT * FROM search.ftsearch WHERE value MATCH ?', query_key, query_value)
+            total = @db.execute('SELECT count(*) FROM (SELECT rowid FROM search.ftsearch WHERE value MATCH ? INTERSECT SELECT rowid FROM search.ftsearch WHERE key MATCH ?)', query_value)[0][0].to_i, query_key
+            sel = @db.select('SELECT * FROM search.ftsearch WHERE value MATCH ? INTERSECT SELECT * FROM search.ftsearch WHERE key MATCH ?', query_value, query_key)
         end
 
         res = sel.
@@ -105,7 +105,7 @@ class Taginfo < Sinatra::Base
             condition_if("role LIKE ? ESCAPE '@'", like_contains(query)).
             get_first_value().to_i
 
-        res = @db.select('SELECT * FROM db.relation_roles').
+        res = @db.select('SELECT rtype, role, count_all FROM db.relation_roles').
             condition_if("role LIKE ? ESCAPE '@'", like_contains(query)).
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.count_all
