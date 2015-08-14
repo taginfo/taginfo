@@ -34,7 +34,6 @@ class Taginfo < Sinatra::Base
             end
 
         @prevalent_values = @db.select("SELECT value, count_#{@filter_type} AS count FROM db.tags").
-        #@prevalent_values = @db.select("SELECT value, count_#{@filter_type} AS count FROM db.prevalent_values_ext").
             condition('key=?', @key).
             condition('count > ?', (@count_all_values * 0.02).to_i).
             order_by([:count], 'DESC').

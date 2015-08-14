@@ -42,23 +42,6 @@ CREATE TABLE prevalent_values (
   fraction REAL
 );
 
-
-DROP TABLE IF EXISTS prevalent_values_ext;
-
-CREATE TABLE prevalent_values_ext (
-  key                TEXT,
-  value              TEXT,
-  count_all          INTEGER DEFAULT 0,
-  count_nodes        INTEGER DEFAULT 0,
-  count_ways         INTEGER DEFAULT 0,
-  count_relations    INTEGER DEFAULT 0,
-  fraction_all       REAL,
-  fraction_nodes     REAL,
-  fraction_ways      REAL,
-  fraction_relations REAL
-);
-
-
 DROP TABLE IF EXISTS key_distributions;
 
 CREATE TABLE key_distributions (
