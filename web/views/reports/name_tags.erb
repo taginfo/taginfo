@@ -3,9 +3,11 @@
     @sel = Hash.new('')
     @sel[@filter_type] = ' selected="selected"'
 %>
-<div class="pre">
-    <h1><%= h(t.reports.name_tags.name) %></h1>
-    <%= t.reports.name_tags.intro %>
+<div class="pre ui-helper-clearfix">
+    <div id="pre-text">
+        <h1><%= h(t.reports.name_tags.name) %></h1>
+        <%= t.reports.name_tags.intro %>
+    </div>
 </div>
 <div id="tabs">
     <ul>

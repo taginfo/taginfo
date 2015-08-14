@@ -1,6 +1,8 @@
-<div class="pre">
-    <h1><%= h(t.reports.similar_keys.name) %></h1>
-    <p><%= h(t.reports.similar_keys.intro) %></p>
+<div class="pre ui-helper-clearfix">
+    <div id="pre-text">
+        <h1><%= h(t.reports.similar_keys.name) %></h1>
+        <p><%= h(t.reports.similar_keys.intro) %></p>
+    </div>
 </div>
 <div class="box resize">
 <% begin @db.count('db.similar_keys_common_rare').execute() %>
