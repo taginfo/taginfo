@@ -1,0 +1,34 @@
+<%
+    misc = @trans.t.misc
+    osm = @trans.t.osm
+    page = @trans.t.reports.wiki_problems
+ %>
+function page_init() {
+    up = function() { window.location = '/reports'; };
+    create_flexigrid('grid-problems', {
+        url: '/api/0/wiki/problems',
+        colModel: [
+            { display: '<%= h(page.wiki_page) %>', name: 'title', width: 280, sortable: true, align: 'left' },
+            { display: '<%= h(page.location) %>', name: 'location', width: 140, sortable: true, align: 'left' },
+            { display: '<%= h(page.reason) %>', name: 'reason', width: 280, sortable: true, align: 'left' },
+            { display: '<%= h(page.lang) %>', name: 'lang', width: 50, sortable: true, align: 'left' },
+            { display: '<%= h(osm.tag) %>', name: 'tag', width: 160, sortable: true, align: 'left' },
+            { display: '<%= h(page.info) %>', name: 'info', width: 600, sortable: false, align: 'left' }
+        ],
+        sortname: 'title',
+        sortorder: 'asc',
+        preProcess: function(data) {
+            data.rows = jQuery.map(data.data, function(row, i) {
+                return { 'cell': [
+                    link_to_wiki(row.title),
+                    row.location,
+                    row.reason,
+                    tag('span', html_escape(row.lang), { 'class': 'lang' }),
+                    row.key && row.value ? link_to_tag(row.key, row.value) : '',
+                    row.info ? html_escape(row.info) : ''
+                ] };
+            });
+            return data;
+        }
+    });
+}

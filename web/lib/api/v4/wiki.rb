@@ -42,4 +42,59 @@ class Taginfo < Sinatra::Base
         }, json_opts(params[:format]))
     end
 
+    api(0, 'wiki/problems', {
+        :description => 'Show problems encountered by taginfo while parsing the wiki',
+        :paging => :optional,
+        :sort => %w( location reason title tag lang ),
+        :result => paging_results([
+            [:location, :STRING, 'Problem location'],
+            [:reason,   :STRING, 'Problem reason'],
+            [:title,    :STRING, 'Wiki page title where the problem occurred'],
+            [:lang,     :STRING, 'Wiki language of this page'],
+            [:key,      :STRING, 'Key this wiki page is for'],
+            [:value,    :STRING, 'Value this wiki page is for (or null if key page)'],
+            [:info,     :STRING, 'Informational string dependant on type of problem']
+        ]),
+        :example => { },
+        :ui => ''
+    }) do
+        total = @db.count('wiki.problems').get_first_value().to_i
+
+        res = @db.select('SELECT * FROM wiki.problems').
+            order_by(@ap.sortname, @ap.sortorder) { |o|
+                o.location :location
+                o.location :reason
+                o.location :key
+                o.location :value
+                o.reason :reason
+                o.reason :location
+                o.reason :key
+                o.reason :value
+                o.title
+                o.tag :key
+                o.tag :value
+                o.lang :lang
+                o.lang :key
+                o.lang :value
+            }.
+            paging(@ap).
+            execute()
+
+        return JSON.generate({
+            :page  => @ap.page,
+            :rp    => @ap.results_per_page,
+            :total => total,
+            :url   => request.url,
+            :data  => res.map{ |row| {
+                :location => row['location'],
+                :reason   => row['reason'],
+                :title    => row['title'],
+                :lang     => row['lang'],
+                :key      => row['key'],
+                :value    => row['value'],
+                :info     => row['info']
+            } }
+        }, json_opts(params[:format]))
+    end
+
 end

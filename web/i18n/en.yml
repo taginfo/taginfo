@@ -671,4 +671,18 @@ reports:
             languages. Sometimes the image from one or the other language
             variant is better. But sometimes it makes sense to have different
             images because of different cultural backgrounds or so.
+    wiki_problems:
+        name: Wiki parsing problems
+        intro: |
+            Taginfo reads all wiki pages used to describe keys, tags, and
+            relations to find information about tags. This report shows a list
+            of problems encountered while reading those pages. These aren't
+            necessarily errors in the wiki, they just mean that something in
+            the wiki pages isn't formatted in a way taginfo understands. Either
+            the page has to be corrected or taginfo has to be fixed.
+        location: Location
+        reason: Reason
+        wiki_page: Wiki page
+        lang: Lang.
+        info: Additional information
 

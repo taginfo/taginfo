@@ -62,4 +62,5 @@ Report.new 'Name tags' #disabled
 Report.new 'Similar keys', :db
 Report.new 'Historic development', :db
 Report.new 'Wiki images', :wiki
+#Report.new 'Wiki problems', :wiki
 
