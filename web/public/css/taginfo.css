@@ -188,6 +188,12 @@ div#header_date {
     color: #808080;
 }
 
+@media all and (max-width: 800px) and (max-device-width: 800px) {
+    div#header_date {
+        display: none;
+    }
+}
+
 div#header div#header_forms {
     position: absolute;
     right: 20px;
