@@ -418,6 +418,8 @@ pages:
             title: Tags used by this project
             intro: This data is provided by the project and not necessarily complete. Please see the project documentation for details.
             description: How this key/tag is used in the project
+            count_all_tooltip: Number of objects in database with this key/tag
+            objects_tooltip: Object types the project uses
 
 flexigrid:
     pagetext: Page

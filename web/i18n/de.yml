@@ -79,7 +79,7 @@ misc:
     users_tooltip: Anzahl unterschiedlicher User, die die Objekte mit diesem Key zuletzt geändert haben.
     prevalent_values: Häufige Values
     prevalent_values_tooltip: Bis zu zehn der häufigsten Values zu diesem Key (Anzeige nur, wenn mehr als 1% der Tags mit diesem Key auch diesen Value haben).
-    in_wiki_tooltip: Zu diesem Objekt gibt es mindestens eine Wiki-Seite.
+    in_wiki_tooltip: Zu diesem Key/Tag gibt es mindestens eine Wiki-Seite.
 
 help:
     search:
@@ -438,6 +438,8 @@ pages:
             title: Tags, die von diesem Projekt verwenden werden
             intro: Die folgenden Daten wurden von dem Projekt zur Verfügung gestellt. Sie sind nicht notwendigerweise komplett. Für Details schau bitte in die Projekt-Dokumentation.
             description: Wie dieser Key/Tag im Projekt benutzt wird
+            count_all_tooltip: Anzahl Objekte in der Datenbank mit diesem Key/Tag
+            objects_tooltip: Objekt-Typen, die dieses Projekt benutzt
 
 flexigrid:
     pagetext: Seite

@@ -9,7 +9,9 @@ var create_flexigrid_for = {
             url: '/api/4/project/tags?project=' + encodeURIComponent(project),
             colModel: [
                 { display: '<%= h(osm.tag) %>', name: 'tag', width: 260, sortable: true },
-                { display: '<%= h(osm.objects) %>', name: 'objects', width:  80, sortable: false },
+                { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" width="16" height="16" title="<%= h(misc.in_wiki_tooltip) %>"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
+                { display: '<span title="<%= h(page.tags.count_all_tooltip) %>"><%= h(misc.count) %></span>', name: 'count_all', width: 70, sortable: true, align: 'right' },
+                { display: '<span title="<%= h(page.tags.objects_tooltip) %>"><%= h(osm.objects) %></span>', name: 'objects', width:  80, sortable: false },
                 { display: '<%= h(page.tags.description) %>', name: 'description', width: 800, sortable: false, align: 'left' }
             ],
             searchitems: [
@@ -21,6 +23,8 @@ var create_flexigrid_for = {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
                         row.value ? link_to_tag(row.key, row.value) : (link_to_key(row.key) + '=*'),
+                        fmt_checkmark(row.in_wiki),
+                        fmt_with_ts(row.count_all),
                         fmt_type_icon('node',     row.on_node) +
                         fmt_type_icon('way',      row.on_way) +
                         fmt_type_icon('area',     row.on_area) +
