@@ -190,7 +190,7 @@ class WikiPage
     def parse_type(category, param, db)
         if param.is_a?(Array)
             if param.size > 1
-                puts "ERROR: multiple values for #{category} field: #{param}"
+                puts "ERROR: multiple values for #{category} parameter: #{param}"
                 db.execute("INSERT INTO problems (category, reason, title, lang, key, value, info) VALUES (?, 'multiple_values', ?, ?, ?, ?, ?)", category, title, lang, key, value, param.join(', '))
                 return
             end
@@ -202,7 +202,7 @@ class WikiPage
             elsif param == 'no'
                 return false
             else
-                puts "ERROR: invalid value for field: category=#{category} title=#{title} lang=#{lang} key=#{key} value=#{value} param=#{param}"
+                puts "ERROR: invalid value for parameter: category=#{category} title=#{title} lang=#{lang} key=#{key} value=#{value} param=#{param}"
                 db.execute("INSERT INTO problems (category, reason, title, lang, key, value, info) VALUES (?, 'invalid_value', ?, ?, ?, ?, ?)", category, title, lang, key, value, param)
             end
         end
@@ -269,7 +269,7 @@ class WikiPage
                 @description = desc.join('').strip
                 if PROBLEMATIC_DESCRIPTION.match(@description)
                     puts "ERROR: problematic description: #{ @description }"
-                    db.execute("INSERT INTO problems (category, reason, title, lang, key, value, info) VALUES ('description_field', 'description_should_only_contain_plain_text', ?, ?, ?, ?, ?)", title, lang, key, value, description)
+                    db.execute("INSERT INTO problems (category, reason, title, lang, key, value, info) VALUES ('description_parameter', 'description_should_only_contain_plain_text', ?, ?, ?, ?, ?)", title, lang, key, value, description)
                 end
             end
         end
@@ -286,10 +286,10 @@ class WikiPage
             end
         end
 
-        @onNode     = parse_type('onNode_field',     template.named_parameters['onNode'],     db)
-        @onWay      = parse_type('onWay_field',      template.named_parameters['onWay'],      db)
-        @onArea     = parse_type('onArea_field',     template.named_parameters['onArea'],     db)
-        @onRelation = parse_type('onRelation_field', template.named_parameters['onRelation'], db)
+        @onNode     = parse_type('onNode_parameter',     template.named_parameters['onNode'],     db)
+        @onWay      = parse_type('onWay_parameter',      template.named_parameters['onWay'],      db)
+        @onArea     = parse_type('onArea_parameter',     template.named_parameters['onArea'],     db)
+        @onRelation = parse_type('onRelation_parameter', template.named_parameters['onRelation'], db)
 
         if template.named_parameters['implies']
             template.named_parameters['implies'].each do |i|
@@ -316,7 +316,7 @@ class WikiPage
             if WIKIDATA_FORMAT.match(wikidata)
                 @wikidata = wikidata
             else
-                db.execute("INSERT INTO problems (category, reason, title, lang, key, value, info) VALUES ('wikidata_field', 'does_not_match_QNUMBER', ?, ?, ?, ?, ?)", title, lang, key, value, wikidata)
+                db.execute("INSERT INTO problems (category, reason, title, lang, key, value, info) VALUES ('wikidata_parameter', 'does_not_match_QNUMBER', ?, ?, ?, ?, ?)", title, lang, key, value, wikidata)
             end
         end
     end
