@@ -246,7 +246,7 @@ class WikiPage
             db.execute("INSERT INTO wikipedia_links (key, value, lang, title) VALUES (?, ?, ?, ?)", @key, @value, lang, title)
         else
             puts "ERROR: Language in wikipedia link template looks wrong: '#{lang}'"
-            db.execute("INSERT INTO problems (category, reason, title, lang, key, value, info) VALUES ('wikipedia_link', 'wrong_lang_format', ?, ?, ?, ?, ?)", title, self.lang, key, value, lang)
+            db.execute("INSERT INTO problems (category, reason, title, lang, key, value, info) VALUES ('wikipedia_link', 'wrong_lang_format', ?, ?, ?, ?, ?)", self.title, self.lang, key, value, lang)
         end
     end
 
