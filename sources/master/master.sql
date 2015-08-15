@@ -160,15 +160,19 @@ CREATE TABLE suggestions (
     score   INTEGER
 );
 
-INSERT INTO suggestions (key, value, count, in_wiki, score)
-        SELECT key, NULL, count_all, in_wiki, count_all * (1 + (in_wiki * 9)) FROM db.keys WHERE count_all >= 10000 OR (in_wiki = 1 AND count_all >= 100)
+INSERT INTO suggestions (key, value, count, in_wiki)
+        SELECT key, NULL, count_all, in_wiki
+            FROM db.keys
+            WHERE count_all >= 10000 OR (in_wiki = 1 AND count_all >= 100)
     UNION
-        SELECT DISTINCT p.key, p.value, p.count, title NOT NULL AS in_wiki, p.count * (1 + (title NOT NULL))
+        SELECT DISTINCT p.key, p.value, p.count, title NOT NULL
             FROM db.prevalent_values p LEFT JOIN wiki.wikipages w ON p.key=w.key AND p.value = w.value
             WHERE (p.count >= 1000 OR (title IS NOT NULL and p.count >= 100))
                 AND p.fraction > 0.01
                 AND CAST(p.value AS REAL) == 0.0
                 AND length(p.value) <= 20;
+
+UPDATE suggestions SET score = count * (1 + in_wiki * 9);
 
 -- ============================================================================
 
