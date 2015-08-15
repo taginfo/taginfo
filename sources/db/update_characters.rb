@@ -7,7 +7,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013  Jochen Topf <jochen@remote.org>
+#  Copyright (C) 2013-2015  Jochen Topf <jochen@remote.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ db.execute("PRAGMA journal_mode  = OFF")
 db.execute("PRAGMA synchronous   = OFF")
 db.execute("PRAGMA count_changes = OFF")
 db.execute("PRAGMA temp_store    = MEMORY")
-db.execute("PRAGMA cache_size    = 5000000")
+db.execute("PRAGMA cache_size    = 1000000")
 
 #------------------------------------------------------------------------------
 
