@@ -202,7 +202,7 @@ class WikiPage
             elsif param == 'no'
                 return false
             else
-                puts "ERROR: invalid value for parameter: location=#{location} title=#{title} lang=#{lang} key=#{key} value=#{value} param=#{param}"
+                puts "ERROR: invalid value for parameter: param_name=#{param_name} title=#{title} lang=#{lang} key=#{key} value=#{value} param=#{param}"
                 db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'invalid value for ' || ? || ' parameter', ?, ?, ?, ?, ?)", param_name, title, lang, key, value, param)
             end
         end
