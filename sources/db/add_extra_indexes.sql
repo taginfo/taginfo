@@ -15,8 +15,14 @@ PRAGMA temp_store    = MEMORY;
 PRAGMA cache_size    = 1000000;
 
 CREATE INDEX tags_key_count_nodes_idx     ON tags (key, count_nodes     DESC);
+ANALYZE tags_key_count_nodes_idx;
+
 CREATE INDEX tags_key_count_ways_idx      ON tags (key, count_ways      DESC);
+ANALYZE tags_key_count_ways_idx;
+
 CREATE INDEX tags_key_count_relations_idx ON tags (key, count_relations DESC);
+ANALYZE tags_key_count_relations_idx;
 
 CREATE UNIQUE INDEX tags_key_value_idx ON tags (key, value);
+ANALYZE tags_key_value_idx;
 

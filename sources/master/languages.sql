@@ -63,3 +63,5 @@ INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('zh-ha
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('zh-hant', NULL, 'Traditional Chinese', '繁體中文');
 -- INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('', '', '', '');
 
+ANALYZE languages;
+
