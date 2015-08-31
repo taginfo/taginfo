@@ -35,7 +35,7 @@ if [ -d $DIR/taginfo-projects ]; then
     git pull
     cd -
 else
-    git clone https://github.com/joto/taginfo-projects.git $DIR/taginfo-projects
+    git clone https://github.com/taginfo/taginfo-projects.git $DIR/taginfo-projects
 fi
 
 echo "`$DATECMD` Running init.sql..."
