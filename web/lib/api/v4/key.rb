@@ -243,15 +243,15 @@ class Taginfo < Sinatra::Base
 
         if params[:query].to_s != ''
             total = @db.count('db.tags').
-                condition("count_#{filter_type} > 0").
                 condition('key = ?', key).
+                condition_if_true("count_#{filter_type} > 0", filter_type != 'all').
                 condition_if("value LIKE ? ESCAPE '@'", like_contains(params[:query])).
                 get_first_value()
         end
 
         res = @db.select('SELECT * FROM db.tags').
-            condition("count_#{filter_type} > 0").
             condition('key = ?', key).
+            condition_if_true("count_#{filter_type} > 0", filter_type != 'all').
             condition_if("value LIKE ? ESCAPE '@'", like_contains(params[:query])).
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.value
