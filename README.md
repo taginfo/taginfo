@@ -89,5 +89,5 @@ All the Javascript and CSS needed is already included.
 
 ## Author
 
-Jochen Topf (jochen@remote.org) - [Joto](http://wiki.openstreetmap.org/wiki/User:Joto)
+Jochen Topf (jochen@topf.org) - [Joto](http://wiki.openstreetmap.org/wiki/User:Joto)
 

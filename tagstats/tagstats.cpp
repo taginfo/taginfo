@@ -1,6 +1,6 @@
 /*
 
-  Copyright 2012-2014 Jochen Topf <jochen@topf.org>.
+  Copyright (C) 2012-2015 Jochen Topf <jochen@topf.org>.
 
   This file is part of Tagstats.
 
