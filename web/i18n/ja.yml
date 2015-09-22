@@ -361,7 +361,7 @@ pages:
         geographic_distribution:
             title: このタグの地理的な分布
             relations: リレーションは地理的な位置を持っていないので、地図は表示できません。
-            no_map: 済みません。地図はよく使われるタグにのみ作成されます。overpass turboのリンクを使用してみてください。
+            no_map: 申し訳ありませんが、地図はよく使われるタグにのみ作成されます。 overpass turbo のリンクを使用してみてください。
         wiki_pages:
             title: このタグに関するウィキページ
             none_found: このタグに関するウィキページは利用できません。
@@ -418,6 +418,8 @@ pages:
             title: このプロジェクトで使用されているタグ
             intro: このデータはプロジェクトによって提供されており、完成させる必要はありません。詳細はプロジェクトの説明書を参照してください。
             description: プロジェクトでキーやタグがどのように使われているか
+            count_all_tooltip: データベース中でこのキー/タグが使われているオブジェクトの数
+            objects_tooltip: プロジェクトが使っているオブジェクトの種類
 
 flexigrid:
     pagetext: ページ
@@ -436,6 +438,25 @@ comparison:
     add_tag: このタグをリストに追加
     clear: 比較リストをクリア
     compare: キーやタグを比較
+sources:
+    master:
+        name: Master
+        description: taginfo のユーザーインタフェースで必要な統計や様々なデータを集めたものです。
+    history:
+        name: History
+        description: 時間軸で集めた統計です。
+    db:
+        name: Database
+        description: メイン OSM データベース（planet ファイル）における各キーや値の統計です。
+    wiki:
+        name: Wiki
+        description: OSM ウィキのタグやキーのページからのデータです。
+    languages:
+        name: Languages
+        description: 言語名、コードなどです。 IANA や Unicode レジストリからのものです。
+    projects:
+        name: Projects
+        description: 外部プロジェクトや、そこで使用される OSM のキーやタグです。
 
 reports:
     characters_in_keys:
@@ -539,7 +560,7 @@ reports:
             この場合はウィキページに、
             <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>page name</i>]]</tt>
             と1行書くだけです。</p>
-        also_show_keys: 英語版がなくても、他の言語版のウィキページがあるキーも表示する。
+        also_show_keys: 他言語版のウィキページがあっても英語版がないキーを表示する。
         table:
             create_wiki_page: ウィキページを作成...
     key_lengths:
@@ -565,7 +586,7 @@ reports:
     languages:
         name: 言語
         intro: |
-            OpenStreetMapは国際的なプロジェクトです。タグやその説明は各言語に翻訳できます。
+            OpenStreetMap は国際的なプロジェクトです。タグやその説明は各言語に翻訳できます。
             この表ではtaginfoが把握している言語と、
             その言語でキーやタグを説明するウィキページがそれぞれいくつあるかを表示しています。
         code: コード
@@ -584,9 +605,9 @@ reports:
     name_tags:
         name: nameタグの変化形
     similar_keys:
-        name: 類似のキー名
+        name: 似たキー名
         intro: |
-            このレポートはよく使われているキーで、まれによく似た名前のキーが使われているものを表示しています。
+            このレポートはよく使われているキーで、まれによく似た名称のキーが使われているものを表示しています。
             これはよく使われるキーのスペルミスを多くをあぶりだしますが、完璧ではありません。
             データの修正には注意を払ってください。検索と置換による機械的なキーの編集は行わないでください。
             それぞれの場合を個別に確認して、確認できたその他の問題も同時に修正してください。
