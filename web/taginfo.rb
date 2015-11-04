@@ -106,8 +106,8 @@ class Taginfo < Sinatra::Base
 
     # when do we expect the next data update
     def next_update
-        # three hours after midnight UTC
-        ((Time.utc(Time.now.year(), Time.now.month(), Time.now.day(), 3, 0, 0) + (Time.now.hour < 3 ? 0 : 24)*60*60)-Time.now).to_i.to_i
+        # 7 hours after midnight UTC
+        ((Time.utc(Time.now.year(), Time.now.month(), Time.now.day(), 7, 0, 0) + (Time.now.hour < 7 ? 0 : 24)*60*60)-Time.now).to_i.to_i
     end
 
     before do
