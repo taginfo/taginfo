@@ -25,7 +25,7 @@ class Taginfo < Sinatra::Base
     }) do
         total = @db.count('relation_types').
             condition_if("rtype LIKE ? ESCAPE '@'", like_contains(params[:query])).
-            get_first_value().to_i
+            get_first_i
 
         res = @db.select('SELECT * FROM relation_types').
             condition_if("rtype LIKE ? ESCAPE '@'", like_contains(params[:query])).

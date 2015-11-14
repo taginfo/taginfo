@@ -34,7 +34,7 @@ class Taginfo < Sinatra::Base
         total = @db.count('relation_roles').
             condition("rtype=?", rtype).
             condition_if("role LIKE ? ESCAPE '@'", like_contains(params[:query])).
-            get_first_value().to_i
+            get_first_i
 
         res = @db.select('SELECT * FROM relation_roles').
             condition("rtype=?", rtype).
@@ -176,7 +176,7 @@ class Taginfo < Sinatra::Base
             condition("status = 'OK' AND on_relation = 1").
             condition("key = 'type' AND value = ?", rtype).
             condition_if("value LIKE ? ESCAPE '@' OR name LIKE ? ESCAPE '@'", q, q).
-            get_first_value().to_i
+            get_first_i
 
         res = @db.select('SELECT t.project_id, p.name, p.icon_url AS project_icon_url, t.value, t.description, t.doc_url, t.icon_url FROM projects.projects p, projects.project_tags t ON p.id=t.project_id').
             condition("status = 'OK' AND on_relation = 1").

@@ -27,7 +27,7 @@ class Taginfo < Sinatra::Base
         total = @db.count('projects.projects').
             condition("status=?", status).
             condition_if("name LIKE ? ESCAPE '@' OR description LIKE ? ESCAPE '@'", q, q).
-            get_first_value().to_i
+            get_first_i
 
         res = @db.select('SELECT * FROM projects.projects').
             condition("status=?", status).

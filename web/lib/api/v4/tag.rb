@@ -45,7 +45,7 @@ class Taginfo < Sinatra::Base
                                     key,         value,           query_substr,               query_substr,           key,         value,           query_substr,               query_substr) :
                 cq.condition('(key1=? AND value1=?) OR (key2=? AND value2=?)', key, value, key, value)).
             condition("count_#{filter_type} > 0").
-            get_first_value().to_i
+            get_first_i
 
         has_this_key = @db.select("SELECT count_#{filter_type} FROM db.tags").
             condition('key = ?', key).

@@ -95,7 +95,7 @@ class Taginfo < Sinatra::Base
 
         total = @db.count('db.relation_roles').
             condition_if("role LIKE ? ESCAPE '@'", like_contains(query)).
-            get_first_value().to_i
+            get_first_i
 
         res = @db.select('SELECT rtype, role, count_all FROM db.relation_roles').
             condition_if("role LIKE ? ESCAPE '@'", like_contains(query)).
@@ -138,7 +138,7 @@ class Taginfo < Sinatra::Base
 
         total = @db.count('search.ftsearch').
             condition("value MATCH ?", query).
-            get_first_value().to_i
+            get_first_i
 
         res = @db.select('SELECT * FROM search.ftsearch').
             condition("value MATCH ?", query).

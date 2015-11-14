@@ -56,7 +56,7 @@ class Taginfo < Sinatra::Base
         :example => { },
         :ui => ''
     }) do
-        total = @db.count('wiki.problems').get_first_value().to_i
+        total = @db.count('wiki.problems').get_first_i
 
         res = @db.select('SELECT * FROM wiki.problems').
             order_by(@ap.sortname, @ap.sortorder) { |o|

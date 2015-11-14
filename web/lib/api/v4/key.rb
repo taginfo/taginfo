@@ -39,7 +39,7 @@ class Taginfo < Sinatra::Base
                     cq.condition('key1 = ? OR key2 = ?', key, key)
                 ).
             condition_if_true("count_#{filter_type} > 0", filter_type != 'all').
-            get_first_value().to_i
+            get_first_i
 
         has_this_key = @db.select("SELECT count_#{filter_type} FROM db.keys").
             condition('key = ?', key).
@@ -89,11 +89,11 @@ class Taginfo < Sinatra::Base
 
         if params[:query].to_s != ''
             total = @db.select("SELECT count(*) FROM db.similar_keys s WHERE (s.key1 LIKE ? ESCAPE '@') AND s.key2=?
-                                                                          OR (s.key2 LIKE ? ESCAPE '@') AND s.key1=?", query, key, query, key).get_first_value().to_i
+                                                                          OR (s.key2 LIKE ? ESCAPE '@') AND s.key1=?", query, key, query, key).get_first_i
         else
             total = @db.count('db.similar_keys').
                         condition("key1=? OR key2=?", key, key).
-                        get_first_value().to_i
+                        get_first_i
         end
 
         rows = (params[:query].to_s != '' ?
@@ -272,7 +272,7 @@ class Taginfo < Sinatra::Base
             end
         end
 
-        return generate_json_result(total.to_i,
+        return generate_json_result(total,
             res.map{ |row| {
                 :value    => row['value'],
                 :count    => row['count_' + filter_type].to_i,
@@ -363,7 +363,7 @@ class Taginfo < Sinatra::Base
             condition_if("on_node = ?",                    filter_type == 'nodes'     ? 1 : '').
             condition_if("on_way = ? OR on_area = 1",      filter_type == 'ways'      ? 1 : '').
             condition_if("on_relation = ? OR on_area = 1", filter_type == 'relations' ? 1 : '').
-            get_first_value().to_i
+            get_first_i
 
         res = @db.select('SELECT t.project_id, p.name, p.icon_url AS project_icon_url, t.key, t.value, t.description, t.doc_url, t.icon_url, t.on_node, t.on_way, t.on_relation, t.on_area FROM projects.projects p, projects.project_tags t ON p.id=t.project_id').
             condition("status = 'OK'").

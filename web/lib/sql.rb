@@ -230,7 +230,7 @@ module SQL
             q = build_query()
             row = @db.get_first_row(q, *@params)
             return [nil] * columns.size if row.nil?;
-            columns.map{ |column| row[column.to_s] }
+            columns.map{ |column| row[column.to_s].to_i }
         end
 
     end

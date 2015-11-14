@@ -128,7 +128,7 @@ class Taginfo < Sinatra::Base
 
         total = @db.count('top_tags').
             condition_if("(skey LIKE ? ESCAPE '@') OR (svalue LIKE ? ESCAPE '@')", like_contains(params[:query]), like_contains(params[:query])).
-            get_first_value().to_i
+            get_first_i
 
         res = @db.select('SELECT * FROM top_tags').
             condition_if("(skey LIKE ? ESCAPE '@') OR (svalue LIKE ? ESCAPE '@')", like_contains(params[:query]), like_contains(params[:query])).

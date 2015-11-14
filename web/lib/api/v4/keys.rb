@@ -52,7 +52,7 @@ class Taginfo < Sinatra::Base
         total = @db.count('db.keys').
             condition_if("key LIKE ? ESCAPE '@'", like_contains(params[:query])).
             conditions(filters).
-            get_first_value().to_i
+            get_first_i
 
         res = @db.select('SELECT * FROM db.keys').
             condition_if("key LIKE ? ESCAPE '@'", like_contains(params[:query])).
@@ -159,7 +159,7 @@ class Taginfo < Sinatra::Base
 
         total = @db.count('wiki.wikipages_keys').
             condition_if("key LIKE ? ESCAPE '@'", like_contains(params[:query])).
-            get_first_value().to_i
+            get_first_i
 
         res = @db.select("SELECT key, coalesce(langs, '') AS langs FROM wiki.wikipages_keys").
             condition_if("key LIKE ? ESCAPE '@'", like_contains(params[:query])).
@@ -203,7 +203,7 @@ class Taginfo < Sinatra::Base
         total = @db.select("SELECT count(*) FROM similar_keys_common_rare").
                         condition(cond).
                         condition_if("(key_common LIKE ? ESCAPE '@' OR key_rare LIKE ? ESCAPE '@')", query, query).
-                        get_first_value().to_i
+                        get_first_i
 
         res = @db.select("SELECT * FROM similar_keys_common_rare").
                         condition(cond).
@@ -274,7 +274,7 @@ class Taginfo < Sinatra::Base
             condition('count_all > ?', min_count).
             condition("in_wiki#{english} = 0").
             condition_if("key LIKE ? ESCAPE '@'", like_contains(params[:query])).
-            get_first_value().to_i
+            get_first_i
 
         res = @db.select('SELECT * FROM db.keys').
             condition('count_all > ?', min_count).
