@@ -58,18 +58,14 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total,
-            :url   => request.url,
-            :data  => res.map{ |row| {
+        return generate_json_result(total,
+            res.map{ |row| {
                 :other_key      => row['other_key'],
                 :together_count => row['together_count'].to_i,
                 :to_fraction    => (row['together_count'].to_f / has_this_key.to_f).round(4),
                 :from_fraction  => row['from_fraction'].to_f.round(4)
             } }
-        }, json_opts(params[:format]))
+        )
     end
 
     api(4, 'key/similar', {
@@ -115,17 +111,13 @@ class Taginfo < Sinatra::Base
                     paging(@ap).
                     execute()
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total,
-            :url   => request.url,
-            :data  => rows.map{ |row| {
+        return generate_json_result(total,
+            rows.map{ |row| {
                 :other_key  => row['other_key'],
                 :count_all  => row['count_all'],
                 :similarity => row['similarity']
             } }
-        }, json_opts(params[:format]))
+        )
     end
 
     api(4, 'key/distribution/nodes', {
@@ -197,11 +189,7 @@ class Taginfo < Sinatra::Base
                 end
             end
 
-        return JSON.generate({
-            :total => 4,
-            :url   => request.url,
-            :data  => out
-        }, json_opts(params[:format]))
+        return generate_json_result(4, out);
     end
 
     api(4, 'key/values', {
@@ -284,19 +272,15 @@ class Taginfo < Sinatra::Base
             end
         end
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total.to_i,
-            :url   => request.url,
-            :data  => res.map{ |row| {
+        return generate_json_result(total.to_i,
+            res.map{ |row| {
                 :value    => row['value'],
                 :count    => row['count_' + filter_type].to_i,
                 :fraction => (row['count_' + filter_type].to_f / this_key_count.to_f).round(4),
                 :in_wiki  => row['in_wiki'] == 1,
                 :description => wikidesc[row['value']] || ''
             } }
-        }, json_opts(params[:format]))
+        )
     end
 
     api(4, 'key/wiki_pages', {
@@ -397,12 +381,8 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total.to_i,
-            :url   => request.url,
-            :data  => res.map{ |row| {
+        return generate_json_result(total,
+            res.map{ |row| {
                 :project_id       => row['project_id'],
                 :project_name     => row['name'],
                 :project_icon_url => row['project_icon_url'],
@@ -416,7 +396,7 @@ class Taginfo < Sinatra::Base
                 :doc_url          => row['doc_url'],
                 :icon_url         => row['icon_url']
             } }
-        }, json_opts(params[:format]))
+        )
     end
 
 end

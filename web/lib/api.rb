@@ -157,3 +157,24 @@ class APIParameters
 
 end
 
+def generate_json_result(total, data)
+    result = {
+        :url        => request.url,
+        :data_until => @data_until_m
+    }
+
+    if @ap.results_per_page > 0
+        result.merge!({
+            :page   => @ap.page,
+            :rp     => @ap.results_per_page
+        })
+    end
+
+    result.merge!({
+        :total      => total,
+        :data       => data
+    })
+
+    return JSON.generate(result, json_opts(params[:format]))
+end
+

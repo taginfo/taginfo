@@ -38,12 +38,8 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total,
-            :url   => request.url,
-            :data  => res.map{ |row| {
+        return generate_json_result(total,
+            res.map{ |row| {
                 :id          => row['id'],
                 :name        => row['name'],
                 :project_url => row['project_url'],
@@ -51,7 +47,7 @@ class Taginfo < Sinatra::Base
                 :doc_url     => row['doc_url'],
                 :description => row['description'],
             }}
-        }, json_opts(params[:format]))
+        )
     end
 
 end

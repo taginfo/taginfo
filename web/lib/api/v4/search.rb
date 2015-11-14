@@ -37,17 +37,13 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total,
-            :url   => request.url,
-            :data  => res.map{ |row| {
+        return generate_json_result(total,
+            res.map{ |row| {
                 :key       => row['key'],
                 :value     => row['value'],
                 :count_all => row['count_all'].to_i,
             }}
-        }, json_opts(params[:format]))
+        )
     end
 
     api(4, 'search/by_keyword', {
@@ -74,16 +70,12 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total,
-            :url   => request.url,
-            :data  => res.map{ |row| {
+        return generate_json_result(total,
+            res.map{ |row| {
                 :key   => row['key'],
                 :value => row['value']
             }}
-        }, json_opts(params[:format]))
+        )
     end
 
     api(4, 'search/by_role', {
@@ -115,17 +107,13 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total,
-            :url   => request.url,
-            :data  => res.map{ |row| {
+        return generate_json_result(total,
+            res.map{ |row| {
                 :rtype     => row['rtype'],
                 :role      => row['role'],
                 :count_all => row['count_all'].to_i,
             }}
-        }, json_opts(params[:format]))
+        )
     end
 
     api(4, 'search/by_value', {
@@ -145,13 +133,7 @@ class Taginfo < Sinatra::Base
 
         # searching for the empty string is very expensive, so we'll just return an empty result
         if query == ''
-            return JSON.generate({
-                :page  => 0,
-                :rp    => 0,
-                :total => 0,
-                :url   => request.url,
-                :data  => []
-            }, json_opts(params[:format]))
+            return generate_json_result(0, []);
         end
 
         total = @db.count('search.ftsearch').
@@ -168,17 +150,13 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total,
-            :url   => request.url,
-            :data  => res.map{ |row| {
+        return generate_json_result(total,
+            res.map{ |row| {
                 :key       => row['key'],
                 :value     => row['value'],
                 :count_all => row['count_all'].to_i,
             }}
-        }, json_opts(params[:format]))
+        )
     end
 
 end

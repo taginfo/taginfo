@@ -125,7 +125,8 @@ class Taginfo < Sinatra::Base
 
         @db = SQL::Database.new.attach_sources
 
-        @data_until = DATA_UNTIL
+        @data_until = DATA_UNTIL.sub(/:..$/, '')
+        @data_until_m = DATA_UNTIL.sub(' ', 'T') + 'Z'
     end
 
     after do

@@ -70,19 +70,15 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total,
-            :url   => request.url,
-            :data  => res.map{ |row| {
+        return generate_json_result(total,
+            res.map{ |row| {
                 :other_key      => row['other_key'],
                 :other_value    => row['other_value'],
                 :together_count => row['together_count'].to_i,
                 :to_fraction    => (row['together_count'].to_f / has_this_key.to_f).round(4),
                 :from_fraction  => row['from_fraction'].to_f.round(4)
             } }
-        }, json_opts(params[:format]))
+        )
     end
 
     api(4, 'tag/distribution/nodes', {
@@ -160,11 +156,7 @@ class Taginfo < Sinatra::Base
                 end
         end
 
-        return JSON.generate({
-            :total => 4,
-            :url   => request.url,
-            :data  => out
-        }, json_opts(params[:format]))
+        return generate_json_result(4, out);
     end
 
     api(4, 'tag/wiki_pages', {
@@ -268,12 +260,8 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total.to_i,
-            :url   => request.url,
-            :data  => res.map{ |row| {
+        return generate_json_result(total,
+            res.map{ |row| {
                 :project_id       => row['project_id'],
                 :project_name     => row['name'],
                 :project_icon_url => row['project_icon_url'],
@@ -287,7 +275,7 @@ class Taginfo < Sinatra::Base
                 :doc_url          => row['doc_url'],
                 :icon_url         => row['icon_url']
             } }
-        }, json_opts(params[:format]))
+        )
     end
 
 end

@@ -82,10 +82,8 @@ class Taginfo < Sinatra::Base
             end
         end
 
-        return JSON.generate({
-            :total => res.size,
-            :url   => request.url,
-            :data  => res.map{ |row| {
+        return generate_json_result(res.size,
+            res.map{ |row| {
                 :key                      => row['key'],
                 :value                    => row['value'],
                 :in_wiki                  => row['in_wiki'],
@@ -103,7 +101,7 @@ class Taginfo < Sinatra::Base
                 :on_area                  => row['on_area'].to_i     == 1,
                 :on_relation              => row['on_relation'].to_i == 1,
             } }
-        }, json_opts(params[:format]))
+        )
     end
 
     api(4, 'tags/popular', {
@@ -146,12 +144,8 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total,
-            :url   => request.url,
-            :data  => res.map{ |row| {
+        return generate_json_result(total,
+            res.map{ |row| {
                 :key                      => row['skey'],
                 :value                    => row['svalue'],
                 :in_wiki                  => row['in_wiki'],
@@ -164,7 +158,7 @@ class Taginfo < Sinatra::Base
                 :count_relations          => row['count_relations'].to_i,
                 :count_relations_fraction => (row['count_relations'].to_f / @db.stats('relations')).round(4),
             } }
-        }, json_opts(params[:format]))
+        )
     end
 
 end

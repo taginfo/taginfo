@@ -19,7 +19,7 @@ class Taginfo < Sinatra::Base
             [:count_all,   :INTEGER, 'Number of objects with this key/tag in database'],
             [:in_wiki,     :BOOL,    'Is this key/tag in wiki?']
         ]),
-        :example => { :page => 1, :rp => 10, :sortname => 'tag', :sortorder => 'asc' },
+        :example => { :project => 'id_editor', :page => 1, :rp => 10, :sortname => 'tag', :sortorder => 'asc' },
         :ui => '/projects/id_editor'
     }) do
         project_id = params[:project]
@@ -43,12 +43,8 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total,
-            :url   => request.url,
-            :data  => res.map{ |row| {
+        return generate_json_result(total,
+            res.map{ |row| {
                 :key         => row['key'],
                 :value       => row['value'],
                 :on_node     => row['on_node'].to_i     == 1,
@@ -61,7 +57,7 @@ class Taginfo < Sinatra::Base
                 :count_all   => row['count_all'],
                 :in_wiki     => row['in_wiki'].to_i == 1
             }}
-        }, json_opts(params[:format]))
+        )
     end
 
 end

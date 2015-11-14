@@ -120,12 +120,8 @@ class Taginfo < Sinatra::Base
             end
         end
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total,
-            :url   => request.url,
-            :data  => res.map{ |row| h = {
+        return generate_json_result(total,
+            res.map{ |row| h = {
                 :key                      => row['key'],
                 :count_all                => row['count_all'].to_i,
                 :count_all_fraction       => (row['count_all'].to_f / @db.stats('objects')).round(4),
@@ -142,7 +138,7 @@ class Taginfo < Sinatra::Base
             h[:wikipages] = row['wikipages'] if row['wikipages']
             h[:prevalent_values] = row['prevalent_values'][0,10] if row['prevalent_values']
             h }
-        }, json_opts(params[:format]))
+        )
     end
 
     api(4, 'keys/wiki_pages', {
@@ -173,12 +169,8 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total,
-            :url   => request.url,
-            :data  => res.map{ |row|
+        return generate_json_result(total,
+            res.map{ |row|
                 lang_hash = Hash.new
                 row['langs'].split(',').each{ |l|
                     (lang, status) = l.split(' ', 2)
@@ -186,7 +178,7 @@ class Taginfo < Sinatra::Base
                 }
                 { :key => row['key'], :lang => lang_hash }
             }
-        }, json_opts(params[:format]))
+        )
     end
 
     api(4, 'keys/similar', {
@@ -234,12 +226,8 @@ class Taginfo < Sinatra::Base
                         paging(@ap).
                         execute()
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total,
-            :url   => request.url,
-            :data  => res.map{ |row| {
+        return generate_json_result(total,
+            res.map{ |row| {
                     :key_common       => row['key_common'],
                     :key_rare         => row['key_rare'],
                     :count_all_common => row['count_all_common'],
@@ -247,7 +235,7 @@ class Taginfo < Sinatra::Base
                     :similarity       => row['similarity']
                 }
             }
-        }, json_opts(params[:format]))
+        )
     end
 
     api(4, 'keys/without_wiki_page', {
@@ -320,12 +308,8 @@ class Taginfo < Sinatra::Base
             reshash[key]['prevalent_values'] << pv
         end
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total,
-            :url   => request.url,
-            :data  => res.map{ |row| {
+        return generate_json_result(total,
+            res.map{ |row| {
                 :key                => row['key'],
                 :count_all          => row['count_all'].to_i,
                 :count_all_fraction => row['count_all'].to_f / @db.stats('objects'),
@@ -333,7 +317,7 @@ class Taginfo < Sinatra::Base
                 :users_all          => row['users_all'].to_i,
                 :prevalent_values   => row['prevalent_values']
             } }
-        }, json_opts(params[:format]))
+        )
     end
 
 end

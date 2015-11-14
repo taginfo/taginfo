@@ -27,10 +27,8 @@ class Taginfo < Sinatra::Base
             }.
             execute()
 
-        return JSON.generate({
-            :total => res.size,
-            :url   => request.url,
-            :data  => res.map{ |row| {
+        return generate_json_result(res.size,
+            res.map{ |row| {
                 :code                    => row['code'],
                 :native_name             => row['native_name'],
                 :english_name            => row['english_name'],
@@ -39,7 +37,7 @@ class Taginfo < Sinatra::Base
                 :wiki_tag_pages          => row['wiki_tag_pages'].to_i,
                 :wiki_tag_pages_fraction => row['wiki_tag_pages'].to_f / @db.stats('wiki_tags_described'),
             } }
-        }, json_opts(params[:format]))
+        )
     end
 
     api(0, 'wiki/problems', {
@@ -80,12 +78,8 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total,
-            :url   => request.url,
-            :data  => res.map{ |row| {
+        return generate_json_result(total,
+            res.map{ |row| {
                 :location => row['location'],
                 :reason   => row['reason'],
                 :title    => row['title'],
@@ -94,7 +88,7 @@ class Taginfo < Sinatra::Base
                 :value    => row['value'],
                 :info     => row['info']
             } }
-        }, json_opts(params[:format]))
+        )
     end
 
 end

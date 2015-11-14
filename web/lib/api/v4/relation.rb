@@ -49,12 +49,8 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total,
-            :url   => request.url,
-            :data  => res.map{ |row| {
+        return generate_json_result(total,
+            res.map{ |row| {
                 :rtype                           =>  row['rtype'],
                 :role                            =>  row['role'],
                 :count_all_members               =>  row['count_all'].to_i,
@@ -66,7 +62,7 @@ class Taginfo < Sinatra::Base
                 :count_relation_members          =>  row['count_relations'].to_i,
                 :count_relation_members_fraction =>  relation_type_info['members_relations'].to_i == 0 ? 0 : (row['count_relations'].to_f / relation_type_info['members_relations'].to_i).round(4),
             } }
-        }, json_opts(params[:format]))
+        )
     end
 
     api(4, 'relation/stats', {
@@ -98,11 +94,7 @@ class Taginfo < Sinatra::Base
                 end
             end
 
-        return JSON.generate({
-            :total => 4,
-            :url   => request.url,
-            :data  => out
-        }, json_opts(params[:format]))
+        return generate_json_result(4, out);
     end
 
     api(4, 'relation/wiki_pages', {
@@ -196,12 +188,8 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total.to_i,
-            :url   => request.url,
-            :data  => res.map{ |row| {
+        return generate_json_result(total,
+            res.map{ |row| {
                 :project_id       => row['project_id'],
                 :project_name     => row['name'],
                 :project_icon_url => row['project_icon_url'],
@@ -210,7 +198,7 @@ class Taginfo < Sinatra::Base
                 :doc_url          => row['doc_url'],
                 :icon_url         => row['icon_url']
             } }
-        }, json_opts(params[:format]))
+        )
     end
 
 end
