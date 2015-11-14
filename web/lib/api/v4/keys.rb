@@ -200,31 +200,31 @@ class Taginfo < Sinatra::Base
 
         cond = "(similarity != 0 OR lower(key_common) = lower(key_rare)) AND count_all_common >= 10000"
 
-        total = @db.select("SELECT count(*) FROM similar_keys_common_rare").
-                        condition(cond).
-                        condition_if("(key_common LIKE ? ESCAPE '@' OR key_rare LIKE ? ESCAPE '@')", query, query).
-                        get_first_i
+        total = @db.count('similar_keys_common_rare').
+            condition(cond).
+            condition_if("(key_common LIKE ? ESCAPE '@' OR key_rare LIKE ? ESCAPE '@')", query, query).
+            get_first_i
 
         res = @db.select("SELECT * FROM similar_keys_common_rare").
-                        condition(cond).
-                        condition_if("(key_common LIKE ? ESCAPE '@' OR key_rare LIKE ? ESCAPE '@')", query, query).
-                        order_by(@ap.sortname, @ap.sortorder) { |o|
-                            o.key_common :key_common
-                            o.key_common :key_rare
-                            o.key_rare :key_rare
-                            o.key_rare :key_common
-                            o.count_all_common :count_all_common
-                            o.count_all_common! :count_all_rare
-                            o.count_all_common! :similarity
-                            o.count_all_rare :count_all_rare
-                            o.count_all_rare! :count_all_common
-                            o.count_all_rare :similarity
-                            o.similarity :similarity
-                            o.similarity! :count_all_common
-                            o.similarity! :count_all_rare
-                        }.
-                        paging(@ap).
-                        execute()
+            condition(cond).
+            condition_if("(key_common LIKE ? ESCAPE '@' OR key_rare LIKE ? ESCAPE '@')", query, query).
+            order_by(@ap.sortname, @ap.sortorder) { |o|
+                o.key_common :key_common
+                o.key_common :key_rare
+                o.key_rare :key_rare
+                o.key_rare :key_common
+                o.count_all_common :count_all_common
+                o.count_all_common! :count_all_rare
+                o.count_all_common! :similarity
+                o.count_all_rare :count_all_rare
+                o.count_all_rare! :count_all_common
+                o.count_all_rare :similarity
+                o.similarity :similarity
+                o.similarity! :count_all_common
+                o.similarity! :count_all_rare
+            }.
+            paging(@ap).
+            execute()
 
         return generate_json_result(total,
             res.map{ |row| {
