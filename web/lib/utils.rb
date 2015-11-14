@@ -222,26 +222,6 @@ def get_wiki_result(res)
     }, json_opts(params[:format]))
 end
 
-# Used in josm api calls
-def get_josm_style_rules_result(total, res)
-    return JSON.generate({
-        :page  => @ap.page,
-        :rp    => @ap.results_per_page,
-        :total => total,
-        :url   => request.url,
-        :data  => res.map{ |row| {
-            :key        => row['k'],
-            :value      => row['v'],
-            :value_bool => row['b'],
-            :rule       => row['rule'],
-            :area_color => row['area_color'] ? row['area_color'].sub(/^.*#/, '#') : '',
-            :line_color => row['line_color'] ? row['line_color'].sub(/^.*#/, '#') : '',
-            :line_width => row['line_width'] ? row['line_width'].to_i : 0,
-            :icon       => row['icon_source'] && row['icon_source'] != 'misc/deprecated.png' && row['icon_source'] != 'misc/no_icon.png' ? row['icon_source'] : ''
-        } }
-    }, json_opts(params[:format]))
-end
-
 def paging_results(array)
     return [
         [ :total, :INT, 'Total number of results.' ],
