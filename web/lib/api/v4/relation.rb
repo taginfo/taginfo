@@ -1,5 +1,4 @@
 # web/lib/api/v4/relation.rb
-
 class Taginfo < Sinatra::Base
 
     api(4, 'relation/roles', {
