@@ -196,7 +196,8 @@ end
 
 # Used in wiki api calls
 def get_wiki_result(res)
-    return JSON.generate(res.map{ |row| {
+    return generate_json_result(res.size,
+        res.map{ |row| {
             :lang             => row['lang'],
             :language         => ::Language[row['lang']].native_name,
             :language_en      => ::Language[row['lang']].english_name,
@@ -218,8 +219,8 @@ def get_wiki_result(res)
             :tags_implies     => row['tags_implies'    ].split(','),
             :tags_combination => row['tags_combination'].split(','),
             :tags_linked      => row['tags_linked'     ].split(',')
-        }
-    }, json_opts(params[:format]))
+        } }
+    )
 end
 
 def paging_results(array)

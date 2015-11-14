@@ -79,25 +79,22 @@ var create_flexigrid_for = {
             usepager: false,
             useRp: false,
             preProcess: function(data) {
-                return {
-                    total: data.size,
-                    page: 1,
-                    rows: jQuery.map(data, function(row, i) {
-                        return { 'cell': [
-                            fmt_language(row.lang, row.language, row.language_en),
-                            link_to_wiki(row.title),
-                            html_escape(row.description),
-                            fmt_wiki_image_popup(row.image),
-                            fmt_type_icon('node',     row.on_node) +
-                            fmt_type_icon('way',      row.on_way) +
-                            fmt_type_icon('area',     row.on_area) +
-                            fmt_type_icon('relation', row.on_relation),
-                            fmt_key_or_tag_list(row.tags_implies),
-                            fmt_key_or_tag_list(row.tags_combination),
-                            fmt_key_or_tag_list(row.tags_linked)
-                        ]};
-                    })
-                };
+                data.rows = jQuery.map(data.data, function(row, i) {
+                    return { 'cell': [
+                        fmt_language(row.lang, row.language, row.language_en),
+                        link_to_wiki(row.title),
+                        html_escape(row.description),
+                        fmt_wiki_image_popup(row.image),
+                        fmt_type_icon('node',     row.on_node) +
+                        fmt_type_icon('way',      row.on_way) +
+                        fmt_type_icon('area',     row.on_area) +
+                        fmt_type_icon('relation', row.on_relation),
+                        fmt_key_or_tag_list(row.tags_implies),
+                        fmt_key_or_tag_list(row.tags_combination),
+                        fmt_key_or_tag_list(row.tags_linked)
+                    ] };
+                });
+                return data;
             }
         });
     },
