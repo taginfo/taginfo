@@ -178,3 +178,15 @@ def generate_json_result(total, data)
     return JSON.generate(result, json_opts(params[:format]))
 end
 
+def get_png(table, type, key, value=nil)
+    content_type :png
+    @db.select("SELECT png FROM db.#{ table }_distributions").
+        condition("object_type=?", type).
+        condition('key = ?', key).
+        condition_if('value = ?', value).
+        get_first_value() ||
+    @db.select('SELECT png FROM db.key_distributions').
+        is_null('key').
+        get_first_value()
+end
+

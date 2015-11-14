@@ -88,17 +88,7 @@ class Taginfo < Sinatra::Base
         :example => { :key => 'amenity', :value => 'post_box' },
         :ui => '/tags/amenit=post_boxy#map'
     }) do
-        key   = params[:key]
-        value = params[:value]
-        content_type :png
-        @db.select('SELECT png FROM db.tag_distributions').
-            condition("object_type='n'").
-            condition('key = ?', key).
-            condition('value = ?', value).
-            get_first_value() ||
-        @db.select('SELECT png FROM db.key_distributions').
-            is_null('key').
-            get_first_value()
+        get_png('tag', 'n', params[:key], params[:value])
     end
 
     api(4, 'tag/distribution/ways', {
@@ -108,17 +98,7 @@ class Taginfo < Sinatra::Base
         :example => { :key => 'highway', :value => 'residential' },
         :ui => '/tags/highway=residential#map'
     }) do
-        key   = params[:key]
-        value = params[:value]
-        content_type :png
-        @db.select('SELECT png FROM db.tag_distributions').
-            condition("object_type='w'").
-            condition('key = ?', key).
-            condition('value = ?', value).
-            get_first_value() ||
-        @db.select('SELECT png FROM db.key_distributions').
-            is_null('key').
-            get_first_value()
+        get_png('tag', 'w', params[:key], params[:value])
     end
 
     api(4, 'tag/stats', {
