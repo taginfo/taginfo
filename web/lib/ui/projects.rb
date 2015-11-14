@@ -22,7 +22,7 @@ class Taginfo < Sinatra::Base
             halt 404
         end
 
-        @title = [h(@project['name']), t.taginfo.projects]
+        @title = [@project['name'], t.taginfo.projects]
 
         section :projects
 

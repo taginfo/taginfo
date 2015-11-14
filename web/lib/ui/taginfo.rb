@@ -128,7 +128,7 @@ class Taginfo < Sinatra::Base
     end
 
     get %r{/taginfo/projects/([a-z_]+)/error_log} do |id|
-        @title = "Error log for project #{h(id)}"
+        @title = "Error log for project #{ id }"
         @section = 'taginfo'
         @section_title = t.taginfo.meta
 

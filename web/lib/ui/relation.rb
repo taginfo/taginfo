@@ -10,7 +10,7 @@ class Taginfo < Sinatra::Base
 
         @rtype_uri  = escape(@rtype)
 
-        @title = [escape_html(@rtype), t.osm.relations]
+        @title = [@rtype, t.osm.relations]
         section :relations
 
         @wiki_count = @db.count('wiki.relation_pages').condition('rtype=?', @rtype).get_first_i
