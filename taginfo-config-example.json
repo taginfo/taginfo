@@ -123,8 +123,8 @@
         // Extra compilerflags, for instance to find Osmium.
         "cxxflags": "-I../../../osmium/osmium/include",
         // Node location store. For really large OSM files (whole planet or large continent)
-        // this should be "MmapAnon", otherwise "SparseTable".
-        "geodistribution": "SparseTable",
+        // this should be "DenseMmapArray" (or "DenseMemArray" on OSX), otherwise "SparseMemArray".
+        "geodistribution": "SparseMemArray",
         // C++ type used for geodistribution
         "geodistribution_int": "uint16_t"
     }

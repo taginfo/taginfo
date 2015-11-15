@@ -22,14 +22,19 @@
 
 */
 
-#include <stdexcept>
 #include <limits>
+#include <memory>
+#include <stdexcept>
+#include <vector>
 
 #include <gd.h>
 
+#include <osmium/osm/location.hpp>
+
+
 /**
- * Functor class defining the () operator as a function that limits a
- * Osmium::OSM::Position to a bounding box, reduces the resolution
+ * Functor class defining the call operator as a function that limits a
+ * osmium::Location to a bounding box, reduces the resolution
  * of the coordinates and returns an integer.
  *
  * If the position is outside the bounding box, std::numeric_limits<T>::max()
@@ -62,7 +67,7 @@ public:
         }
     }
 
-    T operator()(const Osmium::OSM::Position& p) const {
+    T operator()(const osmium::Location& p) const {
         if (p.lon() < m_minx || p.lat() < m_miny || p.lon() >= m_maxx || p.lat() >= m_maxy) {
             // if the position is out of bounds we return MAXINT for type T
             return std::numeric_limits<T>::max();
@@ -103,42 +108,36 @@ public:
  */
 class GeoDistribution {
 
-    typedef std::vector<bool> geo_distribution_t;
+    typedef std::vector<bool> geo_distribution_type;
 
     /**
      * Contains a pointer to a bitset that gives us the distribution.
-     * If only one grid cell is used so far, this pointer is NULL. Only
+     * If only one grid cell is used so far, this pointer is nullptr. Only
      * if more than one grid cell is used, we dynamically create an
      * object for this.
      */
-    geo_distribution_t* m_distribution;
+    std::unique_ptr<geo_distribution_type> m_distribution = nullptr;
 
     /**
      * Number of set grid cells.
      */
-    unsigned int m_cells;
+    unsigned int m_cells = 0;
 
     /// If there is only one grid cell location, this is where its kept.
-    rough_position_t m_location;
+    rough_position_type m_location = 0;
 
     /// Overall distribution
-    static geo_distribution_t c_distribution_all;
+    static geo_distribution_type c_distribution_all;
 
     static int c_width;
     static int c_height;
 
 public:
 
-    GeoDistribution() : m_distribution(NULL), m_cells(0), m_location(0) {
-    }
-
-    ~GeoDistribution() {
-        delete m_distribution;
-    }
+    GeoDistribution() = default;
 
     void clear() {
-        delete m_distribution;
-        m_distribution = NULL;
+        m_distribution.reset(nullptr);
         m_cells = 0;
         m_location = 0;
     }
@@ -152,8 +151,8 @@ public:
     /**
      * Add the given coordinate to the distribution store.
      */
-    void add_coordinate(rough_position_t n) {
-        if (n == std::numeric_limits<rough_position_t>::max()) {
+    void add_coordinate(rough_position_type n) {
+        if (n == std::numeric_limits<rough_position_type>::max()) {
             // ignore positions that are out of bounds
             return;
         }
@@ -162,20 +161,65 @@ public:
             m_cells++;
             c_distribution_all[n] = true;
         } else if (m_cells == 1 && m_location != n) {
-            m_distribution = new geo_distribution_t(c_width*c_height);
-            (*m_distribution)[m_location] = true;
+            m_distribution.reset(new geo_distribution_type(c_width * c_height));
+            m_distribution->operator[](m_location) = true;
             c_distribution_all[m_location] = true;
-            (*m_distribution)[n] = true;
+            m_distribution->operator[](n) = true;
             c_distribution_all[n] = true;
             m_cells++;
         } else if (m_cells == 1 && m_location == n) {
             // nothing to do
-        } else if (! (*m_distribution)[n]) {
+        } else if (! m_distribution->operator[](n)) {
             m_cells++;
-            (*m_distribution)[n] = true;
+            m_distribution->operator[](n) = true;
             c_distribution_all[n] = true;
         }
     }
+
+    class Image {
+
+        gdImagePtr m_image;
+        int m_color;
+
+    public:
+
+        Image(int width, int height) :
+            m_image(gdImageCreate(width, height)) {
+            gdImageColorTransparent(m_image, gdImageColorAllocate(m_image, 0, 0, 0));
+            m_color = gdImageColorAllocate(m_image, 180, 0, 0);
+        }
+
+        ~Image() {
+            gdImageDestroy(m_image);
+        }
+
+        void set_pixel(int x, int y) {
+            gdImageSetPixel(m_image, x, y, m_color);
+        }
+
+        gdImagePtr data() {
+            return m_image;
+        }
+
+    }; // class Image
+
+    class Png {
+
+    public:
+
+        int size;
+        void* data;
+
+        Png(Image& image) :
+            size(0),
+            data(gdImagePngPtr(image.data(), &size)) {
+        }
+
+        ~Png() {
+            gdFree(data);
+        }
+
+    }; // class Png
 
     /**
      * Create PNG image.
@@ -186,50 +230,31 @@ public:
      *        image.
      * @returns Pointer to memory area with PNG image.
      */
-    void* create_png(int* size) {
-        gdImagePtr im = gdImageCreate(c_width, c_height);
-        int bgColor = gdImageColorAllocate(im, 0, 0, 0);
-        gdImageColorTransparent(im, bgColor);
-        int fgColor = gdImageColorAllocate(im, 180, 0, 0);
+    Png create_png() {
+        Image image(c_width, c_height);
 
         if (m_cells == 1) {
             int y = m_location / c_width;
             int x = m_location - (y * c_width);
-            gdImageSetPixel(im, x, y, fgColor);
+            image.set_pixel(x, y);
         } else if (m_cells >= 2) {
             int n=0;
             for (int y=0; y < c_height; y++) {
                 for (int x=0; x < c_width; x++) {
-                    if ((*m_distribution)[n]) {
-                        gdImageSetPixel(im, x, y, fgColor);
+                    if (m_distribution->operator[](n)) {
+                        image.set_pixel(x, y);
                     }
                     n++;
                 }
             }
         }
 
-        void* png = gdImagePngPtr(im, size);
-        gdImageDestroy(im);
-
-        return png;
+        return Png(image);
     }
 
-    /**
-     * Call this to free the pointer returned by create_png().
-     */
-    void free_png(void *png) {
-        gdFree(png);
-    }
-
-    static void* create_empty_png(int* size) {
-        gdImagePtr im = gdImageCreate(c_width, c_height);
-        int bgColor = gdImageColorAllocate(im, 0, 0, 0);
-        gdImageColorTransparent(im, bgColor);
-
-        void* png = gdImagePngPtr(im, size);
-        gdImageDestroy(im);
-
-        return png;
+    static Png create_empty_png() {
+        Image image(c_width, c_height);
+        return Png(image);
     }
 
     /**

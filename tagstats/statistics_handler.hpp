@@ -22,7 +22,9 @@
 
 */
 
-#include <boost/foreach.hpp>
+#include <cstdint>
+
+#include <osmium/handler.hpp>
 
 #include "sqlite.hpp"
 
@@ -30,13 +32,18 @@
  * Osmium handler that collects basic statistics from OSM data and
  * writes it to a Sqlite database.
  */
-class StatisticsHandler : public Osmium::Handler::Base {
+class StatisticsHandler : public osmium::handler::Handler {
 
 public:
 
     StatisticsHandler(Sqlite::Database& database) :
-        Base(),
-        m_database(database) {
+        Handler(),
+        m_stats(),
+        m_stat_names(nullptr),
+        m_database(database),
+        m_id(0),
+        m_version(0),
+        m_tag_count(0) {
         // if you change anything in this array, also change the corresponding struct below
         static const char *sn[] = {
             "nodes",
@@ -82,8 +89,8 @@ public:
         }
     }
 
-    void node(const shared_ptr<Osmium::OSM::Node const>& node) {
-        update_common_stats(*node);
+    void node(const osmium::Node& node) {
+        update_common_stats(node);
         m_stats.nodes++;
         if (m_tag_count == 0) {
             m_stats.nodes_without_tags++;
@@ -101,31 +108,33 @@ public:
         m_stats.sum_node_version += m_version;
     }
 
-    void way(const shared_ptr<Osmium::OSM::Way const>& way) {
-        update_common_stats(*way);
+    void way(const osmium::Way& way) {
+        update_common_stats(way);
         m_stats.ways++;
-        if (way->is_closed()) {
+        if (way.is_closed()) {
             m_stats.closed_ways++;
         }
         if (m_id > static_cast<int64_t>(m_stats.max_way_id)) {
             m_stats.max_way_id = m_id;
         }
         m_stats.way_tags += m_tag_count;
-        m_stats.way_nodes += way->nodes().size();
+
+        auto way_nodes_size = way.nodes().size();
+        m_stats.way_nodes += way_nodes_size;
         if (m_tag_count > static_cast<int64_t>(m_stats.max_tags_on_way)) {
             m_stats.max_tags_on_way = m_tag_count;
         }
-        if (way->nodes().size() > static_cast<int64_t>(m_stats.max_nodes_on_way)) {
-            m_stats.max_nodes_on_way = way->nodes().size();
+        if (way_nodes_size > m_stats.max_nodes_on_way) {
+            m_stats.max_nodes_on_way = way_nodes_size;
         }
         if (m_version > static_cast<int64_t>(m_stats.max_way_version)) {
             m_stats.max_way_version = m_version;
         }
         m_stats.sum_way_version += m_version;
 
-        osm_object_id_t ref = 0;
-        BOOST_FOREACH(const Osmium::OSM::WayNode& wn, way->nodes()) {
-            osm_object_id_t diff = wn.ref() - ref;
+        osmium::object_id_type ref = 0;
+        for (const auto& wn : way.nodes()) {
+            osmium::object_id_type diff = wn.ref() - ref;
             if (diff == 1) {
                 ++m_stats.way_nodes_consecutive;
             } else if (diff <= 127) { // 2^7-1
@@ -137,19 +146,19 @@ public:
         }
     }
 
-    void relation(const shared_ptr<Osmium::OSM::Relation const>& relation) {
-        update_common_stats(*relation);
+    void relation(const osmium::Relation& relation) {
+        update_common_stats(relation);
         m_stats.relations++;
         if (m_id > static_cast<int64_t>(m_stats.max_relation_id)) {
             m_stats.max_relation_id = m_id;
         }
         m_stats.relation_tags += m_tag_count;
-        osm_sequence_id_t member_count = relation->members().size();
+        auto member_count = relation.members().size();
         m_stats.relation_members += member_count;
         if (m_tag_count > static_cast<int64_t>(m_stats.max_tags_on_relation)) {
             m_stats.max_tags_on_relation = m_tag_count;
         }
-        if (member_count > static_cast<int64_t>(m_stats.max_members_on_relation)) {
+        if (member_count > m_stats.max_members_on_relation) {
             m_stats.max_members_on_relation = member_count;
         }
         if (m_version > static_cast<int64_t>(m_stats.max_relation_version)) {
@@ -157,22 +166,24 @@ public:
         }
         m_stats.sum_relation_version += m_version;
 
-        BOOST_FOREACH(const Osmium::OSM::RelationMember& member, relation->members()) {
+        for (const auto& member : relation.members()) {
             switch (member.type()) {
-                case 'n':
+                case osmium::item_type::node:
                     ++m_stats.relation_member_nodes;
                     break;
-                case 'w':
+                case osmium::item_type::way:
                     ++m_stats.relation_member_ways;
                     break;
-                case 'r':
+                case osmium::item_type::relation:
                     ++m_stats.relation_member_relations;
+                    break;
+                default:
                     break;
             }
         }
     }
 
-    void final() {
+    void write_to_database() {
         Sqlite::Statement statement_insert_into_main_stats(m_database, "INSERT INTO stats (key, value) VALUES (?, ?);");
         m_database.begin_transaction();
 
@@ -233,16 +244,16 @@ private:
 
     Sqlite::Database& m_database;
 
-    osm_object_id_t m_id;
-    osm_version_t   m_version;
-    int             m_tag_count;
+    osmium::object_id_type m_id;
+    osmium::object_version_type m_version;
+    int m_tag_count;
 
-    void update_common_stats(const Osmium::OSM::Object& object) {
+    void update_common_stats(const osmium::OSMObject& object) {
         m_id        = object.id();
         m_version   = object.version();
         m_tag_count = object.tags().size();
 
-        osm_user_id_t uid = object.uid();
+        auto uid = object.uid();
         if (uid == 0) {
             m_stats.anon_user_objects++;
         }
@@ -250,7 +261,7 @@ private:
             m_stats.max_user_id = uid;
         }
 
-        osm_changeset_id_t changeset = object.changeset();
+        auto changeset = object.changeset();
         if (changeset > static_cast<int64_t>(m_stats.max_changeset_id)) {
             m_stats.max_changeset_id = changeset;
         }

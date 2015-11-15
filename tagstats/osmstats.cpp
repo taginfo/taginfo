@@ -21,11 +21,9 @@
 
 #include <iostream>
 
-#define OSMIUM_WITH_PBF_INPUT
-#define OSMIUM_WITH_XML_INPUT
-
-#include <osmium.hpp>
 #include <osmium/handler.hpp>
+#include <osmium/io/any_input.hpp>
+#include <osmium/visitor.hpp>
 
 #include "statistics_handler.hpp"
 
@@ -35,14 +33,13 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    Osmium::OSMFile infile(argv[1]);
+    osmium::io::File infile(argv[1]);
 
     Sqlite::Database db(argv[2], SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE);
     db.exec("CREATE TABLE stats (key TEXT, value INT64);");
 
     StatisticsHandler handler(db);
-    Osmium::Input::read(infile, handler);
-
-    google::protobuf::ShutdownProtobufLibrary();
+    osmium::io::Reader reader(infile);
+    osmium::apply(reader, handler);
 }
 

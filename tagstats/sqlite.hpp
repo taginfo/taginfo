@@ -11,8 +11,8 @@
 
 */
 
+#include <cstdint>
 #include <stdexcept>
-#include <stdint.h>
 #include <string>
 
 #include <sqlite3.h>

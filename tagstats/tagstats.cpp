@@ -21,10 +21,9 @@
 
 #include <getopt.h>
 
-#define OSMIUM_WITH_PBF_INPUT
-#define OSMIUM_WITH_XML_INPUT
-
-#include <osmium.hpp>
+#include <osmium/io/any_input.hpp>
+#include <osmium/osm/entity_bits.hpp>
+#include <osmium/visitor.hpp>
 
 #include "statistics_handler.hpp"
 
@@ -33,15 +32,15 @@
  * TAGSTATS_GEODISTRIBUTION_INT must be set in Makefile, typically to uint16_t
  * or uint32_t (for higher resolution but needs twice as much memory).
  */
-typedef TAGSTATS_GEODISTRIBUTION_INT rough_position_t;
+using rough_position_type = TAGSTATS_GEODISTRIBUTION_INT;
 
-// Set BYID in Makefile to SparseTable, MmapFile, or MmapAnon
+// Set BYID in Makefile to SparseMemArray, DenseMemArray, or DenseMmapArray
 #include TAGSTATS_GEODISTRIBUTION_INCLUDE
-typedef Osmium::Storage::ById::TAGSTATS_GEODISTRIBUTION_FOR_WAYS<rough_position_t> storage_t;
+using storage_type = osmium::index::map::TAGSTATS_GEODISTRIBUTION_FOR_WAYS<osmium::unsigned_object_id_type, rough_position_type>;
 
 #include "geodistribution.hpp"
 
-GeoDistribution::geo_distribution_t GeoDistribution::c_distribution_all;
+GeoDistribution::geo_distribution_type GeoDistribution::c_distribution_all;
 int GeoDistribution::c_width;
 int GeoDistribution::c_height;
 
@@ -136,12 +135,16 @@ int main(int argc, char *argv[]) {
     }
 
     GeoDistribution::set_dimensions(width, height);
-    Osmium::OSMFile infile(argv[optind]);
+    osmium::io::File infile(argv[optind]);
     Sqlite::Database db(argv[optind+1], SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE);
-    MapToInt<rough_position_t> map_to_int(left, bottom, right, top, width, height);
+    MapToInt<rough_position_type> map_to_int(left, bottom, right, top, width, height);
     TagStatsHandler handler(db, selection_database_name, map_to_int, min_tag_combination_count);
-    Osmium::Input::read(infile, handler);
 
-    google::protobuf::ShutdownProtobufLibrary();
+    handler.init();
+
+    osmium::io::Reader reader(infile);
+    osmium::apply(reader, handler);
+
+    handler.write_to_database();
 }
 

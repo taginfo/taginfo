@@ -22,14 +22,13 @@
 
 */
 
-#include <string>
 #include <fstream>
 #include <iostream>
 #include <map>
+#include <string>
 #include <utility>
 
 #include <google/sparse_hash_map>
-#include <boost/foreach.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
 
@@ -80,28 +79,28 @@ struct Counter {
     uint32_t count[3];
 
     Counter() {
-        count[NODE]     = 0; // nodes
-        count[WAY]      = 0; // ways
-        count[RELATION] = 0; // relations
+        count[0] = 0; // nodes
+        count[1] = 0; // ways
+        count[2] = 0; // relations
     }
 
     uint32_t nodes() const {
-        return count[NODE];
+        return count[0];
     }
     uint32_t ways() const {
-        return count[WAY];
+        return count[1];
     }
     uint32_t relations() const {
-        return count[RELATION];
+        return count[2];
     }
     uint32_t all() const {
-        return count[NODE] + count[WAY] + count[RELATION];
+        return count[0] + count[1] + count[2];
     }
 };
 
 typedef google::sparse_hash_map<const char *, Counter, djb2_hash, eqstr> value_hash_map_t;
 
-typedef google::sparse_hash_map<osm_user_id_t, uint32_t> user_hash_map_t;
+typedef google::sparse_hash_map<osmium::user_id_type, uint32_t> user_hash_map_t;
 
 typedef google::sparse_hash_map<const char *, Counter, djb2_hash, eqstr> combination_hash_map_t;
 
@@ -134,27 +133,29 @@ public:
           distribution() {
     }
 
-    void update(const char* value, const Osmium::OSM::Object& object, StringStore& string_store) {
-        key.count[object.type()]++;
+    void update(const char* value, const osmium::OSMObject& object, StringStore& string_store) {
+        int type = osmium::item_type_to_nwr_index(object.type());
+
+        key.count[type]++;
 
         value_hash_map_t::iterator values_iterator(values_hash.find(value));
         if (values_iterator == values_hash.end()) {
             Counter counter;
-            counter.count[object.type()] = 1;
+            counter.count[type] = 1;
             values_hash.insert(std::pair<const char*, Counter>(string_store.add(value), counter));
-            values.count[object.type()]++;
+            values.count[type]++;
         } else {
-            values_iterator->second.count[object.type()]++;
-            if (values_iterator->second.count[object.type()] == 1) {
-                values.count[object.type()]++;
+            values_iterator->second.count[type]++;
+            if (values_iterator->second.count[type] == 1) {
+                values.count[type]++;
             }
         }
 
         user_hash[object.uid()]++;
     }
 
-    void add_key_combination(const char* other_key, osm_object_type_t type) {
-        key_combination_hash[other_key].count[type]++;
+    void add_key_combination(const char* other_key, osmium::item_type type) {
+        key_combination_hash[other_key].count[osmium::item_type_to_nwr_index(type)]++;
     }
 
 }; // class KeyStats
@@ -173,8 +174,8 @@ public:
     KeyValueStats() : m_key_value_combination_hash() {
     }
 
-    void add_key_combination(const char* other_key, osm_object_type_t type) {
-        m_key_value_combination_hash[other_key].count[type]++;
+    void add_key_combination(const char* other_key, osmium::item_type type) {
+        m_key_value_combination_hash[other_key].count[osmium::item_type_to_nwr_index(type)]++;
     }
 
 }; // class KeyValueStats
@@ -207,23 +208,25 @@ public:
         m_role_counts() {
     }
 
-    void add(const Osmium::OSM::Relation& relation) {
+    void add(const osmium::Relation& relation) {
         m_count++;
 
-        BOOST_FOREACH(const Osmium::OSM::RelationMember& member, relation.members()) {
+        for (const auto& member : relation.members()) {
             RelationRoleStats& r = m_role_counts[member.role()];
             switch (member.type()) {
-                case 'n':
+                case osmium::item_type::node:
                     ++r.node;
                     ++m_node_members;
                     break;
-                case 'w':
+                case osmium::item_type::way:
                     ++r.way;
                     ++m_way_members;
                     break;
-                case 'r':
+                case osmium::item_type::relation:
                     ++r.relation;
                     ++m_relation_members;
+                    break;
+                default:
                     break;
             }
         }
@@ -231,12 +234,11 @@ public:
 
 }; // class RelationTypeStats
 
-typedef std::map<std::string, RelationTypeStats> relation_type_stats_map_t;
 
 /**
  * Osmium handler that creates statistics for Taginfo.
  */
-class TagStatsHandler : public Osmium::Handler::Base {
+class TagStatsHandler : public osmium::handler::Handler {
 
     /**
      * Tag combination not appearing at least this often are not written
@@ -252,7 +254,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
     key_value_geodistribution_hash_map_t m_key_value_geodistribution;
 
-    relation_type_stats_map_t m_relation_type_stats;
+    std::map<std::string, RelationTypeStats> m_relation_type_stats;
 
     time_t m_max_timestamp;
 
@@ -267,11 +269,11 @@ class TagStatsHandler : public Osmium::Handler::Base {
         std::cerr << "  " << msg << " took " << duration << " seconds (about " << duration / 60 << " minutes)\n\n";
     }
 
-    void _update_key_combination_hash(osm_object_type_t type, Osmium::OSM::TagList::const_iterator it1, Osmium::OSM::TagList::const_iterator end) {
+    void _update_key_combination_hash(osmium::item_type type, osmium::TagList::const_iterator it1, osmium::TagList::const_iterator end) {
         for (; it1 != end; ++it1) {
             const char* key1 = it1->key();
             key_hash_map_t::iterator tsi1(tags_stat.find(key1));
-            for (Osmium::OSM::TagList::const_iterator it2 = it1+1; it2 != end; ++it2) {
+            for (auto it2 = std::next(it1); it2 != end; ++it2) {
                 const char* key2 = it2->key();
                 key_hash_map_t::iterator tsi2(tags_stat.find(key2));
                 if (strcmp(key1, key2) < 0) {
@@ -283,7 +285,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
         }
     }
 
-    void _update_key_value_combination_hash2(osm_object_type_t type, Osmium::OSM::TagList::const_iterator it, Osmium::OSM::TagList::const_iterator end, key_value_hash_map_t::iterator kvi1, std::string& key_value1) {
+    void _update_key_value_combination_hash2(osmium::item_type type, osmium::TagList::const_iterator it, osmium::TagList::const_iterator end, key_value_hash_map_t::iterator kvi1, std::string& key_value1) {
         for (; it != end; ++it) {
             std::string key_value2(it->key());
             key_value_hash_map_t::iterator kvi2 = m_key_value_stats.find(key_value2.c_str());
@@ -309,12 +311,12 @@ class TagStatsHandler : public Osmium::Handler::Base {
         }
     }
 
-    void _update_key_value_combination_hash(osm_object_type_t type, Osmium::OSM::TagList::const_iterator it, Osmium::OSM::TagList::const_iterator end) {
+    void _update_key_value_combination_hash(osmium::item_type type, osmium::TagList::const_iterator it, osmium::TagList::const_iterator end) {
         for (; it != end; ++it) {
             std::string key_value1(it->key());
             key_value_hash_map_t::iterator kvi1 = m_key_value_stats.find(key_value1.c_str());
             if (kvi1 != m_key_value_stats.end()) {
-                _update_key_value_combination_hash2(type, it+1, end, kvi1, key_value1);
+                _update_key_value_combination_hash2(type, std::next(it), end, kvi1, key_value1);
             }
 
             key_value1 += "=";
@@ -322,7 +324,7 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
             kvi1 = m_key_value_stats.find(key_value1.c_str());
             if (kvi1 != m_key_value_stats.end()) {
-                _update_key_value_combination_hash2(type, it+1, end, kvi1, key_value1);
+                _update_key_value_combination_hash2(type, std::next(it), end, kvi1, key_value1);
             }
         }
     }
@@ -333,26 +335,23 @@ class TagStatsHandler : public Osmium::Handler::Base {
         Sqlite::Statement statement_insert_into_key_distributions(m_database, "INSERT INTO key_distributions (key, object_type, png) VALUES (?, ?, ?);");
         m_database.begin_transaction();
 
-        for (key_hash_map_t::const_iterator it = tags_stat.begin(); it != tags_stat.end(); ++it) {
-            KeyStats* stat = it->second;
+        for (const auto& p : tags_stat) {
+            KeyStats* stat = p.second;
 
             if (for_nodes) {
-                stat->cells.count[NODE] = stat->distribution.cells();
+                stat->cells.count[0] = stat->distribution.cells();
             } else {
-                stat->cells.count[WAY] = stat->distribution.cells();
+                stat->cells.count[1] = stat->distribution.cells();
             }
 
-            int size;
-            void* ptr = stat->distribution.create_png(&size);
-            sum_size += size;
+            auto png = stat->distribution.create_png();
+            sum_size += png.size;
 
             statement_insert_into_key_distributions
-            .bind_text(it->first)             // column: key
+            .bind_text(p.first)               // column: key
             .bind_text(for_nodes ? "n" : "w") // column: object_type
-            .bind_blob(ptr, size)             // column: png
+            .bind_blob(png.data, png.size)    // column: png
             .execute();
-
-            stat->distribution.free_png(ptr);
 
             stat->distribution.clear();
         }
@@ -372,18 +371,15 @@ class TagStatsHandler : public Osmium::Handler::Base {
         for (key_value_geodistribution_hash_map_t::const_iterator it = m_key_value_geodistribution.begin(); it != m_key_value_geodistribution.end(); ++it) {
             GeoDistribution* geo = it->second;
 
-            int size;
-            void* ptr = geo->create_png(&size);
-            sum_size += size;
+            auto png = geo->create_png();
+            sum_size += png.size;
 
             statement_insert_into_tag_distributions
             .bind_text(it->first.first)       // column: key
             .bind_text(it->first.second)      // column: value
             .bind_text(for_nodes ? "n" : "w") // column: object_type
-            .bind_blob(ptr, size)             // column: png
+            .bind_blob(png.data, png.size)    // column: png
             .execute();
-
-            geo->free_png(ptr);
 
             if (for_nodes) {
                 geo->clear();
@@ -421,70 +417,73 @@ class TagStatsHandler : public Osmium::Handler::Base {
 
     }
 
-    void collect_tag_stats(const Osmium::OSM::Object& object) {
+    void collect_tag_stats(const osmium::OSMObject& object) {
         if (m_max_timestamp < object.timestamp()) {
             m_max_timestamp = object.timestamp();
         }
 
-        Osmium::OSM::TagList::const_iterator begin = object.tags().begin();
-        Osmium::OSM::TagList::const_iterator end   = object.tags().end();
-
-        if (begin == end) {
+        if (object.tags().empty()) {
             return;
         }
 
         KeyStats* stat;
-        for (Osmium::OSM::TagList::const_iterator it = begin; it != end; ++it) {
-            const char* key = it->key();
-
-            key_hash_map_t::iterator tags_iterator(tags_stat.find(key));
+        for (const auto& tag : object.tags()) {
+            const auto tags_iterator = tags_stat.find(tag.key());
             if (tags_iterator == tags_stat.end()) {
                 stat = new KeyStats();
-                tags_stat.insert(std::pair<const char *, KeyStats *>(m_string_store.add(key), stat));
+                tags_stat.insert(std::pair<const char *, KeyStats *>(m_string_store.add(tag.key()), stat));
             } else {
                 stat = tags_iterator->second;
             }
-            stat->update(it->value(), object, m_string_store);
+            stat->update(tag.value(), object, m_string_store);
 
-            std::pair<const char*, const char*> keyvalue = std::make_pair(it->key(), it->value());
+            std::pair<const char*, const char*> keyvalue = std::make_pair(tag.key(), tag.value());
 
-            if (object.type() == NODE) {
-                rough_position_t location = m_map_to_int(static_cast<const Osmium::OSM::Node&>(object).position());
+            if (object.type() == osmium::item_type::node) {
+                rough_position_type location = m_map_to_int(static_cast<const osmium::Node&>(object).location());
                 stat->distribution.add_coordinate(location);
                 key_value_geodistribution_hash_map_t::iterator gd_it = m_key_value_geodistribution.find(keyvalue);
                 if (gd_it != m_key_value_geodistribution.end()) {
                     gd_it->second->add_coordinate(location);
                 }
             }
-            else if (object.type() == WAY) {
-                const Osmium::OSM::WayNodeList& wnl = static_cast<const Osmium::OSM::Way&>(object).nodes();
+            else if (object.type() == osmium::item_type::way) {
+                const auto& wnl = static_cast<const osmium::Way&>(object).nodes();
                 if (!wnl.empty()) {
                     key_value_geodistribution_hash_map_t::iterator gd_it = m_key_value_geodistribution.find(keyvalue);
-                    for (Osmium::OSM::WayNodeList::const_iterator it = wnl.begin(); it != wnl.end(); ++it) {
-                        rough_position_t location = m_storage[it->ref()];
-                        stat->distribution.add_coordinate(location);
-                        if (gd_it != m_key_value_geodistribution.end()) {
-                            gd_it->second->add_coordinate(location);
+                    for (const auto& wn : wnl) {
+                        try {
+                            rough_position_type location = m_storage.get(wn.positive_ref());
+                            stat->distribution.add_coordinate(location);
+                            if (gd_it != m_key_value_geodistribution.end()) {
+                                gd_it->second->add_coordinate(location);
+                            }
+                        } catch (const osmium::not_found&) {
+                            // node is missing for way: ignore
                         }
                     }
                 }
             }
         }
 
+        osmium::TagList::const_iterator begin = object.tags().begin();
+        osmium::TagList::const_iterator end   = object.tags().end();
         _update_key_combination_hash(object.type(), begin, end);
         _update_key_value_combination_hash(object.type(), begin, end);
     }
 
     StatisticsHandler statistics_handler;
 
-    MapToInt<rough_position_t> m_map_to_int;
+    MapToInt<rough_position_type> m_map_to_int;
 
-    storage_t m_storage;
+    storage_type m_storage;
+
+    osmium::item_type m_last_type = osmium::item_type::node;
 
 public:
 
-    TagStatsHandler(Sqlite::Database& database, const std::string& selection_database_name, MapToInt<rough_position_t>& map_to_int, unsigned int min_tag_combination_count) :
-        Base(),
+    TagStatsHandler(Sqlite::Database& database, const std::string& selection_database_name, MapToInt<rough_position_type>& map_to_int, unsigned int min_tag_combination_count) :
+        Handler(),
         m_min_tag_combination_count(min_tag_combination_count),
         m_max_timestamp(0),
         m_string_store(string_store_size),
@@ -528,83 +527,75 @@ public:
         }
     }
 
-    void node(const shared_ptr<Osmium::OSM::Node const>& node) {
+    void node(const osmium::Node& node) {
         statistics_handler.node(node);
-        collect_tag_stats(*node);
-        m_storage.set(node->id(), m_map_to_int(node->position()));
+        collect_tag_stats(node);
+        m_storage.set(node.positive_id(), m_map_to_int(node.location()));
     }
 
-    void way(const shared_ptr<Osmium::OSM::Way const>& way) {
+    void way(const osmium::Way& way) {
+        if (m_last_type != osmium::item_type::way) {
+            before_ways();
+            m_last_type = osmium::item_type::way;
+        }
+
         statistics_handler.way(way);
-        collect_tag_stats(*way);
+        collect_tag_stats(way);
     }
 
-    void relation(const shared_ptr<Osmium::OSM::Relation const>& relation) {
-        statistics_handler.relation(relation);
-        collect_tag_stats(*relation);
+    void relation(const osmium::Relation& relation) {
+        if (m_last_type != osmium::item_type::relation) {
+            before_relations();
+            m_last_type = osmium::item_type::relation;
+        }
 
-        const char* type = relation->tags().get_value_by_key("type");
+        statistics_handler.relation(relation);
+        collect_tag_stats(relation);
+
+        const char* type = relation.tags().get_value_by_key("type");
         if (type) {
-            relation_type_stats_map_t::iterator it = m_relation_type_stats.find(type);
+            auto it = m_relation_type_stats.find(type);
             if (it != m_relation_type_stats.end()) {
-                it->second.add(*relation);
+                it->second.add(relation);
             }
         }
     }
 
-    void before_nodes() {
-        std::cerr << "------------------------------------------------------------------------------\n";
-        std::cerr << "Processing nodes...\n";
-        timer = time(0);
-    }
-
-    void after_nodes() {
+    void before_ways() {
         _timer_info("processing nodes");
         _print_memory_usage();
 
-        int size;
-        void* ptr = GeoDistribution::create_empty_png(&size);
+        auto png = GeoDistribution::create_empty_png();
         Sqlite::Statement statement_insert_into_key_distributions(m_database, "INSERT INTO key_distributions (png) VALUES (?);");
         m_database.begin_transaction();
         statement_insert_into_key_distributions
-        .bind_blob(ptr, size) // column: png
+        .bind_blob(png.data, png.size) // column: png
         .execute();
         m_database.commit();
-
-        gdFree(ptr);
 
         _print_and_clear_key_distribution_images(true);
         _print_and_clear_tag_distribution_images(true);
         timer = time(0);
         _timer_info("dumping images");
         _print_memory_usage();
-    }
 
-    void before_ways() {
         std::cerr << "------------------------------------------------------------------------------\n";
         std::cerr << "Processing ways...\n";
         timer = time(0);
     }
 
-    void after_ways() {
+    void before_relations() {
         _timer_info("processing ways");
         _print_and_clear_key_distribution_images(false);
         _print_and_clear_tag_distribution_images(false);
         _print_memory_usage();
-    }
 
-    void before_relations() {
         std::cerr << "------------------------------------------------------------------------------\n";
         std::cerr << "Processing relations...\n";
         timer = time(0);
     }
 
-    void after_relations() {
-        _timer_info("processing relations");
-        _print_memory_usage();
-    }
-
-    void init(Osmium::OSM::Meta&) {
+    void init() { // XXX
         std::cerr << "------------------------------------------------------------------------------\n";
         std::cerr << "Starting tagstats...\n\n";
         std::cerr << "Sizes of some important data structures:\n";
@@ -616,13 +607,20 @@ public:
         std::cerr << "  sizeof(KeyStats)                   = " << sizeof(KeyStats) << "\n\n";
 
         _print_memory_usage();
+
+        std::cerr << "------------------------------------------------------------------------------\n";
+        std::cerr << "Processing nodes...\n";
+        timer = time(0);
     }
 
-    void final() {
+    void write_to_database() {
+        _timer_info("processing relations");
+        _print_memory_usage();
+
         std::cerr << "------------------------------------------------------------------------------\n";
         std::cerr << "Writing results to database...\n";
         timer = time(0);
-        statistics_handler.final();
+        statistics_handler.write_to_database();
 
         Sqlite::Statement statement_insert_into_keys(m_database, "INSERT INTO keys (key, " \
                 " count_all,  count_nodes,  count_ways,  count_relations, " \
@@ -671,20 +669,20 @@ public:
         uint64_t user_hash_size=0;
         uint64_t user_hash_buckets=0;
 
-        for (key_hash_map_t::const_iterator tags_iterator(tags_stat.begin()); tags_iterator != tags_stat.end(); ++tags_iterator) {
-            KeyStats *stat = tags_iterator->second;
+        for (const auto& key_stat : tags_stat) {
+            KeyStats *stat = key_stat.second;
 
             values_hash_size    += stat->values_hash.size();
             values_hash_buckets += stat->values_hash.bucket_count();
 
-            for (value_hash_map_t::const_iterator values_iterator(stat->values_hash.begin()); values_iterator != stat->values_hash.end(); ++values_iterator) {
+            for (const auto& value_stat : stat->values_hash) {
                 statement_insert_into_tags
-                .bind_text(tags_iterator->first)                   // column: key
-                .bind_text(values_iterator->first)                 // column: value
-                .bind_int64(values_iterator->second.all())         // column: count_all
-                .bind_int64(values_iterator->second.nodes())       // column: count_nodes
-                .bind_int64(values_iterator->second.ways())        // column: count_ways
-                .bind_int64(values_iterator->second.relations())   // column: count_relations
+                .bind_text(key_stat.first)                   // column: key
+                .bind_text(value_stat.first)                 // column: value
+                .bind_int64(value_stat.second.all())         // column: count_all
+                .bind_int64(value_stat.second.nodes())       // column: count_nodes
+                .bind_int64(value_stat.second.ways())        // column: count_ways
+                .bind_int64(value_stat.second.relations())   // column: count_relations
                 .execute();
             }
 
@@ -692,7 +690,7 @@ public:
             user_hash_buckets += stat->user_hash.bucket_count();
 
             statement_insert_into_keys
-            .bind_text(tags_iterator->first)      // column: key
+            .bind_text(key_stat.first)            // column: key
             .bind_int64(stat->key.all())          // column: count_all
             .bind_int64(stat->key.nodes())        // column: count_nodes
             .bind_int64(stat->key.ways())         // column: count_ways
@@ -709,34 +707,31 @@ public:
             key_combination_hash_size    += stat->key_combination_hash.size();
             key_combination_hash_buckets += stat->key_combination_hash.bucket_count();
 
-            for (combination_hash_map_t::const_iterator it(stat->key_combination_hash.begin()); it != stat->key_combination_hash.end(); ++it) {
-                const Counter *s = &(it->second);
+            for (const auto& key_combo_stat : stat->key_combination_hash) {
                 statement_insert_into_key_combinations
-                .bind_text(tags_iterator->first) // column: key1
-                .bind_text(it->first)            // column: key2
-                .bind_int64(s->all())            // column: count_all
-                .bind_int64(s->nodes())          // column: count_nodes
-                .bind_int64(s->ways())           // column: count_ways
-                .bind_int64(s->relations())      // column: count_relations
+                .bind_text(key_stat.first)         // column: key1
+                .bind_text(key_combo_stat.first)   // column: key2
+                .bind_int64(key_combo_stat.second.all())            // column: count_all
+                .bind_int64(key_combo_stat.second.nodes())          // column: count_nodes
+                .bind_int64(key_combo_stat.second.ways())           // column: count_ways
+                .bind_int64(key_combo_stat.second.relations())      // column: count_relations
                 .execute();
             }
 
             delete stat; // lets make valgrind happy
         }
 
-        for (key_value_hash_map_t::const_iterator tags_iterator = m_key_value_stats.begin(); tags_iterator != m_key_value_stats.end(); ++tags_iterator) {
-            KeyValueStats* stat = tags_iterator->second;
+        for (const auto& key_value_stat : m_key_value_stats) {
+            KeyValueStats *stat = key_value_stat.second;
 
             std::vector<std::string> kv1;
-            boost::split(kv1, tags_iterator->first, boost::is_any_of("="));
+            boost::split(kv1, key_value_stat.first, boost::is_any_of("="));
             kv1.push_back(""); // if there is no = in key, make sure there is an empty value
 
-            for (combination_hash_map_t::const_iterator it = stat->m_key_value_combination_hash.begin(); it != stat->m_key_value_combination_hash.end(); ++it) {
-                const Counter* s = &(it->second);
-
-                if (s->all() >= m_min_tag_combination_count) {
+            for (const auto& key_value_combo_stat : stat->m_key_value_combination_hash) {
+                if (key_value_combo_stat.second.all() >= m_min_tag_combination_count) {
                     std::vector<std::string> kv2;
-                    boost::split(kv2, it->first, boost::is_any_of("="));
+                    boost::split(kv2, key_value_combo_stat.first, boost::is_any_of("="));
                     kv2.push_back(""); // if there is no = in key, make sure there is an empty value
 
                     statement_insert_into_tag_combinations
@@ -744,10 +739,10 @@ public:
                     .bind_text(kv1[1])          // column: value1
                     .bind_text(kv2[0])          // column: key2
                     .bind_text(kv2[1])          // column: value2
-                    .bind_int64(s->all())       // column: count_all
-                    .bind_int64(s->nodes())     // column: count_nodes
-                    .bind_int64(s->ways())      // column: count_ways
-                    .bind_int64(s->relations()) // column: count_relations
+                    .bind_int64(key_value_combo_stat.second.all())       // column: count_all
+                    .bind_int64(key_value_combo_stat.second.nodes())     // column: count_nodes
+                    .bind_int64(key_value_combo_stat.second.ways())      // column: count_ways
+                    .bind_int64(key_value_combo_stat.second.relations()) // column: count_relations
                     .execute();
                 }
             }
@@ -755,13 +750,10 @@ public:
             delete stat; // lets make valgrind happy
         }
 
-        typedef std::pair<const std::string, RelationTypeStats> relation_type_stats_map_iterator_t;
-        typedef std::pair<const std::string, RelationRoleStats> relation_role_stats_map_iterator_t;
-
-        BOOST_FOREACH(relation_type_stats_map_iterator_t it, m_relation_type_stats) {
-            const RelationTypeStats& r = it.second;
+        for (const auto& rtype_stats : m_relation_type_stats) {
+            const RelationTypeStats& r = rtype_stats.second;
             statement_insert_into_relation_types
-            .bind_text(it.first)                 // column: rtype
+            .bind_text(rtype_stats.first)        // column: rtype
             .bind_int64(r.m_count)               // column: count
             .bind_int64(r.m_node_members + r.m_way_members + r.m_relation_members)  // column: members_all
             .bind_int64(r.m_node_members)        // columns: members_nodes
@@ -769,11 +761,11 @@ public:
             .bind_int64(r.m_relation_members)    // columns: members_relations
             .execute();
 
-            BOOST_FOREACH(relation_role_stats_map_iterator_t roleit, r.m_role_counts) {
-                const RelationRoleStats& rstats = roleit.second;
+            for (const auto& role_stats : r.m_role_counts) {
+                const RelationRoleStats& rstats = role_stats.second;
                 statement_insert_into_relation_roles
-                .bind_text(it.first)             // column: rtype
-                .bind_text(roleit.first)         // column: role
+                .bind_text(rtype_stats.first)    // column: rtype
+                .bind_text(role_stats.first)     // column: role
                 .bind_int64(rstats.node + rstats.way + rstats.relation)  // column: count_all
                 .bind_int64(rstats.node)         // column: count_nodes
                 .bind_int64(rstats.way)          // column: count_ways
@@ -806,7 +798,7 @@ public:
         std::cerr << " values:           " << ((sizeof(const char*)*8 + sizeof(Counter)*8 + 3) * values_hash_buckets / 8 ) << "\n";
         std::cerr << " key combinations: " << ((sizeof(const char*)*8 + sizeof(Counter)*8 + 3) * key_combination_hash_buckets / 8 ) << "\n";
 
-        std::cerr << " users:    " << ((sizeof(osm_user_id_t)*8 + sizeof(uint32_t)*8 + 3) * user_hash_buckets / 8 )  << "\n";
+        std::cerr << " users:    " << ((sizeof(osmium::user_id_type)*8 + sizeof(uint32_t)*8 + 3) * user_hash_buckets / 8 )  << "\n";
 
         std::cerr << std::endl;
 
