@@ -261,6 +261,7 @@ pages:
         packed: Comprimido
         unpacked: Sin comprimir
         description: Descripción
+        note: Algunos índices no están en las bases de datos disponibles para su descarga aquí. El tamañó 'Comprimido' es el tamaño sin esos índices, el tamaño 'Sin comprimir' incluye los índices que probablemente desee construir después de la descarga.
     reports:
         intro: |
             Los reportes muestran los datos de las etiquetas desde diferentes ángulos.
@@ -335,6 +336,13 @@ pages:
         projects:
             title: Proyectos que utilizan esta clave
             description: Cómo se utiliza esta clave en el proyecto
+        similar:
+            tab: Similares
+            title: Claves similares
+            other: Claves similares
+            count_all_tooltip: Número de objetos con una clave similar
+            similarity: Similitud
+            similarity_tooltip: Números más pequeños significa que son más similares
     tag:
         description_from_wiki: Descripción de esta etiqueta desde la wiki (si está disponible en su idioma elegido, si no en Inglés).
         no_description_in_wiki: No hay descripción en el idioma Inglés para esta etiqueta en la wiki. (Véase también la pestaña "Wiki".)
@@ -410,6 +418,8 @@ pages:
             title: Etiquetas utilizadas por este proyecto
             intro: Este dato es proporcionado por el proyecto y no necesariamente está completo. Por favor, consulte la documentación del proyecto para obtener más información.
             description: Cómo se utiliza esta clave/etiqueta en el proyecto
+            count_all_tooltip: Número de objetos en la base de datos con esta clave/etiqueta
+            objects_tooltip: Los tipos de objeto que el proyecto utiliza
 
 flexigrid:
     pagetext: Página
@@ -432,6 +442,9 @@ sources:
     master:
         name: Maestro
         description: Estadísticas globales y otros datos necesarios para la interfaz de usuario de taginfo.
+    history:
+        name: Historial
+        description: Estadísticas globales a través del tiempo.
     db:
         name: Base de datos
         description: Estadísticas sobre cada clave y cada etiqueta de la base de datos principal de OSM (archivo del planeta).
@@ -449,9 +462,10 @@ reports:
     characters_in_keys:
         name: Caracteres en las claves
         intro: |
-            Cualquier carácter Unicode válido puede aparecer en una clave de OSM, pero generalmente se utilizan sólo
-            letras latinas en minúscula (a-z) y el guión abajo (_). A veces los dos puntos
-            (:) se añaden como un carácter de separación.
+            Cualquier carácter Unicode válido puede aparecer en una clave de OSM, pero
+            generalmente se utilizan sólo letras latinas en minúscula (a-z) y el guión
+            abajo (_). Los dos puntos (:) se utilizan a menudo como un carácter de separación.
+            Este reporte clasifica todas las claves según los caracteres que se utilizan.
         statistics:
             tab: Estadísticas
             title: Resumen de estadísticas
@@ -461,33 +475,67 @@ reports:
                 plain: Sólo letras latinas en minúscula (<span class="char">a</span> hasta la <span class="char">z</span>) y el guión abajo (<span class="char">_</span>), el primer y el último carácter son letras.
                 colon: Como A pero con uno o más signos de dos puntos (<span class="char">:</span>) en el interior.
                 letters: Como B pero con letras latinas en mayúscula o letras de otros alfabetos.
-                space: Como C pero contiene al menos un carácter de espacio en blanco (espacio, tabulador, nueva línea, retorno de carro, o de otros alfabetos).
-                problem: Como C pero contiene caracteres posiblemente problemáticos <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
+                space: Al menos un carácter de espacio en blanco (espacio, tabulador, nueva línea, retorno de carro, o de otros alfabetos).
+                problem: Contiene posiblemente caracteres problemáticos <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
                 rest: Todo lo demás.
                 total: Total
+        plain:
+            tab: Sencilla
+            title: Claves sencillas
+            intro: |
+                <p>Las claves que contienen sólo letras latinas en minúscula (<span
+                class="char">a</span> a la <span class="char">z</span>) y el
+                guión abajo (<span class="char">_</span>). El primer y el último
+                carácter deben ser letras. La mayoría de las claves simples deben
+                entrar en esta categoría.</p>
+        colon:
+            tab: Dos puntos
+            title: Claves con dos puntos
+            intro: |
+                <p>Las claves que tienen uno o más caracteres de dos puntos
+                (<span class="char">:</span>) en el interior, además de las
+                letras (<span class="char">a</span> a la <span
+                class="char">z</span>) y el guión abajo (<span
+                class="char">_</span>). Los dos puntos se utilizan a menudo
+                como un carácter separador de jerarquia.</p>
+        letters:
+            tab: Letras
+            title: Claves con letras mayúsculas o letras de otros alfabetos
+            intro: |
+                <p>Las letras minúsculas del alfabeto latino son generalmente
+                preferidas para las claves, pero a veces se utilizan mayúsculas
+                (por ejemplo, para abreviaturas conocidas) o letras de otros
+                alfabetos (por ejemplo, para claves que sólo son relevantes
+                para un área donde se usa ese alfabeto predominantemente).</p>
         space:
-            tab: Whitespace
+            tab: Espacios en blanco
             title: Claves con espacios en blanco
             intro: |
-                <p>Claves que contengan caracteres de espacios en blanco como espacio, tabulador,
-                nueva línea, retorno de carro o caracteres de espacios en blanco de otros
-                alfabetos.<br/>
-                Espacio en blanco en las claves pueden ser confusos, especialmente al
-                principio o al final de la clave, porque son invisibles. Generalmente
-                puede usarse el guión abajo (_) en su lugar.</p>
+                <p>Claves que contengan caracteres de espacios en blanco como
+                espacio, tabulación, nueva línea, retorno de carro o caracteres
+                de espacios en blanco de otros alfabetos. Espacio en blanco en
+                las claves pueden ser confusos, especialmente al principio o al
+                final de la clave, porque son invisibles. Generalmente el espacio
+                en blanco deve ser removido o utilizar el guión abajo
+                (<span class="char">_</span>) en su lugar.</p>
         problem:
             tab: Problemático
             title: Claves con caracteres posiblemente problemáticos
             intro: |
-                <p>Claves que contienen caracteres posiblemente problemáticos: <span
-                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> o caracteres
-                de control. Estos caracteres
-                pueden ser problemáticos, ya que se utilizan para citar cadenas en
-                diferentes lenguajes de programación o tienen un significado especial en XML, HTML,
-                URLs, y otros lugares. El signo igual se utiliza a menudo como separador
-                entre etiquetas claves y valores.<br/>
-                Las claves que aparecen en esta lista no son necesariamente malas. Pero
-                en muchos casos son sólo resultados de algún error.</p>
+                <p>Claves que contienen caracteres posiblemente problemáticos:
+                <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> o caracteres
+                de control. Estos caracteres pueden ser problemáticos, ya que se
+                utilizan para citar cadenas en diferentes lenguajes de
+                programación o tienen un significado especial en XML, HTML, URLs,
+                y otros lugares. El signo igual se utiliza a menudo como separador
+                entre etiquetas claves y valores. Las claves que aparecen en esta
+                lista no son necesariamente malas. Pero en muchos casos son sólo
+                resultados de algún error.</p>
+        rest:
+            tab: Resto
+            title: Todas las otras claves
+            intro: |
+                <p>Las claves que no encajan en ninguna de las otras categorías.</p>
     database_statistics:
         name: Estadísticas de la base de datos
         objects_in_db: Número de objetos en la base de datos
@@ -592,4 +640,52 @@ reports:
                 sólo muestran los bloques que pueden utilizarse para describir idiomas
                 independientemente de si en realidad son utilizados en OSM.
                 </p>
+    similar_keys:
+        name: Claves similares
+        intro: |
+            Este reporte muestra las claves utilizadas muy a menudo y claves
+            utilizadas muy raras veces. Esto expone muchas faltas de ortografía de
+            claves comunes, pero no es perfecto. !Tenga cuidado cuando corrija los
+            datos! NO se limite a editar mecanicamente estas claves con buscar y
+            reemplazar. Mire cada caso individualmente y también solucione otras
+            problemas que usted encuentre.
+        key_common: Claves utilizadas comúnmente
+        key_rare: Claves que rara vez se utilizan
+        count_common: Recuento
+        count_rare: Recuento
+        similarity: Similitud
+    historic_development:
+        name: Desarrollo histórico
+        intro: |
+            Desarrollo de algunas estadísticas importantes a través del tiempo.
+            Estos datos han sido recogidos por taginfo, pueden darse brechas
+            cuando taginfo no se ha ejecutado en un día por alguna razón.
+        keys:
+            title: Claves únicas
+        tags:
+            title: Etiquetas únicas
+        relation_types:
+            title: Tipos de relación únicos
+    wiki_images:
+        name: Imágenes wiki
+        intro: |
+            Las imágenes utilizadas en el wiki para simbolizar las claves en
+            diferentes idiomas. A veces, la imagen de una u otra variante de
+            idioma es mejor. Pero a veces tiene sentido tener diferentes
+            imágenes a causa de diferentes trasfondos culturales o algo así.
+    wiki_problems:
+        name: Problemas de análisis de la wiki
+        intro: |
+            Taginfo lee todas las páginas wiki utilizadas para describir las
+            claves, etiquetas y relaciones para encontrar información sobre las
+            etiquetas. Este reporte muestra una lista de problemas encontrados
+            durante la lectura de esas páginas.  Estos no son necesariamente
+            errores en la wiki, sólo significan que algo en las páginas wiki no
+            está formateado en una forma que taginfo entienda. O bien la página
+            tiene que ser corregida o taginfo tiene que ser corregido.
+        location: Ubicación
+        reason: Razón
+        wiki_page: Página wiki
+        lang: Idioma
+        info: Información adicional
 
