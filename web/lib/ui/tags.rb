@@ -36,12 +36,7 @@ class Taginfo < Sinatra::Base
         end
         @count_all = @db.select("SELECT count_#{@filter_type} FROM db.tags").condition('key = ? AND value = ?', @key, @value).get_first_i
 
-        @desc = h(get_tag_description(r18n.locale.code, @key, @value))
-        if @desc == ''
-            @desc = "<span class='empty'>#{ t.pages.tag.no_description_in_wiki }</span>"
-        else
-            @desc = "<span title='#{ t.pages.tag.description_from_wiki }' tipsy='w'>#{ @desc }</span>"
-        end
+        @desc = wrap_description(t.pages.tag, get_tag_description(r18n.locale.code, @key, @value))
 
         @db.select("SELECT width, height, image_url, thumb_url_prefix, thumb_url_suffix FROM wiki.wikipages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang=? AND key=? AND value=? UNION SELECT width, height, image_url, thumb_url_prefix, thumb_url_suffix FROM wiki.wikipages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang='en' AND key=? AND value=? LIMIT 1", r18n.locale.code, @key, @value, @key, @value).
             execute() do |row|

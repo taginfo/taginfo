@@ -16,12 +16,7 @@ class Taginfo < Sinatra::Base
         @wiki_count = @db.count('wiki.relation_pages').condition('rtype=?', @rtype).get_first_i
         @count_all_values = @db.select("SELECT count FROM db.relation_types").condition('rtype = ?', @rtype).get_first_i
 
-        @desc = h(get_relation_description(r18n.locale.code, @rtype))
-        if @desc == ''
-            @desc = "<span class='empty'>#{ t.pages.relation.no_description_in_wiki }</span>"
-        else
-            @desc = "<span title='#{ t.pages.relation.description_from_wiki }' tipsy='w'>#{ @desc }</span>"
-        end
+        @desc = wrap_description(t.pages.relation, get_relation_description(r18n.locale.code, @rtype))
 
         @db.select("SELECT width, height, image_url, thumb_url_prefix, thumb_url_suffix FROM wiki.relation_pages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang=? AND rtype=? UNION SELECT width, height, image_url, thumb_url_prefix, thumb_url_suffix FROM wiki.relation_pages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang='en' AND rtype=? LIMIT 1", r18n.locale.code, @rtype, @rtype).
             execute() do |row|

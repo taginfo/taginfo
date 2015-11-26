@@ -227,6 +227,14 @@ def get_relation_description(lang, rtype)
     get_description('wiki.relation_pages', 'rtype', lang, rtype, nil)
 end
 
+def wrap_description(translation, description)
+    if description != ''
+        return "<span title='#{ h(translation.description_from_wiki) }' tipsy='w'>#{ h(description) }</span>"
+    else
+        return "<span class='empty'>#{ h(translation.no_description_in_wiki) }</span>"
+    end
+end
+
 # ------------------------------------------------------------------------------
 
 # Used in wiki api calls
