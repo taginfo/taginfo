@@ -33,10 +33,7 @@ class Taginfo < Sinatra::Base
                     data[:count_nodes]     = result['count_nodes']
                     data[:count_ways]      = result['count_ways']
                     data[:count_relations] = result['count_relations']
-
-                    desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang=? AND key=? AND value IS NULL", r18n.locale.code, key).get_first_value())
-                    desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang='en' AND key=? AND value IS NULL", key).get_first_value()) if desc == ''
-                    data[:desc] = desc
+                    data[:desc]            = h(get_key_description(r18n.locale.code, key))
 
                     prevalent_values = @db.select("SELECT value, count, fraction FROM db.prevalent_values").
                         condition('key=?', key).
@@ -58,10 +55,7 @@ class Taginfo < Sinatra::Base
                     data[:count_nodes]     = result['count_nodes']
                     data[:count_ways]      = result['count_ways']
                     data[:count_relations] = result['count_relations']
-
-                    desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang=? AND key=? AND value=?", r18n.locale.code, key, value).get_first_value())
-                    desc = h(@db.select("SELECT description FROM wiki.wikipages WHERE lang='en' AND key=? AND value=?", key, value).get_first_value()) if desc == ''
-                    data[:desc] = desc
+                    data[:desc]            = h(get_tag_description(r18n.locale.code, key, value))
 
                     data[:prevalent_values] = []
 

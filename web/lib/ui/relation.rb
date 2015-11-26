@@ -16,8 +16,7 @@ class Taginfo < Sinatra::Base
         @wiki_count = @db.count('wiki.relation_pages').condition('rtype=?', @rtype).get_first_i
         @count_all_values = @db.select("SELECT count FROM db.relation_types").condition('rtype = ?', @rtype).get_first_i
 
-        @desc = h(@db.select("SELECT description FROM wiki.relation_pages WHERE lang=? AND rtype=?", r18n.locale.code, @rtype).get_first_value())
-        @desc = h(@db.select("SELECT description FROM wiki.relation_pages WHERE lang='en' AND rtype=?", @rtype).get_first_value()) if @desc == ''
+        @desc = h(get_relation_description(r18n.locale.code, @rtype))
         if @desc == ''
             @desc = "<span class='empty'>#{ t.pages.relation.no_description_in_wiki }</span>"
         else

@@ -194,6 +194,41 @@ end
 
 # ------------------------------------------------------------------------------
 
+# Get description for key/tag/relation from wiki page
+# Get it in given language or fall back to English if it isn't available
+def get_description(table, attr, lang, param, value)
+    [r18n.locale.code, 'en'].each do |lang|
+        select = @db.select("SELECT description FROM #{table}")
+                    .condition("lang=? AND #{attr}=?", lang, param)
+
+        if attr == 'key'
+            if value.nil?
+                select = select.condition('value IS NULL')
+            else
+                select = select.condition('value=?', value)
+            end
+        end
+
+        desc = select.get_first_value()
+        return desc if desc
+    end
+    return ''
+end
+
+def get_key_description(lang, key)
+    get_description('wiki.wikipages', 'key', lang, key, nil)
+end
+
+def get_tag_description(lang, key, value)
+    get_description('wiki.wikipages', 'key', lang, key, value)
+end
+
+def get_relation_description(lang, rtype)
+    get_description('wiki.relation_pages', 'rtype', lang, rtype, nil)
+end
+
+# ------------------------------------------------------------------------------
+
 # Used in wiki api calls
 def get_wiki_result(res)
     return generate_json_result(res.size,
