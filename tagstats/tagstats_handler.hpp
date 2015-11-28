@@ -418,8 +418,8 @@ class TagStatsHandler : public osmium::handler::Handler {
     }
 
     void collect_tag_stats(const osmium::OSMObject& object) {
-        if (m_max_timestamp < object.timestamp()) {
-            m_max_timestamp = object.timestamp();
+        if (m_max_timestamp < object.timestamp().seconds_since_epoch()) {
+            m_max_timestamp = object.timestamp().seconds_since_epoch();
         }
 
         if (object.tags().empty()) {
