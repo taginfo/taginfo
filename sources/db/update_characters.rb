@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# coding: utf-8
 #------------------------------------------------------------------------------
 #
 #  Taginfo source: DB
@@ -27,14 +28,14 @@
 require 'sqlite3'
 
 dir = ARGV[0] || '.'
-db = SQLite3::Database.new(dir + '/taginfo-db.db')
-db.results_as_hash = true
+database = SQLite3::Database.new(dir + '/taginfo-db.db')
+database.results_as_hash = true
 
-db.execute("PRAGMA journal_mode  = OFF")
-db.execute("PRAGMA synchronous   = OFF")
-db.execute("PRAGMA count_changes = OFF")
-db.execute("PRAGMA temp_store    = MEMORY")
-db.execute("PRAGMA cache_size    = 1000000")
+database.execute("PRAGMA journal_mode  = OFF")
+database.execute("PRAGMA synchronous   = OFF")
+database.execute("PRAGMA count_changes = OFF")
+database.execute("PRAGMA temp_store    = MEMORY")
+database.execute("PRAGMA cache_size    = 1000000")
 
 #------------------------------------------------------------------------------
 
@@ -42,12 +43,12 @@ regexes = [
     [ 'plain',   %r{^[a-z]([a-z_]*[a-z])?$} ],
     [ 'colon',   %r{^[a-z][a-z_:]*[a-z]$} ],
     [ 'letters', %r{^[\p{L}\p{M}]([\p{L}\p{M}\p{N}_:]*[\p{L}\p{M}\p{N}])?$}u ],
-    [ 'space',   %r{[\s\p{Z}]}u ],
+    [ 'space',   %r{[\p{Z}]}u ],
     [ 'problem', %r{[=+/&<>;\@'"?%#\\,\p{C}]}u ]
 ]
 
 keys = {}
-db.execute("SELECT key FROM keys").map{ |row| row['key'] }.each do |key|
+database.execute("SELECT key FROM keys").map{ |row| row['key'] }.each do |key|
     keys[key] = 'rest'
     regexes.each do |type, regex|
         if key.match(regex)
@@ -57,9 +58,9 @@ db.execute("SELECT key FROM keys").map{ |row| row['key'] }.each do |key|
     end
 end
 
-db.transaction do |db|
+database.transaction do |db|
     keys.each do |key, type|
-        db.execute("UPDATE keys SET characters=? WHERE key=?", type, key)
+        db.execute("UPDATE keys SET characters=? WHERE key=?", [type, key])
     end
 end
 

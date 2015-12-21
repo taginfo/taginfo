@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# coding: utf-8
 #------------------------------------------------------------------------------
 #
 #  get_image_info.rb [DIR]
@@ -45,18 +46,18 @@ require './lib/mediawikiapi.rb'
 #------------------------------------------------------------------------------
 
 dir = ARGV[0] || '.'
-db = SQLite3::Database.new(dir + '/taginfo-wiki.db')
-db.results_as_hash = true
+database = SQLite3::Database.new(dir + '/taginfo-wiki.db')
+database.results_as_hash = true
 
 #------------------------------------------------------------------------------
 
 api = MediaWikiAPI::API.new('wiki.openstreetmap.org')
 
-image_titles = db.execute("SELECT DISTINCT(image) AS title FROM wikipages WHERE image IS NOT NULL AND image != '' UNION SELECT DISTINCT(image) AS title FROM relation_pages WHERE image IS NOT NULL AND image != ''").
+image_titles = database.execute("SELECT DISTINCT(image) AS title FROM wikipages WHERE image IS NOT NULL AND image != '' UNION SELECT DISTINCT(image) AS title FROM relation_pages WHERE image IS NOT NULL AND image != ''").
                     map{ |row| row['title'] }.
                     select{ |title| title.match(%r{^(file|image):}i) }
 
-db.transaction do |db|
+database.transaction do |db|
     puts "Found #{ image_titles.size } different image titles"
 
     images_added = {}
@@ -77,8 +78,8 @@ db.transaction do |db|
             normalized = data['query']['normalized']
             if normalized
                 normalized.each do |n|
-                    db.execute('UPDATE wikipages SET image=? WHERE image=?', n['to'], n['from'])
-                    db.execute('UPDATE relation_pages SET image=? WHERE image=?', n['to'], n['from'])
+                    db.execute('UPDATE wikipages SET image=? WHERE image=?', [n['to'], n['from']])
+                    db.execute('UPDATE relation_pages SET image=? WHERE image=?', [n['to'], n['from']])
                 end
             end
 
@@ -111,7 +112,7 @@ db.transaction do |db|
                     end
 
                     images_added[v['title']] = 1
-                    db.execute("INSERT INTO wiki_images (image, width, height, size, mime, image_url, thumb_url_prefix, thumb_url_suffix) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                    db.execute("INSERT INTO wiki_images (image, width, height, size, mime, image_url, thumb_url_prefix, thumb_url_suffix) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [
                         v['title'],
                         info['width'],
                         info['height'],
@@ -120,7 +121,7 @@ db.transaction do |db|
                         info['url'],
                         prefix,
                         suffix
-                    )
+                    ])
                 end
             end
         rescue

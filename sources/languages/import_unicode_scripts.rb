@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# coding: utf-8
 #------------------------------------------------------------------------------
 #
 #  Taginfo source: Languages
@@ -27,20 +28,20 @@
 require 'sqlite3'
 
 dir = ARGV[0] || '.'
-db = SQLite3::Database.new(dir + '/taginfo-languages.db')
+database = SQLite3::Database.new(dir + '/taginfo-languages.db')
 
 #------------------------------------------------------------------------------
 
 property_value_alias_file = "#{dir}/PropertyValueAliases.txt"
 codepoint_script_mapping_file = "#{dir}/Scripts.txt"
 
-db.transaction do |db|
+database.transaction do |db|
     open(property_value_alias_file) do |file|
         file.each do |line|
             line.chomp!
             if line.match(%r{^sc ;})
-                (sc, script, name) = line.split(%r{\s*;\s*})
-                db.execute("INSERT INTO unicode_scripts (script, name) VALUES (?, ?)", script, name)
+                (_, script, name) = line.split(%r{\s*;\s*})
+                db.execute("INSERT INTO unicode_scripts (script, name) VALUES (?, ?)", [script, name])
             end
         end
     end
@@ -61,7 +62,7 @@ db.transaction do |db|
                 puts "Line does not match: #{line}"
                 next
             end
-            db.execute("INSERT INTO unicode_codepoint_script_mapping (codepoint_from, codepoint_to, name) VALUES (?, ?, ?)", from, to, script)
+            db.execute("INSERT INTO unicode_codepoint_script_mapping (codepoint_from, codepoint_to, name) VALUES (?, ?, ?)", [from, to, script])
         end
     end
 end

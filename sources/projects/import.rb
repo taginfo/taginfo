@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# coding: utf-8
 #------------------------------------------------------------------------------
 #
 #  Taginfo source: Projects
@@ -61,7 +62,7 @@ projects.each do |id, url|
         rescue
             last_modified = Time.now.utc
         end
-        db.execute("INSERT INTO projects (id, json_url, last_modified, fetch_date, fetch_status, fetch_json, status, data_updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        db.execute("INSERT INTO projects (id, json_url, last_modified, fetch_date, fetch_status, fetch_json, status, data_updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [
             id,
             url,
             last_modified,
@@ -70,15 +71,15 @@ projects.each do |id, url|
             response.body,
             (response.code == '200' ? 'OK' : 'FETCH ERROR'),
             last_modified
-        )
+        ])
     rescue
-        db.execute("INSERT INTO projects (id, json_url, fetch_date, fetch_status, status) VALUES (?, ?, ?, ?, ?)",
+        db.execute("INSERT INTO projects (id, json_url, fetch_date, fetch_status, status) VALUES (?, ?, ?, ?, ?)", [
             id,
             url,
             Time.now.utc.iso8601,
             500,
             'FETCH ERROR'
-        )
+        ])
     end
 end
 

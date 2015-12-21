@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# coding: utf-8
 #------------------------------------------------------------------------------
 #
 #  get_wiki_data.rb [DIR]
@@ -105,10 +106,10 @@ class WikiPage
     def check_title
         return :wrong_lang_format     if @lang  !~ /^[a-z]{2}(-[a-z0-9-]+)?$/
         return :lang_is_en            if @title =~ /^en:/i
-        return :value_in_key_page     if @ttype == 'key' && ! @value.nil?
-        return :no_value_for_tag_page if @ttype == 'tag' &&   @value.nil?
-        return :slash_in_key          if CONTAINS_SLASH.match(@key)
-        return :slash_in_value        if CONTAINS_SLASH.match(@value)
+        return :value_in_key_page     if defined?(@ttype) && @ttype == 'key' && ! @value.nil?
+        return :no_value_for_tag_page if defined?(@ttype) && @ttype == 'tag' &&   @value.nil?
+        return :slash_in_key          if defined?(@key) && CONTAINS_SLASH.match(@key)
+        return :slash_in_value        if defined?(@value) && CONTAINS_SLASH.match(@value)
         return :ok
     end
 
@@ -167,14 +168,14 @@ class WikiPage
         puts "FATAL: Parsing of page '#{title}' failed '#{ex.message}':"
         puts ex.backtrace.join("\n")
         @parsed = false
-        db.execute("INSERT INTO problems (location, reason, title, lang, key, value) VALUES ('page content', 'parsing failed', ?, ?, ?, ?)", title, lang, key, value)
+        db.execute("INSERT INTO problems (location, reason, title, lang, key, value) VALUES ('page content', 'parsing failed', ?, ?, ?, ?)", [title, lang, key, value])
     end
 
     def set_image(ititle, db)
         @image = ''
         if ititle.nil?
             puts "ERROR: invalid image: page='#{title}' image=nil"
-            db.execute("INSERT INTO problems (location, reason, title, lang, key, value) VALUES ('Template:Key/Value/RelationDescription', 'image parameter empty', ?, ?, ?, ?)", title, lang, key, value)
+            db.execute("INSERT INTO problems (location, reason, title, lang, key, value) VALUES ('Template:Key/Value/RelationDescription', 'image parameter empty', ?, ?, ?, ?)", [title, lang, key, value])
         elsif IMAGE_TITLE_FORMAT.match(ititle)
             @image = "File:#{$2}"
             if ! PAGE_TITLE_FORMAT.match(ititle)
@@ -182,7 +183,7 @@ class WikiPage
             end
         else
             puts "ERROR: invalid image: page='#{title}' image='#{ititle}'"
-            db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'invalid image parameter', ?, ?, ?, ?, ?)", title, lang, key, value, ititle)
+            db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'invalid image parameter', ?, ?, ?, ?, ?)", [title, lang, key, value, ititle])
         end
     end
 
@@ -190,7 +191,7 @@ class WikiPage
         if param.is_a?(Array)
             if param.size > 1
                 puts "ERROR: multiple values for #{location} parameter: #{param}"
-                db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'multiple values for ' || ? || ' parameter', ?, ?, ?, ?, ?)", param_name, title, lang, key, value, param.join(', '))
+                db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'multiple values for ' || ? || ' parameter', ?, ?, ?, ?, ?)", [param_name, title, lang, key, value, param.join(', ')])
                 return
             end
             param = param[0]
@@ -202,7 +203,7 @@ class WikiPage
                 return false
             else
                 puts "ERROR: invalid value for parameter: param_name=#{param_name} title=#{title} lang=#{lang} key=#{key} value=#{value} param=#{param}"
-                db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'invalid value for ' || ? || ' parameter', ?, ?, ?, ?, ?)", param_name, title, lang, key, value, param)
+                db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'invalid value for ' || ? || ' parameter', ?, ?, ?, ?, ?)", [param_name, title, lang, key, value, param])
             end
         end
         return false
@@ -230,10 +231,10 @@ class WikiPage
         end
         puts "#{ "  " * level }Related term: lang='#{lang}' term='#{term}'"
         if LANGUAGE_CODE.match(lang)
-            db.execute("INSERT INTO related_terms (key, value, lang, term) VALUES (?, ?, ?, ?)", @key, @value, lang, term)
+            db.execute("INSERT INTO related_terms (key, value, lang, term) VALUES (?, ?, ?, ?)", [@key, @value, lang, term])
         else
             puts "ERROR: Language in related term template looks wrong: '#{lang}'"
-            db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:RelatedTerm', 'invalid lang parameter', ?, ?, ?, ?, ?)", title, self.lang, key, value, lang)
+            db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:RelatedTerm', 'invalid lang parameter', ?, ?, ?, ?, ?)", [title, self.lang, key, value, lang])
         end
     end
 
@@ -242,10 +243,14 @@ class WikiPage
         title = template.parameters[1]
         puts "#{ "  " * level }Wikipedia link: lang='#{lang}' title='#{title}'"
         if LANGUAGE_CODE.match(lang)
-            db.execute("INSERT INTO wikipedia_links (key, value, lang, title) VALUES (?, ?, ?, ?)", @key, @value, lang, title)
+            if defined?(@key)
+                db.execute("INSERT INTO tag_page_wikipedia_links (key, value, lang, title) VALUES (?, ?, ?, ?)", [@key, @value, lang, title])
+            else defined?(@rtype)
+                db.execute("INSERT INTO relation_page_wikipedia_links (rtype, lang, title) VALUES (?, ?, ?)", [@rtype, lang, title])
+            end
         else
             puts "ERROR: Language in wikipedia link template looks wrong: '#{lang}'"
-            db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Wikipedia', 'invalid lang parameter', ?, ?, ?, ?, ?)", self.title, self.lang, key, value, lang)
+            db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Wikipedia', 'invalid lang parameter', ?, ?, ?, ?, ?)", [self.title, self.lang, key, value, lang])
         end
     end
 
@@ -254,7 +259,7 @@ class WikiPage
 
         if template.parameters != []
             puts "ERROR: positional parameter on description template"
-            db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'has positional parameter', ?, ?, ?, ?, ?)", title, lang, key, value, template.parameters.join(','))
+            db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'has positional parameter', ?, ?, ?, ?, ?)", [title, lang, key, value, template.parameters.join(',')])
         end
 
         if template.named_parameters['description']
@@ -268,7 +273,7 @@ class WikiPage
                 @description = desc.join('').strip
                 if PROBLEMATIC_DESCRIPTION.match(@description)
                     puts "ERROR: problematic description: #{ @description }"
-                    db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'description parameter should only contain plain text', ?, ?, ?, ?, ?)", title, lang, key, value, description)
+                    db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'description parameter should only contain plain text', ?, ?, ?, ?, ?)", [title, lang, key, value, description])
                 end
             end
         end
@@ -315,7 +320,7 @@ class WikiPage
             if WIKIDATA_FORMAT.match(wikidata)
                 @wikidata = wikidata
             else
-                db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'wikidata parameter does not match Q###', ?, ?, ?, ?, ?)", title, lang, key, value, wikidata)
+                db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'wikidata parameter does not match Q###', ?, ?, ?, ?, ?)", [title, lang, key, value, wikidata])
             end
         end
     end
@@ -352,6 +357,8 @@ class KeyOrTagPage < WikiPage
         @key       = @tag.sub(/=.*/, '')                    # key
         if @tag =~ /=/
             @value = @tag.sub(/.*?=/, '')                   # value (if any)
+        else
+            @value = nil
         end
         if title =~ /^(.*):(Key|Tag):/
             @lang  = $1.downcase                            # IETF language tag
@@ -370,7 +377,7 @@ class KeyOrTagPage < WikiPage
 
     def insert(db)
         db.execute(
-            "INSERT INTO wikipages (lang, tag, key, value, title, body, tgroup, type, has_templ, parsed, description, image, on_node, on_way, on_area, on_relation, tags_implies, tags_combination, tags_linked, status, statuslink, wikidata) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO wikipages (lang, tag, key, value, title, body, tgroup, type, has_templ, parsed, description, image, on_node, on_way, on_area, on_relation, tags_implies, tags_combination, tags_linked, status, statuslink, wikidata) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [
             lang,
             tag,
             key,
@@ -393,7 +400,7 @@ class KeyOrTagPage < WikiPage
             status,
             statuslink,
             wikidata
-        )
+        ])
     end
 
 end
@@ -427,7 +434,7 @@ class RelationPage < WikiPage
 
     def insert(db)
         db.execute(
-            "INSERT INTO relation_pages (lang, rtype, title, body, tgroup, type, has_templ, parsed, description, image, tags_linked) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO relation_pages (lang, rtype, title, body, tgroup, type, has_templ, parsed, description, image, tags_linked) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [
             lang,
             rtype,
             title,
@@ -439,7 +446,7 @@ class RelationPage < WikiPage
             description,
             image,
             tags_linked.sort.uniq.join(',')
-        )
+        ])
     end
 
 end
@@ -497,15 +504,15 @@ class Cache
 
     def get_page(page)
         @current_pagetitles[page.title] = page.timestamp
-        @db.execute("SELECT * FROM cache.cache_pages WHERE title=? AND timestamp=?", page.title, page.timestamp) do |row|
+        @db.execute("SELECT * FROM cache.cache_pages WHERE title=? AND timestamp=?", [page.title, page.timestamp]) do |row|
             page.content = row['body']
             puts "CACHE: Page '#{ page.title }' in cache (#{ page.timestamp })"
             return
         end
-        @db.execute("DELETE FROM cache.cache_pages WHERE title=?", page.title)
+        @db.execute("DELETE FROM cache.cache_pages WHERE title=?", [page.title])
         res = @api.get(page.params)
         page.content = res.body
-        @db.execute("INSERT INTO cache.cache_pages (title, timestamp, body) VALUES (?, ?, ?)", page.title, page.timestamp, page.content)
+        @db.execute("INSERT INTO cache.cache_pages (title, timestamp, body) VALUES (?, ?, ?)", [page.title, page.timestamp, page.content])
         puts "CACHE: Page '#{ page.title }' not in cache (#{ page.timestamp })"
     end
 
@@ -518,7 +525,7 @@ class Cache
         to_delete = @current_pagetitles.keys
         puts "CACHE: Deleting pages from cache: #{ to_delete.join(' ') }"
         to_delete.each do |title|
-            @db.execute("DELETE FROM cache.cache_pages WHERE title=?", title)
+            @db.execute("DELETE FROM cache.cache_pages WHERE title=?", [title])
         end
     end
 
@@ -527,16 +534,16 @@ end
 #------------------------------------------------------------------------------
 
 dir = ARGV[0] || '.'
-db = SQLite3::Database.new(dir + '/taginfo-wiki.db')
-db.results_as_hash = true
+database = SQLite3::Database.new(dir + '/taginfo-wiki.db')
+database.results_as_hash = true
 
 #------------------------------------------------------------------------------
 
 api = MediaWikiAPI::API.new('wiki.openstreetmap.org', 80, '/w/index.php?')
 
-cache = Cache.new(dir, db, api)
+cache = Cache.new(dir, database, api)
 
-db.transaction do |db|
+database.transaction do |db|
 
     File.open(dir + '/tagpages.list') do |wikipages|
         wikipages.each do |line|
@@ -564,7 +571,7 @@ db.transaction do |db|
                 page.insert(db)
             else
                 puts "ERROR: invalid page: #{reason} #{page.title}"
-                db.execute("INSERT INTO problems (location, reason, title, lang, key, value) VALUES ('page title', ?, ?, ?, ?, ?)", reason.to_s.gsub('_', ' '), page.title, page.lang, page.key, page.value)
+                db.execute("INSERT INTO problems (location, reason, title, lang, key, value) VALUES ('page title', ?, ?, ?, ?, ?)", [reason.to_s.gsub('_', ' '), page.title, page.lang, page.key, page.value])
             end
         end
     end

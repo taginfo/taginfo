@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# coding: utf-8
 #------------------------------------------------------------------------------
 #
 #  extract_words.rb [DIR]
@@ -120,15 +121,15 @@ end
 #------------------------------------------------------------------------------
 
 dir = ARGV[0] || '.'
-db = SQLite3::Database.new(dir + '/taginfo-wiki.db')
-db.results_as_hash = true
+database = SQLite3::Database.new(dir + '/taginfo-wiki.db')
+database.results_as_hash = true
 
 #------------------------------------------------------------------------------
 
 words = Words.new
 we = WordExtractor.new(words)
 
-db.execute("SELECT * FROM wikipages") do |row|
+database.execute("SELECT * FROM wikipages") do |row|
 #    puts "key=#{ row['key'] } value=#{ row['value'] } lang=#{ row['lang'] }"
     we.parse(row['key'], row['value'], row['lang'], row['body'])
 end
@@ -140,9 +141,9 @@ words.invert
 #    puts "#{key}=#{value}: #{words}"
 #end
 
-db.transaction do |db|
-    words.dump do |key, value, words|
-        db.execute('INSERT INTO words (key, value, words) VALUES (?, ?, ?)', key, value, words)
+database.transaction do |db|
+    words.dump do |key, value, wordlist|
+        db.execute('INSERT INTO words (key, value, words) VALUES (?, ?, ?)', [key, value, wordlist])
     end
 end
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# coding: utf-8
 #------------------------------------------------------------------------------
 #
 #  Taginfo source: Projects
@@ -31,7 +32,7 @@ require 'sqlite3'
 #------------------------------------------------------------------------------
 
 dir = ARGV[0] || '.'
-db = SQLite3::Database.new(dir + '/taginfo-projects.db')
+database = SQLite3::Database.new(dir + '/taginfo-projects.db')
 
 #------------------------------------------------------------------------------
 
@@ -85,11 +86,11 @@ def parse_and_check(id, data, log, db)
         return
     end
 
-    db.execute("UPDATE projects SET data_format=?, data_url=? WHERE id=?", data[:data_format], data[:data_url], id)
+    db.execute("UPDATE projects SET data_format=?, data_url=? WHERE id=?", [data[:data_format], data[:data_url], id])
 
     if data[:data_updated]
         if data[:data_updated].match(/^[0-9]{8}T[0-9]{6}Z$/)
-            db.execute("UPDATE projects SET data_updated=? WHERE id=?", data[:data_updated], id)
+            db.execute("UPDATE projects SET data_updated=? WHERE id=?", [data[:data_updated], id])
         else
             log.error "project.data_updated MUST USE FORMAT 'yyyymmddThhmmssZ'. CURRENT VALUE IGNORED."
         end
@@ -128,7 +129,7 @@ def parse_and_check(id, data, log, db)
         log.error "MISSING project.contact_email."
     end
 
-    db.execute("UPDATE projects SET name=?, description=?, project_url=?, doc_url=?, icon_url=?, contact_name=?, contact_email=? WHERE id=?",
+    db.execute("UPDATE projects SET name=?, description=?, project_url=?, doc_url=?, icon_url=?, contact_name=?, contact_email=? WHERE id=?", [
         p[:name],
         p[:description],
         p[:project_url],
@@ -137,7 +138,7 @@ def parse_and_check(id, data, log, db)
         p[:contact_name],
         p[:contact_email],
         id
-    )
+    ])
 
     p.delete(:name)
     p.delete(:description)
@@ -182,7 +183,7 @@ def parse_and_check(id, data, log, db)
             else
                 on = { 'node' => 1, 'way' => 1, 'relation' => 1, 'area' => 1 }
             end
-            db.execute("INSERT INTO project_tags (project_id, key, value, description, doc_url, icon_url, on_node, on_way, on_relation, on_area) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            db.execute("INSERT INTO project_tags (project_id, key, value, description, doc_url, icon_url, on_node, on_way, on_relation, on_area) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [
                 id,
                 d[:key],
                 d[:value],
@@ -193,25 +194,25 @@ def parse_and_check(id, data, log, db)
                 on['way'],
                 on['relation'],
                 on['area'],
-            )
+            ])
         end
     end
 end
 
 #------------------------------------------------------------------------------
 
-db.execute("SELECT id, fetch_json FROM projects WHERE status='OK' ORDER BY id").each do |id, json|
+database.execute("SELECT id, fetch_json FROM projects WHERE status='OK' ORDER BY id").each do |id, json|
     puts "  #{id}..."
     begin
         data = JSON.parse(json, { :symbolize_names => true, :create_additions => false })
 
-        db.transaction do |db|
+        database.transaction do |db|
             log = Log.new
             parse_and_check(id, data, log, db)
-            db.execute("UPDATE projects SET error_log=?, status=? WHERE id=?", log.get_log(), log.get_state(), id)
+            db.execute("UPDATE projects SET error_log=?, status=? WHERE id=?", [log.get_log(), log.get_state(), id])
         end
     rescue JSON::ParserError
-        db.execute("UPDATE projects SET status='JSON_ERROR' WHERE id=?", id)
+        database.execute("UPDATE projects SET status='JSON_ERROR' WHERE id=?", [id])
     end
 end
 

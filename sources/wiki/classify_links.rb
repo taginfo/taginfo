@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# coding: utf-8
 #------------------------------------------------------------------------------
 #
 #  classify_links.rb [DIR]
@@ -115,11 +116,11 @@ db.transaction do |db|
                 end
             end
 
-            db.execute("INSERT INTO wiki_links (link_class, from_title, from_lang, from_type, from_name, to_title, to_lang, to_type, to_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            db.execute("INSERT INTO wiki_links (link_class, from_title, from_lang, from_type, from_name, to_title, to_lang, to_type, to_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", [
                 link_class,
                 from, from_lang, from_type, from_name,
                 to, to_lang, to_type, to_name
-            )
+            ])
 #        puts "#{link_class}\t#{from}\t#{from_lang}\t#{from_type}\t#{from_name}\t#{to}\t#{to_lang}\t#{to_type}\t#{to_name}"
         end
     end
