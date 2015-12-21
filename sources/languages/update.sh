@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 #  Taginfo source: Languages
 #
@@ -7,82 +7,82 @@
 
 set -e
 
-DIR=$1
-REGISTRY_URL="http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry"
-REGISTRY_FILE="$DIR/language-subtag-registry"
-CLDR_URL="http://unicode.org/Public/cldr/latest/core.zip"
-CLDR_FILE="$DIR/cldr-core.zip"
-CLDR_DIR="$DIR/cldr"
-UNICODE_SCRIPTS_URL="http://www.unicode.org/Public/UNIDATA/Scripts.txt"
-UNICODE_SCRIPTS_FILE="$DIR/Scripts.txt"
-PROPERTY_ALIASES_URL="http://www.unicode.org/Public/UNIDATA/PropertyValueAliases.txt"
-PROPERTY_ALIASES_FILE="$DIR/PropertyValueAliases.txt"
+readonly DIR=$1
 
-DATECMD='date +%Y-%m-%dT%H:%M:%S'
+if [ -z $DIR ]; then
+    echo "Usage: update.sh DIR"
+    exit 1
+fi
+
+readonly REGISTRY_URL="http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry"
+readonly REGISTRY_FILE="$DIR/language-subtag-registry"
+readonly CLDR_URL="http://unicode.org/Public/cldr/latest/core.zip"
+readonly CLDR_FILE="$DIR/cldr-core.zip"
+readonly CLDR_DIR="$DIR/cldr"
+readonly UNICODE_SCRIPTS_URL="http://www.unicode.org/Public/UNIDATA/Scripts.txt"
+readonly UNICODE_SCRIPTS_FILE="$DIR/Scripts.txt"
+readonly PROPERTY_ALIASES_URL="http://www.unicode.org/Public/UNIDATA/PropertyValueAliases.txt"
+readonly PROPERTY_ALIASES_FILE="$DIR/PropertyValueAliases.txt"
+readonly DATABASE=$DIR/taginfo-languages.db
+
+readonly TAGINFO_SCRIPT="languages"
+. ../util.sh
 
 update_file() {
-    file=$1
-    url=$2
+    local file="$1"
+    local url="$2"
 
-    if curl --silent --fail --location --time-cond $file --output $file $url; then
+    if run_exe curl --silent --fail --location --time-cond $file --output $file $url; then
         return 0
     else
         error=$?
         if [ "$error" = "22" ]; then
-            echo "WARNING: Getting ${url} failed. Using old version."
+            print_message "WARNING: Getting ${url} failed. Using old version."
         else
-            echo "ERROR: Could not get ${url}: curl error: $error"
+            print_message "ERROR: Could not get ${url}: curl error: $error"
             exit 1
         fi
     fi
 }
 
-if [ "x" = "x$DIR" ]; then
-    echo "Usage: update.sh DIR"
-    exit 1
-fi
+getting_subtag_registry() {
+    print_message "Getting subtag registry..."
+    update_file $REGISTRY_FILE $REGISTRY_URL
 
-echo "`$DATECMD` Start languages..."
+    print_message "Running subtag import..."
+    run_ruby ./import_subtag_registry.rb $DIR
+}
 
-EXEC_RUBY="$TAGINFO_RUBY"
-if [ "x$EXEC_RUBY" = "x" ]; then
-    EXEC_RUBY=ruby
-fi
-echo "Running with ruby set as '${EXEC_RUBY}'"
+getting_cldr() {
+    print_message "Getting CLDR..."
+    update_file $CLDR_FILE $CLDR_URL
 
-DATABASE=$DIR/taginfo-languages.db
+    print_message "Unpacking CLDR..."
+    rm -fr $CLDR_DIR
+    mkdir $CLDR_DIR
+    run_exe unzip -q -d $CLDR_DIR $CLDR_FILE
+}
 
-rm -f $DATABASE
+getting_unicode_scripts() {
+    print_message "Getting unicode scripts..."
+    update_file $UNICODE_SCRIPTS_FILE $UNICODE_SCRIPTS_URL
+    update_file $PROPERTY_ALIASES_FILE $PROPERTY_ALIASES_URL
 
-echo "`$DATECMD` Running init.sql..."
-sqlite3 $DATABASE <../init.sql
+    print_message "Running unicode scripts import..."
+    run_ruby ./import_unicode_scripts.rb $DIR
+}
 
-echo "`$DATECMD` Running pre.sql..."
-sqlite3 $DATABASE <pre.sql
+main() {
+    print_message "Start languages..."
 
-echo "`$DATECMD` Getting subtag registry..."
-update_file $REGISTRY_FILE $REGISTRY_URL
+    initialize_database
+    getting_subtag_registry
+    getting_cldr
+    getting_unicode_scripts
+    finalize_database
 
-echo "`$DATECMD` Running subtag import..."
-$EXEC_RUBY ./import_subtag_registry.rb $DIR
+    print_message "Done languages."
+}
 
-echo "`$DATECMD` Getting CLDR..."
-update_file $CLDR_FILE $CLDR_URL
-
-echo "`$DATECMD` Unpacking CLDR..."
-rm -fr $CLDR_DIR
-mkdir $CLDR_DIR
-unzip -q -d $CLDR_DIR $CLDR_FILE
-
-echo "`$DATECMD` Getting unicode scripts..."
-update_file $UNICODE_SCRIPTS_FILE $UNICODE_SCRIPTS_URL
-update_file $PROPERTY_ALIASES_FILE $PROPERTY_ALIASES_URL
-
-echo "`$DATECMD` Running unicode scripts import..."
-$EXEC_RUBY ./import_unicode_scripts.rb $DIR
-
-echo "`$DATECMD` Running post.sql..."
-sqlite3 $DATABASE <post.sql
-
-echo "`$DATECMD` Done languages."
+main
 

@@ -110,11 +110,19 @@ CREATE TABLE related_terms (
     term  TEXT
 );
 
-DROP TABLE IF EXISTS wikipedia_links;
+DROP TABLE IF EXISTS tag_page_wikipedia_links;
 
-CREATE TABLE wikipedia_links (
+CREATE TABLE tag_page_wikipedia_links (
     key   TEXT,
     value TEXT,
+    lang  TEXT,
+    title TEXT
+);
+
+DROP TABLE IF EXISTS relation_page_wikipedia_links;
+
+CREATE TABLE relation_page_wikipedia_links (
+    rtype TEXT,
     lang  TEXT,
     title TEXT
 );

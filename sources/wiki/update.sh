@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 #  Taginfo source: Wiki
 #
@@ -7,63 +7,68 @@
 
 set -e
 
-DIR=$1
+readonly DIR=$1
 
-DATECMD='date +%Y-%m-%dT%H:%M:%S'
-
-if [ "x" = "x$DIR" ]; then
+if [ -z $DIR ]; then
     echo "Usage: update.sh DIR"
     exit 1
 fi
 
-echo "`$DATECMD` Start wiki..."
+readonly DATABASE=$DIR/taginfo-wiki.db
+readonly CACHEDB=$DIR/wikicache.db
+readonly LOGFILE_WIKI_DATA=$DIR/get_wiki_data.log
+readonly LOGFILE_IMAGE_INFO=$DIR/get_image_info.log
 
-EXEC_RUBY="$TAGINFO_RUBY"
-if [ "x$EXEC_RUBY" = "x" ]; then
-    EXEC_RUBY=ruby
-fi
-echo "Running with ruby set as '${EXEC_RUBY}'"
+readonly TAGINFO_SCRIPT="wiki"
+. ../util.sh
 
-DATABASE=$DIR/taginfo-wiki.db
-CACHEDB=$DIR/wikicache.db
-LOGFILE_WIKI_DATA=$DIR/get_wiki_data.log
-LOGFILE_IMAGE_INFO=$DIR/get_image_info.log
+initialize_cache() {
+    if [ ! -e $CACHEDB ]; then
+        run_sql $CACHEDB cache.sql
+    fi
+}
 
-rm -f $DIR/allpages.list
-rm -f $DIR/tagpages.list
-rm -f $LOGFILE
-rm -f $DATABASE
+get_page_list() {
+    print_message "Getting page list..."
+    rm -f $DIR/allpages.list
+    rm -f $DIR/tagpages.list
+    run_ruby ./get_page_list.rb $DIR
+}
 
-if [ ! -e $CACHEDB ]; then
-    sqlite3 $CACHEDB <cache.sql
-fi
+get_wiki_data() {
+    print_message "Getting wiki data..."
+    run_ruby -l$LOGFILE_WIKI_DATA ./get_wiki_data.rb $DIR
 
-echo "`$DATECMD` Running init.sql..."
-sqlite3 $DATABASE <../init.sql
+    print_message "Getting image info..."
+    run_ruby -l$LOGFILE_IMAGE_INFO ./get_image_info.rb $DIR
+}
 
-echo "`$DATECMD` Running pre.sql..."
-sqlite3 $DATABASE <pre.sql
+get_links() {
+    print_message "Getting links to Key/Tag/Relation pages..."
+    run_ruby -l$DIR/links.list ./get_links.rb $DIR
 
-echo "`$DATECMD` Getting page list..."
-$EXEC_RUBY ./get_page_list.rb $DIR
+    print_message "Classifying links..."
+    run_ruby ./classify_links.rb $DIR
+}
 
-echo "`$DATECMD` Getting wiki data..."
-$EXEC_RUBY ./get_wiki_data.rb $DIR >$LOGFILE_WIKI_DATA
+extract_words() {
+    print_message "Extracting words..."
+    run_ruby ./extract_words.rb $DIR
+}
 
-echo "`$DATECMD` Getting image info..."
-$EXEC_RUBY ./get_image_info.rb $DIR >$LOGFILE_IMAGE_INFO
+main() {
+    print_message "Start wiki..."
 
-#echo "`$DATECMD` Getting links to Key/Tag/Relation pages..."
-#$EXEC_RUBY ./get_links.rb $DIR >$DIR/links.list
+    initialize_database
+    initialize_cache
+    get_page_list
+    get_wiki_data
+    #get_links
+    extract_words
+    finalize_database
 
-#echo "`$DATECMD` Classifying links..."
-#$EXEC_RUBY ./classify_links.rb $DIR
+    print_message "Done wiki."
+}
 
-echo "`$DATECMD` Extracting words..."
-$EXEC_RUBY ./extract_words.rb $DIR
-
-echo "`$DATECMD` Running post.sql..."
-sqlite3 $DATABASE <post.sql
-
-echo "`$DATECMD` Done wiki."
+main
 

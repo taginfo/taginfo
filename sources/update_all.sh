@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #------------------------------------------------------------------------------
 #
 #  Taginfo
@@ -20,78 +20,133 @@
 # Note that this will NOT work for the "db" source! Well, you can download it,
 # but it will fail later, because the database is changed by the master.sql
 # scripts.
-SOURCES_DOWNLOAD=`../bin/taginfo-config.rb sources.download`
+readonly SOURCES_DOWNLOAD=$(../bin/taginfo-config.rb sources.download)
 
 # These sources will be created from the actual sources
-SOURCES_CREATE=`../bin/taginfo-config.rb sources.create`
+readonly SOURCES_CREATE=$(../bin/taginfo-config.rb sources.create)
 
 #------------------------------------------------------------------------------
 
 set -e
 
-DATECMD='date +%Y-%m-%dT%H:%M:%S'
+readonly DIR=$1
 
-DIR=$1
-
-if [ "x" = "x$DIR" ]; then
+if [ -z $DIR ]; then
     echo "Usage: update_all.sh DIR"
     exit 1
 fi
 
-LOGFILE=`date +%Y%m%dT%H%M`
+readonly TAGINFO_SCRIPT="all"
+. ./util.sh
+
+readonly LOGFILE=$(date +%Y%m%dT%H%M)
 mkdir -p $DIR/log
 exec >$DIR/log/$LOGFILE.log 2>&1
 
-echo "`$DATECMD` Start update_all..."
 
-mkdir -p $DIR/download
+download_source() {
+    local source="$1"
 
-for source in $SOURCES_DOWNLOAD; do
-    echo "====================================="
-    echo "Downloading $source..."
+    print_message "Downloading $source..."
+
     mkdir -p $DIR/$source
-    curl --silent --fail --output $DIR/download/taginfo-$source.db.bz2 --time-cond $DIR/download/taginfo-$source.db.bz2 http://taginfo.openstreetmap.org/download/taginfo-$source.db.bz2
-    bzcat $DIR/download/taginfo-$source.db.bz2 >$DIR/$source/taginfo-$source.db
-    echo "Done."
-done
+    run_exe curl --silent --fail --output $DIR/download/taginfo-$source.db.bz2 --time-cond $DIR/download/taginfo-$source.db.bz2 http://taginfo.openstreetmap.org/download/taginfo-$source.db.bz2
+    run_exe -l$DIR/$source/taginfo-$source.db bzcat $DIR/download/taginfo-$source.db.bz2
 
-for source in $SOURCES_CREATE; do
-    echo "====================================="
-    echo "Running $source/update.sh..."
+    print_message "Done."
+}
+
+download_sources() {
+    local sources="$*"
+
+    mkdir -p $DIR/download
+
+    local source
+    for source in $sources; do
+        download_source $source
+    done
+}
+
+update_source() {
+    local source="$1"
+
+    print_message "Running $source/update.sh..."
+
     mkdir -p $DIR/$source
-    cd $source
-    ./update.sh $DIR/$source
-    cd ..
-    echo "Done."
-done
+    (cd $source && ./update.sh $DIR/$source)
 
-echo "====================================="
-echo "Running master/update.sh..."
-cd master
-./update.sh $DIR
-cd ..
+    print_message "Done."
+}
 
-echo "====================================="
-echo "`$DATECMD` Running bzip2 on all databases..."
-for source in $SOURCES_CREATE; do
-    bzip2 -9 -c $DIR/$source/taginfo-$source.db >$DIR/download/taginfo-$source.db.bz2 &
-done
-sleep 5 # wait for bzip2 on the smaller dbs to finish
+update_sources() {
+    local sources="$*"
 
-for db in master history search; do
-    bzip2 -9 -c $DIR/taginfo-$db.db >$DIR/download/taginfo-$db.db.bz2 &
-done
+    local source
+    for source in $sources; do
+        update_source $source
+    done
+}
 
-wait
-echo "Done."
+update_master() {
+    print_message "Running master/update.sh..."
 
-echo "====================================="
-echo "`$DATECMD` Creating extra indexes..."
-sqlite3 $DIR/db/taginfo-db.db <db/add_extra_indexes.sql
-echo "Done."
+    (cd master && ./update.sh $DIR)
 
-echo "====================================="
-echo "`$DATECMD` Done update_all."
+    print_message "Done."
+}
+
+compress_file() {
+    local filename="$1"
+    local compressed="$2"
+
+    print_message "Compressing '$filename' to '$compressed'"
+    bzip2 -9 -c $DIR/$filename.db >$DIR/download/taginfo-$compressed.db.bz2 &
+}
+
+compress_databases() {
+    local sources="$*"
+
+    print_message "Running bzip2 on all databases..."
+
+    local source
+    for source in $sources; do
+        compress_file $source/taginfo-$source $source
+#        bzip2 -9 -c $DIR/$source/taginfo-$source.db >$DIR/download/taginfo-$source.db.bz2 &
+    done
+    sleep 5 # wait for bzip2 on the smaller dbs to finish
+
+    local db
+    for db in master history search; do
+        compress_file taginfo-$db $db
+#        bzip2 -9 -c $DIR/taginfo-$db.db >$DIR/download/taginfo-$db.db.bz2 &
+    done
+
+    wait
+
+    print_message "Done."
+}
+
+create_extra_indexes() {
+    print_message "Creating extra indexes..."
+
+    run_sql $DIR/db/taginfo-db.db db/add_extra_indexes.sql
+
+    print_message "Done."
+}
+
+main() {
+    print_message "Start update_all..."
+
+    download_sources $SOURCES_DOWNLOAD
+    update_sources $SOURCES_CREATE
+    update_master
+    compress_databases $SOURCES_CREATE
+    create_extra_indexes
+
+    print_message "Done update_all."
+}
+
+main
 
 
 #-- THE END -------------------------------------------------------------------

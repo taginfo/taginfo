@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 #  Taginfo Master DB
 #
@@ -7,58 +7,67 @@
 
 set -e
 
-DIR=$1
+readonly DIR=$1
 
-[ -n "$M4" ] || M4=m4
-DATECMD='date +%Y-%m-%dT%H:%M:%S'
-
-if [ "x" = "x$DIR" ]; then
+if [ -z $DIR ]; then
     echo "Usage: update.sh DIR"
     exit 1
 fi
 
-echo "`$DATECMD` Start master..."
+readonly MASTER_DB=$DIR/taginfo-master.db
+readonly HISTORY_DB=$DIR/taginfo-history.db
+readonly SELECTION_DB=$DIR/selection.db
 
-MASTER_DB=$DIR/taginfo-master.db
-HISTORY_DB=$DIR/taginfo-history.db
-SELECTION_DB=$DIR/selection.db
+readonly TAGINFO_SCRIPT="master"
+. ../util.sh
 
-echo "`$DATECMD` Create search database..."
+create_search_database() {
+    local tokenizer=$(../../bin/taginfo-config.rb sources.master.tokenizer simple)
+    rm -f $DIR/taginfo-search.db
+    run_sql DIR=$DIR TOKENIZER=$tokenizer $DIR/taginfo-search.db search.sql
+}
 
-tokenizer=`../../bin/taginfo-config.rb sources.master.tokenizer simple`
-rm -f $DIR/taginfo-search.db
-$M4 --prefix-builtins -D __DIR__=$DIR -D __TOKENIZER__=$tokenizer search.sql | sqlite3 $DIR/taginfo-search.db
+create_master_database() {
+    rm -f $MASTER_DB
+    run_sql $MASTER_DB languages.sql
+    run_sql DIR=$DIR $MASTER_DB master.sql
+}
 
-echo "`$DATECMD` Create master database..."
+create_selection_database() {
+    local min_count_tags=$(../../bin/taginfo-config.rb sources.master.min_count_tags 10000)
+    local min_count_for_map=$(../../bin/taginfo-config.rb sources.master.min_count_for_map 1000)
+    local min_count_relations_per_type=$(../../bin/taginfo-config.rb sources.master.min_count_relations_per_type 100)
 
-rm -f $MASTER_DB
-sqlite3 $MASTER_DB <languages.sql
-$M4 --prefix-builtins -D __DIR__=$DIR master.sql | sqlite3 $MASTER_DB
+    rm -f $SELECTION_DB
+    run_sql \
+        DIR=$DIR \
+        MIN_COUNT_FOR_MAP=$min_count_for_map \
+        MIN_COUNT_TAGS=$min_count_tags \
+        MIN_COUNT_RELATIONS_PER_TYPE=$min_count_relations_per_type \
+        $SELECTION_DB selection.sql
 
-echo "`$DATECMD` Create selection database..."
+    run_sql $SELECTION_DB ../db/show_selection_stats.sql "Selection database contents:"
+}
 
-min_count_tags=`../../bin/taginfo-config.rb sources.master.min_count_tags 10000`
-min_count_for_map=`../../bin/taginfo-config.rb sources.master.min_count_for_map 1000`
-min_count_relations_per_type=`../../bin/taginfo-config.rb sources.master.min_count_relations_per_type 100`
+update_history_database() {
+    if [ ! -e $HISTORY_DB ]; then
+        print_message "No history database from previous runs. Initializing a new one..."
+        run_sql $HISTORY_DB history_init.sql
+    fi
 
-rm -f $SELECTION_DB
-$M4 --prefix-builtins \
-   -D __DIR__=$DIR \
-   -D __MIN_COUNT_FOR_MAP__=$min_count_for_map \
-   -D __MIN_COUNT_TAGS__=$min_count_tags \
-   -D __MIN_COUNT_RELATIONS_PER_TYPE__=$min_count_relations_per_type \
-   selection.sql | sqlite3 $SELECTION_DB
+    run_sql DIR=$DIR $HISTORY_DB history_update.sql
+}
 
-echo "Selection database contents:"
-sqlite3 $SELECTION_DB < ../db/show_selection_stats.sql
+main() {
+    print_message "Start master..."
 
-echo "`$DATECMD` Update history database..."
+    create_search_database
+    create_master_database
+    create_selection_database
+    update_history_database
 
-if [ ! -e $HISTORY_DB ]; then
-    sqlite3 $HISTORY_DB < history_init.sql
-fi
+    print_message "Done master."
+}
 
-$M4 --prefix-builtins -D __DIR__=$DIR history_update.sql | sqlite3 $HISTORY_DB
-
-echo "`$DATECMD` Done master."
+main
 

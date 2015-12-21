@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 #  Taginfo source: Projects
 #
@@ -7,51 +7,42 @@
 
 set -e
 
-DIR=$1
-PROJECT_LIST=$DIR/taginfo-projects/project_list.txt
+readonly DIR=$1
 
-DATECMD='date +%Y-%m-%dT%H:%M:%S'
-
-if [ "x" = "x$DIR" ]; then
+if [ -z $DIR ]; then
     echo "Usage: update.sh DIR"
     exit 1
 fi
 
-echo "`$DATECMD` Start projects..."
+readonly PROJECT_LIST=$DIR/taginfo-projects/project_list.txt
+readonly DATABASE=$DIR/taginfo-projects.db
 
-EXEC_RUBY="$TAGINFO_RUBY"
-if [ "x$EXEC_RUBY" = "x" ]; then
-    EXEC_RUBY=ruby
-fi
-echo "Running with ruby set as '${EXEC_RUBY}'"
+readonly TAGINFO_SCRIPT="projects"
+. ../util.sh
 
-DATABASE=$DIR/taginfo-projects.db
+update_projects_list() {
+    if [ -d $DIR/taginfo-projects ]; then
+        (cd $DIR/taginfo-projects && run_exe git pull --quiet)
+    else
+        run_exe git clone --quiet --depth=1 https://github.com/taginfo/taginfo-projects.git $DIR/taginfo-projects
+    fi
+}
 
-rm -f $DATABASE
+import_projects_list() {
+    run_ruby ./import.rb $DIR $PROJECT_LIST
+    run_ruby ./parse.rb $DIR
+}
 
-echo "`$DATECMD` Updating projects list..."
-if [ -d $DIR/taginfo-projects ]; then
-    cd $DIR/taginfo-projects
-    git pull
-    cd -
-else
-    git clone https://github.com/taginfo/taginfo-projects.git $DIR/taginfo-projects
-fi
+main() {
+    print_message "Start projects..."
 
-echo "`$DATECMD` Running init.sql..."
-sqlite3 $DATABASE <../init.sql
+    initialize_database
+    update_projects_list
+    import_projects_list
+    finalize_database
 
-echo "`$DATECMD` Running pre.sql..."
-sqlite3 $DATABASE <pre.sql
+    print_message "Done projects."
+}
 
-echo "`$DATECMD` Getting data files..."
-$EXEC_RUBY ./import.rb $DIR $PROJECT_LIST
-
-echo "`$DATECMD` Parsing data files..."
-$EXEC_RUBY ./parse.rb $DIR
-
-echo "`$DATECMD` Running post.sql..."
-sqlite3 $DATABASE <post.sql
-
-echo "`$DATECMD` Done projects."
+main
 
