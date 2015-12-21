@@ -101,11 +101,19 @@ CREATE TABLE wiki_links (
     to_name    TEXT
 );
 
-DROP TABLE IF EXISTS related_terms;
+DROP TABLE IF EXISTS tag_page_related_terms;
 
-CREATE TABLE related_terms (
+CREATE TABLE tag_page_related_terms (
     key   TEXT,
     value TEXT,
+    lang  TEXT,
+    term  TEXT
+);
+
+DROP TABLE IF EXISTS relation_page_related_terms;
+
+CREATE TABLE relation_page_related_terms (
+    rtype TEXT,
     lang  TEXT,
     term  TEXT
 );

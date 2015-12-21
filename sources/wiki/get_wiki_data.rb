@@ -231,7 +231,11 @@ class WikiPage
         end
         puts "#{ "  " * level }Related term: lang='#{lang}' term='#{term}'"
         if LANGUAGE_CODE.match(lang)
-            db.execute("INSERT INTO related_terms (key, value, lang, term) VALUES (?, ?, ?, ?)", [@key, @value, lang, term])
+            if defined?(@key)
+                db.execute("INSERT INTO tag_page_related_terms (key, value, lang, term) VALUES (?, ?, ?, ?)", [@key, @value, lang, term])
+            elsif defined?(@rtype)
+                db.execute("INSERT INTO relation_page_related_terms (rtype, lang, term) VALUES (?, ?, ?)", [@rtype, lang, term])
+            end
         else
             puts "ERROR: Language in related term template looks wrong: '#{lang}'"
             db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:RelatedTerm', 'invalid lang parameter', ?, ?, ?, ?, ?)", [title, self.lang, key, value, lang])
@@ -245,7 +249,7 @@ class WikiPage
         if LANGUAGE_CODE.match(lang)
             if defined?(@key)
                 db.execute("INSERT INTO tag_page_wikipedia_links (key, value, lang, title) VALUES (?, ?, ?, ?)", [@key, @value, lang, title])
-            else defined?(@rtype)
+            elsif defined?(@rtype)
                 db.execute("INSERT INTO relation_page_wikipedia_links (rtype, lang, title) VALUES (?, ?, ?)", [@rtype, lang, title])
             end
         else
