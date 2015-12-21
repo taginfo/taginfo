@@ -4,8 +4,6 @@
 --  post.sql
 --
 
-.bail ON
-
 UPDATE wikipages SET status='r' WHERE type='redirect';
 UPDATE wikipages SET status='p' WHERE type='page' AND has_templ=0;
 UPDATE wikipages SET status='t' WHERE type='page' AND has_templ=1 AND parsed=1;

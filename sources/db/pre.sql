@@ -4,8 +4,6 @@
 --  pre.sql
 --
 
-.bail ON
-
 INSERT INTO source (id, name, update_start) SELECT 'db', 'Database', datetime('now');
 
 DROP TABLE IF EXISTS keys;

@@ -4,8 +4,6 @@
 --  pre.sql
 --
 
-.bail ON
-
 INSERT INTO source (id, name, update_start, data_until) SELECT 'projects', 'Projects', datetime('now'), datetime('now');
 
 DROP TABLE IF EXISTS projects;

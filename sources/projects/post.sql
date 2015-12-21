@@ -4,8 +4,6 @@
 --  post.sql
 --
 
-.bail ON
-
 INSERT INTO stats (key, value) SELECT 'projects', count(*) FROM projects;
 INSERT INTO stats (key, value) SELECT 'projects_ok', count(*) FROM projects WHERE status='OK';
 INSERT INTO stats (key, value) SELECT 'project_keys', count(*) FROM project_tags WHERE value IS NULL;

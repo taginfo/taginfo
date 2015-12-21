@@ -4,8 +4,6 @@
 --  cache.sql
 --
 
-.bail ON
-
 CREATE TABLE cache_pages (
     title     TEXT,
     timestamp TEXT,

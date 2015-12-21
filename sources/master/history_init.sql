@@ -6,8 +6,6 @@
 --
 -- ============================================================================
 
-.bail ON
-
 DROP TABLE IF EXISTS history_stats;
 CREATE TABLE history_stats (
     udate TEXT,

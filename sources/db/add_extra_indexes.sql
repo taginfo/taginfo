@@ -7,8 +7,6 @@
 --  download to keep the download to a reasonable size.
 --
 
-.bail ON
-
 PRAGMA journal_mode  = OFF;
 PRAGMA synchronous   = OFF;
 PRAGMA temp_store    = MEMORY;

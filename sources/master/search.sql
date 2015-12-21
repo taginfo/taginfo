@@ -6,8 +6,6 @@
 --
 -- ============================================================================
 
-.bail ON
-
 PRAGMA journal_mode  = OFF;
 PRAGMA synchronous   = OFF;
 PRAGMA temp_store    = MEMORY;

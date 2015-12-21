@@ -6,8 +6,6 @@
 --
 -- ============================================================================
 
-.bail ON
-
 ATTACH DATABASE '__DIR__/db/taginfo-db.db'               AS db;
 ATTACH DATABASE '__DIR__/wiki/taginfo-wiki.db'           AS wiki;
 ATTACH DATABASE '__DIR__/languages/taginfo-languages.db' AS languages;

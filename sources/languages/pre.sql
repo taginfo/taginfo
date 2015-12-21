@@ -4,8 +4,6 @@
 --  pre.sql
 --
 
-.bail ON
-
 INSERT INTO source (id, name, update_start, data_until) SELECT 'languages', 'Languages', datetime('now'), datetime('now');
 
 DROP TABLE IF EXISTS subtags;

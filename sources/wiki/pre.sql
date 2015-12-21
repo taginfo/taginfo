@@ -4,8 +4,6 @@
 --  pre.sql
 --
 
-.bail ON
-
 INSERT INTO source (id, name, update_start, data_until) SELECT 'wiki', 'Wiki', datetime('now'), datetime('now');
 
 DROP TABLE IF EXISTS wikipages;

@@ -4,8 +4,6 @@
 --  Initialize source database
 --
 
-.bail ON
-
 --
 -- Contains metadata about this source.
 --

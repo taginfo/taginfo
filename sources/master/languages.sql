@@ -4,8 +4,6 @@
 --  languages.sql
 --
 
-.bail ON
-
 --
 --  Contains all the languages Taginfo knows about.
 --
