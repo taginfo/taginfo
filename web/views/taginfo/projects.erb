@@ -22,7 +22,7 @@
             <%= h(project['fetch_date']) %><br/>
             <%= h(project['data_updated']) %>
         </td>
-        <td class="tc<%= c %> nowrap"><%= h(project['fetch_status']) %></td>
+        <td class="tc<%= c %> nowrap <%= project['fetch_status'] != '200' ? 'warn' : ''  %>"><%= h(project['fetch_status']) %></td>
         <td class="tc<%= c %> nowrap">
             <%= h(project['status']) %></br>
             <% if project['error_log'] != '' %>
@@ -30,13 +30,16 @@
             <% end %>
         </td>
         <td class="<%= c %> nowrap">
-            <a href="<%= h(project['json_url']) %>"><%= h(project['json_url']) %></a><br/>
-            <a href="<%= h(project['data_url']) %>"><%= h(project['data_url']) %></a><br/>
-            <a href="<%= h(project['project_url']) %>"><%= h(project['project_url']) %></a><br/>
-            <a href="<%= h(project['doc_url']) %>"><%= h(project['doc_url']) %></a>
+            <a title="JSON URL" href="<%= h(project['json_url']) %>"><%= h(project['json_url']) %></a><br/>
+            <a title="Data URL" href="<%= h(project['data_url']) %>"><%= h(project['data_url']) %></a><br/>
+            <a title="Project URL" href="<%= h(project['project_url']) %>"><%= h(project['project_url']) %></a><br/>
+            <a title="Doc URL" href="<%= h(project['doc_url']) %>"><%= h(project['doc_url']) %></a>
         </td>
         <td class="tc<%= c %> nowrap"><%= h(project['data_format']) %></td>
-        <td class="<%= c %> nowrap"><%= h(project['contact_name']) %><br/><%= h(project['contact_email']) %></td>
+        <td class="<%= c %> nowrap">
+            <%= project['contact_name']  ? h(project['contact_name'])  : '<span class="warn">MISSING CONTACT NAME</span>'  %><br/>
+            <%= project['contact_email'] ? h(project['contact_email']) : '<span class="warn">MISSING CONTACT EMAIL</span>' %>
+        </td>
         <td class="<%= c %>"><%= h(project['description']) %></td>
     </tr>
 <% end %>

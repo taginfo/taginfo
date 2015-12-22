@@ -461,6 +461,10 @@ table.list td.nowrap {
     white-space: nowrap;
 }
 
+table.list .warn {
+    color: #e00000;
+}
+
 /* ========== */
 
 table.comparison {
