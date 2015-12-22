@@ -2,7 +2,7 @@
 #
 #  Taginfo source: DB
 #
-#  update.sh DIR [PLANETFILE]
+#  update.sh DIR [OSM_FILE]
 #
 
 set -e
@@ -11,29 +11,29 @@ set -e
 #ulimit -c unlimited
 
 readonly DIR=$1
-readonly PLANETFILE=${2:-$(../../bin/taginfo-config.rb sources.db.planetfile)}
 
 if [ -z $DIR ]; then
-    echo "Usage: update.sh DIR [PLANETFILE]"
+    echo "Usage: update.sh DIR [OSM_FILE]"
     exit 1
 fi
 
 readonly DATABASE=$DIR/taginfo-db.db
 readonly SELECTION_DB=$DIR/../selection.db
-readonly BINDIR=$(../../bin/taginfo-config.rb sources.db.bindir ../../tagstats)
-readonly TAGSTATS=$(../../bin/taginfo-config.rb sources.db.tagstats ../../tagstats/tagstats)
 
 readonly TAGINFO_SCRIPT="db"
 . ../util.sh
 
+readonly OSM_FILE=${2:-$(get_config sources.db.planetfile)}
+
 run_tagstats() {
-    local top=$(../../bin/taginfo-config.rb geodistribution.top)
-    local right=$(../../bin/taginfo-config.rb geodistribution.right)
-    local bottom=$(../../bin/taginfo-config.rb geodistribution.bottom)
-    local left=$(../../bin/taginfo-config.rb geodistribution.left)
-    local width=$(../../bin/taginfo-config.rb geodistribution.width)
-    local height=$(../../bin/taginfo-config.rb geodistribution.height)
-    local min_tag_combination_count=$(../../bin/taginfo-config.rb sources.master.min_tag_combination_count 1000)
+    local top=$(get_config geodistribution.top)
+    local right=$(get_config geodistribution.right)
+    local bottom=$(get_config geodistribution.bottom)
+    local left=$(get_config geodistribution.left)
+    local width=$(get_config geodistribution.width)
+    local height=$(get_config geodistribution.height)
+    local min_tag_combination_count=$(get_config sources.master.min_tag_combination_count 1000)
+    local tagstats=$(get_config sources.db.bindir ../../tagstats)/tagstats
 
     local open_selection_db=""
     if [[ -f $SELECTION_DB && -s $SELECTION_DB ]]; then
@@ -46,14 +46,15 @@ run_tagstats() {
     fi
 
     print_message "Running tagstats... "
-#TAGSTATS="valgrind --leak-check=full --show-reachable=yes $TAGSTATS"
-    run_exe $TAGSTATS $open_selection_db --min-tag-combination-count=$min_tag_combination_count --left=$left --bottom=$bottom --top=$top --right=$right --width=$width --height=$height $PLANETFILE $DATABASE
+#tagstats="valgrind --leak-check=full --show-reachable=yes $tagstats"
+    run_exe $tagstats $open_selection_db --min-tag-combination-count=$min_tag_combination_count --left=$left --bottom=$bottom --top=$top --right=$right --width=$width --height=$height $OSM_FILE $DATABASE
 }
 
 run_similarity() {
-    if [ -e $BINDIR/similarity ]; then
+    local similarity=$(get_config sources.db.bindir ../../tagstats)/similarity
+    if [ -e $similarity ]; then
         print_message "Running similarity... "
-        run_exe $BINDIR/similarity $DATABASE
+        run_exe $similarity $DATABASE
     else
         print_message "WARNING: Not running 'similarity', because binary not found. Please compile it."
     fi

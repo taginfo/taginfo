@@ -22,7 +22,7 @@ readonly TAGINFO_SCRIPT="master"
 . ../util.sh
 
 create_search_database() {
-    local tokenizer=$(../../bin/taginfo-config.rb sources.master.tokenizer simple)
+    local tokenizer=$(get_config sources.master.tokenizer simple)
     rm -f $DIR/taginfo-search.db
     run_sql DIR=$DIR TOKENIZER=$tokenizer $DIR/taginfo-search.db search.sql
 }
@@ -34,9 +34,9 @@ create_master_database() {
 }
 
 create_selection_database() {
-    local min_count_tags=$(../../bin/taginfo-config.rb sources.master.min_count_tags 10000)
-    local min_count_for_map=$(../../bin/taginfo-config.rb sources.master.min_count_for_map 1000)
-    local min_count_relations_per_type=$(../../bin/taginfo-config.rb sources.master.min_count_relations_per_type 100)
+    local min_count_tags=$(get_config sources.master.min_count_tags 10000)
+    local min_count_for_map=$(get_config sources.master.min_count_for_map 1000)
+    local min_count_relations_per_type=$(get_config sources.master.min_count_relations_per_type 100)
 
     rm -f $SELECTION_DB
     run_sql \

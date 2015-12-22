@@ -29,6 +29,17 @@ print_message() {
     print_message_impl "$TAGINFO_SCRIPT" "${FUNCNAME[1]}" "$message"
 }
 
+ruby_command_line() {
+    echo -n -E "env - ${TAGINFO_RUBY:-ruby} -E utf-8 -w"
+}
+
+get_config() {
+    local name="$1"
+    local default="$2"
+
+    $(ruby_command_line) ../../bin/taginfo-config.rb "$name" "$default"
+}
+
 run_ruby() {
     local logfile=""
     if [[ $1 == "-l"* ]]; then
@@ -36,14 +47,13 @@ run_ruby() {
         shift
     fi
 
-    local exec_ruby="${TAGINFO_RUBY:-ruby} -E utf-8 -w"
-    print_message_impl "$TAGINFO_SCRIPT" "${FUNCNAME[1]}" "Running '${exec_ruby} $@'..."
+    print_message_impl "$TAGINFO_SCRIPT" "${FUNCNAME[1]}" "Running '$(ruby_command_line) $@'..."
 
     if [ -z $logfile ]; then
-        env - $exec_ruby $@
+        $(ruby_command_line) "$@"
     else
         print_message_impl "$TAGINFO_SCRIPT" "${FUNCNAME[1]}" "  Logging to '${logfile}'..."
-        env - $exec_ruby $@ >$logfile
+        $(ruby_command_line) "$@" >$logfile
     fi
 }
 
