@@ -46,23 +46,30 @@ open(project_list) do |file|
     end
 end
 
+def fetch(uri_str, limit = 10)
+    raise ArgumentError, 'too many HTTP redirects' if limit == 0
+
+    response = Net::HTTP.get_response(URI(uri_str))
+
+    case response
+    when Net::HTTPRedirection then
+        location = response['location']
+        fetch(location, limit - 1)
+    else
+        response
+    end
+end
+
 projects.each do |id, url|
     puts "  #{id} #{url}"
-    uri = URI(url)
-    http = Net::HTTP.new(uri.host, uri.port)
-    if uri.scheme == 'https'
-        http.use_ssl = true
-        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    end
     begin
-        request = Net::HTTP::Get.new(uri.request_uri)
-        response = http.request(request)
+        response = fetch(url)
         begin
             last_modified = Time.parse(response['Last-Modified'] || response['Date']).utc.iso8601
         rescue
             last_modified = Time.now.utc
         end
-        db.execute("INSERT INTO projects (id, json_url, last_modified, fetch_date, fetch_status, fetch_json, status, data_updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [
+        db.execute("INSERT INTO projects (id, json_url, last_modified, fetch_date, fetch_status, fetch_json, status, data_updated) VALUES (?, ?, ?, ?, CAST(? AS TEXT), ?, ?, ?)", [
             id,
             url,
             last_modified,
@@ -77,7 +84,7 @@ projects.each do |id, url|
             id,
             url,
             Time.now.utc.iso8601,
-            500,
+            '500',
             'FETCH ERROR'
         ])
     end
