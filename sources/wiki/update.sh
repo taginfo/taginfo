@@ -1,71 +1,73 @@
 #!/bin/bash
+#------------------------------------------------------------------------------
 #
 #  Taginfo source: Wiki
 #
-#  update.sh DIR
+#  update.sh DATADIR
 #
+#------------------------------------------------------------------------------
 
 set -e
 
-readonly DIR=$1
+readonly SRCDIR=$(dirname $(readlink -f "$0"))
+readonly DATADIR=$1
 
-if [ -z $DIR ]; then
-    echo "Usage: update.sh DIR"
+if [ -z $DATADIR ]; then
+    echo "Usage: update.sh DATADIR"
     exit 1
 fi
 
-readonly DATABASE=$DIR/taginfo-wiki.db
-readonly CACHEDB=$DIR/wikicache.db
-readonly LOGFILE_WIKI_DATA=$DIR/get_wiki_data.log
-readonly LOGFILE_IMAGE_INFO=$DIR/get_image_info.log
+readonly DATABASE=$DATADIR/taginfo-wiki.db
+readonly CACHEDB=$DATADIR/wikicache.db
+readonly LOGFILE_WIKI_DATA=$DATADIR/get_wiki_data.log
+readonly LOGFILE_IMAGE_INFO=$DATADIR/get_image_info.log
 
-readonly TAGINFO_SCRIPT="wiki"
-. ../util.sh
+source $SRCDIR/../util.sh wiki $SRCDIR
 
 initialize_cache() {
     if [ ! -e $CACHEDB ]; then
-        run_sql $CACHEDB cache.sql
+        run_sql $CACHEDB $SRCDIR/cache.sql
     fi
 }
 
 get_page_list() {
     print_message "Getting page list..."
-    rm -f $DIR/allpages.list
-    rm -f $DIR/tagpages.list
-    run_ruby ./get_page_list.rb $DIR
+    rm -f $DATADIR/allpages.list
+    rm -f $DATADIR/tagpages.list
+    run_ruby $SRCDIR/get_page_list.rb $DATADIR
 }
 
 get_wiki_data() {
     print_message "Getting wiki data..."
-    run_ruby -l$LOGFILE_WIKI_DATA ./get_wiki_data.rb $DIR
+    run_ruby -l$LOGFILE_WIKI_DATA $SRCDIR/get_wiki_data.rb $DATADIR
 
     print_message "Getting image info..."
-    run_ruby -l$LOGFILE_IMAGE_INFO ./get_image_info.rb $DIR
+    run_ruby -l$LOGFILE_IMAGE_INFO $SRCDIR/get_image_info.rb $DATADIR
 }
 
 get_links() {
     print_message "Getting links to Key/Tag/Relation pages..."
-    run_ruby -l$DIR/links.list ./get_links.rb $DIR
+    run_ruby -l$DATADIR/links.list $SRCDIR/get_links.rb $DATADIR
 
     print_message "Classifying links..."
-    run_ruby ./classify_links.rb $DIR
+    run_ruby $SRCDIR/classify_links.rb $DATADIR
 }
 
 extract_words() {
     print_message "Extracting words..."
-    run_ruby ./extract_words.rb $DIR
+    run_ruby $SRCDIR/extract_words.rb $DATADIR
 }
 
 main() {
     print_message "Start wiki..."
 
-    initialize_database
+    initialize_database $DATABASE $SRCDIR
     initialize_cache
     get_page_list
     get_wiki_data
     #get_links
     extract_words
-    finalize_database
+    finalize_database $DATABASE $SRCDIR
 
     print_message "Done wiki."
 }

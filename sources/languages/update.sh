@@ -1,32 +1,34 @@
 #!/bin/bash
+#------------------------------------------------------------------------------
 #
 #  Taginfo source: Languages
 #
-#  update.sh DIR
+#  update.sh DATADIR
 #
+#------------------------------------------------------------------------------
 
 set -e
 
-readonly DIR=$1
+readonly SRCDIR=$(dirname $(readlink -f "$0"))
+readonly DATADIR=$1
 
-if [ -z $DIR ]; then
-    echo "Usage: update.sh DIR"
+if [ -z $DATADIR ]; then
+    echo "Usage: update.sh DATADIR"
     exit 1
 fi
 
 readonly REGISTRY_URL="http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry"
-readonly REGISTRY_FILE="$DIR/language-subtag-registry"
+readonly REGISTRY_FILE="$DATADIR/language-subtag-registry"
 readonly CLDR_URL="http://unicode.org/Public/cldr/latest/core.zip"
-readonly CLDR_FILE="$DIR/cldr-core.zip"
-readonly CLDR_DIR="$DIR/cldr"
+readonly CLDR_FILE="$DATADIR/cldr-core.zip"
+readonly CLDR_DIR="$DATADIR/cldr"
 readonly UNICODE_SCRIPTS_URL="http://www.unicode.org/Public/UNIDATA/Scripts.txt"
-readonly UNICODE_SCRIPTS_FILE="$DIR/Scripts.txt"
+readonly UNICODE_SCRIPTS_FILE="$DATADIR/Scripts.txt"
 readonly PROPERTY_ALIASES_URL="http://www.unicode.org/Public/UNIDATA/PropertyValueAliases.txt"
-readonly PROPERTY_ALIASES_FILE="$DIR/PropertyValueAliases.txt"
-readonly DATABASE=$DIR/taginfo-languages.db
+readonly PROPERTY_ALIASES_FILE="$DATADIR/PropertyValueAliases.txt"
+readonly DATABASE=$DATADIR/taginfo-languages.db
 
-readonly TAGINFO_SCRIPT="languages"
-. ../util.sh
+source $SRCDIR/../util.sh languages $SRCDIR
 
 update_file() {
     local file="$1"
@@ -50,7 +52,7 @@ getting_subtag_registry() {
     update_file $REGISTRY_FILE $REGISTRY_URL
 
     print_message "Running subtag import..."
-    run_ruby ./import_subtag_registry.rb $DIR
+    run_ruby $SRCDIR/import_subtag_registry.rb $DATADIR
 }
 
 getting_cldr() {
@@ -69,17 +71,17 @@ getting_unicode_scripts() {
     update_file $PROPERTY_ALIASES_FILE $PROPERTY_ALIASES_URL
 
     print_message "Running unicode scripts import..."
-    run_ruby ./import_unicode_scripts.rb $DIR
+    run_ruby $SRCDIR/import_unicode_scripts.rb $DATADIR
 }
 
 main() {
     print_message "Start languages..."
 
-    initialize_database
+    initialize_database $DATABASE $SRCDIR
     getting_subtag_registry
     getting_cldr
     getting_unicode_scripts
-    finalize_database
+    finalize_database $DATABASE $SRCDIR
 
     print_message "Done languages."
 }

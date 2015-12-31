@@ -1,45 +1,47 @@
 #!/bin/bash
+#------------------------------------------------------------------------------
 #
 #  Taginfo source: Projects
 #
-#  update.sh DIR
+#  update.sh DATADIR
 #
+#------------------------------------------------------------------------------
 
 set -e
 
-readonly DIR=$1
+readonly SRCDIR=$(dirname $(readlink -f "$0"))
+readonly DATADIR=$1
 
-if [ -z $DIR ]; then
-    echo "Usage: update.sh DIR"
+if [ -z $DATADIR ]; then
+    echo "Usage: update.sh DATADIR"
     exit 1
 fi
 
-readonly PROJECT_LIST=$DIR/taginfo-projects/project_list.txt
-readonly DATABASE=$DIR/taginfo-projects.db
+readonly PROJECT_LIST=$DATADIR/taginfo-projects/project_list.txt
+readonly DATABASE=$DATADIR/taginfo-projects.db
 
-readonly TAGINFO_SCRIPT="projects"
-. ../util.sh
+source $SRCDIR/../util.sh projects $SRCDIR
 
 update_projects_list() {
-    if [ -d $DIR/taginfo-projects ]; then
-        (cd $DIR/taginfo-projects && run_exe git pull --quiet)
+    if [ -d $DATADIR/taginfo-projects ]; then
+        run_exe git -C $DATADIR/taginfo-projects pull --quiet
     else
         run_exe git clone --quiet --depth=1 https://github.com/taginfo/taginfo-projects.git $DIR/taginfo-projects
     fi
 }
 
 import_projects_list() {
-    run_ruby ./import.rb $DIR $PROJECT_LIST
-    run_ruby ./parse.rb $DIR
+    run_ruby $SRCDIR/import.rb $DATADIR $PROJECT_LIST
+    run_ruby $SRCDIR/parse.rb $DATADIR
 }
 
 main() {
     print_message "Start projects..."
 
-    initialize_database
+    initialize_database $DATABASE $SRCDIR
     update_projects_list
     import_projects_list
-    finalize_database
+    finalize_database $DATABASE $SRCDIR
 
     print_message "Done projects."
 }

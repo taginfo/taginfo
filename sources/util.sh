@@ -3,16 +3,21 @@
 #
 #  Taginfo utility functions
 #
+#  util.sh SCRIPT_NAME
+#
+#  (The SCRIPT_NAME is used for logging)
+#
 #------------------------------------------------------------------------------
 
 set -e
+
+readonly TAGINFO_SCRIPT="$1"
 
 if [ -z $LAST_MESSAGE_TIMESTAMP ]; then
     typeset -i -x LAST_MESSAGE_TIMESTAMP=$(date +%s)
 fi
 
 print_message_impl() {
-    local script="$1"; shift
     local function="$1"; shift
     local message="$*"
 
@@ -20,24 +25,24 @@ print_message_impl() {
     local -i this_message_timestamp=$(date +%s)
     local -i elapsed=$(( ( $this_message_timestamp - $LAST_MESSAGE_TIMESTAMP ) / 60 ))
 
-    printf "%s | %d | %s | %s | %s\n" "$timestamp" "$elapsed" "$script" "$function" "$message"
+    printf "%s | %d | %s | %s | %s\n" "$timestamp" "$elapsed" "$TAGINFO_SCRIPT" "$function" "$message"
 }
 
 print_message() {
     local message="$1"
 
-    print_message_impl "$TAGINFO_SCRIPT" "${FUNCNAME[1]}" "$message"
+    print_message_impl "${FUNCNAME[1]}" "$message"
 }
 
 ruby_command_line() {
-    echo -n -E "env - ${TAGINFO_RUBY:-ruby} -E utf-8 -w"
+    echo -n -E "env - ${TAGINFO_RUBY:-ruby} -E utf-8 -w -I $SRCDIR/lib"
 }
 
 get_config() {
     local name="$1"
     local default="$2"
 
-    $(ruby_command_line) ../../bin/taginfo-config.rb "$name" "$default"
+    $(ruby_command_line) $SRCDIR/../../bin/taginfo-config.rb "$name" "$default"
 }
 
 run_ruby() {
@@ -47,12 +52,12 @@ run_ruby() {
         shift
     fi
 
-    print_message_impl "$TAGINFO_SCRIPT" "${FUNCNAME[1]}" "Running '$(ruby_command_line) $@'..."
+    print_message_impl "${FUNCNAME[1]}" "Running '$(ruby_command_line) $@'..."
 
     if [ -z $logfile ]; then
         $(ruby_command_line) "$@"
     else
-        print_message_impl "$TAGINFO_SCRIPT" "${FUNCNAME[1]}" "  Logging to '${logfile}'..."
+        print_message_impl "${FUNCNAME[1]}" "  Logging to '${logfile}'..."
         $(ruby_command_line) "$@" >$logfile
     fi
 }
@@ -64,12 +69,12 @@ run_exe() {
         shift
     fi
 
-    print_message_impl "$TAGINFO_SCRIPT" "${FUNCNAME[1]}" "Running '$@'..."
+    print_message_impl "${FUNCNAME[1]}" "Running '$@'..."
 
     if [ -z $logfile ]; then
         env - $@
     else
-        print_message_impl "$TAGINFO_SCRIPT" "${FUNCNAME[1]}" "  Logging to '${logfile}'..."
+        print_message_impl "${FUNCNAME[1]}" "  Logging to '${logfile}'..."
         env - $@ >$logfile
     fi
 }
@@ -86,7 +91,7 @@ run_sql() {
     local sql_file="$2"
     local message="${3:-Running SQL script '${sql_file}' on database '${database}'...}"
 
-    print_message_impl "$TAGINFO_SCRIPT" "${FUNCNAME[1]}" "$message"
+    print_message_impl "${FUNCNAME[1]}" "$message"
 
     local SQLITE="sqlite3 -bail -batch $database"
     if [ ${#macros[@]} -eq 0 ]; then
@@ -94,7 +99,7 @@ run_sql() {
     else
         local sql="$(<$sql_file)"
         for i in ${macros[@]}; do
-            print_message_impl "$TAGINFO_SCRIPT" "${FUNCNAME[1]}" "  with parameter: $i"
+            print_message_impl "${FUNCNAME[1]}" "  with parameter: $i"
             sql=${sql//__${i%=*}__/${i#*=}}
         done
         echo -E "$sql" | $SQLITE
@@ -102,13 +107,19 @@ run_sql() {
 }
 
 initialize_database() {
-    rm -f $DATABASE
-    run_sql $DATABASE ../init.sql
-    run_sql $DATABASE pre.sql
+    local database="$1"
+    local sourcedir="$2"
+
+    rm -f $database
+    run_sql $database $sourcedir/../init.sql
+    run_sql $database $sourcedir/pre.sql
 }
 
 finalize_database() {
-    run_sql $DATABASE post.sql
+    local database="$1"
+    local sourcedir="$2"
+
+    run_sql $database $sourcedir/post.sql
 }
 
 

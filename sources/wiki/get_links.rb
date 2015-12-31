@@ -39,7 +39,7 @@ require 'uri'
 require 'json'
 require 'pp'
 
-require './lib/mediawikiapi.rb'
+require 'mediawikiapi.rb'
 
 #------------------------------------------------------------------------------
 
