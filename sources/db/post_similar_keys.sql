@@ -4,13 +4,6 @@
 --  post_similar_keys.sql
 --
 
-PRAGMA journal_mode  = OFF;
-PRAGMA synchronous   = OFF;
-PRAGMA temp_store    = MEMORY;
-PRAGMA cache_size    = 1000000;
-
--- ============================================================================
-
 -- need this index now...
 CREATE UNIQUE INDEX keys_key_idx ON keys (key);
 

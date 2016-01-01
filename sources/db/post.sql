@@ -4,13 +4,6 @@
 --  post.sql
 --
 
-PRAGMA journal_mode  = OFF;
-PRAGMA synchronous   = OFF;
-PRAGMA temp_store    = MEMORY;
-PRAGMA cache_size    = 1000000;
-
--- ============================================================================
-
 INSERT INTO stats (key, value) SELECT 'num_keys',                  count(*) FROM keys;
 INSERT INTO stats (key, value) SELECT 'num_keys_on_nodes',         count(*) FROM keys WHERE count_nodes     > 0;
 INSERT INTO stats (key, value) SELECT 'num_keys_on_ways',          count(*) FROM keys WHERE count_ways      > 0;

@@ -7,11 +7,6 @@
 --  download to keep the download to a reasonable size.
 --
 
-PRAGMA journal_mode  = OFF;
-PRAGMA synchronous   = OFF;
-PRAGMA temp_store    = MEMORY;
-PRAGMA cache_size    = 1000000;
-
 CREATE INDEX tags_key_count_nodes_idx     ON tags (key, count_nodes     DESC);
 ANALYZE tags_key_count_nodes_idx;
 

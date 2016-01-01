@@ -4,13 +4,6 @@
 --  post_indexes.sql
 --
 
-PRAGMA journal_mode  = OFF;
-PRAGMA synchronous   = OFF;
-PRAGMA temp_store    = MEMORY;
-PRAGMA cache_size    = 1000000;
-
--- ============================================================================
-
 CREATE        INDEX tags_key_count_all_idx ON tags (key, count_all DESC);
 
 CREATE        INDEX key_combinations_key1_idx ON key_combinations (key1);

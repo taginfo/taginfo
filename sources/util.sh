@@ -94,7 +94,12 @@ run_sql() {
 
     print_message_impl "${FUNCNAME[1]}" "$message"
 
-    local SQLITE="sqlite3 -bail -batch $database"
+    local setup_sql="$SRCDIR/setup.sql"
+    if [ ! -f $setup_sql ]; then
+        setup_sql="$SRCDIR/../setup.sql"
+    fi
+
+    local SQLITE="sqlite3 -bail -batch -init $setup_sql $database"
     if [ ${#macros[@]} -eq 0 ]; then
         $SQLITE <$sql_file
     else
