@@ -28,6 +28,7 @@ readonly SOURCES_CREATE=$(../bin/taginfo-config.rb sources.create)
 #------------------------------------------------------------------------------
 
 set -e
+set -u
 
 readonly SRCDIR=$(dirname $(readlink -f "$0"))
 readonly DATADIR=$1

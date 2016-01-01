@@ -10,10 +10,11 @@
 #------------------------------------------------------------------------------
 
 set -e
+set -u
 
 readonly TAGINFO_SCRIPT="$1"
 
-if [ -z $LAST_MESSAGE_TIMESTAMP ]; then
+if [ ! -v LAST_MESSAGE_TIMESTAMP ]; then
     typeset -i -x LAST_MESSAGE_TIMESTAMP=$(date +%s)
 fi
 
@@ -40,7 +41,7 @@ ruby_command_line() {
 
 get_config() {
     local name="$1"
-    local default="$2"
+    local default="${2:-}"
 
     $(ruby_command_line) $SRCDIR/../../bin/taginfo-config.rb "$name" "$default"
 }
@@ -80,7 +81,7 @@ run_exe() {
 }
 
 run_sql() {
-    local -a macros
+    local -a macros=()
 
     while [[ $1 == *=* ]]; do
         macros+=($1)

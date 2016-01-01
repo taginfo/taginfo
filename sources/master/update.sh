@@ -8,6 +8,7 @@
 #------------------------------------------------------------------------------
 
 set -e
+set -u
 
 readonly SRCDIR=$(dirname $(readlink -f "$0"))
 readonly DATADIR=$1
