@@ -123,4 +123,7 @@ finalize_database() {
     run_sql $database $sourcedir/post.sql
 }
 
+get_bindir() {
+    (cd $SRCDIR; realpath $(get_config sources.db.bindir ../../tagstats))
+}
 

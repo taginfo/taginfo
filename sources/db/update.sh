@@ -36,7 +36,7 @@ run_tagstats() {
     local width=$(get_config geodistribution.width)
     local height=$(get_config geodistribution.height)
     local min_tag_combination_count=$(get_config sources.master.min_tag_combination_count 1000)
-    local tagstats=$(get_config sources.db.bindir $SRCDIR/../../tagstats)/tagstats
+    local tagstats=$(get_bindir)/tagstats
 
     local open_selection_db=""
     if [[ -f $SELECTION_DB && -s $SELECTION_DB ]]; then
@@ -54,7 +54,7 @@ run_tagstats() {
 }
 
 run_similarity() {
-    local similarity=$(get_config sources.db.bindir $SRCDIR/../../tagstats)/similarity
+    local similarity=$(get_bindir)/similarity
     if [ -e $similarity ]; then
         print_message "Running similarity... "
         run_exe $similarity $DATABASE
