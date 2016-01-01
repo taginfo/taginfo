@@ -29,11 +29,10 @@ It uses:
 * JSON gem (install with gem, Debian/Ubuntu packages are too old and buggy)
 * curl binary
 * sqlite3 binary and ruby libs
-* m4 binary
 
 Install the Debian/Ubuntu packages:
 ```sh
-$ sudo apt-get install curl m4 sqlite3 ruby-sqlite3
+$ sudo apt-get install curl sqlite3 ruby-sqlite3
 $ sudo apt-get install ruby-passenger libapache2-mod-passenger
 ```
 
