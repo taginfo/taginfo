@@ -430,26 +430,162 @@ flexigrid:
     nomsg: Nessun oggetto
     errormsg: Errore di Connessione
 
+comparison:
+    list: Lista dei confronti
+    items: oggetto/i
+    add_key: Aggiungi questa chiave alla lista
+    add_tag: Aggiungi questo tag alla lista
+    clear: Cancella la lista dei confronti
+    compare: Confronta le chiavi/tag
+    
 sources:
     master:
         name: Master
         description: Statistiche aggregate e dati eterogenei sono necessari per l'interfaccia utente di Taginfo.
+    history:
+        name: Storico
+        description: Statistiche aggregate rispetto al tempo.
     db:
         name: Database
         description: Le statistiche riguardanti ogni chiave e tag dal database principale di OSM (file di planet).
     wiki:
         name: Wiki
         description: Dati dalle pagine della wiki OSM dei tag e delle chiavi.
+    languages:
+        name: Lingue
+        description: Nomi, codici e altro delle lingue dai registri IANA e Unicode.
+    projects:
+        name: Progetti
+        description: Progetti esterni e le chiavi/tag da loro utilizzati.
 
 reports:
     characters_in_keys:
         name: Caratteri nelle chiavi
+        intro: |
+            Qualsiasi carattere con un valido codice Unicode può comparire in una chiave OSM, ma normalmente
+            soltanto i caratteri latini minuscoli (a-z) e il caratteri di sottolineatura (_) sono
+            utilizzati. Il carattere dei due punti (:) è spesso utilizzato come carattere separatore. Questo
+            rapporto divide in categorie tutte le chiavi in base ai caratteri utilizzati.
+        statistics:
+            tab: Statistiche
+            title: Anteprima delle statistiche
+            fraction: Frazione
+            characters: Caratteri nelle chiave
+            characters_in_keys:
+                plain: Soltanto le lettere latine minuscole  (da <span class="char">a</span> a <span class="char">z</span>) e il carattere di sottolineatura (<span class="char">_</span>), il primo ed ultimo carattere sono lettere.
+                colon: Come in A, ma con uno o più carattere due punti (<span class="char">:</span>) all'interno.
+                letters: Come in B, ma con una o più lettere maiuscole o da altri alfabeti.
+                space: Almeno un carattere di spaziatura (spazio, tab, nuova linea, ritorno a capo, o da altro alfabeto).
+                problem: Contiene caratteri probabilmente problematici <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
+                rest: Qualsiasi altro caso.
+                total: Totale
+        plain:
+            tab: Normale
+            title: Chiavi normali
+            intro: |
+                <p>Le chiavi contengono soltanto lettere latine minuscole (<span
+                class="char">a</span> to <span class="char">z</span>) ed il carattere
+                di sottolinneatura (<span class="char">_</span>). Il primo ed ultimo
+                carattere devono essere lettere. La maggior parte delle chiavi semplici dovrebbe ricadere in
+                questa categoria.</p>
+        colon:
+            tab: Due punti
+            title: Chiavi con il carattere due punti
+            intro: |
+                <p>Chiavi che hanno uno o più caratteri due punti (<span
+                class="char">:</span>) all'interno in aggiunta a
+                lettere (da <span class="char">a</span> a <span
+                class="char">z</span>) e catatteri di sottolineatura (<span
+                class="char">_</span>). Il carattere due punti viene spesso usato come
+                carattere separatore in una gerarchia.</p>
+        letters:
+            tab: Lettere
+            title: Chiavi con lettere maiuscole o con lettere di altri alfabeti
+            intro: |
+                <p>Normalmente è preferibile che le chiavi siano composte da lettere minuscole
+                dell'alfabeto latino, ma in alcuni casi le lettere maiuscole vengono utlizzate
+                (ad esempio per abbreviazioni note) o vengono utilizzare lettere di altri
+                alfabeti(ad esempio per chiavi che sono rilevanti solo in un area dove
+                questo alfabeto è usato in modo predominante).</p>
+        space:
+            tab: Caratteri di spaziatura
+            title: Chiavi con caratteri di spaziatura
+            intro: |
+                <p>Chiavi che contengono caratteri di spaziatura come spazio, tab,
+                nuova linea, ritorno a capo o caratteri di spaziatura di altri
+                alfabeti. I caratteri di spaziatura nelle chiavi possono generare confusione, specialmente
+                all'inzio o alla fine della chiave, perché sono invisibili.
+                In generale i caratteri di spaziatura andrebbero rimossi oppure andrebbe utilizato il
+                carattere di sottolineatura(<span class="char">_</span>) al loro posto.</p>
+        problem:
+            tab: Problematici
+            title: Chiavi con caratteri probabilmente problematici
+            intro: |
+                <p>Chiavi che contengono caratteri probabilmente problematici: <span
+                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> or caratteri
+                di controllo. Questi caratteri possono essere problematici, perché
+                sono utilizzati come carettere di inizio e fine stringa in molti linguaggi di programmazione 
+                o hanno un significato speciale in  XML, HTML, URLs, e in altre occasioni. Il
+                simbolo di uguale è spesso utilizzato come separatore tra la chiave i il valore.
+                Le chiavi che appaiono in questa lista non sono tuttavia necessariamente sbagliate.
+                In molti casi, però, sono semplicemnte il frutto di qualche errore
+                e dovrebbero essere sistemati.</p>
+        rest:
+            tab: Altro
+            title: Qualsiasi altra chiave
+            intro: |
+                <p>chiavi che non rientrano in nessuna delle altre categorie.</p>
+    database_statistics:
+        name: Statistiche del Database
+        objects_in_db: Numero di oggetti nel database
+        tags_in_db: Numero di tag nel database
+        distinct_keys: Numero di chiavi univoche
+        distinct_tags: Numero di tag univoci
+        nodes_in_db: Numero di nodi nel database
+        nodes_with_tags_in_db: Numero di nodi nel database con almeno un tag
+        nodes_with_tags_in_db_percent: Percentuale di nodi con almeno un tag
+        tags_on_nodes: Numero di tag sui nodi
+        avg_tags_per_tagged_node: Numero medio di tag per ogni nodo con dei tag
+        ways_in_db: Numero di way nel database
+        closed_ways_in_db: Numero di way chiuse nel database
+        tags_on_ways: Numero tag sulle way
+        avg_tags_per_way: Numero medio di tag per ogni way
+        relations_in_db: Numero di relazioni nel database
+        tags_on_relations: Numero di tag sulle relazione
+        avg_tags_per_relation: Numero medio di tag per ogni relazione
     frequently_used_keys_without_wiki_page:
         name: Chiavi Usate Frequentemente Senza una Pagina Wiki
-    key_lengths:
+            intro: |
+            <p>Questa tabella mostra le chiavi che compaiono più di  10&thinsp;000 volte nel
+            database OSM, ma che non hanno una pagina wiki che le descrive. Se conosci qualche cosa a proposito di
+            ona di queste chiavi, per favore crea una pagina wiki cliccando sul collegamento 
+            presente nella colonna più a sinistra e inserisci una descrizione della chiave. In alcuni casi ha senso piuttosto
+            creare un redirect ad un'altra pagina wiki. Per creare un redirect basta inserire una riga con
+            <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>nome della pagina</i>]]</tt>
+            nella pagina wiki.</p>
+        also_show_keys: Mostra anche le chiavi che non hanno una pagina wiki in lingua inglese, ma che hanno una pagina wiki in un altra lingua.
+        table:
+            create_wiki_page: Crea una pagina wiki...
+     key_lengths:
         name: Lunghezze Chiavi
+                intro: |
+            I tag delle chiavi possono essere lunghi da 0 a 255 caratteri (Unicode). Le chiavi molto corte o molto lunghe sono spesso, ma non sempre, degli errori.
+        table:
+            number_of_objects: Numero degli oggetti
+        histogram:
+            name: Istogramma
+            intro: Questo istogramma mostra quante chiavi ci sono con ogni lunghezza.
+            key_length: Lunghezza della chiave
+            number_of_keys: Numero delle chiavi
     language_comparison_table_for_keys_in_the_wiki:
         name: Tabella Comparativa Linguaggi per le Chiavi nella Wiki
+     icons:
+            template: Una pagina è disponibile sul sito wiki e contiene un template standard.
+            error: Una pagina è disponibile sul sito wiki e contiene un template standard, ma non si riesce ad estrarne il significato.
+            page: Una pagina è disponibile sul sito wiki, ma non contiene un template standard.
+            redirect: La pagina è un redirect.
+        intro: |
+            Questa tabella mostra i valori di tutti i tag usati per le chiavi per cui è disponibile una pagina wsul sito wiki e in che lingua è la pagina.
     languages:
         name: Linguaggi
     wiki_pages_about_non_existing_keys:
