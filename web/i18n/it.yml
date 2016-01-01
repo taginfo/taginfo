@@ -117,7 +117,7 @@ help:
         prev_page: Pagina precedente
         next_page: Pagina successiva
         last_page: Ultima pagina
-        help_page: QUesto aiuto
+        help_page: Questo aiuto
         activate_search: Attiva la casella d'inserimento per la ricerca
         activate_filter: Attiva la casella d'inserimento per il filtro
         prev_entry: Elemento precedente
@@ -155,12 +155,12 @@ pages:
         about_taginfo:
             title: Informazioni su taginfo
             text: |
-                <p>OpenStreetMap usa i <b>tag</b> per aggiungere informazione agli oggetti grografici.
+                <p>OpenStreetMap usa i <b>tag</b> per aggiungere informazione agli oggetti geografici.
                 Non c'è una lista fissata di questi tag. Nuovi tag possono essere inventati e usati
                 a seconda delle necessità. Ogni persona può creare un nuovo tag e aggiungerlo ad
-                un oggetto nuovo o già esistente. Ciò rende OpenStreetMap enormemente flessible,
+                un oggetto nuovo o già esistente. Ciò rende OpenStreetMap enormemente flessibile,
                 ma anche rende lavorarci alle volte un po' difficile.</p>
-                <p>QUando contribuisci ad OSM o quando stai usando dati di OSM data, capita
+                <p>Quando contribuisci ad OSM o quando stai usando dati di OSM data, capita
                 spesso domande del tipo: Quali tag vengono usati dalle persone per la caratteristica X?
                 Quali tag posso utilizzare per la caratteristica Y perché appaia in maniera corretta sulla mappa?
                 Il tag Z descritto nella pagina wiki è veramente utilizzato e dove?</p>
@@ -187,7 +187,7 @@ pages:
                 <p>Se vuoi guardare dentro ai dati usati da taginfo, puoi scaricare
                 i file del database Sqlite che vengono regolarmente aggiornati. Tutto il lavoro di preprocessing è già stato fatto per te.
                 Vedi la <a href="/download">pagina dei download</a> per una lista dei file. Si noti che
-                alcuni di questi possono essere particolarmente frandi. Se vuoi scarcarli frequentemente,
+                alcuni di questi possono essere particolarmente grandi. Se vuoi scarcarli frequentemente,
                 contatta un responsabile del sito che stai usando o discuti la cosa nella mailing list.</p>
                 <h3>Licenza</h3>
                 <p>I dati disponibili tramite taginfo sono sotto la licenza ODbL, la
@@ -202,8 +202,8 @@ pages:
                 <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Traduzioni</h3>
                 <p>Abbiamo bisogno di traduttori per tradurre l'interfaccia utente di taginfo. Vedi la pagina <a
-                href="/taginfo/translations">introduttiva sulle traduzioni</a> per informazini su quali lingue
-                hanno bisogno di lavoro di traduzione. Maggiori informazioni su come aiutare sono diponibili nella
+                href="/taginfo/translations">introduttiva sulle traduzioni</a> per informazioni su quali lingue
+                hanno bisogno di lavoro di traduzione. Maggiori informazioni su come aiutare sono disponibili nella
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">pagina wiki di OSM</a>.</p>
                 <h3>Codice</h3>
                 <p>Tutto il software che sta dietro i siti taginfo è Open Source. Puoi ottenerlo sul sito
@@ -236,13 +236,13 @@ pages:
             intro: In questa lista sono elencate le fonti attualmente utilizzate. Ulteriori fonti potrebbero essere aggiunte in futuro.
         description:
             db: |
-                <p>Le statistiche sulle chiavi, tag e sui tipi di relazioni sono generate dal <a class="extlink" href="http://planet.openstreetmap.org/">database OSM</a> (o da un suo estratto) e dalla stesse fonte proviengono le mappe che mostrano la distribuzione geografica dei nodi e dei percorsi (way).</p>
+                <p>Le statistiche sulle chiavi, tag e sui tipi di relazioni sono generate dal <a class="extlink" href="http://planet.openstreetmap.org/">database OSM</a> (o da un suo estratto) e dalla stesse fonte provengono le mappe che mostrano la distribuzione geografica dei nodi e dei percorsi (way).</p>
             wiki: |
                 <p>Il <a class="extlink" href="//wiki.openstreetmap.org/">sito wiki di OSM</a> viene consultato e tutte le pagine del tipo Key:*, Tag:*, e Relation:* (in tutte le varie lingue) vengono analizzate. Da queste vengono estratte le descrizioni, le immagini e i tag correlati.</p>
             languages: |
                 <p>Taginfo prende le informazioni sulle varie lingue del mondo, i loro codici, nomi, etc. da diversi registri <a class="extlink" href="http://www.iana.org/">IANA</a> and <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
             projects: |
-                <p>Projects that use OSM tags in some way, such as editors, maps, routers, etc. See <a href="/projects">the project list</a>.</p>
+                <p>Progetti che usano i tag di OSM in qualche modo, come strumenti di modifica, mappe, navigatori, ecc. Vedi <a href="/projects">la lista dei progetti</a>.</p>
         updates:
             title: Aggiornamenti
             intro: I dati di taginfo vengono aggiornati regolarmente dalle loro fonti.
@@ -281,14 +281,14 @@ pages:
         nothing_to_compare: Non ci sono chiavi/tag da confrontare. Consulta una pagina sulle chiavi o sui tag e aggiungili.
     keys:
         intro: |
-                QUesta tabella mostra tutte le chiavi tag che esistono nel database o in una delle altre fonti.
+                Questa tabella mostra tutte le chiavi tag che esistono nel database o in una delle altre fonti.
     tags:
         intro: |
                 Questa tabella mostra i tag più comuni presenti nel database.
     relations:
         name: Tipi di relazioni
         intro: Informazioni sui diversi tipi di relazioni (indicati dal tag <a href="/keys/type?filter=relations">type</a>).
-        relations_of_type_tooltip: Numero delle relazioi di questo tipo (e percentuale rispetto al totale delle relazioni).
+        relations_of_type_tooltip: Numero delle relazioni di questo tipo (e percentuale rispetto al totale delle relazioni).
         prevalent_roles: Ruoli maggiormente presenti
         prevalent_roles_tooltip: Ruoli maggiormente presenti per questo tipo di relazioni.
         no_information: Nessuna informazione
@@ -341,7 +341,7 @@ pages:
             title: Chiavi simili
             other: Chiavi simili
             count_all_tooltip: Numero degli oggetti con la chiave simile
-            similarity: Simigliarità
+            similarity: Similarità
             similarity_tooltip: Un numero più basso indica una maggiore simigliarità
      tag:
         description_from_wiki: Descrizione di questo tag dalla pagina wiki (se disponibile nella lingua selezionata, altrimenti in inglese).
@@ -349,7 +349,7 @@ pages:
         button_disabled: Pulsante disabilitato, perché ci sono troppi oggetti con questo tag.
         number_objects: Numero degli oggetti
         overview:
-            see_also: Vedi ache la pagina del tipo di relazione
+            see_also: Vedi anche la pagina del tipo di relazione
         other_tags_used:
             title: Altri tag utilizzati assieme a questo tag.
             other: Altri tag
@@ -369,7 +369,7 @@ pages:
             create: Crea una pagina wiki per questo tag
             suggest_key_wiki_page: Probabilmente puoi trovare ulteriori informazioni sulla pagina wiki della chiave %1.
             wiki_page: Pagina wiki
-            implied_tags: Tag implciti
+            implied_tags: Tag impliciti
             combined_tags: Tag combinati
             linked_tags: Tag collegati
         projects:
@@ -387,7 +387,7 @@ pages:
             member_count: Numero del membro della relazione
             see_also: Vedi anche la pagina dei tag
         roles:
-            tab: RUoli
+            tab: Ruoli
             title: Ruoli del membro della relazione
             objects_tooltip: Membri della relazione con questo ruolo (e la loro percentuale rispetto al totale dei membri) per questo tipo relazione.
             nodes_tooltip: Membri della relazione di tipo nodo con questo ruolo (e la loro percentuale rispetto al totale dei membri di tipo nodo) per questo tipo relazione.
@@ -399,8 +399,8 @@ pages:
             title: Grafico dei ruoli
         wiki_pages:
             title: pagine wiki su questo tipo di relazione
-            none_found: Nessuna pagina wiki disponinilw su questo tipo di relazione.
-            create: Crea  una pagina wiki su questo tipo di relazione
+            none_found: Nessuna pagina wiki disponinili per questo tipo di relazione.
+            create: Crea  una pagina wiki per questo tipo di relazione
             wiki_page: Pagina wiki
         projects:
             title: Progetti che utilizzano questo tipo di relazione
@@ -416,10 +416,10 @@ pages:
             info: QUesti dati sono forniti dal progetto a taginfo attraverso il 'JSON project file' (file JSON del progetto) indicato nel collegamento qui sopra. Vedi la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">pagina wiki</a> per una descrizione del formato.
         tags:
             title: Tags usati da questo progetto
-            intro: Questi dati sono forniti dal progetto e non snon necessariamente completi. Per favore consulta la documentazione del progetto per dettagli.
-            description: Come questa chiave/tag viene utilzzata nel progetto
+            intro: Questi dati sono forniti dal progetto e non sono necessariamente completi. Per favore consulta la documentazione del progetto per dettagli.
+            description: Come questa chiave/tag viene utilizzata nel progetto
             count_all_tooltip: Numero di oggetti nel database con questa chiave/tag
-            objects_tooltip: Typo di oggetti cheil progetto utilizza
+            objects_tooltip: Tipo di oggetti che il progetto utilizza
 
 flexigrid:
     pagetext: Pagina
@@ -485,7 +485,7 @@ reports:
             intro: |
                 <p>Le chiavi contengono soltanto lettere latine minuscole (<span
                 class="char">a</span> to <span class="char">z</span>) ed il carattere
-                di sottolinneatura (<span class="char">_</span>). Il primo ed ultimo
+                di sottolineatura (<span class="char">_</span>). Il primo ed ultimo
                 carattere devono essere lettere. La maggior parte delle chiavi semplici dovrebbe ricadere in
                 questa categoria.</p>
         colon:
@@ -495,7 +495,7 @@ reports:
                 <p>Chiavi che hanno uno o più caratteri due punti (<span
                 class="char">:</span>) all'interno in aggiunta a
                 lettere (da <span class="char">a</span> a <span
-                class="char">z</span>) e catatteri di sottolineatura (<span
+                class="char">z</span>) e caratteri di sottolineatura (<span
                 class="char">_</span>). Il carattere due punti viene spesso usato come
                 carattere separatore in una gerarchia.</p>
         letters:
@@ -503,7 +503,7 @@ reports:
             title: Chiavi con lettere maiuscole o con lettere di altri alfabeti
             intro: |
                 <p>Normalmente è preferibile che le chiavi siano composte da lettere minuscole
-                dell'alfabeto latino, ma in alcuni casi le lettere maiuscole vengono utlizzate
+                dell'alfabeto latino, ma in alcuni casi le lettere maiuscole vengono utilizzate
                 (ad esempio per abbreviazioni note) o vengono utilizzare lettere di altri
                 alfabeti(ad esempio per chiavi che sono rilevanti solo in un area dove
                 questo alfabeto è usato in modo predominante).</p>
@@ -514,7 +514,7 @@ reports:
                 <p>Chiavi che contengono caratteri di spaziatura come spazio, tab,
                 nuova linea, ritorno a capo o caratteri di spaziatura di altri
                 alfabeti. I caratteri di spaziatura nelle chiavi possono generare confusione, specialmente
-                all'inzio o alla fine della chiave, perché sono invisibili.
+                all'inizio o alla fine della chiave, perché sono invisibili.
                 In generale i caratteri di spaziatura andrebbero rimossi oppure andrebbe utilizato il
                 carattere di sottolineatura(<span class="char">_</span>) al loro posto.</p>
         problem:
@@ -524,11 +524,11 @@ reports:
                 <p>Chiavi che contengono caratteri probabilmente problematici: <span
                 class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> or caratteri
                 di controllo. Questi caratteri possono essere problematici, perché
-                sono utilizzati come carettere di inizio e fine stringa in molti linguaggi di programmazione 
+                sono utilizzati come carattere di inizio e fine stringa in molti linguaggi di programmazione 
                 o hanno un significato speciale in  XML, HTML, URLs, e in altre occasioni. Il
                 simbolo di uguale è spesso utilizzato come separatore tra la chiave i il valore.
                 Le chiavi che appaiono in questa lista non sono tuttavia necessariamente sbagliate.
-                In molti casi, però, sono semplicemnte il frutto di qualche errore
+                In molti casi, però, sono semplicemente il frutto di qualche errore
                 e dovrebbero essere sistemati.</p>
         rest:
             tab: Altro
@@ -558,7 +558,7 @@ reports:
             intro: |
             <p>Questa tabella mostra le chiavi che compaiono più di  10&thinsp;000 volte nel
             database OSM, ma che non hanno una pagina wiki che le descrive. Se conosci qualche cosa a proposito di
-            ona di queste chiavi, per favore crea una pagina wiki cliccando sul collegamento 
+            di queste chiavi, per favore crea una pagina wiki cliccando sul collegamento 
             presente nella colonna più a sinistra e inserisci una descrizione della chiave. In alcuni casi ha senso piuttosto
             creare un redirect ad un'altra pagina wiki. Per creare un redirect basta inserire una riga con
             <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>nome della pagina</i>]]</tt>
@@ -585,7 +585,7 @@ reports:
             page: Una pagina è disponibile sul sito wiki, ma non contiene un template standard.
             redirect: La pagina è un redirect.
         intro: |
-            Questa tabella mostra i valori di tutti i tag usati per le chiavi per cui è disponibile una pagina wsul sito wiki e in che lingua è la pagina.
+            Questa tabella mostra i valori di tutti i tag usati per le chiavi per cui è disponibile una pagina sul sito wiki e in che lingua è la pagina.
     languages:
         name: Linguaggi
     wiki_pages_about_non_existing_keys:
