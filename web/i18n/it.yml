@@ -1,3 +1,4 @@
+
 osm:
     tag: Tag
     tags: Tags
@@ -31,17 +32,22 @@ taginfo:
     sources: Fonti
     download: Download
     about: Riguardo a Taginfo
+    contact: Contatti
+    meta: Meta
     wiki: Wiki
     report: Report
     reports: Reports
     international: International
     apidoc: API Documentation
+    project: Progetto
+    projects: Progetti
     test: Test
     map: Mappa
     maps: Mappe
     relations: Relazioni
     combinations: Combinazioni
     key_combinations: Combinazioni delle Chiavi
+    comparison: Confronto Chiavi/Valori
     overview: Panoramica
     data_from: Fonte Dati
     data_from_description: Ultimo aggiornamento al database taginfo
@@ -75,6 +81,52 @@ misc:
     prevalent_values: Valori prevalenti
     prevalent_values_tooltip: Fino a 10 dei valori più usati per questa chiave (solamente se almeno l'1% delle chiavi hanno questo valore).
     in_wiki_tooltip: La chiave ha almeno una pagina pagina nel wiki.
+
+help:
+    search:
+        title: Ricerca
+        intro: Utilizza la casella di ricerca nell'angolo in alto a destra per cercare Chiavi e Valori dei tag.
+        string: Puoi cercare le Chiavi e i Valori dei tag
+        substring: Funziona anche se inserisci solo una parte della Chiave/Valore
+        complete_tags: Puoi cercare tag completi
+        values_only: Puoi anche cercare solo tra i Valori dei tag
+        suggestions: |
+            Per tua comodità mentre scrivi ti verranno suggerite le Chiavi e tag più frequenti.
+            Usa i tasti freccia della tastiera per sceglierne una e premi
+            <span class="key">Invio</span>.
+            Verrai portato direttamente alla pagine di quella Chiave o tag.
+    keyboard:
+        title: Scorciatoie con la tastiera
+        site_navigation: Naviga nel sito
+        page_navigation: Naviga nella pagina
+        table_navigation: Naviga nella tabella
+        keys:
+            home: Home
+            end: Fine
+            pageup: PagSu
+            pagedown: PagGiù
+            esc: Esc
+            tab: TAB
+        home_page: Pagina principale
+        keys_page: Pagina delle Chiavi
+        tags_page: Pagina dei Valori
+        relations_page: Pagina delle Relazioni
+        projects_page: Pagina dei Progetti
+        compare_page: Pagina dei Confronti
+        first_page: Prima pagina
+        prev_page: Pagina precedente
+        next_page: Pagina successiva
+        last_page: Ultima pagina
+        help_page: QUesto aiuto
+        activate_search: Attiva la casella d'inserimento per la ricerca
+        activate_filter: Attiva la casella d'inserimento per il filtro
+        prev_entry: Elemento precedente
+        next_entry: Elemento successivo
+        enter_entry: Salta all'elemento
+        switch_tab: Cambia scheda
+        deactivate: Disattiva la casella d'inserimento
+        up: Vai alla pagina più in alto nella gerarchia
+        switch_input: Spostati tra le caselle d'inserimento
 
 pages:
     sources:
