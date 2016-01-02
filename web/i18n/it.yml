@@ -629,7 +629,7 @@ reports:
         name: Linguaggi
         intro: |
             OpenStreetMap è un progetto internazionale. I tag e le loro
-            descrizioni             possono essere in una qualsiasi lingua.
+            descrizioni possono essere in una qualsiasi lingua.
             Questa tabella mostra le lingue di cui taginfo ha conoscenza
             e per ognuna di queste lingue quante pagine wiki che documentano,
             rispettivamente, le chiavi e i tag.
@@ -683,8 +683,7 @@ reports:
                 <p>Nota che i dati mostrati in questa tabella <b>non</b> provengono
                 da OpenStreetMap, vengono soltanto mostrati i blocchetti da unire che
                 possono essere usati per descrivere le lingue
-                indipendentemente dal fatto che siano realmente utilizzati in OSM.
-                </p>
+                indipendentemente dal fatto che siano realmente utilizzati in OSM. </p>
     similar_keys:
         name: Chiavi simili
         intro: |
