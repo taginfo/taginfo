@@ -15,9 +15,9 @@ osm:
     relation_types: Tipi di Relazioni
     relation_member: Membro della Relazione
     relation_members: Membri della Relazione
-    relation_member_nodes: Membri dei nodi
-    relation_member_ways: Membri delle ways
-    relation_member_relations: Membri delle Relazioni
+    relation_member_nodes: Nodi membro della relazione
+    relation_member_ways: Ways membro della relazione
+    relation_member_relations: Relazioni membro della relazione
     relation_member_role: Ruolo
     relation_member_roles: Ruoli
     object: Oggetto
@@ -197,7 +197,7 @@ pages:
                 preprocessing è già stato fatto per te. Vedi la <a
                 href="/download">pagina dei download</a> per una lista dei
                 file. Si noti che alcuni di questi possono essere
-                particolarmente grandi. Se vuoi scarcarli frequentemente,
+                particolarmente grandi. Se vuoi scaricarli frequentemente,
                 contatta un responsabile del sito che stai usando o discuti la
                 cosa nella mailing list.</p> <h3>Licenza</h3> <p>I dati
                 disponibili tramite taginfo sono sotto la licenza ODbL, la <a
@@ -206,7 +206,7 @@ pages:
         software:
             title: Il programma taginfo
             text: |
-                <p>Il programma taginfo è  statp creato e mantenuto da <a
+                <p>Il programma taginfo è  stato creato e mantenuto da <a
                 class="extlink"
                 href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
                 Il design del sito web è stato creato da <a class="extlink"
@@ -376,8 +376,8 @@ pages:
             title: Chiavi simili
             other: Chiavi simili
             count_all_tooltip: Numero degli oggetti con la chiave simile
-            similarity: Similarità
-            similarity_tooltip: Un numero più basso indica una maggiore simigliarità
+            similarity: Somiglianza
+            similarity_tooltip: Un numero più basso indica una maggiore somiglianza
     tag:
         description_from_wiki: Descrizione di questo tag dalla pagina wiki (se disponibile nella lingua selezionata, altrimenti in inglese).
         no_description_in_wiki: Nessuna descrizione nel wiki
@@ -413,7 +413,7 @@ pages:
     relation:
         name: Tipo di relazione
         description_from_wiki: La descrizione di questo tipo di relazione è preso dalla pagina wiki (se disponibile nella lingua selezionata, altrimenti in inglese).
-        no_description_in_wiki: Nessuna descrizione in lingua inglese per questo tipo di relazione. (Vedi anche nella scheda"Wiki".)
+        no_description_in_wiki: Nessuna descrizione in lingua inglese per questo tipo di relazione. (Vedi anche nella scheda "Wiki".)
         button_disabled: Pulsante disabilitato, perché ci sono troppi oggetti con questo tipo di relazione.
         overview:
             tab: Anteprima
@@ -434,7 +434,7 @@ pages:
             title: Grafico dei ruoli
         wiki_pages:
             title: pagine wiki su questo tipo di relazione
-            none_found: Nessuna pagina wiki disponinili per questo tipo di relazione.
+            none_found: Nessuna pagina wiki disponibile per questo tipo di relazione.
             create: Crea  una pagina wiki per questo tipo di relazione
             wiki_page: Pagina wiki
         projects:
@@ -550,7 +550,7 @@ reports:
                 nuova linea, ritorno a capo o caratteri di spaziatura di altri
                 alfabeti. I caratteri di spaziatura nelle chiavi possono generare confusione, specialmente
                 all'inizio o alla fine della chiave, perché sono invisibili.
-                In generale i caratteri di spaziatura andrebbero rimossi oppure andrebbe utilizato il
+                In generale i caratteri di spaziatura andrebbero rimossi oppure andrebbe utilizzato il
                 carattere di sottolineatura(<span class="char">_</span>) al loro posto.</p>
         problem:
             tab: Problematici
@@ -627,6 +627,114 @@ reports:
             pagina.
     languages:
         name: Linguaggi
+        intro: |
+            OpenStreetMap è un progetto internazionale. I tag e le loro
+            descrizioni possono essere in una qualsiasi lingua.
+            Questa tabella mostra le lingue di cui taginfo ha conoscenza
+            e per ognuna di queste lingue quante pagine wiki che documentano,
+            rispettivamente, le chiavi e i tag.
+        code: Codice
+        native_name: Nome in lingua originale
+        english_name: Nome in inglese
+        wiki_key_pages: Pagine wiki per le chiavi
+        wiki_tag_pages: Pagine wiki per i tag
     wiki_pages_about_non_existing_keys:
         name: Pagine della Wiki Riguardanti Chiavi Non-Esistenti
+        intro: |
+            Questa tabella mostra le chiavi per le quali esiste una pagina wiki,
+            ma per le quali non ci sia neppure una singola presenza nel database.
+            Ciò non è necessariamente un errore (potrebbe essere che qualcuno
+            abbia aggiunto la documentazione sul sito wiki in preparazione
+            per usare una chiave oppure che la pagina wiki documenti una
+            chiave ormai obsoleta), ma può anche darsi che si tratti di
+            un errore di battitura o un errore di altro tipo.
+        wiki_pages: Pagine wiki
+    name_tags:
+        name: Varianti del tag nome
+        intro: |
+            <p>Questo rapporto mostra le informazioni relativi a come viene
+            dato un nome agli oggetti in OSM utilizzando il
+            tag <tt>name</tt> tag e le sue varianti.</p>
+        overview:
+            tab: Anteprima
+            title: Anteprima
+        bcp47:
+            tab: I sotto-tag BCP47
+            title: I sotto-tag BCP47
+            filter:
+                label: Mostra solo i sotto-tag di tipo
+                all: Tutti
+                language: Lingua
+                script: Script
+                region: Regione
+                variant: Variante
+            intro: |
+                <p>Lo <a href="http://www.ietf.org/">IETF</a> definisce i <i>tag
+                delle lingue</i> in un suo standard
+                <a href="http://tools.ietf.org/html/bcp47">Tags for Identifying Languages
+                (BCP47)</a>. I tag delle lingue
+                consistono in uno o più <i>sotto-tag</i> cje descrivono le lingua,
+                gli script, le varianti, ecc. La lista seguente mostrai sotto-tag
+                attualmente registrati che sono rilevanti per OSM.
+                Per maggiori informazioni vedi anche la
+                <a href="https://en.wikipedia.org/wiki/IETF_language_tag">pagina
+                di Wikipedia sui tag per le lingue di IETF</a> e il sito <a
+                href="http://www.langtag.net/">langtag.net</a>.</p>
+                <p>Nota che i dati mostrati in questa tabella <b>non</b> provengono
+                da OpenStreetMap, vengono soltanto mostrati i blocchetti da unire che
+                possono essere usati per descrivere le lingue
+                indipendentemente dal fatto che siano realmente utilizzati in OSM. </p>
+    similar_keys:
+        name: Chiavi simili
+        intro: |
+            Questo rappoeto mostra le chiavi utilizzate frequentemente e le chiavi
+            simili utilizzate molto raramente. Ciò dovrebbe evidenziare molti degli
+            errori di scrittura delle chiavi più comuni, ma non è perfetto.
+            Prestate attenzione quando correggete i dati! NON modificate semplicemnte
+            in modo meccanico queste chiavi con un cerca e sostituisci.
+            Guardate e controllate ogni caso in modo individuale e risolvete
+            anche gli altri problemi che trovate.
+        key_common: Chiavi usate frequentemente
+        key_rare: Chiavi usate raramente
+        count_common: Conteggio
+        count_rare: Conteggio
+        similarity: Somiglianza
+    historic_development:
+        name: Analisi dello Storico
+        intro: |
+            Analisi di alcune statistiche rispetto al tempo. Questi dati
+            sono stati raccolti da taginfo, è possibile che siano presenti
+            delle lacune se taginfo non ha funzionato in un giorno per qualche
+            motivo.
+        keys:
+            title: Chiavi univoche
+        tags:
+            title: Tag univoci
+        relation_types:
+            title: Tipo di relazioni univoci
+    wiki_images:
+        name: Immagini wiki
+        intro: |
+            Le imamgini utilizzati nel sito wiki come simbolo per le chiavi in
+            diverse lingue. A volte c'è un'immagine in una delle varie lingue 
+            che è la migliore. Tuttavia in alcuni casi ha senso avere
+            diverse immagini a causa del diverso background culturale o simili
+            motivi.
+    wiki_problems:
+        name: Problemi nella analisi (parsing) del wiki
+        intro: |
+            Taginfo legge tutte le pagine sul sito wiki utilizzate per descrivere
+            le chiavi, i tag e le relazioni per trovare informazioni sui tag.
+            Questo rapporto mostra una lista dei problemi riscontrati mentre
+            queste pagine vengono lette. Questi non sono necessariamente degli
+            errori nel wiki, vuole semplicemente dire che le pagine
+            non sono formattate in una maniera che taginfo riesca a comprendere.
+            Può essere sia che la pagina vada corretta oppure che taginfo vada
+            sistemato.
+        location: Località
+        reason: Ragione
+        wiki_page: Pagina wiki
+        lang: Lingua
+        info: Informazioni aggiuntive
+
 
