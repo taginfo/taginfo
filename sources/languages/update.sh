@@ -29,7 +29,7 @@ readonly PROPERTY_ALIASES_URL="http://www.unicode.org/Public/UNIDATA/PropertyVal
 readonly PROPERTY_ALIASES_FILE="$DATADIR/PropertyValueAliases.txt"
 readonly DATABASE=$DATADIR/taginfo-languages.db
 
-source $SRCDIR/../util.sh languages $SRCDIR
+source $SRCDIR/../util.sh languages
 
 update_file() {
     local file="$1"

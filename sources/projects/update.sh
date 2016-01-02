@@ -21,7 +21,7 @@ fi
 readonly PROJECT_LIST=$DATADIR/taginfo-projects/project_list.txt
 readonly DATABASE=$DATADIR/taginfo-projects.db
 
-source $SRCDIR/../util.sh projects $SRCDIR
+source $SRCDIR/../util.sh projects
 
 update_projects_list() {
     if [ -d $DATADIR/taginfo-projects ]; then

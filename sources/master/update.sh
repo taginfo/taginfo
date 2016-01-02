@@ -22,7 +22,7 @@ readonly MASTER_DB=$DATADIR/taginfo-master.db
 readonly HISTORY_DB=$DATADIR/taginfo-history.db
 readonly SELECTION_DB=$DATADIR/selection.db
 
-source $SRCDIR/../util.sh master $SRCDIR
+source $SRCDIR/../util.sh master
 
 create_search_database() {
     local tokenizer=$(get_config sources.master.tokenizer simple)

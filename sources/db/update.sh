@@ -24,7 +24,7 @@ fi
 readonly DATABASE=$DATADIR/taginfo-db.db
 readonly SELECTION_DB=$DATADIR/../selection.db
 
-source $SRCDIR/../util.sh db $SRCDIR
+source $SRCDIR/../util.sh db
 
 readonly OSM_FILE=${2:-$(get_config sources.db.planetfile)}
 

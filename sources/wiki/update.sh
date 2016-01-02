@@ -23,7 +23,7 @@ readonly CACHEDB=$DATADIR/wikicache.db
 readonly LOGFILE_WIKI_DATA=$DATADIR/get_wiki_data.log
 readonly LOGFILE_IMAGE_INFO=$DATADIR/get_image_info.log
 
-source $SRCDIR/../util.sh wiki $SRCDIR
+source $SRCDIR/../util.sh wiki
 
 initialize_cache() {
     if [ ! -e $CACHEDB ]; then
