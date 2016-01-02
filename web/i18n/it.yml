@@ -206,7 +206,7 @@ pages:
         software:
             title: Il programma taginfo
             text: |
-                <p>Il programma taginfo è  stato creato e mantenuto da <a
+                <p>Il programma taginfo è stato creato e mantenuto da <a
                 class="extlink"
                 href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
                 Il design del sito web è stato creato da <a class="extlink"
@@ -331,7 +331,11 @@ pages:
         empty_role: ruolo vuoto
     projects:
         intro: |
-            Questa tabella mostra tutti i progetti conosciuti da taginfo che utilizzano i tag OSM in qualche modo.<br/>Per maggiori informazioni su questa funzionalità consultate la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">pagina wiki</a>.
+            Questa tabella mostra tutti i progetti conosciuti da taginfo che
+            utilizzano i tag OSM in qualche modo.<br/>Per maggiori informazioni
+            su questa funzionalità consultate la <a
+            href="//wiki.openstreetmap.org/wiki/Taginfo/Projects"
+            class="extlink">pagina wiki</a>.
     key:
         description_from_wiki: Descrizione di questa chiave dalla pagina wiki (se disponibile nella lingua selezionata, altrimenti in inglese).
         no_description_in_wiki: Nessuna descrizione nel wiki
@@ -435,7 +439,7 @@ pages:
         wiki_pages:
             title: pagine wiki su questo tipo di relazione
             none_found: Nessuna pagina wiki disponibile per questo tipo di relazione.
-            create: Crea  una pagina wiki per questo tipo di relazione
+            create: Crea una pagina wiki per questo tipo di relazione
             wiki_page: Pagina wiki
         projects:
             title: Progetti che utilizzano questo tipo di relazione
@@ -497,17 +501,19 @@ reports:
     characters_in_keys:
         name: Caratteri nelle chiavi
         intro: |
-            Qualsiasi carattere con un valido codice Unicode può comparire in una chiave OSM, ma normalmente
-            soltanto i caratteri latini minuscoli (a-z) e il caratteri di sottolineatura (_) sono
-            utilizzati. Il carattere dei due punti (:) è spesso utilizzato come carattere separatore. Questo
-            rapporto divide in categorie tutte le chiavi in base ai caratteri utilizzati.
+            Qualsiasi carattere con un valido codice Unicode può comparire in
+            una chiave OSM, ma normalmente soltanto i caratteri latini
+            minuscoli (a-z) e il caratteri di sottolineatura (_) sono
+            utilizzati. Il carattere dei due punti (:) è spesso utilizzato come
+            carattere separatore. Questo rapporto divide in categorie tutte le
+            chiavi in base ai caratteri utilizzati.
         statistics:
             tab: Statistiche
             title: Anteprima delle statistiche
             fraction: Frazione
             characters: Caratteri nelle chiave
             characters_in_keys:
-                plain: Soltanto le lettere latine minuscole  (da <span class="char">a</span> a <span class="char">z</span>) e il carattere di sottolineatura (<span class="char">_</span>), il primo ed ultimo carattere sono lettere.
+                plain: Soltanto le lettere latine minuscole (da <span class="char">a</span> a <span class="char">z</span>) e il carattere di sottolineatura (<span class="char">_</span>), il primo ed ultimo carattere sono lettere.
                 colon: Come in A, ma con uno o più carattere due punti (<span class="char">:</span>) all'interno.
                 letters: Come in B, ma con una o più lettere maiuscole o da altri alfabeti.
                 space: Almeno un carattere di spaziatura (spazio, tab, nuova linea, ritorno a capo, o da altro alfabeto).
@@ -518,58 +524,65 @@ reports:
             tab: Normale
             title: Chiavi normali
             intro: |
-                <p>Le chiavi contengono soltanto lettere latine minuscole (<span
-                class="char">a</span> to <span class="char">z</span>) ed il carattere
-                di sottolineatura (<span class="char">_</span>). Il primo ed ultimo
-                carattere devono essere lettere. La maggior parte delle chiavi semplici dovrebbe ricadere in
-                questa categoria.</p>
+                <p>Le chiavi contengono soltanto lettere latine minuscole
+                (<span class="char">a</span> to <span class="char">z</span>) ed
+                il carattere di sottolineatura (<span class="char">_</span>).
+                Il primo ed ultimo carattere devono essere lettere. La maggior
+                parte delle chiavi semplici dovrebbe ricadere in questa
+                categoria.</p>
         colon:
             tab: Due punti
             title: Chiavi con il carattere due punti
             intro: |
                 <p>Chiavi che hanno uno o più caratteri due punti (<span
-                class="char">:</span>) all'interno in aggiunta a
-                lettere (da <span class="char">a</span> a <span
-                class="char">z</span>) e caratteri di sottolineatura (<span
-                class="char">_</span>). Il carattere due punti viene spesso usato come
-                carattere separatore in una gerarchia.</p>
+                class="char">:</span>) all'interno in aggiunta a lettere (da
+                <span class="char">a</span> a <span class="char">z</span>) e
+                caratteri di sottolineatura (<span class="char">_</span>). Il
+                carattere due punti viene spesso usato come carattere
+                separatore in una gerarchia.</p>
         letters:
             tab: Lettere
             title: Chiavi con lettere maiuscole o con lettere di altri alfabeti
             intro: |
-                <p>Normalmente è preferibile che le chiavi siano composte da lettere minuscole
-                dell'alfabeto latino, ma in alcuni casi le lettere maiuscole vengono utilizzate
-                (ad esempio per abbreviazioni note) o vengono utilizzare lettere di altri
-                alfabeti(ad esempio per chiavi che sono rilevanti solo in un area dove
-                questo alfabeto è usato in modo predominante).</p>
+                <p>Normalmente è preferibile che le chiavi siano composte da
+                lettere minuscole dell'alfabeto latino, ma in alcuni casi le
+                lettere maiuscole vengono utilizzate (ad esempio per
+                abbreviazioni note) o vengono utilizzare lettere di altri
+                alfabeti(ad esempio per chiavi che sono rilevanti solo in un
+                area dove questo alfabeto è usato in modo predominante).</p>
         space:
             tab: Caratteri di spaziatura
             title: Chiavi con caratteri di spaziatura
             intro: |
-                <p>Chiavi che contengono caratteri di spaziatura come spazio, tab,
-                nuova linea, ritorno a capo o caratteri di spaziatura di altri
-                alfabeti. I caratteri di spaziatura nelle chiavi possono generare confusione, specialmente
-                all'inizio o alla fine della chiave, perché sono invisibili.
-                In generale i caratteri di spaziatura andrebbero rimossi oppure andrebbe utilizzato il
-                carattere di sottolineatura(<span class="char">_</span>) al loro posto.</p>
+                <p>Chiavi che contengono caratteri di spaziatura come spazio,
+                tab, nuova linea, ritorno a capo o caratteri di spaziatura di
+                altri alfabeti. I caratteri di spaziatura nelle chiavi possono
+                generare confusione, specialmente all'inizio o alla fine della
+                chiave, perché sono invisibili. In generale i caratteri di
+                spaziatura andrebbero rimossi oppure andrebbe utilizzato il
+                carattere di sottolineatura(<span class="char">_</span>) al
+                loro posto.</p>
         problem:
             tab: Problematici
             title: Chiavi con caratteri probabilmente problematici
             intro: |
-                <p>Chiavi che contengono caratteri probabilmente problematici: <span
-                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> or caratteri
-                di controllo. Questi caratteri possono essere problematici, perché
-                sono utilizzati come carattere di inizio e fine stringa in molti linguaggi di programmazione
-                o hanno un significato speciale in  XML, HTML, URLs, e in altre occasioni. Il
-                simbolo di uguale è spesso utilizzato come separatore tra la chiave i il valore.
-                Le chiavi che appaiono in questa lista non sono tuttavia necessariamente sbagliate.
-                In molti casi, però, sono semplicemente il frutto di qualche errore
-                e dovrebbero essere sistemati.</p>
+                <p>Chiavi che contengono caratteri probabilmente problematici:
+                <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> or
+                caratteri di controllo. Questi caratteri possono essere
+                problematici, perché sono utilizzati come carattere di inizio e
+                fine stringa in molti linguaggi di programmazione o hanno un
+                significato speciale in XML, HTML, URLs, e in altre occasioni.
+                Il simbolo di uguale è spesso utilizzato come separatore tra la
+                chiave i il valore. Le chiavi che appaiono in questa lista non
+                sono tuttavia necessariamente sbagliate. In molti casi, però,
+                sono semplicemente il frutto di qualche errore e dovrebbero
+                essere sistemati.</p>
         rest:
             tab: Altro
             title: Qualsiasi altra chiave
             intro: |
-                <p>chiavi che non rientrano in nessuna delle altre categorie.</p>
+                <p>chiavi che non rientrano in nessuna delle altre
+                categorie.</p>
     database_statistics:
         name: Statistiche del Database
         objects_in_db: Numero di oggetti nel database
@@ -591,13 +604,16 @@ reports:
     frequently_used_keys_without_wiki_page:
         name: Chiavi Usate Frequentemente Senza una Pagina Wiki
         intro: |
-            <p>Questa tabella mostra le chiavi che compaiono più di  10&thinsp;000 volte nel
-            database OSM, ma che non hanno una pagina wiki che le descrive. Se conosci qualche cosa a proposito di
-            di queste chiavi, per favore crea una pagina wiki cliccando sul collegamento
-            presente nella colonna più a sinistra e inserisci una descrizione della chiave. In alcuni casi ha senso piuttosto
-            creare un redirect ad un'altra pagina wiki. Per creare un redirect basta inserire una riga con
-            <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>nome della pagina</i>]]</tt>
-            nella pagina wiki.</p>
+            <p>Questa tabella mostra le chiavi che compaiono più di
+            10&thinsp;000 volte nel database OSM, ma che non hanno una pagina
+            wiki che le descrive. Se conosci qualche cosa a proposito di di
+            queste chiavi, per favore crea una pagina wiki cliccando sul
+            collegamento presente nella colonna più a sinistra e inserisci una
+            descrizione della chiave. In alcuni casi ha senso piuttosto creare
+            un redirect ad un'altra pagina wiki. Per creare un redirect basta
+            inserire una riga con <tt style="background-color: #f0f0f0;
+            padding: 0 2px;">#REDIRECT [[<i>nome della pagina</i>]]</tt> nella
+            pagina wiki.</p>
         also_show_keys: Mostra anche le chiavi che non hanno una pagina wiki in lingua inglese, ma che hanno una pagina wiki in un altra lingua.
         table:
             create_wiki_page: Crea una pagina wiki...
@@ -669,31 +685,32 @@ reports:
                 region: Regione
                 variant: Variante
             intro: |
-                <p>Lo <a href="http://www.ietf.org/">IETF</a> definisce i <i>tag
-                delle lingue</i> in un suo standard
-                <a href="http://tools.ietf.org/html/bcp47">Tags for Identifying Languages
-                (BCP47)</a>. I tag delle lingue
-                consistono in uno o più <i>sotto-tag</i> cje descrivono le lingua,
-                gli script, le varianti, ecc. La lista seguente mostrai sotto-tag
-                attualmente registrati che sono rilevanti per OSM.
-                Per maggiori informazioni vedi anche la
-                <a href="https://en.wikipedia.org/wiki/IETF_language_tag">pagina
+                <p>Lo <a href="http://www.ietf.org/">IETF</a> definisce i
+                <i>tag delle lingue</i> in un suo standard <a
+                href="http://tools.ietf.org/html/bcp47">Tags for Identifying
+                Languages (BCP47)</a>. I tag delle lingue consistono in uno o
+                più <i>sotto-tag</i> cje descrivono le lingua, gli script, le
+                varianti, ecc. La lista seguente mostrai sotto-tag attualmente
+                registrati che sono rilevanti per OSM. Per maggiori
+                informazioni vedi anche la <a
+                href="https://en.wikipedia.org/wiki/IETF_language_tag">pagina
                 di Wikipedia sui tag per le lingue di IETF</a> e il sito <a
-                href="http://www.langtag.net/">langtag.net</a>.</p>
-                <p>Nota che i dati mostrati in questa tabella <b>non</b> provengono
-                da OpenStreetMap, vengono soltanto mostrati i blocchetti da unire che
-                possono essere usati per descrivere le lingue
-                indipendentemente dal fatto che siano realmente utilizzati in OSM. </p>
+                href="http://www.langtag.net/">langtag.net</a>.</p> <p>Nota che
+                i dati mostrati in questa tabella <b>non</b> provengono da
+                OpenStreetMap, vengono soltanto mostrati i blocchetti da unire
+                che possono essere usati per descrivere le lingue
+                indipendentemente dal fatto che siano realmente utilizzati in
+                OSM.</p>
     similar_keys:
         name: Chiavi simili
         intro: |
-            Questo rappoeto mostra le chiavi utilizzate frequentemente e le chiavi
-            simili utilizzate molto raramente. Ciò dovrebbe evidenziare molti degli
-            errori di scrittura delle chiavi più comuni, ma non è perfetto.
-            Prestate attenzione quando correggete i dati! NON modificate semplicemnte
-            in modo meccanico queste chiavi con un cerca e sostituisci.
-            Guardate e controllate ogni caso in modo individuale e risolvete
-            anche gli altri problemi che trovate.
+            Questo rappoeto mostra le chiavi utilizzate frequentemente e le
+            chiavi simili utilizzate molto raramente. Ciò dovrebbe evidenziare
+            molti degli errori di scrittura delle chiavi più comuni, ma non è
+            perfetto. Prestate attenzione quando correggete i dati! NON
+            modificate semplicemnte in modo meccanico queste chiavi con un
+            cerca e sostituisci. Guardate e controllate ogni caso in modo
+            individuale e risolvete anche gli altri problemi che trovate.
         key_common: Chiavi usate frequentemente
         key_rare: Chiavi usate raramente
         count_common: Conteggio
@@ -702,9 +719,9 @@ reports:
     historic_development:
         name: Analisi dello Storico
         intro: |
-            Analisi di alcune statistiche rispetto al tempo. Questi dati
-            sono stati raccolti da taginfo, è possibile che siano presenti
-            delle lacune se taginfo non ha funzionato in un giorno per qualche
+            Analisi di alcune statistiche rispetto al tempo. Questi dati sono
+            stati raccolti da taginfo, è possibile che siano presenti delle
+            lacune se taginfo non ha funzionato in un giorno per qualche
             motivo.
         keys:
             title: Chiavi univoche
@@ -716,19 +733,18 @@ reports:
         name: Immagini wiki
         intro: |
             Le imamgini utilizzati nel sito wiki come simbolo per le chiavi in
-            diverse lingue. A volte c'è un'immagine in una delle varie lingue 
-            che è la migliore. Tuttavia in alcuni casi ha senso avere
-            diverse immagini a causa del diverso background culturale o simili
-            motivi.
+            diverse lingue. A volte c'è un'immagine in una delle varie lingue
+            che è la migliore. Tuttavia in alcuni casi ha senso avere diverse
+            immagini a causa del diverso background culturale o simili motivi.
     wiki_problems:
         name: Problemi nella analisi (parsing) del wiki
         intro: |
-            Taginfo legge tutte le pagine sul sito wiki utilizzate per descrivere
-            le chiavi, i tag e le relazioni per trovare informazioni sui tag.
-            Questo rapporto mostra una lista dei problemi riscontrati mentre
-            queste pagine vengono lette. Questi non sono necessariamente degli
-            errori nel wiki, vuole semplicemente dire che le pagine
-            non sono formattate in una maniera che taginfo riesca a comprendere.
+            Taginfo legge tutte le pagine sul sito wiki utilizzate per
+            descrivere le chiavi, i tag e le relazioni per trovare informazioni
+            sui tag. Questo rapporto mostra una lista dei problemi riscontrati
+            mentre queste pagine vengono lette. Questi non sono necessariamente
+            degli errori nel wiki, vuole semplicemente dire che le pagine non
+            sono formattate in una maniera che taginfo riesca a comprendere.
             Può essere sia che la pagina vada corretta oppure che taginfo vada
             sistemato.
         location: Località
@@ -736,5 +752,4 @@ reports:
         wiki_page: Pagina wiki
         lang: Lingua
         info: Informazioni aggiuntive
-
 
