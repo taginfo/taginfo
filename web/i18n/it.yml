@@ -1,4 +1,3 @@
-
 osm:
     tag: Tag
     tags: Tags
@@ -91,10 +90,10 @@ help:
         complete_tags: Puoi cercare tag completi
         values_only: Puoi anche cercare solo tra i Valori dei tag
         suggestions: |
-            Per tua comodità mentre scrivi ti verranno suggerite le Chiavi e tag più frequenti.
-            Usa i tasti freccia della tastiera per sceglierne una e premi
-            <span class="key">Invio</span>.
-            Verrai portato direttamente alla pagine di quella Chiave o tag.
+            Per tua comodità mentre scrivi ti verranno suggerite le Chiavi e
+            tag più frequenti. Usa i tasti freccia della tastiera per
+            sceglierne una e premi <span class="key">Invio</span>. Verrai
+            portato direttamente alla pagine di quella Chiave o tag.
     keyboard:
         title: Scorciatoie con la tastiera
         site_navigation: Naviga nel sito
@@ -143,11 +142,12 @@ pages:
         reports:
             listreports: Vedi tutti i rapporti...
         about:
-            intro:
+            intro: |
                 <p>OpenStreetMap usa i <b>tag</b> nella forma <b>key=value</b>
-                per aggiungere un significato agli oggetti geografici. Taginfo raccoglie le informazioni
-                su questi tag da diverse fonti per aiutarti a comprendere 
-                il loro significato e come vengono usati.</p>
+                per aggiungere un significato agli oggetti geografici. Taginfo
+                raccoglie le informazioni su questi tag da diverse fonti per
+                aiutarti a comprendere il loro significato e come vengono
+                usati.</p>
             more: Altre informazioni su taginfo...
         international:
             see: Vedi altri siti taginfo...
@@ -155,94 +155,125 @@ pages:
         about_taginfo:
             title: Informazioni su taginfo
             text: |
-                <p>OpenStreetMap usa i <b>tag</b> per aggiungere informazione agli oggetti geografici.
-                Non c'è una lista fissata di questi tag. Nuovi tag possono essere inventati e usati
-                a seconda delle necessità. Ogni persona può creare un nuovo tag e aggiungerlo ad
-                un oggetto nuovo o già esistente. Ciò rende OpenStreetMap enormemente flessibile,
-                ma anche rende lavorarci alle volte un po' difficile.</p>
-                <p>Quando contribuisci ad OSM o quando stai usando dati di OSM data, capita
-                spesso domande del tipo: Quali tag vengono usati dalle persone per la caratteristica X?
-                Quali tag posso utilizzare per la caratteristica Y perché appaia in maniera corretta sulla mappa?
-                Il tag Z descritto nella pagina wiki è veramente utilizzato e dove?</p>
-                <p>Taginfo ti fornisce un aiuto mostrandoti delle statistiche a riguardo di quali tags sono realmente nel
-                database, quante persone usano questi tag, dove sono utilizzati e altre informazioni analoghe.
-                Raccogli informazioni sui tag anche dal sito wiki e da altre fonti. Taginfo
-                cerca di mettere assieme tutte le informazioni sui tag per aiutarti a comprendere
-                come sono usati e cosa significano. Vedi la <a href="/sources">lista delle fonti</a>
-                che taginfo utilizza.</p>
+                <p>OpenStreetMap usa i <b>tag</b> per aggiungere informazione
+                agli oggetti geografici. Non c'è una lista fissata di questi
+                tag. Nuovi tag possono essere inventati e usati a seconda delle
+                necessità. Ogni persona può creare un nuovo tag e aggiungerlo
+                ad un oggetto nuovo o già esistente. Ciò rende OpenStreetMap
+                enormemente flessibile, ma anche rende lavorarci alle volte un
+                po' difficile.</p> <p>Quando contribuisci ad OSM o quando stai
+                usando dati di OSM data, capita spesso domande del tipo: Quali
+                tag vengono usati dalle persone per la caratteristica X? Quali
+                tag posso utilizzare per la caratteristica Y perché appaia in
+                maniera corretta sulla mappa? Il tag Z descritto nella pagina
+                wiki è veramente utilizzato e dove?</p> <p>Taginfo ti fornisce
+                un aiuto mostrandoti delle statistiche a riguardo di quali tags
+                sono realmente nel database, quante persone usano questi tag,
+                dove sono utilizzati e altre informazioni analoghe. Raccogli
+                informazioni sui tag anche dal sito wiki e da altre fonti.
+                Taginfo cerca di mettere assieme tutte le informazioni sui tag
+                per aiutarti a comprendere come sono usati e cosa significano.
+                Vedi la <a href="/sources">lista delle fonti</a> che taginfo
+                utilizza.</p>
         about_site:
             title: Informazioni su questo sito
         building_on_taginfo:
             title: Sviluppare con taginfo
             text: |
-                <p>Puoi usare i dati ottenuti con taginfo nei tuoi progetti:</p>
-                <h3>API</h3>
-                <p>Puoi accedere ai dati di Taginfo tramite una REST API. Vedi la
-                <a href="/taginfo/apidoc">documentazione sull'API</a> per maggiori dettagli, alcune informazioni generali sono
-                presenti <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">sul sito wiki di OSM</a> (in inglese).
-                I server che forniscono le API di taginfo API non hanno risorse illimitate.
-                Per favore utilizza le API in modo responsabile. In caso di dubbio contatta un responsabile del 
-                sito che stai usando o discuti la cosa nella mailing list.</p>
-                <h3>Download</h3>
-                <p>Se vuoi guardare dentro ai dati usati da taginfo, puoi scaricare
-                i file del database Sqlite che vengono regolarmente aggiornati. Tutto il lavoro di preprocessing è già stato fatto per te.
-                Vedi la <a href="/download">pagina dei download</a> per una lista dei file. Si noti che
-                alcuni di questi possono essere particolarmente grandi. Se vuoi scarcarli frequentemente,
-                contatta un responsabile del sito che stai usando o discuti la cosa nella mailing list.</p>
-                <h3>Licenza</h3>
-                <p>I dati disponibili tramite taginfo sono sotto la licenza ODbL, la
-                <a class="extlink" href="//www.openstreetmap.org/copyright">stessa
+                <p>Puoi usare i dati ottenuti con taginfo nei tuoi
+                progetti:</p> <h3>API</h3> <p>Puoi accedere ai dati di Taginfo
+                tramite una REST API. Vedi la <a
+                href="/taginfo/apidoc">documentazione sull'API</a> per maggiori
+                dettagli, alcune informazioni generali sono presenti <a
+                class="extlink"
+                href="//wiki.openstreetmap.org/wiki/Taginfo/API">sul sito wiki
+                di OSM</a> (in inglese). I server che forniscono le API di
+                taginfo API non hanno risorse illimitate. Per favore utilizza
+                le API in modo responsabile. In caso di dubbio contatta un
+                responsabile del sito che stai usando o discuti la cosa nella
+                mailing list.</p> <h3>Download</h3> <p>Se vuoi guardare dentro
+                ai dati usati da taginfo, puoi scaricare i file del database
+                Sqlite che vengono regolarmente aggiornati. Tutto il lavoro di
+                preprocessing è già stato fatto per te. Vedi la <a
+                href="/download">pagina dei download</a> per una lista dei
+                file. Si noti che alcuni di questi possono essere
+                particolarmente grandi. Se vuoi scarcarli frequentemente,
+                contatta un responsabile del sito che stai usando o discuti la
+                cosa nella mailing list.</p> <h3>Licenza</h3> <p>I dati
+                disponibili tramite taginfo sono sotto la licenza ODbL, la <a
+                class="extlink" href="//www.openstreetmap.org/copyright">stessa
                 licenza dei dati OpenStreetMap</a>.</p>
         software:
             title: Il programma taginfo
             text: |
-                <p>Il programma taginfo è  statp creato e mantenuto da
-                <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
-                Il design del sito web è stato creato da
-                <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
-                <h3>Traduzioni</h3>
-                <p>Abbiamo bisogno di traduttori per tradurre l'interfaccia utente di taginfo. Vedi la pagina <a
-                href="/taginfo/translations">introduttiva sulle traduzioni</a> per informazioni su quali lingue
-                hanno bisogno di lavoro di traduzione. Maggiori informazioni su come aiutare sono disponibili nella
-                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">pagina wiki di OSM</a>.</p>
-                <h3>Codice</h3>
-                <p>Tutto il software che sta dietro i siti taginfo è Open Source. Puoi ottenerlo sul sito
-                <a class="extlink" href="https://github.com/joto/taginfo/">GitHub</a>. Per informazioni introduttive
-                consulta la pagina sull'<a class="extlink"
-                href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">architettura di taginfo</a>
-                sul sito wiki di OSM.</p>
-                <h3>Far funzionare una vostra personale istanza</h3>
-                <p>Potete far funzionare un vostro personale
-                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">sito taginfo</a>,
-                ad esempio con i dati solo della vostra nazione. Le istruzioni sono
-                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Running">nella pagina wiki di
-                OSM</a>.</p>
-                <h3>Segnalazioni di bug e richieste di nuove funzioni</h3>
-                <p>Le segnalazioni di bug e le richieste di nuove funzioni devono essere fatte direttamente nel<a class="extlink"
-                href="https://github.com/joto/taginfo/issues">GitHub issue tracker</a>. In alternativa puoi
-                discutere la cosa nella mailing list.</p>
-                <h3>Contatti/Mailing list</h3>
-                <p>Potete contattarci nella
-                <a class="extlink" href="//lists.openstreetmap.org/listinfo/taginfo-dev">taginfo-dev mailing list</a>
-                se avete domanda o avete bisogno di aiuto.</p>
-     sources:
+                <p>Il programma taginfo è  statp creato e mantenuto da <a
+                class="extlink"
+                href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
+                Il design del sito web è stato creato da <a class="extlink"
+                href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
+                <h3>Traduzioni</h3> <p>Abbiamo bisogno di traduttori per
+                tradurre l'interfaccia utente di taginfo. Vedi la pagina <a
+                href="/taginfo/translations">introduttiva sulle traduzioni</a>
+                per informazioni su quali lingue hanno bisogno di lavoro di
+                traduzione. Maggiori informazioni su come aiutare sono
+                disponibili nella <a class="extlink"
+                href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">pagina wiki
+                di OSM</a>.</p> <h3>Codice</h3> <p>Tutto il software che sta
+                dietro i siti taginfo è Open Source. Puoi ottenerlo sul sito <a
+                class="extlink"
+                href="https://github.com/joto/taginfo/">GitHub</a>. Per
+                informazioni introduttive consulta la pagina sull'<a
+                class="extlink"
+                href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">architettura
+                di taginfo</a> sul sito wiki di OSM.</p> <h3>Far funzionare una
+                vostra personale istanza</h3> <p>Potete far funzionare un
+                vostro personale <a class="extlink"
+                href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">sito
+                taginfo</a>, ad esempio con i dati solo della vostra nazione.
+                Le istruzioni sono <a class="extlink"
+                href="//wiki.openstreetmap.org/wiki/Taginfo/Running">nella
+                pagina wiki di OSM</a>.</p> <h3>Segnalazioni di bug e richieste
+                di nuove funzioni</h3> <p>Le segnalazioni di bug e le richieste
+                di nuove funzioni devono essere fatte direttamente nel<a
+                class="extlink"
+                href="https://github.com/joto/taginfo/issues">GitHub issue
+                tracker</a>. In alternativa puoi discutere la cosa nella
+                mailing list.</p> <h3>Contatti/Mailing list</h3> <p>Potete
+                contattarci nella <a class="extlink"
+                href="//lists.openstreetmap.org/listinfo/taginfo-dev">taginfo-dev
+                mailing list</a> se avete domanda o avete bisogno di aiuto.</p>
+    sources:
         intro: |
-            <p>Taginfo prende i dati dai tags OSM da diverse fonti e li fonde insieme
-            per una facile navigazione e scoperta.</p>
-            <p>Da notare che Taginfo visualizza solo i dati. Se volete cambiarli, dovete tornare
+            <p>Taginfo prende i dati dai tags OSM da diverse fonti e li fonde
+            insieme per una facile navigazione e scoperta.</p> <p>Da notare che
+            Taginfo visualizza solo i dati. Se volete cambiarli, dovete tornare
             alla fonte dei dati.</p>
         list:
             title: Lista delle fonti
             intro: In questa lista sono elencate le fonti attualmente utilizzate. Ulteriori fonti potrebbero essere aggiunte in futuro.
         description:
             db: |
-                <p>Le statistiche sulle chiavi, tag e sui tipi di relazioni sono generate dal <a class="extlink" href="http://planet.openstreetmap.org/">database OSM</a> (o da un suo estratto) e dalla stesse fonte provengono le mappe che mostrano la distribuzione geografica dei nodi e dei percorsi (way).</p>
+                <p>Le statistiche sulle chiavi, tag e sui tipi di relazioni
+                sono generate dal <a class="extlink"
+                href="http://planet.openstreetmap.org/">database OSM</a> (o da
+                un suo estratto) e dalla stesse fonte provengono le mappe che
+                mostrano la distribuzione geografica dei nodi e dei percorsi
+                (way).</p>
             wiki: |
-                <p>Il <a class="extlink" href="//wiki.openstreetmap.org/">sito wiki di OSM</a> viene consultato e tutte le pagine del tipo Key:*, Tag:*, e Relation:* (in tutte le varie lingue) vengono analizzate. Da queste vengono estratte le descrizioni, le immagini e i tag correlati.</p>
+                <p>Il <a class="extlink" href="//wiki.openstreetmap.org/">sito
+                wiki di OSM</a> viene consultato e tutte le pagine del tipo
+                Key:*, Tag:*, e Relation:* (in tutte le varie lingue) vengono
+                analizzate. Da queste vengono estratte le descrizioni, le
+                immagini e i tag correlati.</p>
             languages: |
-                <p>Taginfo prende le informazioni sulle varie lingue del mondo, i loro codici, nomi, etc. da diversi registri <a class="extlink" href="http://www.iana.org/">IANA</a> and <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+                <p>Taginfo prende le informazioni sulle varie lingue del mondo,
+                i loro codici, nomi, etc. da diversi registri <a
+                class="extlink" href="http://www.iana.org/">IANA</a> and <a
+                class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
             projects: |
-                <p>Progetti che usano i tag di OSM in qualche modo, come strumenti di modifica, mappe, navigatori, ecc. Vedi <a href="/projects">la lista dei progetti</a>.</p>
+                <p>Progetti che usano i tag di OSM in qualche modo, come
+                strumenti di modifica, mappe, navigatori, ecc. Vedi <a
+                href="/projects">la lista dei progetti</a>.</p>
         updates:
             title: Aggiornamenti
             intro: I dati di taginfo vengono aggiornati regolarmente dalle loro fonti.
@@ -252,11 +283,14 @@ pages:
         to: a
     download:
         intro: |
-            <p>Qui potete scaricare il database usato da Taginfo. Tutti i dati sono memorizzati
-            in un database <a class="extlink" href="http://www.sqlite.org/">Sqlite</a>. I file del database sono poi
-            compressi con <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
-            <p>Se non volete scaricare questi database, ma avete bisogno di avere un accesso automatizzato
-            ai dati, potete anche usare le <a href="/about">API</a>.</p>
+            <p>Qui potete scaricare il database usato da Taginfo. Tutti i dati
+            sono memorizzati in un database <a class="extlink"
+            href="http://www.sqlite.org/">Sqlite</a>. I file del database sono
+            poi compressi con <a class="extlink"
+            href="http://www.bzip.org/">bzip2</a>.</p> <p>Se non volete
+            scaricare questi database, ma avete bisogno di avere un accesso
+            automatizzato ai dati, potete anche usare le <a
+            href="/about">API</a>.</p>
         file: File
         packed: Compressi
         unpacked: Decompressi
@@ -264,15 +298,15 @@ pages:
         unknown: sconosciuto
     reports:
         intro: |
-            I Reports mostrano i dati da differenti prospettive.
-            Spesso riuniscono i dati da diverse fonti in modi interessanti. Alcuni
-            di questi reports possono aiutare a trovare certi tipi di errori, come ad esempio
-            chiavi popolari senza una pagina nel wiki.
+            I Reports mostrano i dati da differenti prospettive. Spesso
+            riuniscono i dati da diverse fonti in modi interessanti. Alcuni di
+            questi reports possono aiutare a trovare certi tipi di errori, come
+            ad esempio chiavi popolari senza una pagina nel wiki.
         data_sources: Fonte dati
     search:
         title: Risultati ricerca
         you_were_searching_for: Stavi cercando
-     fulltext: Testo completo
+        fulltext: Testo completo
         no_keys: Nessuna chiave trovata.
         no_values: Nessun valore trovato.
         no_tags: Nessun tag trovato.
@@ -281,10 +315,11 @@ pages:
         nothing_to_compare: Non ci sono chiavi/tag da confrontare. Consulta una pagina sulle chiavi o sui tag e aggiungili.
     keys:
         intro: |
-                Questa tabella mostra tutte le chiavi tag che esistono nel database o in una delle altre fonti.
+            Questa tabella mostra tutte le chiavi tag che esistono nel database
+            o in una delle altre fonti.
     tags:
         intro: |
-                Questa tabella mostra i tag più comuni presenti nel database.
+            Questa tabella mostra i tag più comuni presenti nel database.
     relations:
         name: Tipi di relazioni
         intro: Informazioni sui diversi tipi di relazioni (indicati dal tag <a href="/keys/type?filter=relations">type</a>).
@@ -296,7 +331,7 @@ pages:
         empty_role: ruolo vuoto
     projects:
         intro: |
-                Questa tabella mostra tutti i progetti conosciuti da taginfo che utilizzano i tag OSM in qualche modo.<br/>Per maggiori informazioni su questa funzionalità consultate la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">pagina wiki</a>.
+            Questa tabella mostra tutti i progetti conosciuti da taginfo che utilizzano i tag OSM in qualche modo.<br/>Per maggiori informazioni su questa funzionalità consultate la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">pagina wiki</a>.
     key:
         description_from_wiki: Descrizione di questa chiave dalla pagina wiki (se disponibile nella lingua selezionata, altrimenti in inglese).
         no_description_in_wiki: Nessuna descrizione nel wiki
@@ -343,7 +378,7 @@ pages:
             count_all_tooltip: Numero degli oggetti con la chiave simile
             similarity: Similarità
             similarity_tooltip: Un numero più basso indica una maggiore simigliarità
-     tag:
+    tag:
         description_from_wiki: Descrizione di questo tag dalla pagina wiki (se disponibile nella lingua selezionata, altrimenti in inglese).
         no_description_in_wiki: Nessuna descrizione nel wiki
         button_disabled: Pulsante disabilitato, perché ci sono troppi oggetti con questo tag.
@@ -413,7 +448,7 @@ pages:
             documentation_url: Documentazione
             last_update: Ultimo aggiornamento
             json_url: file JSON del progetto
-            info: QUesti dati sono forniti dal progetto a taginfo attraverso il 'JSON project file' (file JSON del progetto) indicato nel collegamento qui sopra. Vedi la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">pagina wiki</a> per una descrizione del formato.
+            info: Questi dati sono forniti dal progetto a taginfo attraverso il 'JSON project file' (file JSON del progetto) indicato nel collegamento qui sopra. Vedi la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">pagina wiki</a> per una descrizione del formato.
         tags:
             title: Tags usati da questo progetto
             intro: Questi dati sono forniti dal progetto e non sono necessariamente completi. Per favore consulta la documentazione del progetto per dettagli.
@@ -437,7 +472,7 @@ comparison:
     add_tag: Aggiungi questo tag alla lista
     clear: Cancella la lista dei confronti
     compare: Confronta le chiavi/tag
-    
+
 sources:
     master:
         name: Master
@@ -524,7 +559,7 @@ reports:
                 <p>Chiavi che contengono caratteri probabilmente problematici: <span
                 class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> or caratteri
                 di controllo. Questi caratteri possono essere problematici, perché
-                sono utilizzati come carattere di inizio e fine stringa in molti linguaggi di programmazione 
+                sono utilizzati come carattere di inizio e fine stringa in molti linguaggi di programmazione
                 o hanno un significato speciale in  XML, HTML, URLs, e in altre occasioni. Il
                 simbolo di uguale è spesso utilizzato come separatore tra la chiave i il valore.
                 Le chiavi che appaiono in questa lista non sono tuttavia necessariamente sbagliate.
@@ -555,10 +590,10 @@ reports:
         avg_tags_per_relation: Numero medio di tag per ogni relazione
     frequently_used_keys_without_wiki_page:
         name: Chiavi Usate Frequentemente Senza una Pagina Wiki
-            intro: |
+        intro: |
             <p>Questa tabella mostra le chiavi che compaiono più di  10&thinsp;000 volte nel
             database OSM, ma che non hanno una pagina wiki che le descrive. Se conosci qualche cosa a proposito di
-            di queste chiavi, per favore crea una pagina wiki cliccando sul collegamento 
+            di queste chiavi, per favore crea una pagina wiki cliccando sul collegamento
             presente nella colonna più a sinistra e inserisci una descrizione della chiave. In alcuni casi ha senso piuttosto
             creare un redirect ad un'altra pagina wiki. Per creare un redirect basta inserire una riga con
             <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>nome della pagina</i>]]</tt>
@@ -566,10 +601,12 @@ reports:
         also_show_keys: Mostra anche le chiavi che non hanno una pagina wiki in lingua inglese, ma che hanno una pagina wiki in un altra lingua.
         table:
             create_wiki_page: Crea una pagina wiki...
-     key_lengths:
+    key_lengths:
         name: Lunghezze Chiavi
-                intro: |
-            I tag delle chiavi possono essere lunghi da 0 a 255 caratteri (Unicode). Le chiavi molto corte o molto lunghe sono spesso, ma non sempre, degli errori.
+        intro: |
+            I tag delle chiavi possono essere lunghi da 0 a 255 caratteri
+            (Unicode). Le chiavi molto corte o molto lunghe sono spesso, ma non
+            sempre, degli errori.
         table:
             number_of_objects: Numero degli oggetti
         histogram:
@@ -579,13 +616,15 @@ reports:
             number_of_keys: Numero delle chiavi
     language_comparison_table_for_keys_in_the_wiki:
         name: Tabella Comparativa Linguaggi per le Chiavi nella Wiki
-     icons:
+        icons:
             template: Una pagina è disponibile sul sito wiki e contiene un template standard.
             error: Una pagina è disponibile sul sito wiki e contiene un template standard, ma non si riesce ad estrarne il significato.
             page: Una pagina è disponibile sul sito wiki, ma non contiene un template standard.
             redirect: La pagina è un redirect.
         intro: |
-            Questa tabella mostra i valori di tutti i tag usati per le chiavi per cui è disponibile una pagina sul sito wiki e in che lingua è la pagina.
+            Questa tabella mostra i valori di tutti i tag usati per le chiavi
+            per cui è disponibile una pagina sul sito wiki e in che lingua è la
+            pagina.
     languages:
         name: Linguaggi
     wiki_pages_about_non_existing_keys:
