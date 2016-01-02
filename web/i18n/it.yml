@@ -15,9 +15,9 @@ osm:
     relation_types: Tipi di Relazioni
     relation_member: Membro della Relazione
     relation_members: Membri della Relazione
-    relation_member_nodes: Membri dei nodi
-    relation_member_ways: Membri delle ways
-    relation_member_relations: Membri delle Relazioni
+    relation_member_nodes: Nodi membro della relazione
+    relation_member_ways: Ways membro della relazione
+    relation_member_relations: Relazioni membro della relazione
     relation_member_role: Ruolo
     relation_member_roles: Ruoli
     object: Oggetto
