@@ -16,17 +16,6 @@
 #
 #------------------------------------------------------------------------------
 
-# These sources will be downloaded from http://taginfo.openstreetmap.org/download/
-# Note that this will NOT work for the "db" source! Well, you can download it,
-# but it will fail later, because the database is changed by the master.sql
-# scripts.
-readonly SOURCES_DOWNLOAD=$(../bin/taginfo-config.rb sources.download)
-
-# These sources will be created from the actual sources
-readonly SOURCES_CREATE=$(../bin/taginfo-config.rb sources.create)
-
-#------------------------------------------------------------------------------
-
 set -e
 set -u
 
@@ -38,7 +27,7 @@ if [ -z $DATADIR ]; then
     exit 1
 fi
 
-source ./util.sh all
+source $SRCDIR/util.sh all
 
 readonly LOGFILE=$(date +%Y%m%dT%H%M)
 mkdir -p $DATADIR/log
@@ -112,14 +101,12 @@ compress_databases() {
     local source
     for source in $sources; do
         compress_file $source/taginfo-$source $source
-#        bzip2 -9 -c $DATADIR/$source/taginfo-$source.db >$DATADIR/download/taginfo-$source.db.bz2 &
     done
     sleep 5 # wait for bzip2 on the smaller dbs to finish
 
     local db
     for db in master history search; do
         compress_file taginfo-$db $db
-#        bzip2 -9 -c $DATADIR/taginfo-$db.db >$DATADIR/download/taginfo-$db.db.bz2 &
     done
 
     wait
@@ -138,10 +125,19 @@ create_extra_indexes() {
 main() {
     print_message "Start update_all..."
 
-    download_sources $SOURCES_DOWNLOAD
-    update_sources $SOURCES_CREATE
+    # These sources will be downloaded from http://taginfo.openstreetmap.org/download/
+    # Note that this will NOT work for the "db" source! Well, you can download it,
+    # but it will fail later, because the database is changed by the master.sql
+    # scripts.
+    local sources_download=$(get_config sources.download)
+
+    # These sources will be created from the actual sources
+    local sources_create=$(get_config sources.create)
+
+    download_sources $sources_download
+    update_sources $sources_create
     update_master
-    compress_databases $SOURCES_CREATE
+    compress_databases $sources_create
     create_extra_indexes
 
     print_message "Done update_all."

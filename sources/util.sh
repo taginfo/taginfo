@@ -12,6 +12,11 @@
 set -e
 set -u
 
+if [ -f $SRCDIR/util.sh ]; then
+    readonly UTILDIR=$SRCDIR
+else
+    readonly UTILDIR=$SRCDIR/..
+fi
 readonly TAGINFO_SCRIPT="$1"
 
 if [ ! -v LAST_MESSAGE_TIMESTAMP ]; then
@@ -43,7 +48,7 @@ get_config() {
     local name="$1"
     local default="${2:-}"
 
-    $(ruby_command_line) $SRCDIR/../../bin/taginfo-config.rb "$name" "$default"
+    $(ruby_command_line) $UTILDIR/../bin/taginfo-config.rb "$name" "$default"
 }
 
 run_ruby() {
@@ -94,12 +99,7 @@ run_sql() {
 
     print_message_impl "${FUNCNAME[1]}" "$message"
 
-    local setup_sql="$SRCDIR/setup.sql"
-    if [ ! -f $setup_sql ]; then
-        setup_sql="$SRCDIR/../setup.sql"
-    fi
-
-    local SQLITE="sqlite3 -bail -batch -init $setup_sql $database"
+    local SQLITE="sqlite3 -bail -batch -init $UTILDIR/setup.sql $database"
     if [ ${#macros[@]} -eq 0 ]; then
         $SQLITE <$sql_file
     else
