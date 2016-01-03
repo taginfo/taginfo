@@ -49,11 +49,20 @@ end
 def fetch(uri_str, limit = 10)
     raise ArgumentError, 'too many HTTP redirects' if limit == 0
 
-    response = Net::HTTP.get_response(URI(uri_str))
+    uri = URI(uri_str)
+    http = Net::HTTP.new(uri.host, uri.port)
+    if uri.scheme == 'https'
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    end
+
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
 
     case response
     when Net::HTTPRedirection then
         location = response['location']
+        puts "    redirect to #{location}"
         fetch(location, limit - 1)
     else
         response
