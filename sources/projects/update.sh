@@ -27,7 +27,7 @@ update_projects_list() {
     if [ -d $DATADIR/taginfo-projects ]; then
         run_exe git -C $DATADIR/taginfo-projects pull --quiet
     else
-        run_exe git clone --quiet --depth=1 https://github.com/taginfo/taginfo-projects.git $DIR/taginfo-projects
+        run_exe git clone --quiet --depth=1 https://github.com/taginfo/taginfo-projects.git $DATADIR/taginfo-projects
     fi
 }
 
