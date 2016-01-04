@@ -67,7 +67,7 @@ end
 
 dir = ARGV[0] || '.'
 
-api = MediaWikiAPI::API.new('wiki.openstreetmap.org')
+api = MediaWikiAPI::API.new
 
 File.open(dir + '/tagpages.list') do |tagpages|
     tagpages.each do |line|

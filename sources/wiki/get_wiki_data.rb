@@ -543,7 +543,7 @@ database.results_as_hash = true
 
 #------------------------------------------------------------------------------
 
-api = MediaWikiAPI::API.new('wiki.openstreetmap.org', 80, '/w/index.php?')
+api = MediaWikiAPI::API.new('/w/index.php?')
 
 cache = Cache.new(dir, database, api)
 

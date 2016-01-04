@@ -51,7 +51,7 @@ database.results_as_hash = true
 
 #------------------------------------------------------------------------------
 
-api = MediaWikiAPI::API.new('wiki.openstreetmap.org')
+api = MediaWikiAPI::API.new
 
 image_titles = database.execute("SELECT DISTINCT(image) AS title FROM wikipages WHERE image IS NOT NULL AND image != '' UNION SELECT DISTINCT(image) AS title FROM relation_pages WHERE image IS NOT NULL AND image != ''").
                     map{ |row| row['title'] }.

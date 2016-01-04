@@ -85,7 +85,7 @@ end
 
 dir = ARGV[0] || '.'
 
-api = MediaWikiAPI::API.new('wiki.openstreetmap.org')
+api = MediaWikiAPI::API.new
 
 namespaces = get_namespaces(api)
 

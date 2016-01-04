@@ -27,15 +27,15 @@
 #------------------------------------------------------------------------------
 
 require 'cgi'
+require 'uri'
+require 'net/https'
 
 module MediaWikiAPI
 
     class API
 
-        def initialize(host, port=80, path='/w/api.php?')
-            @host = host
-            @port = port
-            @path = path
+        def initialize(path='/w/api.php?')
+            @url = 'https://wiki.openstreetmap.org' + path
             @headers = {}
             add_header('User-agent', 'taginfo/1.0 (http://wiki.osm.org/wiki/Taginfo)')
         end
@@ -45,16 +45,20 @@ module MediaWikiAPI
         end
 
         def build_path(params)
-            @path + params.to_a.map{ |el| CGI::escape(el[0].to_s) + '=' + CGI::escape(el[1].to_s) }.join('&')
+            URI(@url + params.to_a.map{ |el| CGI::escape(el[0].to_s) + '=' + CGI::escape(el[1].to_s) }.join('&'))
         end
 
         def get(params)
-            path = build_path(params)
-            http = Net::HTTP.start(@host, @port)
+            uri = build_path(params)
+            http = Net::HTTP.new(uri.host, uri.port)
+            if uri.scheme == 'https'
+                http.use_ssl = true
+                http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+            end
 #            puts "Getting path [#{path}]"
-            result = http.get(path, @headers)
-            result.body.force_encoding('UTF-8')
-            result
+            response = http.get(uri.request_uri, @headers)
+            response.body.force_encoding('UTF-8')
+            response
         end
 
         def query(params)
