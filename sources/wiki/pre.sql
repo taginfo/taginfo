@@ -155,10 +155,3 @@ CREATE TABLE words (
     words TEXT
 );
 
-DROP TABLE IF EXISTS stats;
-
-CREATE TABLE stats (
-    key   TEXT,
-    value INT64
-);
-
