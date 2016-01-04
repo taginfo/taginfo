@@ -504,6 +504,8 @@ class Cache
         @api = api
         @db.execute("ATTACH DATABASE ? AS cache", dir + '/wikicache.db')
         @current_pagetitles = {}
+        @in_cache = 0
+        @not_in_cache = 0
     end
 
     def get_page(page)
@@ -511,6 +513,7 @@ class Cache
         @db.execute("SELECT * FROM cache.cache_pages WHERE title=? AND timestamp=?", [page.title, page.timestamp]) do |row|
             page.content = row['body']
             puts "CACHE: Page '#{ page.title }' in cache (#{ page.timestamp })"
+            @in_cache += 1
             return
         end
         @db.execute("DELETE FROM cache.cache_pages WHERE title=?", [page.title])
@@ -518,6 +521,7 @@ class Cache
         page.content = res.body
         @db.execute("INSERT INTO cache.cache_pages (title, timestamp, body) VALUES (?, ?, ?)", [page.title, page.timestamp, page.content])
         puts "CACHE: Page '#{ page.title }' not in cache (#{ page.timestamp })"
+        @not_in_cache += 1
     end
 
     # Removes pages from cache that are not in the wiki any more
@@ -527,10 +531,16 @@ class Cache
         end
 
         to_delete = @current_pagetitles.keys
+        puts "\n======================================================"
         puts "CACHE: Deleting pages from cache: #{ to_delete.join(' ') }"
         to_delete.each do |title|
             @db.execute("DELETE FROM cache.cache_pages WHERE title=?", [title])
         end
+    end
+
+    def print_stats
+        puts "CACHE: Pages found in cache: #{@in_cache}"
+        puts "CACHE: Pages not found in cache: #{@not_in_cache}"
     end
 
 end
@@ -581,6 +591,8 @@ database.transaction do |db|
     end
 
     cache.cleanup
+    cache.print_stats
+
 end
 
 
