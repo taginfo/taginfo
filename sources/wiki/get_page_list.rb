@@ -64,14 +64,16 @@ def get_namespaces(api)
 end
 
 def get_page_list(api, namespaceid, options)
-    apfrom = ''
+    continue = ''
+    gapcontinue = ''
     loop do
-        data = api.query(:generator => 'allpages', :gaplimit => 'max', :gapfrom => apfrom, :gapnamespace => namespaceid, :gapfilterredir => options[:redirect] ? 'redirects' : 'nonredirects', :prop => 'info')
+        data = api.query(:generator => 'allpages', :gaplimit => 'max', :gapcontinue => gapcontinue, :continue => continue, :gapnamespace => namespaceid, :gapfilterredir => options[:redirect] ? 'redirects' : 'nonredirects', :prop => 'info')
         data['query']['pages'].each do |k,v|
             yield v['touched'], v['title'].gsub(/\s/, '_')
         end
-        if data['query-continue']
-            apfrom = data['query-continue']['allpages']['gapcontinue'].gsub(/\s/, '_')
+        if data['continue']
+            continue = data['continue']['continue']
+            gapcontinue = data['continue']['gapcontinue']
 #            puts "apfrom=#{apfrom}"
         else
             return
