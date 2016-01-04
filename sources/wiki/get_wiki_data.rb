@@ -6,9 +6,10 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Reads all the wiki pages from 'tagpages.list' and gets their content from
-#  the OSM wiki. The pages are parsed and the information stored in the
-#  sqlite database 'taginfo-wiki.db' which must have been initialized before.
+#  Reads all the wiki pages from 'interesting_wiki_pages.list' and gets their
+#  content from the OSM wiki. The pages are parsed and the information stored
+#  in the sqlite database 'taginfo-wiki.db' which must have been initialized
+#  before.
 #
 #  All files are in DIR or the current directory if no directory was given on
 #  the command line.
@@ -559,7 +560,7 @@ cache = Cache.new(dir, database, api)
 
 database.transaction do |db|
 
-    File.open(dir + '/tagpages.list') do |wikipages|
+    File.open(dir + '/interesting_wiki_pages.list') do |wikipages|
         wikipages.each do |line|
             line.chomp!
             (type, timestamp, namespace, title) = line.split("\t")

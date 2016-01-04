@@ -69,7 +69,7 @@ dir = ARGV[0] || '.'
 
 api = MediaWikiAPI::API.new
 
-File.open(dir + '/tagpages.list') do |tagpages|
+File.open(dir + '/interesting_wiki_pages.list') do |tagpages|
     tagpages.each do |line|
         line.chomp!
         (type, timestamp, namespace, title) = line.split("\t")

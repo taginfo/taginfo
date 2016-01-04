@@ -33,8 +33,8 @@ initialize_cache() {
 
 get_page_list() {
     print_message "Getting page list..."
-    rm -f $DATADIR/allpages.list
-    rm -f $DATADIR/tagpages.list
+    rm -f $DATADIR/all_wiki_pages.list
+    rm -f $DATADIR/interesting_wiki_pages.list
     run_ruby $SRCDIR/get_page_list.rb $DATADIR
 }
 

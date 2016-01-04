@@ -8,9 +8,12 @@
 #
 #  Gets the list of all wiki pages from the OSM wiki.
 #
-#  Two files will be written: 'allpages.list' contains all pages in the wiki,
-#  'tagpages.list' contains all pages about tags from the wiki. Both have the
-#  format:
+#  Two files will be written: 'all_wiki_pages.list' contains a list of all
+#  pages in the wiki (currently not used), 'interesting_wiki_pages.list'
+#  contains all wiki pages about keys, tags, or relations which will be read
+#  in in a later step.
+#
+#  Both files have the format:
 #
 #  <type> TAB <namespace> TAB <title>
 #
@@ -92,8 +95,8 @@ namespaces = get_namespaces(api)
 # add main namespace
 namespaces[''] = 0
 
-allpages = File.open(dir + '/allpages.list', 'w')
-tagpages = File.open(dir + '/tagpages.list', 'w')
+allpages = File.open(dir + '/all_wiki_pages.list', 'w')
+tagpages = File.open(dir + '/interesting_wiki_pages.list', 'w')
 
 namespaces.keys.sort.each do |namespace|
     id = namespaces[namespace]
