@@ -10,7 +10,7 @@
         // Description of this taginfo instance. Will appear on the home page and about page.
         "description": "This is a <b>taginfo test instance</b>. Change this text in your <tt>taginfo-config.json</tt>.",
         // Additional description that will only appear on the about page.
-        "about": "<p>This site is maintained by XXX.</p><p>There isn't just one taginfo site, there are several. The main site is at <a class='extlink' href='http://taginfo.openstreetmap.org/'>taginfo.openstreetmap.org</a>, but several <a class='extlink' href='http://wiki.openstreetmap.org/wiki/Taginfo/Sites'>other taginfo sites</a> are operated by different people.</p>",
+        "about": "<p>This site is maintained by XXX.</p><p>There isn't just one taginfo site, there are several. The main site is at <a class='extlink' href='https://taginfo.openstreetmap.org/'>taginfo.openstreetmap.org</a>, but several <a class='extlink' href='https://wiki.openstreetmap.org/wiki/Taginfo/Sites'>other taginfo sites</a> are operated by different people.</p>",
         // URL path to instance icon in the upper left.
         "icon": "/img/logo/test.png",
         // Contact name and email address.
@@ -68,7 +68,7 @@
         "tags": "osm openstreetmap tag tags taginfo"
     },
     "sources": {
-        // These sources will be downloaded from http://taginfo.openstreetmap.org/download/
+        // These sources will be downloaded from https://taginfo.openstreetmap.org/download/
         // Note that this will NOT work for the "db" source! Well, you can download it,
         // but it will fail later, because the database is changed by the master.sql
         // scripts.

@@ -40,7 +40,7 @@ download_source() {
     print_message "Downloading $source..."
 
     mkdir -p $DATADIR/$source
-    run_exe curl --silent --fail --output $DATADIR/download/taginfo-$source.db.bz2 --time-cond $DATADIR/download/taginfo-$source.db.bz2 http://taginfo.openstreetmap.org/download/taginfo-$source.db.bz2
+    run_exe curl --silent --fail --output $DATADIR/download/taginfo-$source.db.bz2 --time-cond $DATADIR/download/taginfo-$source.db.bz2 https://taginfo.openstreetmap.org/download/taginfo-$source.db.bz2
     run_exe -l$DATADIR/$source/taginfo-$source.db bzcat $DATADIR/download/taginfo-$source.db.bz2
 
     print_message "Done."
@@ -125,7 +125,7 @@ create_extra_indexes() {
 main() {
     print_message "Start update_all..."
 
-    # These sources will be downloaded from http://taginfo.openstreetmap.org/download/
+    # These sources will be downloaded from https://taginfo.openstreetmap.org/download/
     # Note that this will NOT work for the "db" source! Well, you can download it,
     # but it will fail later, because the database is changed by the master.sql
     # scripts.
