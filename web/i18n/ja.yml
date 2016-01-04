@@ -148,12 +148,12 @@ pages:
                 地理的なオブジェクトに意味づけしています。
                 taginfo はこのようなタグに関する情報を様々な情報源から収集し、
                 どのような意味なのか、どのように使われているかを分かりやすくします。</p>
-            more: taginfoについての詳細...
+            more: taginfo についての詳細...
         international:
-            see: 他のtaginfoサイトを表示...
+            see: 他の taginfo サイトを表示...
     about:
         about_taginfo:
-            title: taginfoについて
+            title: taginfo について
             text: |
                 <p>OpenStreetMap は<b>タグ</b>を使って地理的なオブジェクトに意味づけします。
                 このタグの固定した一覧はありません。必要に応じて新しいタグが開発されることがあります。
@@ -408,12 +408,12 @@ pages:
     project:
         overview:
             project_name: プロジェクト名
-            project_url: プロジェクトのURL
+            project_url: プロジェクトの URL
             description: 説明
             documentation_url: 説明書
             last_update: 最終更新
-            json_url: JSONプロジェクトファイル
-            info: このデータは上記の場所からリンクされている'JSONプロジェクトファイル'を通してプロジェクトからtaginfoに提供されています。書式の説明については<a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">ウィキ</a>を参照してください。
+            json_url: JSON プロジェクトファイル
+            info: このデータは上記の場所からリンクされている 'JSON プロジェクトファイル' を通してプロジェクトから taginfo に提供されています。書式の説明については<a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">ウィキ</a>を参照してください。
         tags:
             title: このプロジェクトで使用されているタグ
             intro: このデータはプロジェクトによって提供されており、完成させる必要はありません。詳細はプロジェクトの説明書を参照してください。
@@ -438,6 +438,7 @@ comparison:
     add_tag: このタグをリストに追加
     clear: 比較リストをクリア
     compare: キーやタグを比較
+
 sources:
     master:
         name: Master
@@ -462,7 +463,7 @@ reports:
     characters_in_keys:
         name: キーに使われている文字
         intro: |
-            OSMのキーでは有効なUnicodeの文字がどれでも使用できますが、
+            OSM のキーでは有効な Unicode の文字がどれでも使用できますが、
             ふつうはラテン小文字（a-z）とアンダースコア（_）が使用されています。
             コロン（:）は区切り文字としてよく使われています。
             このレポートはすべてのキーを使用している文字によって分類しています。
@@ -473,8 +474,8 @@ reports:
             characters: キーで使われている文字
             characters_in_keys:
                 plain: ラテン小文字（<span class="char">a</span>～<span class="char">z</span>）とアンダースコア（<span class="char">_</span>）のみを使用し、最初と最後が文字です。
-                colon: Aと同様ですが、内部で1つ以上のコロン（<span class="char">:</span>）が使われています。
-                letters: Bと同様ですが、ラテン大文字やラテン以外の文字が使われています。
+                colon: A と同様ですが、内部で1つ以上のコロン（<span class="char">:</span>）が使われています。
+                letters: B と同様ですが、ラテン大文字やラテン以外の文字が使われています。
                 space: 1つ以上の空白記号（空白、タブ、改行、リターン、その他のアルファベットの区切り文字）が使われています。
                 problem: 問題を起こす可能性がある記号<span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>が使われています。
                 rest: それ以外です。
@@ -552,7 +553,7 @@ reports:
     frequently_used_keys_without_wiki_page:
         name: よく使われているもののウィキページのないキー
         intro: |
-            <p>この表ではOSMデータベースで10,000件以上使用されているものの、
+            <p>この表では OSM データベースで10,000件以上使用されているものの、
             説明するウィキページがないキーを表示しています。
             もし以下のキーの1つでも何かご存知であれば、左端の列のリンクをクリックして
             ウィキページを作成し、キーについて説明してください。
@@ -566,7 +567,7 @@ reports:
     key_lengths:
         name: キーの長さ
         intro: |
-            タグのキーの長さはUnicodeで0～255文字です。非常に短いキーや、非常に長いキーは、必ずとは言いませんが、ほとんどはエラーです。
+            タグのキーの長さは Unicode で0～255文字です。非常に短いキーや、非常に長いキーは、必ずとは言いませんが、ほとんどはエラーです。
         table:
             number_of_objects: オブジェクトの数
         histogram:
@@ -587,7 +588,7 @@ reports:
         name: 言語
         intro: |
             OpenStreetMap は国際的なプロジェクトです。タグやその説明は各言語に翻訳できます。
-            この表ではtaginfoが把握している言語と、
+            この表では taginfo が把握している言語と、
             その言語でキーやタグを説明するウィキページがそれぞれいくつあるかを表示しています。
         code: コード
         native_name: 原語名
@@ -603,7 +604,36 @@ reports:
             綴りミスやその他のエラーである可能性もあります。
         wiki_pages: ウィキページ
     name_tags:
-        name: nameタグの変化形
+        name: name タグの派生形
+        intro: |
+            <p>このレポートは、 <tt>name</tt> タグ及びその派生形を使っている
+            OSM のオブジェクトの名称に関する情報を表示します。</p>
+        overview:
+            tab: 概要
+            title: 概要
+        bcp47:
+            tab: BCP47 サブタグ
+            title: BCP47 サブタグ
+            filter:
+                label: 表示するサブタグの種類
+                all: すべて
+                language: 言語
+                script: 記法
+                region: 地域
+                variant: 派生形
+            intro: |
+                <p><a href="http://www.ietf.org/">IETF</a> は標準「<a 
+                href="http://tools.ietf.org/html/bcp47">Tags for Identifying Languages
+                (BCP47)</a>」の中で、<i>言語タグ</i>を規定しています。言語タグは言語、
+                文字、派生形などを記述する1つ以上の<i>サブタグ</i>から成ります。
+                以下の一覧は現在 OSM に関して登録されているサブタグを示します。詳しい情報は、
+                <a href="http://ja.wikipedia.org/wiki/IETF%E8%A8%80%E8%AA%9E%E3%82%BF%E3%82%B0">
+                ウィキペディアの IETF 言語タグの記事</a>と<a href="http://www.langtag.net/">
+                langtag.net</a>のサイトを参照してください。</p>
+                <p>なお、この表にあるデータは OpenStreetMap からのものでは<b>なく</b>、
+                OSM で実際に使われているかどうかにかかわらず、言語を記述するために使われる
+                可能性があるブロックを表示しているだけです。
+                </p>
     similar_keys:
         name: 似たキー名
         intro: |
@@ -619,7 +649,7 @@ reports:
     historic_development:
         name: 発展の歴史
         intro: |
-            一部の重要な統計についての時系列の発展状況です。このデータはtaginfoによって収集されたもので、隙間はtaginfoが何らかの理由で動作していなかった日です。
+            一部の重要な統計についての時系列の発展状況です。このデータは taginfo によって収集されたもので、隙間は taginfo が何らかの理由で動作していなかった日です。
         keys:
             title: キーの種類の数
         tags:
@@ -632,4 +662,18 @@ reports:
             それぞれの言語におけるキーを象徴するためにウィキで使われている画像です。
             画像は同一だったり、言語によって異なったほうが良かったりします。
             しかし、文化的背景の違いなどによって異なる画像が使われることがわかる場合もあります。
+    wiki_problems:
+        name: ウィキ解析時の問題
+        intro: |
+            Taginfo はタグについての情報を探すために、キー、タグ、リレーションを
+            記述するために使われているすべてのウィキページを読み取ります。
+            このレポートはページを読み取る際に発生した問題の一覧を表示しています。
+            ウィキ上でのエラーを示しているのではなく、単に taginfo 
+            が理解できる書式で書かれていないものがウィキページにあるということを
+            意味します。ページか taginfo のどちらかを修正する必要があります。
+        location: 場所
+        reason: 理由
+        wiki_page: ウィキページ
+        lang: 言語
+        info: 追加情報
 
