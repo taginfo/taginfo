@@ -130,7 +130,7 @@ function fmt_value(value) {
         return span(texts.misc.empty_string, 'badchar empty');
     }
 
-    return value
+    return html_escape(value)
             .replace(/ /g, '&#x2423;')
             .replace(/\s/g, span('&nbsp;', 'whitespace'));
 }
