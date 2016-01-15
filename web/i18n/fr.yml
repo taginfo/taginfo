@@ -360,7 +360,7 @@ pages:
             title: Pages du wiki sur cette valeur
             none_found: Aucune page du wiki trouvée.
             create: Créer une page du wiki pour ce tag
-            suggest_key_wiki_page: Vous trouverez peut-être plus d’information sur la page wiki pour les clés 1%.
+            suggest_key_wiki_page: Vous trouverez peut-être plus d’information sur la page wiki pour les clés %1.
             wiki_page: Page du wiki
             implied_tags: Tags implicites
             combined_tags: Tags combinés
