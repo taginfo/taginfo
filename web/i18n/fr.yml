@@ -312,7 +312,7 @@ pages:
         values_used: Valeurs utilisées par cette clé
         tag_description_from_wiki: Description de ce tag depuis le wiki (dans votre langue choisie si possible, sinon en anglais).
         overview:
-            objects_last_edited_by: Les objets ayant cette clé ont été édités en dernier par 1% utilisateurs différents.
+            objects_last_edited_by: Les objets ayant cette clé ont été édités en dernier par %1 utilisateurs différents.
             no_endorsement: (ce qui ne signifie pas que tous ces utilisateurs approuvent cette clé)
             distribution_of_values: Répartition des valeurs
         other_keys_used:
