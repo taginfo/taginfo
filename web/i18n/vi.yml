@@ -160,6 +160,13 @@ pages:
             title: Xây dựng trên taginfo
         software:
             title: Phần mềm taginfo
+    sources:
+        intro: |
+            <p>Taginfo lấy dữ liệu về thẻ OSM từ nhiều nguồn gốc và thu thập dữ liệu
+            để duyệt và khám phá một cách dễ dàng.</p>
+            <p>Lưu ý rằng taginfo chỉ hiển thị dữ liệu này. Các dữ liệu phải được sửa đổi tại nguồn gốc.</p>
+            <p>Lưu ý rằng taginfo chỉ hiển thị dữ liệu này. Các dữ liệu phải được sửa đổi tại nguồn gốc.</p>
+        description:
             db: |
                 <p>Thống kê về các chìa khóa, thẻ, và loại quan hệ được tạo ra từ <a class="extlink" href="http://planet.openstreetmap.org/">cơ sở dữ liệu OSM</a> (hoặc một bản trích) cũng như các bản đồ trình bày sự phân phối địa lý của các nốt và lối.</p>
             wiki: |
@@ -170,12 +177,6 @@ pages:
                 <p>Các dự án sử dụng thẻ OSM một cách nào đó, thí dụ như trình vẽ, bản đồ, trình chỉ đường, v.v. Xem <a href="/projects">danh sách dự án</a>.</p>
         updates:
             title: Cập nhật
-    sources:
-        intro: |
-            <p>Taginfo lấy dữ liệu về thẻ OSM từ nhiều nguồn gốc và thu thập dữ liệu
-            để duyệt và khám phá một cách dễ dàng.</p>
-            <p>Lưu ý rằng taginfo chỉ hiển thị dữ liệu này. Các dữ liệu phải được sửa đổi tại nguồn gốc.</p>
-            <p>Lưu ý rằng taginfo chỉ hiển thị dữ liệu này. Các dữ liệu phải được sửa đổi tại nguồn gốc.</p>
         data_until: Dữ liệu cho tới
         last_update_run: Cập nhật lần cuối
         data_until_explanation: Tất cả các sửa đổi cho tới lúc này sẽ xuất hiện trong dữ liệu; các sửa đổi về sau có thể xuất hiện.
