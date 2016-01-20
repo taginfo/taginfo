@@ -41,11 +41,16 @@ def walk(path, en, other)
                 puts "MISSING: #{name} [en=#{en[key]}]"
             else
                 walk(path + '.' + key, en[key], other[key])
+                if other[key] && other[key].empty?
+                    other.delete(key)
+                end
             end
         else
 #            puts "#{name} [#{en[key]}] [#{other[key]}]"
-            if other.nil?|| ! other[key]
+            if other.nil? || ! other[key]
                 puts "MISSING: #{name} [en=#{en[key]}]"
+            else
+                other.delete(key)
             end
         end
     end
@@ -57,4 +62,11 @@ if look_for_error('', i18n_lang)
 end
 
 walk('', i18n_en, i18n_lang)
+
+
+unless i18n_lang.empty?
+    puts "keys in translation that are not in English version:"
+    require 'pp'
+    pp i18n_lang
+end
 

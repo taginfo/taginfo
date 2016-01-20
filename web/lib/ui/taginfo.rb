@@ -93,7 +93,7 @@ class Taginfo < Sinatra::Base
         @section = 'taginfo'
         @section_title = t.taginfo.meta
         @lang = params[:lang] || 'de'
-        @i18n_en   = YAML.load_file("i18n/en.yml")
+        @i18n_en = YAML.load_file("i18n/en.yml")
         begin
             @i18n_lang = YAML.load_file("i18n/#{@lang}.yml")
         rescue
