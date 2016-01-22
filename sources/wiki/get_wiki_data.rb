@@ -433,10 +433,6 @@ class RelationPage < WikiPage
         end
     end
 
-    def set_image(ititle, db)
-        @image = "File:#{ititle}"
-    end
-
     def insert(db)
         db.execute(
             "INSERT INTO relation_pages (lang, rtype, title, body, tgroup, type, has_templ, parsed, description, image, tags_linked) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [
