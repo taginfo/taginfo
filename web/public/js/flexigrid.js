@@ -583,7 +583,7 @@
 
             if (p.total<r2) r2 = p.total;
 
-            var stat = p.pagestat;
+            var stat = jQuery(window).width() > 820 ? p.pagestat : '{from}..{to}/{total}';
 
             stat = stat.replace(/{from}/,r1);
             stat = stat.replace(/{to}/,r2);

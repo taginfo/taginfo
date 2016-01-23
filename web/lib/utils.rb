@@ -51,6 +51,14 @@ def section(id)
     @section_title = (@section =~ /^(keys|tags)$/) ? t.osm[@section] : t.taginfo[@section]
 end
 
+def in_section(id)
+    @section == id ? 'class="selected" ' : ''
+end
+
+def under_section
+    @section && request.path != '/' + @section
+end
+
 def json_opts(format)
     if format == 'json_pretty'
         return { :indent => '  ', :space => ' ', :object_nl => "\n" }

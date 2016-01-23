@@ -1,137 +1,20 @@
 <% @nosearch = true
    @css = <<'CSS'
-div#menu {
-    position: relative;
-    margin: 0 auto;
-    width: 100%;
-    height: 30px;
-    border-bottom: 1px solid #a0a0a0;
-}
-
-div#menuitems {
-    position: absolute;
-    width: 100%;
-}
-
-div#menu .mitem {
-    position: relative;
-}
-
-div#menu h2 {
-    text-transform: uppercase;
-    font-weight: normal;
-    margin: 2px 40px 2px 0px;
-    height: 26px;
-    float: left;
-}
-
-div#menu h2:hover {
-    border-bottom: 3px solid #a0a0a0;
-}
-
-div#menu h2 a {
-    text-decoration: none;
-}
-
-div#menu div.mitem .mpop {
-    position: absolute;
-    visibility: hidden;
-    padding-top: 6px;
-    width: 100%;
-    height: 210px;
-    top: 31px;
-    background: -moz-linear-gradient(top, #ffffff, #f0f0f0);
-    border-radius: 4px;
-}
-
-div#menu div.mitem .mpop p {
-    padding: 8px 16px;
-    max-width: 40em;
-}
-
-div#menu div.mitem .mpop div {
-    padding: 8px 16px;
-}
-
-div#menu div.mitem:hover .mpop {
-    visibility: visible;
-}
-
 div#search_box {
     text-align: center;
 }
 
 div#search_box p {
     max-width: 100%;
-    font-size: 80%;
+    font-size: 0.8rem;
 }
 
 div#main input#search {
-    font-size: 140%;
     padding: 2px 6px;
 }
 CSS
 %>
 <div class="resize">
-    <div id="menu"><div id="menuitems">
-        <div class="mitem"><h2><a href="/keys"><%= h(t.osm.keys) %></a></h2>
-            <div class="mpop">
-                <p>All tag keys that exist in the database or in any of the other sources.</p>
-                <div id="key_list"></div>
-                <p class="emphasis"><a href="/keys"><%= h(t.pages.index.keys.listkeys) %></a></p>
-            </div>
-        </div>
-        <div class="mitem"><h2><a href="/tags"><%= h(t.osm.tags) %></a></h2>
-            <div class="mpop">
-                <p>The most common tags in the database.</p>
-                <div id="tag_list"></div>
-                <p class="emphasis"><a href="/tags"><%= h(t.pages.index.tags.listtags) %></a></p>
-            </div>
-        </div>
-        <div class="mitem"><h2><a href="/relations"><%= h(t.osm.relation_types) %></a></h2>
-            <div class="mpop">
-                <p>The different types of relations (indicated by the type tag).</p>
-                <div id="relation_list"></div>
-                <p class="emphasis"><a href="/relations"><%= h(t.pages.index.relations.listrelations) %></a></p>
-            </div>
-        </div>
-        <div class="mitem"><h2><a href="/projects"><%= h(t.taginfo.projects) %></a></h2>
-            <div class="mpop">
-                <p>Projects that use OSM data in some way.</p>
-                <div>
-<% @db.select('SELECT id, name, icon_url FROM projects.projects').execute().each do |project| %>
-                    <a href="/projects/<%= project['id'] %>"><img width="20" height="20" src="<%= project['icon_url'] %>" alt="" title="<%= project['name'] %>"/></a>
-<% end %>
-                </div>
-                <p class="emphasis"><a href="/projects">Show all projects...</a></p>
-            </div>
-        </div>
-        <div class="mitem"><h2><a href="/reports"><%= h(t.taginfo.reports) %></a></h2>
-            <div class="mpop">
-                <p>Reports show the tag data from different angles. They often
-                bring together data from several sources in interesting ways.
-                Some of the reports can help with finding specific errors.</p>
-                <div>
-                    <a href="/reports/characters_in_keys">Characters in keys</a> &bull;
-                    <a href="/reports/database_statistics">Database statistics</a> &bull;
-                    <a href="/reports/historic_development">Historic development</a> &bull;
-                    <a href="/reports/key_lengths">Key lengths</a> &bull;
-                    <a href="/reports/similar_keys">Similar keys</a>
-                </div>
-                <p class="emphasis"><a href="/reports"><%= h(t.pages.index.reports.listreports) %></a></p>
-            </div>
-        </div>
-        <div class="mitem"><h2><a href="/about"><%= h(t.taginfo.about) %></a></h2>
-            <div class="mpop">
-                <p>OpenStreetMap uses tags to add meaning to geographic
-                objects. There is no fixed list of those tags. New tags can be
-                invented and used as needed. Taginfo tries to bring together
-                all information about tags to help you understand how they are
-                used and what they mean.</p>
-                <p class="emphasis"><a href="/about">More...</a></p>
-            </div>
-        </div>
-    </div></div>
     <div style="clear: both; height: 240px;"></div>
     <div id="search_box">
         <form id="search_form" action="/search"><input type="text" id="search" name="q" value="<%= h(params[:q]) %>"/></form>

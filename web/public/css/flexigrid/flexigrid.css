@@ -2,7 +2,7 @@
 /* CSS Document */
 
 .flexigrid {
-    font-size: 80%;
+    font-size: 0.8rem;
     position: relative;
     border: 0px solid #ddddd4;
     overflow: hidden;
@@ -519,9 +519,15 @@ div.pGroup {
     margin: 0px 5px;
 }
 
+@media screen and (max-width: 820px) {
+    div.pGroup {
+        margin: 0;
+    }
+}
+
 .flexigrid div.pDiv .pPageStat {
-    width: 220px;
     display: block;
+    padding-left: 10px;
 }
 
 .flexigrid div.pDiv .pPageStat, .flexigrid div.pDiv .pcontrol {
@@ -538,6 +544,7 @@ div.pGroup {
     border-radius: 4px;
     margin: 0;
     padding: 2px;
+    font-size: 0.8rem;
 }
 
 .flexigrid div.pDiv  div.pButton {

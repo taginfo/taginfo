@@ -1,3 +1,62 @@
+<% @css = <<'CSS'
+table.comparison {
+    border-spacing: 10px 1px;
+    margin: 0 -10px 10px -10px;
+}
+
+table.comparison a.close {
+    float: right;
+    display: block;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #e8e8e4;
+    border-radius: 4px;
+}
+
+table.comparison a.close:hover {
+    border: 1px solid #d0d0d0;
+}
+
+table.comparison td.data h2 {
+    position: relative;
+    clear: both;
+    top: -12px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+table.comparison th.data, table.comparison td.data {
+    padding: 10px;
+    background-color: #e8e8e4;
+    vertical-align: top;
+    text-align: center;
+}
+
+table.comparison td.first {
+    border-radius: 10px 10px 0 0;
+}
+
+table.comparison td.last {
+    border-radius: 0 0 10px 10px;
+}
+
+table.compstat {
+    width: 100%;
+}
+
+table.compstat th {
+    white-space: nowrap;
+    text-align: left;
+    width: 25%;
+}
+
+table.compstat td {
+    white-space: nowrap;
+    text-align: right;
+    width: 25%;
+}
+CSS
+%>
 <div class="pre">
     <h1 class="section"><%= h(t.taginfo.comparison) %></h1>
 </div>

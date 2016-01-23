@@ -3,6 +3,7 @@ class Taginfo < Sinatra::Base
 
     get! '/reports' do
         @title = t.taginfo.reports
+        section :reports
         erb :'reports/index'
     end
 

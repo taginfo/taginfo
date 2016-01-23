@@ -3,6 +3,7 @@ class Taginfo < Sinatra::Base
 
     get '/projects' do
         @title = t.taginfo.projects
+        section :projects
         javascript_for(:flexigrid)
         javascript "#{ r18n.locale.code }/projects"
         erb :projects

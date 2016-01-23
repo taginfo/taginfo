@@ -17,7 +17,7 @@ class Javascript
 
     @@js_files = {
 #        :common    => [ 'jquery-1.11.1.min', 'jquery-ui-1.9.2.custom.min', 'customSelect.jquery.min', 'jquery.tipsy-minified', 'jquery.cookie-minified' ],
-        :common    => [ 'common' ],
+        :common    => [ 'common', 'jquery.slicknav.min' ],
         :taginfo   => [ 'taginfo' ],
         :flexigrid => [ 'jquery-migrate-1.2.1.min', 'flexigrid-minified' ],
         :d3        => [ 'd3/d3.v3.min' ],

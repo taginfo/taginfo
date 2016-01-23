@@ -22,6 +22,7 @@ function resize_box() {
         height = jQuery(window).height();
 
     height -= jQuery('div#header').outerHeight(true);
+    height -= jQuery('#menu').outerHeight(true);
     height -= jQuery('div.pre').outerHeight(true);
     height -= jQuery('.ui-tabs-nav').outerHeight(true);
     height -= jQuery('div#footer').outerHeight(true);
@@ -886,6 +887,11 @@ jQuery(document).ready(function() {
 
     jQuery('#search_form').bind('submit', function(event) {
         return jQuery('input#search').val() != '';
+    });
+
+    jQuery('#menu').slicknav({
+        prependTo: 'body',
+        label: ''
     });
 
     jQuery(window).resize(function() {

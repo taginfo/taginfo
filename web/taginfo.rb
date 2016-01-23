@@ -175,6 +175,7 @@ class Taginfo < Sinatra::Base
     %w(about download sources).each do |page|
         get '/' + page do
             @title = t.taginfo[page]
+            section page
             if File.exists?("viewsjs/#{ page }.js.erb")
                 javascript "#{ r18n.locale.code }/#{ page }"
             end
@@ -185,6 +186,7 @@ class Taginfo < Sinatra::Base
     %w(keys tags relations).each do |page|
         get '/' + page do
             @title = t.osm[page]
+            section page
             javascript_for(:flexigrid)
             javascript "#{ r18n.locale.code }/#{ page }"
             erb page.to_sym

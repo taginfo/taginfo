@@ -6,7 +6,7 @@
 </div>
 <div class="box resize">
     <h2><%= h(t.pages.reports.list) %></h2>
-    <ul>
+    <ul class="reportlist">
 <% Report.each_visible_with_index do |report, n| c = (n%2!=0) ? ' even' : '' %>
         <li><a href="<%= report.url %>"><%= h(t.reports[report.name].name) %></a></li>
 <% end %>
