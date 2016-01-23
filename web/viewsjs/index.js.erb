@@ -110,7 +110,16 @@ function fill_lists() {
     relation_list.append('...');
 }
 
+var timeout_id = 0;
+
+function trigger_resize() {
+    if (timeout_id != 0) {
+        window.clearTimeout(timeout_id);
+    }
+    timeout_id = window.setTimeout(resize_home, 100);
+}
+
 function page_init() {
-    jQuery(window).resize(resize_home);
+    jQuery(window).resize(trigger_resize);
     resize_home();
 }

@@ -895,6 +895,7 @@ jQuery(document).ready(function() {
     });
 
     jQuery(window).resize(function() {
+        jQuery('select').trigger('render');
         resize_box();
         resize_grid(current_grid);
     });
