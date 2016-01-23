@@ -4,10 +4,10 @@ Brings together information about OpenStreetMap tags and makes it searchable
 and browsable.
 
 **Documentation:** See the
-[Taginfo](http://wiki.openstreetmap.org/wiki/Taginfo) page at the OpenStreetMap
+[Taginfo](https://wiki.openstreetmap.org/wiki/Taginfo) page at the OpenStreetMap
 wiki.
 
-**Live System:** [taginfo.openstreetmap.org](http://taginfo.openstreetmap.org/)
+**Live System:** [taginfo.openstreetmap.org](https://taginfo.openstreetmap.org/)
 
 
 ## Files
@@ -15,7 +15,7 @@ wiki.
 * `/sources`  - import scripts
 * `/web`      - web user interface and API
 * `/examples` - some misc example stuff
-* `/tagstats` - C++ program to create database statistics
+* `/tagstats` - C++ programs to create database statistics etc.
 
 
 ## Prerequisites
@@ -41,14 +41,10 @@ Install the Gems:
 $ sudo gem install rack rack-contrib sinatra sinatra-r18n json
 ```
 
-There is a developer mailing list:
-[taginfo-dev](http://lists.openstreetmap.org/listinfo/taginfo-dev)
-
-
 ## Data Import
 
-See [Taginfo/Running](http://wiki.openstreetmap.org/wiki/Taginfo/Running) at
-OpenStreetMap's wiki.
+See [Taginfo/Installation](https://wiki.openstreetmap.org/wiki/Taginfo/Installation)
+at OpenStreetMap's wiki.
 
 
 ## Web User Interface
@@ -56,7 +52,7 @@ OpenStreetMap's wiki.
 You need a `/data` directory (in the parent directory of the directory where
 this `README.md` is). It must contain the sqlite database files created in the
 data import step or downloaded from page
-[taginfo.openstreetmap.org/download](http://taginfo.openstreetmap.org/download).
+[taginfo.openstreetmap.org/download](https://taginfo.openstreetmap.org/download).
 
 To start the web user interface:
 ```sh
@@ -74,19 +70,25 @@ Taginfo uses the following Javascript libraries:
 * [jQuery Cookie](https://github.com/carhartl/jquery-cookie/)
 * Flexigrid (from [Google Code](http://code.google.com/p/flexigrid/) and
   [flexigrid.info](http://www.flexigrid.info/), but with changes and bugfixes)
+* [slicknav](http://slicknav.com/)
 
 All the Javascript and CSS needed is already included.
 
 
 ## Thanks
 
-* Stefano Tampieri, for the Italian translation
-* Ilya Zverev (zverik@textual.ru), for the Russion translation
-* Jocelyn Jaubert (jocelyn.jaubert@gmail.com), for the French translation
-* Jacek Buczyński (jacekzlodzi@gmail.com), for the Polish translation
+To the [many people](https://github.com/joto/taginfo/graphs/contributors)
+helping with bug reports, code and translations.
+
+
+## Contact
+
+There is a mailing list for developers and people running their own instances
+of taginfo:
+[taginfo-dev](https://lists.openstreetmap.org/listinfo/taginfo-dev)
 
 
 ## Author
 
-Jochen Topf (jochen@topf.org) - [Joto](http://wiki.openstreetmap.org/wiki/User:Joto)
+Jochen Topf (jochen@topf.org) - https://jochentopf.com/
 
