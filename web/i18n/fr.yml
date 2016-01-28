@@ -336,6 +336,13 @@ pages:
         projects:
             title: Projets utilisant cette clé
             description: Utilisation de cette clé par ce projet
+        similar:
+            count_all_tooltip: Nombre d'objets avec la clé similaire
+            other: Clés similaires
+            similarity: Similarité
+            similarity_tooltip: Un faible nombre indique une plus forte similarité
+            tab: Similaire
+            title: Clés similaires
     tag:
         description_from_wiki: Description de ce tag depuis le wiki (dans votre langue choisie si possible, sinon en anglais).
         no_description_in_wiki: Aucune description dans le wiki
