@@ -49,9 +49,9 @@ taginfo:
     comparison: Comparaison de clés/tags
     overview: Vue d'ensemble
     data_from: Données du
-    data_from_description: Dernière mise à jour de la base de données de Taginfo
+    data_from_description: Dernière mise à jour de la base de données de taginfo
     instance:
-        title: À propos de ce site Taginfo
+        title: À propos de ce site taginfo
         other: |
             Visiter la page <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> pour d'autres sites.
 
@@ -150,7 +150,7 @@ pages:
                 comprendre ce qu'ils signifient, et comment ils sont utilisés.</p>
             more: Plus d'information…
         international:
-            see: Voir d'autres sites Taginfo…
+            see: Voir d'autres sites taginfo...
     about:
         about_taginfo:
             title: À propos de taginfo
@@ -177,7 +177,7 @@ pages:
             text: |
                 <p>Vous pouvez utiliser les données de taginfo dans vos propres projets :</p>
                 <h3>API</h3>
-                <p>Les données de Taginfo sont accessibles via une API REST. Regardez la
+                <p>Les données de taginfo sont accessibles via une API REST. Regardez la
                 <a href="/taginfo/apidoc">documentation de l'API</a> pour plus de détails, les informations d'ordre général sont
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">dans le wiki d'OSM</a>.
                 Les serveurs proposants l'API taginfo n'ont pas des ressources illimitées.
@@ -229,7 +229,7 @@ pages:
         intro: |
             <p>Taginfo retrouve des données sur les tags OSM depuis plusieurs sources et les assemble
             pour en faciliter l'exploration.</p>
-            <p>Notez que Taginfo ne fait qu'afficher ces données. Si vous souhaitez les modifier, vous
+            <p>Notez que taginfo ne fait qu'afficher ces données. Si vous souhaitez les modifier, vous
             devez le faire à leur source.</p>
         list:
             title: Liste des sources
@@ -252,7 +252,7 @@ pages:
         to: à
     download:
         intro: |
-            <p>Vous pouvez télécharger les données utilisées par Taginfo. Toutes les données sont stockées
+            <p>Vous pouvez télécharger les données utilisées par taginfo. Toutes les données sont stockées
             dans des bases de données <a class="extlink" href="http://www.sqlite.org/">SQLite</a>.
             Les fichiers de base de données sont ensuite compressés
             avec <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
@@ -261,6 +261,10 @@ pages:
         packed: Compressé
         unpacked: Décompressé
         description: Description
+        note: |
+            Certains indexes ne figurent pas dans les données disponibles ici en téléchargement.
+            La valeur "compressé" indique la taille sans ces indexes, tandis que la valeur "décompressé"
+            inclue ces indexes que vous voudrez probablement construire après votre téléchargement.
     reports:
         intro: |
             Les rapports montrent les données de différents points de vue.
@@ -415,8 +419,10 @@ pages:
             json_url: Fichier JSON
             info: Ces données sont fournies à taginfo via des le 'Fichier JSON' lié ci-dessus. Voir le <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a> pour la description du format
         tags:
+            count_all_tooltip: Nombre d'objets dans la base de données avec ce couple clé/tag 
             title: Tags utilisés par ce projet
             intro: Ces informations sont fournies par le projet, et ne sont pas forcément complètes. Veuillez lire la documentation du projet pour en savoir plus.
+            objects_tooltip: Types d'objets utilisés par ce projet
             description: Utilisation de ce tag/clé
 
 flexigrid:
@@ -437,9 +443,12 @@ comparison:
     compare: Comparer les clés/tags
 
 sources:
+    history:
+        name: Historique
+        description: Agrégation des statistiques au fil du temps.
     master:
         name: Maître
-        description: Agrégation des statistiques et des données diverses nécessaire à l'interface utilisateur de Taginfo.
+        description: Agrégation des statistiques et des données diverses nécessaire à l'interface utilisateur de taginfo.
     db:
         name: Base de données
         description: Statistiques pour chaque clé et chaque tag depuis la base de données principale OSM (fichier planet) 
@@ -455,18 +464,48 @@ sources:
 
 reports:
     characters_in_keys:
-        name: Caractères utilisés dans les clés
+        colon:
+            intro: |
+                Clés contenant un ou plusieurs caractères deux-points (<span class="char">:</span>) 
+                en plus des lettres (<span class="char">a</span> à <span class="char">z</span>) 
+                et du tiret bas (<span class="char">_</span>). 
+                Le deux-point est souvent utilisé comme séparateur hiérarchique.
+            tab: Deux-points
+            title: Clés contenant un deux-points
         intro: |
             Tout caractère Unicode valide peut apparaitre dans les clés OSM mais habituellement les
-            lettres latines minuscules (a-z) et le caractère souligné (_) sont utilisés. Parfois le caractère deux-points
-            (:) est ajouté comme séparateur.
+            lettres latines minuscules (<span class="char">a</span> à <span class="char">z</span>) et 
+            le tiret bas (<span class="char">_</span>) sont utilisés. Parfois le caractère deux-points
+            (<span class="char">:</span>) est ajouté comme séparateur.
+        letters:
+            intro: |
+                Les lettres minuscules de l’alphabet latin sont généralement préférées pour les clés,
+                mais les majuscules sont parfois utilisées (par exemples pour des abréviations connues)
+                ainsi que des lettres d’autres alphabets (par exemple des clés pertinentes uniquement 
+                dans une zone ou cet alphabet est majoritairement utilisé).
+            tab: Lettres
+            title: Clés contenant des majuscules ou des lettres autres que celles de l'alphabet latin.
+        name: Caractères utilisés dans les clés
+        plain:
+            intro: |
+                Clés contenant uniquement des lettres minuscules de l’alphabet latin (<span class="char">a</span>
+                à <span class="char">z</span>) et le tiret bas (<span class="char">_</span>).
+                Le premier et le dernier caractère doivent être des lettres.
+                Les clés les plus simples devraient faire partie de cette catégorie.
+            tab: Simple
+            title: Clés simples
+        rest:
+            intro: |
+                Clés ne correspondant à aucune autre catégorie.
+            tab: Autres
+            title: Toutes les autres clés
         statistics:
             tab: Statistiques
             title: Statistiques globales
             fraction: Fraction
             characters: Caractères utilisés dans les clés
             characters_in_keys:
-                plain: Seulement les lettres latines minuscules (<span class="char">a</span> à <span class="char">z</span>) et le souligné (<span class="char">_</span>), le première et dernière caractère est une lettre.
+                plain: Seulement les lettres latines minuscules (<span class="char">a</span> à <span class="char">z</span>) et le tiret bas (<span class="char">_</span>), le première et dernière caractère est une lettre.
                 colon: Comme la règle A mais contenant un ou plusieurs caractères deux-points (<span class="char">:</span>).
                 letters: Comme la règle B mais avec des lettres latines majuscules ou des lettres d'autres alphabets.
                 space: Comme la règle C mais peut contenir au moins un symbole d'espacement (espace, tabulation, nouvelle ligne, retour chariot, et selon d'autres alphabets).
@@ -527,6 +566,13 @@ reports:
         also_show_keys: Montrer aussi les clés qui n’ont pas de page wiki en anglais mais qui ont une page dans une autre langue.
         table:
             create_wiki_page: Créer la page wiki…
+    historic_development:
+        intro: |
+            Évolution de quelques statistiques importantes au fil du temps.
+            Ces données ont été collectées par taginfo, des écarts sont possibles si taginfo n’a pas 
+            tourné un jour donné pour une raison ou une autre.
+        keys:
+            name: Évolution historique
     key_lengths:
         name: Longueurs des clés
         intro: |
@@ -562,10 +608,10 @@ reports:
     wiki_pages_about_non_existing_keys:
         name: Pages du wiki concernant des clés inexistantes
         intro: |
-            Ce tableau affiche les clés décritent dans le wiki mais qui n'ont pas d'
-            instance dans la base de données OSM. Ce n'est pas forcément une erreur (peut-être que quelqu'un
-            à décrit une clé préalablement à son utilisation ou les
-            pages du wiki décrivent une clé devenue obsolète), mais c'est peut aussi une faute de frappe ou une autre erreur.
+            Ce tableau présente les clés décrites dans le wiki mais qui n'ont pas d'instance
+            dans la base de données OSM. Ce n'est pas forcément une erreur (peut-être que quelqu'un
+            a décrit une clé préalablement à son utilisation ou les
+            pages du wiki décrivent une clé devenue obsolète), mais c'est peut-être aussi une faute de frappe ou une autre erreur.
         wiki_pages: Pages wiki
     name_tags:
         name: Variations des tags 'name'
@@ -600,3 +646,35 @@ reports:
                 Il affiche juste les blocs qui permettent de décrire des langues,
                 sans tenir compte de leur utilisation ou non dans OSM.
                 </p>
+    similar_keys:
+        count_common: Quantité
+        count_rare: Quantité
+        intro: |
+            Ce rapport présente des clés très souvent utilisées et des clés similaires très rarement 
+            utilisées. Cela met en lumière beaucoup de fautes d’orthographe sur les clés  les plus 
+            courantes, mais cela n’est pas parfait. Faites attention en corrigeant les données !
+            Ne corrigez pas mécaniquement ces clés en faisant un simple rechercher/remplacer.
+            Vérifiez chaque cas et corrigez les autres problèmes que vous rencontrez.
+        key_common: Clés souvent utilisées
+        key_rare: Clés rarement utilisées
+        name: Clés similaires
+        similarity: Similarité
+    wiki_images:
+        intro: |
+            Images utilisées par le wiki pour symboliser les clés dans les différentes langues. 
+            Parfois l’image d’une page dans une langue est meilleure que celle dans une autre. 
+            Mais il est parfois judicieux d’utiliser des images différentes pour des raisons culturelles. 
+        name: Images du wiki
+    wiki_problems:
+        info: Informations additionelles
+        intro: |
+            Taginfo parcourt toutes les pages du wiki utilisées pour décrire les clés, tags et relations 
+            afin de récupérer leurs informations. Ce rapport présente une liste de problèmes rencontrés 
+            lors de la lecture de ces pages. Ce ne sont pas forcément des erreurs du wiki, elles indiquent 
+            juste que quelque chose dans les pages du wiki n’est pas formaté dans un sens compréhensible 
+            par taginfo. Soit la page doit être corrigée soit taginfo doit être débogué. 
+        lang: Lang.
+        location: Emplacement
+        name: Problèmes d'analyse syntaxique
+        reason: Raison
+        wiki_page: Page wiki
