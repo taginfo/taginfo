@@ -567,12 +567,17 @@ reports:
         table:
             create_wiki_page: Créer la page wiki…
     historic_development:
+        name: Évolution historique
         intro: |
             Évolution de quelques statistiques importantes au fil du temps.
             Ces données ont été collectées par taginfo, des écarts sont possibles si taginfo n’a pas 
             tourné un jour donné pour une raison ou une autre.
         keys:
-            name: Évolution historique
+            title: Clés unique
+        tags:
+            title: Tags unique
+        relation_types:
+            title: Types de relation unique
     key_lengths:
         name: Longueurs des clés
         intro: |
