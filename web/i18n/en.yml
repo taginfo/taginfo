@@ -465,7 +465,7 @@ reports:
             Any valid Unicode character can appear in an OSM key but usually
             only lower case latin letters (a-z) and the underscore (_) are
             used. The colon (:) is often used as a separator character. This
-            report categorizes all keys according the the characters they use.
+            report categorizes all keys according to the characters they use.
         statistics:
             tab: Statistics
             title: Statistics overview
