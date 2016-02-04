@@ -94,8 +94,8 @@ database.transaction do |db|
                     info = v['imageinfo'][0]
                     if info['thumburl'] && info['thumburl'].match(%r{^(.*/)[0-9]{1,4}(px-.*)$})
                         prefix = $1
-                        prefix.sub!('http:', 'https:')
                         suffix = $2
+                        prefix.sub!('http:', 'https:')
                     else
                         prefix = nil
                         suffix = nil
