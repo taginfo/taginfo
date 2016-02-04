@@ -30,7 +30,7 @@ taginfo:
     source: Source
     sources: Sources
     download: Téléchargement
-    about: À Propos de…
+    about: À Propos de...
     contact: Contact
     meta: Méta
     wiki: Wiki
@@ -72,15 +72,15 @@ misc:
     area: Surface
     language: Langue
     search_for: Rechercher
-    objects_tooltip: Nombre d'objets (en absolu, et en pourcentage de tous les nœuds, chemins et relations).
-    nodes_tooltip: Nombre de nœuds (en absolu, et en pourcentage des nœuds taggués, les nœuds sans tags étant ignorés).
-    ways_tooltip: Nombre de chemins (en absolu, et en pourcentage de tous les chemins).
-    relations_tooltip: Nombre de relations (en absolu, et en pourcentage de tous les relation).
-    values_tooltip: Nombre de valeurs différentes pour cette clé.
-    users_tooltip: Nombre d'utilisateurs ayant édité en dernier les objets de cette clé.
-    prevalent_values: Valeurs dominantes
-    prevalent_values_tooltip: Jusqu'à dix des valeurs les plus fréquentes pour cette clé (seulement pour les valeurs présentes plus de 1%).
-    in_wiki_tooltip: Possède au moins une page wiki.
+    objects_tooltip: Nombre d'objets (en quantité et en pourcentage de tous les nœuds, chemins et relations).
+    nodes_tooltip: Nombre de nœuds (en quantité et en pourcentage des nœuds taggués, i.e. les nœuds sans aucun tag sont ignorés).
+    ways_tooltip: Nombre de chemins (en quantité et en pourcentage de tous les chemins).
+    relations_tooltip: Nombre de relations (en quantité et en pourcentage de toutes les relations).
+    values_tooltip: Nombre de valeurs différentes.
+    users_tooltip: Nombre d'utilisateurs différents ayant édité en dernier des objets ayant cette clé.
+    prevalent_values: Valeurs les plus fréquentes
+    prevalent_values_tooltip: Les dix valeurs les plus fréquentes (uniquement les valeurs dont la proportion dépasse 1%).
+    in_wiki_tooltip: Cette clé dispose au moins d'une page wiki.
 
 help:
     search:
@@ -135,20 +135,20 @@ pages:
     index:
         popular_keys: Clés populaires
         keys:
-            listkeys: Voir toutes les clés…
+            listkeys: Voir toutes les clés...
         tags:
-            listtags: Voir les tags les plus fréquents…
+            listtags: Voir les tags les plus fréquents...
         relations:
-            listrelations: Voir tous les types…
+            listrelations: Voir tous les types...
         reports:
-            listreports: Voir tous les rapports…
+            listreports: Voir tous les rapports...
         about:
             intro:
                 <p>OpenStreetMap utilise des <b>tags</b> de la forme <b>clé=valeur</b>
                 pour rajouter des informations aux objets géographiques. Taginfo rassemble
                 les informations sur ces tags de plusieurs sources afin de vous aider à
                 comprendre ce qu'ils signifient, et comment ils sont utilisés.</p>
-            more: Plus d'information…
+            more: Plus d'information...
         international:
             see: Voir d'autres sites taginfo...
     about:
@@ -156,26 +156,27 @@ pages:
             title: À propos de taginfo
             text: |
                 <p>OpenStreetMap utilise des <b>tags</b> pour décrire des objets géographiques.
-                Il n'existe pas de liste déterminée de tous ces tags. De nouveaux tags peuvent
+                Il n'existe pas de liste exhaustive de tous ces tags. De nouveaux tags peuvent
                 être créés et utilisés suivant les besoins. Tout le monde peut donc
-                imaginer un nouveau tag, et l'ajouter à un nouvel objet ou à des objets existants. Cela rend OpenStreetMap très flexible, mais ne facilite pas
-                toujours la réutilisation des données.<p>
-                <p>En tant que contributeur ou en tant qu'utilisateur des données OSM, de nombreuses
-                questions se posent telles que : Quels tags utilise-t-on pour l'objet X ? Quels tags dois-je utiliser
-                pour l'objet Y pour qu'il apparaisse correctement sur une carte ? Est-ce que le tag Z décrit
-                sur le wiki est vraiment utilisé et si oui, où ?</p>
-                <p>Taginfo vous aide en affichant des statistiques sur les tags qui sont actuellement dans la
-                base de données, combien de personnes les utilisent, et où, etc. Il
-                donne aussi les définitions des tags du wiki ou d'autres sources. Taginfo
-                essaie de rassembler toutes les informations sur les tags pour vous aider à comprendre
-                comment ils sont utilisés et ce qu'ils signifient. Regardez la <a href="/sources">liste des sources</a>
+                imaginer un nouveau tag et l'ajouter à un nouvel objet ou à des objets existants. 
+                Cela rend OpenStreetMap extrêmement flexible, mais ne facilite pas
+                toujours la réutilisation des données.</p>
+                <p>Que vous soyez contributeur ou utilisateur des données OSM, des questions se posent toujours : 
+                Quels tag utilisent les gens pour un objet X ? Quels tags dois-je utiliser
+                pour l'objet Y afin qu'il s'affiche correctement sur la carte ? Le tag Z décrit
+                sur le wiki est-il vraiment utilisé et où ?</p>
+                <p>Taginfo vous aide en présentant des statistiques sur les tags qui sont actuellement dans la
+                base de données, combien de personnes les utilisent, où, etc.
+                Il recueille aussi des informations sur les tags depuis le wiki et d'autres sources. 
+                Taginfo tente de rassembler toutes les informations sur les tags afin de vous aider à comprendre
+                comment ceux-ci sont utilisés et ce qu'ils signifient. Regardez une <a href="/sources">liste des sources</a>
                 qu'utilise taginfo.</p>
         about_site:
             title: À propos de ce site
         building_on_taginfo:
             title: Développer sur taginfo
             text: |
-                <p>Vous pouvez utiliser les données de taginfo dans vos propres projets :</p>
+                <p>Vous pouvez utiliser les données de taginfo dans vos projets :</p>
                 <h3>API</h3>
                 <p>Les données de taginfo sont accessibles via une API REST. Regardez la
                 <a href="/taginfo/apidoc">documentation de l'API</a> pour plus de détails, les informations d'ordre général sont
@@ -187,7 +188,7 @@ pages:
                 <p>Si vous souhaitez "jouer" avec les données de taginfo, vous pouvez télécharger les
                 fichiers de la base de données Sqlite régulièrement mis à jour. Tous les pré-traitements sont fait pour vous.
                 Regardez la <a href="/download">page de téléchargements</a> pour avoir la liste des fichiers. Notez que
-                certains de ces fichiers sont assez gros. Si vous voulez les télécharger régulièrement,
+                certains de ces fichiers peuvent être assez lourds. Si vous voulez les télécharger régulièrement,
                 contactez les administrateurs du site que vous utilisez ou contactez-nous sur la liste de diffusion.</p>
                 <h3>License</h3>
                 <p>Les données disponibles via taginfo sont sous licence ODbL, la
@@ -196,14 +197,14 @@ pages:
         software:
             title: Le logiciel taginfo
             text: |
-                <p>Le logiciel taginfo a été créé et maintenu par
+                <p>Le logiciel taginfo a été créé et est maintenu par
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
-                La design web a été conçu par
+                La conception de l'interface web a été conçue par
                 <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Traductions</h3>
                 <p>Nous avons besoin de traducteurs pour l'interface utilisateur de taginfo. Regardez la <a
-                href="/taginfo/translations">vue d'ensemble des traductions</a> pour les langues qui nécescitent
-                des mises à jour. Vous trouverez plus d'information sur comment vous pouvez nous aider dans
+                href="/taginfo/translations">vue d'ensemble des traductions</a> pour les langues qui nécessitent
+                des mises à jour. Plus d'informations sur comment aider sur
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">le wiki d'OSM</a>.</p>
                 <h3>Code</h3>
                 <p>Tous le code des sites taginfo est Open Source. Vous pouvez l'obtenir sur
@@ -211,44 +212,44 @@ pages:
                 regardez la page à propos de l'<a class="extlink"
                 href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">architecture de
                 taginfo</a> sur le wiki d'OSM.</p>
-                <h3>Faites tourner votre propre serveur</h3>
+                <h3>Faire tourner sa propre instance</h3>
                 <p>Vous pouvez lancer votre propre
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">site taginfo</a>,
                 avec par exemple les données concernant votre propre pays. Les instructions se trouvent
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Running">dans le wiki d'OSM
                 </a>.</p>
-                <h3>Signaler des bugs et demander des améliorations</h3>
-                <p>Les signalements de bugset les demandes d'améliorations doivent être faites sur le <a class="extlink"
-                href="https://github.com/joto/taginfo/issues">gestionnaires d'erreurs de GitHub</a>. Vous pouvez aussi
+                <h3>Rapports de bogues et demandes d'améliorations</h3>
+                <p>Les signalements de bogues et les demandes d'améliorations doivent être faites sur le <a class="extlink"
+                href="https://github.com/joto/taginfo/issues">gestionnaire d'erreurs de GitHub</a>. Vous pouvez aussi
                 en discuter avec nous sur la liste de diffusion.</p>
-                <h3>Contact/Liste de diffusion</h3>
+                <h3>Contact / liste de diffusion</h3>
                 <p>Contactez nous sur la
                 <a class="extlink" href="//lists.openstreetmap.org/listinfo/taginfo-dev">liste de diffusion taginfo-dev</a>
                 si vous avez des questions ou besoin d'aide.</p>
     sources:
         intro: |
-            <p>Taginfo retrouve des données sur les tags OSM depuis plusieurs sources et les assemble
+            <p>Taginfo collecte des données sur les tags OSM depuis plusieurs sources et les assemble
             pour en faciliter l'exploration.</p>
-            <p>Notez que taginfo ne fait qu'afficher ces données. Si vous souhaitez les modifier, vous
-            devez le faire à leur source.</p>
+            <p>Notez que taginfo ne fait que présenter ces données. Si vous souhaitez les modifier, vous
+            devez remonter à la source.</p>
         list:
             title: Liste des sources
-            intro: Voici la liste des sources utilisées. D'autres sources pourront être intégrées dans le futur.
+            intro: Voici la liste des sources utilisées actuellement. D'autres sources pourront être intégrées dans le futur.
         description:
             db: |
-                <p>Les statistiques sur les clés, tags, et types de relation types sont générés depuis la <a class="extlink" href="http://planet.openstreetmap.org/">base de données OSM</a> (ou un extrait) ainsi que des cartes montrant la distribution géographique des nœuds et des chemins.</p>
+                <p>Les statistiques sur les clés, tags, et types de relations sont générés depuis la <a class="extlink" href="http://planet.openstreetmap.org/">base de données OSM</a> (ou un extrait) ainsi que les cartes présentant la distribution géographique des nœuds et des chemins.</p>
             wiki: |
-                <p>Le <a class="extlink" href="//wiki.openstreetmap.org/">wiki OSM</a> est lu et toutes les pages Key:*, Tag:*, et Relation:* (dans toutes les langues différentes) sont analysées. Descriptions, images, tags relatifs, etc. en sont extraits.</p>
+                <p>Le <a class="extlink" href="//wiki.openstreetmap.org/">wiki OSM</a> est lu et toutes les pages <span class="char">Key:*</span>, <span class="char">Tag:*</span> et <span class="char">Relation:*</span> (dans toutes les langues) sont analysées. Descriptions, images, tags associés, etc. en sont extraits.</p>
             languages: |
-                <p>Taginfo fournit les informations sur les différentes langues du monde, leurs codes, noms, etc. depuis plusieurs registres de l'<a class="extlink" href="http://www.iana.org/">IANA</a> et d'<a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+                <p>Taginfo récupère les informations sur les différentes langues du monde, leurs codes, noms, etc. depuis plusieurs registres de l'<a class="extlink" href="http://www.iana.org/">IANA</a> et d'<a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
             projects: |
-                <p>Les projects utilisants les tags OSM, commes les éditeurs, les cartes, les routeurs, etc. Regardez <a href="/projects">la liste des projets</a>.</p>
+                <p>Ce sont les projects qui utilisent les tags OSM, comme les éditeurs, les cartes, les routeurs, etc. Regardez <a href="/projects">la liste des projets</a>.</p>
         updates:
             title: Mises à jour
             intro: Les données de taginfo sont régulièrement mises à jour.
         data_until: Données jusqu'à
         last_update_run: Dernière mise à jour
-        data_until_explanation: Toutes les modifications jusqu'à cette date sont présentes, les suivantes le seront peut-être.
+        data_until_explanation: Toutes les modifications jusqu'à cette date sont présentes, les modifications ultérieures le sont peut-être.
         to: à
     download:
         intro: |
@@ -267,8 +268,8 @@ pages:
             inclue ces indexes que vous voudrez probablement construire après votre téléchargement.
     reports:
         intro: |
-            Les rapports montrent les données de différents points de vue.
-            Ils agrègent de façon intéressante des données d'origines variées.
+            Les rapports présentent les données selon différents points de vue.
+            Ils agrègent souvent de façon intéressante des données provenant de plusieurs sources.
             Certains rapports peuvent aider à trouver certains types d'erreurs.
         list: Liste de tous les rapports
         data_sources: Sources de données utilisés
@@ -284,13 +285,13 @@ pages:
         nothing_to_compare: Il n’y a aucun élément à comparer. Rendez-vous sur une page clé/tag pour en ajouter.
     keys:
         intro: |
-                Ce tableau affiche toutes les clés qui existent dans la base de données ou dans une autre source.
+                Ce tableau présente les clés présentes dans la base de données ou dans l'une des autres sources.
     tags:
         intro: |
-                Ce tableau affiche les tags les plus fréquents dans la base de données.
+                Ce tableau présente les tags les plus fréquents dans la base de données.
     relations:
         name: Types de relation
-        intro: Information sur les différents type de relations (indiquée par le tag <a href="/keys/type?filter=relations">type</a>).
+        intro: Information sur les différents types de relations (indiqués par la clé <a href="/keys/type?filter=relations">type</a>).
         relations_of_type_tooltip: Nombre de relations de ce type (et pourcentage parmi toutes les relations).
         prevalent_roles: Rôles dominants
         prevalent_roles_tooltip: Rôles dominants pour ce type de relation
@@ -299,7 +300,7 @@ pages:
         empty_role: rôle vide
     projects:
         intro: |
-                Ce tableau affiche tous les projets connus par taginfo qui utilisent des tags OSM.<br/>Pour plus d'informations sur cette fonctionalité, merci de lire le <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
+                Ce tableau présente les projets connus de taginfo qui utilisent des tags OSM.<br/>Pour plus d'informations sur cette fonctionalité, merci de lire le <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
     key:
         description_from_wiki: Description de cette clé depuis le wiki (dans votre langue choisie si possible, sinon en anglais).
         no_description_in_wiki: Aucune description dans le wiki
@@ -362,7 +363,7 @@ pages:
             from_count_tooltip: Nombre d'objets de cet autre tag qui ont aussi ce tag.
         combinations:
             title: Combinaisons
-            description: Ce tableau n'affiche que les combinaisons les plus fréquentes des tags les plus fréquents.
+            description: Ce tableau présente uniquement les combinaisons les plus fréquentes des tags les plus fréquents.
         geographic_distribution:
             title: Distribution géographique de ce tag.
             relations: Les relations ne sont pas géolocalisées, il n’existe donc aucune carte.
@@ -419,7 +420,7 @@ pages:
             json_url: Fichier JSON
             info: Ces données sont fournies à taginfo via des le 'Fichier JSON' lié ci-dessus. Voir le <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a> pour la description du format
         tags:
-            count_all_tooltip: Nombre d'objets dans la base de données avec ce couple clé/tag 
+            count_all_tooltip: Nombre d'objets dans la base de données avec ce tag/clé 
             title: Tags utilisés par ce projet
             intro: Ces informations sont fournies par le projet, et ne sont pas forcément complètes. Veuillez lire la documentation du projet pour en savoir plus.
             objects_tooltip: Types d'objets utilisés par ce projet
@@ -427,7 +428,7 @@ pages:
 
 flexigrid:
     pagetext: Page
-    pagestat: Affiche de {from} à {to} des {total} éléments
+    pagestat: Affichage de {from} à {to} de {total} éléments
     outof: de
     findtext: Trouver
     procmsg: Traitement en cours, patientez s'il vous plait...
@@ -466,37 +467,38 @@ reports:
     characters_in_keys:
         colon:
             intro: |
-                Clés contenant un ou plusieurs caractères deux-points (<span class="char">:</span>) 
+                <p>Clés contenant un ou plusieurs caractères deux-points (<span class="char">:</span>) 
                 en plus des lettres (<span class="char">a</span> à <span class="char">z</span>) 
                 et du tiret bas (<span class="char">_</span>). 
-                Le deux-point est souvent utilisé comme séparateur hiérarchique.
+                Le deux-point est souvent utilisé comme séparateur hiérarchique.</p>
             tab: Deux-points
             title: Clés contenant un deux-points
         intro: |
-            Tout caractère Unicode valide peut apparaitre dans les clés OSM mais habituellement les
+            <p>Tout caractère Unicode valide peut figurer dans une clé OSM mais habituellement seuls les
             lettres latines minuscules (<span class="char">a</span> à <span class="char">z</span>) et 
-            le tiret bas (<span class="char">_</span>) sont utilisés. Parfois le caractère deux-points
-            (<span class="char">:</span>) est ajouté comme séparateur.
+            le tiret bas (<span class="char">_</span>) sont utilisés. Le signe de ponctuation deux-points
+            (<span class="char">:</span>) est souvent utilisé comme séparateur.
+            Ce rapport classe toutes les clés selon les caractères qu'elles utilisent.</p>
         letters:
             intro: |
-                Les lettres minuscules de l’alphabet latin sont généralement préférées pour les clés,
+                <p>Les lettres minuscules de l’alphabet latin sont généralement préférées pour les clés,
                 mais les majuscules sont parfois utilisées (par exemples pour des abréviations connues)
                 ainsi que des lettres d’autres alphabets (par exemple des clés pertinentes uniquement 
-                dans une zone ou cet alphabet est majoritairement utilisé).
+                dans une zone ou cet alphabet est majoritairement utilisé).</p>
             tab: Lettres
             title: Clés contenant des majuscules ou des lettres autres que celles de l'alphabet latin.
-        name: Caractères utilisés dans les clés
+        name: Caractères utilisés dans ces clés
         plain:
             intro: |
-                Clés contenant uniquement des lettres minuscules de l’alphabet latin (<span class="char">a</span>
+                <p>Clés contenant uniquement des lettres minuscules de l’alphabet latin (<span class="char">a</span>
                 à <span class="char">z</span>) et le tiret bas (<span class="char">_</span>).
                 Le premier et le dernier caractère doivent être des lettres.
-                Les clés les plus simples devraient faire partie de cette catégorie.
+                Les clés les plus simples devraient faire partie de cette catégorie.</p>
             tab: Simple
             title: Clés simples
         rest:
             intro: |
-                Clés ne correspondant à aucune autre catégorie.
+                <p>Clés ne correspondant à aucune autre catégorie.</p>
             tab: Autres
             title: Toutes les autres clés
         statistics:
@@ -505,36 +507,35 @@ reports:
             fraction: Fraction
             characters: Caractères utilisés dans les clés
             characters_in_keys:
-                plain: Seulement les lettres latines minuscules (<span class="char">a</span> à <span class="char">z</span>) et le tiret bas (<span class="char">_</span>), le première et dernière caractère est une lettre.
-                colon: Comme la règle A mais contenant un ou plusieurs caractères deux-points (<span class="char">:</span>).
+                plain: Seuls les lettres latines minuscules (<span class="char">a</span> à <span class="char">z</span>) et le tiret bas (<span class="char">_</span>), les premier et dernier caractères sont des lettres.
+                colon: Comme la règle A mais avec un ou plusieurs caractères deux-points (<span class="char">:</span>).
                 letters: Comme la règle B mais avec des lettres latines majuscules ou des lettres d'autres alphabets.
-                space: Comme la règle C mais peut contenir au moins un symbole d'espacement (espace, tabulation, nouvelle ligne, retour chariot, et selon d'autres alphabets).
-                problem: Comme la règle C mais peut contenir des caractères problématiques <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
+                space: Comme la règle C mais avec au moins un caractère d'espacement (espace, tabulation, nouvelle ligne, retour chariot, et selon d'autres alphabets).
+                problem: Comme la règle C mais avec des caractères problématiques <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
                 rest: Toutes les autres possibilités.
                 total: Total
         space:
             tab: Espaces
             title: Clés contenant des espaces
             intro: |
-                <p>Les tags dont la clé contient des symboles d'espacement comme espace, tabulation, nouvelle
-                ligne, retour chariot, ou d'autres selon les
-                alphabets.<br/>
-                Les espaces dans les clés sont sources d'erreur, en particulier au
+                <p>Clés utilisant des caractères d'espacement comme l'espace, la tabulation, une nouvelle
+                ligne, un retour chariot, ou des espaces d'autres alphabets.
+                Les caractères d'espacement peuvent être source de confusion, en particulier au
                 début ou la fin de la clé, car ils sont invisibles. Généralement
-                le caractère de soulignement (<span class="char">_</span>) devrait être utilisé à la place.</p>
+                le caractère d'espacement devrait être supprimé et le tiret bas (<span class="char">_</span>) utilisé à la place.</p>
         problem:
             tab: Problématiques
             title: Clés avec des caractères potentiellement problématiques
             intro: |
-                <p>Les clés contenant des symboles problématiques : <span
-                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> ou les caractères
+                <p>Les clés contenant des caractères problématiques : <span
+                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> ou des caractères
                 de contrôle. Ces caractères
-                peuvent poser des problèmes, car ils sont utilisés pour délimiter les chaines de caractères dans
-                les langages de programmation. Ils ont une sens particulier en XML, HTML, dans les
-                URLs, et ailleurs aussi. Le signe égal (<span class="char">=</span>) est souvent utilisé comme séparateur
-                entre les clés et les valeurs des tags.<br/>
-                Les clés apparaissant dans cette liste ne sont pas forcément fausses pour autant. Mais
-                bien souvent elles sont seulement dûes à des erreurs.</p>
+                peuvent poser des problèmes car ils sont utilisés pour commenter des chaînes de caractères dans
+                certains langages de programmation ou ont des significations particulières en XML, HTML, certaines adresses web, etc. 
+                Le signe égal (<span class="char">=</span>) est souvent utilisé comme séparateur
+                entre les clés et les valeurs.
+                Les clés présentées dans ce tableau ne sont pas forcément fausses pour autant. Mais
+                bien souvent elles sont seulement dûes à des erreurs et devraient être corrigées.</p>
     database_statistics:
         name: Statistiques de la base de données
         objects_in_db: Nombre d'objets
@@ -554,7 +555,7 @@ reports:
         tags_on_relations: Nombre de tags sur les relations
         avg_tags_per_relation: Nombre moyen de tag par relation
     frequently_used_keys_without_wiki_page:
-        name: Clés fréquement utilisées sans page de wiki
+        name: Clés fréquement utilisées ne disposant pas d'une page wiki
         intro: |
             <p>Ce tableau présente les clés qui apparaissent plus de 10&thinsp;000 fois dans la
             base de donnée OSM mais qui n’ont pas de description dans le wiki. Si vous maitrisez l’une
@@ -565,7 +566,7 @@ reports:
             dans la page du wiki.</p>
         also_show_keys: Montrer aussi les clés qui n’ont pas de page wiki en anglais mais qui ont une page dans une autre langue.
         table:
-            create_wiki_page: Créer la page wiki…
+            create_wiki_page: Créer la page wiki...
     historic_development:
         name: Évolution historique
         intro: |
@@ -586,32 +587,31 @@ reports:
             number_of_objects: Nombre d’objets
         histogram:
             name: Histogramme
-            intro: Cet histogramme montre combien il y a de clés de chaque longueur.
+            intro: Cet histogramme présente le nombre de clés pour une longueur donnée.
             key_length: Longueur de la clé
-            number_of_keys: Nombre de des clés
+            number_of_keys: Nombre de clés
     language_comparison_table_for_keys_in_the_wiki:
-        name: Comparaison par langue des clés présentées sur le wiki
+        name: Comparaison par langue des clés dispodant d'une page wiki
         icons:
             template: Page disponible dans le wiki et contenant les modèles standards.
             error: Page disponible dans le wiki et contenant les modèles standards, mais impossible à déchiffrer.
             page: Page disponible dans le wiki mais ne contenant pas les modèles standards.
             redirect: Page de redirection.
         intro: |
-            Ce tableau affiche toutes les clés de tags possédant une page wiki et dans quelle langue.
+            Ce tableau présente toutes les clés de tags possédant une page wiki et dans quelle langue.
     languages:
         name: Langues
         intro: |
             OpenStreetMap est un projet international. Les tags et leurs descriptions peuvent
-            être dans n'importe quelle langue. Ce tableau répertorie les langues que taginfo connait et combien
-            il y a de pages du wiki dans ces langues documentant respectivement,
-            les clés et les tags.
+            être dans n'importe quelle langue. Ce tableau présente les langues connues de taginfo et le nombre 
+            de pages du wiki écrites dans ces langues qui documentent les clés et les tags.
         code: Code
         native_name: Nom natif
         english_name: Nom anglais
         wiki_key_pages: Clés dans le wiki
         wiki_tag_pages: Tags dans le wiki
     wiki_pages_about_non_existing_keys:
-        name: Pages du wiki concernant des clés inexistantes
+        name: Pages du wiki sur des clés inexistantes
         intro: |
             Ce tableau présente les clés décrites dans le wiki mais qui n'ont pas d'instance
             dans la base de données OSM. Ce n'est pas forcément une erreur (peut-être que quelqu'un
@@ -642,12 +642,12 @@ reports:
                 <a href="http://tools.ietf.org/html/bcp47">Tags for Identifying Languages
                 (BCP47)</a>. Les tags de langue
                 sont constitués d'un ou plusieurs <i>sous-tags</i> décrivant la langue,
-                le script, les variantes, etc… La liste suivante montre les sous-tags
+                le script, les variantes, etc... La liste suivante montre les sous-tags
                 existants actuellement et quisont pertinants pour OSM. Pour plus d'information, voir aussi la page
                 <a href="http://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
                 sur les tags de langues de l'IETF</a> et le site <a
                 href="http://www.langtag.net/">langtag.net</a>.</p>
-                <p>Notez que les données affichées dans ce tableau <b>ne provient pas</b> d'OpenStreetMap.
+                <p>Notez que les données présentées dans ce tableau <b>ne proviennent pas</b> d'OpenStreetMap.
                 Il affiche juste les blocs qui permettent de décrire des langues,
                 sans tenir compte de leur utilisation ou non dans OSM.
                 </p>
