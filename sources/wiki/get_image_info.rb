@@ -92,8 +92,9 @@ database.transaction do |db|
             data['query']['pages'].each do |k,v|
                 if v['imageinfo'] && ! images_added[v['title']]
                     info = v['imageinfo'][0]
-                    if info['thumburl'].match(%r{^(.*/)[0-9]{1,4}(px-.*)$})
+                    if info['thumburl'] && info['thumburl'].match(%r{^(.*/)[0-9]{1,4}(px-.*)$})
                         prefix = $1
+                        prefix.sub!('http:', 'https:')
                         suffix = $2
                     else
                         prefix = nil
@@ -102,12 +103,11 @@ database.transaction do |db|
                     end
 
                     info['url'].sub!('http:', 'https:')
-                    prefix.sub!('http:', 'https:')
 
                     # The OSM wiki reports the wrong thumbnail URL for images
                     # transcluded from Wikimedia Commons. This fixes those
                     # URLs.
-                    if info['url'].match(%r{^https://upload\.wikimedia\.org/wikipedia/commons})
+                    if prefix && info['url'].match(%r{^https://upload\.wikimedia\.org/wikipedia/commons})
                         prefix.sub!('https://wiki.openstreetmap.org/w/images', 'https://upload.wikimedia.org/wikipedia/commons')
                     end
 
@@ -124,8 +124,8 @@ database.transaction do |db|
                     ])
                 end
             end
-        rescue
-            puts "Wiki API call error:"
+        rescue => ex
+            puts "Wiki API call error: #{ex.message}"
             pp data
         end
     end
