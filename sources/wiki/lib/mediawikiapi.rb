@@ -55,7 +55,7 @@ module MediaWikiAPI
                 http.use_ssl = true
                 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
             end
-#            puts "Getting path [#{path}]"
+#            puts "Getting path [#{uri.request_uri}]"
             response = http.get(uri.request_uri, @headers)
             response.body.force_encoding('UTF-8')
             response
