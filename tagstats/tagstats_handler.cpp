@@ -539,24 +539,16 @@ void TagStatsHandler::write_to_database() {
     _timer_info("writing results to database");
 
     m_vout << "hash map sizes:\n";
-    m_vout << "  tags:     size=" << tags_hash_size <<
-                        " buckets=" << tags_hash_buckets <<
-            " sizeof(KeyStats)="  << sizeof(KeyStats) <<
-                                " ==> " << (tags_hash_size * sizeof(KeyStats) / 1024) << "kB\n";
-    m_vout << "  values:   size=" << values_hash_size <<
-                        " buckets=" << values_hash_buckets <<
-                " sizeof(Counter)=" << sizeof(Counter) <<
-                                " ==> " << (values_hash_size * sizeof(Counter) / 1024) << "kB\n";
-    m_vout << "  key combinations: size=" << key_combination_hash_size <<
-                                " buckets=" << key_combination_hash_buckets <<
-                        " sizeof(Counter)=" << sizeof(Counter) <<
-                                    " ==> " << (key_combination_hash_size * sizeof(Counter) / 1024) << "kB\n";
-    m_vout << "  users:    size=" << user_hash_size <<
-                        " buckets=" << user_hash_buckets <<
-                " sizeof(uint32_t)=" << sizeof(uint32_t) <<
-                            " ==> " << (user_hash_size * sizeof(uint32_t) / 1024) << "kB\n";
+    m_vout << "  tags:       " << (tags_hash_size * sizeof(KeyStats) / 1024) << "kB"
+           << " [size=" << tags_hash_size << " buckets=" << tags_hash_buckets << " sizeof(KeyStats)="  << sizeof(KeyStats) << "]\n";
+    m_vout << "  values:     " << (values_hash_size * sizeof(Counter) / 1024) << "kB"
+           << " [size=" << values_hash_size << " buckets=" << values_hash_buckets << " sizeof(Counter)=" << sizeof(Counter) << "]\n";
+    m_vout << "  key combos: " << (key_combination_hash_size * sizeof(Counter) / 1024) << "kB"
+           << " [size=" << key_combination_hash_size << " buckets=" << key_combination_hash_buckets << " sizeof(Counter)=" << sizeof(Counter) << "]\n";
+    m_vout << "  users:      " << (user_hash_size * sizeof(uint32_t) / 1024) << "kB"
+           << " [size=" << user_hash_size << " buckets=" << user_hash_buckets << " sizeof(uint32_t)=" << sizeof(uint32_t) << "]\n";
 
-    m_vout << "  sum: " << (
+    m_vout << "  sum:        " << (
                 (tags_hash_size * sizeof(KeyStats)
                 + values_hash_size * sizeof(Counter)
                 + key_combination_hash_size * sizeof(Counter)
@@ -564,14 +556,23 @@ void TagStatsHandler::write_to_database() {
                 / 1024)
                 << "kB\n";
 
-    m_vout << "\n" << "total memory for hashes:" << "\n";
-    m_vout << "  (sizeof(hash key) + sizeof(hash value *) + 2.5 bit overhead) * bucket_count + sizeof(hash value) * size\n";
-    m_vout << " tags:             " << ((sizeof(const char*)*8 + sizeof(KeyStats *)*8 + 3) * tags_hash_buckets / 8 ) + sizeof(KeyStats) * tags_hash_size << "\n";
-    m_vout << "  (sizeof(hash key) + sizeof(hash value  ) + 2.5 bit overhead) * bucket_count\n";
-    m_vout << " values:           " << ((sizeof(const char*)*8 + sizeof(Counter)*8 + 3) * values_hash_buckets / 8 ) << "\n";
-    m_vout << " key combinations: " << ((sizeof(const char*)*8 + sizeof(Counter)*8 + 3) * key_combination_hash_buckets / 8 ) << "\n";
+    m_vout << "\n" << "estimated total memory for hashes:" << "\n";
 
-    m_vout << " users:    " << ((sizeof(osmium::user_id_type)*8 + sizeof(uint32_t)*8 + 3) * user_hash_buckets / 8 )  << "\n";
+    auto size_tags = ((sizeof(const char*)*8 + sizeof(KeyStats *)*8 + 3) * tags_hash_buckets / 8 ) + sizeof(KeyStats) * tags_hash_size;
+    m_vout << " tags:       " << (size_tags / 1024) << "kB"
+           << " [(sizeof(hash key) + sizeof(hash value*) + 2.5 bit overhead) * bucket_count + sizeof(hash value) * size]\n";
+
+    auto size_values = (sizeof(const char*)*8 + sizeof(Counter)*8 + 3) * values_hash_buckets / 8;
+    m_vout << " values:     " << (size_values / 1024) << "kB"
+           << " [(sizeof(hash key) + sizeof(hash value) + 2.5 bit overhead) * bucket_count]\n";
+
+    auto size_key_combos = (sizeof(const char*)*8 + sizeof(Counter)*8 + 3) * key_combination_hash_buckets / 8;
+    m_vout << " key combos: " << (size_key_combos / 1024) << "kB\n";
+
+    auto size_users = (sizeof(osmium::user_id_type)*8 + sizeof(uint32_t)*8 + 3) * user_hash_buckets / 8;
+    m_vout << " users:      " << (size_users / 1024) << "kB\n";
+
+    m_vout << " sum:        " << ((size_tags + size_values + size_key_combos + size_users) / 1024) << "kB\n";
 
     m_vout << "\n";
 
