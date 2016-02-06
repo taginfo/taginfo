@@ -348,13 +348,6 @@ void TagStatsHandler::before_relations() {
 void TagStatsHandler::init() { // XXX
     m_vout << "------------------------------------------------------------------------------\n";
     m_vout << "Starting tagstats...\n";
-    m_vout << "Sizes of some important data structures:\n";
-    m_vout << "  sizeof(value_hash_map_t)           = " << sizeof(value_hash_map_t) << "\n";
-    m_vout << "  sizeof(Counter)                    = " << sizeof(Counter) << "\n";
-    m_vout << "  sizeof(key_combination_hash_map_t) = " << sizeof(combination_hash_map_t) << "\n";
-    m_vout << "  sizeof(user_hash_map_t)            = " << sizeof(user_hash_map_t) << "\n";
-    m_vout << "  sizeof(GeoDistribution)            = " << sizeof(GeoDistribution) << "\n";
-    m_vout << "  sizeof(KeyStats)                   = " << sizeof(KeyStats) << "\n";
 
     _print_memory_usage();
 

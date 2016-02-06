@@ -43,9 +43,17 @@ LIB_ICU    := $(shell pkg-config --libs icu-uc icu-io)
 
 CXXFLAGS_ICU := $(shell pkg-config --cflags icu-uc icu-io)
 
+PROGRAMS := tagstats osmstats similarity sizes taginfo_unicode
+
+CPPFILES := $(wildcard *.cpp)
+
+
 .PHONY: all check indent install clean
 
-all: tagstats osmstats similarity taginfo_unicode
+all: $(PROGRAMS)
+
+sizes: sizes.cpp
+	$(CXX) $(CXXFLAGS) $(CXXFLAGS_WARNINGS) $(CXXFLAGS_FEATURES) -o $@ $< $(LDFLAGS)
 
 osmstats: osmstats.cpp statistics_handler.hpp
 	$(CXX) $(CXXFLAGS) $(CXXFLAGS_WARNINGS) -o $@ $< $(LDFLAGS) $(LIB_IO) $(LIB_SQLITE)
@@ -66,7 +74,7 @@ taginfo_unicode: taginfo_unicode.cpp sqlite.hpp
 	$(CXX) $(CXXFLAGS) $(CXXFLAGS_WARNINGS) $(CXXFLAGS_ICU) -o $@ $< $(LDFLAGS) $(LIB_SQLITE) $(LIB_ICU)
 
 check:
-	cppcheck --enable=all tagstats.cpp osmstats.cpp similarity.cpp taginfo_unicode.cpp
+	cppcheck --enable=all $(CPPFILES)
 
 indent:
 	astyle --style=java --indent-namespaces --indent-switches --pad-header --suffix=none \*.hpp \*.cpp
@@ -75,5 +83,5 @@ install:
 	install -m 755 tagstats ../sources/db/tagstats
 
 clean:
-	rm -f *.o *.gcno *.gcda *.gcov gmon.out core tagstats osmstats similarity taginfo_unicode
+	rm -f *.o *.gcno *.gcda *.gcov gmon.out core $(PROGRAMS)
 

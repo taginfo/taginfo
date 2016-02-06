@@ -25,6 +25,7 @@
 #include <cstdint>
 
 #include <osmium/handler.hpp>
+#include <osmium/osm.hpp>
 
 #include "sqlite.hpp"
 

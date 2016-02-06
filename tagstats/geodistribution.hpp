@@ -30,6 +30,7 @@
 #include <gd.h>
 
 #include <osmium/osm/location.hpp>
+#include <osmium/osm/types.hpp>
 
 /**
  * Positions are stored in this type of integer for the distribution images.

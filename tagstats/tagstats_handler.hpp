@@ -34,6 +34,7 @@
 #include <osmium/util/memory.hpp>
 #include <osmium/util/verbose_output.hpp>
 
+#include "geodistribution.hpp"
 #include "hash.hpp"
 #include "sqlite.hpp"
 #include "statistics_handler.hpp"
