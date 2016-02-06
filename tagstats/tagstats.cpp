@@ -54,7 +54,7 @@ void print_help() {
               << "\nDefault for bounding box is: (-180, -90, 180, 90).\n";
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     static struct option long_options[] = {
         {"help",                      no_argument,       0, 'H'},
         {"min-tag-combination-count", required_argument, 0, 'm'},
@@ -125,14 +125,13 @@ int main(int argc, char *argv[]) {
     }
 
     osmium::util::VerboseOutput vout(true);
+    vout << "Starting tagstats...\n";
 
     GeoDistribution::set_dimensions(width, height);
     osmium::io::File infile(argv[optind]);
     Sqlite::Database db(argv[optind+1], SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE);
     MapToInt<rough_position_type> map_to_int(left, bottom, right, top, width, height);
     TagStatsHandler handler(db, selection_database_name, map_to_int, min_tag_combination_count, vout);
-
-    handler.init();
 
     osmium::io::Reader reader(infile);
     osmium::apply(reader, handler);

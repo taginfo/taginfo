@@ -48,7 +48,7 @@ PROGRAMS := tagstats osmstats similarity sizes taginfo_unicode
 CPPFILES := $(wildcard *.cpp)
 
 
-.PHONY: all check indent install clean
+.PHONY: all check indent clean
 
 all: $(PROGRAMS)
 
@@ -78,9 +78,6 @@ check:
 
 indent:
 	astyle --style=java --indent-namespaces --indent-switches --pad-header --suffix=none \*.hpp \*.cpp
-
-install:
-	install -m 755 tagstats ../sources/db/tagstats
 
 clean:
 	rm -f *.o *.gcno *.gcda *.gcov gmon.out core $(PROGRAMS)

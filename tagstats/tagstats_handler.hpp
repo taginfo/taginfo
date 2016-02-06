@@ -66,11 +66,11 @@ struct Counter {
     }
 };
 
-typedef google::sparse_hash_map<const char *, Counter, djb2_hash, eqstr> value_hash_map_t;
+typedef google::sparse_hash_map<const char*, Counter, djb2_hash, eqstr> value_hash_map_t;
 
 typedef google::sparse_hash_map<osmium::user_id_type, uint32_t> user_hash_map_t;
 
-typedef google::sparse_hash_map<const char *, Counter, djb2_hash, eqstr> combination_hash_map_t;
+typedef google::sparse_hash_map<const char*, Counter, djb2_hash, eqstr> combination_hash_map_t;
 
 /**
  * A KeyStats object holds all statistics for an OSM tag key.
@@ -128,7 +128,7 @@ public:
 
 }; // class KeyStats
 
-typedef google::sparse_hash_map<const char *, KeyStats *, djb2_hash, eqstr> key_hash_map_t;
+typedef google::sparse_hash_map<const char*, KeyStats*, djb2_hash, eqstr> key_hash_map_t;
 
 /**
  * A KeyValueStats object holds some statistics for an OSM tag (key/value pair).
@@ -148,8 +148,8 @@ public:
 
 }; // class KeyValueStats
 
-typedef google::sparse_hash_map<const char *, KeyValueStats *, djb2_hash, eqstr> key_value_hash_map_t;
-typedef google::sparse_hash_map<std::pair<const char*, const char*>, GeoDistribution *, djb2_hash, eqstr> key_value_geodistribution_hash_map_t;
+typedef google::sparse_hash_map<const char*, KeyValueStats*, djb2_hash, eqstr> key_value_hash_map_t;
+typedef google::sparse_hash_map<std::pair<const char*, const char*>, GeoDistribution*, djb2_hash, eqstr> key_value_geodistribution_hash_map_t;
 
 struct RelationRoleStats {
     uint32_t node;
@@ -216,9 +216,9 @@ class TagStatsHandler : public osmium::handler::Handler {
      */
     unsigned int m_min_tag_combination_count;
 
-    time_t timer;
+    time_t m_timer;
 
-    key_hash_map_t tags_stat;
+    key_hash_map_t m_tags_stat;
 
     key_value_hash_map_t m_key_value_stats;
 
@@ -234,13 +234,29 @@ class TagStatsHandler : public osmium::handler::Handler {
 
     Sqlite::Database& m_database;
 
-    void _timer_info(const char *msg);
+    StatisticsHandler m_statistics_handler;
 
-    void _update_key_combination_hash(osmium::item_type type, osmium::TagList::const_iterator it1, osmium::TagList::const_iterator end);
+    MapToInt<rough_position_type> m_map_to_int;
 
-    void _update_key_value_combination_hash2(osmium::item_type type, osmium::TagList::const_iterator it, osmium::TagList::const_iterator end, key_value_hash_map_t::iterator kvi1, std::string& key_value1);
+    storage_type m_storage;
 
-    void _update_key_value_combination_hash(osmium::item_type type, osmium::TagList::const_iterator it, osmium::TagList::const_iterator end);
+    osmium::item_type m_last_type;
+
+    void _timer_info(const char* msg);
+
+    void _update_key_combination_hash(osmium::item_type type,
+                                      osmium::TagList::const_iterator it1,
+                                      osmium::TagList::const_iterator end);
+
+    void _update_key_value_combination_hash2(osmium::item_type type,
+                                             osmium::TagList::const_iterator it,
+                                             osmium::TagList::const_iterator end,
+                                             key_value_hash_map_t::iterator kvi1,
+                                             const std::string& key_value1);
+
+    void _update_key_value_combination_hash(osmium::item_type type,
+                                            osmium::TagList::const_iterator it,
+                                            osmium::TagList::const_iterator end);
 
     void _print_and_clear_key_distribution_images(bool for_nodes);
 
@@ -250,17 +266,13 @@ class TagStatsHandler : public osmium::handler::Handler {
 
     void collect_tag_stats(const osmium::OSMObject& object);
 
-    StatisticsHandler statistics_handler;
-
-    MapToInt<rough_position_type> m_map_to_int;
-
-    storage_type m_storage;
-
-    osmium::item_type m_last_type = osmium::item_type::node;
-
 public:
 
-    TagStatsHandler(Sqlite::Database& database, const std::string& selection_database_name, MapToInt<rough_position_type>& map_to_int, unsigned int min_tag_combination_count, osmium::util::VerboseOutput& vout);
+    TagStatsHandler(Sqlite::Database& database,
+                    const std::string& selection_database_name,
+                    MapToInt<rough_position_type>& map_to_int,
+                    unsigned int min_tag_combination_count,
+                    osmium::util::VerboseOutput& vout);
 
     void node(const osmium::Node& node);
 
@@ -271,8 +283,6 @@ public:
     void before_ways();
 
     void before_relations();
-
-    void init();
 
     void write_to_database();
 
