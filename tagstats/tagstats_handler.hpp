@@ -3,7 +3,7 @@
 
 /*
 
-  Copyright (C) 2012-2015 Jochen Topf <jochen@topf.org>.
+  Copyright (C) 2012-2016 Jochen Topf <jochen@topf.org>.
 
   This file is part of Tagstats.
 
@@ -31,6 +31,9 @@
 #include <google/sparse_hash_map>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
+
+#include <osmium/util/memory.hpp>
+#include <osmium/util/verbose_output.hpp>
 
 #include "sqlite.hpp"
 #include "string_store.hpp"
@@ -240,6 +243,8 @@ public:
  */
 class TagStatsHandler : public osmium::handler::Handler {
 
+    osmium::util::VerboseOutput& m_vout;
+
     /**
      * Tag combination not appearing at least this often are not written
      * to database.
@@ -266,7 +271,7 @@ class TagStatsHandler : public osmium::handler::Handler {
 
     void _timer_info(const char *msg) {
         int duration = time(0) - timer;
-        std::cerr << "  " << msg << " took " << duration << " seconds (about " << duration / 60 << " minutes)\n\n";
+        m_vout << "  " << msg << " took " << duration << " seconds (about " << duration / 60 << " minutes)\n";
     }
 
     void _update_key_combination_hash(osmium::item_type type, osmium::TagList::const_iterator it1, osmium::TagList::const_iterator end) {
@@ -330,7 +335,7 @@ class TagStatsHandler : public osmium::handler::Handler {
     }
 
     void _print_and_clear_key_distribution_images(bool for_nodes) {
-        int sum_size=0;
+        uint64_t sum_size=0;
 
         Sqlite::Statement statement_insert_into_key_distributions(m_database, "INSERT INTO key_distributions (key, object_type, png) VALUES (?, ?, ?);");
         m_database.begin_transaction();
@@ -356,14 +361,14 @@ class TagStatsHandler : public osmium::handler::Handler {
             stat->distribution.clear();
         }
 
-        std::cerr << "gridcells_all: " << GeoDistribution::count_all_set_cells() << std::endl;
-        std::cerr << "sum of key location image sizes: " << sum_size << " bytes\n";
+        m_vout << "gridcells_all: " << GeoDistribution::count_all_set_cells() << "\n";
+        m_vout << "sum of key location image sizes: " << (sum_size / 1024) << "kB\n";
 
         m_database.commit();
     }
 
     void _print_and_clear_tag_distribution_images(bool for_nodes) {
-        int sum_size=0;
+        uint64_t sum_size=0;
 
         Sqlite::Statement statement_insert_into_tag_distributions(m_database, "INSERT INTO tag_distributions (key, value, object_type, png) VALUES (?, ?, ?, ?);");
         m_database.begin_transaction();
@@ -388,33 +393,20 @@ class TagStatsHandler : public osmium::handler::Handler {
             }
         }
 
-        std::cerr << "sum of tag location image sizes: " << sum_size << " bytes\n";
+        m_vout << "sum of tag location image sizes: " << (sum_size / 1024) << "kB\n";
 
         m_database.commit();
     }
 
     void _print_memory_usage() {
-        std::cerr << "string_store: chunk_size=" << m_string_store.get_chunk_size() / 1024 / 1024 << "MB"
-                  <<                  " chunks=" << m_string_store.get_chunk_count()
-                  <<                  " memory=" << (m_string_store.get_chunk_size() / 1024 / 1024) * m_string_store.get_chunk_count() << "MB"
-                  <<           " bytes_in_last=" << m_string_store.get_used_bytes_in_last_chunk() / 1024 << "kB"
-                  << std::endl;
+        m_vout << "string_store: chunk_size=" << m_string_store.get_chunk_size() / 1024 / 1024 << "MB"
+               <<                  " chunks=" << m_string_store.get_chunk_count()
+               <<                  " memory=" << (m_string_store.get_chunk_size() / 1024 / 1024) * m_string_store.get_chunk_count() << "MB"
+               <<           " bytes_in_last=" << m_string_store.get_used_bytes_in_last_chunk() / 1024 << "kB"
+               << "\n";
 
-        char filename[100];
-        sprintf(filename, "/proc/%d/status", getpid());
-        std::ifstream status_file(filename);
-        std::string line;
-
-        if (status_file.is_open()) {
-            while (! status_file.eof() ) {
-                std::getline(status_file, line);
-                if (line.substr(0, 6) == "VmPeak" || line.substr(0, 6) == "VmSize") {
-                    std::cerr << line << std::endl;
-                }
-            }
-            status_file.close();
-        }
-
+        osmium::MemoryUsage mcheck;
+        m_vout << "memory used: current=" << mcheck.current() << "MB peak=" << mcheck.peak() << "MB\n";
     }
 
     void collect_tag_stats(const osmium::OSMObject& object) {
@@ -482,8 +474,9 @@ class TagStatsHandler : public osmium::handler::Handler {
 
 public:
 
-    TagStatsHandler(Sqlite::Database& database, const std::string& selection_database_name, MapToInt<rough_position_type>& map_to_int, unsigned int min_tag_combination_count) :
+    TagStatsHandler(Sqlite::Database& database, const std::string& selection_database_name, MapToInt<rough_position_type>& map_to_int, unsigned int min_tag_combination_count, osmium::util::VerboseOutput& vout) :
         Handler(),
+        m_vout(vout),
         m_min_tag_combination_count(min_tag_combination_count),
         m_max_timestamp(0),
         m_string_store(string_store_size),
@@ -563,7 +556,6 @@ public:
 
     void before_ways() {
         _timer_info("processing nodes");
-        _print_memory_usage();
 
         auto png = GeoDistribution::create_empty_png();
         Sqlite::Statement statement_insert_into_key_distributions(m_database, "INSERT INTO key_distributions (png) VALUES (?);");
@@ -579,8 +571,8 @@ public:
         _timer_info("dumping images");
         _print_memory_usage();
 
-        std::cerr << "------------------------------------------------------------------------------\n";
-        std::cerr << "Processing ways...\n";
+        m_vout << "------------------------------------------------------------------------------\n";
+        m_vout << "Processing ways...\n";
         timer = time(0);
     }
 
@@ -590,26 +582,26 @@ public:
         _print_and_clear_tag_distribution_images(false);
         _print_memory_usage();
 
-        std::cerr << "------------------------------------------------------------------------------\n";
-        std::cerr << "Processing relations...\n";
+        m_vout << "------------------------------------------------------------------------------\n";
+        m_vout << "Processing relations...\n";
         timer = time(0);
     }
 
     void init() { // XXX
-        std::cerr << "------------------------------------------------------------------------------\n";
-        std::cerr << "Starting tagstats...\n\n";
-        std::cerr << "Sizes of some important data structures:\n";
-        std::cerr << "  sizeof(value_hash_map_t)           = " << sizeof(value_hash_map_t) << "\n";
-        std::cerr << "  sizeof(Counter)                    = " << sizeof(Counter) << "\n";
-        std::cerr << "  sizeof(key_combination_hash_map_t) = " << sizeof(combination_hash_map_t) << "\n";
-        std::cerr << "  sizeof(user_hash_map_t)            = " << sizeof(user_hash_map_t) << "\n";
-        std::cerr << "  sizeof(GeoDistribution)            = " << sizeof(GeoDistribution) << "\n";
-        std::cerr << "  sizeof(KeyStats)                   = " << sizeof(KeyStats) << "\n\n";
+        m_vout << "------------------------------------------------------------------------------\n";
+        m_vout << "Starting tagstats...\n";
+        m_vout << "Sizes of some important data structures:\n";
+        m_vout << "  sizeof(value_hash_map_t)           = " << sizeof(value_hash_map_t) << "\n";
+        m_vout << "  sizeof(Counter)                    = " << sizeof(Counter) << "\n";
+        m_vout << "  sizeof(key_combination_hash_map_t) = " << sizeof(combination_hash_map_t) << "\n";
+        m_vout << "  sizeof(user_hash_map_t)            = " << sizeof(user_hash_map_t) << "\n";
+        m_vout << "  sizeof(GeoDistribution)            = " << sizeof(GeoDistribution) << "\n";
+        m_vout << "  sizeof(KeyStats)                   = " << sizeof(KeyStats) << "\n";
 
         _print_memory_usage();
 
-        std::cerr << "------------------------------------------------------------------------------\n";
-        std::cerr << "Processing nodes...\n";
+        m_vout << "------------------------------------------------------------------------------\n";
+        m_vout << "Processing nodes...\n";
         timer = time(0);
     }
 
@@ -617,8 +609,8 @@ public:
         _timer_info("processing relations");
         _print_memory_usage();
 
-        std::cerr << "------------------------------------------------------------------------------\n";
-        std::cerr << "Writing results to database...\n";
+        m_vout << "------------------------------------------------------------------------------\n";
+        m_vout << "Writing results to database...\n";
         timer = time(0);
         statistics_handler.write_to_database();
 
@@ -778,33 +770,46 @@ public:
 
         _timer_info("writing results to database");
 
-        std::cerr << "hash map sizes:\n";
-        std::cerr << "  tags:     size=" <<   tags_hash_size << " buckets=" <<   tags_hash_buckets << " sizeof(KeyStats)="  << sizeof(KeyStats)  << " *=" <<   tags_hash_size * sizeof(KeyStats) << "\n";
-        std::cerr << "  values:   size=" << values_hash_size << " buckets=" << values_hash_buckets << " sizeof(Counter)=" << sizeof(Counter) << " *=" << values_hash_size * sizeof(Counter) << "\n";
-        std::cerr << "  key combinations: size=" << key_combination_hash_size << " buckets=" << key_combination_hash_buckets << " sizeof(Counter)=" << sizeof(Counter) << " *=" << key_combination_hash_size * sizeof(Counter) << "\n";
-        std::cerr << "  users:    size=" << user_hash_size << " buckets=" << user_hash_buckets << " sizeof(uint32_t)=" << sizeof(uint32_t) << " *=" << user_hash_size * sizeof(uint32_t) << "\n";
+        m_vout << "hash map sizes:\n";
+        m_vout << "  tags:     size=" << tags_hash_size <<
+                          " buckets=" << tags_hash_buckets <<
+                " sizeof(KeyStats)="  << sizeof(KeyStats) <<
+                                   " ==> " << (tags_hash_size * sizeof(KeyStats) / 1024) << "kB\n";
+        m_vout << "  values:   size=" << values_hash_size <<
+                          " buckets=" << values_hash_buckets <<
+                  " sizeof(Counter)=" << sizeof(Counter) <<
+                                   " ==> " << (values_hash_size * sizeof(Counter) / 1024) << "kB\n";
+        m_vout << "  key combinations: size=" << key_combination_hash_size <<
+                                  " buckets=" << key_combination_hash_buckets <<
+                          " sizeof(Counter)=" << sizeof(Counter) <<
+                                      " ==> " << (key_combination_hash_size * sizeof(Counter) / 1024) << "kB\n";
+        m_vout << "  users:    size=" << user_hash_size <<
+                          " buckets=" << user_hash_buckets <<
+                 " sizeof(uint32_t)=" << sizeof(uint32_t) <<
+                              " ==> " << (user_hash_size * sizeof(uint32_t) / 1024) << "kB\n";
 
-        std::cerr << "  sum: " <<
-                  tags_hash_size * sizeof(KeyStats)
+        m_vout << "  sum: " << (
+                  (tags_hash_size * sizeof(KeyStats)
                   + values_hash_size * sizeof(Counter)
                   + key_combination_hash_size * sizeof(Counter)
-                  + user_hash_size * sizeof(uint32_t)
-                  << "\n";
+                  + user_hash_size * sizeof(uint32_t))
+                    / 1024)
+                  << "kB\n";
 
-        std::cerr << "\n" << "total memory for hashes:" << "\n";
-        std::cerr << "  (sizeof(hash key) + sizeof(hash value *) + 2.5 bit overhead) * bucket_count + sizeof(hash value) * size\n";
-        std::cerr << " tags:             " << ((sizeof(const char*)*8 + sizeof(KeyStats *)*8 + 3) * tags_hash_buckets / 8 ) + sizeof(KeyStats) * tags_hash_size << "\n";
-        std::cerr << "  (sizeof(hash key) + sizeof(hash value  ) + 2.5 bit overhead) * bucket_count\n";
-        std::cerr << " values:           " << ((sizeof(const char*)*8 + sizeof(Counter)*8 + 3) * values_hash_buckets / 8 ) << "\n";
-        std::cerr << " key combinations: " << ((sizeof(const char*)*8 + sizeof(Counter)*8 + 3) * key_combination_hash_buckets / 8 ) << "\n";
+        m_vout << "\n" << "total memory for hashes:" << "\n";
+        m_vout << "  (sizeof(hash key) + sizeof(hash value *) + 2.5 bit overhead) * bucket_count + sizeof(hash value) * size\n";
+        m_vout << " tags:             " << ((sizeof(const char*)*8 + sizeof(KeyStats *)*8 + 3) * tags_hash_buckets / 8 ) + sizeof(KeyStats) * tags_hash_size << "\n";
+        m_vout << "  (sizeof(hash key) + sizeof(hash value  ) + 2.5 bit overhead) * bucket_count\n";
+        m_vout << " values:           " << ((sizeof(const char*)*8 + sizeof(Counter)*8 + 3) * values_hash_buckets / 8 ) << "\n";
+        m_vout << " key combinations: " << ((sizeof(const char*)*8 + sizeof(Counter)*8 + 3) * key_combination_hash_buckets / 8 ) << "\n";
 
-        std::cerr << " users:    " << ((sizeof(osmium::user_id_type)*8 + sizeof(uint32_t)*8 + 3) * user_hash_buckets / 8 )  << "\n";
+        m_vout << " users:    " << ((sizeof(osmium::user_id_type)*8 + sizeof(uint32_t)*8 + 3) * user_hash_buckets / 8 )  << "\n";
 
-        std::cerr << std::endl;
+        m_vout << "\n";
 
         _print_memory_usage();
 
-        std::cerr << "------------------------------------------------------------------------------\n";
+        m_vout << "------------------------------------------------------------------------------\n";
     }
 
 }; // class TagStatsHandler

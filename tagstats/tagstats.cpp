@@ -1,6 +1,6 @@
 /*
 
-  Copyright (C) 2012-2015 Jochen Topf <jochen@topf.org>.
+  Copyright (C) 2012-2016 Jochen Topf <jochen@topf.org>.
 
   This file is part of Tagstats.
 
@@ -23,6 +23,7 @@
 
 #include <osmium/io/any_input.hpp>
 #include <osmium/osm/entity_bits.hpp>
+#include <osmium/util/verbose_output.hpp>
 #include <osmium/visitor.hpp>
 
 #include "statistics_handler.hpp"
@@ -134,11 +135,13 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
+    osmium::util::VerboseOutput vout(true);
+
     GeoDistribution::set_dimensions(width, height);
     osmium::io::File infile(argv[optind]);
     Sqlite::Database db(argv[optind+1], SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE);
     MapToInt<rough_position_type> map_to_int(left, bottom, right, top, width, height);
-    TagStatsHandler handler(db, selection_database_name, map_to_int, min_tag_combination_count);
+    TagStatsHandler handler(db, selection_database_name, map_to_int, min_tag_combination_count, vout);
 
     handler.init();
 
