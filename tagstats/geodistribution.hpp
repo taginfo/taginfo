@@ -31,6 +31,17 @@
 
 #include <osmium/osm/location.hpp>
 
+/**
+ * Positions are stored in this type of integer for the distribution images.
+ * TAGSTATS_GEODISTRIBUTION_INT must be set in Makefile, typically to uint16_t
+ * or uint32_t (for higher resolution but needs twice as much memory).
+ */
+using rough_position_type = TAGSTATS_GEODISTRIBUTION_INT;
+
+// Set BYID in Makefile to SparseMemArray, DenseMemArray, or DenseMmapArray
+#include TAGSTATS_GEODISTRIBUTION_INCLUDE
+using storage_type = osmium::index::map::TAGSTATS_GEODISTRIBUTION_FOR_WAYS<osmium::unsigned_object_id_type, rough_position_type>;
+
 
 /**
  * Functor class defining the call operator as a function that limits a

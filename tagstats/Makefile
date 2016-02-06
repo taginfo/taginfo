@@ -50,8 +50,14 @@ all: tagstats osmstats similarity taginfo_unicode
 osmstats: osmstats.cpp statistics_handler.hpp
 	$(CXX) $(CXXFLAGS) $(CXXFLAGS_WARNINGS) -o $@ $< $(LDFLAGS) $(LIB_IO) $(LIB_SQLITE)
 
-tagstats: tagstats.cpp tagstats_handler.hpp statistics_handler.hpp string_store.hpp geodistribution.hpp sqlite.hpp
-	$(CXX) $(CXXFLAGS) $(CXXFLAGS_WARNINGS) $(CXXFLAGS_FEATURES) -o $@ $< $(LDFLAGS) $(LIB_IO) $(LIB_SQLITE) $(LIB_GD)
+tagstats.o: tagstats.cpp tagstats_handler.hpp statistics_handler.hpp string_store.hpp geodistribution.hpp sqlite.hpp
+	$(CXX) -c $(CXXFLAGS) $(CXXFLAGS_WARNINGS) $(CXXFLAGS_FEATURES) -o $@ $<
+
+tagstats_handler.o: tagstats_handler.cpp tagstats_handler.hpp statistics_handler.hpp string_store.hpp geodistribution.hpp sqlite.hpp
+	$(CXX) -c $(CXXFLAGS) $(CXXFLAGS_WARNINGS) $(CXXFLAGS_FEATURES) -o $@ $<
+
+tagstats: tagstats.o tagstats_handler.o
+	$(CXX) -o $@ $^ $(LDFLAGS) $(LIB_IO) $(LIB_SQLITE) $(LIB_GD)
 
 similarity: similarity.cpp sqlite.hpp
 	$(CXX) $(CXXFLAGS) $(CXXFLAGS_WARNINGS) -o $@ $< $(LDFLAGS) $(LIB_SQLITE)
