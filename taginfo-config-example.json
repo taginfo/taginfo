@@ -104,12 +104,6 @@
             "tokenizer": "simple"
         }
     },
-    // Settings for the web user interface
-    "user_interface": {
-        "key_page": {
-            "show_tab_similar": true
-        }
-    },
     "logging": {
         // directory for log files
         "directory": "/osm/taginfo/var/log",
