@@ -227,6 +227,12 @@ public:
             data(gdImagePngPtr(image.data(), &size)) {
         }
 
+        Png(const Png&) = delete;
+        Png(Png&&) = default;
+
+        Png& operator=(const Png&) = delete;
+        Png& operator=(Png&&) = default;
+
         ~Png() {
             gdFree(data);
         }
