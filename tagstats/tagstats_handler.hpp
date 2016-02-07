@@ -23,6 +23,7 @@
 */
 
 #include <fstream>
+#include <deque>
 #include <iostream>
 #include <map>
 #include <string>
@@ -209,6 +210,10 @@ public:
 class TagStatsHandler : public osmium::handler::Handler {
 
     osmium::util::VerboseOutput& m_vout;
+
+    std::deque<KeyStats> m_key_stats_store;
+    std::deque<KeyValueStats> m_key_value_stats_store;
+    std::deque<GeoDistribution> m_geo_distribution_store;
 
     /**
      * Tag combination not appearing at least this often are not written

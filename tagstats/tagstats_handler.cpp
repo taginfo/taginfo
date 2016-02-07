@@ -171,8 +171,6 @@ void TagStatsHandler::_print_and_clear_tag_distribution_images(bool for_nodes) {
 
         if (for_nodes) {
             geo->clear();
-        } else {
-            delete geo;
         }
     }
 
@@ -205,7 +203,8 @@ void TagStatsHandler::collect_tag_stats(const osmium::OSMObject& object) {
     for (const auto& tag : object.tags()) {
         const auto tags_iterator = m_tags_stat.find(tag.key());
         if (tags_iterator == m_tags_stat.end()) {
-            stat = new KeyStats();
+            m_key_stats_store.emplace_back();
+            stat = &m_key_stats_store.back();
             m_tags_stat.insert(std::pair<const char*, KeyStats*>(m_string_store.add(tag.key()), stat));
         } else {
             stat = tags_iterator->second;
@@ -274,14 +273,16 @@ TagStatsHandler::TagStatsHandler(Sqlite::Database& database,
             Sqlite::Statement select(sdb, "SELECT key FROM interesting_tags WHERE value IS NULL;");
             while (select.read()) {
                 std::string key_value = select.get_text(0);
-                m_key_value_stats[m_string_store.add(key_value.c_str())] = new KeyValueStats();
+                m_key_value_stats_store.emplace_back();
+                m_key_value_stats[m_string_store.add(key_value.c_str())] = &m_key_value_stats_store.back();
             }
         }
         {
             Sqlite::Statement select(sdb, "SELECT key || '=' || value FROM interesting_tags WHERE value IS NOT NULL;");
             while (select.read()) {
                 std::string key_value = select.get_text(0);
-                m_key_value_stats[m_string_store.add(key_value.c_str())] = new KeyValueStats();
+                m_key_value_stats_store.emplace_back();
+                m_key_value_stats[m_string_store.add(key_value.c_str())] = &m_key_value_stats_store.back();
             }
         }
         {
@@ -289,7 +290,9 @@ TagStatsHandler::TagStatsHandler(Sqlite::Database& database,
             while (select.read()) {
                 std::string key   = select.get_text(0);
                 std::string value = select.get_text(1);
-                m_key_value_geodistribution[std::make_pair(m_string_store.add(key.c_str()), m_string_store.add(value.c_str()))] = new GeoDistribution();
+                m_geo_distribution_store.emplace_back();
+                m_key_value_geodistribution[std::make_pair(m_string_store.add(key.c_str()),
+                                                           m_string_store.add(value.c_str()))] = &m_geo_distribution_store.back();
             }
         }
         {
@@ -477,8 +480,6 @@ void TagStatsHandler::write_to_database() {
                 .bind_int64(key_combo_stat.second.relations()) // column: count_relations
                 .execute();
         }
-
-        delete stat; // lets make valgrind happy
     }
 
     for (const auto& key_value_stat : m_key_value_stats) {
@@ -506,8 +507,6 @@ void TagStatsHandler::write_to_database() {
                     .execute();
             }
         }
-
-        delete stat; // lets make valgrind happy
     }
 
     for (const auto& rtype_stats : m_relation_type_stats) {
