@@ -179,15 +179,31 @@ void TagStatsHandler::_print_and_clear_tag_distribution_images(bool for_nodes) {
     m_database.commit();
 }
 
+template <typename T>
+size_t container_size_mb(const T& container) {
+    return container.size() * sizeof(typename T::value_type) / (1024 * 1024);
+}
+
 void TagStatsHandler::_print_memory_usage() {
-    m_vout << "string_store: chunk_size=" << (m_string_store.get_chunk_size() / 1024 / 1024) << "MB"
-            <<                 " chunks=" <<  m_string_store.get_chunk_count()
-            <<                 " memory=" << (m_string_store.get_chunk_size() / 1024 / 1024) * m_string_store.get_chunk_count() << "MB"
-            <<          " bytes_in_last=" << (m_string_store.get_used_bytes_in_last_chunk() / 1024) << "kB"
-            << "\n";
+    m_vout << "MEMORY USAGE:\n";
+
+    auto chunk_size = m_string_store.get_chunk_size() / (1024 * 1024);
+    auto chunk_count = m_string_store.get_chunk_count();
+
+    m_vout << "  string store:           " << (chunk_size * chunk_count) << "MB ["
+           << "chunk_size=" << chunk_size << "MB "
+           << "chunks=" <<  chunk_count
+           << " bytes_in_last=" << (m_string_store.get_used_bytes_in_last_chunk() / 1024) << "kB"
+           << "]\n";
+
+    m_vout << "  key stats store:        " << container_size_mb(m_key_stats_store) << "MB\n";
+    m_vout << "  key_value stats store:  " << container_size_mb(m_key_value_stats) << "MB\n";
+    m_vout << "  geo distribution store: " << container_size_mb(m_geo_distribution_store) << "MB\n";
 
     osmium::MemoryUsage mcheck;
-    m_vout << "memory used: current=" << mcheck.current() << "MB peak=" << mcheck.peak() << "MB\n";
+    m_vout << "  overall memory used:\n"
+           << "    current:              " << mcheck.current() << "MB\n"
+           << "    peak:                 " << mcheck.peak() << "MB\n";
 }
 
 void TagStatsHandler::collect_tag_stats(const osmium::OSMObject& object) {
@@ -420,9 +436,6 @@ void TagStatsHandler::write_to_database() {
     strftime(max_timestamp_str, sizeof(max_timestamp_str), "%Y-%m-%d %H:%M:%S", tm);
     statement_update_meta.bind_text(max_timestamp_str).execute();
 
-    const uint64_t tags_hash_size = m_tags_stat.size();
-    const uint64_t tags_hash_buckets = m_tags_stat.size()*2; //bucket_count();
-
     uint64_t values_hash_size = 0;
     uint64_t values_hash_buckets = 0;
 
@@ -536,6 +549,9 @@ void TagStatsHandler::write_to_database() {
     m_database.commit();
 
     _timer_info("writing results to database");
+
+    const uint64_t tags_hash_size = m_tags_stat.size();
+    const uint64_t tags_hash_buckets = m_tags_stat.size()*2; //bucket_count();
 
     m_vout << "hash map sizes:\n";
     m_vout << "  tags:       " << (tags_hash_size * sizeof(KeyStats) / 1024) << "kB"
