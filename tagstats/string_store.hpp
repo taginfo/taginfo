@@ -85,15 +85,15 @@ public:
 
     // These functions get you some idea how much memory was
     // used.
-    int get_chunk_size() const {
+    size_t get_chunk_size() const {
         return m_chunk_size;
     }
 
-    int get_chunk_count() const {
+    size_t get_chunk_count() const {
         return m_chunks.size();
     }
 
-    int get_used_bytes_in_last_chunk() const {
+    size_t get_used_bytes_in_last_chunk() const {
         return m_chunks.front().size();
     }
 
