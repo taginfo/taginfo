@@ -2,7 +2,7 @@ User-agent: *
 Disallow: /api
 Disallow: /compare
 Disallow: /css
-Disallow: /download
+Disallow: /download/taginfo-db.db.bz2
 Disallow: /embed
 Disallow: /img
 Disallow: /js
