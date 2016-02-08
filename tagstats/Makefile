@@ -27,7 +27,7 @@ BYID := $(shell ../bin/taginfo-config.rb tagstats.geodistribution)
 #BYID := SparseMemArray
 #BYID := DenseMemArray
 #BYID := DenseMmapArray
-BYID_LC   := $(shell echo $(BYID) | sed -e 's/\([A-Z]\)/_\1/g' | cut -c2- | tr 'A-Z' 'a-z')
+BYID_LC   := $(shell echo $(BYID) | LC_COLLATE=C sed -e 's/\([A-Z]\)/_\1/g' | cut -c2- | tr 'A-Z' 'a-z')
 BYID_INCL := "<osmium/index/map/$(BYID_LC).hpp>"
 
 CXXFLAGS_FEATURES += -DTAGSTATS_GEODISTRIBUTION_INT=$(GEODISTRIBUTION_TYPE)
