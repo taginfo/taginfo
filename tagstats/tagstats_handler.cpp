@@ -180,8 +180,8 @@ void TagStatsHandler::_print_and_clear_tag_distribution_images(bool for_nodes) {
 }
 
 template <typename T>
-size_t container_size_mb(const T& container) {
-    return container.size() * sizeof(typename T::value_type) / (1024 * 1024);
+size_t container_size_kb(const T& container) {
+    return container.size() * sizeof(typename T::value_type) / 1024;
 }
 
 void TagStatsHandler::_print_memory_usage() {
@@ -196,9 +196,9 @@ void TagStatsHandler::_print_memory_usage() {
            << " bytes_in_last=" << (m_string_store.get_used_bytes_in_last_chunk() / 1024) << "kB"
            << "]\n";
 
-    m_vout << "  key stats store:        " << container_size_mb(m_key_stats_store) << "MB\n";
-    m_vout << "  key_value stats store:  " << container_size_mb(m_key_value_stats) << "MB\n";
-    m_vout << "  geo distribution store: " << container_size_mb(m_geo_distribution_store) << "MB\n";
+    m_vout << "  key_stats_store:        " << container_size_kb(m_key_stats_store) << "kB [size=" << m_key_stats_store.size() << "]\n";
+    m_vout << "  key_value stats_store:  " << container_size_kb(m_key_value_stats_store) << "kB [size=" << m_key_value_stats_store.size() << "]\n";
+    m_vout << "  geo_distribution_store: " << container_size_kb(m_geo_distribution_store) << "kB [size=" << m_geo_distribution_store.size() << "]\n";
 
     osmium::MemoryUsage mcheck;
     m_vout << "  overall memory used:\n"
@@ -232,14 +232,14 @@ void TagStatsHandler::collect_tag_stats(const osmium::OSMObject& object) {
         if (object.type() == osmium::item_type::node) {
             rough_position_type location = m_map_to_int(static_cast<const osmium::Node&>(object).location());
             stat->distribution.add_coordinate(location);
-            key_value_geodistribution_hash_map_t::iterator gd_it = m_key_value_geodistribution.find(keyvalue);
+            auto gd_it = m_key_value_geodistribution.find(keyvalue);
             if (gd_it != m_key_value_geodistribution.end()) {
                 gd_it->second->add_coordinate(location);
             }
         } else if (object.type() == osmium::item_type::way) {
             const auto& wnl = static_cast<const osmium::Way&>(object).nodes();
             if (!wnl.empty()) {
-                key_value_geodistribution_hash_map_t::iterator gd_it = m_key_value_geodistribution.find(keyvalue);
+                auto gd_it = m_key_value_geodistribution.find(keyvalue);
                 for (const auto& wn : wnl) {
                     try {
                         rough_position_type location = m_storage.get(wn.positive_ref());
@@ -574,20 +574,20 @@ void TagStatsHandler::write_to_database() {
     m_vout << "\n" << "estimated total memory for hashes:" << "\n";
 
     auto size_tags = ((sizeof(const char*)*8 + sizeof(KeyStats *)*8 + 3) * tags_hash_buckets / 8 ) + sizeof(KeyStats) * tags_hash_size;
-    m_vout << " tags:       " << (size_tags / 1024) << "kB"
+    m_vout << "  tags:       " << (size_tags / 1024) << "kB"
            << " [(sizeof(hash key) + sizeof(hash value*) + 2.5 bit overhead) * bucket_count + sizeof(hash value) * size]\n";
 
     auto size_values = (sizeof(const char*)*8 + sizeof(Counter)*8 + 3) * values_hash_buckets / 8;
-    m_vout << " values:     " << (size_values / 1024) << "kB"
+    m_vout << "  values:     " << (size_values / 1024) << "kB"
            << " [(sizeof(hash key) + sizeof(hash value) + 2.5 bit overhead) * bucket_count]\n";
 
     auto size_key_combos = (sizeof(const char*)*8 + sizeof(Counter)*8 + 3) * key_combination_hash_buckets / 8;
-    m_vout << " key combos: " << (size_key_combos / 1024) << "kB\n";
+    m_vout << "  key combos: " << (size_key_combos / 1024) << "kB\n";
 
     auto size_users = (sizeof(osmium::user_id_type)*8 + sizeof(uint32_t)*8 + 3) * user_hash_buckets / 8;
-    m_vout << " users:      " << (size_users / 1024) << "kB\n";
+    m_vout << "  users:      " << (size_users / 1024) << "kB\n";
 
-    m_vout << " sum:        " << ((size_tags + size_values + size_key_combos + size_users) / 1024) << "kB\n";
+    m_vout << "  sum:        " << ((size_tags + size_values + size_key_combos + size_users) / 1024) << "kB\n";
 
     m_vout << "\n";
 
