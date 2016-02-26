@@ -242,7 +242,7 @@ void TagStatsHandler::collect_tag_stats(const osmium::OSMObject& object) {
                 auto gd_it = m_key_value_geodistribution.find(keyvalue);
                 for (const auto& wn : wnl) {
                     try {
-                        rough_position_type location = m_storage.get(wn.positive_ref());
+                        rough_position_type location = m_location_index->get(wn.positive_ref());
                         stat->distribution.add_coordinate(location);
                         if (gd_it != m_key_value_geodistribution.end()) {
                             gd_it->second->add_coordinate(location);
@@ -265,7 +265,8 @@ TagStatsHandler::TagStatsHandler(Sqlite::Database& database,
         const std::string& selection_database_name,
         MapToInt<rough_position_type>& map_to_int,
         unsigned int min_tag_combination_count,
-        osmium::util::VerboseOutput& vout) :
+        osmium::util::VerboseOutput& vout,
+        std::unique_ptr<storage_type> location_index) :
     Handler(),
     m_vout(vout),
     m_min_tag_combination_count(min_tag_combination_count),
@@ -279,7 +280,7 @@ TagStatsHandler::TagStatsHandler(Sqlite::Database& database,
     m_database(database),
     m_statistics_handler(database),
     m_map_to_int(map_to_int),
-    m_storage(),
+    m_location_index(std::move(location_index)),
     m_last_type(osmium::item_type::node)
 {
     if (!selection_database_name.empty()) {
@@ -328,7 +329,7 @@ TagStatsHandler::TagStatsHandler(Sqlite::Database& database,
 void TagStatsHandler::node(const osmium::Node& node) {
     m_statistics_handler.node(node);
     collect_tag_stats(node);
-    m_storage.set(node.positive_id(), m_map_to_int(node.location()));
+    m_location_index->set(node.positive_id(), m_map_to_int(node.location()));
 }
 
 void TagStatsHandler::way(const osmium::Way& way) {

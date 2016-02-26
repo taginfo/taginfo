@@ -36,6 +36,7 @@ run_tagstats() {
     local width=$(get_config geodistribution.width)
     local height=$(get_config geodistribution.height)
     local min_tag_combination_count=$(get_config sources.master.min_tag_combination_count 1000)
+    local index=$(get_config tagstats.geodistribution)
     local tagstats=$(get_bindir)/tagstats
 
     local open_selection_db=""
@@ -50,7 +51,7 @@ run_tagstats() {
 
     print_message "Running tagstats... "
 #tagstats="valgrind --leak-check=full --show-reachable=yes $tagstats"
-    run_exe $tagstats $open_selection_db --min-tag-combination-count=$min_tag_combination_count --left=$left --bottom=$bottom --top=$top --right=$right --width=$width --height=$height $OSM_FILE $DATABASE
+    run_exe $tagstats $open_selection_db --index=$index --min-tag-combination-count=$min_tag_combination_count --left=$left --bottom=$bottom --top=$top --right=$right --width=$width --height=$height $OSM_FILE $DATABASE
 }
 
 run_similarity() {

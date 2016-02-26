@@ -23,16 +23,8 @@ CXXFLAGS += -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -std=c++11
 CXXFLAGS += $(shell ../bin/taginfo-config.rb tagstats.cxxflags)
 
 GEODISTRIBUTION_TYPE := $(shell ../bin/taginfo-config.rb tagstats.geodistribution_int uint16_t)
-BYID := $(shell ../bin/taginfo-config.rb tagstats.geodistribution)
-#BYID := SparseMemArray
-#BYID := DenseMemArray
-#BYID := DenseMmapArray
-BYID_LC   := $(shell echo $(BYID) | sed -e 's/\([A-Z]\)/_\1/g' | cut -c2- | tr 'A-Z' 'a-z')
-BYID_INCL := "<osmium/index/map/$(BYID_LC).hpp>"
 
 CXXFLAGS_FEATURES += -DTAGSTATS_GEODISTRIBUTION_INT=$(GEODISTRIBUTION_TYPE)
-CXXFLAGS_FEATURES += -DTAGSTATS_GEODISTRIBUTION_FOR_WAYS=$(BYID)
-CXXFLAGS_FEATURES += -DTAGSTATS_GEODISTRIBUTION_INCLUDE=$(BYID_INCL)
 
 CXXFLAGS_WARNINGS := -Wall -Wextra -pedantic -Wredundant-decls -Wdisabled-optimization -Wctor-dtor-privacy -Wnon-virtual-dtor -Woverloaded-virtual -Wsign-promo -Wold-style-cast
 

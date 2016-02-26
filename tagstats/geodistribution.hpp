@@ -29,6 +29,10 @@
 
 #include <gd.h>
 
+#include <osmium/index/map/dense_mem_array.hpp>
+#include <osmium/index/map/dense_mmap_array.hpp>
+#include <osmium/index/map/sparse_mem_array.hpp>
+#include <osmium/index/map/sparse_mmap_array.hpp>
 #include <osmium/osm/location.hpp>
 #include <osmium/osm/types.hpp>
 
@@ -39,9 +43,23 @@
  */
 using rough_position_type = TAGSTATS_GEODISTRIBUTION_INT;
 
-// Set BYID in Makefile to SparseMemArray, DenseMemArray, or DenseMmapArray
-#include TAGSTATS_GEODISTRIBUTION_INCLUDE
-using storage_type = osmium::index::map::TAGSTATS_GEODISTRIBUTION_FOR_WAYS<osmium::unsigned_object_id_type, rough_position_type>;
+using storage_type = osmium::index::map::Map<osmium::unsigned_object_id_type, rough_position_type>;
+
+#ifdef OSMIUM_HAS_INDEX_MAP_DENSE_MEM_ARRAY
+    REGISTER_MAP(osmium::unsigned_object_id_type, rough_position_type, osmium::index::map::DenseMemArray, DenseMemArray)
+#endif
+
+#ifdef OSMIUM_HAS_INDEX_MAP_DENSE_MMAP_ARRAY
+    REGISTER_MAP(osmium::unsigned_object_id_type, rough_position_type, osmium::index::map::DenseMmapArray, DenseMmapArray)
+#endif
+
+#ifdef OSMIUM_HAS_INDEX_MAP_SPARSE_MEM_ARRAY
+    REGISTER_MAP(osmium::unsigned_object_id_type, rough_position_type, osmium::index::map::SparseMemArray, SparseMemArray)
+#endif
+
+#ifdef OSMIUM_HAS_INDEX_MAP_SPARSE_MMAP_ARRAY
+    REGISTER_MAP(osmium::unsigned_object_id_type, rough_position_type, osmium::index::map::SparseMmapArray, SparseMmapArray)
+#endif
 
 
 /**

@@ -42,6 +42,8 @@ void print_help() {
               << "from OSMFILE and puts them into DATABASE (an SQLite database).\n" \
               << "\nOptions:\n" \
               << "  -H, --help                    Print this help message and exit\n" \
+              << "  -i, --index=INDEX_TYPE        Set index type for location index\n" \
+              << "  -I, --show-index-types        Show available index types for location index\n" \
               << "  -m, --min-tag-combination-count=N  Tag combinations not appearing this often\n" \
               << "                                     are not written to database\n" \
               << "  -s, --selection-db=DATABASE   Name of selection database\n" \
@@ -57,6 +59,8 @@ void print_help() {
 int main(int argc, char* argv[]) {
     static struct option long_options[] = {
         {"help",                      no_argument,       0, 'H'},
+        {"index",                     required_argument, 0, 'i'},
+        {"show-index-types",          no_argument,       0, 'I'},
         {"min-tag-combination-count", required_argument, 0, 'm'},
         {"selection-db",              required_argument, 0, 's'},
         {"top",                       required_argument, 0, 't'},
@@ -72,6 +76,9 @@ int main(int argc, char* argv[]) {
 
     std::string selection_database_name;
 
+    std::string location_index_type = "SparseMmapArray";
+    const auto& map_factory = osmium::index::MapFactory<osmium::unsigned_object_id_type, rough_position_type>::instance();
+
     double top    =   90;
     double right  =  180;
     double bottom =  -90;
@@ -81,7 +88,7 @@ int main(int argc, char* argv[]) {
     unsigned int height = 180;
 
     while (true) {
-        int c = getopt_long(argc, argv, "Hm:s:t:r:b:l:w:h:", long_options, 0);
+        int c = getopt_long(argc, argv, "Hi:Im:s:t:r:b:l:w:h:", long_options, 0);
         if (c == -1) {
             break;
         }
@@ -89,6 +96,15 @@ int main(int argc, char* argv[]) {
         switch (c) {
             case 'H':
                 print_help();
+                exit(0);
+            case 'i':
+                location_index_type = optarg;
+                break;
+            case 'I':
+                std::cout << "Available index types:\n";
+                for (const auto& map_type : map_factory.map_types()) {
+                    std::cout << "  " << map_type << "\n";
+                }
                 exit(0);
             case 's':
                 selection_database_name = optarg;
@@ -131,7 +147,9 @@ int main(int argc, char* argv[]) {
     osmium::io::File infile(argv[optind]);
     Sqlite::Database db(argv[optind+1], SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE);
     MapToInt<rough_position_type> map_to_int(left, bottom, right, top, width, height);
-    TagStatsHandler handler(db, selection_database_name, map_to_int, min_tag_combination_count, vout);
+
+    auto location_index = map_factory.create_map(location_index_type);
+    TagStatsHandler handler(db, selection_database_name, map_to_int, min_tag_combination_count, vout, std::move(location_index));
 
     osmium::io::Reader reader(infile);
     osmium::apply(reader, handler);

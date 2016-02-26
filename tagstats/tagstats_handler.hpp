@@ -243,7 +243,7 @@ class TagStatsHandler : public osmium::handler::Handler {
 
     MapToInt<rough_position_type> m_map_to_int;
 
-    storage_type m_storage;
+    std::unique_ptr<storage_type> m_location_index;
 
     osmium::item_type m_last_type;
 
@@ -277,7 +277,8 @@ public:
                     const std::string& selection_database_name,
                     MapToInt<rough_position_type>& map_to_int,
                     unsigned int min_tag_combination_count,
-                    osmium::util::VerboseOutput& vout);
+                    osmium::util::VerboseOutput& vout,
+                    std::unique_ptr<storage_type> location_index);
 
     void node(const osmium::Node& node);
 
