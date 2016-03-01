@@ -23,10 +23,10 @@
 */
 
 #include <fstream>
-#include <deque>
 #include <iostream>
 #include <map>
 #include <string>
+#include <unordered_map>
 #include <utility>
 
 #include <google/sparse_hash_map>
@@ -47,31 +47,31 @@
 struct Counter {
     uint32_t count[3];
 
-    Counter() {
+    Counter() noexcept {
         count[0] = 0; // nodes
         count[1] = 0; // ways
         count[2] = 0; // relations
     }
 
-    uint32_t nodes() const {
+    uint32_t nodes() const noexcept {
         return count[0];
     }
-    uint32_t ways() const {
+    uint32_t ways() const noexcept {
         return count[1];
     }
-    uint32_t relations() const {
+    uint32_t relations() const noexcept {
         return count[2];
     }
-    uint32_t all() const {
+    uint32_t all() const noexcept {
         return count[0] + count[1] + count[2];
     }
 };
 
-typedef google::sparse_hash_map<const char*, Counter, djb2_hash, eqstr> value_hash_map_t;
+typedef google::sparse_hash_map<const char*, Counter, djb2_hash, eqstr> value_hash_map_type;
 
-typedef google::sparse_hash_map<osmium::user_id_type, uint32_t> user_hash_map_t;
+typedef google::sparse_hash_map<osmium::user_id_type, uint32_t> user_hash_map_type;
 
-typedef google::sparse_hash_map<const char*, Counter, djb2_hash, eqstr> combination_hash_map_t;
+typedef google::sparse_hash_map<const char*, Counter, djb2_hash, eqstr> combination_hash_map_type;
 
 /**
  * A KeyStats object holds all statistics for an OSM tag key.
@@ -84,11 +84,11 @@ public:
     Counter values;
     Counter cells;
 
-    combination_hash_map_t key_combination_hash;
+    combination_hash_map_type key_combination_hash;
 
-    user_hash_map_t user_hash;
+    user_hash_map_type user_hash;
 
-    value_hash_map_t values_hash;
+    value_hash_map_type values_hash;
 
     GeoDistribution distribution;
 
@@ -107,7 +107,7 @@ public:
 
         key.count[type]++;
 
-        value_hash_map_t::iterator values_iterator(values_hash.find(value));
+        auto values_iterator = values_hash.find(value);
         if (values_iterator == values_hash.end()) {
             Counter counter;
             counter.count[type] = 1;
@@ -129,7 +129,7 @@ public:
 
 }; // class KeyStats
 
-typedef google::sparse_hash_map<const char*, KeyStats*, djb2_hash, eqstr> key_hash_map_t;
+typedef std::unordered_map<const char*, KeyStats, djb2_hash, eqstr> key_hash_map_type;
 
 /**
  * A KeyValueStats object holds some statistics for an OSM tag (key/value pair).
@@ -138,7 +138,7 @@ class KeyValueStats {
 
 public:
 
-    combination_hash_map_t m_key_value_combination_hash;
+    combination_hash_map_type m_key_value_combination_hash;
 
     KeyValueStats() : m_key_value_combination_hash() {
     }
@@ -149,8 +149,8 @@ public:
 
 }; // class KeyValueStats
 
-typedef google::sparse_hash_map<const char*, KeyValueStats*, djb2_hash, eqstr> key_value_hash_map_t;
-typedef google::sparse_hash_map<std::pair<const char*, const char*>, GeoDistribution*, djb2_hash, eqstr> key_value_geodistribution_hash_map_t;
+typedef std::unordered_map<const char*, KeyValueStats, djb2_hash, eqstr> key_value_hash_map_type;
+typedef std::unordered_map<std::pair<const char*, const char*>, GeoDistribution, djb2_hash, eqstr> key_value_geodistribution_hash_map_type;
 
 struct RelationRoleStats {
     uint32_t node;
@@ -162,20 +162,14 @@ class RelationTypeStats {
 
 public:
 
-    uint64_t m_count;
-    uint64_t m_node_members;
-    uint64_t m_way_members;
-    uint64_t m_relation_members;
+    uint64_t m_count = 0;
+    uint64_t m_node_members = 0;
+    uint64_t m_way_members = 0;
+    uint64_t m_relation_members = 0;
 
     std::map<std::string, RelationRoleStats> m_role_counts;
 
-    RelationTypeStats() :
-        m_count(0),
-        m_node_members(0),
-        m_way_members(0),
-        m_relation_members(0),
-        m_role_counts() {
-    }
+    RelationTypeStats() = default;
 
     void add(const osmium::Relation& relation) {
         m_count++;
@@ -211,10 +205,6 @@ class TagStatsHandler : public osmium::handler::Handler {
 
     osmium::util::VerboseOutput& m_vout;
 
-    std::deque<KeyStats> m_key_stats_store;
-    std::deque<KeyValueStats> m_key_value_stats_store;
-    std::deque<GeoDistribution> m_geo_distribution_store;
-
     /**
      * Tag combination not appearing at least this often are not written
      * to database.
@@ -223,11 +213,11 @@ class TagStatsHandler : public osmium::handler::Handler {
 
     time_t m_timer;
 
-    key_hash_map_t m_tags_stat;
+    key_hash_map_type m_tags_stat;
 
-    key_value_hash_map_t m_key_value_stats;
+    key_value_hash_map_type m_key_value_stats;
 
-    key_value_geodistribution_hash_map_t m_key_value_geodistribution;
+    key_value_geodistribution_hash_map_type m_key_value_geodistribution;
 
     std::map<std::string, RelationTypeStats> m_relation_type_stats;
 
@@ -247,28 +237,29 @@ class TagStatsHandler : public osmium::handler::Handler {
 
     osmium::item_type m_last_type;
 
-    void _timer_info(const char* msg);
+    void timer_info(const char* msg);
 
-    void _update_key_combination_hash(osmium::item_type type,
+    void update_key_combination_hash(osmium::item_type type,
                                       osmium::TagList::const_iterator it1,
                                       osmium::TagList::const_iterator end);
 
-    void _update_key_value_combination_hash2(osmium::item_type type,
+    void update_key_value_combination_hash2(osmium::item_type type,
                                              osmium::TagList::const_iterator it,
                                              osmium::TagList::const_iterator end,
-                                             key_value_hash_map_t::iterator kvi1,
+                                             key_value_hash_map_type::iterator kvi1,
                                              const std::string& key_value1);
 
-    void _update_key_value_combination_hash(osmium::item_type type,
+    void update_key_value_combination_hash(osmium::item_type type,
                                             osmium::TagList::const_iterator it,
                                             osmium::TagList::const_iterator end);
 
-    void _print_and_clear_key_distribution_images(bool for_nodes);
+    void print_and_clear_key_distribution_images(bool for_nodes);
 
-    void _print_and_clear_tag_distribution_images(bool for_nodes);
+    void print_and_clear_tag_distribution_images(bool for_nodes);
 
-    void _print_memory_usage();
+    void print_actual_memory_usage();
 
+    KeyStats& get_stat(const char* key);
     void collect_tag_stats(const osmium::OSMObject& object);
 
 public:

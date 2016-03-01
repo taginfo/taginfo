@@ -5,7 +5,7 @@
 #include <utility>
 
 /**
- * Hash function used in google hash map that seems to work well with tag
+ * Hash function used in hash maps that works well with tag
  * key/value strings.
  */
 struct djb2_hash {
@@ -29,7 +29,7 @@ struct djb2_hash {
 };
 
 /**
- * String comparison used in google hash map.
+ * String comparison used in hash maps.
  */
 struct eqstr {
     bool operator()(const char* s1, const char* s2) const noexcept {
@@ -39,6 +39,12 @@ struct eqstr {
     bool operator()(std::pair<const char*, const char*> p1,
                     std::pair<const char*, const char*> p2) const noexcept {
         return operator()(p1.first, p2.first) && operator()(p1.second, p2.second);
+    }
+};
+
+struct strless {
+    bool operator()(const char* s1, const char* s2) const noexcept {
+        return std::strcmp(s1, s2) < 0;
     }
 };
 

@@ -266,7 +266,7 @@ public:
      *        image.
      * @returns Pointer to memory area with PNG image.
      */
-    Png create_png() {
+    Png create_png() const {
         Image image(c_width, c_height);
 
         if (m_cells == 1) {

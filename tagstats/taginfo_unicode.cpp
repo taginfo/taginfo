@@ -166,7 +166,7 @@ int main(int argc, char *argv[]) {
     Sqlite::Database db(argv[1], SQLITE_OPEN_READWRITE);
     Sqlite::Statement select(db, "SELECT key FROM keys WHERE characters NOT IN ('plain', 'colon') ORDER BY key");
     while (select.read()) {
-        data += select.get_string(0);
+        data += select.get_text_ptr(0);
         data += '\0';
     }
 
