@@ -557,7 +557,7 @@ function table_right() {
 /* ============================ */
 
 function quote_double(text) {
-    return text.replace(/["\\]/, '\\$&', 'gm')
+    return text.replace(/["\\]/gm, '\\$&');
 }
 
 function level0_editor(overpass_url_prefix, level0_url_prefix, filter, key, value) {
