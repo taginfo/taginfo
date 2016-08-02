@@ -70,9 +70,9 @@ var create_flexigrid_for = {
             useRp: false,
             preProcess: function(data) {
                 return {
-                    total: data.size,
+                    total: data.total,
                     page: 1,
-                    rows: jQuery.map(data, function(row, i) {
+                    rows: jQuery.map(data.data, function(row, i) {
                         return { 'cell': [
                             fmt_language(row.lang, row.language, row.language_en),
                             link_to_wiki(row.title),

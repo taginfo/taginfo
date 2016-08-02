@@ -124,7 +124,7 @@ class Taginfo < Sinatra::Base
 
         res = @db.execute('SELECT * FROM wiki.relation_pages LEFT OUTER JOIN wiki.wiki_images USING (image) WHERE rtype = ? ORDER BY lang', rtype)
 
-        return JSON.generate(res.map{ |row| {
+        return generate_json_result(res.size, res.map{ |row| {
                 :lang             => row['lang'],
                 :language         => ::Language[row['lang']].native_name,
                 :language_en      => ::Language[row['lang']].english_name,
@@ -140,7 +140,7 @@ class Taginfo < Sinatra::Base
                     :thumb_url_suffix => row['thumb_url_suffix']
                 }
             }
-        }, json_opts(params[:format]))
+        })
     end
 
     api(4, 'relation/projects', {
