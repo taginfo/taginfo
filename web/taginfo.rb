@@ -136,7 +136,7 @@ class Taginfo < Sinatra::Base
     #-------------------------------------
 
     before '/api/*' do
-        content_type :json
+        content_type :json, :charset => 'UTF-8'
         expires next_update
         cors = TaginfoConfig.get('instance.access_control_allow_origin', '')
         if cors != ""
