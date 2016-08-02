@@ -42,14 +42,14 @@
         // XAPI/JOSM buttons are disabled if more than this many results are expected
         "max_results": 1000,
         // URL prefix for the XAPI/JOSM links on the key and tag pages.
-        "url_prefix": "http://overpass-api.de/api/xapi_meta?"
+        "url_prefix": "https://overpass-api.de/api/xapi_meta?"
     },
     // "overpass turbo" button on key/tag pages
     "turbo": {
         // if there are more objects than this with a key/tag, the normal Overpass Turbo
         // will be called, if less the Wizard will be used with autorun and autozoom
         "max_auto": 1000,
-        "url_prefix": "http://overpass-turbo.eu/?",
+        "url_prefix": "https://overpass-turbo.eu/?",
         // set this to "global" or "in <area>" where <area> is a country name or other region found by Nominatim
         "wizard_area": "global"
     },
@@ -57,7 +57,7 @@
     "level0": {
         // disable Level0 Editor button if there are more than this many objects with a key/tag
         "max_results": 50,
-        "overpass_url_prefix": "http://overpass.osm.rambler.ru/cgi/interpreter?",
+        "overpass_url_prefix": "https://overpass-api.de/api/interpreter?",
         "level0_url_prefix": "http://level0.osmz.ru/?"
     },
     "opensearch": {

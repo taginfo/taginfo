@@ -108,7 +108,7 @@ def turbo_link(count, filter, key, value=nil)
         if filter != 'all'
             filter_condition = ' and type:' + filter.chop
         end
-        url = TaginfoConfig.get('turbo.url_prefix', 'http://overpass-turbo.eu/?') + 'w=' + Rack::Utils::escape('"' + key + '"=' + value + filter_condition.to_s + ' ' + TaginfoConfig.get('turbo.wizard_area', 'global')) + '&R'
+        url = TaginfoConfig.get('turbo.url_prefix', 'https://overpass-turbo.eu/?') + 'w=' + Rack::Utils::escape('"' + key + '"=' + value + filter_condition.to_s + ' ' + TaginfoConfig.get('turbo.wizard_area', 'global')) + '&R'
     else
         template = 'key';
         parameters = { :key => key }
@@ -124,9 +124,9 @@ def turbo_link(count, filter, key, value=nil)
         end
         parameters[:template] = template
 
-        url = TaginfoConfig.get('turbo.url_prefix', 'http://overpass-turbo.eu/?') + Rack::Utils::build_query(parameters)
+        url = TaginfoConfig.get('turbo.url_prefix', 'https://overpass-turbo.eu/?') + Rack::Utils::build_query(parameters)
     end
-    return '<span class="button">' + external_link('turbo_button', '<img src="/img/turbo.png"/> overpass turbo', url, true) + '</span>'
+    return '<span class="button">' + external_link('turbo_button', 'Overpass turbo', url, true) + '</span>'
 end
 
 def level0_link()
