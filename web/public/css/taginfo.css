@@ -155,7 +155,8 @@ span.customSelect {
 }
 
 .customSelectInner {
-    background:url(/img/arrow.png) no-repeat center right;
+    background: url(/img/arrow.png) no-repeat center right;
+    background-size: 12px 12px;
 }
 
 /* ========== */
@@ -206,6 +207,7 @@ input#search {
 
 input#search, p.search {
     background-image: url('/css/flexigrid/images/magnifier.png');
+    background-size: 20px 20px;
     background-repeat: no-repeat;
     background-position: right center;
     background-color: #ffffff;

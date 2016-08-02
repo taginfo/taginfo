@@ -176,6 +176,7 @@
 
 .flexigrid div.sDiv2 input, .flexigrid div.sDiv2 select {
     background: url(images/magnifier.png) no-repeat right #ffffff;
+    background-size: 16px 16px;
 }
 
 .flexigrid div.sDiv2 select {
@@ -407,7 +408,7 @@ div.colCopy {
 
 .flexigrid span.cdropleft {
     display: block;
-    background: url(images/prev.gif) no-repeat -4px center;
+    background: url(images/prev.png) no-repeat -4px center;
     width: 24px;
     height: 24px;
     position: relative;
@@ -418,7 +419,7 @@ div.colCopy {
 
 .flexigrid div.hDiv span.cdropright {
     display: block;
-    background: url(images/next.gif) no-repeat 12px center;
+    background: url(images/next.png) no-repeat 12px center;
     width: 24px;
     height: 24px;
     float: right;
@@ -594,30 +595,37 @@ div.pGroup {
 
 .flexigrid .pSearch {
     background: url(images/magnifier.png) no-repeat center;
+    background-size: 16px 16px;
 }
 
 .flexigrid .pFirst {
-    background: url(images/first.gif) no-repeat center;
+    background: url(images/first.png) no-repeat center;
+    background-size: 16px 16px;
 }
 
 .flexigrid .pPrev {
-    background: url(images/prev.gif) no-repeat center;
+    background: url(images/prev.png) no-repeat center;
+    background-size: 16px 16px;
 }
 
 .flexigrid .pNext {
-    background: url(images/next.gif) no-repeat center;
+    background: url(images/next.png) no-repeat center;
+    background-size: 16px 16px;
 }
 
 .flexigrid .pLast {
-    background: url(images/last.gif) no-repeat center;
+    background: url(images/last.png) no-repeat center;
+    background-size: 16px 16px;
 }
 
 .flexigrid .pReload {
     background: url(images/load.png) no-repeat center;
+    background-size: 16px 16px;
 }
 
 .flexigrid .pReload.loading {
-    background: url(images/load.gif) no-repeat center;
+    background: url(images/load-large.gif) no-repeat center;
+    background-size: 16px 16px;
 }
 
 /* ie adjustments */
