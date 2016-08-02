@@ -360,7 +360,7 @@ function fmt_language(code, native_name, english_name) {
 
 function fmt_type_icon(type, on_or_off) {
     return img({
-        src: '/img/types/' + (on_or_off ? encodeURIComponent(type) : 'none') + '.16.png',
+        src: '/img/types/' + (on_or_off ? encodeURIComponent(type) : 'none') + '.svg',
         alt: on_or_off ? 'yes' : 'no',
         width: 16,
         height: 16
@@ -372,7 +372,7 @@ function fmt_type_image(type) {
     type = type.replace(/s$/, '');
     var name = html_escape(texts.osm[type]);
     return img({
-        src: '/img/types/' + encodeURIComponent(type) + '.16.png',
+        src: '/img/types/' + encodeURIComponent(type) + '.svg',
         alt: '[' + name + ']',
         title: name,
         width: 16,

@@ -40,7 +40,7 @@ var taginfo_taglist = (function(){
 
     function type_image(type) {
         return '<img src="' +
-                 url_for_taginfo('img/types/' + type + '.16.png') +
+                 url_for_taginfo('img/types/' + type + '.svg') +
                  '" width="16" height="16"/> ';
     }
 

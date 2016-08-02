@@ -8,15 +8,15 @@
 <a target="_blank" title="More information about key '<%= escape_html(@key) %>' at Taginfo" href="//taginfo.openstreetmap.org/keys/?key=<%= escape(@key) %>">tag<b>info</b> [More...]</a>
 <div class="content"><table>
     <tr>
-        <td class="ft"><img src="/img/types/node.16.png" width="16" height="16" alt="Nodes" title="Nodes with key '<%= escape_html(@key) %>' in database"></td>
+        <td class="ft"><img src="/img/types/node.svg" width="16" height="16" alt="Nodes" title="Nodes with key '<%= escape_html(@key) %>' in database"></td>
         <td title="Nodes with key '<%= escape_html(@key) %>' in database"><%= @dbkey['count_nodes'].to_i.to_s_with_ts %></td>
     </tr>
     <tr>
-        <td class="ft"><img src="/img/types/way.16.png" width="16" height="16" alt="Ways" title="Ways with key '<%= escape_html(@key) %>' in database"></td>
+        <td class="ft"><img src="/img/types/way.svg" width="16" height="16" alt="Ways" title="Ways with key '<%= escape_html(@key) %>' in database"></td>
         <td title="Ways with key '<%= escape_html(@key) %>' in database"><%= @dbkey['count_ways'].to_i.to_s_with_ts %></td>
     </tr>
     <tr>
-        <td class="ft"><img src="/img/types/relation.16.png" width="16" height="16" alt="Relations" title="Relations with key '<%= escape_html(@key) %>' in database"></td>
+        <td class="ft"><img src="/img/types/relation.svg" width="16" height="16" alt="Relations" title="Relations with key '<%= escape_html(@key) %>' in database"></td>
         <td title="Relations with key '<%= escape_html(@key) %>' in database"><%= @dbkey['count_relations'].to_i.to_s_with_ts %></td>
     </tr>
 </table></div>
