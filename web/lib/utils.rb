@@ -276,19 +276,21 @@ end
 
 def paging_results(array)
     return [
-        [ :total, :INT, 'Total number of results.' ],
-        [ :page,  :INT, 'Result page number (first has page number 1).' ],
-        [ :rp,    :INT, 'Results per page.' ],
-        [ :url,   :STRING, 'URL of the request.' ],
-        [ :data,  :ARRAY_OF_HASHES, 'Array with results.', array ]
+        [ :total,      :INT, 'Total number of results.' ],
+        [ :page,       :INT, 'Result page number (first has page number 1).' ],
+        [ :rp,         :INT, 'Results per page.' ],
+        [ :url,        :STRING, 'URL of the request.' ],
+        [ :data_until, :STRING, 'All changes in the source until this date are reflected in this taginfo result.' ],
+        [ :data,       :ARRAY_OF_HASHES, 'Array with results.', array ]
     ];
 end
 
 def no_paging_results(array)
     return [
-        [ :total, :INT, 'Total number of results.' ],
-        [ :url,   :STRING, 'URL of the request.' ],
-        [ :data,  :ARRAY_OF_HASHES, 'Array with results.', array ]
+        [ :total,      :INT, 'Total number of results.' ],
+        [ :url,        :STRING, 'URL of the request.' ],
+        [ :data_until, :STRING, 'All changes in the source until this date are reflected in this taginfo result.' ],
+        [ :data,       :ARRAY_OF_HASHES, 'Array with results.', array ]
     ];
 end
 
