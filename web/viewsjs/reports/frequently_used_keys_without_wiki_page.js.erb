@@ -9,7 +9,7 @@ function create_flexigrid_with_option(english) {
         colModel: [
             { display: '<%= h(page.table.create_wiki_page) %>', name: 'create_wiki_page', width: 200, sortable: false },
             { display: '<%= h(osm.key) %>', name: 'key', width: 180, sortable: true },
-            { display: '<span title="<%= h(misc.objects_tooltip) %>"><img src="/img/types/all.16.png" width="16" height="16" alt=""/> <%= h(osm.objects) %></span>', name: 'count_all', width: 70, sortable: true, align: 'right' },
+            { display: '<span title="<%= h(misc.objects_tooltip) %>"><img src="/img/types/all.svg" width="16" height="16" alt=""/> <%= h(osm.objects) %></span>', name: 'count_all', width: 70, sortable: true, align: 'right' },
             { display: '<%= h(osm.users) %>', name: 'users_all', width: 44, sortable: true, align: 'right' },
             { display: '<span title="<%= h(misc.values_tooltip) %>"><%= h(osm.values) %></span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
             { display: '<span title="<%= h(misc.prevalent_values_tooltip) %>"><%= h(misc.prevalent_values) %></span>', name: 'prevalent_values', width: 500, sortable: true }
