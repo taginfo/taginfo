@@ -215,10 +215,8 @@ class Taginfo < Sinatra::Base
         filter_type = get_filter()
         q = like_contains(params[:query])
 
-        total = @db.select('SELECT count(distinct project_id) FROM projects.projects p, projects.project_tags t ON p.id=t.project_id').
-            condition("status = 'OK'").
-            condition('key = ?', key).
-            condition('value = ? OR VALUE IS NULL', value).
+        total = @db.select("SELECT count(*) FROM (SELECT project_id, key, MAX(value) AS value FROM projects.project_tags WHERE key=? AND (value=? OR value IS NULL) GROUP BY project_id, key) AS s JOIN projects.project_tags t JOIN projects.projects p ON p.id=t.project_id AND t.project_id=s.project_id AND t.key=s.key AND (t.value=s.value OR (t.value IS NULL AND s.value IS NULL))", key, value).
+            condition("p.status = 'OK'").
             condition_if("value LIKE ? ESCAPE '@' OR name LIKE ? ESCAPE '@'", q, q).
             condition_if("on_node = ?",                    filter_type == 'nodes'     ? 1 : '').
             condition_if("on_way = ? OR on_area = 1",      filter_type == 'ways'      ? 1 : '').
