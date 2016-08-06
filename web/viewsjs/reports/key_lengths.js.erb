@@ -11,7 +11,7 @@ var create_flexigrid_for = {
                 { display: '<%= h(misc.length) %>', name: 'length', width: 60, sortable: true, align: 'right' },
                 { display: '<%= h(osm.key) %>', name: 'key', width: 180, sortable: true },
                 { display: '<span title="<%= h(misc.objects_tooltip) %>"><img src="/img/types/all.svg" width="16" height="16" alt=""/> <%= h(osm.objects) %></span>', name: 'count_all', width: 200, sortable: true, align: 'center' },
-                { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" width="16" height="16" title="<%= h(misc.in_wiki_tooltip) %>"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
+                { display: '<span title="<%= h(misc.in_wiki_tooltip) %>">Wiki</span>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
                 { display: '<span title="<%= h(misc.values_tooltip) %>"><%= h(osm.values) %></span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
                 { display: '<span title="<%= h(misc.prevalent_values_tooltip) %>"><%= h(misc.prevalent_values) %></span>', name: 'prevalent_values', width: 550, sortable: true }
             ],

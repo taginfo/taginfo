@@ -36,7 +36,7 @@ var create_flexigrid_for = {
             colModel: [
                 { display: '<%= h(osm.value) %>', name: 'value', width: 200, sortable: true },
                 { display: '<%= h(misc.count) %>', name: 'count', width: 260, sortable: true, align: 'center' },
-                { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" width="16" height="16" title="<%= h(misc.in_wiki_tooltip) %>"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
+                { display: '<span title="<%= h(misc.in_wiki_tooltip) %>">Wiki</span>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
                 { display: '<span title="<%= h(page.tag_description_from_wiki) %>"><%= h(misc.description) %></span>', name: 'description', width: 600, sortable: false, align: 'left' }
             ],
             searchitems: [

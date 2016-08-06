@@ -13,7 +13,7 @@ var create_flexigrid_for = {
             colModel: [
                 { display: '<%= h(osm.key) %>', name: 'key', width: 250, sortable: true },
                 { display: '<%= h(osm.objects) %>', name: 'count_all', width: 100, sortable: true, align: 'right' },
-                { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" width="16" height="16" title="<%= h(misc.in_wiki_tooltip) %>"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
+                { display: '<span title="<%= h(misc.in_wiki_tooltip) %>">Wiki</span>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
                 { display: 'Prefix', name: 'prefix', width: 100, sortable: true },
                 { display: 'Type', name: 'type', width: 100, sortable: true },
                 { display: 'Langtag', name: 'langtag', width: 100, sortable: true },

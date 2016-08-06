@@ -9,7 +9,7 @@ var create_flexigrid_for = {
             url: '/api/4/project/tags?project=' + encodeURIComponent(project),
             colModel: [
                 { display: '<%= h(osm.tag) %>', name: 'tag', width: 260, sortable: true },
-                { display: '<img src="/img/sources/wiki.16.png" alt="Wiki" width="16" height="16" title="<%= h(misc.in_wiki_tooltip) %>"/>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
+                { display: '<span title="<%= h(misc.in_wiki_tooltip) %>">Wiki</span>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
                 { display: '<span title="<%= h(page.tags.count_all_tooltip) %>"><%= h(misc.count) %></span>', name: 'count_all', width: 70, sortable: true, align: 'right' },
                 { display: '<span title="<%= h(page.tags.objects_tooltip) %>"><%= h(osm.objects) %></span>', name: 'objects', width:  80, sortable: false },
                 { display: '<%= h(page.tags.description) %>', name: 'description', width: 800, sortable: false, align: 'left' }
