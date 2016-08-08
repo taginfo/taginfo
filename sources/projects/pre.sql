@@ -27,7 +27,11 @@ CREATE TABLE projects (
     icon_url      TEXT,
     contact_name  TEXT,
     contact_email TEXT,
-    keywords      TEXT
+    keywords      TEXT,
+    key_entries   INTEGER DEFAULT 0,
+    tag_entries   INTEGER DEFAULT 0,
+    unique_keys   INTEGER DEFAULT 0,
+    unique_tags   INTEGER DEFAULT 0
 );
 
 DROP TABLE IF EXISTS project_tags;
