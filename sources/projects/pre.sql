@@ -47,6 +47,8 @@ CREATE TABLE project_tags (
     description TEXT,
     doc_url     TEXT,
     icon_url    TEXT,
-    keywords    TEXT
+    keywords    TEXT,
+    in_wiki     INTEGER DEFAULT 0,
+    count_all   INTEGER DEFAULT 0
 );
 
