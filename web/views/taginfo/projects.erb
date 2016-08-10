@@ -26,7 +26,7 @@
         <td class="tc<%= c %> nowrap">
             <%= h(project['status']) %></br>
             <% if project['error_log'] != '' %>
-                <a href="projects/<%= project['id'] %>/error_log"><img src="/img/error.png" width="16" height="16" alt="ERROR" title="Show warnings/errors"/></a>
+                <a href="projects/<%= project['id'] %>/error_log"><img src="/img/error.svg" width="16" height="16" alt="ERROR" title="Show warnings/errors"/></a>
             <% end %>
         </td>
         <td class="<%= c %> nowrap">
