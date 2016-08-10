@@ -12,7 +12,11 @@ class Taginfo < Sinatra::Base
             [:project_url, :STRING, 'Project URL'],
             [:icon_url,    :STRING, 'Icon URL'],
             [:doc_url,     :STRING, 'Documentation URL'],
-            [:description, :STRING, 'Project description']
+            [:description, :STRING, 'Project description'],
+            [:key_entries, :INT,    'Key entries for this project'],
+            [:tag_entries, :INT,    'Tag entries for this project'],
+            [:unique_keys, :INT,    'Unique keys known to this project'],
+            [:unique_tags, :INT,    'Unique tags known to this project']
         ]),
         :example => { :page => 1, :rp => 10, :sortname => 'name', :sortorder => 'asc' },
         :ui => '/projects'
@@ -46,6 +50,10 @@ class Taginfo < Sinatra::Base
                 :icon_url    => row['icon_url'],
                 :doc_url     => row['doc_url'],
                 :description => row['description'],
+                :key_entries => row['key_entries'],
+                :tag_entries => row['tag_entries'],
+                :unique_keys => row['unique_keys'],
+                :unique_tags => row['unique_tags']
             }}
         )
     end
