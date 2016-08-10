@@ -46,16 +46,16 @@ INSERT INTO master_stats SELECT * FROM db.stats
 
 INSERT INTO db.keys (key) SELECT DISTINCT key FROM wiki.wikipages WHERE key NOT IN (SELECT key FROM db.keys);
 
-UPDATE db.keys SET in_wiki=1    WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NULL);
-UPDATE db.keys SET in_wiki_en=1 WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NULL AND lang='en');
+UPDATE db.keys SET in_wiki=1    WHERE key IN (SELECT DISTINCT key FROM wiki.wikipages WHERE value IS NULL);
+UPDATE db.keys SET in_wiki_en=1 WHERE key IN (SELECT DISTINCT key FROM wiki.wikipages WHERE value IS NULL AND lang='en');
 
 -- ============================================================================
 
 -- too slow, so we drop it for now
 -- INSERT INTO db.tags (key, value) SELECT DISTINCT key, value FROM wiki.wikipages WHERE key || '=XX=' || value NOT IN (SELECT key || '=XX=' || value FROM db.tags);
 
-UPDATE db.tags SET in_wiki=1    WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*') AND key || '=' || value IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*');
-UPDATE db.tags SET in_wiki_en=1 WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en') AND key || '=' || value IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en');
+UPDATE db.tags SET in_wiki=1    WHERE key IN (SELECT DISTINCT key FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*') AND key || '=' || value IN (SELECT DISTINCT tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*');
+UPDATE db.tags SET in_wiki_en=1 WHERE key IN (SELECT DISTINCT key FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en') AND key || '=' || value IN (SELECT DISTINCT tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en');
 
 -- ============================================================================
 
@@ -83,8 +83,8 @@ UPDATE top_tags SET
     count_ways      = (SELECT t.count_ways      FROM db.tags t WHERE t.key=skey AND t.value=svalue),
     count_relations = (SELECT t.count_relations FROM db.tags t WHERE t.key=skey AND t.value=svalue);
 
-UPDATE top_tags SET in_wiki=1    WHERE skey || '=' || svalue IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*');
-UPDATE top_tags SET in_wiki_en=1 WHERE skey || '=' || svalue IN (SELECT distinct tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en');
+UPDATE top_tags SET in_wiki=1    WHERE skey || '=' || svalue IN (SELECT DISTINCT tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*');
+UPDATE top_tags SET in_wiki_en=1 WHERE skey || '=' || svalue IN (SELECT DISTINCT tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en');
 
 UPDATE top_tags SET in_projects=(SELECT num FROM projects.project_counts p WHERE p.key=skey AND p.value=svalue);
 
@@ -114,8 +114,8 @@ INSERT INTO popular_keys (key, count, users)
 -- count number of wikipages for each key
 UPDATE popular_keys SET wikipages = (SELECT count(*) FROM wiki.wikipages w WHERE w.key=popular_keys.key);
 
-UPDATE popular_keys SET in_wiki=1    WHERE key IN (SELECT distinct key FROM wiki.wikipages);
-UPDATE popular_keys SET in_wiki_en=1 WHERE key IN (SELECT distinct key FROM wiki.wikipages WHERE lang='en');
+UPDATE popular_keys SET in_wiki=1    WHERE key IN (SELECT DISTINCT key FROM wiki.wikipages);
+UPDATE popular_keys SET in_wiki_en=1 WHERE key IN (SELECT DISTINCT key FROM wiki.wikipages WHERE lang='en');
 
 -- ============================================================================
 
@@ -143,9 +143,9 @@ UPDATE popular_keys SET scale1 = 10 * scale_count + 8 * scale_users + 2 * scale_
 
 -- ============================================================================
 
-INSERT INTO languages (code) SELECT distinct(lang) FROM wiki.wikipages WHERE lang NOT IN (SELECT code FROM languages);
-UPDATE languages SET wiki_key_pages=(SELECT count(distinct key) FROM wiki.wikipages WHERE lang=code AND value IS NULL);
-UPDATE languages SET wiki_tag_pages=(SELECT count(distinct key) FROM wiki.wikipages WHERE lang=code AND value IS NOT NULL);
+INSERT INTO languages (code) SELECT DISTINCT lang FROM wiki.wikipages WHERE lang NOT IN (SELECT code FROM languages);
+UPDATE languages SET wiki_key_pages=(SELECT count(DISTINCT key) FROM wiki.wikipages WHERE lang=code AND value IS NULL);
+UPDATE languages SET wiki_tag_pages=(SELECT count(DISTINCT key) FROM wiki.wikipages WHERE lang=code AND value IS NOT NULL);
 
 -- ============================================================================
 
