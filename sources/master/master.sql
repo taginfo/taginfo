@@ -51,6 +51,29 @@ UPDATE db.keys SET in_wiki_en=1 WHERE key IN (SELECT DISTINCT key FROM wiki.wiki
 
 -- ============================================================================
 
+UPDATE db.keys SET in_projects=(SELECT projects FROM projects.project_unique_keys WHERE projects.project_unique_keys.key=db.keys.key);
+
+-- ============================================================================
+
+UPDATE projects.project_unique_keys SET in_wiki=(SELECT lang_count FROM wiki.wikipages_keys w WHERE projects.project_unique_keys.key = w.key);
+UPDATE projects.project_unique_keys SET in_wiki=1 WHERE key IN (SELECT DISTINCT key FROM wiki.wikipages WHERE value IS NULL);
+UPDATE projects.project_unique_keys SET count_all=(SELECT count_all FROM db.keys WHERE projects.project_unique_keys.key = db.keys.key);
+
+UPDATE projects.project_unique_tags SET in_wiki=1 WHERE key || '=' || value IN (SELECT DISTINCT key || '=' || value FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*');
+
+CREATE TEMP TABLE tags_count_all (
+    key       VARCHAR,
+    value     VARCHAR,
+    count_all INTEGER
+);
+
+INSERT INTO tags_count_all (key, value, count_all)
+    SELECT t.key, t.value, t.count_all FROM db.tags t, projects.project_unique_tags p WHERE t.key=p.key AND t.value = p.value;
+
+UPDATE projects.project_unique_tags SET count_all=(SELECT count_all FROM tags_count_all WHERE projects.project_unique_tags.key = tags_count_all.key AND projects.project_unique_tags.value = tags_count_all.value);
+
+-- ============================================================================
+
 -- too slow, so we drop it for now
 -- INSERT INTO db.tags (key, value) SELECT DISTINCT key, value FROM wiki.wikipages WHERE key || '=XX=' || value NOT IN (SELECT key || '=XX=' || value FROM db.tags);
 
@@ -73,9 +96,9 @@ CREATE TABLE top_tags (
 );
 
 INSERT INTO top_tags (skey, svalue)
-    SELECT key1, value1 FROM db.tag_combinations WHERE value1 != ''
+    SELECT DISTINCT key1, value1 FROM db.tag_combinations WHERE value1 != ''
     UNION
-    SELECT key2, value2 FROM db.tag_combinations WHERE value2 != '';
+    SELECT DISTINCT key2, value2 FROM db.tag_combinations WHERE value2 != '';
 
 UPDATE top_tags SET
     count_all       = (SELECT t.count_all       FROM db.tags t WHERE t.key=skey AND t.value=svalue),
@@ -86,7 +109,7 @@ UPDATE top_tags SET
 UPDATE top_tags SET in_wiki=1    WHERE skey || '=' || svalue IN (SELECT DISTINCT tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*');
 UPDATE top_tags SET in_wiki_en=1 WHERE skey || '=' || svalue IN (SELECT DISTINCT tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en');
 
-UPDATE top_tags SET in_projects=(SELECT num FROM projects.project_counts p WHERE p.key=skey AND p.value=svalue);
+UPDATE top_tags SET in_projects=(SELECT projects FROM projects.project_unique_tags p WHERE p.key=skey AND p.value=svalue);
 
 CREATE UNIQUE INDEX top_tags_key_value_idx ON top_tags (skey, svalue);
 
