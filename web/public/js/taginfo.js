@@ -828,6 +828,9 @@ jQuery(document).ready(function() {
                     case 116: // t
                         window.location = '/tags';
                         break;
+                    case 120: // x
+                        window.location = '/reports';
+                        break;
                 }
             }
         }

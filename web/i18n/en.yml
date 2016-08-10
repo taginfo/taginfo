@@ -112,6 +112,7 @@ help:
         tags_page: Tags page
         relations_page: Relations page
         projects_page: Projects page
+        reports_page: Reports page
         compare_page: Comparison page
         first_page: First page
         prev_page: Previous page
