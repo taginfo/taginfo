@@ -19,6 +19,8 @@
 <% end %>
             <tr><th><%= h(t.pages.project.overview.last_update) %>:</th><td><%= h(@project['data_updated']) %></td></tr>
             <tr><th><%= h(t.pages.project.overview.json_url) %>:</th><td id="json_url"></td></tr>
+            <tr><th><%= h(t.osm.keys) %>:</th><td><%= h(@project['unique_keys']) %></td></tr>
+            <tr><th><%= h(t.osm.tags) %>:</th><td><%= h(@project['unique_tags']) %></td></tr>
         </table>
         <p><i><%= t.pages.project.overview.info %></i></p>
     </div>

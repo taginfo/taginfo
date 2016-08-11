@@ -5,7 +5,7 @@ class Taginfo < Sinatra::Base
         :description => 'Get list of all projects using OSM tags known to taginfo.',
         :parameters => { :status => 'Only show projects with given status (default is "OK")', :query => 'Only show projects matching this query (substring match, optional).' },
         :paging => :optional,
-        :sort => %w( name ),
+        :sort => %w( name unique_keys unique_values ),
         :result => paging_results([
             [:id,          :STRING, 'Project id'],
             [:name,        :STRING, 'Project name'],
@@ -38,6 +38,10 @@ class Taginfo < Sinatra::Base
             condition_if("name LIKE ? ESCAPE '@' OR description LIKE ? ESCAPE '@'", q, q).
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.name 'lower(name)'
+                o.unique_keys
+                o.unique_keys :unique_tags
+                o.unique_tags
+                o.unique_tags :unique_keys
             }.
             paging(@ap).
             execute()

@@ -3,6 +3,8 @@ function page_init() {
         url: '/api/4/projects/all',
         colModel: [
             { display: '<%= h(@trans.t.taginfo.project) %>', name: 'name', width: 400, sortable: true },
+            { display: '<%= h(@trans.t.osm.keys) %>', name: 'unique_keys', width: 40, sortable: true },
+            { display: '<%= h(@trans.t.osm.tags) %>', name: 'unique_tags', width: 40, sortable: true },
             { display: '<%= h(@trans.t.misc.description) %>', name: 'description', width: 800, sortable: false }
         ],
         searchitems: [
@@ -14,6 +16,8 @@ function page_init() {
             data.rows = jQuery.map(data.data, function(row, i) {
                 return { 'cell': [
                     link_to_project(row.id, row.name, row.icon_url),
+                    html_escape(row.unique_keys),
+                    html_escape(row.unique_tags),
                     html_escape(row.description)
                 ] };
             });
