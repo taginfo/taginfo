@@ -29,7 +29,7 @@ class Taginfo < Sinatra::Base
             condition_if("key LIKE ? ESCAPE '@' OR value LIKE ? ESCAPE '@'", q, q).
             get_first_i
 
-        res = @db.select('SELECT * FROM (SELECT p.key AS key, p.value AS value, p.on_node, p.on_way, p.on_relation, p.on_area, p.description, p.doc_url, p.icon_url, k.in_wiki, k.count_all FROM projects.project_tags p, keys k WHERE p.project_id=? AND p.key = k.key AND p.value IS NULL UNION SELECT p.key AS key, p.value AS value, p.on_node, p.on_way, p.on_relation, p.on_area, p.description, p.doc_url, p.icon_url, t.in_wiki, t.count_all FROM projects.project_tags p, tags t WHERE p.project_id=? AND p.key = t.key AND p.value = t.value)', project_id, project_id).
+        res = @db.select('SELECT * FROM (SELECT p.key AS key, p.value AS value, p.on_node, p.on_way, p.on_relation, p.on_area, p.description, p.doc_url, p.icon_url, k.in_wiki, k.count_all FROM projects.project_tags p, projects.project_unique_keys k WHERE p.project_id=? AND p.key = k.key AND p.value IS NULL UNION SELECT p.key AS key, p.value AS value, p.on_node, p.on_way, p.on_relation, p.on_area, p.description, p.doc_url, p.icon_url, t.in_wiki, t.count_all FROM projects.project_tags p, projects.project_unique_tags t WHERE p.project_id=? AND p.key = t.key AND p.value = t.value)', project_id, project_id).
             condition_if("key LIKE ? ESCAPE '@' OR value LIKE ? ESCAPE '@'", q, q).
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.tag :key
