@@ -93,16 +93,25 @@ compress_file() {
     bzip2 -9 -c $DATADIR/$filename.db >$DATADIR/download/taginfo-$compressed.db.bz2 &
 }
 
-compress_databases() {
+compress_source_databases() {
     local sources="$*"
 
-    print_message "Running bzip2 on all databases..."
+    print_message "Running bzip2 on all source databases..."
 
     local source
     for source in $sources; do
         compress_file $source/taginfo-$source $source
     done
-    sleep 5 # wait for bzip2 on the smaller dbs to finish
+
+    wait
+
+    print_message "Done."
+}
+
+compress_extra_databases() {
+    local sources="$*"
+
+    print_message "Running bzip2 on all extra databases..."
 
     local db
     for db in master history search; do
@@ -136,9 +145,10 @@ main() {
 
     download_sources $sources_download
     update_sources $sources_create
-    update_master
-    compress_databases $sources_create
+    compress_source_databases $sources_create
     create_extra_indexes
+    update_master
+    compress_extra_databases $sources_create
 
     print_message "Done update_all."
 }
