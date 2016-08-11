@@ -237,7 +237,7 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute()
 
-        values_with_wiki_page = res.select{ |row| row['in_wiki'].to_i == 1 }.map{ |row| "'" + SQLite3::Database.quote(row['value']) + "'" }.join(',')
+        values_with_wiki_page = res.select{ |row| row['in_wiki'].to_i != 0 }.map{ |row| "'" + SQLite3::Database.quote(row['value']) + "'" }.join(',')
 
         # Read description for tag from wikipages, first in English then in the chosen
         # language. This way the chosen language description will overwrite the default
@@ -261,7 +261,7 @@ class Taginfo < Sinatra::Base
                 :value    => row['value'],
                 :count    => row['count_' + filter_type].to_i,
                 :fraction => (row['count_' + filter_type].to_f / this_key_count.to_f).round(4),
-                :in_wiki  => row['in_wiki'] == 1,
+                :in_wiki  => row['in_wiki'] != 0,
                 :description => wikidesc[row['value']] || ''
             } }
         )

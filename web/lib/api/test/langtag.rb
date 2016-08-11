@@ -51,7 +51,7 @@ class Taginfo < Sinatra::Base
                 {
                 :key           => row['key'],
                 :count_all     => row['count_all'].to_i,
-                :in_wiki       => row['in_wiki'].to_i == 1 ? true : false,
+                :in_wiki       => row['in_wiki'].to_i != 0,
                 :prefix        => nt.prefix,
                 :type          => nt.type,
                 :langtag       => nt.langtag,

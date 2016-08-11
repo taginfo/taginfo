@@ -54,7 +54,7 @@ class Taginfo < Sinatra::Base
                 :doc_url     => row['doc_url'],
                 :icon_url    => row['icon_url'],
                 :count_all   => row['count_all'],
-                :in_wiki     => row['in_wiki'].to_i == 1
+                :in_wiki     => row['in_wiki'].to_i != 0
             }}
         )
     end

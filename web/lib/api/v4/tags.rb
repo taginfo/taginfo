@@ -57,7 +57,7 @@ class Taginfo < Sinatra::Base
             data = @db.get_first_row("SELECT * FROM db.tags WHERE key=? AND value=?", key, value)
 
             if data
-                if data['in_wiki'].to_i == 1
+                if data['in_wiki'].to_i != 0
                     wiki = @db.execute("SELECT * FROM wiki.wikipages LEFT OUTER JOIN wiki_images USING (image) WHERE key=? AND value=? ORDER BY lang", key, value)
 
                     data['wiki'] = {}
