@@ -56,10 +56,13 @@ UPDATE db.keys SET in_projects=(SELECT projects FROM projects.project_unique_key
 -- ============================================================================
 
 UPDATE projects.project_unique_keys SET in_wiki=(SELECT lang_count FROM wiki.wikipages_keys w WHERE projects.project_unique_keys.key = w.key);
-UPDATE projects.project_unique_keys SET in_wiki=1 WHERE key IN (SELECT DISTINCT key FROM wiki.wikipages WHERE value IS NULL);
-UPDATE projects.project_unique_keys SET count_all=(SELECT count_all FROM db.keys WHERE projects.project_unique_keys.key = db.keys.key);
+UPDATE projects.project_unique_keys SET in_wiki=0 WHERE in_wiki IS NULL;
 
-UPDATE projects.project_unique_tags SET in_wiki=1 WHERE key || '=' || value IN (SELECT DISTINCT key || '=' || value FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*');
+UPDATE projects.project_unique_tags SET in_wiki=(SELECT lang_count FROM wiki.wikipages_tags w WHERE projects.project_unique_tags.key = w.key AND projects.project_unique_tags.value = w.value);
+UPDATE projects.project_unique_tags SET in_wiki=0 WHERE in_wiki IS NULL;
+
+UPDATE projects.project_unique_keys SET count_all=(SELECT count_all FROM db.keys WHERE projects.project_unique_keys.key = db.keys.key);
+UPDATE projects.project_unique_keys SET count_all=0 WHERE count_all IS NULL;
 
 CREATE TEMP TABLE tags_count_all (
     key       VARCHAR,
@@ -71,6 +74,7 @@ INSERT INTO tags_count_all (key, value, count_all)
     SELECT t.key, t.value, t.count_all FROM db.tags t, projects.project_unique_tags p WHERE t.key=p.key AND t.value = p.value;
 
 UPDATE projects.project_unique_tags SET count_all=(SELECT count_all FROM tags_count_all WHERE projects.project_unique_tags.key = tags_count_all.key AND projects.project_unique_tags.value = tags_count_all.value);
+UPDATE projects.project_unique_tags SET count_all=0 WHERE count_all IS NULL;
 
 -- ============================================================================
 

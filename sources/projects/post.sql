@@ -14,8 +14,8 @@ INSERT INTO stats (key, value) SELECT 'project_tags', count(*) FROM project_tags
 CREATE TABLE project_unique_keys (
     key       VARCHAR NOT NULL,
     projects  INTEGER,
-    in_wiki   INTEGER DEFAULT 0,
-    count_all INTEGER DEFAULT 0
+    in_wiki   INTEGER,
+    count_all INTEGER
 );
 
 INSERT INTO project_unique_keys (key, projects)
@@ -25,8 +25,8 @@ CREATE TABLE project_unique_tags (
     key       VARCHAR NOT NULL,
     value     VARCHAR NOT NULL,
     projects  INTEGER,
-    in_wiki   INTEGER DEFAULT 0,
-    count_all INTEGER DEFAULT 0
+    in_wiki   INTEGER,
+    count_all INTEGER
 );
 
 INSERT INTO project_unique_tags (key, value, projects)
