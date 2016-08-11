@@ -25,8 +25,7 @@ class Taginfo < Sinatra::Base
         project_id = params[:project]
 
         q = like_contains(params[:query])
-        total = @db.count('projects.project_tags').
-            condition("project_id=?", project_id).
+        total = @db.select('SELECT count(*) FROM (SELECT DISTINCT key, value FROM projects.project_tags WHERE project_id=?)', project_id).
             condition_if("key LIKE ? ESCAPE '@' OR value LIKE ? ESCAPE '@'", q, q).
             get_first_i
 
