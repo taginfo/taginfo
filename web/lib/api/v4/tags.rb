@@ -100,6 +100,7 @@ class Taginfo < Sinatra::Base
                 :on_way                   => row['on_way'].to_i      == 1,
                 :on_area                  => row['on_area'].to_i     == 1,
                 :on_relation              => row['on_relation'].to_i == 1,
+                :projects                 => row['projects'].to_i
             } }
         )
     end
@@ -120,7 +121,8 @@ class Taginfo < Sinatra::Base
             [:count_ways,               :INT,    'Number of ways in the OSM database with this tag.'],
             [:count_ways_fraction,      :FLOAT,  'Number of ways in relation to all ways.'],
             [:count_relations,          :INT,    'Number of relations in the OSM database with this tag.'],
-            [:count_relations_fraction, :FLOAT,  'Number of relations in relation to all relations.']
+            [:count_relations_fraction, :FLOAT,  'Number of relations in relation to all relations.'],
+            [:projects,                 :INT,    'Number of projects using this tag']
         ]),
         :example => { :page => 1, :rp => 10, :sortname => 'tag', :sortorder => 'asc' },
         :ui => '/tags'
@@ -136,6 +138,8 @@ class Taginfo < Sinatra::Base
                 o.tag :skey
                 o.tag :svalue
                 o.in_wiki
+                o.projects
+                o.projects :skey
                 o.count_all
                 o.count_nodes
                 o.count_ways
@@ -157,6 +161,7 @@ class Taginfo < Sinatra::Base
                 :count_ways_fraction      => (row['count_ways'].to_f / @db.stats('ways')).round(4),
                 :count_relations          => row['count_relations'].to_i,
                 :count_relations_fraction => (row['count_relations'].to_f / @db.stats('relations')).round(4),
+                :projects                 => row['projects'].to_i
             } }
         )
     end
