@@ -80,7 +80,7 @@ run_exe() {
     if [ -z $logfile ]; then
         env - $@
     else
-        print_message_impl "${FUNCNAME[1]}" "  Logging to '${logfile}'..."
+        print_message_impl "${FUNCNAME[1]}" "  Writing output to '${logfile}'..."
         env - $@ >$logfile
     fi
 }

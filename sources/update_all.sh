@@ -33,15 +33,20 @@ readonly LOGFILE=$(date +%Y%m%dT%H%M)
 mkdir -p $DATADIR/log
 exec >$DATADIR/log/$LOGFILE.log 2>&1
 
+if which pbzip2; then
+    BZIP_COMMAND=pbzip2
+else
+    BZIP_COMMAND=bzip2
+fi
 
 download_source() {
     local source="$1"
 
-    print_message "Downloading $source..."
+    print_message "Downloading and uncompressing $source..."
 
     mkdir -p $DATADIR/$source
     run_exe curl --silent --fail --output $DATADIR/download/taginfo-$source.db.bz2 --time-cond $DATADIR/download/taginfo-$source.db.bz2 https://taginfo.openstreetmap.org/download/taginfo-$source.db.bz2
-    run_exe -l$DATADIR/$source/taginfo-$source.db bzcat $DATADIR/download/taginfo-$source.db.bz2
+    run_exe -l$DATADIR/$source/taginfo-$source.db $BZIP_COMMAND -d -c $DATADIR/download/taginfo-$source.db.bz2
 
     print_message "Done."
 }
@@ -89,14 +94,14 @@ compress_file() {
     local filename="$1"
     local compressed="$2"
 
-    print_message "Compressing '$filename' to '$compressed'"
-    bzip2 -9 -c $DATADIR/$filename.db >$DATADIR/download/taginfo-$compressed.db.bz2 &
+    print_message "Compressing '$filename' to '$compressed' using '$BZIP_COMMAND'"
+    $BZIP_COMMAND -9 -c $DATADIR/$filename.db >$DATADIR/download/taginfo-$compressed.db.bz2 &
 }
 
 compress_source_databases() {
     local sources="$*"
 
-    print_message "Running bzip2 on all source databases..."
+    print_message "Compressing all source databases..."
 
     local source
     for source in $sources; do
@@ -111,7 +116,7 @@ compress_source_databases() {
 compress_extra_databases() {
     local sources="$*"
 
-    print_message "Running bzip2 on all extra databases..."
+    print_message "Compressing all extra databases..."
 
     local db
     for db in master history search; do
