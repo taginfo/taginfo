@@ -10,7 +10,7 @@ project. The numerous small improvements and bugfixes can't all be listed.
 
 ## November 2010
 
-* Added translation support, first languages English, German, Italian
+* Added localization support, first languages English, German, Italian
 * Add support for embedding taginfo snippets into OSM wiki
 * Add the first reports
 
@@ -30,7 +30,7 @@ project. The numerous small improvements and bugfixes can't all be listed.
 
 ## October 2011
 
-* Add French and Russian translation
+* Add French and Russian localization
 * Add maps for keys on ways
 * Add config file
 
@@ -44,7 +44,7 @@ project. The numerous small improvements and bugfixes can't all be listed.
 
 ## November 2012
 
-* Add Polish translation
+* Add Polish localization
 
 ## December 2012
 
@@ -72,11 +72,11 @@ project. The numerous small improvements and bugfixes can't all be listed.
 
 ## March 2014
 
-* Add Portuguese translation
+* Add Portuguese localization
 
 ## April 2014
 
-* Added Ukrainian translation
+* Added Ukrainian localization
 
 ## May 2014
 
@@ -84,7 +84,7 @@ project. The numerous small improvements and bugfixes can't all be listed.
 * Add Level0 editor link
 * Add support for maps on popular tags
 * Remove support for old API versions 2 and 3
-* Add Hungarian, Spanish, and Vietnamese translation
+* Add Hungarian, Spanish, and Vietnamese localization
 
 ## September 2014
 
@@ -92,10 +92,42 @@ project. The numerous small improvements and bugfixes can't all be listed.
 
 ## November 2014
 
-* Add Brazilian Portuguese translation
+* Add Brazilian Portuguese localization
 
 ## February 2015
 
 * Add 'Similarity' tab for keys
 * Add 'Historic development' report
+
+## March 2015
+
+* Add Japanese localization
+* Add 'Wiki images' report
+
+## August 2015
+
+* Add 'taglist' feature
+
+## November 2015
+
+* Database statistics creation code switches from old osmium to new libosmium
+
+## December 2015
+
+* Major refactoring of the shell scripts collecting the source data making the
+  code cleaner and more robust
+
+## January 2016
+
+* New web site layout with more prominent menu and better mobile support
+
+## February 2016
+
+* Cleanup of database statistics creation code with some speedups
+
+## August 2016
+
+* Support for HiDPI displays in web UI
+* Add Taiwanese Chinese localization
+* Better integration of projects
 
