@@ -26,7 +26,7 @@ function page_init() {
                     fmt_value_with_percent(row.count_nodes,     row.count_nodes_fraction),
                     fmt_value_with_percent(row.count_ways,      row.count_ways_fraction),
                     fmt_value_with_percent(row.count_relations, row.count_relations_fraction),
-                    fmt_checkmark(row.in_wiki)
+                    link_to_tag_with_tab(row.key, row.value, 'wiki', fmt_checkmark(row.in_wiki))
                 ] };
             });
             return data;

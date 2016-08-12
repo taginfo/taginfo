@@ -182,6 +182,20 @@ function link_to_key(key, attr) {
     );
 }
 
+function link_to_key_with_tab(key, tab, text) {
+    return link(
+        url_for_key(key) + '#' + tab,
+        text
+    );
+}
+
+function link_to_tag_with_tab(key, value, tab, text) {
+    return link(
+        url_for_tag(key, value) + '#' + tab,
+        text
+    );
+}
+
 function link_to_value(key, value, attr) {
     return link(
         url_for_tag(key, value),
