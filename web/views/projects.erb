@@ -4,7 +4,25 @@
         <p><%= t.pages.projects.intro %></p>
     </div>
 </div>
-<div class="box resize">
-    <table id="grid-projects">
-    </table>
+<div id="tabs">
+    <ul class="no-print">
+        <li><a href="#projects"><%= h(t.taginfo.projects) %></a></li>
+        <li><a href="#keys"><%= h(t.osm.keys) %></a></li>
+        <li><a href="#tags"><%= h(t.osm.tags) %></a></li>
+    </ul>
+    <div id="projects">
+        <h2><%= h(t.taginfo.projects) %></h2>
+        <table id="grid-projects">
+        </table>
+    </div>
+    <div id="keys">
+        <h2><%= h(t.osm.keys) %></h2>
+        <table id="grid-keys">
+        </table>
+    </div>
+    <div id="tags">
+        <h2><%= h(t.osm.tags) %></h2>
+        <table id="grid-tags">
+        </table>
+    </div>
 </div>

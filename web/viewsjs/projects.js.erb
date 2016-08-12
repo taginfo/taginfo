@@ -1,27 +1,88 @@
+var create_flexigrid_for = {
+    projects: function() {
+        create_flexigrid('grid-projects', {
+            url: '/api/4/projects/all',
+            colModel: [
+                { display: '<%= h(@trans.t.taginfo.project) %>', name: 'name', width: 400, sortable: true },
+                { display: '<%= h(@trans.t.osm.keys) %>', name: 'unique_keys', width: 40, sortable: true, align: 'right' },
+                { display: '<%= h(@trans.t.osm.tags) %>', name: 'unique_tags', width: 40, sortable: true, align: 'right' },
+                { display: '<%= h(@trans.t.misc.description) %>', name: 'description', width: 800, sortable: false }
+            ],
+            searchitems: [
+                { display: '<%= h(@trans.t.taginfo.project) %>/<%= h(@trans.t.misc.description) %>', name: 'name' }
+            ],
+            sortname: 'name',
+            sortorder: 'asc',
+            preProcess: function(data) {
+                data.rows = jQuery.map(data.data, function(row, i) {
+                    return { 'cell': [
+                        link_to_project(row.id, row.name, row.icon_url),
+                        html_escape(row.unique_keys),
+                        html_escape(row.unique_tags),
+                        html_escape(row.description)
+                    ] };
+                });
+                return data;
+            }
+        });
+    },
+    keys: function() {
+        create_flexigrid('grid-keys', {
+            url: '/api/4/projects/keys',
+            colModel: [
+                { display: '<%= h(@trans.t.osm.keys) %>', name: 'key', width: 500, sortable: true },
+                { display: '<%= h(@trans.t.taginfo.projects) %>', name: 'projects', width: 40, sortable: true, align: 'right' },
+                { display: '<span title="<%= h(@trans.misc.in_wiki_tooltip) %>">Wiki</span>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
+                { display: '<span title="<%= h(@trans.misc.objects_tooltip) %>"><img src="/img/types/all.svg" width="16" height="16" alt=""/> <%= h(@trans.osm.objects) %></span>', name: 'count_all', width: 200, sortable: true, align: 'center' }
+            ],
+            searchitems: [
+                { display: '<%= h(@trans.t.osm.keys) %>', name: 'key' }
+            ],
+            sortname: 'key',
+            sortorder: 'asc',
+            preProcess: function(data) {
+                data.rows = jQuery.map(data.data, function(row, i) {
+                    return { 'cell': [
+                        link_to_key(row.key),
+                        link_to_key_with_tab(row.key, 'projects', html_escape(row.projects)),
+                        link_to_key_with_tab(row.key, 'wiki', fmt_checkmark(row.in_wiki)),
+                        fmt_value_with_percent(row.count_all, row.count_all_fraction),
+                    ] };
+                });
+                return data;
+            }
+        });
+    },
+    tags: function() {
+        create_flexigrid('grid-tags', {
+            url: '/api/4/projects/tags',
+            colModel: [
+                { display: '<%= h(@trans.t.osm.tags) %>', name: 'tag', width: 600, sortable: true },
+                { display: '<%= h(@trans.t.taginfo.projects) %>', name: 'projects', width: 40, sortable: true, align: 'right' },
+                { display: '<span title="<%= h(@trans.misc.in_wiki_tooltip) %>">Wiki</span>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
+                { display: '<span title="<%= h(@trans.misc.objects_tooltip) %>"><img src="/img/types/all.svg" width="16" height="16" alt=""/> <%= h(@trans.osm.objects) %></span>', name: 'count_all', width: 200, sortable: true, align: 'center' }
+            ],
+            searchitems: [
+                { display: '<%= h(@trans.t.osm.tags) %>', name: 'tags' }
+            ],
+            sortname: 'tag',
+            sortorder: 'asc',
+            preProcess: function(data) {
+                data.rows = jQuery.map(data.data, function(row, i) {
+                    return { 'cell': [
+                        link_to_tag(row.key, row.value),
+                        link_to_tag_with_tab(row.key, row.value, 'projects', html_escape(row.projects)),
+                        link_to_tag_with_tab(row.key, row.value, 'wiki', fmt_checkmark(row.in_wiki)),
+                        fmt_value_with_percent(row.count_all, row.count_all_fraction),
+                    ] };
+                });
+                return data;
+            }
+        });
+    }
+}
+
 function page_init() {
-    create_flexigrid('grid-projects', {
-        url: '/api/4/projects/all',
-        colModel: [
-            { display: '<%= h(@trans.t.taginfo.project) %>', name: 'name', width: 400, sortable: true },
-            { display: '<%= h(@trans.t.osm.keys) %>', name: 'unique_keys', width: 40, sortable: true },
-            { display: '<%= h(@trans.t.osm.tags) %>', name: 'unique_tags', width: 40, sortable: true },
-            { display: '<%= h(@trans.t.misc.description) %>', name: 'description', width: 800, sortable: false }
-        ],
-        searchitems: [
-            { display: '<%= h(@trans.t.taginfo.project) %>/<%= h(@trans.t.misc.description) %>', name: 'name' }
-        ],
-        sortname: 'name',
-        sortorder: 'asc',
-        preProcess: function(data) {
-            data.rows = jQuery.map(data.data, function(row, i) {
-                return { 'cell': [
-                    link_to_project(row.id, row.name, row.icon_url),
-                    html_escape(row.unique_keys),
-                    html_escape(row.unique_tags),
-                    html_escape(row.description)
-                ] };
-            });
-            return data;
-        }
-    });
+    up = function() { window.location = '/'; }
+    init_tabs();
 }
