@@ -58,4 +58,97 @@ class Taginfo < Sinatra::Base
         )
     end
 
+    api(4, 'projects/keys', {
+        :description => 'Get list of all keys used by at least one project.',
+        :parameters => { :query => 'Only show keys matching this query (substring match, optional).' },
+        :paging => :optional,
+        :sort => %w( key projects in_wiki count_all ),
+        :result => paging_results([
+            [:key,                :STRING, 'Key'],
+            [:projects,           :INT,    'Number of projects using this key'],
+            [:in_wiki,            :BOOL,   'Is this key described in any wiki pages'],
+            [:count_all,          :INT,    'Number of objects in the OSM database with this key.'],
+            [:count_all_fraction, :FLOAT,  'Number of objects in relation to all objects.']
+        ]),
+        :example => { :page => 1, :rp => 10, :sortname => 'key', :sortorder => 'asc' },
+        :ui => '/projects#keys'
+    }) do
+        q = like_contains(params[:query])
+        total = @db.count('projects.project_unique_keys').
+            condition_if("key LIKE ? ESCAPE '@'", q).
+            get_first_i
+
+        res = @db.select('SELECT * FROM projects.project_unique_keys').
+            condition_if("key LIKE ? ESCAPE '@'", q).
+            order_by(@ap.sortname, @ap.sortorder) { |o|
+                o.key
+                o.projects
+                o.projects :key
+                o.in_wiki
+                o.in_wiki :key
+                o.count_all
+                o.count_all :key
+            }.
+            paging(@ap).
+            execute()
+
+        return generate_json_result(total,
+            res.map{ |row| {
+                :key                => row['key'],
+                :projects           => row['projects'],
+                :in_wiki            => row['in_wiki'],
+                :count_all          => row['count_all'],
+                :count_all_fraction => (row['count_all'].to_f / @db.stats('objects')).round(4)
+            }}
+        )
+    end
+
+    api(4, 'projects/tags', {
+        :description => 'Get list of all tags used by at least one project.',
+        :parameters => { :query => 'Only show tags matching this query (substring match, optional).' },
+        :paging => :optional,
+        :sort => %w( key value projects in_wiki count_all ),
+        :result => paging_results([
+            [:key,                :STRING, 'Key'],
+            [:value,              :STRING, 'Value'],
+            [:projects,           :INT,    'Number of projects using this tag'],
+            [:in_wiki,            :BOOL,   'Is this tag described in any wiki pages'],
+            [:count_all,          :INT,    'Number of objects in the OSM database with this tag.'],
+            [:count_all_fraction, :FLOAT,  'Number of objects in relation to all objects.']
+        ]),
+        :example => { :page => 1, :rp => 10, :sortname => 'key', :sortorder => 'asc' },
+        :ui => '/projects#tags'
+    }) do
+        q = like_contains(params[:query])
+        total = @db.count('projects.project_unique_tags').
+            condition_if("key LIKE ? ESCAPE '@' OR value LIKE ? ESCAPE '@'", q, q).
+            get_first_i
+
+        res = @db.select('SELECT * FROM projects.project_unique_tags').
+            condition_if("key LIKE ? ESCAPE '@' OR value LIKE ? ESCAPE '@'", q, q).
+            order_by(@ap.sortname, @ap.sortorder) { |o|
+                o.tag :key
+                o.tag :value
+                o.projects
+                o.projects :key
+                o.in_wiki
+                o.in_wiki :key
+                o.count_all
+                o.count_all :key
+            }.
+            paging(@ap).
+            execute()
+
+        return generate_json_result(total,
+            res.map{ |row| {
+                :key                => row['key'],
+                :value              => row['value'],
+                :projects           => row['projects'],
+                :in_wiki            => row['in_wiki'],
+                :count_all          => row['count_all'],
+                :count_all_fraction => (row['count_all'].to_f / @db.stats('objects')).round(4)
+            }}
+        )
+    end
+
 end
