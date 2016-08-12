@@ -11,7 +11,8 @@ function page_init() {
             { display: '<span title="<%= h(misc.nodes_tooltip) %>"><img src="/img/types/node.svg" width="16" height="16" alt=""/> <%= h(osm.nodes) %></span>', name: 'count_nodes', width: 220, sortable: true, align: 'center' },
             { display: '<span title="<%= h(misc.ways_tooltip) %>"><img src="/img/types/way.svg" width="16" height="16" alt=""/> <%= h(osm.ways) %></span>', name: 'count_ways', width: 220, sortable: true, align: 'center' },
             { display: '<span title="<%= h(misc.relations_tooltip) %>"><img src="/img/types/relation.svg" width="16" height="16" alt=""/> <%= h(osm.relations) %></span>', name: 'count_relations',  width: 220, sortable: true, align: 'center' },
-            { display: '<span title="<%= h(misc.in_wiki_tooltip) %>">Wiki</span>', name: 'in_wiki', width: 20, sortable: true, align: 'center' }
+            { display: '<span title="<%= h(misc.in_wiki_tooltip) %>"><%= h(@trans.t.taginfo.wiki) %></span>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
+            { display: '<%= h(@trans.t.taginfo.projects) %>', name: 'projects', width: 40, sortable: true, align: 'right' }
         ],
         searchitems: [
             { display: '<%= h(osm.tag) %>', name: 'tag' }
@@ -26,7 +27,8 @@ function page_init() {
                     fmt_value_with_percent(row.count_nodes,     row.count_nodes_fraction),
                     fmt_value_with_percent(row.count_ways,      row.count_ways_fraction),
                     fmt_value_with_percent(row.count_relations, row.count_relations_fraction),
-                    link_to_tag_with_tab(row.key, row.value, 'wiki', fmt_checkmark(row.in_wiki))
+                    link_to_tag_with_tab(row.key, row.value, 'wiki', fmt_checkmark(row.in_wiki)),
+                    link_to_tag_with_tab(row.key, row.value, 'projects', html_escape(row.projects))
                 ] };
             });
             return data;
