@@ -59,6 +59,7 @@ INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('vi', 
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('zh',      'zh', 'Chinese', '中文');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('zh-hans', NULL, 'Simplified Chinese', '简体中文');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('zh-hant', NULL, 'Traditional Chinese', '繁體中文');
+INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('zh-TW',   NULL, 'Taiwanese Mandarin', '國語');
 -- INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('', '', '', '');
 
 ANALYZE languages;
