@@ -45,6 +45,12 @@ function draw(words) {
 
 function resize_home() {
     var tagcloud = jQuery('#tagcloud');
+    if (tagcloud.css('display') == 'none') {
+        tagcloud.empty();
+        fill_lists();
+        return;
+    }
+
     tagcloud.empty();
     tagcloud.height(0);
 

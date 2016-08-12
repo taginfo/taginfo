@@ -729,6 +729,12 @@ div.img_popup {
 
 /* ==========  */
 
+@media screen and (max-width: 1023px) {
+    .cloudcontainer {
+        display: none;
+    }
+}
+
 div#tagcloud a:hover {
     text-decoration: none;
 }

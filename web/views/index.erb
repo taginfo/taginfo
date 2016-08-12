@@ -1,8 +1,8 @@
 <table class="boxes resize" width="100%">
     <tr>
         <td width="232" height="40"><h2><a href="/keys"><%= h(t.osm.keys) %></a></h2></td>
-        <td rowspan="6" width="20"></td>
-        <td height="40"><h2><%= h(t.pages.index.popular_keys) %></h2></td>
+        <td rowspan="6" width="20" class="cloudcontainer"></td>
+        <td height="40" class="cloudcontainer"><h2><%= h(t.pages.index.popular_keys) %></h2></td>
         <td rowspan="6" width="20"></td>
         <td width="232" height="40"><h2><a href="/reports"><%= h(t.taginfo.reports) %></a></h2></td>
         <td rowspan="6" width="20"></td>
@@ -13,8 +13,8 @@
             <div id="key_list"></div>
             <div class="emphasis" style="margin: 10px 0 0 0;"><a href="/keys"><%= h(t.pages.index.keys.listkeys) %></a></div>
         </td>
-        <td rowspan="5" class="box">
-            <div id="tagcloud" style="margin: 15px 0; line-height: 200%; text-align: justify; overflow: hidden;"></div>
+        <td rowspan="5" class="box cloudcontainer">
+            <div id="tagcloud" class="cloudcontainer" style="margin: 15px 0; line-height: 200%; text-align: justify; overflow: hidden;"></div>
         </td>
         <td rowspan="5" class="box">
             <p><%= t.pages.reports.intro %></p>
