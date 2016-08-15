@@ -29,6 +29,7 @@ It uses:
 * JSON gem (install with gem, Debian/Ubuntu packages are too old and buggy)
 * curl binary
 * sqlite3 binary and ruby libs
+* Optional: Parallel bzip (pzbip2)
 
 Install the Debian/Ubuntu packages:
 ```sh
