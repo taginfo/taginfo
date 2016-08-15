@@ -38,8 +38,8 @@ var create_flexigrid_for = {
             searchitems: [
                 { display: '<%= h(@trans.t.osm.keys) %>', name: 'key' }
             ],
-            sortname: 'key',
-            sortorder: 'asc',
+            sortname: 'projects',
+            sortorder: 'desc',
             preProcess: function(data) {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
@@ -65,8 +65,8 @@ var create_flexigrid_for = {
             searchitems: [
                 { display: '<%= h(@trans.t.osm.tags) %>', name: 'tags' }
             ],
-            sortname: 'tag',
-            sortorder: 'asc',
+            sortname: 'projects',
+            sortorder: 'desc',
             preProcess: function(data) {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
