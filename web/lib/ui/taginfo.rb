@@ -81,7 +81,7 @@ class Taginfo < Sinatra::Base
 
         @num_texts = {}
         r18n.available_locales.each do |lang|
-            data = YAML.load_file("i18n/#{lang.code}.yml")
+            data = YAML.load_file("i18n/#{lang.code.downcase}.yml")
             @num_texts[lang.code] = count_texts(data)
         end
 
@@ -95,7 +95,7 @@ class Taginfo < Sinatra::Base
         @lang = params[:lang] || 'de'
         @i18n_en = YAML.load_file("i18n/en.yml")
         begin
-            @i18n_lang = YAML.load_file("i18n/#{@lang}.yml")
+            @i18n_lang = YAML.load_file("i18n/#{@lang.downcase}.yml")
         rescue
             @error = "Unknown language: #{@lang}"
         end
