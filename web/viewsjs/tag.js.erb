@@ -116,7 +116,7 @@ var create_flexigrid_for = {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
                         link_to_project(row.project_id, row.project_name, row.project_icon_url),
-                        row.value ? link_to_tag(row.key, row.value) : (link_to_key(row.key) + '=*'),
+                        row.value === null ? (link_to_key(row.key) + '=*') : link_to_tag(row.key, row.value),
                         fmt_type_icon('node',     row.on_node) +
                         fmt_type_icon('way',      row.on_way) +
                         fmt_type_icon('area',     row.on_area) +
