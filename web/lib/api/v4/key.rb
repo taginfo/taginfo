@@ -309,7 +309,7 @@ class Taginfo < Sinatra::Base
         :description => 'Get projects using a given key.',
         :parameters => {
             :key => 'Tag key (required).',
-            :query => 'Only show results where the value matches this query (substring match, optional).'
+            :query => 'Only show results where the project name or tag value matches this query (substring match, optional).'
         },
         :paging => :optional,
         :filter => {

@@ -3,7 +3,10 @@ class Taginfo < Sinatra::Base
 
     api(4, 'projects/all', {
         :description => 'Get list of all projects using OSM tags known to taginfo.',
-        :parameters => { :status => 'Only show projects with given status (default is "OK")', :query => 'Only show projects matching this query (substring match, optional).' },
+        :parameters => {
+            :status => 'Only show projects with given status (default is "OK")',
+            :query => 'Only show projects where name or description matches this query (substring match, optional).'
+        },
         :paging => :optional,
         :sort => %w( name unique_keys unique_values ),
         :result => paging_results([
