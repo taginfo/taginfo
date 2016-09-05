@@ -76,6 +76,14 @@ var taginfo_taglist = (function(){
                 'description': 'Beschreibung',
                 'image': 'Bild',
                 'count': 'Anzahl'
+            },
+            'cs': {
+                'key': 'Klíč',
+                'value': 'Hodnota',
+                'element': 'Prvek',
+                'description': 'Popis',
+                'image': 'Ilustrace',
+                'count': 'Počet'
             }
         };
 
