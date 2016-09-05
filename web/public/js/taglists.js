@@ -225,8 +225,11 @@ var taginfo_taglist = (function(){
         },
         'count': function(lang, data) {
             return ['node', 'way', 'relation'].map(function(type) {
-                return type_image(type) + data['count_' + type + 's'];
-            }).join('<br/>');
+                var value = data['count_' + type + 's'].toString().
+                            replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1&thinsp;');
+                return '<div style="text-align: right">' +
+                       value + ' ' + type_image(type) + '</div>';
+            }).join('');
         }
     };
 
