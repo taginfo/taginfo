@@ -61,13 +61,13 @@ var taginfo_taglist = (function(){
 
     function column_name(lang, column) {
         var names = {
-            'en': {
-                'key': 'Key',
-                'value': 'Value',
-                'element': 'Element',
-                'description': 'Description',
-                'image': 'Image',
-                'count': 'Count'
+            'cs': {
+                'key': 'Klíč',
+                'value': 'Hodnota',
+                'element': 'Prvek',
+                'description': 'Popis',
+                'image': 'Ilustrace',
+                'count': 'Počet'
             },
             'de': {
                 'key': 'Key',
@@ -77,13 +77,101 @@ var taginfo_taglist = (function(){
                 'image': 'Bild',
                 'count': 'Anzahl'
             },
-            'cs': {
-                'key': 'Klíč',
-                'value': 'Hodnota',
-                'element': 'Prvek',
-                'description': 'Popis',
-                'image': 'Ilustrace',
-                'count': 'Počet'
+            'en': {
+                'key': 'Key',
+                'value': 'Value',
+                'element': 'Element',
+                'description': 'Description',
+                'image': 'Image',
+                'count': 'Count'
+            },
+            'es': {
+                'key': 'Clave',
+                'value': 'Valor',
+                'element': 'Tipo',
+                'description': 'Descripción',
+                'image': 'Imagen',
+                'count': 'Recuento'
+            },
+            'fr': {
+                'key': 'Clé',
+                'value': 'Valeur',
+                'element': '',
+                'description': 'Description',
+                'image': 'Image',
+                'count': 'Count'
+            },
+            'hu': {
+                'key': 'Kulcs',
+                'value': 'Érték',
+                'element': 'Típus',
+                'description': 'Leírás',
+                'image': 'Kép',
+                'count': 'Darab'
+            },
+            'it': {
+                'key': 'Chiave',
+                'value': 'Valore',
+                'element': 'Tipo Oggetto',
+                'description': 'Descrizione',
+                'image': 'Immagine',
+                'count': 'Conteggio'
+            },
+            'ja': {
+                'key': 'キー',
+                'value': '値',
+                'element': '種別',
+                'description': '説明',
+                'image': '画像',
+                'count': '件数'
+            },
+            'pl': {
+                'key': 'Klucz',
+                'value': 'Wartość',
+                'element': 'Rodzaj',
+                'description': 'Opis',
+                'image': 'Obraz',
+                'count': 'Ilość'
+            },
+            'pt': {
+                'key': 'Chave',
+                'value': 'Valor',
+                'element': 'Tipo',
+                'description': 'Descrição',
+                'image': 'Imagem',
+                'count': 'Contagem'
+            },
+            'ru': {
+                'key': 'Ключ',
+                'value': 'Значение',
+                'element': 'Тип',
+                'description': 'Описание',
+                'image': 'Изображение',
+                'count': 'Количество'
+            },
+            'uk': {
+                'key': 'Ключ',
+                'value': 'Значення',
+                'element': 'Тип',
+                'description': 'Опис',
+                'image': 'Зображення',
+                'count': 'Кількість'
+            },
+            'vi': {
+                'key': 'Chìa khóa',
+                'value': 'Giá trị',
+                'element': 'Kiểu',
+                'description': 'Miêu tả',
+                'image': 'Hình ảnh',
+                'count': 'Tổng số'
+            },
+            'zh-TW': {
+                'key': '鍵',
+                'value': '值',
+                'element': '類型',
+                'description': '描述',
+                'image': '圖片',
+                'count': '計數'
             }
         };
 
