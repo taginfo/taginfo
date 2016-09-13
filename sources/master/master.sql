@@ -172,7 +172,7 @@ UPDATE popular_keys SET scale1 = 10 * scale_count + 8 * scale_users + 2 * scale_
 
 INSERT INTO languages (code) SELECT DISTINCT lang FROM wiki.wikipages WHERE lang NOT IN (SELECT code FROM languages);
 UPDATE languages SET wiki_key_pages=(SELECT count(DISTINCT key) FROM wiki.wikipages WHERE lang=code AND value IS NULL);
-UPDATE languages SET wiki_tag_pages=(SELECT count(DISTINCT key) FROM wiki.wikipages WHERE lang=code AND value IS NOT NULL);
+UPDATE languages SET wiki_tag_pages=(SELECT count(DISTINCT key || '=' || value) FROM wiki.wikipages WHERE lang=code AND value IS NOT NULL);
 
 -- ============================================================================
 
