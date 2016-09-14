@@ -236,7 +236,7 @@ pages:
             intro: Zde je seznam aktuálně používaných zdrojů. V budoucnu můžeme integrovat více zdrojů.
         description:
             db: |
-                <p>Statistika o klíčích, značkách a typech relací se generuje z <a class="extlink" href="http://planet.openstreetmap.org/">databáze OSM</a> (nebo z extractu) a stejně se vytvářejí mapy, které ukazují geografické rozmístění uzlů a cest.</p>
+                <p>Statistika o klíčích, značkách a typech relací se generuje z <a class="extlink" href="https://planet.openstreetmap.org/">databáze OSM</a> (nebo z extractu) a stejně se vytvářejí mapy, které ukazují geografické rozmístění uzlů a cest.</p>
             wiki: |
                 <p>Čteme <a class="extlink" href="//wiki.openstreetmap.org/">wiki OSM</a> a nanalyzujeme všechny stránky Key:*, Tag:* a Relation:* (ve všech jazycích). Extrahujeme z nich popisky, ilustrace, související značky atd.</p>
             languages: |

@@ -237,7 +237,7 @@ pages:
             intro: Aquí está una lista de fuentes usadas actualmente. Más fuentes podrían integrarse en el futuro.
         description:
             db: |
-                <p>Las estadísticas sobre las claves, etiquetas y tipos de relación son generadas a partir de la <a class="extlink" href="http://planet.openstreetmap.org/">base de datos de OSM</a> (o un extracto) así como los mapas que muestran la distribución geográfica de los nodos y vías.</p>
+                <p>Las estadísticas sobre las claves, etiquetas y tipos de relación son generadas a partir de la <a class="extlink" href="https://planet.openstreetmap.org/">base de datos de OSM</a> (o un extracto) así como los mapas que muestran la distribución geográfica de los nodos y vías.</p>
             wiki: |
                 <p>La <a class="extlink" href="//wiki.openstreetmap.org/">wiki de OSM</a> es leída y se analizan todas las páginas Key:*, Tag:*, y Relation:* (en todos los idiomas diferentes). Descripciones, imágenes, etiquetas relacionadas, etc. se extraen de ellas.</p>
             languages: |

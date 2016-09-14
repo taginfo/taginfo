@@ -168,7 +168,7 @@ pages:
             <p>Lưu ý rằng taginfo chỉ hiển thị dữ liệu này. Các dữ liệu phải được sửa đổi tại nguồn gốc.</p>
         description:
             db: |
-                <p>Thống kê về các chìa khóa, thẻ, và loại quan hệ được tạo ra từ <a class="extlink" href="http://planet.openstreetmap.org/">cơ sở dữ liệu OSM</a> (hoặc một bản trích) cũng như các bản đồ trình bày sự phân phối địa lý của các nốt và lối.</p>
+                <p>Thống kê về các chìa khóa, thẻ, và loại quan hệ được tạo ra từ <a class="extlink" href="https://planet.openstreetmap.org/">cơ sở dữ liệu OSM</a> (hoặc một bản trích) cũng như các bản đồ trình bày sự phân phối địa lý của các nốt và lối.</p>
             wiki: |
                 <p><a class="extlink" href="//wiki.openstreetmap.org/wiki/Vi:Main_Page">Wiki OSM</a> được truy cập và tất cả mọi trang Key:*, Tag:*, và Relation:* (trong các ngôn ngữ) được phân tích. Các miêu tả, hình ảnh, thẻ liên quan, v.v. được lấy từ các trang này.</p>
             languages: |

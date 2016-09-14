@@ -236,7 +236,7 @@ pages:
             intro: 現在使用している情報源の一覧です。将来的には他の情報源も組み込むかもしれません。
         description:
             db: |
-                <p>キー、タグ、リレーション種別に関する統計は、 <a class="extlink" href="http://planet.openstreetmap.org/">OSM データベース</a>（またはそれを展開したもの）から作成されます。ノードやウェイの地理的な分布を表す地図も同様です。</p>
+                <p>キー、タグ、リレーション種別に関する統計は、 <a class="extlink" href="https://planet.openstreetmap.org/">OSM データベース</a>（またはそれを展開したもの）から作成されます。ノードやウェイの地理的な分布を表す地図も同様です。</p>
             wiki: |
                 <p><a class="extlink" href="//wiki.openstreetmap.org/">OSM ウィキ</a>が読み取られ、（各言語の）すべての Key:*, Tag:*, Relation:* ページが解析されます。説明、画像、関連タグなどが、そこから抽出されます。</p>
             languages: |

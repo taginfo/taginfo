@@ -237,7 +237,7 @@ pages:
             intro: Here is a list of currently used sources. More sources might be integrated in the future.
         description:
             db: |
-                <p>Statistics about keys, tags, and relation types are generated from the <a class="extlink" href="http://planet.openstreetmap.org/">OSM database</a> (or an extract) as well as the maps that show the geographic distribution of nodes and ways.</p>
+                <p>Statistics about keys, tags, and relation types are generated from the <a class="extlink" href="https://planet.openstreetmap.org/">OSM database</a> (or an extract) as well as the maps that show the geographic distribution of nodes and ways.</p>
             wiki: |
                 <p>The <a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> is read and all Key:*, Tag:*, and Relation:* pages (in all the different languages) are analyzed. Descriptions, images, related tags, etc. are extracted from them.</p>
             languages: |

@@ -255,7 +255,7 @@ pages:
             db: |
                 <p>Le statistiche sulle chiavi, tag e sui tipi di relazioni
                 sono generate dal <a class="extlink"
-                href="http://planet.openstreetmap.org/">database OSM</a> (o da
+                href="https://planet.openstreetmap.org/">database OSM</a> (o da
                 un suo estratto) e dalla stesse fonte provengono le mappe che
                 mostrano la distribuzione geografica dei nodi e dei percorsi
                 (way).</p>

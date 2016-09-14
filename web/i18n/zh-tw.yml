@@ -232,7 +232,7 @@ pages:
             intro: 這是目前使用的資料來源列表，未來可能會整合更多來源。
         description:
             db: |
-                <p>關於鍵、標籤和關係類型的統計數據皆產生自 <a class="extlink" href="http://planet.openstreetmap.org/">OSM 資料庫</a>（或某個提取檔），跟地圖上的節點和路徑一樣。</p>
+                <p>關於鍵、標籤和關係類型的統計數據皆產生自 <a class="extlink" href="https://planet.openstreetmap.org/">OSM 資料庫</a>（或某個提取檔），跟地圖上的節點和路徑一樣。</p>
             wiki: |
                 <p><a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> 已被讀取，而且所有鍵:*、標籤:* 和關係:* 頁面（在所有不同語言）已被分析。描述、圖片、相關標籤等皆由它們取出。</p>
             languages: |

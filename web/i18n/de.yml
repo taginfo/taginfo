@@ -252,7 +252,7 @@ pages:
             intro: Dies ist eine Liste der derzeit verwendeten Datenquellen. Weitere Datenquellen werden in der Zukunft vielleicht ergänzt.
         description:
             db: |
-                <p>Statistiken über Keys, Tags, und Relations-Typen, sowie Karten für die geographische Verteilung der Nodes und Ways, werden aus der <a class="extlink" href="http://planet.openstreetmap.org/">OSM-Datenbank</a> (oder einem Extrakt) generiert.</p>
+                <p>Statistiken über Keys, Tags, und Relations-Typen, sowie Karten für die geographische Verteilung der Nodes und Ways, werden aus der <a class="extlink" href="https://planet.openstreetmap.org/">OSM-Datenbank</a> (oder einem Extrakt) generiert.</p>
             wiki: |
                 <p>Das <a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> wird gelesen und alle Key:*-, Tag:*-, und Relation:*-Seiten (in allen Sprachen) analysiert. Beschreibungen, Bilder, verwandte Tags, usw. werden aus den Seiten extrahiert.</p>
             languages: |

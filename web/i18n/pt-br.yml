@@ -167,7 +167,7 @@ pages:
         description:
             db: |
                 <p>Estatísticas sobre chaves, etiquetas e tipos de relação são geradas a partir da
-                <a class="extlink" href="http://planet.openstreetmap.org/">base de dados do OpenStreetMap</a>
+                <a class="extlink" href="https://planet.openstreetmap.org/">base de dados do OpenStreetMap</a>
                 (ou de um <i>extract</i>), assim como os mapas que mostram a distribuição geográfica de pontos e linhas.</p>
             wiki: |
                 <p>A <a class="extlink" href="//wiki.openstreetmap.org/">wiki do OpenStreetMap</a>
