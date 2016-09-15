@@ -302,7 +302,7 @@ pages:
         no_description_in_wiki: Tento klíč nemá na wiki žádný popis v angličtině. (Viz také záložku "Wiki".)
         filter:
             label: |
-                 Filter:
+                 Filter: Filtr
             none: Žádný filtr
             nodes: Pouze uzly
             ways: Pouze cesty
