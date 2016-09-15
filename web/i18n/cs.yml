@@ -12,7 +12,7 @@ osm:
     relation: Relace
     relations: Relace
     relation_type: Typ relace
-    relation_types: Typy relace
+    relation_types: Typy relací
     relation_member: Člen relace
     relation_members: Členy relace
     relation_member_nodes: Členské uzly
@@ -76,7 +76,7 @@ misc:
     ways_tooltip: Počet cest (celkový počet a procento ze všech cest).
     relations_tooltip: Počet relací (celkový počet a procento ze všech relací).
     values_tooltip: Počet různých hodnot tohoto klíče.
-    users_tooltip: Počet uživatelů, které naposledy změnili objekty s tímto klíčem.
+    users_tooltip: Počet uživatelů, kteří naposledy změnili objekty s tímto klíčem.
     prevalent_values: Převažující hodnoty
     prevalent_values_tooltip: Až deset nejběžnějších hodnot tohoto klíče (pouze pokud více než 1% značek s tímto klíčem má tuto hodnotu).
     in_wiki_tooltip: Má přinejmenším jednu wikistránku.
@@ -187,7 +187,7 @@ pages:
                 <p>Chcete-li si hrát s daty, které taginfo používá, můžete si stáhnout
                 pravidelně aktualizované databázové soubory Sqlite. Data již pro vás byla připravena.
                 Podívejte se na <a href="/download">stránku stahování</a>, kde je seznam souborů. Povšimněte si,
-                že některé z těchto souborů jsou celkem velké. Pokud je chcete stahovat pravidleně,
+                že některé z těchto souborů jsou celkem velké. Pokud je chcete stahovat pravidelně,
                 kontaktujte spráce serveru, který používáte, nebo nás kontaktuje na mailing listu.</p>
                 <h3>Licence</h3>
                 <p>Data dostupná na taginfo jsou licencovaná pod licencí ODbL,
@@ -198,7 +198,7 @@ pages:
             text: |
                 <p>Software taginfo byl vytvořen a je udržován
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochenem Topfem</a>.
-                Desing webových stránek byl vytvořen
+                Design webových stránek byl vytvořen
                 <a class="extlink" href="http://www.ctd-studio.co.uk/">Christianem Topfem</a>.</p>
                 <h3>Překlady</h3>
                 <p>Potřebujeme překladatele uživatelského rozhraní taginfo. Podívejte se na <a
@@ -416,7 +416,7 @@ pages:
             info: Tato data jsou poskytována projektem pro taginfo pomocí 'souboru JSON projektu', který je nalinkován výše. Viz <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>, kde je popis formátu.
         tags:
             title: Značky používané tímto projektem
-            intro: Tato data jsou poskytována projektem a občas nejsou komplentí. Pro podrobnosti se podívejte na dokumentaci projektu.
+            intro: Tato data jsou poskytována projektem a občas nejsou kompletní. Pro podrobnosti se podívejte na dokumentaci projektu.
             description: Jak se tento klíč/značka používá v projektu
             count_all_tooltip: Počet objektů v databází s tímto klíčem/značkou
             objects_tooltip: Typ objektů použitých projektem
@@ -456,7 +456,7 @@ sources:
         description: Názvy jazyků, jejich kódy atd. z registrů IANA a Unicode.
     projects:
         name: Projekty
-        description: Extenrí projekty a značky a klíče z OSM, které používají.
+        description: Externí projekty a značky a klíče z OSM, které používají.
 
 reports:
     characters_in_keys:
@@ -527,7 +527,7 @@ reports:
                 se používají pro označování řetězců v různých programovacích jazycích
                 nebo mají zvláštní význam v XML, HTML, URL a dalších místech.
                 Rovnítko se často používá jako oddělovač mezi klíčem a hodnotou
-                ve značce. Klíče, které jsou v tomto seznamu ale nejsou nutně
+                ve značce. Klíče, které jsou v tomto seznamu, ale nejsou nutně
                 špatné. Ovšem v mnoha případech vznikly omylem a měly by být
                 opraveny.</p>
         rest:
@@ -563,7 +563,7 @@ reports:
             na jinou wiki stránku. Chcete-li to udělat, pak jen přidejte jeden řádek s
             <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>název stránky</i>]]</tt>
             do wiki stránky.</p>
-        also_show_keys: Také zobrazuje klíče, které nemají wiki stránku v angličtině, ale mají ji v nějakém jiném jazyce.
+        also_show_keys: Také zobrazit klíče, které nemají wiki stránku v angličtině, ale mají ji v nějakém jiném jazyce.
         table:
             create_wiki_page: Vytvořit wiki stránku...
     key_lengths:
@@ -578,7 +578,7 @@ reports:
             key_length: Délka klíče
             number_of_keys: Počet klíčů
     language_comparison_table_for_keys_in_the_wiki:
-        name: Srovnání jazyků pro klíče na wiki
+        name: Srovnání jazyků klíčů na wiki
         icons:
             template: Stránka je na wiki a obsahuje standardní šablonu.
             error: Stránka je na wiki, obsahuje standardní šablonu, ale nelze ji zpracovat.
@@ -655,7 +655,7 @@ reports:
         name: Historický vývoj
         intro: |
             Vývoj některých důležitých statistik během času. Tato data byla
-            získána pomocí tagino, mezery se mohou vyskytovat, když taginfo
+            získána pomocí taginfo, mezery se mohou vyskytovat, když taginfo
             den z nějakého důvodu neběželo.
         keys:
             title: Unikátní klíče
@@ -667,7 +667,7 @@ reports:
         name: Wiki obrázky
         intro: |
             Obrázky se na wiki používají pro ilustraci značek v různých
-            jazycích. Někdy je varianta obrázky z jednoho nebo jiného jazyka
+            jazycích. Někdy je varianta obrázku z jednoho nebo jiného jazyka
             lepší. Ale někdy má smysl mít různé obrázky v různých jazycích
             kvůli různému kulturnímu pozadí a podobně.
     wiki_problems:
