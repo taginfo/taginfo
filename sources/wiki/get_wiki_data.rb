@@ -188,6 +188,22 @@ class WikiPage
         end
     end
 
+    def set_osmcarto_rendering(ititle, db)
+        @image = ''
+        if ititle.nil?
+            puts "ERROR: invalid osmcarto-rendering: page='#{title}' image=nil"
+            db.execute("INSERT INTO problems (location, reason, title, lang, key, value) VALUES ('Template:Key/Value/RelationDescription', 'osmcarto-rendering parameter empty', ?, ?, ?, ?)", [title, lang, key, value])
+        elsif IMAGE_TITLE_FORMAT.match(ititle)
+            @image = "File:#{$2}"
+            if ! PAGE_TITLE_FORMAT.match(ititle)
+                puts "WARN: possible invalid character in osmcarto-rendering image title: page='#{title}' image='#{ititle}'"
+            end
+        else
+            puts "ERROR: invalid osmcarto-rendering: page='#{title}' image='#{ititle}'"
+            db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'invalid osmcarto-rendering parameter', ?, ?, ?, ?, ?)", [title, lang, key, value, ititle])
+        end
+    end
+
     def parse_type(param_name, param, db)
         if param.is_a?(Array)
             if param.size > 1
@@ -286,6 +302,12 @@ class WikiPage
             img = template.named_parameters['image'][0]
             if img.class != Template
                 set_image(img, db)
+            end
+        end
+        if template.named_parameters['osmcarto-rendering']
+            img = template.named_parameters['osmcarto-rendering'][0]
+            if img.class != Template
+                set_osmcarto_rendering(img, db)
             end
         end
         if template.named_parameters['group']
