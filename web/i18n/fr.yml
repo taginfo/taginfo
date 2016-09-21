@@ -107,12 +107,13 @@ help:
             pagedown: PgDn
             esc: Esc
             tab: TAB
-        home_page: Page de démarrage
-        keys_page: Liste des clés
-        tags_page: Liste des tags
-        relations_page: Liste des relations
-        projects_page: Liste des projets
-        compare_page: Comparaisons
+        home_page: Page d'accueil
+        keys_page: Page "Clés"
+        tags_page: Page "Tags"
+        relations_page: Page "Relations"
+        reports_page: Page "Rapports"
+        projects_page: Page "Projets"
+        compare_page: Page "Comparaison de clés/tags"
         first_page: Première page
         prev_page: Page précédente
         next_page: Page suivante
