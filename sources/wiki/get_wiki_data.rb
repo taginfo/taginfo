@@ -418,7 +418,7 @@ class KeyOrTagPage < WikiPage
 
     def insert(db)
         db.execute(
-            "INSERT INTO wikipages (lang, tag, key, value, title, body, tgroup, type, has_templ, parsed, redirect_target, description, image, osmcarto_rendering, on_node, on_way, on_area, on_relation, tags_implies, tags_combination, tags_linked, status, statuslink, wikidata) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [
+            "INSERT INTO wikipages (lang, tag, key, value, title, body, tgroup, type, has_templ, parsed, redirect_target, description, image, osmcarto_rendering, on_node, on_way, on_area, on_relation, tags_implies, tags_combination, tags_linked, status, statuslink, wikidata) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [
             lang,
             tag,
             key,
@@ -429,6 +429,7 @@ class KeyOrTagPage < WikiPage
             type,
             has_templ  ? 1 : 0,
             parsed     ? 1 : 0,
+            redirect_target,
             description,
             image,
             osmcarto_rendering,
@@ -472,7 +473,7 @@ class RelationPage < WikiPage
 
     def insert(db)
         db.execute(
-            "INSERT INTO relation_pages (lang, rtype, title, body, tgroup, type, has_templ, parsed, redirect_target, description, image, osmcarto_rendering, tags_linked) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [
+            "INSERT INTO relation_pages (lang, rtype, title, body, tgroup, type, has_templ, parsed, redirect_target, description, image, osmcarto_rendering, tags_linked) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [
             lang,
             rtype,
             title,
@@ -481,6 +482,7 @@ class RelationPage < WikiPage
             type,
             has_templ  ? 1 : 0,
             parsed     ? 1 : 0,
+            redirect_target,
             description,
             image,
             osmcarto_rendering,
