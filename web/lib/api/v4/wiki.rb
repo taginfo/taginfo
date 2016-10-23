@@ -41,24 +41,27 @@ class Taginfo < Sinatra::Base
     end
 
     api(0, 'wiki/problems', {
-        :description => 'Show problems encountered by taginfo while parsing the wiki',
+        :description => 'Show problems encountered by taginfo while parsing wiki pages',
         :paging => :optional,
-        :sort => %w( location reason title tag lang ),
+        :sort => %w( location reason title lang tag ),
         :result => paging_results([
             [:location, :STRING, 'Problem location'],
             [:reason,   :STRING, 'Problem reason'],
             [:title,    :STRING, 'Wiki page title where the problem occurred'],
             [:lang,     :STRING, 'Wiki language of this page'],
-            [:key,      :STRING, 'Key this wiki page is for'],
-            [:value,    :STRING, 'Value this wiki page is for (or null if key page)'],
+            [:key,      :STRING, 'Key this wiki page is for (or null if neither "Key" nor "Tag" page)'],
+            [:value,    :STRING, 'Value this wiki page is for (or null if not a "Tag" page)'],
             [:info,     :STRING, 'Informational string dependant on type of problem']
         ]),
         :example => { },
-        :ui => ''
+        :ui => '/taginfo/wiki-problems#list'
     }) do
-        total = @db.count('wiki.problems').get_first_i
+        total = @db.count('wiki.problems').
+            condition_if("location || ' ' || reason || ' ' || title || ' ' LIKE ? ESCAPE '@'", like_contains(params[:query])).
+            get_first_i
 
         res = @db.select('SELECT * FROM wiki.problems').
+            condition_if("location || ' ' || reason || ' ' || title || ' ' LIKE ? ESCAPE '@'", like_contains(params[:query])).
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.location :location
                 o.location :reason

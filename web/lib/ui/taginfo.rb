@@ -139,4 +139,17 @@ class Taginfo < Sinatra::Base
         erb :'taginfo/project_error_log'
     end
 
+    get '/taginfo/wiki-problems' do
+        @title = "Wiki problems"
+        @section = 'taginfo'
+        @section_title = t.taginfo.meta
+
+        @stats_reason = @db.select("SELECT reason, count(*) AS count FROM wiki.problems GROUP BY reason ORDER BY reason").execute()
+        @stats_lang   = @db.select("SELECT lang,   count(*) AS count FROM wiki.problems GROUP BY lang   ORDER BY lang").execute()
+
+        javascript_for(:flexigrid, :d3)
+        javascript "#{ r18n.locale.code }/taginfo/wiki-problems"
+        erb :'taginfo/wiki-problems'
+    end
+
 end
