@@ -19,6 +19,7 @@ CREATE TABLE wikipages (
     type               TEXT,
     has_templ          INTEGER,
     parsed             INTEGER,
+    redirect_target    TEXT,
     description        TEXT,
     image              TEXT,
     osmcarto_rendering TEXT,
@@ -37,18 +38,20 @@ CREATE TABLE wikipages (
 DROP TABLE IF EXISTS relation_pages;
 
 CREATE TABLE relation_pages (
-    lang             TEXT,
-    rtype            TEXT,
-    title            TEXT,
-    body             TEXT,
-    tgroup           TEXT,
-    type             TEXT,
-    has_templ        INTEGER,
-    parsed           INTEGER,
-    description      TEXT,
-    image            TEXT,
-    tags_linked      TEXT,
-    status           TEXT
+    lang               TEXT,
+    rtype              TEXT,
+    title              TEXT,
+    body               TEXT,
+    tgroup             TEXT,
+    type               TEXT,
+    has_templ          INTEGER,
+    parsed             INTEGER,
+    redirect_target    TEXT,
+    description        TEXT,
+    image              TEXT,
+    osmcarto_rendering TEXT,
+    tags_linked        TEXT,
+    status             TEXT
 );
 
 DROP TABLE IF EXISTS wiki_images;
