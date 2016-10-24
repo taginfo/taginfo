@@ -159,3 +159,16 @@ CREATE TABLE words (
     words TEXT
 );
 
+DROP TABLE IF EXISTS redirects;
+
+CREATE TABLE redirects (
+    from_title TEXT,
+    from_lang  TEXT,
+    from_key   TEXT,
+    from_value TEXT,
+    to_title   TEXT,
+    to_lang    TEXT,
+    to_key     TEXT,
+    to_value   TEXT
+);
+
