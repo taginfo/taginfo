@@ -14,7 +14,7 @@
         <td class="box">
             <p><%= h(t.pages.sources.list.intro) %></p>
 <% Source.visible.each_with_index do |source, n| c = (n%2!=0) ? ' even' : '' %>
-            <h2><img src="<%= source.imgurl(24) %>" width="24" height="24" alt=""/> <%= h(t.sources[source.id].name) %></h2>
+            <h2><%= h(t.sources[source.id].name) %></h2>
             <%= t.pages.sources.description[source.id] %>
 <% end %>
         </td>
@@ -28,7 +28,7 @@
                 </tr>
 <% Source.visible.each_with_index do |source, n| c = (n%2!=0) ? ' even' : '' %>
                 <tr>
-                    <td class="<%= c %>"><img src="<%= source.imgurl(16) %>" width="16" height="16" alt=""/>&nbsp;&nbsp;<%= h(t.sources[source.id].name) %>
+                    <td class="<%= c %>"><%= h(t.sources[source.id].name) %>
                     <td class="tc<%= c %> nowrap"><%= h(source.data_until) %> UTC</td>
                     <td class="tc<%= c %> nowrap"><%= h(source.update_start.to_s + ' ' + t.pages.sources.to + ' ' + source.update_end.to_s) %> UTC</td>
                 </tr>
