@@ -103,6 +103,14 @@ module SQL
             get_first_value('SELECT value FROM master_stats WHERE key=?', key).to_i
         end
 
+        def quote(data)
+            SQLite3::Database.quote(data)
+        end
+
+        def quote_and_join_array(data)
+            data.map{ |v| "'" + SQLite3::Database.quote(v) + "'" }.join(',')
+        end
+
     end
 
     # Representation of a SELECT query.

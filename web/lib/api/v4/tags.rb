@@ -1,4 +1,16 @@
 # web/lib/api/v4/tags.rb
+
+def add_image_data(images, data, image_type)
+    unless data[image_type].nil?
+        data_title = data[image_type]['image']
+        if images[data_title] != 1
+            %w(width height mime image_url thumb_url_prefix thumb_url_suffix).each do |arg|
+                data[image_type][arg] = images[data_title][arg]
+            end
+        end
+    end
+end
+
 class Taginfo < Sinatra::Base
 
     api(4, 'tags/list', {
@@ -22,14 +34,25 @@ class Taginfo < Sinatra::Base
             [:on_area,                  :BOOL,   'Is this a tag for areas?'],
             [:on_relation,              :BOOL,   'Is this a tag for relations?'],
             [:wiki,                     :HASH,   'Hash with language codes as keys and values are hashes with the following keys:', [
-                [:description,      :STRING, 'Description of this tag.' ],
-                [:image,            :STRING, 'Wiki page title of associated image.' ],
-                [:width,            :INT,    'Width of image.' ],
-                [:height,           :INT,    'Height of image.' ],
-                [:mime,             :STRING, 'MIME type of image.' ],
-                [:image_url,        :STRING, 'Image URL' ],
-                [:thumb_url_prefix, :STRING, 'Prefix of thumbnail URL.' ],
-                [:thumb_url_suffix, :STRING, 'Suffix of thumbnail URL.' ]
+                [:description,          :STRING, 'Description of this tag.' ],
+                [:image,                :HASH,   'Optional hash with information about descriptive image:', [
+                    [:image,            :STRING, 'Wiki page title of associated image.' ],
+                    [:width,            :INT,    'Width of image.' ],
+                    [:height,           :INT,    'Height of image.' ],
+                    [:mime,             :STRING, 'MIME type of image.' ],
+                    [:image_url,        :STRING, 'Image URL' ],
+                    [:thumb_url_prefix, :STRING, 'Prefix of thumbnail URL.' ],
+                    [:thumb_url_suffix, :STRING, 'Suffix of thumbnail URL.' ]
+                ]],
+                [:osmcarto_rendering,   :HASH,   'Optional hash with information about default rendering:', [
+                    [:image,            :STRING, 'Wiki page title of associated image.' ],
+                    [:width,            :INT,    'Width of image.' ],
+                    [:height,           :INT,    'Height of image.' ],
+                    [:mime,             :STRING, 'MIME type of image.' ],
+                    [:image_url,        :STRING, 'Image URL' ],
+                    [:thumb_url_prefix, :STRING, 'Prefix of thumbnail URL.' ],
+                    [:thumb_url_suffix, :STRING, 'Suffix of thumbnail URL.' ]
+                ]]
             ]]
         ]),
         :notes => 'You have to either use the <tt>key</tt> parameter or the <tt>tags</tt> parameter.',
@@ -42,32 +65,34 @@ class Taginfo < Sinatra::Base
             tags = @db.execute("SELECT DISTINCT value FROM wiki.wikipages WHERE key=? AND value IS NOT NULL AND type='page' ORDER BY value", pkey).map{ |row| [ pkey, row['value'] ] }
         else
             last_key = nil
-            tags = params[:tags].split(',').map{ |tag|
+            tags = params[:tags].split(',').map do |tag|
                 kv = tag.split('=', 2)
                 if kv.size == 1
                     kv = [last_key, kv]
                 end
                 last_key = kv[0]
                 kv
-            }
+            end
         end
 
         res = []
+        images = {}
         tags.each do |key, value|
             data = @db.get_first_row("SELECT * FROM db.tags WHERE key=? AND value=?", key, value)
 
             if data
                 if data['in_wiki'].to_i != 0
-                    wiki = @db.execute("SELECT * FROM wiki.wikipages LEFT OUTER JOIN wiki_images USING (image) WHERE key=? AND value=? ORDER BY lang", key, value)
-
+                    wiki = @db.execute("SELECT * FROM wiki.wikipages WHERE key=? AND value=? ORDER BY lang", key, value)
                     data['wiki'] = {}
                     wiki.each do |w|
                         info = { 'description' => w['description'] }
                         unless w['image'].nil?
-                            info['image'] = {}
-                            %w(image width height mime image_url thumb_url_prefix thumb_url_suffix).each do |arg|
-                                info['image'][arg] = w[arg]
-                            end
+                            images[w['image']] = 1
+                            info['image'] = {'image' => w['image']}
+                        end
+                        unless w['osmcarto_rendering'].nil?
+                            images[w['osmcarto_rendering']] = 1
+                            info['osmcarto_rendering'] = {'image' => w['osmcarto_rendering']}
                         end
                         data['wiki'][w['lang']] = info
                     end
@@ -79,6 +104,24 @@ class Taginfo < Sinatra::Base
                 end
 
                 res << data
+            end
+        end
+
+        if images.size > 0
+            image_list = @db.quote_and_join_array(images.keys)
+            image_rows = @db.execute("SELECT * FROM wiki.wiki_images WHERE image IN (#{ image_list })")
+
+            image_rows.each do |row|
+                images[row['image']] = row
+            end
+        end
+
+        res.each do |data|
+            unless data['wiki'].nil?
+                data['wiki'].values.each do |data_for_lang|
+                    add_image_data(images, data_for_lang, 'image')
+                    add_image_data(images, data_for_lang, 'osmcarto_rendering')
+                end
             end
         end
 
