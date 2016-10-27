@@ -61,7 +61,7 @@ TaginfoConfig.read
 
 #------------------------------------------------------------------------------
 
-DATA_UNTIL = SQL::Database.init('../../data');
+DATA_UNTIL = SQL::Database.init(TaginfoConfig.get('paths.data_dir', '../../data'));
 
 class Taginfo < Sinatra::Base
 

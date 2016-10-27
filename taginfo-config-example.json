@@ -37,6 +37,15 @@
         // optional attribution for base image, will show up below all maps
         "image_attribution": ""
     },
+    "paths": {
+        // Directory where the database files for use by taginfo are kept.
+        "data_dir": "../../data",
+        // Directory for the compressed database files for download. If you
+        // change this, you might have also to change the "download" symbolic
+        // link in the "web/public" directory and/or add this path to your
+        // web server config.
+        "download_dir": "../../download"
+    },
     // "XAPI" and "JOSM" buttons on key/tag pages
     "xapi": {
         // XAPI/JOSM buttons are disabled if more than this many results are expected

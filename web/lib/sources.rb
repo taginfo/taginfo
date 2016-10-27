@@ -32,8 +32,10 @@ class Source
         @update_end   = update_end
         @visible      = visible
 
-        @dbsize = File.size("../../data/#{ dbname }").to_bytes rescue 0
-        @dbpack = File.size("../../download/#{ dbname }.bz2").to_bytes rescue 0
+        data_dir = TaginfoConfig.get('paths.data_dir', '../../data')
+        download_dir = TaginfoConfig.get('paths.download_dir', '../../download')
+        @dbsize = File.size("#{ data_dir }/#{ dbname }").to_bytes rescue 0
+        @dbpack = File.size("#{ download_dir }/#{ dbname }.bz2").to_bytes rescue 0
 
         @@sources << self
     end
