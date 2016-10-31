@@ -282,7 +282,7 @@ var taginfo_taglist = (function(){
             columns.push('count');
         }
 
-        return '<table class="taginfo-taglist"><thead><tr>' +
+        return '<table class="wikitable taginfo-taglist"><thead><tr>' +
             columns.map(function(column) {
                 return th(column_name(options.lang, column));
             }).join('') + '</tr></thead><tbody>' +
