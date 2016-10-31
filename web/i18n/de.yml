@@ -222,7 +222,7 @@ pages:
                 <h3>Code</h3>
                 <p>Alle Software hinter dieser taginfo-Webseite ist Open Source.
                 Du kannst sie von
-                <a class="extlink" href="https://github.com/joto/taginfo/">GitHub</a>
+                <a class="extlink" href="https://github.com/taginfo/taginfo/">GitHub</a>
                 bekommen. Einen Überblick der <a class="extlink"
                 href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">taginfo-Architektur</a>
                 gibt es im Wiki.</p>
@@ -234,7 +234,7 @@ pages:
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Running">OSM-Wiki</a>.</p>
                 <h3>Fehlermeldungen und Verbesserungswünsche</h3>
                 <p>Fehlermeldungen und Verbesserungswünsche sollten an den<a class="extlink"
-                href="https://github.com/joto/taginfo/issues">GitHub issue tracker</a>
+                href="https://github.com/taginfo/taginfo/issues">GitHub issue tracker</a>
                 gerichtet werden. Oder Du kannst Dich auf der Mailingliste bei
                 uns melden.</p>
                 <h3>Kontakt/Mailingliste</h3>

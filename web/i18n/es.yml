@@ -208,7 +208,7 @@ pages:
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">wiki de OSM</a>.</p>
                 <h3>Código</h3>
                 <p>Todo el software detrás de los sitios de taginfo es Open Source. Puede conseguirlo en
-                <a class="extlink" href="https://github.com/joto/taginfo/">GitHub</a>. Para una visión general
+                <a class="extlink" href="https://github.com/taginfo/taginfo/">GitHub</a>. Para una visión general
                 véase la página sobre la <a class="extlink"
                 href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">aquitectura
                 de taginfo</a> en la wiki de OSM.</p>
@@ -220,7 +220,7 @@ pages:
                 de OSM</a>.</p>
                 <h3>Informes de errores y solicitudes de funcionalidad</h3>
                 <p>Los informes de errores y solicitudes de funcionalidad deben ser dirigidos al <a class="extlink"
-                href="https://github.com/joto/taginfo/issues">gestor de incidencias de GitHub</a>. O usted puede
+                href="https://github.com/taginfo/taginfo/issues">gestor de incidencias de GitHub</a>. O usted puede
                 comunicarse con nosotros en la lista de correo.</p>
                 <h3>Contacto/Lista de correo</h3>
                 <p>Contáctese con nosotros en la

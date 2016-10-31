@@ -9,8 +9,8 @@
 <% else %>
     <table class="list">
         <th></th>
-        <th><a class="extlink" style="float: right;" href="https://github.com/joto/taginfo/blob/master/web/i18n/en.yml">on github</a>English</th>
-        <th><a class="extlink" style="float: right;" href="https://github.com/joto/taginfo/blob/master/web/i18n/<%= @lang.downcase %>.yml">on github</a>
+        <th><a class="extlink" style="float: right;" href="https://github.com/taginfo/taginfo/blob/master/web/i18n/en.yml">on github</a>English</th>
+        <th><a class="extlink" style="float: right;" href="https://github.com/taginfo/taginfo/blob/master/web/i18n/<%= @lang.downcase %>.yml">on github</a>
 <form action="/taginfo/i18n" method="GET">
     <select id="lang" name="lang">
 <% r18n.available_locales.sort{ |a,b| a.title <=> b.title }.each do |locale| %>

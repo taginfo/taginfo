@@ -207,7 +207,7 @@ pages:
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM wiki</a>.</p>
                 <h3>Zdrojový kód</h3>
                 <p>Všechen software pracující na taginfo serveru je Open Source. Můžete si ho stáhnout na
-                <a class="extlink" href="https://github.com/joto/taginfo/">GitHubu</a>. Pro základní přehled
+                <a class="extlink" href="https://github.com/taginfo/taginfo/">GitHubu</a>. Pro základní přehled
                 se podívejte na stránku o <a class="extlink"
                 href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">architektuře taginfo
                 </a> na wiki OSM.</p>
@@ -219,7 +219,7 @@ pages:
                 </a>.</p>
                 <h3>Hlášení chyb a požadavky na změny</h3>
                 <p>Hlášení chyb a požadavky na změny byste měli směřovat na <a class="extlink"
-                href="https://github.com/joto/taginfo/issues">GitHub</a>. Nebo nás můžete
+                href="https://github.com/taginfo/taginfo/issues">GitHub</a>. Nebo nás můžete
                 kontaktovat na mailing listu.</p>
                 <h3>Contact/Mailing list</h3>
                 <p>Kontaktujte nás na

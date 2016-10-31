@@ -204,7 +204,7 @@ pages:
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM вікі</a>.</p>
                 <h3>Код</h3>
                 <p>Усе ПЗ сайтів taginfo є Open Source. Ви можете знайти його на
-                <a class="extlink" href="https://github.com/joto/taginfo/">GitHub</a>. Для огляду
+                <a class="extlink" href="https://github.com/taginfo/taginfo/">GitHub</a>. Для огляду
                 дивіться сторінку про <a class="extlink"
                 href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">архітектуру
                 taginfo</a> на OSM вікі.</p>
@@ -216,7 +216,7 @@ pages:
                 вікі</a>.</p>
                 <h3>Повідомлення про помилки та пропозиції</h3>
                 <p>Повідомлення про помилки та пропозиції направляйте на <a class="extlink"
-                href="https://github.com/joto/taginfo/issues">GitHub</a>. Або ви можете
+                href="https://github.com/taginfo/taginfo/issues">GitHub</a>. Або ви можете
                 зв'язатись з нами через список розсилки.</p>
                 <h3>Контакти/Список розсилки</h3>
                 <p>Зв'яжіться з нами через

@@ -78,7 +78,7 @@ All the Javascript and CSS needed is already included.
 
 ## Thanks
 
-To the [many people](https://github.com/joto/taginfo/graphs/contributors)
+To the [many people](https://github.com/taginfo/taginfo/graphs/contributors)
 helping with bug reports, code and translations.
 
 

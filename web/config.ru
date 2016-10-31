@@ -20,7 +20,7 @@ today = Time.now.strftime('%Y-%m-%d')
 log = File.new("#{LOGDIR}/taginfo-#{ today }.log", "a")
 log.sync = true
 
-# https://github.com/joto/taginfo/issues/34
+# https://github.com/taginfo/taginfo/issues/34
 #$stdout.reopen(log)
 $stderr.reopen(log)
 

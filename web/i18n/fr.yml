@@ -209,7 +209,7 @@ pages:
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">le wiki d'OSM</a>.</p>
                 <h3>Code</h3>
                 <p>Tous le code des sites taginfo est Open Source. Vous pouvez l'obtenir sur
-                <a class="extlink" href="https://github.com/joto/taginfo/">GitHub</a>. Pour avoir une vue d'ensemble
+                <a class="extlink" href="https://github.com/taginfo/taginfo/">GitHub</a>. Pour avoir une vue d'ensemble
                 regardez la page à propos de l'<a class="extlink"
                 href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">architecture de
                 taginfo</a> sur le wiki d'OSM.</p>
@@ -221,7 +221,7 @@ pages:
                 </a>.</p>
                 <h3>Rapports de bogues et demandes d'améliorations</h3>
                 <p>Les signalements de bogues et les demandes d'améliorations doivent être faites sur le <a class="extlink"
-                href="https://github.com/joto/taginfo/issues">gestionnaire d'erreurs de GitHub</a>. Vous pouvez aussi
+                href="https://github.com/taginfo/taginfo/issues">gestionnaire d'erreurs de GitHub</a>. Vous pouvez aussi
                 en discuter avec nous sur la liste de diffusion.</p>
                 <h3>Contact / liste de diffusion</h3>
                 <p>Contactez nous sur la

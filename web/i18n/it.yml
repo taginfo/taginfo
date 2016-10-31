@@ -221,7 +221,7 @@ pages:
                 di OSM</a>.</p> <h3>Codice</h3> <p>Tutto il software che sta
                 dietro i siti taginfo è Open Source. Puoi ottenerlo sul sito <a
                 class="extlink"
-                href="https://github.com/joto/taginfo/">GitHub</a>. Per
+                href="https://github.com/taginfo/taginfo/">GitHub</a>. Per
                 informazioni introduttive consulta la pagina sull'<a
                 class="extlink"
                 href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">architettura
@@ -236,7 +236,7 @@ pages:
                 di nuove funzioni</h3> <p>Le segnalazioni di bug e le richieste
                 di nuove funzioni devono essere fatte direttamente nel<a
                 class="extlink"
-                href="https://github.com/joto/taginfo/issues">GitHub issue
+                href="https://github.com/taginfo/taginfo/issues">GitHub issue
                 tracker</a>. In alternativa puoi discutere la cosa nella
                 mailing list.</p> <h3>Contatti/Mailing list</h3> <p>Potete
                 contattarci nella <a class="extlink"

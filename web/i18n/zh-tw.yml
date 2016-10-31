@@ -203,7 +203,7 @@ pages:
                 在 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM wiki</a> 上。</p>
                 <h3>程式碼</h3>
                 <p>所有在 taginfo 網站背後的軟體都是開放原始碼的，你能
-                在 <a class="extlink" href="https://github.com/joto/taginfo/">GitHub</a> 上取得。軟體總覽
+                在 <a class="extlink" href="https://github.com/taginfo/taginfo/">GitHub</a> 上取得。軟體總覽
                 請見 OSM Wiki 上關於 <a class="extlink"
                 href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">taginfo 架構</a>
                 的頁面。</p>
@@ -215,7 +215,7 @@ pages:
                 wiki 上</a>。</p>
                 <h3>漏洞回報和功能要求</h3>
                 <p>漏洞回報和功能要求應該要直接在 <a class="extlink"
-                href="https://github.com/joto/taginfo/issues">GitHub 議題追蹤</a>上反應，
+                href="https://github.com/taginfo/taginfo/issues">GitHub 議題追蹤</a>上反應，
                 或者你也可以來郵件列表上跟我們講。</p>
                 <h3聯絡/郵件列表</h3>
                 <p>若你有疑問或想要幫助，
