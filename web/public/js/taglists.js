@@ -308,6 +308,7 @@ var taginfo_taglist = (function(){
 
         jQuery.getJSON(url, function(json) {
             element.html(create_table(json.data, options));
+            jQuery("td a img", element).parent().parent().css("text-align", "center");
         });
     }
 
