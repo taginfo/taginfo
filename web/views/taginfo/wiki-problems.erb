@@ -19,17 +19,29 @@
         </table>
     </div>
     <div id="stats-reason">
-        <table class="list">
+        <table class="list" style="float: left; margin-right: 20px;">
             <tr><th>Count</th><th>Reason</th></tr>
 <% @stats_reason.each do |row| %>
             <tr><td style="text-align: right"><%= row['count'] %></td><td><%= row['reason'] %></td></tr>
 <% end %>
         </table>
+        <table class="list">
+            <tr><th>Count</th><th>Reason</th></tr>
+<% @stats_reason.sort{ |a, b| b['count'] <=> a['count'] }.each do |row| %>
+            <tr><td style="text-align: right"><%= row['count'] %></td><td><%= row['reason'] %></td></tr>
+<% end %>
+        </table>
     </div>
     <div id="stats-lang">
-        <table class="list">
+        <table class="list" style="float: left; margin-right: 20px;">
             <tr><th>Count</th><th>Language</th></tr>
 <% @stats_lang.each do |row| %>
+            <tr><td style="text-align: right"><%= row['count'] %></td><td><%= row['lang'] %></td></tr>
+<% end %>
+        </table>
+        <table class="list">
+            <tr><th>Count</th><th>Language</th></tr>
+<% @stats_lang.sort{ |a, b| b['count'] <=> a['count'] }.each do |row| %>
             <tr><td style="text-align: right"><%= row['count'] %></td><td><%= row['lang'] %></td></tr>
 <% end %>
         </table>
