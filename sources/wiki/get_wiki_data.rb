@@ -59,7 +59,7 @@ PAGE_TITLE_FORMAT = %r{^([-_:.,= ()]|[[:alnum:]])+$}
 IMAGE_TITLE_FORMAT = %r{^(file|image):(.*)$}i
 
 # Language code format (something link 'en', or 'en_GB')
-LANGUAGE_CODE = %r{^[a-z][a-z](_[a-z]+)?$}i
+LANGUAGE_CODE = %r{^[a-z]{2}(-[a-z0-9]+)?$}i
 
 CONTAINS_SLASH = %r{/}
 
@@ -107,7 +107,7 @@ class WikiPage
 
     # Has this wiki page a name that we can understand and process?
     def check_title
-        return :wrong_lang_format     if @lang  !~ /^[a-z]{2}(-[a-z0-9-]+)?$/
+        return :wrong_lang_format     unless LANGUAGE_CODE.match(@lang)
         return :lang_is_en            if @title =~ /^en:/i
         return :value_in_key_page     if defined?(@ttype) && @ttype == 'key' && ! @value.nil?
         return :no_value_for_tag_page if defined?(@ttype) && @ttype == 'tag' &&   @value.nil?
