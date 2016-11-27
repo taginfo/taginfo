@@ -276,8 +276,11 @@ class WikiPage
     def parse_template_wikipedia(template, level, db)
         lang = template.parameters[0]
         title = template.parameters[1]
+        if lang == ''
+            lang = 'en'
+        end
         puts "#{ "  " * level }Wikipedia link: lang='#{lang}' title='#{title}'"
-        if LANGUAGE_CODE.match(lang)
+        if lang == 'commons' || LANGUAGE_CODE.match(lang)
             if defined?(@key)
                 db.execute("INSERT INTO tag_page_wikipedia_links (key, value, lang, title) VALUES (?, ?, ?, ?)", [@key, @value, lang, title])
             elsif defined?(@rtype)
