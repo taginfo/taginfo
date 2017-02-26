@@ -77,7 +77,6 @@ int main(int argc, char* argv[]) {
     std::string selection_database_name;
 
     std::string location_index_type = "SparseMmapArray";
-    const auto& map_factory = osmium::index::MapFactory<osmium::unsigned_object_id_type, rough_position_type>::instance();
 
     double top    =   90;
     double right  =  180;
@@ -102,9 +101,10 @@ int main(int argc, char* argv[]) {
                 break;
             case 'I':
                 std::cout << "Available index types:\n";
-                for (const auto& map_type : map_factory.map_types()) {
-                    std::cout << "  " << map_type << "\n";
-                }
+                std::cout << "  DenseMemArray\n";
+                std::cout << "  DenseMmapArray\n";
+                std::cout << "  SparseMemArray\n";
+                std::cout << "  SparseMmapArray\n";
                 exit(0);
             case 's':
                 selection_database_name = optarg;
@@ -146,10 +146,12 @@ int main(int argc, char* argv[]) {
     GeoDistribution::set_dimensions(width, height);
     osmium::io::File infile(argv[optind]);
     Sqlite::Database db(argv[optind+1], SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE);
-    MapToInt<rough_position_type> map_to_int(left, bottom, right, top, width, height);
 
-    auto location_index = map_factory.create_map(location_index_type);
-    TagStatsHandler handler(db, selection_database_name, map_to_int, min_tag_combination_count, vout, std::move(location_index));
+    MapToInt map_to_int{left, bottom, right, top, width, height};
+
+    const bool better_resolution = (width * height) >= (1 << 16);
+    LocationIndex location_index{location_index_type, better_resolution};
+    TagStatsHandler handler{db, selection_database_name, map_to_int, min_tag_combination_count, vout, location_index};
 
     osmium::io::Reader reader(infile);
     osmium::apply(reader, handler);

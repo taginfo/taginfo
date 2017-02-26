@@ -22,6 +22,7 @@
 
 */
 
+#include <cassert>
 #include <fstream>
 #include <iostream>
 #include <map>
@@ -32,6 +33,10 @@
 #include <google/sparse_hash_map>
 
 #include <osmium/handler.hpp>
+#include <osmium/index/map/dense_mem_array.hpp>
+#include <osmium/index/map/dense_mmap_array.hpp>
+#include <osmium/index/map/sparse_mem_array.hpp>
+#include <osmium/index/map/sparse_mmap_array.hpp>
 #include <osmium/util/memory.hpp>
 #include <osmium/util/verbose_output.hpp>
 
@@ -40,6 +45,70 @@
 #include "sqlite.hpp"
 #include "statistics_handler.hpp"
 #include "string_store.hpp"
+
+/**
+ * Stores the location of nodes. Lookup is by node ID.
+ *
+ * Locations are stored with reduced resolution, either in 16 bit or 32 bit.
+ * The bool better_resolution on the constructor decides which is used.
+ */
+class LocationIndex {
+
+    template <typename T>
+    using map_type = osmium::index::map::Map<osmium::unsigned_object_id_type, T>;
+
+    std::unique_ptr<map_type<uint16_t>> m_location_index_16bit{nullptr};
+    std::unique_ptr<map_type<uint32_t>> m_location_index_32bit{nullptr};
+
+    template <typename T>
+    static std::unique_ptr<map_type<T>> create_map(const std::string& location_index_type) {
+        osmium::index::register_map<osmium::unsigned_object_id_type, T, osmium::index::map::DenseMemArray>("DenseMemArray");
+        osmium::index::register_map<osmium::unsigned_object_id_type, T, osmium::index::map::DenseMmapArray>("DenseMmapArray");
+        osmium::index::register_map<osmium::unsigned_object_id_type, T, osmium::index::map::SparseMemArray>("SparseMemArray");
+        osmium::index::register_map<osmium::unsigned_object_id_type, T, osmium::index::map::SparseMmapArray>("SparseMmapArray");
+        const auto& map_factory = osmium::index::MapFactory<osmium::unsigned_object_id_type, T>::instance();
+        return map_factory.create_map(location_index_type);
+    }
+
+public:
+
+    LocationIndex(const std::string& index_type_name, bool better_resolution) {
+        if (better_resolution) {
+            m_location_index_32bit = std::move(create_map<uint32_t>(index_type_name));
+        } else {
+            m_location_index_16bit = std::move(create_map<uint16_t>(index_type_name));
+        }
+    }
+
+    void set(osmium::unsigned_object_id_type id, uint32_t value) {
+        if (value == std::numeric_limits<uint32_t>::max()) {
+            return;
+        }
+        if (m_location_index_16bit) {
+            assert(value <= std::numeric_limits<uint16_t>::max());
+            m_location_index_16bit->set(id, uint16_t(value));
+        } else {
+            m_location_index_32bit->set(id, value);
+        }
+    }
+
+    uint32_t get(osmium::unsigned_object_id_type id) const {
+        return m_location_index_16bit ? uint32_t(m_location_index_16bit->get(id))
+                                      : m_location_index_32bit->get(id);
+    }
+
+    size_t size() const noexcept {
+        return m_location_index_16bit ? m_location_index_16bit->size()
+                                      : m_location_index_32bit->size();
+    }
+
+    size_t used_memory() const noexcept {
+        return m_location_index_16bit ? m_location_index_16bit->used_memory()
+                                      : m_location_index_32bit->used_memory();
+    }
+
+}; // class LocationIndex
+
 
 /**
  * Holds some counter for nodes, ways, and relations.
@@ -231,9 +300,9 @@ class TagStatsHandler : public osmium::handler::Handler {
 
     StatisticsHandler m_statistics_handler;
 
-    MapToInt<rough_position_type> m_map_to_int;
+    MapToInt& m_map_to_int;
 
-    std::unique_ptr<storage_type> m_location_index;
+    LocationIndex& m_location_index;
 
     osmium::item_type m_last_type;
 
@@ -266,10 +335,10 @@ public:
 
     TagStatsHandler(Sqlite::Database& database,
                     const std::string& selection_database_name,
-                    MapToInt<rough_position_type>& map_to_int,
+                    MapToInt& map_to_int,
                     unsigned int min_tag_combination_count,
                     osmium::util::VerboseOutput& vout,
-                    std::unique_ptr<storage_type> location_index);
+                    LocationIndex& location_index);
 
     void node(const osmium::Node& node);
 

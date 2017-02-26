@@ -22,10 +22,6 @@ CXXFLAGS += -O3
 CXXFLAGS += -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -std=c++11
 CXXFLAGS += $(shell ../bin/taginfo-config.rb tagstats.cxxflags)
 
-GEODISTRIBUTION_TYPE := $(shell ../bin/taginfo-config.rb tagstats.geodistribution_int uint16_t)
-
-CXXFLAGS_FEATURES += -DTAGSTATS_GEODISTRIBUTION_INT=$(GEODISTRIBUTION_TYPE)
-
 CXXFLAGS_WARNINGS := -Wall -Wextra -pedantic -Wredundant-decls -Wdisabled-optimization -Wctor-dtor-privacy -Wnon-virtual-dtor -Woverloaded-virtual -Wsign-promo -Wold-style-cast
 
 LIB_IO     := -pthread -lexpat -lbz2 -lz

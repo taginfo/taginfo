@@ -110,11 +110,11 @@ uint64_t show_string_store_memory_usage(osmium::util::VerboseOutput& out, const 
     return string_store.get_chunk_size() * chunk_count;
 }
 
-uint64_t show_location_index_memory_usage(osmium::util::VerboseOutput& out, const storage_type* location_index) {
-    out << std::setw(8) << (location_index->used_memory() / 1024) << " kB ["
-        << "size=" << location_index->size()
+uint64_t show_location_index_memory_usage(osmium::util::VerboseOutput& out, const LocationIndex& location_index) {
+    out << std::setw(8) << (location_index.used_memory() / 1024) << " kB ["
+        << "size=" << location_index.size()
         << "]\n";
-    return location_index->used_memory();
+    return location_index.used_memory();
 }
 
 void TagStatsHandler::timer_info(const char* msg) {
@@ -291,7 +291,7 @@ void TagStatsHandler::collect_tag_stats(const osmium::OSMObject& object) {
         const auto keyvalue = std::make_pair(tag.key(), tag.value());
 
         if (object.type() == osmium::item_type::node) {
-            rough_position_type location = m_map_to_int(static_cast<const osmium::Node&>(object).location());
+            auto location = m_map_to_int(static_cast<const osmium::Node&>(object).location());
             stat.distribution.add_coordinate(location);
             const auto gd_it = m_key_value_geodistribution.find(keyvalue);
             if (gd_it != m_key_value_geodistribution.end()) {
@@ -303,7 +303,7 @@ void TagStatsHandler::collect_tag_stats(const osmium::OSMObject& object) {
                 const auto gd_it = m_key_value_geodistribution.find(keyvalue);
                 for (const auto& wn : wnl) {
                     try {
-                        rough_position_type location = m_location_index->get(wn.positive_ref());
+                        auto location = m_location_index.get(wn.positive_ref());
                         stat.distribution.add_coordinate(location);
                         if (gd_it != m_key_value_geodistribution.end()) {
                             gd_it->second.add_coordinate(location);
@@ -324,10 +324,10 @@ void TagStatsHandler::collect_tag_stats(const osmium::OSMObject& object) {
 
 TagStatsHandler::TagStatsHandler(Sqlite::Database& database,
         const std::string& selection_database_name,
-        MapToInt<rough_position_type>& map_to_int,
+        MapToInt& map_to_int,
         unsigned int min_tag_combination_count,
         osmium::util::VerboseOutput& vout,
-        std::unique_ptr<storage_type> location_index) :
+        LocationIndex& location_index) :
     Handler(),
     m_vout(vout),
     m_min_tag_combination_count(min_tag_combination_count),
@@ -341,7 +341,7 @@ TagStatsHandler::TagStatsHandler(Sqlite::Database& database,
     m_database(database),
     m_statistics_handler(database),
     m_map_to_int(map_to_int),
-    m_location_index(std::move(location_index)),
+    m_location_index(location_index),
     m_last_type(osmium::item_type::node)
 {
     if (!selection_database_name.empty()) {
@@ -388,7 +388,7 @@ TagStatsHandler::TagStatsHandler(Sqlite::Database& database,
 void TagStatsHandler::node(const osmium::Node& node) {
     m_statistics_handler.node(node);
     collect_tag_stats(node);
-    m_location_index->set(node.positive_id(), m_map_to_int(node.location()));
+    m_location_index.set(node.positive_id(), m_map_to_int(node.location()));
 }
 
 void TagStatsHandler::way(const osmium::Way& way) {
@@ -630,7 +630,7 @@ void TagStatsHandler::write_to_database() {
     total += show_string_store_memory_usage(m_vout, m_string_store);
 
     m_vout << "  location_index: .......... ";
-    total += show_location_index_memory_usage(m_vout, m_location_index.get());
+    total += show_location_index_memory_usage(m_vout, m_location_index);
 
     m_vout << "  ======================================\n";
     m_vout << "  total: ................... " << std::setw(8) << (total / 1024) << " kB\n";
