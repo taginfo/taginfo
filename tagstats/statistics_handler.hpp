@@ -3,7 +3,7 @@
 
 /*
 
-  Copyright (C) 2012-2016 Jochen Topf <jochen@topf.org>.
+  Copyright (C) 2012-2017 Jochen Topf <jochen@topf.org>.
 
   This file is part of Tagstats.
 
@@ -37,7 +37,7 @@ class StatisticsHandler : public osmium::handler::Handler {
 
 public:
 
-    StatisticsHandler(Sqlite::Database& database) :
+    explicit StatisticsHandler(Sqlite::Database& database) :
         Handler(),
         m_stats(),
         m_stat_names(nullptr),
@@ -90,7 +90,7 @@ public:
         }
     }
 
-    void node(const osmium::Node& node) {
+    void node(const osmium::Node& node) noexcept {
         update_common_stats(node);
         m_stats.nodes++;
         if (m_tag_count == 0) {
@@ -109,7 +109,7 @@ public:
         m_stats.sum_node_version += m_version;
     }
 
-    void way(const osmium::Way& way) {
+    void way(const osmium::Way& way) noexcept {
         update_common_stats(way);
         m_stats.ways++;
         if (way.is_closed()) {
@@ -120,7 +120,7 @@ public:
         }
         m_stats.way_tags += m_tag_count;
 
-        auto way_nodes_size = way.nodes().size();
+        const auto way_nodes_size = way.nodes().size();
         m_stats.way_nodes += way_nodes_size;
         if (m_tag_count > static_cast<int64_t>(m_stats.max_tags_on_way)) {
             m_stats.max_tags_on_way = m_tag_count;
@@ -147,14 +147,14 @@ public:
         }
     }
 
-    void relation(const osmium::Relation& relation) {
+    void relation(const osmium::Relation& relation) noexcept {
         update_common_stats(relation);
         m_stats.relations++;
         if (m_id > static_cast<int64_t>(m_stats.max_relation_id)) {
             m_stats.max_relation_id = m_id;
         }
         m_stats.relation_tags += m_tag_count;
-        auto member_count = relation.members().size();
+        const auto member_count = relation.members().size();
         m_stats.relation_members += member_count;
         if (m_tag_count > static_cast<int64_t>(m_stats.max_tags_on_relation)) {
             m_stats.max_tags_on_relation = m_tag_count;
@@ -188,16 +188,16 @@ public:
         Sqlite::Statement statement_insert_into_main_stats(m_database, "INSERT INTO stats (key, value) VALUES (?, ?);");
         m_database.begin_transaction();
 
-        for (int i=0; m_stat_names[i]; ++i) {
+        for (int i = 0; m_stat_names[i]; ++i) {
             statement_insert_into_main_stats
-            .bind_text(m_stat_names[i])
-            .bind_int64(reinterpret_cast<uint64_t*>(&m_stats)[i])
-            .execute();
+                .bind_text(m_stat_names[i])
+                .bind_int64(reinterpret_cast<uint64_t*>(&m_stats)[i])
+                .execute();
         }
         statement_insert_into_main_stats
-        .bind_text("nodes_with_tags")
-        .bind_int64(m_stats.nodes - m_stats.nodes_without_tags)
-        .execute();
+            .bind_text("nodes_with_tags")
+            .bind_int64(m_stats.nodes - m_stats.nodes_without_tags)
+            .execute();
 
         m_database.commit();
     }
@@ -249,12 +249,12 @@ private:
     osmium::object_version_type m_version;
     int m_tag_count;
 
-    void update_common_stats(const osmium::OSMObject& object) {
+    void update_common_stats(const osmium::OSMObject& object) noexcept {
         m_id        = object.id();
         m_version   = object.version();
         m_tag_count = object.tags().size();
 
-        auto uid = object.uid();
+        const auto uid = object.uid();
         if (uid == 0) {
             m_stats.anon_user_objects++;
         }
@@ -262,7 +262,7 @@ private:
             m_stats.max_user_id = uid;
         }
 
-        auto changeset = object.changeset();
+        const auto changeset = object.changeset();
         if (changeset > static_cast<int64_t>(m_stats.max_changeset_id)) {
             m_stats.max_changeset_id = changeset;
         }

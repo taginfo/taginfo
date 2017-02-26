@@ -3,7 +3,7 @@
 
 /*
 
-  Copyright (C) 2012-2016 Jochen Topf <jochen@topf.org>.
+  Copyright (C) 2012-2017 Jochen Topf <jochen@topf.org>.
 
   This file is part of Tagstats.
 
@@ -125,22 +125,26 @@ struct Counter {
     uint32_t nodes() const noexcept {
         return count[0];
     }
+
     uint32_t ways() const noexcept {
         return count[1];
     }
+
     uint32_t relations() const noexcept {
         return count[2];
     }
+
     uint32_t all() const noexcept {
         return count[0] + count[1] + count[2];
     }
-};
 
-typedef google::sparse_hash_map<const char*, Counter, djb2_hash, eqstr> value_hash_map_type;
+}; // struct Counter
 
-typedef google::sparse_hash_map<osmium::user_id_type, uint32_t> user_hash_map_type;
+using value_hash_map_type = google::sparse_hash_map<const char*, Counter, djb2_hash, eqstr>;
 
-typedef google::sparse_hash_map<const char*, Counter, djb2_hash, eqstr> combination_hash_map_type;
+using user_hash_map_type = google::sparse_hash_map<osmium::user_id_type, uint32_t>;
+
+using combination_hash_map_type = google::sparse_hash_map<const char*, Counter, djb2_hash, eqstr>;
 
 /**
  * A KeyStats object holds all statistics for an OSM tag key.
@@ -172,11 +176,11 @@ public:
     }
 
     void update(const char* value, const osmium::OSMObject& object, StringStore& string_store) {
-        int type = osmium::item_type_to_nwr_index(object.type());
+        const int type = osmium::item_type_to_nwr_index(object.type());
 
         key.count[type]++;
 
-        auto values_iterator = values_hash.find(value);
+        const auto values_iterator = values_hash.find(value);
         if (values_iterator == values_hash.end()) {
             Counter counter;
             counter.count[type] = 1;
@@ -198,7 +202,7 @@ public:
 
 }; // class KeyStats
 
-typedef std::unordered_map<const char*, KeyStats, djb2_hash, eqstr> key_hash_map_type;
+using key_hash_map_type = std::unordered_map<const char*, KeyStats, djb2_hash, eqstr>;
 
 /**
  * A KeyValueStats object holds some statistics for an OSM tag (key/value pair).
@@ -218,8 +222,8 @@ public:
 
 }; // class KeyValueStats
 
-typedef std::unordered_map<const char*, KeyValueStats, djb2_hash, eqstr> key_value_hash_map_type;
-typedef std::unordered_map<std::pair<const char*, const char*>, GeoDistribution, djb2_hash, eqstr> key_value_geodistribution_hash_map_type;
+using key_value_hash_map_type = std::unordered_map<const char*, KeyValueStats, djb2_hash, eqstr>;
+using key_value_geodistribution_hash_map_type = std::unordered_map<std::pair<const char*, const char*>, GeoDistribution, djb2_hash, eqstr>;
 
 struct RelationRoleStats {
     uint32_t node;
@@ -241,7 +245,7 @@ public:
     RelationTypeStats() = default;
 
     void add(const osmium::Relation& relation) {
-        m_count++;
+        ++m_count;
 
         for (const auto& member : relation.members()) {
             RelationRoleStats& r = m_role_counts[member.role()];

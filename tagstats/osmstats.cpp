@@ -1,6 +1,6 @@
 /*
 
-  Copyright (C) 2012-2016 Jochen Topf <jochen@topf.org>.
+  Copyright (C) 2012-2017 Jochen Topf <jochen@topf.org>.
 
   This file is part of Tagstats.
 
@@ -30,16 +30,16 @@
 int main(int argc, char *argv[]) {
     if (argc != 3) {
         std::cerr << "Usage: " << argv[0] << " OSMFILE DATABASE" << std::endl;
-        exit(1);
+        std::exit(1);
     }
 
-    osmium::io::File infile(argv[1]);
+    osmium::io::File input_file{argv[1]};
 
-    Sqlite::Database db(argv[2], SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE);
+    Sqlite::Database db{argv[2], SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE};
     db.exec("CREATE TABLE stats (key TEXT, value INT64);");
 
-    StatisticsHandler handler(db);
-    osmium::io::Reader reader(infile);
+    StatisticsHandler handler{db};
+    osmium::io::Reader reader{input_file};
     osmium::apply(reader, handler);
 }
 

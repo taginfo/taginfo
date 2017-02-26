@@ -1,6 +1,6 @@
 /*
 
-  Copyright (C) 2015 Jochen Topf <jochen@topf.org>.
+  Copyright (C) 2015-2017 Jochen Topf <jochen@topf.org>.
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@
 
 #include "sqlite.hpp"
 
-const char* category_to_string(int8_t category) {
+const char* category_to_string(int8_t category) noexcept {
     switch (category) {
         // letters
         case  1: return "Lu"; // uppercase letter
@@ -93,7 +93,7 @@ void get_unicode_info(const char* text, const icu::UnicodeString& us, Sqlite::St
     bool unusual = false;
     for (icu::StringCharacterIterator it(us); it.hasNext(); it.next()) {
         UChar32 codepoint = it.current32();
-        int8_t chartype = u_charType(codepoint);
+        const int8_t chartype = u_charType(codepoint);
         if (! u_isprint(codepoint)) {
             unusual = true;
             break;
@@ -119,14 +119,14 @@ void get_unicode_info(const char* text, const icu::UnicodeString& us, Sqlite::St
         for (icu::StringCharacterIterator it(us); it.hasNext(); it.next(), ++num) {
             UChar32 codepoint = it.current32();
 
-            int8_t chartype = u_charType(codepoint);
+            const int8_t chartype = u_charType(codepoint);
 
             char buffer[100];
             UErrorCode errorCode = U_ZERO_ERROR;
             u_charName(codepoint, U_UNICODE_CHAR_NAME, buffer, sizeof(buffer), &errorCode);
 
             UCharDirection direction = u_charDirection(codepoint);
-            int32_t block = u_getIntPropertyValue(codepoint, UCHAR_BLOCK);
+            const int32_t block = u_getIntPropertyValue(codepoint, UCHAR_BLOCK);
 
             icu::UnicodeString ustr(codepoint);
             std::string str;
@@ -150,7 +150,7 @@ void get_unicode_info(const char* text, const icu::UnicodeString& us, Sqlite::St
 }
 
 void find_unicode_info(const char* begin, const char* end, Sqlite::Statement& insert) {
-    for (; begin != end; begin += strlen(begin) + 1) {
+    for (; begin != end; begin += std::strlen(begin) + 1) {
         get_unicode_info(begin, icu::UnicodeString::fromUTF8(begin), insert);
     }
 }
@@ -163,15 +163,15 @@ int main(int argc, char *argv[]) {
 
     std::string data;
 
-    Sqlite::Database db(argv[1], SQLITE_OPEN_READWRITE);
-    Sqlite::Statement select(db, "SELECT key FROM keys WHERE characters NOT IN ('plain', 'colon') ORDER BY key");
+    Sqlite::Database db{argv[1], SQLITE_OPEN_READWRITE};
+    Sqlite::Statement select{db, "SELECT key FROM keys WHERE characters NOT IN ('plain', 'colon') ORDER BY key"};
     while (select.read()) {
         data += select.get_text_ptr(0);
         data += '\0';
     }
 
 
-    Sqlite::Statement insert(db, "INSERT INTO key_characters (key, num, utf8, codepoint, block, category, direction, name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    Sqlite::Statement insert{db, "INSERT INTO key_characters (key, num, utf8, codepoint, block, category, direction, name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"};
     db.begin_transaction();
     find_unicode_info(data.c_str(), data.c_str() + data.size(), insert);
     db.commit();

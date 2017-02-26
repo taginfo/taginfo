@@ -1,6 +1,6 @@
 /*
 
-  Copyright (C) 2015 Jochen Topf <jochen@topf.org>.
+  Copyright (C) 2015-2017 Jochen Topf <jochen@topf.org>.
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ const int MAX_EDIT_DISTANCE = 2;
  * the Levenshtein algorithm I copied from somewhere on the Internet, but it
  * is fast enough for our purpose here.
  */
-unsigned int edit_distance(const char* str1, int len1, const char* str2, int len2) {
+unsigned int edit_distance(const char* str1, int len1, const char* str2, int len2) noexcept {
     static unsigned d[MAX_STRLEN][MAX_STRLEN];
 
     d[0][0] = 0;
@@ -59,7 +59,7 @@ unsigned int edit_distance(const char* str1, int len1, const char* str2, int len
 /**
  * Are the two given strings similar according to some metric?
  */
-int similarity(const char* str1, int len1, const char* str2, int len2) {
+int similarity(const char* str1, int len1, const char* str2, int len2) noexcept {
     // Do not check very short strings, because they create too many false
     // positives.
     if (len1 < MIN_STRLEN || len2 < MIN_STRLEN) {
@@ -80,12 +80,12 @@ int similarity(const char* str1, int len1, const char* str2, int len2) {
 
     // Do not check strings if they have very different lengths, they can't
     // be similar according to Levenshtein anyway.
-    if (abs(len1 - len2) >= MAX_EDIT_DISTANCE) {
+    if (std::abs(len1 - len2) >= MAX_EDIT_DISTANCE) {
         return -1;
     }
 
     // Check Levenshtein edit distance.
-    int distance = edit_distance(str1, len1, str2, len2);
+    const int distance = edit_distance(str1, len1, str2, len2);
     if (distance <= MAX_EDIT_DISTANCE) {
         return distance;
     }
@@ -100,10 +100,10 @@ int similarity(const char* str1, int len1, const char* str2, int len2) {
 void find_similarities(const char* begin, const char* end, Sqlite::Statement& insert) {
     int len1;
     for (const char* str1 = begin; str1 != end; str1 += len1 + 1) {
-        len1 = strlen(str1);
+        len1 = std::strlen(str1);
         int len2;
         for (const char* str2 = str1 + len1; str2 != end; str2 += len2 + 1) {
-            len2 = strlen(str2);
+            len2 = std::strlen(str2);
             int sim = similarity(str1, len1, str2, len2);
             if (sim >= 0) {
                 //std::cout << "[" << str1 << "][" << str2 << "]\n";
@@ -121,14 +121,14 @@ int main(int argc, char *argv[]) {
 
     std::string data;
 
-    Sqlite::Database db(argv[1], SQLITE_OPEN_READWRITE);
-    Sqlite::Statement select(db, "SELECT key FROM keys ORDER BY key");
+    Sqlite::Database db{argv[1], SQLITE_OPEN_READWRITE};
+    Sqlite::Statement select{db, "SELECT key FROM keys ORDER BY key"};
     while (select.read()) {
         data += select.get_text_ptr(0);
         data += '\0';
     }
 
-    Sqlite::Statement insert(db, "INSERT INTO similar_keys (key1, key2, similarity) VALUES (?, ?, ?)");
+    Sqlite::Statement insert{db, "INSERT INTO similar_keys (key1, key2, similarity) VALUES (?, ?, ?)"};
     db.begin_transaction();
     find_similarities(data.c_str(), data.c_str() + data.size(), insert);
     db.commit();

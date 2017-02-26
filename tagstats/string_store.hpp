@@ -3,7 +3,7 @@
 
 /*
 
-  Copyright (C) 2012-2016 Jochen Topf <jochen@topf.org>.
+  Copyright (C) 2012-2017 Jochen Topf <jochen@topf.org>.
 
   This file is part of Tagstats.
 
@@ -54,7 +54,7 @@ class StringStore {
 
 public:
 
-    StringStore(size_t chunk_size) :
+    explicit StringStore(size_t chunk_size) :
         m_chunk_size(chunk_size),
         m_chunks() {
         add_chunk();
@@ -67,7 +67,7 @@ public:
      * allocated.
      */
     const char* add(const char* string) {
-        size_t len = std::strlen(string) + 1;
+        const size_t len = std::strlen(string) + 1;
 
         assert(len <= m_chunk_size);
 
@@ -85,18 +85,19 @@ public:
 
     // These functions get you some idea how much memory was
     // used.
-    size_t get_chunk_size() const {
+    size_t get_chunk_size() const noexcept {
         return m_chunk_size;
     }
 
-    size_t get_chunk_count() const {
+    size_t get_chunk_count() const noexcept {
         return m_chunks.size();
     }
 
-    size_t get_used_bytes_in_last_chunk() const {
+    size_t get_used_bytes_in_last_chunk() const noexcept {
+        assert(!m_chunks.empty());
         return m_chunks.front().size();
     }
 
-};
+}; // class StringStore
 
 #endif // TAGSTATS_STRING_STORE_HPP

@@ -3,7 +3,7 @@
 
 /*
 
-  Copyright (C) 2012-2016 Jochen Topf <jochen@topf.org>.
+  Copyright (C) 2012-2017 Jochen Topf <jochen@topf.org>.
 
   This file is part of Tagstats.
 
@@ -104,7 +104,7 @@ public:
  */
 class GeoDistribution {
 
-    typedef std::vector<bool> geo_distribution_type;
+    using geo_distribution_type = std::vector<bool>;
 
     /**
      * Contains a pointer to a bitset that gives us the distribution.
@@ -154,7 +154,7 @@ public:
         }
         if (m_cells == 0) {
             m_location = n;
-            m_cells++;
+            ++m_cells;
             c_distribution_all[n] = true;
         } else if (m_cells == 1 && m_location != n) {
             m_distribution.reset(new geo_distribution_type(c_width * c_height));
@@ -162,11 +162,11 @@ public:
             c_distribution_all[m_location] = true;
             m_distribution->operator[](n) = true;
             c_distribution_all[n] = true;
-            m_cells++;
+            ++m_cells;
         } else if (m_cells == 1 && m_location == n) {
             // nothing to do
         } else if (! m_distribution->operator[](n)) {
-            m_cells++;
+            ++m_cells;
             m_distribution->operator[](n) = true;
             c_distribution_all[n] = true;
         }
@@ -189,11 +189,11 @@ public:
             gdImageDestroy(m_image);
         }
 
-        void set_pixel(int x, int y) {
+        void set_pixel(int x, int y) noexcept {
             gdImageSetPixel(m_image, x, y, m_color);
         }
 
-        gdImagePtr data() {
+        gdImagePtr data() const noexcept {
             return m_image;
         }
 
@@ -206,7 +206,7 @@ public:
         int size;
         void* data;
 
-        Png(Image& image) :
+        explicit Png(Image& image) :
             size(0),
             data(gdImagePngPtr(image.data(), &size)) {
         }
@@ -233,20 +233,20 @@ public:
      * @returns Pointer to memory area with PNG image.
      */
     Png create_png() const {
-        Image image(c_width, c_height);
+        Image image{c_width, c_height};
 
         if (m_cells == 1) {
-            int y = m_location / c_width;
-            int x = m_location - (y * c_width);
+            const int y = m_location / c_width;
+            const int x = m_location - (y * c_width);
             image.set_pixel(x, y);
         } else if (m_cells >= 2) {
-            int n=0;
-            for (int y=0; y < c_height; y++) {
-                for (int x=0; x < c_width; x++) {
+            int n = 0;
+            for (int y = 0; y < c_height; ++y) {
+                for (int x = 0; x < c_width; ++x) {
                     if (m_distribution->operator[](n)) {
                         image.set_pixel(x, y);
                     }
-                    n++;
+                    ++n;
                 }
             }
         }
@@ -255,14 +255,14 @@ public:
     }
 
     static Png create_empty_png() {
-        Image image(c_width, c_height);
-        return Png(image);
+        Image image{c_width, c_height};
+        return Png{image};
     }
 
     /**
      * Return the number of cells set.
      */
-    unsigned int cells() const {
+    unsigned int cells() const noexcept {
         return m_cells;
     }
 
@@ -271,15 +271,15 @@ public:
      * object.
      */
     static unsigned int count_all_set_cells() {
-        int c=0;
-        for (int n=0; n < c_width*c_height; ++n) {
+        int c = 0;
+        for (int n = 0; n < c_width * c_height; ++n) {
             if (c_distribution_all[n]) {
-                c++;
+                ++c;
             }
         }
         return c;
     }
 
-};
+}; // class GeoDistribution
 
 #endif // TAGSTATS_GEODISTRIBUTION_HPP

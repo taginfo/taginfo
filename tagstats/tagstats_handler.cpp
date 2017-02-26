@@ -1,6 +1,6 @@
 /*
 
-  Copyright (C) 2012-2016 Jochen Topf <jochen@topf.org>.
+  Copyright (C) 2012-2017 Jochen Topf <jochen@topf.org>.
 
   This file is part of Tagstats.
 
@@ -43,7 +43,7 @@ struct split_result {
     size_t vsize;
 };
 
-split_result split_key_value(const char* kv) {
+split_result split_key_value(const char* kv) noexcept {
     const char* v = std::strchr(kv, '=');
 
     if (v) {
