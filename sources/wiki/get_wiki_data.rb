@@ -19,7 +19,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013-2015  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2013-2017  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -105,6 +105,24 @@ class WikiPage
         @@pages[@title] = self
     end
 
+    def parse_title(title)
+        tag       = title.gsub(/^([^:]+:)?(Key|Tag):/, '') # complete tag (key=value)
+        key       = tag.sub(/=.*/, '')                     # key
+        if tag =~ /=/
+            value = tag.sub(/.*?=/, '')                    # value (if any)
+        else
+            value = nil
+        end
+        if title =~ /^(.*):(Key|Tag):/
+            lang  = $1.downcase                            # IETF language tag
+            ttype = $2.downcase                            # 'tag' or 'key'
+        else
+            lang  = 'en'
+        end
+
+        [lang, tag, key, value, ttype]
+    end
+
     # Has this wiki page a name that we can understand and process?
     def check_title
         return :wrong_lang_format     unless LANGUAGE_CODE.match(@lang)
@@ -134,6 +152,10 @@ class WikiPage
         else
             puts "  Redirect to '#{m[1]}'"
             @redirect_target = m[1]
+            if title =~ /(^|:)(Key|Tag):/
+                (to_lang, to_tag, to_key, to_value, to_ttype) = parse_title(@redirect_target)
+            end
+            db.execute("INSERT INTO redirects (from_title, from_lang, from_key, from_value, to_title, to_lang, to_key, to_value) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [title, lang, key, value, @redirect_target, to_lang, to_key, to_value])
         end
     end
 
@@ -397,19 +419,7 @@ class KeyOrTagPage < WikiPage
     def initialize(type, timestamp, namespace, title)
         super(type, timestamp, namespace, title)
 
-        @tag       = title.gsub(/^([^:]+:)?(Key|Tag):/, '') # complete tag (key=value)
-        @key       = @tag.sub(/=.*/, '')                    # key
-        if @tag =~ /=/
-            @value = @tag.sub(/.*?=/, '')                   # value (if any)
-        else
-            @value = nil
-        end
-        if title =~ /^(.*):(Key|Tag):/
-            @lang  = $1.downcase                            # IETF language tag
-            @ttype = $2.downcase                            # 'tag' or 'key'
-        else
-            @lang  = 'en'
-        end
+        (@lang, @tag, @key, @value, @ttype) = parse_title(title)
 
         @tags_implies     = []
         @tags_combination = []
