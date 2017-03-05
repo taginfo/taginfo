@@ -175,8 +175,9 @@ pages:
             title: Acerca de este sitio
         building_on_taginfo:
             title: Basándose en taginfo
-            text: |
+            pre: |
                 <p>Puede utilizar los datos de taginfo en sus propios proyectos:</p>
+            api: |
                 <h3>API</h3>
                 <p>Los datos de Taginfo pueden accederse a través de una API REST. Véase la
                 <a href="/taginfo/apidoc">documentación de la API</a> para los detalles, información general se
@@ -184,12 +185,14 @@ pages:
                 Los servidores que ejecutan la API de taginfo no tiene recursos ilimitados.
                 Por favor, utilice la API responsablemente. En caso de duda contáctese con los responsables del
                 sitio que está utilizando o comuníquese con nosotros en la lista de correo.</p>
+            download: |
                 <h3>Descargar</h3>
                 <p>Si desea jugar un poco con los datos utilizados por taginfo, puede descargar los
                 archivos de la base de datos Sqlite actualizados regularmente. Todo el preprocesamiento es hecho para usted.
                 Véase la <a href="/download">página de descargas</a> para obtener una lista de archivos. Tenga en cuenta que
                 algunos de estos archivos pueden llegar a ser demasiado grandes. Si desea descargar de forma regular,
                 contáctese con los responsables del sitio que está utilizando o hable con nosotros en la lista de correo.</p>
+            license: |
                 <h3>Licencia</h3>
                 <p>Los datos disponibles a través de taginfo están licenciados bajo ODbL, la
                 <a class="extlink" href="//www.openstreetmap.org/copyright">misma

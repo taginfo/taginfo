@@ -170,8 +170,9 @@ pages:
             title: 關於此網站
         building_on_taginfo:
             title: 用 taginfo 開發
-            text: |
+            pre: |
                 <p>你可以在自己的專案中使用來自 taginfo 的資料：</p>
+            api: |
                 <h3>API</h3>
                 <p>Taginfo 資料可由 REST API 存取。看看 
                 <a href="/taginfo/apidoc">API 文件</a>取得細節，一些一般資訊在 
@@ -179,12 +180,14 @@ pages:
                 運作 taginfo API 的伺服器並沒有無限的資源，
                 請負責地使用 API。有疑問請聯絡你所使用的網站的維護者
                 或在郵件列表上跟我們講。</p>
+            download: |
                 <h3>下載</h3>
                 <p>如果你想要玩玩 taginfo 用的資料，你能下載定期更新的 Sqlite 資料庫檔案，
                 所有的預先處理已經先幫你做好了。
                 看看<a href="/download">下載頁面</a>取得檔案列表。
                 注意這些檔案之中有些會非常大，如果你想定期地下載他們，
                 請聯絡你所使用的網站的維護者或在郵件列表上跟我們講。</p>
+            license: |
                 <h3>授權</h3>
                 <p>taginfo 可用的資料是採用 ODbL 授權，跟 
                 <a class="extlink" href="//www.openstreetmap.org/copyright">

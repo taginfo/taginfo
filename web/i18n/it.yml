@@ -179,9 +179,12 @@ pages:
             title: Informazioni su questo sito
         building_on_taginfo:
             title: Sviluppare con taginfo
-            text: |
+            pre: |
                 <p>Puoi usare i dati ottenuti con taginfo nei tuoi
-                progetti:</p> <h3>API</h3> <p>Puoi accedere ai dati di Taginfo
+                progetti:</p>
+            api: |
+                <h3>API</h3>
+                <p>Puoi accedere ai dati di Taginfo
                 tramite una REST API. Vedi la <a
                 href="/taginfo/apidoc">documentazione sull'API</a> per maggiori
                 dettagli, alcune informazioni generali sono presenti <a
@@ -191,7 +194,10 @@ pages:
                 taginfo API non hanno risorse illimitate. Per favore utilizza
                 le API in modo responsabile. In caso di dubbio contatta un
                 responsabile del sito che stai usando o discuti la cosa nella
-                mailing list.</p> <h3>Download</h3> <p>Se vuoi guardare dentro
+                mailing list.</p>
+            download: |
+                <h3>Download</h3>
+                <p>Se vuoi guardare dentro
                 ai dati usati da taginfo, puoi scaricare i file del database
                 Sqlite che vengono regolarmente aggiornati. Tutto il lavoro di
                 preprocessing è già stato fatto per te. Vedi la <a
@@ -199,7 +205,10 @@ pages:
                 file. Si noti che alcuni di questi possono essere
                 particolarmente grandi. Se vuoi scaricarli frequentemente,
                 contatta un responsabile del sito che stai usando o discuti la
-                cosa nella mailing list.</p> <h3>Licenza</h3> <p>I dati
+                cosa nella mailing list.</p>
+            license: |
+                <h3>Licenza</h3>
+                <p>I dati
                 disponibili tramite taginfo sono sotto la licenza ODbL, la <a
                 class="extlink" href="//www.openstreetmap.org/copyright">stessa
                 licenza dei dati OpenStreetMap</a>.</p>

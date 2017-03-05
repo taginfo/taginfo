@@ -174,8 +174,9 @@ pages:
             title: O tomto serveru
         building_on_taginfo:
             title: Stavíme na taginfo
-            text: |
+            pre: |
                 <p>Můžete používat data z taginfo ve vašich vlastních projektech:</p>
+            api: |
                 <h3>API</h3>
                 <p>K datům z Taginfo můžete přistupovat pomocí REST API. Podívejte se na
                 <a href="/taginfo/apidoc">dokumentaci API</a> pro více podrobností, nějaké obecné informace jsou
@@ -183,12 +184,14 @@ pages:
                 Servery, na kterých běží taginfo API nemají neomezené zdroje.
                 Používejte, prosím, API zodpovědně. Máte-li pochybnosti, kontaktujte správce
                 serveru, který používáte, nebo nás kontaktujte na mailing listu.</p>
+            download: |
                 <h3>Stažení</h3>
                 <p>Chcete-li si hrát s daty, které taginfo používá, můžete si stáhnout
                 pravidelně aktualizované databázové soubory Sqlite. Data již pro vás byla připravena.
                 Podívejte se na <a href="/download">stránku stahování</a>, kde je seznam souborů. Povšimněte si,
                 že některé z těchto souborů jsou celkem velké. Pokud je chcete stahovat pravidelně,
                 kontaktujte spráce serveru, který používáte, nebo nás kontaktuje na mailing listu.</p>
+            license: |
                 <h3>Licence</h3>
                 <p>Data dostupná na taginfo jsou licencovaná pod licencí ODbL,
                 <a class="extlink" href="//www.openstreetmap.org/copyright">stejnou

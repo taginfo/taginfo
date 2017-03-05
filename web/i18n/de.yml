@@ -179,8 +179,9 @@ pages:
             title: Über diese Webseite
         building_on_taginfo:
             title: Auf taginfo aufbauen
-            text: |
+            pre: |
                 <p>Du kannst die Daten von taginfo in Deinen eigenen Projekten nutzen:</p>
+            api: |
                 <h3>API</h3>
                 <p>Die taginfo-Daten sind über eine REST API zugänglich. Siehe die
                 <a href="/taginfo/apidoc">API-Dokumentation</a> für die Details,
@@ -190,6 +191,7 @@ pages:
                 viele Ressourcen. Bitte nutze die API verantwortlich. Wenn Du Dir
                 nicht sicher bist, kontaktiere die Betreiber der Webseite oder
                 melde Dich auf der Mailingliste.</p>
+            download: |
                 <h3>Download</h3>
                 <p>Wenn Du mit der Datensammlung spielen willst, die hinter
                 taginfo steht, dann kannst Du die regelmäßig aktualisierten Daten
@@ -199,6 +201,7 @@ pages:
                 dieser Dateien sehr groß werden. Wenn Du sie regelmäßig herunterladen
                 willst, dann kontaktiere die Betreiber der Webseite oder melde
                 Dich auf der Mailingliste.</p>
+            lincese: |
                 <h3>Lizenz</h3>
                 <p>Die Daten, die über taginfo zur Verfügung gestellt werden,
                 werden unter der ODbL lizensiert, die
