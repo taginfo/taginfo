@@ -61,6 +61,9 @@ TaginfoConfig.read
 
 #------------------------------------------------------------------------------
 
+ALL_SECTIONS = %w(download taginfo test)
+SECTIONS = Hash[TaginfoConfig.get('instance.sections', ALL_SECTIONS).collect { |s| [s.to_sym, s] } ]
+
 DATA_UNTIL = SQL::Database.init(TaginfoConfig.get('paths.data_dir', '../../data'));
 
 class Taginfo < Sinatra::Base
@@ -172,13 +175,10 @@ class Taginfo < Sinatra::Base
 
     #-------------------------------------
 
-    %w(about download sources).each do |page|
+    %w(about sources).each do |page|
         get '/' + page do
             @title = t.taginfo[page]
             section page
-            if File.exists?("viewsjs/#{ page }.js.erb")
-                javascript "#{ r18n.locale.code }/#{ page }"
-            end
             erb page.to_sym
         end
     end
@@ -236,9 +236,11 @@ class Taginfo < Sinatra::Base
     load 'lib/ui/relation.rb'
     load 'lib/ui/reports.rb'
     load 'lib/ui/search.rb'
-    load 'lib/ui/taginfo.rb'
     load 'lib/ui/tags.rb'
-    load 'lib/ui/test.rb'
+
+    SECTIONS.keys.each do |section|
+        load "lib/ui/#{ section }.rb"
+    end
 
     # run application
     run! if app_file == $0

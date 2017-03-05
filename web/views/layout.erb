@@ -59,8 +59,12 @@
             <a href="//www.openstreetmap.org/copyright">Data &copy; OSM contributors (ODbL)</a></div>
         <div id="footer_right">
             <a href="/sources"><%= h(t.taginfo.sources) %></a> &middot;
+<% if SECTIONS[:download] %>
             <a href="/download"><%= h(t.taginfo.download) %></a> &middot;
+<% end %>
+<% if SECTIONS[:taginfo] %>
             <a href="/taginfo/apidoc">API</a> &middot;
+<% end %>
             <a id="help_link" href="#help"><%= h(t.misc.help) %></a> &middot;
             <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo"><%= h(t.taginfo.wiki) %></a>
         </div>

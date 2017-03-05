@@ -21,7 +21,9 @@
         // to all /api responses. Use "" to not set this header, disallowing
         // external services to use your API from a browser. Set to "*" to
         // allow anybody.
-        "access_control_allow_origin": "*"
+        "access_control_allow_origin": "*",
+        // Sections of the website that are enabled.
+        "sections": ["download", "taginfo"]
     },
     // For the geodistribution map. See the wiki documentation about these settings.
     "geodistribution": {

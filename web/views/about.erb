@@ -13,7 +13,9 @@
         <td rowspan="3" class="box">
 <%= t.pages.about.building_on_taginfo.pre %>
 <%= t.pages.about.building_on_taginfo.api %>
-<%= t.pages.about.building_on_taginfo.download %>
+<%  if SECTIONS[:download] %>
+<%=   t.pages.about.building_on_taginfo.download %>
+<%  end %>
 <%= t.pages.about.building_on_taginfo.license %>
         </td>
         <td rowspan="3" class="box">
