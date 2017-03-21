@@ -304,7 +304,7 @@ pages:
         packed: Compressi
         unpacked: Decompressi
         description: Descrizione
-        note: Alcuni indici non sono presenti nel database disponibile qui per il download. La dimensione 'compressa' è la dimensione senza questi indici, la dimensione 'decompressa' include gli indici che probabilmente vorrai creare dopo ildownload.
+        note: Alcuni indici non sono presenti nel database disponibile qui per il download. La dimensione 'compressa' è la dimensione senza questi indici, la dimensione 'decompressa' include gli indici che probabilmente vorrai creare dopo il download.
     reports:
         intro: |
             I Reports mostrano i dati da prospettive differenti. Spesso
@@ -404,14 +404,14 @@ pages:
             other: Altri tag
             to_count_tooltip: Numero degli oggetti con questo tag che hanno anche l'altro tag o chiave.
             other_key_tooltip: Tags o chiave utilizzata assieme a questo tag.
-            from_count_tooltip: Numero di oggetti con l'altro tag o chiave cha hanno anche questo tag.
+            from_count_tooltip: Numero di oggetti con l'altro tag o chiave che hanno anche questo tag.
         combinations:
             title: Combinazioni
             description: Questa tabella mostra solo le combinazioni più comuni dei tag più comuni.
         geographic_distribution:
             title: Distribuzione geografica di questo tag
             relations: Le relazioni non hanno una localizzazione geografica, pertanto una mappa non può essere mostrata.
-            no_map: Spiacenti. La mappa può essere creata solo per i tag più frquenti. Potete provare ad utilizzare il collegamento a overpass turbo.
+            no_map: Spiacenti. La mappa può essere creata solo per i tag più frequenti. Potete provare ad utilizzare il collegamento a overpass turbo.
         wiki_pages:
             title: Pagine wiki su questo tag
             none_found: Non ci sono pagine wiki disponibili per questo tag.
@@ -699,7 +699,7 @@ reports:
                 <i>tag delle lingue</i> in un suo standard <a
                 href="http://tools.ietf.org/html/bcp47">Tags for Identifying
                 Languages (BCP47)</a>. I tag delle lingue consistono in uno o
-                più <i>sotto-tag</i> cje descrivono le lingua, gli script, le
+                più <i>sotto-tag</i> che descrivono le lingua, gli script, le
                 varianti, ecc. La lista seguente mostrai sotto-tag attualmente
                 registrati che sono rilevanti per OSM. Per maggiori
                 informazioni vedi anche la <a
@@ -714,11 +714,11 @@ reports:
     similar_keys:
         name: Chiavi simili
         intro: |
-            Questo rappoeto mostra le chiavi utilizzate frequentemente e le
+            Questo rapporto mostra le chiavi utilizzate frequentemente e le
             chiavi simili utilizzate molto raramente. Ciò dovrebbe evidenziare
             molti degli errori di scrittura delle chiavi più comuni, ma non è
             perfetto. Prestate attenzione quando correggete i dati! NON
-            modificate semplicemnte in modo meccanico queste chiavi con un
+            modificate semplicemente in modo meccanico queste chiavi con un
             cerca e sostituisci. Guardate e controllate ogni caso in modo
             individuale e risolvete anche gli altri problemi che trovate.
         key_common: Chiavi usate frequentemente
@@ -742,7 +742,7 @@ reports:
     wiki_images:
         name: Immagini wiki
         intro: |
-            Le imamgini utilizzati nel sito wiki come simbolo per le chiavi in
+            Le immagini utilizzate nel sito wiki come simbolo per le chiavi in
             diverse lingue. A volte c'è un'immagine in una delle varie lingue
             che è la migliore. Tuttavia in alcuni casi ha senso avere diverse
             immagini a causa del diverso background culturale o simili motivi.
