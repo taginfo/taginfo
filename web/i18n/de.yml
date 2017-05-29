@@ -637,6 +637,19 @@ reports:
             oder die Wiki-Seite beschreibt einen früher verwendeten Key, der inzwischen obsolet
             wurde). Es kann aber auch ein Tippfehler oder anderer Fehler sein.
         wiki_pages: Wiki-Seiten
+    wiki_problems:
+        info: Weitere Information
+        intro: |
+            Taginfo liest alle Wiki-Seiten, die Keys, Tags und Relationen beschreiben um Informationen
+            ueber Tags zu finden. Dieser Report zeigt die Liste von Problemen die beim Lesen dieser
+            Wiki-Seiten entstanden sind. Das sind sind nicht unbedingt Fehler in den Wiki-Seiten,
+            es bedeutet nur, dass etwas in den Wiki-Seiten so formatiert ist, dass es von Taginfo nicht verstanden wird.
+            Entweder muss die Wiki-Seite korrigiert werden oder Taginfo verbessert werden.
+        lang: Sprache
+        location: Ort
+        name: Problem beim Parsen der Wiki-Seite
+        reason: Grund
+        wiki_page: Wiki-Seite
     name_tags:
         name: Name-Tag-Varianten
         intro: |
