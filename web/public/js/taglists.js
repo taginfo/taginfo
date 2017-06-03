@@ -88,6 +88,15 @@ var taginfo_taglist = (function(){
                 'osmcarto_rendering': 'Map rendering',
                 'count': 'Count'
             },
+            'eo': {
+                'key': 'Ŝlosilo',
+                'value': 'Valoro',
+                'element': 'Objekto',
+                'description': 'Priskribo',
+                'image': 'Bildo',
+                'osmcarto_rendering': 'Map rendering',
+                'count': 'Nombro'
+            },
             'es': {
                 'key': 'Clave',
                 'value': 'Valor',
@@ -140,7 +149,7 @@ var taginfo_taglist = (function(){
                 'description': 'Opis',
                 'image': 'Obraz',
                 'osmcarto_rendering': 'Ikona',
-                'count': 'Ilość'
+                'count': 'Liczba'
             },
             'pt': {
                 'key': 'Chave',
