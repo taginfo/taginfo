@@ -94,7 +94,7 @@ var taginfo_taglist = (function(){
                 'element': 'Objekto',
                 'description': 'Priskribo',
                 'image': 'Bildo',
-                'osmcarto_rendering': 'Map rendering',
+                'osmcarto_rendering': 'Map-bldigado',
                 'count': 'Nombro'
             },
             'es': {
