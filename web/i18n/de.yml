@@ -201,7 +201,7 @@ pages:
                 dieser Dateien sehr groß werden. Wenn Du sie regelmäßig herunterladen
                 willst, dann kontaktiere die Betreiber der Webseite oder melde
                 Dich auf der Mailingliste.</p>
-            lincese: |
+            license: |
                 <h3>Lizenz</h3>
                 <p>Die Daten, die über taginfo zur Verfügung gestellt werden,
                 werden unter der ODbL lizensiert, die
@@ -631,25 +631,30 @@ reports:
     wiki_pages_about_non_existing_keys:
         name: Wiki-Seiten zu nicht-existierende Keys
         intro: |
-            Diese Tabelle zeigt Keys, zu denen (mindestens) eine Wiki-Seite existiert, die
-            aber in der Datenbank nicht vorkommen. Das ist nicht unbedingt ein Fehler (vielleicht
-            hat jemand die Dokumentation angelegt als Vorbereitung für die Benutzung des Keys
-            oder die Wiki-Seite beschreibt einen früher verwendeten Key, der inzwischen obsolet
-            wurde). Es kann aber auch ein Tippfehler oder anderer Fehler sein.
+            Diese Tabelle zeigt Keys, zu denen (mindestens) eine Wiki-Seite
+            existiert, die aber in der Datenbank nicht vorkommen. Das ist nicht
+            unbedingt ein Fehler (vielleicht hat jemand die Dokumentation
+            angelegt als Vorbereitung für die Benutzung des Keys oder die
+            Wiki-Seite beschreibt einen früher verwendeten Key, der inzwischen
+            obsolet wurde). Es kann aber auch ein Tippfehler oder anderer
+            Fehler sein.
         wiki_pages: Wiki-Seiten
     wiki_problems:
-        info: Weitere Information
+        name: Probleme beim Parsen von Wiki-Seiten
         intro: |
-            Taginfo liest alle Wiki-Seiten, die Keys, Tags und Relationen beschreiben um Informationen
-            ueber Tags zu finden. Dieser Report zeigt die Liste von Problemen die beim Lesen dieser
-            Wiki-Seiten entstanden sind. Das sind sind nicht unbedingt Fehler in den Wiki-Seiten,
-            es bedeutet nur, dass etwas in den Wiki-Seiten so formatiert ist, dass es von Taginfo nicht verstanden wird.
-            Entweder muss die Wiki-Seite korrigiert werden oder Taginfo verbessert werden.
-        lang: Sprache
+            Taginfo liest alle Wiki-Seiten, die Keys, Tags oder Relationen
+            beschreiben, um Informationen über Tags zu finden. Dieser Report
+            zeigt die Liste von Problemen, die beim Lesen dieser Wiki-Seiten
+            aufgetreten sind. Manches davon sind Fehler in den Wiki-Seiten,
+            manche Meldungen bedeuten aberr, dass etwas in den Wiki-Seiten so
+            formatiert ist, dass es von Taginfo nicht verstanden wurde.
+            Entweder muss die Wiki-Seite korrigiert oder Taginfo verbessert
+            werden.
         location: Ort
-        name: Problem beim Parsen der Wiki-Seite
         reason: Grund
         wiki_page: Wiki-Seite
+        lang: Sprache
+        info: Weitere Informationen
     name_tags:
         name: Name-Tag-Varianten
         intro: |
