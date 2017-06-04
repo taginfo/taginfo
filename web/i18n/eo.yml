@@ -195,7 +195,7 @@ pages:
             wiki: |
                 <p>La <a class="extlink" href="//wiki.openstreetmap.org/wiki/Eo:Main_Page">OSM-vikio</a> estas tralegata por ĉiuj paĝoj Key:*, Tag:* kaj Relation:* (en ĉiuj disponeblaj lingvoj). Priskriboj, bildoj kaj rilataj etikedoj estas eltirataj el ili.</p>
             languages: |
-                <p>Taginfo akiras informojn pri diversaj lingvoj de la mondo, iliajn kodojn, nomojn, ktp. el listoj de <a class="extlink" href="http://www.iana.org/">IANA</a> kaj <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+                <p>Taginfo akiras informojn pri diversaj lingvoj de la mondo, iliajn kodojn, nomojn, ktp. el listoj de <a class="extlink" href="https://www.iana.org/">IANA</a> kaj <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Projektoj, kiuj iel uzas OSM-etikedojn, kiel redaktiloj, mapoj, navigiloj, ktp. Vidu la <a href="/projects">liston de projektoj</a>.</p>
         updates:
@@ -207,7 +207,7 @@ pages:
         to: ĝis
     download:
         intro: |
-            <p>Tie ĉi vi povas elŝuti la datumbazojn uzatajn de taginfo. Ĉiuj datumoj estas konservitaj en datumbazojn <a class="extlink" href="http://www.sqlite.org/">Sqlite</a>. Datumbazaj dosieroj estas kompaktigitaj per <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
+            <p>Tie ĉi vi povas elŝuti la datumbazojn uzatajn de taginfo. Ĉiuj datumoj estas konservitaj en datumbazojn <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>. Datumbazaj dosieroj estas kompaktigitaj per <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>Se vi ne volas elŝuti tiujn ĉi datumbazojn, tamen bezonas aŭtomatan aliron al datumoj, vi ankaŭ povas uzi la <a href="/about">API</a>.</p>
         file: Dosiero
         packed: Kompaktigita
@@ -534,7 +534,7 @@ reports:
                 region: Regiono
                 variant: Variaĵo
             intro: |
-                <p><a href="http://www.ietf.org/">IETF</a> difinas <i>lingvajn etikedojn</i> en iliaj normaj<a href="http://tools.ietf.org/html/bcp47">etikedoj por identigi lingvojn (BCP47)</a>. Lingvaj etikedoj konsistas el almenaŭ unu <i>subetikedo</i> priskribanta lingvon, alfabeton, variaĵojn, ktp. La jena listo montras nune registritajn subetikedojn. Por pliaj informoj, vidu ankaŭ la <a href="http://en.wikipedia.org/wiki/IETF_language_tag">Vikipedian artikolon pri IETF lingvaj etikedoj</a> kaj la retejon <a href="http://www.langtag.net/">langtag.net</a>.</p>
+                <p><a href="https://www.ietf.org/">IETF</a> difinas <i>lingvajn etikedojn</i> en iliaj normaj<a href="https://tools.ietf.org/html/bcp47">etikedoj por identigi lingvojn (BCP47)</a>. Lingvaj etikedoj konsistas el almenaŭ unu <i>subetikedo</i> priskribanta lingvon, alfabeton, variaĵojn, ktp. La jena listo montras nune registritajn subetikedojn. Por pliaj informoj, vidu ankaŭ la <a href="https://en.wikipedia.org/wiki/IETF_language_tag">Vikipedian artikolon pri IETF lingvaj etikedoj</a> kaj la retejon <a href="http://www.langtag.net/">langtag.net</a>.</p>
                 <p>Rimarku, ke datumoj montrataj en tiu ĉi tabelo <b>ne</b> devenas el OpenStreetMap, ĝi nur montras konstru-pecojn, kiujn oni povas uzi por priskribi lingvojn senrilate, ĉu ili estas nune uzataj en OSM.
                 </p>
     similar_keys:

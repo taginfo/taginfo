@@ -243,7 +243,7 @@ pages:
             wiki: |
                 <p>Čteme <a class="extlink" href="//wiki.openstreetmap.org/">wiki OSM</a> a analyzujeme všechny stránky Key:*, Tag:* a Relation:* (ve všech jazycích). Extrahujeme z nich popisky, ilustrace, související značky atd.</p>
             languages: |
-                <p>Taginfo získává informace o různých jazycích světa, jejich kódech, názvech, atd. z různých registrů <a class="extlink" href="http://www.iana.org/">IANA</a> a <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+                <p>Taginfo získává informace o různých jazycích světa, jejich kódech, názvech, atd. z různých registrů <a class="extlink" href="https://www.iana.org/">IANA</a> a <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Projekty, které nějak používají značky OSM, jako jsou editory, mapy, navigace, atd. Viz <a href="/projects">seznam projektů</a>.</p>
         updates:
@@ -256,7 +256,7 @@ pages:
     download:
         intro: |
             <p>Zde si můžete stáhnout databáze, které taginfo používá. Všechna data jsou uložena
-            v databázích <a class="extlink" href="http://www.sqlite.org/">Sqlite</a>.
+            v databázích <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>.
             Databázové soubory jsou poté zabaleny pomocí <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>Pokud si nechcete tyto databáze stahovat, ale potřebujete strojový přístup
             k datům, můžete také použít <a href="/about">API</a>.</p>
@@ -627,14 +627,14 @@ reports:
                 region: Region
                 variant: Varianta
             intro: |
-                <p><a href="http://www.ietf.org/">IETF</a> definuje <i>jazykové
+                <p><a href="https://www.ietf.org/">IETF</a> definuje <i>jazykové
                 značky</i> ve svém standardu
-                <a href="http://tools.ietf.org/html/bcp47">Tags for Identifying Languages
+                <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages
                 (BCP47)</a>. Jazykové
                 značky obsahují jednu nebo více <i>podznaček</popisující jazyk,
                 písmo, variantu, atd. Následující seznam ukazuje podznačky, které jsou
                 momentálně registrované a mají význam pro OSM. Pro více informací se podívejte
-                také na <a href="http://en.wikipedia.org/wiki/IETF_language_tag">položku Wikipedie
+                také na <a href="https://en.wikipedia.org/wiki/IETF_language_tag">položku Wikipedie
                 o jazykovýách značkách IETF</a> a stránky <a
                 href="http://www.langtag.net/">langtag.net</a>.</p>
                 <p>Uvědomte si, že data zobrazená v této taublce <b>nejsou</b> z OpenStreetMap,

@@ -259,7 +259,7 @@ pages:
             wiki: |
                 <p>Das <a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> wird gelesen und alle Key:*-, Tag:*-, und Relation:*-Seiten (in allen Sprachen) analysiert. Beschreibungen, Bilder, verwandte Tags, usw. werden aus den Seiten extrahiert.</p>
             languages: |
-                <p>Taginfo bekommt Informationen über die verschiedenen Sprachen dieser Welt, ihre Codes, Namen, usw. aus diversen Datenbanken der <a class="extlink" href="http://www.iana.org/">IANA</a> und vom <a class="extlink" href="http://www.unicode.org/">Unicode Consortium</a>.</p>
+                <p>Taginfo bekommt Informationen über die verschiedenen Sprachen dieser Welt, ihre Codes, Namen, usw. aus diversen Datenbanken der <a class="extlink" href="https://www.iana.org/">IANA</a> und vom <a class="extlink" href="http://www.unicode.org/">Unicode Consortium</a>.</p>
             projects: |
                 <p>Projekte, die OSM-Tags in irgendeiner Weise nutzen, zum Beispiel Editoren, Karten, Router, usw. Siehe auch die <a href="/projects">Projektliste</a>.</p>
         updates:
@@ -273,7 +273,7 @@ pages:
         intro: |
             <p>Hier kannst Du die Datenbanken herunterladen, die von Taginfo verwendet
             werden. Alle Daten sind in <a class="extlink"
-            href="http://www.sqlite.org/">Sqlite-Datenbanken</a> gespeichert.
+            href="https://www.sqlite.org/">Sqlite-Datenbanken</a> gespeichert.
             Die Datenbank-Dateien sind dann mit
             <a class="extlink"
             href="http://www.bzip.org/">bzip2</a> gepackt.</p>
@@ -674,14 +674,14 @@ reports:
                 region: Region
                 variant: Variante
             intro: |
-                <p>Die <a href="http://www.ietf.org/">IETF</a> definiert
+                <p>Die <a href="https://www.ietf.org/">IETF</a> definiert
                 <i>language tags</i> (Sprach-Tags) in ihrem Standard
-                <a href="http://tools.ietf.org/html/bcp47">Tags for Identifying Languages
+                <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages
                 (BCP47)</a>. Diese Sprach-Tags bestehen aus einem oder mehreren
                 <i>subtags</i>, die die Sprache, Schriftsystem, Varianten, usw.
                 bezeichnen. Die folgende Liste zeigt die derzeit registrierten
                 Subtags an, die für OSM relevant sind. Mehr dazu gibt es im
-                <a href="http://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia-Eintrag
+                <a href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia-Eintrag
                 zu den IETF-Sprachtags</a> und unter <a
                 href="http://www.langtag.net/">langtag.net</a>.</p>
                 <p>Bitte beachte, dass die Daten in dieser Tabelle <b>nicht</b>

@@ -245,7 +245,7 @@ pages:
             wiki: |
                 <p>Le <a class="extlink" href="//wiki.openstreetmap.org/">wiki OSM</a> est lu et toutes les pages <span class="char">Key:*</span>, <span class="char">Tag:*</span> et <span class="char">Relation:*</span> (dans toutes les langues) sont analysées. Descriptions, images, tags associés, etc. en sont extraits.</p>
             languages: |
-                <p>Taginfo récupère les informations sur les différentes langues du monde, leurs codes, noms, etc. depuis plusieurs registres de l'<a class="extlink" href="http://www.iana.org/">IANA</a> et d'<a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+                <p>Taginfo récupère les informations sur les différentes langues du monde, leurs codes, noms, etc. depuis plusieurs registres de l'<a class="extlink" href="https://www.iana.org/">IANA</a> et d'<a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Ce sont les projects qui utilisent les tags OSM, comme les éditeurs, les cartes, les routeurs, etc. Regardez <a href="/projects">la liste des projets</a>.</p>
         updates:
@@ -258,7 +258,7 @@ pages:
     download:
         intro: |
             <p>Vous pouvez télécharger les données utilisées par taginfo. Toutes les données sont stockées
-            dans des bases de données <a class="extlink" href="http://www.sqlite.org/">SQLite</a>.
+            dans des bases de données <a class="extlink" href="https://www.sqlite.org/">SQLite</a>.
             Les fichiers de base de données sont ensuite compressés
             avec <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>Si vous ne voulez pas télécharger les données, vous pouvez toujours y accéder directement grâce à l'<a href="/about">API</a>.</p>
@@ -641,14 +641,14 @@ reports:
                 region: Région
                 variant: Variante
             intro: |
-                <p>L'<a href="http://www.ietf.org/">IETF</a> définit des <i>tags
+                <p>L'<a href="https://www.ietf.org/">IETF</a> définit des <i>tags
                 de langue</i> dans sa norme
-                <a href="http://tools.ietf.org/html/bcp47">Tags for Identifying Languages
+                <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages
                 (BCP47)</a>. Les tags de langue
                 sont constitués d'un ou plusieurs <i>sous-tags</i> décrivant la langue,
                 le script, les variantes, etc... La liste suivante montre les sous-tags
                 existants actuellement et quisont pertinants pour OSM. Pour plus d'information, voir aussi la page
-                <a href="http://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
+                <a href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
                 sur les tags de langues de l'IETF</a> et le site <a
                 href="http://www.langtag.net/">langtag.net</a>.</p>
                 <p>Notez que les données présentées dans ce tableau <b>ne proviennent pas</b> d'OpenStreetMap.

@@ -240,7 +240,7 @@ pages:
             wiki: |
                 <p><a class="extlink" href="//wiki.openstreetmap.org/">OSM Вікі</a> читається та аналізуються всі сторінки Key:*, Tag:*, and Relation:* (всіма мовами). Описи, картинки, пов'язані теґи тощо отримуються звідти.</p>
             languages: |
-                <p>Taginfo отримує інформацію про різні мови світу, їх коди, назви тощо з деяких <a class="extlink" href="http://www.iana.org/">IANA</a> та <a class="extlink" href="http://www.unicode.org/">Unicode</a> регістрів.</p>
+                <p>Taginfo отримує інформацію про різні мови світу, їх коди, назви тощо з деяких <a class="extlink" href="https://www.iana.org/">IANA</a> та <a class="extlink" href="http://www.unicode.org/">Unicode</a> регістрів.</p>
             projects: |
                 <p>Проекти, які використовують теґи OSM, наприклад, редактори, мапи, роутери тощо. Див. <a href="/projects">список проектів</a>.</p>
         updates:
@@ -254,7 +254,7 @@ pages:
         intro: |
             <p>Тут можна звантажити бази даних, які використовує Taginfo.  Усі дані зберігаються
             у форматі <a class="extlink"
-            href="http://www.sqlite.org/">Sqlite</a>. Потім файли баз даних стиснуті
+            href="https://www.sqlite.org/">Sqlite</a>. Потім файли баз даних стиснуті
             <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>Якщо Вам не потрібні ці файли, а потрібен автоматизований доступ до даних,
             скористайтеся <a href="/about">API</a>.</p>
@@ -617,12 +617,12 @@ reports:
                 region: Регіон
                 variant: Діалект
             intro: |
-                <p><a href="http://www.ietf.org/">Інженерна рада Інтернету (IETF)</a> визначає <i>мовні
-                теґи</i> за своїм стандартом <a href="http://tools.ietf.org/html/bcp47">BCP47</a>. Мовні
+                <p><a href="https://www.ietf.org/">Інженерна рада Інтернету (IETF)</a> визначає <i>мовні
+                теґи</i> за своїм стандартом <a href="https://tools.ietf.org/html/bcp47">BCP47</a>. Мовні
                 теґи містять один або більше <i>підтеґів</i>, що описують мову,
                 писемність, діалект та інше. Наступний список відображає підтеґи,
                 що в даний момент враховуються і відносяться до OSM. Для більш детальної інформації див. також
-                <a href="http://en.wikipedia.org/wiki/IETF_language_tag">статтю у Вікіпедії
+                <a href="https://en.wikipedia.org/wiki/IETF_language_tag">статтю у Вікіпедії
                 про реєстр мовних теґів IETF (англ.)</a> та сайт <a
                 href="http://www.langtag.net/">langtag.net</a>.</p>
                 <p>Врахуйте, що дані в таблиці взяті <b>не</b> з OpenStreetMap,

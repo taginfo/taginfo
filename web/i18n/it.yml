@@ -277,7 +277,7 @@ pages:
             languages: |
                 <p>Taginfo prende le informazioni sulle varie lingue del mondo,
                 i loro codici, nomi, etc. da diversi registri <a
-                class="extlink" href="http://www.iana.org/">IANA</a> and <a
+                class="extlink" href="https://www.iana.org/">IANA</a> and <a
                 class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Progetti che usano i tag di OSM in qualche modo, come
@@ -294,7 +294,7 @@ pages:
         intro: |
             <p>Qui potete scaricare il database usato da Taginfo. Tutti i dati
             sono memorizzati in un database <a class="extlink"
-            href="http://www.sqlite.org/">Sqlite</a>. I file del database sono
+            href="https://www.sqlite.org/">Sqlite</a>. I file del database sono
             poi compressi con <a class="extlink"
             href="http://www.bzip.org/">bzip2</a>.</p> <p>Se non volete
             scaricare questi database, ma avete bisogno di avere un accesso
@@ -695,9 +695,9 @@ reports:
                 region: Regione
                 variant: Variante
             intro: |
-                <p>Lo <a href="http://www.ietf.org/">IETF</a> definisce i
+                <p>Lo <a href="https://www.ietf.org/">IETF</a> definisce i
                 <i>tag delle lingue</i> in un suo standard <a
-                href="http://tools.ietf.org/html/bcp47">Tags for Identifying
+                href="https://tools.ietf.org/html/bcp47">Tags for Identifying
                 Languages (BCP47)</a>. I tag delle lingue consistono in uno o
                 più <i>sotto-tag</i> che descrivono le lingua, gli script, le
                 varianti, ecc. La lista seguente mostrai sotto-tag attualmente

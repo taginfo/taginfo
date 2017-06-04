@@ -167,7 +167,7 @@ pages:
     download:
         intro: |
             <p>Itt tudod letölteni a taginfo által használt adatbázisokat. Az összes adat
-            <a class="extlink" href="http://www.sqlite.org/">Sqlite</a> adatbázisokban tárolódik.
+            <a class="extlink" href="https://www.sqlite.org/">Sqlite</a> adatbázisokban tárolódik.
             Az adatbázisfájlok <a class="extlink" href="http://www.bzip.org/">bzip2</a>-vel vannak csomagolva.</p>
             <p>Ha nem szeretnéd letölteni az adatbázisokat, viszont automatizáltan érnéd el az adatokat,
             érdemes az <a href="/about">API</a>-t használnod.</p>

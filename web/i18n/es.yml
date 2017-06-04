@@ -244,7 +244,7 @@ pages:
             wiki: |
                 <p>La <a class="extlink" href="//wiki.openstreetmap.org/">wiki de OSM</a> es leída y se analizan todas las páginas Key:*, Tag:*, y Relation:* (en todos los idiomas diferentes). Descripciones, imágenes, etiquetas relacionadas, etc. se extraen de ellas.</p>
             languages: |
-                <p>Taginfo obtiene información acerca de los diferentes idiomas del mundo, sus códigos, nombres, etc. de varios registros de <a class="extlink" href="http://www.iana.org/">IANA</a> y <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+                <p>Taginfo obtiene información acerca de los diferentes idiomas del mundo, sus códigos, nombres, etc. de varios registros de <a class="extlink" href="https://www.iana.org/">IANA</a> y <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Proyectos que utilizan etiquetas OSM de alguna manera, tales como editores, mapas, enrutadores, etc. Ver <a href="/projects">la lista de proyectos</a>.</p>
         updates:
@@ -257,7 +257,7 @@ pages:
     download:
         intro: |
             <p>Aquí puedes descargar las bases de datos utilizadas por taginfo. Todos los datos se almacenan
-            en bases de datos <a class="extlink" href="http://www.sqlite.org/">Sqlite</a>.
+            en bases de datos <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>.
             Los archivos de la base de datos luego se comprimen con <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>Si no desea descargar estas bases de datos, pero necesita acceso automatizado a
             los datos, también puede utilizar la <a href="/about">API</a>.</p>
@@ -630,14 +630,14 @@ reports:
                 region: Región
                 variant: Variante
             intro: |
-                <p>El <a href="http://www.ietf.org/">IETF</a> define <i>etiquetas
+                <p>El <a href="https://www.ietf.org/">IETF</a> define <i>etiquetas
                 de idioma</i> en sus estándares
-                <a href="http://tools.ietf.org/html/bcp47">Etiquetas para Identificación de Idiomas
+                <a href="https://tools.ietf.org/html/bcp47">Etiquetas para Identificación de Idiomas
                 (BCP47)</a>. Las etiquetas
                 de idioma consisten en una o más <i>subetiquetas</i> describiendo el idioma,
                 escritura, variantes, etc. La siguiente lista muestra las subetiquetas registradas
                 actualmente que son relevantes para la OSM. Para más información véase también el
-                <a href="http://en.wikipedia.org/wiki/IETF_language_tag">artículo de la Wikipedia
+                <a href="https://en.wikipedia.org/wiki/IETF_language_tag">artículo de la Wikipedia
                 sobre etiquetas de idioma IETF</a> y el sitio <a
                 href="http://www.langtag.net/">langtag.net</a>.</p>
                 <p>Tenga en cuenta que los datos mostrados en esta tabla <b>no</b> son de OpenStreetMap,

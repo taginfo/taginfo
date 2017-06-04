@@ -160,7 +160,7 @@ pages:
             wiki: |
                 <p><a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> jest czytana i wszystkie strony Key:*, Tag:*, i Relation:* (w różnych językach) są analizowane. Opisy, obrazy, powiązane tagi, itd. są wyciągane z niej.</p>
             languages: |
-                <p>Taginfo pobiera informacje o różnych językach świata, ich kodów, nazw, itd. z <a class="extlink" href="http://www.iana.org/">IANA</a> i <a class="extlink" href="http://www.unicode.org/">Unicode</a> rejestrów.</p>
+                <p>Taginfo pobiera informacje o różnych językach świata, ich kodów, nazw, itd. z <a class="extlink" href="https://www.iana.org/">IANA</a> i <a class="extlink" href="http://www.unicode.org/">Unicode</a> rejestrów.</p>
         updates:
             title: Aktualizacje
             intro: Baza taginfo jest regularnie aktualizowana ze źródeł.
@@ -170,7 +170,7 @@ pages:
         to: do
     download:
         intro: |
-            <p>Tutaj możesz pobrać pliki bazy danych, z których korzysta taginfo. Wszystkie dane są przechowywane w bazach <a class="extlink" href="http://www.sqlite.org/">Sqlite</a>.
+            <p>Tutaj możesz pobrać pliki bazy danych, z których korzysta taginfo. Wszystkie dane są przechowywane w bazach <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>.
             Pliki baz danych są skompresowane w <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>Jeżeli nie chcesz pobierać tych baz danych, ale potrzebujesz dostępu do nich, możesz użyć <a href="/about">API</a>.</p>
         file: Plik
@@ -439,10 +439,10 @@ reports:
                 region: Region
                 variant: Wariant
             intro: |
-                <p><a href="http://www.ietf.org/">IETF</a> definiuje <i>znaczniki języków</i> in its standard
-                <a href="http://tools.ietf.org/html/bcp47">Znaczniki dla Identyfikacji Języków
+                <p><a href="https://www.ietf.org/">IETF</a> definiuje <i>znaczniki języków</i> in its standard
+                <a href="https://tools.ietf.org/html/bcp47">Znaczniki dla Identyfikacji Języków
                 (BCP47)</a>. Znaczniki języka zawierają jeden lub więcej <i>znaczników podrzędnych</i> opisujących język, skrypt, warianty itp. Poniższa lista pokazuje obecnie zarejestrowane podrzędne znaczniki istotne dla OSM. Więcej informacji znajdziesz w artukule
-                <a href="http://en.wikipedia.org/wiki/IETF_language_tag">Wikipedii o znacznikach językowych IETF</a> oraz na stronie <a
+                <a href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedii o znacznikach językowych IETF</a> oraz na stronie <a
                 href="http://www.langtag.net/">langtag.net</a>.</p>
                 <p>Zwróć uwagę, że dane w tej tabeli <b>nie pochodzą</b> z bazy OpenStreetMap,
                 i jedynie pokazują elementy, które mogą być użyte by opisać języki niezależnie od tego, w jaki sposób są użyte w OSM.

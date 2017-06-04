@@ -239,7 +239,7 @@ pages:
             wiki: |
                 <p><a class="extlink" href="//wiki.openstreetmap.org/">OSM Вики</a> читается и все Key:*, Tag:* и Relation:* страницы (на всех языках) анализируются. Описания, картинки, связанные теги и т. д. берутся оттуда.</p>
             languages: |
-                <p>Taginfo получает информацию о разных языках мира, их кодах, названиях и т. д. из разных регистров <a class="extlink" href="http://www.iana.org/">IANA</a> и <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+                <p>Taginfo получает информацию о разных языках мира, их кодах, названиях и т. д. из разных регистров <a class="extlink" href="https://www.iana.org/">IANA</a> и <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Проекты, которые используют теги OSM, такие как редакторы, карты, роутеры и т. д. См. <a href="/projects">список проектов</a>.</p>
         updates:
@@ -253,7 +253,7 @@ pages:
         intro: |
             <p>Здесь можно скачать базы данных, используемые Taginfo. Все данные хранятся
             в формате <a class="extlink"
-            href="http://www.sqlite.org/">Sqlite</a>. Затем файлы баз данных сжаты
+            href="https://www.sqlite.org/">Sqlite</a>. Затем файлы баз данных сжаты
             <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>Если вам не нужны эти файлы, а требуется автоматизируемый доступ к данным,
             воспользуйтесь <a href="/about">API</a>.</p>
@@ -616,12 +616,12 @@ reports:
                 region: Регион
                 variant: Диалект
             intro: |
-                <p><a href="http://www.ietf.org/">Инженерный совет Интернета (IETF)</a> определяет <i>языковые
-                теги</i> по своему стандарту <a href="http://tools.ietf.org/html/bcp47">BCP47</a>. Языковые
+                <p><a href="https://www.ietf.org/">Инженерный совет Интернета (IETF)</a> определяет <i>языковые
+                теги</i> по своему стандарту <a href="https://tools.ietf.org/html/bcp47">BCP47</a>. Языковые
                 теги содержат один или более <i>субтегов</i>, описывающих язык,
                 письменность, диалект и прочее. Следующий список отображает субтеги,
                 в данный момент учитывающиеся и относящиеся к OSM. Для более детальной информации см. также
-                <a href="http://en.wikipedia.org/wiki/IETF_language_tag">статью в Википедии
+                <a href="https://en.wikipedia.org/wiki/IETF_language_tag">статью в Википедии
                 о регистре языковых тегов IETF (англ.)</a> и сайт <a
                 href="http://www.langtag.net/">langtag.net</a>.</p>
                 <p>Учтите, что данные в таблице взяты <b>не</b> из OpenStreetMap,

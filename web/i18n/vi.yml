@@ -172,7 +172,7 @@ pages:
             wiki: |
                 <p><a class="extlink" href="//wiki.openstreetmap.org/wiki/Vi:Main_Page">Wiki OSM</a> được truy cập và tất cả mọi trang Key:*, Tag:*, và Relation:* (trong các ngôn ngữ) được phân tích. Các miêu tả, hình ảnh, thẻ liên quan, v.v. được lấy từ các trang này.</p>
             languages: |
-                <p>Taginfo lấy thông tin về các ngôn ngữ trên thế giới, từ các mã, tên, v.v., từ một số cơ sở dữ liệu <a class="extlink" href="http://www.iana.org/">IANA</a> và <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+                <p>Taginfo lấy thông tin về các ngôn ngữ trên thế giới, từ các mã, tên, v.v., từ một số cơ sở dữ liệu <a class="extlink" href="https://www.iana.org/">IANA</a> và <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Các dự án sử dụng thẻ OSM một cách nào đó, thí dụ như trình vẽ, bản đồ, trình chỉ đường, v.v. Xem <a href="/projects">danh sách dự án</a>.</p>
         updates:
@@ -184,7 +184,7 @@ pages:
     download:
         intro: |
             <p>Ở đây bạn có thể tải về các cơ sở dữ liệu được sử dụng bởi taginfo. Tất cả dữ liệu được lưu giữ
-            trong CSDL <a class="extlink" href="http://www.sqlite.org/">SQLite</a>.
+            trong CSDL <a class="extlink" href="https://www.sqlite.org/">SQLite</a>.
             Sau đó, các tập tin CSDL được nén bằng <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>Nếu bạn không muốn tải về các CSDL này mà vẫn muốn truy cập dữ liệu một cách tự động,
             bạn cũng có thể dùng <a href="/about">API</a>.</p>
@@ -512,14 +512,14 @@ reports:
                 region: Khu vực
                 variant: Biến thể
             intro: |
-                <p><a href="http://www.ietf.org/">IETF</a> định rõ các <i>thẻ
+                <p><a href="https://www.ietf.org/">IETF</a> định rõ các <i>thẻ
                 ngôn ngữ</i> trong tiêu chuẩn
-                <a href="http://tools.ietf.org/html/bcp47">Tags for Identifying Languages
+                <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages
                 (BCP 47)</a>. Thẻ ngôn ngữ
                 có ít nhất một <i>thẻ phụ</i> miêu tả ngôn ngữ,
                 hệ chữ viết, biến thể, v.v. Danh sách sau có các thẻ phụ đã đăng ký
                 có liên quan đến OSM. Để tìm hiểu thêm, hãy đọc
-                <a href="http://en.wikipedia.org/wiki/IETF_language_tag">bài Wikipedia
+                <a href="https://en.wikipedia.org/wiki/IETF_language_tag">bài Wikipedia
                 về thẻ ngôn ngữ IETF</a> và trang Web <a
                 href="http://www.langtag.net/">langtag.net</a>.</p>
                 <p>Lưu ý rằng dữ liệu trong bảng này <b>không phải</b> lấy từ OpenStreetMap,
