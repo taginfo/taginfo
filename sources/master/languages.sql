@@ -27,7 +27,7 @@ INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('da', 
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('de',      'de', 'German', 'Deutsch');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('el',      'el', 'Greek', 'Ελληνικά');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('en',      'en', 'English', 'English');
-INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('eo',      'eo', 'Esparanto', 'Esparanto');
+INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('eo',      'eo', 'Esperanto', 'Esperanto');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('es',      'es', 'Spanish', 'Español');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('et',      'et', 'Estonian', 'Eesti');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('fa',      'fa', 'Farsi', 'فارسی');
@@ -49,7 +49,7 @@ INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('nl', 
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('no',      'no', 'Norwegian', 'Norsk');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('pl',      'pl', 'Polish', 'Polski');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('pt',      'pt', 'Portuguese', 'Português');
-INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('pt-BR',   NULL, 'Brazilian Portuguese', 'Português do Brasil');
+INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('pt-br',   NULL, 'Brazilian Portuguese', 'Português do Brasil');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('ro',      'ro', 'Romanian', 'Română');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('ro-md',   NULL, 'Moldovan', 'Română (Moldova)');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('ru',      'ru', 'Russian', 'Русский');
