@@ -245,7 +245,7 @@ pages:
         empty_role: pusta rola
     projects:
         intro: |
-                Ta tabela pokazuje wszystkie znane taginfo projekty, które korzystają na jakiś sposób ze znaczników OSM.<br/>Po więcej informacji dotyczących tej funkcji zajrzyj do <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.      
+                Ta tabela pokazuje wszystkie znane taginfo projekty, które korzystają na jakiś sposób ze znaczników OSM.<br/>Po więcej informacji dotyczących tej funkcji zajrzyj do <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
     key:
         description_from_wiki: Opis tego klucza z wiki (jeśli dostępne w wybranym języku, w przeciwnym razie po angielsku).
         no_description_in_wiki: Brak opisu na wiki.
@@ -393,7 +393,7 @@ sources:
         description: Zebrane statystyki i różne dane wykorzystywane przez interfejs taginfo.
     history:
         name: Historia
-        description: Statystyki zebrane w czasie.                                          
+        description: Statystyki zebrane w czasie.
     db:
         name: Database
         description: Statystyki o każdym kluczu i każdym tagu z głównej bazy OSM (plik planet).
