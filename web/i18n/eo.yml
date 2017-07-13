@@ -213,7 +213,7 @@ pages:
         packed: Kompaktigita
         unpacked: Nekompaktigita
         description: Priskribo
-        note: Kelkaj indeksoj ne troviĝas en la datumbazo elŝutebla tie ĉi. La ‘kompaktiga’ versio ne inkludas tiujn ĉi indeksojn, la ‘nekompaktigita’ versio inkludas indeksojn, kiujn vi probable bezonos krei post elŝuto.
+        note: Kelkaj indeksoj ne troviĝas en la datumbazo elŝutebla tie ĉi. La 'kompaktiga' versio ne inkludas tiujn ĉi indeksojn, la 'nekompaktigita' versio inkludas indeksojn, kiujn vi probable bezonos krei post elŝuto.
     reports:
         intro: |
             Raportoj vidigas etikedajn datumojn pluraspekte. Ili ofte kolektas datumojn kune el diversaj fontoj interese maniere. Iuj raportoj povas helpi al vi trovi difinajn erarojn.
@@ -237,7 +237,7 @@ pages:
                 La jena tabelo montras la plej ofte uzatajn etikedojn en la datumbazo.
     relations:
         name: Rilat-tipoj
-        intro: Informoj pri diversaj tipoj de rilatoj (indikataj per la etikedo ‘<a href="/keys/type?filter=relations">type</a>).
+        intro: Informoj pri diversaj tipoj de rilatoj (indikataj per la etikedo <a href="/keys/type?filter=relations">type</a>).
         relations_of_type_tooltip: Nombro da rilatoj de tiu ĉi tipo (kaj elcento da ĉiuj rilatoj).
         prevalent_roles: Popularaj roloj
         prevalent_roles_tooltip: Popularaj roloj por tiu ĉi tipo de rilato.
@@ -249,7 +249,7 @@ pages:
                 Tiu ĉi tabelo montras ĉiujn projektoj konatajn al taginfo, kiuj uzas OSM-etikedojn iamaniere.<br/>Por pliaj informoj pri tiu ĉi eblo, vidu la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">vikion</a>.
     key:
         description_from_wiki: Priskribo de tiu ĉi ŝlosilo de la vikio (se disponebla en elektita lingvo, alie en la angla).
-        no_description_in_wiki: Neniu priskribo en la angla pri tiu ĉi ŝlosilo en la vikio. (Vidu ankaŭ la langeton ‘Vikio’.)
+        no_description_in_wiki: Neniu priskribo en la angla pri tiu ĉi ŝlosilo en la vikio. (Vidu ankaŭ la langeton 'Vikio'.)
         filter:
             label: |
                  Filtrilo:
@@ -295,7 +295,7 @@ pages:
             similarity_tooltip: Ju malplia des pli simila
     tag:
         description_from_wiki: Priskribo de tiu ĉi etikedo de la vikio (se disponebla en elektita lingvo, alie en la angla).
-        no_description_in_wiki: Neniu priskribo en la angla pri tiu ĉi etikedo en la vikio. (Vidu ankaŭ la langeton ‘Vikio’.)
+        no_description_in_wiki: Neniu priskribo en la angla pri tiu ĉi etikedo en la vikio. (Vidu ankaŭ la langeton 'Vikio'.)
         button_disabled: Butono malaktiva, ĉar estas tro multe da objektoj kun tiu ĉi etikedo.
         number_objects: Nombro da objektoj
         overview:
@@ -317,7 +317,7 @@ pages:
             title: Viki-paĝoj pri tiu ĉi etikedo
             none_found: Neniu disponebla viki-paĝo pri tiu ĉi etikedo.
             create: Krei viki-paĝon pri tiu ĉi etikedo
-            suggest_key_wiki_page: Eble vi trovos kelkajn informojn sur la viki-paĝo pri la ŝlosilo ‘%1’.
+            suggest_key_wiki_page: Eble vi trovos kelkajn informojn sur la viki-paĝo pri la ŝlosilo '%1'.
             wiki_page: Viki-paĝo
             implied_tags: Proponataj etikedoj
             combined_tags: Kunigitaj etikedoj
@@ -328,7 +328,7 @@ pages:
     relation:
         name: Rilat-tipo
         description_from_wiki: Priskribo de tiu ĉi rilat-tipo de la vikio (se disponebla en elektita lingvo, alie en la angla).
-        no_description_in_wiki: Neniu priskribo en la angla pri tiu ĉi rilat-tipo en la vikio. (Vidu ankaŭ la langeton ‘Vikio’.)
+        no_description_in_wiki: Neniu priskribo en la angla pri tiu ĉi rilat-tipo en la vikio. (Vidu ankaŭ la langeton 'Vikio'.)
         button_disabled: Butono malaktiva, ĉar estas tro multe da objektoj kun tiu ĉi etikedo.
         overview:
             tab: Sumigo
@@ -363,7 +363,7 @@ pages:
             documentation_url: Dokumentaro
             last_update: Lasta ĝisdatigo
             json_url: Projekta JSON-dosiero
-            info: Tiuj ĉi datumoj estas liverataj de la projekto al tagino per la ‘projekta JSON-dosiero’ ligita supre. Vidu la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">vikion</a> por priskbo de formo.
+            info: Tiuj ĉi datumoj estas liverataj de la projekto al tagino per la 'projekta JSON-dosiero' ligita supre. Vidu la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">vikion</a> por priskbo de formo.
         tags:
             title: Etikedoj uzataj de tiu ĉi projekto
             intro: Tiuj ĉi datumoj estas liverataj de la projekto kaj povas ne esti kompletaj. Bonvolu vidi la projektan dokumentaron por pliaj detaloj.
@@ -517,7 +517,7 @@ reports:
             La jena tabelo montras ŝlosilojn pri kiuj viki-paĝo ekzistas, tamen ili ne ekzistas en la datumbazo. Tio ĉi ne devas esti eraro (eble iu skribis dokumentaron en la vikio por prepari uzi ŝlosilon, aŭ viki-paĝo priskribas nune malkonsilindan ŝlosilon), sed povas ankaŭ esti misskribo aŭ alia eraro.
         wiki_pages: Viki-paĝoj
     name_tags:
-        name: Variaĵoj de etikedoj ‘name’
+        name: Variaĵoj de etikedoj 'name'
         intro: |
             <p>La jena raporto montras informojn pri nomoj de objektoj en OSM uzantaj la etikedon <tt>name</tt> kaj ĝiaj variaĵoj.</p>
         overview:
