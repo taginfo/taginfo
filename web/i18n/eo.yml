@@ -37,7 +37,7 @@ taginfo:
     wiki: Vikio
     report: Raporto
     reports: Raportoj
-    international: Internacia
+    international: Interŝtata
     apidoc: API-dokumentaro
     project: Projekto
     projects: Projektoj
@@ -150,11 +150,11 @@ pages:
         about_taginfo:
             title: Pri taginfo
             text: |
-                <p>OpenStreetMap uzas <b>etikedojn</b> (ang. tags) por signifigi geografiajn objektojn. Ne ekzistas absoluta listo de tiuj ĉi etikedoj. Oni povas krei kaj uzi laŭbezone novajn etikedojn. Ĉiu povas proponi novan etikedon kaj aldoni ĝin al ekzistaj objektoj. Tio ĉi igas OpenStreetMap-n ege tajlorebla, tamen iam ete malfaciligas la laboradon kun ĝi.</p>
+                <p>OpenStreetMap uzas <b>etikedojn</b> (ang. tags) por signifigi geografiajn objektojn. Ne ekzistas absoluta listo de tiuj ĉi etikedoj. Oni povas krei kaj uzi laŭbezone novajn etikedojn. Ĉiu povas proponi novan etikedon kaj aldoni ĝin al ekzistaj objektoj. Tio ĉi igas OpenStreetMap-n ege tajlorebla, tamen iam ete malfaciligas laboradon kun ĝi.</p>
                 <p>Kiam vi kontribuas al OSM aŭ uzas OSM-datumojn, ĉiam aperas demandoj kiel: Kiujn etikedojn oni uzas por objekto X? Kiujn etikedojn mi povas uzi por objekto Y por ke ĝi ĝuste aperu sur la mapo? Ĉu etikedo Z priskribita en la vikio estas vere uzata kaj kie?</p>
                 <p>Taginfo helpas al vi per montri statistikojn pri kiuj etikedoj troviĝas en la datumbazo, kiom da homoj ilin uzas, kie ili estas uzataj, ktp. Ĝi ankaŭ akiras informojn pri etikedojn el la vikio kaj el aliaj ejoj. Taginfo provas kolekti ĉiujn informojn pri etikedoj por helpi al vi kompreni kiel ili estas uzataj kaj kion ili signifas. Vidu la <a href="/sources">liston de fontoj</a> uzataj de taginfo.</p>
         about_site:
-            title: Pri la retejo
+            title: Pri tiu ĉi retejo
         building_on_taginfo:
             title: Bazi sur taginfo
             pre: |
@@ -173,9 +173,9 @@ pages:
             text: |
                 <p>La programaro de taginfo estis kreita kaj estas prizorgata de <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>. La reteja aspekto estis fasonita de <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Tradukoj</h3>
-                <p>Ni bezonas tradukistojn por la uzant-fasado de taginfo. Vidu la <a href="/taginfo/translations">sumiĝon de tradukoj</a> por lingvoj, kiuj bezonas iom da laboro. Pliaj informoj kiel helpi troviĝas en la <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM-vikio</a>.</p>
+                <p>Ni bezonas tradukistojn por la uzant-fasado de taginfo. Vidu la <a href="/taginfo/translations">sumigon de tradukoj</a> por lingvoj, kiuj bezonas iom da laboro. Pliaj informoj kiel helpi troviĝas en la <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM-vikio</a>.</p>
                 <h3>Kodo</h3>
-                <p>Ĉiu programaro poviganta la retejojn de taginfo estas malfermkoda. Vi povas akiri ĝin de <a class="extlink" href="https://github.com/taginfo/taginfo/">GitHub</a>. Por sumiĝo, vidu la paĝon pri <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">arĥitekturo de taginfo</a> en la OSM-vikio.</p>
+                <p>Ĉiu programaro poviganta la retejojn de taginfo estas malfermkoda. Vi povas akiri ĝin de <a class="extlink" href="https://github.com/taginfo/taginfo/">GitHub</a>. Por sumigo, vidu la paĝon pri <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">arĥitekturo de taginfo</a> en la OSM-vikio.</p>
                 <h3>Lanĉi sian propran aperon</h3>
                 <p>Vi povas lanĉi vian propran <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">retejon taginfo</a>, ekzemple kun datumoj nur por via lando. Instrukcioj estas en la <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Running">OSM-vikio</a>.</p>
                 <h3>Erar-raportoj kaj novaj ebloj</h3>
@@ -213,7 +213,7 @@ pages:
         packed: Kompaktigita
         unpacked: Nekompaktigita
         description: Priskribo
-        note: Kelkaj indeksoj ne troviĝas en la datumbazo elŝutebla tie ĉi. La 'kompaktiga' versio ne inkludas tiujn ĉi indeksojn, la 'nekompaktigita' versio inkludas indeksojn, kiujn vi probable bezonos krei post elŝuto.
+        note: Kelkaj indeksoj ne troviĝas en la datumbazo elŝutebla tie ĉi. La ‘kompaktiga’ versio ne inkludas tiujn ĉi indeksojn, la ‘nekompaktigita’ versio inkludas indeksojn, kiujn vi probable bezonos krei post elŝuto.
     reports:
         intro: |
             Raportoj vidigas etikedajn datumojn pluraspekte. Ili ofte kolektas datumojn kune el diversaj fontoj interese maniere. Iuj raportoj povas helpi al vi trovi difinajn erarojn.
@@ -237,7 +237,7 @@ pages:
                 La jena tabelo montras la plej ofte uzatajn etikedojn en la datumbazo.
     relations:
         name: Rilat-tipoj
-        intro: Informoj pri diversaj tipoj de rilatoj (indikataj per la etikedo '<a href="/keys/type?filter=relations">type</a>').
+        intro: Informoj pri diversaj tipoj de rilatoj (indikataj per la etikedo ‘<a href="/keys/type?filter=relations">type</a>).
         relations_of_type_tooltip: Nombro da rilatoj de tiu ĉi tipo (kaj elcento da ĉiuj rilatoj).
         prevalent_roles: Popularaj roloj
         prevalent_roles_tooltip: Popularaj roloj por tiu ĉi tipo de rilato.
@@ -249,7 +249,7 @@ pages:
                 Tiu ĉi tabelo montras ĉiujn projektoj konatajn al taginfo, kiuj uzas OSM-etikedojn iamaniere.<br/>Por pliaj informoj pri tiu ĉi eblo, vidu la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">vikion</a>.
     key:
         description_from_wiki: Priskribo de tiu ĉi ŝlosilo de la vikio (se disponebla en elektita lingvo, alie en la angla).
-        no_description_in_wiki: Neniu priskribo en la angla pri tiu ĉi ŝlosilo en la vikio. (Vidu ankaŭ la langeton 'Vikio'.)
+        no_description_in_wiki: Neniu priskribo en la angla pri tiu ĉi ŝlosilo en la vikio. (Vidu ankaŭ la langeton ‘Vikio’.)
         filter:
             label: |
                  Filtrilo:
@@ -295,7 +295,7 @@ pages:
             similarity_tooltip: Ju malplia des pli simila
     tag:
         description_from_wiki: Priskribo de tiu ĉi etikedo de la vikio (se disponebla en elektita lingvo, alie en la angla).
-        no_description_in_wiki: Neniu priskribo en la angla pri tiu ĉi etikedo en la vikio. (Vidu ankaŭ la langeton 'Vikio'.)
+        no_description_in_wiki: Neniu priskribo en la angla pri tiu ĉi etikedo en la vikio. (Vidu ankaŭ la langeton ‘Vikio’.)
         button_disabled: Butono malaktiva, ĉar estas tro multe da objektoj kun tiu ĉi etikedo.
         number_objects: Nombro da objektoj
         overview:
@@ -317,7 +317,7 @@ pages:
             title: Viki-paĝoj pri tiu ĉi etikedo
             none_found: Neniu disponebla viki-paĝo pri tiu ĉi etikedo.
             create: Krei viki-paĝon pri tiu ĉi etikedo
-            suggest_key_wiki_page: Eble vi trovos kelkajn informojn sur la viki-paĝo pri la ŝlosilo '%1'.
+            suggest_key_wiki_page: Eble vi trovos kelkajn informojn sur la viki-paĝo pri la ŝlosilo ‘%1’.
             wiki_page: Viki-paĝo
             implied_tags: Proponataj etikedoj
             combined_tags: Kunigitaj etikedoj
@@ -328,11 +328,11 @@ pages:
     relation:
         name: Rilat-tipo
         description_from_wiki: Priskribo de tiu ĉi rilat-tipo de la vikio (se disponebla en elektita lingvo, alie en la angla).
-        no_description_in_wiki: Neniu priskribo en la angla pri tiu ĉi rilat-tipo en la vikio. (Vidu ankaŭ la langeton 'Vikio'.)
+        no_description_in_wiki: Neniu priskribo en la angla pri tiu ĉi rilat-tipo en la vikio. (Vidu ankaŭ la langeton ‘Vikio’.)
         button_disabled: Butono malaktiva, ĉar estas tro multe da objektoj kun tiu ĉi etikedo.
         overview:
-            tab: Sumiĝo
-            title: Sumiĝo
+            tab: Sumigo
+            title: Sumigo
             member_type: Tipo de ano
             member_count: Nombro da anoj
             see_also: Vidu ankaŭ la paĝon pri etikedo
@@ -363,7 +363,7 @@ pages:
             documentation_url: Dokumentaro
             last_update: Lasta ĝisdatigo
             json_url: Projekta JSON-dosiero
-            info: Tiuj ĉi datumoj estas liverataj de la projekto al tagino per la 'projekta JSON-dosiero' ligita supre. Vidu la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">vikion</a> por priskbo de formo.
+            info: Tiuj ĉi datumoj estas liverataj de la projekto al tagino per la ‘projekta JSON-dosiero’ ligita supre. Vidu la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">vikion</a> por priskbo de formo.
         tags:
             title: Etikedoj uzataj de tiu ĉi projekto
             intro: Tiuj ĉi datumoj estas liverataj de la projekto kaj povas ne esti kompletaj. Bonvolu vidi la projektan dokumentaron por pliaj detaloj.
@@ -415,7 +415,7 @@ reports:
             Ĉiu ĝusta Unikoda signo povas aperi en OSM-ŝlosilo, sed kutime nur malgrandaj latinaj literoj (a-z) kaj substreko (_) estas uzataj. Dupunkto (:) estas ofte uzata kiel disiga signo. Tiu ĉi raporto laŭspecigas ĉiujn ŝlosilojn laŭ uzitaj signoj.
         statistics:
             tab: Statistikoj
-            title: Statistika sumiĝo
+            title: Statistika sumigo
             fraction: Elcento
             characters: Signoj en ŝlosilo
             characters_in_keys:
@@ -517,12 +517,12 @@ reports:
             La jena tabelo montras ŝlosilojn pri kiuj viki-paĝo ekzistas, tamen ili ne ekzistas en la datumbazo. Tio ĉi ne devas esti eraro (eble iu skribis dokumentaron en la vikio por prepari uzi ŝlosilon, aŭ viki-paĝo priskribas nune malkonsilindan ŝlosilon), sed povas ankaŭ esti misskribo aŭ alia eraro.
         wiki_pages: Viki-paĝoj
     name_tags:
-        name: Variaĵoj de etikedoj 'name'
+        name: Variaĵoj de etikedoj ‘name’
         intro: |
             <p>La jena raporto montras informojn pri nomoj de objektoj en OSM uzantaj la etikedon <tt>name</tt> kaj ĝiaj variaĵoj.</p>
         overview:
-            tab: Sumiĝo
-            title: Sumiĝo
+            tab: Sumigo
+            title: Sumigo
         bcp47:
             tab: BCP47-subetikedoj
             title: BCP47-subetikedoj
