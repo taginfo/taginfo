@@ -39,7 +39,7 @@ taginfo:
     international: Międzynarodowy
     apidoc: Dokumentacja API
     project: Projekt
-    projects: Projekty          
+    projects: Projekty
     test: Test
     map: Mapa
     maps: Mapy
@@ -149,7 +149,7 @@ pages:
             text: |
                 <p>OpenStreetMap używa <b>znaczników</b> (tagów), aby nadać znaczenie obiektom geograficznym. Nie ma nadrzędnie ustalonej listy tych to znaczników. Można utworzyć nowe znaczniki gdy zajdzie taka potrzeba. Każdy może zaproponować nowy tag i dodać go do nowych lub istniejących obiektów. To nadaje mapie OpenStreetMap elastyczności, ale czasami sprawia trudności podczas pracy.</p>
                 <p>Za każdym razem podczas edycji mapy lub używania danych OSM pojawiają się pytania: Jakich znaczników używają inni dla obiektu X? Jakich tagów można użyć dla obiektu Y, aby poprawnie się renderował? Czy tag Z opisany na wiki jest w rzeczywistości używany i gdzie?</p>
-                <p>Taginfo pomoże Ci wyświetlając statystyki dotyczące, które tagi znajdują się w bazie, jak wiele osób z nich korzysta, itp. Pobierane są także informacje o tagach z wiki i z innych źródeł. Taginfo próbuje zebrać do kupy wszystkie informacje o znacznikach, aby pomóc Ci zrozumieć w jaki sposób są one używane i co oznaczają. Zajrzyj do <a href="/sources">listy źródeł</a> używanych przez taginfo.</p>            
+                <p>Taginfo pomoże Ci wyświetlając statystyki dotyczące, które tagi znajdują się w bazie, jak wiele osób z nich korzysta, itp. Pobierane są także informacje o tagach z wiki i z innych źródeł. Taginfo próbuje zebrać do kupy wszystkie informacje o znacznikach, aby pomóc Ci zrozumieć w jaki sposób są one używane i co oznaczają. Zajrzyj do <a href="/sources">listy źródeł</a> używanych przez taginfo.</p>
         about_site:
             title: O tej stronie
             building_on_taginfo:
@@ -177,9 +177,9 @@ pages:
                 <h3>Własny klon taginfo</h3>
                 <p>Możesz postawić własną <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">stronę taginfo</a>, na przykład tylko dla danych z Twojego kreju. Instrukcje znajdziesz na <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Running">wiki OSM</a>.</p>
                 <h3>Raportowanie błędów</h3>
-                <p>Raporty o błędach i prośby  nowe funkcje prosimy zgłaszać na <a class="extlink" href="https://github.com/taginfo/taginfo/issues">GitHubie</a>. Możesz też napisać do nas na naszej liście dyskusyjnej.</p>
+                <p>Raporty o błędach i prośby nowe funkcje prosimy zgłaszać na <a class="extlink" href="https://github.com/taginfo/taginfo/issues">GitHubie</a>. Możesz też napisać do nas na naszej liście dyskusyjnej.</p>
                 <h3>Kontakt/lista dyskusyjna/h3>
-                <p>Jeżeli masz jakieś pytania bądź chcesz pomóc, skontaktuj się z nami na <a class="extlink" href="//lists.openstreetmap.org/listinfo/taginfo-dev">liście dyskusyjnej taginfo-dev</a>.</p>                        
+                <p>Jeżeli masz jakieś pytania bądź chcesz pomóc, skontaktuj się z nami na <a class="extlink" href="//lists.openstreetmap.org/listinfo/taginfo-dev">liście dyskusyjnej taginfo-dev</a>.</p>
     sources:
         intro: |
             <p>Taginfo pobiera dane o OSM z różnych źródeł i zbiera je razem dla łatwiejszego ich przeglądania.</p>
@@ -195,7 +195,7 @@ pages:
             languages: |
                 <p>Taginfo pobiera informacje o różnych językach świata, ich kodów, nazw, itd. z <a class="extlink" href="https://www.iana.org/">IANA</a> i <a class="extlink" href="http://www.unicode.org/">rejestrów Unicode</a>.</p>
             projects: |
-                <p>Projekty, które w jakiś sposób używają znaczników OSM, takie jak edytory, mapy, nawigacje, itp. Zajrzyj do <a href="/projects">listy projektów</a>.</p>                 
+                <p>Projekty, które w jakiś sposób używają znaczników OSM, takie jak edytory, mapy, nawigacje, itp. Zajrzyj do <a href="/projects">listy projektów</a>.</p>
         updates:
             title: Aktualizacje
             intro: Baza taginfo jest regularnie aktualizowana ze źródeł.
@@ -212,7 +212,7 @@ pages:
         packed: Spakowany
         unpacked: Pełny
         description: Opis
-        note: Niektóre indeksy nie znajdują się w tutaj dostępnych bazach danych. ‘Skompresowane’ paczki nie zawierają indeksów, ‘pełne’ zawierają indeksy, które prawdopodobnie będziesz chciał utworzyć po pobraniu.                                                                                                                                                                                                                   
+        note: Niektóre indeksy nie znajdują się w tutaj dostępnych bazach danych. 'Skompresowane' paczki nie zawierają indeksów, 'pełne' zawierają indeksy, które prawdopodobnie będziesz chciał utworzyć po pobraniu.
     reports:
         intro: |
             Raporty ukazują dane z różnych punktów widzenia i z różnych źródeł. Niektóre raporty są pomocne przy szukaniu specyficznych błędów.
@@ -368,7 +368,7 @@ pages:
             intro: Te dane zostały dostarczone przez projekt i niekoniecznie muszą być kompletne. Zajrzyj do dokumentacji projektu po dalsze szczegóły.
             description: W jaki sposób ten klucz/znacznik jest używany w projekcie
             count_all_tooltip: Liczba obiektów w bazie danych z tym kluczem/znacznikiem
-            objects_tooltip: Typy obeiektów używane przez projekt                              
+            objects_tooltip: Typy obeiektów używane przez projekt
 
 flexigrid:
     pagetext: Strona
@@ -435,13 +435,13 @@ reports:
             title: Klucze zawierające średnik
             intro: |
                 <p>Klucze zawierające jeden lub więcej znak średnika (<span
-                class="char">:</span>) pomiędzy literami (<span class="char">a</span> do <span  class="char">z</span>) i podkreślnikiem (<span
+                class="char">:</span>) pomiędzy literami (<span class="char">a</span> do <span class="char">z</span>) i podkreślnikiem (<span
                 class="char">_</span>). Średnik jest zwykle używany jako separator hierarchiczny.</p>
         letters:
             tab: Litery
             title: Klucze zawierające wielkie litery i litery z innych alfabetów
             intro: |
-                <p>Małe litery alfabetu łacińskiego są zwykle preferowane dla kluczy, ale czasami używane są także wielkie litery (np. dla skrótowców) lub litery z innych alfabetów (np. dla kluczy mających sens tylko na pewnych obszarach geograficznych ).</p>                               
+                <p>Małe litery alfabetu łacińskiego są zwykle preferowane dla kluczy, ale czasami używane są także wielkie litery (np. dla skrótowców) lub litery z innych alfabetów (np. dla kluczy mających sens tylko na pewnych obszarach geograficznych).</p>
         space:
             tab: Znaki niedrukowalne
             title: Klucze ze znakami niedrukowalnymi
@@ -517,7 +517,7 @@ reports:
     wiki_pages_about_non_existing_keys:
         name: Strony wiki na temat nieistniejących kluczy
         intro: |
-            Ta tabela pokazuje klucze, które posiadają swoje strony na wiki, ale nie istnieją nawet pojedyncze obiekty w bazie z ich użyciem. Nie musi być to błąd, gdyż ktoś mógł stworzyć dokumentację przed wdrożeniem nowego schematu tagowania. Ale może być to zwykła literówka albo inny błąd.             
+            Ta tabela pokazuje klucze, które posiadają swoje strony na wiki, ale nie istnieją nawet pojedyncze obiekty w bazie z ich użyciem. Nie musi być to błąd, gdyż ktoś mógł stworzyć dokumentację przed wdrożeniem nowego schematu tagowania. Ale może być to zwykła literówka albo inny błąd.
         wiki_pages: Strony wiki
     name_tags:
         name: Warianty tagu name
@@ -572,4 +572,4 @@ reports:
         wiki_page: Strona wiki
         lang: Język
         info: Dodatkowe informacje
-                
+
