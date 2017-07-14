@@ -107,6 +107,8 @@ help:
         keys_page: Strona kluczy
         tags_page: Strona tagów
         relations_page: Strona relacji
+        projects_page: Strona projektów
+        reports_page: Strona raportów        
         compare_page: Strona porównywania
         first_page: Pierwsza strona
         prev_page: Poprzednia strona
@@ -149,10 +151,10 @@ pages:
             text: |
                 <p>OpenStreetMap używa <b>znaczników</b> (tagów), aby nadać znaczenie obiektom geograficznym. Nie ma nadrzędnie ustalonej listy tych to znaczników. Można utworzyć nowe znaczniki gdy zajdzie taka potrzeba. Każdy może zaproponować nowy tag i dodać go do nowych lub istniejących obiektów. To nadaje mapie OpenStreetMap elastyczności, ale czasami sprawia trudności podczas pracy.</p>
                 <p>Za każdym razem podczas edycji mapy lub używania danych OSM pojawiają się pytania: Jakich znaczników używają inni dla obiektu X? Jakich tagów można użyć dla obiektu Y, aby poprawnie się renderował? Czy tag Z opisany na wiki jest w rzeczywistości używany i gdzie?</p>
-                <p>Taginfo pomoże Ci wyświetlając statystyki dotyczące, które tagi znajdują się w bazie, jak wiele osób z nich korzysta, itp. Pobierane są także informacje o tagach z wiki i z innych źródeł. Taginfo próbuje zebrać do kupy wszystkie informacje o znacznikach, aby pomóc Ci zrozumieć w jaki sposób są one używane i co oznaczają. Zajrzyj do <a href="/sources">listy źródeł</a> używanych przez taginfo.</p>
+                <p>Taginfo pomoże Ci wyświetlając statystyki dotyczące tego które tagi znajdują się w bazie, jak wiele osób z nich korzysta, itp. Pobierane są także informacje o tagach z wiki i z innych źródeł. Taginfo próbuje zebrać do kupy wszystkie informacje o znacznikach, aby pomóc Ci zrozumieć w jaki sposób są one używane i co oznaczają. Zajrzyj do <a href="/sources">listy źródeł</a> używanych przez taginfo.</p>
         about_site:
             title: O tej stronie
-            building_on_taginfo:
+        building_on_taginfo:
             title: Projekty pochodne
             pre: |
                 <p>Możesz użyć danych pochodzących z taginfo w swoich własnych projektach:</p>
@@ -173,12 +175,12 @@ pages:
                 <p>Potrzebujemy tłumaczy interfejsu użytkownika taginfo. Na stronie <a
                 href="/taginfo/translations">podsumowania tłumaczeń</a> sprawdzisz, które tłumaczenia wymagają pracy. Więcej informacji o tym jak możesz pomóc, znajdziesz na <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">wiki OSM</a>.</p>
                 <h3>Kod źródłowy</h3>
-                <p>Całe oprogramowanie na którym stoi taginfo jest otwartoźródłowe. Kod źródłowy znajdziesz na <a class="extlink" href="https://github.com/taginfo/taginfo/">GitHubie</a>. Podsumowanie znajdziesz na stronie dotyczącej <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">archiketury taginfo</a> na wiki OSM.</p>
+                <p>Całe oprogramowanie na którym stoi taginfo jest otwartoźródłowe. Kod źródłowy znajdziesz na <a class="extlink" href="https://github.com/taginfo/taginfo/">GitHubie</a>. Podsumowanie znajdziesz na stronie dotyczącej <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">architektury taginfo</a> na wiki OSM.</p>
                 <h3>Własny klon taginfo</h3>
-                <p>Możesz postawić własną <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">stronę taginfo</a>, na przykład tylko dla danych z Twojego kreju. Instrukcje znajdziesz na <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Running">wiki OSM</a>.</p>
+                <p>Możesz postawić własną <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">stronę taginfo</a>, na przykład tylko dla danych z Twojego kraju. Instrukcje znajdziesz na <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Running">wiki OSM</a>.</p>
                 <h3>Raportowanie błędów</h3>
                 <p>Raporty o błędach i prośby nowe funkcje prosimy zgłaszać na <a class="extlink" href="https://github.com/taginfo/taginfo/issues">GitHubie</a>. Możesz też napisać do nas na naszej liście dyskusyjnej.</p>
-                <h3>Kontakt/lista dyskusyjna/h3>
+                <h3>Kontakt/lista dyskusyjna</h3>
                 <p>Jeżeli masz jakieś pytania bądź chcesz pomóc, skontaktuj się z nami na <a class="extlink" href="//lists.openstreetmap.org/listinfo/taginfo-dev">liście dyskusyjnej taginfo-dev</a>.</p>
     sources:
         intro: |
@@ -275,13 +277,13 @@ pages:
             title: Rozmieszczenie geograficzne tego klucza
             relations: Relacje nie posiadają współrzędnych geograficznych, więc nie można ich pokazać na mapie.
         wiki_pages:
-            title: Artykuły wiki o tym kluczu
+            title: Artykuły na wiki o tym kluczu
             none_found: Brak artykułów wiki o tym kluczu.
             create: Stwórz artykuł wiki o tym kluczu
             wiki_page: Strona wiki
-            implied_tags: Wskazane Tagi
-            combined_tags: Połączone Tagi
-            linked_tags: Linked Tags*
+            implied_tags: Wskazane tagi
+            combined_tags: Połączone tagi
+            linked_tags: Podlinkowane tagi
         projects:
             title: Projekty korzystające z tego klucza
             description: W jaki sposób ten klucz jest wykorzystywany w projekcie
@@ -313,20 +315,20 @@ pages:
             relations: Relacje nie posiadają współrzędnych geograficznych, więc nie można ich pokazać na mapie.
             no_map: Mapa jest tylko dostępna dla często używanych tagów. Spróbuj link do overpass turbo.
         wiki_pages:
-            title: Artykuły wiki o tym tagu
-            none_found: Brak artykułów wiki o tym tagu.
+            title: Artykuły na wiki o tym tagu
+            none_found: Brak artykułów na wiki o tym tagu.
             create: Stwórz stronę wiki o tym tagu
             suggest_key_wiki_page: Być może znajdziesz więcej informacji na wiki dla klucza %1.
             wiki_page: Strona wiki
-            implied_tags: Wskazane Tagi
-            combined_tags: Połączone Tagi
+            implied_tags: Wskazane tagi
+            combined_tags: Połączone tagi
             linked_tags: Podlinkowane tagi
         projects:
             title: Projekty korzystające z tego znacznika
             description: W jaki sposób ten znacznik jest wykorzystywany w projekcie
     relation:
         name: Rodzaj relacji
-        description_from_wiki: Opis tego rodzaju relacji w wiki (jeśli dostępne w wybranym języku, w przeciwnym razie po angielsku)
+        description_from_wiki: Opis tego rodzaju relacji na wiki (jeśli dostępne w wybranym języku, w przeciwnym razie po angielsku)
         no_description_in_wiki: Brak opisu na wiki.
         button_disabled: Przycisk został wyłączony, ponieważ jest zbyt dużo obiektów z tym kluczem.
         overview:
@@ -368,7 +370,7 @@ pages:
             intro: Te dane zostały dostarczone przez projekt i niekoniecznie muszą być kompletne. Zajrzyj do dokumentacji projektu po dalsze szczegóły.
             description: W jaki sposób ten klucz/znacznik jest używany w projekcie
             count_all_tooltip: Liczba obiektów w bazie danych z tym kluczem/znacznikiem
-            objects_tooltip: Typy obeiektów używane przez projekt
+            objects_tooltip: Typy obiektów używane przez projekt
 
 flexigrid:
     pagetext: Strona
@@ -402,7 +404,7 @@ sources:
         description: Dane z artykułów o tagach z wiki OSM.
     languages:
         name: Języki
-        description: Język nazw, kodów, itd. z IANA i rejestrów Unicode.
+        description: Nazwy języków, ich kody, itd. z IANA i rejestrów Unicode.
     projects:
         name: Projekty
         description: Zewnętrzne projekty i wykorzystywane przez nie klucze/znaczniki OSM.
@@ -479,10 +481,10 @@ reports:
         tags_on_relations: Liczba tagów na relację
         avg_tags_per_relation: Średnia liczba tagów na relację
     frequently_used_keys_without_wiki_page:
-        name: Często używane klucze bez strony w wiki
+        name: Często używane klucze bez strony na wiki
         intro: |
-            <p>Ta tabelka pokazuje klucze, które występują w bazie OSM więcej niż 10&thinsp;000 razy, ale nie posiadają opisującego go artykułu w wiki. Jeśli posiadasz jakieś informacje na temat tych kluczy, stwórz nowy artykuł na wiki, wystarczy kliknąć w link w lewej kolumnie. Czasem wystarczy stworzyć przekierowanie do innego artykułu. Aby to zrobić wpisz tylko tą jedną linię: <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>nazwa artykułu</i>]]</tt>.</p>
-        also_show_keys: Pokaż także klucze, które nie posiadają swojej strony po angielskim, ale mają ją w innym języku.
+            <p>Ta tabelka pokazuje klucze, które występują w bazie OSM więcej niż 10&thinsp;000 razy, ale nie posiadają opisującego go artykułu na wiki. Jeśli posiadasz jakieś informacje na temat tych kluczy, stwórz nowy artykuł na wiki, wystarczy kliknąć w link w lewej kolumnie. Czasem wystarczy stworzyć przekierowanie do innego artykułu. Aby to zrobić, musisz wpisać zaledwie następującą linijkę: <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>nazwa artykułu</i>]]</tt>.</p>
+        also_show_keys: Pokaż także klucze, które nie posiadają swojej strony po angielsku, ale mają ją w innym języku.
         table:
             create_wiki_page: Stwórz stronę wiki...
     key_lengths:
@@ -497,11 +499,11 @@ reports:
             key_length: Długość klucza
             number_of_keys: Liczba kluczy
     language_comparison_table_for_keys_in_the_wiki:
-        name: Tabela porównawcza języków w wiki
+        name: Tabela porównawcza języków na wiki
         icons:
-            template: Strona w wiki istnieje i zawiera standardowy szablon.
-            error: Strona w wiki istnieje i zawiera standardowy szablon, ale nie mogła zostać przetworzona.
-            page: Strona w wiki istnieje, ale nie zawiera standardowego szablonu.
+            template: Strona na wiki istnieje i zawiera standardowy szablon.
+            error: Strona na wiki istnieje i zawiera standardowy szablon, ale nie mogła zostać przetworzona.
+            page: Strona na wiki istnieje, ale nie zawiera standardowego szablonu.
             redirect: Strona jest przekierowaniem.
         intro: |
             Ta tabela pokazuje wszystkie tagi, dla których istnieją strony na wiki oraz to, w jakich są językach.
@@ -543,7 +545,7 @@ reports:
     similar_keys:
         name: Podobne klucze
         intro: |
-            Ten raport wyświetla klucze używane bardzo często i podobne klucze używane bardzo rzadko. W ten sposób można wytropic wiele literówek w powszechnych kluczach, ale nie jest to idealne. Bądź ostrożny naprawiając te dane! NIE edytuj tych danych maszynowo poprzez znajdź-i-zamień. Spójrz na każdy przypadek indywidualnie i napraw także inne napotkane problemy.
+            Ten raport wyświetla klucze używane bardzo często i podobne klucze używane bardzo rzadko. W ten sposób można wytropić wiele literówek w powszechnych kluczach, ale nie jest to idealne. Bądź ostrożny naprawiając te dane! NIE edytuj tych danych maszynowo poprzez znajdź-i-zamień. Spójrz na każdy przypadek indywidualnie i napraw także inne napotkane problemy.
         key_common: Często używane klucze
         key_rare: Rzadko używane klucze
         count_common: Liczba
@@ -562,7 +564,7 @@ reports:
     wiki_images:
         name: Zdjęcia na wiki
         intro: |
-            Ilustracje używane na wiki w różnych językach do reprezentacji kluczy. Czasami zdjęcia z jednego wariantu są lepsze niż inne. Ale czasami jest sens aby te obrazy były różne z powodu różnic kulturowych i innych.
+            Ilustracje używane na wiki w różnych językach do reprezentacji kluczy. Czasami zdjęcia z jednego wariantu są lepsze niż inne. Ale czasami ma sens, aby te obrazy były różne z powodu różnic kulturowych i innych.
     wiki_problems:
         name: Problemy składni wiki
         intro: |
