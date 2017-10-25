@@ -78,32 +78,58 @@ class Taginfo < Sinatra::Base
         res = []
         images = {}
         tags.each do |key, value|
-            data = @db.get_first_row("SELECT * FROM db.tags WHERE key=? AND value=?", key, value)
+            if value == '*'
+                data = @db.get_first_row("SELECT * FROM db.keys WHERE key=?", key)
 
-            if data
-                if data['in_wiki'].to_i != 0
-                    wiki = @db.execute("SELECT * FROM wiki.wikipages WHERE key=? AND value=? ORDER BY lang", key, value)
-                    data['wiki'] = {}
-                    wiki.each do |w|
-                        info = { 'description' => w['description'] }
-                        unless w['image'].nil?
-                            images[w['image']] = 1
-                            info['image'] = {'image' => w['image']}
+                if data
+                    if data['in_wiki'].to_i != 0
+                        wiki = @db.execute("SELECT * FROM wiki.wikipages WHERE key=? AND value IS NULL ORDER BY lang", key)
+                        data['wiki'] = {}
+                        wiki.each do |w|
+                            info = { 'description' => w['description'] }
+                            unless w['image'].nil?
+                                images[w['image']] = 1
+                                info['image'] = {'image' => w['image']}
+                            end
+                            data['wiki'][w['lang']] = info
                         end
-                        unless w['osmcarto_rendering'].nil?
-                            images[w['osmcarto_rendering']] = 1
-                            info['osmcarto_rendering'] = {'image' => w['osmcarto_rendering']}
+
+                        wiki_default = wiki.select{ |w| w['lang'] == 'en' }[0] || wiki[0]
+                        %w(on_node on_way on_area on_relation).each do |arg|
+                            data[arg] = wiki_default[arg]
                         end
-                        data['wiki'][w['lang']] = info
                     end
 
-                    wiki_default = wiki.select{ |w| w['lang'] == 'en' }[0] || wiki[0]
-                    %w(on_node on_way on_area on_relation).each do |arg|
-                        data[arg] = wiki_default[arg]
-                    end
+                    res << data
                 end
+            else
+                data = @db.get_first_row("SELECT * FROM db.tags WHERE key=? AND value=?", key, value)
 
-                res << data
+                if data
+                    if data['in_wiki'].to_i != 0
+                        wiki = @db.execute("SELECT * FROM wiki.wikipages WHERE key=? AND value=? ORDER BY lang", key, value)
+                        data['wiki'] = {}
+                        wiki.each do |w|
+                            info = { 'description' => w['description'] }
+                            unless w['image'].nil?
+                                images[w['image']] = 1
+                                info['image'] = {'image' => w['image']}
+                            end
+                            unless w['osmcarto_rendering'].nil?
+                                images[w['osmcarto_rendering']] = 1
+                                info['osmcarto_rendering'] = {'image' => w['osmcarto_rendering']}
+                            end
+                            data['wiki'][w['lang']] = info
+                        end
+
+                        wiki_default = wiki.select{ |w| w['lang'] == 'en' }[0] || wiki[0]
+                        %w(on_node on_way on_area on_relation).each do |arg|
+                            data[arg] = wiki_default[arg]
+                        end
+                    end
+
+                    res << data
+                end
             end
         end
 

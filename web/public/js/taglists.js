@@ -217,6 +217,9 @@ var taginfo_taglist = (function(){
             return wiki_key_link(get_lang(data, lang), data.key);
         },
         'value': function(lang, data) {
+            if (data.value === null) {
+                return '';
+            }
             return wiki_tag_link(get_lang(data, lang), data.key, data.value);
         },
         'element': function(lang, data) {
