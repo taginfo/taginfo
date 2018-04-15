@@ -1,21 +1,21 @@
 
 osm:
-    tag: Tag
-    tags: Tags
-    key: Key
-    keys: Keys
-    value: Value
-    values: Values
-    node: Node
-    nodes: Nodes
-    way: Way
-    ways: Ways
-    relation: Relation
-    relations: Relations
-    relation_type: Relation type
-    relation_types: Relation types
-    relation_member: Relation member
-    relation_members: Relation members
+    tag: 태그
+    tags: 태그
+    key: 키
+    keys: 키
+    value: 값
+    values: 값
+    node: 노드
+    nodes: 노드
+    way: 길
+    ways: 길
+    relation: 관계
+    relations: 관계
+    relation_type: 관계 유형
+    relation_types: 관계 유형
+    relation_member: 관계 구성원
+    relation_members: 관계 구성원
     relation_member_nodes: Member nodes
     relation_member_ways: Member ways
     relation_member_relations: Member relations
