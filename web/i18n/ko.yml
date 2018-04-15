@@ -14,92 +14,91 @@ osm:
     relations: 관계
     relation_type: 관계 유형
     relation_types: 관계 유형
-    relation_member: 관계 구성원
-    relation_members: 관계 구성원
-    relation_member_nodes: Member nodes
-    relation_member_ways: Member ways
-    relation_member_relations: Member relations
-    relation_member_role: Role
-    relation_member_roles: Roles
-    object: Object
-    objects: Objects
-    all: All
-    user: User
-    users: Users
+    relation_member: 관계의 구성 요소
+    relation_members: 관계의 구성 요소
+    relation_member_nodes: 노드 구성 요소
+    relation_member_ways: 길 구성 요소
+    relation_member_relations: 관계 구성 요소
+    relation_member_role: 역할
+    relation_member_roles: 역할
+    object: 요소
+    objects: 
+    all: 전체
+    user: 사용자
+    users: 사용자
 
 taginfo:
-    source: Source
-    sources: Sources
-    download: Download
-    about: About
-    contact: Contact
-    meta: Meta
-    wiki: Wiki
-    report: Report
-    reports: Reports
-    international: International
-    apidoc: API Documentation
-    project: Project
-    projects: Projects
-    test: Test
-    map: Map
-    maps: Maps
-    relations: Relations
-    combinations: Combinations
-    key_combinations: Combinations
-    comparison: Key/Tag Comparison
-    overview: Overview
-    data_from: Data from
-    data_from_description: Last update of taginfo database
+    source: 출처
+    sources: 출처
+    download: 다운로드
+    about: 개요
+    contact: 연락처
+    meta: 메타
+    wiki: 위키
+    report: 보고서
+    reports: 보고서
+    international: 전 세계
+    apidoc: API 문서
+    project: 프로젝트
+    projects: 프로젝트
+    test: 테스트
+    map: 지도
+    maps: 지도
+    relations: 관계
+    combinations: 조합
+    key_combinations: 조합
+    comparison: 키/태그 비교
+    overview: 개요
+    data_from: 최근 
+    data_from_description: taginfo 데이터베이스를 마지막으로 갱신한 날
     instance:
-        title: About this taginfo site
-        other: See the <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> for other sites.
+        title: 이 taginfo 사이트에 대해서
+        other: 다른 사이트는 <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM 위키</a>를 참조.
 
 misc:
-    values_less_than_one_percent: no values with more than 1%
-    empty_string: empty string
-    unknown: unknown
-    count: Count
-    image: Image
-    no_image: no image
-    all: All
-    object_type: Type
-    description: Description
-    help: Help
-    length: Length
-    icon: Icon
-    line: Line
-    area: Area
-    language: Language
-    search_for: Search for
-    objects_tooltip: Number of objects (as absolute value and as percentage of all nodes, ways, and relations).
-    nodes_tooltip: Number of nodes (as absolute value and as percentage of tagged nodes, ie. nodes without any tags are ignored).
-    ways_tooltip: Number of ways (as absolute value and as percentage of all ways).
-    relations_tooltip: Number of relations (as absolute value and as percentage of all relations).
-    values_tooltip: Number of different values for this key.
-    users_tooltip: Number of distinct users who last changed objects with this key.
-    prevalent_values: Prevalent values
-    prevalent_values_tooltip: Up to ten of the most common values for this key (only if more than 1% of tags with this key have this value).
-    in_wiki_tooltip: Has at least one wiki page.
+    values_less_than_one_percent: 1% 이상 사용하는 값이 없습니다
+    empty_string: 빈 문자열
+    unknown: 알 수 없음
+    count: 횟수
+    image: 이미지
+    no_image: 이미지 없음
+    all: 전체
+    object_type: 유형
+    description: 설명
+    help: 도움
+    length: 길이
+    icon: 아이콘
+    line: 선
+    area: 구역
+    language: 언어
+    search_for: 검색
+    objects_tooltip: 요소의 개수 (모든 노드, 길, 관계의 개수와 비율).
+    nodes_tooltip: 노드의 개수 (태그가 붙은 노드의 개수와 비율, 태그가 없는 노드는 무시합니다).
+    ways_tooltip: 길의 개수 (모든 길의 개수와 비율).
+    relations_tooltip: 관계의 개수 (모든 관계의 개수와 비율).
+    values_tooltip: 이 키가 가지는 모든 값의 개수.
+    users_tooltip: 마지막으로 이 키를 가진 요소를 변경한 사용자의 수
+    prevalent_values: 일반적인 값
+    prevalent_values_tooltip: 이 키에 많이 사용된 10개의 값까지 (이 키가 있는 태그의 1% 이상이 이 값을 가진 경우에만).
+    in_wiki_tooltip: 위키 문서가 하나라도 있는지의 여부.
 
 help:
     search:
-        title: Search
-        intro: Use the search box in the upper right corner to search for tag keys and values.
-        string: You can search for tag keys and values
-        substring: Just part of the key/value also works
-        complete_tags: You can search for complete tags
-        values_only: You can also search for tag values only
+        title: 검색
+        intro: 태그의 키와 값을 검색하기 위해 오른쪽 위에 있는 검색 상자를 사용합니다
+        string: 태그의 키와 값을 검색할 수 있습니다
+        substring: 키나 값의 일부분으로 검색할 수 있습니다
+        complete_tags: 완전한 태그를 검색할 수 있습니다
+        values_only: 태그의 값만으로 검색할 수 있습니다
         suggestions: |
-            For your convenience popular keys and tags will be suggested
-            while you type. Use your cursor keys to choose one and hit
-            <span class="key">Enter</span>.
-            You will jump directly to that key or tag page.
+            입력 중에 편리함을 위해 자주 쓰는 키와 태그를 제안합니다.
+            화살표 키로 선택하고 <span class="key">Enter</span> 키를 누르세요.
+            그 키나 태그의 페이지로 바로 넘어갈 것입니다.
     keyboard:
-        title: Keyboard shortcuts
-        site_navigation: Site navigation
-        page_navigation: Page navigation
-        table_navigation: Table navigation
+        title: 키보드 단축키
+        site_navigation: 사이트 조작
+        page_navigation: 페이지 조작
+        table_navigation: 표 조작
         keys:
             home: Home
             end: End
@@ -107,168 +106,158 @@ help:
             pagedown: PgDn
             esc: Esc
             tab: TAB
-        home_page: Home page
-        keys_page: Keys page
-        tags_page: Tags page
-        relations_page: Relations page
-        projects_page: Projects page
-        reports_page: Reports page
-        compare_page: Comparison page
-        first_page: First page
-        prev_page: Previous page
-        next_page: Next page
-        last_page: Last page
-        help_page: This help
-        activate_search: Activate search input
-        activate_filter: Activate filter input field
-        prev_entry: Previous entry
-        next_entry: Next entry
-        enter_entry: Jump to entry
-        switch_tab: Switch tab
-        deactivate: Deactivate input fields
-        up: Up in page hierarchy
-        switch_input: Switch between input fields
+        home_page: 처음 화면
+        keys_page: 키 페이지
+        tags_page: 태그 페이지
+        relations_page: 관계 페이지
+        projects_page: 프로젝트 페이지
+        reports_page: 보고서 페이지
+        compare_page: 비교 페이지
+        first_page: 첫 페이지
+        prev_page: 이전 페이지
+        next_page: 다음 페이지
+        last_page: 마지막 페이지
+        help_page: 도움 화면
+        activate_search: 검색창 활성화
+        activate_filter: 필터 입력창 활성화
+        prev_entry: 이전 항목
+        next_entry: 다음 항목
+        enter_entry: 그 항목으로 이동
+        switch_tab: 탭 전환
+        deactivate: 검색창 비활성화
+        up: 한 단계 위로 이동
+        switch_input: 입력창 간 전환
 
 pages:
     not_found:
-        title: Not found
-        intro: Sorry, we could not find the page you were looking for.
+        title: 찾을 수 없음
+        intro: 죄송합니다, 찾으려 하는 페이지를 찾을 수 없습니다.
     index:
-        popular_keys: Some popular keys
+        popular_keys: 자주 사용하는 키
         keys:
-            listkeys: See all keys...
+            listkeys: 모든 키를 표시...
         tags:
-            listtags: See most common tags...
+            listtags: 자주 사용하는 태그를 표시...
         relations:
-            listrelations: See all relation types...
+            listrelations: 모든 관계의 종류를 표시...
         reports:
-            listreports: See all reports...
+            listreports: 모든 보고서를 표시...
         about:
             intro:
-                <p>OpenStreetMap uses <b>tags</b> of the form <b>key=value</b>
-                to add meaning to geographic objects. Taginfo collects information
-                about these tags from several sources to help you understand what
-                they mean and how they are used.</p>
-            more: More about taginfo...
+                <p>OpenStreetMap은 지리적 요소에 의미를 부여하기 위해 <b>키=값</b>의 형태인 <b>태그</b>를 사용합니다.
+                taginfo는 어떻게 태그가 사용되고 태그의 의미가 무엇인지 이해하는 것을
+                돕기 위해 정보를 여러 출처에서 가져와 수집합니다.</p>
+            more: taginfo의 더 자세한 개요...
         international:
-            see: See other taginfo sites...
+            see: 다른 taginfo 사이트...
     about:
         about_taginfo:
-            title: About taginfo
+            title: taginfo에 대해서
             text: |
-                <p>OpenStreetMap uses <b>tags</b> to add meaning to geographic objects. There
-                is no fixed list of those tags. New tags can be invented and used as needed.
-                Everybody can come up with a new tag and add it to new or existing objects.
-                This makes OpenStreetMap enormously flexible, but sometimes also a bit hard
-                to work with.</p>
-                <p>Whether you are contributing to OSM or using the OSM data, there are always
-                questions like: What tags do people use for feature X? What tags can I use
-                for feature Y so that it appears properly on the map? Is the tag Z described
-                on the wiki actually in use and where?</p>
-                <p>Taginfo helps you by showing statistics about which tags are actually in the
-                database, how many people use those tags, where they are used and so on. It
-                also gets information about tags from the wiki and from other places. Taginfo
-                tries to bring together all information about tags to help you understand
-                how they are used and what they mean. See a <a href="/sources">list of sources</a>
-                taginfo uses.</p>
+                <p>OpenStreetMap은 지리적 요소에 의미를 부여하기 위해 <b>태그</b>를 사용합니다.
+                이 태그 목록은 고정되지 않습니다. 필요하면 새로운 태그가 개발되고 사용될 수 있습니다.
+                누구든지 새로운 태그를 만들어내고 새로운 요소나 이미 존재하는 요소에 추가할 수 있습니다.
+                이러한 행동은 OpenStreetMap을 더 유연하게 만들어 주지만, 때때로 작업하는 데 어려움을 줄 수 있습니다.</p>
+                <p>OSM에 기여하든 OSM 데이터를 사용하든 간에 지물 X에 사람들이 어떤 태그를 쓰는지,
+                지물 Y에 무슨 태그를 사용할 수 있는지, 그래서 지물이 지도에 적절히 나타나는지,
+                위키에 묘사된 태그 Z가 실제로 어디서 사용되는지 같은 질문이 항상 존재합니다.</p>
+                <p>taginfo는 통계를 보여줌으로써 어떤 태그가 실제로 데이터베이스에 있는지,
+                얼마나 많은 사람들이 그 태그를 쓰는지, 어디서 그 태그가 사용되는지 등등을 알려줍니다.
+                또한 taginfo는 위키와 다른 곳에서 태그에 대한 정보를 얻습니다.
+                taginfo는 어떻게 태그가 사용되고 태그의 의미가 무엇인지 이해하는 것을
+                돕기 위해 태그에 대한 모든 정보를 같이 가져오려 합니다.
+                taginfo가 사용한 <a href="/sources">출처 목록</a>을 참조하세요.</p>
         about_site:
-            title: About This Site
+            title: 이 사이트에 대해서
         building_on_taginfo:
-            title: Building on taginfo
+            title: taginfo를 사용한 개발
             pre: |
-                <p>You can use the data from taginfo in your own projects:</p>
+                <p>taginfo의 데이터를 자신의 프로젝트에 사용할 수 있습니다.</p>
             api: |
                 <h3>API</h3>
-                <p>Taginfo data can be accessed through a REST API. See the
-                <a href="/taginfo/apidoc">API documentation</a> for the details, some general information is
-                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">on the OSM wiki</a>.
-                The servers running the taginfo API do not have unlimited resources.
-                Please use the API responsibly. If in doubt contact the maintainers of the
-                site you are using or talk to us on the mailing list.</p>
+                <p>taginfo의 데이터는 REST API를 통해서 접근할 수 있습니다.
+                자세한 사항은 <a href="/taginfo/apidoc">API 문서</a>를 참조하세요. 몇 가지 일반적인 정보는
+                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">OSM 위키</a>를 참조하세요.
+                taginfo API를 사용하는 서버는 무제한적인 자원이 있는 것이 아닙니다.
+                API를 책임감을 갖고 사용해 주세요. 확신이 서지 않는다면 사용하고 있는 사이트의 관리자에게 연락하거나
+                메일링 리스트에서 우리에게 연락하세요.</p>
             download: |
-                <h3>Download</h3>
-                <p>If you want to play around with the data used by taginfo, you can download the
-                regularly updated Sqlite database files. All the preprocessing is done for you.
-                See the <a href="/download">download page</a> for a list of files. Note that
-                some of these files can get quite large. If you want to download them regularly,
-                contact the maintainers of the site you are using or talk to us on the mailing list.</p>
+                <h3>다운로드</h3>
+                <p>taginfo에서 사용된 데이터를 가지고 여러가지 테스트를 하고 싶다면,
+                정기적으로 업데이트되는 Sqlite 데이터베이스 파일을 다운로드할 수 있습니다. 모든 사전 처리는 이미 끝내 놓았습니다.
+                파일 목록은 <a href="/download">다운로드 페이지</a>를 참조하세요.
+                몇몇 파일은 꽤나 클 수 있다는 점을 알아 두세요. 만약 정기적으로 다운로드받고 싶다면,
+                사용하고 있는 사이트의 관리자에게 연락하거나 메일링 리스트에서 우리에게 연락하세요.</p>
             license: |
-                <h3>License</h3>
-                <p>The data available through taginfo is licenced under ODbL, the
-                <a class="extlink" href="//www.openstreetmap.org/copyright">same
-                license as the OpenStreetMap data</a>.</p>
+                <h3>라이선스</h3>
+                <p>taginfo를 통해 사용 가능한 데이터는 <a class="extlink"
+                href="//www.openstreetmap.org/copyright">OpenStreetMap과 같은</a> ODbL 라이선스를 갖습니다.</p>
         software:
-            title: The taginfo software
+            title: taginfo 소프트웨어
             text: |
-                <p>The taginfo software was created and is maintained by
-                <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
-                The web design was created by
-                <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
-                <h3>Translations</h3>
-                <p>We need translators for the taginfo user interface. See the <a
-                href="/taginfo/translations">translations overview</a> for languages that need
-                some work. More information on how to help is on the
-                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM wiki</a>.</p>
-                <h3>Code</h3>
-                <p>All the software behind the taginfo sites is Open Source. You can get it on
-                <a class="extlink" href="https://github.com/taginfo/taginfo/">GitHub</a>. For an overview
-                see the page about the <a class="extlink"
-                href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">taginfo
-                architecture</a> on the OSM wiki.</p>
-                <h3>Running your own instance</h3>
-                <p>You can run your own
-                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">taginfo site</a>,
-                for instance with data for just your own country. Instructions are
-                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Running">on the OSM
-                wiki</a>.</p>
-                <h3>Bug reports and feature requests</h3>
-                <p>Bug reports and feature requests should be directed to the <a class="extlink"
-                href="https://github.com/taginfo/taginfo/issues">GitHub issue tracker</a>. Or you can
-                come talk to us on the mailing list.</p>
-                <h3>Contact/Mailing list</h3>
-                <p>Contact us on the
-                <a class="extlink" href="//lists.openstreetmap.org/listinfo/taginfo-dev">taginfo-dev mailing list</a>
-                if you have questions or want to help.</p>
+                <p>taginfo 소프트웨어는 <a class="extlink"
+                href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>가 제작, 유지보수하고 있습니다.
+                웹 디자인은 <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>가 제작했습니다.</p>
+                <h3>번역</h3>
+                <p>우리는 taginfo 사용자 인터페이스 번역자가 필요합니다. 작업이 필요한 언어는
+                <a href="/taginfo/translations">번역 개요</a>를 참조하세요.
+                어떻게 도울 수 있는지에 대한 자세한 정보는 <a class="extlink"
+                href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM 위키</a>에 있습니다.</p>
+                <h3>코드</h3>
+                <p>taginfo 사이트에 있는 소프트웨어는 모두 오픈소스입니다. <a class="extlink"
+                href="https://github.com/taginfo/taginfo/">GitHub</a>에서 코드를 얻을 수 있습니다.
+                전체 구조에 대해서는 OSM 위키에 있는 <a class="extlink"
+                href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">taginfo 구조</a>에 대한 페이지를 읽어 주세요.</p>
+                <h3>자신의 인스턴스를 구동하는 경우</h3>
+                <p>가령 자신의 나라의 데이터만 가진 <a class="extlink"
+                href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">taginfo 사이트</a>를 돌릴 수 있습니다.
+                설명은 <a class="extlink"
+                href="//wiki.openstreetmap.org/wiki/Taginfo/Running">OSM 위키</a>를 참조하세요.</p>
+                <h3>버그 제보와 기능 요청</h3>
+                <p>버그 제보와 기능 요청은 <a class="extlink"
+                href="https://github.com/taginfo/taginfo/issues">GitHub 이슈 트래커</a>로 해 주세요.
+                아니면 메일링 리스트에서 우리에게 연락할 수 있습니다.</p>
+                <h3>연락처/메일링 리스트</h3>
+                <p>요청이나 도와주고 싶은 것이 있다면 <a class="extlink"
+                href="//lists.openstreetmap.org/listinfo/taginfo-dev">taginfo-dev 메일링 리스트</a>로 우리에게 연락하세요.</p>
     sources:
         intro: |
-            <p>Taginfo collects data about OSM tags from several sources and brings them
-            together for easy browsing and discovery.</p>
-            <p>Note that taginfo only displays this data. If you want to change it, you
-            have to go back to the source.</p>
+            <p>taginfo는 여러 출처에서 OSM 태그에 대한 데이터를 수집하고, 쉬운 탐색과 가독성을 위해 조합합니다.</p>
+            <p>taginfo는 데이터를 보여주기만 한다는 것을 명심하세요. 만약 이를 바꾸고 싶다면, 출처로 돌아가야 합니다.</p>
         list:
-            title: List of Sources
-            intro: Here is a list of currently used sources. More sources might be integrated in the future.
+            title: 출처 목록
+            intro: 현재 사용하는 출처의 목록입니다. 나중에 새로운 출처가 추가될지도 모릅니다.
         description:
             db: |
-                <p>Statistics about keys, tags, and relation types are generated from the <a class="extlink" href="https://planet.openstreetmap.org/">OSM database</a> (or an extract) as well as the maps that show the geographic distribution of nodes and ways.</p>
+                <p>키, 태그, 관계의 종류에 대한 통계와 노드와 길의 지리적 분포를 보여주는 지도는 <a class="extlink" href="https://planet.openstreetmap.org/">OSM 데이터베이스</a>(또는 데이터베이스의 발췌물)로 작성되었습니다.</p>
             wiki: |
-                <p>The <a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> is read and all Key:*, Tag:*, and Relation:* pages (in all the different languages) are analyzed. Descriptions, images, related tags, etc. are extracted from them.</p>
+                <p><a class="extlink" href="//wiki.openstreetmap.org/">OSM 위키</a>를 읽어들여서 모든 Key:*, Tag:*, and Relation:* (각각 모든 언어의)문서를 분석했습니다. 거기에서 설명, 이미지, 관계된 태그 등을 추출했습니다.</p>
             languages: |
-                <p>Taginfo gets information about the different languages of the world, their codes, names, etc. from several <a class="extlink" href="https://www.iana.org/">IANA</a> and <a class="extlink" href="http://www.unicode.org/">Unicode</a> registries.</p>
+                <p>taginfo는 전 세계의 언어에 관한 코드와 명칭 등의 정보를 <a class="extlink" href="https://www.iana.org/">IANA</a>와 <a class="extlink" href="http://www.unicode.org/">Unicode</a> 레지스트리에서 받고 있습니다.</p>
             projects: |
-                <p>Projects that use OSM tags in some way, such as editors, maps, routers, etc. See <a href="/projects">the project list</a>.</p>
+                <p>편집기, 지도, 경로 탐색기 등의 몇 가지 방법으로 OSM 태그를 사용하는 프로젝트는 <a href="/projects">프로젝트 목록</a>을 참조하세요.</p>
         updates:
-            title: Updates
-            intro: The taginfo data is updated regularly from the sources.
-        data_until: Data until
-        last_update_run: Last update run
-        data_until_explanation: All edits until this time will be in the data, later edits might be.
-        to: to
+            title: 갱신 현황
+            intro: taginfo 데이터는 출처로부터 주기적으로 갱신됩니다.
+        data_until: 반영 시점
+        last_update_run: 마지막 갱신
+        data_until_explanation: 이 시각까지의 모든 편집이 데이터에 반영되며, 이후 편집이 반영될 수도 있습니다.
+        to: ~
     download:
         intro: |
-            <p>Here you can download the databases used by taginfo. All the data is stored
-            in <a class="extlink" href="https://www.sqlite.org/">Sqlite</a> databases.
-            The database files are then packed with <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
-            <p>If you don't want to download these databases, but need automated access to
-            the data, you can also use the <a href="/about">API</a>.</p>
+            <p>taginfo가 사용하는 데이터베이스를 여기에서 다운로드받을 수 있습니다. 모든 데이터는 <a class="extlink"
+            href="https://www.sqlite.org/">Sqlite</a> 데이터베이스에 저장되어 있습니다.
+            데이터베이스 파일은 <a class="extlink" href="http://www.bzip.org/">bzip2</a>로 압축되어 있습니다.</p>
+            <p>만약 이러한 데이터베이스 파일을 다운로드하길 원치 않고, 데이터로 자동 접속이 필요하다면,
+            <a href="/about">API</a>를 사용할 수 있습니다.</p>
         file: File
-        packed: Packed
-        unpacked: Unpacked
-        description: Description
-        note: Some indexes are not in the databases available for download here. The 'Packed' size is the size without those indexes, the 'Unpacked' size includes the indexes you probably want to build after downloading.
+        packed: 압축 후
+        unpacked: 압축 전
+        description: 설명
+        note: 일부 색인은 여기에서 다운로드할 수 있는 데이터베이스에 없습니다. 압축 후 크기는 이러한 색인이 없는 크기이며, 압축 전 크기에는 다운로드 후에 구축하려는 색인이 포함되어 있습니다.
     reports:
         intro: |
-            Reports show the tag data from different angles.
+            보고서는 태그 데이터를 다각도에서 보여 줍니다.
             They often bring together data from several sources in interesting ways. Some
             of the reports can help with finding specific errors.
         list: List of all reports
