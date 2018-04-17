@@ -72,14 +72,14 @@ misc:
     area: 구역
     language: 언어
     search_for: 검색
-    objects_tooltip: 요소의 개수 (모든 노드, 길, 관계의 개수와 비율).
-    nodes_tooltip: 노드의 개수 (태그가 붙은 노드의 개수와 비율, 태그가 없는 노드는 무시합니다).
-    ways_tooltip: 길의 개수 (모든 길의 개수와 비율).
-    relations_tooltip: 관계의 개수 (모든 관계의 개수와 비율).
+    objects_tooltip: 요소의 개수(모든 노드, 길, 관계의 개수와 비율).
+    nodes_tooltip: 노드의 개수(태그가 붙은 노드의 개수와 비율, 태그가 없는 노드는 무시합니다).
+    ways_tooltip: 길의 개수(모든 길의 개수와 비율).
+    relations_tooltip: 관계의 개수(모든 관계의 개수와 비율).
     values_tooltip: 이 키가 가지는 모든 값의 개수.
     users_tooltip: 마지막으로 이 키를 가진 요소를 변경한 사용자의 수
     prevalent_values: 일반적인 값
-    prevalent_values_tooltip: 이 키에 많이 사용된 10개의 값까지 (이 키가 있는 태그의 1% 이상이 이 값을 가진 경우에만).
+    prevalent_values_tooltip: 이 키에 많이 사용된 10개의 값까지(이 키가 있는 태그의 1% 이상이 이 값을 가진 경우에만).
     in_wiki_tooltip: 위키 문서가 하나라도 있는지의 여부.
 
 help:
@@ -231,7 +231,7 @@ pages:
             db: |
                 <p>키, 태그, 관계의 종류에 대한 통계와 노드와 길의 지리적 분포를 보여주는 지도는 <a class="extlink" href="https://planet.openstreetmap.org/">OSM 데이터베이스</a>(또는 데이터베이스의 발췌물)로 작성되었습니다.</p>
             wiki: |
-                <p><a class="extlink" href="//wiki.openstreetmap.org/">OSM 위키</a>를 읽어들여서 모든 Key:*, Tag:*, and Relation:* (각각 모든 언어의)문서를 분석했습니다. 거기에서 설명, 이미지, 관계된 태그 등을 추출했습니다.</p>
+                <p><a class="extlink" href="//wiki.openstreetmap.org/">OSM 위키</a>를 읽어들여서 모든 Key:*, Tag:*, Relation:*(각각 모든 언어의) 문서를 분석했습니다. 거기에서 설명, 이미지, 관계된 태그 등을 추출했습니다.</p>
             languages: |
                 <p>taginfo는 전 세계의 언어에 관한 코드와 명칭 등의 정보를 <a class="extlink" href="https://www.iana.org/">IANA</a>와 <a class="extlink" href="http://www.unicode.org/">Unicode</a> 레지스트리에서 받고 있습니다.</p>
             projects: |
@@ -279,8 +279,8 @@ pages:
                 이 표는 데이터베이스 상에서 자주 쓰이는 태그를 나타냅니다.
     relations:
         name: 관계 유형
-        intro: 관계의 유형에 대한 정보 (<a href="/keys/type?filter=relations">type</a> 태그로 표현합니다).
-        relations_of_type_tooltip: 이 유형인 관계의 개수 (모든 관계의 사용 비율 포함).
+        intro: 관계의 유형에 대한 정보(<a href="/keys/type?filter=relations">type</a> 태그로 표현합니다).
+        relations_of_type_tooltip: 이 유형인 관계의 개수(모든 관계의 사용 비율 포함).
         prevalent_roles: 자주 쓰이는 역할
         prevalent_roles_tooltip: 이 유형인 관계에서 자주 쓰이는 역할입니다.
         no_information: 정보 없음
@@ -290,8 +290,8 @@ pages:
         intro: |
                 이 표는 어떤 방식으로든 OSM 태그를 쓰는 taginfo에 알려진 모든 프로젝트를 나타냅니다.<br/>이 기능에 대해서는 <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">위키</a>를 참조하세요.
     key:
-        description_from_wiki: 이 키에 대한 위키에서 가져온 설명 (현재 선택한 언어로 존재하면 현재 언어, 그렇지 않으면 영어).
-        no_description_in_wiki: 이 키에 대한 영어 설명이 위키에 없습니다 ("위키" 탭 참조).
+        description_from_wiki: 이 키에 대한 위키에서 가져온 설명(현재 선택한 언어로 존재하면 현재 언어, 그렇지 않으면 영어).
+        no_description_in_wiki: 이 키에 대한 영어 설명이 위키에 없습니다("위키" 탭 참조).
         filter:
             label: |
                  필터:
@@ -303,7 +303,7 @@ pages:
         number_objects: 요소의 개수
         number_values: 값의 개수
         values_used: 이 키와 함께 사용되는 값
-        tag_description_from_wiki: 태그에 대한 위키에서 가져온 설명 (현재 선택한 언어로 존재하면 현재 언어, 그렇지 않으면 영어).
+        tag_description_from_wiki: 태그에 대한 위키에서 가져온 설명(현재 선택한 언어로 존재하면 현재 언어, 그렇지 않으면 영어).
         overview:
             objects_last_edited_by: 이 키를 사용하는 요소를 %1명의 사용자가 마지막으로 편집했습니다.
             no_endorsement: (이 키를 사용한 사용자가 모두 이 키를 지지한다는 것을 의미하지 않습니다)
@@ -327,7 +327,7 @@ pages:
             linked_tags: 링크된 태그
         projects:
             title: 이 키를 사용하는 프로젝트
-            description: 이 키가 프로젝트에서 사용되는 방법
+            description: 프로젝트에서 이 키를 사용한 방법
         similar:
             tab: 비슷한 키
             title: 비슷한 키
@@ -336,8 +336,8 @@ pages:
             similarity: 유사성
             similarity_tooltip: 수치가 낮을수록 더 비슷합니다
     tag:
-        description_from_wiki: 이 태그에 대한 위키에서 가져온 설명 (현재 선택한 언어로 존재하면 현재 언어, 그렇지 않으면 영어).
-        no_description_in_wiki: 이 태그에 대한 영어 설명이 위키에 없습니다 ("위키" 탭 참조).
+        description_from_wiki: 이 태그에 대한 위키에서 가져온 설명(현재 선택한 언어로 존재하면 현재 언어, 그렇지 않으면 영어).
+        no_description_in_wiki: 이 태그에 대한 영어 설명이 위키에 없습니다("위키" 탭 참조).
         button_disabled: 이 태그를 사용하는 요소가 너무 많아 버튼이 비활성화되었습니다.
         number_objects: 요소의 개수
         overview:
@@ -366,11 +366,11 @@ pages:
             linked_tags: 링크된 태그
         projects:
             title: 이 키를 사용하는 프로젝트
-            description: 이 키가 프로젝트에서 사용되는 방법
+            description: 프로젝트에서 이 키를 사용한 방법
     relation:
         name: 관계 유형
-        description_from_wiki: 이 관계 유형에 대한 위키에서 가져온 설명 (현재 선택한 언어로 존재하면 현재 언어, 그렇지 않으면 영어).
-        no_description_in_wiki: 이 관계 유형에 대한 영어 설명이 위키에 없습니다 ("위키" 탭 참조).
+        description_from_wiki: 이 관계 유형에 대한 위키에서 가져온 설명(현재 선택한 언어로 존재하면 현재 언어, 그렇지 않으면 영어).
+        no_description_in_wiki: 이 관계 유형에 대한 영어 설명이 위키에 없습니다("위키" 탭 참조).
         button_disabled: 이 관계 유형을 사용하는 요소가 너무 많아 버튼이 비활성화되었습니다.
         overview:
             tab: 개요
@@ -381,78 +381,78 @@ pages:
         roles:
             tab: 역할
             title: 구성 요소가 갖는 역할
-            objects_tooltip: 이 역할을 갖는 이 관계 유형의 구성 요소 개수(와 모든 구성 요소의 비율)입니다.
-            nodes_tooltip: Relation members of type node with this role (and as percentage of all members of type node) for this relation type.
-            ways_tooltip: Relation members of type way with this role (and as percentage of all members of type way) for this relation type.
-            relations_tooltip: Relation members of type relation with this role (and as percentage of all members of type relation) for this relation type.
-            no_roles_info: There is no information about roles for this relation type (most likely because there are only very few of those relations).
+            objects_tooltip: 이 관계 유형에 포함된 요소 중 이 역할을 갖는 구성 요소의 개수(와 구성 요소 사이의 비율).
+            nodes_tooltip: 이 관계 유형에 포함된 요소 중 이 역할을 갖는 노드의 개수(와 노드 사이의 비율).
+            ways_tooltip: 이 관계 유형에 포함된 요소 중 이 역할을 갖는 길의 개수(와 길 사이의 비율).
+            relations_tooltip: 이 관계 유형에 포함된 요소 중 이 역할을 갖는 관계의 개수(와 관계 사이의 비율).
+            no_roles_info: 이 관계 유형에 쓰인 역할이 없습니다.(관계가 거의 사용되지 않았기 때문일 가능성이 높습니다.)
         graph:
-            tab: Roles Graph
-            title: Roles Graph
+            tab: 역할 그래프
+            title: 역할 그래프
         wiki_pages:
-            title: Wiki pages about this relation type
-            none_found: No wiki page available for this relation type.
-            create: Create wiki page for this relation type
-            wiki_page: Wiki page
+            title: 이 관계 유형에 대한 위키 문서
+            none_found: 이 관계 유형에 대한 위키 문서가 없습니다.
+            create: 이 관계 유형에 대한 위키 문서 만들기
+            wiki_page: 위키 문서
         projects:
-            title: Projects using this relation type
-            description: How this relation type is used in the project
+            title: 이 관계 유형을 사용하는 프로젝트
+            description: 프로젝트에서 이 관계 유형을 사용한 방법
     project:
         overview:
-            project_name: Project name
-            project_url: Project URL
-            description: Description
-            documentation_url: Documentation
-            last_update: Last update
-            json_url: JSON project file
-            info: This data is provided by the project for taginfo though the 'JSON project file' linked from above. See the <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a> for a format description.
+            project_name: 프로젝트 이름
+            project_url: 프로젝트 URL
+            description: 설명
+            documentation_url: 문서
+            last_update: 마지막 업데이트
+            json_url: JSON 프로젝트 파일
+            info: taginfo 프로젝트는 이 프로젝트의 데이터를 위에 링크된 'JSON 프로젝트 파일'을 통해서 제공합니다. JSON 서식에 대해서는 <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">위키</a> 참조.
         tags:
-            title: Tags used by this project
-            intro: This data is provided by the project and not necessarily complete. Please see the project documentation for details.
-            description: How this key/tag is used in the project
-            count_all_tooltip: Number of objects in database with this key/tag
-            objects_tooltip: Object types the project uses
+            title: 이 프로젝트에서 사용한 태그
+            intro: 이 데이터는 프로젝트에서 제공받기 때문에 무조건 완전하다 볼 수는 없습니다. 정확한 내용은 프로젝트 문서를 참조하세요.
+            description: 프로젝트에서 이 키/를 사용한 방법
+            count_all_tooltip: 데이터베이스 상에 있는 이 키/태그를 가진 요소의 수
+            objects_tooltip: 이 프로젝트에서 사용한 요소의 유형
 
 flexigrid:
-    pagetext: Page
-    pagestat: Displaying {from} to {to} of {total} items
-    outof: of
-    findtext: Find
-    procmsg: Processing, please wait...
-    nomsg: No items
-    errormsg: Connection Error
+    pagetext: 페이지
+    pagestat: {total} 항목 중 {from}번째부터 {to}번째까지 표시
+    outof: /
+    findtext: 검색
+    procmsg: 처리 중, 잠시만 기다려 주세요...
+    nomsg: 항목 없음
+    errormsg: 접속 오류
 
 comparison:
-    list: Comparison list
-    items: items
-    add_key: Add this key to list
-    add_tag: Add this tag to list
-    clear: Clear comparison list
-    compare: Compare keys/tags
+    list: 비교 목록
+    items: 항목
+    add_key: 이 키를 목록에 추가
+    add_tag: 이 태그를 목록에 추가
+    clear: 비교 목록 비우기
+    compare: 키/태그 비교
 
 sources:
     master:
         name: Master
-        description: Aggregate statistics and miscellaneous data needed for the taginfo user interface.
+        description: taginfo 사용자 인터페이스에 필요한 통계 자료와 기타 데이터들 모음.
     history:
         name: History
-        description: Aggregate statistics over time.
+        description: 시간 경과에 따른 통계 모음.
     db:
         name: Database
-        description: Statistics about each key and each tag from the main OSM database (planet file).
+        description: 주요 OSM 데이터베이스에서 가져온 각각의 키/태그에 대한 통계(지구 파일).
     wiki:
         name: Wiki
-        description: Data from the tag and key pages of the OSM wiki.
+        description: OSM 위키 키/태그 문서에서 가져온 데이터.
     languages:
         name: Languages
-        description: Language names, codes, etc. from IANA and Unicode registries.
+        description: IANA와 Unicode 레지스트리에서 가져온 언어 이름, 코드 등등.
     projects:
         name: Projects
-        description: External projects and the OSM keys/tags they use.
+        description: 외부 프로젝트와 외부 프로젝트에서 사용하는 OSM 키/태그.
 
 reports:
     characters_in_keys:
-        name: Characters in keys
+        name: 키에 사용된 문자
         intro: |
             Any valid Unicode character can appear in an OSM key but usually
             only lower case latin letters (a-z) and the underscore (_) are
