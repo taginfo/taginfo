@@ -576,71 +576,63 @@ reports:
     wiki_pages_about_non_existing_keys:
         name: 존재하지 않는 키에 대한 위키 문서
         intro: |
-            This table shows keys for which a wiki page exists but there is not a single
-            instance in the database. This is not necessarily an error (maybe somebody
-            added the documentation in the wiki as preparation for using a key or the wiki
-            page documents a now obsolete key), but it can also be a typo or other error.
-        wiki_pages: Wiki pages
+            이 표는 위키 문서가 있지만 데이터베이스 상에 존재하지 않는 키를 나타냅니다.
+            그렇다고 반드시 오류라는 의미는 아니지만(아마 몇몇은 키를 사용하기 위해 준비 절차로 위키 문서를 추가했거나,
+            위키 문서가 더는 쓸모없어진 키를 설명하는 것일 수도 있습니다.) 
+            보통은 오타거나 기타 오류인 경우가 많습니다.
+        wiki_pages: 위키 문서
     name_tags:
-        name: Variants of name tags
+        name: 이름 태그의 변이형
         intro: |
-            <p>This report shows information related to the naming of objects in OSM
-            using the <tt>name</tt> tag and its variants.</p>
+            <p>이 보고서는 OSM에 있으면서 <tt>name</tt> 태그와 그 변이형을 사용하는 요소에 붙은 이름과 관련된 정보를 나타냅니다.</p>
         overview:
-            tab: Overview
-            title: Overview
+            tab: 개요
+            title: 개요
         bcp47:
-            tab: BCP47 Subtags
-            title: BCP47 Subtags
+            tab: BCP47 하위 태그
+            title: BCP47 하위 태그
             filter:
-                label: Show only subtags of type
-                all: All
-                language: Language
-                script: Script
-                region: Region
-                variant: Variant
+                label: 유형의 하위 태그만 표시
+                all: 전체
+                language: 언어
+                script: 문자 체계
+                region: 지역
+                variant: 변이형
             intro: |
-                <p>The <a href="https://www.ietf.org/">IETF</a> defines <i>language
-                tags</i> in its standard
-                <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages
-                (BCP47)</a>. Language
-                tags consist of one or more <i>subtags</i> describing the language,
-                script, variants, etc. The following list shows the subtags currently
-                registered that are relevant for OSM. For more information see also the
-                <a href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
-                entry on IETF language tags</a> and the <a
-                href="http://www.langtag.net/">langtag.net</a> site.</p>
-                <p>Note that the data shown in this table is <b>not</b> from OpenStreetMap,
-                it just shows the building blocks that can be used to describe languages
-                irrespective of whether they are actually used in OSM.
-                </p>
+                <p><a href="https://www.ietf.org/">IETF</a>는 <a
+                href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages(BCP47)</a>로
+                표준 <i>언어 태그</i>를 정의합니다.
+                언어 태그는 언어, 문자 체계, 변이형 등을 설명하는 하나 이상의 <i>하위 태그</i>로 구성되어 있습니다.
+                다음 목록은 OSM과 관련되어 있으면서 현재 등록된 하위 태그를 나타냅니다.
+                자세한 정보는 <a href="https://ko.wikipedia.org/wiki/IETF_%EC%96%B8%EC%96%B4_%ED%83%9C%EA%B7%B8">IETF
+                언어 태그 위키피디아 문서</a>와 <a href="http://www.langtag.net/">langtag.net</a> 사이트 참조.</p>
+                <p>이 표의 데이터는 OpenStreetMap에서 가져온 것이 <b>아니고</b>, 어디서 설명하든 상관없이
+                언어를 설명할 때 사용할 수 있는 구성 요소만 나타낸다는 점을 명심하세요.</p>
     similar_keys:
-        name: Similar keys
+        name: 비슷한 키
         intro: |
-            This report shows keys used very often and similar keys used very
-            rarely. This exposes many misspellings of common keys, but is not
-            perfect. Take care when fixing the data! Do NOT just mechanically
-            edit those keys with search-and-replace. Look at each case individually
-            and also fix other problems that you see.
-        key_common: Commonly used keys
-        key_rare: Rarely used keys
-        count_common: Count
-        count_rare: Count
-        similarity: Similarity
+            이 보고서는 자주 쓰는 키 중 거의 사용되지 않은 비슷한 키가 있는 키를 나타냅니다.
+            이는 자주 쓰이는 키에서 나온 많은 오타를 드러내지만, 항상 그렇지는 않습니다.
+            데이터를 수정할 때는 신중히 처리하세요! 검색과 교체만을 반복하면서 기계적으로 수정하지 마세요.
+            각각의 경우를 일일이 따져 보고 발견한 다른 문제도 같이 고치세요.
+        key_common: 자주 사용하는 키
+        key_rare: 거의 사용되지 않은 키
+        count_common: 횟수
+        count_rare: 횟수
+        similarity: 유사성
     historic_development:
-        name: Historic development
+        name: 역사적으로 본 성장
         intro: |
-            Development of some important statistics over time. This data has
-            been collected by taginfo, gaps are possible when taginfo didn't run
-            on a day for some reason.
+            시간의 경과에 따른 몇몇 중요한 통계의 성장. 이 데이터는 taginfo에서 지속적으로 수집되었으며,
+            taginfo가 몇 가지 이유로 하루 정도 작동하지 않을 때 끊어진 선이 생길 수 있습니다.
         keys:
-            title: Unique keys
+            title: 키의 개수
         tags:
-            title: Unique tags
+            title: 태그의 개수
         relation_types:
-            title: Unique relation types
+            title: 관계 유형의 개수
     wiki_images:
-        name: Wiki images
+        name: 위키 이미지
         intro: |
             Images used in the wiki to symbolize the keys in different
             languages. Sometimes the image from one or the other language
