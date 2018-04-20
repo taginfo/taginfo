@@ -22,7 +22,6 @@ osm:
     relation_member_role: 역할
     relation_member_roles: 역할
     object: 요소
-    objects: 
     all: 전체
     user: 사용자
     users: 사용자
@@ -49,7 +48,7 @@ taginfo:
     key_combinations: 조합
     comparison: 키/태그 비교
     overview: 개요
-    data_from: 최근 
+    data_from: 최근
     data_from_description: taginfo 데이터베이스를 마지막으로 갱신한 날
     instance:
         title: 이 taginfo 사이트에 대해서
@@ -242,7 +241,6 @@ pages:
         data_until: 반영 시점
         last_update_run: 마지막 갱신
         data_until_explanation: 이 시각까지의 모든 편집이 데이터에 반영되며, 이후 편집이 반영될 수도 있습니다.
-        to: ~
     download:
         intro: |
             <p>taginfo가 사용하는 데이터베이스를 여기에서 다운로드받을 수 있습니다. 모든 데이터는 <a class="extlink"
@@ -257,8 +255,8 @@ pages:
         note: 일부 색인은 여기에서 다운로드할 수 있는 데이터베이스에 없습니다. 압축 후 크기는 이러한 색인이 없는 크기이며, 압축 전 크기에는 다운로드 후에 구축하려는 색인이 포함되어 있습니다.
     reports:
         intro: |
-        보고서는 여러 출처에서 흥미로운 방법으로 데이터를 가져와서 태그 데이터를 다각도로 보여주는 역할을 합니다.
-        몇몇 보고서는 특정한 오류를 찾는 데 도움이 됩니다.
+            보고서는 여러 출처에서 흥미로운 방법으로 데이터를 가져와서 태그 데이터를 다각도로 보여주는 역할을 합니다.
+            몇몇 보고서는 특정한 오류를 찾는 데 도움이 됩니다.
         list: 모든 보고서 목록
         data_sources: 사용한 출처 데이터
     search:
@@ -273,10 +271,10 @@ pages:
         nothing_to_compare: 비교할 키/태그가 없습니다. 아무 키 또는 태그 페이지로 이동해서 추가하세요.
     keys:
         intro: |
-                이 표는 데이터베이스나 기타 출처에 존재하는 모든 태그의 키를 나타냅니다.
+            이 표는 데이터베이스나 기타 출처에 존재하는 모든 태그의 키를 나타냅니다.
     tags:
         intro: |
-                이 표는 데이터베이스 상에서 자주 쓰이는 태그를 나타냅니다.
+            이 표는 데이터베이스 상에서 자주 쓰이는 태그를 나타냅니다.
     relations:
         name: 관계 유형
         intro: 관계의 유형에 대한 정보(<a href="/keys/type?filter=relations">type</a> 태그로 표현합니다).
@@ -288,13 +286,13 @@ pages:
         empty_role: 역할 없음
     projects:
         intro: |
-                이 표는 어떤 방식으로든 OSM 태그를 쓰는 taginfo에 알려진 모든 프로젝트를 나타냅니다.<br/>이 기능에 대해서는 <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">위키</a>를 참조하세요.
+            이 표는 어떤 방식으로든 OSM 태그를 쓰는 taginfo에 알려진 모든 프로젝트를 나타냅니다.<br/>이 기능에 대해서는 <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">위키</a>를 참조하세요.
     key:
         description_from_wiki: 이 키에 대한 위키에서 가져온 설명(현재 선택한 언어로 존재하면 현재 언어, 그렇지 않으면 영어).
         no_description_in_wiki: 이 키에 대한 영어 설명이 위키에 없습니다("위키" 탭 참조).
         filter:
             label: |
-                 필터:
+                필터:
             none: 필터 없음
             nodes: 노드만
             ways: 길만
@@ -415,7 +413,6 @@ pages:
 
 flexigrid:
     pagetext: 페이지
-    pagestat: {total} 항목 중 {from}번째부터 {to}번째까지 표시
     outof: /
     findtext: 검색
     procmsg: 처리 중, 잠시만 기다려 주세요...
@@ -455,7 +452,7 @@ reports:
         name: 키에 사용된 문자
         intro: |
             OSM 키에는 유효한 모든 Unicode 문자를 사용할 수 있지만, 대개 로마자 소문자와 언더바만 사용됩니다.
-            콜론은 주로 서로 다른 두 문자를 분리할 때 사용합니다. 이 보고서는 
+            콜론은 주로 서로 다른 두 문자를 분리할 때 사용합니다. 이 보고서는
             사용되는 문자를 기준으로 모든 키를 분류했습니다.
         statistics:
             tab: 통계
@@ -578,7 +575,7 @@ reports:
         intro: |
             이 표는 위키 문서가 있지만 데이터베이스 상에 존재하지 않는 키를 나타냅니다.
             그렇다고 반드시 오류라는 의미는 아니지만(아마 몇몇은 키를 사용하기 위해 준비 절차로 위키 문서를 추가했거나,
-            위키 문서가 더는 쓸모없어진 키를 설명하는 것일 수도 있습니다.) 
+            위키 문서가 더는 쓸모없어진 키를 설명하는 것일 수도 있습니다.)
             보통은 오타거나 기타 오류인 경우가 많습니다.
         wiki_pages: 위키 문서
     name_tags:
