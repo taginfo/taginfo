@@ -634,21 +634,19 @@ reports:
     wiki_images:
         name: 위키 이미지
         intro: |
-            Images used in the wiki to symbolize the keys in different
-            languages. Sometimes the image from one or the other language
-            variant is better. But sometimes it makes sense to have different
-            images because of different cultural backgrounds or so.
+            서로 다른 언어에서 키를 이미지로 나타내기 위해 위키에서 사용하는 이미지.
+            때때로 다른 언어에서 사용된 이미지가 더 좋을 수 있습니다.
+            하지만 서로 다른 문화적 배경 때문에 서로 다른 이미지를 갖는 것이 좋은 경우가 많습니다.
     wiki_problems:
-        name: Wiki parsing problems
+        name: 위키 분석 문제
         intro: |
-            Taginfo reads all wiki pages used to describe keys, tags, and
-            relations to find information about tags. This report shows a list
-            of problems encountered while reading those pages. These aren't
-            necessarily errors in the wiki, they just mean that something in
-            the wiki pages isn't formatted in a way taginfo understands. Either
-            the page has to be corrected or taginfo has to be fixed.
-        location: Location
-        reason: Reason
-        wiki_page: Wiki page
-        lang: Lang.
-        info: Additional information
+            taginfo는 태그에 대한 정보를 찾기 위해 키, 태그, 관계를 설명하는 데 사용한 모든 위키 문서를 읽습니다.
+            이 보고서는 문서를 읽어들이면서 발생한 문제를 목록으로 나타냅니다.
+            무조건 위키의 문제만은 아니고, 단지 위키 문서에 taginfo가 이해하는 방식으로 서식이 만들어지지 않았다는 것를 의미합니다.
+            그럴 때는 문서를 교정하거나 taginfo를 고쳐야 합니다.
+        location: 장소
+        reason: 이유
+        wiki_page: 위키 문서
+        lang: 언어
+        info: 비고
+
