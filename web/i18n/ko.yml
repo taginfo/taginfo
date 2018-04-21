@@ -22,6 +22,7 @@ osm:
     relation_member_role: 역할
     relation_member_roles: 역할
     object: 요소
+    objects: 요소
     all: 전체
     user: 사용자
     users: 사용자
@@ -241,6 +242,7 @@ pages:
         data_until: 반영 시점
         last_update_run: 마지막 갱신
         data_until_explanation: 이 시각까지의 모든 편집이 데이터에 반영되며, 이후 편집이 반영될 수도 있습니다.
+        to: ～
     download:
         intro: |
             <p>taginfo가 사용하는 데이터베이스를 여기에서 다운로드받을 수 있습니다. 모든 데이터는 <a class="extlink"
@@ -289,7 +291,7 @@ pages:
             이 표는 어떤 방식으로든 OSM 태그를 쓰는 taginfo에 알려진 모든 프로젝트를 나타냅니다.<br/>이 기능에 대해서는 <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">위키</a>를 참조하세요.
     key:
         description_from_wiki: 이 키에 대한 위키에서 가져온 설명(현재 선택한 언어로 존재하면 현재 언어, 그렇지 않으면 영어).
-        no_description_in_wiki: 이 키에 대한 영어 설명이 위키에 없습니다("위키" 탭 참조).
+        no_description_in_wiki: 이 키에 대한 영어 설명이 위키에 없습니다("Wiki" 탭 참조).
         filter:
             label: |
                 필터:
@@ -335,7 +337,7 @@ pages:
             similarity_tooltip: 수치가 낮을수록 더 비슷합니다
     tag:
         description_from_wiki: 이 태그에 대한 위키에서 가져온 설명(현재 선택한 언어로 존재하면 현재 언어, 그렇지 않으면 영어).
-        no_description_in_wiki: 이 태그에 대한 영어 설명이 위키에 없습니다("위키" 탭 참조).
+        no_description_in_wiki: 이 태그에 대한 영어 설명이 위키에 없습니다("Wiki" 탭 참조).
         button_disabled: 이 태그를 사용하는 요소가 너무 많아 버튼이 비활성화되었습니다.
         number_objects: 요소의 개수
         overview:
@@ -368,7 +370,7 @@ pages:
     relation:
         name: 관계 유형
         description_from_wiki: 이 관계 유형에 대한 위키에서 가져온 설명(현재 선택한 언어로 존재하면 현재 언어, 그렇지 않으면 영어).
-        no_description_in_wiki: 이 관계 유형에 대한 영어 설명이 위키에 없습니다("위키" 탭 참조).
+        no_description_in_wiki: 이 관계 유형에 대한 영어 설명이 위키에 없습니다("Wiki" 탭 참조).
         button_disabled: 이 관계 유형을 사용하는 요소가 너무 많아 버튼이 비활성화되었습니다.
         overview:
             tab: 개요
@@ -413,6 +415,8 @@ pages:
 
 flexigrid:
     pagetext: 페이지
+    pagestat: |
+        {total} 항목 중 {from}번째부터 {to}번째까지 표시
     outof: /
     findtext: 검색
     procmsg: 처리 중, 잠시만 기다려 주세요...
