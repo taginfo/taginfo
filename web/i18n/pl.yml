@@ -240,8 +240,8 @@ pages:
         name: Typy relacji
         intro: Informacje o różnych typach relacji (oznaczonych tagiem <a href="/keys/type?filter=relations">type</a>).
         relations_of_type_tooltip: Liczba relacji tej strony (i jako procent wszystkich relacji).
-        prevalent_roles: Powrzechne role
-        prevalent_roles_tooltip: Powrzechne role dla tego typu relacji.
+        prevalent_roles: Powszechne role
+        prevalent_roles_tooltip: Powszechne role dla tego typu relacji.
         no_information: Brak informacji
         roles_less_than_one_percent: brak ról powyżej 1%
         empty_role: pusta rola
