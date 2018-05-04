@@ -49,7 +49,7 @@ class Taginfo < Sinatra::Base
     api(4, 'search/by_keyword', {
         :description => 'Search for keys and tags by keyword in wiki pages.',
         :parameters => { :query => 'Value to search for (substring search, required).' },
-        :sort => %w( count_all key value ),
+        :sort => %w( key value ),
         :paging => :optional,
         :result => paging_results([
             [:key,   :STRING, 'Key'],
