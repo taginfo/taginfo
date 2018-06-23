@@ -1,7 +1,7 @@
 # web/lib/ui/relations.rb
 class Taginfo < Sinatra::Base
 
-    get %r{^/relations/(.*)} do |rtype|
+    get %r{/relations/(.*)} do |rtype|
         if params[:rtype].nil?
             @rtype = rtype
         else

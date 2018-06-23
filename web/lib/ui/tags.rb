@@ -1,7 +1,7 @@
 # web/lib/ui/tags.rb
 class Taginfo < Sinatra::Base
 
-    get %r{^/tags/(.*)} do |tag|
+    get %r{/tags/(.*)} do |tag|
         if tag.match(/=/)
             kv = tag.split('=', 2)
         else

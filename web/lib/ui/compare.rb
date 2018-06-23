@@ -1,7 +1,7 @@
 # web/lib/ui/compare.rb
 class Taginfo < Sinatra::Base
 
-    get %r{^/compare/(.*)} do |items|
+    get %r{/compare/(.*)} do |items|
         @data = []
 
         if !items.nil?
