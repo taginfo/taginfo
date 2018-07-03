@@ -53,7 +53,7 @@ function page_init() {
         bar_step = bar_width + bar_skip,
         data = <%= hist.to_json %>,
         w = bar_step * data.length,
-        h = 400,
+        h = Math.min(400, $('#tabs').height() - 160),
         margin = { top: 10, right: 15, bottom: 60, left: 60 };
 
     var scale_y = d3.scale.linear()
