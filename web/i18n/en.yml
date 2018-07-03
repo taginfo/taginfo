@@ -417,7 +417,7 @@ pages:
             documentation_url: Documentation
             last_update: Last update
             json_url: JSON project file
-            info: This data is provided by the project for taginfo though the 'JSON project file' linked from above. See the <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a> for a format description.
+            info: This data is provided by the project for taginfo through the 'JSON project file' linked from above. See the <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a> for a format description.
         tags:
             title: Tags used by this project
             intro: This data is provided by the project and not necessarily complete. Please see the project documentation for details.
