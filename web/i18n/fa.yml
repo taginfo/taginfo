@@ -88,7 +88,7 @@ help:
         intro: با استفاده از کادر جست‌وجو در گوشهٔ چپ بالا به‌دنبال کلیدها و مقادیر بگردید.
         string: کلید و مقدار برچسب‌ها را جست‌وجو کنید
         substring: جست‌وجو با بخشی از کلید/برچسب نیز کار می‌کند
-        complete_tags: برچسب کامل را جست‌وجو کنید:
+        complete_tags: برچسب کامل را جست‌وجو کنید
         values_only: همچنین می‌توانید فقط مقدار برچسب را جست‌وجو کنید
         suggestions: |
             هنگام نوشتن، برای راحتی شما کلیدها و برچسب‌های پرکاربرد
@@ -293,8 +293,7 @@ pages:
                 این جدول رایج‌ترین برچسب‌های پایگاه‌داده را نشان می‌دهد.
     relations:
         name: انواع رابطه
-        intro: اطلاعاتی دربارهٔ انواع مختلف رابطه‌ها (که با برچسب 
-        <a href="/keys/type?filter=relations">type</a> مشخص شده‌اند).
+        intro: اطلاعاتی دربارهٔ انواع مختلف رابطه‌ها (که با برچسب <a href="/keys/type?filter=relations">type</a> مشخص شده‌اند).
         relations_of_type_tooltip: تعداد رابطه‌های این نوع (و درصد از همهٔ رابطه‌ها).
         prevalent_roles: نقش‌های رایج
         prevalent_roles_tooltip: نقش‌های رایج برای این نوع از رابطه.
@@ -423,9 +422,7 @@ pages:
             documentation_url: مستندات
             last_update: آخرین به‌روزرسانی
             json_url: فایل JOSN پروژه
-            info: این اطلاعات توسط پروژه از طریق «فایل JOSN پروژه» که در بالا پیوند دارد در اختیار taginfo قرار گرفته. برای توضیحات قالب 
-            <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">ویکی</a> for a format description
-            را ببینید.
+            info: این اطلاعات توسط پروژه از طریق «فایل JOSN پروژه» که در بالا پیوند دارد در اختیار taginfo قرار گرفته. برای توضیحات قالب <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">ویکی</a> for a format description را ببینید.
         tags:
             title: برچسب‌هایی که این پروژه استفاده کرده
             intro: این اطلاعات توسط پروژه ارائه شده و لزوماً کامل نیست. لطفاً برای جزئیات، مستندات پروژه را ببینید.
@@ -481,8 +478,7 @@ reports:
             fraction: نسبت
             characters: نویسه‌های کلید
             characters_in_keys:
-                plain: فقط حروف کوچک لاتین
-                (<span class="char">a</span> تا <span class="char">z</span>) و خط زیر (<span class="char">_</span>). حروف اول و آخر حرفی هستند.
+                plain: فقط حروف کوچک لاتین (<span class="char">a</span> تا <span class="char">z</span>) و خط زیر (<span class="char">_</span>). حروف اول و آخر حرفی هستند.
                 colon: مانند A اما با یک دونقطه (<span class="char">:</span>) یا بیشتر در آن.
                 letters: مانند B اما با حروف بزرگ لاتین یا حروفی از سایر الفباها.
                 space: حداقل یک نویسهٔ فاصلهٔ سفید (فاصله، تب، نوسطر، سرخط یا از سایر الفباها).
