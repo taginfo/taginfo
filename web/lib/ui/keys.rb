@@ -1,7 +1,7 @@
 # web/lib/ui/keys.rb
 class Taginfo < Sinatra::Base
 
-    get %r{^/keys/(.*)} do |key|
+    get %r{/keys/(.*)} do |key|
         if params[:key].nil?
             @key = key
         else
