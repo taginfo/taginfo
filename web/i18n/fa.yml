@@ -435,7 +435,7 @@ flexigrid:
     pagestat: نمایش {from} تا {to} از {total} مورد
     outof: از
     findtext: جست‌وجو
-    procmsg: در حال پردازش، لطفاً شکیبا باشید...&#8207;
+    procmsg: در حال پردازش، لطفاً شکیبا باشید...
     nomsg: هیچی
     errormsg: خطای اتصال
 
@@ -558,7 +558,7 @@ reports:
             <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>نام صفحهٔ موجود</i>]]</tt></p>
         also_show_keys: کلیدهایی که صفحه‌ای در ویکی انگلیسی ندارند اما به زبانی دیگر صفحه‌ای برای آن‌ها وجود دارد نیز در این جدول نشان داده شوند.
         table:
-            create_wiki_page: ساخت صفحهٔ ویکی...&#8207;
+            create_wiki_page: ساخت صفحهٔ ویکی...
     key_lengths:
         name: طول کلید
         intro: |
