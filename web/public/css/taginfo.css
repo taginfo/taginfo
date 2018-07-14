@@ -7,6 +7,10 @@ body {
     line-height: 130%;
 }
 
+html[dir="rtl"] body {
+    font-family: 'Noto Sans Arabic UI', Tahoma, sans-serif;
+}
+
 @media print {
     .no-print {
         display: none !important;
@@ -60,6 +64,11 @@ div#javascriptmsg {
     margin: 20px 40px;
 }
 
+html[dir="rtl"] div#javascriptmsg {
+    left: auto;
+    right: 380px;
+}
+
 /* ========== */
 
 a {
@@ -88,6 +97,10 @@ a.extlink:before {
     content: "\2192\2009";
 }
 
+html[dir="rtl"] a.extlink:before {
+    content: "\1F517\00A0";
+}
+
 a.section {
     text-transform: uppercase;
     text-decoration: none;
@@ -97,6 +110,10 @@ div#pre-text {
     float: left;
     max-width: 60em;
     margin-bottom: 8px;
+}
+
+html[dir="rtl"] div#pre-text {
+    float: right;
 }
 
 /* ==========  */
@@ -132,7 +149,6 @@ span.disabled {
 .tipsy-arrow-s { border-top-color: #000; }
 .tipsy-arrow-e { border-left-color: #000; }
 .tipsy-arrow-w { border-right-color: #000; }
-
 .tipsy-n .tipsy-arrow { top: 0px; left: 50%; margin-left: -5px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent; }
 .tipsy-nw .tipsy-arrow { top: 0; left: 10px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent;}
 .tipsy-ne .tipsy-arrow { top: 0; right: 10px; border-bottom-style: solid; border-top: none;  border-left-color: transparent; border-right-color: transparent;}
@@ -151,11 +167,11 @@ span.customSelect {
     background-color: #ffffff;
     border-radius: 4px;
     font-size: 0.9rem;
-    text-align: left;
+    text-align: left;/*?*/
 }
 
 .customSelectInner {
-    background: url(/img/arrow.png) no-repeat center right;
+    background: url(/img/arrow.png) no-repeat center right;/*?*/
     background-size: 12px 12px;
 }
 
@@ -181,15 +197,32 @@ div#header_date {
     color: #808080;
 }
 
+html[dir="rtl"] div#header_date {
+    right: auto;
+    left: 20px;
+    text-align: left;
+}
+
 div#header div#header_forms {
     position: absolute;
     right: 20px;
     top: 31px;
 }
 
+html[dir="rtl"] div#header div#header_forms {
+    right: auto;
+    left: 20px;
+}
+
 div#header div#header_forms form {
     float: left;
     padding-left: 22px;
+}
+
+html[dir="rtl"] div#header div#header_forms form {
+    float: right;
+    padding-left: 0;
+    padding-right: 22px;
 }
 
 select#locale, select#lang {
@@ -279,6 +312,10 @@ ul#menu a.selected {
     margin: 10px 10px 6px 5px !important;
 }
 
+html[dir="rtl"] .slicknav_btn {
+    margin: 10px 5px 6px 10px !important;
+}
+
 .slicknav_nav {
     background: linear-gradient(to bottom, #ffffff 0%, #e8e8e4 100%);
 }
@@ -287,6 +324,10 @@ ul#menu a.selected {
     color: #202020 !important;
     text-align: right;
     font-size: 1.2rem;
+}
+
+html[dir="rtl"] .slicknav_nav a {
+    text-align: left;
 }
 
 @media screen and (max-width: 640px) {
@@ -314,6 +355,11 @@ ul#menu a.selected {
         width: 136px;
     }
 
+    html[dir="rtl"] div#header_logo {
+        left: 30px;
+        right: 4px;
+    }
+
     div#header img {
         height: 36px;
         width: auto;
@@ -323,6 +369,11 @@ ul#menu a.selected {
         position: absolute;
         top: -20px;
         left: 130px;
+    }
+
+    html[dir="rtl"] div#header div#header_forms form {
+        left: auto;
+        right: 130px;
     }
 
     #filter-form {
@@ -382,24 +433,25 @@ div#footer {
 }
 
 div#footer_left {
-    position: absolute;
+    float: left;
+}
+
+html[dir="rtl"] div#footer_left {
+    direction: ltr;
+    float:right;
 }
 
 div#footer_right {
-    position: absolute;
-    right: 0px;
-    text-align: right;
+    float: right;
+}
+
+html[dir="rtl"] div#footer_right {
+    float: left;
 }
 
 @media screen and (max-width: 640px) {
     div#footer {
         margin: 0 10px;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    div#footer_right {
-        top: 24px;
     }
 }
 
@@ -425,7 +477,7 @@ div.box {
 
 div.boxes {
     width: 232px;
-    float: right;
+    float: right;/*?*/
 }
 
 table.boxes {
@@ -484,6 +536,11 @@ div#tools {
     margin-top: 4px;
 }
 
+html[dir="rtl"] div#tools {
+    clear: left;
+    float: left;
+}
+
 span.lang {
     position: relative;
     top: -1px;
@@ -517,6 +574,11 @@ form#list-form {
     float: right;
 }
 
+html[dir="rtl"] form#list-form {
+    margin: 0 0 0 20px;
+    float: left;
+}
+
 @media print {
     form#list-form {
         display: none;
@@ -534,6 +596,10 @@ form#filter-form {
     float: right;
 }
 
+html[dir="rtl"] form#filter-form {
+    float: left;
+}
+
 select#filter {
     min-width: 146px;
     background-color: #ffffff;
@@ -543,7 +609,7 @@ select#filter {
 
 div.value {
     width: 6em;
-    float: left;
+    float: left;/*?*/
     padding: 0 !important;
     margin: 0 !important;
     text-align: right;
@@ -567,7 +633,7 @@ div.bar {
 
 /* ========== */
 
-span.overflow:hover {
+span.overflow:hover {/*?*/
     position: absolute;
     padding-right: 6px;
     background-color: #ffffff;
@@ -606,12 +672,17 @@ table.list th.tl, table.list td.tl {
     text-align: left;
 }
 
+html[dir="rtl"] table.list th.tl,
+html[dir="rtl"] table.list td.tl {
+    text-align: right;
+}
+
 table.list th.tc, table.list td.tc {
     text-align: center;
 }
 
 table.list th.tr, table.list td.tr {
-    text-align: right;
+    text-align: right;/*?*/
 }
 
 table.list td.nowrap {
@@ -690,9 +761,17 @@ table.help_table td {
     padding: 2px 6px 2px 0;
 }
 
+html[dir="rtl"] table.help_table td {
+    padding: 2px 0 2px 6px;
+}
+
 table.help_table th {
     padding-bottom: 10px;
     text-align: left;
+}
+
+html[dir="rtl"] table.help_table th {
+    text-align: right;
 }
 
 span.key {
@@ -745,6 +824,10 @@ div#tagcloud a:hover {
     font: 12px Arial,sans-serif;
 }
 
+html[dir="rtl"] .canvas svg text {
+    font: 12px 'Noto Sans Arabic UI', Tahoma, sans-serif;
+}
+
 .canvas .axis line {
     fill: none;
     stroke: #000;
@@ -753,5 +836,73 @@ div#tagcloud a:hover {
 
 .canvas .axis path {
     display: none;
+}
+
+/**** additions ****/
+
+html[dir="rtl"] .flexigrid,
+html[dir="rtl"] input#search,
+html[dir="rtl"] p.search,
+html[dir="rtl"] #key_list,
+html[dir="rtl"] #tag_list,
+html[dir="rtl"] #relation_list,
+html[dir="rtl"] .number,
+html[dir="rtl"] .canvas,
+html[dir="rtl"] .wiki-images,
+html[dir="rtl"] #overview,
+html[dir="rtl"] pPageStat, {
+    direction: ltr;
+}
+
+html[dir="rtl"] #overview p,
+html[dir="rtl"] .tipsy {
+    direction: rtl;
+}
+
+html[dir="rtl"] #overview p {
+    text-align: left;
+}
+
+html[dir="rtl"] #map div {
+    position: absolute;
+}
+
+/* overwrites inline style="margin: 0 0 0 18px; padding: 0;" */
+html[dir="rtl"] td ul {
+    margin: 0 18px 0 0!important;
+}
+
+/* jquery-ui-1.8.10.custom-minified.css */
+html[dir="rtl"] .ui-tabs .ui-tabs-nav li {
+    float: right;
+    margin: 0 0 0 .2em;
+}
+
+html[dir="rtl"] .ui-dialog .ui-dialog-titlebar-close {
+    right: auto;
+    left: 0.3em;
+}
+
+html[dir="rtl"] .ui-dialog .ui-dialog-title {
+    float: right;
+    margin: .1em 0 .1em 16px;
+}
+
+/* slicknav.min.css */
+html[dir="rtl"] .slicknav_btn {
+    float: left;
+}
+
+/* comparison page */
+html[dir="rtl"] table.comparison a.close {
+    float: left;
+}
+
+html[dir="rtl"] table.compstat td {
+    direction: ltr;
+}
+
+html[dir="rtl"] table.compstat th {
+    text-align: right;
 }
 
