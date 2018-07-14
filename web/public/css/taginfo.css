@@ -849,8 +849,7 @@ html[dir="rtl"] #relation_list,
 html[dir="rtl"] .number,
 html[dir="rtl"] .canvas,
 html[dir="rtl"] .wiki-images,
-html[dir="rtl"] #overview,
-html[dir="rtl"] pPageStat, {
+html[dir="rtl"] #overview {
     direction: ltr;
 }
 
