@@ -76,7 +76,7 @@ var create_flexigrid_for = {
                         return { 'cell': [
                             fmt_language(row.lang, row.language, row.language_en),
                             link_to_wiki(row.title),
-                            html_escape(row.description),
+                            fmt_desc(row.lang, row.dir, row.description),
                             fmt_wiki_image_popup(row.image)
                         ]};
                     })

@@ -248,8 +248,11 @@ end
 # Used in wiki api calls
 def get_wiki_result(res)
     return generate_json_result(res.size,
-        res.map{ |row| {
+        res.map{ |row|
+            loc = R18n.locale(row['lang'])
+            {
             :lang             => row['lang'],
+            :dir              => loc ? (loc.ltr? ? 'ltr' : 'rtl') : 'auto',
             :language         => ::Language[row['lang']].native_name,
             :language_en      => ::Language[row['lang']].english_name,
             :title            => row['title'],

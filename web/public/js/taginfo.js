@@ -106,6 +106,10 @@ function translate(str, fn) {
     return result;
 }
 
+function fmt_desc(lang, dir, desc) {
+    return '<span lang="' + lang + '" dir="' + dir + '">' + html_escape(desc) + '</span>';
+}
+
 function fmt_key(key) {
     if (key == '') {
         return span(texts.misc.empty_string, 'badchar empty');

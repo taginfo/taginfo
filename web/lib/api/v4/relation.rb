@@ -124,8 +124,11 @@ class Taginfo < Sinatra::Base
 
         res = @db.execute('SELECT * FROM wiki.relation_pages LEFT OUTER JOIN wiki.wiki_images USING (image) WHERE rtype = ? ORDER BY lang', rtype)
 
-        return generate_json_result(res.size, res.map{ |row| {
+        return generate_json_result(res.size, res.map{ |row|
+                loc = R18n.locale(row['lang'])
+                {
                 :lang             => row['lang'],
+                :dir              => loc ? (loc.ltr? ? 'ltr' : 'rtl') : 'auto',
                 :language         => ::Language[row['lang']].native_name,
                 :language_en      => ::Language[row['lang']].english_name,
                 :title            => row['title'],
