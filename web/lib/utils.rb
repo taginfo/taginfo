@@ -218,9 +218,9 @@ def get_description(table, attr, lang, param, value)
         end
 
         desc = select.get_first_value()
-        return desc if desc
+        return [desc, lang, R18n.locale(lang).ltr?] if desc
     end
-    return ''
+    return ['', '', '']
 end
 
 def get_key_description(lang, key)
@@ -236,8 +236,8 @@ def get_relation_description(lang, rtype)
 end
 
 def wrap_description(translation, description)
-    if description != ''
-        return "<span title='#{ h(translation.description_from_wiki) }' tipsy='w'>#{ h(description) }</span>"
+    if description[0] != ''
+        return "<span lang='#{description[1]}' dir='#{description[2] ? 'ltr' : 'rtl'}' title='#{ h(translation.description_from_wiki) }' tipsy='#{r18n.locale.ltr? ? 'w' : 'e'}'>#{ h(description[0]) }</span>"
     else
         return "<span class='empty'>#{ h(translation.no_description_in_wiki) }</span>"
     end

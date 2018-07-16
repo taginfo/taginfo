@@ -33,7 +33,10 @@ class Taginfo < Sinatra::Base
                     data[:count_nodes]     = result['count_nodes']
                     data[:count_ways]      = result['count_ways']
                     data[:count_relations] = result['count_relations']
-                    data[:desc]            = h(get_key_description(r18n.locale.code, key))
+                    desc = get_key_description(r18n.locale.code, key)
+                    data[:desc]            = h(desc[0])
+                    data[:lang]            = desc[1]
+                    data[:dir]             = desc[2]
 
                     prevalent_values = @db.select("SELECT value, count, fraction FROM db.prevalent_values").
                         condition('key=?', key).
@@ -55,7 +58,10 @@ class Taginfo < Sinatra::Base
                     data[:count_nodes]     = result['count_nodes']
                     data[:count_ways]      = result['count_ways']
                     data[:count_relations] = result['count_relations']
-                    data[:desc]            = h(get_tag_description(r18n.locale.code, key, value))
+                    desc = get_tag_description(r18n.locale.code, key, value)
+                    data[:desc]            = h(desc[0])
+                    data[:lang]            = desc[1]
+                    data[:dir]             = desc[2]
 
                     data[:prevalent_values] = []
 
