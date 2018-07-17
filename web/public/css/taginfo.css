@@ -167,11 +167,11 @@ span.customSelect {
     background-color: #ffffff;
     border-radius: 4px;
     font-size: 0.9rem;
-    text-align: left;/*?*/
+    text-align: left;
 }
 
 .customSelectInner {
-    background: url(/img/arrow.png) no-repeat center right;/*?*/
+    background: url(/img/arrow.png) no-repeat center right;
     background-size: 12px 12px;
 }
 
@@ -477,7 +477,7 @@ div.box {
 
 div.boxes {
     width: 232px;
-    float: right;/*?*/
+    float: right;
 }
 
 table.boxes {
@@ -609,7 +609,7 @@ select#filter {
 
 div.value {
     width: 6em;
-    float: left;/*?*/
+    float: left;
     padding: 0 !important;
     margin: 0 !important;
     text-align: right;
@@ -633,7 +633,7 @@ div.bar {
 
 /* ========== */
 
-span.overflow:hover {/*?*/
+span.overflow:hover {
     position: absolute;
     padding-right: 6px;
     background-color: #ffffff;
@@ -682,7 +682,7 @@ table.list th.tc, table.list td.tc {
 }
 
 table.list th.tr, table.list td.tr {
-    text-align: right;/*?*/
+    text-align: right;
 }
 
 table.list td.nowrap {
