@@ -105,6 +105,7 @@ class Taginfo < Sinatra::Base
             [:language,         :STRING, 'Language name in its language.'],
             [:language_en,      :STRING, 'Language name in English.'],
             [:title,            :STRING, 'Wiki page title.'],
+            [:dir,              :STRING, 'Writing direction ("ltr" or "rtl") of description.'],
             [:description,      :STRING, 'Short description of key from wiki page.'],
             [:image,            :HASH,   'Associated image.', [
                 [:title,            :STRING, 'Wiki page title of associated image.' ],

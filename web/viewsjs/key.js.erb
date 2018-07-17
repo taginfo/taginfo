@@ -50,7 +50,7 @@ var create_flexigrid_for = {
                         hover_expand(link_to_value(key, row.value)),
                         fmt_value_with_percent(row.count, row.fraction),
                         link_to_tag_with_tab(key, row.value, 'wiki', fmt_checkmark(row.in_wiki)),
-                        html_escape(row.description)
+                        fmt_desc(row.desclang, row.descdir, row.description)
                     ] };
                 });
                 delete data.data;
