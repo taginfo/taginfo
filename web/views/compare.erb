@@ -69,7 +69,7 @@ CSS
         <td class="data first item<%= num %>" style="width: <%= 100/@data.size %>%">
             <a class="close ui-icon ui-icon-closethick" href="#"></a>
             <h2></h2>
-            <p lang="<%= data[:lang] %>" dir="<%= data[:dir] ? 'ltr' : 'rtl' %>"><%= data[:desc] %></p>
+            <p lang="<%= data[:lang] %>" dir="<%= data[:dir] %>"><%= data[:desc] %></p>
         </td>
         <% end %>
     </tr>

@@ -25,7 +25,7 @@ var create_flexigrid_for = {
                         row.location,
                         row.reason,
                         link_to_wiki(row.title),
-                        row.reason == "wrong lang format" ? '' : fmt_language(row.lang, '', ''),
+                        row.reason == "wrong lang format" ? '' : fmt_language(row.lang, 'auto', '', ''),
                         row.key === null ? '' :
                             row.value === null ? link_to_key(row.key) : link_to_tag(row.key, row.value),
                         row.info

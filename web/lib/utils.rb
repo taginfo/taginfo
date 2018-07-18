@@ -202,6 +202,17 @@ end
 
 # ------------------------------------------------------------------------------
 
+# Get the printing direction of a language.
+def direction_from_lang_code(language_code)
+    r = R18n.locale(language_code)
+    if r.supported?
+        return r.ltr? ? 'ltr' : 'rtl'
+    end
+    return 'auto'
+end
+
+# ------------------------------------------------------------------------------
+
 # Get description for key/tag/relation from wiki page
 # Get it in given language or fall back to English if it isn't available
 def get_description(table, attr, lang, param, value)
@@ -218,9 +229,9 @@ def get_description(table, attr, lang, param, value)
         end
 
         desc = select.get_first_value()
-        return [desc, lang, R18n.locale(lang).ltr?] if desc
+        return [desc, lang, direction_from_lang_code(lang)] if desc
     end
-    return ['', '', '']
+    return ['', '', 'auto']
 end
 
 def get_key_description(lang, key)
@@ -249,10 +260,9 @@ end
 def get_wiki_result(res)
     return generate_json_result(res.size,
         res.map{ |row|
-            loc = R18n.locale(row['lang'])
             {
             :lang             => row['lang'],
-            :dir              => loc ? (loc.ltr? ? 'ltr' : 'rtl') : 'auto',
+            :dir              => direction_from_lang_code(row['lang']),
             :language         => ::Language[row['lang']].native_name,
             :language_en      => ::Language[row['lang']].english_name,
             :title            => row['title'],

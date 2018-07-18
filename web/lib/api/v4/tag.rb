@@ -145,6 +145,7 @@ class Taginfo < Sinatra::Base
         :paging => :no,
         :result => no_paging_results([
             [:lang,             :STRING, 'Language code.'],
+            [:dir,              :STRING, 'Writing direction ("ltr", "rtl", or "auto") of description.'],
             [:language,         :STRING, 'Language name in its language.'],
             [:language_en,      :STRING, 'Language name in English.'],
             [:title,            :STRING, 'Wiki page title.'],

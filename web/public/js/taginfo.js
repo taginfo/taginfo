@@ -369,11 +369,15 @@ function fmt_wiki_image_popup(image) {
     });
 }
 
-function fmt_language(code, native_name, english_name) {
+function fmt_language(code, dir, native_name, english_name) {
     return tag('span', html_escape(code), {
         'class': 'lang',
         title: html_escape(native_name + ' (' + english_name + ')')
-    }) + ' ' + html_escape(native_name);
+    }) + ' ' +
+    tag('span', html_escape(native_name), {
+        lang: code,
+        dir: dir,
+    });
 }
 
 function fmt_type_icon(type, on_or_off) {

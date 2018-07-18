@@ -197,7 +197,7 @@ class Taginfo < Sinatra::Base
             [:fraction,    :FLOAT,  'Number of times in relation to number of times this key is in the OSM database.'],
             [:in_wiki,     :BOOL,   'Is there at least one wiki page for this tag.'],
             [:desclang,    :STRING, 'Language the description of the tag is in.'],
-            [:descdir,     :STRING, 'Writing direction ("ltr" or "rtl") of description of the tag.'],
+            [:descdir,     :STRING, 'Writing direction ("ltr", "rtl", or "auto") of description of the tag.'],
             [:description, :STRING, 'Description of the tag from the wiki.']
         ]),
         :example => { :key => 'highway', :page => 1, :rp => 10, :sortname => 'count_ways', :sortorder => 'desc' },
@@ -253,7 +253,7 @@ class Taginfo < Sinatra::Base
                     condition('key = ?', key).
                     condition("value IN (#{ values_with_wiki_page })").
                     execute().each do |row|
-                    wikidesc[row['value']] = [row['description'], lang, R18n::locale(lang).ltr? ? 'ltr' : 'rtl']
+                    wikidesc[row['value']] = [row['description'], lang, direction_from_lang_code(lang)]
                 end
             end
         end
@@ -277,6 +277,7 @@ class Taginfo < Sinatra::Base
         :paging => :no,
         :result => no_paging_results([
             [:lang,             :STRING, 'Language code.'],
+            [:dir,              :STRING, 'Writing direction ("ltr", "rtl", or "auto") of description.'],
             [:language,         :STRING, 'Language name in its language.'],
             [:language_en,      :STRING, 'Language name in English.'],
             [:title,            :STRING, 'Wiki page title.'],
