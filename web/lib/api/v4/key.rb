@@ -264,9 +264,9 @@ class Taginfo < Sinatra::Base
                 :count       => row['count_' + filter_type].to_i,
                 :fraction    => (row['count_' + filter_type].to_f / this_key_count.to_f).round(4),
                 :in_wiki     => row['in_wiki'] != 0,
-                :description => wikidesc[row['value']][0] || '',
-                :desclang    => wikidesc[row['value']][1] || '',
-                :descdir     => wikidesc[row['value']][2] || ''
+                :description => wikidesc[row['value']] ? wikidesc[row['value']][0] : '',
+                :desclang    => wikidesc[row['value']] ? wikidesc[row['value']][1] : '',
+                :descdir     => wikidesc[row['value']] ? wikidesc[row['value']][2] : ''
             } }
         )
     end
