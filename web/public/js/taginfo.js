@@ -407,7 +407,7 @@ function fmt_with_ts(value) {
     if (value === null) {
         return '-';
     } else {
-        return value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1&thinsp;');
+        return value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1&#x202f;');
     }
 }
 

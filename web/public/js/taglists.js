@@ -270,7 +270,7 @@ var taginfo_taglist = (function(){
         'count': function(lang, data) {
             return ['node', 'way', 'relation'].map(function(type) {
                 var value = data['count_' + type + 's'].toString().
-                            replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1&thinsp;');
+                            replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1&#x202f;');
                 return '<div style="text-align: right">' +
                        value + ' ' + type_image(type) + '</div>';
             }).join('');

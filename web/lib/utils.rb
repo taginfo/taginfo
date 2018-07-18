@@ -7,7 +7,7 @@ class Fixnum
 
     # convert to string with thin space as thousand separator
     def to_s_with_ts
-        self.to_s.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1&thinsp;")
+        self.to_s.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1&#x202f;")
     end
 
 end
