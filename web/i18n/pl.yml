@@ -433,12 +433,12 @@ reports:
                 <p>Klucze zawierające tylko małe litery alfabetu łacińskiego (<span
                 class="char">a</span> do <span class="char">z</span>) i podkreślnik (<span class="char">_</span>). Pierwszy i ostatni znak muszą być literami. Większość kluczy powinna znaleźć się w tej kategorii.</p>
         colon:
-            tab: Średnik
-            title: Klucze zawierające średnik
+            tab: Dwukropek
+            title: Klucze zawierające dwukropek
             intro: |
-                <p>Klucze zawierające jeden lub więcej znak średnika (<span
-                class="char">:</span>) pomiędzy literami (<span class="char">a</span> do <span class="char">z</span>) i podkreślnikiem (<span
-                class="char">_</span>). Średnik jest zwykle używany jako separator hierarchiczny.</p>
+                <p>Klucze zawierające jeden lub więcej znaków dwukropka (<span
+                class="char">:</span>) pomiędzy literami (<span class="char">a</span> do <span class="char">z</span>) oraz klucze z podkreślnikiem (<span
+                class="char">_</span>). Dwukropek jest zwykle używany jako separator hierarchiczny.</p>
         letters:
             tab: Litery
             title: Klucze zawierające wielkie litery i litery z innych alfabetów
