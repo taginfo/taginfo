@@ -1,14 +1,14 @@
-<div class="pre">
+<div class="pre" lang="en" dir="ltr">
     <h1>Translations Overview</h1>
 </div>
-<div class="box resize">
+<div class="box resize" lang="en" dir="ltr">
     <table class="list">
 <% r18n.available_locales.sort{ |a,b| a.code <=> b.code }.each do |locale| %>
 <%   percent = (@num_texts[locale.code].to_f / @num_texts['en'].to_f * 100).to_i %>
         <tr>
             <td><span class="lang"><%= locale.code %></span></td>
             <td><%= h(::Language[locale.code].english_name) %></td>
-            <td><%= h(::Language[locale.code].native_name) %></td>
+            <td lang="<%= locale.code %>" dir="<%= locale.ltr? ? 'ltr' : 'rtl' %>"><%= h(::Language[locale.code].native_name) %></td>
             <td class="tr"><%= @num_texts[locale.code] %>/<%= @num_texts['en'] %></td>
             <td class="tr <%= percent > 90 ? 'good' : ( percent <= 80 ? 'bad' : 'okay' ) %>"><%= percent %>%</td>
             <td><a href="/taginfo/i18n?lang=<%= locale.code %>">see texts</a></td>

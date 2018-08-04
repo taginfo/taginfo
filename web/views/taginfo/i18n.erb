@@ -1,9 +1,9 @@
-<div class="pre ui-helper-clearfix">
+<div class="pre ui-helper-clearfix" lang="en" dir="ltr">
     <div id="pre-text">
         <h1>Translations of taginfo texts</h1>
     </div>
 </div>
-<div class="box resize" style="overflow: auto;">
+<div class="box resize" style="overflow: auto;" lang="en" dir="ltr">
 <% if @error %>
     <p style="color: red;"><%= @error %></p>
 <% else %>
@@ -14,12 +14,12 @@
 <form action="/taginfo/i18n" method="GET">
     <select id="lang" name="lang">
 <% r18n.available_locales.sort{ |a,b| a.title <=> b.title }.each do |locale| %>
-        <option value="<%= locale.code %>"<%= @lang == locale.code ? ' selected="selected"' : ''%>><%= locale.title %></option>
+        <option lang="<%= locale.code %>" dir="<%= locale.ltr? ? 'ltr': 'rtl' %>" value="<%= locale.code %>"<%= @lang == locale.code ? ' selected="selected"' : ''%>><%= locale.title %></option>
 <% end %>
     </select>
 </form>
         </th>
 <%= i18n_walk(@line, 0, '', @i18n_en, @i18n_lang) %>
     </table>
-</div>
 <% end %>
+</div>
