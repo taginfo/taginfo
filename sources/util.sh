@@ -100,15 +100,17 @@ run_sql() {
     print_message_impl "${FUNCNAME[1]}" "$message"
 
     local SQLITE="sqlite3 -bail -batch -init $UTILDIR/setup.sql $database"
+    local remove_first_off='sed -e 1!b;/^off/d'
+
     if [ ${#macros[@]} -eq 0 ]; then
-        $SQLITE <$sql_file
+        $SQLITE <$sql_file | $remove_first_off
     else
         local sql="$(<$sql_file)"
         for i in ${macros[@]}; do
             print_message_impl "${FUNCNAME[1]}" "  with parameter: $i"
             sql=${sql//__${i%=*}__/${i#*=}}
         done
-        echo -E "$sql" | $SQLITE
+        echo -E "$sql" | $SQLITE | $remove_first_off
     fi
 }
 
