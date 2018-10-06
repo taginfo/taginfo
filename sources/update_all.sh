@@ -33,7 +33,7 @@ readonly LOGFILE=$(date +%Y%m%dT%H%M)
 mkdir -p $DATADIR/log
 exec >$DATADIR/log/$LOGFILE.log 2>&1
 
-if which pbzip2; then
+if which pbzip2 >/dev/null; then
     BZIP_COMMAND=pbzip2
 else
     BZIP_COMMAND=bzip2
