@@ -21,6 +21,7 @@
 
 #include <cassert>
 #include <cstring>
+#include <iomanip>
 #include <iterator>
 #include <map>
 #include <string>
@@ -269,7 +270,7 @@ void TagStatsHandler::print_actual_memory_usage() {
 KeyStats& TagStatsHandler::get_stat(const char* key) {
     const auto it = m_tags_stat.find(key);
     if (it == m_tags_stat.end()) {
-        auto sit = m_tags_stat.emplace(std::make_pair(m_string_store.add(key), KeyStats{}));
+        const auto sit = m_tags_stat.emplace(std::make_pair(m_string_store.add(key), KeyStats{}));
         assert(sit.second);
         return sit.first->second;
     } else {
@@ -293,7 +294,7 @@ void TagStatsHandler::collect_tag_stats(const osmium::OSMObject& object) {
         const auto keyvalue = std::make_pair(tag.key(), tag.value());
 
         if (object.type() == osmium::item_type::node) {
-            auto location = m_map_to_int(static_cast<const osmium::Node&>(object).location());
+            const auto location = m_map_to_int(static_cast<const osmium::Node&>(object).location());
             stat.distribution.add_coordinate(location);
             const auto gd_it = m_key_value_geodistribution.find(keyvalue);
             if (gd_it != m_key_value_geodistribution.end()) {
@@ -305,7 +306,7 @@ void TagStatsHandler::collect_tag_stats(const osmium::OSMObject& object) {
                 const auto gd_it = m_key_value_geodistribution.find(keyvalue);
                 for (const auto& wn : wnl) {
                     try {
-                        auto location = m_location_index.get(wn.positive_ref());
+                        const auto location = m_location_index.get(wn.positive_ref());
                         stat.distribution.add_coordinate(location);
                         if (gd_it != m_key_value_geodistribution.end()) {
                             gd_it->second.add_coordinate(location);
@@ -352,22 +353,22 @@ TagStatsHandler::TagStatsHandler(Sqlite::Database& database,
         {
             Sqlite::Statement select{sdb, "SELECT key FROM interesting_tags WHERE value IS NULL;"};
             while (select.read()) {
-                auto key_value = select.get_text_ptr(0);
+                const auto key_value = select.get_text_ptr(0);
                 m_key_value_stats.emplace(m_string_store.add(key_value), KeyValueStats{});
             }
         }
         {
             Sqlite::Statement select{sdb, "SELECT key || '=' || value FROM interesting_tags WHERE value IS NOT NULL;"};
             while (select.read()) {
-                auto key_value = select.get_text_ptr(0);
+                const auto key_value = select.get_text_ptr(0);
                 m_key_value_stats.emplace(m_string_store.add(key_value), KeyValueStats{});
             }
         }
         {
             Sqlite::Statement select{sdb, "SELECT key, value FROM frequent_tags;"};
             while (select.read()) {
-                auto key   = select.get_text_ptr(0);
-                auto value = select.get_text_ptr(1);
+                const auto key   = select.get_text_ptr(0);
+                const auto value = select.get_text_ptr(1);
                 m_key_value_geodistribution.emplace(std::make_pair(m_string_store.add(key),
                                                                    m_string_store.add(value)),
                                                     GeoDistribution{});
@@ -376,7 +377,7 @@ TagStatsHandler::TagStatsHandler(Sqlite::Database& database,
         {
             Sqlite::Statement select{sdb, "SELECT rtype FROM interesting_relation_types;"};
             while (select.read()) {
-                auto rtype = select.get_text_ptr(0);
+                const auto rtype = select.get_text_ptr(0);
                 m_relation_type_stats[rtype] = RelationTypeStats{};
             }
         }
@@ -559,10 +560,10 @@ void TagStatsHandler::write_to_database() {
 
     for (const auto& key_value_stat : m_key_value_stats) {
         const KeyValueStats& stat = key_value_stat.second;
-        auto sr1 = split_key_value(key_value_stat.first);
+        const auto sr1 = split_key_value(key_value_stat.first);
         for (const auto& key_value_combo_stat : stat.m_key_value_combination_hash) {
             if (key_value_combo_stat.second.all() >= m_min_tag_combination_count) {
-                auto sr2 = split_key_value(key_value_combo_stat.first);
+                const auto sr2 = split_key_value(key_value_combo_stat.first);
                 statement_insert_into_tag_combinations
                     .bind_text(sr1.k, sr1.ksize)                         // column: key1
                     .bind_text(sr1.v, sr1.vsize)                         // column: value1
