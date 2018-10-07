@@ -146,8 +146,9 @@ void TagStatsHandler::update_key_value_combination_hash2(osmium::item_type type,
                                                          osmium::TagList::const_iterator end,
                                                          key_value_hash_map_type::iterator kvi1,
                                                          const std::string& key_value1) {
+    std::string key_value2;
     for (; it != end; ++it) {
-        std::string key_value2{it->key()};
+        key_value2 = it->key();
         auto kvi2 = m_key_value_stats.find(key_value2.c_str());
         if (kvi2 != m_key_value_stats.end()) {
             if (key_value1 < key_value2) {
@@ -174,8 +175,9 @@ void TagStatsHandler::update_key_value_combination_hash2(osmium::item_type type,
 void TagStatsHandler::update_key_value_combination_hash(osmium::item_type type,
                                                         osmium::TagList::const_iterator it,
                                                         osmium::TagList::const_iterator end) {
+    std::string key_value1;
     for (; it != end; ++it) {
-        std::string key_value1(it->key());
+        key_value1 = it->key();
         auto kvi1 = m_key_value_stats.find(key_value1.c_str());
         if (kvi1 != m_key_value_stats.end()) {
             update_key_value_combination_hash2(type, std::next(it), end, kvi1, key_value1);
