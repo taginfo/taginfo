@@ -109,11 +109,11 @@ var taginfo_taglist = (function(){
             'fr': {
                 'key': 'Clé',
                 'value': 'Valeur',
-                'element': '',
+                'element': 'Élément',
                 'description': 'Description',
                 'image': 'Image',
                 'osmcarto_rendering': 'Icône',
-                'count': 'Count'
+                'count': 'Nombre'
             },
             'hu': {
                 'key': 'Kulcs',
