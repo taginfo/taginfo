@@ -339,7 +339,7 @@ class Taginfo < Sinatra::Base
             [:icon_url,         :STRING, 'Icon URL']
         ]),
         :example => { :key => 'highway', :page => 1, :rp => 10, :sortname => 'project_name', :sortorder => 'asc' },
-        :ui => '/keys/highway=residential#projects'
+        :ui => '/keys/highway#projects'
     }) do
         key = params[:key]
         q = like_contains(params[:query])
