@@ -86,7 +86,7 @@ class Taginfo < Sinatra::Base
         :parameters => { :key => 'Tag key (required).', :value => 'Tag value (required).' },
         :result => 'PNG image.',
         :example => { :key => 'amenity', :value => 'post_box' },
-        :ui => '/tags/amenit=post_boxy#map'
+        :ui => '/tags/amenity=post_box#map'
     }) do
         get_png('tag', 'n', params[:key], params[:value])
     end
