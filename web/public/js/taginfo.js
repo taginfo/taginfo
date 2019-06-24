@@ -107,6 +107,9 @@ function translate(str, fn) {
 }
 
 function fmt_desc(lang, dir, desc) {
+    if (desc === null) {
+        return '';
+    }
     return '<span lang="' + lang + '" dir="' + dir + '">' + html_escape(desc) + '</span>';
 }
 
