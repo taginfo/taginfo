@@ -825,34 +825,34 @@ jQuery(document).ready(function() {
                 switch (event.which) {
                     case 63: // ?
                         open_help();
-                        break;
+                        return false;
                     case 99: // c
                         window.location = comparison_list_url(get_comparison_list());
-                        break;
+                        return false;
                     case 102: // f
                         jQuery('input.qsbox').focus();
-                        break;
+                        return false;
                     case 104: // h
                         window.location = '/';
-                        break;
+                        return false;
                     case 107: // k
                         window.location = '/keys';
-                        break;
+                        return false;
                     case 112: // p
                         window.location = '/projects';
-                        break;
+                        return false;
                     case 114: // r
                         window.location = '/relations';
-                        break;
+                        return false;
                     case 115: // s
                         jQuery('input#search').focus();
-                        break;
+                        return false;
                     case 116: // t
                         window.location = '/tags';
-                        break;
+                        return false;
                     case 120: // x
                         window.location = '/reports';
-                        break;
+                        return false;
                 }
             }
         }
@@ -866,28 +866,28 @@ jQuery(document).ready(function() {
             switch (event.which) {
                 case 36: // home
                     jQuery('div.pFirst:visible').click();
-                    break;
+                    return false;
                 case 33: // page up
                     jQuery('div.pPrev:visible').click();
-                    break;
+                    return false;
                 case 34: // page down
                     jQuery('div.pNext:visible').click();
-                    break;
+                    return false;
                 case 35: // end
                     jQuery('div.pLast:visible').click();
-                    break;
+                    return false;
                 case 37: // arrow left
                     up();
-                    break;
+                    return false;
                 case 38: // arrow up
                     table_up();
-                    break;
+                    return false;
                 case 39: // arrow right
                     table_right();
-                    break;
+                    return false;
                 case 40: // arrow down
                     table_down();
-                    break;
+                    return false;
             }
         }
     });
