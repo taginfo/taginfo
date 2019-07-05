@@ -382,7 +382,7 @@ class WikiPage
             @statuslink = template.named_parameters['statuslink'][0]
             if @statuslink.class == Template
                 @statuslink = nil
-            fi
+            end
         end
         if template.named_parameters['wikidata']
             wikidata = template.named_parameters['wikidata'][0]
