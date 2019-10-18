@@ -735,6 +735,11 @@ function comparison_list_change(key, value) {
 
 function activate_josm_button() {
     if (jQuery('#josm_button').length != 0) {
+        if (window.location.protocol == "https:") {
+            var url = jQuery('#josm_button')[0].href.replace('http://localhost:8111/', 'https://localhost:8112/');
+            jQuery('#josm_button')[0].href = url;
+        }
+
         jQuery('#josm_button').bind('click', function() {
             var url = jQuery('#josm_button')[0].href;
             jQuery.get(url, function(data) {
