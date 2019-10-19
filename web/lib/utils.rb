@@ -90,7 +90,7 @@ def xapi_link(element, key, value=nil)
 end
 
 def josm_link(element, key, value=nil)
-    '<span class="button">' + external_link('josm_button', 'JOSM', 'http://localhost:8111/import?url=' + Rack::Utils::escape(xapi_url(element, key, value)), true) + '</span>'
+    '<span class="button">' + external_link('josm_button', 'JOSM', 'http://127.0.0.1:8111/import?url=' + Rack::Utils::escape(xapi_url(element, key, value)), true) + '</span>'
 end
 
 def quote_double(text)
