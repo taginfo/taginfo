@@ -111,7 +111,7 @@ help:
         keys_page: Sleutels-pagina
         tags_page: Tags-pagina
         relations_page: Relaties-pagina
-        projects_page: projecten-pagina
+        projects_page: Projecten-pagina
         reports_page: Rapporten-pagina
         compare_page: Vergelijkingspagina
         first_page: Eerste pagina
@@ -411,8 +411,8 @@ pages:
             description: Hoe dit relatietype wordt gebruikt in het project
     project:
         overview:
-            project_name: projectnaam
-            project_url: project URL
+            project_name: Projectnaam
+            project_url: Project URL
             description: Beschrijving
             documentation_url: Documentatie
             last_update: Laatste update
