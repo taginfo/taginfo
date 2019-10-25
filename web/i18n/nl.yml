@@ -21,8 +21,8 @@ osm:
     relation_member_relations: Lid relaties
     relation_member_role: Rol
     relation_member_roles: Rollen
-    object: object
-    objects: objecten
+    object: Object
+    objects: Objecten
     all: Alle
     user: Gebruiker
     users: Gebruikers
@@ -39,8 +39,8 @@ taginfo:
     reports: Rapporten
     international: Internationaal
     apidoc: API Documentatie
-    project: project
-    projects: projecten
+    project: Project
+    projects: Projecten
     test: Test
     map: Kaart
     maps: Kaarten
@@ -319,7 +319,7 @@ pages:
         overview:
             objects_last_edited_by: objecten met deze sleutel zijn het laatst bewerkt door %1 verschillende gebruikers.
             no_endorsement: (Dit betekent niet dat al deze gebruikers te sleutel steunen.)
-            distribution_of_values: Verspreiding vaan waarden
+            distribution_of_values: Verspreiding van waarden
         other_keys_used:
             title: Andere sleutel gebruikt samen met deze sleutel
             other: Andere sleutels
@@ -338,8 +338,8 @@ pages:
             combined_tags: Gecombineerde Tags
             linked_tags: Gekoppelde Tags
         projects:
-            title: projecten die deze sleutel gebruiken
-            description: How this key is used in the project
+            title: Projecten die deze sleutel gebruiken
+            description: Hoe deze sleutel gebruik wordt in het project
         similar:
             tab: Soortgelijk
             title: Soortgelijke sleutels
@@ -377,7 +377,7 @@ pages:
             combined_tags: Gecombineerde Tags
             linked_tags: Gekoppelde Tags
         projects:
-            title: projecten die deze tag gebruiken
+            title: Projecten die deze tag gebruiken
             description: Hoe deze tag gebruikt wordt in het project
     relation:
         name: Relatietype
@@ -407,7 +407,7 @@ pages:
             create: Creëer wikipagina voor dit relatietype
             wiki_page: Wikipagina
         projects:
-            title: projecten die dit relatietype gebruiken
+            title: Projecten die dit relatietype gebruiken
             description: Hoe dit relatietype wordt gebruikt in het project
     project:
         overview:
@@ -459,7 +459,7 @@ sources:
         name: Talen
         description: Taalnamen, codes en dergelijke van IANA en Unicode registers.
     projects:
-        name: projecten
+        name: Projecten
         description: Externe projecten de de OSM sleutels/tags die ze gebruikene.
 
 reports:
