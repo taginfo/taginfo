@@ -269,7 +269,7 @@ pages:
     reports:
         intro: |
             Rapporten weergeven de tag data van verschillende hoeken.
-            Ze brengen vaak data samen van vers bronnen op interessante manieren. Sommige
+            Ze brengen vaak data samen van verschillende bronnen op interessante manieren. Sommige
             van de rapporten kunnen helpen met het vinden van specifieke fouten.
         list: Lijst van alle rapporten
         data_sources: Databronnen gebruikt
