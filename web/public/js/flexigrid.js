@@ -651,7 +651,7 @@
                        error: function(XMLHttpRequest, textStatus, errorThrown) { try { if (p.onError) p.onError(XMLHttpRequest, textStatus, errorThrown); } catch (e) {} }
                      });
 
-                    $('.pJSON a').attr('href', p.url + ( p.url.indexOf('?') == -1 ? '?' : '&') + jQuery.param(param) + '&format=json_pretty');
+                    $('.pJSON a', g.pDiv).attr('href', p.url + ( p.url.indexOf('?') == -1 ? '?' : '&') + jQuery.param(param) + '&format=json_pretty');
             },
             doSearch: function () {
                 p.query = $('input[name=q]',g.sDiv).val();
