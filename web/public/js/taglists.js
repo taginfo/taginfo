@@ -256,7 +256,7 @@ var taginfo_taglist = (function(){
                     return link_to_noescape(url_for_wiki(d.osmcarto_rendering.image),
                                             '<img style="max-width: 120px; max-height: 120px;" src="' +
                                             d.osmcarto_rendering.thumb_url_prefix +
-                                            d.osmcarto_rendering.width +
+                                            (d.osmcarto_rendering.width - 1) +
                                             d.osmcarto_rendering.thumb_url_suffix +
                                             '" width="' +
                                             d.osmcarto_rendering.width +
