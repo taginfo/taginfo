@@ -170,7 +170,11 @@ class WikiPage
 
         loop do
             # split text into ('before', 'token', 'after')
-            m = /^(.*?)(\{\{|\}\}|[|=])(.*)$/m.match(text)
+            if context.last.has_parname
+                m = /^(.*?)(\{\{|\}\}|[|])(.*)$/m.match(text)
+            else
+                m = /^(.*?)(\{\{|\}\}|[|=])(.*)$/m.match(text)
+            end
 
             # we are done if there are no more tokens
             if m.nil?
@@ -523,6 +527,10 @@ class Template
 
     def parname(name)
         @parname = name
+    end
+
+    def has_parname
+        !@parname.nil?
     end
 
     def add_parameter(value)
