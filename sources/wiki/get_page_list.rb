@@ -11,7 +11,7 @@
 #  Two files will be written: 'all_wiki_pages.list' contains a list of all
 #  pages in the wiki (currently not used), 'interesting_wiki_pages.list'
 #  contains all wiki pages about keys, tags, or relations which will be read
-#  in in a later step.
+#  in a later step.
 #
 #  Both files have the format:
 #
