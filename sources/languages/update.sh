@@ -39,7 +39,7 @@ update_file() {
         return 0
     else
         error=$?
-        if [ "$error" = "22" ]; then
+        if [ "$error" = "22" -o "$error" = "7" ]; then
             print_message "WARNING: Getting ${url} failed. Using old version."
         else
             print_message "ERROR: Could not get ${url}: curl error: $error"
