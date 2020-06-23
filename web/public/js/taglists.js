@@ -187,23 +187,23 @@ var taginfo_taglist = (function(){
                 'osmcarto_rendering': 'Hình tượng',
                 'count': 'Tổng số'
             },
-            'zh-hans': { 
-                'key': '类别', 
-                'value': '值', 
-                'element': '元素', 
-                'description': '说明', 
-                'image': '照片', 
-                'osmcarto_rendering': '地图显示', 
-                'count': '计数' 
+            'zh-hans': {
+                'key': '类别',
+                'value': '值',
+                'element': '元素',
+                'description': '说明',
+                'image': '照片',
+                'osmcarto_rendering': '地图显示',
+                'count': '计数'
             },
-            'zh-hant': { 
-                'key': '鍵', 
-                'value': '值', 
-                'element': '元素', 
-                'description': '描述', 
-                'image': '照片', 
-                'osmcarto_rendering': '地圖標註', 
-                'count': '計數' 
+            'zh-hant': {
+                'key': '鍵',
+                'value': '值',
+                'element': '元素',
+                'description': '描述',
+                'image': '照片',
+                'osmcarto_rendering': '地圖標註',
+                'count': '計數'
             }
         };
 
