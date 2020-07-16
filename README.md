@@ -22,7 +22,7 @@ wiki.
 
 It uses:
 
-* Ruby (must be at least 1.9.1)
+* Ruby (must be at least 2.4)
 * Mongrel or Apache2 mod_passenger
 * [Sinatra web framework](http://www.sinatrarb.com/)
 * Rack Contrib Gem (for `Rack::JSONP`)

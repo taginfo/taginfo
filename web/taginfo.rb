@@ -9,7 +9,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2010-2017  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2010-2020  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -27,8 +27,8 @@
 #------------------------------------------------------------------------------
 
 v=RUBY_VERSION.split('.').map{ |x| x.to_i }
-if (v[0]*100+v[1])*100+v[0] < 10901
-    STDERR.puts "You need at least Ruby 1.9.1 to run taginfo"
+if v[0] < 2 or v[1] < 4
+    STDERR.puts "You need at least Ruby 2.4 to run taginfo"
     exit(1)
 end
 

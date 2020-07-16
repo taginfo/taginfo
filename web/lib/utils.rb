@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 # patch some convenience methods into base classes
 
-class Fixnum
+class Integer
 
     # convert to string with thin space as thousand separator
     def to_s_with_ts
