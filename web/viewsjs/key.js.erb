@@ -197,7 +197,7 @@ function create_chart(params) {
         .data(params.data)
         .enter()
         .append("svg:a")
-            .attr('xlink:href', function(d) { return url_for_tag(params.key, d['value']); })
+            .attr('href', function(d) { return url_for_tag(params.key, d['value']); })
             .attr('transform', function(d) { return 'translate(10, ' + scale(d['y']) + ')'; })
             .call(function(c) {
                 c.append("rect")
@@ -211,6 +211,7 @@ function create_chart(params) {
                 .attr('dy', '0.5em')
                 .text(function(d) { return d['value']; });
 
+    jQuery('svg a[href$="(other)"]').removeAttr('href').css('text-decoration', 'none');
 }
 
 function page_init() {
