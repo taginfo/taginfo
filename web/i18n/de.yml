@@ -348,6 +348,9 @@ pages:
             from_count_tooltip: Anzahl Objekte mit dem anderen Key, die auch diesen Key haben.
         geographic_distribution:
             title: Geographische Verteilung dieses Keys
+            all: Diese Karte zeigt die Verteilung von Nodes und Ways mit diesem Key, Relationen werden nicht angezeigt.
+            nodes: Diese Karte zeigt die Verteilung von Nodes mit diesem Key.
+            ways: Diese Karte zeigt die Verteilung von Ways mit diesem Key.
             relations: Relations haben keinen geographischen Ort, daher kann keine Karte angezeigt werden.
         wiki_pages:
             title: Wiki-Seiten zu diesem Key
@@ -385,6 +388,9 @@ pages:
             description: Diese Tabelle zeigt nur die häufigsten Kombinationen der häufigsten Tags.
         geographic_distribution:
             title: Geographische Verteilung dieses Tags
+            all: Diese Karte zeigt die Verteilung von Nodes und Ways mit diesem Tag, Relationen werden nicht angezeigt.
+            nodes: Diese Karte zeigt die Verteilung von Nodes mit diesem Tag.
+            ways: Diese Karte zeigt die Verteilung von Ways mit diesem Tag.
             relations: Relations haben keinen geographischen Ort, daher kann keine Karte angezeigt werden.
             no_map: Sorry. Die Karte kann nur für die häufigsten Tags generiert werden. Probieren Sie den overpass turbo link.
         wiki_pages:
