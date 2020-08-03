@@ -79,7 +79,7 @@ misc:
     users_tooltip: Numero di singoli utenti che hanno usato recentemente questa chiave.
     prevalent_values: Valori prevalenti
     prevalent_values_tooltip: Fino a 10 dei valori più usati per questa chiave (solamente se almeno l'1% delle chiavi hanno questo valore).
-    in_wiki_tooltip: La chiave ha almeno una pagina pagina nel wiki.
+    in_wiki_tooltip: La chiave ha almeno una pagina nel wiki.
 
 help:
     search:
@@ -110,6 +110,7 @@ help:
         keys_page: Pagina delle Chiavi
         tags_page: Pagina dei Valori
         relations_page: Pagina delle Relazioni
+        reports_page: Pagina dei Report
         projects_page: Pagina dei Progetti
         compare_page: Pagina dei Confronti
         first_page: Prima pagina
