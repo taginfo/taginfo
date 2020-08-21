@@ -351,7 +351,7 @@ pages:
             all: Diese Karte zeigt die Verteilung von Nodes und Ways mit diesem Key, Relationen werden nicht angezeigt.
             nodes: Diese Karte zeigt die Verteilung von Nodes mit diesem Key.
             ways: Diese Karte zeigt die Verteilung von Ways mit diesem Key.
-            relations: Relations haben keinen geographischen Ort, daher kann keine Karte angezeigt werden.
+            relations: Die Anzeige des geographischen Orts der verschiedenen Relationstypen ist nicht so einfach, daher kann keine Karte angezeigt werden.
         wiki_pages:
             title: Wiki-Seiten zu diesem Key
             none_found: Keine Wiki-Seiten für diesen Key vorhanden.
@@ -391,7 +391,7 @@ pages:
             all: Diese Karte zeigt die Verteilung von Nodes und Ways mit diesem Tag, Relationen werden nicht angezeigt.
             nodes: Diese Karte zeigt die Verteilung von Nodes mit diesem Tag.
             ways: Diese Karte zeigt die Verteilung von Ways mit diesem Tag.
-            relations: Relations haben keinen geographischen Ort, daher kann keine Karte angezeigt werden.
+            relations: Die Anzeige des geographischen Orts der verschiedenen Relationstypen ist nicht so einfach, daher kann keine Karte angezeigt werden.
             no_map: Sorry. Die Karte kann nur für die häufigsten Tags generiert werden. Probieren Sie den overpass turbo link.
         wiki_pages:
             title: Wiki-Seiten zu diesem Tag

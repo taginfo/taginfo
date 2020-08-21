@@ -331,7 +331,7 @@ pages:
             all: This shows the distribution of nodes and ways with this key, relations are not shown.
             nodes: This shows the distribution of nodes with this key.
             ways: This shows the distribution of ways with this key.
-            relations: Relations do not have a geographical location, so no map can be shown.
+            relations: Showing a geographical location for the different types of relations isn't straightforward, so we are not trying to show a map here.
         wiki_pages:
             title: Wiki pages about this key
             none_found: No wiki page available for this key.
@@ -371,7 +371,7 @@ pages:
             all: This shows the distribution of nodes and ways with this tag, relations are not shown.
             nodes: This shows the distribution of nodes with this tag.
             ways: This shows the distribution of ways with this tag.
-            relations: Relations do not have a geographical location, so no map can be shown.
+            relations: Showing a geographical location for the different types of relations isn't straightforward, so we are not trying to show a map here.
             no_map: Sorry. The map can only be created for the most frequent tags. Try the overpass turbo link.
         wiki_pages:
             title: Wiki pages about this tag
