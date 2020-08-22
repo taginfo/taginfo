@@ -19,7 +19,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013-2017  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2013-2020  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -80,7 +80,7 @@ class WikiPage
                 :tags_implies, :tags_combination, :tags_linked,
                 :parsed, :has_templ, :group,
                 :onNode, :onWay, :onArea, :onRelation,
-                :status, :statuslink, :wikidata
+                :approval_status, :statuslink, :wikidata
 
     def self.pages
         @@pages.values.sort{ |a,b| a.title <=> b.title }
@@ -380,7 +380,7 @@ class WikiPage
             end
         end
         if template.named_parameters['status']
-            @status = template.named_parameters['status'].join('')
+            @approval_status = template.named_parameters['status'].join(',')
         end
         if template.named_parameters['statuslink']
             @statuslink = template.named_parameters['statuslink'][0]
@@ -438,7 +438,7 @@ class KeyOrTagPage < WikiPage
 
     def insert(db)
         db.execute(
-            "INSERT INTO wikipages (lang, tag, key, value, title, body, tgroup, type, has_templ, parsed, redirect_target, description, image, osmcarto_rendering, on_node, on_way, on_area, on_relation, tags_implies, tags_combination, tags_linked, status, statuslink, wikidata) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [
+            "INSERT INTO wikipages (lang, tag, key, value, title, body, tgroup, type, has_templ, parsed, redirect_target, description, image, osmcarto_rendering, on_node, on_way, on_area, on_relation, tags_implies, tags_combination, tags_linked, approval_status, statuslink, wikidata) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [
             lang,
             tag,
             key,
@@ -460,7 +460,7 @@ class KeyOrTagPage < WikiPage
             tags_implies.    sort.uniq.join(','),
             tags_combination.sort.uniq.join(','),
             tags_linked.     sort.uniq.join(','),
-            status,
+            approval_status,
             statuslink,
             wikidata
         ])
