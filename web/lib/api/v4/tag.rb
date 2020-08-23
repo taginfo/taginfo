@@ -165,7 +165,8 @@ class Taginfo < Sinatra::Base
             [:on_relation,      :BOOL,   'Is this a tag for relations?'],
             [:tags_implies,     :ARRAY_OF_STRINGS, 'List of keys/tags implied by this tag.'],
             [:tags_combination, :ARRAY_OF_STRINGS, 'List of keys/tags that can be combined with this tag.'],
-            [:tags_linked,      :ARRAY_OF_STRINGS, 'List of keys/tags related to this tag.']
+            [:tags_linked,      :ARRAY_OF_STRINGS, 'List of keys/tags related to this tag.'],
+            [:status,           :STRING, 'Status of this key/tag.']
         ]),
         :notes => 'To get the complete thumbnail image URL, concatenate <tt>thumb_url_prefix</tt>, width of image in pixels, and <tt>thumb_url_suffix</tt>. The thumbnail image width must be smaller than <tt>width</tt>, use the <tt>image_url</tt> otherwise.',
         :example => { :key => 'highway', :value => 'residential' },

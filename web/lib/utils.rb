@@ -282,7 +282,8 @@ def get_wiki_result(res)
             :on_relation      => row['on_relation'].to_i == 1,
             :tags_implies     => row['tags_implies'    ].split(','),
             :tags_combination => row['tags_combination'].split(','),
-            :tags_linked      => row['tags_linked'     ].split(',')
+            :tags_linked      => row['tags_linked'     ].split(','),
+            :status           => row['approval_status']
         } }
     )
 end
