@@ -117,6 +117,7 @@ var create_flexigrid_for = {
                 { display: '<%= h(misc.description) %>', name: 'description', width: 400, sortable: false },
                 { display: '<%= h(misc.image) %>', name: 'image', width: 120, sortable: false },
                 { display: '<%= h(osm.objects) %>', name: 'objects', width:  80, sortable: false },
+                { display: '<span title="<%= h(misc.approval_status) %>"><%= h(misc.status) %></a>', name: 'status', width: 60, sortable: false },
                 { display: '<%= h(page.wiki_pages.implied_tags) %>', name: 'tags_implied', width: 120, sortable: false },
                 { display: '<%= h(page.wiki_pages.combined_tags) %>', name: 'tags_combination', width: 120, sortable: false },
                 { display: '<%= h(page.wiki_pages.linked_tags) %>', name: 'tags_linked', width: 220, sortable: false }
@@ -134,6 +135,7 @@ var create_flexigrid_for = {
                         fmt_type_icon('way',      row.on_way) +
                         fmt_type_icon('area',     row.on_area) +
                         fmt_type_icon('relation', row.on_relation),
+                        fmt_status(row.status),
                         fmt_key_or_tag_list(row.tags_implies),
                         fmt_key_or_tag_list(row.tags_combination),
                         fmt_key_or_tag_list(row.tags_linked)

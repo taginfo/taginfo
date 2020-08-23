@@ -81,6 +81,8 @@ misc:
     prevalent_values: Prevalent values
     prevalent_values_tooltip: Up to ten of the most common values for this key (only if more than 1% of tags with this key have this value).
     in_wiki_tooltip: Has at least one wiki page.
+    status: Status
+    approval_status: Approval status
 
 help:
     search:

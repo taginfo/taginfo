@@ -113,6 +113,13 @@ function fmt_desc(lang, dir, desc) {
     return '<span lang="' + lang + '" dir="' + dir + '">' + html_escape(desc) + '</span>';
 }
 
+function fmt_status(status) {
+    if (status === null) {
+        return '';
+    }
+    return html_escape(status);
+}
+
 function fmt_key(key) {
     if (key == '') {
         return span(texts.misc.empty_string, 'badchar empty');
