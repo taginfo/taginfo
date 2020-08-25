@@ -24,16 +24,14 @@ It uses:
 
 * Ruby (must be at least 2.4)
 * Mongrel or Apache2 mod_passenger
-* [Sinatra web framework](http://www.sinatrarb.com/)
-* Rack Contrib Gem (for `Rack::JSONP`)
-* JSON gem (install with gem, Debian/Ubuntu packages are too old and buggy)
+* [Sinatra web framework](http://www.sinatrarb.com/) and other ruby libraries
 * curl binary
-* sqlite3 binary and ruby libs
+* sqlite3 binary
 * Optional: Parallel bzip (pzbip2)
 
 Install the Debian/Ubuntu packages:
 ```sh
-$ sudo apt-get install curl sqlite3 ruby-sqlite3
+$ sudo apt-get install curl sqlite3
 $ sudo apt-get install ruby-passenger libapache2-mod-passenger
 ```
 
