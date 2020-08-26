@@ -87,7 +87,7 @@
         // These sources will be created from the actual sources.
         "create": "db",
         "db": {
-            // Path to binaries (like 'tagstats' and 'similarity').
+            // Path to binaries (like 'taginfo-stats' and 'taginfo-similarity').
             "bindir": "../../tagstats",
             // The OSM planet file or extract where we read the OSM data from.
             "planetfile": "/osm/planet/var/current-planet.osm.pbf"
@@ -123,11 +123,11 @@
     },
     // For compiling tagstats.
     "tagstats": {
-        // Extra compilerflags, for instance to find Libosmium.
-        "cxxflags": "-I../../../libosmium/include",
-        // Node location store. For really large OSM files (whole planet or large continent)
+        // Node location store. The default is "FlexMem" which works for any
+        // size of OSM file, but may need a bit more memory than other values.
+        // For really large OSM files (whole planet or large continent)
         // this should be "DenseMmapArray" (or "DenseMemArray" on OSX), otherwise "SparseMemArray".
-        "geodistribution": "SparseMemArray",
+        "geodistribution": "FlexMem",
         // C++ type used for geodistribution
         "geodistribution_int": "uint16_t"
     }

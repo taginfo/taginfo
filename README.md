@@ -15,7 +15,6 @@ wiki.
 * `/sources`  - import scripts
 * `/web`      - web user interface and API
 * `/examples` - some misc example stuff
-* `/tagstats` - C++ programs to create database statistics etc.
 
 
 ## Prerequisites
@@ -43,6 +42,11 @@ $ sudo bundle install
 Depending on your setup you might want to install an application server like
 * [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) or
 * Apache2 `mod_passenger`
+
+If you want to create the taginfo database yourself, you need to have
+https://github.com/taginfo/taginfo-tools installed. See there for details.
+If you only want to run the UI and get the database from somewhere else,
+you do not need this.
 
 
 ## Data Import
