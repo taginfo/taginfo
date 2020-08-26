@@ -77,16 +77,6 @@ class Taginfo < Sinatra::Base
     configure do
         set :app_file, __FILE__
 
-        if ARGV[0]
-            # production
-            set :host, 'localhost'
-            set :port, ARGV[0]
-            set :environment, :production
-        else
-            # test
-            enable :logging
-        end
-
         # Disable rack-protection library because it messes up embedding
         # taginfo in an iframe. This should probably be done more
         # selectively, but there is no documentation on what rack-protection

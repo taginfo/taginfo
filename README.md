@@ -23,7 +23,6 @@ wiki.
 It uses:
 
 * Ruby (must be at least 2.4)
-* Mongrel or Apache2 mod_passenger
 * [Sinatra web framework](http://www.sinatrarb.com/) and other ruby libraries
 * curl binary
 * sqlite3 binary
@@ -41,6 +40,11 @@ $ sudo gem install bundler
 $ sudo bundle install
 ```
 
+Depending on your setup you might want to install an application server like
+* [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) or
+* Apache2 `mod_passenger`
+
+
 ## Data Import
 
 See [Taginfo/Installation](https://wiki.openstreetmap.org/wiki/Taginfo/Installation)
@@ -55,10 +59,22 @@ data import step or downloaded from page
 [taginfo.openstreetmap.org/download](https://taginfo.openstreetmap.org/download).
 
 To start the web user interface:
+
 ```sh
-$ cd web
-$ ./taginfo.rb
+cd web
+./taginfo.rb
 ```
+
+You can also use it via [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/).
+
+```sh
+cd web
+uwsgi uwsgi.ini
+```
+
+You can change various settings in the [web/uwsgi.ini](config file) and use
+it through a web server like Apache2 oder Nginx.
+
 
 ## Javascript
 
