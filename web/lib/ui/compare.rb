@@ -33,7 +33,7 @@ class Taginfo < Sinatra::Base
                     data[:count_nodes]     = result['count_nodes']
                     data[:count_ways]      = result['count_ways']
                     data[:count_relations] = result['count_relations']
-                    desc = get_key_description(r18n.locale.code, key)
+                    desc = get_key_description(key)
                     data[:desc]            = h(desc[0])
                     data[:lang]            = desc[1]
                     data[:dir]             = desc[2]
@@ -58,7 +58,7 @@ class Taginfo < Sinatra::Base
                     data[:count_nodes]     = result['count_nodes']
                     data[:count_ways]      = result['count_ways']
                     data[:count_relations] = result['count_relations']
-                    desc = get_tag_description(r18n.locale.code, key, value)
+                    desc = get_tag_description(key, value)
                     data[:desc]            = h(desc[0])
                     data[:lang]            = desc[1]
                     data[:dir]             = desc[2]

@@ -215,7 +215,7 @@ end
 
 # Get description for key/tag/relation from wiki page
 # Get it in given language or fall back to English if it isn't available
-def get_description(table, attr, lang, param, value)
+def get_description(table, attr, param, value)
     [r18n.locale.code, 'en'].each do |lang|
         select = @db.select("SELECT description FROM #{table}")
                     .condition("lang=? AND #{attr}=?", lang, param)
@@ -234,16 +234,16 @@ def get_description(table, attr, lang, param, value)
     return ['', '', 'auto']
 end
 
-def get_key_description(lang, key)
-    get_description('wiki.wikipages', 'key', lang, key, nil)
+def get_key_description(key)
+    get_description('wiki.wikipages', 'key', key, nil)
 end
 
-def get_tag_description(lang, key, value)
-    get_description('wiki.wikipages', 'key', lang, key, value)
+def get_tag_description(key, value)
+    get_description('wiki.wikipages', 'key', key, value)
 end
 
-def get_relation_description(lang, rtype)
-    get_description('wiki.relation_pages', 'rtype', lang, rtype, nil)
+def get_relation_description(rtype)
+    get_description('wiki.relation_pages', 'rtype', rtype, nil)
 end
 
 def wrap_description(translation, description)
