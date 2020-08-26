@@ -48,7 +48,9 @@
         // web server config.
         "download_dir": "../../download",
         // Path to binaries (like 'taginfo-stats' and 'taginfo-similarity').
-        "bin_dir": "../../bin"
+        "bin_dir": "../../bin",
+        // Path to sqlite regexp extension.
+        "sqlite3_pcre_extension": "/usr/lib/sqlite3/pcre.so"
     },
     // "XAPI" and "JOSM" buttons on key/tag pages
     "xapi": {

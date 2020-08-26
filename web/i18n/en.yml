@@ -49,6 +49,7 @@ taginfo:
     key_combinations: Combinations
     comparison: Key/Tag Comparison
     overview: Overview
+    links: Links
     data_from: Data from
     data_from_description: Last update of taginfo database
     instance:

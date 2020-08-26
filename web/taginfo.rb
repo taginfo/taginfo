@@ -46,6 +46,7 @@ require 'sinatra/r18n'
 require 'rack/contrib'
 
 require 'lib/utils.rb'
+require 'lib/taglinks.rb'
 require 'lib/config.rb'
 require 'lib/javascript.rb'
 require 'lib/language.rb'
@@ -117,6 +118,7 @@ class Taginfo < Sinatra::Base
         expires 0, :no_cache
 
         @db = SQL::Database.new.attach_sources
+        $WIKIPEDIA_SITES = @db.execute('SELECT prefix FROM wikipedia_sites').map{ |row| row['prefix'] }
 
         @data_until = DATA_UNTIL.sub(/:..$/, '')
         @data_until_m = DATA_UNTIL.sub(' ', 'T') + 'Z'

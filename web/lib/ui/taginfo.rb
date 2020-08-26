@@ -149,6 +149,37 @@ class Taginfo < Sinatra::Base
         erb :'taginfo/project_error_log'
     end
 
+    get '/taginfo/taglinks' do
+        @title = 'Taglinks'
+        @section = 'taginfo'
+        @section_title = t.taginfo.meta
+
+        @data = {}
+        TAGLINKS.each do |key, match|
+            row = @db.select("SELECT count_all, values_all FROM db.keys").
+                condition("key = ?", key.to_s).
+                get_first_row
+
+            @data[key] = row
+
+            matching = 0
+
+            pcre_extension = TaginfoConfig.get('paths.sqlite3_pcre_extension')
+            if pcre_extension
+                matching = @db.count('db.tags').
+                    condition("key = ?", key.to_s).
+                    condition("value REGEXP ?", match.regex.to_s).
+                    get_first_i
+            end
+
+            @data[key]['values_match'] = matching;
+
+            @data[key]['links'] = match.call('VALUE');
+        end
+
+        erb :'taginfo/taglinks'
+    end
+
     get '/taginfo/wiki-problems' do
         @title = "Wiki problems"
         @section = 'taginfo'

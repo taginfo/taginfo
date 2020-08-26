@@ -52,8 +52,14 @@
         <h2><%= h(t.taginfo.overview) %></h2>
         <table id="grid-overview">
         </table>
+<% if @has_rtype_link or @links.size > 0 %>
+        <h2><%= h(t.taginfo.links) %></h2>
+<% end %>
 <% if @has_rtype_link %>
         <p><%= h(t.pages.tag.overview.see_also) %>: <span id="relationlink"></span></p>
+<% end %>
+<% @links.each do |link| %>
+        <p><%= link %></p>
 <% end %>
     </div>
     <div id="combinations">
