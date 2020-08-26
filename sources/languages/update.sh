@@ -18,14 +18,14 @@ if [ -z $DATADIR ]; then
     exit 1
 fi
 
-readonly REGISTRY_URL="http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry"
+readonly REGISTRY_URL="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry"
 readonly REGISTRY_FILE="$DATADIR/language-subtag-registry"
-readonly CLDR_URL="http://unicode.org/Public/cldr/latest/core.zip"
+readonly CLDR_URL="https://unicode.org/Public/cldr/latest/core.zip"
 readonly CLDR_FILE="$DATADIR/cldr-core.zip"
 readonly CLDR_DIR="$DATADIR/cldr"
-readonly UNICODE_SCRIPTS_URL="http://www.unicode.org/Public/UNIDATA/Scripts.txt"
+readonly UNICODE_SCRIPTS_URL="https://www.unicode.org/Public/UNIDATA/Scripts.txt"
 readonly UNICODE_SCRIPTS_FILE="$DATADIR/Scripts.txt"
-readonly PROPERTY_ALIASES_URL="http://www.unicode.org/Public/UNIDATA/PropertyValueAliases.txt"
+readonly PROPERTY_ALIASES_URL="https://www.unicode.org/Public/UNIDATA/PropertyValueAliases.txt"
 readonly PROPERTY_ALIASES_FILE="$DATADIR/PropertyValueAliases.txt"
 readonly DATABASE=$DATADIR/taginfo-languages.db
 
