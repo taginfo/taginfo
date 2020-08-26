@@ -204,7 +204,7 @@ class Taginfo < Sinatra::Base
         :ui => '/keys/highway#values'
     }) do
         key = params[:key]
-        lang = params[:lang] || 'en'
+        language = params[:lang] || 'en'
         filter_type = get_filter()
 
         if @ap.sortname == 'count'
@@ -247,7 +247,7 @@ class Taginfo < Sinatra::Base
         wikidesc = {}
 
         if values_with_wiki_page != ''
-            ['en', lang].uniq.each do |lang|
+            ['en', language].uniq.each do |lang|
                 @db.select('SELECT value, description FROM wiki.wikipages').
                     condition('lang = ?', lang).
                     condition('key = ?', key).

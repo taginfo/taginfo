@@ -61,7 +61,7 @@ module SQL
             min_duration = TaginfoConfig.get('logging.min_duration', 0)
             if duration > min_duration
                 if params.size > 0
-                    p = ' params=[' + params.map{ |p| "'#{p}'" }.join(', ') + ']'
+                    p = ' params=[' + params.map{ |param| "'#{param}'" }.join(', ') + ']'
                 else
                     p = ''
                 end
@@ -150,8 +150,8 @@ module SQL
             self
         end
 
-        def conditions(cond)
-            cond.each do |cond|
+        def conditions(conds)
+            conds.each do |cond|
                 condition(cond)
             end
             self
