@@ -48,7 +48,7 @@ regexes = [
 ]
 
 keys = {}
-database.execute("SELECT key FROM keys").map{ |row| row['key'] }.each do |key|
+database.execute("SELECT key FROM keys WHERE characters IS NULL").map{ |row| row['key'] }.each do |key|
     keys[key] = 'rest'
     regexes.each do |type, regex|
         if key.match(regex)

@@ -22,12 +22,7 @@ INSERT INTO stats (key, value) SELECT 'num_key_combinations_on_nodes',     count
 INSERT INTO stats (key, value) SELECT 'num_key_combinations_on_ways',      count(*) FROM key_combinations WHERE count_ways      > 0;
 INSERT INTO stats (key, value) SELECT 'num_key_combinations_on_relations', count(*) FROM key_combinations WHERE count_relations > 0;
 
-INSERT INTO stats (key, value) SELECT 'characters_in_keys_plain',   count(*) FROM keys WHERE characters='plain';
-INSERT INTO stats (key, value) SELECT 'characters_in_keys_colon',   count(*) FROM keys WHERE characters='colon';
-INSERT INTO stats (key, value) SELECT 'characters_in_keys_letters', count(*) FROM keys WHERE characters='letters';
-INSERT INTO stats (key, value) SELECT 'characters_in_keys_space',   count(*) FROM keys WHERE characters='space';
-INSERT INTO stats (key, value) SELECT 'characters_in_keys_problem', count(*) FROM keys WHERE characters='problem';
-INSERT INTO stats (key, value) SELECT 'characters_in_keys_rest',    count(*) FROM keys WHERE characters='rest';
+INSERT INTO stats (key, value) SELECT 'characters_in_keys_' || characters, count(*) FROM keys WHERE characters IS NOT NULL GROUP BY characters;
 
 INSERT INTO stats (key, value) SELECT 'grade_bad',     count(*) FROM keys WHERE grade='b';
 INSERT INTO stats (key, value) SELECT 'grade_unknown', count(*) FROM keys WHERE grade='u';
