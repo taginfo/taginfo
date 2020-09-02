@@ -131,3 +131,24 @@ project. The numerous small improvements and bugfixes can't all be listed.
 * Add Taiwanese Chinese localization
 * Better integration of projects
 
+## August 2020
+
+* Moved C++ binaries into their own repository taginfo-tools. Generating
+  the statistics is much faster now due to use of hash containers from the
+  Abseil library.
+
+## October 2020
+
+* For some tags such as `wikipedia`, `website`, `url`, `wikidata`, `phone`,
+  etc. links to relevant websites are now shown on the tags overview tab.
+* Full text search is now much faster, sometimes time goes down from minutes
+  to "instant".
+* Now shows approval status in wiki tab of key and tag pages.
+
+## November 2020
+
+* Added 'Chronology' tab for keys and tags showing development of keys/tags
+  over time. This works for all keys and the more popular tags.
+* Improved support for mobile: Tool links are now also available on smaller
+  screens.
+
