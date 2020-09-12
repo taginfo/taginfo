@@ -17,7 +17,7 @@ class Taginfo < Sinatra::Base
             [:doc_url,     :STRING,  'Documentation URL'],
             [:icon_url,    :STRING,  'Icon URL'],
             [:count_all,   :INTEGER, 'Number of objects with this key/tag in database'],
-            [:in_wiki,     :BOOL,    'Is this key/tag in wiki?']
+            [:in_wiki,     :BOOL,    'Is there at least one wiki page for this key/tag?']
         ]),
         :example => { :project => 'id_editor', :page => 1, :rp => 10, :sortname => 'tag', :sortorder => 'asc' },
         :ui => '/projects/id_editor'

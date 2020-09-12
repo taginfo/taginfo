@@ -20,7 +20,7 @@ class Taginfo < Sinatra::Base
         :result => no_paging_results([
             [:key,                      :STRING, 'Key'],
             [:value,                    :STRING, 'Value'],
-            [:in_wiki,                  :BOOL,   'In there a page in the wiki for this tag?'],
+            [:in_wiki,                  :BOOL,   'In there at least one wiki page for this tag?'],
             [:count_all,                :INT,    'Number of objects in the OSM database with this tag.'],
             [:count_all_fraction,       :FLOAT,  'Number of objects in relation to all objects.'],
             [:count_nodes,              :INT,    'Number of nodes in the OSM database with this tag.'],
@@ -182,7 +182,7 @@ class Taginfo < Sinatra::Base
         :result => paging_results([
             [:key,                      :STRING, 'Key'],
             [:value,                    :STRING, 'Value'],
-            [:in_wiki,                  :BOOL,   'In there a page in the wiki for this tag?'],
+            [:in_wiki,                  :BOOL,   'In there at least one wiki page for this tag?'],
             [:count_all,                :INT,    'Number of objects in the OSM database with this tag.'],
             [:count_all_fraction,       :FLOAT,  'Number of objects in relation to all objects.'],
             [:count_nodes,              :INT,    'Number of nodes in the OSM database with this tag.'],

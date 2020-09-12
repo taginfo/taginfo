@@ -30,7 +30,7 @@ class Taginfo < Sinatra::Base
             [:count_relations_fraction, :FLOAT,  'Number of relations in relation to all relations.'],
             [:values_all,               :INT,    'Number of different values for this key.'],
             [:users_all,                :INT,    'Number of users owning objects with this key.'],
-            [:in_wiki,                  :BOOL,   'Has this key at least one wiki page?'],
+            [:in_wiki,                  :BOOL,   'Is there at least one wiki page for this key?'],
             [:projects,                 :INT,    'Number of projects using this key']
         ]),
         :example => { :page => 1, :rp => 10, :filter => 'in_wiki', :sortname => 'key', :sortorder => 'asc' },

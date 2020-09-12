@@ -195,7 +195,7 @@ class Taginfo < Sinatra::Base
             [:value,       :STRING, 'Value'],
             [:count,       :INT,    'Number of times this key/value is in the OSM database.'],
             [:fraction,    :FLOAT,  'Number of times in relation to number of times this key is in the OSM database.'],
-            [:in_wiki,     :BOOL,   'Is there at least one wiki page for this tag.'],
+            [:in_wiki,     :BOOL,   'Is there at least one wiki page for this tag?'],
             [:desclang,    :STRING, 'Language the description of the tag is in.'],
             [:descdir,     :STRING, 'Writing direction ("ltr", "rtl", or "auto") of description of the tag.'],
             [:description, :STRING, 'Description of the tag from the wiki.']

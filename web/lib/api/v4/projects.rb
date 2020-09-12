@@ -73,7 +73,7 @@ class Taginfo < Sinatra::Base
         :result => paging_results([
             [:key,                :STRING, 'Key'],
             [:projects,           :INT,    'Number of projects using this key'],
-            [:in_wiki,            :BOOL,   'Is this key described in any wiki pages'],
+            [:in_wiki,            :BOOL,   'Is there at least one wiki page for this key?'],
             [:count_all,          :INT,    'Number of objects in the OSM database with this key.'],
             [:count_all_fraction, :FLOAT,  'Number of objects in relation to all objects.']
         ]),
@@ -119,7 +119,7 @@ class Taginfo < Sinatra::Base
             [:key,                :STRING, 'Key'],
             [:value,              :STRING, 'Value'],
             [:projects,           :INT,    'Number of projects using this tag'],
-            [:in_wiki,            :BOOL,   'Is this tag described in any wiki pages'],
+            [:in_wiki,            :BOOL,   'Is there at least one wiki page for this tag?'],
             [:count_all,          :INT,    'Number of objects in the OSM database with this tag.'],
             [:count_all_fraction, :FLOAT,  'Number of objects in relation to all objects.']
         ]),
