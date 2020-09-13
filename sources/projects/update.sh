@@ -34,6 +34,7 @@ update_projects_list() {
 import_projects_list() {
     run_ruby $SRCDIR/import.rb $DATADIR $PROJECT_LIST
     run_ruby $SRCDIR/parse.rb $DATADIR
+    run_ruby $SRCDIR/get_icons.rb $DATADIR
 }
 
 main() {

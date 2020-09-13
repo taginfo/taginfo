@@ -3,7 +3,7 @@ class Taginfo < Sinatra::Base
 
     api(4, 'project/tags', {
         :description => 'Get list of all keys/tags used by a project.',
-        :parameters => { :project => 'Project ID' },
+        :parameters => { :project => 'Project ID (required)' },
         :paging => :optional,
         :sort => %w( tag count_all in_wiki ),
         :result => paging_results([
@@ -57,6 +57,20 @@ class Taginfo < Sinatra::Base
                 :in_wiki     => row['in_wiki'].to_i != 0
             }}
         )
+    end
+
+    api(4, 'project/icon', {
+        :description => 'Get icon of a project.',
+        :parameters => { :project => 'Project ID (required)' },
+        :result => 'PNG image.',
+        :example => { :project => 'id_editor' },
+        :ui => '/projects/id_editor'
+    }) do
+        project_id = params[:project]
+        content_type :png
+        @db.select('SELECT icon FROM projects.projects').
+            condition('id = ?', project_id).
+            get_first_value()
     end
 
 end
