@@ -319,7 +319,7 @@ function style(styles) {
 
 function link(url, text, attrs) {
     if (attrs === undefined) {
-        attrs = {}
+        attrs = {};
     }
     attrs.href = url;
     return tag('a', text, attrs);
@@ -590,7 +590,7 @@ function level0_editor(overpass_url_prefix, level0_url_prefix, filter, key, valu
     if (value !== undefined) {
         query += '"="' + quote_double(value);
     }
-    query += '"];'
+    query += '"];';
 
     if (filter == 'nodes') {
         query = 'node' + query;
@@ -759,7 +759,7 @@ function project_tag_desc(description, icon, url) {
         out += html_escape(description) + ' ';
     }
     if (url) {
-        out += '[' + link(url, 'More...', { target: '_blank', 'class': 'extlink' }) + ']'
+        out += '[' + link(url, 'More...', { target: '_blank', 'class': 'extlink' }) + ']';
     }
     return out;
 }
