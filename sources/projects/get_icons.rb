@@ -63,11 +63,23 @@ end
 projects = database.execute("SELECT id, icon_url FROM projects WHERE status='OK' AND (icon_url LIKE 'http://%' OR icon_url LIKE 'https://%') ORDER BY id")
 
 projects.each do |id, url|
-    puts "  #{id} #{url}"
-    response = fetch(url)
-    if response.code == '200'
-        blob = SQLite3::Blob.new(response.body)
-        database.execute("UPDATE projects SET icon = ? WHERE id = ?", [ blob, id ])
+    begin
+        response = fetch(url)
+        if response.code == '200'
+            content_type = response['content-type'].force_encoding('UTF-8')
+            content_type.sub!(/ *;.*/, '')
+            if content_type =~ %r{^image/}
+                puts "  #{id} #{url} #{content_type}"
+                image = SQLite3::Blob.new(response.body)
+                database.execute("UPDATE projects SET icon_type = ?, icon = ? WHERE id = ?", [ content_type, image, id ])
+            else
+                puts "  #{id} #{url} ERROR content-type=#{content_type}"
+            end
+        else
+            puts "  #{id} #{url} ERROR code=#{response.code}"
+        end
+    rescue
+        puts "  #{id} #{url} ERROR"
     end
 end
 

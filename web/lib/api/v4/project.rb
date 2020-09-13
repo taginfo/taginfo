@@ -67,10 +67,11 @@ class Taginfo < Sinatra::Base
         :ui => '/projects/id_editor'
     }) do
         project_id = params[:project]
-        content_type :png
-        @db.select('SELECT icon FROM projects.projects').
+        res = @db.select('SELECT icon_type, icon FROM projects.projects').
             condition('id = ?', project_id).
-            get_first_value()
+            execute()[0]
+        content_type res['icon_type']
+        res['icon']
     end
 
 end
