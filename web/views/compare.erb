@@ -123,6 +123,14 @@ CSS
     </tr>
     <tr>
         <% @data.each_with_index do |data, num| %>
+        <td class="data item<%= num %> projects">
+            <p><b><%= data[:value].nil? ? h(t.pages.key.projects.title) : h(t.pages.tag.projects.title) %>:</b>
+            <%= data[:projects] %></p>
+        </td>
+        <% end %>
+    </tr>
+    <tr>
+        <% @data.each_with_index do |data, num| %>
         <td class="data item<%= num %> map">
             <% if data[:has_map] %>
             <div style="background-image: url(<%= TaginfoConfig.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: center 4px; background-size: <%= @img_width %>px <%= @img_height %>px; position: relative;"/>
