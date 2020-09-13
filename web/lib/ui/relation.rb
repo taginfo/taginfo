@@ -27,22 +27,27 @@ class Taginfo < Sinatra::Base
 
         sum_count_all = @db.select("SELECT members_all FROM db.relation_types WHERE rtype=?", @rtype).get_first_i
 
-        @roles = []
+        roles = { 'nodes' => [], 'ways' => [], 'relations' => [] }
         sum = { 'nodes' => 0, 'ways' => 0, 'relations' => 0 }
-        @db.select("SELECT * FROM db.relation_roles WHERE rtype=? ORDER BY count_all DESC", @rtype).execute() do |row|
+        @db.select("SELECT * FROM db.relation_roles WHERE rtype=? ORDER BY count_all ASC", @rtype).execute() do |row|
             %w( nodes ways relations ).each do |type|
                 count = row["count_#{ type }"].to_i
                 if row['count_all'].to_i < sum_count_all * 0.01
                     sum[type] += count
                 else
-                    @roles << { :role => row['role'], :type => type, :value => count }
+                    roles[type] << { :role => row['role'], :type => type, :value => count }
                 end
             end
         end
         if sum['nodes'] > 0 || sum['ways'] > 0 || sum['relations'] > 0
             %w( nodes ways relations ).each do |type|
-                @roles << { :role => '...', :type => type, :value => sum[type] }
+                roles[type].unshift({ :role => '...', :type => type, :value => sum[type] })
             end
+        end
+
+        @roles = []
+        %w( nodes ways relations ).each do |type|
+            @roles += roles[type]
         end
 
         javascript_for(:flexigrid, :d3)

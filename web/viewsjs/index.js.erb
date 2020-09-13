@@ -19,28 +19,34 @@ var keys_data = <%= keys.map{ |tag| { :text => tag['key'], :size => tagcloud_siz
 up = function() {};
 
 function draw(words) {
-    var fill = d3.scale.category20b();
+    // This color scheme isn't available in newer D3 versions, but we'll keep
+    // it for the time being.
+    var category20b = [ 3750777, 5395619, 7040719, 10264286, 6519097, 9216594, 11915115,
+                        13556636, 9202993, 12426809, 15186514, 15190932, 8666169, 11356490,
+                        14049643, 15177372, 8077683, 10834324, 13528509, 14589654 ].map(
+                            value => new d3.rgb(value >> 16, value >> 8 & 255, value & 255));
+    var fill = d3.scaleOrdinal(category20b);
 
-    d3.select("div#tagcloud").append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .append("g")
-            .attr("transform", 'translate(' + width/2 + ',' + height/2 + ')')
-            .selectAll("text")
+    d3.select('div#tagcloud').append('svg')
+        .attr('width', width)
+        .attr('height', height)
+        .append('g')
+            .attr('transform', 'translate(' + width/2 + ',' + height/2 + ')')
+            .selectAll('text')
                 .data(words)
                 .enter()
                 .append('svg:a')
-                    .attr('xlink:href', function(d) { return url_for_key(d.text); })
-                    .append("text")
-                    .style("font-size", function(d) { return d.size + "px"; })
-                    .style("font-family", font_family)
-                    .style("font-weight", font_weight)
-                    .style('fill', function(d, i) { return d3.rgb(fill(i)).darker(0.5); })
-                    .attr("text-anchor", "middle")
-                    .attr("transform", function(d) {
-                        return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                    .attr('xlink:href', d => url_for_key(d.text))
+                    .append('text')
+                    .style('font-size', d => d.size + 'px')
+                    .style('font-family', font_family)
+                    .style('font-weight', font_weight)
+                    .style('fill', (d, i) => d3.rgb(fill(i)).darker(0.5))
+                    .attr('text-anchor', 'middle')
+                    .attr('transform', function(d) {
+                        return 'translate(' + [d.x, d.y] + ')rotate(' + d.rotate + ')';
                     })
-                    .text(function(d) { return d.text; });
+                    .text(d => d.text);
 }
 
 function resize_home() {
@@ -69,13 +75,18 @@ function resize_home() {
 
     width = tagcloud.parent().width();
 
+    // The cloud function mangles the data in the words array, so we need to clone it
+    data = keys_data.map(function(d) {
+        return Object.assign({}, d);
+    });
+
     d3.layout.cloud().size([width, height])
-        .words(keys_data)
+        .words(data)
         .timeInterval(10)
         .rotate(function() { return ~~(Math.random() * 5) * 30 - 60; })
         .font(font_family)
         .fontWeight(font_weight)
-        .fontSize(function(d) { return d.size; })
+        .fontSize(d => d.size)
         .on('end', draw)
         .start();
 }

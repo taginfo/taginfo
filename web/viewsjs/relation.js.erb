@@ -109,7 +109,6 @@ var create_flexigrid_for = {
     }
 };
 
-// Marimekko chart based on http://bl.ocks.org/1005090
 function create_role_chart(data) {
     if (data.length == 0) {
         return;
@@ -119,36 +118,62 @@ function create_role_chart(data) {
         height = 360,
         margin = 20;
 
-    var x = d3.scale.linear() .range([0, width  - 3 * margin]);
-    var y = d3.scale.linear() .range([0, height - 2 * margin]);
+    var x = d3.scaleLinear().range([0, width  - 2 * margin]);
+    var y = d3.scaleLinear().range([0, height - 2 * margin]);
 
-    var z = d3.scale.category10();
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
 
-    var n = d3.format(",d"),
-        p = d3.format("%");
+    var percent = d3.format('~%');
 
-    var svg = d3.select("div.canvas").append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .append("g")
-            .attr("transform", "translate(" + 2 * margin + "," + margin + ")");
+    var svg = d3.select('div.canvas').append('svg')
+        .attr('width', width + 20)
+        .attr('height', height)
+        .append('g')
+            .attr('transform', "translate(" + 2 * margin + "," + margin + ")");
 
-    var offset = 0;
+    var root = d3.hierarchy(d3.group(data, d => d.type, d => d.role));
 
-    // Nest values by member type. We assume each member type+role is unique.
-    var member_types = d3.nest()
-        .key(function(d) { return d.type; })
-        .entries(data);
+    var treemap = d3.treemap()
+        .round(true)
+        .tile(d3.treemapSliceDice)
+        .size([width - 2 * margin, height - 2 * margin]);
 
-    // Compute the total sum, the per-type sum, and the per-role offset.
-    // You can use reduce rather than reduceRight to reverse the ordering.
-    // We also record a reference to the parent type for each role.
-    var sum = member_types.reduce(function(v, p) {
-        return (p.offset = v) + (p.sum = p.values.reduceRight(function(v, d) {
-            d.parent = p;
-            return (d.offset = v) + d.value;
-        }, 0));
-    }, 0);
+    treemap(root.sum(d => d.value));
+
+    var roles = svg.selectAll('.role')
+        .data(root.leaves())
+            .enter().append('a')
+                .attr('class', 'role')
+                .style('text-decoration', 'none')
+                .attr("xlink:title", function(d) {
+                    var str = '' + d.data.value + ' member ' + d.data.type + ' with ';
+                    if (d.data.role == '...') {
+                        return str + "other roles";
+                    } else {
+                        return str + "role '" + d.data.role + "'";
+                    }
+                })
+                .call(function(c) {
+                    c.append("rect")
+                        .attr('x', d => d.x0)
+                        .attr('y', d => d.y0)
+                        .attr('width', d => d.x1 - d.x0)
+                        .attr('height', d => d.y1 - d.y0)
+                        .style("fill", d => color(d.data.role));
+                    c.append("text")
+                        .attr("x", d => d.x0 + (d.x1 - d.x0) / 2)
+                        .attr("y", d => d.y0 + (d.y1 - d.y0) / 2)
+                        .attr("dy", 4)
+                        .attr("text-anchor", "middle")
+                        .style("fill", "#fff")
+                        .text(function(d) {
+                            if (d.x1 - d.x0 > 40 && d.y1 - d.y0 > 10) {
+                                return d.data.role == '' ? '(empty)' : d.data.role;
+                            } else {
+                                return '';
+                            }
+                        });
+                });
 
     // Add x-axis ticks.
     var xtick = svg.selectAll(".x")
@@ -165,7 +190,7 @@ function create_role_chart(data) {
         .attr("y", 8)
         .attr("text-anchor", "middle")
         .attr("dy", ".71em")
-        .text(p);
+        .text(percent);
 
     // Add y-axis ticks.
     var ytick = svg.selectAll(".y")
@@ -182,80 +207,43 @@ function create_role_chart(data) {
         .attr("x", -8)
         .attr("text-anchor", "end")
         .attr("dy", ".35em")
-        .text(p);
+        .text(percent);
 
     // Add a group for each member type.
     var member_types_svg = svg.selectAll(".member_types")
-        .data(member_types)
+        .data(root.children)
         .enter().append("g")
             .attr("class", "member_types")
-            .attr("xlink:title", function(d) { return d.key; })
-            .attr("transform", function(d) { return "translate(" + x(d.offset / sum) + ")"; })
+            .attr("transform", d => 'translate(' + d.x0 + ', -6)')
             .call(function(c) {
                 c.append("line")
                     .attr("x1", 0)
-                    .attr("y1", -9.5)
-                    .attr("x2", function(d) { return x(d.sum/sum); } )
-                    .attr("y2", -9.5)
+                    .attr("y1", -3.7)
+                    .attr("x2", d => d.x1 - d.x0 )
+                    .attr("y2", -3.7)
                     .style("stroke", "#000");
                 c.append("text")
                     .attr("x", 0)
-                    .attr("y", -6)
                     .attr("text-anchor", "start")
-                    .text(function(d) { return x(d.sum/sum/2) > 6 ? '<' : ''; });
+                    .text(d => (d.x1 - d.x0) > 10 ? '<' : '');
                 c.append("text")
-                    .attr("x", function(d) { return x(d.sum/sum); } )
-                    .attr("y", -6)
+                    .attr("x", d => d.x1 - d.x0 )
                     .attr("text-anchor", "end")
-                    .text(function(d) { return x(d.sum/sum/2) > 6 ? '>' : ''; });
+                    .text(d => (d.x1 - d.x0) > 10 ? '>' : '');
                 c.append("text")
-                    .attr("x", function(d) { return x(d.sum/sum/2); } )
-                    .attr("y", -6)
+                    .attr("x", d => (d.x1 - d.x0) / 2 )
                     .attr("text-anchor", "middle")
                     .style("stroke", "#ddddd4")
                     .style("stroke-width", 4)
                     .style("fill", "#000")
-                    .text(function(d) { return x(d.sum/sum/2) > 20 ? texts.osm[d.key] : ''; });
+                    .text(d => (d.x1 - d.x0) > 40 ? texts.osm[d.data[0]] : '');
                 c.append("text")
-                    .attr("x", function(d) { return x(d.sum/sum/2); } )
-                    .attr("y", -6)
+                    .attr("x", d => (d.x1 - d.x0) / 2 )
                     .attr("text-anchor", "middle")
                     .style("fill", "#000")
-                    .text(function(d) { return x(d.sum/sum/2) > 20 ? texts.osm[d.key] : ''; });
-            })
+                    .text(d => (d.x1 - d.x0) > 40 ? texts.osm[d.data[0]] : '');
+            });
 
-    // Add a rect for each role.
-    var roles = member_types_svg.selectAll(".role")
-        .data(function(d) { return d.values; })
-            .enter().append("a")
-                .attr("class", "role")
-                .attr("xlink:title", function(d) {
-                    if (d.role == '...') {
-                        return "" + d.value + " member " + d.parent.key + " with other roles";
-                    } else {
-                        return "" + d.value + " member " + d.parent.key + " with role '" + d.role + "'";
-                    }
-                })
-                .call(function(c) {
-                    c.append("rect")
-                        .attr("y", function(d) { return y(d.offset / d.parent.sum); })
-                        .attr("height", function(d) { return y(d.value / d.parent.sum); })
-                        .attr("width", function(d) { return x(d.parent.sum / sum); })
-                        .style("fill", function(d) { return z(d.role); });
-                    c.append("text")
-                        .attr("x", function(d) { return x(d.parent.sum / sum / 2); } )
-                        .attr("y", function(d) { return y(d.value / d.parent.sum / 2); } )
-                        .attr("dy", function(d) { return y(d.offset / d.parent.sum) + 4; })
-                        .attr("text-anchor", "middle")
-                        .style("fill", "#fff")
-                        .text(function(d) {
-                            if (x(d.parent.sum / sum) > 40 && y(d.value / d.parent.sum) > 12) {
-                                return d.role == '' ? '(empty)' : d.role;
-                            } else {
-                                return '';
-                            }
-                        });
-                });
 }
 
 function page_init() {

@@ -20,7 +20,7 @@ class Javascript
         :common    => [ 'common', 'jquery.slicknav.min' ],
         :taginfo   => [ 'taginfo' ],
         :flexigrid => [ 'jquery-migrate-1.2.1.min', 'flexigrid-minified' ],
-        :d3        => [ 'd3/d3.v3.min' ],
+        :d3        => [ 'd3/d3.min' ],
         :d3_cloud  => [ 'd3/d3.layout.cloud' ],
     }
 

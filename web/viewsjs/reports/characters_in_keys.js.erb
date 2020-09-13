@@ -55,29 +55,29 @@ function page_init() {
         y += d['value'];
     });
 
-    var scale = d3.scale.linear()
+    var scale = d3.scaleLinear()
                     .domain([0, max])
                     .range([0, w]);
 
     var chart = d3.select('#canvas').append('svg')
-                    .attr("width", w)
-                    .attr("height", h);
+                    .attr('width', w)
+                    .attr('height', h);
 
-    chart.selectAll("rect")
+    chart.selectAll('rect')
         .data(data)
         .enter()
-        .append("svg:g")
+        .append('g')
             .attr('transform', function(d) { return 'translate(' + scale(d['y']) + ', 0)'; })
             .call(function(c) {
-                c.append("rect")
+                c.append('rect')
                     .attr('height', 20)
-                    .attr('width', function(d) { return scale(d['value']); })
-                    .style('fill', function(d) { return colors[d['label']]; });
+                    .attr('width', d => scale(d['value']))
+                    .style('fill', d => colors[d['label']]);
             })
-            .append("text")
-                .attr('x', function(d) { return scale(d['value'] / 2); })
+            .append('text')
+                .attr('x', d => scale(d['value'] / 2))
                 .attr('y', 34)
                 .style('text-anchor', 'middle')
-                .text(function(d) { return d['label']; });
+                .text(d => d['label']);
 
 }

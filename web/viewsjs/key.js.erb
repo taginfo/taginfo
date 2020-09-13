@@ -182,34 +182,34 @@ function create_chart(params) {
         y += d['count'];
     });
 
-    var scale = d3.scale.linear()
+    var scale = d3.scaleLinear()
                     .domain([0, params.max])
                     .range([0, params.height]);
 
-    var color = d3.scale.ordinal()
+    var color = d3.scaleOrdinal()
                     .range(d3_colors());
 
     var chart = d3.select('#canvas-values').append('svg')
-                    .attr("width", params.width)
-                    .attr("height", params.height);
+                    .attr('width', params.width)
+                    .attr('height', params.height);
 
-    chart.selectAll("rect")
+    chart.selectAll('rect')
         .data(params.data)
         .enter()
-        .append("svg:a")
-            .attr('href', function(d) { return url_for_tag(params.key, d['value']); })
-            .attr('transform', function(d) { return 'translate(10, ' + scale(d['y']) + ')'; })
+        .append('svg:a')
+            .attr('href', d => url_for_tag(params.key, d['value']))
+            .attr('transform', d => 'translate(10, ' + scale(d['y']) + ')')
             .call(function(c) {
-                c.append("rect")
+                c.append('rect')
                     .attr('width', 20)
-                    .attr('height', function(d) { return scale(d['count']); })
-                    .style('fill', function(d, i) { return color(i); });
+                    .attr('height', d => scale(d['count']))
+                    .style('fill', (d, i) => color(i));
             })
-            .append("text")
+            .append('text')
                 .attr('x', 25)
-                .attr('y', function(d) { return scale(d['count'] / 2); })
+                .attr('y', d => scale(d['count'] / 2))
                 .attr('dy', '0.5em')
-                .text(function(d) { return d['value']; });
+                .text(d => d['value']);
 
     jQuery('svg a[href$="(other)"]').removeAttr('href').css('text-decoration', 'none');
 }
