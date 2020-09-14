@@ -70,8 +70,12 @@ class Taginfo < Sinatra::Base
         res = @db.select('SELECT icon_type, icon FROM projects.projects').
             condition('id = ?', project_id).
             execute()[0]
-        content_type res['icon_type']
-        res['icon']
+        if res['icon']
+            content_type res['icon_type']
+            res['icon']
+        else
+            redirect('/img/generic_project_icon.png');
+        end
     end
 
 end

@@ -16,7 +16,7 @@ var create_flexigrid_for = {
             preProcess: function(data) {
                 data.rows = jQuery.map(data.data, function(row, i) {
                     return { 'cell': [
-                        link_to_project(row.id, row.name, row.icon_url),
+                        link_to_project(row.id, row.name),
                         html_escape(row.unique_keys),
                         html_escape(row.unique_tags),
                         html_escape(row.description)
