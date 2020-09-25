@@ -24,12 +24,6 @@ readonly SELECTION_DB=$DATADIR/selection.db
 
 source $SRCDIR/../util.sh master
 
-create_search_database() {
-    local tokenizer=$(get_config sources.master.tokenizer simple)
-    rm -f $DATADIR/taginfo-search.db
-    run_sql DIR=$DATADIR TOKENIZER=$tokenizer $DATADIR/taginfo-search.db $SRCDIR/search.sql
-}
-
 create_master_database() {
     rm -f $MASTER_DB
     run_sql $MASTER_DB $SRCDIR/languages.sql
@@ -64,7 +58,6 @@ update_history_database() {
 main() {
     print_message "Start master..."
 
-    create_search_database
     create_master_database
     create_selection_database
     update_history_database

@@ -19,3 +19,6 @@ ANALYZE tags_key_count_relations_idx;
 CREATE UNIQUE INDEX tags_key_value_idx ON tags (key, value);
 ANALYZE tags_key_value_idx;
 
+INSERT INTO ftsearch (key, value, count_all) SELECT key, value, count_all FROM tags;
+ANALYZE ftsearch;
+

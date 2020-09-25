@@ -43,7 +43,6 @@ module SQL
             Source.each do |source|
                 attach_source(source.dbname, source.id.to_s)
             end
-            attach_source('taginfo-search.db', 'search')
             attach_source('taginfo-history.db', 'history')
             self
         end
