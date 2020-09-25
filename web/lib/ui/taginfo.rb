@@ -64,6 +64,16 @@ class Taginfo < Sinatra::Base
         end
     end
 
+    get '/taginfo/stats' do
+        @title = 'Statistics'
+        @section = 'taginfo'
+        @section_title = t.taginfo.meta
+
+        @stats = @db.select("SELECT * FROM master_stats ORDER BY key").execute()
+
+        erb :'taginfo/stats'
+    end
+
     get '/taginfo/config' do
         @title = 'Configuration'
         @section = 'taginfo'
