@@ -118,10 +118,8 @@ compress_extra_databases() {
 
     print_message "Compressing all extra databases..."
 
-    local db
-    for db in master history search; do
-        compress_file taginfo-$db $db
-    done
+    compress_file taginfo-master master
+    compress_file taginfo-history history
 
     wait
 
