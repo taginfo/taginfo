@@ -25,8 +25,8 @@ class Taginfo < Sinatra::Base
                 total = @db.execute('SELECT count(*) FROM ftsearch WHERE key MATCH ?', query_key)[0][0].to_i
                 sel = @db.select('SELECT * FROM ftsearch WHERE key MATCH ?', query_key)
             else
-                total = @db.execute('SELECT count(*) FROM (SELECT rowid FROM ftsearch WHERE value MATCH ? INTERSECT SELECT rowid FROM ftsearch WHERE key MATCH ?)', query_value, query_key)[0][0].to_i
-                sel = @db.select('SELECT * FROM ftsearch WHERE value MATCH ? INTERSECT SELECT * FROM ftsearch WHERE key MATCH ?', query_value, query_key)
+                total = @db.execute(%q{SELECT count(*) FROM ftsearch WHERE ftsearch MATCH 'key:"' || ? || '" value:"' || ? || '"'}, query_key, query_value)[0][0].to_i
+                sel = @db.select(%q{SELECT * FROM ftsearch WHERE ftsearch MATCH 'key:"' || ? || '" value:"' || ? || '"'}, query_key, query_value)
             end
 
             res = sel.
