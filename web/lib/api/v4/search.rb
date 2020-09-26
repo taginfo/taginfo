@@ -18,14 +18,14 @@ class Taginfo < Sinatra::Base
         (query_key, query_value) = query.split('=', 2)
 
         if query_key == ''
-            total = @db.execute('SELECT count(*) FROM search.ftsearch WHERE value MATCH ?', query_value)[0][0].to_i
-            sel = @db.select('SELECT * FROM search.ftsearch WHERE value MATCH ?', query_value)
+            total = @db.execute('SELECT count(*) FROM ftsearch WHERE value MATCH ?', query_value)[0][0].to_i
+            sel = @db.select('SELECT * FROM ftsearch WHERE value MATCH ?', query_value)
         elsif query_value == ''
-            total = @db.execute('SELECT count(*) FROM search.ftsearch WHERE key MATCH ?', query_key)[0][0].to_i
-            sel = @db.select('SELECT * FROM search.ftsearch WHERE key MATCH ?', query_key)
+            total = @db.execute('SELECT count(*) FROM ftsearch WHERE key MATCH ?', query_key)[0][0].to_i
+            sel = @db.select('SELECT * FROM ftsearch WHERE key MATCH ?', query_key)
         else
-            total = @db.execute('SELECT count(*) FROM (SELECT rowid FROM search.ftsearch WHERE value MATCH ? INTERSECT SELECT rowid FROM search.ftsearch WHERE key MATCH ?)', query_value, query_key)[0][0].to_i
-            sel = @db.select('SELECT * FROM search.ftsearch WHERE value MATCH ? INTERSECT SELECT * FROM search.ftsearch WHERE key MATCH ?', query_value, query_key)
+            total = @db.execute('SELECT count(*) FROM (SELECT rowid FROM ftsearch WHERE value MATCH ? INTERSECT SELECT rowid FROM ftsearch WHERE key MATCH ?)', query_value, query_key)[0][0].to_i
+            sel = @db.select('SELECT * FROM ftsearch WHERE value MATCH ? INTERSECT SELECT * FROM ftsearch WHERE key MATCH ?', query_value, query_key)
         end
 
         res = sel.
@@ -136,11 +136,11 @@ class Taginfo < Sinatra::Base
             return generate_json_result(0, []);
         end
 
-        total = @db.count('search.ftsearch').
+        total = @db.count('ftsearch').
             condition("value MATCH ?", query).
             get_first_i
 
-        res = @db.select('SELECT * FROM search.ftsearch').
+        res = @db.select('SELECT * FROM ftsearch').
             condition("value MATCH ?", query).
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.count_all
