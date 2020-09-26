@@ -17,25 +17,30 @@ class Taginfo < Sinatra::Base
         query = params[:query]
         (query_key, query_value) = query.split('=', 2)
 
-        if query_key == ''
-            total = @db.execute('SELECT count(*) FROM ftsearch WHERE value MATCH ?', query_value)[0][0].to_i
-            sel = @db.select('SELECT * FROM ftsearch WHERE value MATCH ?', query_value)
-        elsif query_value == ''
-            total = @db.execute('SELECT count(*) FROM ftsearch WHERE key MATCH ?', query_key)[0][0].to_i
-            sel = @db.select('SELECT * FROM ftsearch WHERE key MATCH ?', query_key)
-        else
-            total = @db.execute('SELECT count(*) FROM (SELECT rowid FROM ftsearch WHERE value MATCH ? INTERSECT SELECT rowid FROM ftsearch WHERE key MATCH ?)', query_value, query_key)[0][0].to_i
-            sel = @db.select('SELECT * FROM ftsearch WHERE value MATCH ? INTERSECT SELECT * FROM ftsearch WHERE key MATCH ?', query_value, query_key)
-        end
+        begin
+            if query_key == ''
+                total = @db.execute('SELECT count(*) FROM ftsearch WHERE value MATCH ?', query_value)[0][0].to_i
+                sel = @db.select('SELECT * FROM ftsearch WHERE value MATCH ?', query_value)
+            elsif query_value == ''
+                total = @db.execute('SELECT count(*) FROM ftsearch WHERE key MATCH ?', query_key)[0][0].to_i
+                sel = @db.select('SELECT * FROM ftsearch WHERE key MATCH ?', query_key)
+            else
+                total = @db.execute('SELECT count(*) FROM (SELECT rowid FROM ftsearch WHERE value MATCH ? INTERSECT SELECT rowid FROM ftsearch WHERE key MATCH ?)', query_value, query_key)[0][0].to_i
+                sel = @db.select('SELECT * FROM ftsearch WHERE value MATCH ? INTERSECT SELECT * FROM ftsearch WHERE key MATCH ?', query_value, query_key)
+            end
 
-        res = sel.
-            order_by(@ap.sortname, @ap.sortorder) { |o|
-                o.count_all
-                o.key
-                o.value
-            }.
-            paging(@ap).
-            execute()
+            res = sel.
+                order_by(@ap.sortname, @ap.sortorder) { |o|
+                    o.count_all
+                    o.key
+                    o.value
+                }.
+                paging(@ap).
+                execute()
+        rescue
+            total = 0
+            res = []
+        end
 
         return generate_json_result(total,
             res.map{ |row| {
@@ -136,19 +141,24 @@ class Taginfo < Sinatra::Base
             return generate_json_result(0, []);
         end
 
-        total = @db.count('ftsearch').
-            condition("value MATCH ?", query).
-            get_first_i
+        begin
+            total = @db.count('ftsearch').
+                condition("value MATCH ?", query).
+                get_first_i
 
-        res = @db.select('SELECT * FROM ftsearch').
-            condition("value MATCH ?", query).
-            order_by(@ap.sortname, @ap.sortorder) { |o|
-                o.count_all
-                o.key
-                o.value
-            }.
-            paging(@ap).
-            execute()
+            res = @db.select('SELECT * FROM ftsearch').
+                condition("value MATCH ?", query).
+                order_by(@ap.sortname, @ap.sortorder) { |o|
+                    o.count_all
+                    o.key
+                    o.value
+                }.
+                paging(@ap).
+                execute()
+        rescue
+            total = 0
+            res = []
+        end
 
         return generate_json_result(total,
             res.map{ |row| {
