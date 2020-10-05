@@ -331,7 +331,7 @@ html[dir="rtl"] .slicknav_nav a {
 }
 
 @media screen and (max-width: 640px) {
-    ul#menu, #set_language, #header_date, #tools, #list-form, .pJSON, #osmlink {
+    ul#menu, #set_language, #header_date, #list-form, .pJSON, #osmlink {
         display: none;
     }
 
