@@ -150,12 +150,3 @@ CREATE TABLE key_characters (
   name      TEXT
 );
 
-DROP TABLE IF EXISTS ftsearch;
-
-CREATE VIRTUAL TABLE ftsearch USING fts5 (
-    content='tags',
-    key,
-    value,
-    count_all UNINDEXED,
-);
-

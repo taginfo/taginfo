@@ -130,6 +130,7 @@ create_extra_indexes() {
     print_message "Creating extra indexes..."
 
     run_sql $DATADIR/db/taginfo-db.db $SRCDIR/db/add_extra_indexes.sql
+    run_sql $DATADIR/db/taginfo-db.db $SRCDIR/db/add_ftsearch.sql
 
     print_message "Done."
 }
