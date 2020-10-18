@@ -1,5 +1,7 @@
 # web/lib/utils.rb
 
+require 'time'
+
 # ------------------------------------------------------------------------------
 # patch some convenience methods into base classes
 
@@ -320,5 +322,25 @@ def build_image_url(row)
         return "#{row['thumb_url_prefix']}#{ h <= w ? MAX_IMAGE_WIDTH : (MAX_IMAGE_WIDTH * w / h).to_i }#{ row['thumb_url_suffix'] }"
     end
     return nil
+end
+
+def unpack_chronology(raw_data)
+    data = []
+
+    if raw_data
+        flat_data = raw_data.unpack('l*')
+
+        while (flat_data.size() > 0) do
+            day = flat_data.shift(4)
+            data << {
+                :date      => Time.at(day[0] * (60*60*24)).to_date.to_s,
+                :nodes     => day[1],
+                :ways      => day[2],
+                :relations => day[3]
+            }
+        end
+    end
+
+    return data
 end
 

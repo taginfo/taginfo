@@ -933,3 +933,77 @@ jQuery(document).ready(function() {
     });
 });
 
+function draw_chronology_chart(data, filter) {
+    var w = 900,
+        h = 400,
+        margin = { top: 10, right: 15, bottom: 60, left: 80 };
+
+    var sum = 0;
+    data.forEach(function(d) {
+        d.date = new Date(d.date);
+        if (filter == 'all') {
+            sum += d.nodes + d.ways + d.relations;
+        } else {
+            sum += d[filter];
+        }
+        d.sum = sum;
+    });
+
+    var t0 = data[0].date;
+        t1 = data[data.length - 1].date;
+
+    var max = d3.max(data, d => d.sum);
+
+    var scale_x = d3.scaleTime()
+                    .domain([t0, t1])
+                    .range([0, w]);
+
+    var axis_x = d3.axisBottom(scale_x)
+                    .tickFormat(d3.timeFormat('%b %Y'));
+
+    var scale_y = d3.scaleLinear()
+                    .domain([0, max])
+                    .range([h, 0]);
+
+    var line = d3.line()
+                 .x(d => scale_x(d.date))
+                 .y(d => scale_y(d.sum));
+
+    d3.select('#chart-chronology svg').remove();
+
+    var chart = d3.select('#chart-chronology').append('svg')
+                    .attr('width', w + margin.left + margin.right)
+                    .attr('height', h + margin.top + margin.bottom)
+                    .append('g')
+                        .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
+                        .call(function(c) {
+                            c.append('rect')
+                                .attr('width', w + 10)
+                                .attr('height', h + 10)
+                                .attr('x', -5)
+                                .attr('y', -5)
+                                .style('fill', 'white')
+                                .style('stroke', '#d0d0c8')
+                        });
+
+    chart.append('g')
+        .attr('class', 'x axis')
+        .attr('transform', 'translate(0, ' + (h + 5) + ')')
+        .call(axis_x);
+
+    chart.append('g')
+        .attr('class', 'y axis')
+        .attr('transform', 'translate(-5, 0)')
+        .call(d3.axisLeft(scale_y));
+
+    chart.append('path')
+        .datum(data)
+        .attr('fill', 'none')
+        .attr('stroke', '#083e76')
+        .attr('stroke-width', 1.5)
+        .attr('stroke-linejoin', 'round')
+        .attr('stroke-linecap', 'round')
+        .attr('d', line);
+}
+
+/* ============================ */

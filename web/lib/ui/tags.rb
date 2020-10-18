@@ -49,13 +49,14 @@ class Taginfo < Sinatra::Base
         end
 
         @has_map = @db.count('tag_distributions').condition('key=? AND value=?', @key, @value).get_first_i > 0
+        @has_chronology = @db.count('tags_chronology').condition('key=? AND value=?', @key, @value).get_first_i > 0
 
         @img_width  = TaginfoConfig.get('geodistribution.width')  * TaginfoConfig.get('geodistribution.scale_image')
         @img_height = TaginfoConfig.get('geodistribution.height') * TaginfoConfig.get('geodistribution.scale_image')
 
         @links = get_links(@key, @value)
 
-        javascript_for(:flexigrid)
+        javascript_for(:flexigrid, :d3)
         javascript "#{ r18n.locale.code }/tag"
         erb :tag
     end

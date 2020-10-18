@@ -258,4 +258,33 @@ class Taginfo < Sinatra::Base
         )
     end
 
+    api(4, 'tag/chronology', {
+        :description => 'Get chronology of tag counts.',
+        :parameters => {
+            :key => 'Tag key (required).',
+            :value => 'Tag value (required).',
+        },
+        :paging => :no,
+        :result => no_paging_results([
+            [:date,      :TEXT, 'Date in format YYYY-MM-DD.'],
+            [:nodes,     :INT, 'Number of nodes with this tag.'],
+            [:ways,      :INT, 'Number of ways with this tag.'],
+            [:relations, :INT, 'Number of relations with this tag.']
+        ]),
+        :example => { :key => 'highway', :value => 'primary' },
+        :ui => '/tags/highway=primary#chronology'
+    }) do
+        key = params[:key]
+        value = params[:value]
+
+        res = @db.select('SELECT data FROM chronology.tags_chronology').
+            condition('key = ?', key).
+            condition('value = ?', value).
+            get_first_value()
+
+        data = unpack_chronology(res)
+
+        return generate_json_result(data.size(), data);
+    end
+
 end

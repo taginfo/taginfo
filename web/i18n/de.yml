@@ -41,6 +41,7 @@ taginfo:
     project: Projekt
     projects: Projekte
     test: Test
+    chronology: Chronologie
     map: Karte
     maps: Karten
     relations: Relations
@@ -391,6 +392,8 @@ pages:
         combinations:
             title: Kombinationen
             description: Diese Tabelle zeigt nur die häufigsten Kombinationen der häufigsten Tags.
+        chronology:
+            no_chronology: Sorry. Die Chronologie kann nur für die häufigsten Tags generiert werden.
         geographic_distribution:
             title: Geographische Verteilung dieses Tags
             all: Diese Karte zeigt die Verteilung von Nodes und Ways mit diesem Tag, Relationen werden nicht angezeigt.

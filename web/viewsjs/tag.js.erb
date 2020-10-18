@@ -63,6 +63,11 @@ var create_flexigrid_for = {
             }
         });
     },
+    chronology: function(key, value) {
+        jQuery.getJSON('/api/4/tag/chronology?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value), function(data) {
+            draw_chronology_chart(data.data, filter.value);
+        });
+    },
     wiki: function(key, value) {
         create_flexigrid('grid-wiki', {
             url: '/api/4/tag/wiki_pages?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value),

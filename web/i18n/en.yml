@@ -42,6 +42,7 @@ taginfo:
     project: Project
     projects: Projects
     test: Test
+    chronology: Chronology
     map: Map
     maps: Maps
     relations: Relations
@@ -371,6 +372,8 @@ pages:
         combinations:
             title: Combinations
             description: This table shows only the most common combinations of the most common tags.
+        chronology:
+            no_chronology: Sorry. The chronology can only be generated for the most frequent tags.
         geographic_distribution:
             title: Geographical distribution of this tag
             all: This shows the distribution of nodes and ways with this tag, relations are not shown.

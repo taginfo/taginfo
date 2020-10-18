@@ -45,6 +45,7 @@
         <li><a href="#values"><%= h(t.osm.values) %></a></li>
         <li><a href="#combinations"><%= h(t.taginfo.key_combinations) %></a></li>
         <li><a href="#similar"><%= h(t.pages.key.similar.tab) %></a></li>
+        <li><a href="#chronology"><%= h(t.taginfo.chronology) %></a></li>
         <li><a href="#map"><%= h(t.taginfo.map) %></a></li>
         <li><a href="#wiki"><%= h(t.sources.wiki.name) %></a></li>
         <li><a href="#projects"><%= h(t.taginfo.projects) %></a></li>
@@ -80,6 +81,10 @@
         <h2><%= h(t.pages.key.similar.title) %></h2>
         <table id="grid-similar">
         </table>
+    </div>
+    <div id="chronology">
+        <h2><%= h(t.taginfo.chronology) %></h2>
+        <div id="chart-chronology"></div>
     </div>
     <div id="map">
         <h2><%= h(t.pages.key.geographic_distribution.title) %></h2>

@@ -108,6 +108,11 @@ var create_flexigrid_for = {
             }
         });
     },
+    chronology: function(key) {
+        jQuery.getJSON('/api/4/key/chronology?key=' + encodeURIComponent(key), function(data) {
+            draw_chronology_chart(data.data, filter.value);
+        });
+    },
     wiki: function(key, filter_type) {
         create_flexigrid('grid-wiki', {
             url: '/api/4/key/wiki_pages?key=' + encodeURIComponent(key),
