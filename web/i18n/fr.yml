@@ -56,13 +56,15 @@ taginfo:
             Visiter la page <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> pour d'autres sites.
 
 misc:
-    values_less_than_one_percent: Toutes les valeurs sont inférieures à 1%
+    values_less_than_one_percent: Toutes les valeurs inférieures à 1%
     empty_string: chaîne de caractère vide
     unknown: inconnu
     count: Quantité
     image: Image
     no_image: pas d'image
     all: Tous
+    approval_status: Statut approuvé
+    status: Statut
     object_type: Type
     description: Description
     help: Aide
@@ -331,7 +333,10 @@ pages:
             other_key_tooltip: Autre clé utilisée avec cette clé.
             from_count_tooltip: Nombre d'objets de cette autre clé qui ont aussi cette clé.
         geographic_distribution:
+            all: Cela montre la distribution des nœuds et des chemins avec cette clé, les relations ne sont pas affichées.
             title: Répartition géographique de cette clé
+            nodes: Cela montre la distribution des nœuds avec cette clé.
+            ways: Cela montre la distribution des chemins avec cette clé.
             relations: |
                 Les relations n'ont pas de position géographique : Elles ne peuvent donc pas être affichées sur une carte.
         wiki_pages:
@@ -370,6 +375,9 @@ pages:
             description: Ce tableau présente uniquement les combinaisons les plus fréquentes des tags les plus fréquents.
         geographic_distribution:
             title: Distribution géographique de ce tag.
+            all: Cela montre la distribution des nœuds et des chemins avec ce tag, les relations ne sont pas affichées.
+            nodes: Cela montre la distribution des nœuds avec ce tag.
+            ways: Cela montre la distribution des chemins avec ce tag.
             relations: Les relations ne sont pas géolocalisées, il n’existe donc aucune carte.
             no_map: Désolé, la carte ne peut être créée que pour les tags les plus fréquents. Essayez le lien overpass turbo.
         wiki_pages:
