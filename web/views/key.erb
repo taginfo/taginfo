@@ -20,20 +20,6 @@
             <option value="compare"><%= h(t.comparison.compare) %></option>
         </select>
     </form>
-    <div id="tools" class="no-print">
-        <% if @count_all_values <= TaginfoConfig.get('xapi.max_results', 1000) %>
-            <%= xapi_link(@filter_xapi, @key) %> <%= josm_link(@filter_xapi, @key) %>
-        <% else %>
-            <span class="button disabled" title="<%= h(t.pages.key.button_disabled) %>">XAPI</span>
-            <span class="button disabled" title="<%= h(t.pages.key.button_disabled) %>">JOSM</span>
-        <% end %>
-        <% if @count_all_values <= TaginfoConfig.get('level0.max_results', 10) %>
-            <%= level0_link() %>
-        <% else %>
-            <span class="button disabled" title="<%= h(t.pages.key.button_disabled) %>">Level0 Editor</span>
-        <% end %>
-        <%= turbo_link(@count_all_values, @filter_type, @key) %>
-    </div>
 </div>
 <div id="tabs">
     <ul class="no-print">
@@ -117,6 +103,20 @@
         <table id="grid-projects">
         </table>
     </div>
+</div>
+<div id="tools" class="no-print">
+    <% if @count_all_values <= TaginfoConfig.get('xapi.max_results', 1000) %>
+        <%= xapi_link(@filter_xapi, @key) %> <%= josm_link(@filter_xapi, @key) %>
+    <% else %>
+        <span class="button disabled" title="<%= h(t.pages.key.button_disabled) %>">XAPI</span>
+        <span class="button disabled" title="<%= h(t.pages.key.button_disabled) %>">JOSM</span>
+    <% end %>
+    <% if @count_all_values <= TaginfoConfig.get('level0.max_results', 10) %>
+        <%= level0_link() %>
+    <% else %>
+        <span class="button disabled" title="<%= h(t.pages.key.button_disabled) %>">Level0 Editor</span>
+    <% end %>
+    <%= turbo_link(@count_all_values, @filter_type, @key) %>
 </div>
 <% javascript do
     JS.raw(<<"JAVASCRIPT")

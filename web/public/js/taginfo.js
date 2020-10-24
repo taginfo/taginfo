@@ -25,6 +25,7 @@ function resize_box() {
     height -= jQuery('#menu').outerHeight(true);
     height -= jQuery('div.pre').outerHeight(true);
     height -= jQuery('.ui-tabs-nav').outerHeight(true);
+    height -= jQuery('div#tools').outerHeight(true);
     height -= jQuery('div#footer').outerHeight(true);
 
     if (height < 440) {
