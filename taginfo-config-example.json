@@ -46,7 +46,9 @@
         // change this, you might have also to change the "download" symbolic
         // link in the "web/public" directory and/or add this path to your
         // web server config.
-        "download_dir": "../../download"
+        "download_dir": "../../download",
+        // Path to binaries (like 'taginfo-stats' and 'taginfo-similarity').
+        "bin_dir": "../../bin"
     },
     // "XAPI" and "JOSM" buttons on key/tag pages
     "xapi": {
@@ -83,7 +85,7 @@
         // Note that this will NOT work for the "db" source! Well, you can download it,
         // but it will fail later, because the database is changed by the master.sql
         // scripts.
-        "download": "languages projects wiki",
+        "download": "languages projects wiki chronology",
         // These sources will be created from the actual sources.
         "create": "db",
         "db": {
@@ -91,6 +93,10 @@
             "bindir": "../../tagstats",
             // The OSM planet file or extract where we read the OSM data from.
             "planetfile": "/osm/planet/var/current-planet.osm.pbf"
+        },
+        "chronology": {
+            // The OSM history planet file or extract where we read the OSM data from.
+            "osm_history_file": "/osm/planet/var/current-history-planet.osh.pbf"
         },
         // If you change any of the following you have to run the update
         // twice for it to take effect.
