@@ -131,6 +131,6 @@ finalize_database() {
 }
 
 get_bindir() {
-    (cd $SRCDIR; readlink -f $(get_config sources.db.bindir ../../tagstats))
+    (cd $SRCDIR; readlink -f $(get_config paths.bin_dir ../../bin))
 }
 

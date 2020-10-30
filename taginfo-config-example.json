@@ -89,8 +89,6 @@
         // These sources will be created from the actual sources.
         "create": "db",
         "db": {
-            // Path to binaries (like 'taginfo-stats' and 'taginfo-similarity').
-            "bindir": "../../tagstats",
             // The OSM planet file or extract where we read the OSM data from.
             "planetfile": "/osm/planet/var/current-planet.osm.pbf"
         },
