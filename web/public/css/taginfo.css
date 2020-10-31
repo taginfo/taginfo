@@ -177,12 +177,12 @@ span.customSelect {
 
 /* ========== */
 
-div#header {
+header {
     padding: 15px 20px 4px 20px;
 }
 
 @media screen and (max-width: 640px) {
-    div#header {
+    header {
         position: absolute;
         top: 20px;
     }
@@ -203,23 +203,23 @@ html[dir="rtl"] div#header_date {
     text-align: left;
 }
 
-div#header div#header_forms {
+header div#header_forms {
     position: absolute;
     right: 20px;
     top: 31px;
 }
 
-html[dir="rtl"] div#header div#header_forms {
+html[dir="rtl"] header div#header_forms {
     right: auto;
     left: 20px;
 }
 
-div#header div#header_forms form {
+header div#header_forms form {
     float: left;
     padding-left: 22px;
 }
 
-html[dir="rtl"] div#header div#header_forms form {
+html[dir="rtl"] header div#header_forms form {
     float: right;
     padding-left: 0;
     padding-right: 22px;
@@ -342,7 +342,7 @@ html[dir="rtl"] .slicknav_nav a {
         border-bottom: 1px solid #b8b8b0;
     }
 
-    div#header {
+    header {
         top: 0;
     }
 
@@ -360,18 +360,18 @@ html[dir="rtl"] .slicknav_nav a {
         right: 4px;
     }
 
-    div#header img {
+    header img {
         height: 36px;
         width: auto;
     }
 
-    div#header div#header_forms form {
+    header div#header_forms form {
         position: absolute;
         top: -20px;
         left: 130px;
     }
 
-    html[dir="rtl"] div#header div#header_forms form {
+    html[dir="rtl"] header div#header_forms form {
         left: auto;
         right: 130px;
     }
@@ -387,20 +387,20 @@ html[dir="rtl"] .slicknav_nav a {
 }
 
 @media screen and (max-width: 479px) {
-    div#header div#header_forms form input {
+    header div#header_forms form input {
         width: 120px;
     }
 }
 
 @media screen and (max-width: 359px) {
-    div#header div#header_forms form {
+    header div#header_forms form {
         display: none;
     }
 }
 
 /* ========== */
 
-div#main {
+main {
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -410,7 +410,7 @@ div.section_title {
 }
 
 @media screen and (max-width: 640px) {
-    div#main {
+    main {
         margin-left: 10px;
         margin-right: 10px;
     }
@@ -423,7 +423,7 @@ div.section_title {
 
 /* ========== */
 
-div#footer {
+footer {
     clear: both;
     position: relative;
     font-size: 0.9rem;
@@ -450,7 +450,7 @@ html[dir="rtl"] div#footer_right {
 }
 
 @media screen and (max-width: 640px) {
-    div#footer {
+    footer {
         margin: 0 10px;
     }
 }

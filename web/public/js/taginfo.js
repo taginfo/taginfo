@@ -21,11 +21,11 @@ function resize_box() {
     var wrapper = jQuery('.resize,.ui-tabs-panel'),
         height = jQuery(window).height();
 
-    height -= jQuery('div#header').outerHeight(true);
+    height -= jQuery('header').outerHeight(true);
     height -= jQuery('#menu').outerHeight(true);
     height -= jQuery('div.pre').outerHeight(true);
     height -= jQuery('.ui-tabs-nav').outerHeight(true);
-    height -= jQuery('div#footer').outerHeight(true);
+    height -= jQuery('footer').outerHeight(true);
 
     if (height < 440) {
         height = 440;

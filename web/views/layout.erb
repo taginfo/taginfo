@@ -18,7 +18,7 @@
 <%= javascript_tags %>
 </head>
 <body>
-    <div id="header">
+    <header>
         <div id="header_date" title="<%= h(t.taginfo.data_from_description) %>" tipsy="<%= r18n.locale.ltr? ? 'ne' : 'nw' %>"><%= h(t.taginfo.data_from) %>: <%= @data_until %> UTC</div>
         <div id="header_forms" class="no-print">
             <form id="set_language" action="/switch_locale">
@@ -37,7 +37,8 @@
             <a href="/"><img width="49" height="49" src="<%= TaginfoConfig.get('instance.icon', '/img/logo/world.png') %>" alt="taginfo"/></a>
             <a href="/"><img width="129" height="49" src="/img/logo/taginfo.png" alt="taginfo"/></a>
         </div>
-    </div>
+    </header>
+    <nav>
     <ul id="menu">
         <li><a <%= in_section('keys') %>href="/keys"><%= h(t.osm.keys) %></a></li>
         <li><a <%= in_section('tags') %>href="/tags"><%= h(t.osm.tags) %></a></li>
@@ -49,15 +50,16 @@
         <li><a <%= in_section('taginfo') %>href="/taginfo"><%= h(t.taginfo.meta) %></a></li>
 <% end %>
     </ul>
-    <div id="main">
+    </nav>
+    <main>
 <% if under_section %>
         <div class="section_title">
             <a class="section" href="/<%= @section %>"><%= @section_title %></a>
         </div>
 <% end %>
 <%= yield %>
-    </div>
-    <div id="footer" class="no-print">
+    </main>
+    <footer class="no-print">
         <div id="footer_left"><span id="osmlink"><a class="extlink" href="//www.openstreetmap.org/"><b>OpenStreetMap</b></a> &middot;</span>
             <a href="//www.openstreetmap.org/copyright">Data &copy; OSM contributors (ODbL)</a></div>
         <div id="footer_right">
@@ -71,7 +73,7 @@
             <a id="help_link" href="#help"><%= h(t.misc.help) %></a> &middot;
             <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo"><%= h(t.taginfo.wiki) %></a>
         </div>
-    </div>
+    </footer>
     <div id="javascriptmsg">This website only works with Javascript! Please enable Javascript in your browser.</div>
     <div id="help"><div id="help_tabs">
         <ul>
