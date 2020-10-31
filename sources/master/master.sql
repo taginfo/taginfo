@@ -6,10 +6,11 @@
 --
 -- ============================================================================
 
-ATTACH DATABASE '__DIR__/db/taginfo-db.db'               AS db;
-ATTACH DATABASE '__DIR__/wiki/taginfo-wiki.db'           AS wiki;
-ATTACH DATABASE '__DIR__/languages/taginfo-languages.db' AS languages;
-ATTACH DATABASE '__DIR__/projects/taginfo-projects.db'   AS projects;
+ATTACH DATABASE '__DIR__/db/taginfo-db.db'                 AS db;
+ATTACH DATABASE '__DIR__/wiki/taginfo-wiki.db'             AS wiki;
+ATTACH DATABASE '__DIR__/languages/taginfo-languages.db'   AS languages;
+ATTACH DATABASE '__DIR__/projects/taginfo-projects.db'     AS projects;
+ATTACH DATABASE '__DIR__/chronology/taginfo-chronology.db' AS chronology;
 
 -- ============================================================================
 
@@ -30,7 +31,8 @@ CREATE TABLE sources (
 INSERT INTO sources SELECT 1, 1, * FROM db.source
               UNION SELECT 2, 1, * FROM wiki.source
               UNION SELECT 3, 1, * FROM languages.source
-              UNION SELECT 4, 1, * FROM projects.source;
+              UNION SELECT 4, 1, * FROM projects.source
+              UNION SELECT 5, 1, * FROM chronology.source;
 
 DROP TABLE IF EXISTS master_stats;
 CREATE TABLE master_stats (
@@ -40,7 +42,9 @@ CREATE TABLE master_stats (
 
 INSERT INTO master_stats SELECT * FROM db.stats
                    UNION SELECT * FROM wiki.stats
-                   UNION SELECT * FROM projects.stats;
+                   UNION SELECT * FROM languages.stats
+                   UNION SELECT * FROM projects.stats
+                   UNION SELECT * FROM chronology.stats;
 
 -- ============================================================================
 
