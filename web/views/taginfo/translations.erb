@@ -11,7 +11,7 @@
             <td><%= h(::Language[locale.code].english_name) %></td>
             <td lang="<%= locale.code %>" dir="<%= locale.ltr? ? 'ltr' : 'rtl' %>"><%= h(::Language[locale.code].native_name) %></td>
             <td class="tr"><%= @num_texts[locale.code] %>/<%= @num_texts['en'] %></td>
-            <td class="tr <%= percent > 90 ? 'good' : ( percent <= 80 ? 'bad' : 'okay' ) %>"><%= percent %>%</td>
+            <td class="tr <%= percent == 100 ? 'good' : ( percent <= 80 ? 'bad' : 'okay' ) %>"><%= percent %>%</td>
             <td><a href="/taginfo/i18n?lang=<%= locale.code %>">see texts</a></td>
         </tr>
 <% end %>
