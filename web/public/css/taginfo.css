@@ -25,7 +25,7 @@ img.map {
     border: 1px solid #b8b8b0;
 }
 
-td img, span.button img {
+td img {
     position: relative;
     top: 3px;
 }
@@ -118,7 +118,7 @@ html[dir="rtl"] div#pre-text {
 
 /* ==========  */
 
-span.button {
+.button {
     background-color: #f0f0f0;
     color: #303030;
     border: 1px solid #e8e8e8;
@@ -126,11 +126,11 @@ span.button {
     border-radius: 4px;
 }
 
-span.button a.extlink:before {
+.button a.extlink:before {
     content: none;
 }
 
-span.disabled {
+.disabled {
     color: #808080;
 }
 
@@ -534,6 +534,16 @@ div#tools {
     float: right;
     font-size: 0.8rem;
     margin-top: 4px;
+}
+
+div#tools ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+div#tools li {
+    display: inline;
 }
 
 html[dir="rtl"] div#tools {
