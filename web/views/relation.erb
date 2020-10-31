@@ -5,13 +5,13 @@
     </div>
     <div id="tools" class="no-print">
         <ul>
-<%- if @count_all_values <= TaginfoConfig.get('xapi.max_results', 1000) -%>
+<% if @count_all_values <= TaginfoConfig.get('xapi.max_results', 1000) %>
             <li class="button"><%= xapi_link('relation', 'type', @rtype) %></li>
             <li class="button"><%= josm_link('relation', 'type', @rtype) %></li>
-<%- else -%>
+<% else %>
             <li class="button disabled" title="<%= h(t.pages.relation.button_disabled) %>">XAPI</li>
             <li class="button disabled" title="<%= h(t.pages.relation.button_disabled) %>">JOSM</li>
-<%- end -%>
+<% end %>
             <li class="button"><%= turbo_link(@count_all_values, 'relations', 'type', @rtype) %></li>
         </ul>
     </div>

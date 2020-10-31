@@ -22,18 +22,18 @@
     </form>
     <div id="tools" class="no-print">
         <ul>
-<%- if @count_all_values <= TaginfoConfig.get('xapi.max_results', 1000) -%>
+<% if @count_all_values <= TaginfoConfig.get('xapi.max_results', 1000) %>
             <li class="button"><%= xapi_link(@filter_xapi, @key) %></li>
             <li class="button"><%= josm_link(@filter_xapi, @key) %></li>
-<%- else -%>
+<% else %>
             <li class="button disabled" title="<%= h(t.pages.key.button_disabled) %>">XAPI</li>
             <li class="button disabled" title="<%= h(t.pages.key.button_disabled) %>">JOSM</li>
-<%- end -%>
-<%- if @count_all_values <= TaginfoConfig.get('level0.max_results', 10) -%>
+<% end %>
+<% if @count_all_values <= TaginfoConfig.get('level0.max_results', 10) %>
             <li class="button"><%= level0_link() %></li>
-<%- else -%>
+<% else %>
             <li class="button disabled" title="<%= h(t.pages.key.button_disabled) %>">Level0 Editor</li>
-<%- end -%>
+<% end %>
             <li class="button"><%= turbo_link(@count_all_values, @filter_type, @key) %></li>
         </ul>
     </div>
