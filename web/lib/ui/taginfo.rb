@@ -45,7 +45,11 @@ class Taginfo < Sinatra::Base
     end
 
     get '/taginfo' do
+        @section = 'taginfo'
+        @section_title = t.taginfo.meta
+
         get_commit
+
         erb :'taginfo/index'
     end
 

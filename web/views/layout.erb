@@ -45,6 +45,9 @@
         <li><a <%= in_section('projects') %>href="/projects"><%= h(t.taginfo.projects) %></a></li>
         <li><a <%= in_section('reports') %>href="/reports"><%= h(t.taginfo.reports) %></a></li>
         <li><a <%= in_section('about') %>href="/about"><%= h(t.taginfo.about) %></a></li>
+<% if @section == 'taginfo' %>
+        <li><a <%= in_section('taginfo') %>href="/taginfo"><%= h(t.taginfo.meta) %></a></li>
+<% end %>
     </ul>
     <div id="main">
 <% if under_section %>
