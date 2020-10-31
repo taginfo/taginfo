@@ -921,6 +921,11 @@ jQuery(document).ready(function() {
         label: ''
     });
 
+    jQuery('#tools').slicknav({
+        prependTo: '#toolsmenu',
+        label: ''
+    });
+
     jQuery(window).resize(function() {
         jQuery('select').trigger('render');
         resize_box();

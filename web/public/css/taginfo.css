@@ -134,6 +134,21 @@ html[dir="rtl"] div#pre-text {
     color: #808080;
 }
 
+.slicknav_nav .disabled {
+    text-align: right;
+    padding: 9px 14px !important;
+    margin-left: 0 !important;
+}
+
+html[dir="rtl"] .slicknav_nav .disabled {
+    text-align: left;
+}
+
+.slicknav_nav .button {
+    border: none;
+    border-radius: 0;
+}
+
 /* ========== */
 
 .tipsy { font-size: 0.8rem; position: absolute; padding: 5px; z-index: 100000; }
@@ -308,16 +323,31 @@ ul#menu a.selected {
     padding: 0 0 1px 0 !important;
 }
 
-.slicknav_btn {
+body > .slicknav_menu > .slicknav_btn {
     margin: 10px 10px 6px 5px !important;
 }
 
-html[dir="rtl"] .slicknav_btn {
+html[dir="rtl"] body > .slicknav_menu > .slicknav_btn {
     margin: 10px 5px 6px 10px !important;
 }
 
-.slicknav_nav {
+body > .slicknav_menu > .slicknav_nav {
     background: linear-gradient(to bottom, #ffffff 0%, #e8e8e4 100%);
+}
+
+#toolsmenu .slicknav_nav {
+    position: absolute;
+    top: 104px;
+    z-index: 100;
+    border-radius: 4px;
+}
+
+html[dir="ltr"] #toolsmenu .slicknav_nav {
+    right: 50px;
+}
+
+html[dir="rtl"] #toolsmenu .slicknav_nav {
+    left: 50px;
 }
 
 .slicknav_nav a {
@@ -338,7 +368,10 @@ html[dir="rtl"] .slicknav_nav a {
     .slicknav_menu {
         display: block;
         margin-bottom: 10px;
-        background: #ffffff none repeat scroll 0 0 !important;
+        background: transparent none repeat scroll 0 0 !important;
+    }
+
+    body > .slicknav_menu {
         border-bottom: 1px solid #b8b8b0;
     }
 
@@ -549,6 +582,33 @@ div#tools li {
 html[dir="rtl"] div#tools {
     clear: left;
     float: left;
+}
+
+div#toolsmenu {
+    float: right;
+    font-size: 12px;
+}
+
+html[dir="rtl"] div#toolsmenu {
+    float: left;
+}
+
+div#toolsmenu .slicknav_icon {
+    display: none;
+}
+
+div#toolsmenu .slicknav_btn {
+    background-image: url('/img/tools.png');
+    background-size: 24px 24px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 32px;
+    margin: 0 0 0 10px;
+}
+
+html[dir="rtl"] div#toolsmenu .slicknav_btn {
+    margin: 0 10px 0 0;
 }
 
 span.lang {
