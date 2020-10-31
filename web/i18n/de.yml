@@ -265,6 +265,8 @@ pages:
                 <p>Taginfo bekommt Informationen über die verschiedenen Sprachen dieser Welt, ihre Codes, Namen, usw. aus diversen Datenbanken der <a class="extlink" href="https://www.iana.org/">IANA</a> und vom <a class="extlink" href="http://www.unicode.org/">Unicode Consortium</a>.</p>
             projects: |
                 <p>Projekte, die OSM-Tags in irgendeiner Weise nutzen, zum Beispiel Editoren, Karten, Router, usw. Siehe auch die <a href="/projects">Projektliste</a>.</p>
+            chronology: |
+                <p>Anzahl der Keys/Tags über die Zeit vom <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">history planet</a>.</p>
         updates:
             title: Aktualisierung
             intro: Die Taginfo-Daten werden regelmäßig aktualisiert.
@@ -490,6 +492,9 @@ sources:
     projects:
         name: Projekte
         description: Externe Projekte und die OSM-Keys und -Tags, die sie benutzen.
+    chronology:
+        name: Chronologie
+        description: Anzahl der Keys/Tags über die Zeit (aus dem history planet).
 
 reports:
     characters_in_keys:
