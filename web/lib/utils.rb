@@ -141,7 +141,7 @@ def level0_url(filter, key, value)
     if filter == 'nodes'
         query = 'node' + query
     elsif filter == 'ways'
-        query = 'way' + query + '>;'
+        query = '(way' + query + '>;);'
     elsif filter == 'relations'
         query = 'rel' + query
     else
