@@ -23,6 +23,7 @@ class Taginfo < Sinatra::Base
     api(4, 'site/sources', {
         :description => 'Get information about the data sources used.',
         :result => [
+            [:id          , :STRING, 'Id'],
             [:name        , :STRING, 'Name'],
             [:data_until  , :STRING, 'All changes in the source until this date are reflected in taginfo.'],
             [:update_start, :STRING, 'Date/Timestamp when last update was started.'],
@@ -32,6 +33,7 @@ class Taginfo < Sinatra::Base
         :ui => '/sources'
     }) do
         return JSON.generate(Source.visible.map{ |source| {
+            :id           => source.id,
             :name         => source.name,
             :data_until   => source.data_until,
             :update_start => source.update_start,
