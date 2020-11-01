@@ -44,21 +44,6 @@ class Source
         @@sources[@id] = self
     end
 
-    # The URL where this source is described
-    def url
-        "/sources/#{ @id }"
-    end
-
-    # The img URL of this source
-    def imgurl(size=16)
-        "/img/sources/#{ @id }.#{ size }.png"
-    end
-
-    # Returns img tag for this source
-    def img(size=16, title_prefix='')
-        %Q{<img src="#{ imgurl(size) }" alt="#{ name }" title="#{title_prefix} #{ name }" tipsy="w" width="#{ size }" height="#{ size }"/>}
-    end
-
     def dbname
         "taginfo-#{ @id }.db"
     end
