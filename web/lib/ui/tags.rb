@@ -49,7 +49,10 @@ class Taginfo < Sinatra::Base
         end
 
         @has_map = @db.count('tag_distributions').condition('key=? AND value=?', @key, @value).get_first_i > 0
-        @has_chronology = @db.count('tags_chronology').condition('key=? AND value=?', @key, @value).get_first_i > 0
+
+        if Source.get(:chronology)
+            @has_chronology = @db.count('tags_chronology').condition('key=? AND value=?', @key, @value).get_first_i > 0
+        end
 
         @img_width  = TaginfoConfig.get('geodistribution.width')  * TaginfoConfig.get('geodistribution.scale_image')
         @img_height = TaginfoConfig.get('geodistribution.height') * TaginfoConfig.get('geodistribution.scale_image')

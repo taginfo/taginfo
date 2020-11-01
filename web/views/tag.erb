@@ -42,7 +42,9 @@
     <ul>
         <li><a href="#overview"><%= h(t.taginfo.overview) %></a></li>
         <li><a href="#combinations"><%= h(t.taginfo.combinations) %></a></li>
+<% if Source.get(:chronology) %>
         <li><a href="#chronology"><%= h(t.taginfo.chronology) %></a></li>
+<% end %>
         <li><a href="#map"><%= h(t.taginfo.map) %></a></li>
         <li><a href="#wiki"><%= h(t.sources.wiki.name) %></a></li>
         <li><a href="#projects"><%= h(t.taginfo.projects) %></a></li>
@@ -74,6 +76,7 @@
         <table id="grid-combinations">
         </table>
     </div>
+<% if Source.get(:chronology) %>
     <div id="chronology">
         <h2><%= h(t.taginfo.chronology) %></h2>
         <% if @has_chronology %>
@@ -82,6 +85,7 @@
             <p class="empty"><%= h(t.pages.tag.chronology.no_chronology) %></p>
         <% end %>
     </div>
+<% end %>
     <div id="map">
         <h2><%= h(t.pages.tag.geographic_distribution.title) %></h2>
         <% if @has_map %>

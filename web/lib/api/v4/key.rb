@@ -404,6 +404,10 @@ class Taginfo < Sinatra::Base
         :example => { :key => 'highway' },
         :ui => '/keys/highway#chronology'
     }) do
+        if not Source.get(:chronology)
+            return generate_json_result(0, []);
+        end
+
         key = params[:key]
 
         res = @db.select('SELECT data FROM chronology.keys_chronology').
