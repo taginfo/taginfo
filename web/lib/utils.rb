@@ -131,8 +131,30 @@ def turbo_link(count, filter, key, value=nil)
     return external_link('turbo_button', 'Overpass turbo', url, true)
 end
 
-def level0_link()
-    return external_link('level0_button', 'Level0 Editor', '#', true)
+def level0_url(filter, key, value)
+    query = '["' + quote_double(key)
+    if not value.nil?
+        query += '"="' + quote_double(value)
+    end
+    query += '"];'
+
+    if filter == 'nodes'
+        query = 'node' + query
+    elsif filter == 'ways'
+        query = 'way' + query + '>;'
+    elsif filter == 'relations'
+        query = 'rel' + query
+    else
+        query = '(node' + query + 'way' + query + '>;rel' + query + ');'
+    end
+
+    overpass_url = TaginfoConfig.get('level0.overpass_url_prefix') + Rack::Utils::build_query({ :data => '[out:xml];' + query + 'out meta;' })
+
+    return TaginfoConfig.get('level0.level0_url_prefix') + Rack::Utils::build_query({ :url => overpass_url })
+end
+
+def level0_link(filter, key, value=nil)
+    return external_link('level0_button', 'Level0 Editor', level0_url(filter, key, value), true)
 end
 
 def external_link(id, title, link, new_window=false)

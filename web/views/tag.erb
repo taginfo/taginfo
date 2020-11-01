@@ -31,7 +31,7 @@
             <li class="button disabled" title="<%= h(t.pages.tag.button_disabled) %>">JOSM</li>
 <% end %>
 <% if @count_all <= TaginfoConfig.get('level0.max_results', 10) %>
-            <li class="button"><%= level0_link() %></li>
+            <li class="button"><%= level0_link(@filter_type, @key, @value) %></li>
 <% else %>
             <li class="button disabled" title="<%= h(t.pages.tag.button_disabled) %>">Level0 Editor</li>
 <% end %>
@@ -152,9 +152,6 @@ function page_init2() {
 
     jQuery('span#keylink').html(link_to_key(key));
     jQuery('span#relationlink').html(link_to_rtype(value));
-    jQuery('#level0_button').bind('click', function() {
-        return level0_editor('#{ TaginfoConfig.get('level0.overpass_url_prefix') }', '#{ TaginfoConfig.get('level0.level0_url_prefix') }', filter, key, value);
-    });
 
     init_tabs([key, value, filter]);
 }
