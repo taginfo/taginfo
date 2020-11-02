@@ -29,7 +29,7 @@ It uses:
 * [Sinatra web framework](http://www.sinatrarb.com/) and other ruby libraries
 * curl binary
 * sqlite3 binary (version 3.9 or above with FTS5 and regexp support)
-* Optional: Parallel bzip (pzbip2)
+* Optional: Parallel bzip (pbzip2)
 
 Install the Debian/Ubuntu packages:
 ```sh
