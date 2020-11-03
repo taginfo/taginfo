@@ -41,6 +41,7 @@ taginfo:
     project: Progetto
     projects: Progetti
     test: Test
+    chronology: Cronologia
     map: Mappa
     maps: Mappe
     relations: Relazioni
@@ -48,6 +49,7 @@ taginfo:
     key_combinations: Combinazioni delle Chiavi
     comparison: Confronto Chiavi/Valori
     overview: Panoramica
+    links: Collegamenti
     data_from: Fonte Dati
     data_from_description: Ultimo aggiornamento al database taginfo
     instance:
@@ -80,6 +82,8 @@ misc:
     prevalent_values: Valori prevalenti
     prevalent_values_tooltip: Fino a 10 dei valori più usati per questa chiave (solamente se almeno l'1% delle chiavi hanno questo valore).
     in_wiki_tooltip: La chiave ha almeno una pagina nel wiki.
+    status: Stato
+    approval_status: Stato di approvazione
 
 help:
     search:
@@ -284,6 +288,8 @@ pages:
                 <p>Progetti che usano i tag di OSM in qualche modo, come
                 strumenti di modifica, mappe, navigatori, ecc. Vedi <a
                 href="/projects">la lista dei progetti</a>.</p>
+            chronology: |
+                <p>Numero di chiavi/tag nel tempo da <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">file di planet storico</a>.</p>
         updates:
             title: Aggiornamenti
             intro: I dati di taginfo vengono aggiornati regolarmente dalle loro fonti.
@@ -374,6 +380,9 @@ pages:
             from_count_tooltip: Numero degli oggetti con l'altra chiave che hanno anche questa chiave.
         geographic_distribution:
             title: Distribuzione geografica di questa chiave
+            all: Mostra la distribuzione dei nodi e dei percorsi con questa chiave (le relazioni non compaiono).
+            nodes: Mostra la distribuzione dei nodi con questa chiave.
+            ways: Mostra la distribuzione dei percorsi con questa chiave.
             relations: Le relazioni non hanno una localizzazione geografica, pertanto una mappa non può essere mostrata.
         wiki_pages:
             title: Pagine wiki su questa chiave
@@ -409,8 +418,13 @@ pages:
         combinations:
             title: Combinazioni
             description: Questa tabella mostra solo le combinazioni più comuni dei tag più comuni.
+        chronology:
+            no_chronology: Spiacenti. La cronologia può essere generata solo per i tag più frequenti.
         geographic_distribution:
             title: Distribuzione geografica di questo tag
+            all: Mostra la distribuzione dei nodi e dei percorsi con questo tag (le relazioni non compaiono).
+            nodes: Mostra la distribuzione dei nodi con questo tag.
+            ways: Mostra la distribuzione dei percorsi con questo tag.
             relations: Le relazioni non hanno una localizzazione geografica, pertanto una mappa non può essere mostrata.
             no_map: Spiacenti. La mappa può essere creata solo per i tag più frequenti. Potete provare ad utilizzare il collegamento a overpass turbo.
         wiki_pages:
@@ -507,6 +521,9 @@ sources:
     projects:
         name: Progetti
         description: Progetti esterni e le chiavi/tag da loro utilizzati.
+    chronology:
+        name: Cronologia
+        description: Numero di chiavi/tag nel tempo da file planet storico.
 
 reports:
     characters_in_keys:
