@@ -42,6 +42,7 @@ taginfo:
     project: Project
     projects: Projecten
     test: Test
+    chronology: Chronologie
     map: Kaart
     maps: Kaarten
     relations: Relaties
@@ -49,6 +50,7 @@ taginfo:
     key_combinations: Combinaties
     comparison: Key/Tag Comparison
     overview: Overzicht
+    links: Links
     data_from: Data van
     data_from_description: Laatste update van de taginfo database
     instance:
@@ -81,6 +83,8 @@ misc:
     prevalent_values: Voornamelijke waarden
     prevalent_values_tooltip: Tot tien van de meest voorkomende waarden van deze sleutel (alleen als meer dan 1% van de tags met deze sleutel de waarden hebben).
     in_wiki_tooltip: Heeft tenminste één wikipagina.
+    status: Status
+    approval_status: Goedkeuringsstatus
 
 help:
     search:
@@ -247,6 +251,8 @@ pages:
                 <p>Taginfo krijgt informatie over de verschillende talen van de wereld, hun codes, namen en dergelijke van enkele <a class="extlink" href="https://www.iana.org/">IANA</a> en <a class="extlink" href="http://www.unicode.org/">Unicode</a> registers.</p>
             projects: |
                 <p>Projecten die OSM tags op een of andere manier gebruiken, zoals bewerkers, kaarten, routeerders en dergelijke. Zie <a href="/projects">de projectlijst</a>.</p>
+            chronology: |
+                <p>Aantal sleutels/tags in de loop van de tijd van <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">planet historie</a>.</p>
         updates:
             title: Updates
             intro: De taginfo data wordt regulier bijgewerkt vanuit de bronnen.
@@ -328,7 +334,10 @@ pages:
             from_count_tooltip: Hoeveelheid objecten met andere sleutel die ook deze sleutel hebben.
         geographic_distribution:
             title: Geografische verspreiding van deze sleutel
-            relations: Relaties hebben geen geografische locatie, dus er kan geen kaart weergeven worden.
+            all: Dit weergeeft de verspreiding van nodes en wegen met deze sleutel, relaties worden niet weergegeven
+            nodes: Dit weergeeft de verspreding van nodes met deze sleutel.
+            ways: Dit weergeeft de verspreiding van wegen met deze sleutel.
+            relations: Het weergeven van een geografische locatie voor de verschillende typen relaties is niet eenvoudig, dus we proberen hier geen kaart weer te geven.
         wiki_pages:
             title: Wikipagina's over deze sleutel
             none_found: Geen wikipagina beschikbaar voor deze sleutel.
@@ -363,9 +372,14 @@ pages:
         combinations:
             title: Combinaties
             description: Deze tabel weergeeft alleen de meest gebruikt combinaties van de meest voorkomende tags.
+        chronology:
+            no_chronology: Sorry. De chronologie kan alleeen gegenereerd worden voor de meest voorkomende tags.
         geographic_distribution:
             title: Geografische verspreiding van deze tag.
-            relations: Relaties hebben geen geografische locatie, dus er kan geen kaart weergeven worden.
+            all: Dit weergeeft de verspreiding van nodes en wegen met deze tag, relaties worden niet weergegeven
+            nodes: Dit weergeeft de verspreding van nodes met deze tag.
+            ways: Dit weergeeft de verspreiding van wegen met deze tag.
+            relations: Het weergeven van een geografische locatie voor de verschillende typen relaties is niet eenvoudig, dus we proberen hier geen kaart weer te geven.
             no_map: Sorry. De kaart kan alleen worden gemaakt voor de meest voorkomende tags. Probeer de overpass turbo link.
         wiki_pages:
             title: Wikipagina's over deze tag
@@ -460,7 +474,10 @@ sources:
         description: Taalnamen, codes en dergelijke van IANA en Unicode registers.
     projects:
         name: Projecten
-        description: Externe projecten de de OSM sleutels/tags die ze gebruikene.
+        description: Externe projecten de de OSM sleutels/tags die ze gebruiken.
+    chronology:
+        name: Chronologie
+        description: Aantal sleutels/tags in de loop van de tijd van planet historie.
 
 reports:
     characters_in_keys:
