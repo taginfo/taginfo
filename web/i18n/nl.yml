@@ -474,7 +474,7 @@ sources:
         description: Taalnamen, codes en dergelijke van IANA en Unicode registers.
     projects:
         name: Projecten
-        description: Externe projecten de de OSM sleutels/tags die ze gebruiken.
+        description: Externe projecten en de OSM sleutels/tags die ze gebruiken.
     chronology:
         name: Chronologie
         description: Aantal sleutels/tags in de loop van de tijd van planet historie.
