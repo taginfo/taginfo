@@ -54,6 +54,8 @@ taginfo:
     instance:
         title: Giới thiệu về trang taginfo này
         other: Xem các trang khác tại <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">wiki OSM</a>.
+    chronology: Thời biểu
+    links: Liên kết
 
 misc:
     values_less_than_one_percent: không có giá trị hơn 1%
@@ -81,6 +83,8 @@ misc:
     prevalent_values: Giá trị phổ biến
     prevalent_values_tooltip: Cho tới 10 giá trị phổ biến nhất của chìa khóa này (chỉ khi nào hơn 1% các thẻ có chìa khóa này có giá trị này).
     in_wiki_tooltip: Có ít nhất một trang wiki.
+    approval_status: Trạng thái chấp nhận
+    status: Trạng thái
 
 help:
     search:
@@ -246,6 +250,8 @@ pages:
                 <p>Taginfo lấy thông tin về các ngôn ngữ trên thế giới, từ các mã, tên, v.v., từ một số cơ sở dữ liệu <a class="extlink" href="https://www.iana.org/">IANA</a> và <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Các dự án sử dụng thẻ OSM một cách nào đó, thí dụ như trình vẽ, bản đồ, trình chỉ đường, v.v. Xem <a href="/projects">danh sách dự án</a>.</p>
+            chronology: |
+                <p>Số lần sử dụng chìa khóa hoặc thẻ theo thời gian từ <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">thế giới có lịch sử</a>.</p>
         updates:
             title: Cập nhật
             intro: Dữ liệu taginfo được cập nhật thường xuyên từ các nguồn gốc.
@@ -331,6 +337,9 @@ pages:
         geographic_distribution:
             title: Phân phối địa lý của chìa khóa này
             relations: Quan hệ không có vị trí địa lý nên không thể hiển thị bản đồ.
+            all: Phân phối các nốt và lối có chìa khóa này, không kể các quan hệ.
+            nodes: Phân phối các nốt có chìa khóa này.
+            ways: Phân phối các lối có chìa khóa này.
         wiki_pages:
             title: Trang wiki về chìa khóa này
             none_found: Không có sẵn trang wiki nào về chìa khóa này.
@@ -369,6 +378,9 @@ pages:
             title: Phân phố địa lý của thẻ này
             relations: Quan hệ không có vị trí địa lý nên không thể hiển thị bản đồ.
             no_map: Rất tiếc, chỉ có thể tạo bản đồ cho các thẻ phổ biến nhất. Hãy thử liên kết overpass turbo.
+            all: Phân phối các nốt và lối có thẻ này, không kể các quan hệ.
+            nodes: Phân phối các nốt có thẻ này.
+            ways: Phân phối các lối có thẻ này.
         wiki_pages:
             title: Trang wiki về thẻ này
             none_found: Không có sẵn trang wiki nào về thẻ này.
@@ -381,6 +393,8 @@ pages:
         projects:
             title: Dự án sử dụng thẻ này
             description: Dự án sử dụng thẻ này làm sao
+        chronology:
+            no_chronology: Rất tiếc, chỉ có thể tính thời biểu đối với các thẻ phổ biến nhất.
     relation:
         name: Loại quan hệ
         description_from_wiki: Lời miêu tả loại quan hệ này trên wiki (trong ngôn ngữ của bạn nếu có sẵn, nếu không thì trong tiếng Anh).
@@ -463,6 +477,9 @@ sources:
     projects:
         name: Dự án
         description: Dự án bên ngoài và các chìa khóa/thẻ OSM được sử dụng.
+    chronology:
+        name: Thời biểu
+        description: Số lần sử dụng chìa khóa hoặc thẻ theo thời gian từ thế giới có lịch sử.
 
 reports:
     characters_in_keys:
