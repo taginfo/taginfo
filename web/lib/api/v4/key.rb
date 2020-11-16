@@ -397,9 +397,9 @@ class Taginfo < Sinatra::Base
         :paging => :no,
         :result => no_paging_results([
             [:date,      :TEXT, 'Date in format YYYY-MM-DD.'],
-            [:nodes,     :INT, 'Number of nodes with this key.'],
-            [:ways,      :INT, 'Number of ways with this key.'],
-            [:relations, :INT, 'Number of relations with this key.']
+            [:nodes,     :INT, 'Difference of number of nodes with this key relative to previous entry.'],
+            [:ways,      :INT, 'Difference of number of ways with this key relative to previous entry.'],
+            [:relations, :INT, 'Difference of number of relations with this key relative to previous entry.']
         ]),
         :example => { :key => 'highway' },
         :ui => '/keys/highway#chronology'
