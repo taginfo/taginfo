@@ -935,7 +935,7 @@ function draw_chronology_chart(data, filter) {
                     .domain([0, max])
                     .range([h, 0]);
 
-    var line = d3.line()
+    var line = d3.line().curve(d3.curveStepAfter)
                  .x(d => scale_x(d.date))
                  .y(d => scale_y(d.sum));
 
