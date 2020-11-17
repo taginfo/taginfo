@@ -42,6 +42,7 @@ taginfo:
     project: 프로젝트
     projects: 프로젝트
     test: 테스트
+    chronology: 역사
     map: 지도
     maps: 지도
     relations: 관계
@@ -49,6 +50,7 @@ taginfo:
     key_combinations: 조합
     comparison: 키/태그 비교
     overview: 개요
+    links: 링크
     data_from: 최근
     data_from_description: taginfo 데이터베이스를 마지막으로 갱신한 날
     instance:
@@ -81,6 +83,8 @@ misc:
     prevalent_values: 일반적인 값
     prevalent_values_tooltip: 이 키에 많이 사용된 10개의 값까지(이 키가 있는 태그의 1% 이상이 이 값을 가진 경우에만).
     in_wiki_tooltip: 위키 문서가 하나라도 있는지의 여부.
+    status: 상태
+    approval_status: 인가 상태
 
 help:
     search:
@@ -236,6 +240,8 @@ pages:
                 <p>taginfo는 전 세계의 언어에 관한 코드와 명칭 등의 정보를 <a class="extlink" href="https://www.iana.org/">IANA</a>와 <a class="extlink" href="http://www.unicode.org/">Unicode</a> 레지스트리에서 받고 있습니다.</p>
             projects: |
                 <p>편집기, 지도, 경로 탐색기 등의 몇 가지 방법으로 OSM 태그를 사용하는 프로젝트는 <a href="/projects">프로젝트 목록</a>을 참조하세요.</p>
+            chronology: |
+                <p>과거 <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">OSM 데이터</a>에 존재하는 키/태그의 개수.</p>
         updates:
             title: 갱신 현황
             intro: taginfo 데이터는 출처로부터 주기적으로 갱신됩니다.
@@ -316,6 +322,9 @@ pages:
             from_count_tooltip: 다른 키를 사용한 요소 중 이 키를 같이 사용한 요소의 개수입니다.
         geographic_distribution:
             title: 이 키의 지리적 분포
+            all: 아래 지도는 해당 키를 갖는 노드와 길의 분포를 나타냅니다. 관계는 나타내지 않습니다.
+            nodes: 아래 지도는 해당 키를 갖는 노드의 분포를 나타냅니다.
+            ways: 아래 지도는 해당 키를 갖는 길의 분포를 나타냅니다.
             relations: 관계는 지리적 위치를 갖지 않으므로 지도로 표시할 수 없습니다.
         wiki_pages:
             title: 이 키에 대한 위키 문서
@@ -351,8 +360,13 @@ pages:
         combinations:
             title: 조합
             description: 이 표는 자주 쓰이는 태그의 일반적인 조합만 나타냅니다.
+        chronology:
+            no_chronology: 죄송합니다. 빈번하게 쓰이는 태그만 역사를 분석합니다.
         geographic_distribution:
             title: 이 태그의 지리적 분포
+            all: 아래 지도는 해당 태그를 갖는 노드와 길의 분포를 나타냅니다. 관계는 나타내지 않습니다.
+            nodes: 아래 지도는 해당 태그를 갖는 노드의 분포를 나타냅니다.
+            ways: 아래 지도는 해당 태그를 갖는 길의 분포를 나타냅니다.
             relations: 관계는 지리적 위치를 갖지 않으므로 지도로 표시할 수 없습니다.
             no_map: 죄송합니다. 빈번하게 쓰이는 태그만 지도로 표시합니다. 상위 링크로 시도해 보세요.
         wiki_pages:
@@ -450,6 +464,9 @@ sources:
     projects:
         name: Projects
         description: 외부 프로젝트와 외부 프로젝트에서 사용하는 OSM 키/태그.
+    chronology:
+        name: Chronology
+        description: 과거 OSM 데이터에 존재하는 키/태그의 개수.
 
 reports:
     characters_in_keys:
