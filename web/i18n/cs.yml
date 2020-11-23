@@ -250,6 +250,8 @@ pages:
                 <p>Taginfo získává informace o různých jazycích světa, jejich kódech, názvech, atd. z různých registrů <a class="extlink" href="https://www.iana.org/">IANA</a> a <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Projekty, které nějak používají značky OSM, jako jsou editory, mapy, navigace, atd. Viz <a href="/projects">seznam projektů</a>.</p>
+            chronology: |
+                <p>Množství klíčů/značek během času podle <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">historie OSM</a>.</p>
         updates:
             title: Aktualizace
             intro: Data v taginfo jsou pravidelně aktualizována ze zdrojů.
@@ -369,6 +371,8 @@ pages:
         combinations:
             title: Kombinace
             description: Tato tabulka zobrazuje pouze nejčastější kombinace nejčastějších značek.
+        chronology:
+            no_chronology: Litujeme, Chronologie lze vytvo5it pouze pro nejrozšířenější značky.
         geographic_distribution:
             title: Geografické rozložení této značky
             all: Ukazuje rozložení uzlů a cest pro tento klíč, relace nejsou zobrazeny.
