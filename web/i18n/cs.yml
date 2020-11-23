@@ -41,6 +41,7 @@ taginfo:
     project: Projekt
     projects: Projekty
     test: Test
+    chronology: Chronologie
     map: Mapa
     maps: Mapy
     relations: Relace
@@ -48,6 +49,7 @@ taginfo:
     key_combinations: Kombinace
     comparison: Porovníní klíč/značka
     overview: Přehled
+    links: Odkazy
     data_from: Data z
     data_from_description: Poslední aktualizace databáze taginfo
     instance:
@@ -80,6 +82,8 @@ misc:
     prevalent_values: Převažující hodnoty
     prevalent_values_tooltip: Až deset nejběžnějších hodnot tohoto klíče (pouze pokud více než 1% značek s tímto klíčem má tuto hodnotu).
     in_wiki_tooltip: Má přinejmenším jednu wikistránku.
+    status: Stav
+    approval_status: Stav schválení
 
 help:
     search:
@@ -327,7 +331,10 @@ pages:
             from_count_tooltip: Počet objektů s jiným klíčem, které také mají tento klíč.
         geographic_distribution:
             title: Geografické rozložení tohoto klíče
+            all: Ukazuje rozložení uzlů a cest pro tento klíč, relace nejsou zobrazeny.
             relations: Relace nemají geografickou polohu, takže nelze zobrazit mapu.
+            nodes: Tohle ukazuje geografické rozložení uzlů pro tento klíč.
+            ways: Tohle ukazuje geografické rozložení cest pro tento klíč
         wiki_pages:
             title: Wiki stránky o tomto klíči
             none_found: Pro tento klíč není žádná wiki stránka.
@@ -364,7 +371,10 @@ pages:
             description: Tato tabulka zobrazuje pouze nejčastější kombinace nejčastějších značek.
         geographic_distribution:
             title: Geografické rozložení této značky
-            relations: Relace nemají geografické umístění, takže nelze zobrazit mapu.
+            all: Ukazuje rozložení uzlů a cest pro tento klíč, relace nejsou zobrazeny.
+            nodes: Tohle ukazuje geografické rozložení uzlů pro tento klíč.
+            ways: Tohle ukazuje geografické rozložení cest pro tento klíč
+            relations: Relace nemají geografickou polohu, takže nelze zobrazit mapu.
             no_map: Litujeme. Mapu lze vytvořit pouze pro nejrozšířenější značky. Zkuste odkaz na overpass turbo.
         wiki_pages:
             title: Wiki stránky o této značce
@@ -460,6 +470,9 @@ sources:
     projects:
         name: Projekty
         description: Externí projekty a značky a klíče z OSM, které používají.
+    chronology:
+        name: Chronologie
+        description: Množství klíčů/tagů během času (z historie OSM).
 
 reports:
     characters_in_keys:
