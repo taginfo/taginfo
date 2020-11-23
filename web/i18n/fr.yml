@@ -41,6 +41,7 @@ taginfo:
     project: Projet
     projects: Projets
     test: Test
+    chronology: Chronologie
     map: Carte
     maps: Cartes
     relations: Relations
@@ -250,6 +251,8 @@ pages:
                 <p>Taginfo récupère les informations sur les différentes langues du monde, leurs codes, noms, etc. depuis plusieurs registres de l'<a class="extlink" href="https://www.iana.org/">IANA</a> et d'<a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Ce sont les projects qui utilisent les tags OSM, comme les éditeurs, les cartes, les routeurs, etc. Regardez <a href="/projects">la liste des projets</a>.</p>
+            chronology: |
+                <p>L'évolution du nombre de clés/tags au cours du temps depuis le fichier <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/"><i>planet</i> historisé</a>.</p>
         updates:
             title: Mises à jour
             intro: Les données de taginfo sont régulièrement mises à jour.
@@ -373,6 +376,8 @@ pages:
         combinations:
             title: Combinaisons
             description: Ce tableau présente uniquement les combinaisons les plus fréquentes des tags les plus fréquents.
+        chronology:
+            no_chronology: Désolé. La chronologie ne peut être générée que pour les tags les plus fréquents.
         geographic_distribution:
             title: Distribution géographique de ce tag.
             all: Cela montre la distribution des nœuds et des chemins avec ce tag, les relations ne sont pas affichées.
@@ -474,6 +479,9 @@ sources:
     projects:
         name: Projets
         description: Projets externes, et les clés/tags qu'ils utilisent.
+    chronology:
+        name: Chronologie
+        description: Nombre de clés/tags au fil du temps dans le fichier planet historisé.
 
 reports:
     characters_in_keys:
