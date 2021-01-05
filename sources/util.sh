@@ -9,8 +9,7 @@
 #
 #------------------------------------------------------------------------------
 
-set -e
-set -u
+set -euo pipefail
 
 if [ -f $SRCDIR/util.sh ]; then
     readonly UTILDIR=$SRCDIR

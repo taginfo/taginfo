@@ -7,8 +7,7 @@
 #
 #------------------------------------------------------------------------------
 
-set -e
-set -u
+set -euo pipefail
 
 readonly SRCDIR=$(dirname $(readlink -f "$0"))
 readonly DATADIR=$1
