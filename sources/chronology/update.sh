@@ -31,7 +31,6 @@ run_chronology() {
     if [[ -f $SELECTION_DB && -s $SELECTION_DB ]]; then
         open_selection_db="--selection-db=$SELECTION_DB"
         print_message "Reading selection database '$SELECTION_DB'"
-        run_sql $SELECTION_DB $SRCDIR/show_selection_stats.sql "Selection database contents:"
     else
         print_message "Selection database '$SELECTION_DB' not found. Not creating some statistics."
         print_message "  The next taginfo update should automatically correct this."
