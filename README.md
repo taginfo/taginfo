@@ -80,8 +80,8 @@ cd web
 uwsgi uwsgi.ini
 ```
 
-You can change various settings in the [web/uwsgi.ini](config file) and use
-it through a web server like Apache2 oder Nginx.
+You can change various settings in the [config file](web/uwsgi.ini) and use
+it through a web server like Apache2 or Nginx.
 
 
 ## Javascript
