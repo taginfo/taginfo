@@ -163,16 +163,16 @@ pages:
                 <p>OpenStreetMap utilise des <b>tags</b> pour décrire des objets géographiques.
                 Il n'existe pas de liste exhaustive de tous ces tags. De nouveaux tags peuvent
                 être créés et utilisés suivant les besoins. Tout le monde peut donc
-                imaginer un nouveau tag et l'ajouter à un nouvel objet ou à des objets existants. 
+                imaginer un nouveau tag et l'ajouter à un nouvel objet ou à des objets existants.
                 Cela rend OpenStreetMap extrêmement flexible, mais ne facilite pas
                 toujours la réutilisation des données.</p>
-                <p>Que vous soyez contributeur ou utilisateur des données OSM, des questions se posent toujours : 
+                <p>Que vous soyez contributeur ou utilisateur des données OSM, des questions se posent toujours :
                 Quels tag utilisent les gens pour un objet X ? Quels tags dois-je utiliser
                 pour l'objet Y afin qu'il s'affiche correctement sur la carte ? Le tag Z décrit
                 sur le wiki est-il vraiment utilisé et où ?</p>
                 <p>Taginfo vous aide en présentant des statistiques sur les tags qui sont actuellement dans la
                 base de données, combien de personnes les utilisent, où, etc.
-                Il recueille aussi des informations sur les tags depuis le wiki et d'autres sources. 
+                Il recueille aussi des informations sur les tags depuis le wiki et d'autres sources.
                 Taginfo tente de rassembler toutes les informations sur les tags afin de vous aider à comprendre
                 comment ceux-ci sont utilisés et ce qu'ils signifient. Regardez une <a href="/sources">liste des sources</a>
                 qu'utilise taginfo.</p>
@@ -438,7 +438,7 @@ pages:
             json_url: Fichier JSON
             info: Ces données sont fournies à taginfo via des le 'Fichier JSON' lié ci-dessus. Voir le <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a> pour la description du format
         tags:
-            count_all_tooltip: Nombre d'objets dans la base de données avec ce tag/clé 
+            count_all_tooltip: Nombre d'objets dans la base de données avec ce tag/clé
             title: Tags utilisés par ce projet
             intro: Ces informations sont fournies par le projet, et ne sont pas forcément complètes. Veuillez lire la documentation du projet pour en savoir plus.
             objects_tooltip: Types d'objets utilisés par ce projet
@@ -470,7 +470,7 @@ sources:
         description: Agrégation des statistiques et des données diverses nécessaire à l'interface utilisateur de taginfo.
     db:
         name: Base de données
-        description: Statistiques pour chaque clé et chaque tag depuis la base de données principale OSM (fichier planet) 
+        description: Statistiques pour chaque clé et chaque tag depuis la base de données principale OSM (fichier planet)
     wiki:
         name: Wiki
         description: Clés et valeurs des tags sur le wiki d'OSM.
@@ -486,42 +486,13 @@ sources:
 
 reports:
     characters_in_keys:
-        colon:
-            intro: |
-                <p>Clés contenant un ou plusieurs caractères deux-points (<span class="char">:</span>) 
-                en plus des lettres (<span class="char">a</span> à <span class="char">z</span>) 
-                et du tiret bas (<span class="char">_</span>). 
-                Le deux-point est souvent utilisé comme séparateur hiérarchique.</p>
-            tab: Deux-points
-            title: Clés contenant un deux-points
-        intro: |
-            <p>Tout caractère Unicode valide peut figurer dans une clé OSM mais habituellement seuls les
-            lettres latines minuscules (<span class="char">a</span> à <span class="char">z</span>) et 
-            le tiret bas (<span class="char">_</span>) sont utilisés. Le signe de ponctuation deux-points
-            (<span class="char">:</span>) est souvent utilisé comme séparateur.
-            Ce rapport classe toutes les clés selon les caractères qu'elles utilisent.</p>
-        letters:
-            intro: |
-                <p>Les lettres minuscules de l’alphabet latin sont généralement préférées pour les clés,
-                mais les majuscules sont parfois utilisées (par exemples pour des abréviations connues)
-                ainsi que des lettres d’autres alphabets (par exemple des clés pertinentes uniquement 
-                dans une zone ou cet alphabet est majoritairement utilisé).</p>
-            tab: Lettres
-            title: Clés contenant des majuscules ou des lettres autres que celles de l'alphabet latin.
         name: Caractères utilisés dans ces clés
-        plain:
-            intro: |
-                <p>Clés contenant uniquement des lettres minuscules de l’alphabet latin (<span class="char">a</span>
-                à <span class="char">z</span>) et le tiret bas (<span class="char">_</span>).
-                Le premier et le dernier caractère doivent être des lettres.
-                Les clés les plus simples devraient faire partie de cette catégorie.</p>
-            tab: Simple
-            title: Clés simples
-        rest:
-            intro: |
-                <p>Clés ne correspondant à aucune autre catégorie.</p>
-            tab: Autres
-            title: Toutes les autres clés
+        intro: |
+            Tout caractère Unicode valide peut figurer dans une clé OSM mais
+            habituellement seuls les lettres latines minuscules (a-z) et le
+            tiret bas (_) sont utilisés. Le signe de ponctuation deux-points
+            (:) est souvent utilisé comme séparateur. Ce rapport classe toutes
+            les clés selon les caractères qu'elles utilisent.
         statistics:
             tab: Statistiques
             title: Statistiques globales
@@ -535,6 +506,30 @@ reports:
                 problem: Comme la règle C mais avec des caractères problématiques <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
                 rest: Toutes les autres possibilités.
                 total: Total
+        plain:
+            tab: Simple
+            title: Clés simples
+            intro: |
+                <p>Clés contenant uniquement des lettres minuscules de l’alphabet latin (<span class="char">a</span>
+                à <span class="char">z</span>) et le tiret bas (<span class="char">_</span>).
+                Le premier et le dernier caractère doivent être des lettres.
+                Les clés les plus simples devraient faire partie de cette catégorie.</p>
+        colon:
+            tab: Deux-points
+            title: Clés contenant un deux-points
+            intro: |
+                <p>Clés contenant un ou plusieurs caractères deux-points (<span class="char">:</span>)
+                en plus des lettres (<span class="char">a</span> à <span class="char">z</span>)
+                et du tiret bas (<span class="char">_</span>).
+                Le deux-point est souvent utilisé comme séparateur hiérarchique.</p>
+        letters:
+            tab: Lettres
+            title: Clés contenant des majuscules ou des lettres autres que celles de l'alphabet latin.
+            intro: |
+                <p>Les lettres minuscules de l’alphabet latin sont généralement préférées pour les clés,
+                mais les majuscules sont parfois utilisées (par exemples pour des abréviations connues)
+                ainsi que des lettres d’autres alphabets (par exemple des clés pertinentes uniquement
+                dans une zone ou cet alphabet est majoritairement utilisé).</p>
         space:
             tab: Espaces
             title: Clés contenant des espaces
@@ -552,11 +547,16 @@ reports:
                 class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> ou des caractères
                 de contrôle. Ces caractères
                 peuvent poser des problèmes car ils sont utilisés pour commenter des chaînes de caractères dans
-                certains langages de programmation ou ont des significations particulières en XML, HTML, certaines adresses web, etc. 
+                certains langages de programmation ou ont des significations particulières en XML, HTML, certaines adresses web, etc.
                 Le signe égal (<span class="char">=</span>) est souvent utilisé comme séparateur
                 entre les clés et les valeurs.
                 Les clés présentées dans ce tableau ne sont pas forcément fausses pour autant. Mais
                 bien souvent elles sont seulement dûes à des erreurs et devraient être corrigées.</p>
+        rest:
+            tab: Autres
+            title: Toutes les autres clés
+            intro: |
+                <p>Clés ne correspondant à aucune autre catégorie.</p>
     database_statistics:
         name: Statistiques de la base de données
         objects_in_db: Nombre d'objets
@@ -592,7 +592,7 @@ reports:
         name: Évolution historique
         intro: |
             Évolution de quelques statistiques importantes au fil du temps.
-            Ces données ont été collectées par taginfo, des écarts sont possibles si taginfo n’a pas 
+            Ces données ont été collectées par taginfo, des écarts sont possibles si taginfo n’a pas
             tourné un jour donné pour une raison ou une autre.
         keys:
             title: Clés unique
@@ -624,7 +624,7 @@ reports:
         name: Langues
         intro: |
             OpenStreetMap est un projet international. Les tags et leurs descriptions peuvent
-            être dans n'importe quelle langue. Ce tableau présente les langues connues de taginfo et le nombre 
+            être dans n'importe quelle langue. Ce tableau présente les langues connues de taginfo et le nombre
             de pages du wiki écrites dans ces langues qui documentent les clés et les tags.
         code: Code
         native_name: Nom natif
@@ -676,8 +676,8 @@ reports:
         count_common: Quantité
         count_rare: Quantité
         intro: |
-            Ce rapport présente des clés très souvent utilisées et des clés similaires très rarement 
-            utilisées. Cela met en lumière beaucoup de fautes d’orthographe sur les clés  les plus 
+            Ce rapport présente des clés très souvent utilisées et des clés similaires très rarement
+            utilisées. Cela met en lumière beaucoup de fautes d’orthographe sur les clés  les plus
             courantes, mais cela n’est pas parfait. Faites attention en corrigeant les données !
             Ne corrigez pas mécaniquement ces clés en faisant un simple rechercher/remplacer.
             Vérifiez chaque cas et corrigez les autres problèmes que vous rencontrez.
@@ -687,18 +687,18 @@ reports:
         similarity: Similarité
     wiki_images:
         intro: |
-            Images utilisées par le wiki pour symboliser les clés dans les différentes langues. 
-            Parfois l’image d’une page dans une langue est meilleure que celle dans une autre. 
-            Mais il est parfois judicieux d’utiliser des images différentes pour des raisons culturelles. 
+            Images utilisées par le wiki pour symboliser les clés dans les différentes langues.
+            Parfois l’image d’une page dans une langue est meilleure que celle dans une autre.
+            Mais il est parfois judicieux d’utiliser des images différentes pour des raisons culturelles.
         name: Images du wiki
     wiki_problems:
         info: Informations additionelles
         intro: |
-            Taginfo parcourt toutes les pages du wiki utilisées pour décrire les clés, tags et relations 
-            afin de récupérer leurs informations. Ce rapport présente une liste de problèmes rencontrés 
-            lors de la lecture de ces pages. Ce ne sont pas forcément des erreurs du wiki, elles indiquent 
-            juste que quelque chose dans les pages du wiki n’est pas formaté dans un sens compréhensible 
-            par taginfo. Soit la page doit être corrigée soit taginfo doit être débogué. 
+            Taginfo parcourt toutes les pages du wiki utilisées pour décrire les clés, tags et relations
+            afin de récupérer leurs informations. Ce rapport présente une liste de problèmes rencontrés
+            lors de la lecture de ces pages. Ce ne sont pas forcément des erreurs du wiki, elles indiquent
+            juste que quelque chose dans les pages du wiki n’est pas formaté dans un sens compréhensible
+            par taginfo. Soit la page doit être corrigée soit taginfo doit être débogué.
         lang: Lang.
         location: Emplacement
         name: Problèmes d'analyse syntaxique
