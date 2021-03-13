@@ -66,6 +66,7 @@
         "max_auto": 1000,
         "url_prefix": "https://overpass-turbo.eu/?",
         // set this to "global" or "in <area>" where <area> is a country name or other region found by Nominatim
+        // you might need to enclose the name in double quotes: "in \"France métropolitaine\""
         "wizard_area": "global"
     },
     // "Level0 Editor" button on key/tag pages
