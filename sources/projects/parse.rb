@@ -187,6 +187,7 @@ def parse_and_check(id, data, log, db)
         elsif !d[:key].is_a?(String)
             log.error "tags.#{n}.key MUST BE A STRING.\n"
         else
+            has_error = FALSE
             on = { 'node' => 0, 'way' => 0, 'relation' => 0, 'area' => 0 }
             if d[:object_types]
                 if d[:object_types].class == Array
@@ -199,11 +200,13 @@ def parse_and_check(id, data, log, db)
                                 on[type] = 1
                             else
                                 log.error "UNKNOWN OBJECT TYPE FOR #{d[:key]}: '#{type}' (ALLOWED ARE: node, way, relation, area)."
+                                has_error = TRUE
                             end
                         end
                     end
                 else
                     log.error "tags.#{n}.object_types (FOR KEY '#{d[:key]}') MUST BE AN ARRAY."
+                    has_error = TRUE
                 end
             else
                 on = { 'node' => 1, 'way' => 1, 'relation' => 1, 'area' => 1 }
@@ -211,32 +214,38 @@ def parse_and_check(id, data, log, db)
 
             if d[:value] && !d[:value].is_a?(String)
                 log.error "OPTIONAL tag.X.value MUST BE STRING."
+                has_error = TRUE
             end
 
             if d[:description] && !d[:description].is_a?(String)
                 log.error "OPTIONAL tag.X.description MUST BE STRING."
+                has_error = TRUE
             end
 
             if d[:doc_url] && !d[:doc_url].is_a?(String)
                 log.error "OPTIONAL tag.X.doc_url MUST BE STRING."
+                has_error = TRUE
             end
 
             if d[:icon_url] && !d[:icon_url].is_a?(String)
                 log.error "OPTIONAL tag.X.icon_url MUST BE STRING."
+                has_error = TRUE
             end
 
-            db.execute("INSERT INTO project_tags (project_id, key, value, description, doc_url, icon_url, on_node, on_way, on_relation, on_area) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [
-                id,
-                d[:key],
-                d[:value],
-                d[:description],
-                d[:doc_url],
-                d[:icon_url],
-                on['node'],
-                on['way'],
-                on['relation'],
-                on['area'],
-            ])
+            if !has_error
+                db.execute("INSERT INTO project_tags (project_id, key, value, description, doc_url, icon_url, on_node, on_way, on_relation, on_area) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [
+                    id,
+                    d[:key],
+                    d[:value],
+                    d[:description],
+                    d[:doc_url],
+                    d[:icon_url],
+                    on['node'],
+                    on['way'],
+                    on['relation'],
+                    on['area'],
+                ])
+            end
         end
     end
 end
