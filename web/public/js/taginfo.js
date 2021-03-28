@@ -903,10 +903,22 @@ jQuery(document).ready(function() {
     });
 });
 
+function tomorrow() {
+    var d = new Date();
+    d.setDate(d.getDate() + 1);
+    return d.toISOString().substring(0, 10);
+}
+
 function draw_chronology_chart(data, filter) {
     var w = 900,
         h = 400,
         margin = { top: 10, right: 15, bottom: 60, left: 80 };
+
+    if (data[0].date > '2007-10-07') {
+        data.unshift({date: '2007-10-07', nodes: 0, ways: 0, relations: 0});
+    }
+
+    data.push({date: tomorrow(), nodes: 0, ways: 0, relations: 0});
 
     var sum = 0;
     data.forEach(function(d) {
