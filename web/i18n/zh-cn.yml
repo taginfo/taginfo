@@ -26,3 +26,33 @@ osm:
     all: 全部
     user: 用户
     users: 用户
+
+taginfo:
+    source: 来源
+    sources: 来源
+    download: 下载
+    about: 关于
+    contact: 联系我们
+    meta: 元数据
+    wiki: Wiki
+    report: 报告
+    reports: 报告
+    international: 国际化
+    apidoc: API文档
+    project: 项目
+    projects: 项目
+    test: 测试
+    chronology: 年表
+    map: 地图
+    maps: 地图
+    relations: 关系
+    combinations: 组合
+    key_combinations: 组合
+    comparison: 键/标签 对比
+    overview: 概览
+    links: 链接
+    data_from: 数据来源于
+    data_from_description: Taginfo数据库的最新更新
+    instance:
+        title: 关于这个Taginfo站点
+        other: 参见<a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a>来获知更多Taginfo站点.
