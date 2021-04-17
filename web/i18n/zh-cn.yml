@@ -1,0 +1,28 @@
+
+osm:
+    tag: 标签
+    tags: 标签
+    key: 键
+    keys: 键
+    value: 值
+    values: 值
+    node: 节点
+    nodes: 节点
+    way: 路径
+    ways: 路径
+    relation: 关系
+    relations: 关系
+    relation_type: 关系类型
+    relation_types: 关系类型
+    relation_member: 关系成员
+    relation_members: 关系成员
+    relation_member_nodes: 成员节点
+    relation_member_ways: 成员路径
+    relation_member_relations: 成员关系
+    relation_member_role: 角色
+    relation_member_roles: 角色
+    object: 对象
+    objects: 对象
+    all: 全部
+    user: 用户
+    users: 用户
