@@ -85,3 +85,8 @@ misc:
     in_wiki_tooltip: 有至少一个Wiki页面
     status: 状态
     approval_status: 被承认状态
+
+pages:
+    not_found:
+        title: 未找到
+        intro: 抱歉，我们没能找到您所寻找的页面
