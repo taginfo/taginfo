@@ -86,6 +86,15 @@ misc:
     status: 状态
     approval_status: 被承认状态
 
+help:
+    search:
+        title: 搜索
+        intro: 使用右上角的搜索框来搜索标签的键和值。
+        string: 你可以搜索标签的键和值
+        substring: 仅有键和值的局部亦能正常搜索
+        complete_tags: 你可以搜索完整的标签
+        values_only: 你可以只搜索标签的值
+
 pages:
     not_found:
         title: 未找到
