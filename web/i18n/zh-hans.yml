@@ -1,0 +1,101 @@
+
+osm:
+    tag: 标签
+    tags: 标签
+    key: 键
+    keys: 键
+    value: 值
+    values: 值
+    node: 节点
+    nodes: 节点
+    way: 路径
+    ways: 路径
+    relation: 关系
+    relations: 关系
+    relation_type: 关系类型
+    relation_types: 关系类型
+    relation_member: 关系成员
+    relation_members: 关系成员
+    relation_member_nodes: 成员节点
+    relation_member_ways: 成员路径
+    relation_member_relations: 成员关系
+    relation_member_role: 角色
+    relation_member_roles: 角色
+    object: 对象
+    objects: 对象
+    all: 全部
+    user: 用户
+    users: 用户
+
+taginfo:
+    source: 来源
+    sources: 来源
+    download: 下载
+    about: 关于
+    contact: 联系我们
+    meta: 元数据
+    wiki: Wiki
+    report: 报告
+    reports: 报告
+    international: 国际化
+    apidoc: API文档
+    project: 项目
+    projects: 项目
+    test: 测试
+    chronology: 年表
+    map: 地图
+    maps: 地图
+    relations: 关系
+    combinations: 组合
+    key_combinations: 组合
+    comparison: 键/标签 对比
+    overview: 概览
+    links: 链接
+    data_from: 数据来源于
+    data_from_description: Taginfo数据库的最新更新
+    instance:
+        title: 关于这个Taginfo站点
+        other: 参见<a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a>来获知更多Taginfo站点.
+
+misc:
+    values_less_than_one_percent: 没有任何值所占比例高于1%
+    empty_string: 空字符串
+    unknown: 未知
+    count: 计数
+    image: 图像
+    no_image: 无图像
+    all: 全部
+    object_type: 类型
+    description: 描述
+    help: 帮助
+    length: 长度
+    icon: 图标
+    line: 线
+    area: 区域
+    language: 语言
+    search_for: 搜索……
+    objects_tooltip: 对象的数目（以绝对数量和所有节点、路径、关系的百分比展示）
+    nodes_tooltip: 节点的数目（以绝对数量和被各种不同标识的百分比展示；此外，没有任何标签的节点将被忽略）
+    ways_tooltip: 路径的数目（以绝对数量和所有路径的百分比展示）
+    relations_tooltip: 关系的数目（以绝对数量和所有关系的百分比展示）
+    values_tooltip: 这个键所拥有的不同值的个数
+    users_tooltip: 在某对象的最后一次编辑中使用了该键的用户数
+    prevalent_values: 高频值
+    prevalent_values_tooltip: 最多展示10个该键的最常见值（且仅当超过1%的该键为该值时）
+    in_wiki_tooltip: 有至少一个Wiki页面
+    status: 状态
+    approval_status: 被承认状态
+
+help:
+    search:
+        title: 搜索
+        intro: 使用右上角的搜索框来搜索标签的键和值。
+        string: 你可以搜索标签的键和值
+        substring: 仅有键和值的局部亦能正常搜索
+        complete_tags: 你可以搜索完整的标签
+        values_only: 你可以只搜索标签的值
+
+pages:
+    not_found:
+        title: 未找到
+        intro: 抱歉，我们没能找到您所寻找的页面
