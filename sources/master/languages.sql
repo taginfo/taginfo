@@ -42,7 +42,7 @@ INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('hu', 
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('id',      'id', 'Indonesian', 'Bahasa Indonesia');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('it',      'it', 'Italian', 'Italiano');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('ja',      'ja', 'Japanese', '日本語');
-INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('ko',      'ko', 'Korean', '한국어 (韓國語)');
+INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('ko',      'ko', 'Korean', '한국어');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('lt',      'lt', 'Lithuanian', 'Lietuvių Kalba');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('lv',      'lv', 'Latvian', 'Latviešu Valoda');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('ms',      'ms', 'Malay', 'Bahasa Melayu');
