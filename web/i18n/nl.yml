@@ -624,7 +624,7 @@ reports:
         intro: |
             Deze tabel geeft sleutels weer waarvoor een wikipagina bestaat, maar geen enkele
             keer voorkomt in de database. Dit is niet per definitie een fout (misschien heeft iemand
-            de documentatie in de wiki toegevoegd als voorbereiding voor het gebruikt van een sleutel, of de
+            de documentatie in de wiki toegevoegd als voorbereiding voor het gebruik van een sleutel, of de
             wikipagina documenteert een nu verouderde sleutel), maar het kan ook een typefout of ander fout zijn.
         wiki_pages: Wikipagina's
     name_tags:
