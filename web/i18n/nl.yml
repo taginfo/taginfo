@@ -169,7 +169,7 @@ pages:
                 vragen als: Welke tags gebruiken mensen voor eigenschap X? Welke tags kan ik gebruiken
                 voor eigenschap Y zodat het goed op de kaart verschijnt? Is de tag Z beschreven
                 op de wiki echt in gebruik en waar?</p>
-                <p>Taginfo helpt je  door het weergeven van statistieken over welke tags daadwerkelijk in de
+                <p>Taginfo helpt je door het weergeven van statistieken over welke tags daadwerkelijk in de
                 database zitten, hoe veel mensen die tags gebruiken, waar ze gebruikt zijn en dergelijke. Het
                 verkrijgt ook informatie over tags van de wiki en van ander plaatsen. Taginfo
                 probeert alle informatie over tags samen te brengen om je te helpen te begrijpen
@@ -237,7 +237,7 @@ pages:
         intro: |
             <p>Taginfo verzamelt data over OSM tags van enkele bronnen en brengt ze
             samen voor simpel bladeren en ontdekken.</p>
-            <p>Let erop dat taginfo alleen deze data weergeeft. Als je deze wilt veranderen, moet
+            <p>Let erop dat taginfo deze data aleen laat zien. Als je deze wilt veranderen, moet
             je terug naar de bron.</p>
         list:
             title: Lijst van bronnen
@@ -274,7 +274,7 @@ pages:
         note: Sommige indexen zitten niet in de hier beschikbare databases. De  'Ingepakt' grootte is de grootte zonder deze indexen, de 'Uitgepakt' grootte bevat de indexen die je waarschijnlijk wilt bouwen na het downloaden.
     reports:
         intro: |
-            Rapporten weergeven de tag data van verschillende hoeken.
+            Rapporten geven de tag data weer vanuit verschillende hoeken.
             Ze brengen vaak data samen van verschillende bronnen op interessante manieren. Sommige
             van de rapporten kunnen helpen met het vinden van specifieke fouten.
         list: Lijst van alle rapporten
@@ -291,10 +291,10 @@ pages:
         nothing_to_compare: Er zijn geen sleutels/tags om te vergelijken. Ga naar een sleutel- of tagpagina en voeg ze toe.
     keys:
         intro: |
-                Deze tabel weergeeft alle tag sleutels die in de database bestaan of in een van de andere bronnen.
+                Deze tabel geeft alle tag sleutels weer die in de database bestaan of in een van de andere bronnen.
     tags:
         intro: |
-                Deze tabel weergeeft de meest voorkomende tags in de database.
+                Deze tabel geeft de meest voorkomende tags in de database weer.
     relations:
         name: Relatietypes
         intro: Informatie over de verschillende typen relaties (aangegeven door de <a href="/keys/type?filter=relations">type</a> tag).
@@ -306,7 +306,7 @@ pages:
         empty_role: lege rol
     projects:
         intro: |
-                Deze tabel weergeeft alle projecten bekend voor taginfo die OSM tags gebruiken op een of andere manier.<br/>Voor meer informatie over deze functionaliteit zie de <a href="//wiki.openstreetmap.org/wiki/Taginfo/projects" class="extlink">wiki</a>.
+                Deze tabel geeft alle projecten weer, die bekend zijn voor taginfo en OSM tags gebruiken op een of andere manier.<br/>Voor meer informatie over deze functionaliteit zie de <a href="//wiki.openstreetmap.org/wiki/Taginfo/projects" class="extlink">wiki</a>.
     key:
         description_from_wiki: Beschrijving van deze sleutel van de wiki (als beschikbaar in je gekozen taal, anders in het Engels).
         no_description_in_wiki: Geen Engelse beschrijving voor deze sleutel in de wiki. (Zie ook het "Wiki" tabblad.)
@@ -334,9 +334,9 @@ pages:
             from_count_tooltip: Hoeveelheid objecten met andere sleutel die ook deze sleutel hebben.
         geographic_distribution:
             title: Geografische verspreiding van deze sleutel
-            all: Dit weergeeft de verspreiding van nodes en wegen met deze sleutel, relaties worden niet weergegeven
-            nodes: Dit weergeeft de verspreding van nodes met deze sleutel.
-            ways: Dit weergeeft de verspreiding van wegen met deze sleutel.
+            all: Dit geeft de verspreiding van nodes en wegen met deze sleutel weer, relaties worden niet weergegeven
+            nodes: Dit geeft de verspreding van nodes met deze sleutel weer.
+            ways: Dit geeft de verspreiding van wegen met deze sleutel weer.
             relations: Het weergeven van een geografische locatie voor de verschillende typen relaties is niet eenvoudig, dus we proberen hier geen kaart weer te geven.
         wiki_pages:
             title: Wikipagina's over deze sleutel
@@ -371,14 +371,14 @@ pages:
             from_count_tooltip: Hoeveelheid objecten met andere tag/sleutel die ook deze tag hebben.
         combinations:
             title: Combinaties
-            description: Deze tabel weergeeft alleen de meest gebruikt combinaties van de meest voorkomende tags.
+            description: Deze tabel geeft alleen de meest gebruikt combinaties van de meest voorkomende tags weer.
         chronology:
             no_chronology: Sorry. De chronologie kan alleeen gegenereerd worden voor de meest voorkomende tags.
         geographic_distribution:
             title: Geografische verspreiding van deze tag.
-            all: Dit weergeeft de verspreiding van nodes en wegen met deze tag, relaties worden niet weergegeven
-            nodes: Dit weergeeft de verspreding van nodes met deze tag.
-            ways: Dit weergeeft de verspreiding van wegen met deze tag.
+            all: Dit geeft de verspreiding van nodes en wegen met deze tag weer, relaties worden niet weergegeven
+            nodes: Dit geeft de verspreding van nodes met deze tag weer.
+            ways: Dit geeft de verspreiding van wegen met deze tag weer.
             relations: Het weergeven van een geografische locatie voor de verschillende typen relaties is niet eenvoudig, dus we proberen hier geen kaart weer te geven.
             no_map: Sorry. De kaart kan alleen worden gemaakt voor de meest voorkomende tags. Probeer de overpass turbo link.
         wiki_pages:
@@ -441,7 +441,7 @@ pages:
 
 flexigrid:
     pagetext: Pagina
-    pagestat: Weergeeft {from} tot {to} van {total} items
+    pagestat: Geeft {from} tot {to} van {total} items weer
     outof: van
     findtext: Zoek
     procmsg: Verwerkt, wacht alsjeblieft...
@@ -577,14 +577,14 @@ reports:
     frequently_used_keys_without_wiki_page:
         name: Veel gebruikte sleutels zonder wikipagina
         intro: |
-            <p>Deze tabel weergeeft sleutel die meer dan 10&thinsp;000 keer in de OSM
+            <p>Deze tabel geeft sleutels weer die meer dan 10&thinsp;000 keer in de OSM
             database voorkomen maar geen wikipagina hebben die ze beschrijft.  Als je iets weet over een
             van deze sleutels, creëer alsjeblieft de wikipagina door te klikken op de link in de
             linkerkolom en de sleutel te beschrijven. Soms is het logisch om een
             redirect naar een andere wikipagina aan te maken. Om dit te dien voer de regel met
             <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>paginanaam</i>]]</tt>
             in de wikipagina in.</p>
-        also_show_keys: Weergeef ook sleutels die geen Engels wikipagina hebben, maar wel een in een andere taal.
+        also_show_keys: Geef ook sleutels weer die geen Engelse wikipagina hebben, maar wel een in een andere taal.
         table:
             create_wiki_page: Creëer wikipagina...
     key_lengths:
@@ -595,7 +595,7 @@ reports:
             number_of_objects: Hoeveelheid objecten
         histogram:
             name: Histogram
-            intro: Dit histogram weergeeft hoeveel tags er zijn van elke lengte.
+            intro: Dit histogram geeft weer hoeveel tags er zijn van elke lengte.
             key_length: Sleutellengte
             number_of_keys: Hoeveelheid sleutels
     language_comparison_table_for_keys_in_the_wiki:
@@ -606,12 +606,12 @@ reports:
             page: Pagina in wiki beschikbaar, maar bevat geen standaard template.
             redirect: Pagina is een redirect.
         intro: |
-            Deze tabel weergeeft alle tag sleutels waarvoor er wikipagina's beschikbaar zijn en in welke taal ze er zijn.
+            Deze tabel geeft alle tag sleutels weer waarvoor er wikipagina's beschikbaar zijn en in welke taal ze er zijn.
     languages:
         name: Talen
         intro: |
             OpenStreetMap is een internationaal project. Tags en hun beschrijvingen kunnen
-            in elke taal zijn. Deze tabel weergeeft de talen die taginfo kent en
+            in elke taal zijn. Deze tabel geeft de talen die taginfo kent weer en
             hoeveel wikipagina's er zijn in deze talen, die de sleutels en tags documenteren,
             respectievelijk.
         code: Code
@@ -622,15 +622,15 @@ reports:
     wiki_pages_about_non_existing_keys:
         name: Wikipagina's over niet bestaande sleutels
         intro: |
-            Deze tabel weergeeft sleutels waarvoor een wikipagina bestaat, maar geen enkele
+            Deze tabel geeft sleutels weer waarvoor een wikipagina bestaat, maar geen enkele
             keer voorkomt in de database. Dit is niet per definitie een fout (misschien heeft iemand
-            de documentatie in de wiki toegevoegd als voorbereiding voor het gebruikt van een sleutel, of de
+            de documentatie in de wiki toegevoegd als voorbereiding voor het gebruik van een sleutel, of de
             wikipagina documenteert een nu verouderde sleutel), maar het kan ook een typefout of ander fout zijn.
         wiki_pages: Wikipagina's
     name_tags:
         name: Varianten van naam tags
         intro: |
-            <p>Dit rapport weergeeft informatie gerelateerd aan de naamgeving van objecten in OSM
+            <p>Dit rapport geeft informatie weer, gerelateerd aan de naamgeving van objecten in OSM
             gebruikmakend van de <tt>name</tt> tag en zijn varianten.</p>
         overview:
             tab: Overzicht
@@ -639,7 +639,7 @@ reports:
             tab: BCP47 Subtags
             title: BCP47 Subtags
             filter:
-                label: Weergeef alleen subtags van type
+                label: Geef alleen subtags van type weer
                 all: Alle
                 language: Taal
                 script: Script
@@ -651,20 +651,20 @@ reports:
                 <a href="https://tools.ietf.org/html/bcp47">Tags voor het identificeren van talen
                 (BCP47)</a>. Taal
                 tags bestaan uit een of meer <i>subtags</i> die de taal, script,
-                varianten en dergelijke beschrijven. De volgende lijst weergeeft de subtags die op dit moment
+                varianten en dergelijke beschrijven. De volgende lijst geeft de subtags weer die op dit moment
                 geregistreerd zijn die relevant zijn voor OSM. Voor meer informatie bekijk ook de
                 <a href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
                 pagina over IETF language tags</a> en de <a
                 href="http://www.langtag.net/">langtag.net</a> site.</p>
                 <p>Let er op dat de data weergegeven in deze tabel <b>niet</b> van OpenStreetMap is,
-                er worden slechts de bouwblokken weergeven die gebruikt kunnen worden om talen te beschrijven
+                er worden slechts de bouwblokken weergegeven die gebruikt kunnen worden om talen te beschrijven
                 onafhankelijk van of ze daadwerkelijk gebruikt worden in OSM.
                 </p>
     similar_keys:
         name: Soortgelijke sleutels
         intro: |
-            Dit rapport weergeeft de veel gebruikte sleutels en soortgelijke sleutels
-            die weinig gebruikt worden. Dit belicht veel spelfouten van gebruikelijke sleutels, maar is niet
+            Dit rapport geeft de veel gebruikte sleutels en soortgelijke sleutels
+            die weinig gebruikt worden weer. Dit belicht veel spelfouten van gebruikelijke sleutels, maar is niet
             perfect. Wees voorzichtig bij het repareren vaan data! Bewerk NIET zomaar mechanisch
             zulke sleutels met zoeken en vervangen. Kijk naar elke individuele situatie
             en repareer ook andere problemen die je ziet.
@@ -696,8 +696,8 @@ reports:
         name: Wiki parseerproblemen
         intro: |
             Taginfo leest alle wikipagina's die sleutels, tags en
-            relaties beschrijven om informatie over deze tags te vinden. Dit rapport weergeeft een lijst
-            van problemen die ondervonden werden tijdens het lezen van die pagina's. Dit zijn niet
+            relaties beschrijven om informatie over deze tags te vinden. Dit rapport geeft een lijst
+            van problemen die ondervonden werden tijdens het lezen van die pagina's weer. Dit zijn niet
             per definitie fouten in de wiki, ze betekenen slechts dat iets in
             de wikipagina's niet geformatteerd is zoals taginfo dit begrijpt. Of
             de oagina moeten verbeterd worden, of taginfo moet gerepareerd worden.
