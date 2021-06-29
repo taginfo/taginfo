@@ -237,7 +237,7 @@ pages:
         intro: |
             <p>Taginfo verzamelt data over OSM tags van enkele bronnen en brengt ze
             samen voor simpel bladeren en ontdekken.</p>
-            <p>Let erop dat taginfo alleen deze data weergeeft. Als je deze wilt veranderen, moet
+            <p>Let erop dat taginfo deze data aleen laat zien. Als je deze wilt veranderen, moet
             je terug naar de bron.</p>
         list:
             title: Lijst van bronnen
