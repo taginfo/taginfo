@@ -48,7 +48,10 @@
         // web server config.
         "download_dir": "../../download",
         // Path to binaries (like 'taginfo-stats' and 'taginfo-similarity').
-        "bin_dir": "../../bin",
+        // Probably something like '.../taginfo-tools/build/src'. If this is
+        // a relative path, it must be relative to the subdirectory of the
+        // 'sources' directory.
+        "bin_dir": "../../../taginfo-tools/build/src",
         // Path to sqlite regexp extension.
         "sqlite3_pcre_extension": "/usr/lib/sqlite3/pcre.so"
     },
