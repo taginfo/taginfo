@@ -94,6 +94,14 @@ help:
         substring: 仅有键和值的局部亦能正常搜索
         complete_tags: 你可以搜索完整的标签
         values_only: 你可以只搜索标签的值
+        suggestions: |
+            为了您的方便，在您输入的时候将自动向您推荐热门的键和标签。您可以单击选择后按<span class="key">Enter</span>.
+            您将直接跳转到所选的键或标签所对应的页面。
+    keyboard:
+        title: 键盘快捷键
+        site_navigation: 站点导航
+        page_navigation: 页面导航
+        table_navigation: 表格导航
 
 pages:
     not_found:
