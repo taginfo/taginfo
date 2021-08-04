@@ -102,8 +102,52 @@ help:
         site_navigation: 站点导航
         page_navigation: 页面导航
         table_navigation: 表格导航
+        keys:
+            home: Home
+            end: End
+            pageup: PgUp
+            pagedown: PgDn
+            esc: Esc
+            tab: TAB
+        home_page: 主页
+        keys_page: 键页面
+        tags_page: 标签页
+        relations_page: 关系页
+        projects_page: 项目页
+        reports_page: 报告页
+        compare_page: 对比页
+        first_page: 首页
+        prev_page: 上一页
+        next_page: 下一页
+        last_page: 末页
+        help_page: 帮助
+
+        prev_entry: 前一项
+        next_entry: 后一项
 
 pages:
     not_found:
         title: 未找到
         intro: 抱歉，我们没能找到您所寻找的页面
+    index:
+        popular_keys: 一些热门的键
+        keys:
+            listkeys: 查看所有键
+        tags:
+            listtags: 查看最常见的标签
+        relations:
+            listrelations: 查看所有关系类型
+        reports:
+            listreports: 查看所有报告
+        about:
+            intro:
+                <p>OpenStreetMap 使用<b>key=value</b>表中的<b>标签</b>来为地理上的要素添加含义。
+                Taginfo通过多种来源收集这些标签的使用信息来帮助您理解他们的含义及用法。</p>
+            more: 关于taginfo的更多
+        international:
+            see: 查看其他taginfo站点
+    about:
+        about_taginfo:
+            title: 关于Taginfo
+        about_site:
+            title: 关于这个站点
