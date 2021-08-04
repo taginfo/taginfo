@@ -151,3 +151,23 @@ pages:
             title: 关于Taginfo
         about_site:
             title: 关于这个站点
+    reports:
+        intro: |
+            报告将从不同角度展示标签数据。他们通常以有趣的方式汇集来自多个来源的数据。
+            部分报告或许可以帮您发现特定的错误。
+        list: 全部报告列表
+        data_sources: 所使用的数据集
+    search:
+        title: 搜索结果
+        you_were_searching_for: 您正在搜索
+        fulltext: 全文
+        no_keys: 未能找到键
+        no_values: 未能找到值
+        no_tags: 未能找到标签
+        no_match: 未能匹配到结果
+    keys:
+        intro: |
+                这个表展示了数据库或其他一切来源中的所有标签的键
+    tags:
+        intro: |
+                这个表展示了数据库中最常用的标签。
