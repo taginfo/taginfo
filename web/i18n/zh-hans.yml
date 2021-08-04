@@ -192,7 +192,7 @@ pages:
             distribution_of_values: Distribution of values
         other_keys_used:
             title: Other keys used together with this key
-            other: Other keys
+            other: 其他键
             to_count_tooltip: Number of objects with this key that also have the other key.
             other_key_tooltip: Key used together with this key.
             from_count_tooltip: Number of objects with other key that also have this key.
@@ -203,11 +203,11 @@ pages:
             ways: This shows the distribution of ways with this key.
             relations: Showing a geographical location for the different types of relations isn't straightforward, so we are not trying to show a map here.
         wiki_pages:
-            title: Wiki pages about this key
-            none_found: No wiki page available for this key.
-            create: Create wiki page for this key
+            title: 关于这个键的Wiki页面
+            none_found: 找不到这个键的Wiki页面
+            create: 为这个键创建Wiki页面
             wiki_page: Wiki页面
-            implied_tags: Implied Tags
+            implied_tags: 潜在的标签
             combined_tags: 关联的标签
             linked_tags: 链接的标签
         projects:
