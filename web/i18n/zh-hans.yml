@@ -171,3 +171,52 @@ pages:
     tags:
         intro: |
                 这个表展示了数据库中最常用的标签。
+    key:
+        description_from_wiki: Wiki上关于您所选的键的解释（若您当前的语言不可用则将默认为英文）
+        no_description_in_wiki: 在Wiki上找不到这个键的英文描述（亦可参见“Wiki”标签页）
+        filter:
+            label: |
+                 过滤器:
+            none: 无过滤器
+            nodes: 仅节点
+            ways: 仅路径
+            relations: 仅关系
+        button_disabled: Button disabled, because there are too many objects with this key.
+        number_objects: Number of objects
+        number_values: Number of values
+        values_used: Values used with this key
+        tag_description_from_wiki: Description of the tag from the wiki (if available in your chosen language, otherwise in English).
+        overview:
+            objects_last_edited_by: Objects with this key were last edited by %1 different users.
+            no_endorsement: (This does not mean that all those users endorse this key.)
+            distribution_of_values: Distribution of values
+        other_keys_used:
+            title: Other keys used together with this key
+            other: Other keys
+            to_count_tooltip: Number of objects with this key that also have the other key.
+            other_key_tooltip: Key used together with this key.
+            from_count_tooltip: Number of objects with other key that also have this key.
+        geographic_distribution:
+            title: Geographical distribution of this key
+            all: This shows the distribution of nodes and ways with this key, relations are not shown.
+            nodes: This shows the distribution of nodes with this key.
+            ways: This shows the distribution of ways with this key.
+            relations: Showing a geographical location for the different types of relations isn't straightforward, so we are not trying to show a map here.
+        wiki_pages:
+            title: Wiki pages about this key
+            none_found: No wiki page available for this key.
+            create: Create wiki page for this key
+            wiki_page: Wiki页面
+            implied_tags: Implied Tags
+            combined_tags: 关联的标签
+            linked_tags: 链接的标签
+        projects:
+            title: 使用了这个键的项目
+            description: 这个键在这个项目中是如何被使用的
+        similar:
+            tab: 相似
+            title: 相似的键
+            other: 相似的键
+            count_all_tooltip: Number of objects with the similar key
+            similarity: 相似性
+            similarity_tooltip: 越小的数字意味着越接近
