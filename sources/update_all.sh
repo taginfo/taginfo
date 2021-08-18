@@ -21,18 +21,18 @@ set -euo pipefail
 readonly SRCDIR=$(dirname $(readlink -f "$0"))
 readonly DATADIR=$1
 
-if [ -z $DATADIR ]; then
+if [ -z "$DATADIR" ]; then
     echo "Usage: update_all.sh DATADIR"
     exit 1
 fi
 
-source $SRCDIR/util.sh all
+source "$SRCDIR/util.sh" all
 
 readonly LOGFILE=$(date +%Y%m%dT%H%M)
-mkdir -p $DATADIR/log
-exec >$DATADIR/log/$LOGFILE.log 2>&1
+mkdir -p "$DATADIR/log"
+exec >"$DATADIR/log/$LOGFILE.log" 2>&1
 
-if which pbzip2 >/dev/null; then
+if command -v pbzip2 >/dev/null; then
     BZIP_COMMAND=pbzip2
 else
     BZIP_COMMAND=bzip2
@@ -43,9 +43,9 @@ download_source() {
 
     print_message "Downloading and uncompressing $source..."
 
-    mkdir -p $DATADIR/$source
-    run_exe curl --silent --fail --output $DATADIR/download/taginfo-$source.db.bz2 --time-cond $DATADIR/download/taginfo-$source.db.bz2 https://taginfo.openstreetmap.org/download/taginfo-$source.db.bz2
-    run_exe -l$DATADIR/$source/taginfo-$source.db $BZIP_COMMAND -d -c $DATADIR/download/taginfo-$source.db.bz2
+    mkdir -p "$DATADIR/$source"
+    run_exe curl --silent --fail --output "$DATADIR/download/taginfo-$source.db.bz2" --time-cond "$DATADIR/download/taginfo-$source.db.bz2" "https://taginfo.openstreetmap.org/download/taginfo-$source.db.bz2"
+    run_exe "-l$DATADIR/$source/taginfo-$source.db" "$BZIP_COMMAND" -d -c "$DATADIR/download/taginfo-$source.db.bz2"
 
     print_message "Done."
 }
@@ -53,11 +53,11 @@ download_source() {
 download_sources() {
     local sources="$*"
 
-    mkdir -p $DATADIR/download
+    mkdir -p "$DATADIR/download"
 
     local source
     for source in $sources; do
-        download_source $source
+        download_source "$source"
     done
 }
 
@@ -66,8 +66,8 @@ update_source() {
 
     print_message "Running $source/update.sh..."
 
-    mkdir -p $DATADIR/$source
-    $SRCDIR/$source/update.sh $DATADIR/$source
+    mkdir -p "$DATADIR/$source"
+    "$SRCDIR/$source/update.sh" "$DATADIR/$source"
 
     print_message "Done."
 }
@@ -77,14 +77,14 @@ update_sources() {
 
     local source
     for source in $sources; do
-        update_source $source
+        update_source "$source"
     done
 }
 
 update_master() {
     print_message "Running master/update.sh..."
 
-    $SRCDIR/master/update.sh $DATADIR
+    "$SRCDIR/master/update.sh" "$DATADIR"
 
     print_message "Done."
 }
@@ -94,7 +94,7 @@ compress_file() {
     local compressed="$2"
 
     print_message "Compressing '$filename' to '$compressed' using '$BZIP_COMMAND'"
-    $BZIP_COMMAND -9 -c $DATADIR/$filename.db >$DATADIR/download/taginfo-$compressed.db.bz2 &
+    "$BZIP_COMMAND" -9 -c "$DATADIR/$filename.db" >"$DATADIR/download/taginfo-$compressed.db.bz2" &
 }
 
 compress_source_databases() {
@@ -104,7 +104,7 @@ compress_source_databases() {
 
     local source
     for source in $sources; do
-        compress_file $source/taginfo-$source $source
+        compress_file "$source/taginfo-$source" "$source"
     done
 
     wait
@@ -128,8 +128,8 @@ compress_extra_databases() {
 create_extra_indexes() {
     print_message "Creating extra indexes..."
 
-    run_sql $DATADIR/db/taginfo-db.db $SRCDIR/db/add_extra_indexes.sql
-    run_sql $DATADIR/db/taginfo-db.db $SRCDIR/db/add_ftsearch.sql
+    run_sql "$DATADIR/db/taginfo-db.db" "$SRCDIR/db/add_extra_indexes.sql"
+    run_sql "$DATADIR/db/taginfo-db.db" "$SRCDIR/db/add_ftsearch.sql"
 
     print_message "Done."
 }
@@ -141,10 +141,12 @@ main() {
     # Note that this will NOT work for the "db" source! Well, you can download it,
     # but it will fail later, because the database is changed by the master.sql
     # scripts.
-    local sources_download=$(get_config sources.download)
+    local sources_download
+    sources_download=$(get_config sources.download)
 
     # These sources will be created from the actual sources
-    local sources_create=$(get_config sources.create)
+    local sources_create
+    sources_create=$(get_config sources.create)
 
     download_sources $sources_download
     update_sources $sources_create

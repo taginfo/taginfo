@@ -11,7 +11,7 @@
 
 set -euo pipefail
 
-if [ -f $SRCDIR/util.sh ]; then
+if [ -f "$SRCDIR/util.sh" ]; then
     readonly UTILDIR=$SRCDIR
 else
     readonly UTILDIR=$SRCDIR/..
@@ -47,7 +47,7 @@ get_config() {
     local name="$1"
     local default="${2:-}"
 
-    $(ruby_command_line) $UTILDIR/../bin/taginfo-config.rb "$name" "$default"
+    $(ruby_command_line) "$UTILDIR/../bin/taginfo-config.rb" "$name" "$default"
 }
 
 run_ruby() {
@@ -117,32 +117,34 @@ initialize_database() {
     local database="$1"
     local sourcedir="$2"
 
-    rm -f $database
-    run_sql $database $sourcedir/../init.sql
-    run_sql $database $sourcedir/pre.sql
+    rm -f "$database"
+    run_sql "$database" "$sourcedir/../init.sql"
+    run_sql "$database" "$sourcedir/pre.sql"
 }
 
 finalize_database() {
     local database="$1"
     local sourcedir="$2"
 
-    run_sql $database $sourcedir/post.sql
+    run_sql "$database" "$sourcedir/post.sql"
 }
 
 get_bindir() {
-    local bin_dir=$(get_config paths.bin_dir)
+    local bin_dir
+    bin_dir=$(get_config paths.bin_dir)
     if [ -z "$bin_dir" ]; then
         >&2 echo "paths.bin_dir in config is not set"
         echo "(paths.bin_dir)"
         return
     fi
 
-    local abs_bin_dir=$(cd $SRCDIR; readlink -f $bin_dir)
+    local abs_bin_dir
+    abs_bin_dir=$(cd "$SRCDIR"; readlink -f "$bin_dir")
     if [ -z "$abs_bin_dir" ]; then
         >&2 echo "'$bin_dir': No such directory (paths.bin_dir in config)"
-        abs_bin_dir=$bin_dir
+        abs_bin_dir="$bin_dir"
     fi
 
-    echo $abs_bin_dir
+    echo "$abs_bin_dir"
 }
 
