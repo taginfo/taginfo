@@ -3,7 +3,6 @@
 #  taginfo-config.rb KEY [DEFAULT]
 #
 
-require 'rubygems'
 require 'json'
 
 require File.expand_path(File.dirname(__FILE__)) + '/../web/lib/config.rb'

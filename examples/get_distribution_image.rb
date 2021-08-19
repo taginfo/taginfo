@@ -3,7 +3,6 @@
 #  get_distribution_image DB KEY nodes|ways
 #
 
-require 'rubygems'
 require 'sqlite3'
 
 filename = ARGV[0]
