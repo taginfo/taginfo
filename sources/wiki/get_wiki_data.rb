@@ -542,7 +542,7 @@ class Template
                         @name = m[1].downcase
                     else
                         puts "WARN: Unknown template: #{ value }"
-                        @name = value
+                        @name = value.to_s
                     end
                 else
                     @parameters << value
