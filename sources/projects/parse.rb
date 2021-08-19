@@ -187,7 +187,7 @@ def parse_and_check(id, data, log, db)
         elsif !d[:key].is_a?(String)
             log.error "tags.#{n}.key MUST BE A STRING.\n"
         else
-            has_error = FALSE
+            has_error = false
             on = { 'node' => 0, 'way' => 0, 'relation' => 0, 'area' => 0 }
             if d[:object_types]
                 if d[:object_types].class == Array
@@ -200,13 +200,13 @@ def parse_and_check(id, data, log, db)
                                 on[type] = 1
                             else
                                 log.error "UNKNOWN OBJECT TYPE FOR #{d[:key]}: '#{type}' (ALLOWED ARE: node, way, relation, area)."
-                                has_error = TRUE
+                                has_error = true
                             end
                         end
                     end
                 else
                     log.error "tags.#{n}.object_types (FOR KEY '#{d[:key]}') MUST BE AN ARRAY."
-                    has_error = TRUE
+                    has_error = true
                 end
             else
                 on = { 'node' => 1, 'way' => 1, 'relation' => 1, 'area' => 1 }
@@ -214,22 +214,22 @@ def parse_and_check(id, data, log, db)
 
             if d[:value] && !d[:value].is_a?(String)
                 log.error "OPTIONAL tag.X.value MUST BE STRING."
-                has_error = TRUE
+                has_error = true
             end
 
             if d[:description] && !d[:description].is_a?(String)
                 log.error "OPTIONAL tag.X.description MUST BE STRING."
-                has_error = TRUE
+                has_error = true
             end
 
             if d[:doc_url] && !d[:doc_url].is_a?(String)
                 log.error "OPTIONAL tag.X.doc_url MUST BE STRING."
-                has_error = TRUE
+                has_error = true
             end
 
             if d[:icon_url] && !d[:icon_url].is_a?(String)
                 log.error "OPTIONAL tag.X.icon_url MUST BE STRING."
-                has_error = TRUE
+                has_error = true
             end
 
             if !has_error
