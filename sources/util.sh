@@ -26,9 +26,12 @@ print_message_impl() {
     local function="$1"; shift
     local message="$*"
 
-    local timestamp=$(date +%Y-%m-%dT%H:%M:%S)
-    local -i this_message_timestamp=$(date +%s)
-    local -i elapsed=$(( ( $this_message_timestamp - $LAST_MESSAGE_TIMESTAMP ) / 60 ))
+    local timestamp
+    timestamp=$(date +%Y-%m-%dT%H:%M:%S)
+    local -i this_message_timestamp
+    this_message_timestamp=$(date +%s)
+
+    local -i elapsed=$(( ( this_message_timestamp - LAST_MESSAGE_TIMESTAMP ) / 60 ))
 
     printf "%s | %d | %s | %s | %s\n" "$timestamp" "$elapsed" "$TAGINFO_SCRIPT" "$function" "$message"
 }
@@ -57,13 +60,13 @@ run_ruby() {
         shift
     fi
 
-    print_message_impl "${FUNCNAME[1]}" "Running '$(ruby_command_line) $@'..."
+    print_message_impl "${FUNCNAME[1]}" "Running '$(ruby_command_line) $*'..."
 
-    if [ -z $logfile ]; then
+    if [ -z "$logfile" ]; then
         $(ruby_command_line) "$@"
     else
         print_message_impl "${FUNCNAME[1]}" "  Logging to '${logfile}'..."
-        $(ruby_command_line) "$@" >$logfile
+        $(ruby_command_line) "$@" >"$logfile"
     fi
 }
 
@@ -74,13 +77,13 @@ run_exe() {
         shift
     fi
 
-    print_message_impl "${FUNCNAME[1]}" "Running '$@'..."
+    print_message_impl "${FUNCNAME[1]}" "Running '$*'..."
 
-    if [ -z $logfile ]; then
-        env - $@
+    if [ -z "$logfile" ]; then
+        env - "$@"
     else
         print_message_impl "${FUNCNAME[1]}" "  Writing output to '${logfile}'..."
-        env - $@ >$logfile
+        env - "$@" >"$logfile"
     fi
 }
 
@@ -88,7 +91,7 @@ run_sql() {
     local -a macros=()
 
     while [[ $1 == *=* ]]; do
-        macros+=($1)
+        macros+=("$1")
         shift;
     done
 
@@ -102,10 +105,11 @@ run_sql() {
     local remove_first_off='sed -e 1!b;/^off/d'
 
     if [ ${#macros[@]} -eq 0 ]; then
-        $SQLITE <$sql_file | $remove_first_off
+        $SQLITE <"$sql_file" | $remove_first_off
     else
-        local sql="$(<$sql_file)"
-        for i in ${macros[@]}; do
+        local sql
+        sql="$(<$sql_file)"
+        for i in "${macros[@]}"; do
             print_message_impl "${FUNCNAME[1]}" "  with parameter: $i"
             sql=${sql//__${i%=*}__/${i#*=}}
         done
