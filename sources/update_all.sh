@@ -18,7 +18,7 @@
 
 set -euo pipefail
 
-readonly SRCDIR=$(dirname $(readlink -f "$0"))
+readonly SRCDIR=$(dirname "$(readlink -f "$0")")
 readonly DATADIR=$1
 
 if [ -z "$DATADIR" ]; then
@@ -26,6 +26,7 @@ if [ -z "$DATADIR" ]; then
     exit 1
 fi
 
+# shellcheck source=/dev/null
 source "$SRCDIR/util.sh" all
 
 readonly LOGFILE=$(date +%Y%m%dT%H%M)
@@ -148,11 +149,19 @@ main() {
     local sources_create
     sources_create=$(get_config sources.create)
 
+    # shellcheck disable=SC2086 # we want word splitting here
     download_sources $sources_download
+
+    # shellcheck disable=SC2086 # we want word splitting here
     update_sources $sources_create
+
+    # shellcheck disable=SC2086 # we want word splitting here
     compress_source_databases $sources_create
+
     create_extra_indexes
     update_master
+
+    # shellcheck disable=SC2086 # we want word splitting here
     compress_extra_databases $sources_create
 
     print_message "Done update_all."

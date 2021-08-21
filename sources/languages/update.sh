@@ -9,7 +9,7 @@
 
 set -euo pipefail
 
-readonly SRCDIR=$(dirname $(readlink -f "$0"))
+readonly SRCDIR=$(dirname "$(readlink -f "$0")")
 readonly DATADIR=$1
 
 if [ -z "$DATADIR" ]; then
@@ -30,6 +30,7 @@ readonly WIKIMEDIAS_URL="https://wikistats.wmcloud.org/wikimedias_csv.php"
 readonly WIKIMEDIAS_FILE="$DATADIR/wikimedias.csv"
 readonly DATABASE=$DATADIR/taginfo-languages.db
 
+# shellcheck source=/dev/null
 source "$SRCDIR/../util.sh" languages
 
 update_file() {
@@ -40,7 +41,7 @@ update_file() {
         return 0
     else
         error=$?
-        if [ "$error" = "22" -o "$error" = "7" -o "$error" = "60" ]; then
+        if [ "$error" = "22" ] || [ "$error" = "7" ] || [ "$error" = "60" ]; then
             print_message "WARNING: Getting ${url} failed. Using old version."
         else
             print_message "ERROR: Could not get ${url}: curl error: $error"

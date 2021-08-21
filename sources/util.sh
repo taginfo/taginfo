@@ -97,6 +97,8 @@ run_sql() {
 
     local database="$1"
     local sql_file="$2"
+
+    # shellcheck disable=SC2016 # false positive due to parsing error
     local message="${3:-Running SQL script '${sql_file}' on database '${database}'...}"
 
     print_message_impl "${FUNCNAME[1]}" "$message"
@@ -108,7 +110,7 @@ run_sql() {
         $SQLITE <"$sql_file" | $remove_first_off
     else
         local sql
-        sql="$(<$sql_file)"
+        sql=$(<"$sql_file")
         for i in "${macros[@]}"; do
             print_message_impl "${FUNCNAME[1]}" "  with parameter: $i"
             sql=${sql//__${i%=*}__/${i#*=}}

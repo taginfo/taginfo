@@ -9,7 +9,7 @@
 
 set -euo pipefail
 
-readonly SRCDIR=$(dirname $(readlink -f "$0"))
+readonly SRCDIR=$(dirname "$(readlink -f "$0")")
 readonly DATADIR=$1
 
 if [ -z "$DATADIR" ]; then
@@ -22,6 +22,7 @@ readonly CACHEDB=$DATADIR/wikicache.db
 readonly LOGFILE_WIKI_DATA=$DATADIR/get_wiki_data.log
 readonly LOGFILE_IMAGE_INFO=$DATADIR/get_image_info.log
 
+# shellcheck source=/dev/null
 source "$SRCDIR/../util.sh" wiki
 
 initialize_cache() {

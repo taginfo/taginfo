@@ -9,7 +9,7 @@
 
 set -euo pipefail
 
-readonly SRCDIR=$(dirname $(readlink -f "$0"))
+readonly SRCDIR=$(dirname "$(readlink -f "$0")")
 readonly DATADIR=$1
 
 if [ -z "$DATADIR" ]; then
@@ -20,6 +20,7 @@ fi
 readonly DATABASE=$DATADIR/taginfo-chronology.db
 readonly SELECTION_DB=$DATADIR/../selection.db
 
+# shellcheck source=/dev/null
 source "$SRCDIR/../util.sh" chronology
 
 readonly OSM_HISTORY_FILE=${2:-$(get_config sources.chronology.osm_history_file)}

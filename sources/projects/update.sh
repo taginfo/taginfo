@@ -9,7 +9,7 @@
 
 set -euo pipefail
 
-readonly SRCDIR=$(dirname $(readlink -f "$0"))
+readonly SRCDIR=$(dirname "$(readlink -f "$0")")
 readonly DATADIR=$1
 
 if [ -z "$DATADIR" ]; then
@@ -20,6 +20,7 @@ fi
 readonly PROJECT_LIST="$DATADIR/taginfo-projects/project_list.txt"
 readonly DATABASE="$DATADIR/taginfo-projects.db"
 
+# shellcheck source=/dev/null
 source "$SRCDIR/../util.sh" projects
 
 update_projects_list() {
