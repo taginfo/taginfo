@@ -29,15 +29,7 @@ source "$SRCDIR/../util.sh" db
 readonly OSM_FILE=${2:-$(get_config sources.db.planetfile)}
 
 run_tagstats() {
-    local top
-    local right
-    local bottom
-    local left
-    local width
-    local height
-    local min_tag_combination_count
-    local index
-    local tagstats
+    local top right bottom left width height min_tag_combination_count index tagstats
 
     top=$(get_config geodistribution.top)
     right=$(get_config geodistribution.right)

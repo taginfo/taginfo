@@ -35,9 +35,7 @@ create_master_database() {
 }
 
 create_selection_database() {
-    local min_count_tags
-    local min_count_for_map
-    local min_count_relations_per_type
+    local min_count_tags min_count_for_map min_count_relations_per_type
 
     min_count_tags=$(get_config sources.master.min_count_tags 10000)
     min_count_for_map=$(get_config sources.master.min_count_for_map 1000)

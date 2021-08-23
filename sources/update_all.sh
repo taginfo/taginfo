@@ -138,15 +138,15 @@ create_extra_indexes() {
 main() {
     print_message "Start update_all..."
 
+    local sources_download sources_create
+
     # These sources will be downloaded from https://taginfo.openstreetmap.org/download/
     # Note that this will NOT work for the "db" source! Well, you can download it,
     # but it will fail later, because the database is changed by the master.sql
     # scripts.
-    local sources_download
     sources_download=$(get_config sources.download)
 
     # These sources will be created from the actual sources
-    local sources_create
     sources_create=$(get_config sources.create)
 
     # shellcheck disable=SC2086 # we want word splitting here

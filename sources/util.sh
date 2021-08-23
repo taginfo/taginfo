@@ -136,7 +136,8 @@ finalize_database() {
 }
 
 get_bindir() {
-    local bin_dir
+    local bin_dir abs_bin_dir
+
     bin_dir=$(get_config paths.bin_dir)
     if [ -z "$bin_dir" ]; then
         >&2 echo "paths.bin_dir in config is not set"
@@ -144,7 +145,6 @@ get_bindir() {
         return
     fi
 
-    local abs_bin_dir
     abs_bin_dir=$(cd "$SRCDIR"; readlink -f "$bin_dir")
     if [ -z "$abs_bin_dir" ]; then
         >&2 echo "'$bin_dir': No such directory (paths.bin_dir in config)"
