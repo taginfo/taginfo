@@ -181,27 +181,27 @@ pages:
             nodes: 仅节点
             ways: 仅路径
             relations: 仅关系
-        button_disabled: Button disabled, because there are too many objects with this key.
-        number_objects: Number of objects
-        number_values: Number of values
-        values_used: Values used with this key
-        tag_description_from_wiki: Description of the tag from the wiki (if available in your chosen language, otherwise in English).
+        button_disabled: 按钮不可用，因为这个键有太多对象。
+        number_objects: 对象的数量
+        number_values: 值的数量
+        values_used: 这个键用到的值
+        tag_description_from_wiki: 这个标签在Wiki上的描述（如果您所选的语言不可用就会展示英文版本）
         overview:
-            objects_last_edited_by: Objects with this key were last edited by %1 different users.
-            no_endorsement: (This does not mean that all those users endorse this key.)
-            distribution_of_values: Distribution of values
+            objects_last_edited_by: 具有这个键的对象被%1的用户最后修改过。
+            no_endorsement: （这不意味着所有这些用户都认可这个键。）
+            distribution_of_values: 值的分布
         other_keys_used:
-            title: Other keys used together with this key
+            title: 其他与这个键一并使用的键
             other: 其他键
-            to_count_tooltip: Number of objects with this key that also have the other key.
-            other_key_tooltip: Key used together with this key.
-            from_count_tooltip: Number of objects with other key that also have this key.
+            to_count_tooltip: 有这个键且同时有其他键的对象个数
+            other_key_tooltip: 与这个键一并使用的键。
+            from_count_tooltip: 有其他键同时包含这个键的对象个数
         geographic_distribution:
-            title: Geographical distribution of this key
-            all: This shows the distribution of nodes and ways with this key, relations are not shown.
-            nodes: This shows the distribution of nodes with this key.
-            ways: This shows the distribution of ways with this key.
-            relations: Showing a geographical location for the different types of relations isn't straightforward, so we are not trying to show a map here.
+            title: 这个键在地图上的分布情况
+            all: 这展示了包含这个键的节点和路径的分布情况，但不包括关系。
+            nodes: 这展示了包含这个键的节点的分布情况。
+            ways: 这展示了包含这个键的路径的分布情况。
+            relations: 显示不同类型的关系在地图上的分布并不简单，因此我们不打算在此处显示地图。
         wiki_pages:
             title: 关于这个键的Wiki页面
             none_found: 找不到这个键的Wiki页面
@@ -217,6 +217,6 @@ pages:
             tab: 相似
             title: 相似的键
             other: 相似的键
-            count_all_tooltip: Number of objects with the similar key
+            count_all_tooltip: 与本键相似的键的对象个数
             similarity: 相似性
             similarity_tooltip: 越小的数字意味着越接近
