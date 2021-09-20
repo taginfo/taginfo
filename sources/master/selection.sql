@@ -28,9 +28,9 @@ INSERT INTO interesting_tags (key, value)
     UNION
     SELECT key, value FROM db.tags WHERE count_all > __MIN_COUNT_TAGS__;
 
-DELETE FROM interesting_tags WHERE key IN ('created_by', 'ele', 'height', 'is_in', 'lanes', 'layer', 'maxspeed', 'name', 'ref', 'width') AND value IS NOT NULL;
-DELETE FROM interesting_tags WHERE value IS NOT NULL AND key LIKE '%:%';
-DELETE FROM interesting_tags WHERE value IS NOT NULL AND key LIKE 'fresno_%';
+-- DELETE FROM interesting_tags WHERE key IN ('created_by', 'ele', 'height', 'is_in', 'lanes', 'layer', 'maxspeed', 'name', 'ref', 'width') AND value IS NOT NULL;
+-- DELETE FROM interesting_tags WHERE value IS NOT NULL AND key LIKE '%:%';
+-- DELETE FROM interesting_tags WHERE value IS NOT NULL AND key LIKE 'fresno_%';
 
 ANALYZE interesting_tags;
 
