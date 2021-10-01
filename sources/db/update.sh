@@ -57,7 +57,7 @@ run_tagstats() {
 
     print_message "Running tagstats... "
 #tagstats="valgrind --leak-check=full --show-reachable=yes $tagstats"
-    run_exe "$tagstats" "$open_selection_db" \
+    run_exe "$tagstats" $open_selection_db \
         --index="$index" \
         --min-tag-combination-count="$min_tag_combination_count" \
         --left="$left" \
