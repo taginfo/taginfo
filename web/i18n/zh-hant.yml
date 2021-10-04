@@ -42,6 +42,7 @@ taginfo:
     project: 專案
     projects: 專案
     test: 測試
+    chronology: 年表
     map: 地圖
     maps: 地圖
     relations: 關係
@@ -49,6 +50,7 @@ taginfo:
     key_combinations: 組合
     comparison: 鍵與標籤的比較
     overview: 總覽
+    links: 鏈接
     data_from: 資料來自
     data_from_description: taginfo 資料庫的上次更新
     instance:
@@ -81,6 +83,8 @@ misc:
     prevalent_values: 普遍值
     prevalent_values_tooltip: 此鍵十個最常用的值（只有在多於 1% 有此鍵的標籤有此值的時候）。
     in_wiki_tooltip: 有至少一個 wiki 頁面。
+    status: 狀態
+    approval_status: 批准狀態
 
 help:
     search:
@@ -242,6 +246,8 @@ pages:
                 <p>Taginfo 取得世界不同語言的資料，它們的代碼、名稱等來自數個 <a class="extlink" href="https://www.iana.org/">IANA</a> 和 <a class="extlink" href="http://www.unicode.org/">Unicode</a> 登記名冊。</p>
             projects: |
                 <p>以一些方式使用 OSM 標籤的專案，像是編輯器、路線規劃等，請見<a href="/projects">專案列表</a>。</p>
+            chronology: |
+                <p><a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">歷史星球</a>上隨時間變化的鍵/標籤數量。</p>
         updates:
             title: 更新
             intro: taginfo 資料定期地從來源更新。
@@ -323,6 +329,9 @@ pages:
             from_count_tooltip: 有其他鍵的同時也有此鍵的物件的數目。
         geographic_distribution:
             title: 此鍵的地理分佈
+            all: 這顯示了該鍵的節點和路徑的分佈，關聯未顯示。
+            nodes: 這顯示了具有該鍵的節點的分佈。
+            ways: 這顯示了具有該鍵的路徑的分佈。
             relations: 關係沒有地理位置，所以沒有地圖可以顯示。
         wiki_pages:
             title: 關於此鍵的 Wiki 頁面
@@ -358,6 +367,8 @@ pages:
         combinations:
             title: 組合
             description: 此表格只顯示最常見標籤的最常見組合。
+        chronology:
+            no_chronology: 抱歉。只能爲最頻繁的標籤生成年表。
         geographic_distribution:
             title: 此標籤的地理分佈
             relations: 關係沒有地理位置，所以沒有地圖可以顯示。
@@ -456,6 +467,9 @@ sources:
     projects:
         name: 專案
         description: 外部專案和它們用的 OSM 鍵或標籤。
+    chronology:
+        name: 年表
+        description: 歷史星球上隨時間變化的鍵/標籤數量。
 
 reports:
     characters_in_keys:
