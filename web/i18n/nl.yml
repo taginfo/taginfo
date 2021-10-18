@@ -207,7 +207,7 @@ pages:
                 <p>De taginfo software is gecreëerd en onderhouden door
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
                 Het webontwerp is gecreëerd door
-                <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
+                <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Vertalingen</h3>
                 <p>We hebben vertalers nodig voor de taginfo gebruikersinterface. zie het <a
                 href="/taginfo/translations">vertalingenoverzicht</a> voor talen die
@@ -248,7 +248,7 @@ pages:
             wiki: |
                 <p>De <a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> wordt gelezen en alle Key:*, Tag:*, en Relation:* pagina's (in alle verschillende talen) worden geanalyseerd. Beschrijvingen, afbeeldingen, gerelateerde tags en dergelijke worden er uitgehaald.</p>
             languages: |
-                <p>Taginfo krijgt informatie over de verschillende talen van de wereld, hun codes, namen en dergelijke van enkele <a class="extlink" href="https://www.iana.org/">IANA</a> en <a class="extlink" href="http://www.unicode.org/">Unicode</a> registers.</p>
+                <p>Taginfo krijgt informatie over de verschillende talen van de wereld, hun codes, namen en dergelijke van enkele <a class="extlink" href="https://www.iana.org/">IANA</a> en <a class="extlink" href="https://www.unicode.org/">Unicode</a> registers.</p>
             projects: |
                 <p>Projecten die OSM tags op een of andere manier gebruiken, zoals bewerkers, kaarten, routeerders en dergelijke. Zie <a href="/projects">de projectlijst</a>.</p>
             chronology: |

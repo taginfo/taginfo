@@ -201,7 +201,7 @@ pages:
             text: |
                 <p>taginfo 소프트웨어는 <a class="extlink"
                 href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>가 제작, 유지보수하고 있습니다.
-                웹 디자인은 <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>가 제작했습니다.</p>
+                웹 디자인은 <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>가 제작했습니다.</p>
                 <h3>번역</h3>
                 <p>우리는 taginfo 사용자 인터페이스 번역자가 필요합니다. 작업이 필요한 언어는
                 <a href="/taginfo/translations">번역 개요</a>를 참조하세요.
@@ -237,7 +237,7 @@ pages:
             wiki: |
                 <p><a class="extlink" href="//wiki.openstreetmap.org/">OSM 위키</a>를 읽어들여서 모든 Key:*, Tag:*, Relation:*(각각 모든 언어의) 문서를 분석했습니다. 거기에서 설명, 이미지, 관계된 태그 등을 추출했습니다.</p>
             languages: |
-                <p>taginfo는 전 세계의 언어에 관한 코드와 명칭 등의 정보를 <a class="extlink" href="https://www.iana.org/">IANA</a>와 <a class="extlink" href="http://www.unicode.org/">Unicode</a> 레지스트리에서 받고 있습니다.</p>
+                <p>taginfo는 전 세계의 언어에 관한 코드와 명칭 등의 정보를 <a class="extlink" href="https://www.iana.org/">IANA</a>와 <a class="extlink" href="https://www.unicode.org/">Unicode</a> 레지스트리에서 받고 있습니다.</p>
             projects: |
                 <p>편집기, 지도, 경로 탐색기 등의 몇 가지 방법으로 OSM 태그를 사용하는 프로젝트는 <a href="/projects">프로젝트 목록</a>을 참조하세요.</p>
             chronology: |

@@ -199,7 +199,7 @@ pages:
                 <p>ПЗ taginfo було створене і підтримується
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
                 Дизайн веб-сайту був створений
-                <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
+                <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Переклади</h3>
                 <p>Нам потрібні перекладачі для інтерфейсу користувача taginfo. Див. <a
                 href="/taginfo/translations">огляд перекладів</a> для мов, над якими
@@ -240,7 +240,7 @@ pages:
             wiki: |
                 <p><a class="extlink" href="//wiki.openstreetmap.org/">OSM Вікі</a> читається та аналізуються всі сторінки Key:*, Tag:*, and Relation:* (всіма мовами). Описи, картинки, пов'язані теґи тощо отримуються звідти.</p>
             languages: |
-                <p>Taginfo отримує інформацію про різні мови світу, їх коди, назви тощо з деяких <a class="extlink" href="https://www.iana.org/">IANA</a> та <a class="extlink" href="http://www.unicode.org/">Unicode</a> регістрів.</p>
+                <p>Taginfo отримує інформацію про різні мови світу, їх коди, назви тощо з деяких <a class="extlink" href="https://www.iana.org/">IANA</a> та <a class="extlink" href="https://www.unicode.org/">Unicode</a> регістрів.</p>
             projects: |
                 <p>Проекти, які використовують теґи OSM, наприклад, редактори, мапи, роутери тощо. Див. <a href="/projects">список проектів</a>.</p>
         updates:

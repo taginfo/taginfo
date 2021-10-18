@@ -170,7 +170,7 @@ pages:
         software:
             title: Oprogramowanie taginfo
             text: |
-                <p>Oprogramowanie taginfo zostało napisane i jest wspierane przez <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochena Topfa</a>. Strona została zaprojektowana przez <a class="extlink" href="http://www.ctd-studio.co.uk/">Christiana Topfa</a>.</p>
+                <p>Oprogramowanie taginfo zostało napisane i jest wspierane przez <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochena Topfa</a>. Strona została zaprojektowana przez <a class="extlink" href="https://ctd-studio.co.uk/">Christiana Topfa</a>.</p>
                 <h3>Tłumaczenia</h3>
                 <p>Potrzebujemy tłumaczy interfejsu użytkownika taginfo. Na stronie <a
                 href="/taginfo/translations">podsumowania tłumaczeń</a> sprawdzisz, które tłumaczenia wymagają pracy. Więcej informacji o tym jak możesz pomóc, znajdziesz na <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">wiki OSM</a>.</p>
@@ -195,7 +195,7 @@ pages:
             wiki: |
                 <p><a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> jest czytana i wszystkie strony Key:*, Tag:*, i Relation:* (w różnych językach) są analizowane. Opisy, obrazy, powiązane tagi, itd. są wyciągane z niej.</p>
             languages: |
-                <p>Taginfo pobiera informacje o różnych językach świata, ich kodów, nazw, itd. z <a class="extlink" href="https://www.iana.org/">IANA</a> i <a class="extlink" href="http://www.unicode.org/">rejestrów Unicode</a>.</p>
+                <p>Taginfo pobiera informacje o różnych językach świata, ich kodów, nazw, itd. z <a class="extlink" href="https://www.iana.org/">IANA</a> i <a class="extlink" href="https://www.unicode.org/">rejestrów Unicode</a>.</p>
             projects: |
                 <p>Projekty, które w jakiś sposób używają znaczników OSM, takie jak edytory, mapy, nawigacje, itp. Zajrzyj do <a href="/projects">listy projektów</a>.</p>
         updates:

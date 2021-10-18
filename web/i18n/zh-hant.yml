@@ -202,7 +202,7 @@ pages:
                 <p>taginfo 軟體是由 
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a> 建立和維護。
                 網頁設計由 
-                <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a> 建立。</p>
+                <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a> 建立。</p>
                 <h3>翻譯</h3>
                 <p>我們需要 taginfo 使用者界面的翻譯者，看看<a
                 href="/taginfo/translations">翻譯總覽</a>看看還需要努力的語言。
@@ -243,7 +243,7 @@ pages:
             wiki: |
                 <p><a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> 已被讀取，而且所有鍵:*、標籤:* 和關係:* 頁面（在所有不同語言）已被分析。描述、圖片、相關標籤等皆由它們取出。</p>
             languages: |
-                <p>Taginfo 取得世界不同語言的資料，它們的代碼、名稱等來自數個 <a class="extlink" href="https://www.iana.org/">IANA</a> 和 <a class="extlink" href="http://www.unicode.org/">Unicode</a> 登記名冊。</p>
+                <p>Taginfo 取得世界不同語言的資料，它們的代碼、名稱等來自數個 <a class="extlink" href="https://www.iana.org/">IANA</a> 和 <a class="extlink" href="https://www.unicode.org/">Unicode</a> 登記名冊。</p>
             projects: |
                 <p>以一些方式使用 OSM 標籤的專案，像是編輯器、路線規劃等，請見<a href="/projects">專案列表</a>。</p>
             chronology: |

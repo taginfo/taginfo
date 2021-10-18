@@ -177,7 +177,7 @@ pages:
         software:
             title: Taginfo-programaro
             text: |
-                <p>La programaro de taginfo estis kreita kaj estas prizorgata de <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>. La reteja aspekto estis fasonita de <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
+                <p>La programaro de taginfo estis kreita kaj estas prizorgata de <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>. La reteja aspekto estis fasonita de <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Tradukoj</h3>
                 <p>Ni bezonas tradukistojn por la uzant-fasado de taginfo. Vidu la <a href="/taginfo/translations">sumigon de tradukoj</a> por lingvoj, kiuj bezonas iom da laboro. Pliaj informoj kiel helpi troviĝas en la <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM-vikio</a>.</p>
                 <h3>Kodo</h3>
@@ -201,7 +201,7 @@ pages:
             wiki: |
                 <p>La <a class="extlink" href="//wiki.openstreetmap.org/wiki/Eo:Main_Page">OSM-vikio</a> estas tralegata por ĉiuj paĝoj Key:*, Tag:* kaj Relation:* (en ĉiuj disponeblaj lingvoj). Priskriboj, bildoj kaj rilataj etikedoj estas eltirataj el ili.</p>
             languages: |
-                <p>Taginfo akiras informojn pri diversaj lingvoj de la mondo, iliajn kodojn, nomojn, ktp. el listoj de <a class="extlink" href="https://www.iana.org/">IANA</a> kaj <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+                <p>Taginfo akiras informojn pri diversaj lingvoj de la mondo, iliajn kodojn, nomojn, ktp. el listoj de <a class="extlink" href="https://www.iana.org/">IANA</a> kaj <a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Projektoj, kiuj iel uzas OSM-etikedojn, kiel redaktiloj, mapoj, navigiloj, ktp. Vidu la <a href="/projects">liston de projektoj</a>.</p>
             chronology: |

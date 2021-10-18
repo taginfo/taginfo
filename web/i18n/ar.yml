@@ -187,7 +187,7 @@ pages:
                 <p>تم إنشاء برنامج Taginfo ويتم الحفاظ عليه بواسطة
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
                 تم إنشاء تصميم الويب بواسطة
-                <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
+                <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Translations</h3>
                 <p>نحتاج إلى مترجمين لواجهة مستخدم Taginfo. انظر <a
                 href="/taginfo/translations">ملخص الترجمات</a> للحصول على اللغات التي تحتاج إلى بعض العمل. مزيد من المعلومات حول كيفية المساعدة في
@@ -220,7 +220,7 @@ pages:
             wiki: |
                 <p>من <a class="extlink" href="//wiki.openstreetmap.org/">ويكي OSM</a> والذي يتم فيها قراءة وتحليل جميع صفحات المفاتيح Key:*، والوسوم Tag:*، والعلاقات Relation:*  (بجميع اللغات المختلفة)، ويتضمن ذلك تحليل واستخراج البيانات من الوصوف والصور والوسوم ذات الصلة بوسوم أخرى ... الخ.</p>
             languages: |
-                <p>Taginfo يحصل على معلومات حول لغات العالم المختلفة، من أكوادها ومعرفاتها المتعارف عليها، ومسمياتها، وما إلى ذلك من عدة سجلات ومصادر مثل <a class="extlink" href="https://www.iana.org/">IANA</a> و <a class="extlink" href="http://www.unicode.org/">Unicode</a> .</p>
+                <p>Taginfo يحصل على معلومات حول لغات العالم المختلفة، من أكوادها ومعرفاتها المتعارف عليها، ومسمياتها، وما إلى ذلك من عدة سجلات ومصادر مثل <a class="extlink" href="https://www.iana.org/">IANA</a> و <a class="extlink" href="https://www.unicode.org/">Unicode</a> .</p>
             projects: |
                 <p>المشاريع التي تستخدم وسوم OSM بطريقة ما، مثل محررات الخرائط والخرائط نفسها وأجهزة الملاحة وما إلى ذلك، انظر <a href="/projects">قائمة المشاريع</a>.</p>
             chronology: |

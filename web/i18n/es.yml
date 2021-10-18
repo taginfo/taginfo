@@ -203,7 +203,7 @@ pages:
                 <p>El software de taginfo fue creado y es mantenido por
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
                  El diseño web fue creado por
-                <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
+                <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Traducciones</h3>
                 <p>Necesitamos traductores para la interfaz de usuario de taginfo. Véase el <a
                 href="/taginfo/translations">resumen de las traducciones</a> para idiomas que necesitan
@@ -244,7 +244,7 @@ pages:
             wiki: |
                 <p>La <a class="extlink" href="//wiki.openstreetmap.org/">wiki de OSM</a> es leída y se analizan todas las páginas Key:*, Tag:*, y Relation:* (en todos los idiomas diferentes). Descripciones, imágenes, etiquetas relacionadas, etc. se extraen de ellas.</p>
             languages: |
-                <p>Taginfo obtiene información acerca de los diferentes idiomas del mundo, sus códigos, nombres, etc. de varios registros de <a class="extlink" href="https://www.iana.org/">IANA</a> y <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+                <p>Taginfo obtiene información acerca de los diferentes idiomas del mundo, sus códigos, nombres, etc. de varios registros de <a class="extlink" href="https://www.iana.org/">IANA</a> y <a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Proyectos que utilizan etiquetas OSM de alguna manera, tales como editores, mapas, enrutadores, etc. Ver <a href="/projects">la lista de proyectos</a>.</p>
         updates:

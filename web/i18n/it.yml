@@ -224,7 +224,7 @@ pages:
                 class="extlink"
                 href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
                 Il design del sito web è stato creato da <a class="extlink"
-                href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
+                href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Traduzioni</h3> <p>Abbiamo bisogno di traduttori per
                 tradurre l'interfaccia utente di taginfo. Vedi la pagina <a
                 href="/taginfo/translations">introduttiva sulle traduzioni</a>
@@ -283,7 +283,7 @@ pages:
                 <p>Taginfo prende le informazioni sulle varie lingue del mondo,
                 i loro codici, nomi, etc. da diversi registri <a
                 class="extlink" href="https://www.iana.org/">IANA</a> and <a
-                class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+                class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Progetti che usano i tag di OSM in qualche modo, come
                 strumenti di modifica, mappe, navigatori, ecc. Vedi <a
