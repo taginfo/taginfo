@@ -206,7 +206,7 @@ pages:
                 <p>Software taginfo byl vytvořen a je udržován
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochenem Topfem</a>.
                 Design webových stránek byl vytvořen
-                <a class="extlink" href="http://www.ctd-studio.co.uk/">Christianem Topfem</a>.</p>
+                <a class="extlink" href="https://ctd-studio.co.uk/">Christianem Topfem</a>.</p>
                 <h3>Překlady</h3>
                 <p>Potřebujeme překladatele uživatelského rozhraní taginfo. Podívejte se na <a
                 href="/taginfo/translations">přehled překladů</a>, kde najdete jazyky, na kterých
@@ -247,7 +247,7 @@ pages:
             wiki: |
                 <p>Čteme <a class="extlink" href="//wiki.openstreetmap.org/">wiki OSM</a> a analyzujeme všechny stránky Key:*, Tag:* a Relation:* (ve všech jazycích). Extrahujeme z nich popisky, ilustrace, související značky atd.</p>
             languages: |
-                <p>Taginfo získává informace o různých jazycích světa, jejich kódech, názvech, atd. z různých registrů <a class="extlink" href="https://www.iana.org/">IANA</a> a <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+                <p>Taginfo získává informace o různých jazycích světa, jejich kódech, názvech, atd. z různých registrů <a class="extlink" href="https://www.iana.org/">IANA</a> a <a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Projekty, které nějak používají značky OSM, jako jsou editory, mapy, navigace, atd. Viz <a href="/projects">seznam projektů</a>.</p>
             chronology: |

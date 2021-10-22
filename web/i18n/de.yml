@@ -218,7 +218,7 @@ pages:
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen
                 Topf</a> entwickelt und gepflegt.
                 Das Webdesign wurde von
-                <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a> entwickelt.</p>
+                <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a> entwickelt.</p>
                 <h3>Übersetzungen</h3>
                 <p>Wir brauchen Übersetzer für das taginfo-Benutzerinterface.
                 Im <a
@@ -263,7 +263,7 @@ pages:
             wiki: |
                 <p>Das <a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> wird gelesen und alle Key:*-, Tag:*-, und Relation:*-Seiten (in allen Sprachen) analysiert. Beschreibungen, Bilder, verwandte Tags, usw. werden aus den Seiten extrahiert.</p>
             languages: |
-                <p>Taginfo bekommt Informationen über die verschiedenen Sprachen dieser Welt, ihre Codes, Namen, usw. aus diversen Datenbanken der <a class="extlink" href="https://www.iana.org/">IANA</a> und vom <a class="extlink" href="http://www.unicode.org/">Unicode Consortium</a>.</p>
+                <p>Taginfo bekommt Informationen über die verschiedenen Sprachen dieser Welt, ihre Codes, Namen, usw. aus diversen Datenbanken der <a class="extlink" href="https://www.iana.org/">IANA</a> und vom <a class="extlink" href="https://www.unicode.org/">Unicode Consortium</a>.</p>
             projects: |
                 <p>Projekte, die OSM-Tags in irgendeiner Weise nutzen, zum Beispiel Editoren, Karten, Router, usw. Siehe auch die <a href="/projects">Projektliste</a>.</p>
             chronology: |

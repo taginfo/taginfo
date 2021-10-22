@@ -204,7 +204,7 @@ pages:
                 <p>ПО taginfo было создано и поддерживается
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
                 Дизайн сайта был создан
-                <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
+                <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Переводы</h3>
                 <p>Нам нужны переводчики для пользовательского интерфейса taginfo. См. <a
                 href="/taginfo/translations">обзор переводов</a> для языков, над которыми нужно
@@ -245,7 +245,7 @@ pages:
             wiki: |
                 <p><a class="extlink" href="//wiki.openstreetmap.org/">OSM Вики</a> читается и все Key:*, Tag:* и Relation:* страницы (на всех языках) анализируются. Описания, картинки, связанные теги и т. д. берутся оттуда.</p>
             languages: |
-                <p>Taginfo получает информацию о разных языках мира, их кодах, названиях и т. д. из разных регистров <a class="extlink" href="https://www.iana.org/">IANA</a> и <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+                <p>Taginfo получает информацию о разных языках мира, их кодах, названиях и т. д. из разных регистров <a class="extlink" href="https://www.iana.org/">IANA</a> и <a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Проекты, которые используют теги OSM, такие как редакторы, карты, роутеры и т. д. См. <a href="/projects">список проектов</a>.</p>
             chronology: |
