@@ -612,7 +612,7 @@ reports:
             key_length: Longueur de la clé
             number_of_keys: Nombre de clés
     language_comparison_table_for_keys_in_the_wiki:
-        name: Comparaison par langue des clés dispodant d'une page wiki
+        name: Comparaison par langue des clés disposant d'une page wiki
         icons:
             template: Page disponible dans le wiki et contenant les modèles standards.
             error: Page disponible dans le wiki et contenant les modèles standards, mais impossible à déchiffrer.
