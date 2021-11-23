@@ -1,164 +1,164 @@
 
 osm:
-    tag: Tag
-    tags: Tags
-    key: Key
-    keys: Keys
-    value: Value
-    values: Values
+    tag: Etiqueta
+    tags: Etiquetes
+    key: Clau
+    keys: Claus
+    value: Valor
+    values: Valors
     node: Node
     nodes: Nodes
-    way: Way
-    ways: Ways
-    relation: Relation
-    relations: Relations
-    relation_type: Relation type
-    relation_types: Relation types
-    relation_member: Relation member
-    relation_members: Relation members
-    relation_member_nodes: Member nodes
-    relation_member_ways: Member ways
-    relation_member_relations: Member relations
-    relation_member_role: Role
-    relation_member_roles: Roles
-    object: Object
-    objects: Objects
-    all: All
-    user: User
-    users: Users
+    way: Via
+    ways: Vies
+    relation: Relació
+    relations: Relacions
+    relation_type: Tipus de relació
+    relation_types: Tipus de relació
+    relation_member: Membre de la relació
+    relation_members: Membres de la relació
+    relation_member_nodes: Nodes membres
+    relation_member_ways: Vies membres
+    relation_member_relations: Relacions membres
+    relation_member_role: Rol
+    relation_member_roles: Rols
+    object: Objecte
+    objects: Objectes
+    all: Tot
+    user: Usuari
+    users: Usuaris
 
 taginfo:
-    source: Source
-    sources: Sources
-    download: Download
-    about: About
-    contact: Contact
+    source: Font
+    sources: Fonts
+    download: Descarrega
+    about: Quant a
+    contact: Contacte
     meta: Meta
     wiki: Wiki
-    report: Report
-    reports: Reports
-    international: International
-    apidoc: API Documentation
-    project: Project
-    projects: Projects
+    report: Informe
+    reports: Informes
+    international: Internacional
+    apidoc: Documentació de API
+    project: Projecte
+    projects: Projectes
     test: Test
-    chronology: Chronology
-    map: Map
-    maps: Maps
-    relations: Relations
-    combinations: Combinations
-    key_combinations: Combinations
-    comparison: Key/Tag Comparison
-    overview: Overview
-    links: Links
-    data_from: Data from
-    data_from_description: Last update of taginfo database
+    chronology: Cronologia
+    map: Mapa
+    maps: Mapes
+    relations: Relacions
+    combinations: Combinacions
+    key_combinations: Combinacions
+    comparison: Comparació de clau/etiqueta
+    overview: Descripció general
+    links: Enllaços
+    data_from: Dades de
+    data_from_description: Última actualització de la base de dades de taginfo
     instance:
-        title: About this taginfo site
-        other: See the <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> for other sites.
+        title: Quan a la pàgina de taginfo
+        other: Veure la<a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">wiki d'OSM</a> per altres pàgines.
 
 misc:
-    values_less_than_one_percent: no values with more than 1%
-    empty_string: empty string
-    unknown: unknown
-    count: Count
-    image: Image
-    no_image: no image
-    all: All
-    object_type: Type
-    description: Description
-    help: Help
-    length: Length
-    icon: Icon
-    line: Line
+    values_less_than_one_percent: no hi ha valors amb més de l'1%
+    empty_string: cadena de text buida
+    unknown: desconegut
+    count: Comptatge
+    image: Imatge
+    no_image: sense imatge
+    all: Tot
+    object_type: Tipus
+    description: Descripció
+    help: Ajuda
+    length: Longitud
+    icon: Icona
+    line: Línia
     area: Area
-    language: Language
-    search_for: Search for
-    objects_tooltip: Number of objects (as absolute value and as percentage of all nodes, ways, and relations).
-    nodes_tooltip: Number of nodes (as absolute value and as percentage of tagged nodes, ie. nodes without any tags are ignored).
-    ways_tooltip: Number of ways (as absolute value and as percentage of all ways).
-    relations_tooltip: Number of relations (as absolute value and as percentage of all relations).
-    values_tooltip: Number of different values for this key.
-    users_tooltip: Number of distinct users who last changed objects with this key.
-    prevalent_values: Prevalent values
-    prevalent_values_tooltip: Up to ten of the most common values for this key (only if more than 1% of tags with this key have this value).
-    in_wiki_tooltip: Has at least one wiki page.
-    status: Status
-    approval_status: Approval status
+    language: Idioma
+    search_for: Cerca
+    objects_tooltip: Nombre d'objectes (com a valor absolut i com a percentatge de tots els nodes, vies i relacions).
+    nodes_tooltip: Nombre de nodes (com a valor absolut i com a percentatge dels nodes etiquetats, ie. s'ignoren els nodes sense cap etiqueta).
+    ways_tooltip: Nombre de vies (com a valor absolut i com a percentatge de totes vies).
+    relations_tooltip: Nombre de relacions (com a valor absolut i com a percentatge de totes les relacions).
+    values_tooltip: Nombre de valors diferents per aquesta clau.
+    users_tooltip: Nombre d'usuaris diferents que han estat els últims a canviar objectes amb aquesta clau.
+    prevalent_values: Valors prevalents
+    prevalent_values_tooltip: Fins a deu dels valors més comuns per aquesta clau (només si més de l'1% de les etiquetes d'aquesta clau tenen aquest valor).
+    in_wiki_tooltip: Almenys, té una pàgina wiki.
+    status: Estat
+    approval_status: Estat de l'aprovació
 
 help:
     search:
-        title: Search
-        intro: Use the search box in the upper right corner to search for tag keys and values.
-        string: You can search for tag keys and values
-        substring: Just part of the key/value also works
-        complete_tags: You can search for complete tags
-        values_only: You can also search for tag values only
+        title: Cerca
+        intro: Useu la caixa de cerca a la cantonada superior dreta per cercar claus d'etiquetes i valors.
+        string: Podeu cercar claus d'etiquetes i valors
+        substring: Només una part de la clau/valor també funciona
+        complete_tags: Podeu cercar etiquetes completes
+        values_only: També podeu cercar valors d'etiquetes sols
         suggestions: |
-            For your convenience popular keys and tags will be suggested
-            while you type. Use your cursor keys to choose one and hit
-            <span class="key">Enter</span>.
-            You will jump directly to that key or tag page.
+            Per la vostra conveniència, se suggeriran claus i etiquetes populars
+            mentre escriviu. Useu les tecles de cursor per escollir-ne una i premeu la tecla de
+            <span class="key">Retorn</span>.
+            Saltareu directament a la pàgina d'aquella clau o etiqueta.
     keyboard:
-        title: Keyboard shortcuts
-        site_navigation: Site navigation
-        page_navigation: Page navigation
-        table_navigation: Table navigation
+        title: Dreceres de teclat
+        site_navigation: Navegació del lloc
+        page_navigation: Navegació de pàgina
+        table_navigation: Navegació de taula
         keys:
-            home: Home
-            end: End
-            pageup: PgUp
-            pagedown: PgDn
-            esc: Esc
-            tab: TAB
-        home_page: Home page
-        keys_page: Keys page
-        tags_page: Tags page
-        relations_page: Relations page
-        projects_page: Projects page
-        reports_page: Reports page
-        compare_page: Comparison page
-        first_page: First page
-        prev_page: Previous page
-        next_page: Next page
-        last_page: Last page
-        help_page: This help
-        activate_search: Activate search input
-        activate_filter: Activate filter input field
-        prev_entry: Previous entry
-        next_entry: Next entry
-        enter_entry: Jump to entry
-        switch_tab: Switch tab
-        deactivate: Deactivate input fields
-        up: Up in page hierarchy
-        switch_input: Switch between input fields
+            home: Inici
+            end: Fi
+            pageup: Retrocedir pàgina
+            pagedown: Avançar pàgina
+            esc: Escapada
+            tab: Tabulació
+        home_page: Pàgina d'inici
+        keys_page: Pàgina de claus
+        tags_page: Pàgina d'etiquetes
+        relations_page: Pàgina de relacions
+        projects_page: Pàgina de projectes
+        reports_page: Pàgina d'informes
+        compare_page: Pàgina de comparacions
+        first_page: Primera pàgina
+        prev_page: Pàgina anterior
+        next_page: Pàgina següent
+        last_page: Última pàgina
+        help_page: Aquesta ajuda
+        activate_search: Activa l'entrada de cerca
+        activate_filter: Activa el filtre del camp d'entrada
+        prev_entry: Entrada prèvia
+        next_entry: Entrada següent
+        enter_entry: Salta a l'entrada
+        switch_tab: Canvia la pestanya
+        deactivate: Desactiva el camp d'entrada
+        up: Puja en la jerarquia de pàgines
+        switch_input: Canvia entre camps d'entrada
 
 pages:
     not_found:
-        title: Not found
-        intro: Sorry, we could not find the page you were looking for.
+        title: No s'ha trobat
+        intro: No hem pogut trobar la pàgina que cercàveu.
     index:
-        popular_keys: Some popular keys
+        popular_keys: Algunes claus populars
         keys:
-            listkeys: See all keys...
+            listkeys: Veure totes les claus...
         tags:
-            listtags: See most common tags...
+            listtags: Veure les etiquetes més habituals...
         relations:
-            listrelations: See all relation types...
+            listrelations: Veure tots els tipus de relacions...
         reports:
-            listreports: See all reports...
+            listreports: Veure tots els informes...
         about:
             intro:
-                <p>OpenStreetMap uses <b>tags</b> of the form <b>key=value</b>
-                to add meaning to geographic objects. Taginfo collects information
-                about these tags from several sources to help you understand what
-                they mean and how they are used.</p>
-            more: More about taginfo...
+                <p>OpenStreetMap utilitza <b>etiquetes</b> de la forma <b>clau=valor</b>
+                per afegir significat als objectes geogràfics. Taginfo recull informació
+                sobre aquestes etiquetes de diferents fonts per ajudar a entendre què
+                volen dir i com s'utilitzen.</p>
+            more: Més sobre taginfo...
         international:
-            see: See other taginfo sites...
+            see: Veure altres llocs de taginfo...
     about:
         about_taginfo:
-            title: About taginfo
+            title: Quant a taginfo
             text: |
                 <p>OpenStreetMap uses <b>tags</b> to add meaning to geographic objects. There
                 is no fixed list of those tags. New tags can be invented and used as needed.
@@ -176,9 +176,9 @@ pages:
                 how they are used and what they mean. See a <a href="/sources">list of sources</a>
                 taginfo uses.</p>
         about_site:
-            title: About This Site
+            title: Quant a aquesta pàgina
         building_on_taginfo:
-            title: Building on taginfo
+            title: Construint sobre taginfo
             pre: |
                 <p>You can use the data from taginfo in your own projects:</p>
             api: |
@@ -274,231 +274,231 @@ pages:
         note: Some indexes are not in the databases available for download here. The 'Packed' size is the size without those indexes, the 'Unpacked' size includes the indexes you probably want to build after downloading.
     reports:
         intro: |
-            Reports show the tag data from different angles.
-            They often bring together data from several sources in interesting ways. Some
-            of the reports can help with finding specific errors.
-        list: List of all reports
-        data_sources: Data sources used
+            Els informes mostren les dades d'etiquetes des de diferents angles.
+            Sovint ajunten dades de varies fonts de maneres interessants. Alguns
+            dels informes poden ajudar a trobar errors específics.
+        list: Llista de tots els informes
+        data_sources: Fonts de dades usades
     search:
-        title: Search results
-        you_were_searching_for: You were searching for
-        fulltext: Full text
-        no_keys: No keys found.
-        no_values: No values found.
-        no_tags: No tags found.
-        no_match: No matches.
+        title: Resultats de cerca
+        you_were_searching_for: Estaveu cercant
+        fulltext: Text complet
+        no_keys: No s'han trobat claus.
+        no_values: No s'han trobat valors.
+        no_tags: No s'han trobat etiquetes.
+        no_match: Cap coincidència.
     compare:
-        nothing_to_compare: There are no keys/tags to compare. Go to any key or tag page and add them.
+        nothing_to_compare: No hi ha cap clau/etiqueta a comparar. Aneu a qualsevol pàgina clau o etiqueta i afegiu-la.
     keys:
         intro: |
-                This table shows all tag keys that exist in the database or in any of the other sources.
+                Aquesta taula mostra totes les claus d'etiquetes que existeixen a la base de dades o en qualsevol altre de les fonts.
     tags:
         intro: |
-                This table shows the most common tags in the database.
+                Aquesta taula mostra les etiquetes més comunes de la base de dades.
     relations:
-        name: Relation types
-        intro: Information about the different types of relations (indicated by the <a href="/keys/type?filter=relations">type</a> tag).
-        relations_of_type_tooltip: Number of relations of this type (and as percentage of all relations).
-        prevalent_roles: Prevalent roles
-        prevalent_roles_tooltip: Prevalent roles for this type of relation.
-        no_information: No information
-        roles_less_than_one_percent: no roles with more than 1%
-        empty_role: empty role
+        name: Tipus de relacions
+        intro: Informació sobre els diferents tipus de relacions (indicat per l'etiqueta <a href="/keys/type?filter=relations">type</a>).
+        relations_of_type_tooltip: Nombre de relacions d'aquest tipus (i com a percentatge de totes les relacions).
+        prevalent_roles: Rols prevalents
+        prevalent_roles_tooltip: Rols prevalents per aquest tipus de relació.
+        no_information: Sense informació
+        roles_less_than_one_percent: cap rol amb més de l'1%
+        empty_role: rol buit
     projects:
         intro: |
-                This table shows all projects known to taginfo that use OSM tags in some way.<br/>For more about this functionality see the <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
+                Aquesta taula mostra tots els projectes coneguts per taginfo que d'alguna manera usen etiquetes OSM.<br/>Per més informació sobre aquesta funcionalitat, veure la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
     key:
-        description_from_wiki: Description of this key from the wiki (if available in your chosen language, otherwise in English).
-        no_description_in_wiki: No English language description for this key in the wiki. (See also the "Wiki" tab.)
+        description_from_wiki: Descripció d'aquesta clau a la wiki (si està disponible, en l'idioma que heu escollit, sinó, en anglès).
+        no_description_in_wiki: No hi ha cap descripció en anglès d'aquesta clau a la wiki. (Veure també la pestanya "Wiki".)
         filter:
             label: |
-                 Filter:
-            none: No filter
-            nodes: Nodes only
-            ways: Ways only
-            relations: Relations only
-        button_disabled: Button disabled, because there are too many objects with this key.
-        number_objects: Number of objects
-        number_values: Number of values
-        values_used: Values used with this key
-        tag_description_from_wiki: Description of the tag from the wiki (if available in your chosen language, otherwise in English).
+                 Filtre:
+            none: Cap filtre
+            nodes: Només nodes
+            ways: Només vies
+            relations: Només relacions
+        button_disabled: Botó deshabilitat perquè hi ha massa objectes amb aquesta clau.
+        number_objects: Nombre d'objectes
+        number_values: Nombre de valors
+        values_used: Valors usats amb aquesta clau
+        tag_description_from_wiki: Descripció de la clau a la wiki (si està disponible, en l'idioma que heu escollit, sinó, en anglès).
         overview:
-            objects_last_edited_by: Objects with this key were last edited by %1 different users.
-            no_endorsement: (This does not mean that all those users endorse this key.)
-            distribution_of_values: Distribution of values
+            objects_last_edited_by: Objectes amb aquesta clau editats per última vegada per %1 usuaris diferents.
+            no_endorsement: (Això no vol dir que tots aquests usuaris estiguin d'acord amb aquesta clau.)
+            distribution_of_values: Distribució de valors
         other_keys_used:
-            title: Other keys used together with this key
-            other: Other keys
-            to_count_tooltip: Number of objects with this key that also have the other key.
-            other_key_tooltip: Key used together with this key.
-            from_count_tooltip: Number of objects with other key that also have this key.
+            title: Altres claus que s'usen conjuntament amb aquesta clau
+            other: Altres claus
+            to_count_tooltip: Nombre d'objectes amb aquesta clau que també tenen l'altre clau.
+            other_key_tooltip: Clau usada conjuntament amb aquesta clau.
+            from_count_tooltip: Nombre d'objectes amb l'altra clau que també tenen aquesta clau.
         geographic_distribution:
-            title: Geographical distribution of this key
-            all: This shows the distribution of nodes and ways with this key, relations are not shown.
-            nodes: This shows the distribution of nodes with this key.
-            ways: This shows the distribution of ways with this key.
-            relations: Showing a geographical location for the different types of relations isn't straightforward, so we are not trying to show a map here.
+            title: Distribució geogràfica d'aquesta clau
+            all: Això mostra la distribució de nodes i vies amb aquesta clau. No es mostren les relacions.
+            nodes: Això mostra la distribució de nodes amb aquesta clau.
+            ways: Això mostra la distribució de vies amb aquesta clau.
+            relations: Mostrar la ubicació geogràfica per diferents tipus de relacions no és bufar i fer ampolles, per això aquí no intentem mostrar un mapa.
         wiki_pages:
-            title: Wiki pages about this key
-            none_found: No wiki page available for this key.
-            create: Create wiki page for this key
-            wiki_page: Wiki page
-            implied_tags: Implied Tags
-            combined_tags: Combined Tags
-            linked_tags: Linked Tags
+            title: Pàgines wiki sobre aquesta clau
+            none_found: No hi ha disponible cap pàgina wiki per aquesta clau.
+            create: Creeu una pàgina wiki per aquesta clau
+            wiki_page: Pàgina wiki
+            implied_tags: Etiquetes implícites
+            combined_tags: Etiquetes combinades
+            linked_tags: Etiquetes enllaçades
         projects:
-            title: Projects using this key
-            description: How this key is used in the project
+            title: Projectes que usen aquesta clau
+            description: Com s'utilitza aquesta clau en el projecte
         similar:
-            tab: Similar
-            title: Similar keys
-            other: Similar keys
-            count_all_tooltip: Number of objects with the similar key
-            similarity: Similarity
-            similarity_tooltip: Smaller numbers mean more similar
+            tab: Semblants
+            title: Claus semblants
+            other: Claus semblants
+            count_all_tooltip: Nombre d'objectes amb una clau semblant
+            similarity: Semblança
+            similarity_tooltip: Nombres més petits volen dir més semblança
     tag:
-        description_from_wiki: Description of this tag from the wiki (if available in your chosen language, otherwise in English).
-        no_description_in_wiki: No English language description for this tag in the wiki. (See also the "Wiki" tab.)
-        button_disabled: Button disabled, because there are too many objects with this tag.
-        number_objects: Number of objects
+        description_from_wiki: Descripció d'aquesta etiqueta a la wiki (si està disponible, en l'idioma que heu escollit, sinó, en anglès).
+        no_description_in_wiki: No hi ha cap descripció en anglès d'aquesta etiqueta a la wiki. (Veure també la pestanya "Wiki".)
+        button_disabled: Botó deshabilitat perquè hi ha massa objectes amb aquesta etiqueta.
+        number_objects: Nombre d'objectes
         overview:
-            see_also: See also the relation type page
+            see_also: Veure també la pàgina del tipus de relació
         other_tags_used:
-            title: Other tags used together with this tag
-            other: Other tags
-            to_count_tooltip: Number of objects with this tag that also have the other tag/key.
-            other_key_tooltip: Tags/Keys used together with this tag.
-            from_count_tooltip: Number of objects with other tag/key that also have this tag.
+            title: Altres etiquetes que s'usen conjuntament amb aquesta etiqueta
+            other: Altres etiquetes
+            to_count_tooltip: Nombre d'objectes amb aquesta etiqueta que també tenen l'altre etiqueta/clau.
+            other_key_tooltip: Etiquetes/claus usades conjuntament amb aquesta etiqueta.
+            from_count_tooltip: Nombre d'objectes amb l'altra etiqueta/clau que també tenen aquesta clau.
         combinations:
-            title: Combinations
-            description: This table shows only the most common combinations of the most common tags.
+            title: Combinacions
+            description: Aquesta taula només mostra les combinacions més comunes de les etiquetes més comunes.
         chronology:
-            no_chronology: Sorry. The chronology can only be generated for the most frequent tags.
+            no_chronology: La cronologia només es pot generar per les etiquetes més freqüents.
         geographic_distribution:
-            title: Geographical distribution of this tag
-            all: This shows the distribution of nodes and ways with this tag, relations are not shown.
-            nodes: This shows the distribution of nodes with this tag.
-            ways: This shows the distribution of ways with this tag.
-            relations: Showing a geographical location for the different types of relations isn't straightforward, so we are not trying to show a map here.
-            no_map: Sorry. The map can only be created for the most frequent tags. Try the overpass turbo link.
+            title: Distribució geogràfica d'aquesta etiqueta
+            all: Això mostra la distribució de nodes i vies amb aquesta etiqueta. No es mostren les relacions.
+            nodes: Això mostra la distribució de nodes amb aquesta etiqueta.
+            ways: Això mostra la distribució de vies amb aquesta etiqueta.
+            relations: Mostrar la ubicació geogràfica per diferents tipus de relacions no és bufar i fer ampolles, per això aquí no intentem mostrar un mapa.
+            no_map: El mapa només es pot crear per les etiquetes més freqüents. Proveu l'enllaç de overpass turbo.
         wiki_pages:
-            title: Wiki pages about this tag
-            none_found: No wiki page available for this tag.
-            create: Create wiki page for this tag
-            suggest_key_wiki_page: Maybe you can find some more information on the wiki page for the key %1.
-            wiki_page: Wiki page
-            implied_tags: Implied Tags
-            combined_tags: Combined Tags
-            linked_tags: Linked Tags
+            title: Pàgines wiki sobre aquesta etiqueta
+            none_found: No hi ha disponible cap pàgina wiki per aquesta etiqueta.
+            create: Creeu una pàgina wiki per aquesta etiqueta
+            suggest_key_wiki_page: Potser podeu trobar alguna informació a la pàgina wiki de la clau %1.
+            wiki_page: Pàgina wiki
+            implied_tags: Etiquetes implícites
+            combined_tags: Etiquetes combinades
+            linked_tags: Etiquetes enllaçades
         projects:
-            title: Projects using this tag
-            description: How this tag is used in the project
+            title: Projectes que usen aquesta etiqueta
+            description: Com s'utilitza aquesta etiqueta en el projecte
     relation:
-        name: Relation type
-        description_from_wiki: Description of this relation type from the wiki (if available in your chosen language, otherwise in English).
-        no_description_in_wiki: No English language description for this relation type in the wiki. (See also the "Wiki" tab.)
-        button_disabled: Button disabled, because there are too many objects with this relation type.
+        name: Tipus de relació
+        description_from_wiki: Descripció d'aquest tipus de relació a la wiki (si està disponible, en l'idioma que heu escollit, sinó, en anglès).
+        no_description_in_wiki: No hi ha cap descripció en anglès d'aquest tipus de relació a la wiki. (Veure també la pestanya "Wiki".)
+        button_disabled: Botó deshabilitat perquè hi ha massa objectes amb aquest tipus de relació.
         overview:
-            tab: Overview
-            title: Overview
-            member_type: Member type
-            member_count: Number of members
-            see_also: See also the tag page
+            tab: Descripció general
+            title: Descripció general
+            member_type: Tipus de membres
+            member_count: Nombre de membres
+            see_also: Veure també la pàgina d'etiqueta
         roles:
-            tab: Roles
-            title: Member roles
-            objects_tooltip: Relation members with this role (and as percentage of all members) for this relation type.
-            nodes_tooltip: Relation members of type node with this role (and as percentage of all members of type node) for this relation type.
-            ways_tooltip: Relation members of type way with this role (and as percentage of all members of type way) for this relation type.
-            relations_tooltip: Relation members of type relation with this role (and as percentage of all members of type relation) for this relation type.
-            no_roles_info: There is no information about roles for this relation type (most likely because there are only very few of those relations).
+            tab: Rols
+            title: Rols dels membres
+            objects_tooltip: Membres de la relació amb aquest rol (i com a percentage de tots els membres) per aquest tipus de relació.
+            nodes_tooltip: Membres de la relació de tipus node amb aquest rol (i com a percentage de tots els membres de tipus node) per aquest tipus de relació.
+            ways_tooltip: Membres de la relació de tipus via amb aquest rol (i com a percentage de tots els membres de tipus via) per aquest tipus de relació.
+            relations_tooltip: Membres de la relació de tipus relació amb aquest rol (i com a percentage de tots els membres de tipus relació) per aquest tipus de relació.
+            no_roles_info: No hi ha informació sobre rols per aquest tipus de relació (segurament perquè hi ha molt poques relacions d'aquestes).
         graph:
-            tab: Roles Graph
-            title: Roles Graph
+            tab: Gràfic de rols
+            title: Gràfic de rols
         wiki_pages:
-            title: Wiki pages about this relation type
-            none_found: No wiki page available for this relation type.
-            create: Create wiki page for this relation type
-            wiki_page: Wiki page
+            title: Pàgines wiki sobre aquest tipus de relació
+            none_found: No hi ha disponible cap pàgina wiki per aquest tipus de relació.
+            create: Creeu una pàgina wiki per aquest tipus de relació
+            wiki_page: Pàgina wiki
         projects:
-            title: Projects using this relation type
-            description: How this relation type is used in the project
+            title: Projectes que usen aquest tipus de relació
+            description: Com s'utilitza aquest tipus de relació en el projecte
     project:
         overview:
-            project_name: Project name
-            project_url: Project URL
-            description: Description
-            documentation_url: Documentation
-            last_update: Last update
-            json_url: JSON project file
-            info: This data is provided by the project for taginfo through the 'JSON project file' linked from above. See the <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a> for a format description.
+            project_name: Nom del projecte
+            project_url: URL del projecte
+            description: Descripció
+            documentation_url: Documentació
+            last_update: Última actualització
+            json_url: Fitxer JSON del projecte
+            info: Aquestes dades són proporcionades pel projecte per taginfo a través del 'fitxer JSON del projecte' enllaçat a sobre. Veure la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a> per una descripció del format.
         tags:
-            title: Tags used by this project
-            intro: This data is provided by the project and not necessarily complete. Please see the project documentation for details.
-            description: How this key/tag is used in the project
-            count_all_tooltip: Number of objects in database with this key/tag
-            objects_tooltip: Object types the project uses
+            title: Etiquetes usades per aquest projecte
+            intro: Aquestes dades són proporcionades pel projecte i no són necessàriament completes. Veure la documentació del projecte per més detalls.
+            description: Com s'usa aquesta clau/etiqueta en el projecte
+            count_all_tooltip: Nombre d'objectes a la base de dades amb aquesta clau/etiqueta
+            objects_tooltip: Tipus d'objectes que usa el projecte
 
 flexigrid:
-    pagetext: Page
-    pagestat: Displaying {from} to {to} of {total} items
-    outof: of
-    findtext: Find
-    procmsg: Processing, please wait...
-    nomsg: No items
-    errormsg: Connection Error
+    pagetext: Pàgina
+    pagestat: Mostrant del {from} al {to} de {total} elements
+    outof: de
+    findtext: Troba
+    procmsg: S'està processant, espereu...
+    nomsg: Cap element
+    errormsg: Error de connexió
 
 comparison:
-    list: Comparison list
-    items: items
-    add_key: Add this key to list
-    add_tag: Add this tag to list
-    clear: Clear comparison list
-    compare: Compare keys/tags
+    list: Llista de comparacions
+    items: elements
+    add_key: Afegeix aquesta clau a la llista
+    add_tag: Afegeix aquesta etiqueta a la llista
+    clear: Buida la llista de comparacions
+    compare: Compara claus/etiquetes
 
 sources:
     master:
         name: Master
         description: Aggregate statistics and miscellaneous data needed for the taginfo user interface.
     history:
-        name: History
+        name: Història
         description: Aggregate statistics over time.
     db:
-        name: Database
+        name: Base de dades
         description: Statistics about each key and each tag from the main OSM database (planet file).
     wiki:
         name: Wiki
         description: Data from the tag and key pages of the OSM wiki.
     languages:
-        name: Languages
+        name: Idiomes
         description: Language names, codes, etc. from IANA and Unicode registries.
     projects:
-        name: Projects
+        name: Projectes
         description: External projects and the OSM keys/tags they use.
     chronology:
-        name: Chronology
+        name: Cronologia
         description: Number of keys/tags over time from history planet.
 
 reports:
     characters_in_keys:
-        name: Characters in keys
+        name: Caràcters en claus
         intro: |
-            Any valid Unicode character can appear in an OSM key but usually
-            only lower case latin letters (a-z) and the underscore (_) are
-            used. The colon (:) is often used as a separator character. This
-            report categorizes all keys according to the characters they use.
+            Qualsevol caràcter Unicode vàlid pot aparèixer en una clau d'OSM però normalment
+            només s'usen lletres minúscules de l'alfabet llatí (a-z) i guions baixos (_).
+            Els dos punts (:) sovint s'usen com a caràcter separador. Aquest
+            informe categoritza totes les claus segons els caràcters que usen.
         statistics:
-            tab: Statistics
-            title: Statistics overview
-            fraction: Fraction
+            tab: Estadístiques
+            title: Descripció general de les estadístiques
+            fraction: Fracció
             characters: Characters in key
             characters_in_keys:
-                plain: Only latin lowercase letters (<span class="char">a</span> to <span class="char">z</span>) and underscore (<span class="char">_</span>), first and last characters are letters.
-                colon: Like A but with one or more colons (<span class="char">:</span>) inside.
-                letters: Like B but with uppercase latin letters or letters from other alphabets.
-                space: At least one whitespace character (space, tab, new line, carriage return, or from other alphabets).
-                problem: Contains possibly problematic characters <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
-                rest: Everything else.
+                plain: Només lletres minúscules de l'alfabet llatí (<span class="char">a</span> a <span class="char">z</span>) i guió baix (<span class="char">_</span>), el primer i l'últim caràcter són lletres.
+                colon: Com A però amb un o més dos punts (<span class="char">:</span>) dins.
+                letters: Com B però amb lletres majúscules de l'alfabet llatí o lletres d'altres alfabets.
+                space: Al menys un caràcter en blanc (estai, tabulació, salt de línia, retorn de carro o d'altres alfabets).
+                problem: Conté caràcter possiblement problemàtics <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
+                rest: Tota la resta.
                 total: Total
         plain:
             tab: Plain
@@ -510,8 +510,8 @@ reports:
                 characters must be letters. Most simple keys should fall into
                 this category.</p>
         colon:
-            tab: Colon
-            title: Keys with colon
+            tab: Dos punts
+            title: Claus amb dos punts
             intro: |
                 <p>Keys that have one or more colon (<span
                 class="char">:</span>) characters inside in addition to the
@@ -529,8 +529,8 @@ reports:
                 scripts (for instance for keys only relevant to an area where
                 that script is used predominantly).</p>
         space:
-            tab: Whitespace
-            title: Keys with whitespace
+            tab: Espais en blanc
+            title: Claus amb espais en blanc
             intro: |
                 <p>Keys that contain whitespace characters such as space, tab,
                 new line, carriage return, or whitespace characters from other
@@ -539,8 +539,8 @@ reports:
                 Generally the whitespace should be removed or the underscore
                 (<span class="char">_</span>) used instead.</p>
         problem:
-            tab: Problematic
-            title: Keys with possibly problematic characters
+            tab: Problemàtic
+            title: Claus amb caràcters possiblement problemàtics
             intro: |
                 <p>Keys that contain possibly problematic characters: <span
                 class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> or control
@@ -552,12 +552,12 @@ reports:
                 though. But in many cases they are just results of some error
                 and should be fixed.</p>
         rest:
-            tab: Rest
-            title: All other keys
+            tab: La resta
+            title: Totes les altres claus
             intro: |
                 <p>Keys that don't fit in any of the other categories.</p>
     database_statistics:
-        name: Database statistics
+        name: Estadístiques de la base de dades
         objects_in_db: Number of objects in the database
         tags_in_db: Number of tags in the database
         distinct_keys: Number of distinct keys
@@ -575,7 +575,7 @@ reports:
         tags_on_relations: Number of tags on relations
         avg_tags_per_relation: Average number of tags per relation
     frequently_used_keys_without_wiki_page:
-        name: Frequently used keys without wiki page
+        name: Claus usades freqüentment sense pàgina wiki
         intro: |
             <p>This table shows keys that appear more than 10&thinsp;000 times in the OSM
             database but have no wiki page describing them.  If you know anything about one
@@ -588,18 +588,18 @@ reports:
         table:
             create_wiki_page: Create wiki page...
     key_lengths:
-        name: Key lengths
+        name: Longitud de les claus
         intro: |
             Tag keys can be between 0 and 255 (Unicode) characters long. Very short or very long keys are often, but not always, errors.
         table:
             number_of_objects: Number of objects
         histogram:
-            name: Histogram
+            name: Histograma
             intro: This histogram shows how many keys there are of each length.
             key_length: Key length
             number_of_keys: Number of keys
     language_comparison_table_for_keys_in_the_wiki:
-        name: Language comparison table for keys in the wiki
+        name: Taula de comparació d'idiomes per claus a la wiki
         icons:
             template: Page in wiki available and contains standard template.
             error: Page in wiki available and contains standard template, but couldn't be parsed.
@@ -608,7 +608,7 @@ reports:
         intro: |
             This table shows all tag keys for which there are wiki pages available and in what languages they are.
     languages:
-        name: Languages
+        name: Idiomes
         intro: |
             OpenStreetMap is an international project. Tags and their descriptions can
             be in any language. This table lists the languages taginfo knows about and how
@@ -620,30 +620,30 @@ reports:
         wiki_key_pages: Wiki key pages
         wiki_tag_pages: Wiki tag pages
     wiki_pages_about_non_existing_keys:
-        name: Wiki pages about non-existing keys
+        name: Pàgines wiki sobre claus no existents
         intro: |
             This table shows keys for which a wiki page exists but there is not a single
             instance in the database. This is not necessarily an error (maybe somebody
             added the documentation in the wiki as preparation for using a key or the wiki
             page documents a now obsolete key), but it can also be a typo or other error.
-        wiki_pages: Wiki pages
+        wiki_pages: Pàgines wiki
     name_tags:
-        name: Variants of name tags
+        name: Variants de les etiquetes de nom
         intro: |
-            <p>This report shows information related to the naming of objects in OSM
-            using the <tt>name</tt> tag and its variants.</p>
+            <p>Aquest informe mostra informació relacionada amb com s'anomenen els objectes a OSM
+            usant l'etiqueta <tt>name</tt> i les seves variants.</p>
         overview:
-            tab: Overview
-            title: Overview
+            tab: Descripció general
+            title: Descripció general
         bcp47:
-            tab: BCP47 Subtags
-            title: BCP47 Subtags
+            tab: Subetiquetes BCP47
+            title: Subetiquetes BCP47
             filter:
-                label: Show only subtags of type
-                all: All
-                language: Language
+                label: Mostra només etiquetes del tipus
+                all: Tots
+                language: Idioma
                 script: Script
-                region: Region
+                region: Regió
                 variant: Variant
             intro: |
                 <p>The <a href="https://www.ietf.org/">IETF</a> defines <i>language
@@ -661,7 +661,7 @@ reports:
                 irrespective of whether they are actually used in OSM.
                 </p>
     similar_keys:
-        name: Similar keys
+        name: Claus semblants
         intro: |
             This report shows keys used very often and similar keys used very
             rarely. This exposes many misspellings of common keys, but is not
@@ -674,19 +674,19 @@ reports:
         count_rare: Count
         similarity: Similarity
     historic_development:
-        name: Historic development
+        name: Desenvolupament històric
         intro: |
             Development of some important statistics over time. This data has
             been collected by taginfo, gaps are possible when taginfo didn't run
             on a day for some reason.
         keys:
-            title: Unique keys
+            title: Claus úniques
         tags:
-            title: Unique tags
+            title: Etiquetes úniques
         relation_types:
-            title: Unique relation types
+            title: Tipus de relacions únics
     wiki_images:
-        name: Wiki images
+        name: Imatges de la wiki
         intro: |
             Images used in the wiki to symbolize the keys in different
             languages. Sometimes the image from one or the other language
