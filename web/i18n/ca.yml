@@ -55,7 +55,7 @@ taginfo:
     data_from_description: Última actualització de la base de dades de taginfo
     instance:
         title: Quan a la pàgina de taginfo
-        other: Veure la<a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">wiki d'OSM</a> per altres pàgines.
+        other: Veure la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">wiki d'OSM</a> per altres pàgines.
 
 misc:
     values_less_than_one_percent: no hi ha valors amb més de l'1%
@@ -148,7 +148,7 @@ pages:
         reports:
             listreports: Veure tots els informes...
         about:
-            intro:
+            intro: |
                 <p>OpenStreetMap utilitza <b>etiquetes</b> de la forma <b>clau=valor</b>
                 per afegir significat als objectes geogràfics. Taginfo recull informació
                 sobre aquestes etiquetes de diferents fonts per ajudar a entendre què
@@ -169,7 +169,7 @@ pages:
                 qüestions com ara: quines etiquetes usa la gent pels objectes X? Quines etiquetes puc usar
                 per objectes Y de manera que es vegin correctament al mapa? L'etiqueta Z descrita
                 a la wiki, s'està utilitzant realment i on?</p>
-                <p>Taginfo us ajuda mostrant estadístiques sobre quines etiquetes hi ha realment a la 
+                <p>Taginfo us ajuda mostrant estadístiques sobre quines etiquetes hi ha realment a la
                 base de dades, quanta gent usa aquestes etiquetes, on s'usen i altres coses. També
                 obté informació sobre les etiquetes des de la wiki i des d'altres llocs. Taginfo
                 intenta agrupar tota la informació sobre etiquetes per ajudar-vos a entendre
@@ -187,7 +187,7 @@ pages:
                 <a href="/taginfo/apidoc">documentació de l'API</a> pels detalls, alguna informació general és
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">a la wiki d'OSM</a>.
                 Els servidors que executen l'API de taginfo no tenen recursos il·limitats.
-                Useu l'API responsablement. En cas de dubte, contacteu el mantenidor del 
+                Useu l'API responsablement. En cas de dubte, contacteu el mantenidor del
                 que estigueu usant o digueu-nos alguna cosa a la llista de correu.</p>
             download: |
                 <h3>Descarrega</h3>
@@ -211,7 +211,7 @@ pages:
                 <h3>Traduccions</h3>
                 <p>Necessitem traductors per l'interfície d'usuari de taginfo. Veure la <a
                 href="/taginfo/translations">resum general</a> per trobar idiomes que necessiten
-                un cop de mà. A la 
+                un cop de mà. A la
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">wiki d'OSM</a> hi ha més informació sobre com ajudar.</p>
                 <h3>Codi</h3>
                 <p>Tot el programari darrera de la web de taginfo és programari lliure. El podeu obtenir a
