@@ -8,7 +8,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013-2017  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2013-2021  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -47,22 +47,30 @@ database.transaction do |db|
     end
 
     open(codepoint_script_mapping_file) do |file|
+        last_to = 0
+        last_script = ''
         file.each do |line|
             line.chomp!
             line.sub!(%r{\s*#.*}, '')
             next if line.match(%r{^$})
             (codes, script) = line.split(%r{\s+;\s+})
             if codes.match(%r{^[0-9A-F]{4,5}$})
-                from = codes
-                to   = codes
+                from = codes.to_i(16)
+                to   = codes.to_i(16)
             elsif codes.match(%r{^([0-9A-F]{4,5})..([0-9A-F]{4,5})$})
-                from = $1
-                to   = $2
+                from = $1.to_i(16)
+                to   = $2.to_i(16)
             else
                 puts "Line does not match: #{line}"
                 next
             end
-            db.execute("INSERT INTO unicode_codepoint_script_mapping (codepoint_from, codepoint_to, name) VALUES (?, ?, ?)", [from, to, script])
+            if last_to + 1 == from and last_script == script
+                db.execute("UPDATE unicode_codepoint_script_mapping SET codepoint_to = ? WHERE codepoint_to = ?", [to, last_to])
+            else
+                db.execute("INSERT INTO unicode_codepoint_script_mapping (codepoint_from, codepoint_to, name) VALUES (?, ?, ?)", [from, to, script])
+            end
+            last_to = to
+            last_script = script
         end
     end
 end

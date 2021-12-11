@@ -28,8 +28,8 @@ CREATE TABLE unicode_scripts (
 DROP TABLE IF EXISTS unicode_codepoint_script_mapping;
 
 CREATE TABLE unicode_codepoint_script_mapping (
-    codepoint_from TEXT,
-    codepoint_to   TEXT,
+    codepoint_from INT,
+    codepoint_to   INT,
     name           TEXT
 );
 
