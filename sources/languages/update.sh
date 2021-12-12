@@ -22,6 +22,8 @@ readonly REGISTRY_FILE="$DATADIR/language-subtag-registry"
 readonly CLDR_URL="https://unicode.org/Public/cldr/latest/core.zip"
 readonly CLDR_FILE="$DATADIR/cldr-core.zip"
 readonly CLDR_DIR="$DATADIR/cldr"
+readonly UNICODE_DATA_URL="https://www.unicode.org/Public/UNIDATA/UnicodeData.txt"
+readonly UNICODE_DATA_FILE="$DATADIR/UnicodeData.txt"
 readonly UNICODE_SCRIPTS_URL="https://www.unicode.org/Public/UNIDATA/Scripts.txt"
 readonly UNICODE_SCRIPTS_FILE="$DATADIR/Scripts.txt"
 readonly PROPERTY_ALIASES_URL="https://www.unicode.org/Public/UNIDATA/PropertyValueAliases.txt"
@@ -77,6 +79,14 @@ getting_unicode_scripts() {
     run_ruby "$SRCDIR/import_unicode_scripts.rb" "$DATADIR"
 }
 
+getting_unicode_data() {
+    print_message "Getting unicode data..."
+    update_file "$UNICODE_DATA_FILE" "$UNICODE_DATA_URL"
+
+    print_message "Running unicode data import..."
+    run_ruby "$SRCDIR/import_unicode_data.rb" "$DATADIR"
+}
+
 getting_wikipedia_sites() {
     print_message "Getting wikipedia sites..."
     update_file "$WIKIMEDIAS_FILE" "$WIKIMEDIAS_URL"
@@ -91,6 +101,7 @@ main() {
     getting_subtag_registry
     getting_cldr
     getting_unicode_scripts
+    getting_unicode_data
     getting_wikipedia_sites
     finalize_database "$DATABASE" "$SRCDIR"
 
