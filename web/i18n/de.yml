@@ -49,6 +49,7 @@ taginfo:
     key_combinations: Kombinationen
     comparison: Key/Tag-Vergleich
     overview: Übersicht
+    characters: Zeichen
     links: Links
     data_from: Daten vom
     data_from_description: Letzte Aktualisierung der taginfo-Datenbank
@@ -376,6 +377,8 @@ pages:
             count_all_tooltip: Anzahl Objekte mit dem ähnlichen Key
             similarity: Ähnlichkeit
             similarity_tooltip: Kleine Zahlen bedeuten "ähnlicher"
+        characters:
+            title: Unicode-Zeichen in diesem Key
     tag:
         description_from_wiki: Beschreibung dieses Tags aus dem Wiki (falls vorhanden in der gewählten Sprache, sonst auf Englisch).
         no_description_in_wiki: Keine deutschsprachige Beschreibung dieses Tags im Wiki. (Siehe auch im "Wiki"-Tab.)
@@ -413,6 +416,8 @@ pages:
         projects:
             title: Projekte, die diesen Tag benutzen
             description: Wie dieser Tag im Projekt benutzt wird
+        characters:
+            title: Unicode-Zeichen in diesem Tag
     relation:
         name: Relation-Typ
         description_from_wiki: Beschreibung dieses Relations-Types aus dem Wiki  (falls vorhanden in der gewählten Sprache, sonst auf Englisch).
@@ -443,6 +448,8 @@ pages:
         projects:
             title: Projekte, die diesen Relation-Typ benutzen
             description: Wie dieser Relation-Typ im Projekt benutzt wird
+        characters:
+            title: Unicode-Zeichen in diesem Relation-Typ
     project:
         overview:
             project_name: Projektname
@@ -498,6 +505,13 @@ sources:
     chronology:
         name: Chronologie
         description: Anzahl der Keys/Tags über die Zeit (aus dem history planet).
+
+unicode:
+    character: Zeichen
+    codepoint: Codepoint
+    script: Schrift
+    general_category: Kategorie
+    name: Unicode-Name des Codepoints
 
 reports:
     characters_in_keys:

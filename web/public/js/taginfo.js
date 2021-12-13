@@ -387,6 +387,66 @@ function fmt_language(code, dir, native_name, english_name) {
     });
 }
 
+function fmt_unicode_code_point(num) {
+    return 'U+' + num.toString(16).padStart(4, '0');
+}
+
+function fmt_unicode_script(code, name) {
+    if (code === null || name === null) {
+        return '';
+    }
+    return tag('span', html_escape(code), {'class' : 'badge unicode-script'}) +
+           ' ' +
+           tag('span', html_escape(name));
+}
+
+function fmt_unicode_general_category(category) {
+    if (category === null) {
+        return '';
+    }
+    const names = {
+        'C': 'Other',
+        'Cc': 'Control',
+        'Cf': 'Forma',
+        'Cn': 'Unassigned',
+        'Co': 'Private Use',
+        'Cs': 'Surrogate',
+        'L': 'Letter',
+        'Ll': 'Lowercase Letter',
+        'Lm': 'Modifier Letter',
+        'Lo': 'Other Letter',
+        'Lt': 'Titlecase Letter',
+        'Lu': 'Uppercase Letter',
+        'M': 'Mark',
+        'Mc': 'Spacing Mark',
+        'Me': 'Enclosing Mark',
+        'Mn': 'Nonspacing Mark',
+        'N': 'Number',
+        'Nd': 'Decimal Number',
+        'Nl': 'Letter Number',
+        'No': 'Other Number',
+        'P': 'Punctuation',
+        'Pc': 'Connector Punctuation',
+        'Pd': 'Dash Punctuation',
+        'Pe': 'Close Punctuation',
+        'Pf': 'Final Punctuation',
+        'Pi': 'Initial Punctuation',
+        'Po': 'Other Punctuation',
+        'Ps': 'Open Punctuation',
+        'S': 'Symbol',
+        'Sc': 'Currency Symbol',
+        'Sk': 'Modifier Symbol',
+        'Sm': 'Math Symbol',
+        'So': 'Other Symbol',
+        'Z': 'Separator',
+        'Zl': 'Line Separator',
+        'Zp': 'Paragraph Separator',
+        'Zs': 'Space Separator',
+    };
+    return tag('span', html_escape(category), {'class' : 'badge unicode-gc'}) +
+           ' ' + names[category];
+}
+
 function fmt_type_icon(type, on_or_off) {
     return img({
         src: '/img/types/' + (on_or_off ? encodeURIComponent(type) : 'none') + '.svg',
@@ -530,6 +590,31 @@ function init_tabs(params) {
             if (id in create_flexigrid_for) {
                 create_flexigrid_for[id].apply(this, params);
             }
+        }
+    });
+}
+
+function create_characters_flexigrid(string) {
+    return create_flexigrid('grid-characters', {
+        url: '/api/4/unicode/characters?string=' + encodeURIComponent(string),
+        colModel: [
+            { display: texts.unicode.character, name: 'character', width: 20, sortable: true },
+            { display: texts.unicode.codepoint, name: 'codepoint', width: 60, sortable: true, align: 'right' },
+            { display: texts.unicode.script, name: 'script', width: 100, sortable: true },
+            { display: texts.unicode.general_category, name: 'general_category', width: 150, sortable: false },
+            { display: texts.unicode.name, name: 'name', width: 600, sortable: false, align: 'left' }
+        ],
+        preProcess: function(data) {
+            data.rows = jQuery.map(data.data, function(row, i) {
+                return { 'cell': [
+                    row.char,
+                    link('https://decodeunicode.org/' + fmt_unicode_code_point(row.codepoint), fmt_unicode_code_point(row.codepoint), { target: '_blank', title: 'decodeunicode.org' }),
+                    fmt_unicode_script(row.script, row.script_name),
+                    fmt_unicode_general_category(row.category),
+                    row.name
+                ] };
+            });
+            return data;
         }
     });
 }

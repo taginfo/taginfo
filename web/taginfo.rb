@@ -9,7 +9,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2010-2020  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2010-2021  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -214,6 +214,7 @@ class Taginfo < Sinatra::Base
     load 'lib/api/v4/site.rb'
     load 'lib/api/v4/tag.rb'
     load 'lib/api/v4/tags.rb'
+    load 'lib/api/v4/unicode.rb'
     load 'lib/api/v4/wiki.rb'
 
     # test API (unstable, do not use)

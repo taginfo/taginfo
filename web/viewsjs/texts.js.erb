@@ -32,5 +32,13 @@ var texts = <%=
                 :relations => @trans.t.osm.relations,
                 :all => @trans.t.osm.all
             },
+            :unicode => {
+                :character => @trans.t.unicode.character,
+                :codepoint => @trans.t.unicode.codepoint,
+                :script => @trans.t.unicode.script,
+                :general_category => @trans.t.unicode.general_category,
+                :links => @trans.t.unicode.links,
+                :name => @trans.t.unicode.name
+            }
         }.to_json
 %>;
