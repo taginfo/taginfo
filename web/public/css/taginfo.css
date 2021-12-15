@@ -611,18 +611,6 @@ html[dir="rtl"] div#toolsmenu .slicknav_btn {
     margin: 0 10px 0 0;
 }
 
-span.lang {
-    position: relative;
-    top: -1px;
-    background-color: #f0e0f0;
-    color: #202020;
-    border: 1px solid #b8b8b0;
-    font-weight: bold;
-    font-size: 0.8rem;
-    padding: 0 4px;
-    border-radius: 4px;
-}
-
 span.badge {
     position: relative;
     top: -1px;
@@ -632,6 +620,10 @@ span.badge {
     font-size: 0.8rem;
     padding: 0 4px;
     border-radius: 4px;
+}
+
+span.lang {
+    background-color: #f0e0f0;
 }
 
 span.unicode-script {

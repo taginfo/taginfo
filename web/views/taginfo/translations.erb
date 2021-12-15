@@ -7,7 +7,7 @@
 <%   percent = (@num_texts[locale.code].to_f / @num_texts['en'].to_f * 100).to_i %>
         <tr>
             <td style="text-align: right;"><%= n + 1 %>.</td>
-            <td><span class="lang"><%= locale.code %></span></td>
+            <td><span class="badge lang"><%= locale.code %></span></td>
             <td><%= h(::Language[locale.code].english_name) %></td>
             <td lang="<%= locale.code %>" dir="<%= locale.ltr? ? 'ltr' : 'rtl' %>"><%= h(::Language[locale.code].native_name) %></td>
             <td class="tr"><%= @num_texts[locale.code] %>/<%= @num_texts['en'] %></td>

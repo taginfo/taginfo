@@ -378,7 +378,7 @@ function fmt_wiki_image_popup(image) {
 
 function fmt_language(code, dir, native_name, english_name) {
     return tag('span', html_escape(code), {
-        'class': 'lang',
+        'class': 'badge lang',
         title: html_escape(native_name + ' (' + english_name + ')')
     }) + ' ' +
     tag('span', html_escape(native_name), {

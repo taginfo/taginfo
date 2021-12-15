@@ -23,7 +23,7 @@ function page_init() {
         colModel: [
             { display: '<%= h(osm.key) %>', name: 'key', width: 160, sortable: true },
             <% @languages.each do |lang| %>
-            { display: '<span title="<%= ::Language[lang].native_name %>" class="lang" style="padding: 0"><%= h(lang) %></span>', name: '<%= h(lang) %>', align: 'center', width: <%= lang.length * 9 + 1 %>, sortable: false },
+            { display: '<span title="<%= ::Language[lang].native_name %>" class="badge lang" style="padding: 0"><%= h(lang) %></span>', name: '<%= h(lang) %>', align: 'center', width: <%= lang.length * 9 + 1 %>, sortable: false },
             <% end %>
         ],
         searchitems: [
