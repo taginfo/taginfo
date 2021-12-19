@@ -42,6 +42,7 @@ taginfo:
     project: Projekto
     projects: Projektoj
     test: Testi
+    chronology: Kronologio
     map: Mapo
     maps: Mapoj
     relations: Rilatoj
@@ -49,6 +50,7 @@ taginfo:
     key_combinations: Ŝlosil-kombinaĵoj
     comparison: Kompari ŝlosilon/etikedon
     overview: Sumigo
+    links: Ligiloj
     data_from: Datumoj de
     data_from_description: Lasta ĝisdatigo de taginfo-datumbazo
     instance:
@@ -81,6 +83,8 @@ misc:
     prevalent_values: Plej oftaj valoroj
     prevalent_values_tooltip: Maksimume dek plej popularaj valoroj por tiu ĉi ŝlosilo (nur se pli ol 1% da etikedoj kun tiu ĉi ŝlosilo havas tiun ĉi valoron).
     in_wiki_tooltip: Havas almenaŭ unu viki-paĝon.
+    status: Stato
+    approval_status: Aproba stato
 
 help:
     search:
@@ -91,7 +95,9 @@ help:
         complete_tags: Vi povas serĉi tutajn etikedojn
         values_only: Vi ankaŭ povas serĉi nur etikedajn valorojn
         suggestions: |
-            Pro oportuneco, popularaj ŝlosiloj kaj etikedoj estos proponataj dum tajpado. Uzu viajn saget-klavojn por elekti kaj premu <span class="key">enen-klavon</span>. Vi iros senpere al paĝo pri elektita ŝlosilo aŭ etikedo.
+            Pro oportuneco, popularaj ŝlosiloj kaj etikedoj estos proponataj dum tajpado.
+            Uzu viajn saget-klavojn por elekti kaj premu <span class="key">enen-klavon</span>.
+            Vi iros senpere al paĝo pri elektita ŝlosilo aŭ etikedo.
     keyboard:
         title: Fulmoklavoj
         site_navigation: Retej-navigado
@@ -171,7 +177,7 @@ pages:
         software:
             title: Taginfo-programaro
             text: |
-                <p>La programaro de taginfo estis kreita kaj estas prizorgata de <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>. La reteja aspekto estis fasonita de <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
+                <p>La programaro de taginfo estis kreita kaj estas prizorgata de <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>. La reteja aspekto estis fasonita de <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Tradukoj</h3>
                 <p>Ni bezonas tradukistojn por la uzant-fasado de taginfo. Vidu la <a href="/taginfo/translations">sumigon de tradukoj</a> por lingvoj, kiuj bezonas iom da laboro. Pliaj informoj kiel helpi troviĝas en la <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM-vikio</a>.</p>
                 <h3>Kodo</h3>
@@ -195,9 +201,11 @@ pages:
             wiki: |
                 <p>La <a class="extlink" href="//wiki.openstreetmap.org/wiki/Eo:Main_Page">OSM-vikio</a> estas tralegata por ĉiuj paĝoj Key:*, Tag:* kaj Relation:* (en ĉiuj disponeblaj lingvoj). Priskriboj, bildoj kaj rilataj etikedoj estas eltirataj el ili.</p>
             languages: |
-                <p>Taginfo akiras informojn pri diversaj lingvoj de la mondo, iliajn kodojn, nomojn, ktp. el listoj de <a class="extlink" href="https://www.iana.org/">IANA</a> kaj <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+                <p>Taginfo akiras informojn pri diversaj lingvoj de la mondo, iliajn kodojn, nomojn, ktp. el listoj de <a class="extlink" href="https://www.iana.org/">IANA</a> kaj <a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Projektoj, kiuj iel uzas OSM-etikedojn, kiel redaktiloj, mapoj, navigiloj, ktp. Vidu la <a href="/projects">liston de projektoj</a>.</p>
+            chronology: |
+                <p>Nombro de ŝlosiloj/etikedoj laŭlonge de la <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">history planet</a>.</p>
         updates:
             title: Ĝisdatigoj
             intro: La taginfo-datumoj estas regule ĝisdatigataj el fontoj.
@@ -274,6 +282,9 @@ pages:
             from_count_tooltip: Nombro da objektoj kun alia ŝlosilo, kiuj ankaŭ havas tiun ĉi ŝlosilon.
         geographic_distribution:
             title: Geografia distribuo de tiu ĉi ŝlosilo
+            all: Ĉi tio montras la distribuon de nodoj kaj linioj kun ĉi tiu etikedo, rilatoj ne estas montritaj.
+            nodes: Ĉi tio montras la distribuon de nodoj kun ĉi tiu etikedo.
+            ways: Ĉi tio montras la distribuon de linioj kun ĉi tiu etikedo.
             relations: Rilatoj ne atribuiĝas al geografiaj lokoj, do ne povas montri mapon.
         wiki_pages:
             title: Viki-paĝoj pri tiu ĉi ŝlosilo
@@ -309,8 +320,13 @@ pages:
         combinations:
             title: Kombinaĵoj
             description: La jena tabelo montras la plej oftajn kombinaĵojn de la plej uzataj etikedoj.
+        chronology:
+            no_chronology: Pardonu. La kronologio povas esti generita nur por la plej oftaj etikedoj.
         geographic_distribution:
             title: Geografia distribuo de tiu ĉi etikedo
+            all: Ĉi tio montras la distribuon de nodoj kaj linioj kun ĉi tiu etikedo, rilatoj ne estas montritaj.
+            nodes: Ĉi tio montras la distribuon de nodoj kun ĉi tiu etikedo.
+            ways: Ĉi tio montras la distribuon de linioj kun ĉi tiu etikedo.
             relations: Rilatoj ne atribuiĝas al geografiaj lokoj, do ne povas montri mapon.
             no_map: Bedaŭrinde la mapo estas generata nur por la plej oftaj etikedoj. Provu uzi overpass-ligilon.
         wiki_pages:
@@ -407,6 +423,9 @@ sources:
     projects:
         name: Projektoj
         description: Eksteraj projektoj kaj OSM-ŝlosiloj/etikedoj uzataj de ili.
+    chronology:
+        name: Kronologio
+        description: Nombro de ŝlosiloj/etikedoj laŭlonge de la history planet.
 
 reports:
     characters_in_keys:

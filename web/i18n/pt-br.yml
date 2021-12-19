@@ -177,7 +177,7 @@ pages:
                 <p>O taginfo pega informação a respeito dos vários idiomas do mundo, seus códigos, nomes,
                 e outras coisas, a partir de registros
                 <a class="extlink" href="https://www.iana.org/">IANA</a> e
-                <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+                <a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Projetos que usam etiquetas OSM de alguma maneira, tais como editores, mapas,
                 aplicações de roteamento, etc. Veja a <a href="/projects">lista de projetos</a>.</p>

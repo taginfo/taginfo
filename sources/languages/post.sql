@@ -10,6 +10,8 @@ INSERT INTO stats (key, value)
 INSERT INTO stats (key, value)
     SELECT 'wikipedia_sites', count(*) FROM wikipedia_sites;
 
+CREATE INDEX unicode_data_codepoint_idx ON unicode_data (codepoint);
+
 ANALYZE;
 
 UPDATE source SET update_end=datetime('now');

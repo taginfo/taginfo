@@ -207,7 +207,7 @@ pages:
                 <p>De taginfo software is gecreëerd en onderhouden door
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
                 Het webontwerp is gecreëerd door
-                <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
+                <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Vertalingen</h3>
                 <p>We hebben vertalers nodig voor de taginfo gebruikersinterface. zie het <a
                 href="/taginfo/translations">vertalingenoverzicht</a> voor talen die
@@ -237,7 +237,7 @@ pages:
         intro: |
             <p>Taginfo verzamelt data over OSM tags van enkele bronnen en brengt ze
             samen voor simpel bladeren en ontdekken.</p>
-            <p>Let erop dat taginfo deze data aleen laat zien. Als je deze wilt veranderen, moet
+            <p>Let erop dat taginfo deze data alleen laat zien. Als je deze wilt veranderen, moet
             je terug naar de bron.</p>
         list:
             title: Lijst van bronnen
@@ -248,7 +248,7 @@ pages:
             wiki: |
                 <p>De <a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> wordt gelezen en alle Key:*, Tag:*, en Relation:* pagina's (in alle verschillende talen) worden geanalyseerd. Beschrijvingen, afbeeldingen, gerelateerde tags en dergelijke worden er uitgehaald.</p>
             languages: |
-                <p>Taginfo krijgt informatie over de verschillende talen van de wereld, hun codes, namen en dergelijke van enkele <a class="extlink" href="https://www.iana.org/">IANA</a> en <a class="extlink" href="http://www.unicode.org/">Unicode</a> registers.</p>
+                <p>Taginfo krijgt informatie over de verschillende talen van de wereld, hun codes, namen en dergelijke van enkele <a class="extlink" href="https://www.iana.org/">IANA</a> en <a class="extlink" href="https://www.unicode.org/">Unicode</a> registers.</p>
             projects: |
                 <p>Projecten die OSM tags op een of andere manier gebruiken, zoals bewerkers, kaarten, routeerders en dergelijke. Zie <a href="/projects">de projectlijst</a>.</p>
             chronology: |
@@ -315,8 +315,8 @@ pages:
                  Filter:
             none: Geen filter
             nodes: Alleen nodes
-            ways: Aleen wegen
-            relations: Aleen relaties
+            ways: Alleen wegen
+            relations: Alleen relaties
         button_disabled: Knop uitgeschakeld, omdat er te veel objecten zijn met deze sleutel.
         number_objects: Hoeveelheid objecten
         number_values: Hoeveelheid waarden
@@ -493,7 +493,7 @@ reports:
             fraction: Fraction
             characters: Karakters in sleutel
             characters_in_keys:
-                plain: Aleen kleine letters (<span class="char">a</span> tot <span class="char">z</span>) en underscore (<span class="char">_</span>), eerste en laatste karakters zijn letters.
+                plain: Alleen kleine letters (<span class="char">a</span> tot <span class="char">z</span>) en underscore (<span class="char">_</span>), eerste en laatste karakters zijn letters.
                 colon: Als A maar met een of meer dubbele punten (<span class="char">:</span>) erin.
                 letters: Als B maar met hoofdletters of letters van ander alfabetten.
                 space: Minsten een witruimte karakter (spatie, tab, nieuwe regel, carriage return, of van andere alfabetten).

@@ -18,6 +18,15 @@ CREATE TABLE subtags (
     prefix          TEXT
 );
 
+DROP TABLE IF EXISTS unicode_data;
+
+CREATE TABLE unicode_data (
+    codepoint INT,
+    script    TEXT,
+    category  TEXT,
+    name      TEXT
+);
+
 DROP TABLE IF EXISTS unicode_scripts;
 
 CREATE TABLE unicode_scripts (
@@ -28,9 +37,10 @@ CREATE TABLE unicode_scripts (
 DROP TABLE IF EXISTS unicode_codepoint_script_mapping;
 
 CREATE TABLE unicode_codepoint_script_mapping (
-    codepoint_from TEXT,
-    codepoint_to   TEXT,
-    name           TEXT
+    codepoint_from INT,
+    codepoint_to   INT,
+    script         TEXT,
+    category       TEXT
 );
 
 DROP TABLE IF EXISTS wikipedia_sites;

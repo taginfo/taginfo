@@ -202,7 +202,7 @@ pages:
                 <p>taginfo ソフトウェアは <a class="extlink" 
                 href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a> が開発し、保守しています。
                 ウェブのデザインは <a class="extlink" 
-                href="http://www.ctd-studio.co.uk/">Christian Topf</a> が作成しました。</p>
+                href="https://ctd-studio.co.uk/">Christian Topf</a> が作成しました。</p>
                 <h3>翻訳</h3>
                 <p>私たちは taginfo のユーザーインタフェースの翻訳者を必要としています。作業が必要な言語については<a
                 href="/taginfo/translations">翻訳の状況</a>を参照してください。
@@ -243,7 +243,7 @@ pages:
             wiki: |
                 <p><a class="extlink" href="//wiki.openstreetmap.org/">OSM ウィキ</a>が読み取られ、（各言語の）すべての Key:*, Tag:*, Relation:* ページが解析されます。説明、画像、関連タグなどが、そこから抽出されます。</p>
             languages: |
-                <p>taginfo は世界の各言語に関するコードや名称などの情報を、 <a class="extlink" href="https://www.iana.org/">IANA</a> や <a class="extlink" href="http://www.unicode.org/">Unicode</a> レジストリなどから取得しています。</p>
+                <p>taginfo は世界の各言語に関するコードや名称などの情報を、 <a class="extlink" href="https://www.iana.org/">IANA</a> や <a class="extlink" href="https://www.unicode.org/">Unicode</a> レジストリなどから取得しています。</p>
             projects: |
                 <p>OSM タグをある方法で使っている、エディタ、地図、経路検索などのプロジェクトです。<a href="/projects">プロジェクト一覧</a>を参照してください。</p>
         updates:
@@ -630,7 +630,7 @@ reports:
                 (BCP47)</a>」の中で、<i>言語タグ</i>を規定しています。言語タグは言語、
                 文字、派生形などを記述する1つ以上の<i>サブタグ</i>から成ります。
                 以下の一覧は現在 OSM に関して登録されているサブタグを示します。詳しい情報は、
-                <a href="http://ja.wikipedia.org/wiki/IETF%E8%A8%80%E8%AA%9E%E3%82%BF%E3%82%B0">
+                <a href="https://ja.wikipedia.org/wiki/IETF%E8%A8%80%E8%AA%9E%E3%82%BF%E3%82%B0">
                 ウィキペディアの IETF 言語タグの記事</a>と<a href="http://www.langtag.net/">
                 langtag.net</a>のサイトを参照してください。</p>
                 <p>なお、この表にあるデータは OpenStreetMap からのものでは<b>なく</b>、

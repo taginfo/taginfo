@@ -197,7 +197,7 @@ pages:
                 <p>ساخت نرم‌افزار taginfo و نگهداری آن را 
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a> بر عهده دارد.
                 طراحی وبسایت را 
-                <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a> انجام داده است.</p>
+                <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a> انجام داده است.</p>
                 <h3>ترجمه‌ها</h3>
                 <p>برای ترجمهٔ رابط کاربری taginfo نیازمند مترجم هستیم. <a
                 href="/taginfo/translations">با مروری بر ترجمه‌ها</a> وضعیت ترجمه‌های مختلف را ببینید. 
@@ -244,7 +244,7 @@ pages:
                 <p>Taginfo اطلاعات زبان‌های گوناگون دنیا، کدهای آن‌ها، نام‌ها و... را از چندین دفتر ثبت 
                 <a class="extlink" href="https://www.iana.org/">IANA</a> 
                 و 
-                <a class="extlink" href="http://www.unicode.org/">Unicode</a> دریافت می‌کند.</p>
+                <a class="extlink" href="https://www.unicode.org/">Unicode</a> دریافت می‌کند.</p>
             projects: |
                 <p>پروژه‌هایی که از برچسب‌های OSM به هر شکلی استفاده می‌کنند، مانند ویرایشگرها، نقشه‌ها، مسیریاب‌ها و... .
                 <a href="/projects">سیاههٔ پروژه‌ها</a> را ببینید.</p>

@@ -24,6 +24,7 @@
         <li><a href="#graph"><%= h(t.pages.relation.graph.tab) %></a></li>
         <li><a href="#wiki"><%= h(t.sources.wiki.name) %></a></li>
         <li><a href="#projects"><%= h(t.taginfo.projects) %></a></li>
+        <li><a href="#characters"><%= h(t.taginfo.characters) %></a></li>
     </ul>
     <div id="overview">
 <% if @image_url %>
@@ -67,6 +68,11 @@
     <div id="projects">
         <h2><%= h(t.pages.relation.projects.title) %></h2>
         <table id="grid-projects">
+        </table>
+    </div>
+    <div id="characters">
+        <h2><%= h(t.pages.relation.characters.title) %></h2>
+        <table id="grid-characters">
         </table>
     </div>
 </div>

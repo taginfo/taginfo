@@ -209,7 +209,7 @@ pages:
                 <p>Phần mềm taginfo do
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>
                 sáng tạo và bảo quản. Thiết kế do
-                <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
+                <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Biên dịch</h3>
                 <p>Chúng tôi cần người biên dịch giao diện taginfo.
                 Xem danh sách các ngôn ngữ cần được biên dịch tại
@@ -247,7 +247,7 @@ pages:
             wiki: |
                 <p><a class="extlink" href="//wiki.openstreetmap.org/wiki/Vi:Main_Page">Wiki OSM</a> được truy cập và tất cả mọi trang Key:*, Tag:*, và Relation:* (trong các ngôn ngữ) được phân tích. Các miêu tả, hình ảnh, thẻ liên quan, v.v. được lấy từ các trang này.</p>
             languages: |
-                <p>Taginfo lấy thông tin về các ngôn ngữ trên thế giới, từ các mã, tên, v.v., từ một số cơ sở dữ liệu <a class="extlink" href="https://www.iana.org/">IANA</a> và <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+                <p>Taginfo lấy thông tin về các ngôn ngữ trên thế giới, từ các mã, tên, v.v., từ một số cơ sở dữ liệu <a class="extlink" href="https://www.iana.org/">IANA</a> và <a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Các dự án sử dụng thẻ OSM một cách nào đó, thí dụ như trình vẽ, bản đồ, trình chỉ đường, v.v. Xem <a href="/projects">danh sách dự án</a>.</p>
             chronology: |
