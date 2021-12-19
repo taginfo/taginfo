@@ -50,6 +50,7 @@ taginfo:
     key_combinations: 组合
     comparison: 键/标签 对比
     overview: 概览
+    characters: 字符
     links: 链接
     data_from: 数据来源于
     data_from_description: Taginfo数据库的最新更新
@@ -151,6 +152,29 @@ pages:
             title: 关于Taginfo
         about_site:
             title: 关于这个站点
+        building_on_taginfo:
+            title: 基于taginfo搭建
+            pre: |
+                <p>您可以在您的项目中使用taginfo的数据:</p>
+        software:
+            title: Taginfo软件
+    sources:
+        list:
+            title: 来源列表
+            intro: 这是目前使用的来源列表。未来可能还将引入更多来源。
+        updates:
+            title: 更新
+            intro: Taginfo的数据会定期从来源更新
+        data_until: 数据截止至
+        last_update_run: 最后一次更新运行于
+        data_until_explanation: 所有截止到这天的修改都会在数据里，之后的数据也有可能包含在内。
+        to: 到
+    download:
+        file: 文件
+        packed: 打包后的
+        unpacked: 未打包的
+        description: 描述
+        note: 有些未位于数据库内的索引不可在此下载。“打包后的”文件不包含这些索引，“未打包的”文件包含这些您可能会希望在下载重建的索引。
     reports:
         intro: |
             报告将从不同角度展示标签数据。他们通常以有趣的方式汇集来自多个来源的数据。
@@ -220,6 +244,38 @@ pages:
             count_all_tooltip: 与本键相似的键的对象个数
             similarity: 相似性
             similarity_tooltip: 越小的数字意味着越接近
+    project:
+        overview:
+            project_name: 项目名称
+            project_url: 项目URL
+            description: 描述
+            documentation_url: 文档
+            last_update: 最后更新
+            json_url: 项目的JSON文件
+
+flexigrid:
+    pagetext: 页
+    pagestat: 显示总计 {total} 项中的从{from}到{to}项
+    outof: of
+    findtext: 查找
+    procmsg: 处理中，请稍后……
+    nomsg: 没有项
+    errormsg: 连接错误
+
+comparison:
+    list: 比较列表
+    items: 项
+    add_key: 把这个键加入列表
+    add_tag: 把这个标签加入列表
+    clear: 清除比较列表
+    compare: 比较键或标签
+
+unicode:
+    character: 字符
+    codepoint: 内码
+    script: 书写系统
+    general_category: 基本类别
+    name: 内码对应的字符标准名称
 
 reports:
     characters_in_keys:
