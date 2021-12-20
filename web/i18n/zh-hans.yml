@@ -50,6 +50,7 @@ taginfo:
     key_combinations: 组合
     comparison: 键/标签 对比
     overview: 概览
+    characters: 字符
     links: 链接
     data_from: 数据来源于
     data_from_description: Taginfo数据库的最新更新
@@ -151,6 +152,29 @@ pages:
             title: 关于Taginfo
         about_site:
             title: 关于这个站点
+        building_on_taginfo:
+            title: 基于taginfo搭建
+            pre: |
+                <p>您可以在您的项目中使用taginfo的数据:</p>
+        software:
+            title: Taginfo软件
+    sources:
+        list:
+            title: 来源列表
+            intro: 这是目前使用的来源列表。未来可能还将引入更多来源。
+        updates:
+            title: 更新
+            intro: Taginfo的数据会定期从来源更新
+        data_until: 数据截止至
+        last_update_run: 最后一次更新运行于
+        data_until_explanation: 所有截止到这天的修改都会在数据里，之后的数据也有可能包含在内。
+        to: 到
+    download:
+        file: 文件
+        packed: 打包后的
+        unpacked: 未打包的
+        description: 描述
+        note: 有些未位于数据库内的索引不可在此下载。“打包后的”文件不包含这些索引，“未打包的”文件包含这些您可能会希望在下载重建的索引。
     reports:
         intro: |
             报告将从不同角度展示标签数据。他们通常以有趣的方式汇集来自多个来源的数据。
@@ -220,3 +244,89 @@ pages:
             count_all_tooltip: 与本键相似的键的对象个数
             similarity: 相似性
             similarity_tooltip: 越小的数字意味着越接近
+    project:
+        overview:
+            project_name: 项目名称
+            project_url: 项目URL
+            description: 描述
+            documentation_url: 文档
+            last_update: 最后更新
+            json_url: 项目的JSON文件
+
+flexigrid:
+    pagetext: 页
+    pagestat: 显示总计 {total} 项中的从{from}到{to}项
+    outof: of
+    findtext: 查找
+    procmsg: 处理中，请稍后……
+    nomsg: 没有项
+    errormsg: 连接错误
+
+comparison:
+    list: 比较列表
+    items: 项
+    add_key: 把这个键加入列表
+    add_tag: 把这个标签加入列表
+    clear: 清除比较列表
+    compare: 比较键或标签
+
+unicode:
+    character: 字符
+    codepoint: 内码
+    script: 书写系统
+    general_category: 基本类别
+    name: 内码对应的字符标准名称
+
+reports:
+    characters_in_keys:
+        name: 键中的字符数
+        intro: |
+            任何有效的Unicode字符都可以出现在OSM的键中，但通常会被用到的只有小写拉丁字母 (a-z) 和下划线 (_) 。
+            冒号 (:) 通常用作分隔符。这份报告根据所有键所使用的字符对它们进行分类。
+    database_statistics:
+        name: 数据库统计信息
+        objects_in_db: 数据库中的对象数量
+        tags_in_db: 数据库中的标签数量
+        distinct_keys: 不相同的键的数量
+        distinct_tags: 不相同的标签的数量
+    frequently_used_keys_without_wiki_page:
+        name: 没有Wiki页面的常用键
+    key_lengths:
+        name: 键长度
+        table:
+            number_of_objects: 对象数目
+        histogram:
+            name: 直方图
+            intro: 该直方图反映了不同长度的键与他们的数目的关系。
+            key_length: 键长度
+            number_of_keys: 键的数目
+    language_comparison_table_for_keys_in_the_wiki:
+        name: Wiki中的键的多语言对照表
+    languages:
+        name: 语言
+        code: 语言代码
+        native_name: 当地语言名
+        english_name: 英文名
+        wiki_key_pages: 键的Wiki页面
+        wiki_tag_pages: 标签的Wiki页面
+    wiki_pages_about_non_existing_keys:
+        name: 关于不存在的标签的Wiki页面
+        wiki_pages: Wiki页面
+    name_tags:
+        name: name标签的变体
+        overview:
+            tab: 概览
+            title: 概览
+    similar_keys:
+        name: 近似键
+        key_common: 广泛被使用的键
+        key_rare: 很少被使用的键
+        count_common: 计数
+        count_rare: 计数
+        similarity: 相似性
+    historic_development:
+        name: 历史上的开发用数据
+    wiki_images:
+        name: Wiki图片
+    wiki_problems:
+        name: Wiki解析问题
