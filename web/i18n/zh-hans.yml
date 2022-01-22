@@ -124,15 +124,15 @@ help:
         next_page: 下一页
         last_page: 末页
         help_page: 帮助
-        activate_search: Activate search input
-        activate_filter: Activate filter input field
+        activate_search: 激活搜索输入
+        activate_filter: 激活过滤器输入域
         prev_entry: 前一项
         next_entry: 后一项
-        enter_entry: Jump to entry
-        switch_tab: Switch tab
-        deactivate: Deactivate input fields
-        up: Up in page hierarchy
-        switch_input: Switch between input fields
+        enter_entry: 跳转到条目
+        switch_tab: 切换子页
+        deactivate: 停用输入域
+        up: 上一层级页面
+        switch_input: 在输入域间切换
 
 pages:
     not_found:
