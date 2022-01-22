@@ -52,7 +52,7 @@ taginfo:
     overview: 概览
     characters: 字符
     links: 链接
-    data_from: 数据来源于
+    data_from: 数据源
     data_from_description: Taginfo数据库的最新更新
     instance:
         title: 关于这个Taginfo站点
