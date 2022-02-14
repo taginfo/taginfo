@@ -285,7 +285,7 @@ pages:
 
 flexigrid:
     pagetext: 页
-    pagestat: 显示总计 {total} 项中的从{from}到{to}项
+    pagestat: 显示第{from}到{to}项（总计 {total} 项）
     outof: of
     findtext: 查找
     procmsg: 处理中，请稍后……
