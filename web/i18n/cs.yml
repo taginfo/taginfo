@@ -47,13 +47,13 @@ taginfo:
     relations: Relace
     combinations: Kombinace
     key_combinations: Kombinace
-    comparison: Porovníní klíč/značka
+    comparison: Porovnání klíč/značka
     overview: Přehled
     links: Odkazy
     data_from: Data z
-    data_from_description: Poslední aktualizace databáze taginfo
+    data_from_description: Poslední aktualizace databáze Taginfo
     instance:
-        title: O tomto serveru taginfo
+        title: O tomto serveru Taginfo
         other: Viz <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> pro infomace o dalších serverech.
 
 misc:
@@ -483,7 +483,7 @@ reports:
         name: Znaky v klíčích
         intro: |
             V klíči OSM se může objevit jakýkoliv platný znak Unicode, ale obvykle
-            se používají pouze malá latinská písmena (a-z) a podtržítko (_).
+            se používají pouze malá latinková písmena (a-z) a podtržítko (_).
             Dvojtečka (:) je často používaná jako oddělovací znak. Tato 
             zpráva kategorizuje všechny klíče podle znaků, které používají.
         statistics:
@@ -492,9 +492,9 @@ reports:
             fraction: Procent
             characters: Znaky v klíči
             characters_in_keys:
-                plain: Pouze malá latinská písmena (<span class="char">a</span> až <span class="char">z</span>) a podtržítko (<span class="char">_</span>), první a poslední znak je písmeno.
-                colon: Jako A ale s jednou nebo více dvojtečkami (<span class="char">:</span>) uvnitř.
-                letters: Jako B ale s velkými latinskými písmeny nebo písmeny jiných abeced.
+                plain: Pouze malá latinková písmena (<span class="char">a</span> až <span class="char">z</span>) a podtržítko (<span class="char">_</span>), první a poslední znak je písmeno.
+                colon: Jako A, ale s jednou nebo více dvojtečkami (<span class="char">:</span>) uvnitř.
+                letters: Jako B, ale s velkými latinkovými písmeny nebo písmeny jiných abeced.
                 space: Přinejmenším jeden bílý znak (mezera, tabulátor, nový řádek, návrat vozíku, nebo z jiné abecedy).
                 problem: Obsahuje pravděpodobně problematické znaky <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
                 rest: Vše ostatní.
@@ -503,7 +503,7 @@ reports:
             tab: Jednoduché
             title: Jednoduché klíče
             intro: |
-                <p>Klíče obsahující pouze malá latinská písmena (<span
+                <p>Klíče obsahující pouze malá latinková písmena (<span
                 class="char">a</span> až <span class="char">z</span>) a
                 podtržítko (<span class="char">_</span>). První a poslední
                 znak musí být písmeno. Většina jednoduchých klíčů spadá
@@ -522,7 +522,7 @@ reports:
             tab: Písmena
             title: Klíče s velkými písmeny nebo písmeny z jiných jazyků
             intro: |
-                <p>Obvykle se pro klíče preferují malá latinská písmena,
+                <p>Obvykle se pro klíče preferují malá latinková písmena,
                 ale někdy se používají i velká písmena
                 (např. u známých zkratek) nebo písmena z jiných jazyků
                 (např. u klíčů, které jsou relevantní jen v oblasti,
