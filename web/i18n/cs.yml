@@ -372,7 +372,7 @@ pages:
             title: Kombinace
             description: Tato tabulka zobrazuje pouze nejčastější kombinace nejčastějších značek.
         chronology:
-            no_chronology: Litujeme, Chronologie lze vytvo5it pouze pro nejrozšířenější značky.
+            no_chronology: Litujeme, Chronologie lze vytvořit pouze pro nejrozšířenější značky.
         geographic_distribution:
             title: Geografické rozložení této značky
             all: Ukazuje rozložení uzlů a cest pro tento klíč, relace nejsou zobrazeny.
