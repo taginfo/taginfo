@@ -234,7 +234,7 @@ class Taginfo < Sinatra::Base
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.project_name 'lower(p.name)'
                 o.project_name :value
-                o.tag :value
+                o.tag! :value
                 o.tag 'lower(p.name)'
             }.
             paging(@ap).
