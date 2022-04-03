@@ -55,6 +55,7 @@ taginfo:
     instance:
         title: O tomto serveru Taginfo
         other: Viz <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> pro infomace o dalších serverech.
+    characters: Znaky
 
 misc:
     values_less_than_one_percent: žádné hodnoty s více než 1%
@@ -392,6 +393,8 @@ pages:
         projects:
             title: Projekty používající tuto značku
             description: Jak je tato značka používaná v projektu
+        characters:
+            title: Znaky Unicode v typu relace
     relation:
         name: Typ relace
         description_from_wiki: Popis tohoto typu relace z wiki (je-li dostupný ve vašem jazyce, jinak v angličtině).
@@ -422,6 +425,8 @@ pages:
         projects:
             title: Projekty používající tento typ relace
             description: Jak se tento typ relace používá v projektu
+        characters:
+            title: Znaky Unicode v typu relace
     project:
         overview:
             project_name: Název projektu
@@ -704,3 +709,9 @@ reports:
         wiki_page: Wiki stránka
         lang: Jazyk
         info: Další informace
+unicode:
+    character: Znak
+    codepoint: Kódový bod
+    general_category: Obecná kategorie
+    name: Název kódového dodu Unicode
+    script: Skript
