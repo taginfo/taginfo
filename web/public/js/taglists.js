@@ -142,6 +142,15 @@ var taginfo_taglist = (function(){
                 'osmcarto_rendering': 'アイコン',
                 'count': '件数'
             },
+            'ko': {
+                'key': '키',
+                'value': '값',
+                'element': '요소',
+                'description': '설명',
+                'image': '사진',
+                'osmcarto_rendering': '아이콘',
+                'count': '사용 횟수'
+            },
             'pl': {
                 'key': 'Klucz',
                 'value': 'Wartość',
