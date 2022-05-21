@@ -30,6 +30,7 @@ osm:
 taginfo:
     source: Источник
     sources: Источники
+    characters: Знаки-символы
     download: Скачать
     about: Про Taginfo
     contact: Контакты
@@ -701,9 +702,9 @@ reports:
         wiki_page: Вики-страница
         lang: Язык
         info: Дополнительная информация
-    unicode:
-        character: Знак
-        codepoint: Кодовая позиция
-        general_category: Категория знака
-        name: Название кодовой позиции
-        script: Система письма
+unicode:
+    character: Знак
+    codepoint: Кодовая позиция
+    general_category: Категория знака
+    name: Название кодовой позиции
+    script: Система письма
