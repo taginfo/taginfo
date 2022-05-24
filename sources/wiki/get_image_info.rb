@@ -17,7 +17,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013-2017  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2013-2022  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -51,6 +51,8 @@ database.results_as_hash = true
 
 #------------------------------------------------------------------------------
 
+time_spent_in_api_calls = 0
+
 api = MediaWikiAPI::API.new
 
 image_titles = database.execute("SELECT DISTINCT(image) AS title FROM wikipages WHERE image IS NOT NULL AND image != '' UNION SELECT DISTINCT(osmcarto_rendering) AS title FROM wikipages WHERE osmcarto_rendering IS NOT NULL AND osmcarto_rendering != '' UNION SELECT DISTINCT(image) AS title FROM relation_pages WHERE image IS NOT NULL AND image != ''").
@@ -69,7 +71,9 @@ database.transaction do |db|
         puts "Get image info for: #{ some_titles.join(' ') }"
 
         begin
+            starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
             data = api.query(:prop => 'imageinfo', :iiprop => 'url|size|mime', :titles => some_titles.join('|'), :iiurlwidth => 10, :iiurlheight => 10)
+            time_spent_in_api_calls += Process.clock_gettime(Process::CLOCK_MONOTONIC) - starting
 
             if !data['query']
                 puts "Wiki API call failed (no 'query' field):"
@@ -132,6 +136,8 @@ database.transaction do |db|
         end
     end
 end
+
+puts "Time spent in API calls: #{ time_spent_in_api_calls }s"
 
 
 #-- THE END -------------------------------------------------------------------

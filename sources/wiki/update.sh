@@ -19,6 +19,7 @@ fi
 
 readonly DATABASE=$DATADIR/taginfo-wiki.db
 readonly CACHEDB=$DATADIR/wikicache.db
+readonly LOGFILE_GET_PAGE_LIST=$DATADIR/get_page_list.log
 readonly LOGFILE_WIKI_DATA=$DATADIR/get_wiki_data.log
 readonly LOGFILE_IMAGE_INFO=$DATADIR/get_image_info.log
 
@@ -35,7 +36,7 @@ get_page_list() {
     print_message "Getting page list..."
     rm -f "$DATADIR/all_wiki_pages.list"
     rm -f "$DATADIR/interesting_wiki_pages.list"
-    run_ruby "$SRCDIR/get_page_list.rb" "$DATADIR"
+    run_ruby "-l$LOGFILE_GET_PAGE_LIST" "$SRCDIR/get_page_list.rb" "$DATADIR"
 }
 
 get_wiki_data() {

@@ -19,7 +19,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013-2020  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2013-2022  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -560,6 +560,8 @@ end
 
 class Cache
 
+    @@time_spent_in_api_calls = 0
+
     def initialize(dir, db, api)
         @db = db
         @api = api
@@ -578,7 +580,11 @@ class Cache
             return
         end
         @db.execute("DELETE FROM cache.cache_pages WHERE title=?", [page.title])
+
+        starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         res = @api.get(page.params)
+        @@time_spent_in_api_calls += Process.clock_gettime(Process::CLOCK_MONOTONIC) - starting
+
         page.content = res.body
         @db.execute("INSERT INTO cache.cache_pages (title, timestamp, body) VALUES (?, ?, ?)", [page.title, page.timestamp, page.content])
         puts "CACHE: Page '#{ page.title }' not in cache (#{ page.timestamp })"
@@ -602,6 +608,7 @@ class Cache
     def print_stats
         puts "CACHE: Pages found in cache: #{@in_cache}"
         puts "CACHE: Pages not found in cache: #{@not_in_cache}"
+        puts "CACHE: Time spent in API calls: #{@@time_spent_in_api_calls}s"
     end
 
 end
