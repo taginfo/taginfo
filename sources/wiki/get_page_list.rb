@@ -68,7 +68,6 @@ end
 
 def get_file_namespace(api)
     data = api.query(:meta => 'siteinfo', :siprop => 'namespaces')
-    namespaces = {}
     data['query']['namespaces'].values.each do |ns|
         if ns['canonical'] == 'File'
             return ns['id']
