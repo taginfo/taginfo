@@ -606,9 +606,9 @@ class Cache
     end
 
     def print_stats
-        puts "CACHE: Pages found in cache: #{@in_cache}"
-        puts "CACHE: Pages not found in cache: #{@not_in_cache}"
-        puts "CACHE: Time spent in API calls: #{@@time_spent_in_api_calls}s"
+        puts "CACHE: Pages found in cache: #{ @in_cache }"
+        puts "CACHE: Pages not found in cache: #{ @not_in_cache }"
+        puts "CACHE: Time spent in API calls: #{ @@time_spent_in_api_calls.to_i }s"
     end
 
 end

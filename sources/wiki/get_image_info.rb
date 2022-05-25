@@ -137,7 +137,7 @@ database.transaction do |db|
     end
 end
 
-puts "Time spent in API calls: #{ time_spent_in_api_calls }s"
+puts "Time spent in API calls: #{ time_spent_in_api_calls.to_i }s"
 
 
 #-- THE END -------------------------------------------------------------------
