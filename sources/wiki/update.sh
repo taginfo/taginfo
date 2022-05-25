@@ -18,7 +18,8 @@ if [ -z "$DATADIR" ]; then
 fi
 
 readonly DATABASE=$DATADIR/taginfo-wiki.db
-readonly CACHEDB=$DATADIR/wikicache.db
+readonly CACHE_PAGES_DB=$DATADIR/wikicache.db
+readonly CACHE_IMAGES_DB=$DATADIR/wikicache-images.db
 readonly LOGFILE_GET_PAGE_LIST=$DATADIR/get_page_list.log
 readonly LOGFILE_WIKI_DATA=$DATADIR/get_wiki_data.log
 readonly LOGFILE_IMAGE_INFO=$DATADIR/get_image_info.log
@@ -27,8 +28,11 @@ readonly LOGFILE_IMAGE_INFO=$DATADIR/get_image_info.log
 source "$SRCDIR/../util.sh" wiki
 
 initialize_cache() {
-    if [ ! -e "$CACHEDB" ]; then
-        run_sql "$CACHEDB" "$SRCDIR/cache.sql"
+    if [ ! -e "$CACHE_PAGES_DB" ]; then
+        run_sql "$CACHE_PAGES_DB" "$SRCDIR/cache.sql"
+    fi
+    if [ ! -e "$CACHE_IMAGES_DB" ]; then
+        run_sql "$CACHE_IMAGES_DB" "$SRCDIR/cache.sql"
     fi
 }
 
