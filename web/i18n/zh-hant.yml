@@ -148,7 +148,7 @@ pages:
             listreports: 檢視所有報告...
         about:
             intro:
-                <p>OpenStreetMap 用<b>鍵=值</b>格式的<b>標籤</b> 
+                <p>OpenStreetMap 用<b>鍵=值</b>格式的<b>標籤</b>
                 來為地理物件增加意義。taginfo 從數個來源收集這些標籤的資訊
                 來幫助你知道這些標籤的意義和他們被怎麼用。</p>
             more: 更多關於 taginfo...
@@ -178,7 +178,7 @@ pages:
                 <p>你可以在自己的專案中使用來自 taginfo 的資料：</p>
             api: |
                 <h3>API</h3>
-                <p>Taginfo 資料可由 REST API 存取。看看 
+                <p>Taginfo 資料可由 REST API 存取。看看
                 <a href="taginfo/apidoc">API 文件</a>取得細節，一些一般資訊在
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">OSM wiki 上</a>。
                 運作 taginfo API 的伺服器並沒有無限的資源，
@@ -193,15 +193,15 @@ pages:
                 請聯絡你所使用的網站的維護者或在郵件列表上跟我們講。</p>
             license: |
                 <h3>授權</h3>
-                <p>taginfo 可用的資料是採用 ODbL 授權，跟 
+                <p>taginfo 可用的資料是採用 ODbL 授權，跟
                 <a class="extlink" href="//www.openstreetmap.org/copyright">
                 OpenStreetMap 資料一樣的授權條款</a>。</p>
         software:
             title: taginfo 軟體
             text: |
-                <p>taginfo 軟體是由 
+                <p>taginfo 軟體是由
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a> 建立和維護。
-                網頁設計由 
+                網頁設計由
                 <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a> 建立。</p>
                 <h3>翻譯</h3>
                 <p>我們需要 taginfo 使用者界面的翻譯者，看看<a
@@ -215,9 +215,9 @@ pages:
                 href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">taginfo 架構</a>
                 的頁面。</p>
                 <h3>運行你自己的實例</h3>
-                <p>你可以運行自己的 
+                <p>你可以運行自己的
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">taginfo 網站</a>，
-                來只為你自己的國家的資料做實例。指引 
+                來只為你自己的國家的資料做實例。指引
                 在 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Running">OSM
                 wiki 上</a>。</p>
                 <h3>漏洞回報和功能要求</h3>

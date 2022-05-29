@@ -193,20 +193,20 @@ pages:
                 あなたがお使いのサイトの管理者に連絡を取るか、メーリングリストで私たちに連絡するかしてください。</p>
             license: |
                 <h3>ライセンス</h3>
-                <p>taginfo を通して提供されるデータは、 <a class="extlink" 
+                <p>taginfo を通して提供されるデータは、 <a class="extlink"
                 href="//www.openstreetmap.org/copyright">OpenStreetMap のデータと同じく</a>、 ODbL の下にライセンスされます。
                 </p>
         software:
             title: taginfo ソフトウェアについて
             text: |
-                <p>taginfo ソフトウェアは <a class="extlink" 
+                <p>taginfo ソフトウェアは <a class="extlink"
                 href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a> が開発し、保守しています。
-                ウェブのデザインは <a class="extlink" 
+                ウェブのデザインは <a class="extlink"
                 href="https://ctd-studio.co.uk/">Christian Topf</a> が作成しました。</p>
                 <h3>翻訳</h3>
                 <p>私たちは taginfo のユーザーインタフェースの翻訳者を必要としています。作業が必要な言語については<a
                 href="taginfo/translations">翻訳の状況</a>を参照してください。
-                協力する方法について、詳しくは <a class="extlink" 
+                協力する方法について、詳しくは <a class="extlink"
                 href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM ウィキ</a>を参照してください。</p>
                 <h3>コード</h3>
                 <p>taginfoサイトに関するソフトウェアはすべてオープンソースです。
@@ -215,7 +215,7 @@ pages:
                 href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">taginfo の構造</a>
                 に関するページをお読みください。</p>
                 <h3>独自のインスタンスを実行する</h3>
-                <p>例えば、自分の国のデータだけ持つサイトなど、独自の <a class="extlink" 
+                <p>例えば、自分の国のデータだけ持つサイトなど、独自の <a class="extlink"
                 href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">taginfo サイト</a>
                 を構築することができます。説明は、
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Running">OSM ウィキ</a>
@@ -625,7 +625,7 @@ reports:
                 region: 地域
                 variant: 派生形
             intro: |
-                <p><a href="https://www.ietf.org/">IETF</a> は標準「<a 
+                <p><a href="https://www.ietf.org/">IETF</a> は標準「<a
                 href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages
                 (BCP47)</a>」の中で、<i>言語タグ</i>を規定しています。言語タグは言語、
                 文字、派生形などを記述する1つ以上の<i>サブタグ</i>から成ります。
@@ -671,7 +671,7 @@ reports:
             Taginfo はタグについての情報を探すために、キー、タグ、リレーションを
             記述するために使われているすべてのウィキページを読み取ります。
             このレポートはページを読み取る際に発生した問題の一覧を表示しています。
-            ウィキ上でのエラーを示しているのではなく、単に taginfo 
+            ウィキ上でのエラーを示しているのではなく、単に taginfo
             が理解できる書式で書かれていないものがウィキページにあるということを
             意味します。ページか taginfo のどちらかを修正する必要があります。
         location: 場所

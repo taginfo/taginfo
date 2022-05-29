@@ -318,7 +318,7 @@ pages:
             ways: Только линии
             relations: Только отношения
         button_disabled: Кнопка отключена, потому что есть слишком много объектов с этим ключом.
-        characters:		
+        characters:
             title: Знаки универсального кода в этом значении
         number_objects: Количество объектов
         number_values: Количество значений
@@ -362,7 +362,7 @@ pages:
         description_from_wiki: Описание тега из вики (если есть, на вашем языке, иначе - на английском).
         no_description_in_wiki: Нет описания в вики.
         button_disabled: Кнопка отключена, потому что есть слишком много объектов с этим тегом.
-        characters:		
+        characters:
             title: Знаки универсального кода в этом теге
         number_objects: Количество объектов
         overview:
@@ -402,7 +402,7 @@ pages:
         description_from_wiki: Описание отношения из вики (если есть, на вашем языке, иначе - на английском).
         no_description_in_wiki: Нет описания в вики.
         button_disabled: Кнопка отключена, потому что есть слишком много объектов с этим типом отношения.
-        characters:		
+        characters:
             title: Знаки универсального кода в типе отношения
         overview:
             tab: Обзор

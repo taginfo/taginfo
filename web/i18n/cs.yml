@@ -167,7 +167,7 @@ pages:
                 práci.</p>
                 <p>Ať už přispíváte do OSM nebo používáte data z OSM, vždy se objevují
                 otázky jako: Jaké značky používají lidé pro prvek X? Jaké značky mohu použít
-                pro prvek Y, aby se správně objevil na mapě? Je značka Z popsaná na 
+                pro prvek Y, aby se správně objevil na mapě? Je značka Z popsaná na
                 wiki skutečně používaná a kde?</p>
                 <p>Taginfo vám pomáhá zobrazením statistik o tom, které značky se skutečně
                 vyskytují v databázi, kolik lidí je používá, kde jsou použity atd. Také
@@ -211,7 +211,7 @@ pages:
                 <h3>Překlady</h3>
                 <p>Potřebujeme překladatele uživatelského rozhraní taginfo. Podívejte se na <a
                 href="taginfo/translations">přehled překladů</a>, kde najdete jazyky, na kterých
-                je potřeba zapracovat. Více informací o tom, jak pomoci je na 
+                je potřeba zapracovat. Více informací o tom, jak pomoci je na
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM wiki</a>.</p>
                 <h3>Zdrojový kód</h3>
                 <p>Všechen software pracující na taginfo serveru je Open Source. Můžete si ho stáhnout na
@@ -489,7 +489,7 @@ reports:
         intro: |
             V klíči OSM se může objevit jakýkoliv platný znak Unicode, ale obvykle
             se používají pouze malá latinková písmena (a-z) a podtržítko (_).
-            Dvojtečka (:) je často používaná jako oddělovací znak. Tato 
+            Dvojtečka (:) je často používaná jako oddělovací znak. Tato
             zpráva kategorizuje všechny klíče podle znaků, které používají.
         statistics:
             tab: Statistika
@@ -518,10 +518,10 @@ reports:
             title: Klíče s dvojtečkou
             intro: |
                 <p>Klíče, které v sobě obsahují jednu nebo více dvojteček (<span
-                class="char">:</span>) kromě písmen 
+                class="char">:</span>) kromě písmen
                 (<span class="char">a</span> až <span
                 class="char">z</span>) a podtržítek (<span
-                class="char">_</span>). Dvojtečka se často používá jako znak 
+                class="char">_</span>). Dvojtečka se často používá jako znak
                 oddělující hierachie.</p>
         letters:
             tab: Písmena
@@ -626,8 +626,8 @@ reports:
         name: Wiki stránky o neexistujících klíčích
         intro: |
             Tato tabulka zobrazuje klíče, pro které existuje wiki stránka, ale nemají ani
-            jeden výskyt v databázi. To není nutně chybou (někdo možná přidal 
-            na wiki dokumentaci během přípravy používání klíče nebo wiki stránka 
+            jeden výskyt v databázi. To není nutně chybou (někdo možná přidal
+            na wiki dokumentaci během přípravy používání klíče nebo wiki stránka
             dokumentuje značku prohlášenou za zastaralou), ale může se jednat o překlep či jinou chybu.
         wiki_pages: Wiki stránky
     name_tags:
