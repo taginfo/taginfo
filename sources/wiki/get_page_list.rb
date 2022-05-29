@@ -66,16 +66,6 @@ def get_namespaces(api)
     namespaces
 end
 
-def get_file_namespace(api)
-    data = api.query(:meta => 'siteinfo', :siprop => 'namespaces')
-    data['query']['namespaces'].values.each do |ns|
-        if ns['canonical'] == 'File'
-            return ns['id']
-        end
-    end
-    nil
-end
-
 def get_page_list(api, namespaceid, options)
     continue = ''
     gapcontinue = ''
@@ -131,17 +121,5 @@ end
 
 tagpages.close
 allpages.close
-
-file_ns_id = get_file_namespace(api)
-filepages = File.open(dir + '/image_pages.list', 'w')
-
-puts "Reading namespace 'File' with id '#{ file_ns_id }'..."
-
-get_page_list(api, file_ns_id, :redirect => false) do |timestamp, page|
-    line = ['page', timestamp, 'File', page].join("\t")
-    filepages.puts line
-end
-
-filepages.close
 
 #-- THE END -------------------------------------------------------------------
