@@ -1,0 +1,19 @@
+<%
+@title.unshift('Discardable Tags')
+%>
+<div>
+    <div>
+        <h1><a href="<%= build_link("/sources/#{ @source.id }") %>"><%= @source.name %></a>: Discardable Tags</h1>
+        <p><i>Discardable tags</i> are tags that the OpenStreetMap community
+        has found not to be useful. Editors may remove these tags automatically
+        and silently when they save new versions of an object.</p>
+        <p>More information on the wiki: <a class="extlink" href="https://wiki.openstreetmap.org/wiki/Discardable_tags">Discardable Tags</a></p>
+    </div>
+</div>
+<div class="box">
+    <ul>
+<% @db.select("SELECT key, max(source) FILTER (WHERE source = 'id') AS id, max(source) FILTER (WHERE source = 'josm') AS josm FROM discardable_tags GROUP BY key ORDER BY key").execute do |row| %>
+        <li><a href="<%= build_link('/keys/' + row['key']) %>"><%= row['key'] %></a> (<%= [row['id'], row['josm']].compact.join(', ') %>)</li>
+<% end %>
+    </ul>
+</div>

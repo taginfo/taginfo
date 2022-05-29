@@ -258,6 +258,8 @@ pages:
                 <p>Number of keys/tags over time from <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">history planet</a>.</p>
             wikidata: |
                 <p>The <a class="extlink" href="https://www.wikidata.org/">Wikidata database</a> connects OSM keys, tags, and relations to other concepts using the property <a href="https://www.wikidata.org/wiki/Property:P1282">P1282</a>.</p>
+            sw: |
+                <p>Configurations from various OSM programs (such as editors).</p>
         updates:
             title: Updates
             intro: The taginfo data is updated regularly from the sources.
@@ -617,7 +619,9 @@ sources:
     wikidata:
         name: Wikidata
         description: The Wikimedia wikidata database connects OSM keys, tags, and relations to other concepts.
-
+    sw:
+        name: Software
+        description: Configurations from various OSM programs (such as editors).
 unicode:
     character: Char
     codepoint: Code point
