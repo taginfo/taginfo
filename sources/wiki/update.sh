@@ -32,7 +32,7 @@ initialize_cache() {
         run_sql "$CACHE_PAGES_DB" "$SRCDIR/cache.sql"
     fi
     if [ ! -e "$CACHE_IMAGES_DB" ]; then
-        run_sql "$CACHE_IMAGES_DB" "$SRCDIR/cache.sql"
+        run_sql "$CACHE_IMAGES_DB" "$SRCDIR/cache-images.sql"
     fi
 }
 
