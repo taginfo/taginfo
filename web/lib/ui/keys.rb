@@ -42,8 +42,8 @@ class Taginfo < Sinatra::Base
         @wiki_count = @db.count('wiki.wikipages').condition('key=? AND value IS NULL', @key).get_first_i
         @user_count = @db.select('SELECT users_all FROM db.keys').condition('key=?', @key).get_first_i
 
-        @img_width  = TaginfoConfig.get('geodistribution.width')  * TaginfoConfig.get('geodistribution.scale_image')
-        @img_height = TaginfoConfig.get('geodistribution.height') * TaginfoConfig.get('geodistribution.scale_image')
+        @img_width  = @taginfo_config.get('geodistribution.width')  * @taginfo_config.get('geodistribution.scale_image')
+        @img_height = @taginfo_config.get('geodistribution.height') * @taginfo_config.get('geodistribution.scale_image')
 
         javascript_for(:flexigrid, :d3)
         javascript "#{ r18n.locale.code }/key"

@@ -15,7 +15,7 @@ class Taginfo < Sinatra::Base
     }) do
         data = {}
         [:width, :height, :scale_image, :scale_compare_image, :background_image, :image_attribution].each do |k|
-            data[k] = TaginfoConfig.get("geodistribution.#{k}")
+            data[k] = @taginfo_config.get("geodistribution.#{k}")
         end
         return JSON.generate(data, json_opts(params[:format]))
     end
@@ -34,7 +34,7 @@ class Taginfo < Sinatra::Base
     }) do
         data = {}
         [:url, :name, :description, :icon, :contact, :area].each do |k|
-            data[k] = TaginfoConfig.get("instance.#{k}")
+            data[k] = @taginfo_config.get("instance.#{k}")
         end
         return JSON.generate(data, json_opts(params[:format]))
     end

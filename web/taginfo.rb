@@ -105,6 +105,8 @@ class Taginfo < Sinatra::Base
     end
 
     before do
+        @taginfo_config = TaginfoConfig
+
         if request.cookies['taginfo_locale'] && request.path != '/switch_locale'
             params[:locale] = request.cookies['taginfo_locale']
         end
@@ -133,7 +135,7 @@ class Taginfo < Sinatra::Base
     before '/api/*' do
         content_type :json, :charset => 'UTF-8'
         expires next_update
-        cors = TaginfoConfig.get('instance.access_control_allow_origin', '')
+        cors = @taginfo_config.get('instance.access_control_allow_origin', '')
         if cors != ""
             headers['Access-Control-Allow-Origin'] = cors
         end

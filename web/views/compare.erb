@@ -133,11 +133,11 @@ CSS
         <% @data.each_with_index do |data, num| %>
         <td class="data item<%= num %> map">
             <% if data[:has_map] %>
-            <div style="background-image: url(<%= TaginfoConfig.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: center 4px; background-size: <%= @img_width %>px <%= @img_height %>px; position: relative;"/>
+            <div style="background-image: url(<%= @taginfo_config.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: center 4px; background-size: <%= @img_width %>px <%= @img_height %>px; position: relative;"/>
                 <% key_or_tag = data[:value].nil? ? 'key' : 'tag' %>
                 <img class="map" src="/api/4/<%= key_or_tag %>/distribution/nodes?key=<%= data[:key] %><%= data[:value].nil? ? '' : ('&amp;value=' + data[:value]) %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>" style="position: absolute;"/>
                 <img class="map" src="/api/4/<%= key_or_tag %>/distribution/ways?key=<%= data[:key] %><%= data[:value].nil? ? '' : ('&amp;value=' + data[:value]) %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
-                <div class="note"><%= TaginfoConfig.get('geodistribution.image_attribution') %></div>
+                <div class="note"><%= @taginfo_config.get('geodistribution.image_attribution') %></div>
             </div>
             <% end %>
         </td>

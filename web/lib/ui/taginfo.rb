@@ -83,7 +83,7 @@ class Taginfo < Sinatra::Base
         @section = 'taginfo'
         @section_title = t.taginfo.meta
 
-        @config = TaginfoConfig.sanitized_config
+        @config = @taginfo_config.sanitized_config
 
         erb :'taginfo/config'
     end
@@ -168,7 +168,7 @@ class Taginfo < Sinatra::Base
 
             matching = 0
 
-            pcre_extension = TaginfoConfig.get('paths.sqlite3_pcre_extension')
+            pcre_extension = @taginfo_config.get('paths.sqlite3_pcre_extension')
             if pcre_extension
                 matching = @db.count('db.tags').
                     condition("key = ?", key.to_s).
