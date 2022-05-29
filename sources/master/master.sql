@@ -137,7 +137,7 @@ CREATE TABLE popular_keys (
 );
 
 INSERT INTO popular_keys (key, count, users)
-    SELECT key, count_all, users_all FROM db.keys WHERE count_all > 1000 GROUP BY key;
+    SELECT key, count_all, users_all FROM db.keys WHERE count_all > __MIN_COUNT_POPULAR__ GROUP BY key;
 
 -- count number of wikipages for each key
 UPDATE popular_keys SET wikipages = (SELECT count(*) FROM wiki.wikipages w WHERE w.key=popular_keys.key);
@@ -189,7 +189,7 @@ CREATE TABLE suggestions (
 INSERT INTO suggestions (key, value, count, in_wiki)
         SELECT key, NULL, count_all, in_wiki
             FROM db.keys
-            WHERE count_all >= 10000 OR (in_wiki = 1 AND count_all >= 100)
+            WHERE count_all >= __MIN_COUNT_SUGGESTION__ OR (in_wiki = 1 AND count_all >= 100)
     UNION
         SELECT DISTINCT p.key, p.value, p.count, title NOT NULL
             FROM db.prevalent_values p LEFT JOIN wiki.wikipages w ON p.key=w.key AND p.value = w.value
