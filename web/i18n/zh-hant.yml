@@ -169,7 +169,7 @@ pages:
                 等統計數據來幫助你。它也能從 wiki 和其他地方取得關於標籤的資訊
                 ，Taginfo 試著把標籤的所有資訊集中在一起來幫助你知道他們怎麼用
                 和代表什麼意思。
-                看看 taginfo 用的<a href="/sources">資料來源列表</a>。</p>
+                看看 taginfo 用的<a href="sources">資料來源列表</a>。</p>
         about_site:
             title: 關於此網站
         building_on_taginfo:
@@ -179,7 +179,7 @@ pages:
             api: |
                 <h3>API</h3>
                 <p>Taginfo 資料可由 REST API 存取。看看 
-                <a href="/taginfo/apidoc">API 文件</a>取得細節，一些一般資訊在 
+                <a href="taginfo/apidoc">API 文件</a>取得細節，一些一般資訊在
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">OSM wiki 上</a>。
                 運作 taginfo API 的伺服器並沒有無限的資源，
                 請負責地使用 API。有疑問請聯絡你所使用的網站的維護者
@@ -188,7 +188,7 @@ pages:
                 <h3>下載</h3>
                 <p>如果你想要玩玩 taginfo 用的資料，你能下載定期更新的 Sqlite 資料庫檔案，
                 所有的預先處理已經先幫你做好了。
-                看看<a href="/download">下載頁面</a>取得檔案列表。
+                看看<a href="download">下載頁面</a>取得檔案列表。
                 注意這些檔案之中有些會非常大，如果你想定期地下載他們，
                 請聯絡你所使用的網站的維護者或在郵件列表上跟我們講。</p>
             license: |
@@ -205,7 +205,7 @@ pages:
                 <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a> 建立。</p>
                 <h3>翻譯</h3>
                 <p>我們需要 taginfo 使用者界面的翻譯者，看看<a
-                href="/taginfo/translations">翻譯總覽</a>看看還需要努力的語言。
+                href="taginfo/translations">翻譯總覽</a>看看還需要努力的語言。
                 更多如何幫助的資訊
                 在 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM wiki</a> 上。</p>
                 <h3>程式碼</h3>
@@ -245,7 +245,7 @@ pages:
             languages: |
                 <p>Taginfo 取得世界不同語言的資料，它們的代碼、名稱等來自數個 <a class="extlink" href="https://www.iana.org/">IANA</a> 和 <a class="extlink" href="https://www.unicode.org/">Unicode</a> 登記名冊。</p>
             projects: |
-                <p>以一些方式使用 OSM 標籤的專案，像是編輯器、路線規劃等，請見<a href="/projects">專案列表</a>。</p>
+                <p>以一些方式使用 OSM 標籤的專案，像是編輯器、路線規劃等，請見<a href="projects">專案列表</a>。</p>
             chronology: |
                 <p><a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">歷史星球</a>上隨時間變化的鍵/標籤數量。</p>
         updates:
@@ -261,7 +261,7 @@ pages:
             在 <a class="extlink" href="https://www.sqlite.org/">Sqlite</a> 資料庫裡。
             資料庫檔案接著用 <a class="extlink" href="http://www.bzip.org/">bzip2</a> 打包。</p>
             <p>如果你不想下載這些資料庫，但需要自動存取這些資料，
-            你也可以用 <a href="/about">API</a>。</p>
+            你也可以用 <a href="about">API</a>。</p>
         file: 檔案
         packed: 已打包
         unpacked: 未打包
@@ -292,7 +292,7 @@ pages:
                 此表格顯示資料庫裡最常用的標籤。
     relations:
         name: 關係類型
-        intro: 關於不同類型的關係的資訊（被 <a href="/keys/type?filter=relations">type</a> 標籤指出的）。
+        intro: 關於不同類型的關係的資訊（被 <a href="keys/type?filter=relations">type</a> 標籤指出的）。
         relations_of_type_tooltip: 此類型關係的數目（和在所有關係之中的百分比）。
         prevalent_roles: 普遍的角色
         prevalent_roles_tooltip: 此類型關係的普遍角色。

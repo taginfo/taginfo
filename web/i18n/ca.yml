@@ -174,7 +174,7 @@ pages:
                 base de dades, quanta gent usa aquestes etiquetes, on s'usen i altres coses. També
                 obté informació sobre les etiquetes des de la wiki i des d'altres llocs. Taginfo
                 intenta agrupar tota la informació sobre etiquetes per ajudar-vos a entendre
-                com s'usen i què signifiquen. Vegeu una <a href="/sources">llista de les fonts</a>
+                com s'usen i què signifiquen. Vegeu una <a href="sources">llista de les fonts</a>
                 que taginfo usa.</p>
         about_site:
             title: Quant a aquesta pàgina
@@ -185,7 +185,7 @@ pages:
             api: |
                 <h3>API</h3>
                 <p>Les dades de Taginfo són accessibles a traves d'una API REST. Vegeu la
-                <a href="/taginfo/apidoc">documentació de l'API</a> pels detalls, alguna informació general és
+                <a href="taginfo/apidoc">documentació de l'API</a> pels detalls, alguna informació general és
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">a la wiki d'OSM</a>.
                 Els servidors que executen l'API de taginfo no tenen recursos il·limitats.
                 Useu l'API responsablement. En cas de dubte, contacteu el mantenidor del
@@ -194,7 +194,7 @@ pages:
                 <h3>Descarrega</h3>
                 <p>Si voleu jugar amb les dades que usa taginfo, podeu descarregar
                 els fitxers de base de dades Sqlite que s'actualitzen regularment. Tot el preprocessament ja el teniu fet.
-                Vegeu la <a href="/download">pàgina de descàrregues</a> per una llista de fitxers. Fixeu-vos que
+                Vegeu la <a href="download">pàgina de descàrregues</a> per una llista de fitxers. Fixeu-vos que
                 alguns d'aquests fitxers poden ser força grossos. Si voleu descarregar-los habitualment,
                 contacteu amb els mantenidors del lloc que estigueu usant o digueu-nos alguna cosa a la llista de correu.</p>
             license: |
@@ -211,7 +211,7 @@ pages:
                 <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Traduccions</h3>
                 <p>Necessitem traductors per l'interfície d'usuari de taginfo. Vegeu el <a
-                href="/taginfo/translations">resum general</a> per trobar idiomes que necessiten
+                href="taginfo/translations">resum general</a> per trobar idiomes que necessiten
                 un cop de mà. A la
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">wiki d'OSM</a> hi ha més informació sobre com ajudar.</p>
                 <h3>Codi</h3>
@@ -249,7 +249,7 @@ pages:
             languages: |
                 <p>Taginfo obté informació sobre els diferents idiomes del món, els seus codis, noms, etc. des de diversos registres de l'<a class="extlink" href="https://www.iana.org/">IANA</a> i d'<a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
-                <p>Els projectes que d'alguna manera usen les etiquetes d'OSM, com ara editors, mapes, encaminadors,  etc. Vegeu <a href="/projects">la llista de projectes</a>.</p>
+                <p>Els projectes que d'alguna manera usen les etiquetes d'OSM, com ara editors, mapes, encaminadors,  etc. Vegeu <a href="projects">la llista de projectes</a>.</p>
             chronology: |
                 <p>Nombre de claus/etiquetes al llarg del temps de la <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">història del planeta</a>.</p>
         updates:
@@ -265,7 +265,7 @@ pages:
             en una base de dades <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>.
             Després, els fitxers de la base de dades s'empaqueten amb <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>Si no voleu descarregar aquestes bases de dades, però necessiteu accés automàtic a
-            les dades, també podeu usar l'<a href="/about">API</a>.</p>
+            les dades, també podeu usar l'<a href="about">API</a>.</p>
         file: Fitxer
         packed: Empaquetat
         unpacked: Desempaquetat
@@ -296,7 +296,7 @@ pages:
                 Aquesta taula mostra les etiquetes més comunes de la base de dades.
     relations:
         name: Tipus de relacions
-        intro: Informació sobre els diferents tipus de relacions (indicat per l'etiqueta <a href="/keys/type?filter=relations">type</a>).
+        intro: Informació sobre els diferents tipus de relacions (indicat per l'etiqueta <a href="keys/type?filter=relations">type</a>).
         relations_of_type_tooltip: Nombre de relacions d'aquest tipus (i com a percentatge de totes les relacions).
         prevalent_roles: Rols prevalents
         prevalent_roles_tooltip: Rols prevalents per aquest tipus de relació.

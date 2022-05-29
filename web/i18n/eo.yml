@@ -158,7 +158,7 @@ pages:
             text: |
                 <p>OpenStreetMap uzas <b>etikedojn</b> (ang. tags) por signifigi geografiajn objektojn. Ne ekzistas absoluta listo de tiuj ĉi etikedoj. Oni povas krei kaj uzi laŭbezone novajn etikedojn. Ĉiu povas proponi novan etikedon kaj aldoni ĝin al ekzistaj objektoj. Tio ĉi igas OpenStreetMap-n ege tajlorebla, tamen iam ete malfaciligas laboradon kun ĝi.</p>
                 <p>Kiam vi kontribuas al OSM aŭ uzas OSM-datumojn, ĉiam aperas demandoj kiel: Kiujn etikedojn oni uzas por objekto X? Kiujn etikedojn mi povas uzi por objekto Y por ke ĝi ĝuste aperu sur la mapo? Ĉu etikedo Z priskribita en la vikio estas vere uzata kaj kie?</p>
-                <p>Taginfo helpas al vi per montri statistikojn pri kiuj etikedoj troviĝas en la datumbazo, kiom da homoj ilin uzas, kie ili estas uzataj, ktp. Ĝi ankaŭ akiras informojn pri etikedojn el la vikio kaj el aliaj ejoj. Taginfo provas kolekti ĉiujn informojn pri etikedoj por helpi al vi kompreni kiel ili estas uzataj kaj kion ili signifas. Vidu la <a href="/sources">liston de fontoj</a> uzataj de taginfo.</p>
+                <p>Taginfo helpas al vi per montri statistikojn pri kiuj etikedoj troviĝas en la datumbazo, kiom da homoj ilin uzas, kie ili estas uzataj, ktp. Ĝi ankaŭ akiras informojn pri etikedojn el la vikio kaj el aliaj ejoj. Taginfo provas kolekti ĉiujn informojn pri etikedoj por helpi al vi kompreni kiel ili estas uzataj kaj kion ili signifas. Vidu la <a href="sources">liston de fontoj</a> uzataj de taginfo.</p>
         about_site:
             title: Pri tiu ĉi retejo
         building_on_taginfo:
@@ -167,10 +167,10 @@ pages:
                 <p>Vi povas uzi datumojn el taginfo en viajn proprajn projektoj:</p>
             api: |
                 <h3>API</h3>
-                <p>Taginfo-datumojn oni povas akiri per REST API. Vidu la <a href="/taginfo/apidoc">dokumentaron pri API</a> por pliaj detaloj, iaj ĝeneralaj informoj troviĝas en la <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">OSM-vikio</a>. La serviloj gastigantaj la taginfo-API ne havas senliman komputpovon. Bonvolu prudente uzi la API. Se vi dubas, kontaktu la prizorgantojn de la retejo, kiujn vi uzas aŭ skribi al ni ĉe la dissendolisto.</p>
+                <p>Taginfo-datumojn oni povas akiri per REST API. Vidu la <a href="taginfo/apidoc">dokumentaron pri API</a> por pliaj detaloj, iaj ĝeneralaj informoj troviĝas en la <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">OSM-vikio</a>. La serviloj gastigantaj la taginfo-API ne havas senliman komputpovon. Bonvolu prudente uzi la API. Se vi dubas, kontaktu la prizorgantojn de la retejo, kiujn vi uzas aŭ skribi al ni ĉe la dissendolisto.</p>
             download: |
                 <h3>Elŝuto</h3>
-                <p>Se vi volas ludi per datumoj uzataj de taginfo, vi povas elŝuti ofte ĝisdatigatajn sqlite-datumbazajn dosierojn. Ĉia pritraktado estas farata de vi. Vidu la <a href="/download">elŝutan paĝon</a> por liston de dosieroj. Rimarku, ke kelkaj dosieroj estas eĉ grandaj. Se vi volas ofte elŝuti ilin, bonvolu kontakti la prizorgantojn de retejo, kiun vi uzas skribi al ni ĉe la dissendolisto.</p>
+                <p>Se vi volas ludi per datumoj uzataj de taginfo, vi povas elŝuti ofte ĝisdatigatajn sqlite-datumbazajn dosierojn. Ĉia pritraktado estas farata de vi. Vidu la <a href="download">elŝutan paĝon</a> por liston de dosieroj. Rimarku, ke kelkaj dosieroj estas eĉ grandaj. Se vi volas ofte elŝuti ilin, bonvolu kontakti la prizorgantojn de retejo, kiun vi uzas skribi al ni ĉe la dissendolisto.</p>
             license: |
                 <h3>Permesilo</h3>
                 <p>Ĉiuj datumoj disponeblaj per taginfo estas eldonataj laŭ la permesilo ODbl, <a class="extlink" href="//www.openstreetmap.org/copyright">sama kiel por OpenStreetMap-datumoj</a>.</p>
@@ -179,7 +179,7 @@ pages:
             text: |
                 <p>La programaro de taginfo estis kreita kaj estas prizorgata de <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>. La reteja aspekto estis fasonita de <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Tradukoj</h3>
-                <p>Ni bezonas tradukistojn por la uzant-fasado de taginfo. Vidu la <a href="/taginfo/translations">sumigon de tradukoj</a> por lingvoj, kiuj bezonas iom da laboro. Pliaj informoj kiel helpi troviĝas en la <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM-vikio</a>.</p>
+                <p>Ni bezonas tradukistojn por la uzant-fasado de taginfo. Vidu la <a href="taginfo/translations">sumigon de tradukoj</a> por lingvoj, kiuj bezonas iom da laboro. Pliaj informoj kiel helpi troviĝas en la <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM-vikio</a>.</p>
                 <h3>Kodo</h3>
                 <p>Ĉiu programaro poviganta la retejojn de taginfo estas malfermkoda. Vi povas akiri ĝin de <a class="extlink" href="https://github.com/taginfo/taginfo/">GitHub</a>. Por sumigo, vidu la paĝon pri <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">arĥitekturo de taginfo</a> en la OSM-vikio.</p>
                 <h3>Lanĉi sian propran aperon</h3>
@@ -203,7 +203,7 @@ pages:
             languages: |
                 <p>Taginfo akiras informojn pri diversaj lingvoj de la mondo, iliajn kodojn, nomojn, ktp. el listoj de <a class="extlink" href="https://www.iana.org/">IANA</a> kaj <a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
-                <p>Projektoj, kiuj iel uzas OSM-etikedojn, kiel redaktiloj, mapoj, navigiloj, ktp. Vidu la <a href="/projects">liston de projektoj</a>.</p>
+                <p>Projektoj, kiuj iel uzas OSM-etikedojn, kiel redaktiloj, mapoj, navigiloj, ktp. Vidu la <a href="projects">liston de projektoj</a>.</p>
             chronology: |
                 <p>Nombro de ŝlosiloj/etikedoj laŭlonge de la <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">history planet</a>.</p>
         updates:
@@ -216,7 +216,7 @@ pages:
     download:
         intro: |
             <p>Tie ĉi vi povas elŝuti la datumbazojn uzatajn de taginfo. Ĉiuj datumoj estas konservitaj en datumbazojn <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>. Datumbazaj dosieroj estas kompaktigitaj per <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
-            <p>Se vi ne volas elŝuti tiujn ĉi datumbazojn, tamen bezonas aŭtomatan aliron al datumoj, vi ankaŭ povas uzi la <a href="/about">API</a>.</p>
+            <p>Se vi ne volas elŝuti tiujn ĉi datumbazojn, tamen bezonas aŭtomatan aliron al datumoj, vi ankaŭ povas uzi la <a href="about">API</a>.</p>
         file: Dosiero
         packed: Kompaktigita
         unpacked: Nekompaktigita
@@ -245,7 +245,7 @@ pages:
                 La jena tabelo montras la plej ofte uzatajn etikedojn en la datumbazo.
     relations:
         name: Rilat-tipoj
-        intro: Informoj pri diversaj tipoj de rilatoj (indikataj per la etikedo <a href="/keys/type?filter=relations">type</a>).
+        intro: Informoj pri diversaj tipoj de rilatoj (indikataj per la etikedo <a href="keys/type?filter=relations">type</a>).
         relations_of_type_tooltip: Nombro da rilatoj de tiu ĉi tipo (kaj elcento da ĉiuj rilatoj).
         prevalent_roles: Popularaj roloj
         prevalent_roles_tooltip: Popularaj roloj por tiu ĉi tipo de rilato.

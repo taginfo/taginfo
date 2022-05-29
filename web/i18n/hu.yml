@@ -170,7 +170,7 @@ pages:
             <a class="extlink" href="https://www.sqlite.org/">Sqlite</a> adatbázisokban tárolódik.
             Az adatbázisfájlok <a class="extlink" href="http://www.bzip.org/">bzip2</a>-vel vannak csomagolva.</p>
             <p>Ha nem szeretnéd letölteni az adatbázisokat, viszont automatizáltan érnéd el az adatokat,
-            érdemes az <a href="/about">API</a>-t használnod.</p>
+            érdemes az <a href="about">API</a>-t használnod.</p>
         file: Fájl
         packed: Csomagolva
         unpacked: Kicsomagolva
@@ -200,7 +200,7 @@ pages:
                 Ez a táblázat az adatbázisban található leggyakoribb címkéket tartalmazza.
     relations:
         name: Kapcsolattípusok
-        intro: Információk a különböző típusú kapcsolatokról (a <a href="/keys/type?filter=relations">type</a> címke alapján).
+        intro: Információk a különböző típusú kapcsolatokról (a <a href="keys/type?filter=relations">type</a> címke alapján).
         relations_of_type_tooltip: Az ilyen típusú kapcsolatok száma és aránya.
         prevalent_roles: Leggyakoribb szerepek
         prevalent_roles_tooltip: Az ilyen típusú kapcsolatok leggyakoribb szerepei.

@@ -178,7 +178,7 @@ pages:
                 informazioni sui tag anche dal sito wiki e da altre fonti.
                 Taginfo cerca di mettere assieme tutte le informazioni sui tag
                 per aiutarti a comprendere come sono usati e cosa significano.
-                Vedi la <a href="/sources">lista delle fonti</a> che taginfo
+                Vedi la <a href="sources">lista delle fonti</a> che taginfo
                 utilizza.</p>
         about_site:
             title: Informazioni su questo sito
@@ -191,7 +191,7 @@ pages:
                 <h3>API</h3>
                 <p>Puoi accedere ai dati di Taginfo
                 tramite una REST API. Vedi la <a
-                href="/taginfo/apidoc">documentazione sull'API</a> per maggiori
+                href="taginfo/apidoc">documentazione sull'API</a> per maggiori
                 dettagli, alcune informazioni generali sono presenti <a
                 class="extlink"
                 href="//wiki.openstreetmap.org/wiki/Taginfo/API">sul sito wiki
@@ -206,7 +206,7 @@ pages:
                 ai dati usati da taginfo, puoi scaricare i file del database
                 Sqlite che vengono regolarmente aggiornati. Tutto il lavoro di
                 preprocessing è già stato fatto per te. Vedi la <a
-                href="/download">pagina dei download</a> per una lista dei
+                href="download">pagina dei download</a> per una lista dei
                 file. Si noti che alcuni di questi possono essere
                 particolarmente grandi. Se vuoi scaricarli frequentemente,
                 contatta un responsabile del sito che stai usando o discuti la
@@ -227,7 +227,7 @@ pages:
                 href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Traduzioni</h3> <p>Abbiamo bisogno di traduttori per
                 tradurre l'interfaccia utente di taginfo. Vedi la pagina <a
-                href="/taginfo/translations">introduttiva sulle traduzioni</a>
+                href="taginfo/translations">introduttiva sulle traduzioni</a>
                 per informazioni su quali lingue hanno bisogno di lavoro di
                 traduzione. Maggiori informazioni su come aiutare sono
                 disponibili nella <a class="extlink"
@@ -287,7 +287,7 @@ pages:
             projects: |
                 <p>Progetti che usano i tag di OSM in qualche modo, come
                 strumenti di modifica, mappe, navigatori, ecc. Vedi <a
-                href="/projects">la lista dei progetti</a>.</p>
+                href="projects">la lista dei progetti</a>.</p>
             chronology: |
                 <p>Numero di chiavi/tag nel tempo da <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">file di planet storico</a>.</p>
         updates:
@@ -306,7 +306,7 @@ pages:
             href="http://www.bzip.org/">bzip2</a>.</p> <p>Se non volete
             scaricare questi database, ma avete bisogno di avere un accesso
             automatizzato ai dati, potete anche usare le <a
-            href="/about">API</a>.</p>
+            href="about">API</a>.</p>
         file: File
         packed: Compressi
         unpacked: Decompressi
@@ -339,7 +339,7 @@ pages:
             Questa tabella mostra i tag più comuni presenti nel database.
     relations:
         name: Tipi di relazioni
-        intro: Informazioni sui diversi tipi di relazioni (indicati dal tag <a href="/keys/type?filter=relations">type</a>).
+        intro: Informazioni sui diversi tipi di relazioni (indicati dal tag <a href="keys/type?filter=relations">type</a>).
         relations_of_type_tooltip: Numero delle relazioni di questo tipo (e percentuale rispetto al totale delle relazioni).
         prevalent_roles: Ruoli maggiormente presenti
         prevalent_roles_tooltip: Ruoli maggiormente presenti per questo tipo di relazioni.

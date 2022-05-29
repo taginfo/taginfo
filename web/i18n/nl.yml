@@ -173,7 +173,7 @@ pages:
                 database zitten, hoe veel mensen die tags gebruiken, waar ze gebruikt zijn en dergelijke. Het
                 verkrijgt ook informatie over tags van de wiki en van ander plaatsen. Taginfo
                 probeert alle informatie over tags samen te brengen om je te helpen te begrijpen
-                hoe ze gebruikt zijn en wat ze betekenen. Zie een <a href="/sources">lijst van bronnen</a>
+                hoe ze gebruikt zijn en wat ze betekenen. Zie een <a href="sources">lijst van bronnen</a>
                 die taginfo gebruikt.</p>
         about_site:
             title: Over deze site
@@ -184,7 +184,7 @@ pages:
             api: |
                 <h3>API</h3>
                 <p>Taginfo data is toegankelijk via een REST API. Zie de
-                <a href="/taginfo/apidoc">API documentatie</a> voor de details, enkele algemene informatie is beschikbaar
+                <a href="taginfo/apidoc">API documentatie</a> voor de details, enkele algemene informatie is beschikbaar
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">op de OSM wiki</a>.
                 De servers die de taginfo API draaien hebben geen onbeperkte bronnen.
                 Gebruik de API alstublieft verantwoord. In geval van twijfel neem contact met de onderhouders van de
@@ -193,7 +193,7 @@ pages:
                 <h3>Download</h3>
                 <p>Als je wilt spelen met de data gebruikt door taginfo, kan je de
                 regulier bijgewerkte Sqlite database bestanden downloaden. Al het voorverwerken is al gedaan voor je.
-                Zie de <a href="/download">downloadpagina</a> voor een lijst van bestanden. Let op dat
+                Zie de <a href="download">downloadpagina</a> voor een lijst van bestanden. Let op dat
                 sommige van deze bestanden vrij groot kunnen zijn. Als je ze regelmatig wilt downloaden,
                 neem contact op met de onderhouders van de site die je gebruikt of praat met ons op de mailinglijst.</p>
             license: |
@@ -210,7 +210,7 @@ pages:
                 <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Vertalingen</h3>
                 <p>We hebben vertalers nodig voor de taginfo gebruikersinterface. zie het <a
-                href="/taginfo/translations">vertalingenoverzicht</a> voor talen die
+                href="taginfo/translations">vertalingenoverzicht</a> voor talen die
                 wat werk nodig hebben. Meer informatie over het helpen is te vinden op de
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM wiki</a>.</p>
                 <h3>Code</h3>
@@ -250,7 +250,7 @@ pages:
             languages: |
                 <p>Taginfo krijgt informatie over de verschillende talen van de wereld, hun codes, namen en dergelijke van enkele <a class="extlink" href="https://www.iana.org/">IANA</a> en <a class="extlink" href="https://www.unicode.org/">Unicode</a> registers.</p>
             projects: |
-                <p>Projecten die OSM tags op een of andere manier gebruiken, zoals bewerkers, kaarten, routeerders en dergelijke. Zie <a href="/projects">de projectlijst</a>.</p>
+                <p>Projecten die OSM tags op een of andere manier gebruiken, zoals bewerkers, kaarten, routeerders en dergelijke. Zie <a href="projects">de projectlijst</a>.</p>
             chronology: |
                 <p>Aantal sleutels/tags in de loop van de tijd van <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">planet historie</a>.</p>
         updates:
@@ -266,7 +266,7 @@ pages:
             in <a class="extlink" href="https://www.sqlite.org/">Sqlite</a> databases.
             De databasebestanden zijn dan verpakt met <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>Als je deze databases niet wil downloaden, maar geautomatiseerde toegang nodig hebt tot
-            de data, kan je ook de <a href="/about">API</a> gebruiken.</p>
+            de data, kan je ook de <a href="about">API</a> gebruiken.</p>
         file: Bestand
         packed: Ingepakt
         unpacked: Uitgepakt
@@ -297,7 +297,7 @@ pages:
                 Deze tabel geeft de meest voorkomende tags in de database weer.
     relations:
         name: Relatietypes
-        intro: Informatie over de verschillende typen relaties (aangegeven door de <a href="/keys/type?filter=relations">type</a> tag).
+        intro: Informatie over de verschillende typen relaties (aangegeven door de <a href="keys/type?filter=relations">type</a> tag).
         relations_of_type_tooltip: Hoeveelheid relaties van dit type (en als percentage van alle relaties).
         prevalent_roles: Voornamelijke rollen
         prevalent_roles_tooltip: Voornamelijke rollen voor dit type relatie.

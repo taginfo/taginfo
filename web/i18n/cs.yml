@@ -173,7 +173,7 @@ pages:
                 vyskytují v databázi, kolik lidí je používá, kde jsou použity atd. Také
                 sbírá informace o značkách z wiki a dalších míst. Taginfo
                 se pokouší shromáždit všechny informace o značkách, aby vám pomohl pochopit
-                jak se používají a co znamenají. Viz <a href="/sources">seznam zdrojů</a>,
+                jak se používají a co znamenají. Viz <a href="sources">seznam zdrojů</a>,
                 které taginfo používá.</p>
         about_site:
             title: O tomto serveru
@@ -184,7 +184,7 @@ pages:
             api: |
                 <h3>API</h3>
                 <p>K datům z Taginfo můžete přistupovat pomocí REST API. Podívejte se na
-                <a href="/taginfo/apidoc">dokumentaci API</a> pro více podrobností, nějaké obecné informace jsou
+                <a href="taginfo/apidoc">dokumentaci API</a> pro více podrobností, nějaké obecné informace jsou
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">na OSM wiki</a>.
                 Servery, na kterých běží taginfo API nemají neomezené zdroje.
                 Používejte, prosím, API zodpovědně. Máte-li pochybnosti, kontaktujte správce
@@ -193,7 +193,7 @@ pages:
                 <h3>Stažení</h3>
                 <p>Chcete-li si hrát s daty, které taginfo používá, můžete si stáhnout
                 pravidelně aktualizované databázové soubory Sqlite. Data již pro vás byla připravena.
-                Podívejte se na <a href="/download">stránku stahování</a>, kde je seznam souborů. Povšimněte si,
+                Podívejte se na <a href="download">stránku stahování</a>, kde je seznam souborů. Povšimněte si,
                 že některé z těchto souborů jsou celkem velké. Pokud je chcete stahovat pravidelně,
                 kontaktujte spráce serveru, který používáte, nebo nás kontaktuje na mailing listu.</p>
             license: |
@@ -210,7 +210,7 @@ pages:
                 <a class="extlink" href="https://ctd-studio.co.uk/">Christianem Topfem</a>.</p>
                 <h3>Překlady</h3>
                 <p>Potřebujeme překladatele uživatelského rozhraní taginfo. Podívejte se na <a
-                href="/taginfo/translations">přehled překladů</a>, kde najdete jazyky, na kterých
+                href="taginfo/translations">přehled překladů</a>, kde najdete jazyky, na kterých
                 je potřeba zapracovat. Více informací o tom, jak pomoci je na 
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM wiki</a>.</p>
                 <h3>Zdrojový kód</h3>
@@ -250,7 +250,7 @@ pages:
             languages: |
                 <p>Taginfo získává informace o různých jazycích světa, jejich kódech, názvech, atd. z různých registrů <a class="extlink" href="https://www.iana.org/">IANA</a> a <a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
-                <p>Projekty, které nějak používají značky OSM, jako jsou editory, mapy, navigace, atd. Viz <a href="/projects">seznam projektů</a>.</p>
+                <p>Projekty, které nějak používají značky OSM, jako jsou editory, mapy, navigace, atd. Viz <a href="projects">seznam projektů</a>.</p>
             chronology: |
                 <p>Množství klíčů/značek během času podle <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">historie OSM</a>.</p>
         updates:
@@ -266,7 +266,7 @@ pages:
             v databázích <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>.
             Databázové soubory jsou poté zabaleny pomocí <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>Pokud si nechcete tyto databáze stahovat, ale potřebujete strojový přístup
-            k datům, můžete také použít <a href="/about">API</a>.</p>
+            k datům, můžete také použít <a href="about">API</a>.</p>
         file: Soubor
         packed: Zabaleno
         unpacked: Rozbaleno
@@ -297,7 +297,7 @@ pages:
                 Tato tabulka zobrazuje nejrozšířenější značky v databázi.
     relations:
         name: Typy relací
-        intro: Informace o různých typech relací (popsaných značkou <a href="/keys/type?filter=relations">type</a>).
+        intro: Informace o různých typech relací (popsaných značkou <a href="keys/type?filter=relations">type</a>).
         relations_of_type_tooltip: Počet relací tohoto typu (a procento ze všech relací).
         prevalent_roles: Převažující role
         prevalent_roles_tooltip: Převažující role tohoto typu relace.

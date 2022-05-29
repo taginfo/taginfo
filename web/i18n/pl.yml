@@ -151,7 +151,7 @@ pages:
             text: |
                 <p>OpenStreetMap używa <b>znaczników</b> (tagów), aby nadać znaczenie obiektom geograficznym. Nie ma nadrzędnie ustalonej listy tych to znaczników. Można utworzyć nowe znaczniki gdy zajdzie taka potrzeba. Każdy może zaproponować nowy tag i dodać go do nowych lub istniejących obiektów. To nadaje mapie OpenStreetMap elastyczności, ale czasami sprawia trudności podczas pracy.</p>
                 <p>Za każdym razem podczas edycji mapy lub używania danych OSM pojawiają się pytania: Jakich znaczników używają inni dla obiektu X? Jakich tagów można użyć dla obiektu Y, aby poprawnie się renderował? Czy tag Z opisany na wiki jest w rzeczywistości używany i gdzie?</p>
-                <p>Taginfo pomoże Ci wyświetlając statystyki dotyczące tego które tagi znajdują się w bazie, jak wiele osób z nich korzysta, itp. Pobierane są także informacje o tagach z wiki i z innych źródeł. Taginfo próbuje zebrać do kupy wszystkie informacje o znacznikach, aby pomóc Ci zrozumieć w jaki sposób są one używane i co oznaczają. Zajrzyj do <a href="/sources">listy źródeł</a> używanych przez taginfo.</p>
+                <p>Taginfo pomoże Ci wyświetlając statystyki dotyczące tego które tagi znajdują się w bazie, jak wiele osób z nich korzysta, itp. Pobierane są także informacje o tagach z wiki i z innych źródeł. Taginfo próbuje zebrać do kupy wszystkie informacje o znacznikach, aby pomóc Ci zrozumieć w jaki sposób są one używane i co oznaczają. Zajrzyj do <a href="sources">listy źródeł</a> używanych przez taginfo.</p>
         about_site:
             title: O tej stronie
         building_on_taginfo:
@@ -160,10 +160,10 @@ pages:
                 <p>Możesz użyć danych pochodzących z taginfo w swoich własnych projektach:</p>
             api: |
                 <h3>API</h3>
-                <p>Dane taginfo można odpytać za pomocą REST API. Zajrzyj do <a href="/taginfo/apidoc">dokumentacji API</a> po szczegóły, trochę ogólnych informacji znajduje się na <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">wiki OSM</a>. Serwery na których hostowane jest API taginfo nie mają nieograniczonych zasobów. Prosimy odpowiedzialnie korzystać z API. Jeżeli masz jakieś wątpliwości, skontaktuj się z administratorami strony z której korzystasz lub zapytaj nas na naszej liści dyskusyjnej.</p>
+                <p>Dane taginfo można odpytać za pomocą REST API. Zajrzyj do <a href="taginfo/apidoc">dokumentacji API</a> po szczegóły, trochę ogólnych informacji znajduje się na <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">wiki OSM</a>. Serwery na których hostowane jest API taginfo nie mają nieograniczonych zasobów. Prosimy odpowiedzialnie korzystać z API. Jeżeli masz jakieś wątpliwości, skontaktuj się z administratorami strony z której korzystasz lub zapytaj nas na naszej liści dyskusyjnej.</p>
             download: |
                 <h3>Pobieranie</h3>
-                <p>Jeżeli chcesz pobawić się danymi używanymi przez taginfo, możesz pobrać regularnie aktualizowane pliki bazy danych Sqlite. Cała obróbka danych jest zrobiona za Ciebie. Zajrzyj na <a href="/download">stronę pobierań</a> po listę plików. Zauważ, że niektóre pliki są dość spore. Jeżeli chcesz pobierać je regularnie, skontaktuj się z administratorami używanej strony lub skontaktuj się z nami na liście dyskusyjnej.</p>
+                <p>Jeżeli chcesz pobawić się danymi używanymi przez taginfo, możesz pobrać regularnie aktualizowane pliki bazy danych Sqlite. Cała obróbka danych jest zrobiona za Ciebie. Zajrzyj na <a href="download">stronę pobierań</a> po listę plików. Zauważ, że niektóre pliki są dość spore. Jeżeli chcesz pobierać je regularnie, skontaktuj się z administratorami używanej strony lub skontaktuj się z nami na liście dyskusyjnej.</p>
             license: |
                 <h3>Licencja</h3>
                 <p>Dane dostępne za pomocą taginfo są wydane na licencji ODbL, <a class="extlink" href="//www.openstreetmap.org/copyright">takiej samej co dane OpenStreetMap</a>.</p>
@@ -173,7 +173,7 @@ pages:
                 <p>Oprogramowanie taginfo zostało napisane i jest wspierane przez <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochena Topfa</a>. Strona została zaprojektowana przez <a class="extlink" href="https://ctd-studio.co.uk/">Christiana Topfa</a>.</p>
                 <h3>Tłumaczenia</h3>
                 <p>Potrzebujemy tłumaczy interfejsu użytkownika taginfo. Na stronie <a
-                href="/taginfo/translations">podsumowania tłumaczeń</a> sprawdzisz, które tłumaczenia wymagają pracy. Więcej informacji o tym jak możesz pomóc, znajdziesz na <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">wiki OSM</a>.</p>
+                href="taginfo/translations">podsumowania tłumaczeń</a> sprawdzisz, które tłumaczenia wymagają pracy. Więcej informacji o tym jak możesz pomóc, znajdziesz na <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">wiki OSM</a>.</p>
                 <h3>Kod źródłowy</h3>
                 <p>Całe oprogramowanie na którym stoi taginfo jest otwartoźródłowe. Kod źródłowy znajdziesz na <a class="extlink" href="https://github.com/taginfo/taginfo/">GitHubie</a>. Podsumowanie znajdziesz na stronie dotyczącej <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">architektury taginfo</a> na wiki OSM.</p>
                 <h3>Własny klon taginfo</h3>
@@ -197,7 +197,7 @@ pages:
             languages: |
                 <p>Taginfo pobiera informacje o różnych językach świata, ich kodów, nazw, itd. z <a class="extlink" href="https://www.iana.org/">IANA</a> i <a class="extlink" href="https://www.unicode.org/">rejestrów Unicode</a>.</p>
             projects: |
-                <p>Projekty, które w jakiś sposób używają znaczników OSM, takie jak edytory, mapy, nawigacje, itp. Zajrzyj do <a href="/projects">listy projektów</a>.</p>
+                <p>Projekty, które w jakiś sposób używają znaczników OSM, takie jak edytory, mapy, nawigacje, itp. Zajrzyj do <a href="projects">listy projektów</a>.</p>
         updates:
             title: Aktualizacje
             intro: Baza taginfo jest regularnie aktualizowana ze źródeł.
@@ -209,7 +209,7 @@ pages:
         intro: |
             <p>Tutaj możesz pobrać pliki bazy danych, z których korzysta taginfo. Wszystkie dane są przechowywane w bazach <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>.
             Pliki baz danych są skompresowane w <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
-            <p>Jeżeli nie chcesz pobierać tych baz danych, ale potrzebujesz dostępu do nich, możesz użyć <a href="/about">API</a>.</p>
+            <p>Jeżeli nie chcesz pobierać tych baz danych, ale potrzebujesz dostępu do nich, możesz użyć <a href="about">API</a>.</p>
         file: Plik
         packed: Spakowany
         unpacked: Pełny
@@ -238,7 +238,7 @@ pages:
                 Ta tabela pokazuje najbardziej rozpowszechnione tagi w bazie danych.
     relations:
         name: Typy relacji
-        intro: Informacje o różnych typach relacji (oznaczonych tagiem <a href="/keys/type?filter=relations">type</a>).
+        intro: Informacje o różnych typach relacji (oznaczonych tagiem <a href="keys/type?filter=relations">type</a>).
         relations_of_type_tooltip: Liczba relacji tej strony (i jako procent wszystkich relacji).
         prevalent_roles: Powszechne role
         prevalent_roles_tooltip: Powszechne role dla tego typu relacji.

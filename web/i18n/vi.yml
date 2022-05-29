@@ -172,7 +172,7 @@ pages:
                 bao nhiêu người sử dụng các thẻ đó, các thẻ được sử dụng tại đâu, v.v.
                 Nó cũng lấy thông tin từ wiki và những nơi khác.
                 Taginfo cố gắng tập trung tất cả thông tin về thẻ để giúp bạn hiểu cách sử dụng và ý nghĩa.
-                Xem <a href="/sources">danh sách nguồn gốc</a> của taginfo.</p>
+                Xem <a href="sources">danh sách nguồn gốc</a> của taginfo.</p>
         about_site:
             title: Giới thiệu về trang này
         building_on_taginfo:
@@ -182,7 +182,7 @@ pages:
             api: |
                 <h3>API</h3>
                 <p>Có thể truy cập dữ liệu taginfo qua API REST. Xem các chi tiết trong
-                <a href="/taginfo/apidoc">tài liệu API</a>. Cũng có thông tin tổng quát
+                <a href="taginfo/apidoc">tài liệu API</a>. Cũng có thông tin tổng quát
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">tại wiki OSM</a>.
                 Máy chủ phục vụ API taginfo không có tài nguyên vô hạn.
                 Xin vui lòng sử dụng API một cách hợp lý. Nếu không chắc chắn,
@@ -193,7 +193,7 @@ pages:
                 <p>Nếu bạn muốn nghịch ngợm với dữ liệu được sử dụng bởi taginfo,
                 bạn có thể tải về các tập tin cơ sở dữ liệu SQLite được cập nhật thường xuyên.
                 Tất cả công việc xử lý trước đã được thực hiện xong xuôi cho bạn.
-                Xem danh sách tập tin tại <a href="/download">trang tải về</a>.
+                Xem danh sách tập tin tại <a href="download">trang tải về</a>.
                 Lưu ý rằng một số tập tin này có kích thước rất lớn.
                 Nếu bạn muốn tải về chúng thường xuyên,
                 xin vui lòng liên lạc với những người quản lý trang Web mà bạn đang sử dụng hoặc
@@ -213,7 +213,7 @@ pages:
                 <h3>Biên dịch</h3>
                 <p>Chúng tôi cần người biên dịch giao diện taginfo.
                 Xem danh sách các ngôn ngữ cần được biên dịch tại
-                <a href="/taginfo/translations">trang bản dịch</a>. Xem cách giúp đỡ tại
+                <a href="taginfo/translations">trang bản dịch</a>. Xem cách giúp đỡ tại
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">wiki OSM</a>.</p>
                 <h3>Mã nguồn</h3>
                 <p>Toàn bộ phần mềm phục vụ các trang taginfo là mã nguồn mở. Bạn có thể truy cập mã nguồn tại
@@ -249,7 +249,7 @@ pages:
             languages: |
                 <p>Taginfo lấy thông tin về các ngôn ngữ trên thế giới, từ các mã, tên, v.v., từ một số cơ sở dữ liệu <a class="extlink" href="https://www.iana.org/">IANA</a> và <a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
-                <p>Các dự án sử dụng thẻ OSM một cách nào đó, thí dụ như trình vẽ, bản đồ, trình chỉ đường, v.v. Xem <a href="/projects">danh sách dự án</a>.</p>
+                <p>Các dự án sử dụng thẻ OSM một cách nào đó, thí dụ như trình vẽ, bản đồ, trình chỉ đường, v.v. Xem <a href="projects">danh sách dự án</a>.</p>
             chronology: |
                 <p>Số lần sử dụng chìa khóa hoặc thẻ theo thời gian từ <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">thế giới có lịch sử</a>.</p>
         updates:
@@ -265,7 +265,7 @@ pages:
             trong CSDL <a class="extlink" href="https://www.sqlite.org/">SQLite</a>.
             Sau đó, các tập tin CSDL được nén bằng <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>Nếu bạn không muốn tải về các CSDL này mà vẫn muốn truy cập dữ liệu một cách tự động,
-            bạn cũng có thể dùng <a href="/about">API</a>.</p>
+            bạn cũng có thể dùng <a href="about">API</a>.</p>
         file: Tập tin
         packed: Nén
         unpacked: Giải nén
@@ -299,7 +299,7 @@ pages:
                 Bảng này có các thẻ phổ biến nhất trong cơ sở dữ liệu.
     relations:
         name: Loại quan hệ
-        intro: Thông tin về các loại quan hệ (theo thẻ <a href="/keys/type?filter=relations">type</a>).
+        intro: Thông tin về các loại quan hệ (theo thẻ <a href="keys/type?filter=relations">type</a>).
         relations_of_type_tooltip: Số quan hệ loại này (cũng như số phần trăm các quan hệ).
         prevalent_roles: Vai trò phổ biến
         prevalent_roles_tooltip: Các vai trò phổ biến của các quan hệ loại này.

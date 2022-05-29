@@ -180,7 +180,7 @@ pages:
                 <a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Projetos que usam etiquetas OSM de alguma maneira, tais como editores, mapas,
-                aplicações de roteamento, etc. Veja a <a href="/projects">lista de projetos</a>.</p>
+                aplicações de roteamento, etc. Veja a <a href="projects">lista de projetos</a>.</p>
         updates:
             title: Atualizações
             intro: Os dados do taginfo são atualizados periodicamente a partir dessas fontes.
@@ -195,7 +195,7 @@ pages:
             Os arquivos de banco de dados são compactados com
             <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>Se você não quer baixá-los mas precisa acessar os dados
-            de forma automatizada, você pode usar a <a href="/about">API</a>.</p>
+            de forma automatizada, você pode usar a <a href="about">API</a>.</p>
         file: Arquivo
         packed: Compactado
         unpacked: Descompactado
@@ -225,7 +225,7 @@ pages:
                 Esta tabela mostra as etiquetas mais comuns no banco de dados.
     relations:
         name: Tipos de relação
-        intro: Informação sobre os diferentes tipos de relação (indicados pela etiqueta <a href="/keys/type?filter=relations">type</a>).
+        intro: Informação sobre os diferentes tipos de relação (indicados pela etiqueta <a href="keys/type?filter=relations">type</a>).
         relations_of_type_tooltip: Número de relações deste tipo (e como percentual de todas as relações).
         prevalent_roles: Papéis prevalentes
         prevalent_roles_tooltip: Papéis prevalentes para este tipo de relação.

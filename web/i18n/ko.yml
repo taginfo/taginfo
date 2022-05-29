@@ -170,7 +170,7 @@ pages:
                 또한 taginfo는 위키와 다른 곳에서 태그에 대한 정보를 얻습니다.
                 taginfo는 어떻게 태그가 사용되고 태그의 의미가 무엇인지 이해하는 것을
                 돕기 위해 태그에 대한 모든 정보를 같이 가져오려 합니다.
-                taginfo가 사용한 <a href="/sources">출처 목록</a>을 참조하세요.</p>
+                taginfo가 사용한 <a href="sources">출처 목록</a>을 참조하세요.</p>
         about_site:
             title: 이 사이트에 대해서
         building_on_taginfo:
@@ -180,7 +180,7 @@ pages:
             api: |
                 <h3>API</h3>
                 <p>taginfo의 데이터는 REST API를 통해서 접근할 수 있습니다.
-                자세한 사항은 <a href="/taginfo/apidoc">API 문서</a>를 참조하세요. 몇 가지 일반적인 정보는
+                자세한 사항은 <a href="taginfo/apidoc">API 문서</a>를 참조하세요. 몇 가지 일반적인 정보는
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">OSM 위키</a>를 참조하세요.
                 taginfo API를 사용하는 서버는 무제한적인 자원이 있는 것이 아닙니다.
                 API를 책임감을 갖고 사용해 주세요. 확신이 서지 않는다면 사용하고 있는 사이트의 관리자에게 연락하거나
@@ -189,7 +189,7 @@ pages:
                 <h3>다운로드</h3>
                 <p>taginfo에서 사용된 데이터를 가지고 여러가지 테스트를 하고 싶다면,
                 정기적으로 업데이트되는 Sqlite 데이터베이스 파일을 다운로드할 수 있습니다. 모든 사전 처리는 이미 끝내 놓았습니다.
-                파일 목록은 <a href="/download">다운로드 페이지</a>를 참조하세요.
+                파일 목록은 <a href="download">다운로드 페이지</a>를 참조하세요.
                 몇몇 파일은 꽤나 클 수 있다는 점을 알아 두세요. 만약 정기적으로 다운로드받고 싶다면,
                 사용하고 있는 사이트의 관리자에게 연락하거나 메일링 리스트에서 우리에게 연락하세요.</p>
             license: |
@@ -204,7 +204,7 @@ pages:
                 웹 디자인은 <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>가 제작했습니다.</p>
                 <h3>번역</h3>
                 <p>우리는 taginfo 사용자 인터페이스 번역자가 필요합니다. 작업이 필요한 언어는
-                <a href="/taginfo/translations">번역 개요</a>를 참조하세요.
+                <a href="taginfo/translations">번역 개요</a>를 참조하세요.
                 어떻게 도울 수 있는지에 대한 자세한 정보는 <a class="extlink"
                 href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM 위키</a>에 있습니다.</p>
                 <h3>코드</h3>
@@ -239,7 +239,7 @@ pages:
             languages: |
                 <p>taginfo는 전 세계의 언어에 관한 코드와 명칭 등의 정보를 <a class="extlink" href="https://www.iana.org/">IANA</a>와 <a class="extlink" href="https://www.unicode.org/">Unicode</a> 레지스트리에서 받고 있습니다.</p>
             projects: |
-                <p>편집기, 지도, 경로 탐색기 등의 몇 가지 방법으로 OSM 태그를 사용하는 프로젝트는 <a href="/projects">프로젝트 목록</a>을 참조하세요.</p>
+                <p>편집기, 지도, 경로 탐색기 등의 몇 가지 방법으로 OSM 태그를 사용하는 프로젝트는 <a href="projects">프로젝트 목록</a>을 참조하세요.</p>
             chronology: |
                 <p>과거 <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">OSM 데이터</a>에 존재하는 키/태그의 개수.</p>
         updates:
@@ -255,7 +255,7 @@ pages:
             href="https://www.sqlite.org/">Sqlite</a> 데이터베이스에 저장되어 있습니다.
             데이터베이스 파일은 <a class="extlink" href="http://www.bzip.org/">bzip2</a>로 압축되어 있습니다.</p>
             <p>만약 이러한 데이터베이스 파일을 다운로드하길 원치 않고, 데이터로 자동 접속이 필요하다면,
-            <a href="/about">API</a>를 사용할 수 있습니다.</p>
+            <a href="about">API</a>를 사용할 수 있습니다.</p>
         file: File
         packed: 압축 후
         unpacked: 압축 전
@@ -285,7 +285,7 @@ pages:
             이 표는 데이터베이스 상에서 자주 쓰이는 태그를 나타냅니다.
     relations:
         name: 관계 유형
-        intro: 관계의 유형에 대한 정보(<a href="/keys/type?filter=relations">type</a> 태그로 표현합니다).
+        intro: 관계의 유형에 대한 정보(<a href="keys/type?filter=relations">type</a> 태그로 표현합니다).
         relations_of_type_tooltip: 이 유형인 관계의 개수(모든 관계의 사용 비율 포함).
         prevalent_roles: 자주 쓰이는 역할
         prevalent_roles_tooltip: 이 유형인 관계에서 자주 쓰이는 역할입니다.

@@ -169,7 +169,7 @@ pages:
                 base de datos, cuántas personas utilizan las etiquetas, donde se utilizan, etc. También
                 consigue información acerca de las etiquetas de la wiki y de otros lugares. Taginfo
                 intenta reunir toda la información acerca de las etiquetas para ayudarle a entender
-                cómo se utilizan y qué significan. Véase una <a href="/sources">lista de fuentes</a>
+                cómo se utilizan y qué significan. Véase una <a href="sources">lista de fuentes</a>
                 que utiliza taginfo.</p>
         about_site:
             title: Acerca de este sitio
@@ -180,7 +180,7 @@ pages:
             api: |
                 <h3>API</h3>
                 <p>Los datos de Taginfo pueden accederse a través de una API REST. Véase la
-                <a href="/taginfo/apidoc">documentación de la API</a> para los detalles, información general se
+                <a href="taginfo/apidoc">documentación de la API</a> para los detalles, información general se
                 encuentra <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">en la wiki de OSM</a>.
                 Los servidores que ejecutan la API de taginfo no tiene recursos ilimitados.
                 Por favor, utilice la API responsablemente. En caso de duda contáctese con los responsables del
@@ -189,7 +189,7 @@ pages:
                 <h3>Descargar</h3>
                 <p>Si desea jugar un poco con los datos utilizados por taginfo, puede descargar los
                 archivos de la base de datos Sqlite actualizados regularmente. Todo el preprocesamiento es hecho para usted.
-                Véase la <a href="/download">página de descargas</a> para obtener una lista de archivos. Tenga en cuenta que
+                Véase la <a href="download">página de descargas</a> para obtener una lista de archivos. Tenga en cuenta que
                 algunos de estos archivos pueden llegar a ser demasiado grandes. Si desea descargar de forma regular,
                 contáctese con los responsables del sitio que está utilizando o hable con nosotros en la lista de correo.</p>
             license: |
@@ -206,7 +206,7 @@ pages:
                 <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Traducciones</h3>
                 <p>Necesitamos traductores para la interfaz de usuario de taginfo. Véase el <a
-                href="/taginfo/translations">resumen de las traducciones</a> para idiomas que necesitan
+                href="taginfo/translations">resumen de las traducciones</a> para idiomas que necesitan
                 algo de trabajo. Más información sobre cómo ayudar se encuentra en la
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">wiki de OSM</a>.</p>
                 <h3>Código</h3>
@@ -246,7 +246,7 @@ pages:
             languages: |
                 <p>Taginfo obtiene información acerca de los diferentes idiomas del mundo, sus códigos, nombres, etc. de varios registros de <a class="extlink" href="https://www.iana.org/">IANA</a> y <a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
-                <p>Proyectos que utilizan etiquetas OSM de alguna manera, tales como editores, mapas, enrutadores, etc. Ver <a href="/projects">la lista de proyectos</a>.</p>
+                <p>Proyectos que utilizan etiquetas OSM de alguna manera, tales como editores, mapas, enrutadores, etc. Ver <a href="projects">la lista de proyectos</a>.</p>
         updates:
             title: Actualizaciones
             intro: Los datos taginfo se actualizan regularmente desde las fuentes.
@@ -260,7 +260,7 @@ pages:
             en bases de datos <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>.
             Los archivos de la base de datos luego se comprimen con <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>Si no desea descargar estas bases de datos, pero necesita acceso automatizado a
-            los datos, también puede utilizar la <a href="/about">API</a>.</p>
+            los datos, también puede utilizar la <a href="about">API</a>.</p>
         file: Archivo
         packed: Comprimido
         unpacked: Sin comprimir
@@ -291,7 +291,7 @@ pages:
                 Esta tabla muestra las etiquetas más comunes en la base de datos.
     relations:
         name: Tipos de relación
-        intro: Información sobre los diferentes tipos de relaciones (indicados por el <a href="/keys/type?filter=relations">tipo</a> de etiqueta).
+        intro: Información sobre los diferentes tipos de relaciones (indicados por el <a href="keys/type?filter=relations">tipo</a> de etiqueta).
         relations_of_type_tooltip: Número de relaciones de este tipo (y como porcentaje de todas las relaciones).
         prevalent_roles: Roles frecuentes
         prevalent_roles_tooltip: Roles frecuentes para este tipo de relación.

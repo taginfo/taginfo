@@ -174,7 +174,7 @@ pages:
                 database, how many people use those tags, where they are used and so on. It
                 also gets information about tags from the wiki and from other places. Taginfo
                 tries to bring together all information about tags to help you understand
-                how they are used and what they mean. See a <a href="/sources">list of sources</a>
+                how they are used and what they mean. See a <a href="sources">list of sources</a>
                 taginfo uses.</p>
         about_site:
             title: About This Site
@@ -185,7 +185,7 @@ pages:
             api: |
                 <h3>API</h3>
                 <p>Taginfo data can be accessed through a REST API. See the
-                <a href="/taginfo/apidoc">API documentation</a> for the details, some general information is
+                <a href="taginfo/apidoc">API documentation</a> for the details, some general information is
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">on the OSM wiki</a>.
                 The servers running the taginfo API do not have unlimited resources.
                 Please use the API responsibly. If in doubt contact the maintainers of the
@@ -194,7 +194,7 @@ pages:
                 <h3>Download</h3>
                 <p>If you want to play around with the data used by taginfo, you can download the
                 regularly updated Sqlite database files. All the preprocessing is done for you.
-                See the <a href="/download">download page</a> for a list of files. Note that
+                See the <a href="download">download page</a> for a list of files. Note that
                 some of these files can get quite large. If you want to download them regularly,
                 contact the maintainers of the site you are using or talk to us on the mailing list.</p>
             license: |
@@ -211,7 +211,7 @@ pages:
                 <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Translations</h3>
                 <p>We need translators for the taginfo user interface. See the <a
-                href="/taginfo/translations">translations overview</a> for languages that need
+                href="taginfo/translations">translations overview</a> for languages that need
                 some work. More information on how to help is on the
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM wiki</a>.</p>
                 <h3>Code</h3>
@@ -251,7 +251,7 @@ pages:
             languages: |
                 <p>Taginfo gets information about the different languages of the world, their codes, names, etc. from several <a class="extlink" href="https://www.iana.org/">IANA</a> and <a class="extlink" href="https://www.unicode.org/">Unicode</a> registries.</p>
             projects: |
-                <p>Projects that use OSM tags in some way, such as editors, maps, routers, etc. See <a href="/projects">the project list</a>.</p>
+                <p>Projects that use OSM tags in some way, such as editors, maps, routers, etc. See <a href="projects">the project list</a>.</p>
             chronology: |
                 <p>Number of keys/tags over time from <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">history planet</a>.</p>
         updates:
@@ -267,7 +267,7 @@ pages:
             in <a class="extlink" href="https://www.sqlite.org/">Sqlite</a> databases.
             The database files are then packed with <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>If you don't want to download these databases, but need automated access to
-            the data, you can also use the <a href="/about">API</a>.</p>
+            the data, you can also use the <a href="about">API</a>.</p>
         file: File
         packed: Packed
         unpacked: Unpacked
@@ -298,7 +298,7 @@ pages:
                 This table shows the most common tags in the database.
     relations:
         name: Relation types
-        intro: Information about the different types of relations (indicated by the <a href="/keys/type?filter=relations">type</a> tag).
+        intro: Information about the different types of relations (indicated by the <a href="keys/type?filter=relations">type</a> tag).
         relations_of_type_tooltip: Number of relations of this type (and as percentage of all relations).
         prevalent_roles: Prevalent roles
         prevalent_roles_tooltip: Prevalent roles for this type of relation.
