@@ -131,8 +131,6 @@
         // size of OSM file, but may need a bit more memory than other values.
         // For really large OSM files (whole planet or large continent)
         // this should be "DenseMmapArray" (or "DenseMemArray" on OSX), otherwise "SparseMemArray".
-        "geodistribution": "FlexMem",
-        // C++ type used for geodistribution
-        "geodistribution_int": "uint16_t"
+        "geodistribution": "FlexMem"
     }
 }
