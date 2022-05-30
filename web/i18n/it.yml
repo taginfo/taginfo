@@ -511,7 +511,7 @@ sources:
         description: Statistiche aggregate rispetto al tempo.
     db:
         name: Database
-        description: Le statistiche riguardanti ogni chiave e tag dal database principale di OSM (file di planet).
+        description: Le statistiche riguardanti ogni chiave e tag dal database principale di OSM.
     wiki:
         name: Wiki
         description: Dati dalle pagine della wiki OSM dei tag e delle chiavi.

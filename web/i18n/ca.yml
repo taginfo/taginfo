@@ -470,7 +470,7 @@ sources:
         description: Estadístiques agregades al llarg del temps.
     db:
         name: Base de dades
-        description: Estadístiques sobre cada clau i cada etiqueta de la base de dades principal d'OSM (fitxer del planeta).
+        description: Estadístiques sobre cada clau i cada etiqueta de la base de dades principal d'OSM.
     wiki:
         name: Wiki
         description: Dades de les pàgines de les etiquetes i claus de la wiki d'OSM.

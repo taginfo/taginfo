@@ -449,7 +449,7 @@ sources:
         description: Збірна статистика за часом.
     db:
         name: Database
-        description: Статистика по кожному ключу і кожному теґу з основної бази OSM (файлу планети).
+        description: Статистика по кожному ключу і кожному теґу з основної бази OSM.
     wiki:
         name: Wiki
         description: Дані з вікі-сторінок за теґами й ключам OSM.

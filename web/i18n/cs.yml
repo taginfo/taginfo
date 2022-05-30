@@ -469,7 +469,7 @@ sources:
         description: Agregovaná statistika v průběhu času.
     db:
         name: Databáze
-        description: Statistiky o každém klíči a každé značce z hlavní databáze OSM (soubor planet).
+        description: Statistiky o každém klíči a každé značce z hlavní databáze OSM.
     wiki:
         name: Wiki
         description: Data ze wiki stránek OSM o značkách a klíčích.

@@ -451,7 +451,7 @@ sources:
         description: Estadísticas globales a través del tiempo.
     db:
         name: Base de datos
-        description: Estadísticas sobre cada clave y cada etiqueta de la base de datos principal de OSM (archivo del planeta).
+        description: Estadísticas sobre cada clave y cada etiqueta de la base de datos principal de OSM.
     wiki:
         name: Wiki
         description: Datos de las páginas de etiqueta y clave de la wiki de OSM.

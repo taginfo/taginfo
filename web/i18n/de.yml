@@ -492,7 +492,7 @@ sources:
         description: Zusammengefaßte Statistiken über die Zeit.
     db:
         name: Datenbank
-        description: Statistik über jeden Key und Tag aus der OSM-Datenbank (Planet-Datei).
+        description: Statistik über jeden Key und Tag aus OSM.
     wiki:
         name: Wiki
         description: Daten von den Tag- und Key-Seiten des OSM-Wikis.
@@ -504,7 +504,7 @@ sources:
         description: Externe Projekte und die OSM-Keys und -Tags, die sie benutzen.
     chronology:
         name: Chronologie
-        description: Anzahl der Keys/Tags über die Zeit (aus dem history planet).
+        description: Anzahl der Keys/Tags über die Zeit.
 
 unicode:
     character: Zeichen

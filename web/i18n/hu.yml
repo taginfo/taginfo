@@ -323,7 +323,7 @@ sources:
         description: Aggregált statisztikák és különféle adatok, amik a taginfo felhasználói felületéhez kellenek.
     db:
         name: Adatbázis
-        description: Statisztikák az egyes kulcsokról és címkékről a fő OSM adatbázisból (planet fájl).
+        description: Statisztikák az egyes kulcsokról és címkékről a fő OSM adatbázisból.
     wiki:
         name: Wiki
         description: Az OSM wiki címke és kulcs leírólapjairól származó adatok.

@@ -398,7 +398,7 @@ sources:
         description: Statystyki zebrane w czasie.
     db:
         name: Database
-        description: Statystyki o każdym kluczu i każdym tagu z głównej bazy OSM (plik planet).
+        description: Statystyki o każdym kluczu i każdym tagu z głównej bazy OSM.
     wiki:
         name: Wiki
         description: Dane z artykułów o tagach z wiki OSM.

@@ -472,7 +472,7 @@ sources:
         description: Aggregate statistics over time.
     db:
         name: Database
-        description: Statistics about each key and each tag from the main OSM database (planet file).
+        description: Statistics about each key and each tag from OSM data.
     wiki:
         name: Wiki
         description: Data from the tag and key pages of the OSM wiki.
@@ -484,7 +484,7 @@ sources:
         description: External projects and the OSM keys/tags they use.
     chronology:
         name: Chronology
-        description: Number of keys/tags over time from history planet.
+        description: Number of keys/tags over time from OSM history data.
 
 unicode:
     character: Char

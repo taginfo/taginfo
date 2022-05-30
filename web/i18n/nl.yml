@@ -465,7 +465,7 @@ sources:
         description: Verzamelde statistieken over tijd.
     db:
         name: Database
-        description: Statistieken over elke sleutel en elke tag van de hoofd OSM database (planet bestand).
+        description: Statistieken over elke sleutel en elke tag van de OSM database.
     wiki:
         name: Wiki
         description: Data van de tag en sleutel paginas van de OSM wiki.
@@ -477,7 +477,7 @@ sources:
         description: Externe projecten en de OSM sleutels/tags die ze gebruiken.
     chronology:
         name: Chronologie
-        description: Aantal sleutels/tags in de loop van de tijd van planet historie.
+        description: Aantal sleutels/tags in de loop van de tijd van OSM.
 
 reports:
     characters_in_keys:

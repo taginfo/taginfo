@@ -470,7 +470,7 @@ sources:
         description: Agrégation des statistiques et des données diverses nécessaire à l'interface utilisateur de taginfo.
     db:
         name: Base de données
-        description: Statistiques pour chaque clé et chaque tag depuis la base de données principale OSM (fichier planet)
+        description: Statistiques pour chaque clé et chaque tag depuis la base de données principale OSM.
     wiki:
         name: Wiki
         description: Clés et valeurs des tags sur le wiki d'OSM.

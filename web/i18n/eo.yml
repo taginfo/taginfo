@@ -413,7 +413,7 @@ sources:
         description: Kolektas statistikojn tra la tempo.
     db:
         name: Datumbazo
-        description: Statistikoj pri ĉiu ŝlosilo kaj etikedo el la ĉefa OSM-datumbazo (Planet OSM).
+        description: Statistikoj pri ĉiu ŝlosilo kaj etikedo el la ĉefa OSM-datumbazo.
     wiki:
         name: Vikio
         description: Datumoj el paĝoj pri etikedoj kaj ŝlosiloj el la OSM-vikio.

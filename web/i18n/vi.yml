@@ -467,7 +467,7 @@ sources:
         description: Thống kê tập hợp lại qua thời gian.
     db:
         name: Cơ sở dữ liệu
-        description: Thống kê về mỗi chìa khóa và mỗi thẻ từ cơ sở dữ liệu OSM chính (tập tin địa cầu).
+        description: Thống kê về mỗi chìa khóa và mỗi thẻ từ cơ sở dữ liệu OSM chính.
     wiki:
         name: Wiki
         description: Dữ liệu từ các trang thẻ và chìa khóa trên wiki OSM.

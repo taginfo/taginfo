@@ -367,7 +367,7 @@ sources:
         description: Estatísticas agregadas e dados miscelâneos necessários para a interface de usuário do taginfo.
     db:
         name: Banco de dados
-        description: Estatísticas sobre cada chave e cada etiqueta a partir do banco de dados principal do OpenStreetMap (arquivo do planeta).
+        description: Estatísticas sobre cada chave e cada etiqueta a partir do banco de dados do OpenStreetMap.
     wiki:
         name: Wiki
         description: Dados colhidos das páginas de etiquetas e chaves da wiki do projeto OpenStreetMap.
