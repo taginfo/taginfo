@@ -32,9 +32,9 @@ update_projects_list() {
 }
 
 import_projects_list() {
-    run_ruby "$SRCDIR/import.rb" "$DATADIR" "$PROJECT_LIST"
-    run_ruby "$SRCDIR/parse.rb" "$DATADIR"
-    run_ruby "$SRCDIR/get_icons.rb" "$DATADIR"
+    run_ruby "-l$DATADIR/import.log" "$SRCDIR/import.rb" "$DATADIR" "$PROJECT_LIST"
+    run_ruby "-l$DATADIR/parse.log" "$SRCDIR/parse.rb" "$DATADIR"
+    run_ruby "-l$DATADIR/get_icons.log" "$SRCDIR/get_icons.rb" "$DATADIR"
 }
 
 main() {
