@@ -45,6 +45,11 @@ INSERT INTO master_stats SELECT * FROM db.stats
 
 -- ============================================================================
 
+.timer on
+.echo on
+
+-- ============================================================================
+
 INSERT INTO db.keys (key) SELECT DISTINCT key FROM wiki.wikipages WHERE key NOT IN (SELECT key FROM db.keys);
 
 UPDATE db.keys SET in_wiki=1    WHERE key IN (SELECT DISTINCT key FROM wiki.wikipages WHERE value IS NULL);
