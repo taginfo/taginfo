@@ -23,9 +23,10 @@ class TaginfoConfig
     # be public. Currently everything that contains local paths is removed.
     def self.sanitized_config
         c = @@config
+        c['paths'] && c.delete('paths')
         c['sources'] && c['sources'].delete('db')
+        c['sources'] && c['sources'].delete('chronology')
         c['logging'] && c['logging'].delete('directory')
-        c['tagstats'] && c['tagstats'].delete('cxxflags')
         return c
     end
 
