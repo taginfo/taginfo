@@ -32,6 +32,8 @@ INSERT INTO sources SELECT 1, 1, * FROM db.source
               UNION SELECT 3, 1, * FROM languages.source
               UNION SELECT 4, 1, * FROM projects.source;
 
+ANALYZE sources;
+
 DROP TABLE IF EXISTS master_stats;
 CREATE TABLE master_stats (
     key   TEXT,
@@ -42,6 +44,8 @@ INSERT INTO master_stats SELECT * FROM db.stats
                    UNION SELECT * FROM wiki.stats
                    UNION SELECT * FROM languages.stats
                    UNION SELECT * FROM projects.stats;
+
+ANALYZE master_stats;
 
 -- ============================================================================
 
@@ -58,6 +62,8 @@ UPDATE db.keys SET in_wiki_en=1 WHERE key IN (SELECT DISTINCT key FROM wiki.wiki
 -- ============================================================================
 
 UPDATE db.keys SET projects=(SELECT projects FROM projects.project_unique_keys WHERE projects.project_unique_keys.key=db.keys.key);
+
+ANALYZE db.keys;
 
 -- ============================================================================
 
@@ -78,6 +84,9 @@ UPDATE projects.project_unique_tags SET count_all=(SELECT count_all FROM tags_co
 
 UPDATE projects.project_unique_tags SET count_all=0 WHERE count_all IS NULL;
 
+ANALYZE projects.project_unique_keys;
+ANALYZE projects.project_unique_tags;
+
 -- ============================================================================
 
 -- too slow, so we drop it for now
@@ -85,6 +94,8 @@ UPDATE projects.project_unique_tags SET count_all=0 WHERE count_all IS NULL;
 
 UPDATE db.tags SET in_wiki=1    WHERE key IN (SELECT DISTINCT key FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*') AND key || '=' || value IN (SELECT DISTINCT tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*');
 UPDATE db.tags SET in_wiki_en=1 WHERE key IN (SELECT DISTINCT key FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en') AND key || '=' || value IN (SELECT DISTINCT tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en');
+
+ANALYZE db.tags;
 
 -- ============================================================================
 
@@ -118,6 +129,8 @@ UPDATE top_tags SET in_wiki_en=1 WHERE skey || '=' || svalue IN (SELECT DISTINCT
 UPDATE top_tags SET projects=(SELECT projects FROM projects.project_unique_tags p WHERE p.key=skey AND p.value=svalue);
 
 CREATE UNIQUE INDEX top_tags_key_value_idx ON top_tags (skey, svalue);
+
+ANALYZE top_tags;
 
 -- ============================================================================
 
@@ -162,6 +175,8 @@ CREATE TABLE popular_metadata (
 INSERT INTO popular_metadata (keys, count_min, count_max, count_delta, users_min, users_max, users_delta)
     SELECT count(*), min(count), max(count), max(count) - min(count), min(users), max(users), max(users) - min(users) FROM popular_keys;
 
+ANALYZE popular_metadata;
+
 UPDATE popular_keys SET scale_count = CAST (count - (SELECT count_min FROM popular_metadata) AS REAL) / (SELECT count_delta FROM popular_metadata);
 UPDATE popular_keys SET scale_users = CAST (users - (SELECT users_min FROM popular_metadata) AS REAL) / (SELECT users_delta FROM popular_metadata);
 UPDATE popular_keys SET scale_wiki  = CAST (wikipages AS REAL) / (SELECT max(wikipages) FROM popular_keys);
@@ -170,11 +185,15 @@ UPDATE popular_keys SET scale_name  = 0 WHERE key LIKE '%:%';
 
 UPDATE popular_keys SET scale1 = 10 * scale_count + 8 * scale_users + 2 * scale_wiki + 2 * scale_name;
 
+ANALYZE popular_keys;
+
 -- ============================================================================
 
 INSERT INTO languages (code) SELECT DISTINCT lang FROM wiki.wikipages WHERE lang NOT IN (SELECT code FROM languages);
 UPDATE languages SET wiki_key_pages=(SELECT count(DISTINCT key) FROM wiki.wikipages WHERE lang=code AND value IS NULL);
 UPDATE languages SET wiki_tag_pages=(SELECT count(DISTINCT key || '=' || value) FROM wiki.wikipages WHERE lang=code AND value IS NOT NULL);
+
+ANALYZE languages;
 
 -- ============================================================================
 
@@ -201,7 +220,6 @@ INSERT INTO suggestions (key, value, count, in_wiki)
 
 UPDATE suggestions SET score = count * (1 + in_wiki * 9);
 
+ANALYZE suggestions;
+
 -- ============================================================================
-
-ANALYZE;
-
