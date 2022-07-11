@@ -177,7 +177,7 @@ end
 def get_filter
     f = params[:filter].to_s == '' ? 'all' : params[:filter]
     if f !~ /^(all|nodes|ways|relations)$/
-        raise ArgumentError, "unknown filter"
+        return 'all'
     end
     f
 end
