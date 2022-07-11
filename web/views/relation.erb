@@ -1,6 +1,6 @@
 <div class="pre ui-helper-clearfix">
     <div id="pre-text">
-        <h1></h1>
+        <h1 data-rtype="<%= h(@rtype) %>"><%= h(t.pages.relation.name) %>: </h1>
         <p><%= @desc %></p>
     </div>
     <div id="toolsmenu"></div>
@@ -79,11 +79,7 @@
 <% javascript do
     JS.raw(<<"JAVASCRIPT")
 function page_init2() {
-    var rtype = #{ @rtype.to_json },
-        roles = #{ @roles.to_json.gsub(/\},/, "},\n") };
-    jQuery('h1').html("#{ t.pages.relation.name } '" + fmt_rtype(rtype) + "'");
-    jQuery('span#taglink').html(link_to_value('type', rtype));
-    init_tabs([rtype]);
+    const roles = #{ @roles.to_json.gsub(/\},/, "},\n") };
     create_role_chart(roles);
 }
 JAVASCRIPT

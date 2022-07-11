@@ -41,5 +41,6 @@ var create_flexigrid_for = {
 
 function page_init() {
     up = function() { window.location = '/projects'; }
-    page_init2();
+    const dataset = document.querySelector('h1').dataset;
+    init_tabs([dataset.project]);
 }

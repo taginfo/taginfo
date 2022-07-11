@@ -252,5 +252,12 @@ function create_role_chart(data) {
 function page_init() {
     up = function() { window.location = '/relations'; };
     activate_josm_button();
+
+    const h1 = document.querySelector('h1');
+    const rtype = h1.dataset.rtype;
+    h1.innerHTML += fmt_rtype(rtype);
+    jQuery('span#taglink').html(link_to_value('type', rtype));
+    init_tabs([rtype]);
+
     page_init2();
 }

@@ -1,6 +1,6 @@
 <div class="pre ui-helper-clearfix">
     <div id="pre-text">
-        <h1></h1>
+        <h1 data-key="<%= h(@key) %>"></h1>
         <p><%= @desc %></p>
     </div>
     <div id="toolsmenu"></div>
@@ -56,7 +56,7 @@
     <div id="overview">
         <div style="float: right; text-align: center; padding-left: 20px;">
             <p><%= h(t.pages.key.overview.distribution_of_values) %></p>
-            <div class="canvas" id="canvas-values"></div>
+            <div class="canvas" id="canvas-values" data-count="<%= @count_all_values %>"></div>
         </div>
 <% if @image_url %>
         <div class="wiki_image">
@@ -143,16 +143,16 @@ function redraw_chart() {
     jQuery('#canvas-values').html('');
     var max_height = jQuery(window).height() - 300;
     create_chart({
-        key: #{ @key.to_json },
+        key: document.querySelector('h1').dataset.key,
         width: 160,
         height: Math.min(440, max_height),
-        max: #{ @count_all_values },
+        max: document.getElementById('canvas-values').dataset.count,
         data: #{ @prevalent_values.to_json() }
     });
 }
 function page_init2() {
-    var filter = #{ @filter_type.to_json },
-        key = #{ @key.to_json };
+    const filter = document.getElementById('filter').value;
+    const key = document.querySelector('h1').dataset.key;
     jQuery('h1').html(fmt_key(key));
 
     if (cookies_enabled()) {

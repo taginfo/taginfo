@@ -1,7 +1,7 @@
 <div class="pre ui-helper-clearfix">
     <div id="pre-text">
         <h1 class="section"><%= h(@title) %></h1>
-        <p><b><%= h(t.pages.search.you_were_searching_for) %>:</b> <%= escape_html(@query) %></p>
+        <p><b><%= h(t.pages.search.you_were_searching_for) %>:</b> <span id="query"><%= h(@query) %></span></p>
     </div>
 </div>
 <div id="tabs">
@@ -14,11 +14,3 @@
         </table>
     </div>
 </div>
-<% javascript do
-    JS.raw(%Q{
-function page_init2() {
-    init_tabs([#{ @query.to_json }]);
-}
-    })
-end
-%>

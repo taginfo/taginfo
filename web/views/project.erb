@@ -1,6 +1,6 @@
 <div class="pre ui-helper-clearfix">
     <div id="pre-text">
-        <h1><%= h(@project['name']) %></h1>
+        <h1 data-project="<%= h(@project_id) %>"><%= h(@project['name']) %></h1>
         <p><%= h(@project['description']) %></p>
     </div>
 </div>
@@ -17,13 +17,21 @@
 <% end %>
                 <%= h(@project['name']) %>
             </td></tr>
-            <tr><th><%= h(t.pages.project.overview.project_url) %>:</th><td id="project_url"></td></tr>
+            <tr>
+                <th><%= h(t.pages.project.overview.project_url) %>:</th>
+                <td id="project_url"><a href="<%= h(@project['project_url']) %>" target="_blank" class="extlink" rel="nofollow"><%= h(@project['project_url']) %></a></td>
+            </tr>
             <tr><th><%= h(t.pages.project.overview.description) %>:</th><td><%= h(@project['description']) %></td></tr>
 <% if @project['doc_url'] %>
-            <tr><th><%= h(t.pages.project.overview.documentation_url) %>:</th><td id="doc_url"></td></tr>
+            <tr><th><%= h(t.pages.project.overview.documentation_url) %>:</th>
+                <td id="doc_url"><a href="<%= h(@project['doc_url']) %>" target="_blank" class="extlink" rel="nofollow"><%= h(@project['doc_url']) %></a></td>
+            </tr>
 <% end %>
             <tr><th><%= h(t.pages.project.overview.last_update) %>:</th><td><%= h(@project['data_updated']) %></td></tr>
-            <tr><th><%= h(t.pages.project.overview.json_url) %>:</th><td id="json_url"></td></tr>
+            <tr>
+                <th><%= h(t.pages.project.overview.json_url) %>:</th>
+                <td id="json_url"><a href="<%= h(@project['json_url']) %>" target="_blank" class="extlink" rel="nofollow"><%= h(@project['json_url']) %></a></td>
+            </tr>
             <tr><th><%= h(t.osm.keys) %>:</th><td><%= h(@project['unique_keys']) %></td></tr>
             <tr><th><%= h(t.osm.tags) %>:</th><td><%= h(@project['unique_tags']) %></td></tr>
         </table>
@@ -36,26 +44,3 @@
         </table>
     </div>
 </div>
-<% javascript do
-    JS.raw(<<"JAVASCRIPT")
-function page_init2() {
-    var project = #{ @project_id.to_json },
-        project_url = #{ @project['project_url'].to_json },
-        json_url = #{ @project['json_url'].to_json },
-        doc_url = #{ @project['doc_url'].to_json };
-
-    if (project_url) {
-        jQuery('#project_url').html(link_to_url_nofollow(project_url));
-    }
-    if (json_url) {
-        jQuery('#json_url').html(link_to_url_nofollow(json_url));
-    }
-    if (doc_url) {
-        jQuery('#doc_url').html(link_to_url_nofollow(doc_url));
-    }
-
-    init_tabs([project]);
-}
-JAVASCRIPT
-end
-%>

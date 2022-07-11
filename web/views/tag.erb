@@ -1,6 +1,6 @@
 <div class="pre ui-helper-clearfix">
     <div id="pre-text">
-        <h1></h1>
+        <h1 data-key="<%= h(@key) %>" data-value="<%= h(@value) %>"></h1>
         <p><%= @desc %></p>
     </div>
     <div id="toolsmenu"></div>
@@ -138,29 +138,3 @@
         </table>
     </div>
 </div>
-<% javascript do
-    JS.raw(<<"JAVASCRIPT")
-function page_init2() {
-    var filter = #{ @filter_type.to_json },
-        key = #{ @key.to_json },
-        value = #{ @value.to_json };
-    up = function() { window.location = url_for_key(key); };
-    jQuery('h1').html(link_to_key(key) + '=' + fmt_value(value));
-
-    if (cookies_enabled()) {
-        comparison_list_update(key, value);
-        jQuery('#list').bind('change', function() {
-            comparison_list_change(key, value);
-        });
-    } else {
-        jQuery('#list-form').html('<span class="empty" style="position: relative; top: 1px;">Enable cookies for comparison function!</span>');
-    }
-
-    jQuery('span#keylink').html(link_to_key(key));
-    jQuery('span#relationlink').html(link_to_rtype(value));
-
-    init_tabs([key, value, filter]);
-}
-JAVASCRIPT
-end
-%>
