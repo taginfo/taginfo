@@ -46,7 +46,8 @@ var create_flexigrid_for = {
             }
         });
     },
-    "bcp47": function(filter_type) {
+    "bcp47": function() {
+        const filter_type = document.getElementById('subtag-filter').value;
         create_flexigrid('grid-bcp47-subtags', {
             url: '/api/0/langtags?filter=' + encodeURIComponent(filter_type),
             colModel: [
@@ -87,5 +88,5 @@ function page_init() {
 
         window.location.search = jQuery.param(qs);
     });
-    page_init2();
+    init_tabs([]);
 }
