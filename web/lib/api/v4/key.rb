@@ -271,6 +271,58 @@ class Taginfo < Sinatra::Base
         )
     end
 
+    api(4, 'key/prevalent_values', {
+        :description => 'Get most prevalent values used with a given key.',
+        :parameters => {
+            :key => 'Tag key (required).',
+            :min_fraction => 'Only return values which are used in at least this percent of all objects with this key (optional, default = 0.01).'
+        },
+        :paging => :no,
+        :filter => {
+            :all       => { :doc => 'No filter.' },
+            :nodes     => { :doc => 'Only values on tags used on nodes.' },
+            :ways      => { :doc => 'Only values on tags used on ways.' },
+            :relations => { :doc => 'Only values on tags used on relations.' }
+        },
+        :result => paging_results([
+            [:value,       :STRING, 'Value'],
+            [:count,       :INT,    'Number of times this key/value is in the OSM database.'],
+            [:fraction,    :FLOAT,  'Number of times in relation to number of times this key is in the OSM database.']
+        ]),
+        :example => { :key => 'highway', :filter => 'ways' },
+        :ui => '/keys/highway#overview',
+        :notes => 'Returns an additional row with <i>value null</i> and <i>count</i> the sum of the counts for all values not listed.'
+    }) do
+        key = params[:key]
+        min_fraction = 0.01
+        if params[:min_fraction]
+            min_fraction = params[:min_fraction].to_f
+        end
+        filter_type = get_filter()
+
+        count_all_values = @db.select("SELECT count_#{filter_type} FROM db.keys").
+            condition('key = ?', key).get_first_i
+
+        res = @db.select("SELECT value, count_#{filter_type} AS count FROM db.tags").
+            condition('key = ?', key).
+            condition('count > ?', (count_all_values * min_fraction).to_i).
+            order_by([:count], 'DESC').
+            execute()
+
+        total = res.inject(0){ |sum, x| sum += x['count'].to_i }
+        if total < count_all_values
+            res << { 'value' => nil, 'count' => count_all_values - total }
+        end
+
+        return generate_json_result(res.length,
+            res.map{ |row| {
+                :value    => row['value'],
+                :count    => row['count'].to_i,
+                :fraction => (row['count'].to_f / count_all_values.to_f).round(4)
+            } }
+        )
+    end
+
     api(4, 'key/wiki_pages', {
         :description => 'Get list of wiki pages in different languages describing a key.',
         :parameters => { :key => 'Tag key (required)' },

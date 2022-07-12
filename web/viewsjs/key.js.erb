@@ -190,6 +190,11 @@ function create_chart(params) {
     params.data.forEach(function(d) {
         d['y'] = y;
         y += d['count'];
+        if (d.value === null) {
+            d.label = '(other)';
+        } else {
+            d.label = d.value;
+        }
     });
 
     var scale = d3.scaleLinear()
@@ -207,7 +212,7 @@ function create_chart(params) {
         .data(params.data)
         .enter()
         .append('svg:a')
-            .attr('href', d => url_for_tag(params.key, d['value']))
+            .attr('href', d => url_for_tag(params.key, d.label))
             .attr('transform', d => 'translate(10, ' + scale(d['y']) + ')')
             .call(function(c) {
                 c.append('rect')
@@ -219,9 +224,21 @@ function create_chart(params) {
                 .attr('x', 25)
                 .attr('y', d => scale(d['count'] / 2))
                 .attr('dy', '0.5em')
-                .text(d => d['value']);
+                .text(d => d.label);
 
     jQuery('svg a[href$="(other)"]').removeAttr('href').css('text-decoration', 'none');
+}
+
+function redraw_chart(prevalent_values) {
+    jQuery('#canvas-values').html('');
+    var max_height = jQuery(window).height() - 300;
+    create_chart({
+        key: document.querySelector('h1').dataset.key,
+        width: 160,
+        height: Math.min(440, max_height),
+        max: document.getElementById('canvas-values').dataset.count,
+        data: prevalent_values
+    });
 }
 
 function page_init() {

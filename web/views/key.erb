@@ -139,17 +139,6 @@
 </div>
 <% javascript do
     JS.raw(<<"JAVASCRIPT")
-function redraw_chart() {
-    jQuery('#canvas-values').html('');
-    var max_height = jQuery(window).height() - 300;
-    create_chart({
-        key: document.querySelector('h1').dataset.key,
-        width: 160,
-        height: Math.min(440, max_height),
-        max: document.getElementById('canvas-values').dataset.count,
-        data: #{ @prevalent_values.to_json() }
-    });
-}
 function page_init2() {
     const filter = document.getElementById('filter').value;
     const key = document.querySelector('h1').dataset.key;
@@ -166,8 +155,13 @@ function page_init2() {
 
     init_tabs([key, filter, #{ r18n.locale.code.to_json }]);
 
-    redraw_chart();
-    jQuery(window).resize(redraw_chart);
+    jQuery.getJSON('/api/4/key/prevalent_values?min_fraction=0.02&key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter), function(data) {
+        const prevalent_values = data.data;
+        redraw_chart(prevalent_values);
+        jQuery(window).resize(function() {
+            redraw_chart(prevalent_values);
+        });
+    });
 }
 JAVASCRIPT
 end
