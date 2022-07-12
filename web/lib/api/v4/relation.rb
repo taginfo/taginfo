@@ -5,7 +5,8 @@ class Taginfo < Sinatra::Base
         :description => 'Member role statistics for a relation of given type.',
         :parameters => {
             :rtype => 'Relation type (required).',
-            :query => 'Only show results where the role matches this query (substring match, optional).'
+            :query => 'Only show results where the role matches this query (substring match, optional).',
+            :min_fraction => 'Only return roles which are used in at least this percent of all members (optional).'
         },
         :paging => :optional,
         :sort => %w( role count_all_members count_node_members count_way_members count_relation_members ),
@@ -22,7 +23,8 @@ class Taginfo < Sinatra::Base
             [:count_relation_members_fraction, :FLOAT,  'Number of members of type relation with this role devided by all members of type relation.']
         ]),
         :example => { :rtype => 'multipolygon', :page => 1, :rp => 10 },
-        :ui => '/relations/multipolygon#roles'
+        :ui => '/relations/multipolygon#roles',
+        :notes => 'If the <i>query</i> parameter is not set and the <i>min_fraction</i> parameter is set and paging is disabled, the first row returned will have the role <i>null</i> and the counts are added up from all the results not shown due to the <i>min_fraction</i> parameter.'
     }) do
         rtype = params[:rtype]
 
@@ -30,14 +32,20 @@ class Taginfo < Sinatra::Base
             condition("rtype=?", rtype).
             execute()[0]
 
+        if params[:min_fraction]
+            min_count = params[:min_fraction].to_f * relation_type_info['members_all'].to_f
+        end
+
         total = @db.count('relation_roles').
             condition("rtype=?", rtype).
             condition_if("role LIKE ? ESCAPE '@'", like_contains(params[:query])).
+            condition_if("count_all >= ?", min_count).
             get_first_i
 
         res = @db.select('SELECT * FROM relation_roles').
             condition("rtype=?", rtype).
             condition_if("role LIKE ? ESCAPE '@'", like_contains(params[:query])).
+            condition_if("count_all >= ?", min_count).
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.role
                 o.count_all_members      :count_all
@@ -47,6 +55,14 @@ class Taginfo < Sinatra::Base
             }.
             paging(@ap).
             execute()
+
+        if min_count and not params[:query] and not @ap.do_paging?
+            row = @db.execute('SELECT rtype, NULL AS role, sum(count_all) AS count_all, sum(count_nodes) AS count_nodes, sum(count_ways) AS count_ways, sum(count_relations) AS relations FROM relation_roles WHERE rtype=? AND count_all < ? GROUP BY rtype', rtype, min_count).first
+            if row and row['count_all'].to_i > 0
+                res.unshift(row)
+                total += 1
+            end
+        end
 
         return generate_json_result(total,
             res.map{ |row| {

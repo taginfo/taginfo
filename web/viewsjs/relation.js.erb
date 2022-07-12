@@ -112,10 +112,35 @@ var create_flexigrid_for = {
     }
 };
 
-function create_role_chart(data) {
-    if (data.length == 0) {
+function create_role_chart(roles) {
+    if (roles.total == 0) {
         return;
     }
+
+    var data = [];
+    roles.data.forEach(function(r) {
+        ['node', 'way', 'relation'].forEach(function(type) {
+            const count = r['count_' + type + '_members'];
+
+            var title = '' + count + ' member ' + type + 's with ';
+            var label;
+            if (r.role === null) {
+                title += "other roles";
+                label = '...';
+            } else {
+                title += "role '" + r.role + "'";
+                label = r.role == '' ? '(empty)' : r.role;
+            }
+
+            data.push({
+                role: r.role,
+                type: type + 's',
+                value: count,
+                label: label,
+                title: title
+            });
+        });
+    });
 
     var width = 800,
         height = 360,
@@ -148,14 +173,7 @@ function create_role_chart(data) {
             .enter().append('a')
                 .attr('class', 'role')
                 .style('text-decoration', 'none')
-                .attr("xlink:title", function(d) {
-                    var str = '' + d.data.value + ' member ' + d.data.type + ' with ';
-                    if (d.data.role == '...') {
-                        return str + "other roles";
-                    } else {
-                        return str + "role '" + d.data.role + "'";
-                    }
-                })
+                .attr("xlink:title", d => d.data.title)
                 .call(function(c) {
                     c.append("rect")
                         .attr('x', d => d.x0)
@@ -171,7 +189,7 @@ function create_role_chart(data) {
                         .style("fill", "#fff")
                         .text(function(d) {
                             if (d.x1 - d.x0 > 40 && d.y1 - d.y0 > 10) {
-                                return d.data.role == '' ? '(empty)' : d.data.role;
+                                return d.data.label;
                             } else {
                                 return '';
                             }
@@ -259,5 +277,7 @@ function page_init() {
     jQuery('span#taglink').html(link_to_value('type', rtype));
     init_tabs([rtype]);
 
-    page_init2();
+    jQuery.getJSON('/api/4/relation/roles?sortname=count_all_members&sortorder=asc&min_fraction=0.01&rtype=' + encodeURIComponent(rtype), function(roles) {
+        create_role_chart(roles);
+    });
 }

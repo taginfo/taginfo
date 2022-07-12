@@ -76,12 +76,3 @@
         </table>
     </div>
 </div>
-<% javascript do
-    JS.raw(<<"JAVASCRIPT")
-function page_init2() {
-    const roles = #{ @roles.to_json.gsub(/\},/, "},\n") };
-    create_role_chart(roles);
-}
-JAVASCRIPT
-end
-%>
