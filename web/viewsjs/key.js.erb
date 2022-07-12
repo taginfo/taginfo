@@ -254,5 +254,26 @@ function page_init() {
         window.location.search = jQuery.param(qs);
     });
 
-    page_init2();
+    const filter = document.getElementById('filter').value;
+    const key = document.querySelector('h1').dataset.key;
+    jQuery('h1').html(fmt_key(key));
+
+    if (cookies_enabled()) {
+        comparison_list_update(key);
+        jQuery('#list').bind('change', function() {
+            comparison_list_change(key);
+        });
+    } else {
+        jQuery('#list-form').html('<span class="empty" style="position: relative; top: 1px;">Enable cookies for comparison function!</span>');
+    }
+
+    init_tabs([key, filter, '<%= r18n.locale.code %>']);
+
+    jQuery.getJSON('/api/4/key/prevalent_values?min_fraction=0.02&key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter), function(data) {
+        const prevalent_values = data.data;
+        redraw_chart(prevalent_values);
+        jQuery(window).resize(function() {
+            redraw_chart(prevalent_values);
+        });
+    });
 }
