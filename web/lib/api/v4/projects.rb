@@ -123,7 +123,7 @@ class Taginfo < Sinatra::Base
             [:count_all,          :INT,    'Number of objects in the OSM database with this tag.'],
             [:count_all_fraction, :FLOAT,  'Number of objects in relation to all objects.']
         ]),
-        :example => { :page => 1, :rp => 10, :sortname => 'key', :sortorder => 'asc' },
+        :example => { :page => 1, :rp => 10, :sortname => 'tag', :sortorder => 'asc' },
         :ui => '/projects#tags'
     }) do
         q = like_contains(params[:query])
