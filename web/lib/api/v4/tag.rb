@@ -305,7 +305,12 @@ class Taginfo < Sinatra::Base
                 [:key,              :STRING, 'The tag key that was requested.'],
                 [:value,            :STRING, 'The tag value that was requested.'],
                 [:projects,         :INT, 'Number of projects mentioning this tag.'],
-                [:wiki_pages,       :ARRAY_OF_STRINGS, 'Language codes for which wiki pages about this tag are available.'],
+                [:wiki_pages,       :ARRAY_OF_HASHES, 'Language codes for which wiki pages about this tag are available.', [
+                    [:lang,    :STRING, 'Language code.'],
+                    [:english, :STRING, 'English name of this language.'],
+                    [:native,  :STRING, 'Native name of this language.'],
+                    [:dir,     :STRING, 'Printing direction for native name ("ltr", "rtl", or "auto")'],
+                ]],
                 [:has_map,          :BOOL, 'Is a map with the geographical distribution of this tag available?'],
                 [:counts,           :ARRAY_OF_HASHES, 'Objects counts.', [
                     [:type,           :STRING, 'Object type ("all", "nodes", "ways", or "relations")'],
@@ -341,7 +346,15 @@ class Taginfo < Sinatra::Base
             end
         end
 
-        data[:wiki_pages] = @db.select("SELECT DISTINCT lang FROM wiki.wikipages WHERE key=? AND value=? ORDER BY lang", key, value).execute().map{ |row| row['lang'] }
+        data[:wiki_pages] = @db.select("SELECT DISTINCT lang FROM wiki.wikipages WHERE key=? AND value=? ORDER BY lang", key, value).execute().map do |row|
+            lang = row['lang']
+            {
+                :lang    => lang,
+                :english => ::Language[lang].english_name,
+                :native  => ::Language[lang].native_name,
+                :dir     => direction_from_lang_code(lang)
+            }
+        end
 
         data[:projects] = @db.select("SELECT projects FROM projects.project_unique_tags WHERE key=? AND value=?", key, value).execute().map{ |row| row['projects'] }[0] || 0
 

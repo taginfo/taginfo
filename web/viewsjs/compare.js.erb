@@ -1,3 +1,6 @@
+<%
+    misc = @trans.t.misc
+%>
 function page_init() {
     up = function() { window.location = '/'; }
     const datasets = Array.from(document.querySelectorAll('h2'), s => s.dataset);
@@ -48,13 +51,21 @@ function data_complete(datasets, results) {
             jQuery('.item' + index + ' h2').html(link_to_tag(item.key, item.value));
         } else {
             jQuery('.item' + index + ' h2').html(link_to_key(item.key));
-            jQuery('.item' + index + '.prevalent_values p b').html('<%= h(t.misc.prevalent_values) %>:');
-            jQuery('.item' + index + '.prevalent_values div').html(fmt_prevalent_value_list(item.key, item.prevalent_values));
+            if (item.prevalent_values) {
+                jQuery('.item' + index + '.prevalent_values div b').text('<%= h(misc.prevalent_values) %>:');
+                jQuery('.item' + index + '.prevalent_values div.data').html(fmt_prevalent_value_list(item.key, item.prevalent_values));
+            }
         }
-        jQuery('.item' + index + '.projects p').append(item.projects);
+        jQuery('.item' + index + '.projects div').append(item.projects);
         jQuery('.item' + index + '.counts table td').each(function(index, c) {
             c.innerHTML = fmt_with_ts(item.counts[index].count);
         });
+        jQuery('.item' + index + '.wiki div.data').append(item.wiki_pages.map(
+            w => tag('span', html_escape(w.lang), {
+                'class': 'badge lang',
+                title: html_escape(w.native + ' (' + w.english + ')')
+            })
+        ).join(' '));
     });
     jQuery('div.prevalent_values a').tipsy({ opacity: 1, delayIn: 500, gravity: 'w' });
     jQuery('span.lang').tipsy({ opacity: 1, delayIn: 500, gravity: 'n' });

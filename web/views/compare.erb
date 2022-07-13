@@ -1,4 +1,4 @@
-<% @css = <<'CSS'
+<% @css = <<"CSS"
 .comparison {
     display: grid;
     grid-template-rows: repeat(6, auto);
@@ -28,18 +28,27 @@
     margin-right: 20px;
 }
 
-.comparison div {
+.comparison > div {
     padding: 10px;
     background-color: #e8e8e4;
     text-align: center;
 }
 
-.comparison div.title {
+.comparison > div.title {
     border-radius: 10px 10px 0 0;
+    min-height: 9ex;
 }
 
-.comparison div.map {
+.comparison > div.map {
     border-radius: 0 0 10px 10px;
+}
+
+.comparison > div.map div {
+    background-image: url(#{ @taginfo_config.get('geodistribution.background_image') });
+    background-repeat: no-repeat;
+    background-position: center 2px;
+    background-size: #{ @img_width }px #{ @img_height }px;
+    position: relative;
 }
 
 table.compstat {
@@ -75,6 +84,7 @@ CSS
 <% else %>
 <div class="comparison">
 <% @data.each_with_index do |data, num| %>
+    <% key_or_tag = data[:value].nil? ? 'key' : 'tag' %>
     <div class="title item<%= num %>">
         <a class="close ui-icon ui-icon-closethick" href="#"></a>
         <h2 data-key="<%= h(data[:key]) %>"
@@ -82,7 +92,7 @@ CSS
     data-value="<%= h(data[:value]) %>"
 <% end %>
         ></h2>
-        <p lang="<%= data[:lang] %>" dir="<%= data[:dir] %>"><%= data[:desc] %></p>
+        <div lang="<%= data[:lang] %>" dir="<%= data[:dir] %>"><%= data[:desc] %></div>
     </div>
     <div class="counts item<%= num %>">
         <table class="compstat">
@@ -93,20 +103,19 @@ CSS
         </table>
     </div>
     <div class="prevalent_values item<%= num %>">
-        <p><b></b></p>
-        <div></div>
+        <div><b></b></div>
+        <div class="data"></div>
     </div>
     <div class="wiki item<%= num %>">
-        <p><b><%= data[:value].nil? ? h(t.pages.key.wiki_pages.title) : h(t.pages.tag.wiki_pages.title) %>:</b></p>
-        <%= data[:wiki_pages].map{ |lang| '<span class="lang" title="' + ::Language[lang].native_name.to_s + '">' + lang + '</span>' }.join(' ') %>
+        <div><b><%= h(t.pages[key_or_tag].wiki_pages.title) %>:</b></div>
+        <div class="data"></div>
     </div>
     <div class="projects item<%= num %>">
-        <p><b><%= data[:value].nil? ? h(t.pages.key.projects.title) : h(t.pages.tag.projects.title) %>:</b> </p>
+        <div><b><%= h(t.pages[key_or_tag].projects.title) %>:</b> </div>
     </div>
     <div class="map item<%= num %>">
 <% if data[:has_map] %>
-        <div style="background-image: url(<%= @taginfo_config.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: center 11px; background-size: <%= @img_width %>px <%= @img_height %>px; position: relative;"/>
-            <% key_or_tag = data[:value].nil? ? 'key' : 'tag' %>
+        <div>
             <img class="map" src="/api/4/<%= key_or_tag %>/distribution/nodes?key=<%= data[:key] %><%= data[:value].nil? ? '' : ('&amp;value=' + data[:value]) %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>" style="position: absolute;"/>
             <img class="map" src="/api/4/<%= key_or_tag %>/distribution/ways?key=<%= data[:key] %><%= data[:value].nil? ? '' : ('&amp;value=' + data[:value]) %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
             <div class="note"><%= @taginfo_config.get('geodistribution.image_attribution') %></div>

@@ -481,7 +481,12 @@ class Taginfo < Sinatra::Base
                 [:key,              :STRING, 'The tag key that was requested.'],
                 [:projects,         :INT, 'Number of projects mentioning this key.'],
                 [:users,            :INT, 'Number of users last editing objects with this key.'],
-                [:wiki_pages,       :ARRAY_OF_STRINGS, 'Language codes for which wiki pages about this key are available.'],
+                [:wiki_pages,       :ARRAY_OF_HASHES, 'Language codes for which wiki pages about this key are available.', [
+                    [:lang,    :STRING, 'Language code.'],
+                    [:english, :STRING, 'English name of this language.'],
+                    [:native,  :STRING, 'Native name of this language.'],
+                    [:dir,     :STRING, 'Printing direction for native name ("ltr", "rtl", or "auto")'],
+                ]],
                 [:has_map,          :BOOL, 'Is a map with the geographical distribution of this key available?'],
                 [:counts,           :ARRAY_OF_HASHES, 'Objects counts.', [
                     [:type,           :STRING, 'Object type ("all", "nodes", "ways", or "relations")'],
@@ -530,7 +535,15 @@ class Taginfo < Sinatra::Base
             order_by([:count], 'DESC').
             execute().map{ |row| { 'value' => row['value'], 'count' => row['count'].to_i, 'fraction' => row['fraction'].to_f } }
 
-        data[:wiki_pages] = @db.select("SELECT DISTINCT lang FROM wiki.wikipages WHERE key=? AND value IS NULL ORDER BY lang", key).execute().map{ |row| row['lang'] }
+        data[:wiki_pages] = @db.select("SELECT DISTINCT lang FROM wiki.wikipages WHERE key=? AND value IS NULL ORDER BY lang", key).execute().map do |row|
+            lang = row['lang']
+            {
+                :lang    => lang,
+                :english => ::Language[lang].english_name,
+                :native  => ::Language[lang].native_name,
+                :dir     => direction_from_lang_code(lang)
+            }
+        end
 
         data[:has_map] = data[:counts][0][:count] > 0
 
