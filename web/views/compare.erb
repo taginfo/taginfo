@@ -128,8 +128,7 @@ CSS
     <tr>
         <% @data.each_with_index do |data, num| %>
         <td class="data item<%= num %> projects">
-            <p><b><%= data[:value].nil? ? h(t.pages.key.projects.title) : h(t.pages.tag.projects.title) %>:</b>
-            <%= data[:projects] %></p>
+            <p><b><%= data[:value].nil? ? h(t.pages.key.projects.title) : h(t.pages.tag.projects.title) %>:</b> </p>
         </td>
         <% end %>
     </tr>
