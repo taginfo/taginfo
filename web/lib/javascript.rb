@@ -46,7 +46,7 @@ class Javascript
 
     def to_html
         if @file.nil?
-            %Q{    <script type="text/javascript">//<![CDATA[\n#{ @content }//]]></script>}
+            %Q{    <script type="text/javascript">\n#{ @content }\n</script>}
         else
             %Q{    <script type="text/javascript" src="/js/#{ @file }.js"></script>}
         end
@@ -80,25 +80,6 @@ class JQuery
             :rpOptions     => [10,15,20,25,50,100],
         }
         "jQuery('##{id}').flexigrid(" + defaults.merge(options).to_json + ");\n"
-    end
-
-end
-
-class JS
-
-    #
-    #  Careful, deep magic!
-    #
-    #  We redefine the to_json method of the String argument to return
-    #  the raw string. This way we can do JS.raw("foo").to_json and get "foo".
-    #
-    def self.raw(code)
-       code.instance_eval do
-          def to_json(state=nil)
-              to_s
-          end
-       end
-       code
     end
 
 end
