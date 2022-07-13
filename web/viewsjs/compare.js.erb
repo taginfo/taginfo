@@ -1,4 +1,57 @@
 function page_init() {
     up = function() { window.location = '/'; }
-    page_init2();
+    const datasets = Array.from(document.querySelectorAll('h2'), s => s.dataset);
+    var results = {};
+    var todo = datasets.length;
+
+    datasets.forEach(function(d) {
+        if (d.value) {
+            jQuery.getJSON('/api/4/tag/overview?key=' + encodeURIComponent(d.key) + '&value=' + encodeURIComponent(d.value), function(data) {
+                results[d.key + '\0' + d.value] = data.data;
+                todo -= 1;
+                if (todo == 0) {
+                    data_complete(datasets, results);
+                }
+            });
+        } else {
+            jQuery.getJSON('/api/4/key/overview?key=' + encodeURIComponent(d.key), function(data) {
+                data.data.value = null;
+                results[d.key] = data.data;
+                todo -= 1;
+                if (todo == 0) {
+                    data_complete(datasets, results);
+                }
+            });
+        }
+    });
+}
+
+function data_complete(datasets, results) {
+    var data = datasets.map(function(d) {
+        if (d.value) {
+            return results[d.key + '\0' + d.value];
+        }
+        return results[d.key]
+    });
+
+    set_comparison_list(data.map( d => [d.key, d.value] ));
+
+    jQuery.each(data, function(index, item) {
+        var datac = [];
+        jQuery.each(data, function(i, item) {
+            if (i != index) {
+                datac.push([item['key'], item['value']]);
+            }
+        });
+        jQuery('.item' + index + ' a.close').attr('href', comparison_list_url(datac));
+        if (item.value) {
+            jQuery('.item' + index + ' h2').html(link_to_tag(item.key, item.value));
+        } else {
+            jQuery('.item' + index + ' h2').html(link_to_key(item.key));
+            jQuery('.item' + index + '.prevalent_values p b').html('<%= h(t.misc.prevalent_values) %>:');
+            jQuery('.item' + index + '.prevalent_values div').html(fmt_prevalent_value_list(item.key, item.prevalent_values));
+        }
+    });
+    jQuery('div.prevalent_values a').tipsy({ opacity: 1, delayIn: 500, gravity: 'w' });
+    jQuery('span.lang').tipsy({ opacity: 1, delayIn: 500, gravity: 'n' });
 }

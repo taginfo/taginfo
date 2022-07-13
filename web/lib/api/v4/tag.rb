@@ -291,4 +291,68 @@ class Taginfo < Sinatra::Base
         return generate_json_result(data.size(), data);
     end
 
+    api(4, 'tag/overview', {
+        :description => 'Show various data for given tag.',
+        :parameters => {
+            :key => 'Tag key (required).',
+            :value => 'Tag value (required).'
+        },
+        :result => [
+            [ :total,      :INT, 'Total number of results (always 1).' ],
+            [ :url,        :STRING, 'URL of the request.' ],
+            [ :data_until, :STRING, 'All changes in the source until this date are reflected in this taginfo result.' ],
+            [ :data,       :HASH, 'Hash with data.', [
+                [:key,              :STRING, 'The tag key that was requested.'],
+                [:value,            :STRING, 'The tag value that was requested.'],
+                [:projects,         :INT, 'Number of projects mentioning this tag.'],
+                [:wiki_pages,       :ARRAY_OF_STRINGS, 'Language codes for which wiki pages about this tag are available.'],
+                [:has_map,          :BOOL, 'Is a map with the geographical distribution of this tag available?'],
+                [:counts,           :ARRAY_OF_HASHES, 'Objects counts.', [
+                    [:type,           :STRING, 'Object type ("all", "nodes", "ways", or "relations")'],
+                    [:count,          :INT,    'Number of objects with this type and tag.'],
+                    [:count_fraction, :FLOAT,  'Number of objects in relation to all objects.']
+                ]],
+                [:description,      :HASH_OF_HASHES, 'Description of this tag (hash key is language code).', [
+                    [:text, :STRING, 'Description text.' ],
+                    [:dir,  :STRING, 'Printing direction for this language ("ltr", "rtl", or "auto").' ]
+                ]],
+            ]]
+        ],
+        :example => { :key => 'amenity', :value => 'restaurant' },
+        :ui => '/tags/amenity=restaurant#overview'
+    }) do
+        key = params[:key]
+        value = params[:value]
+        data = { :key => key, :value => value, :counts => [] }
+
+        # default values
+        ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
+            data[:counts][n] = { :type => type, :count => 0, :count_fraction => 0.0 }
+        end
+
+        row = @db.select("SELECT count_all, count_nodes, count_ways, count_relations FROM db.tags").condition('key=? AND value=?', key, value).get_first_row()
+        if row
+            ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
+                data[:counts][n] = {
+                    :type           => type,
+                    :count          => row['count_' + type].to_i,
+                    :count_fraction => (row['count_' + type].to_f / get_total(type)).round(4)
+                }
+            end
+        end
+
+        data[:wiki_pages] = @db.select("SELECT DISTINCT lang FROM wiki.wikipages WHERE key=? AND value=? ORDER BY lang", key, value).execute().map{ |row| row['lang'] }
+
+        data[:projects] = @db.select("SELECT projects FROM projects.project_unique_tags WHERE key=? AND value=?", key, value).execute().map{ |row| row['projects'] }[0] || 0
+
+        data[:has_map] = (@db.count('tag_distributions').condition('key=? AND value=?', key, value).get_first_i > 0)
+
+        data[:description] = {}
+        @db.select("SELECT description, lang FROM wiki.wikipages WHERE key=? AND value=? AND description IS NOT NULL ORDER BY lang", key, value).execute().each{ |row|
+            data[:description][row['lang']] = { :text => row['description'], :dir => direction_from_lang_code(row['lang']) }
+        }
+
+
+        return generate_json_result(1, data);
+    end
 end

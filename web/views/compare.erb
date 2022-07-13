@@ -68,7 +68,11 @@ CSS
         <% @data.each_with_index do |data, num| %>
         <td class="data first item<%= num %>" style="width: <%= 100/@data.size %>%">
             <a class="close ui-icon ui-icon-closethick" href="#"></a>
-            <h2></h2>
+            <h2 data-key="<%= h(data[:key]) %>"
+<% if data[:value] %>
+    data-value="<%= h(data[:value]) %>"
+<% end %>
+            ></h2>
             <p lang="<%= data[:lang] %>" dir="<%= data[:dir] %>"><%= data[:desc] %></p>
         </td>
         <% end %>
@@ -150,34 +154,3 @@ CSS
     </tr>
 </table>
 <% end %>
-<% javascript do
-    JS.raw(<<"JAVASCRIPT")
-function page_init2() {
-    var data = #{ @data.to_json };
-    var items = []
-    jQuery.each(data, function(index, item) {
-        items.push([ item.key, (item.value === null ? undefined : item.value) ]);
-    });
-    set_comparison_list(items);
-    jQuery.each(data, function(index, item) {
-        var datac = [];
-        jQuery.each(data, function(i, item) {
-            if (i != index) {
-                datac.push([item['key'], item['value']]);
-            }
-        });
-        jQuery('.item' + index + ' a.close').attr('href', comparison_list_url(datac));
-        if (item.value) {
-            jQuery('.item' + index + ' h2').html(link_to_tag(item.key, item.value));
-        } else {
-            jQuery('.item' + index + ' h2').html(link_to_key(item.key));
-            jQuery('.item' + index + '.prevalent_values p b').html('#{ h(t.misc.prevalent_values)}:');
-            jQuery('.item' + index + '.prevalent_values div').html(fmt_prevalent_value_list(item.key, item.prevalent_values));
-        }
-    });
-    jQuery('div.prevalent_values a').tipsy({ opacity: 1, delayIn: 500, gravity: 'w' });
-    jQuery('span.lang').tipsy({ opacity: 1, delayIn: 500, gravity: 'n' });
-}
-JAVASCRIPT
-end
-%>
