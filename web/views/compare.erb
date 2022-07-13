@@ -1,10 +1,13 @@
 <% @css = <<'CSS'
-table.comparison {
-    border-spacing: 10px 1px;
-    margin: 0 -10px 10px -10px;
+.comparison {
+    display: grid;
+    grid-template-rows: repeat(6, auto);
+    grid-auto-flow: column;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1px 10px;
 }
 
-table.comparison a.close {
+.comparison a.close {
     float: right;
     display: block;
     width: 16px;
@@ -13,11 +16,11 @@ table.comparison a.close {
     border-radius: 4px;
 }
 
-table.comparison a.close:hover {
+.comparison a.close:hover {
     border: 1px solid #d0d0d0;
 }
 
-table.comparison td.data h2 {
+.comparison div h2 {
     position: relative;
     clear: both;
     top: -12px;
@@ -25,35 +28,42 @@ table.comparison td.data h2 {
     margin-right: 20px;
 }
 
-table.comparison th.data, table.comparison td.data {
+.comparison div {
     padding: 10px;
     background-color: #e8e8e4;
-    vertical-align: top;
     text-align: center;
 }
 
-table.comparison td.first {
+.comparison div.title {
     border-radius: 10px 10px 0 0;
 }
 
-table.comparison td.last {
+.comparison div.map {
     border-radius: 0 0 10px 10px;
 }
 
 table.compstat {
-    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 table.compstat th {
     white-space: nowrap;
     text-align: left;
-    width: 25%;
+    min-width: 7em;
+}
+
+table.compstat th img {
+    position: relative;
+    top: 3px;
+    height: 16px;
+    width: 16px;
 }
 
 table.compstat td {
     white-space: nowrap;
     text-align: right;
-    width: 25%;
+    min-width: 7em;
 }
 CSS
 %>
@@ -63,93 +73,57 @@ CSS
 <% if @data.size == 0 %>
 <p class="empty"><%= h(t.pages.compare.nothing_to_compare) %></p>
 <% else %>
-<table class="comparison">
-    <tr>
-        <% @data.each_with_index do |data, num| %>
-        <td class="data first item<%= num %>" style="width: <%= 100/@data.size %>%">
-            <a class="close ui-icon ui-icon-closethick" href="#"></a>
-            <h2 data-key="<%= h(data[:key]) %>"
+<div class="comparison">
+<% @data.each_with_index do |data, num| %>
+    <div class="title item<%= num %>">
+        <a class="close ui-icon ui-icon-closethick" href="#"></a>
+        <h2 data-key="<%= h(data[:key]) %>"
 <% if data[:value] %>
     data-value="<%= h(data[:value]) %>"
 <% end %>
-            ></h2>
-            <p lang="<%= data[:lang] %>" dir="<%= data[:dir] %>"><%= data[:desc] %></p>
-        </td>
-        <% end %>
-    </tr>
-    <tr>
-        <% @data.each_with_index do |data, num| %>
-        <td class="data item<%= num %>">
-            <table class="compstat">
-                <tr>
-                    <td class="spacer"></td>
-                    <th><img width="16" height="16" alt="" src="/img/types/all.svg"/> <%= h(t.osm.all) %></th>
-                    <td><%= data[:count_all].to_s_with_ts %></td>
-                    <td class="spacer"></td>
-                </tr>
-                <tr>
-                    <td class="spacer"></td>
-                    <th><img width="16" height="16" alt="" src="/img/types/node.svg"/> <%= h(t.osm.nodes) %></th>
-                    <td><%= data[:count_nodes].to_s_with_ts %></td>
-                    <td class="spacer"></td>
-                </tr>
-                <tr>
-                    <td class="spacer"></td>
-                    <th><img width="16" height="16" alt="" src="/img/types/way.svg"/> <%= h(t.osm.ways) %></th>
-                    <td><%= data[:count_ways].to_s_with_ts %></td>
-                    <td class="spacer"></td>
-                </tr>
-                <tr>
-                    <td class="spacer"></td>
-                    <th><img width="16" height="16" alt="" src="/img/types/relation.svg"/> <%= h(t.osm.relations) %></th>
-                    <td><%= data[:count_relations].to_s_with_ts %></td>
-                    <td class="spacer"></td>
-                </tr>
-            </table>
-        </td>
-        <% end %>
-    </tr>
-    <tr>
-        <% @data.each_with_index do |data, num| %>
-        <td class="data item<%= num %> prevalent_values">
-            <p><b></b></p>
-            <div></div>
-        </td>
-        <% end %>
-    </tr>
-    <tr>
-        <% @data.each_with_index do |data, num| %>
-        <td class="data item<%= num %> wiki">
-            <p><b><%= data[:value].nil? ? h(t.pages.key.wiki_pages.title) : h(t.pages.tag.wiki_pages.title) %>:</b></p>
-            <%= data[:wiki_pages].map{ |lang| '<span class="lang" title="' + ::Language[lang].native_name.to_s + '">' + lang + '</span>' }.join(' ') %>
-        </td>
-        <% end %>
-    </tr>
-    <tr>
-        <% @data.each_with_index do |data, num| %>
-        <td class="data item<%= num %> projects">
-            <p><b><%= data[:value].nil? ? h(t.pages.key.projects.title) : h(t.pages.tag.projects.title) %>:</b> </p>
-        </td>
-        <% end %>
-    </tr>
-    <tr>
-        <% @data.each_with_index do |data, num| %>
-        <td class="data item<%= num %> map">
-            <% if data[:has_map] %>
-            <div style="background-image: url(<%= @taginfo_config.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: center 4px; background-size: <%= @img_width %>px <%= @img_height %>px; position: relative;"/>
-                <% key_or_tag = data[:value].nil? ? 'key' : 'tag' %>
-                <img class="map" src="/api/4/<%= key_or_tag %>/distribution/nodes?key=<%= data[:key] %><%= data[:value].nil? ? '' : ('&amp;value=' + data[:value]) %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>" style="position: absolute;"/>
-                <img class="map" src="/api/4/<%= key_or_tag %>/distribution/ways?key=<%= data[:key] %><%= data[:value].nil? ? '' : ('&amp;value=' + data[:value]) %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
-                <div class="note"><%= @taginfo_config.get('geodistribution.image_attribution') %></div>
-            </div>
-            <% end %>
-        </td>
-        <% end %>
-    </tr>
-    <tr>
-        <% @data.each_with_index do |data, num| %>
-        <td class="data last"></td>
-        <% end %>
-    </tr>
-</table>
+        ></h2>
+        <p lang="<%= data[:lang] %>" dir="<%= data[:dir] %>"><%= data[:desc] %></p>
+    </div>
+    <div class="counts item<%= num %>">
+        <table class="compstat">
+            <tr>
+                <th><img alt="" src="/img/types/all.svg"/> <%= h(t.osm.all) %></th>
+                <td><%= data[:count_all].to_s_with_ts %></td>
+            </tr>
+            <tr>
+                <th><img alt="" src="/img/types/node.svg"/> <%= h(t.osm.nodes) %></th>
+                <td><%= data[:count_nodes].to_s_with_ts %></td>
+            </tr>
+            <tr>
+                <th><img alt="" src="/img/types/way.svg"/> <%= h(t.osm.ways) %></th>
+                <td><%= data[:count_ways].to_s_with_ts %></td>
+            </tr>
+            <tr>
+                <th><img alt="" src="/img/types/relation.svg"/> <%= h(t.osm.relations) %></th>
+                <td><%= data[:count_relations].to_s_with_ts %></td>
+            </tr>
+        </table>
+    </div>
+    <div class="prevalent_values item<%= num %>">
+        <p><b></b></p>
+        <div></div>
+    </div>
+    <div class="wiki item<%= num %>">
+        <p><b><%= data[:value].nil? ? h(t.pages.key.wiki_pages.title) : h(t.pages.tag.wiki_pages.title) %>:</b></p>
+        <%= data[:wiki_pages].map{ |lang| '<span class="lang" title="' + ::Language[lang].native_name.to_s + '">' + lang + '</span>' }.join(' ') %>
+    </div>
+    <div class="projects item<%= num %>">
+        <p><b><%= data[:value].nil? ? h(t.pages.key.projects.title) : h(t.pages.tag.projects.title) %>:</b> </p>
+    </div>
+    <div class="map item<%= num %>">
+<% if data[:has_map] %>
+        <div style="background-image: url(<%= @taginfo_config.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: center 11px; background-size: <%= @img_width %>px <%= @img_height %>px; position: relative;"/>
+            <% key_or_tag = data[:value].nil? ? 'key' : 'tag' %>
+            <img class="map" src="/api/4/<%= key_or_tag %>/distribution/nodes?key=<%= data[:key] %><%= data[:value].nil? ? '' : ('&amp;value=' + data[:value]) %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>" style="position: absolute;"/>
+            <img class="map" src="/api/4/<%= key_or_tag %>/distribution/ways?key=<%= data[:key] %><%= data[:value].nil? ? '' : ('&amp;value=' + data[:value]) %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
+            <div class="note"><%= @taginfo_config.get('geodistribution.image_attribution') %></div>
+        </div>
+<% end %>
+    </div>
+<% end %>
 <% end %>
