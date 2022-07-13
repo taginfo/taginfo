@@ -52,6 +52,9 @@ function data_complete(datasets, results) {
             jQuery('.item' + index + '.prevalent_values div').html(fmt_prevalent_value_list(item.key, item.prevalent_values));
         }
         jQuery('.item' + index + '.projects p').append(item.projects);
+        jQuery('.item' + index + '.counts table td').each(function(index, c) {
+            c.innerHTML = fmt_with_ts(item.counts[index].count);
+        });
     });
     jQuery('div.prevalent_values a').tipsy({ opacity: 1, delayIn: 500, gravity: 'w' });
     jQuery('span.lang').tipsy({ opacity: 1, delayIn: 500, gravity: 'n' });

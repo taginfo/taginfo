@@ -86,22 +86,10 @@ CSS
     </div>
     <div class="counts item<%= num %>">
         <table class="compstat">
-            <tr>
-                <th><img alt="" src="/img/types/all.svg"/> <%= h(t.osm.all) %></th>
-                <td><%= data[:count_all].to_s_with_ts %></td>
-            </tr>
-            <tr>
-                <th><img alt="" src="/img/types/node.svg"/> <%= h(t.osm.nodes) %></th>
-                <td><%= data[:count_nodes].to_s_with_ts %></td>
-            </tr>
-            <tr>
-                <th><img alt="" src="/img/types/way.svg"/> <%= h(t.osm.ways) %></th>
-                <td><%= data[:count_ways].to_s_with_ts %></td>
-            </tr>
-            <tr>
-                <th><img alt="" src="/img/types/relation.svg"/> <%= h(t.osm.relations) %></th>
-                <td><%= data[:count_relations].to_s_with_ts %></td>
-            </tr>
+            <tr><th><img alt="" src="/img/types/all.svg"/> <%= h(t.osm.all) %></th><td></td></tr>
+            <tr><th><img alt="" src="/img/types/node.svg"/> <%= h(t.osm.nodes) %></th><td></td></tr>
+            <tr><th><img alt="" src="/img/types/way.svg"/> <%= h(t.osm.ways) %></th><td></td></tr>
+            <tr><th><img alt="" src="/img/types/relation.svg"/> <%= h(t.osm.relations) %></th><td></td></tr>
         </table>
     </div>
     <div class="prevalent_values item<%= num %>">
