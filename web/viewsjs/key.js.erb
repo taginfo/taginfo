@@ -186,7 +186,7 @@ var create_flexigrid_for = {
 };
 
 function create_chart(params) {
-    var y = 0;
+    let y = 0;
     params.data.forEach(function(d) {
         d['y'] = y;
         y += d['count'];
@@ -197,14 +197,14 @@ function create_chart(params) {
         }
     });
 
-    var scale = d3.scaleLinear()
+    const scale = d3.scaleLinear()
                     .domain([0, params.max])
                     .range([0, params.height]);
 
-    var color = d3.scaleOrdinal()
+    const color = d3.scaleOrdinal()
                     .range(d3_colors());
 
-    var chart = d3.select('#canvas-values').append('svg')
+    const chart = d3.select('#canvas-values').append('svg')
                     .attr('width', params.width)
                     .attr('height', params.height);
 
@@ -231,7 +231,7 @@ function create_chart(params) {
 
 function redraw_chart(prevalent_values) {
     jQuery('#canvas-values').html('');
-    var max_height = jQuery(window).height() - 300;
+    const max_height = jQuery(window).height() - 300;
     create_chart({
         key: document.querySelector('h1').dataset.key,
         width: 160,
@@ -246,7 +246,7 @@ function page_init() {
     activate_josm_button();
 
     jQuery('#filter').bind('change', function() {
-        var value = this.value;
+        const value = this.value;
 
         var qs = jQuery.getQueryString;
         qs['filter'] = value;

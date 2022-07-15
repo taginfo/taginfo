@@ -4,8 +4,8 @@
 function page_init() {
     up = function() { window.location = '/'; }
     const datasets = Array.from(document.querySelectorAll('h2'), s => s.dataset);
-    var results = {};
-    var todo = datasets.length;
+    let results = {};
+    let todo = datasets.length;
 
     datasets.forEach(function(d) {
         if (d.value) {
@@ -30,7 +30,7 @@ function page_init() {
 }
 
 function data_complete(datasets, results) {
-    var data = datasets.map(function(d) {
+    let data = datasets.map(function(d) {
         if (d.value) {
             return results[d.key + '\0' + d.value];
         }
@@ -40,7 +40,7 @@ function data_complete(datasets, results) {
     set_comparison_list(data.map( d => [d.key, d.value] ));
 
     jQuery.each(data, function(index, item) {
-        var datac = [];
+        let datac = [];
         jQuery.each(data, function(i, item) {
             if (i != index) {
                 datac.push([item['key'], item['value']]);

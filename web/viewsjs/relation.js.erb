@@ -117,13 +117,13 @@ function create_role_chart(roles) {
         return;
     }
 
-    var data = [];
+    let data = [];
     roles.data.forEach(function(r) {
         ['node', 'way', 'relation'].forEach(function(type) {
             const count = r['count_' + type + '_members'];
 
-            var title = '' + count + ' member ' + type + 's with ';
-            var label;
+            let title = '' + count + ' member ' + type + 's with ';
+            let label;
             if (r.role === null) {
                 title += "other roles";
                 label = '...';
@@ -142,33 +142,33 @@ function create_role_chart(roles) {
         });
     });
 
-    var width = 800,
-        height = 360,
-        margin = 20;
+    const width = 800;
+    const height = 360;
+    const margin = 20;
 
-    var x = d3.scaleLinear().range([0, width  - 2 * margin]);
-    var y = d3.scaleLinear().range([0, height - 2 * margin]);
+    const x = d3.scaleLinear().range([0, width  - 2 * margin]);
+    const y = d3.scaleLinear().range([0, height - 2 * margin]);
 
-    var color = d3.scaleOrdinal(d3.schemeCategory10);
+    const color = d3.scaleOrdinal(d3.schemeCategory10);
 
-    var percent = d3.format('~%');
+    const percent = d3.format('~%');
 
-    var svg = d3.select('div.canvas').append('svg')
+    const svg = d3.select('div.canvas').append('svg')
         .attr('width', width + 20)
         .attr('height', height)
         .append('g')
             .attr('transform', "translate(" + 2 * margin + "," + margin + ")");
 
-    var root = d3.hierarchy(d3.group(data, d => d.type, d => d.role));
+    const root = d3.hierarchy(d3.group(data, d => d.type, d => d.role));
 
-    var treemap = d3.treemap()
+    const treemap = d3.treemap()
         .round(true)
         .tile(d3.treemapSliceDice)
         .size([width - 2 * margin, height - 2 * margin]);
 
     treemap(root.sum(d => d.value));
 
-    var roles = svg.selectAll('.role')
+    svg.selectAll('.role')
         .data(root.leaves())
             .enter().append('a')
                 .attr('class', 'role')
@@ -197,7 +197,7 @@ function create_role_chart(roles) {
                 });
 
     // Add x-axis ticks.
-    var xtick = svg.selectAll(".x")
+    const xtick = svg.selectAll(".x")
         .data(x.ticks(10))
         .enter().append("g")
             .attr("class", "x")
@@ -214,7 +214,7 @@ function create_role_chart(roles) {
         .text(percent);
 
     // Add y-axis ticks.
-    var ytick = svg.selectAll(".y")
+    const ytick = svg.selectAll(".y")
         .data(y.ticks(10))
         .enter().append("g")
             .attr("class", "y")
@@ -231,7 +231,7 @@ function create_role_chart(roles) {
         .text(percent);
 
     // Add a group for each member type.
-    var member_types_svg = svg.selectAll(".member_types")
+    const member_types_svg = svg.selectAll(".member_types")
         .data(root.children)
         .enter().append("g")
             .attr("class", "member_types")

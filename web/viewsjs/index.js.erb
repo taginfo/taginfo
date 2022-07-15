@@ -11,21 +11,24 @@ tags = @db.select("SELECT skey, svalue FROM top_tags WHERE skey NOT IN ('source'
 relations = @db.select("SELECT rtype FROM db.relation_types ORDER BY count DESC LIMIT #{ tagcloud_number_of_relations }").execute()
 %>
 
-var keys_data = <%= keys.map{ |tag| { :text => tag['key'], :size => tagcloud_size(tag) } }.to_json.gsub(/\},/, "},\n") %>,
-    tags_data = <%= tags.map{ |entry| [ entry['skey'], entry['svalue'] ] }.to_json.gsub(/\],/, "],\n") %>,
-    relations_data = <%= relations.map{ |row| row['rtype'] }.to_json.gsub(/\],/, "],\n") %>,
-    width, height, font_family = 'Impact', font_weight = 'normal';
+const keys_data = <%= keys.map{ |tag| { :text => tag['key'], :size => tagcloud_size(tag) } }.to_json.gsub(/\},/, "},\n") %>;
+const tags_data = <%= tags.map{ |entry| [ entry['skey'], entry['svalue'] ] }.to_json.gsub(/\],/, "],\n") %>;
+const relations_data = <%= relations.map{ |row| row['rtype'] }.to_json.gsub(/\],/, "],\n") %>;
+const font_family = 'Impact';
+const font_weight = 'normal';
+
+var width, height;
 
 up = function() {};
 
 function draw(words) {
     // This color scheme isn't available in newer D3 versions, but we'll keep
     // it for the time being.
-    var category20b = [ 3750777, 5395619, 7040719, 10264286, 6519097, 9216594, 11915115,
-                        13556636, 9202993, 12426809, 15186514, 15190932, 8666169, 11356490,
-                        14049643, 15177372, 8077683, 10834324, 13528509, 14589654 ].map(
+    const category20b = [ 3750777, 5395619, 7040719, 10264286, 6519097, 9216594, 11915115,
+                          13556636, 9202993, 12426809, 15186514, 15190932, 8666169, 11356490,
+                          14049643, 15177372, 8077683, 10834324, 13528509, 14589654 ].map(
                             value => new d3.rgb(value >> 16, value >> 8 & 255, value & 255));
-    var fill = d3.scaleOrdinal(category20b);
+    const fill = d3.scaleOrdinal(category20b);
 
     d3.select('div#tagcloud').append('svg')
         .attr('width', width)
@@ -50,7 +53,7 @@ function draw(words) {
 }
 
 function resize_home() {
-    var tagcloud = jQuery('#tagcloud');
+    const tagcloud = jQuery('#tagcloud');
     if (tagcloud.css('display') == 'none') {
         tagcloud.empty();
         fill_lists();
@@ -92,16 +95,17 @@ function resize_home() {
 }
 
 function fill_lists() {
-    var key_list = jQuery('#key_list').empty(),
-        tag_list = jQuery('#tag_list').empty(),
-        relation_list = jQuery('#relation_list').empty(),
-        title_td_height = 42,
-        reserve_height = 64,
-        max_height = jQuery('table').height() / 3 - title_td_height - reserve_height;
-        i = 0;
+    const key_list = jQuery('#key_list').empty();
+    const tag_list = jQuery('#tag_list').empty();
+    const relation_list = jQuery('#relation_list').empty();
+    const title_td_height = 42;
+    const reserve_height = 64;
+    const max_height = jQuery('table').height() / 3 - title_td_height - reserve_height;
+
+    let  i = 0;
 
     while (key_list.outerHeight() < max_height && keys_data[i]) {
-        var d = keys_data[i];
+        const d = keys_data[i];
         key_list.append(link_to_key(d.text));
         key_list.append(' &bull; ');
         i++;
@@ -110,7 +114,7 @@ function fill_lists() {
 
     i = 0;
     while (tag_list.outerHeight() < max_height && tags_data[i]) {
-        var d = tags_data[i];
+        const d = tags_data[i];
         tag_list.append(link_to_tag(d[0], d[1]));
         tag_list.append(' &bull; ');
         i++;
@@ -119,7 +123,7 @@ function fill_lists() {
 
     i = 0;
     while (relation_list.outerHeight() < max_height && relations_data[i]) {
-        var d = relations_data[i];
+        const d = relations_data[i];
         relation_list.append(link_to_rtype(d));
         relation_list.append(' &bull; ');
         i++;

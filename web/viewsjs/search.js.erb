@@ -90,7 +90,7 @@ var create_flexigrid_for = {
         });
     },
     tags: function(query) {
-        var q = query.split('=', 2);
+        const q = query.split('=', 2);
         create_flexigrid('grid-tags', {
             url: '/api/4/search/by_key_and_value?query=' + encodeURIComponent(query),
             colModel: [
