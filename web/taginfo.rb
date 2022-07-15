@@ -27,7 +27,7 @@
 #------------------------------------------------------------------------------
 
 v=RUBY_VERSION.split('.').map{ |x| x.to_i }
-if v[0] < 2 or v[1] < 4
+if v[0] < 2 or (v[0] == 2 and v[1] < 4)
     STDERR.puts "You need at least Ruby 2.4 to run taginfo"
     exit(1)
 end
