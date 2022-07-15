@@ -697,107 +697,107 @@ function open_help() {
 
 /* ============================ */
 
-function cookies_enabled() {
-    const cookieEnabled = (navigator.cookieEnabled) ? true : false;
+class ComparisonList {
 
-    if (typeof navigator.cookieEnabled == "undefined" && !cookieEnabled) {
-        document.cookie="testcookie";
-        cookieEnabled = (document.cookie.indexOf("testcookie") != -1) ? true : false;
-    }
-    return (cookieEnabled);
-}
+    #list = [];
 
-function get_comparison_list() {
-    return jQuery.cookie('taginfo_comparison_list') || [];
-}
-
-function set_comparison_list(list) {
-    jQuery.cookie('taginfo_comparison_list', list, { expires: 1, path: '/' });
-}
-
-function comparison_list_update(key, value) {
-    const l = get_comparison_list().length;
-
-    let cl = jQuery('#list option:first').html();
-    cl = cl.replace(/([0-9]+)/, String(l));
-    jQuery('#list option:first').html(cl);
-
-    if (comparison_list_contains(get_comparison_list(), key, value)) {
-        jQuery('#list option:eq(1)').attr('style', 'color: #e0e0e0');
-    } else {
-        jQuery('#list option:eq(1)').attr('style', '');
-    }
-    if (l == 0) {
-        jQuery('#list option:eq(2)').attr('style', 'color: #e0e0e0');
-    } else {
-        jQuery('#list option:eq(2)').attr('style', '');
-    }
-    if (l < 2) {
-        jQuery('#list option:eq(3)').attr('style', 'color: #e0e0e0');
-    } else {
-        jQuery('#list option:eq(3)').attr('style', '');
-    }
-
-    jQuery('#list').val('title').change();
-}
-
-function comparison_list_item_clean(text) {
-    return text === null || text.match(/^[a-zA-Z0-9:_]+$/) !== null;
-}
-
-function comparison_list_url(list) {
-    let okay = true;
-    jQuery.each(list, function(index, item) {
-        if (!comparison_list_item_clean(item[0]) ||
-            !comparison_list_item_clean(item[1])) {
-            okay = false;
-        }
-    });
-
-    if (okay) {
-        return '/compare/' + list.map(function(item) {
-            return item[0] + (item[1] === null ? '' : ('=' + item[1]));
-        }).join('/');
-    } else {
-        let keys = [];
-        let values = [];
-        jQuery.each(list, function(index, item) {
-            keys.push(item[0]);
-            values.push(item[1] === null ? '' : item[1]);
+    constructor(list = []) {
+        this.#list = list.map(function(d) {
+            if (d.value === undefined) {
+                d.value = null;
+            }
+            return [d.key, d.value];
         });
-        return '/compare/?' + jQuery.param({ 'key': keys, 'value': values });
     }
-}
 
-function comparison_list_contains(list, key, value) {
-    let contains = false;
+    load() {
+        const tcl = window.sessionStorage.getItem('taginfo_comparison_list');
+        this.#list = tcl ? JSON.parse(tcl) : [];
+    }
 
-    jQuery.each(list, function(index, item) {
-        if (item[0] == key && item[1] == value) {
-            contains = true;
+    store() {
+        window.sessionStorage.setItem('taginfo_comparison_list', JSON.stringify(this.#list));
+    }
+
+    get length() {
+        return this.#list.length;
+    }
+
+    add(key, value = null) {
+        if (!this.contains(key, value)) {
+            this.#list.push([key, value]);
         }
-    });
-
-    return contains;
-}
-
-function comparison_list_change(key, value) {
-    let list = get_comparison_list();
-    const command = jQuery('#list').val();
-
-    if (command == 'title') {
-        return true;
-    } else if (command == 'add' && !comparison_list_contains(list, key, value)) {
-        list.push([key, value]);
-        set_comparison_list(list);
-    } else if (command == 'clear') {
-        set_comparison_list([]);
-    } else if (command == 'compare' && list.length >= 2) {
-        window.location = comparison_list_url(list);
     }
 
-    comparison_list_update(key, value);
-    return false;
+    clear() {
+        this.#list = [];
+    }
+
+    contains(key, value) {
+        return this.#list.find( item => item[0] == key && item[1] == value ) !== undefined;
+    }
+
+    compare() {
+        if (this.length >= 2) {
+            window.location = this.url();
+        }
+    }
+
+    url() {
+        const item_is_clean = function(text) {
+            return text === null || text.match(/^[a-zA-Z0-9:_]+$/) !== null;
+        };
+
+        const is_clean = this.#list.every( item => item_is_clean(item[0]) &&
+                                                   item_is_clean(item[1]) );
+
+        if (is_clean) {
+            const kv = this.#list.map( item => item[0] + (item[1] === null ? '' : ('=' + item[1])) );
+            return '/compare/' + kv.join('/');
+        }
+
+        let params = new URLSearchParams();
+        this.#list.forEach( item => params.append('key[]', item[0] ) );
+        this.#list.forEach( item => params.append('value[]', item[1] || '' ) );
+
+        return '/compare/?' + params.toString();
+    }
+}
+
+class ComparisonListDisplay {
+
+    #comparison_list;
+    #key = null;
+    #value = null;
+
+    constructor(key, value = null) {
+        const list = new ComparisonList();
+        this.#comparison_list = list;
+        this.#key = key;
+        this.#value = value;
+
+        list.load();
+        this.update();
+
+        document.getElementById('comparison-list-add').addEventListener('click', () => { list.add(key, value); list.store(); this.update(); });
+        document.getElementById('comparison-list-clear').addEventListener('click', () => { list.clear(); list.store(); this.update(); });
+        document.getElementById('comparison-list-compare').addEventListener('click', () => { list.compare(); });
+    }
+
+    update() {
+        const length = this.#comparison_list.length;
+
+        const title = document.querySelector('#comparison-list div');
+        title.textContent = title.textContent.replace(/([0-9]+)/, String(length));
+
+        const enable_disable = function(id, condition) {
+            document.getElementById('comparison-list-' + id).className = condition ? '' : 'disabled';
+        };
+
+        enable_disable('add', !this.#comparison_list.contains(this.#key, this.#value));
+        enable_disable('clear', length > 0);
+        enable_disable('compare', length >= 2);
+    }
 }
 
 /* ============================ */
@@ -841,8 +841,6 @@ jQuery(document).ready(function() {
     jQuery('select').customSelect();
 
     jQuery('#help_link').bind('click', open_help);
-
-    jQuery.cookie.json = true;
 
     jQuery.getQueryString = (function(a) {
         if (a == "") return {};
@@ -894,7 +892,7 @@ jQuery(document).ready(function() {
                         open_help();
                         return false;
                     case 99: // c
-                        window.location = comparison_list_url(get_comparison_list());
+                        window.location = (new ComparisonList()).url();
                         return false;
                     case 102: // f
                         jQuery('input.qsbox').focus();

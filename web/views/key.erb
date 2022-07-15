@@ -13,14 +13,14 @@
             <option value="relations"<%= @sel['relations'] %>><%= h(t.pages.key.filter.relations) %></option>
         </select>
     </form>
-    <form id="list-form">
-        <select id="list" name="list">
-            <option value="title" selected="selected" style="color: #000000"><%= h(t.comparison.list) %> (0 <%= h(t.comparison.items) %>)</option>
-            <option value="add"><%= h(t.comparison.add_key) %></option>
-            <option value="clear"><%= h(t.comparison.clear) %></option>
-            <option value="compare"><%= h(t.comparison.compare) %></option>
-        </select>
-    </form>
+    <div id="comparison-list">
+        <div><%= h(t.comparison.list) %> (0 <%= h(t.comparison.items) %>)</div>
+        <ul>
+            <li id="comparison-list-add"><%= h(t.comparison.add_key) %></li>
+            <li id="comparison-list-clear"><%= h(t.comparison.clear) %></li>
+            <li id="comparison-list-compare"><%= h(t.comparison.compare) %></li>
+        </ul>
+    </div>
     <div id="tools" class="no-print">
         <ul>
 <% if @count_all_values <= @taginfo_config.get('xapi.max_results', 1000) %>

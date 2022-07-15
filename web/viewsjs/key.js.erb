@@ -254,14 +254,7 @@ function page_init() {
     const key = h1.dataset.key;
     h1.innerHTML = fmt_key(key);
 
-    if (cookies_enabled()) {
-        comparison_list_update(key);
-        jQuery('#list').bind('change', function() {
-            comparison_list_change(key);
-        });
-    } else {
-        set_inner_html_to('list-form', '<span class="empty" style="position: relative; top: 1px;">Enable cookies for comparison function!</span>');
-    }
+    new ComparisonListDisplay(key);
 
     init_tabs([key, filter.value, '<%= r18n.locale.code %>']);
 

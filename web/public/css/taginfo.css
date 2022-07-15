@@ -132,6 +132,7 @@ html[dir="rtl"] div#pre-text {
 
 .disabled {
     color: #808080;
+    cursor: not-allowed !important;
 }
 
 .slicknav_nav .disabled {
@@ -361,7 +362,7 @@ html[dir="rtl"] .slicknav_nav a {
 }
 
 @media screen and (max-width: 640px) {
-    ul#menu, #set_language, #header_date, #tools, #list-form, .pJSON, #osmlink {
+    ul#menu, #set_language, #header_date, #tools, #comparison-list, .pJSON, #osmlink {
         display: none;
     }
 
@@ -650,27 +651,54 @@ span.char {
     border-radius: 4px;
 }
 
-form#list-form {
+/* ========== */
+
+#comparison-list {
     margin: 0 20px 0 0;
     float: right;
+    font-size: 0.9rem;
+    border: 1px solid #a0a0a0;
+    border-radius: 4px;
+    padding: 1px 20px 1px 4px;
+    background: url(/img/arrow.png);
+    background-repeat: no-repeat;
+    background-position: center right 2px;
+    background-size: 12px 12px;
 }
 
-html[dir="rtl"] form#list-form {
+html[dir="rtl"] #comparison-list {
     margin: 0 0 0 20px;
     float: left;
 }
 
 @media print {
-    form#list-form {
+    #comparison-list {
         display: none;
     }
 }
 
-select#list {
+#comparison-list ul {
+    display: none;
+    position: absolute;
+    margin-top: 0px;
+    margin-left: 10px;
+    border: 1px solid #a0a0a0;
     background-color: #ffffff;
-    color: #083e76;
-    font-size: 0.9rem;
+    padding: 0;
+    z-index: 99;
 }
+
+#comparison-list li {
+    padding: 4px;
+    display: block;
+    cursor: pointer;
+}
+
+#comparison-list:hover ul {
+    display: block;
+}
+
+/* ========== */
 
 form#filter-form {
     margin-top: 0px;

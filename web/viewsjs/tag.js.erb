@@ -154,14 +154,7 @@ function page_init() {
     up = function() { window.location = url_for_key(key); };
     h1.innerHTML = link_to_key(key) + '=' + fmt_value(value);
 
-    if (cookies_enabled()) {
-        comparison_list_update(key, value);
-        jQuery('#list').bind('change', function() {
-            comparison_list_change(key, value);
-        });
-    } else {
-        set_inner_html_to('list-form', '<span class="empty" style="position: relative; top: 1px;">Enable cookies for comparison function!</span>');
-    }
+    new ComparisonListDisplay(key, value);
 
     set_inner_html_to('keylink', link_to_key(key));
     set_inner_html_to('relationlink', link_to_rtype(value));
