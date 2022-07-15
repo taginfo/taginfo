@@ -296,6 +296,13 @@ function link_to_rtype_with_highlight(rtype, query) {
 
 /* ============================ */
 
+function set_inner_html_to(id, html) {
+    const element = document.getElementById(id);
+    if (element) {
+        element.innerHTML = html;
+    }
+}
+
 function html_escape(text) {
     return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }

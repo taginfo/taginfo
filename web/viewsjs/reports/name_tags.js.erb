@@ -80,13 +80,9 @@ var create_flexigrid_for = {
 
 function page_init() {
     up = function() { window.location = '/reports'; };
-    jQuery('#subtag-filter').bind('change', function() {
-        var value = this.value;
-
-        var qs = jQuery.getQueryString;
-        qs['filter'] = value;
-
-        window.location.search = jQuery.param(qs);
+    const filter = document.getElementById('subtag-filter');
+    filter.addEventListener('change', function(element) {
+        window.location.search = new URLSearchParams({ 'filter': element.target.value });
     });
     init_tabs([]);
 }

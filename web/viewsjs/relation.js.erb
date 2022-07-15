@@ -274,7 +274,7 @@ function page_init() {
     const h1 = document.querySelector('h1');
     const rtype = h1.dataset.rtype;
     h1.innerHTML += fmt_rtype(rtype);
-    jQuery('span#taglink').html(link_to_value('type', rtype));
+    set_inner_html_to('taglink', link_to_value('type', rtype));
     init_tabs([rtype]);
 
     fetch('/api/4/relation/roles?sortname=count_all_members&sortorder=asc&min_fraction=0.01&rtype=' + encodeURIComponent(rtype)).

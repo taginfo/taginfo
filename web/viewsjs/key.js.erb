@@ -230,7 +230,7 @@ function create_chart(params) {
 }
 
 function redraw_chart(prevalent_values) {
-    jQuery('#canvas-values').html('');
+    set_inner_html_to('canvas-values', '');
     const max_height = jQuery(window).height() - 300;
     create_chart({
         key: document.querySelector('h1').dataset.key,
@@ -245,18 +245,14 @@ function page_init() {
     up = function() { window.location = '/keys'; }
     activate_josm_button();
 
-    jQuery('#filter').bind('change', function() {
-        const value = this.value;
-
-        var qs = jQuery.getQueryString;
-        qs['filter'] = value;
-
-        window.location.search = jQuery.param(qs);
+    const filter = document.getElementById('filter');
+    filter.addEventListener('change', function(element) {
+        window.location.search = new URLSearchParams({ 'filter': element.target.value });
     });
 
-    const filter = document.getElementById('filter').value;
-    const key = document.querySelector('h1').dataset.key;
-    jQuery('h1').html(fmt_key(key));
+    const h1 = document.querySelector('h1');
+    const key = h1.dataset.key;
+    h1.innerHTML = fmt_key(key);
 
     if (cookies_enabled()) {
         comparison_list_update(key);
@@ -264,12 +260,12 @@ function page_init() {
             comparison_list_change(key);
         });
     } else {
-        jQuery('#list-form').html('<span class="empty" style="position: relative; top: 1px;">Enable cookies for comparison function!</span>');
+        set_inner_html_to('list-form', '<span class="empty" style="position: relative; top: 1px;">Enable cookies for comparison function!</span>');
     }
 
-    init_tabs([key, filter, '<%= r18n.locale.code %>']);
+    init_tabs([key, filter.value, '<%= r18n.locale.code %>']);
 
-    fetch('/api/4/key/prevalent_values?min_fraction=0.02&key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter)).
+    fetch('/api/4/key/prevalent_values?min_fraction=0.02&key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter.value)).
             then(response => response.json()).
             then(function(data) {
                 const prevalent_values = data.data;
