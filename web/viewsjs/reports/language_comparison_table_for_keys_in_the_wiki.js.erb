@@ -40,7 +40,7 @@ function page_init() {
             return {
                 total: data.total,
                 page: data.page,
-                rows: jQuery.map(data.data, function(row, i) {
+                rows: data.data.map(function(row) {
                     d = [link_to_key(row.key) <%= @languages.map{ ", ''"}.join() %>];
                     for (var lang in row.lang) {
                         ptype = row.lang[lang];

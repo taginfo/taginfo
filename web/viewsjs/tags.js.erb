@@ -20,7 +20,7 @@ function page_init() {
         sortname: 'count_all',
         sortorder: 'desc',
         preProcess: function(data) {
-            data.rows = jQuery.map(data.data, function(row, i) {
+            data.rows = data.data.map(function(row) {
                 return { 'cell': [
                     hover_expand(link_to_tag(row.key, row.value, {}, { 'class': 'pref' })),
                     fmt_value_with_percent(row.count_all,       row.count_all_fraction),

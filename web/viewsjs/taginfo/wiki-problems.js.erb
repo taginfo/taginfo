@@ -20,7 +20,7 @@ var create_flexigrid_for = {
             sortname: 'reason',
             sortorder: 'asc',
             preProcess: function(data) {
-                data.rows = jQuery.map(data.data, function(row, i) {
+                data.rows = data.data.map(function(row) {
                     return { 'cell': [
                         row.location,
                         row.reason,

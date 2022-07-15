@@ -14,7 +14,7 @@ var create_flexigrid_for = {
             sortname: 'name',
             sortorder: 'asc',
             preProcess: function(data) {
-                data.rows = jQuery.map(data.data, function(row, i) {
+                data.rows = data.data.map(function(row) {
                     return { 'cell': [
                         link_to_project(row.id, row.name),
                         html_escape(row.unique_keys),
@@ -41,7 +41,7 @@ var create_flexigrid_for = {
             sortname: 'projects',
             sortorder: 'desc',
             preProcess: function(data) {
-                data.rows = jQuery.map(data.data, function(row, i) {
+                data.rows = data.data.map(function(row) {
                     return { 'cell': [
                         link_to_key(row.key),
                         link_to_key_with_tab(row.key, 'projects', html_escape(row.projects)),
@@ -68,7 +68,7 @@ var create_flexigrid_for = {
             sortname: 'projects',
             sortorder: 'desc',
             preProcess: function(data) {
-                data.rows = jQuery.map(data.data, function(row, i) {
+                data.rows = data.data.map(function(row) {
                     return { 'cell': [
                         link_to_tag(row.key, row.value),
                         link_to_tag_with_tab(row.key, row.value, 'projects', html_escape(row.projects)),

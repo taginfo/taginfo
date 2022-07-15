@@ -496,7 +496,7 @@ function fmt_value_with_percent(value, fraction) {
 }
 
 function fmt_key_or_tag_list(list) {
-    return jQuery.map(list, function(tag, i) {
+    return list.map(function(tag) {
         if (tag.match(/=/)) {
             const el = tag.split('=', 2);
             return link_to_tag(el[0], el[1]);
@@ -510,7 +510,7 @@ function fmt_prevalent_value_list(key, list) {
     if (list.length == 0) {
         return empty(texts.misc.values_less_than_one_percent);
     }
-    return jQuery.map(list, function(item, i) {
+    return list.map(function(item) {
         return link_to_value(key, item.value, { tipsy: 'e', title: fmt_as_percent(item.fraction) });
     }).join(' &bull; ');
 }
@@ -608,7 +608,7 @@ function create_characters_flexigrid(string) {
             { display: texts.unicode.name, name: 'name', width: 600, sortable: false, align: 'left' }
         ],
         preProcess: function(data) {
-            data.rows = jQuery.map(data.data, function(row, i) {
+            data.rows = data.data.map(function(row) {
                 return { 'cell': [
                     row.char,
                     link('https://decodeunicode.org/' + fmt_unicode_code_point(row.codepoint), fmt_unicode_code_point(row.codepoint), { target: '_blank', title: 'decodeunicode.org' }),
@@ -748,7 +748,7 @@ function comparison_list_url(list) {
     });
 
     if (okay) {
-        return '/compare/' + jQuery.map(list, function(item, i) {
+        return '/compare/' + list.map(function(item) {
             return item[0] + (item[1] === null ? '' : ('=' + item[1]));
         }).join('/');
     } else {
