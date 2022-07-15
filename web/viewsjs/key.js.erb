@@ -109,9 +109,9 @@ var create_flexigrid_for = {
         });
     },
     chronology: function(key) {
-        jQuery.getJSON('/api/4/key/chronology?key=' + encodeURIComponent(key), function(data) {
-            draw_chronology_chart(data.data, filter.value);
-        });
+        fetch('/api/4/key/chronology?key=' + encodeURIComponent(key)).
+            then(response => response.json()).
+            then(data => draw_chronology_chart(data.data, filter.value));
     },
     wiki: function(key, filter_type) {
         create_flexigrid('grid-wiki', {
@@ -269,11 +269,13 @@ function page_init() {
 
     init_tabs([key, filter, '<%= r18n.locale.code %>']);
 
-    jQuery.getJSON('/api/4/key/prevalent_values?min_fraction=0.02&key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter), function(data) {
-        const prevalent_values = data.data;
-        redraw_chart(prevalent_values);
-        jQuery(window).resize(function() {
-            redraw_chart(prevalent_values);
-        });
+    fetch('/api/4/key/prevalent_values?min_fraction=0.02&key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter)).
+            then(response => response.json()).
+            then(function(data) {
+                const prevalent_values = data.data;
+                redraw_chart(prevalent_values);
+                jQuery(window).resize(function() {
+                    redraw_chart(prevalent_values);
+                });
     });
 }

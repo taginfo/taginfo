@@ -3,41 +3,29 @@
 %>
 function page_init() {
     up = function() { window.location = '/'; }
-    const datasets = Array.from(document.querySelectorAll('h2'), s => s.dataset);
-    let results = {};
-    let todo = datasets.length;
 
-    datasets.forEach(function(d) {
+    const datasets = Array.from(document.querySelectorAll('h2'), s => s.dataset);
+    const fetch_promises = datasets.map(function(d) {
+        let url = '/api/4/';
         if (d.value) {
-            jQuery.getJSON('/api/4/tag/overview?key=' + encodeURIComponent(d.key) + '&value=' + encodeURIComponent(d.value), function(data) {
-                results[d.key + '\0' + d.value] = data.data;
-                todo -= 1;
-                if (todo == 0) {
-                    data_complete(datasets, results);
-                }
-            });
+            url += 'tag/overview?key=' + encodeURIComponent(d.key) + '&value=' + encodeURIComponent(d.value);
         } else {
-            jQuery.getJSON('/api/4/key/overview?key=' + encodeURIComponent(d.key), function(data) {
-                data.data.value = null;
-                results[d.key] = data.data;
-                todo -= 1;
-                if (todo == 0) {
-                    data_complete(datasets, results);
-                }
-            });
+            url += 'key/overview?key=' + encodeURIComponent(d.key);
         }
+
+        return fetch(url).then(response => response.json());
     });
+
+    Promise.all(fetch_promises).then(r => data_complete(r.map(d => d.data)));
 }
 
-function data_complete(datasets, results) {
-    let data = datasets.map(function(d) {
-        if (d.value) {
-            return results[d.key + '\0' + d.value];
+function data_complete(data) {
+    set_comparison_list(data.map(function(d) {
+        if (d.value === undefined) {
+            d.value = null;
         }
-        return results[d.key]
-    });
-
-    set_comparison_list(data.map( d => [d.key, d.value] ));
+        return [d.key, d.value];
+    }));
 
     jQuery.each(data, function(index, item) {
         let datac = [];

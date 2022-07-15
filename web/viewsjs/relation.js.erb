@@ -277,7 +277,7 @@ function page_init() {
     jQuery('span#taglink').html(link_to_value('type', rtype));
     init_tabs([rtype]);
 
-    jQuery.getJSON('/api/4/relation/roles?sortname=count_all_members&sortorder=asc&min_fraction=0.01&rtype=' + encodeURIComponent(rtype), function(roles) {
-        create_role_chart(roles);
-    });
+    fetch('/api/4/relation/roles?sortname=count_all_members&sortorder=asc&min_fraction=0.01&rtype=' + encodeURIComponent(rtype)).
+        then(response => response.json()).
+        then(roles => create_role_chart(roles));
 }

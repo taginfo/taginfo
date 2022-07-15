@@ -336,9 +336,11 @@ var taginfo_taglist = (function(){
             url += 'key=' + encodeURIComponent(tags);
         }
 
-        jQuery.getJSON(url, function(json) {
-            element.html(create_table(json.data, options));
-            jQuery("td a img", element).parent().parent().css("text-align", "center");
+        fetch(url).
+            then(response => response.json()).
+            then(function(json) {
+                element.html(create_table(json.data, options));
+                jQuery("td a img", element).parent().parent().css("text-align", "center");
         });
     }
 
