@@ -838,8 +838,6 @@ function project_tag_desc(description, icon, url) {
 jQuery(document).ready(function() {
     jQuery('#javascriptmsg').remove();
 
-    jQuery('select').customSelect();
-
     jQuery('#help_link').bind('click', open_help);
 
     jQuery.getQueryString = (function(a) {

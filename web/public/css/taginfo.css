@@ -176,18 +176,34 @@ html[dir="rtl"] .slicknav_nav .disabled {
 
 /* ========== */
 
-span.customSelect {
-    margin: 0;
-    padding: 1px 4px 0 4px;
-    border: 1px solid #a0a0a0;
-    background-color: #ffffff;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    text-align: left;
+form#filter-form {
+    margin-top: 0px;
+    height: 3ex;
+    float: right;
 }
 
-.customSelectInner {
-    background: url(/img/arrow.png) no-repeat center right;
+html[dir="rtl"] form#filter-form {
+    float: left;
+}
+
+select {
+    appearance: none;
+    margin: 0;
+    padding: 2px 4px;
+    min-width: 10em;
+    border: 1px solid #a0a0a0;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    height: 100%;
+}
+
+#comparison-list, select {
+    /*background: url(/img/arrow.svg);*/
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCc+PHBhdGggc3R5bGU9J2ZpbGw6ICM4MDgwODAnIGQ9J00yIDQgSDIyIEwxMiAyMHonLz48L3N2Zz4K);
+    background-color: #ffffff;
+    background-repeat: no-repeat;
+    background-position: center right 2px;
     background-size: 12px 12px;
 }
 
@@ -233,18 +249,13 @@ html[dir="rtl"] header div#header_forms {
 header div#header_forms form {
     float: left;
     padding-left: 22px;
+    height: 24px;
 }
 
 html[dir="rtl"] header div#header_forms form {
     float: right;
     padding-left: 0;
     padding-right: 22px;
-}
-
-select#locale, select#lang {
-    background-color: #ffffff;
-    border: none;
-    font-size: 0.9rem;
 }
 
 input#search {
@@ -654,16 +665,14 @@ span.char {
 /* ========== */
 
 #comparison-list {
+    position: relative;
     margin: 0 20px 0 0;
+    height: 2.5ex;
     float: right;
     font-size: 0.9rem;
     border: 1px solid #a0a0a0;
     border-radius: 4px;
-    padding: 1px 20px 1px 4px;
-    background: url(/img/arrow.png);
-    background-repeat: no-repeat;
-    background-position: center right 2px;
-    background-size: 12px 12px;
+    padding: 2px 28px 2px 4px;
 }
 
 html[dir="rtl"] #comparison-list {
@@ -677,10 +686,15 @@ html[dir="rtl"] #comparison-list {
     }
 }
 
+#comparison-list div {
+    position: relative;
+    top: -1px;
+}
+
 #comparison-list ul {
     display: none;
     position: absolute;
-    margin-top: 0px;
+    margin-top: 1px;
     margin-left: 10px;
     border: 1px solid #a0a0a0;
     background-color: #ffffff;
@@ -696,22 +710,6 @@ html[dir="rtl"] #comparison-list {
 
 #comparison-list:hover ul {
     display: block;
-}
-
-/* ========== */
-
-form#filter-form {
-    margin-top: 0px;
-    float: right;
-}
-
-html[dir="rtl"] form#filter-form {
-    float: left;
-}
-
-select#filter {
-    min-width: 146px;
-    background-color: #ffffff;
 }
 
 /* ========== */
