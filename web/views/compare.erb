@@ -20,6 +20,11 @@
     border: 1px solid #d0d0d0;
 }
 
+.comparison a.close img {
+    width: 16px;
+    height: 16px;
+}
+
 .comparison div h2 {
     position: relative;
     clear: both;
@@ -51,6 +56,10 @@
     position: relative;
 }
 
+html[dir="rtl"] .comparison a.close {
+    float: left;
+}
+
 table.compstat {
     margin-left: auto;
     margin-right: auto;
@@ -74,6 +83,15 @@ table.compstat td {
     text-align: right;
     min-width: 7em;
 }
+
+html[dir="rtl"] table.compstat td {
+    direction: ltr;
+}
+
+html[dir="rtl"] table.compstat th {
+    text-align: right;
+}
+
 CSS
 %>
 <div class="pre">
@@ -86,7 +104,7 @@ CSS
 <% @data.each_with_index do |data, num| %>
     <% key_or_tag = data[:value].nil? ? 'key' : 'tag' %>
     <div class="title item<%= num %>">
-        <a class="close ui-icon ui-icon-closethick" href="#"></a>
+        <a class="close" href="#"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMCAxMCc+PHBhdGggc3R5bGU9J3N0cm9rZTogIzgwODA4MDsgc3Ryb2tlLXdpZHRoOiAycHg7JyBkPSdNMiAyIEw4IDggTTggMiBMMiA4Jy8+PC9zdmc+Cg==" data-src="/img/close.svg"/></a>
         <h2 data-key="<%= h(data[:key]) %>"
 <% if data[:value] %>
     data-value="<%= h(data[:value]) %>"

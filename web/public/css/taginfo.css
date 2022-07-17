@@ -999,16 +999,3 @@ html[dir="rtl"] .slicknav_btn {
     float: left;
 }
 
-/* comparison page */
-html[dir="rtl"] table.comparison a.close {
-    float: left;
-}
-
-html[dir="rtl"] table.compstat td {
-    direction: ltr;
-}
-
-html[dir="rtl"] table.compstat th {
-    text-align: right;
-}
-
