@@ -1,0 +1,721 @@
+
+osm:
+    tag: Etiqueta
+    tags: Etiquetes
+    key: Clau
+    keys: Claus
+    value: Valor
+    values: Valors
+    node: Node
+    nodes: Nodes
+    way: Via
+    ways: Vies
+    relation: Relació
+    relations: Relacions
+    relation_type: Tipus de relació
+    relation_types: Tipus de relació
+    relation_member: Membre de la relació
+    relation_members: Membres de la relació
+    relation_member_nodes: Nodes membres
+    relation_member_ways: Vies membres
+    relation_member_relations: Relacions membres
+    relation_member_role: Rol
+    relation_member_roles: Rols
+    object: Objecte
+    objects: Objectes
+    all: Tot
+    user: Usuari
+    users: Usuaris
+
+taginfo:
+    source: Font
+    sources: Fonts
+    download: Descarrega
+    about: Quant a
+    contact: Contacte
+    meta: Meta
+    wiki: Wiki
+    report: Informe
+    reports: Informes
+    international: Internacional
+    apidoc: Documentació de API
+    project: Projecte
+    projects: Projectes
+    test: Test
+    chronology: Cronologia
+    map: Mapa
+    maps: Mapes
+    relations: Relacions
+    combinations: Combinacions
+    key_combinations: Combinacions
+    comparison: Comparació de clau/etiqueta
+    overview: Descripció general
+    characters: Caràcters
+    links: Enllaços
+    data_from: Dades de
+    data_from_description: Última actualització de la base de dades de taginfo
+    instance:
+        title: Quan a la pàgina de taginfo
+        other: Mostra la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">wiki d'OSM</a> per altres pàgines.
+
+misc:
+    values_less_than_one_percent: no hi ha valors amb més de l'1%
+    empty_string: cadena de text buida
+    unknown: desconegut
+    count: Comptatge
+    image: Imatge
+    no_image: sense imatge
+    all: Tot
+    object_type: Tipus
+    description: Descripció
+    help: Ajuda
+    length: Longitud
+    icon: Icona
+    line: Línia
+    area: Area
+    language: Idioma
+    search_for: Cerca
+    objects_tooltip: Nombre d'objectes (com a valor absolut i com a percentatge de tots els nodes, vies i relacions).
+    nodes_tooltip: Nombre de nodes (com a valor absolut i com a percentatge dels nodes etiquetats, ie. s'ignoren els nodes sense cap etiqueta).
+    ways_tooltip: Nombre de vies (com a valor absolut i com a percentatge de totes vies).
+    relations_tooltip: Nombre de relacions (com a valor absolut i com a percentatge de totes les relacions).
+    values_tooltip: Nombre de valors diferents per aquesta clau.
+    users_tooltip: Nombre d'usuaris diferents que han estat els últims a canviar objectes amb aquesta clau.
+    prevalent_values: Valors prevalents
+    prevalent_values_tooltip: Fins a deu dels valors més comuns per aquesta clau (només si més de l'1% de les etiquetes d'aquesta clau tenen aquest valor).
+    in_wiki_tooltip: Almenys, té una pàgina wiki.
+    status: Estat
+    approval_status: Estat de l'aprovació
+
+help:
+    search:
+        title: Cerca
+        intro: Useu la caixa de cerca a la cantonada superior dreta per cercar claus d'etiquetes i valors.
+        string: Podeu cercar claus d'etiquetes i valors
+        substring: Només una part de la clau/valor també funciona
+        complete_tags: Podeu cercar etiquetes completes
+        values_only: També podeu cercar valors d'etiquetes sols
+        suggestions: |
+            Per la vostra conveniència, se suggeriran claus i etiquetes populars
+            mentre escriviu. Useu les tecles de cursor per escollir-ne una i premeu la tecla de
+            <span class="key">Retorn</span>.
+            Saltareu directament a la pàgina d'aquella clau o etiqueta.
+    keyboard:
+        title: Dreceres de teclat
+        site_navigation: Navegació del lloc
+        page_navigation: Navegació de pàgina
+        table_navigation: Navegació de taula
+        keys:
+            home: Inici
+            end: Fi
+            pageup: Retrocedir pàgina
+            pagedown: Avançar pàgina
+            esc: Escapada
+            tab: Tabulació
+        home_page: Pàgina d'inici
+        keys_page: Pàgina de claus
+        tags_page: Pàgina d'etiquetes
+        relations_page: Pàgina de relacions
+        projects_page: Pàgina de projectes
+        reports_page: Pàgina d'informes
+        compare_page: Pàgina de comparacions
+        first_page: Primera pàgina
+        prev_page: Pàgina anterior
+        next_page: Pàgina següent
+        last_page: Última pàgina
+        help_page: Aquesta ajuda
+        activate_search: Activa l'entrada de cerca
+        activate_filter: Activa el filtre del camp d'entrada
+        prev_entry: Entrada prèvia
+        next_entry: Entrada següent
+        enter_entry: Salta a l'entrada
+        switch_tab: Canvia la pestanya
+        deactivate: Desactiva el camp d'entrada
+        up: Puja en la jerarquia de pàgines
+        switch_input: Canvia entre camps d'entrada
+
+pages:
+    not_found:
+        title: No s'ha trobat
+        intro: No hem pogut trobar la pàgina que cercàveu.
+    index:
+        popular_keys: Algunes claus populars
+        keys:
+            listkeys: Mostra totes les claus...
+        tags:
+            listtags: Mostra les etiquetes més habituals...
+        relations:
+            listrelations: Mostra tots els tipus de relacions...
+        reports:
+            listreports: Mostra tots els informes...
+        about:
+            intro: |
+                <p>OpenStreetMap utilitza <b>etiquetes</b> de la forma <b>clau=valor</b>
+                per afegir significat als objectes geogràfics. Taginfo recull informació
+                sobre aquestes etiquetes de diferents fonts per ajudar a entendre què
+                volen dir i com s'utilitzen.</p>
+            more: Més sobre taginfo...
+        international:
+            see: Mostra altres llocs de taginfo...
+    about:
+        about_taginfo:
+            title: Quant a taginfo
+            text: |
+                <p>OpenStreetMap usa <b>etiquetes</b> per afegir significat a objectes geogràfics. No hi ha
+                una llista fixa d'aquestes etiquetes. Es poden inventar i usar etiquetes noves quan calgui.
+                Tothom pot generar noves etiquetes i afegir-les a objectes nous o ja existents.
+                Això fa OpenStreetMap enormement flexible, però a vegades també una mica difícil
+                de treballar-hi.</p>
+                <p>Tant si esteu contribuïnt a OSM o usant dades d'OSM, sempre hi ha
+                qüestions com ara: quines etiquetes usa la gent pels objectes X? Quines etiquetes puc usar
+                per objectes Y de manera que es vegin correctament al mapa? L'etiqueta Z descrita
+                a la wiki, s'està utilitzant realment i on?</p>
+                <p>Taginfo us ajuda mostrant estadístiques sobre quines etiquetes hi ha realment a la
+                base de dades, quanta gent usa aquestes etiquetes, on s'usen i altres coses. També
+                obté informació sobre les etiquetes des de la wiki i des d'altres llocs. Taginfo
+                intenta agrupar tota la informació sobre etiquetes per ajudar-vos a entendre
+                com s'usen i què signifiquen. Vegeu una <a href="sources">llista de les fonts</a>
+                que taginfo usa.</p>
+        about_site:
+            title: Quant a aquesta pàgina
+        building_on_taginfo:
+            title: Construint sobre taginfo
+            pre: |
+                <p>Podeu usar les dades de taginfo en els vostres propis projectes:</p>
+            api: |
+                <h3>API</h3>
+                <p>Les dades de Taginfo són accessibles a traves d'una API REST. Vegeu la
+                <a href="taginfo/apidoc">documentació de l'API</a> pels detalls, alguna informació general és
+                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">a la wiki d'OSM</a>.
+                Els servidors que executen l'API de taginfo no tenen recursos il·limitats.
+                Useu l'API responsablement. En cas de dubte, contacteu el mantenidor del
+                que estigueu usant o digueu-nos alguna cosa a la llista de correu.</p>
+            download: |
+                <h3>Descarrega</h3>
+                <p>Si voleu jugar amb les dades que usa taginfo, podeu descarregar
+                els fitxers de base de dades Sqlite que s'actualitzen regularment. Tot el preprocessament ja el teniu fet.
+                Vegeu la <a href="download">pàgina de descàrregues</a> per una llista de fitxers. Fixeu-vos que
+                alguns d'aquests fitxers poden ser força grossos. Si voleu descarregar-los habitualment,
+                contacteu amb els mantenidors del lloc que estigueu usant o digueu-nos alguna cosa a la llista de correu.</p>
+            license: |
+                <h3>Llicència</h3>
+                <p>Les dades disponibles a través de taginfo tenen llicència ODbL, la
+                <a class="extlink" href="//www.openstreetmap.org/copyright">mateixa
+                llicència que les dades d'OpenStreetMap</a>.</p>
+        software:
+            title: El programari de taginfo
+            text: |
+                <p>El programari de taginfo va ser creat i és mantingut per
+                <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
+                El disseny de la web va ser creat per
+                <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
+                <h3>Traduccions</h3>
+                <p>Necessitem traductors per l'interfície d'usuari de taginfo. Vegeu el <a
+                href="taginfo/translations">resum general</a> per trobar idiomes que necessiten
+                un cop de mà. A la
+                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">wiki d'OSM</a> hi ha més informació sobre com ajudar.</p>
+                <h3>Codi</h3>
+                <p>Tot el programari darrera de la web de taginfo és programari lliure. El podeu obtenir a
+                <a class="extlink" href="https://github.com/taginfo/taginfo/">GitHub</a>. Per una visió general
+                vegeu la pàgina sobre l'<a class="extlink"
+                href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">arquitectura de
+                taginfo</a> a la wiki d'OSM.</p>
+                <h3>Fent correr la vostra pròpia instancia</h3>
+                <p>Podeu fer correr el vostre propi
+                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">lloc de taginfo</a>,
+                per exemple amb dades per només el vostre propi país. Les instruccions són
+                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Running">a la wiki
+                d'OSM</a>.</p>
+                <h3>Informes d'errors i petició de funcionalitats</h3>
+                <p>Els informes d'errors i les peticions de funcionalitats haurien de dirigir-se al <a class="extlink"
+                href="https://github.com/taginfo/taginfo/issues">gestor de problemes de GitHub</a>. O digueu-nos alguna cosa a la llista de correu.</p>
+                <h3>Contacte/Lliata de correu</h3>
+                <p>Contacteu amb nosaltres a
+                <a class="extlink" href="//lists.openstreetmap.org/listinfo/taginfo-dev"> llista de correu taginfo-dev</a>
+                si teniu preguntes o voleu col·laborar.</p>
+    sources:
+        intro: |
+            <p>Taginfo recull dades sobre les etiquetes d'OSM de diverses fonts i les
+            ajunta per què siguin fàcils de navegar i descobrir.</p>
+            <p>Fixeu-vos que taginfo només mostra aquestes dades. Si voleu canviar-ho, haureu de tornar a les fonts.</p>
+        list:
+            title: Llista de fonts
+            intro: Aquí hi ha una llista de les fonts usades actualment. En el futur, es poden integrar més fonts.
+        description:
+            db: |
+                <p>Estadístiques sobre les claus, etiquetes i tipus de relacions es generen a partir de la <a class="extlink" href="https://planet.openstreetmap.org/">base de dades d'OSM database</a> (o un extracte) així com els mapes que mostren la distribució geogràfica de nodes i vies.</p>
+            wiki: |
+                <p>Es llegeix la <a class="extlink" href="//wiki.openstreetmap.org/">wiki d'OSM</a> i totes les pàgines Key:*, Tag:*, i Relation:* (en tots els diferents idiomes) són analitzades. Les descripcions, imatges, etiquetes relacionades, etc. s'extreuen d'aquí.</p>
+            languages: |
+                <p>Taginfo obté informació sobre els diferents idiomes del món, els seus codis, noms, etc. des de diversos registres de l'<a class="extlink" href="https://www.iana.org/">IANA</a> i d'<a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
+            projects: |
+                <p>Els projectes que d'alguna manera usen les etiquetes d'OSM, com ara editors, mapes, encaminadors,  etc. Vegeu <a href="projects">la llista de projectes</a>.</p>
+            chronology: |
+                <p>Nombre de claus/etiquetes al llarg del temps de la <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">història del planeta</a>.</p>
+        updates:
+            title: Actualitzacions
+            intro: Les dades de taginfo s'actualitzen regularment des de les fonts.
+        data_until: Dades fins
+        last_update_run: Última actualització
+        data_until_explanation: Totes les edicions fins aquest moment seran a les dades, les últimes edicions, pot ser.
+        to: a
+    download:
+        intro: |
+            <p>Aquí podeu descarregar la base de dades usada per taginfo. Totes les dades estan desades
+            en una base de dades <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>.
+            Després, els fitxers de la base de dades s'empaqueten amb <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
+            <p>Si no voleu descarregar aquestes bases de dades, però necessiteu accés automàtic a
+            les dades, també podeu usar l'<a href="about">API</a>.</p>
+        file: Fitxer
+        packed: Empaquetat
+        unpacked: Desempaquetat
+        description: Descripció
+        note: Alguns índexs no són a les bases de dades disponibles per descarregar aquí. La mida 'empaquetada' és la mida sense aquests índexs, la mida 'desempaquetada' inclou els índexs que probablement voldreu construir després de descarregar.
+    reports:
+        intro: |
+            Els informes mostren les dades d'etiquetes des de diferents angles.
+            Sovint ajunten dades de varies fonts de maneres interessants. Alguns
+            dels informes poden ajudar a trobar errors específics.
+        list: Llista de tots els informes
+        data_sources: Fonts de dades usades
+    search:
+        title: Resultats de cerca
+        you_were_searching_for: Estaveu cercant
+        fulltext: Text complet
+        no_keys: No s'han trobat claus.
+        no_values: No s'han trobat valors.
+        no_tags: No s'han trobat etiquetes.
+        no_match: Cap coincidència.
+    compare:
+        nothing_to_compare: No hi ha cap clau/etiqueta a comparar. Aneu a qualsevol pàgina de clau o etiqueta i afegiu-la.
+    keys:
+        intro: |
+                Aquesta taula mostra totes les claus d'etiquetes que existeixen a la base de dades o en qualsevol altre de les fonts.
+    tags:
+        intro: |
+                Aquesta taula mostra les etiquetes més comunes de la base de dades.
+    relations:
+        name: Tipus de relacions
+        intro: Informació sobre els diferents tipus de relacions (indicat per l'etiqueta <a href="keys/type?filter=relations">type</a>).
+        relations_of_type_tooltip: Nombre de relacions d'aquest tipus (i com a percentatge de totes les relacions).
+        prevalent_roles: Rols prevalents
+        prevalent_roles_tooltip: Rols prevalents per aquest tipus de relació.
+        no_information: Sense informació
+        roles_less_than_one_percent: cap rol amb més de l'1%
+        empty_role: rol buit
+    projects:
+        intro: |
+                Aquesta taula mostra tots els projectes coneguts per taginfo que d'alguna manera usen etiquetes OSM.<br/>Per més informació sobre aquesta funcionalitat, vegeu la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
+    key:
+        description_from_wiki: Descripció d'aquesta clau a la wiki (si està disponible, en l'idioma que heu escollit, sinó, en anglès).
+        no_description_in_wiki: No hi ha cap descripció en anglès d'aquesta clau a la wiki. (Vegeu també la pestanya "Wiki".)
+        filter:
+            label: |
+                 Filtre:
+            none: Cap filtre
+            nodes: Només nodes
+            ways: Només vies
+            relations: Només relacions
+        button_disabled: Botó deshabilitat perquè hi ha massa objectes amb aquesta clau.
+        number_objects: Nombre d'objectes
+        number_values: Nombre de valors
+        values_used: Valors usats amb aquesta clau
+        tag_description_from_wiki: Descripció de la clau a la wiki (si està disponible, en l'idioma que heu escollit, sinó, en anglès).
+        overview:
+            objects_last_edited_by: Objectes amb aquesta clau editats per última vegada per %1 usuaris diferents.
+            no_endorsement: (Això no vol dir que tots aquests usuaris estiguin d'acord amb aquesta clau.)
+            distribution_of_values: Distribució de valors
+        other_keys_used:
+            title: Altres claus que s'usen conjuntament amb aquesta clau
+            other: Altres claus
+            to_count_tooltip: Nombre d'objectes amb aquesta clau que també tenen l'altre clau.
+            other_key_tooltip: Clau usada conjuntament amb aquesta clau.
+            from_count_tooltip: Nombre d'objectes amb l'altra clau que també tenen aquesta clau.
+        geographic_distribution:
+            title: Distribució geogràfica d'aquesta clau
+            all: Això mostra la distribució de nodes i vies amb aquesta clau. No es mostren les relacions.
+            nodes: Això mostra la distribució de nodes amb aquesta clau.
+            ways: Això mostra la distribució de vies amb aquesta clau.
+            relations: Mostrar la ubicació geogràfica per diferents tipus de relacions no és bufar i fer ampolles, per això aquí no intentem mostrar un mapa.
+        wiki_pages:
+            title: Pàgines wiki sobre aquesta clau
+            none_found: No hi ha disponible cap pàgina wiki per aquesta clau.
+            create: Creeu una pàgina wiki per aquesta clau
+            wiki_page: Pàgina wiki
+            implied_tags: Etiquetes implícites
+            combined_tags: Etiquetes combinades
+            linked_tags: Etiquetes enllaçades
+        projects:
+            title: Projectes que usen aquesta clau
+            description: Com s'utilitza aquesta clau en el projecte
+        similar:
+            tab: Semblants
+            title: Claus semblants
+            other: Claus semblants
+            count_all_tooltip: Nombre d'objectes amb una clau semblant
+            similarity: Semblança
+            similarity_tooltip: Nombres més petits volen dir més semblança
+        characters:
+            title: Caràcters Unicode en aquesta clau
+    tag:
+        description_from_wiki: Descripció d'aquesta etiqueta a la wiki (si està disponible, en l'idioma que heu escollit, sinó, en anglès).
+        no_description_in_wiki: No hi ha cap descripció en anglès d'aquesta etiqueta a la wiki. (Vegeu també la pestanya "Wiki".)
+        button_disabled: Botó deshabilitat perquè hi ha massa objectes amb aquesta etiqueta.
+        number_objects: Nombre d'objectes
+        overview:
+            see_also: Vegeu també la pàgina del tipus de relació
+        other_tags_used:
+            title: Altres etiquetes que s'usen conjuntament amb aquesta etiqueta
+            other: Altres etiquetes
+            to_count_tooltip: Nombre d'objectes amb aquesta etiqueta que també tenen l'altre etiqueta/clau.
+            other_key_tooltip: Etiquetes/claus usades conjuntament amb aquesta etiqueta.
+            from_count_tooltip: Nombre d'objectes amb l'altra etiqueta/clau que també tenen aquesta clau.
+        combinations:
+            title: Combinacions
+            description: Aquesta taula només mostra les combinacions més comunes de les etiquetes més comunes.
+        chronology:
+            no_chronology: La cronologia només es pot generar per les etiquetes més freqüents.
+        geographic_distribution:
+            title: Distribució geogràfica d'aquesta etiqueta
+            all: Això mostra la distribució de nodes i vies amb aquesta etiqueta. No es mostren les relacions.
+            nodes: Això mostra la distribució de nodes amb aquesta etiqueta.
+            ways: Això mostra la distribució de vies amb aquesta etiqueta.
+            relations: Mostrar la ubicació geogràfica per diferents tipus de relacions no és bufar i fer ampolles, per això aquí no intentem mostrar un mapa.
+            no_map: El mapa només es pot crear per les etiquetes més freqüents. Proveu l'enllaç de overpass turbo.
+        wiki_pages:
+            title: Pàgines wiki sobre aquesta etiqueta
+            none_found: No hi ha disponible cap pàgina wiki per aquesta etiqueta.
+            create: Creeu una pàgina wiki per aquesta etiqueta
+            suggest_key_wiki_page: Potser podeu trobar alguna informació a la pàgina wiki de la clau %1.
+            wiki_page: Pàgina wiki
+            implied_tags: Etiquetes implícites
+            combined_tags: Etiquetes combinades
+            linked_tags: Etiquetes enllaçades
+        projects:
+            title: Projectes que usen aquesta etiqueta
+            description: Com s'utilitza aquesta etiqueta en el projecte
+        characters:
+            title: Caràcters Unicode en aquest valor d'etiqueta
+    relation:
+        name: Tipus de relació
+        description_from_wiki: Descripció d'aquest tipus de relació a la wiki (si està disponible, en l'idioma que heu escollit, sinó, en anglès).
+        no_description_in_wiki: No hi ha cap descripció en anglès d'aquest tipus de relació a la wiki. (Vegeu també la pestanya "Wiki".)
+        button_disabled: Botó deshabilitat perquè hi ha massa objectes amb aquest tipus de relació.
+        overview:
+            tab: Descripció general
+            title: Descripció general
+            member_type: Tipus de membres
+            member_count: Nombre de membres
+            see_also: Vegeu també la pàgina d'etiqueta
+        roles:
+            tab: Rols
+            title: Rols dels membres
+            objects_tooltip: Membres de la relació amb aquest rol (i com a percentage de tots els membres) per aquest tipus de relació.
+            nodes_tooltip: Membres de la relació de tipus node amb aquest rol (i com a percentage de tots els membres de tipus node) per aquest tipus de relació.
+            ways_tooltip: Membres de la relació de tipus via amb aquest rol (i com a percentage de tots els membres de tipus via) per aquest tipus de relació.
+            relations_tooltip: Membres de la relació de tipus relació amb aquest rol (i com a percentage de tots els membres de tipus relació) per aquest tipus de relació.
+            no_roles_info: No hi ha informació sobre rols per aquest tipus de relació (segurament perquè hi ha molt poques relacions d'aquestes).
+        graph:
+            tab: Gràfic de rols
+            title: Gràfic de rols
+        wiki_pages:
+            title: Pàgines wiki sobre aquest tipus de relació
+            none_found: No hi ha disponible cap pàgina wiki per aquest tipus de relació.
+            create: Creeu una pàgina wiki per aquest tipus de relació
+            wiki_page: Pàgina wiki
+        projects:
+            title: Projectes que usen aquest tipus de relació
+            description: Com s'utilitza aquest tipus de relació en el projecte
+        characters:
+            title: Caràcters Unicode en el tipus de relació
+    project:
+        overview:
+            project_name: Nom del projecte
+            project_url: URL del projecte
+            description: Descripció
+            documentation_url: Documentació
+            last_update: Última actualització
+            json_url: Fitxer JSON del projecte
+            info: Aquestes dades són proporcionades pel projecte per taginfo a través del 'fitxer JSON del projecte' enllaçat a sobre. Vegeu la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a> per una descripció del format.
+        tags:
+            title: Etiquetes usades per aquest projecte
+            intro: Aquestes dades són proporcionades pel projecte i no són necessàriament completes. Vegeu la documentació del projecte per més detalls.
+            description: Com s'usa aquesta clau/etiqueta en el projecte
+            count_all_tooltip: Nombre d'objectes a la base de dades amb aquesta clau/etiqueta
+            objects_tooltip: Tipus d'objectes que usa el projecte
+
+flexigrid:
+    pagetext: Pàgina
+    pagestat: Mostrant del {from} al {to} de {total} elements
+    outof: de
+    findtext: Troba
+    procmsg: S'està processant, espereu...
+    nomsg: Cap element
+    errormsg: Error de connexió
+
+comparison:
+    list: Llista de comparacions
+    items: elements
+    add_key: Afegeix aquesta clau a la llista
+    add_tag: Afegeix aquesta etiqueta a la llista
+    clear: Buida la llista de comparacions
+    compare: Compara claus/etiquetes
+
+sources:
+    master:
+        name: Principal
+        description: Estadístiques agregades i dades variades necesssàries per la interfície d'usuari de taginfo.
+    history:
+        name: Història
+        description: Estadístiques agregades al llarg del temps.
+    db:
+        name: Base de dades
+        description: Estadístiques sobre cada clau i cada etiqueta de la base de dades principal d'OSM.
+    wiki:
+        name: Wiki
+        description: Dades de les pàgines de les etiquetes i claus de la wiki d'OSM.
+    languages:
+        name: Idiomes
+        description: Noms dels idiomes, codis, etc. dels registres de l'IANA i Unicode.
+    projects:
+        name: Projectes
+        description: Projectes externs i l'ús de les claus/etiquetes d'OSM.
+    chronology:
+        name: Cronologia
+        description: Nombre de claus/etiquetes al llarg del temps de la història del planeta.
+
+unicode:
+    character: Caràcter
+    codepoint: Punt de codi
+    script: Alfabet
+    general_category: Categoria general
+    name: Nom del punt de codi Unicode
+
+reports:
+    characters_in_keys:
+        name: Caràcters en claus
+        intro: |
+            Qualsevol caràcter Unicode vàlid pot aparèixer en una clau d'OSM però normalment
+            només s'usen lletres minúscules de l'alfabet llatí (a-z) i guions baixos (_).
+            Els dos punts (:) sovint s'usen com a caràcter separador. Aquest
+            informe categoritza totes les claus segons els caràcters que usen.
+        statistics:
+            tab: Estadístiques
+            title: Descripció general de les estadístiques
+            fraction: Fracció
+            characters: Caràcters a la clau
+            characters_in_keys:
+                plain: Només lletres minúscules de l'alfabet llatí (<span class="char">a</span> a <span class="char">z</span>) i guió baix (<span class="char">_</span>), el primer i l'últim caràcter són lletres.
+                colon: Com A però amb un o més dos punts (<span class="char">:</span>) dins.
+                letters: Com B però amb lletres majúscules de l'alfabet llatí o lletres d'altres alfabets.
+                space: Al menys un caràcter en blanc (espai, tabulació, salt de línia, retorn de carro o d'altres alfabets).
+                problem: Conté caràcters possiblement problemàtics <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
+                rest: Tota la resta.
+                total: Total
+        plain:
+            tab: Senzill
+            title: Claus senzilles
+            intro: |
+                <p>Claus que només contenen lletres minúscules de l'alfabet llatí (de <span
+                class="char">a</span> a <span class="char">z</span>) i el
+                guió baix (<span class="char">_</span>). El primer i l'últim
+                caràcters han de ser lletres. Les claus més simples haurien de pertanyer a
+                aquesta categoria.</p>
+        colon:
+            tab: Dos punts
+            title: Claus amb dos punts
+            intro: |
+                <p>Claus que tenen un o més caràcters de dos punts (<span
+                class="char">:</span>) dins a més de les
+                lletres (de <span class="char">a</span> a <span
+                class="char">z</span>) i guions baixos (<span
+                class="char">_</span>). Els dos punts sovint s'usen com a caràcter
+                separador de categories jerarquitzades.</p>
+        letters:
+            tab: Lletres
+            title: Claus amb lletres majúscules o lletres d'altres alfabets
+            intro: |
+                <p>Normalment, les lletres minúscules de l'albabet llatí són
+                les preferides per les claus, però a vegades s'usen les lletres majúscules
+                (per exemple per abreviatures conegudes) o lletres d'altres
+                alfabets (per exemple per claus que només són rellevants per una àrea on
+                aquest alfabet s'usa predominantment).</p>
+        space:
+            tab: Espais en blanc
+            title: Claus amb espais en blanc
+            intro: |
+                <p>Claus que contenen caràcters d'espais en blanc com ara l'espai, tabulador,
+                salt de línia, retorn de carro o caràcters d'espais en blanc d'altres
+                alfabets. Els espais en blanc en claus poden ser confusos, especialment al
+                principi o al final de la clau, perquè són invisibles.
+                Generalment l'espai en blanc s'hauria de treure o usar el guió baix
+                (<span class="char">_</span>) en el seu lloc.</p>
+        problem:
+            tab: Problemàtic
+            title: Claus amb caràcters possiblement problemàtics
+            intro: |
+                <p>Claus que contenen caràcters possiblement problemàtics: <span
+                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> o caràcters de
+                control. Aquests caràcters poden ser problemàtics, perquè
+                s'usen per citar cadenes en diversos llenguatges de programació o
+                tenen significats especials en XML, HTML, URLs, i altres llocs. El
+                signe igual sovint s'usa com a separador entre les claus de les etiquetes i
+                els valors. Les claus que apareixen en aquesta llista no són necessàriament errònies,
+                però. Però, en molts casos són simplement el resultat d'algun error
+                i s'haurien d'arreglar.</p>
+        rest:
+            tab: La resta
+            title: Totes les altres claus
+            intro: |
+                <p>Claus que no encaixen en cap de les altres categories.</p>
+    database_statistics:
+        name: Estadístiques de la base de dades
+        objects_in_db: Nombre d'objectes a la base de dades
+        tags_in_db: Nombre d'etiquetes a la base de dades
+        distinct_keys: Nombre de claus diferents
+        distinct_tags: Nombre d'etiquetes diferents
+        nodes_in_db: Nombre de nodes a la base de dades
+        nodes_with_tags_in_db: Nombre de nodes amb almenys una etiqueta
+        nodes_with_tags_in_db_percent: Percentatge de nodes amb almenys una etiqueta
+        tags_on_nodes: Nombre d'etiquetes en nodes
+        avg_tags_per_tagged_node: Nombre mitjà d'etiquetes per node etiquetat
+        ways_in_db: Nombre de vies a la base de dades
+        closed_ways_in_db: Nombre de vies tancades
+        tags_on_ways: Nombre d'etiquetes en vies
+        avg_tags_per_way: Nombre mitjà d'etiquetes per via
+        relations_in_db: Nombre de relacions a la base de dades
+        tags_on_relations: Nombre d'etiquetes en relacions
+        avg_tags_per_relation: Nombre mitjà d'etiquetes per relació
+    frequently_used_keys_without_wiki_page:
+        name: Claus usades freqüentment sense pàgina wiki
+        intro: |
+            <p>Aquesta taula mostra les claus que apareixen més de 10&thinsp;000 vegades a la base de dades
+            d'OSM però no tenen una pàgina wiki descrivint-les. Si sabeu alguna cosa sobre alguna
+            d'aquestes claus, creeu la pàgina wiki clicant a l'enllaç de la columna més a
+            l'esquerra i describiu la clau. Alternativament, a vegades pot tenir sentit crear una
+            redirecció a una pàgina wiki diferent. Per fer-ho, afegiu una única línia amb
+            <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>nom de la pàgina</i>]]</tt>
+            a la pàgina wiki.</p>
+        also_show_keys: Mostra també les claus que no tenen una pàgina wiki en anglès però sí en algun altre idioma.
+        table:
+            create_wiki_page: Crea una pàgina wiki...
+    key_lengths:
+        name: Longitud de les claus
+        intro: |
+            Les claus de les etiquetes poden tenir entre 0 i 255 (Unicode) caràcters de llargada. Les claus molt curtes o molt llargues sovint, però no sempre, són errors.
+        table:
+            number_of_objects: Nombre d'objectes
+        histogram:
+            name: Histograma
+            intro: Aquest histograma mostra quantes claus hi ha de cada llargada.
+            key_length: Llargada de la clau
+            number_of_keys: Nombre de claus
+    language_comparison_table_for_keys_in_the_wiki:
+        name: Taula de comparació d'idiomes per claus a la wiki
+        icons:
+            template: Pàgina wiki disponible i conté una plantilla estàndard.
+            error: Pàgina wiki disponible i conté una plantilla estàndard, però no s'ha pogut analitzar.
+            page: Pàgina wiki disponible, però no conté una plantilla estàndard.
+            redirect: La pàgina és una redirecció.
+        intro: |
+            Aquesta taula mostra totes les etiquetes per les quals hi ha una pàgina wiki disponible i en quins idiomes són.
+    languages:
+        name: Idiomes
+        intro: |
+            OpenStreetMap és un projecte internacional. Les etiquetes i les seves descripcions poden
+            ser en qualsevol idioma. Aquesta taula llista els idiomes que taginfo coneix i quantes
+            pàgines wiki hi ha en aquests idiomes documentat claus i etiquetes.
+            respectivament.
+        code: Codi
+        native_name: Nom natiu
+        english_name: Nom en anglès
+        wiki_key_pages: pàgines wiki de claus
+        wiki_tag_pages: pàgines wiki d'etiquetes
+    wiki_pages_about_non_existing_keys:
+        name: Pàgines wiki sobre claus no existents
+        intro: |
+            Aquesta taula mostra claus per les quals existeix una pàgina, però no hi ha ni una
+            instància a la base de dades. Això no és necessariament un error (potser algú
+            ha afegit la documentació a la wiki en preparació per usar la clau o la pàgina wiki
+            documenta una clau actualment obsoleta), però també pot ser un error tipogràfic o d'una altra mena.
+        wiki_pages: Pàgines wiki
+    name_tags:
+        name: Variants de les etiquetes de nom
+        intro: |
+            <p>Aquest informe mostra informació relacionada amb com s'anomenen els objectes a OSM
+            usant l'etiqueta <tt>name</tt> i les seves variants.</p>
+        overview:
+            tab: Descripció general
+            title: Descripció general
+        bcp47:
+            tab: Subetiquetes BCP47
+            title: Subetiquetes BCP47
+            filter:
+                label: Mostra només etiquetes del tipus
+                all: Tots
+                language: Idioma
+                script: Alfabet
+                region: Regió
+                variant: Variant
+            intro: |
+                <p>L'<a href="https://www.ietf.org/">IETF</a> defineix <i>etiquetes
+                d'idiomes</i> en els seu estàndard
+                <a href="https://tools.ietf.org/html/bcp47">Etiquetes per Identificar Idiomes
+                (BCP47)</a>. Les etiquetes
+                d'idiomes consisteixen en una o més <i>subetiquetes</i> que descriuen l'idioma,
+                alfabet, variants, etc. La llista següent mostra les subetiquetes actualment
+                registrades que són rellevants per OSM. Per més informació, vegeu també
+                registered that are relevant for OSM. For more information see also the
+                l'<a href="https://ca.wikipedia.org/wiki/Codi_de_llengua_IETF">entrada
+                a la Viquipèdia sobre les etiquetes d'idioma IETF</a> el lloc de <a
+                href="http://www.langtag.net/">langtag.net</a>.</p>
+                <p>Fixeu-vos que les dades que es mostren en aquesta taula <b>not</b> śon d'OpenStreetMap,
+                tan sols mostra les peces que es poden usar per descriure idiomes
+                independentment de si realment s'usen a OSM.
+                </p>
+    similar_keys:
+        name: Claus semblants
+        intro: |
+            Aquest informe mostra claus que s'usen molt sovint i claus similars usades molt
+            rarament. Això mostra molts errors ortogràfics de claus comuns, però no és
+            perfecte. Vigileu quan arregleu les dades! NO editeu mecànicament
+            aquestes amb cerca-i-reemplaça. Mireu cada cas individualment
+            i aprofiteu per arreglar altres problemes que veieu.
+        key_common: Claus usades habitualment
+        key_rare: Claus usades rarament
+        count_common: Recompte
+        count_rare: Recompte
+        similarity: Semblança
+    historic_development:
+        name: Desenvolupament històric
+        intro: |
+            Desenvolupament d'algunes estadístiques importants al llarg del temps. Aquestes dades han
+            estat recopilades per taginfo, els forats són possibles quan taginfo no ha funcionat
+            algun dia per alguna raó.
+        keys:
+            title: Claus úniques
+        tags:
+            title: Etiquetes úniques
+        relation_types:
+            title: Tipus de relacions únics
+    wiki_images:
+        name: Imatges de la wiki
+        intro: |
+            Imatges usades a la wiki per simbolitzar les claus en diferents
+            idiomes. A vegades l'imatge d'un o altre idioma
+            és millor. Però a vegades, té sentit tenir imatges
+            diferents degut a les diferències culturals.
+    wiki_problems:
+        name: Problemes d'anàlisis de la wiki
+        intro: |
+            Taginfo llegeix totes les pàgines wiki usades per descriure claus, etiquetes i
+            relacions per buscar informació sobre les etiquetes. Aquest informe mostra una llista
+            de problemes trobats mentre es llegien aquestes pàgines. Aquests no són
+            necessariament errors a la wiki, tant sols signifiquen que alguna cosa de
+            la pàgina wiki té un format que taginfo no entén. Tant pot ser que
+            la pàgina s'hagi de corregir com que s'hagi d'arreglar taginfo.
+        location: Ubicació
+        reason: Raó
+        wiki_page: Pàgina wiki
+        lang: Idioma
+        info: Informació addicional

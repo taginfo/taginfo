@@ -1,13 +1,15 @@
 # web/lib/utils.rb
 
+require 'time'
+
 # ------------------------------------------------------------------------------
 # patch some convenience methods into base classes
 
-class Fixnum
+class Integer
 
     # convert to string with thin space as thousand separator
     def to_s_with_ts
-        self.to_s.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1&thinsp;")
+        self.to_s.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1&#x202f;")
     end
 
 end
@@ -86,11 +88,11 @@ def xapi_url(element, key, value=nil)
 end
 
 def xapi_link(element, key, value=nil)
-    '<span class="button">' + external_link('xapi_button', 'XAPI', xapi_url(element, key, value), true) + '</span>'
+    external_link('xapi_button', 'XAPI', xapi_url(element, key, value), true)
 end
 
 def josm_link(element, key, value=nil)
-    '<span class="button">' + external_link('josm_button', 'JOSM', 'http://localhost:8111/import?url=' + Rack::Utils::escape(xapi_url(element, key, value)), true) + '</span>'
+    external_link('josm_button', 'JOSM', 'http://127.0.0.1:8111/import?url=' + Rack::Utils::escape(xapi_url(element, key, value)), true)
 end
 
 def quote_double(text)
@@ -126,11 +128,33 @@ def turbo_link(count, filter, key, value=nil)
 
         url = TaginfoConfig.get('turbo.url_prefix', 'https://overpass-turbo.eu/?') + Rack::Utils::build_query(parameters)
     end
-    return '<span class="button">' + external_link('turbo_button', 'Overpass turbo', url, true) + '</span>'
+    return external_link('turbo_button', 'Overpass turbo', url, true)
 end
 
-def level0_link()
-    return '<span class="button">' + external_link('level0_button', 'Level0 Editor', '#', true) + '</span>'
+def level0_url(filter, key, value)
+    query = '["' + quote_double(key)
+    if not value.nil?
+        query += '"="' + quote_double(value)
+    end
+    query += '"];'
+
+    if filter == 'nodes'
+        query = 'node' + query
+    elsif filter == 'ways'
+        query = '(way' + query + '>;);'
+    elsif filter == 'relations'
+        query = 'rel' + query
+    else
+        query = '(node' + query + 'way' + query + '>;rel' + query + ');'
+    end
+
+    overpass_url = TaginfoConfig.get('level0.overpass_url_prefix') + Rack::Utils::build_query({ :data => '[out:xml];' + query + 'out meta;' })
+
+    return TaginfoConfig.get('level0.level0_url_prefix') + Rack::Utils::build_query({ :url => overpass_url })
+end
+
+def level0_link(filter, key, value=nil)
+    return external_link('level0_button', 'Level0 Editor', level0_url(filter, key, value), true)
 end
 
 def external_link(id, title, link, new_window=false)
@@ -153,7 +177,7 @@ end
 def get_filter
     f = params[:filter].to_s == '' ? 'all' : params[:filter]
     if f !~ /^(all|nodes|ways|relations)$/
-        raise ArgumentError, "unknown filter"
+        return 'all'
     end
     f
 end
@@ -202,9 +226,20 @@ end
 
 # ------------------------------------------------------------------------------
 
+# Get the printing direction of a language.
+def direction_from_lang_code(language_code)
+    r = R18n.locale(language_code)
+    if r.supported?
+        return r.ltr? ? 'ltr' : 'rtl'
+    end
+    return 'auto'
+end
+
+# ------------------------------------------------------------------------------
+
 # Get description for key/tag/relation from wiki page
 # Get it in given language or fall back to English if it isn't available
-def get_description(table, attr, lang, param, value)
+def get_description(table, attr, param, value)
     [r18n.locale.code, 'en'].each do |lang|
         select = @db.select("SELECT description FROM #{table}")
                     .condition("lang=? AND #{attr}=?", lang, param)
@@ -218,26 +253,26 @@ def get_description(table, attr, lang, param, value)
         end
 
         desc = select.get_first_value()
-        return desc if desc
+        return [desc, lang, direction_from_lang_code(lang)] if desc
     end
-    return ''
+    return ['', '', 'auto']
 end
 
-def get_key_description(lang, key)
-    get_description('wiki.wikipages', 'key', lang, key, nil)
+def get_key_description(key)
+    get_description('wiki.wikipages', 'key', key, nil)
 end
 
-def get_tag_description(lang, key, value)
-    get_description('wiki.wikipages', 'key', lang, key, value)
+def get_tag_description(key, value)
+    get_description('wiki.wikipages', 'key', key, value)
 end
 
-def get_relation_description(lang, rtype)
-    get_description('wiki.relation_pages', 'rtype', lang, rtype, nil)
+def get_relation_description(rtype)
+    get_description('wiki.relation_pages', 'rtype', rtype, nil)
 end
 
 def wrap_description(translation, description)
-    if description != ''
-        return "<span title='#{ h(translation.description_from_wiki) }' tipsy='w'>#{ h(description) }</span>"
+    if description[0] != ''
+        return "<span lang='#{description[1]}' dir='#{description[2] ? 'ltr' : 'rtl'}' title='#{ h(translation.description_from_wiki) }' tipsy='#{r18n.locale.ltr? ? 'w' : 'e'}'>#{ h(description[0]) }</span>"
     else
         return "<span class='empty'>#{ h(translation.no_description_in_wiki) }</span>"
     end
@@ -248,8 +283,10 @@ end
 # Used in wiki api calls
 def get_wiki_result(res)
     return generate_json_result(res.size,
-        res.map{ |row| {
+        res.map{ |row|
+            {
             :lang             => row['lang'],
+            :dir              => direction_from_lang_code(row['lang']),
             :language         => ::Language[row['lang']].native_name,
             :language_en      => ::Language[row['lang']].english_name,
             :title            => row['title'],
@@ -269,7 +306,8 @@ def get_wiki_result(res)
             :on_relation      => row['on_relation'].to_i == 1,
             :tags_implies     => row['tags_implies'    ].split(','),
             :tags_combination => row['tags_combination'].split(','),
-            :tags_linked      => row['tags_linked'     ].split(',')
+            :tags_linked      => row['tags_linked'     ].split(','),
+            :status           => row['approval_status']
         } }
     )
 end
@@ -306,5 +344,25 @@ def build_image_url(row)
         return "#{row['thumb_url_prefix']}#{ h <= w ? MAX_IMAGE_WIDTH : (MAX_IMAGE_WIDTH * w / h).to_i }#{ row['thumb_url_suffix'] }"
     end
     return nil
+end
+
+def unpack_chronology(raw_data)
+    data = []
+
+    if raw_data
+        flat_data = raw_data.unpack('l*')
+
+        while (flat_data.size() > 0) do
+            day = flat_data.shift(4)
+            data << {
+                :date      => Time.at(day[0] * (60*60*24)).to_date.to_s,
+                :nodes     => day[1],
+                :ways      => day[2],
+                :relations => day[3]
+            }
+        end
+    end
+
+    return data
 end
 

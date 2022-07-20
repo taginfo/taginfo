@@ -19,7 +19,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013-2017  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2013-2022  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@
 #  GNU General Public License for more details.
 #
 #  You should have received a copy of the GNU General Public License along
-#  with this program.  If not, see <http://www.gnu.org/licenses/>.
+#  with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 #------------------------------------------------------------------------------
 
@@ -80,7 +80,7 @@ class WikiPage
                 :tags_implies, :tags_combination, :tags_linked,
                 :parsed, :has_templ, :group,
                 :onNode, :onWay, :onArea, :onRelation,
-                :status, :statuslink, :wikidata
+                :approval_status, :statuslink, :wikidata
 
     def self.pages
         @@pages.values.sort{ |a,b| a.title <=> b.title }
@@ -170,7 +170,11 @@ class WikiPage
 
         loop do
             # split text into ('before', 'token', 'after')
-            m = /^(.*?)(\{\{|\}\}|[|=])(.*)$/m.match(text)
+            if context.last.has_parname
+                m = /^(.*?)(\{\{|\}\}|[|])(.*)$/m.match(text)
+            else
+                m = /^(.*?)(\{\{|\}\}|[|=])(.*)$/m.match(text)
+            end
 
             # we are done if there are no more tokens
             if m.nil?
@@ -376,10 +380,13 @@ class WikiPage
             end
         end
         if template.named_parameters['status']
-            @status = template.named_parameters['status'].join('')
+            @approval_status = template.named_parameters['status'].join(',')
         end
         if template.named_parameters['statuslink']
             @statuslink = template.named_parameters['statuslink'][0]
+            if @statuslink.class == Template
+                @statuslink = nil
+            end
         end
         if template.named_parameters['wikidata']
             wikidata = template.named_parameters['wikidata'][0]
@@ -431,7 +438,7 @@ class KeyOrTagPage < WikiPage
 
     def insert(db)
         db.execute(
-            "INSERT INTO wikipages (lang, tag, key, value, title, body, tgroup, type, has_templ, parsed, redirect_target, description, image, osmcarto_rendering, on_node, on_way, on_area, on_relation, tags_implies, tags_combination, tags_linked, status, statuslink, wikidata) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [
+            "INSERT INTO wikipages (lang, tag, key, value, title, body, tgroup, type, has_templ, parsed, redirect_target, description, image, osmcarto_rendering, on_node, on_way, on_area, on_relation, tags_implies, tags_combination, tags_linked, approval_status, statuslink, wikidata) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [
             lang,
             tag,
             key,
@@ -453,7 +460,7 @@ class KeyOrTagPage < WikiPage
             tags_implies.    sort.uniq.join(','),
             tags_combination.sort.uniq.join(','),
             tags_linked.     sort.uniq.join(','),
-            status,
+            approval_status,
             statuslink,
             wikidata
         ])
@@ -522,6 +529,10 @@ class Template
         @parname = name
     end
 
+    def has_parname
+        !@parname.nil?
+    end
+
     def add_parameter(value)
         if value != ''
             if @parname.nil? # positional parameter
@@ -531,7 +542,7 @@ class Template
                         @name = m[1].downcase
                     else
                         puts "WARN: Unknown template: #{ value }"
-                        @name = value
+                        @name = value.to_s
                     end
                 else
                     @parameters << value
@@ -548,6 +559,8 @@ end
 #------------------------------------------------------------------------------
 
 class Cache
+
+    @@time_spent_in_api_calls = 0
 
     def initialize(dir, db, api)
         @db = db
@@ -567,7 +580,11 @@ class Cache
             return
         end
         @db.execute("DELETE FROM cache.cache_pages WHERE title=?", [page.title])
+
+        starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         res = @api.get(page.params)
+        @@time_spent_in_api_calls += Process.clock_gettime(Process::CLOCK_MONOTONIC) - starting
+
         page.content = res.body
         @db.execute("INSERT INTO cache.cache_pages (title, timestamp, body) VALUES (?, ?, ?)", [page.title, page.timestamp, page.content])
         puts "CACHE: Page '#{ page.title }' not in cache (#{ page.timestamp })"
@@ -589,8 +606,9 @@ class Cache
     end
 
     def print_stats
-        puts "CACHE: Pages found in cache: #{@in_cache}"
-        puts "CACHE: Pages not found in cache: #{@not_in_cache}"
+        puts "CACHE: Pages found in cache: #{ @in_cache }"
+        puts "CACHE: Pages not found in cache: #{ @not_in_cache }"
+        puts "CACHE: Time spent in API calls: #{ @@time_spent_in_api_calls.to_i }s"
     end
 
 end

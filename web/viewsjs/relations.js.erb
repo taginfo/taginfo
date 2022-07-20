@@ -17,7 +17,7 @@ function page_init() {
         sortname: 'count',
         sortorder: 'desc',
         preProcess: function(data) {
-            data.rows = jQuery.map(data.data, function(row, i) {
+            data.rows = data.data.map(function(row) {
                 return { 'cell': [
                     link_to_rtype(row.rtype),
                     fmt_value_with_percent(row.count, row.count_fraction),
@@ -37,7 +37,7 @@ function fmt_prevalent_role_list(list) {
     if (list.length == 0) {
         return empty(page.roles_less_than_one_percent);
     }
-    return jQuery.map(list, function(item, i) {
+    return list.map(function(item) {
         if (item.role) {
             return tag('span', fmt_role(item.role), { tipsy: 'e', title: html_escape(item.role) + ' (' + fmt_as_percent(item.fraction) + ')' });
         } else {

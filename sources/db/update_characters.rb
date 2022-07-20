@@ -21,7 +21,7 @@
 #  GNU General Public License for more details.
 #
 #  You should have received a copy of the GNU General Public License along
-#  with this program.  If not, see <http://www.gnu.org/licenses/>.
+#  with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 #------------------------------------------------------------------------------
 
@@ -48,7 +48,7 @@ regexes = [
 ]
 
 keys = {}
-database.execute("SELECT key FROM keys").map{ |row| row['key'] }.each do |key|
+database.execute("SELECT key FROM keys WHERE characters IS NULL").map{ |row| row['key'] }.each do |key|
     keys[key] = 'rest'
     regexes.each do |type, regex|
         if key.match(regex)

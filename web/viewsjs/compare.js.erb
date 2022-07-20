@@ -1,4 +1,67 @@
+<%
+    misc = @trans.t.misc
+%>
 function page_init() {
     up = function() { window.location = '/'; }
-    page_init2();
+
+    const datasets = Array.from(document.querySelectorAll('h2'), s => s.dataset);
+    const fetch_promises = datasets.map(function(d, index) {
+        let url = '/api/4/';
+        if (d.value) {
+            url += 'tag/overview?key=' + encodeURIComponent(d.key) + '&value=' + encodeURIComponent(d.value);
+        } else {
+            url += 'key/overview?key=' + encodeURIComponent(d.key);
+        }
+
+        return fetch(url).
+            then( response => response.json() ).
+            then( d => { fill_data(datasets, d.data, index); return d; } );
+    });
+
+    Promise.all(fetch_promises).then(r => data_complete(r.map(d => d.data)));
+}
+
+function get_el(index, el) {
+    return document.querySelector('.item' + index + el);
+}
+
+function fill_data(datasets, item, index) {
+    const cl = new ComparisonList();
+    datasets.forEach(function(ditem, i) {
+        if (i != index) {
+            cl.add(ditem.key, ditem.value);
+        }
+    });
+    get_el(index, ' a.close').setAttribute('href', cl.url());
+
+    if (item.value) {
+        get_el(index, ' h2').innerHTML = link_to_tag(item.key, item.value);
+    } else {
+        get_el(index, ' h2').innerHTML = link_to_key(item.key);
+        if (item.prevalent_values) {
+            get_el(index, '.prevalent_values div b').textContent = '<%= h(misc.prevalent_values) %>:';
+            get_el(index, '.prevalent_values div.data').innerHTML = fmt_prevalent_value_list(item.key, item.prevalent_values);
+        }
+    }
+    get_el(index, '.projects div').innerHTML += item.projects;
+    get_el(index, '.wiki div.data').innerHTML += item.wiki_pages.map(
+        w => tag('span', html_escape(w.lang), {
+            'class': 'badge lang',
+            title: html_escape(w.native + ' (' + w.english + ')')
+        })
+    ).join(' ');
+
+    document.querySelectorAll('.item' + index + '.counts table td').forEach(function(c, index) {
+        c.innerHTML = fmt_with_ts(item.counts[index].count);
+    });
+
+    return item;
+}
+
+function data_complete(data) {
+    const comparison_list = new ComparisonList(data);
+    comparison_list.store();
+
+    jQuery('div.prevalent_values a').tipsy({ opacity: 1, delayIn: 500, gravity: 'w' });
+    jQuery('span.lang').tipsy({ opacity: 1, delayIn: 500, gravity: 'n' });
 }

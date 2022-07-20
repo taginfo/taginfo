@@ -1,7 +1,7 @@
 # web/lib/ui/keys.rb
 class Taginfo < Sinatra::Base
 
-    get %r{^/keys/(.*)} do |key|
+    get %r{/keys/(.*)} do |key|
         if params[:key].nil?
             @key = key
         else
@@ -20,30 +20,18 @@ class Taginfo < Sinatra::Base
 
         @count_all_values = @db.select("SELECT count_#{@filter_type} FROM db.keys").condition('key = ?', @key).get_first_i
 
-        @desc = wrap_description(t.pages.key, get_key_description(r18n.locale.code, @key))
+        @desc = wrap_description(t.pages.key, get_key_description(@key))
 
         @db.select("SELECT width, height, image_url, thumb_url_prefix, thumb_url_suffix FROM wiki.wikipages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang=? AND key=? AND value IS NULL UNION SELECT width, height, image_url, thumb_url_prefix, thumb_url_suffix FROM wiki.wikipages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang='en' AND key=? AND value IS NULL LIMIT 1", r18n.locale.code, @key, @key).
             execute() do |row|
                 @image_url = build_image_url(row)
             end
 
-        @prevalent_values = @db.select("SELECT value, count_#{@filter_type} AS count FROM db.tags").
-            condition('key=?', @key).
-            condition('count > ?', (@count_all_values * 0.02).to_i).
-            order_by([:count], 'DESC').
-            execute().map{ |row| { 'value' => row['value'], 'count' => row['count'].to_i } }
-
-        # add "(other)" label for the rest of the values
-        sum = @prevalent_values.inject(0){ |sum, x| sum += x['count'] }
-        if sum < @count_all_values
-            @prevalent_values << { 'value' => '(other)', 'count' => @count_all_values - sum }
-        end
-
         @wiki_count = @db.count('wiki.wikipages').condition('key=? AND value IS NULL', @key).get_first_i
         @user_count = @db.select('SELECT users_all FROM db.keys').condition('key=?', @key).get_first_i
 
-        @img_width  = TaginfoConfig.get('geodistribution.width')  * TaginfoConfig.get('geodistribution.scale_image')
-        @img_height = TaginfoConfig.get('geodistribution.height') * TaginfoConfig.get('geodistribution.scale_image')
+        @img_width  = @taginfo_config.get('geodistribution.width')  * @taginfo_config.get('geodistribution.scale_image')
+        @img_height = @taginfo_config.get('geodistribution.height') * @taginfo_config.get('geodistribution.scale_image')
 
         javascript_for(:flexigrid, :d3)
         javascript "#{ r18n.locale.code }/key"

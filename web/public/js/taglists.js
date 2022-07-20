@@ -20,7 +20,7 @@ var taginfo_taglist = (function(){
     }
 
     function url_for_wiki(title) {
-        var path = 'https://wiki.openstreetmap.org/wiki/';
+        const path = 'https://wiki.openstreetmap.org/wiki/';
         return path + encodeURIComponent(title);
     }
 
@@ -60,7 +60,7 @@ var taginfo_taglist = (function(){
     }
 
     function column_name(lang, column) {
-        var names = {
+        const names = {
             'cs': {
                 'key': 'Klíč',
                 'value': 'Hodnota',
@@ -88,6 +88,15 @@ var taginfo_taglist = (function(){
                 'osmcarto_rendering': 'Map rendering',
                 'count': 'Count'
             },
+            'eo': {
+                'key': 'Ŝlosilo',
+                'value': 'Valoro',
+                'element': 'Objekto',
+                'description': 'Priskribo',
+                'image': 'Bildo',
+                'osmcarto_rendering': 'Piktogramo',
+                'count': 'Nombro'
+            },
             'es': {
                 'key': 'Clave',
                 'value': 'Valor',
@@ -100,11 +109,11 @@ var taginfo_taglist = (function(){
             'fr': {
                 'key': 'Clé',
                 'value': 'Valeur',
-                'element': '',
+                'element': 'Élément',
                 'description': 'Description',
                 'image': 'Image',
                 'osmcarto_rendering': 'Icône',
-                'count': 'Count'
+                'count': 'Nombre'
             },
             'hu': {
                 'key': 'Kulcs',
@@ -133,6 +142,15 @@ var taginfo_taglist = (function(){
                 'osmcarto_rendering': 'アイコン',
                 'count': '件数'
             },
+            'ko': {
+                'key': '키',
+                'value': '값',
+                'element': '요소',
+                'description': '설명',
+                'image': '사진',
+                'osmcarto_rendering': '아이콘',
+                'count': '사용 횟수'
+            },
             'pl': {
                 'key': 'Klucz',
                 'value': 'Wartość',
@@ -140,7 +158,7 @@ var taginfo_taglist = (function(){
                 'description': 'Opis',
                 'image': 'Obraz',
                 'osmcarto_rendering': 'Ikona',
-                'count': 'Ilość'
+                'count': 'Liczba'
             },
             'pt': {
                 'key': 'Chave',
@@ -178,13 +196,22 @@ var taginfo_taglist = (function(){
                 'osmcarto_rendering': 'Hình tượng',
                 'count': 'Tổng số'
             },
-            'zh-TW': {
+            'zh-hans': {
+                'key': '类别',
+                'value': '值',
+                'element': '元素',
+                'description': '说明',
+                'image': '照片',
+                'osmcarto_rendering': '地图显示',
+                'count': '计数'
+            },
+            'zh-hant': {
                 'key': '鍵',
                 'value': '值',
-                'element': '類型',
+                'element': '元素',
                 'description': '描述',
-                'image': '圖片',
-                'osmcarto_rendering': '圖示',
+                'image': '照片',
+                'osmcarto_rendering': '地圖標註',
                 'count': '計數'
             }
         };
@@ -208,10 +235,13 @@ var taginfo_taglist = (function(){
             return wiki_key_link(get_lang(data, lang), data.key);
         },
         'value': function(lang, data) {
+            if (data.value === null) {
+                return '';
+            }
             return wiki_tag_link(get_lang(data, lang), data.key, data.value);
         },
         'element': function(lang, data) {
-            var types = '';
+            let types = '';
             if (data.on_node)     { types += type_image('node');     }
             if (data.on_way)      { types += type_image('way');      }
             if (data.on_area)     { types += type_image('area');     }
@@ -220,7 +250,7 @@ var taginfo_taglist = (function(){
         },
         'description': function(lang, data) {
             if (data.wiki) {
-                var d = data.wiki[lang] || data.wiki['en'];
+                const d = data.wiki[lang] || data.wiki['en'];
                 if (d && d.description) {
                     return html_escape(d.description);
                 }
@@ -229,7 +259,7 @@ var taginfo_taglist = (function(){
         },
         'image': function(lang, data) {
             if (data.wiki) {
-                var d = data.wiki[lang] || data.wiki['en'];
+                const d = data.wiki[lang] || data.wiki['en'];
                 if (d && d.image) {
                     return link_to_noescape(url_for_wiki(d.image.image),
                                             '<img src="' + d.image.thumb_url_prefix + '100' + d.image.thumb_url_suffix + '"/>');
@@ -239,12 +269,12 @@ var taginfo_taglist = (function(){
         },
         'osmcarto_rendering': function(lang, data) {
             if (data.wiki) {
-                var d = data.wiki[lang] || data.wiki['en'];
+                const d = data.wiki[lang] || data.wiki['en'];
                 if (d && d.osmcarto_rendering) {
                     return link_to_noescape(url_for_wiki(d.osmcarto_rendering.image),
                                             '<img style="max-width: 120px; max-height: 120px;" src="' +
                                             d.osmcarto_rendering.thumb_url_prefix +
-                                            d.osmcarto_rendering.width +
+                                            (d.osmcarto_rendering.width - 1) +
                                             d.osmcarto_rendering.thumb_url_suffix +
                                             '" width="' +
                                             d.osmcarto_rendering.width +
@@ -257,9 +287,9 @@ var taginfo_taglist = (function(){
         },
         'count': function(lang, data) {
             return ['node', 'way', 'relation'].map(function(type) {
-                var value = data['count_' + type + 's'].toString().
-                            replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1&thinsp;');
-                return '<div style="text-align: right">' +
+                const value = data['count_' + type + 's'].toString().
+                              replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1&#x202f;');
+                return '<div style="text-align: right; white-space: nowrap;">' +
                        value + ' ' + type_image(type) + '</div>';
             }).join('');
         }
@@ -270,7 +300,7 @@ var taginfo_taglist = (function(){
     function tr(content) { return '<tr>' + content + '</tr>'; }
 
     function create_table(data, options) {
-        var columns = ['key', 'value', 'element', 'description'];
+        let columns = ['key', 'value', 'element', 'description'];
 
         if (options.with_rendering) {
             columns.push('osmcarto_rendering');
@@ -294,7 +324,7 @@ var taginfo_taglist = (function(){
     }
 
     function insert_table(element, tags, options) {
-        var url = url_for_taginfo('api/4/tags/list?');
+        let url = url_for_taginfo('api/4/tags/list?');
 
         if (! options.lang) {
             options.lang = 'en';
@@ -306,9 +336,11 @@ var taginfo_taglist = (function(){
             url += 'key=' + encodeURIComponent(tags);
         }
 
-        jQuery.getJSON(url, function(json) {
-            element.html(create_table(json.data, options));
-            jQuery("td a img", element).parent().parent().css("text-align", "center");
+        fetch(url).
+            then(response => response.json()).
+            then(function(json) {
+                element.html(create_table(json.data, options));
+                jQuery("td a img", element).parent().parent().css("text-align", "center");
         });
     }
 

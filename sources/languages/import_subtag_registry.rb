@@ -8,7 +8,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013-2017  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2013-2020  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 #  GNU General Public License for more details.
 #
 #  You should have received a copy of the GNU General Public License along
-#  with this program.  If not, see <http://www.gnu.org/licenses/>.
+#  with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 #------------------------------------------------------------------------------
 
@@ -70,7 +70,7 @@ database = SQLite3::Database.new(dir + '/taginfo-languages.db')
 
 registry_file = "#{dir}/language-subtag-registry"
 
-file_date = nil
+#file_date = nil
 
 begin
     subtag = nil
@@ -81,7 +81,7 @@ begin
             if line == '%%'
                 subtag = Subtag.new
             elsif subtag.nil? && line =~ /^File-Date: ([0-9]{4}-[0-9]{2}-[0-9]{2})$/
-                file_date = $1
+#                file_date = $1
             elsif line =~ /^\s+(.*)/
                 if subtag.respond_to?(last_key)
                     subtag.send(last_key, $1)

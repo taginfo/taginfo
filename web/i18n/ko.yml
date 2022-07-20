@@ -6,100 +6,103 @@ osm:
     keys: 키
     value: 값
     values: 값
-    node: 교점
-    nodes: 교점
+    node: 노드
+    nodes: 노드
     way: 길
     ways: 길
     relation: 관계
     relations: 관계
-    relation_type: 관계 종류 
-    relation_types: 관계 종류
-    relation_member: 관계 구성 요소
-    relation_members: 관계 구성 요소
-    relation_member_nodes: Member nodes
-    relation_member_ways: Member ways
-    relation_member_relations: Member relations
-    relation_member_role: Role
-    relation_member_roles: Roles
-    object: Object
-    objects: Objects
-    all: All
-    user: User
-    users: Users
+    relation_type: 관계 유형
+    relation_types: 관계 유형
+    relation_member: 관계의 구성 요소
+    relation_members: 관계의 구성 요소
+    relation_member_nodes: 노드 구성 요소
+    relation_member_ways: 길 구성 요소
+    relation_member_relations: 관계 구성 요소
+    relation_member_role: 역할
+    relation_member_roles: 역할
+    object: 요소
+    objects: 요소
+    all: 전체
+    user: 사용자
+    users: 사용자
 
 taginfo:
-    source: Source
-    sources: Sources
-    download: Download
-    about: About
-    contact: Contact
-    meta: Meta
-    wiki: Wiki
-    report: Report
-    reports: Reports
-    international: International
-    apidoc: API Documentation
-    project: Project
-    projects: Projects
-    test: Test
-    map: Map
-    maps: Maps
-    relations: Relations
-    combinations: Combinations
-    key_combinations: Combinations
-    comparison: Key/Tag Comparison
-    overview: Overview
-    data_from: Data from
-    data_from_description: Last update of taginfo database
+    source: 출처
+    sources: 출처
+    download: 다운로드
+    about: 개요
+    contact: 연락처
+    meta: 메타
+    wiki: 위키
+    report: 보고서
+    reports: 보고서
+    international: 전 세계
+    apidoc: API 문서
+    project: 프로젝트
+    projects: 프로젝트
+    test: 테스트
+    chronology: 역사
+    map: 지도
+    maps: 지도
+    relations: 관계
+    combinations: 조합
+    key_combinations: 조합
+    comparison: 키/태그 비교
+    overview: 개요
+    links: 링크
+    data_from: 최근
+    data_from_description: taginfo 데이터베이스를 마지막으로 갱신한 날
     instance:
-        title: About this taginfo site
-        other: See the <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> for other sites.
+        title: 이 taginfo 사이트에 대해서
+        other: 다른 사이트는 <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM 위키</a>를 참조.
 
 misc:
-    values_less_than_one_percent: no values with more than 1%
-    empty_string: empty string
-    unknown: unknown
-    count: Count
-    image: Image
-    no_image: no image
-    all: All
-    object_type: Type
-    description: Description
-    help: Help
-    length: Length
-    icon: Icon
-    line: Line
-    area: Area
-    language: Language
-    search_for: Search for
-    objects_tooltip: Number of objects (as absolute value and as percentage of all nodes, ways, and relations).
-    nodes_tooltip: Number of nodes (as absolute value and as percentage of tagged nodes, ie. nodes without any tags are ignored).
-    ways_tooltip: Number of ways (as absolute value and as percentage of all ways).
-    relations_tooltip: Number of relations (as absolute value and as percentage of all relations).
-    values_tooltip: Number of different values for this key.
-    users_tooltip: Number of distinct users who last changed objects with this key.
-    prevalent_values: Prevalent values
-    prevalent_values_tooltip: Up to ten of the most common values for this key (only if more than 1% of tags with this key have this value).
-    in_wiki_tooltip: Has at least one wiki page.
+    values_less_than_one_percent: 1% 이상 사용하는 값이 없습니다
+    empty_string: 빈 문자열
+    unknown: 알 수 없음
+    count: 횟수
+    image: 이미지
+    no_image: 이미지 없음
+    all: 전체
+    object_type: 유형
+    description: 설명
+    help: 도움
+    length: 길이
+    icon: 아이콘
+    line: 선
+    area: 구역
+    language: 언어
+    search_for: 검색
+    objects_tooltip: 요소의 개수(모든 노드, 길, 관계의 개수와 비율).
+    nodes_tooltip: 노드의 개수(태그가 붙은 노드의 개수와 비율, 태그가 없는 노드는 무시합니다).
+    ways_tooltip: 길의 개수(모든 길의 개수와 비율).
+    relations_tooltip: 관계의 개수(모든 관계의 개수와 비율).
+    values_tooltip: 이 키가 가지는 모든 값의 개수.
+    users_tooltip: 마지막으로 이 키를 가진 요소를 변경한 사용자의 수
+    prevalent_values: 일반적인 값
+    prevalent_values_tooltip: 이 키에 많이 사용된 10개의 값까지(이 키가 있는 태그의 1% 이상이 이 값을 가진 경우에만).
+    in_wiki_tooltip: 위키 문서가 하나라도 있는지의 여부.
+    status: 상태
+    approval_status: 인가 상태
 
 help:
     search:
-        title: Search
-        intro: Use the search box in the upper right corner to search for tag keys and values.
-        string: You can search for tag keys and values
-        substring: Just part of the key/value also works
-        complete_tags: You can search for complete tags
-        values_only: You can also search for tag values only
+        title: 검색
+        intro: 태그의 키와 값을 검색하기 위해 오른쪽 위에 있는 검색 상자를 사용합니다
+        string: 태그의 키와 값을 검색할 수 있습니다
+        substring: 키나 값의 일부분으로 검색할 수 있습니다
+        complete_tags: 완전한 태그를 검색할 수 있습니다
+        values_only: 태그의 값만으로 검색할 수 있습니다
         suggestions: |
-            For your convenience popular keys and tags will be suggested
-            while you type. Use your cursor keys to choose one and hit
-            <span class="key">Enter</span>.
-            You will jump directly to that key or tag page.
+            입력 중에 편리함을 위해 자주 쓰는 키와 태그를 제안합니다.
+            화살표 키로 선택하고 <span class="key">Enter</span> 키를 누르세요.
+            그 키나 태그의 페이지로 바로 넘어갈 것입니다.
     keyboard:
-        title: Keyboard shortcuts
-        site_navigation: Site navigation
-        page_navigation: Page navigation
-        table_navigation: Table navigation
+        title: 키보드 단축키
+        site_navigation: 사이트 조작
+        page_navigation: 페이지 조작
+        table_navigation: 표 조작
         keys:
             home: Home
             end: End
@@ -107,586 +110,560 @@ help:
             pagedown: PgDn
             esc: Esc
             tab: TAB
-        home_page: Home page
-        keys_page: Keys page
-        tags_page: Tags page
-        relations_page: Relations page
-        projects_page: Projects page
-        reports_page: Reports page
-        compare_page: Comparison page
-        first_page: First page
-        prev_page: Previous page
-        next_page: Next page
-        last_page: Last page
-        help_page: This help
-        activate_search: Activate search input
-        activate_filter: Activate filter input field
-        prev_entry: Previous entry
-        next_entry: Next entry
-        enter_entry: Jump to entry
-        switch_tab: Switch tab
-        deactivate: Deactivate input fields
-        up: Up in page hierarchy
-        switch_input: Switch between input fields
+        home_page: 처음 화면
+        keys_page: 키 페이지
+        tags_page: 태그 페이지
+        relations_page: 관계 페이지
+        projects_page: 프로젝트 페이지
+        reports_page: 보고서 페이지
+        compare_page: 비교 페이지
+        first_page: 첫 페이지
+        prev_page: 이전 페이지
+        next_page: 다음 페이지
+        last_page: 마지막 페이지
+        help_page: 도움 화면
+        activate_search: 검색창 활성화
+        activate_filter: 필터 입력창 활성화
+        prev_entry: 이전 항목
+        next_entry: 다음 항목
+        enter_entry: 그 항목으로 이동
+        switch_tab: 탭 전환
+        deactivate: 검색창 비활성화
+        up: 한 단계 위로 이동
+        switch_input: 입력창 간 전환
 
 pages:
     not_found:
-        title: Not found
-        intro: Sorry, we could not find the page you were looking for.
+        title: 찾을 수 없음
+        intro: 죄송합니다, 찾으려 하는 페이지를 찾을 수 없습니다.
     index:
-        popular_keys: Some popular keys
+        popular_keys: 자주 사용하는 키
         keys:
-            listkeys: See all keys...
+            listkeys: 모든 키를 표시...
         tags:
-            listtags: See most common tags...
+            listtags: 자주 사용하는 태그를 표시...
         relations:
-            listrelations: See all relation types...
+            listrelations: 모든 관계의 종류를 표시...
         reports:
-            listreports: See all reports...
+            listreports: 모든 보고서를 표시...
         about:
             intro:
-                <p>OpenStreetMap uses <b>tags</b> of the form <b>key=value</b>
-                to add meaning to geographic objects. Taginfo collects information
-                about these tags from several sources to help you understand what
-                they mean and how they are used.</p>
-            more: More about taginfo...
+                <p>OpenStreetMap은 지리적 요소에 의미를 부여하기 위해 <b>키=값</b>의 형태인 <b>태그</b>를 사용합니다.
+                taginfo는 어떻게 태그가 사용되고 태그의 의미가 무엇인지 이해하는 것을
+                돕기 위해 정보를 여러 출처에서 가져와 수집합니다.</p>
+            more: taginfo의 더 자세한 개요...
         international:
-            see: See other taginfo sites...
+            see: 다른 taginfo 사이트...
     about:
         about_taginfo:
-            title: About taginfo
+            title: taginfo에 대해서
             text: |
-                <p>OpenStreetMap uses <b>tags</b> to add meaning to geographic objects. There
-                is no fixed list of those tags. New tags can be invented and used as needed.
-                Everybody can come up with a new tag and add it to new or existing objects.
-                This makes OpenStreetMap enormously flexible, but sometimes also a bit hard
-                to work with.</p>
-                <p>Whether you are contributing to OSM or using the OSM data, there are always
-                questions like: What tags do people use for feature X? What tags can I use
-                for feature Y so that it appears properly on the map? Is the tag Z described
-                on the wiki actually in use and where?</p>
-                <p>Taginfo helps you by showing statistics about which tags are actually in the
-                database, how many people use those tags, where they are used and so on. It
-                also gets information about tags from the wiki and from other places. Taginfo
-                tries to bring together all information about tags to help you understand
-                how they are used and what they mean. See a <a href="/sources">list of sources</a>
-                taginfo uses.</p>
+                <p>OpenStreetMap은 지리적 요소에 의미를 부여하기 위해 <b>태그</b>를 사용합니다.
+                이 태그 목록은 고정되지 않습니다. 필요하면 새로운 태그가 개발되고 사용될 수 있습니다.
+                누구든지 새로운 태그를 만들어내고 새로운 요소나 이미 존재하는 요소에 추가할 수 있습니다.
+                이러한 행동은 OpenStreetMap을 더 유연하게 만들어 주지만, 때때로 작업하는 데 어려움을 줄 수 있습니다.</p>
+                <p>OSM에 기여하든 OSM 데이터를 사용하든 간에 지물 X에 사람들이 어떤 태그를 쓰는지,
+                지물 Y에 무슨 태그를 사용할 수 있는지, 그래서 지물이 지도에 적절히 나타나는지,
+                위키에 묘사된 태그 Z가 실제로 어디서 사용되는지 같은 질문이 항상 존재합니다.</p>
+                <p>taginfo는 통계를 보여줌으로써 어떤 태그가 실제로 데이터베이스에 있는지,
+                얼마나 많은 사람들이 그 태그를 쓰는지, 어디서 그 태그가 사용되는지 등등을 알려줍니다.
+                또한 taginfo는 위키와 다른 곳에서 태그에 대한 정보를 얻습니다.
+                taginfo는 어떻게 태그가 사용되고 태그의 의미가 무엇인지 이해하는 것을
+                돕기 위해 태그에 대한 모든 정보를 같이 가져오려 합니다.
+                taginfo가 사용한 <a href="sources">출처 목록</a>을 참조하세요.</p>
         about_site:
-            title: About This Site
+            title: 이 사이트에 대해서
         building_on_taginfo:
-            title: Building on taginfo
+            title: taginfo를 사용한 개발
             pre: |
-                <p>You can use the data from taginfo in your own projects:</p>
+                <p>taginfo의 데이터를 자신의 프로젝트에 사용할 수 있습니다.</p>
             api: |
                 <h3>API</h3>
-                <p>Taginfo data can be accessed through a REST API. See the
-                <a href="/taginfo/apidoc">API documentation</a> for the details, some general information is
-                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">on the OSM wiki</a>.
-                The servers running the taginfo API do not have unlimited resources.
-                Please use the API responsibly. If in doubt contact the maintainers of the
-                site you are using or talk to us on the mailing list.</p>
+                <p>taginfo의 데이터는 REST API를 통해서 접근할 수 있습니다.
+                자세한 사항은 <a href="taginfo/apidoc">API 문서</a>를 참조하세요. 몇 가지 일반적인 정보는
+                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">OSM 위키</a>를 참조하세요.
+                taginfo API를 사용하는 서버는 무제한적인 자원이 있는 것이 아닙니다.
+                API를 책임감을 갖고 사용해 주세요. 확신이 서지 않는다면 사용하고 있는 사이트의 관리자에게 연락하거나
+                메일링 리스트에서 우리에게 연락하세요.</p>
             download: |
-                <h3>Download</h3>
-                <p>If you want to play around with the data used by taginfo, you can download the
-                regularly updated Sqlite database files. All the preprocessing is done for you.
-                See the <a href="/download">download page</a> for a list of files. Note that
-                some of these files can get quite large. If you want to download them regularly,
-                contact the maintainers of the site you are using or talk to us on the mailing list.</p>
+                <h3>다운로드</h3>
+                <p>taginfo에서 사용된 데이터를 가지고 여러가지 테스트를 하고 싶다면,
+                정기적으로 업데이트되는 Sqlite 데이터베이스 파일을 다운로드할 수 있습니다. 모든 사전 처리는 이미 끝내 놓았습니다.
+                파일 목록은 <a href="download">다운로드 페이지</a>를 참조하세요.
+                몇몇 파일은 꽤나 클 수 있다는 점을 알아 두세요. 만약 정기적으로 다운로드받고 싶다면,
+                사용하고 있는 사이트의 관리자에게 연락하거나 메일링 리스트에서 우리에게 연락하세요.</p>
             license: |
-                <h3>License</h3>
-                <p>The data available through taginfo is licenced under ODbL, the
-                <a class="extlink" href="//www.openstreetmap.org/copyright">same
-                license as the OpenStreetMap data</a>.</p>
+                <h3>라이선스</h3>
+                <p>taginfo를 통해 사용 가능한 데이터는 <a class="extlink"
+                href="//www.openstreetmap.org/copyright">OpenStreetMap과 같은</a> ODbL 라이선스를 갖습니다.</p>
         software:
-            title: The taginfo software
+            title: taginfo 소프트웨어
             text: |
-                <p>The taginfo software was created and is maintained by
-                <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
-                The web design was created by
-                <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
-                <h3>Translations</h3>
-                <p>We need translators for the taginfo user interface. See the <a
-                href="/taginfo/translations">translations overview</a> for languages that need
-                some work. More information on how to help is on the
-                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM wiki</a>.</p>
-                <h3>Code</h3>
-                <p>All the software behind the taginfo sites is Open Source. You can get it on
-                <a class="extlink" href="https://github.com/taginfo/taginfo/">GitHub</a>. For an overview
-                see the page about the <a class="extlink"
-                href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">taginfo
-                architecture</a> on the OSM wiki.</p>
-                <h3>Running your own instance</h3>
-                <p>You can run your own
-                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">taginfo site</a>,
-                for instance with data for just your own country. Instructions are
-                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Running">on the OSM
-                wiki</a>.</p>
-                <h3>Bug reports and feature requests</h3>
-                <p>Bug reports and feature requests should be directed to the <a class="extlink"
-                href="https://github.com/taginfo/taginfo/issues">GitHub issue tracker</a>. Or you can
-                come talk to us on the mailing list.</p>
-                <h3>Contact/Mailing list</h3>
-                <p>Contact us on the
-                <a class="extlink" href="//lists.openstreetmap.org/listinfo/taginfo-dev">taginfo-dev mailing list</a>
-                if you have questions or want to help.</p>
+                <p>taginfo 소프트웨어는 <a class="extlink"
+                href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>가 제작, 유지보수하고 있습니다.
+                웹 디자인은 <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>가 제작했습니다.</p>
+                <h3>번역</h3>
+                <p>우리는 taginfo 사용자 인터페이스 번역자가 필요합니다. 작업이 필요한 언어는
+                <a href="taginfo/translations">번역 개요</a>를 참조하세요.
+                어떻게 도울 수 있는지에 대한 자세한 정보는 <a class="extlink"
+                href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM 위키</a>에 있습니다.</p>
+                <h3>코드</h3>
+                <p>taginfo 사이트에 있는 소프트웨어는 모두 오픈소스입니다. <a class="extlink"
+                href="https://github.com/taginfo/taginfo/">GitHub</a>에서 코드를 얻을 수 있습니다.
+                전체 구조에 대해서는 OSM 위키에 있는 <a class="extlink"
+                href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">taginfo 구조</a>에 대한 페이지를 읽어 주세요.</p>
+                <h3>자신의 인스턴스를 구동하는 경우</h3>
+                <p>가령 자신의 나라의 데이터만 가진 <a class="extlink"
+                href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">taginfo 사이트</a>를 돌릴 수 있습니다.
+                설명은 <a class="extlink"
+                href="//wiki.openstreetmap.org/wiki/Taginfo/Running">OSM 위키</a>를 참조하세요.</p>
+                <h3>버그 제보와 기능 요청</h3>
+                <p>버그 제보와 기능 요청은 <a class="extlink"
+                href="https://github.com/taginfo/taginfo/issues">GitHub 이슈 트래커</a>로 해 주세요.
+                아니면 메일링 리스트에서 우리에게 연락할 수 있습니다.</p>
+                <h3>연락처/메일링 리스트</h3>
+                <p>요청이나 도와주고 싶은 것이 있다면 <a class="extlink"
+                href="//lists.openstreetmap.org/listinfo/taginfo-dev">taginfo-dev 메일링 리스트</a>로 우리에게 연락하세요.</p>
     sources:
         intro: |
-            <p>Taginfo collects data about OSM tags from several sources and brings them
-            together for easy browsing and discovery.</p>
-            <p>Note that taginfo only displays this data. If you want to change it, you
-            have to go back to the source.</p>
+            <p>taginfo는 여러 출처에서 OSM 태그에 대한 데이터를 수집하고, 쉬운 탐색과 가독성을 위해 조합합니다.</p>
+            <p>taginfo는 데이터를 보여주기만 한다는 것을 명심하세요. 만약 이를 바꾸고 싶다면, 출처로 돌아가야 합니다.</p>
         list:
-            title: List of Sources
-            intro: Here is a list of currently used sources. More sources might be integrated in the future.
+            title: 출처 목록
+            intro: 현재 사용하는 출처의 목록입니다. 나중에 새로운 출처가 추가될지도 모릅니다.
         description:
             db: |
-                <p>Statistics about keys, tags, and relation types are generated from the <a class="extlink" href="https://planet.openstreetmap.org/">OSM database</a> (or an extract) as well as the maps that show the geographic distribution of nodes and ways.</p>
+                <p>키, 태그, 관계의 종류에 대한 통계와 노드와 길의 지리적 분포를 보여주는 지도는 <a class="extlink" href="https://planet.openstreetmap.org/">OSM 데이터베이스</a>(또는 데이터베이스의 발췌물)로 작성되었습니다.</p>
             wiki: |
-                <p>The <a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> is read and all Key:*, Tag:*, and Relation:* pages (in all the different languages) are analyzed. Descriptions, images, related tags, etc. are extracted from them.</p>
+                <p><a class="extlink" href="//wiki.openstreetmap.org/">OSM 위키</a>를 읽어들여서 모든 Key:*, Tag:*, Relation:*(각각 모든 언어의) 문서를 분석했습니다. 거기에서 설명, 이미지, 관계된 태그 등을 추출했습니다.</p>
             languages: |
-                <p>Taginfo gets information about the different languages of the world, their codes, names, etc. from several <a class="extlink" href="http://www.iana.org/">IANA</a> and <a class="extlink" href="http://www.unicode.org/">Unicode</a> registries.</p>
+                <p>taginfo는 전 세계의 언어에 관한 코드와 명칭 등의 정보를 <a class="extlink" href="https://www.iana.org/">IANA</a>와 <a class="extlink" href="https://www.unicode.org/">Unicode</a> 레지스트리에서 받고 있습니다.</p>
             projects: |
-                <p>Projects that use OSM tags in some way, such as editors, maps, routers, etc. See <a href="/projects">the project list</a>.</p>
+                <p>편집기, 지도, 경로 탐색기 등의 몇 가지 방법으로 OSM 태그를 사용하는 프로젝트는 <a href="projects">프로젝트 목록</a>을 참조하세요.</p>
+            chronology: |
+                <p>과거 <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">OSM 데이터</a>에 존재하는 키/태그의 개수.</p>
         updates:
-            title: Updates
-            intro: The taginfo data is updated regularly from the sources.
-        data_until: Data until
-        last_update_run: Last update run
-        data_until_explanation: All edits until this time will be in the data, later edits might be.
-        to: to
+            title: 갱신 현황
+            intro: taginfo 데이터는 출처로부터 주기적으로 갱신됩니다.
+        data_until: 반영 시점
+        last_update_run: 마지막 갱신
+        data_until_explanation: 이 시각까지의 모든 편집이 데이터에 반영되며, 이후 편집이 반영될 수도 있습니다.
+        to: ～
     download:
         intro: |
-            <p>Here you can download the databases used by taginfo. All the data is stored
-            in <a class="extlink" href="http://www.sqlite.org/">Sqlite</a> databases.
-            The database files are then packed with <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
-            <p>If you don't want to download these databases, but need automated access to
-            the data, you can also use the <a href="/about">API</a>.</p>
+            <p>taginfo가 사용하는 데이터베이스를 여기에서 다운로드받을 수 있습니다. 모든 데이터는 <a class="extlink"
+            href="https://www.sqlite.org/">Sqlite</a> 데이터베이스에 저장되어 있습니다.
+            데이터베이스 파일은 <a class="extlink" href="http://www.bzip.org/">bzip2</a>로 압축되어 있습니다.</p>
+            <p>만약 이러한 데이터베이스 파일을 다운로드하길 원치 않고, 데이터로 자동 접속이 필요하다면,
+            <a href="about">API</a>를 사용할 수 있습니다.</p>
         file: File
-        packed: Packed
-        unpacked: Unpacked
-        description: Description
-        note: Some indexes are not in the databases available for download here. The 'Packed' size is the size without those indexes, the 'Unpacked' size includes the indexes you probably want to build after downloading.
+        packed: 압축 후
+        unpacked: 압축 전
+        description: 설명
+        note: 일부 색인은 여기에서 다운로드할 수 있는 데이터베이스에 없습니다. 압축 후 크기는 이러한 색인이 없는 크기이며, 압축 전 크기에는 다운로드 후에 구축하려는 색인이 포함되어 있습니다.
     reports:
         intro: |
-            Reports show the tag data from different angles.
-            They often bring together data from several sources in interesting ways. Some
-            of the reports can help with finding specific errors.
-        list: List of all reports
-        data_sources: Data sources used
+            보고서는 여러 출처에서 흥미로운 방법으로 데이터를 가져와서 태그 데이터를 다각도로 보여주는 역할을 합니다.
+            몇몇 보고서는 특정한 오류를 찾는 데 도움이 됩니다.
+        list: 모든 보고서 목록
+        data_sources: 사용한 출처 데이터
     search:
-        title: Search results
-        you_were_searching_for: You were searching for
-        fulltext: Full text
-        no_keys: No keys found.
-        no_values: No values found.
-        no_tags: No tags found.
-        no_match: No matches.
+        title: 검색 결과
+        you_were_searching_for: 검색어
+        fulltext: 전체 검색
+        no_keys: 키를 찾지 못했습니다.
+        no_values: 값을 찾지 못했습니다.
+        no_tags: 태그를 찾지 못했습니다.
+        no_match: 일치하는 것이 없습니다.
     compare:
-        nothing_to_compare: There are no keys/tags to compare. Go to any key or tag page and add them.
+        nothing_to_compare: 비교할 키/태그가 없습니다. 아무 키 또는 태그 페이지로 이동해서 추가하세요.
     keys:
         intro: |
-                This table shows all tag keys that exist in the database or in any of the other sources.
+            이 표는 데이터베이스나 기타 출처에 존재하는 모든 태그의 키를 나타냅니다.
     tags:
         intro: |
-                This table shows the most common tags in the database.
+            이 표는 데이터베이스 상에서 자주 쓰이는 태그를 나타냅니다.
     relations:
-        name: Relation types
-        intro: Information about the different types of relations (indicated by the <a href="/keys/type?filter=relations">type</a> tag).
-        relations_of_type_tooltip: Number of relations of this type (and as percentage of all relations).
-        prevalent_roles: Prevalent roles
-        prevalent_roles_tooltip: Prevalent roles for this type of relation.
-        no_information: No information
-        roles_less_than_one_percent: no roles with more than 1%
-        empty_role: empty role
+        name: 관계 유형
+        intro: 관계의 유형에 대한 정보(<a href="keys/type?filter=relations">type</a> 태그로 표현합니다).
+        relations_of_type_tooltip: 이 유형인 관계의 개수(모든 관계의 사용 비율 포함).
+        prevalent_roles: 자주 쓰이는 역할
+        prevalent_roles_tooltip: 이 유형인 관계에서 자주 쓰이는 역할입니다.
+        no_information: 정보 없음
+        roles_less_than_one_percent: 1% 이상 사용하는 역할이 없습니다
+        empty_role: 역할 없음
     projects:
         intro: |
-                This table shows all projects known to taginfo that use OSM tags in some way.<br/>For more about this functionality see the <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
+            이 표는 어떤 방식으로든 OSM 태그를 쓰는 taginfo에 알려진 모든 프로젝트를 나타냅니다.<br/>이 기능에 대해서는 <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">위키</a>를 참조하세요.
     key:
-        description_from_wiki: Description of this key from the wiki (if available in your chosen language, otherwise in English).
-        no_description_in_wiki: No English language description for this key in the wiki. (See also the "Wiki" tab.)
+        description_from_wiki: 이 키에 대한 위키에서 가져온 설명(현재 선택한 언어로 존재하면 현재 언어, 그렇지 않으면 영어).
+        no_description_in_wiki: 이 키에 대한 영어 설명이 위키에 없습니다("Wiki" 탭 참조).
         filter:
             label: |
-                 Filter:
-            none: No filter
-            nodes: Nodes only
-            ways: Ways only
-            relations: Relations only
-        button_disabled: Button disabled, because there are too many objects with this key.
-        number_objects: Number of objects
-        number_values: Number of values
-        values_used: Values used with this key
-        tag_description_from_wiki: Description of the tag from the wiki (if available in your chosen language, otherwise in English).
+                필터:
+            none: 필터 없음
+            nodes: 노드만
+            ways: 길만
+            relations: 관계만
+        button_disabled: 이 키를 사용하는 요소가 너무 많아 버튼이 비활성화되었습니다.
+        number_objects: 요소의 개수
+        number_values: 값의 개수
+        values_used: 이 키와 함께 사용되는 값
+        tag_description_from_wiki: 태그에 대한 위키에서 가져온 설명(현재 선택한 언어로 존재하면 현재 언어, 그렇지 않으면 영어).
         overview:
-            objects_last_edited_by: Objects with this key were last edited by %1 different users.
-            no_endorsement: (This does not mean that all those users endorse this key.)
-            distribution_of_values: Distribution of values
+            objects_last_edited_by: 이 키를 사용하는 요소를 %1명의 사용자가 마지막으로 편집했습니다.
+            no_endorsement: (이 키를 사용한 사용자가 모두 이 키를 지지한다는 것을 의미하지 않습니다)
+            distribution_of_values: 값의 분포
         other_keys_used:
-            title: Other keys used together with this key
-            other: Other keys
-            to_count_tooltip: Number of objects with this key that also have the other key.
-            other_key_tooltip: Key used together with this key.
-            from_count_tooltip: Number of objects with other key that also have this key.
+            title: 이 키와 같이 사용된 다른 키
+            other: 다른 키
+            to_count_tooltip: 이 키를 사용한 요소 중 다른 키를 같이 사용한 요소의 개수입니다.
+            other_key_tooltip: 이 키와 같이 사용한 키입니다.
+            from_count_tooltip: 다른 키를 사용한 요소 중 이 키를 같이 사용한 요소의 개수입니다.
         geographic_distribution:
-            title: Geographical distribution of this key
-            relations: Relations do not have a geographical location, so no map can be shown.
+            title: 이 키의 지리적 분포
+            all: 아래 지도는 해당 키를 갖는 노드와 길의 분포를 나타냅니다. 관계는 나타내지 않습니다.
+            nodes: 아래 지도는 해당 키를 갖는 노드의 분포를 나타냅니다.
+            ways: 아래 지도는 해당 키를 갖는 길의 분포를 나타냅니다.
+            relations: 관계는 지리적 위치를 갖지 않으므로 지도로 표시할 수 없습니다.
         wiki_pages:
-            title: Wiki pages about this key
-            none_found: No wiki page available for this key.
-            create: Create wiki page for this key
-            wiki_page: Wiki page
-            implied_tags: Implied Tags
-            combined_tags: Combined Tags
-            linked_tags: Linked Tags
+            title: 이 키에 대한 위키 문서
+            none_found: 이 키에 대한 위키 문서가 없습니다.
+            create: 이 키에 대한 위키 문서 만들기
+            wiki_page: 위키 문서
+            implied_tags: 함축된 태그
+            combined_tags: 유용한 조합
+            linked_tags: 링크된 태그
         projects:
-            title: Projects using this key
-            description: How this key is used in the project
+            title: 이 키를 사용하는 프로젝트
+            description: 프로젝트에서 이 키를 사용한 방법
         similar:
-            tab: Similar
-            title: Similar keys
-            other: Similar keys
-            count_all_tooltip: Number of objects with the similar key
-            similarity: Similarity
-            similarity_tooltip: Smaller numbers mean more similar
+            tab: 비슷한 키
+            title: 비슷한 키
+            other: 비슷한 키
+            count_all_tooltip: 비슷한 키를 사용하는 요소의 수
+            similarity: 유사성
+            similarity_tooltip: 수치가 낮을수록 더 비슷합니다
     tag:
-        description_from_wiki: Description of this tag from the wiki (if available in your chosen language, otherwise in English).
-        no_description_in_wiki: No English language description for this tag in the wiki. (See also the "Wiki" tab.)
-        button_disabled: Button disabled, because there are too many objects with this tag.
-        number_objects: Number of objects
+        description_from_wiki: 이 태그에 대한 위키에서 가져온 설명(현재 선택한 언어로 존재하면 현재 언어, 그렇지 않으면 영어).
+        no_description_in_wiki: 이 태그에 대한 영어 설명이 위키에 없습니다("Wiki" 탭 참조).
+        button_disabled: 이 태그를 사용하는 요소가 너무 많아 버튼이 비활성화되었습니다.
+        number_objects: 요소의 개수
         overview:
-            see_also: See also the relation type page
+            see_also: 관계 유형 페이지 참조
         other_tags_used:
-            title: Other tags used together with this tag
-            other: Other tags
-            to_count_tooltip: Number of objects with this tag that also have the other tag/key.
-            other_key_tooltip: Tags/Keys used together with this tag.
-            from_count_tooltip: Number of objects with other tag/key that also have this tag.
+            title: 이 태그와 같이 사용된 다른 태그
+            other: 다른 태그
+            to_count_tooltip: 이 태그를 사용한 요소 중 다른 키/태그를 같이 사용한 요소의 개수입니다.
+            other_key_tooltip: 이 태그와 같이 사용한 태그/키입니다.
+            from_count_tooltip: 다른 태그/키를 사용한 요소 중 이 태그를 같이 사용한 요소의 개수입니다.
         combinations:
-            title: Combinations
-            description: This table shows only the most common combinations of the most common tags.
+            title: 조합
+            description: 이 표는 자주 쓰이는 태그의 일반적인 조합만 나타냅니다.
+        chronology:
+            no_chronology: 죄송합니다. 빈번하게 쓰이는 태그만 역사를 분석합니다.
         geographic_distribution:
-            title: Geographical distribution of this tag
-            relations: Relations do not have a geographical location, so no map can be shown.
-            no_map: Sorry. The map can only be created for the most frequent tags. Try the overpass turbo link.
+            title: 이 태그의 지리적 분포
+            all: 아래 지도는 해당 태그를 갖는 노드와 길의 분포를 나타냅니다. 관계는 나타내지 않습니다.
+            nodes: 아래 지도는 해당 태그를 갖는 노드의 분포를 나타냅니다.
+            ways: 아래 지도는 해당 태그를 갖는 길의 분포를 나타냅니다.
+            relations: 관계는 지리적 위치를 갖지 않으므로 지도로 표시할 수 없습니다.
+            no_map: 죄송합니다. 빈번하게 쓰이는 태그만 지도로 표시합니다. 상위 링크로 시도해 보세요.
         wiki_pages:
-            title: Wiki pages about this tag
-            none_found: No wiki page available for this tag.
-            create: Create wiki page for this tag
-            suggest_key_wiki_page: Maybe you can find some more information on the wiki page for the key %1.
-            wiki_page: Wiki page
-            implied_tags: Implied Tags
-            combined_tags: Combined Tags
-            linked_tags: Linked Tags
+            title: 이 키에 대한 위키 문서
+            none_found: 이 키에 대한 위키 문서가 없습니다.
+            create: 이 키에 대한 위키 문서 만들기
+            suggest_key_wiki_page: 키 %1에 대한 위키 문서에서 더 많은 정보를 찾아낼 수도 있습니다.
+            wiki_page: 위키 문서
+            implied_tags: 함축된 태그
+            combined_tags: 유용한 조합
+            linked_tags: 링크된 태그
         projects:
-            title: Projects using this tag
-            description: How this tag is used in the project
+            title: 이 키를 사용하는 프로젝트
+            description: 프로젝트에서 이 키를 사용한 방법
     relation:
-        name: Relation type
-        description_from_wiki: Description of this relation type from the wiki (if available in your chosen language, otherwise in English).
-        no_description_in_wiki: No English language description for this relation type in the wiki. (See also the "Wiki" tab.)
-        button_disabled: Button disabled, because there are too many objects with this relation type.
+        name: 관계 유형
+        description_from_wiki: 이 관계 유형에 대한 위키에서 가져온 설명(현재 선택한 언어로 존재하면 현재 언어, 그렇지 않으면 영어).
+        no_description_in_wiki: 이 관계 유형에 대한 영어 설명이 위키에 없습니다("Wiki" 탭 참조).
+        button_disabled: 이 관계 유형을 사용하는 요소가 너무 많아 버튼이 비활성화되었습니다.
         overview:
-            tab: Overview
-            title: Overview
-            member_type: Member type
-            member_count: Number of members
-            see_also: See also the tag page
+            tab: 개요
+            title: 개요
+            member_type: 구성 요소의 유형
+            member_count: 구성 요소의 개수
+            see_also: 관련된 태그 페이지
         roles:
-            tab: Roles
-            title: Member roles
-            objects_tooltip: Relation members with this role (and as percentage of all members) for this relation type.
-            nodes_tooltip: Relation members of type node with this role (and as percentage of all members of type node) for this relation type.
-            ways_tooltip: Relation members of type way with this role (and as percentage of all members of type way) for this relation type.
-            relations_tooltip: Relation members of type relation with this role (and as percentage of all members of type relation) for this relation type.
-            no_roles_info: There is no information about roles for this relation type (most likely because there are only very few of those relations).
+            tab: 역할
+            title: 구성 요소가 갖는 역할
+            objects_tooltip: 이 관계 유형에 포함된 요소 중 이 역할을 갖는 구성 요소의 개수(와 구성 요소 사이의 비율).
+            nodes_tooltip: 이 관계 유형에 포함된 요소 중 이 역할을 갖는 노드의 개수(와 노드 사이의 비율).
+            ways_tooltip: 이 관계 유형에 포함된 요소 중 이 역할을 갖는 길의 개수(와 길 사이의 비율).
+            relations_tooltip: 이 관계 유형에 포함된 요소 중 이 역할을 갖는 관계의 개수(와 관계 사이의 비율).
+            no_roles_info: 이 관계 유형에 쓰인 역할이 없습니다.(관계가 거의 사용되지 않았기 때문일 가능성이 높습니다.)
         graph:
-            tab: Roles Graph
-            title: Roles Graph
+            tab: 역할 그래프
+            title: 역할 그래프
         wiki_pages:
-            title: Wiki pages about this relation type
-            none_found: No wiki page available for this relation type.
-            create: Create wiki page for this relation type
-            wiki_page: Wiki page
+            title: 이 관계 유형에 대한 위키 문서
+            none_found: 이 관계 유형에 대한 위키 문서가 없습니다.
+            create: 이 관계 유형에 대한 위키 문서 만들기
+            wiki_page: 위키 문서
         projects:
-            title: Projects using this relation type
-            description: How this relation type is used in the project
+            title: 이 관계 유형을 사용하는 프로젝트
+            description: 프로젝트에서 이 관계 유형을 사용한 방법
     project:
         overview:
-            project_name: Project name
-            project_url: Project URL
-            description: Description
-            documentation_url: Documentation
-            last_update: Last update
-            json_url: JSON project file
-            info: This data is provided by the project for taginfo though the 'JSON project file' linked from above. See the <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a> for a format description.
+            project_name: 프로젝트 이름
+            project_url: 프로젝트 URL
+            description: 설명
+            documentation_url: 문서
+            last_update: 마지막 업데이트
+            json_url: JSON 프로젝트 파일
+            info: taginfo 프로젝트는 이 프로젝트의 데이터를 위에 링크된 'JSON 프로젝트 파일'을 통해서 제공합니다. JSON 서식에 대해서는 <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">위키</a> 참조.
         tags:
-            title: Tags used by this project
-            intro: This data is provided by the project and not necessarily complete. Please see the project documentation for details.
-            description: How this key/tag is used in the project
-            count_all_tooltip: Number of objects in database with this key/tag
-            objects_tooltip: Object types the project uses
+            title: 이 프로젝트에서 사용한 태그
+            intro: 이 데이터는 프로젝트에서 제공받기 때문에 무조건 완전하다 볼 수는 없습니다. 정확한 내용은 프로젝트 문서를 참조하세요.
+            description: 프로젝트에서 이 키/를 사용한 방법
+            count_all_tooltip: 데이터베이스 상에 있는 이 키/태그를 가진 요소의 수
+            objects_tooltip: 이 프로젝트에서 사용한 요소의 유형
 
 flexigrid:
-    pagetext: Page
-    pagestat: Displaying {from} to {to} of {total} items
-    outof: of
-    findtext: Find
-    procmsg: Processing, please wait...
-    nomsg: No items
-    errormsg: Connection Error
+    pagetext: 페이지
+    pagestat: |
+        {total} 항목 중 {from}번째부터 {to}번째까지 표시
+    outof: /
+    findtext: 검색
+    procmsg: 처리 중, 잠시만 기다려 주세요...
+    nomsg: 항목 없음
+    errormsg: 접속 오류
 
 comparison:
-    list: Comparison list
-    items: items
-    add_key: Add this key to list
-    add_tag: Add this tag to list
-    clear: Clear comparison list
-    compare: Compare keys/tags
+    list: 비교 목록
+    items: 항목
+    add_key: 이 키를 목록에 추가
+    add_tag: 이 태그를 목록에 추가
+    clear: 비교 목록 비우기
+    compare: 키/태그 비교
 
 sources:
     master:
         name: Master
-        description: Aggregate statistics and miscellaneous data needed for the taginfo user interface.
+        description: taginfo 사용자 인터페이스에 필요한 통계 자료와 기타 데이터들 모음.
     history:
         name: History
-        description: Aggregate statistics over time.
+        description: 시간 경과에 따른 통계 모음.
     db:
         name: Database
-        description: Statistics about each key and each tag from the main OSM database (planet file).
+        description: 주요 OSM 데이터베이스에서 가져온 각각의 키/태그에 대한 통계(지구 파일).
     wiki:
         name: Wiki
-        description: Data from the tag and key pages of the OSM wiki.
+        description: OSM 위키 키/태그 문서에서 가져온 데이터.
     languages:
         name: Languages
-        description: Language names, codes, etc. from IANA and Unicode registries.
+        description: IANA와 Unicode 레지스트리에서 가져온 언어 이름, 코드 등등.
     projects:
         name: Projects
-        description: External projects and the OSM keys/tags they use.
+        description: 외부 프로젝트와 외부 프로젝트에서 사용하는 OSM 키/태그.
+    chronology:
+        name: Chronology
+        description: 과거 OSM 데이터에 존재하는 키/태그의 개수.
 
 reports:
     characters_in_keys:
-        name: Characters in keys
+        name: 키에 사용된 문자
         intro: |
-            Any valid Unicode character can appear in an OSM key but usually
-            only lower case latin letters (a-z) and the underscore (_) are
-            used. The colon (:) is often used as a separator character. This
-            report categorizes all keys according to the characters they use.
+            OSM 키에는 유효한 모든 Unicode 문자를 사용할 수 있지만, 대개 로마자 소문자와 언더바만 사용됩니다.
+            콜론은 주로 서로 다른 두 문자를 분리할 때 사용합니다. 이 보고서는
+            사용되는 문자를 기준으로 모든 키를 분류했습니다.
         statistics:
-            tab: Statistics
-            title: Statistics overview
-            fraction: Fraction
-            characters: Characters in key
+            tab: 통계
+            title: 통계 개요
+            fraction: 비율
+            characters: 키에 사용된 문자
             characters_in_keys:
-                plain: Only latin lowercase letters (<span class="char">a</span> to <span class="char">z</span>) and underscore (<span class="char">_</span>), first and last characters are letters.
-                colon: Like A but with one or more colons (<span class="char">:</span>) inside.
-                letters: Like B but with uppercase latin letters or letters from other alphabets.
-                space: At least one whitespace character (space, tab, new line, carriage return, or from other alphabets).
-                problem: Contains possibly problematic characters <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
-                rest: Everything else.
-                total: Total
+                plain: 로마자 소문자(<span class="char">a</span>부터 <span class="char">z</span>까지)와 언더바(<span class="char">_</span>)만 사용한 키 중 처음과 끝 부분이 문자인 경우.
+                colon: A와 비슷하지만 콜론(<span class="char">:</span>)을 사용한 경우.
+                letters: B와 비슷하지만 대문자를 사용하거나 로마자 외 다른 문자를 사용한 경우.
+                space: 공백이 존재하는 경우(띄어쓰기, 탭, 개행(new line, carriage return), 로마자 외 다른 문자).
+                problem: 문제가 될 수 있는 문자를 포함한 경우(<span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>).
+                rest: 기타 등등.
+                total: 합계
         plain:
-            tab: Plain
-            title: Plain keys
+            tab: 보통
+            title: 보통 키
             intro: |
-                <p>Keys containing only lowercase latin letters (<span
-                class="char">a</span> to <span class="char">z</span>) and the
-                underscore (<span class="char">_</span>). First and last
-                characters must be letters. Most simple keys should fall into
-                this category.</p>
+                <p>로마자 소문자(<span class="char">a</span>부터 <span class="char">z</span>까지)와
+                언더바(<span class="char">_</span>)만 사용한 키 중 처음과 끝 부분이 문자인 경우.
+                간단한 키가 이 범주에 속합니다.</p>
         colon:
-            tab: Colon
-            title: Keys with colon
+            tab: 콜론 포함
+            title: 콜론을 포함한 키
             intro: |
-                <p>Keys that have one or more colon (<span
-                class="char">:</span>) characters inside in addition to the
-                letters (<span class="char">a</span> to <span
-                class="char">z</span>) and underscores (<span
-                class="char">_</span>). The colon is often used as a hierarchy
-                separator character.</p>
+                <p>소문자(<span class="char">a</span>부터 <span class="char">z</span>까지)와 언더바(<span
+                class="char">_</span>)에 더해서 콜론(<span class="char">:</span>)을 사용한 경우.
+                콜론은 문자 간 계층을 분리할 때 사용합니다.</p>
         letters:
-            tab: Letters
-            title: Keys with uppercase letters or letters from other scripts
+            tab: 다른 문자
+            title: 대문자나 기타 다른 문자를 사용한 키
             intro: |
-                <p>Lowercase letters from the latin script are usually
-                preferred for keys, but sometimes uppercase letters are used
-                (for instance for known abbreviations) or letters from other
-                scripts (for instance for keys only relevant to an area where
-                that script is used predominantly).</p>
+                <p>키에 사용되는 문자는 로마자 소문자가 주로 선호되지만, 때때로 대문자나(잘 알려진 축약어 등)
+                로마자 이외의 문자도(그 문자가 쓰이는 지역과만 크게 관련된 키 등) 사용됩니다.</p>
         space:
-            tab: Whitespace
-            title: Keys with whitespace
+            tab: 공백
+            title: 공백을 포함한 키
             intro: |
-                <p>Keys that contain whitespace characters such as space, tab,
-                new line, carriage return, or whitespace characters from other
-                alphabets. Whitespace in keys can be confusing, especially at
-                the beginning or end of the key, because they are invisible.
-                Generally the whitespace should be removed or the underscore
-                (<span class="char">_</span>) used instead.</p>
+                <p>띄어쓰기, 탭, 개행(new line, carriage return), 로마자 외 다른 문자의 공백 같은
+                공백 문자를 포함한 키. 공백은 보이지 않기 때문에 키 안에 공백을 넣는 것은
+                혼란을 일으킬 수 있습니다(특히 키의 처음과 끝에서 사용하는 경우).
+                대개 공백은 제거하거나 언더바(<span class="char">_</span>)로 대체해야 합니다.</p>
         problem:
-            tab: Problematic
-            title: Keys with possibly problematic characters
+            tab: 문제 있음
+            title: 문제가 될 수 있는 문자를 포함한 경우
             intro: |
-                <p>Keys that contain possibly problematic characters: <span
-                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> or control
-                characters. These characters can be problematic, because they
-                are used to quote strings in different programming languages or
-                have special meanings in XML, HTML, URLs, and other places. The
-                equal sign is used often as separator between tag keys and
-                values. Keys that appear in this list are not necessarily wrong
-                though. But in many cases they are just results of some error
-                and should be fixed.</p>
+                <p>문제가 될 수 있는 문자(<span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>)나 제어 문자를 포함한 키.
+                이러한 문자들은 다른 프로그래밍 언어에서 인용문에 사용되거나,
+                XML, HTML, URL 등에서 특수한 의미를 지니기 때문에 문제가 될 수 있습니다.
+                등호(<span class="char">=</span>) 기호는 주로 태그 키와 값을 분리하는 데 사용됩니다.
+                이 목록에 나타난 키는 틀린 것만은 아닙니다. 하지만 많은 경우에서 이러한 키들은
+                오류를 내놓기 때문에 고쳐야 합니다.</p>
         rest:
-            tab: Rest
-            title: All other keys
+            tab: 기타
+            title: 나머지 키
             intro: |
-                <p>Keys that don't fit in any of the other categories.</p>
+                <p>다른 범주에 들지 않은 키.</p>
     database_statistics:
-        name: Database statistics
-        objects_in_db: Number of objects in the database
-        tags_in_db: Number of tags in the database
-        distinct_keys: Number of distinct keys
-        distinct_tags: Number of distinct tags
-        nodes_in_db: Number of nodes in the database
-        nodes_with_tags_in_db: Number of nodes with at least one tag
-        nodes_with_tags_in_db_percent: Percentage of nodes with at least one tag
-        tags_on_nodes: Number of tags on nodes
-        avg_tags_per_tagged_node: Average number of tags per tagged node
-        ways_in_db: Number of ways in the database
-        closed_ways_in_db: Number of closed ways
-        tags_on_ways: Number of tags on ways
-        avg_tags_per_way: Average number of tags per way
-        relations_in_db: Number of relations in the database
-        tags_on_relations: Number of tags on relations
-        avg_tags_per_relation: Average number of tags per relation
+        name: 데이터베이스 통계
+        objects_in_db: 데이터베이스 상에서 요소의 개수
+        tags_in_db: 데이터베이스 상에서 태그의 개수
+        distinct_keys: 서로 다른 키의 개수
+        distinct_tags: 서로 다른 태그의 개수
+        nodes_in_db: 데이터베이스 상에서 노드의 개수
+        nodes_with_tags_in_db: 적어도 태그가 1개 이상 달린 노드의 개수
+        nodes_with_tags_in_db_percent: 적어도 태그가 1개 이상 달린 노드의 비율
+        tags_on_nodes: 노드에 달린 태그의 개수
+        avg_tags_per_tagged_node: 태그가 달린 노드 1개당 평균 태그 수
+        ways_in_db: 데이터베이스 상에서 길의 개수
+        closed_ways_in_db: 닫힌 길의 개수
+        tags_on_ways: 길에 달린 태그의 개수
+        avg_tags_per_way: 태그가 달린 길 1개당 평균 태그 수
+        relations_in_db: 데이터베이스 상에서 관계의 개수
+        tags_on_relations: 관계에 달린 태그의 개수
+        avg_tags_per_relation: 태그가 달린 관계 1개당 평균 태그 수
     frequently_used_keys_without_wiki_page:
-        name: Frequently used keys without wiki page
+        name: 자주 사용하지만 위키 문서가 없는 키
         intro: |
-            <p>This table shows keys that appear more than 10&thinsp;000 times in the OSM
-            database but have no wiki page describing them.  If you know anything about one
-            of these keys, please create the wiki page by clicking on the link in the
-            leftmost column and describe the key. Sometimes it might make sense to create a
-            redirect to a different wiki page instead. To do this put just one line with
-            <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>page name</i>]]</tt>
-            in the wiki page.</p>
-        also_show_keys: Also show keys that have no English language wiki page but a page in some other language.
+            <p>이 표는 OSM 데이터베이스에서 10&thinsp;000번 이상 나타났지만 키를 설명하는 위키 문서가 없는 키를 나타냅니다.
+            만약 여기 나온 키 중 하나라도 상세하게 알고 있다면,
+            제일 왼쪽 열에 있는 링크를 클릭해서 위키 문서를 만들고 키에 대해 설명해 주세요.
+            때때로 별개의 문서를 만드는 것보다 리다이렉트를 만드는 편이 나을 수 있습니다.
+            리다이렉트를 만들려면 "<tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>문서 이름</i>]]</tt>"이라고
+            위키 문서에 한 줄만 입력하세요.</p>
+        also_show_keys: 타 언어 위키에만 있고 영어 위키에 없는 키를 보이게 합니다.
         table:
-            create_wiki_page: Create wiki page...
+            create_wiki_page: 위키 문서 만들기...
     key_lengths:
-        name: Key lengths
+        name: 키의 길이
         intro: |
-            Tag keys can be between 0 and 255 (Unicode) characters long. Very short or very long keys are often, but not always, errors.
+            태그 키는 0부터 255까지의 길이(Unicode 기준)를 갖습니다. 길이가 너무 짧거나 너무 길면 자주 오류를 일으킵니다.
         table:
-            number_of_objects: Number of objects
+            number_of_objects: 요소의 개수
         histogram:
-            name: Histogram
-            intro: This histogram shows how many keys there are of each length.
-            key_length: Key length
-            number_of_keys: Number of keys
+            name: 막대 그래프
+            intro: 이 막대 그래프는 각각의 길이에 얼마나 많은 키가 있는지를 나타냅니다.
+            key_length: 키의 길이
+            number_of_keys: 키의 개수
     language_comparison_table_for_keys_in_the_wiki:
-        name: Language comparison table for keys in the wiki
+        name: 키를 설명하는 위키 문서 간 언어 비교표
         icons:
-            template: Page in wiki available and contains standard template.
-            error: Page in wiki available and contains standard template, but couldn't be parsed.
-            page: Page in wiki available but doesn't contain standard template.
-            redirect: Page is a redirect.
+            template: 이용 가능하면서 표준 틀을 갖추고 있는 위키 문서.
+            error: 이용 가능하면서 표준 틀을 갖추고 있지만 분석할 수 없는 위키 문서.
+            page: 이용 가능하지만 표준 틀을 갖추고 있지 않는 위키 문서.
+            redirect: 리다이렉트 문서.
         intro: |
-            This table shows all tag keys for which there are wiki pages available and in what languages they are.
+            이 표는 이용 가능한 위키 문서가 있는 모든 태그 키를 언어별로 나타냅니다.
     languages:
-        name: Languages
+        name: 언어
         intro: |
-            OpenStreetMap is an international project. Tags and their descriptions can
-            be in any language. This table lists the languages taginfo knows about and how
-            many wiki pages there are in these languages documenting keys and tags,
-            respectively.
-        code: Code
-        native_name: Native name
-        english_name: English name
-        wiki_key_pages: Wiki key pages
-        wiki_tag_pages: Wiki tag pages
+            OpenStreetMap은 국제적인 프로젝트입니다. 태그와 태그의 설명은 어떠한 언어로든 가능합니다.
+            이 표는 taginfo가 아는 언어와 각각의 언어에 키와 태그를 문서화한 위키 문서가 얼마나 많은지를 나타냅니다.
+        code: 코드
+        native_name: 현지 이름
+        english_name: 영어 이름
+        wiki_key_pages: 위키 키 문서
+        wiki_tag_pages: 위키 태그 문서
     wiki_pages_about_non_existing_keys:
-        name: Wiki pages about non-existing keys
+        name: 존재하지 않는 키에 대한 위키 문서
         intro: |
-            This table shows keys for which a wiki page exists but there is not a single
-            instance in the database. This is not necessarily an error (maybe somebody
-            added the documentation in the wiki as preparation for using a key or the wiki
-            page documents a now obsolete key), but it can also be a typo or other error.
-        wiki_pages: Wiki pages
+            이 표는 위키 문서가 있지만 데이터베이스 상에 존재하지 않는 키를 나타냅니다.
+            그렇다고 반드시 오류라는 의미는 아니지만(아마 몇몇은 키를 사용하기 위해 준비 절차로 위키 문서를 추가했거나,
+            위키 문서가 더는 쓸모없어진 키를 설명하는 것일 수도 있습니다.)
+            보통은 오타거나 기타 오류인 경우가 많습니다.
+        wiki_pages: 위키 문서
     name_tags:
-        name: Variants of name tags
+        name: 이름 태그의 변이형
         intro: |
-            <p>This report shows information related to the naming of objects in OSM
-            using the <tt>name</tt> tag and its variants.</p>
+            <p>이 보고서는 OSM에 있으면서 <tt>name</tt> 태그와 그 변이형을 사용하는 요소에 붙은 이름과 관련된 정보를 나타냅니다.</p>
         overview:
-            tab: Overview
-            title: Overview
+            tab: 개요
+            title: 개요
         bcp47:
-            tab: BCP47 Subtags
-            title: BCP47 Subtags
+            tab: BCP47 하위 태그
+            title: BCP47 하위 태그
             filter:
-                label: Show only subtags of type
-                all: All
-                language: Language
-                script: Script
-                region: Region
-                variant: Variant
+                label: 유형의 하위 태그만 표시
+                all: 전체
+                language: 언어
+                script: 문자 체계
+                region: 지역
+                variant: 변이형
             intro: |
-                <p>The <a href="http://www.ietf.org/">IETF</a> defines <i>language
-                tags</i> in its standard
-                <a href="http://tools.ietf.org/html/bcp47">Tags for Identifying Languages
-                (BCP47)</a>. Language
-                tags consist of one or more <i>subtags</i> describing the language,
-                script, variants, etc. The following list shows the subtags currently
-                registered that are relevant for OSM. For more information see also the
-                <a href="http://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
-                entry on IETF language tags</a> and the <a
-                href="http://www.langtag.net/">langtag.net</a> site.</p>
-                <p>Note that the data shown in this table is <b>not</b> from OpenStreetMap,
-                it just shows the building blocks that can be used to describe languages
-                irrespective of whether they are actually used in OSM.
-                </p>
+                <p><a href="https://www.ietf.org/">IETF</a>는 <a
+                href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages(BCP47)</a>로
+                표준 <i>언어 태그</i>를 정의합니다.
+                언어 태그는 언어, 문자 체계, 변이형 등을 설명하는 하나 이상의 <i>하위 태그</i>로 구성되어 있습니다.
+                다음 목록은 OSM과 관련되어 있으면서 현재 등록된 하위 태그를 나타냅니다.
+                자세한 정보는 <a href="https://ko.wikipedia.org/wiki/IETF_%EC%96%B8%EC%96%B4_%ED%83%9C%EA%B7%B8">IETF
+                언어 태그 위키피디아 문서</a>와 <a href="http://www.langtag.net/">langtag.net</a> 사이트 참조.</p>
+                <p>이 표의 데이터는 OpenStreetMap에서 가져온 것이 <b>아니고</b>, 어디서 설명하든 상관없이
+                언어를 설명할 때 사용할 수 있는 구성 요소만 나타낸다는 점을 명심하세요.</p>
     similar_keys:
-        name: Similar keys
+        name: 비슷한 키
         intro: |
-            This report shows keys used very often and similar keys used very
-            rarely. This exposes many misspellings of common keys, but is not
-            perfect. Take care when fixing the data! Do NOT just mechanically
-            edit those keys with search-and-replace. Look at each case individually
-            and also fix other problems that you see.
-        key_common: Commonly used keys
-        key_rare: Rarely used keys
-        count_common: Count
-        count_rare: Count
-        similarity: Similarity
+            이 보고서는 자주 쓰는 키 중 거의 사용되지 않은 비슷한 키가 있는 키를 나타냅니다.
+            이는 자주 쓰이는 키에서 나온 많은 오타를 드러내지만, 항상 그렇지는 않습니다.
+            데이터를 수정할 때는 신중히 처리하세요! 검색과 교체만을 반복하면서 기계적으로 수정하지 마세요.
+            각각의 경우를 일일이 따져 보고 발견한 다른 문제도 같이 고치세요.
+        key_common: 자주 사용하는 키
+        key_rare: 거의 사용되지 않은 키
+        count_common: 횟수
+        count_rare: 횟수
+        similarity: 유사성
     historic_development:
-        name: Historic development
+        name: 역사적으로 본 성장
         intro: |
-            Development of some important statistics over time. This data has
-            been collected by taginfo, gaps are possible when taginfo didn't run
-            on a day for some reason.
+            시간의 경과에 따른 몇몇 중요한 통계의 성장. 이 데이터는 taginfo에서 지속적으로 수집되었으며,
+            taginfo가 몇 가지 이유로 하루 정도 작동하지 않을 때 끊어진 선이 생길 수 있습니다.
         keys:
-            title: Unique keys
+            title: 키의 개수
         tags:
-            title: Unique tags
+            title: 태그의 개수
         relation_types:
-            title: Unique relation types
+            title: 관계 유형의 개수
     wiki_images:
-        name: Wiki images
+        name: 위키 이미지
         intro: |
-            Images used in the wiki to symbolize the keys in different
-            languages. Sometimes the image from one or the other language
-            variant is better. But sometimes it makes sense to have different
-            images because of different cultural backgrounds or so.
+            서로 다른 언어에서 키를 이미지로 나타내기 위해 위키에서 사용하는 이미지.
+            때때로 다른 언어에서 사용된 이미지가 더 좋을 수 있습니다.
+            하지만 서로 다른 문화적 배경 때문에 서로 다른 이미지를 갖는 것이 좋은 경우가 많습니다.
     wiki_problems:
-        name: Wiki parsing problems
+        name: 위키 분석 문제
         intro: |
-            Taginfo reads all wiki pages used to describe keys, tags, and
-            relations to find information about tags. This report shows a list
-            of problems encountered while reading those pages. These aren't
-            necessarily errors in the wiki, they just mean that something in
-            the wiki pages isn't formatted in a way taginfo understands. Either
-            the page has to be corrected or taginfo has to be fixed.
-        location: Location
-        reason: Reason
-        wiki_page: Wiki page
-        lang: Lang.
-        info: Additional information
-
+            taginfo는 태그에 대한 정보를 찾기 위해 키, 태그, 관계를 설명하는 데 사용한 모든 위키 문서를 읽습니다.
+            이 보고서는 문서를 읽어들이면서 발생한 문제를 목록으로 나타냅니다.
+            무조건 위키의 문제만은 아니고, 단지 위키 문서에 taginfo가 이해하는 방식으로 서식이 만들어지지 않았다는 것를 의미합니다.
+            그럴 때는 문서를 교정하거나 taginfo를 고쳐야 합니다.
+        location: 장소
+        reason: 이유
+        wiki_page: 위키 문서
+        lang: 언어
+        info: 비고

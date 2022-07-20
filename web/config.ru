@@ -11,23 +11,23 @@ require 'lib/config.rb'
 
 TaginfoConfig.read
 
-LOGDIR=TaginfoConfig.get('logging.directory', '/osm/taginfo/var/log');
-
 set :run, false
 set :environment, :production
 
-today = Time.now.strftime('%Y-%m-%d')
-log = File.new("#{LOGDIR}/taginfo-#{ today }.log", "a")
-log.sync = true
+logdir = TaginfoConfig.get('logging.directory');
 
-# https://github.com/taginfo/taginfo/issues/34
-#$stdout.reopen(log)
-$stderr.reopen(log)
+if logdir.to_s != ''
+    today = Time.now.strftime('%Y-%m-%d')
+    log = File.new("#{logdir}/taginfo-#{ today }.log", "a")
+    log.sync = true
 
-$stderr.puts "Taginfo started #{Time.now}"
+    $stderr.reopen(log)
 
-$queries_log = File.new("#{LOGDIR}/queries-#{ today }.log", "a")
-$queries_log.sync = true
+    $stderr.puts "Taginfo started #{Time.now}"
+
+    $queries_log = File.new("#{logdir}/queries-#{ today }.log", "a")
+    $queries_log.sync = true
+end
 
 run Taginfo
 

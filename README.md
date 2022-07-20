@@ -9,38 +9,49 @@ wiki.
 
 **Live System:** [taginfo.openstreetmap.org](https://taginfo.openstreetmap.org/)
 
+There is no versioning of these tools. The official site always runs the
+version tagged `osmorg-taginfo-live`. If you are using the tools, we encourage
+you to stay up-to-date with that version also. But monitor your setup closely
+when you switch to a new version, sometimes things can break.
 
 ## Files
 
 * `/sources`  - import scripts
 * `/web`      - web user interface and API
 * `/examples` - some misc example stuff
-* `/tagstats` - C++ programs to create database statistics etc.
 
 
 ## Prerequisites
 
 It uses:
 
-* Ruby (must be at least 1.9.1)
-* Mongrel or Apache2 mod_passenger
-* [Sinatra web framework](http://www.sinatrarb.com/)
-* Rack Contrib Gem (for `Rack::JSONP`)
-* JSON gem (install with gem, Debian/Ubuntu packages are too old and buggy)
+* Ruby (must be at least 2.4)
+* [Sinatra web framework](http://www.sinatrarb.com/) and other ruby libraries
 * curl binary
-* sqlite3 binary and ruby libs
-* Optional: Parallel bzip (pzbip2)
+* sqlite3 binary (version 3.9 or above with FTS5 and regexp support)
+* Optional: Parallel bzip (pbzip2)
 
 Install the Debian/Ubuntu packages:
 ```sh
-$ sudo apt-get install curl sqlite3 ruby-sqlite3
+$ sudo apt-get install curl sqlite3 sqlite3-pcre
 $ sudo apt-get install ruby-passenger libapache2-mod-passenger
 ```
 
 Install the Gems:
 ```sh
-$ sudo gem install rack rack-contrib sinatra sinatra-r18n json
+$ sudo gem install bundler
+$ sudo bundle install
 ```
+
+Depending on your setup you might want to install an application server like
+* [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) or
+* Apache2 `mod_passenger`
+
+If you want to create the taginfo database yourself, you need to have
+https://github.com/taginfo/taginfo-tools installed. See there for details.
+If you only want to run the UI and get the database from somewhere else,
+you do not need this.
+
 
 ## Data Import
 
@@ -56,10 +67,22 @@ data import step or downloaded from page
 [taginfo.openstreetmap.org/download](https://taginfo.openstreetmap.org/download).
 
 To start the web user interface:
+
 ```sh
-$ cd web
-$ ./taginfo.rb
+cd web
+./taginfo.rb
 ```
+
+You can also use it via [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/).
+
+```sh
+cd web
+uwsgi uwsgi.ini
+```
+
+You can change various settings in the [config file](web/uwsgi.ini) and use
+it through a web server like Apache2 or Nginx.
+
 
 ## Javascript
 

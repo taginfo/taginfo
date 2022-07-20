@@ -1,8 +1,9 @@
 <div class="pre ui-helper-clearfix">
     <div id="pre-text">
-        <h1></h1>
+        <h1 data-key="<%= h(@key) %>" data-value="<%= h(@value) %>"></h1>
         <p><%= @desc %></p>
     </div>
+    <div id="toolsmenu"></div>
     <form id="filter-form">
         <label for="filter"><%= h(t.pages.key.filter.label) %></label>
         <select id="filter" name="filter">
@@ -12,36 +13,43 @@
             <option value="relations"<%= @sel['relations'] %>><%= h(t.pages.key.filter.relations) %></option>
         </select>
     </form>
-    <form id="list-form">
-        <select id="list" name="list">
-            <option value="title" selected="selected" style="color: #000000"><%= h(t.comparison.list) %> (0 <%= h(t.comparison.items) %>)</option>
-            <option value="add"><%= h(t.comparison.add_tag) %></option>
-            <option value="clear"><%= h(t.comparison.clear) %></option>
-            <option value="compare"><%= h(t.comparison.compare) %></option>
-        </select>
-    </form>
+    <div id="comparison-list">
+        <div><%= h(t.comparison.list) %> (0 <%= h(t.comparison.items) %>)</div>
+        <ul>
+            <li id="comparison-list-add"><%= h(t.comparison.add_tag) %></li>
+            <li id="comparison-list-clear"><%= h(t.comparison.clear) %></li>
+            <li id="comparison-list-compare"><%= h(t.comparison.compare) %></li>
+        </ul>
+    </div>
     <div id="tools">
-        <% if @count_all < TaginfoConfig.get('xapi.max_results', 1000) %>
-            <%= xapi_link(@filter_xapi, @key, @value) %> <%= josm_link(@filter_xapi, @key, @value) %>
-        <% else %>
-            <span class="button disabled" title="<%= h(t.pages.tag.button_disabled) %>">XAPI</span>
-            <span class="button disabled" title="<%= h(t.pages.tag.button_disabled) %>">JOSM</span>
-        <% end %>
-        <% if @count_all <= TaginfoConfig.get('level0.max_results', 10) %>
-            <%= level0_link() %>
-        <% else %>
-            <span class="button disabled" title="<%= h(t.pages.tag.button_disabled) %>">Level0 Editor</span>
-        <% end %>
-        <%= turbo_link(@count_all, @filter_type, @key, @value) %>
+        <ul>
+<% if @count_all < @taginfo_config.get('xapi.max_results', 1000) %>
+            <li class="button"><%= xapi_link(@filter_xapi, @key, @value) %></li>
+            <li class="button"><%= josm_link(@filter_xapi, @key, @value) %></li>
+<% else %>
+            <li class="button disabled" title="<%= h(t.pages.tag.button_disabled) %>">XAPI</li>
+            <li class="button disabled" title="<%= h(t.pages.tag.button_disabled) %>">JOSM</li>
+<% end %>
+<% if @count_all <= @taginfo_config.get('level0.max_results', 10) %>
+            <li class="button"><%= level0_link(@filter_type, @key, @value) %></li>
+<% else %>
+            <li class="button disabled" title="<%= h(t.pages.tag.button_disabled) %>">Level0 Editor</li>
+<% end %>
+            <li class="button"><%= turbo_link(@count_all, @filter_type, @key, @value) %></li>
+        </ul>
     </div>
 </div>
 <div id="tabs">
     <ul>
         <li><a href="#overview"><%= h(t.taginfo.overview) %></a></li>
         <li><a href="#combinations"><%= h(t.taginfo.combinations) %></a></li>
+<% if Source.get(:chronology) %>
+        <li><a href="#chronology"><%= h(t.taginfo.chronology) %></a></li>
+<% end %>
         <li><a href="#map"><%= h(t.taginfo.map) %></a></li>
         <li><a href="#wiki"><%= h(t.sources.wiki.name) %></a></li>
         <li><a href="#projects"><%= h(t.taginfo.projects) %></a></li>
+        <li><a href="#characters"><%= h(t.taginfo.characters) %></a></li>
     </ul>
     <div id="overview">
 <% if @image_url %>
@@ -52,8 +60,14 @@
         <h2><%= h(t.taginfo.overview) %></h2>
         <table id="grid-overview">
         </table>
+<% if @has_rtype_link or @links.size > 0 %>
+        <h2><%= h(t.taginfo.links) %></h2>
+<% end %>
 <% if @has_rtype_link %>
         <p><%= h(t.pages.tag.overview.see_also) %>: <span id="relationlink"></span></p>
+<% end %>
+<% @links.each do |link| %>
+        <p><%= link %></p>
 <% end %>
     </div>
     <div id="combinations">
@@ -64,24 +78,37 @@
         <table id="grid-combinations">
         </table>
     </div>
+<% if Source.get(:chronology) %>
+    <div id="chronology">
+        <h2><%= h(t.taginfo.chronology) %></h2>
+        <% if @has_chronology %>
+        <div id="chart-chronology"></div>
+        <% else %>
+            <p class="empty"><%= h(t.pages.tag.chronology.no_chronology) %></p>
+        <% end %>
+    </div>
+<% end %>
     <div id="map">
         <h2><%= h(t.pages.tag.geographic_distribution.title) %></h2>
         <% if @has_map %>
             <% if @filter_type == 'all' %>
-                <div style="background-image: url(<%= TaginfoConfig.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: 1px 1px;"/>
+                <p><%= h(t.pages.tag.geographic_distribution.all) %></p>
+                <div style="background-image: url(<%= @taginfo_config.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: 1px 1px;"/>
                     <img class="map" src="/api/4/tag/distribution/nodes?key=<%= @key_uri %>&value=<%= @value_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>" style="position: absolute;"/>
                     <img class="map" src="/api/4/tag/distribution/ways?key=<%= @key_uri %>&value=<%= @value_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
-                    <div class="note"><%= TaginfoConfig.get('geodistribution.image_attribution') %></div>
+                    <div class="note"><%= @taginfo_config.get('geodistribution.image_attribution') %></div>
                 </div>
             <% elsif @filter_type == 'nodes' %>
-                <div style="background-image: url(<%= TaginfoConfig.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: 1px 1px;"/>
+                <p><%= h(t.pages.tag.geographic_distribution.nodes) %></p>
+                <div style="background-image: url(<%= @taginfo_config.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: 1px 1px;"/>
                     <img class="map" src="/api/4/tag/distribution/nodes?key=<%= @key_uri %>&value=<%= @value_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
-                    <div class="note"><%= TaginfoConfig.get('geodistribution.image_attribution') %></div>
+                    <div class="note"><%= @taginfo_config.get('geodistribution.image_attribution') %></div>
                 </div>
             <% elsif @filter_type == 'ways' %>
-                <div style="background-image: url(<%= TaginfoConfig.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: 1px 1px;"/>
+                <p><%= h(t.pages.tag.geographic_distribution.ways) %></p>
+                <div style="background-image: url(<%= @taginfo_config.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: 1px 1px;"/>
                     <img class="map" src="/api/4/tag/distribution/ways?key=<%= @key_uri %>&value=<%= @value_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
-                    <div class="note"><%= TaginfoConfig.get('geodistribution.image_attribution') %></div>
+                    <div class="note"><%= @taginfo_config.get('geodistribution.image_attribution') %></div>
                 </div>
             <% elsif @filter_type == 'relations' %>
                 <p class="empty"><%= h(t.pages.tag.geographic_distribution.relations) %></p>
@@ -105,33 +132,9 @@
         <table id="grid-projects">
         </table>
     </div>
+    <div id="characters">
+        <h2><%= h(t.pages.tag.characters.title) %></h2>
+        <table id="grid-characters">
+        </table>
+    </div>
 </div>
-<% javascript do
-    JS.raw(<<"JAVASCRIPT")
-function page_init2() {
-    var filter = #{ @filter_type.to_json },
-        key = #{ @key.to_json },
-        value = #{ @value.to_json };
-    up = function() { window.location = url_for_key(key); };
-    jQuery('h1').html(link_to_key(key) + '=' + fmt_value(value));
-
-    if (cookies_enabled()) {
-        comparison_list_update(key, value);
-        jQuery('#list').bind('change', function() {
-            comparison_list_change(key, value);
-        });
-    } else {
-        jQuery('#list-form').html('<span class="empty" style="position: relative; top: 1px;">Enable cookies for comparison function!</span>');
-    }
-
-    jQuery('span#keylink').html(link_to_key(key));
-    jQuery('span#relationlink').html(link_to_rtype(value));
-    jQuery('#level0_button').bind('click', function() {
-        return level0_editor('#{ TaginfoConfig.get('level0.overpass_url_prefix') }', '#{ TaginfoConfig.get('level0.level0_url_prefix') }', filter, key, value);
-    });
-
-    init_tabs([key, value, filter]);
-}
-JAVASCRIPT
-end
-%>

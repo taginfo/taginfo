@@ -16,11 +16,11 @@ end
 class Javascript
 
     @@js_files = {
-#        :common    => [ 'jquery-1.11.1.min', 'jquery-ui-1.9.2.custom.min', 'customSelect.jquery.min', 'jquery.tipsy-minified', 'jquery.cookie-minified' ],
+#        :common    => [ 'jquery-1.11.1.min', 'jquery-ui-1.9.2.custom.min', 'jquery.tipsy-minified' ],
         :common    => [ 'common', 'jquery.slicknav.min' ],
         :taginfo   => [ 'taginfo' ],
         :flexigrid => [ 'jquery-migrate-1.2.1.min', 'flexigrid-minified' ],
-        :d3        => [ 'd3/d3.v3.min' ],
+        :d3        => [ 'd3/d3.min' ],
         :d3_cloud  => [ 'd3/d3.layout.cloud' ],
     }
 
@@ -46,7 +46,7 @@ class Javascript
 
     def to_html
         if @file.nil?
-            %Q{    <script type="text/javascript">//<![CDATA[\n#{ @content }//]]></script>}
+            %Q{    <script type="text/javascript">\n#{ @content }\n</script>}
         else
             %Q{    <script type="text/javascript" src="/js/#{ @file }.js"></script>}
         end
@@ -80,25 +80,6 @@ class JQuery
             :rpOptions     => [10,15,20,25,50,100],
         }
         "jQuery('##{id}').flexigrid(" + defaults.merge(options).to_json + ");\n"
-    end
-
-end
-
-class JS
-
-    #
-    #  Careful, deep magic!
-    #
-    #  We redefine the to_json method of the String argument to return
-    #  the raw string. This way we can do JS.raw("foo").to_json and get "foo".
-    #
-    def self.raw(code)
-       code.instance_eval do
-          def to_json(state=nil)
-              to_s
-          end
-       end
-       code
     end
 
 end

@@ -42,6 +42,7 @@ taginfo:
     project: Project
     projects: Projects
     test: Test
+    chronology: Chronology
     map: Map
     maps: Maps
     relations: Relations
@@ -49,6 +50,8 @@ taginfo:
     key_combinations: Combinations
     comparison: Key/Tag Comparison
     overview: Overview
+    characters: Characters
+    links: Links
     data_from: Data from
     data_from_description: Last update of taginfo database
     instance:
@@ -81,6 +84,8 @@ misc:
     prevalent_values: Prevalent values
     prevalent_values_tooltip: Up to ten of the most common values for this key (only if more than 1% of tags with this key have this value).
     in_wiki_tooltip: Has at least one wiki page.
+    status: Status
+    approval_status: Approval status
 
 help:
     search:
@@ -169,7 +174,7 @@ pages:
                 database, how many people use those tags, where they are used and so on. It
                 also gets information about tags from the wiki and from other places. Taginfo
                 tries to bring together all information about tags to help you understand
-                how they are used and what they mean. See a <a href="/sources">list of sources</a>
+                how they are used and what they mean. See a <a href="sources">list of sources</a>
                 taginfo uses.</p>
         about_site:
             title: About This Site
@@ -180,7 +185,7 @@ pages:
             api: |
                 <h3>API</h3>
                 <p>Taginfo data can be accessed through a REST API. See the
-                <a href="/taginfo/apidoc">API documentation</a> for the details, some general information is
+                <a href="taginfo/apidoc">API documentation</a> for the details, some general information is
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">on the OSM wiki</a>.
                 The servers running the taginfo API do not have unlimited resources.
                 Please use the API responsibly. If in doubt contact the maintainers of the
@@ -189,7 +194,7 @@ pages:
                 <h3>Download</h3>
                 <p>If you want to play around with the data used by taginfo, you can download the
                 regularly updated Sqlite database files. All the preprocessing is done for you.
-                See the <a href="/download">download page</a> for a list of files. Note that
+                See the <a href="download">download page</a> for a list of files. Note that
                 some of these files can get quite large. If you want to download them regularly,
                 contact the maintainers of the site you are using or talk to us on the mailing list.</p>
             license: |
@@ -203,10 +208,10 @@ pages:
                 <p>The taginfo software was created and is maintained by
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
                 The web design was created by
-                <a class="extlink" href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
+                <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Translations</h3>
                 <p>We need translators for the taginfo user interface. See the <a
-                href="/taginfo/translations">translations overview</a> for languages that need
+                href="taginfo/translations">translations overview</a> for languages that need
                 some work. More information on how to help is on the
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM wiki</a>.</p>
                 <h3>Code</h3>
@@ -244,9 +249,11 @@ pages:
             wiki: |
                 <p>The <a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> is read and all Key:*, Tag:*, and Relation:* pages (in all the different languages) are analyzed. Descriptions, images, related tags, etc. are extracted from them.</p>
             languages: |
-                <p>Taginfo gets information about the different languages of the world, their codes, names, etc. from several <a class="extlink" href="http://www.iana.org/">IANA</a> and <a class="extlink" href="http://www.unicode.org/">Unicode</a> registries.</p>
+                <p>Taginfo gets information about the different languages of the world, their codes, names, etc. from several <a class="extlink" href="https://www.iana.org/">IANA</a> and <a class="extlink" href="https://www.unicode.org/">Unicode</a> registries.</p>
             projects: |
-                <p>Projects that use OSM tags in some way, such as editors, maps, routers, etc. See <a href="/projects">the project list</a>.</p>
+                <p>Projects that use OSM tags in some way, such as editors, maps, routers, etc. See <a href="projects">the project list</a>.</p>
+            chronology: |
+                <p>Number of keys/tags over time from <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">history planet</a>.</p>
         updates:
             title: Updates
             intro: The taginfo data is updated regularly from the sources.
@@ -257,10 +264,10 @@ pages:
     download:
         intro: |
             <p>Here you can download the databases used by taginfo. All the data is stored
-            in <a class="extlink" href="http://www.sqlite.org/">Sqlite</a> databases.
+            in <a class="extlink" href="https://www.sqlite.org/">Sqlite</a> databases.
             The database files are then packed with <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>If you don't want to download these databases, but need automated access to
-            the data, you can also use the <a href="/about">API</a>.</p>
+            the data, you can also use the <a href="about">API</a>.</p>
         file: File
         packed: Packed
         unpacked: Unpacked
@@ -291,7 +298,7 @@ pages:
                 This table shows the most common tags in the database.
     relations:
         name: Relation types
-        intro: Information about the different types of relations (indicated by the <a href="/keys/type?filter=relations">type</a> tag).
+        intro: Information about the different types of relations (indicated by the <a href="keys/type?filter=relations">type</a> tag).
         relations_of_type_tooltip: Number of relations of this type (and as percentage of all relations).
         prevalent_roles: Prevalent roles
         prevalent_roles_tooltip: Prevalent roles for this type of relation.
@@ -328,7 +335,10 @@ pages:
             from_count_tooltip: Number of objects with other key that also have this key.
         geographic_distribution:
             title: Geographical distribution of this key
-            relations: Relations do not have a geographical location, so no map can be shown.
+            all: This shows the distribution of nodes and ways with this key, relations are not shown.
+            nodes: This shows the distribution of nodes with this key.
+            ways: This shows the distribution of ways with this key.
+            relations: Showing a geographical location for the different types of relations isn't straightforward, so we are not trying to show a map here.
         wiki_pages:
             title: Wiki pages about this key
             none_found: No wiki page available for this key.
@@ -347,6 +357,8 @@ pages:
             count_all_tooltip: Number of objects with the similar key
             similarity: Similarity
             similarity_tooltip: Smaller numbers mean more similar
+        characters:
+            title: Unicode characters in this key
     tag:
         description_from_wiki: Description of this tag from the wiki (if available in your chosen language, otherwise in English).
         no_description_in_wiki: No English language description for this tag in the wiki. (See also the "Wiki" tab.)
@@ -363,9 +375,14 @@ pages:
         combinations:
             title: Combinations
             description: This table shows only the most common combinations of the most common tags.
+        chronology:
+            no_chronology: Sorry. The chronology can only be generated for the most frequent tags.
         geographic_distribution:
             title: Geographical distribution of this tag
-            relations: Relations do not have a geographical location, so no map can be shown.
+            all: This shows the distribution of nodes and ways with this tag, relations are not shown.
+            nodes: This shows the distribution of nodes with this tag.
+            ways: This shows the distribution of ways with this tag.
+            relations: Showing a geographical location for the different types of relations isn't straightforward, so we are not trying to show a map here.
             no_map: Sorry. The map can only be created for the most frequent tags. Try the overpass turbo link.
         wiki_pages:
             title: Wiki pages about this tag
@@ -379,6 +396,8 @@ pages:
         projects:
             title: Projects using this tag
             description: How this tag is used in the project
+        characters:
+            title: Unicode characters in this tag value
     relation:
         name: Relation type
         description_from_wiki: Description of this relation type from the wiki (if available in your chosen language, otherwise in English).
@@ -409,6 +428,8 @@ pages:
         projects:
             title: Projects using this relation type
             description: How this relation type is used in the project
+        characters:
+            title: Unicode characters in relation type
     project:
         overview:
             project_name: Project name
@@ -417,7 +438,7 @@ pages:
             documentation_url: Documentation
             last_update: Last update
             json_url: JSON project file
-            info: This data is provided by the project for taginfo though the 'JSON project file' linked from above. See the <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a> for a format description.
+            info: This data is provided by the project for taginfo through the 'JSON project file' linked from above. See the <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a> for a format description.
         tags:
             title: Tags used by this project
             intro: This data is provided by the project and not necessarily complete. Please see the project documentation for details.
@@ -451,7 +472,7 @@ sources:
         description: Aggregate statistics over time.
     db:
         name: Database
-        description: Statistics about each key and each tag from the main OSM database (planet file).
+        description: Statistics about each key and each tag from OSM data.
     wiki:
         name: Wiki
         description: Data from the tag and key pages of the OSM wiki.
@@ -461,6 +482,16 @@ sources:
     projects:
         name: Projects
         description: External projects and the OSM keys/tags they use.
+    chronology:
+        name: Chronology
+        description: Number of keys/tags over time from OSM history data.
+
+unicode:
+    character: Char
+    codepoint: Code point
+    script: Script
+    general_category: General category
+    name: Unicode code point name
 
 reports:
     characters_in_keys:
@@ -629,14 +660,14 @@ reports:
                 region: Region
                 variant: Variant
             intro: |
-                <p>The <a href="http://www.ietf.org/">IETF</a> defines <i>language
+                <p>The <a href="https://www.ietf.org/">IETF</a> defines <i>language
                 tags</i> in its standard
-                <a href="http://tools.ietf.org/html/bcp47">Tags for Identifying Languages
+                <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages
                 (BCP47)</a>. Language
                 tags consist of one or more <i>subtags</i> describing the language,
                 script, variants, etc. The following list shows the subtags currently
                 registered that are relevant for OSM. For more information see also the
-                <a href="http://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
+                <a href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
                 entry on IETF language tags</a> and the <a
                 href="http://www.langtag.net/">langtag.net</a> site.</p>
                 <p>Note that the data shown in this table is <b>not</b> from OpenStreetMap,

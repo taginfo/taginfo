@@ -28,6 +28,10 @@ module SQL
             @db = SQLite3::Database.new(filename, { :readonly => true })
             @db.results_as_hash = true
 
+            pcre_extension = TaginfoConfig.get('paths.sqlite3_pcre_extension')
+            if pcre_extension
+                @db.load_extension(pcre_extension)
+            end
             @db.execute('PRAGMA journal_mode = OFF')
             @db.execute('SELECT * FROM languages') do |row|
                 Language.new(row)
@@ -43,7 +47,6 @@ module SQL
             Source.each do |source|
                 attach_source(source.dbname, source.id.to_s)
             end
-            attach_source('taginfo-search.db', 'search')
             attach_source('taginfo-history.db', 'history')
             self
         end
@@ -61,11 +64,11 @@ module SQL
             min_duration = TaginfoConfig.get('logging.min_duration', 0)
             if duration > min_duration
                 if params.size > 0
-                    p = ' params=[' + params.map{ |p| "'#{p}'" }.join(', ') + ']'
+                    p = ' params=[' + params.map{ |param| "'#{param}'" }.join(', ') + ']'
                 else
                     p = ''
                 end
-                ($queries_log||$stdout).puts %Q{SQL duration=#{ duration.round(2) } query="#{ query };"} + p
+                ($queries_log||$stderr).puts %Q{SQL duration=#{ duration.round(2) } query="#{ query };"} + p
             end
 
             out
@@ -150,8 +153,8 @@ module SQL
             self
         end
 
-        def conditions(cond)
-            cond.each do |cond|
+        def conditions(conds)
+            conds.each do |cond|
                 condition(cond)
             end
             self

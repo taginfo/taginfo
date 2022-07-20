@@ -32,6 +32,10 @@ CREATE TABLE project_unique_tags (
 INSERT INTO project_unique_tags (key, value, projects)
     SELECT key, value, count(*) FROM (SELECT DISTINCT key, value, project_id FROM project_tags WHERE value IS NOT NULL) GROUP BY key, value;
 
+CREATE INDEX project_unique_keys_key_idx ON project_unique_keys(key);
+
+CREATE INDEX project_unique_tags_key_value_idx ON project_unique_tags(key, value);
+
 -- ============================================================================
 
 UPDATE projects SET key_entries=(SELECT count(*) FROM project_tags WHERE project_id=id AND value IS NULL);

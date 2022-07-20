@@ -22,4 +22,8 @@ class Language
         end
     end
 
+    def self.has?(code)
+        @@languages.key?(code)
+    end
+
 end

@@ -9,7 +9,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013-2017  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2013-2020  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 #  GNU General Public License for more details.
 #
 #  You should have received a copy of the GNU General Public License along
-#  with this program.  If not, see <http://www.gnu.org/licenses/>.
+#  with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 #------------------------------------------------------------------------------
 
@@ -37,7 +37,7 @@ module MediaWikiAPI
         def initialize(path='/w/api.php?')
             @url = 'https://wiki.openstreetmap.org' + path
             @headers = {}
-            add_header('User-agent', 'taginfo/1.0 (http://wiki.osm.org/wiki/Taginfo)')
+            add_header('User-agent', 'taginfo/1.0 (https://wiki.osm.org/wiki/Taginfo)')
         end
 
         def add_header(name, value)

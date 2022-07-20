@@ -1,0 +1,591 @@
+
+osm:
+    tag: Etikedo
+    tags: Etikedoj
+    key: Ŝlosilo
+    keys: Ŝlosiloj
+    value: Valoro
+    values: Valoroj
+    node: Nodo
+    nodes: Nodoj
+    way: Linio
+    ways: Linioj
+    relation: Rilato
+    relations: Rilatoj
+    relation_type: Rilat-tipo
+    relation_types: Rilat-tipoj
+    relation_member: Ano de rilato
+    relation_members: Anoj de rilatoj
+    relation_member_nodes: Nodaj anoj
+    relation_member_ways: Liniaj anoj
+    relation_member_relations: Rilat-tipaj anoj
+    relation_member_role: Rolo
+    relation_member_roles: Roloj
+    object: Objekto
+    objects: Objektoj
+    all: Ĉiuj
+    user: Uzanto
+    users: Uzantoj
+
+taginfo:
+    source: Fonto
+    sources: Fontoj
+    download: Elŝuti
+    about: Pri
+    contact: Kontakti
+    meta: Meta
+    wiki: Vikio
+    report: Raporto
+    reports: Raportoj
+    international: Interŝtata
+    apidoc: API-dokumentaro
+    project: Projekto
+    projects: Projektoj
+    test: Testi
+    chronology: Kronologio
+    map: Mapo
+    maps: Mapoj
+    relations: Rilatoj
+    combinations: Kombinaĵoj
+    key_combinations: Ŝlosil-kombinaĵoj
+    comparison: Kompari ŝlosilon/etikedon
+    overview: Sumigo
+    links: Ligiloj
+    data_from: Datumoj de
+    data_from_description: Lasta ĝisdatigo de taginfo-datumbazo
+    instance:
+        title: Pri ĉi tiu retejo taginfo
+        other: Vidu la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM-vikion</a> por pliaj retejoj.
+
+misc:
+    values_less_than_one_percent: neniuj valoroj kun pli ol 1%
+    empty_string: malplena signovico
+    unknown: nekonata
+    count: Nombro
+    image: Bildo
+    no_image: neniu bildo
+    all: Ĉiuj
+    object_type: Tipo
+    description: Priskribo
+    help: Helpo
+    length: Longo
+    icon: Piktogramo
+    line: Linio
+    area: Areo
+    language: Lingvo
+    search_for: Serĉi
+    objects_tooltip: Nombro da objektoj (kiel absoluta valoro kaj elcento da ĉiuj nodoj, linioj kaj rilatoj).
+    nodes_tooltip: Nombro da nodoj (kiel absoluta valoro kaj elcento da etikeditaj nodoj, sen senetikedaj nodoj).
+    ways_tooltip: Nombro da linioj (kiel absoluta valoro kaj elcento da ĉiuj linioj).
+    relations_tooltip: Nombro da rilatoj (kiel absoluta valoro kaj elcento da ĉiuj rilatoj).
+    values_tooltip: Nombro da malegalaj valoroj por tiu ĉi ŝlosilo.
+    users_tooltip: Nombro da uzantoj, kiuj lastatempe ŝanĝis objekton kun tiu ĉi ŝlosilo.
+    prevalent_values: Plej oftaj valoroj
+    prevalent_values_tooltip: Maksimume dek plej popularaj valoroj por tiu ĉi ŝlosilo (nur se pli ol 1% da etikedoj kun tiu ĉi ŝlosilo havas tiun ĉi valoron).
+    in_wiki_tooltip: Havas almenaŭ unu viki-paĝon.
+    status: Stato
+    approval_status: Aproba stato
+
+help:
+    search:
+        title: Serĉi
+        intro: Uzu serĉujon ĉe supra dekstra angulo por serĉi etikedajn ŝlosilojn kaj valorojn.
+        string: Vi povas serĉi etikedajn ŝlosilojn kaj valorojn
+        substring: Nur parto da ŝlosilo/valoro ankaŭ sufiĉas
+        complete_tags: Vi povas serĉi tutajn etikedojn
+        values_only: Vi ankaŭ povas serĉi nur etikedajn valorojn
+        suggestions: |
+            Pro oportuneco, popularaj ŝlosiloj kaj etikedoj estos proponataj dum tajpado.
+            Uzu viajn saget-klavojn por elekti kaj premu <span class="key">enen-klavon</span>.
+            Vi iros senpere al paĝo pri elektita ŝlosilo aŭ etikedo.
+    keyboard:
+        title: Fulmoklavoj
+        site_navigation: Retej-navigado
+        page_navigation: Paĝ-navigado
+        table_navigation: Tabel-navigado
+        keys:
+            home: Home
+            end: End
+            pageup: PgUp
+            pagedown: PgDn
+            esc: Esc
+            tab: TAB
+        home_page: Ĉefpaĝo
+        keys_page: Paĝo de ŝlosiloj
+        tags_page: Paĝo de etikedoj
+        relations_page: Paĝo de rilatoj
+        projects_page: Paĝo de projektoj
+        reports_page: Paĝo de raportoj
+        compare_page: Paĝo de komparo
+        first_page: Unu paĝo
+        prev_page: Antaŭa paĝo
+        next_page: Sekva paĝo
+        last_page: Fina paĝo
+        help_page: Tiu ĉi helpo
+        activate_search: Aktivigi serĉujon
+        activate_filter: Aktivigi filtrilujon
+        prev_entry: Antaŭa elemento
+        next_entry: Sekva elemento
+        enter_entry: Iri al elemento
+        switch_tab: Baskuli langeton
+        deactivate: Malaktivigi tajpujojn
+        up: Al supera paĝo
+        switch_input: Baskuli inter enig-kampoj
+
+pages:
+    not_found:
+        title: Ne trovita
+        intro: Bedaŭrinde ni ne povis trovi la serĉatan paĝon.
+    index:
+        popular_keys: Kelkaj popularaj ŝlosiloj
+        keys:
+            listkeys: Vidi ĉiujn ŝlosilojn…
+        tags:
+            listtags: Vidi plej popularajn etikedojn…
+        relations:
+            listrelations: Vidi ĉiujn rilat-tipojn…
+        reports:
+            listreports: Vidi ĉiujn raportojn…
+        about:
+            intro:
+                <p>OpenStreetMap uzas <b>etikedojn</b> en la formo <b>ŝlosilo=valoro</b> por signifigi geografiajn objektojn. Taginfo kolektas informojn pri tiuj ĉi etikedoj el kelkaj fontoj por helpi al vi kompreni kion ili signifas kaj kiel ili estas uzataj.</p>
+            more: Pli pri taginfo…
+        international:
+            see: Vidi aliajn taginfo-retejojn…
+    about:
+        about_taginfo:
+            title: Pri taginfo
+            text: |
+                <p>OpenStreetMap uzas <b>etikedojn</b> (ang. tags) por signifigi geografiajn objektojn. Ne ekzistas absoluta listo de tiuj ĉi etikedoj. Oni povas krei kaj uzi laŭbezone novajn etikedojn. Ĉiu povas proponi novan etikedon kaj aldoni ĝin al ekzistaj objektoj. Tio ĉi igas OpenStreetMap-n ege tajlorebla, tamen iam ete malfaciligas laboradon kun ĝi.</p>
+                <p>Kiam vi kontribuas al OSM aŭ uzas OSM-datumojn, ĉiam aperas demandoj kiel: Kiujn etikedojn oni uzas por objekto X? Kiujn etikedojn mi povas uzi por objekto Y por ke ĝi ĝuste aperu sur la mapo? Ĉu etikedo Z priskribita en la vikio estas vere uzata kaj kie?</p>
+                <p>Taginfo helpas al vi per montri statistikojn pri kiuj etikedoj troviĝas en la datumbazo, kiom da homoj ilin uzas, kie ili estas uzataj, ktp. Ĝi ankaŭ akiras informojn pri etikedojn el la vikio kaj el aliaj ejoj. Taginfo provas kolekti ĉiujn informojn pri etikedoj por helpi al vi kompreni kiel ili estas uzataj kaj kion ili signifas. Vidu la <a href="sources">liston de fontoj</a> uzataj de taginfo.</p>
+        about_site:
+            title: Pri tiu ĉi retejo
+        building_on_taginfo:
+            title: Bazi sur taginfo
+            pre: |
+                <p>Vi povas uzi datumojn el taginfo en viajn proprajn projektoj:</p>
+            api: |
+                <h3>API</h3>
+                <p>Taginfo-datumojn oni povas akiri per REST API. Vidu la <a href="taginfo/apidoc">dokumentaron pri API</a> por pliaj detaloj, iaj ĝeneralaj informoj troviĝas en la <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">OSM-vikio</a>. La serviloj gastigantaj la taginfo-API ne havas senliman komputpovon. Bonvolu prudente uzi la API. Se vi dubas, kontaktu la prizorgantojn de la retejo, kiujn vi uzas aŭ skribi al ni ĉe la dissendolisto.</p>
+            download: |
+                <h3>Elŝuto</h3>
+                <p>Se vi volas ludi per datumoj uzataj de taginfo, vi povas elŝuti ofte ĝisdatigatajn sqlite-datumbazajn dosierojn. Ĉia pritraktado estas farata de vi. Vidu la <a href="download">elŝutan paĝon</a> por liston de dosieroj. Rimarku, ke kelkaj dosieroj estas eĉ grandaj. Se vi volas ofte elŝuti ilin, bonvolu kontakti la prizorgantojn de retejo, kiun vi uzas skribi al ni ĉe la dissendolisto.</p>
+            license: |
+                <h3>Permesilo</h3>
+                <p>Ĉiuj datumoj disponeblaj per taginfo estas eldonataj laŭ la permesilo ODbl, <a class="extlink" href="//www.openstreetmap.org/copyright">sama kiel por OpenStreetMap-datumoj</a>.</p>
+        software:
+            title: Taginfo-programaro
+            text: |
+                <p>La programaro de taginfo estis kreita kaj estas prizorgata de <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>. La reteja aspekto estis fasonita de <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
+                <h3>Tradukoj</h3>
+                <p>Ni bezonas tradukistojn por la uzant-fasado de taginfo. Vidu la <a href="taginfo/translations">sumigon de tradukoj</a> por lingvoj, kiuj bezonas iom da laboro. Pliaj informoj kiel helpi troviĝas en la <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM-vikio</a>.</p>
+                <h3>Kodo</h3>
+                <p>Ĉiu programaro poviganta la retejojn de taginfo estas malfermkoda. Vi povas akiri ĝin de <a class="extlink" href="https://github.com/taginfo/taginfo/">GitHub</a>. Por sumigo, vidu la paĝon pri <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">arĥitekturo de taginfo</a> en la OSM-vikio.</p>
+                <h3>Lanĉi sian propran aperon</h3>
+                <p>Vi povas lanĉi vian propran <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">retejon taginfo</a>, ekzemple kun datumoj nur por via lando. Instrukcioj estas en la <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Running">OSM-vikio</a>.</p>
+                <h3>Erar-raportoj kaj novaj ebloj</h3>
+                <p>Erar-raportojn kaj petojn pri novaj funkcioj oni povas diskuti en la <a class="extlink" href="https://github.com/taginfo/taginfo/issues">GitHub-erarspurilo</a>. Aŭ vi povas skribi al ni ĉe la dissendolisto.</p>
+                <h3>Kontakto/dissendolisto</h3>
+                <p>Kontaktu nin ĉe la <a class="extlink" href="//lists.openstreetmap.org/listinfo/taginfo-dev">dissendolisto taginfo-dev</a>, se vi havas iujn demandojn aŭ volas helpi.</p>
+    sources:
+        intro: |
+            <p>Taginfo akiras datumojn pri OSM-etikedoj el kelkaj fontoj kaj kunigas ilin por facile ilin foliumi kaj analizi.</p>
+            <p>Rimarku, ke taginfo nur montras tiujn ĉi datumojn. Se vi volas ŝanĝi ilin, vi devas iri al ilia fonto.</p>
+        list:
+            title: Listo de fontoj
+            intro: Jen la listo de nune uzataj fontoj. Pliaj fontoj eble estos aldonitaj estontece.
+        description:
+            db: |
+                <p>Statistikoj pri ŝlosiloj, etikedoj kaj rilatoj estas generataj de <a class="extlink" href="https://planet.openstreetmap.org/">OSM-datumbazo</a> (aŭ ĝia kopio), same mapoj, kiuj vidigas geografian distribuon de nodoj kaj linioj.</p>
+            wiki: |
+                <p>La <a class="extlink" href="//wiki.openstreetmap.org/wiki/Eo:Main_Page">OSM-vikio</a> estas tralegata por ĉiuj paĝoj Key:*, Tag:* kaj Relation:* (en ĉiuj disponeblaj lingvoj). Priskriboj, bildoj kaj rilataj etikedoj estas eltirataj el ili.</p>
+            languages: |
+                <p>Taginfo akiras informojn pri diversaj lingvoj de la mondo, iliajn kodojn, nomojn, ktp. el listoj de <a class="extlink" href="https://www.iana.org/">IANA</a> kaj <a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
+            projects: |
+                <p>Projektoj, kiuj iel uzas OSM-etikedojn, kiel redaktiloj, mapoj, navigiloj, ktp. Vidu la <a href="projects">liston de projektoj</a>.</p>
+            chronology: |
+                <p>Nombro de ŝlosiloj/etikedoj laŭlonge de la <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">history planet</a>.</p>
+        updates:
+            title: Ĝisdatigoj
+            intro: La taginfo-datumoj estas regule ĝisdatigataj el fontoj.
+        data_until: Datumoj de
+        last_update_run: Lasta ĝisdatigo je
+        data_until_explanation: Ĉiuj redaktoj ĝis tiu ĉi dato troviĝos en la datumbazo, postaj ĝisdatigoj necrete.
+        to: ĝis
+    download:
+        intro: |
+            <p>Tie ĉi vi povas elŝuti la datumbazojn uzatajn de taginfo. Ĉiuj datumoj estas konservitaj en datumbazojn <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>. Datumbazaj dosieroj estas kompaktigitaj per <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
+            <p>Se vi ne volas elŝuti tiujn ĉi datumbazojn, tamen bezonas aŭtomatan aliron al datumoj, vi ankaŭ povas uzi la <a href="about">API</a>.</p>
+        file: Dosiero
+        packed: Kompaktigita
+        unpacked: Nekompaktigita
+        description: Priskribo
+        note: Kelkaj indeksoj ne troviĝas en la datumbazo elŝutebla tie ĉi. La 'kompaktiga' versio ne inkludas tiujn ĉi indeksojn, la 'nekompaktigita' versio inkludas indeksojn, kiujn vi probable bezonos krei post elŝuto.
+    reports:
+        intro: |
+            Raportoj vidigas etikedajn datumojn pluraspekte. Ili ofte kolektas datumojn kune el diversaj fontoj interese maniere. Iuj raportoj povas helpi al vi trovi difinajn erarojn.
+        list: Listo de ĉiuj raportoj
+        data_sources: Uzataj datum-fontoj
+    search:
+        title: Serĉ-rezultoj
+        you_were_searching_for: Vi serĉis
+        fulltext: Tuta teksto
+        no_keys: Neniuj ŝlosiloj trovitaj.
+        no_values: Neniuj valoroj trovitaj.
+        no_tags: Neniuj etikedoj trovitaj.
+        no_match: Neniuj kongruoj.
+    compare:
+        nothing_to_compare: Estas neniuj ŝlosiloj/etikedoj por kompari. Iru al iu paĝo pri ŝlosilo aŭ etikedo kaj aldoni ilin.
+    keys:
+        intro: |
+                La jena tabelo montras ĉiujn etikedajn ŝlosilojn, kiuj ekzistas en la datumbazo aŭ en aliaj fontoj.
+    tags:
+        intro: |
+                La jena tabelo montras la plej ofte uzatajn etikedojn en la datumbazo.
+    relations:
+        name: Rilat-tipoj
+        intro: Informoj pri diversaj tipoj de rilatoj (indikataj per la etikedo <a href="keys/type?filter=relations">type</a>).
+        relations_of_type_tooltip: Nombro da rilatoj de tiu ĉi tipo (kaj elcento da ĉiuj rilatoj).
+        prevalent_roles: Popularaj roloj
+        prevalent_roles_tooltip: Popularaj roloj por tiu ĉi tipo de rilato.
+        no_information: Neniuj informoj
+        roles_less_than_one_percent: neniuj roloj kun pli ol 1%
+        empty_role: malplena rolo
+    projects:
+        intro: |
+                Tiu ĉi tabelo montras ĉiujn projektoj konatajn al taginfo, kiuj uzas OSM-etikedojn iamaniere.<br/>Por pliaj informoj pri tiu ĉi eblo, vidu la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">vikion</a>.
+    key:
+        description_from_wiki: Priskribo de tiu ĉi ŝlosilo de la vikio (se disponebla en elektita lingvo, alie en la angla).
+        no_description_in_wiki: Neniu priskribo en la angla pri tiu ĉi ŝlosilo en la vikio. (Vidu ankaŭ la langeton 'Vikio'.)
+        filter:
+            label: |
+                 Filtrilo:
+            none: Neniu filtrilo
+            nodes: Nur nodoj
+            ways: Nur linioj
+            relations: Nur rilatoj
+        button_disabled: Butono malaktiva, ĉar estas tro multe da objektoj kun tiu ĉi ŝlosilo.
+        number_objects: Nombro da objektoj
+        number_values: Nombro da valoroj
+        values_used: Valoroj uzataj por tiu ĉi ŝlosilo
+        tag_description_from_wiki: Priskribo de la etikedo de la vikio (se disponebla en elektita lingvo, alie en la angla).
+        overview:
+            objects_last_edited_by: Objektoj kun tiu ĉi ŝlosilo estis lastatempe redaktitaj de %1 diversaj uzantoj.
+            no_endorsement: (Tio ĉi ne indikas, ke tiuj ĉi ĉiuj uzantoj apogas tiun ĉi ŝlosilon.)
+            distribution_of_values: Distribuo de valoroj
+        other_keys_used:
+            title: Aliaj ŝlosiloj uzataj kune kun tiu ĉi ŝlosilo
+            other: Aliaj ŝlosiloj
+            to_count_tooltip: Nombro da objektoj kun tiu ĉi ŝlosilo, kiuj ankaŭ havas alian ŝlosilon.
+            other_key_tooltip: Ŝlosilo uzata kune kun tiu ĉi ŝlosilo.
+            from_count_tooltip: Nombro da objektoj kun alia ŝlosilo, kiuj ankaŭ havas tiun ĉi ŝlosilon.
+        geographic_distribution:
+            title: Geografia distribuo de tiu ĉi ŝlosilo
+            all: Ĉi tio montras la distribuon de nodoj kaj linioj kun ĉi tiu etikedo, rilatoj ne estas montritaj.
+            nodes: Ĉi tio montras la distribuon de nodoj kun ĉi tiu etikedo.
+            ways: Ĉi tio montras la distribuon de linioj kun ĉi tiu etikedo.
+            relations: Rilatoj ne atribuiĝas al geografiaj lokoj, do ne povas montri mapon.
+        wiki_pages:
+            title: Viki-paĝoj pri tiu ĉi ŝlosilo
+            none_found: Neniu disponebla viki-paĝo pri tiu ĉi ŝlosilo.
+            create: Krei viki-paĝon pri tiu ĉi ŝlosilo
+            wiki_page: Viki-paĝo
+            implied_tags: Proponataj etikedoj
+            combined_tags: Kunigitaj etikedoj
+            linked_tags: Ligitaj etikedoj
+        projects:
+            title: Projektoj uzantaj tiun ĉi ŝlosilon
+            description: Kiel tiu ĉi ŝlosilo estas uzata en la projekto
+        similar:
+            tab: Similaj
+            title: Similaj ŝlosiloj
+            other: Similaj ŝlosiloj
+            count_all_tooltip: Nombro da objektoj kun similaj ŝlosiloj
+            similarity: Simileco
+            similarity_tooltip: Ju malplia des pli simila
+    tag:
+        description_from_wiki: Priskribo de tiu ĉi etikedo de la vikio (se disponebla en elektita lingvo, alie en la angla).
+        no_description_in_wiki: Neniu priskribo en la angla pri tiu ĉi etikedo en la vikio. (Vidu ankaŭ la langeton 'Vikio'.)
+        button_disabled: Butono malaktiva, ĉar estas tro multe da objektoj kun tiu ĉi etikedo.
+        number_objects: Nombro da objektoj
+        overview:
+            see_also: Vidu ankaŭ la paĝon pri rilat-tipo
+        other_tags_used:
+            title: Aliaj etikedoj uzataj kun kun tiu ĉi etikedo
+            other: Aliaj etikedoj
+            to_count_tooltip: Nombro da objektoj kun tiu ĉi etikedo, kiuj ankaŭ havas la alian etikedon/ŝlosilon.
+            other_key_tooltip: Etikedoj/ŝlosiloj uzataj kune kune tiu ĉi etikedo.
+            from_count_tooltip: Nombro da objektoj kun alia etikedo/ŝlosilo, kiuj ankaŭ havas tiun ĉi ŝlosilon.
+        combinations:
+            title: Kombinaĵoj
+            description: La jena tabelo montras la plej oftajn kombinaĵojn de la plej uzataj etikedoj.
+        chronology:
+            no_chronology: Pardonu. La kronologio povas esti generita nur por la plej oftaj etikedoj.
+        geographic_distribution:
+            title: Geografia distribuo de tiu ĉi etikedo
+            all: Ĉi tio montras la distribuon de nodoj kaj linioj kun ĉi tiu etikedo, rilatoj ne estas montritaj.
+            nodes: Ĉi tio montras la distribuon de nodoj kun ĉi tiu etikedo.
+            ways: Ĉi tio montras la distribuon de linioj kun ĉi tiu etikedo.
+            relations: Rilatoj ne atribuiĝas al geografiaj lokoj, do ne povas montri mapon.
+            no_map: Bedaŭrinde la mapo estas generata nur por la plej oftaj etikedoj. Provu uzi overpass-ligilon.
+        wiki_pages:
+            title: Viki-paĝoj pri tiu ĉi etikedo
+            none_found: Neniu disponebla viki-paĝo pri tiu ĉi etikedo.
+            create: Krei viki-paĝon pri tiu ĉi etikedo
+            suggest_key_wiki_page: Eble vi trovos kelkajn informojn sur la viki-paĝo pri la ŝlosilo '%1'.
+            wiki_page: Viki-paĝo
+            implied_tags: Proponataj etikedoj
+            combined_tags: Kunigitaj etikedoj
+            linked_tags: Ligitaj etikedoj
+        projects:
+            title: Projektoj uzantaj tiun ĉi etikedon
+            description: Kiel tiu ĉi etikedo estas uzata en la projekto
+    relation:
+        name: Rilat-tipo
+        description_from_wiki: Priskribo de tiu ĉi rilat-tipo de la vikio (se disponebla en elektita lingvo, alie en la angla).
+        no_description_in_wiki: Neniu priskribo en la angla pri tiu ĉi rilat-tipo en la vikio. (Vidu ankaŭ la langeton 'Vikio'.)
+        button_disabled: Butono malaktiva, ĉar estas tro multe da objektoj kun tiu ĉi etikedo.
+        overview:
+            tab: Sumigo
+            title: Sumigo
+            member_type: Tipo de ano
+            member_count: Nombro da anoj
+            see_also: Vidu ankaŭ la paĝon pri etikedo
+        roles:
+            tab: Roloj
+            title: Roloj de anoj
+            objects_tooltip: Anoj de rilatoj kun tiu ĉi rolo (k)Relation members with this role (kaj elcento da ĉiuj anoj) por tiu ĉi rilat-tipo.
+            nodes_tooltip: Anoj de rilatoj de noda tipo kun tiu ĉi rolo (kaj elcento da ĉiuj anoj de noda tipo) por tiu ĉi rilat-tipo.
+            ways_tooltip: Anoj de rilatoj de linia tipo kun tiu ĉi rolo (kaj elcento da ĉiuj anoj de linia tipo) por tiu ĉi rilat-tipo.
+            relations_tooltip: Anoj de rilatoj de rilat-tipo kun tiu ĉi rolo (kaj dlcento da ĉiuj anoj de rilat-tipo) por tiu ĉi rilat-tipo.
+            no_roles_info: Estas neniuj informoj pri tiu ĉi tipo de rilato (probable, ĉar estas tro malmulte da tiuj ĉi rilatoj).
+        graph:
+            tab: Diagramo de roloj
+            title: Diagramo de roloj
+        wiki_pages:
+            title: Viki-paĝoj pri tiu ĉi rilat-tipo
+            none_found: Neniu disponebla viki-paĝo pri tiu ĉi rilat-tipo.
+            create: Krei viki-paĝon pri tiu ĉi rilat-tipo
+            wiki_page: Viki-paĝo
+        projects:
+            title: Projektoj uzantaj tiun ĉi rilat-tipon
+            description: Kiel tiu ĉi rilat-tipo estas uzata en la projekto
+    project:
+        overview:
+            project_name: Projekta nomo
+            project_url: Projekta ligilo
+            description: Priskribo
+            documentation_url: Dokumentaro
+            last_update: Lasta ĝisdatigo
+            json_url: Projekta JSON-dosiero
+            info: Tiuj ĉi datumoj estas liverataj de la projekto al tagino per la 'projekta JSON-dosiero' ligita supre. Vidu la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">vikion</a> por priskbo de formo.
+        tags:
+            title: Etikedoj uzataj de tiu ĉi projekto
+            intro: Tiuj ĉi datumoj estas liverataj de la projekto kaj povas ne esti kompletaj. Bonvolu vidi la projektan dokumentaron por pliaj detaloj.
+            description: Kiel tiu ĉi etikedo/ŝlosilo estas uzata en la projekto
+            count_all_tooltip: Nombro da objektoj en la datumbazo kun tiu ĉi etikedo/ŝlosilo
+            objects_tooltip: Objekt-tipoj uzataj de la projekto
+
+flexigrid:
+    pagetext: Paĝo
+    pagestat: Montranta {from} ĝis {to} el {total} elementoj
+    outof: el
+    findtext: Serĉi
+    procmsg: Prilaborado, bonvolu atendi…
+    nomsg: Neniuj elementoj
+    errormsg: Konektada eraro
+
+comparison:
+    list: Kompara listo
+    items: elementoj
+    add_key: Allistigi tiun ĉi ŝlosilon
+    add_tag: Allistigi tiun ĉi etikedon
+    clear: Forviŝi komparan liston
+    compare: Kompari etikedojn/ŝlosilojn
+
+sources:
+    master:
+        name: Ĉefa
+        description: Kolektas statistikojn kaj diversajn datumojn bezonatajn por la uzant-fasado de taginfo.
+    history:
+        name: Historio
+        description: Kolektas statistikojn tra la tempo.
+    db:
+        name: Datumbazo
+        description: Statistikoj pri ĉiu ŝlosilo kaj etikedo el la ĉefa OSM-datumbazo.
+    wiki:
+        name: Vikio
+        description: Datumoj el paĝoj pri etikedoj kaj ŝlosiloj el la OSM-vikio.
+    languages:
+        name: Lingvoj
+        description: Nomoj de lingvoj, kodoj, ktp. el listoj de IANA kaj Unicode.
+    projects:
+        name: Projektoj
+        description: Eksteraj projektoj kaj OSM-ŝlosiloj/etikedoj uzataj de ili.
+    chronology:
+        name: Kronologio
+        description: Nombro de ŝlosiloj/etikedoj laŭlonge de la history planet.
+
+reports:
+    characters_in_keys:
+        name: Signoj en ŝlosiloj
+        intro: |
+            Ĉiu ĝusta Unikoda signo povas aperi en OSM-ŝlosilo, sed kutime nur malgrandaj latinaj literoj (a-z) kaj substreko (_) estas uzataj. Dupunkto (:) estas ofte uzata kiel disiga signo. Tiu ĉi raporto laŭspecigas ĉiujn ŝlosilojn laŭ uzitaj signoj.
+        statistics:
+            tab: Statistikoj
+            title: Statistika sumigo
+            fraction: Elcento
+            characters: Signoj en ŝlosilo
+            characters_in_keys:
+                plain: Nur malgrandaj latinaj literoj (<span class="char">a</span> ĝis <span class="char">z</span>) kaj substreko (<span class="char">_</span>), unua kaj fina signoj estas literoj.
+                colon: Kiel A, sed kun almenaŭ unu dupunkto (<span class="char">:</span>) ene.
+                letters: Kiel B, sed kun grandaj latinaj literoj aŭ literoj de aliaj alfabetoj.
+                space: Almenaŭ unu blankspaca signo (spaco, tabo, nova linio, ĉaretrevenigo aŭ de aliaj alfabetoj).
+                problem: Enhavas probable problemigaj signoj <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
+                rest: Ĉiuj aliaj.
+                total: Tute
+        plain:
+            tab: Simplaj
+            title: Simplaj ŝlosiloj
+            intro: |
+                <p>Ŝlosiloj enhavantaj nur malgrandajn latinajn literojn (<span class="char">a</span> ĝis <span class="char">z</span>) kaj substrekon (<span class="char">_</span>). Unua kaj fina signo devas esti literoj. Plejparto da simplaj ŝlosiloj devus igi al tiu ĉi kategorio.</p>
+        colon:
+            tab: Dupunkto
+            title: Ŝlosiloj kun duponkto
+            intro: |
+                <p>Ŝlosiloj enhavantaj almenaŭ unu dupunkton (<span class="char">:</span>) ene, krome al literoj (<span class="char">a</span> ĝis <span class="char">z</span>) kaj substrekoj (<span class="char">_</span>). Dupunkto estas ofte uzata kiel hierarĥiga signo.</p>
+        letters:
+            tab: Literoj
+            title: Ŝlosiloj kun grandaj literoj aŭ literoj de aliaj alfabetoj
+            intro: |
+                <p>Malgrandaj latinaj literoj estas kutime konsilindaj por ŝlosiloj, tamen iam grandaj literoj estas uzataj (ekz. por popularaj mallongigoj) aŭ literoj de aliaj alfabetoj (ekz. por ŝlosiloj rilataj nur por areoj kie tiu alfabeto estas uzata).</p>
+        space:
+            tab: Blankspacoj
+            title: Ŝlosiloj kun blankspacoj
+            intro: |
+                <p>Ŝlosiloj enhavantaj blankspacajn signojn kiel spacon, tabon, novan linion, ĉaretrevenigon aŭ blankspacajn signojn de aliaj alfabetoj. Blankspacoj en ŝlosiloj povas konfuzi, precipe ĉe komenco aŭ fino de ŝlosilo, ĉar ili estas nevideblaj. Ĝenerale oni forigu blankspacojn aŭ uzu substrekon (<span class="char">_</span>).</p>
+        problem:
+            tab: Problemigaj
+            title: Ŝlosiloj kun probable problemigaj signoj
+            intro: |
+                <p>Ŝlosiloj enhavantajn probable problemigajn signojn: <span
+                class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> aŭ stirsignojn. Tiuj ĉi signoj povas kaŭzi erarojn, ĉar ili estas uzataj por citi tekstoĉenojn en diversaj programlingvoj aŭ signifas specialan en XML, HTML, ligiloj, ktp. La egalsigno estas ofte uzata kiel disiga signo inter ŝlosilo kaj valoro. Ŝlosiloj de la jena listo ne devas nepre esti eraraj. Tamen en multaj okazoj ili rezultigas iajn erarojn kaj korektendas.</p>
+        rest:
+            tab: Aliaj
+            title: Ĉiuj aliaj ŝlosiloj
+            intro: |
+                <p>Ŝlosiloj, kiuj ne konvenas al aliaj kategorioj.</p>
+    database_statistics:
+        name: Statistikoj pri datumbazo
+        objects_in_db: Nombro da objektoj en la datumbazo
+        tags_in_db: Nombro da etikedoj en la datumbazo
+        distinct_keys: Nombro da malegalaj ŝlosiloj
+        distinct_tags: Nombro da etikedoj
+        nodes_in_db: Nombro da nodoj en la datumbazo
+        nodes_with_tags_in_db: Nombro da nodoj kun almenaŭ unu etikedo
+        nodes_with_tags_in_db_percent: Elcento da nodoj kun almenaŭ unu etikedo
+        tags_on_nodes: Nombro da etikedoj en nodoj
+        avg_tags_per_tagged_node: Mezume po kiom da etikedoj en etikedita nodo
+        ways_in_db: Nombro da linioj en la datumbazo
+        closed_ways_in_db: Nombro da fermitaj linioj
+        tags_on_ways: Nombro da etikedoj en linioj
+        avg_tags_per_way: Mezume po kiom da etikedoj en linio
+        relations_in_db: Nombro da rilatoj en la datumbazo
+        tags_on_relations: Nombro da etikedoj en rilatoj
+        avg_tags_per_relation: Mezume po kiom da etikedoj en rilato
+    frequently_used_keys_without_wiki_page:
+        name: Ofte uzataj ŝlosiloj sen viki-paĝo
+        intro: |
+            <p>La jena tabelo ,pntras ŝlosilojn, kiuj aperas pli ol 10&thinsp;000 foje en la OSM-datumbazo, sed neniu viki-paĝo ilin priskribas. Se vi scias ion pri tiuj ĉi ŝlosiloj, bonvolu krei viki-paĝon per klaki la ligilon ĉe la plej maldekstra kolumno kaj priskribu la ŝlosilon. Iam estas sence krei aldirekton al alia viki-paĝo. Por fari tion, simple enmetu linion kun <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>paĝa nomo</i>]]</tt> ĉe la viki-paĝo.</p>
+        also_show_keys: Ankaŭ montri ŝlosilojn, kiuj ne havas viki-paĝon en la angla, tamen havas en iu alia lingvo.
+        table:
+            create_wiki_page: Krei viki-paĝon…
+    key_lengths:
+        name: Longo de ŝlosiloj
+        intro: |
+            Etikedaj ŝlosiloj povas havi 0 ĝis 255 (Unikodajn) signojn. Tre mallongaj kaj tre longaj estas ofte (sed ne ĉiam) eraraj.
+        table:
+            number_of_objects: Nombro da objektoj
+        histogram:
+            name: Histogramo
+            intro: La jena histogramo montras kiom da ŝlosiloj havas specifan longon.
+            key_length: Ŝlosila longo
+            number_of_keys: Nombro da ŝlosiloj
+    language_comparison_table_for_keys_in_the_wiki:
+        name: Lingva kompar-tablo por ŝlosiloj en la vikio
+        icons:
+            template: Viki-paĝo disponebla kaj enhavas norman ŝablonon.
+            error: Viki-paĝo disponebla kaj enhavas norman ŝablonon, sed kiu ne pritraktebla.
+            page: Viki-paĝo disponebla, sen ne enhavas norman ŝablonon.
+            redirect: Paĝo aldirektas.
+        intro: |
+            La jena tabelo montras ĉiujn etikedajn ŝlosilojn pri kiuj estas disponeblaj viki-paĝoj kaj en kiuj lingvoj ili estas.
+    languages:
+        name: Lingvoj
+        intro: |
+            OpenStreetMap estas internacia projekto. Etikedo kaj iliaj priskriboj povas esti en iu ajn lingvo. La jena tabelo vidigas lingvojn konatajn al taginfo kaj nombro da viki-paĝoj priskribantaj ŝlosilojn kaj etikedojn.
+        code: Kodo
+        native_name: Propra nomo
+        english_name: Angla nomo
+        wiki_key_pages: Ŝlosilaj viki-paĝoj
+        wiki_tag_pages: Etikedaj viki-paĝoj
+    wiki_pages_about_non_existing_keys:
+        name: Viki-paĝoj pri neekzistantaj ŝlosiloj
+        intro: |
+            La jena tabelo montras ŝlosilojn pri kiuj viki-paĝo ekzistas, tamen ili ne ekzistas en la datumbazo. Tio ĉi ne devas esti eraro (eble iu skribis dokumentaron en la vikio por prepari uzi ŝlosilon, aŭ viki-paĝo priskribas nune malkonsilindan ŝlosilon), sed povas ankaŭ esti misskribo aŭ alia eraro.
+        wiki_pages: Viki-paĝoj
+    name_tags:
+        name: Variaĵoj de etikedoj 'name'
+        intro: |
+            <p>La jena raporto montras informojn pri nomoj de objektoj en OSM uzantaj la etikedon <tt>name</tt> kaj ĝiaj variaĵoj.</p>
+        overview:
+            tab: Sumigo
+            title: Sumigo
+        bcp47:
+            tab: BCP47-subetikedoj
+            title: BCP47-subetikedoj
+            filter:
+                label: Montri nur subetikedojn de speco
+                all: Ĉiuj
+                language: Lingvo
+                script: Alfabeto
+                region: Regiono
+                variant: Variaĵo
+            intro: |
+                <p><a href="https://www.ietf.org/">IETF</a> difinas <i>lingvajn etikedojn</i> en iliaj normaj<a href="https://tools.ietf.org/html/bcp47">etikedoj por identigi lingvojn (BCP47)</a>. Lingvaj etikedoj konsistas el almenaŭ unu <i>subetikedo</i> priskribanta lingvon, alfabeton, variaĵojn, ktp. La jena listo montras nune registritajn subetikedojn. Por pliaj informoj, vidu ankaŭ la <a href="https://en.wikipedia.org/wiki/IETF_language_tag">Vikipedian artikolon pri IETF lingvaj etikedoj</a> kaj la retejon <a href="http://www.langtag.net/">langtag.net</a>.</p>
+                <p>Rimarku, ke datumoj montrataj en tiu ĉi tabelo <b>ne</b> devenas el OpenStreetMap, ĝi nur montras konstru-pecojn, kiujn oni povas uzi por priskribi lingvojn senrilate, ĉu ili estas nune uzataj en OSM.
+                </p>
+    similar_keys:
+        name: Similaj ŝlosiloj
+        intro: |
+            La jena raporto montras tre ofte uzatajn ŝlosilojn kaj similajn ŝlosilojn uzatajn tre malofte. Tio ĉi montras multajn misskribojn en oftaj ŝlosiloj, tamen ne estas perfekta. Estu singarda dum riparado de datumoj! NE fuŝredaktu aŭtomate tiujn ŝlosilojn per simple serĉi-kaj-anstataŭigi. Rigardu al ĉiun ekzemplon aparte kaj ankaŭ riparu aliajn videblajn erarojn.
+        key_common: Ofte uzataj ŝlosiloj
+        key_rare: Malofte uzataj ŝlosiloj
+        count_common: Nombro
+        count_rare: Nombro
+        similarity: Simileco
+    historic_development:
+        name: Historia evoluo
+        intro: |
+            Eveluo de iaj gravaj statistikoj tra tempo. Tiuj ĉi datumoj estis kolektitaj de taginfo, interrompoj rezultas el kiam taginfo malfunkciis dum tago ial.
+        keys:
+            title: Malegalaj ŝlosiloj
+        tags:
+            title: Malegalaj etikedoj
+        relation_types:
+            title: Malegalaj rilat-tipoj
+    wiki_images:
+        name: Viki-bildoj
+        intro: |
+            Bildoj uzataj en la vikio por reprezenti ŝlosilojn en diversaj lingvoj. Iam iuj bildoj estas pli bonaj ol aliaj. Tamen iam estas sence havi diversajn bildojn pro diversaj kulturaj fonoj, ktp.
+    wiki_problems:
+        name: Viki-analiz-eraroj
+        intro: |
+            Taginfo legas ĉiujn viki-paĝojn uzatajn por priskribi ŝlosilojn, etikedojn kaj rilatojn por trovi informojn pri etikedoj. Tiu ĉi raporto montras liston de eraroj okazintaj dum legi tiujn paĝojn. Ili ne estas nepre eraroj en la vikio, eble io estas alimaniere aranĝita ol taginfo-aj normoj. Aŭ la paĝo aŭ taginfo bezonas esti riparita.
+        location: Loko
+        reason: Kialo
+        wiki_page: Viki-paĝo
+        lang: Lingvo
+        info: Pliaj informoj
+

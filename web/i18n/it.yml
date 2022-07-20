@@ -41,6 +41,7 @@ taginfo:
     project: Progetto
     projects: Progetti
     test: Test
+    chronology: Cronologia
     map: Mappa
     maps: Mappe
     relations: Relazioni
@@ -48,6 +49,7 @@ taginfo:
     key_combinations: Combinazioni delle Chiavi
     comparison: Confronto Chiavi/Valori
     overview: Panoramica
+    links: Collegamenti
     data_from: Fonte Dati
     data_from_description: Ultimo aggiornamento al database taginfo
     instance:
@@ -79,7 +81,9 @@ misc:
     users_tooltip: Numero di singoli utenti che hanno usato recentemente questa chiave.
     prevalent_values: Valori prevalenti
     prevalent_values_tooltip: Fino a 10 dei valori più usati per questa chiave (solamente se almeno l'1% delle chiavi hanno questo valore).
-    in_wiki_tooltip: La chiave ha almeno una pagina pagina nel wiki.
+    in_wiki_tooltip: La chiave ha almeno una pagina nel wiki.
+    status: Stato
+    approval_status: Stato di approvazione
 
 help:
     search:
@@ -110,6 +114,7 @@ help:
         keys_page: Pagina delle Chiavi
         tags_page: Pagina dei Valori
         relations_page: Pagina delle Relazioni
+        reports_page: Pagina dei Report
         projects_page: Pagina dei Progetti
         compare_page: Pagina dei Confronti
         first_page: Prima pagina
@@ -173,7 +178,7 @@ pages:
                 informazioni sui tag anche dal sito wiki e da altre fonti.
                 Taginfo cerca di mettere assieme tutte le informazioni sui tag
                 per aiutarti a comprendere come sono usati e cosa significano.
-                Vedi la <a href="/sources">lista delle fonti</a> che taginfo
+                Vedi la <a href="sources">lista delle fonti</a> che taginfo
                 utilizza.</p>
         about_site:
             title: Informazioni su questo sito
@@ -186,7 +191,7 @@ pages:
                 <h3>API</h3>
                 <p>Puoi accedere ai dati di Taginfo
                 tramite una REST API. Vedi la <a
-                href="/taginfo/apidoc">documentazione sull'API</a> per maggiori
+                href="taginfo/apidoc">documentazione sull'API</a> per maggiori
                 dettagli, alcune informazioni generali sono presenti <a
                 class="extlink"
                 href="//wiki.openstreetmap.org/wiki/Taginfo/API">sul sito wiki
@@ -201,7 +206,7 @@ pages:
                 ai dati usati da taginfo, puoi scaricare i file del database
                 Sqlite che vengono regolarmente aggiornati. Tutto il lavoro di
                 preprocessing è già stato fatto per te. Vedi la <a
-                href="/download">pagina dei download</a> per una lista dei
+                href="download">pagina dei download</a> per una lista dei
                 file. Si noti che alcuni di questi possono essere
                 particolarmente grandi. Se vuoi scaricarli frequentemente,
                 contatta un responsabile del sito che stai usando o discuti la
@@ -219,10 +224,10 @@ pages:
                 class="extlink"
                 href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
                 Il design del sito web è stato creato da <a class="extlink"
-                href="http://www.ctd-studio.co.uk/">Christian Topf</a>.</p>
+                href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Traduzioni</h3> <p>Abbiamo bisogno di traduttori per
                 tradurre l'interfaccia utente di taginfo. Vedi la pagina <a
-                href="/taginfo/translations">introduttiva sulle traduzioni</a>
+                href="taginfo/translations">introduttiva sulle traduzioni</a>
                 per informazioni su quali lingue hanno bisogno di lavoro di
                 traduzione. Maggiori informazioni su come aiutare sono
                 disponibili nella <a class="extlink"
@@ -277,12 +282,14 @@ pages:
             languages: |
                 <p>Taginfo prende le informazioni sulle varie lingue del mondo,
                 i loro codici, nomi, etc. da diversi registri <a
-                class="extlink" href="http://www.iana.org/">IANA</a> and <a
-                class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+                class="extlink" href="https://www.iana.org/">IANA</a> and <a
+                class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Progetti che usano i tag di OSM in qualche modo, come
                 strumenti di modifica, mappe, navigatori, ecc. Vedi <a
-                href="/projects">la lista dei progetti</a>.</p>
+                href="projects">la lista dei progetti</a>.</p>
+            chronology: |
+                <p>Numero di chiavi/tag nel tempo da <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">file di planet storico</a>.</p>
         updates:
             title: Aggiornamenti
             intro: I dati di taginfo vengono aggiornati regolarmente dalle loro fonti.
@@ -294,17 +301,17 @@ pages:
         intro: |
             <p>Qui potete scaricare il database usato da Taginfo. Tutti i dati
             sono memorizzati in un database <a class="extlink"
-            href="http://www.sqlite.org/">Sqlite</a>. I file del database sono
+            href="https://www.sqlite.org/">Sqlite</a>. I file del database sono
             poi compressi con <a class="extlink"
             href="http://www.bzip.org/">bzip2</a>.</p> <p>Se non volete
             scaricare questi database, ma avete bisogno di avere un accesso
             automatizzato ai dati, potete anche usare le <a
-            href="/about">API</a>.</p>
+            href="about">API</a>.</p>
         file: File
         packed: Compressi
         unpacked: Decompressi
         description: Descrizione
-        note: Alcuni indici non sono presenti nel database disponibile qui per il download. La dimensione 'compressa' è la dimensione senza questi indici, la dimensione 'decompressa' include gli indici che probabilmente vorrai creare dopo ildownload.
+        note: Alcuni indici non sono presenti nel database disponibile qui per il download. La dimensione 'compressa' è la dimensione senza questi indici, la dimensione 'decompressa' include gli indici che probabilmente vorrai creare dopo il download.
     reports:
         intro: |
             I Reports mostrano i dati da prospettive differenti. Spesso
@@ -332,7 +339,7 @@ pages:
             Questa tabella mostra i tag più comuni presenti nel database.
     relations:
         name: Tipi di relazioni
-        intro: Informazioni sui diversi tipi di relazioni (indicati dal tag <a href="/keys/type?filter=relations">type</a>).
+        intro: Informazioni sui diversi tipi di relazioni (indicati dal tag <a href="keys/type?filter=relations">type</a>).
         relations_of_type_tooltip: Numero delle relazioni di questo tipo (e percentuale rispetto al totale delle relazioni).
         prevalent_roles: Ruoli maggiormente presenti
         prevalent_roles_tooltip: Ruoli maggiormente presenti per questo tipo di relazioni.
@@ -373,6 +380,9 @@ pages:
             from_count_tooltip: Numero degli oggetti con l'altra chiave che hanno anche questa chiave.
         geographic_distribution:
             title: Distribuzione geografica di questa chiave
+            all: Mostra la distribuzione dei nodi e dei percorsi con questa chiave (le relazioni non compaiono).
+            nodes: Mostra la distribuzione dei nodi con questa chiave.
+            ways: Mostra la distribuzione dei percorsi con questa chiave.
             relations: Le relazioni non hanno una localizzazione geografica, pertanto una mappa non può essere mostrata.
         wiki_pages:
             title: Pagine wiki su questa chiave
@@ -404,14 +414,19 @@ pages:
             other: Altri tag
             to_count_tooltip: Numero degli oggetti con questo tag che hanno anche l'altro tag o chiave.
             other_key_tooltip: Tags o chiave utilizzata assieme a questo tag.
-            from_count_tooltip: Numero di oggetti con l'altro tag o chiave cha hanno anche questo tag.
+            from_count_tooltip: Numero di oggetti con l'altro tag o chiave che hanno anche questo tag.
         combinations:
             title: Combinazioni
             description: Questa tabella mostra solo le combinazioni più comuni dei tag più comuni.
+        chronology:
+            no_chronology: Spiacenti. La cronologia può essere generata solo per i tag più frequenti.
         geographic_distribution:
             title: Distribuzione geografica di questo tag
+            all: Mostra la distribuzione dei nodi e dei percorsi con questo tag (le relazioni non compaiono).
+            nodes: Mostra la distribuzione dei nodi con questo tag.
+            ways: Mostra la distribuzione dei percorsi con questo tag.
             relations: Le relazioni non hanno una localizzazione geografica, pertanto una mappa non può essere mostrata.
-            no_map: Spiacenti. La mappa può essere creata solo per i tag più frquenti. Potete provare ad utilizzare il collegamento a overpass turbo.
+            no_map: Spiacenti. La mappa può essere creata solo per i tag più frequenti. Potete provare ad utilizzare il collegamento a overpass turbo.
         wiki_pages:
             title: Pagine wiki su questo tag
             none_found: Non ci sono pagine wiki disponibili per questo tag.
@@ -496,7 +511,7 @@ sources:
         description: Statistiche aggregate rispetto al tempo.
     db:
         name: Database
-        description: Le statistiche riguardanti ogni chiave e tag dal database principale di OSM (file di planet).
+        description: Le statistiche riguardanti ogni chiave e tag dal database principale di OSM.
     wiki:
         name: Wiki
         description: Dati dalle pagine della wiki OSM dei tag e delle chiavi.
@@ -506,6 +521,9 @@ sources:
     projects:
         name: Progetti
         description: Progetti esterni e le chiavi/tag da loro utilizzati.
+    chronology:
+        name: Cronologia
+        description: Numero di chiavi/tag nel tempo da file planet storico.
 
 reports:
     characters_in_keys:
@@ -695,11 +713,11 @@ reports:
                 region: Regione
                 variant: Variante
             intro: |
-                <p>Lo <a href="http://www.ietf.org/">IETF</a> definisce i
+                <p>Lo <a href="https://www.ietf.org/">IETF</a> definisce i
                 <i>tag delle lingue</i> in un suo standard <a
-                href="http://tools.ietf.org/html/bcp47">Tags for Identifying
+                href="https://tools.ietf.org/html/bcp47">Tags for Identifying
                 Languages (BCP47)</a>. I tag delle lingue consistono in uno o
-                più <i>sotto-tag</i> cje descrivono le lingua, gli script, le
+                più <i>sotto-tag</i> che descrivono le lingua, gli script, le
                 varianti, ecc. La lista seguente mostrai sotto-tag attualmente
                 registrati che sono rilevanti per OSM. Per maggiori
                 informazioni vedi anche la <a
@@ -714,11 +732,11 @@ reports:
     similar_keys:
         name: Chiavi simili
         intro: |
-            Questo rappoeto mostra le chiavi utilizzate frequentemente e le
+            Questo rapporto mostra le chiavi utilizzate frequentemente e le
             chiavi simili utilizzate molto raramente. Ciò dovrebbe evidenziare
             molti degli errori di scrittura delle chiavi più comuni, ma non è
             perfetto. Prestate attenzione quando correggete i dati! NON
-            modificate semplicemnte in modo meccanico queste chiavi con un
+            modificate semplicemente in modo meccanico queste chiavi con un
             cerca e sostituisci. Guardate e controllate ogni caso in modo
             individuale e risolvete anche gli altri problemi che trovate.
         key_common: Chiavi usate frequentemente
@@ -742,7 +760,7 @@ reports:
     wiki_images:
         name: Immagini wiki
         intro: |
-            Le imamgini utilizzati nel sito wiki come simbolo per le chiavi in
+            Le immagini utilizzate nel sito wiki come simbolo per le chiavi in
             diverse lingue. A volte c'è un'immagine in una delle varie lingue
             che è la migliore. Tuttavia in alcuni casi ha senso avere diverse
             immagini a causa del diverso background culturale o simili motivi.

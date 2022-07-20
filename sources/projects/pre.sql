@@ -28,6 +28,8 @@ CREATE TABLE projects (
     contact_name  TEXT,
     contact_email TEXT,
     keywords      TEXT,
+    icon_type     TEXT,
+    icon          BLOB,
     key_entries   INTEGER DEFAULT 0,
     tag_entries   INTEGER DEFAULT 0,
     unique_keys   INTEGER DEFAULT 0,

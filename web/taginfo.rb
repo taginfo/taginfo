@@ -9,7 +9,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2010-2017  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2010-2021  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -22,13 +22,13 @@
 #  GNU General Public License for more details.
 #
 #  You should have received a copy of the GNU General Public License along
-#  with this program.  If not, see <http://www.gnu.org/licenses/>.
+#  with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 #------------------------------------------------------------------------------
 
 v=RUBY_VERSION.split('.').map{ |x| x.to_i }
-if (v[0]*100+v[1])*100+v[0] < 10901
-    STDERR.puts "You need at least Ruby 1.9.1 to run taginfo"
+if v[0] < 2 or (v[0] == 2 and v[1] < 4)
+    STDERR.puts "You need at least Ruby 2.4 to run taginfo"
     exit(1)
 end
 
@@ -46,6 +46,7 @@ require 'sinatra/r18n'
 require 'rack/contrib'
 
 require 'lib/utils.rb'
+require 'lib/taglinks.rb'
 require 'lib/config.rb'
 require 'lib/javascript.rb'
 require 'lib/language.rb'
@@ -77,16 +78,6 @@ class Taginfo < Sinatra::Base
     configure do
         set :app_file, __FILE__
 
-        if ARGV[0]
-            # production
-            set :host, 'localhost'
-            set :port, ARGV[0]
-            set :environment, :production
-        else
-            # test
-            enable :logging
-        end
-
         # Disable rack-protection library because it messes up embedding
         # taginfo in an iframe. This should probably be done more
         # selectively, but there is no documentation on what rack-protection
@@ -114,6 +105,8 @@ class Taginfo < Sinatra::Base
     end
 
     before do
+        @taginfo_config = TaginfoConfig
+
         if request.cookies['taginfo_locale'] && request.path != '/switch_locale'
             params[:locale] = request.cookies['taginfo_locale']
         end
@@ -127,6 +120,7 @@ class Taginfo < Sinatra::Base
         expires 0, :no_cache
 
         @db = SQL::Database.new.attach_sources
+        $WIKIPEDIA_SITES = @db.execute('SELECT prefix FROM wikipedia_sites').map{ |row| row['prefix'] }
 
         @data_until = DATA_UNTIL.sub(/:..$/, '')
         @data_until_m = DATA_UNTIL.sub(' ', 'T') + 'Z'
@@ -141,7 +135,7 @@ class Taginfo < Sinatra::Base
     before '/api/*' do
         content_type :json, :charset => 'UTF-8'
         expires next_update
-        cors = TaginfoConfig.get('instance.access_control_allow_origin', '')
+        cors = @taginfo_config.get('instance.access_control_allow_origin', '')
         if cors != ""
             headers['Access-Control-Allow-Origin'] = cors
         end
@@ -195,7 +189,7 @@ class Taginfo < Sinatra::Base
 
     #-------------------------------------
 
-    get %r{^/js/([a-z][a-z](-[a-zA-Z]+)?)/(.*).js$} do |lang, dummy, js|
+    get %r{/js/([a-z][a-z](-[a-zA-Z]+)?)/(.*).js} do |lang, dummy, js|
         expires next_update
         @lang = lang
         @trans = R18n::I18n.new(lang, 'i18n')
@@ -222,6 +216,7 @@ class Taginfo < Sinatra::Base
     load 'lib/api/v4/site.rb'
     load 'lib/api/v4/tag.rb'
     load 'lib/api/v4/tags.rb'
+    load 'lib/api/v4/unicode.rb'
     load 'lib/api/v4/wiki.rb'
 
     # test API (unstable, do not use)

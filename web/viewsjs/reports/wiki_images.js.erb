@@ -1,15 +1,11 @@
-<%
-    osm = @trans.t.osm
-    misc = @trans.t.misc
- %>
 function page_init() {
-    var keys = <%= @db.select("SELECT DISTINCT key FROM wiki.wikipages WHERE value IS NULL AND image IN (SELECT image FROM wiki.wiki_images) ORDER BY key").execute().map{ |row| row['key'] }.to_json; %>;
-    console.log(keys);
     up = function() { window.location = '/reports'; };
-    jQuery('.keyimg').each(function(index) {
-        console.log(index, this);
-        jQuery(this).attr('href', url_for_key(keys[index]));
-        jQuery(this).text(fmt_key(keys[index]));
+
+    const keys = <%= @db.select("SELECT DISTINCT key FROM wiki.wikipages WHERE value IS NULL AND image IN (SELECT image FROM wiki.wiki_images) ORDER BY key").execute().map{ |row| row['key'] }.to_json; %>;
+
+    document.querySelectorAll('.keyimg').forEach(function(element, index) {
+        element.setAttribute('href', url_for_key(keys[index]));
+        element.textContent = fmt_key(keys[index]);
     });
 }
 

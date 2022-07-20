@@ -26,7 +26,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2017  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2017-2020  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@
 #  GNU General Public License for more details.
 #
 #  You should have received a copy of the GNU General Public License along
-#  with this program.  If not, see <http://www.gnu.org/licenses/>.
+#  with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 #------------------------------------------------------------------------------
 
@@ -47,13 +47,13 @@ require 'sqlite3'
 
 dir = ARGV[0] || '.'
 
-db = SQLite3::Database.new(dir + '/taginfo-wiki.db')
-db.results_as_hash = true
+database = SQLite3::Database.new(dir + '/taginfo-wiki.db')
+database.results_as_hash = true
 
 # Regular expression matching Key/Tag/Relation pages in all languages
 regexp_ktr = Regexp.new('^(?:(.*):)?(Key|Tag|Relation):(.*)$')
 
-db.transaction do |db|
+database.transaction do |db|
 
     File.open(dir + '/links.list') do |linkfile|
         linkfile.each do |line|

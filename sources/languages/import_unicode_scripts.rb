@@ -8,7 +8,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013-2017  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2013-2021  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 #  GNU General Public License for more details.
 #
 #  You should have received a copy of the GNU General Public License along
-#  with this program.  If not, see <http://www.gnu.org/licenses/>.
+#  with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 #------------------------------------------------------------------------------
 
@@ -35,12 +35,15 @@ database = SQLite3::Database.new(dir + '/taginfo-languages.db')
 property_value_alias_file = "#{dir}/PropertyValueAliases.txt"
 codepoint_script_mapping_file = "#{dir}/Scripts.txt"
 
+scripts = {}
+
 database.transaction do |db|
     open(property_value_alias_file) do |file|
         file.each do |line|
             line.chomp!
             if line.match(%r{^sc ;})
                 (_, script, name) = line.split(%r{\s*;\s*})
+                scripts[name] = script
                 db.execute("INSERT INTO unicode_scripts (script, name) VALUES (?, ?)", [script, name])
             end
         end
@@ -49,20 +52,29 @@ database.transaction do |db|
     open(codepoint_script_mapping_file) do |file|
         file.each do |line|
             line.chomp!
-            line.sub!(%r{\s*#.*}, '')
-            next if line.match(%r{^$})
-            (codes, script) = line.split(%r{\s+;\s+})
+            next if line == '' or line[0] == '#'
+
+            if not line.match(%r{^([0-9A-F.]+) +; +([^ ]+) # (..) })
+                puts "Line does not match: #{line}"
+                next
+            end
+
+            codes = $1
+            name = $2
+            gc = $3
+
             if codes.match(%r{^[0-9A-F]{4,5}$})
-                from = codes
-                to   = codes
+                from = codes.to_i(16)
+                to   = codes.to_i(16)
             elsif codes.match(%r{^([0-9A-F]{4,5})..([0-9A-F]{4,5})$})
-                from = $1
-                to   = $2
+                from = $1.to_i(16)
+                to   = $2.to_i(16)
             else
                 puts "Line does not match: #{line}"
                 next
             end
-            db.execute("INSERT INTO unicode_codepoint_script_mapping (codepoint_from, codepoint_to, name) VALUES (?, ?, ?)", [from, to, script])
+
+            db.execute("INSERT INTO unicode_codepoint_script_mapping (codepoint_from, codepoint_to, script, category) VALUES (?, ?, ?, ?)", [from, to, scripts[name], gc])
         end
     end
 end

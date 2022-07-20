@@ -21,17 +21,17 @@ class Taginfo < Sinatra::Base
         opensearch = <<END_XML
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-    <ShortName>#{ TaginfoConfig.get('opensearch.shortname') }</ShortName>
-    <Description>#{ TaginfoConfig.get('opensearch.description') }</Description>
-    <Tags>#{ TaginfoConfig.get('opensearch.tags') }</Tags>
-    <Contact>#{ TaginfoConfig.get('opensearch.contact') }</Contact>
+    <ShortName>#{ @taginfo_config.get('opensearch.shortname') }</ShortName>
+    <Description>#{ @taginfo_config.get('opensearch.description') }</Description>
+    <Tags>#{ @taginfo_config.get('opensearch.tags') }</Tags>
+    <Contact>#{ @taginfo_config.get('opensearch.contact') }</Contact>
     <Url type="application/x-suggestions+json" rel="suggestions" template="__URL__/search/suggest?term={searchTerms}"/>
     <Url type="text/html" method="get" template="__URL__/search?q={searchTerms}"/>
     <Url type="application/opensearchdescription+xml" rel="self" template="__URL__/search/opensearch.xml"/>
     <Image height="16" width="16" type="image/x-icon">__URL__/favicon.ico</Image>
 </OpenSearchDescription>
 END_XML
-        return opensearch.gsub(/__URL__/, TaginfoConfig.get('instance.url'))
+        return opensearch.gsub(/__URL__/, @taginfo_config.get('instance.url'))
     end
 
     # Returns search suggestions as per OpenSearch standard
@@ -76,7 +76,7 @@ END_XML
                 query, # the query string
                 res, # the list of suggestions
                 res.map{ |item| '' }, # the standard says this is for descriptions, we don't have any so this is empty
-                res.map{ |item| TaginfoConfig.get('instance.url') + '/tags/' + item } # the page this search should got to (ignored by FF, Chrome)
+                res.map{ |item| @taginfo_config.get('instance.url') + '/tags/' + item } # the page this search should got to (ignored by FF, Chrome)
             ].to_json + "\n"
         end
     end

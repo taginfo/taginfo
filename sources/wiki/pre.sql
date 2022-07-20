@@ -31,6 +31,7 @@ CREATE TABLE wikipages (
     tags_combination   TEXT,
     tags_linked        TEXT,
     status             TEXT,
+    approval_status    TEXT,
     statuslink         TEXT,
     wikidata           TEXT
 );

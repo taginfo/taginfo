@@ -1,13 +1,13 @@
 # web/lib/sources.rb
 class Source
 
-    @@sources = Array.new
+    @@sources = Hash.new
 
     attr_reader :id, :name, :data_until, :update_start, :update_end, :visible, :dbsize, :dbpack
 
     # Enumerate all available sources
     def self.each
-        @@sources.each do |source|
+        @@sources.values.each do |source|
             yield source
         end
     end
@@ -18,7 +18,11 @@ class Source
     end
 
     def self.visible
-        @@sources.select{ |source| source.visible }
+        @@sources.values.select{ |source| source.visible }
+    end
+
+    def self.get(id)
+        @@sources[id]
     end
 
     # Create new source
@@ -37,22 +41,7 @@ class Source
         @dbsize = File.size("#{ data_dir }/#{ dbname }").to_bytes rescue 0
         @dbpack = File.size("#{ download_dir }/#{ dbname }.bz2").to_bytes rescue 0
 
-        @@sources << self
-    end
-
-    # The URL where this source is described
-    def url
-        "/sources/#{ @id }"
-    end
-
-    # The img URL of this source
-    def imgurl(size=16)
-        "/img/sources/#{ @id }.#{ size }.png"
-    end
-
-    # Returns img tag for this source
-    def img(size=16, title_prefix='')
-        %Q{<img src="#{ imgurl(size) }" alt="#{ name }" title="#{title_prefix} #{ name }" tipsy="w" width="#{ size }" height="#{ size }"/>}
+        @@sources[@id] = self
     end
 
     def dbname

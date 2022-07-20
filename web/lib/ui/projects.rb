@@ -9,7 +9,7 @@ class Taginfo < Sinatra::Base
         erb :projects
     end
 
-    get %r{^/projects/(.*)} do |project|
+    get %r{/projects/(.*)} do |project|
         if params[:project].nil?
             @project_id = project
         else

@@ -1,16 +1,20 @@
 <div class="pre ui-helper-clearfix">
     <div id="pre-text">
-        <h1></h1>
+        <h1 data-rtype="<%= h(@rtype) %>"><%= h(t.pages.relation.name) %>: </h1>
         <p><%= @desc %></p>
     </div>
+    <div id="toolsmenu"></div>
     <div id="tools" class="no-print">
-        <% if @count_all_values <= TaginfoConfig.get('xapi.max_results', 1000) %>
-            <%= xapi_link('relation', 'type', @rtype) %> <%= josm_link('relation', 'type', @rtype) %>
-        <% else %>
-            <span class="button disabled" title="<%= h(t.pages.relation.button_disabled) %>">XAPI</span>
-            <span class="button disabled" title="<%= h(t.pages.relation.button_disabled) %>">JOSM</span>
-        <% end %>
-        <%= turbo_link(@count_all_values, 'relations', 'type', @rtype) %>
+        <ul>
+<% if @count_all_values <= @taginfo_config.get('xapi.max_results', 1000) %>
+            <li class="button"><%= xapi_link('relation', 'type', @rtype) %></li>
+            <li class="button"><%= josm_link('relation', 'type', @rtype) %></li>
+<% else %>
+            <li class="button disabled" title="<%= h(t.pages.relation.button_disabled) %>">XAPI</li>
+            <li class="button disabled" title="<%= h(t.pages.relation.button_disabled) %>">JOSM</li>
+<% end %>
+            <li class="button"><%= turbo_link(@count_all_values, 'relations', 'type', @rtype) %></li>
+        </ul>
     </div>
 </div>
 <div id="tabs">
@@ -20,6 +24,7 @@
         <li><a href="#graph"><%= h(t.pages.relation.graph.tab) %></a></li>
         <li><a href="#wiki"><%= h(t.sources.wiki.name) %></a></li>
         <li><a href="#projects"><%= h(t.taginfo.projects) %></a></li>
+        <li><a href="#characters"><%= h(t.taginfo.characters) %></a></li>
     </ul>
     <div id="overview">
 <% if @image_url %>
@@ -65,17 +70,9 @@
         <table id="grid-projects">
         </table>
     </div>
+    <div id="characters">
+        <h2><%= h(t.pages.relation.characters.title) %></h2>
+        <table id="grid-characters">
+        </table>
+    </div>
 </div>
-<% javascript do
-    JS.raw(<<"JAVASCRIPT")
-function page_init2() {
-    var rtype = #{ @rtype.to_json },
-        roles = #{ @roles.to_json.gsub(/\},/, "},\n") };
-    jQuery('h1').html("#{ t.pages.relation.name } '" + fmt_rtype(rtype) + "'");
-    jQuery('span#taglink').html(link_to_value('type', rtype));
-    init_tabs([rtype]);
-    create_role_chart(roles);
-}
-JAVASCRIPT
-end
-%>

@@ -16,7 +16,7 @@ function page_init() {
         sortname: 'count_all',
         sortorder: 'desc',
         preProcess: function(data) {
-            data.rows = jQuery.map(data.data, function(row, i) {
+            data.rows = data.data.map(function(row) {
                 var wikilinks = [];
                 jQuery(row.wikipages).each(function(i, wikipage) {
                     var w = link_to_wiki(wikipage.title);

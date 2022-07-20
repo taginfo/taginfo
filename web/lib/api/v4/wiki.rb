@@ -6,6 +6,7 @@ class Taginfo < Sinatra::Base
         :paging => :no,
         :result => no_paging_results([
             [:code                   , :STRING, 'Language code.'],
+            [:dir                    , :STRING, 'Direction this language is written in ("ltr", "rtl", or "auto").'],
             [:native_name            , :STRING, 'Name of language in this language.'],
             [:english_name           , :STRING, 'Name of language in English.'],
             [:wiki_key_pages         , :INT,    'Number of "Key" wiki pages in this language.'],
@@ -30,6 +31,7 @@ class Taginfo < Sinatra::Base
         return generate_json_result(res.size,
             res.map{ |row| {
                 :code                    => row['code'],
+                :dir                     => direction_from_lang_code(row['code']),
                 :native_name             => row['native_name'],
                 :english_name            => row['english_name'],
                 :wiki_key_pages          => row['wiki_key_pages'].to_i,

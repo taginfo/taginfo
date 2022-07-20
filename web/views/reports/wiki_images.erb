@@ -6,6 +6,7 @@ table.wiki-images {
 table.wiki-images td.key {
     background-color: #ffffff;
     padding: 0 10px;
+    min-width: 20em;
 }
 
 table.wiki-images td.images {
@@ -63,11 +64,18 @@ CSS
 <%  imagesize = 50
     if row['width'].to_i <= imagesize && row['height'].to_i <= imagesize
         src = row['image_url']
+    elsif row['thumb_url_prefix'].nil? || row['thumb_url_suffix'].nil?
+        src = nil
     else
         src = row['thumb_url_prefix'] + imagesize.to_s + row['thumb_url_suffix']
     end
+    if src
+        img = '<img src="' + src + '"/>'
+    else
+        img = 'Broken image'
+    end
 %>
-        <a href="http://wiki.openstreetmap.org/wiki/<%= row['title'] %>"><img src="<%= src %>"/></a>
+        <a href="https://wiki.openstreetmap.org/wiki/<%= row['title'] %>"><%= img %></a>
     </div>
 <% end %>
     </td></tr></table>

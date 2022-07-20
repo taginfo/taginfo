@@ -54,6 +54,8 @@ taginfo:
     instance:
         title: Giới thiệu về trang taginfo này
         other: Xem các trang khác tại <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">wiki OSM</a>.
+    chronology: Thời biểu
+    links: Liên kết
 
 misc:
     values_less_than_one_percent: không có giá trị hơn 1%
@@ -81,6 +83,8 @@ misc:
     prevalent_values: Giá trị phổ biến
     prevalent_values_tooltip: Cho tới 10 giá trị phổ biến nhất của chìa khóa này (chỉ khi nào hơn 1% các thẻ có chìa khóa này có giá trị này).
     in_wiki_tooltip: Có ít nhất một trang wiki.
+    approval_status: Trạng thái chấp nhận
+    status: Trạng thái
 
 help:
     search:
@@ -111,6 +115,7 @@ help:
         keys_page: Trang chìa khóa
         tags_page: Trang thẻ
         relations_page: Trang quan hệ
+        reports_page: Trang báo cáo
         projects_page: Trang dự án
         compare_page: Trang so sánh
         first_page: Trang đầu
@@ -154,29 +159,102 @@ pages:
     about:
         about_taginfo:
             title: Giới thiệu về taginfo
+            text: |
+                <p>OpenStreetMap sử dụng các <b>thẻ</b> để định nghĩa các đối tượng địa lý.
+                Không có một danh sách thẻ cố định toàn vẹn.
+                Người nào có thể sáng tạo và sử dụng thẻ mới khi nào cần trên đối tượng mới hoặc đối tượng đã tồn tại.
+                Điều này làm cho OpenStreetMap rất linh động nhưng đôi khi khó sử dụng.</p>
+                <p>Những người đóng góp vào OSM hoặc sử dụng dữ liệu OSM đều tự hỏi các câu hỏi như:
+                Người ta sử dụng thẻ nào cho X?
+                Tôi nên sử dụng thẻ nào cho Y để cho nó xuất hiện đúng đắn trên bản đồ?
+                Thẻ Z được miêu tả trên wiki thật sự có phải được sử dụng rộng rãi, và ở đâu?</p>
+                <p>Taginfo giúp bạn bằng cách trình bày các thống kê về các thẻ trong cơ sở dữ liệu,
+                bao nhiêu người sử dụng các thẻ đó, các thẻ được sử dụng tại đâu, v.v.
+                Nó cũng lấy thông tin từ wiki và những nơi khác.
+                Taginfo cố gắng tập trung tất cả thông tin về thẻ để giúp bạn hiểu cách sử dụng và ý nghĩa.
+                Xem <a href="sources">danh sách nguồn gốc</a> của taginfo.</p>
         about_site:
             title: Giới thiệu về trang này
         building_on_taginfo:
             title: Xây dựng trên taginfo
+            pre: |
+                <p>Bạn có thể sử dụng dữ liệu taginfo trong các dự án của bạn:</p>
+            api: |
+                <h3>API</h3>
+                <p>Có thể truy cập dữ liệu taginfo qua API REST. Xem các chi tiết trong
+                <a href="taginfo/apidoc">tài liệu API</a>. Cũng có thông tin tổng quát
+                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">tại wiki OSM</a>.
+                Máy chủ phục vụ API taginfo không có tài nguyên vô hạn.
+                Xin vui lòng sử dụng API một cách hợp lý. Nếu không chắc chắn,
+                hãy liên lạc với những người quản lý trang Web mà bạn đang sử dụng hoặc
+                liên lạc trực tiếp với chúng tôi trong danh sách thư.</p>
+            download: |
+                <h3>Tải về</h3>
+                <p>Nếu bạn muốn nghịch ngợm với dữ liệu được sử dụng bởi taginfo,
+                bạn có thể tải về các tập tin cơ sở dữ liệu SQLite được cập nhật thường xuyên.
+                Tất cả công việc xử lý trước đã được thực hiện xong xuôi cho bạn.
+                Xem danh sách tập tin tại <a href="download">trang tải về</a>.
+                Lưu ý rằng một số tập tin này có kích thước rất lớn.
+                Nếu bạn muốn tải về chúng thường xuyên,
+                xin vui lòng liên lạc với những người quản lý trang Web mà bạn đang sử dụng hoặc
+                liên lạc trực tiếp với chúng tôi trong danh sách thư.</p>
+            license: |
+                <h3>Giấy phép</h3>
+                <p>Dữ liệu được trình bày bởi taginfo được phát hành theo ODbL, tức
+                <a class="extlink" href="//www.openstreetmap.org/copyright">cùng
+                giấy phép với dữ liệu OpenStreetMap</a>.</p>
         software:
             title: Phần mềm taginfo
+            text: |
+                <p>Phần mềm taginfo do
+                <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>
+                sáng tạo và bảo quản. Thiết kế do
+                <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
+                <h3>Biên dịch</h3>
+                <p>Chúng tôi cần người biên dịch giao diện taginfo.
+                Xem danh sách các ngôn ngữ cần được biên dịch tại
+                <a href="taginfo/translations">trang bản dịch</a>. Xem cách giúp đỡ tại
+                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">wiki OSM</a>.</p>
+                <h3>Mã nguồn</h3>
+                <p>Toàn bộ phần mềm phục vụ các trang taginfo là mã nguồn mở. Bạn có thể truy cập mã nguồn tại
+                <a class="extlink" href="https://github.com/taginfo/taginfo/">GitHub</a>.
+                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">Kiến trúc taginfo</a>
+                được tóm tắt tại wiki OSM.</p>
+                <h3>Chạy thực thể của mình</h3>
+                <p>Bạn có thể chạy
+                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">trang taginfo</a>
+                của chính mình, chẳng hạn chỉ dùng dữ liệu ứng với nước bạn. Xem hướng dẫn
+                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Running">tại wiki OSM</a>.</p>
+                <h3>Báo cáo lỗi và yêu cầu tính năng</h3>
+                <p>Báo cáo lỗi và yêu cầu tính năng tại <a class="extlink"
+                href="https://github.com/taginfo/taginfo/issues">trang vấn đề GitHub</a>.
+                Thay thế, bạn có thể liên lạc với chúng tôi trong danh sách thư.</p>
+                <h3>Liên lạc/danh sách thư</h3>
+                <p>Có thắc mắc gì hoặc muốn giúp đỡ, xin liên lạc với chúng tôi trong
+                <a class="extlink" href="//lists.openstreetmap.org/listinfo/taginfo-dev">danh sách thư taginfo-dev</a>.</p>
     sources:
         intro: |
             <p>Taginfo lấy dữ liệu về thẻ OSM từ nhiều nguồn gốc và thu thập dữ liệu
             để duyệt và khám phá một cách dễ dàng.</p>
             <p>Lưu ý rằng taginfo chỉ hiển thị dữ liệu này. Các dữ liệu phải được sửa đổi tại nguồn gốc.</p>
             <p>Lưu ý rằng taginfo chỉ hiển thị dữ liệu này. Các dữ liệu phải được sửa đổi tại nguồn gốc.</p>
+        list:
+            title: Danh sách nguồn gốc
+            intro: Danh sách này có các nguồn gốc được sử dụng hiện tại. Có thể mai mốt tích hợp thêm nguồn gốc.
         description:
             db: |
                 <p>Thống kê về các chìa khóa, thẻ, và loại quan hệ được tạo ra từ <a class="extlink" href="https://planet.openstreetmap.org/">cơ sở dữ liệu OSM</a> (hoặc một bản trích) cũng như các bản đồ trình bày sự phân phối địa lý của các nốt và lối.</p>
             wiki: |
                 <p><a class="extlink" href="//wiki.openstreetmap.org/wiki/Vi:Main_Page">Wiki OSM</a> được truy cập và tất cả mọi trang Key:*, Tag:*, và Relation:* (trong các ngôn ngữ) được phân tích. Các miêu tả, hình ảnh, thẻ liên quan, v.v. được lấy từ các trang này.</p>
             languages: |
-                <p>Taginfo lấy thông tin về các ngôn ngữ trên thế giới, từ các mã, tên, v.v., từ một số cơ sở dữ liệu <a class="extlink" href="http://www.iana.org/">IANA</a> và <a class="extlink" href="http://www.unicode.org/">Unicode</a>.</p>
+                <p>Taginfo lấy thông tin về các ngôn ngữ trên thế giới, từ các mã, tên, v.v., từ một số cơ sở dữ liệu <a class="extlink" href="https://www.iana.org/">IANA</a> và <a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
-                <p>Các dự án sử dụng thẻ OSM một cách nào đó, thí dụ như trình vẽ, bản đồ, trình chỉ đường, v.v. Xem <a href="/projects">danh sách dự án</a>.</p>
+                <p>Các dự án sử dụng thẻ OSM một cách nào đó, thí dụ như trình vẽ, bản đồ, trình chỉ đường, v.v. Xem <a href="projects">danh sách dự án</a>.</p>
+            chronology: |
+                <p>Số lần sử dụng chìa khóa hoặc thẻ theo thời gian từ <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">thế giới có lịch sử</a>.</p>
         updates:
             title: Cập nhật
+            intro: Dữ liệu taginfo được cập nhật thường xuyên từ các nguồn gốc.
         data_until: Dữ liệu cho tới
         last_update_run: Cập nhật lần cuối
         data_until_explanation: Tất cả các sửa đổi cho tới lúc này sẽ xuất hiện trong dữ liệu; các sửa đổi về sau có thể xuất hiện.
@@ -184,14 +262,18 @@ pages:
     download:
         intro: |
             <p>Ở đây bạn có thể tải về các cơ sở dữ liệu được sử dụng bởi taginfo. Tất cả dữ liệu được lưu giữ
-            trong CSDL <a class="extlink" href="http://www.sqlite.org/">SQLite</a>.
+            trong CSDL <a class="extlink" href="https://www.sqlite.org/">SQLite</a>.
             Sau đó, các tập tin CSDL được nén bằng <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>Nếu bạn không muốn tải về các CSDL này mà vẫn muốn truy cập dữ liệu một cách tự động,
-            bạn cũng có thể dùng <a href="/about">API</a>.</p>
+            bạn cũng có thể dùng <a href="about">API</a>.</p>
         file: Tập tin
         packed: Nén
         unpacked: Giải nén
         description: Miêu tả
+        note: |
+            Các cơ sở dữ liệu có sẵn tại đây để tải về không có một số chỉ mục.
+            Kích thước “Nén” không tính các chỉ mục này,
+            còn kích thước “Không nén” tính các chỉ mục mà bạn có lẽ muốn xây dựng sau khi tải về.
     reports:
         intro: |
             Các trang thống kế này hiển thị các mặt khác nhau của dữ liệu.
@@ -217,13 +299,16 @@ pages:
                 Bảng này có các thẻ phổ biến nhất trong cơ sở dữ liệu.
     relations:
         name: Loại quan hệ
-        intro: Thông tin về các loại quan hệ (theo thẻ <a href="/keys/type?filter=relations">type</a>).
+        intro: Thông tin về các loại quan hệ (theo thẻ <a href="keys/type?filter=relations">type</a>).
         relations_of_type_tooltip: Số quan hệ loại này (cũng như số phần trăm các quan hệ).
         prevalent_roles: Vai trò phổ biến
         prevalent_roles_tooltip: Các vai trò phổ biến của các quan hệ loại này.
         no_information: Không có thông tin
         roles_less_than_one_percent: không có vai trò nào hơn 1%
         empty_role: vai trò trống
+    projects:
+        intro: |
+                Bảng này có các dự án được taginfo biết đến mà sử dụng thẻ OSM một cách nào đó.<br/>Xem thêm về chức năng này tại <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
     key:
         description_from_wiki: Lời miêu tả chìa khóa này trên wiki (trong ngôn ngữ của bạn nếu có sẵn, nếu không thì trong tiếng Anh).
         no_description_in_wiki: Không có lời miêu tả chìa khóa này trong tiếng Anh trên wiki. (Xem thêm thẻ “Wiki”.)
@@ -252,6 +337,9 @@ pages:
         geographic_distribution:
             title: Phân phối địa lý của chìa khóa này
             relations: Quan hệ không có vị trí địa lý nên không thể hiển thị bản đồ.
+            all: Phân phối các nốt và lối có chìa khóa này, không kể các quan hệ.
+            nodes: Phân phối các nốt có chìa khóa này.
+            ways: Phân phối các lối có chìa khóa này.
         wiki_pages:
             title: Trang wiki về chìa khóa này
             none_found: Không có sẵn trang wiki nào về chìa khóa này.
@@ -290,6 +378,9 @@ pages:
             title: Phân phố địa lý của thẻ này
             relations: Quan hệ không có vị trí địa lý nên không thể hiển thị bản đồ.
             no_map: Rất tiếc, chỉ có thể tạo bản đồ cho các thẻ phổ biến nhất. Hãy thử liên kết overpass turbo.
+            all: Phân phối các nốt và lối có thẻ này, không kể các quan hệ.
+            nodes: Phân phối các nốt có thẻ này.
+            ways: Phân phối các lối có thẻ này.
         wiki_pages:
             title: Trang wiki về thẻ này
             none_found: Không có sẵn trang wiki nào về thẻ này.
@@ -302,6 +393,8 @@ pages:
         projects:
             title: Dự án sử dụng thẻ này
             description: Dự án sử dụng thẻ này làm sao
+        chronology:
+            no_chronology: Rất tiếc, chỉ có thể tính thời biểu đối với các thẻ phổ biến nhất.
     relation:
         name: Loại quan hệ
         description_from_wiki: Lời miêu tả loại quan hệ này trên wiki (trong ngôn ngữ của bạn nếu có sẵn, nếu không thì trong tiếng Anh).
@@ -344,6 +437,9 @@ pages:
         tags:
             title: Các thẻ được sử dụng bởi dự án này
             intro: Dữ liệu này do dự án cung cấp và không nhất thiết phải hoàn thành. Xem chi tiết trong tài liệu dự án.
+            description: Chìa khóa/thẻ này được sử dụng trong dự án như thế nào
+            count_all_tooltip: Số đối tượng trong cơ sở dữ liệu có chìa khóa/thẻ này
+            objects_tooltip: Các kiểu đối tượng được sử dụng bởi dự án
 
 flexigrid:
     pagetext: Trang
@@ -371,7 +467,7 @@ sources:
         description: Thống kê tập hợp lại qua thời gian.
     db:
         name: Cơ sở dữ liệu
-        description: Thống kê về mỗi chìa khóa và mỗi thẻ từ cơ sở dữ liệu OSM chính (tập tin địa cầu).
+        description: Thống kê về mỗi chìa khóa và mỗi thẻ từ cơ sở dữ liệu OSM chính.
     wiki:
         name: Wiki
         description: Dữ liệu từ các trang thẻ và chìa khóa trên wiki OSM.
@@ -381,6 +477,9 @@ sources:
     projects:
         name: Dự án
         description: Dự án bên ngoài và các chìa khóa/thẻ OSM được sử dụng.
+    chronology:
+        name: Thời biểu
+        description: Số lần sử dụng chìa khóa hoặc thẻ theo thời gian từ thế giới có lịch sử.
 
 reports:
     characters_in_keys:
@@ -402,6 +501,32 @@ reports:
                 problem: Giống C nhưng có các ký tự có thể gây vấn đề <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
                 rest: Những cái gì khác.
                 total: Tổng số
+        plain:
+            tab: Thuần
+            title: Chìa khóa thuần
+            intro: |
+                <p>Chìa khóa chỉ chứa các chữ Latinh thường (<span
+                class="char">a</span> đến <span class="char">z</span>) và
+                dấu gạch dưới (<span class="char">_</span>).
+                Ký tự đầu tiên và cuối cùng đều phải là chữ cái.
+                Phần nhiều chìa khóa đơn giản nên được bao gồm trong thể loại này.</p>
+        colon:
+            tab: Dấu hai chấm
+            title: Chìa khóa có dấu hai chấm
+            intro: |
+                <p>Chìa khóa có ít nhất một dấu hai chấm (<span
+                class="char">:</span>) bên trong cũng như các chữ cái
+                (<span class="char">a</span> to <span class="char">z</span>) và
+                dấu gạch dưới (<span class="char">_</span>).
+                Dấu hai chấm thường được sử dụng để phân cấp thông tin.</p>
+        letters:
+            tab: Chữ cái
+            title: Chìa khóa có chữ hoa hoặc chữ từ hệ thống viết khác
+            intro: |
+                <p>Chìa khóa thường nên có chữ Latinh thường,
+                nhưng đôi khi chìa khóa chứa chữ hoa (ví dụ để gọi tắt) hoặc
+                chữ từ hệ thống viết khác
+                (ví dụ chìa khóa chỉ thích hợp với khu vực sử dụng hệ thống viết đó).</p>
         space:
             tab: Khoảng cách
             title: Chìa khóa có khoảng cách
@@ -424,6 +549,11 @@ reports:
                 chìa khóa và giá trị trong thẻ.<br/>
                 Các chìa khóa xuất hiện trong danh sách này không nhất thiết là sai. Tuy nhiên,
                 các chìa khóa này rất có thể xảy ra do nhầm lẫn.</p>
+        rest:
+            tab: Khác
+            title: Các chìa khóa khác
+            intro: |
+                <p>Các chìa khóa không hợp các thể loại kia.</p>
     database_statistics:
         name: Thống kê cơ sở dữ liệu
         objects_in_db: Số đối tượng trong cơ sở dữ liệu
@@ -512,14 +642,14 @@ reports:
                 region: Khu vực
                 variant: Biến thể
             intro: |
-                <p><a href="http://www.ietf.org/">IETF</a> định rõ các <i>thẻ
+                <p><a href="https://www.ietf.org/">IETF</a> định rõ các <i>thẻ
                 ngôn ngữ</i> trong tiêu chuẩn
-                <a href="http://tools.ietf.org/html/bcp47">Tags for Identifying Languages
+                <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages
                 (BCP 47)</a>. Thẻ ngôn ngữ
                 có ít nhất một <i>thẻ phụ</i> miêu tả ngôn ngữ,
                 hệ chữ viết, biến thể, v.v. Danh sách sau có các thẻ phụ đã đăng ký
                 có liên quan đến OSM. Để tìm hiểu thêm, hãy đọc
-                <a href="http://en.wikipedia.org/wiki/IETF_language_tag">bài Wikipedia
+                <a href="https://en.wikipedia.org/wiki/IETF_language_tag">bài Wikipedia
                 về thẻ ngôn ngữ IETF</a> và trang Web <a
                 href="http://www.langtag.net/">langtag.net</a>.</p>
                 <p>Lưu ý rằng dữ liệu trong bảng này <b>không phải</b> lấy từ OpenStreetMap,
@@ -549,4 +679,22 @@ reports:
             title: Thẻ duy nhất
         relation_types:
             title: Loại quan hệ duy nhất
-
+    wiki_images:
+        name: Hình ảnh wiki
+        intro: |
+            Hình ảnh được sử dụng trong wiki để tượng trưng các chìa khóa trong các bản dịch.
+            Đôi khi hình trong một bản dịch hợp hơn hình trong bản dịch kia.
+            Đôi khi nên có nhiều hình khác nhau vì nền văn hóa khác nhau.
+    wiki_problems:
+        name: Sự cố phân tích wiki
+        intro: |
+            Taginfo đọc các trang wiki miêu tả chìa khóa, thẻ, và quan hệ để tìm kiếm thông tin về các thẻ.
+            Bản báo cáo này trình bày các vấn đề được gặp trong việc đọc các trang đó.
+            Các vấn đề này không nhất thiết phải là lỗi tring wiki,
+            chỉ có nghĩa rằng trang wiki có định dạng mà taginfo không hiểu.
+            Hoặc trang cần được điều chỉnh hoặc taginfo cần được sửa chữa.
+        location: Vị trí
+        reason: Lý do
+        wiki_page: Trang wiki
+        lang: Ngôn ngữ
+        info: Thông tin bổ sung

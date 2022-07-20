@@ -15,8 +15,6 @@
 #    TAGINFO_API_VERSION  [4]
 #
 
-require 'rubygems'
-
 require 'net/http'
 require 'uri'
 require 'json'

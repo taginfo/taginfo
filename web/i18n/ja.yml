@@ -168,7 +168,7 @@ pages:
                 どこで使用されているのかなどを、統計を表示することでお役に立ちます。
                 ウィキやその他の場所からの情報を得ることもできます。
                 taginfo は、タグがどのように使われているか、どのような意味なのかを理解しやすくするために情報を集約しようとしています。
-                taginfo が使用している<a href="/sources">情報源の一覧</a>を参照してください。
+                taginfo が使用している<a href="sources">情報源の一覧</a>を参照してください。
                 </p>
         about_site:
             title: このサイトについて
@@ -179,7 +179,7 @@ pages:
             api: |
                 <h3>API</h3>
                 <p>taginfo のデータには REST API を通してアクセスできます。詳細は
-                <a href="/taginfo/apidoc">API 説明書</a>を参照してください。一般的な情報の一部は
+                <a href="taginfo/apidoc">API 説明書</a>を参照してください。一般的な情報の一部は
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">OSM ウィキ上</a>にあります。
                 taginfo API を実行するサーバは、無限のリソースを持っている訳ではありません。
                 責任をもって API を使用してください。不明な点は、あなたがお使いのサイトの
@@ -188,25 +188,25 @@ pages:
                 <h3>ダウンロード</h3>
                 <p>taginfo で使用しているデータで遊んでみたい場合は、定期的に更新される
                 Sqlite データベースファイルをダウンロードすることができます。すべての前処理が完了した状態です。
-                ファイルの一覧は<a href="/download">ダウンロードページ</a>を参照してください。
+                ファイルの一覧は<a href="download">ダウンロードページ</a>を参照してください。
                 なお、ファイルによっては非常に大容量になります。定期的にダウンロードしたいのであれば、
                 あなたがお使いのサイトの管理者に連絡を取るか、メーリングリストで私たちに連絡するかしてください。</p>
             license: |
                 <h3>ライセンス</h3>
-                <p>taginfo を通して提供されるデータは、 <a class="extlink" 
+                <p>taginfo を通して提供されるデータは、 <a class="extlink"
                 href="//www.openstreetmap.org/copyright">OpenStreetMap のデータと同じく</a>、 ODbL の下にライセンスされます。
                 </p>
         software:
             title: taginfo ソフトウェアについて
             text: |
-                <p>taginfo ソフトウェアは <a class="extlink" 
+                <p>taginfo ソフトウェアは <a class="extlink"
                 href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a> が開発し、保守しています。
-                ウェブのデザインは <a class="extlink" 
-                href="http://www.ctd-studio.co.uk/">Christian Topf</a> が作成しました。</p>
+                ウェブのデザインは <a class="extlink"
+                href="https://ctd-studio.co.uk/">Christian Topf</a> が作成しました。</p>
                 <h3>翻訳</h3>
                 <p>私たちは taginfo のユーザーインタフェースの翻訳者を必要としています。作業が必要な言語については<a
-                href="/taginfo/translations">翻訳の状況</a>を参照してください。
-                協力する方法について、詳しくは <a class="extlink" 
+                href="taginfo/translations">翻訳の状況</a>を参照してください。
+                協力する方法について、詳しくは <a class="extlink"
                 href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM ウィキ</a>を参照してください。</p>
                 <h3>コード</h3>
                 <p>taginfoサイトに関するソフトウェアはすべてオープンソースです。
@@ -215,7 +215,7 @@ pages:
                 href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">taginfo の構造</a>
                 に関するページをお読みください。</p>
                 <h3>独自のインスタンスを実行する</h3>
-                <p>例えば、自分の国のデータだけ持つサイトなど、独自の <a class="extlink" 
+                <p>例えば、自分の国のデータだけ持つサイトなど、独自の <a class="extlink"
                 href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">taginfo サイト</a>
                 を構築することができます。説明は、
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Running">OSM ウィキ</a>
@@ -243,9 +243,9 @@ pages:
             wiki: |
                 <p><a class="extlink" href="//wiki.openstreetmap.org/">OSM ウィキ</a>が読み取られ、（各言語の）すべての Key:*, Tag:*, Relation:* ページが解析されます。説明、画像、関連タグなどが、そこから抽出されます。</p>
             languages: |
-                <p>taginfo は世界の各言語に関するコードや名称などの情報を、 <a class="extlink" href="http://www.iana.org/">IANA</a> や <a class="extlink" href="http://www.unicode.org/">Unicode</a> レジストリなどから取得しています。</p>
+                <p>taginfo は世界の各言語に関するコードや名称などの情報を、 <a class="extlink" href="https://www.iana.org/">IANA</a> や <a class="extlink" href="https://www.unicode.org/">Unicode</a> レジストリなどから取得しています。</p>
             projects: |
-                <p>OSM タグをある方法で使っている、エディタ、地図、経路検索などのプロジェクトです。<a href="/projects">プロジェクト一覧</a>を参照してください。</p>
+                <p>OSM タグをある方法で使っている、エディタ、地図、経路検索などのプロジェクトです。<a href="projects">プロジェクト一覧</a>を参照してください。</p>
         updates:
             title: 更新状況
             intro: taginfo データは情報源から定期的に更新されます。
@@ -256,10 +256,10 @@ pages:
     download:
         intro: |
             <p>taginfo で使われるデータベースをここからダウンロードできます。すべてのデータが
-            <a class="extlink" href="http://www.sqlite.org/">Sqlite</a> データベースに格納されています。
+            <a class="extlink" href="https://www.sqlite.org/">Sqlite</a> データベースに格納されています。
             データベースファイルは <a class="extlink" href="http://www.bzip.org/">bzip2</a> で圧縮されています。</p>
             <p>これらのデータベースをダウンロードしたくなく、データへの自動アクセスが必要な場合は、
-            <a href="/about">API</a> を使用することもできます。</p>
+            <a href="about">API</a> を使用することもできます。</p>
         file: ファイル
         packed: 圧縮後
         unpacked: 圧縮前
@@ -289,7 +289,7 @@ pages:
                 この表ではデータベース中でよく使われているタグを表示しています。
     relations:
         name: リレーション種別
-        intro: リレーションの各種別についての情報（<a href="/keys/type?filter=relations">type</a>タグで識別されるもの）です。
+        intro: リレーションの各種別についての情報（<a href="keys/type?filter=relations">type</a>タグで識別されるもの）です。
         relations_of_type_tooltip: この種別のリレーションの数（と、全リレーションに対する割合）
         prevalent_roles: よく使われているロール
         prevalent_roles_tooltip: この種類のリレーションでよく使われているロールです。
@@ -419,7 +419,7 @@ pages:
             info: このデータは上記の場所からリンクされている 'JSON プロジェクトファイル' を通してプロジェクトから taginfo に提供されています。書式の説明については<a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">ウィキ</a>を参照してください。
         tags:
             title: このプロジェクトで使用されているタグ
-            intro: このデータはプロジェクトによって提供されており、完成させる必要はありません。詳細はプロジェクトの説明書を参照してください。
+            intro: このデータはプロジェクトによって提供されており、完璧じゃないかもしれません。詳細はプロジェクトの説明書を参照してください。
             description: プロジェクトでキーやタグがどのように使われているか
             count_all_tooltip: データベース中でこのキー/タグが使われているオブジェクトの数
             objects_tooltip: プロジェクトが使っているオブジェクトの種類
@@ -625,12 +625,12 @@ reports:
                 region: 地域
                 variant: 派生形
             intro: |
-                <p><a href="http://www.ietf.org/">IETF</a> は標準「<a 
-                href="http://tools.ietf.org/html/bcp47">Tags for Identifying Languages
+                <p><a href="https://www.ietf.org/">IETF</a> は標準「<a
+                href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages
                 (BCP47)</a>」の中で、<i>言語タグ</i>を規定しています。言語タグは言語、
                 文字、派生形などを記述する1つ以上の<i>サブタグ</i>から成ります。
                 以下の一覧は現在 OSM に関して登録されているサブタグを示します。詳しい情報は、
-                <a href="http://ja.wikipedia.org/wiki/IETF%E8%A8%80%E8%AA%9E%E3%82%BF%E3%82%B0">
+                <a href="https://ja.wikipedia.org/wiki/IETF%E8%A8%80%E8%AA%9E%E3%82%BF%E3%82%B0">
                 ウィキペディアの IETF 言語タグの記事</a>と<a href="http://www.langtag.net/">
                 langtag.net</a>のサイトを参照してください。</p>
                 <p>なお、この表にあるデータは OpenStreetMap からのものでは<b>なく</b>、
@@ -671,7 +671,7 @@ reports:
             Taginfo はタグについての情報を探すために、キー、タグ、リレーションを
             記述するために使われているすべてのウィキページを読み取ります。
             このレポートはページを読み取る際に発生した問題の一覧を表示しています。
-            ウィキ上でのエラーを示しているのではなく、単に taginfo 
+            ウィキ上でのエラーを示しているのではなく、単に taginfo
             が理解できる書式で書かれていないものがウィキページにあるということを
             意味します。ページか taginfo のどちらかを修正する必要があります。
         location: 場所

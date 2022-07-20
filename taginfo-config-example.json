@@ -46,7 +46,14 @@
         // change this, you might have also to change the "download" symbolic
         // link in the "web/public" directory and/or add this path to your
         // web server config.
-        "download_dir": "../../download"
+        "download_dir": "../../download",
+        // Path to binaries (like 'taginfo-stats' and 'taginfo-similarity').
+        // Probably something like '.../taginfo-tools/build/src'. If this is
+        // a relative path, it must be relative to the subdirectory of the
+        // 'sources' directory.
+        "bin_dir": "../../../taginfo-tools/build/src",
+        // Path to sqlite regexp extension.
+        "sqlite3_pcre_extension": "/usr/lib/sqlite3/pcre.so"
     },
     // "XAPI" and "JOSM" buttons on key/tag pages
     "xapi": {
@@ -62,6 +69,7 @@
         "max_auto": 1000,
         "url_prefix": "https://overpass-turbo.eu/?",
         // set this to "global" or "in <area>" where <area> is a country name or other region found by Nominatim
+        // you might need to enclose the name in double quotes: "in \"France métropolitaine\""
         "wizard_area": "global"
     },
     // "Level0 Editor" button on key/tag pages
@@ -83,14 +91,16 @@
         // Note that this will NOT work for the "db" source! Well, you can download it,
         // but it will fail later, because the database is changed by the master.sql
         // scripts.
-        "download": "languages projects wiki",
+        "download": "languages projects wiki chronology",
         // These sources will be created from the actual sources.
         "create": "db",
         "db": {
-            // Path to binaries (like 'tagstats' and 'similarity').
-            "bindir": "../../tagstats",
             // The OSM planet file or extract where we read the OSM data from.
             "planetfile": "/osm/planet/var/current-planet.osm.pbf"
+        },
+        "chronology": {
+            // The OSM history planet file or extract where we read the OSM data from.
+            "osm_history_file": "/osm/planet/var/current-history-planet.osh.pbf"
         },
         // If you change any of the following you have to run the update
         // twice for it to take effect.
@@ -106,29 +116,21 @@
             // Minimum number of relations per type to make this
             // relation type "interesting", ie. to make it show
             // up as a relation type.
-            "min_count_relations_per_type": 100,
-            // Tokenizer for sqlite full-text search. Complex or custom
-            // tokenizers, e.g., icu and unicode61, may be more suitable for
-            // some locales. You may need newer sqlite3 or to recompile
-            // sqlite3 to use those tokenizers.
-            // See http://www.sqlite.org/fts3.html#tokenizer for detail.
-            "tokenizer": "simple"
+            "min_count_relations_per_type": 100
         }
     },
     "logging": {
-        // directory for log files
-        "directory": "/osm/taginfo/var/log",
+        // Directory for log files. If this is empty, logs are written to stderr
+        "directory": "",
         // SQL queries longer than this many seconds are logged
         "min_duration": 0.1
     },
     // For compiling tagstats.
     "tagstats": {
-        // Extra compilerflags, for instance to find Libosmium.
-        "cxxflags": "-I../../../libosmium/include",
-        // Node location store. For really large OSM files (whole planet or large continent)
+        // Node location store. The default is "FlexMem" which works for any
+        // size of OSM file, but may need a bit more memory than other values.
+        // For really large OSM files (whole planet or large continent)
         // this should be "DenseMmapArray" (or "DenseMemArray" on OSX), otherwise "SparseMemArray".
-        "geodistribution": "SparseMemArray",
-        // C++ type used for geodistribution
-        "geodistribution_int": "uint16_t"
+        "geodistribution": "FlexMem"
     }
 }

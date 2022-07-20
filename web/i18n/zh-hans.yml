@@ -1,0 +1,332 @@
+
+osm:
+    tag: 标签
+    tags: 标签
+    key: 键
+    keys: 键
+    value: 值
+    values: 值
+    node: 节点
+    nodes: 节点
+    way: 路径
+    ways: 路径
+    relation: 关系
+    relations: 关系
+    relation_type: 关系类型
+    relation_types: 关系类型
+    relation_member: 关系成员
+    relation_members: 关系成员
+    relation_member_nodes: 成员节点
+    relation_member_ways: 成员路径
+    relation_member_relations: 成员关系
+    relation_member_role: 角色
+    relation_member_roles: 角色
+    object: 对象
+    objects: 对象
+    all: 全部
+    user: 用户
+    users: 用户
+
+taginfo:
+    source: 来源
+    sources: 来源
+    download: 下载
+    about: 关于
+    contact: 联系我们
+    meta: 元数据
+    wiki: Wiki
+    report: 报告
+    reports: 报告
+    international: 国际化
+    apidoc: API文档
+    project: 项目
+    projects: 项目
+    test: 测试
+    chronology: 年表
+    map: 地图
+    maps: 地图
+    relations: 关系
+    combinations: 组合
+    key_combinations: 组合
+    comparison: 键/标签 对比
+    overview: 概览
+    characters: 字符
+    links: 链接
+    data_from: 数据来源于
+    data_from_description: Taginfo数据库的最新更新
+    instance:
+        title: 关于这个Taginfo站点
+        other: 参见<a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a>来获知更多Taginfo站点.
+
+misc:
+    values_less_than_one_percent: 没有任何值所占比例高于1%
+    empty_string: 空字符串
+    unknown: 未知
+    count: 计数
+    image: 图像
+    no_image: 无图像
+    all: 全部
+    object_type: 类型
+    description: 描述
+    help: 帮助
+    length: 长度
+    icon: 图标
+    line: 线
+    area: 区域
+    language: 语言
+    search_for: 搜索……
+    objects_tooltip: 对象的数目（以绝对数量和所有节点、路径、关系的百分比展示）
+    nodes_tooltip: 节点的数目（以绝对数量和被各种不同标识的百分比展示；此外，没有任何标签的节点将被忽略）
+    ways_tooltip: 路径的数目（以绝对数量和所有路径的百分比展示）
+    relations_tooltip: 关系的数目（以绝对数量和所有关系的百分比展示）
+    values_tooltip: 这个键所拥有的不同值的个数
+    users_tooltip: 在某对象的最后一次编辑中使用了该键的用户数
+    prevalent_values: 高频值
+    prevalent_values_tooltip: 最多展示10个该键的最常见值（且仅当超过1%的该键为该值时）
+    in_wiki_tooltip: 有至少一个Wiki页面
+    status: 状态
+    approval_status: 被承认状态
+
+help:
+    search:
+        title: 搜索
+        intro: 使用右上角的搜索框来搜索标签的键和值。
+        string: 你可以搜索标签的键和值
+        substring: 仅有键和值的局部亦能正常搜索
+        complete_tags: 你可以搜索完整的标签
+        values_only: 你可以只搜索标签的值
+        suggestions: |
+            为了您的方便，在您输入的时候将自动向您推荐热门的键和标签。您可以单击选择后按<span class="key">Enter</span>.
+            您将直接跳转到所选的键或标签所对应的页面。
+    keyboard:
+        title: 键盘快捷键
+        site_navigation: 站点导航
+        page_navigation: 页面导航
+        table_navigation: 表格导航
+        keys:
+            home: Home
+            end: End
+            pageup: PgUp
+            pagedown: PgDn
+            esc: Esc
+            tab: TAB
+        home_page: 主页
+        keys_page: 键页面
+        tags_page: 标签页
+        relations_page: 关系页
+        projects_page: 项目页
+        reports_page: 报告页
+        compare_page: 对比页
+        first_page: 首页
+        prev_page: 上一页
+        next_page: 下一页
+        last_page: 末页
+        help_page: 帮助
+
+        prev_entry: 前一项
+        next_entry: 后一项
+
+pages:
+    not_found:
+        title: 未找到
+        intro: 抱歉，我们没能找到您所寻找的页面
+    index:
+        popular_keys: 一些热门的键
+        keys:
+            listkeys: 查看所有键
+        tags:
+            listtags: 查看最常见的标签
+        relations:
+            listrelations: 查看所有关系类型
+        reports:
+            listreports: 查看所有报告
+        about:
+            intro:
+                <p>OpenStreetMap 使用<b>key=value</b>表中的<b>标签</b>来为地理上的要素添加含义。
+                Taginfo通过多种来源收集这些标签的使用信息来帮助您理解他们的含义及用法。</p>
+            more: 关于taginfo的更多
+        international:
+            see: 查看其他taginfo站点
+    about:
+        about_taginfo:
+            title: 关于Taginfo
+        about_site:
+            title: 关于这个站点
+        building_on_taginfo:
+            title: 基于taginfo搭建
+            pre: |
+                <p>您可以在您的项目中使用taginfo的数据:</p>
+        software:
+            title: Taginfo软件
+    sources:
+        list:
+            title: 来源列表
+            intro: 这是目前使用的来源列表。未来可能还将引入更多来源。
+        updates:
+            title: 更新
+            intro: Taginfo的数据会定期从来源更新
+        data_until: 数据截止至
+        last_update_run: 最后一次更新运行于
+        data_until_explanation: 所有截止到这天的修改都会在数据里，之后的数据也有可能包含在内。
+        to: 到
+    download:
+        file: 文件
+        packed: 打包后的
+        unpacked: 未打包的
+        description: 描述
+        note: 有些未位于数据库内的索引不可在此下载。“打包后的”文件不包含这些索引，“未打包的”文件包含这些您可能会希望在下载重建的索引。
+    reports:
+        intro: |
+            报告将从不同角度展示标签数据。他们通常以有趣的方式汇集来自多个来源的数据。
+            部分报告或许可以帮您发现特定的错误。
+        list: 全部报告列表
+        data_sources: 所使用的数据集
+    search:
+        title: 搜索结果
+        you_were_searching_for: 您正在搜索
+        fulltext: 全文
+        no_keys: 未能找到键
+        no_values: 未能找到值
+        no_tags: 未能找到标签
+        no_match: 未能匹配到结果
+    keys:
+        intro: |
+                这个表展示了数据库或其他一切来源中的所有标签的键
+    tags:
+        intro: |
+                这个表展示了数据库中最常用的标签。
+    key:
+        description_from_wiki: Wiki上关于您所选的键的解释（若您当前的语言不可用则将默认为英文）
+        no_description_in_wiki: 在Wiki上找不到这个键的英文描述（亦可参见“Wiki”标签页）
+        filter:
+            label: |
+                 过滤器:
+            none: 无过滤器
+            nodes: 仅节点
+            ways: 仅路径
+            relations: 仅关系
+        button_disabled: 按钮不可用，因为这个键有太多对象。
+        number_objects: 对象的数量
+        number_values: 值的数量
+        values_used: 这个键用到的值
+        tag_description_from_wiki: 这个标签在Wiki上的描述（如果您所选的语言不可用就会展示英文版本）
+        overview:
+            objects_last_edited_by: 具有这个键的对象被%1的用户最后修改过。
+            no_endorsement: （这不意味着所有这些用户都认可这个键。）
+            distribution_of_values: 值的分布
+        other_keys_used:
+            title: 其他与这个键一并使用的键
+            other: 其他键
+            to_count_tooltip: 有这个键且同时有其他键的对象个数
+            other_key_tooltip: 与这个键一并使用的键。
+            from_count_tooltip: 有其他键同时包含这个键的对象个数
+        geographic_distribution:
+            title: 这个键在地图上的分布情况
+            all: 这展示了包含这个键的节点和路径的分布情况，但不包括关系。
+            nodes: 这展示了包含这个键的节点的分布情况。
+            ways: 这展示了包含这个键的路径的分布情况。
+            relations: 显示不同类型的关系在地图上的分布并不简单，因此我们不打算在此处显示地图。
+        wiki_pages:
+            title: 关于这个键的Wiki页面
+            none_found: 找不到这个键的Wiki页面
+            create: 为这个键创建Wiki页面
+            wiki_page: Wiki页面
+            implied_tags: 潜在的标签
+            combined_tags: 关联的标签
+            linked_tags: 链接的标签
+        projects:
+            title: 使用了这个键的项目
+            description: 这个键在这个项目中是如何被使用的
+        similar:
+            tab: 相似
+            title: 相似的键
+            other: 相似的键
+            count_all_tooltip: 与本键相似的键的对象个数
+            similarity: 相似性
+            similarity_tooltip: 越小的数字意味着越接近
+    project:
+        overview:
+            project_name: 项目名称
+            project_url: 项目URL
+            description: 描述
+            documentation_url: 文档
+            last_update: 最后更新
+            json_url: 项目的JSON文件
+
+flexigrid:
+    pagetext: 页
+    pagestat: 显示总计 {total} 项中的从{from}到{to}项
+    outof: of
+    findtext: 查找
+    procmsg: 处理中，请稍后……
+    nomsg: 没有项
+    errormsg: 连接错误
+
+comparison:
+    list: 比较列表
+    items: 项
+    add_key: 把这个键加入列表
+    add_tag: 把这个标签加入列表
+    clear: 清除比较列表
+    compare: 比较键或标签
+
+unicode:
+    character: 字符
+    codepoint: 内码
+    script: 书写系统
+    general_category: 基本类别
+    name: 内码对应的字符标准名称
+
+reports:
+    characters_in_keys:
+        name: 键中的字符数
+        intro: |
+            任何有效的Unicode字符都可以出现在OSM的键中，但通常会被用到的只有小写拉丁字母 (a-z) 和下划线 (_) 。
+            冒号 (:) 通常用作分隔符。这份报告根据所有键所使用的字符对它们进行分类。
+    database_statistics:
+        name: 数据库统计信息
+        objects_in_db: 数据库中的对象数量
+        tags_in_db: 数据库中的标签数量
+        distinct_keys: 不相同的键的数量
+        distinct_tags: 不相同的标签的数量
+    frequently_used_keys_without_wiki_page:
+        name: 没有Wiki页面的常用键
+    key_lengths:
+        name: 键长度
+        table:
+            number_of_objects: 对象数目
+        histogram:
+            name: 直方图
+            intro: 该直方图反映了不同长度的键与他们的数目的关系。
+            key_length: 键长度
+            number_of_keys: 键的数目
+    language_comparison_table_for_keys_in_the_wiki:
+        name: Wiki中的键的多语言对照表
+    languages:
+        name: 语言
+        code: 语言代码
+        native_name: 当地语言名
+        english_name: 英文名
+        wiki_key_pages: 键的Wiki页面
+        wiki_tag_pages: 标签的Wiki页面
+    wiki_pages_about_non_existing_keys:
+        name: 关于不存在的标签的Wiki页面
+        wiki_pages: Wiki页面
+    name_tags:
+        name: name标签的变体
+        overview:
+            tab: 概览
+            title: 概览
+    similar_keys:
+        name: 近似键
+        key_common: 广泛被使用的键
+        key_rare: 很少被使用的键
+        count_common: 计数
+        count_rare: 计数
+        similarity: 相似性
+    historic_development:
+        name: 历史上的开发用数据
+    wiki_images:
+        name: Wiki图片
+    wiki_problems:
+        name: Wiki解析问题

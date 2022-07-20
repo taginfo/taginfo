@@ -14,11 +14,3 @@
     <table id="grid-keys">
     </table>
 </div>
-<% javascript do
-    JS.raw(<<"JAVASCRIPT")
-function page_init2() {
-    create_flexigrid_with_option(#{ params[:english] == '1' ? '1' : '0' });
-}
-JAVASCRIPT
-end
-%>

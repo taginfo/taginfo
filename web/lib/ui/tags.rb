@@ -1,7 +1,7 @@
 # web/lib/ui/tags.rb
 class Taginfo < Sinatra::Base
 
-    get %r{^/tags/(.*)} do |tag|
+    get %r{/tags/(.*)} do |tag|
         if tag.match(/=/)
             kv = tag.split('=', 2)
         else
@@ -36,7 +36,7 @@ class Taginfo < Sinatra::Base
         end
         @count_all = @db.select("SELECT count_#{@filter_type} FROM db.tags").condition('key = ? AND value = ?', @key, @value).get_first_i
 
-        @desc = wrap_description(t.pages.tag, get_tag_description(r18n.locale.code, @key, @value))
+        @desc = wrap_description(t.pages.tag, get_tag_description(@key, @value))
 
         @db.select("SELECT width, height, image_url, thumb_url_prefix, thumb_url_suffix FROM wiki.wikipages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang=? AND key=? AND value=? UNION SELECT width, height, image_url, thumb_url_prefix, thumb_url_suffix FROM wiki.wikipages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang='en' AND key=? AND value=? LIMIT 1", r18n.locale.code, @key, @value, @key, @value).
             execute() do |row|
@@ -50,10 +50,16 @@ class Taginfo < Sinatra::Base
 
         @has_map = @db.count('tag_distributions').condition('key=? AND value=?', @key, @value).get_first_i > 0
 
-        @img_width  = TaginfoConfig.get('geodistribution.width')  * TaginfoConfig.get('geodistribution.scale_image')
-        @img_height = TaginfoConfig.get('geodistribution.height') * TaginfoConfig.get('geodistribution.scale_image')
+        if Source.get(:chronology)
+            @has_chronology = @db.count('tags_chronology').condition('key=? AND value=?', @key, @value).get_first_i > 0
+        end
 
-        javascript_for(:flexigrid)
+        @img_width  = @taginfo_config.get('geodistribution.width')  * @taginfo_config.get('geodistribution.scale_image')
+        @img_height = @taginfo_config.get('geodistribution.height') * @taginfo_config.get('geodistribution.scale_image')
+
+        @links = get_links(@key, @value)
+
+        javascript_for(:flexigrid, :d3)
         javascript "#{ r18n.locale.code }/tag"
         erb :tag
     end
