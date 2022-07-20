@@ -50,6 +50,7 @@ taginfo:
     key_combinations: 조합
     comparison: 키/태그 비교
     overview: 개요
+    characters: 문자
     links: 링크
     data_from: 최근
     data_from_description: taginfo 데이터베이스를 마지막으로 갱신한 날
@@ -344,6 +345,8 @@ pages:
             count_all_tooltip: 비슷한 키를 사용하는 요소의 수
             similarity: 유사성
             similarity_tooltip: 수치가 낮을수록 더 비슷합니다
+        characters:
+            title: 키를 구성하는 유니코드 문자
     tag:
         description_from_wiki: 이 태그에 대한 위키에서 가져온 설명(현재 선택한 언어로 존재하면 현재 언어, 그렇지 않으면 영어).
         no_description_in_wiki: 이 태그에 대한 영어 설명이 위키에 없습니다("Wiki" 탭 참조).
@@ -381,6 +384,8 @@ pages:
         projects:
             title: 이 키를 사용하는 프로젝트
             description: 프로젝트에서 이 키를 사용한 방법
+        characters:
+            title: 태그 값을 구성하는 유니코드 문자
     relation:
         name: 관계 유형
         description_from_wiki: 이 관계 유형에 대한 위키에서 가져온 설명(현재 선택한 언어로 존재하면 현재 언어, 그렇지 않으면 영어).
@@ -411,6 +416,8 @@ pages:
         projects:
             title: 이 관계 유형을 사용하는 프로젝트
             description: 프로젝트에서 이 관계 유형을 사용한 방법
+        characters:
+            title: 관계 유형의 유니코드 문자
     project:
         overview:
             project_name: 프로젝트 이름
@@ -467,6 +474,13 @@ sources:
     chronology:
         name: Chronology
         description: 과거 OSM 데이터에 존재하는 키/태그의 개수.
+
+unicode:
+    character: 문자
+    codepoint: 부호
+    script: 문자 체계
+    general_category: 일반 범주
+    name: 유니코드 부호의 명칭
 
 reports:
     characters_in_keys:
