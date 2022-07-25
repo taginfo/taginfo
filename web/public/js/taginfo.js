@@ -699,10 +699,10 @@ function open_help() {
 
 class ComparisonList {
 
-    #list = [];
+    list = [];
 
     constructor(list = []) {
-        this.#list = list.map(function(d) {
+        this.list = list.map(function(d) {
             if (d.value === undefined) {
                 d.value = null;
             }
@@ -712,29 +712,29 @@ class ComparisonList {
 
     load() {
         const tcl = window.sessionStorage.getItem('taginfo_comparison_list');
-        this.#list = tcl ? JSON.parse(tcl) : [];
+        this.list = tcl ? JSON.parse(tcl) : [];
     }
 
     store() {
-        window.sessionStorage.setItem('taginfo_comparison_list', JSON.stringify(this.#list));
+        window.sessionStorage.setItem('taginfo_comparison_list', JSON.stringify(this.list));
     }
 
     get length() {
-        return this.#list.length;
+        return this.list.length;
     }
 
     add(key, value = null) {
         if (!this.contains(key, value)) {
-            this.#list.push([key, value]);
+            this.list.push([key, value]);
         }
     }
 
     clear() {
-        this.#list = [];
+        this.list = [];
     }
 
     contains(key, value) {
-        return this.#list.find( item => item[0] == key && item[1] == value ) !== undefined;
+        return this.list.find( item => item[0] == key && item[1] == value ) !== undefined;
     }
 
     compare() {
@@ -748,17 +748,17 @@ class ComparisonList {
             return text === null || text.match(/^[a-zA-Z0-9:_]+$/) !== null;
         };
 
-        const is_clean = this.#list.every( item => item_is_clean(item[0]) &&
+        const is_clean = this.list.every( item => item_is_clean(item[0]) &&
                                                    item_is_clean(item[1]) );
 
         if (is_clean) {
-            const kv = this.#list.map( item => item[0] + (item[1] === null ? '' : ('=' + item[1])) );
+            const kv = this.list.map( item => item[0] + (item[1] === null ? '' : ('=' + item[1])) );
             return '/compare/' + kv.join('/');
         }
 
         let params = new URLSearchParams();
-        this.#list.forEach( item => params.append('key[]', item[0] ) );
-        this.#list.forEach( item => params.append('value[]', item[1] || '' ) );
+        this.list.forEach( item => params.append('key[]', item[0] ) );
+        this.list.forEach( item => params.append('value[]', item[1] || '' ) );
 
         return '/compare/?' + params.toString();
     }
@@ -766,15 +766,15 @@ class ComparisonList {
 
 class ComparisonListDisplay {
 
-    #comparison_list;
-    #key = null;
-    #value = null;
+    comparison_list;
+    key = null;
+    value = null;
 
     constructor(key, value = null) {
         const list = new ComparisonList();
-        this.#comparison_list = list;
-        this.#key = key;
-        this.#value = value;
+        this.comparison_list = list;
+        this.key = key;
+        this.value = value;
 
         list.load();
         this.update();
@@ -785,7 +785,7 @@ class ComparisonListDisplay {
     }
 
     update() {
-        const length = this.#comparison_list.length;
+        const length = this.comparison_list.length;
 
         const title = document.querySelector('#comparison-list div');
         title.textContent = title.textContent.replace(/([0-9]+)/, String(length));
@@ -794,7 +794,7 @@ class ComparisonListDisplay {
             document.getElementById('comparison-list-' + id).className = condition ? '' : 'disabled';
         };
 
-        enable_disable('add', !this.#comparison_list.contains(this.#key, this.#value));
+        enable_disable('add', !this.comparison_list.contains(this.key, this.value));
         enable_disable('clear', length > 0);
         enable_disable('compare', length >= 2);
     }
