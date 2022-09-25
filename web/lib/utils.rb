@@ -44,7 +44,7 @@ end
 def title
     @title = [] if @title.nil?
     @title = [@title] unless @title.is_a?(Array)
-    @title << TaginfoConfig.get('instance.name', 'OpenStreetMap Taginfo')
+    @title << @taginfo_config.get('instance.name', 'OpenStreetMap Taginfo')
     @title.join(' | ')
 end
 

@@ -60,7 +60,7 @@ class Taginfo < Sinatra::Base
 
     get '/taginfo/status' do
         content_type 'text/plain'
-        age_in_days = DateTime.now() - DateTime.parse(@data_until)
+        age_in_days = DateTime.now() - DateTime.parse(@db.data_until)
         if age_in_days.to_f > 1.5
             halt 400, "data_too_old\n"
         else

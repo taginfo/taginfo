@@ -33,6 +33,11 @@ class Source
 
     attr_reader :id, :name, :data_until, :update_start, :update_end, :visible, :dbsize, :dbpack
 
+    def initialize(taginfo_config)
+       @taginfo_config = taginfo_config
+       @sources = Array.new
+    end
+
     # Enumerate all available sources
     def self.each
         @@sources.values.each do |source|
@@ -41,8 +46,12 @@ class Source
     end
 
     # The number of available sources
-    def self.size
-        @@sources.size
+    def size
+        @sources.size
+    end
+
+    def visible
+        @sources.select{ |source| source.visible }
     end
 
     def self.visible
@@ -52,8 +61,6 @@ class Source
     def self.get(id)
         @@sources[id]
     end
-
-    # Create new source
     #  id - Symbol with id for this source
     #  name - Name of this source
     def initialize(taginfo_config, id, name, data_until, update_start, update_end, visible)
