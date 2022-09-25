@@ -28,7 +28,7 @@ class Source
     # Create new source
     #  id - Symbol with id for this source
     #  name - Name of this source
-    def initialize(id, name, data_until, update_start, update_end, visible)
+    def initialize(taginfo_config, id, name, data_until, update_start, update_end, visible)
         @id           = id.to_sym
         @name         = name
         @data_until   = data_until
@@ -36,8 +36,8 @@ class Source
         @update_end   = update_end
         @visible      = visible
 
-        data_dir = TaginfoConfig.get('paths.data_dir', '../../data')
-        download_dir = TaginfoConfig.get('paths.download_dir', '../../download')
+        data_dir = taginfo_config.get('paths.data_dir', '../../data')
+        download_dir = taginfo_config.get('paths.download_dir', '../../download')
         @dbsize = File.size("#{ data_dir }/#{ dbname }").to_bytes rescue 0
         @dbpack = File.size("#{ download_dir }/#{ dbname }.bz2").to_bytes rescue 0
 
