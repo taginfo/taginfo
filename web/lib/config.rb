@@ -2,16 +2,22 @@
 
 class TaginfoConfig
 
-    @@config = {}
+    @config = {}
+    @id = ''
 
-    def self.read
-        open(File.expand_path(File.dirname(__FILE__)) + '/../../../taginfo-config.json') do |file|
-            @@config = JSON.parse(file.gets(nil), { :create_additions => false })
+    def initialize(configfile, id)
+        open(configfile) do |file|
+            @config = JSON.parse(file.gets(nil), { :create_additions => false })
         end
+        @id = id
     end
 
-    def self.get(key, default=nil)
-        tree = @@config
+    def id
+        @id
+    end
+
+    def get(key, default=nil)
+        tree = @config
         key.split('.').each do |i|
             tree = tree[i]
             return default unless tree
@@ -21,8 +27,8 @@ class TaginfoConfig
 
     # Config without anything that a security concious admin wouldn't want to
     # be public. Currently everything that contains local paths is removed.
-    def self.sanitized_config
-        c = @@config
+    def sanitized_config
+        c = @config
         c['paths'] && c.delete('paths')
         c['sources'] && c['sources'].delete('db')
         c['sources'] && c['sources'].delete('chronology')

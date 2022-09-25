@@ -58,14 +58,14 @@ require 'lib/langtag/bcp47.rb'
 
 #------------------------------------------------------------------------------
 
-TaginfoConfig.read
+TAGINFO_CONFIG = TaginfoConfig.new('../../taginfo-config.json', nil);
 
 #------------------------------------------------------------------------------
 
 ALL_SECTIONS = %w(download taginfo test)
-SECTIONS = Hash[TaginfoConfig.get('instance.sections', ALL_SECTIONS).collect { |s| [s.to_sym, s] } ]
+SECTIONS = Hash[TAGINFO_CONFIG.get('instance.sections', ALL_SECTIONS).collect { |s| [s.to_sym, s] } ]
 
-DATA_UNTIL = SQL::Database.init(TaginfoConfig.get('paths.data_dir', '../../data'));
+# FRED DATA_UNTIL = SQL::Database.init(TaginfoConfig.get('paths.data_dir', '../../data'));
 
 class Taginfo < Sinatra::Base
 
@@ -105,7 +105,7 @@ class Taginfo < Sinatra::Base
     end
 
     before do
-        @taginfo_config = TaginfoConfig
+        @taginfo_config = TAGINFO_CONFIG
 
         if request.cookies['taginfo_locale'] && request.path != '/switch_locale'
             params[:locale] = request.cookies['taginfo_locale']
@@ -119,11 +119,8 @@ class Taginfo < Sinatra::Base
         # (otherwise switching languages doesn't work)
         expires 0, :no_cache
 
-        @db = SQL::Database.new.attach_sources
+        @db = SQL::Database.new(@taginfo_config).attach_sources
         $WIKIPEDIA_SITES = @db.execute('SELECT prefix FROM wikipedia_sites').map{ |row| row['prefix'] }
-
-        @data_until = DATA_UNTIL.sub(/:..$/, '')
-        @data_until_m = DATA_UNTIL.sub(' ', 'T') + 'Z'
     end
 
     after do

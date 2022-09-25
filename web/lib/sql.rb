@@ -6,23 +6,6 @@ module SQL
     # Wrapper for a database connection.
     class Database
 
-        # This has to be called once to initialize the context for the database
-        def self.init(dir)
-            @@dir = dir
-
-            db = SQL::Database.new
-
-            db.select('SELECT * FROM sources ORDER BY no').execute().each do |source|
-                Source.new(source['id'], source['name'], source['data_until'], source['update_start'], source['update_end'], source['visible'].to_i == 1)
-            end
-
-            data_until = db.select("SELECT min(data_until) FROM sources WHERE id='db'").get_first_value()
-
-            db.close
-
-            data_until
-        end
-
         def initialize(taginfo_config)
             @dir = taginfo_config.get('paths.data_dir')
             filename = @dir + '/taginfo-master.db'

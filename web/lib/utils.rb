@@ -84,7 +84,7 @@ def xapi_url(element, key, value=nil)
     else
         predicate += xapi_escape(value)
     end
-    TaginfoConfig.get('xapi.url_prefix', 'http://www.informationfreeway.org/api/0.6/') + "#{ element }[#{ Rack::Utils::escape(predicate) }]"
+    @taginfo_config.get('xapi.url_prefix', 'http://www.informationfreeway.org/api/0.6/') + "#{ element }[#{ Rack::Utils::escape(predicate) }]"
 end
 
 def xapi_link(element, key, value=nil)
@@ -100,7 +100,7 @@ def quote_double(text)
 end
 
 def turbo_link(count, filter, key, value=nil)
-    if count <= TaginfoConfig.get('turbo.max_auto', 100)
+    if count <= @taginfo_config.get('turbo.max_auto', 100)
         key = quote_double(key)
         if value.nil?
             value = '*'
@@ -110,7 +110,7 @@ def turbo_link(count, filter, key, value=nil)
         if filter != 'all'
             filter_condition = ' and type:' + filter.chop
         end
-        url = TaginfoConfig.get('turbo.url_prefix', 'https://overpass-turbo.eu/?') + 'w=' + Rack::Utils::escape('"' + key + '"=' + value + filter_condition.to_s + ' ' + TaginfoConfig.get('turbo.wizard_area', 'global')) + '&R'
+        url = @taginfo_config.get('turbo.url_prefix', 'https://overpass-turbo.eu/?') + 'w=' + Rack::Utils::escape('"' + key + '"=' + value + filter_condition.to_s + ' ' + @taginfo_config.get('turbo.wizard_area', 'global')) + '&R'
     else
         template = 'key';
         parameters = { :key => key }
@@ -126,7 +126,7 @@ def turbo_link(count, filter, key, value=nil)
         end
         parameters[:template] = template
 
-        url = TaginfoConfig.get('turbo.url_prefix', 'https://overpass-turbo.eu/?') + Rack::Utils::build_query(parameters)
+        url = @taginfo_config.get('turbo.url_prefix', 'https://overpass-turbo.eu/?') + Rack::Utils::build_query(parameters)
     end
     return external_link('turbo_button', 'Overpass turbo', url, true)
 end
@@ -148,9 +148,9 @@ def level0_url(filter, key, value)
         query = '(node' + query + 'way' + query + '>;rel' + query + ');'
     end
 
-    overpass_url = TaginfoConfig.get('level0.overpass_url_prefix') + Rack::Utils::build_query({ :data => '[out:xml];' + query + 'out meta;' })
+    overpass_url = @taginfo_config.get('level0.overpass_url_prefix') + Rack::Utils::build_query({ :data => '[out:xml];' + query + 'out meta;' })
 
-    return TaginfoConfig.get('level0.level0_url_prefix') + Rack::Utils::build_query({ :url => overpass_url })
+    return @taginfo_config.get('level0.level0_url_prefix') + Rack::Utils::build_query({ :url => overpass_url })
 end
 
 def level0_link(filter, key, value=nil)
@@ -365,4 +365,3 @@ def unpack_chronology(raw_data)
 
     return data
 end
-
