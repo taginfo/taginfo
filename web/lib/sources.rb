@@ -1,4 +1,32 @@
 # web/lib/sources.rb
+class Sources
+
+    def initialize(taginfo_config)
+       @taginfo_config = taginfo_config
+       @sources = Array.new
+    end
+
+    # Enumerate all available sources
+    def each
+        @sources.each do |source|
+            yield source
+        end
+    end
+
+    # The number of available sources
+    def size
+        @sources.size
+    end
+
+    def visible
+        @sources.select{ |source| source.visible }
+    end
+
+    def add(id, name, data_until, update_start, update_end, visible)
+        @sources << Source.new(@taginfo_config, id, name, data_until, update_start, update_end, visible)
+    end
+end
+
 class Source
 
     @@sources = Hash.new
