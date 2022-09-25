@@ -65,8 +65,6 @@ TAGINFO_CONFIG = TaginfoConfig.new('../../taginfo-config.json', nil);
 ALL_SECTIONS = %w(download taginfo test)
 SECTIONS = Hash[TAGINFO_CONFIG.get('instance.sections', ALL_SECTIONS).collect { |s| [s.to_sym, s] } ]
 
-# FRED DATA_UNTIL = SQL::Database.init(TaginfoConfig.get('paths.data_dir', '../../data'));
-
 class Taginfo < Sinatra::Base
 
     register Sinatra::R18n
