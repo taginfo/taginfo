@@ -28,7 +28,7 @@ module SQL
             @db = SQLite3::Database.new(filename, { :readonly => true })
             @db.results_as_hash = true
 
-            pcre_extension = TaginfoConfig.get('paths.sqlite3_pcre_extension')
+            pcre_extension = TAGINFO_CONFIG.get('paths.sqlite3_pcre_extension')
             if pcre_extension
                 @db.load_extension(pcre_extension)
             end
@@ -61,7 +61,7 @@ module SQL
             out = yield
             duration = Time.now - t1
 
-            min_duration = TaginfoConfig.get('logging.min_duration', 0)
+            min_duration = TAGINFO_CONFIG.get('logging.min_duration', 0)
             if duration > min_duration
                 if params.size > 0
                     p = ' params=[' + params.map{ |param| "'#{param}'" }.join(', ') + ']'

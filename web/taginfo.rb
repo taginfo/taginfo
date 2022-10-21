@@ -58,14 +58,14 @@ require 'lib/langtag/bcp47.rb'
 
 #------------------------------------------------------------------------------
 
-TaginfoConfig.read
+TAGINFO_CONFIG = TaginfoConfig.new(File.expand_path(File.dirname(__FILE__)) + '/../../taginfo-config.json');
 
 #------------------------------------------------------------------------------
 
 ALL_SECTIONS = %w(download taginfo test)
-SECTIONS = Hash[TaginfoConfig.get('instance.sections', ALL_SECTIONS).collect { |s| [s.to_sym, s] } ]
+SECTIONS = Hash[TAGINFO_CONFIG.get('instance.sections', ALL_SECTIONS).collect { |s| [s.to_sym, s] } ]
 
-DATA_UNTIL = SQL::Database.init(TaginfoConfig.get('paths.data_dir', '../../data'));
+DATA_UNTIL = SQL::Database.init(TAGINFO_CONFIG.get('paths.data_dir', '../../data'));
 
 class Taginfo < Sinatra::Base
 
@@ -105,7 +105,7 @@ class Taginfo < Sinatra::Base
     end
 
     before do
-        @taginfo_config = TaginfoConfig
+        @taginfo_config = TAGINFO_CONFIG
 
         if request.cookies['taginfo_locale'] && request.path != '/switch_locale'
             params[:locale] = request.cookies['taginfo_locale']
