@@ -455,7 +455,7 @@ class Taginfo < Sinatra::Base
         :example => { :key => 'highway' },
         :ui => '/keys/highway#chronology'
     }) do
-        if not Source.get(:chronology)
+        if not @sources.get(:chronology)
             return generate_json_result(0, []);
         end
 

@@ -6,27 +6,16 @@ module SQL
     # Wrapper for a database connection.
     class Database
 
-        # This has to be called once to initialize the context for the database
-        def self.init(dir)
-            @@dir = dir
-
-            db = SQL::Database.new
-
-            db.select('SELECT * FROM sources ORDER BY no').execute().each do |source|
-                Source.new(source['id'], source['name'], source['data_until'], source['update_start'], source['update_end'], source['visible'].to_i == 1)
-            end
-
-            data_until = db.select("SELECT min(data_until) FROM sources WHERE id='db'").get_first_value()
-
-            db.close
-
-            data_until
-        end
-
-        def initialize
-            filename = @@dir + '/taginfo-master.db'
+        def initialize(sources)
+            @sources = sources
+            @dir = TAGINFO_CONFIG.get('paths.data_dir', '../../data')
+            filename = @dir + '/taginfo-master.db'
             @db = SQLite3::Database.new(filename, { :readonly => true })
             @db.results_as_hash = true
+
+            select('SELECT * FROM sources ORDER BY no').execute().each do |source|
+                sources.add(TAGINFO_CONFIG, source['id'], source['name'], source['data_until'], source['update_start'], source['update_end'], source['visible'].to_i == 1)
+            end
 
             pcre_extension = TAGINFO_CONFIG.get('paths.sqlite3_pcre_extension')
             if pcre_extension
@@ -39,12 +28,12 @@ module SQL
         end
 
         def attach_source(filename, name)
-            @db.execute('ATTACH DATABASE ? AS ?', "#{ @@dir }/#{ filename }", name)
+            @db.execute('ATTACH DATABASE ? AS ?', "#{ @dir }/#{ filename }", name)
             @db.execute("PRAGMA #{ name }.journal_mode = OFF")
         end
 
         def attach_sources
-            Source.each do |source|
+            @sources.each do |source|
                 attach_source(source.dbname, source.id.to_s)
             end
             attach_source('taginfo-history.db', 'history')

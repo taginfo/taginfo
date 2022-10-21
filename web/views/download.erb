@@ -24,7 +24,7 @@
             <td class="tr even"><%= File.size("#{ @taginfo_config.get('paths.data_dir', '../../data') }/taginfo-history.db").to_bytes rescue "<span class='empty'>#{ h(t.misc.unknown) }</span>" %></td>
             <td class="tl even"><%= h(t.sources.history.description) %></td>
         </tr>
-<% Source.visible.each_with_index do |source, n| c = (n%2==0) ? '' : ' even' %>
+<% @sources.visible.each_with_index do |source, n| c = (n%2==0) ? '' : ' even' %>
         <tr>
             <td class="tl<%= c %>"><%= source.link_download %></td>
             <td class="tr<%= c %>"><%= source.dbpack != 0 ? source.dbpack : "<span class='empty'>#{ t.misc.unknown }</span>" %></td>

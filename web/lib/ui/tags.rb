@@ -50,7 +50,7 @@ class Taginfo < Sinatra::Base
 
         @has_map = @db.count('tag_distributions').condition('key=? AND value=?', @key, @value).get_first_i > 0
 
-        if Source.get(:chronology)
+        if @sources.get(:chronology)
             @has_chronology = @db.count('tags_chronology').condition('key=? AND value=?', @key, @value).get_first_i > 0
         end
 

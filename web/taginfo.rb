@@ -9,7 +9,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2010-2021  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2010-2022  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -65,8 +65,6 @@ TAGINFO_CONFIG = TaginfoConfig.new(File.expand_path(File.dirname(__FILE__)) + '/
 ALL_SECTIONS = %w(download taginfo test)
 SECTIONS = Hash[TAGINFO_CONFIG.get('instance.sections', ALL_SECTIONS).collect { |s| [s.to_sym, s] } ]
 
-DATA_UNTIL = SQL::Database.init(TAGINFO_CONFIG.get('paths.data_dir', '../../data'));
-
 class Taginfo < Sinatra::Base
 
     register Sinatra::R18n
@@ -119,11 +117,13 @@ class Taginfo < Sinatra::Base
         # (otherwise switching languages doesn't work)
         expires 0, :no_cache
 
-        @db = SQL::Database.new.attach_sources
+        @sources = Sources.new
+        @db = SQL::Database.new(@sources).attach_sources
         $WIKIPEDIA_SITES = @db.execute('SELECT prefix FROM wikipedia_sites').map{ |row| row['prefix'] }
 
-        @data_until = DATA_UNTIL.sub(/:..$/, '')
-        @data_until_m = DATA_UNTIL.sub(' ', 'T') + 'Z'
+        data_until_raw = @db.select("SELECT min(data_until) FROM sources WHERE id='db'").get_first_value()
+        @data_until = data_until_raw.sub(/:..$/, '')
+        @data_until_m = data_until_raw.sub(' ', 'T') + 'Z'
     end
 
     after do
