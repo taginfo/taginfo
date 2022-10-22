@@ -9,6 +9,7 @@ class Taginfo < Sinatra::Base
 
     Report.each do |report|
         get report.url do
+            @title = [report.title, t.taginfo.reports]
             section :reports
             if File.exists?("viewsjs/reports/#{ report.name }.js.erb")
                 javascript "#{ r18n.locale.code }/reports/#{ report.name }"
