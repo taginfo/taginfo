@@ -118,7 +118,7 @@ class Taginfo < Sinatra::Base
         expires 0, :no_cache
 
         @sources = Sources.new
-        @db = SQL::Database.new(@sources).attach_sources
+        @db = SQL::Database.new(@taginfo_config, @sources).attach_sources
         $WIKIPEDIA_SITES = @db.execute('SELECT prefix FROM wikipedia_sites').map{ |row| row['prefix'] }
 
         data_until_raw = @db.select("SELECT min(data_until) FROM sources WHERE id='db'").get_first_value()
