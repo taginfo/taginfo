@@ -103,7 +103,7 @@ module SQL
         end
 
         def stats(key)
-            get_first_value('SELECT value FROM master_stats WHERE key=?', key).to_i
+            get_first_value('SELECT value FROM master_stats WHERE key=?', key.force_encoding('UTF-8')).to_i
         end
 
         def quote(data)
