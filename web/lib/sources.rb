@@ -1,8 +1,18 @@
 # web/lib/sources.rb
 class Sources
 
-    def initialize
+    def initialize(taginfo_config, db)
+        data_dir = taginfo_config.get('paths.data_dir', '../../data')
+        download_dir = taginfo_config.get('paths.download_dir', '../../download')
+
         @sources = Hash.new
+        db.select('SELECT * FROM sources ORDER BY no').execute().each do |source|
+            @sources[source['id'].to_sym] = Source.new(data_dir, download_dir, source['id'], source['name'], source['data_until'], source['update_start'], source['update_end'], source['visible'].to_i == 1)
+        end
+        @sources.each_value do |source|
+            db.attach_source(source.dbname, source.id.to_s)
+        end
+        db.attach_source('taginfo-history.db', 'history')
     end
 
     # Enumerate all available sources
@@ -25,10 +35,6 @@ class Sources
         @sources[id]
     end
 
-    def add(taginfo_config, id, name, data_until, update_start, update_end, visible)
-        @sources[id.to_sym] = Source.new(taginfo_config, id, name, data_until, update_start, update_end, visible)
-    end
-
 end
 
 class Source
@@ -38,7 +44,7 @@ class Source
     # Create new source
     #  id - Symbol with id for this source
     #  name - Name of this source
-    def initialize(taginfo_config, id, name, data_until, update_start, update_end, visible)
+    def initialize(data_dir, download_dir, id, name, data_until, update_start, update_end, visible)
         @id           = id.to_sym
         @name         = name
         @data_until   = data_until
@@ -46,8 +52,6 @@ class Source
         @update_end   = update_end
         @visible      = visible
 
-        data_dir = taginfo_config.get('paths.data_dir', '../../data')
-        download_dir = taginfo_config.get('paths.download_dir', '../../download')
         @dbsize = File.size("#{ data_dir }/#{ dbname }").to_bytes rescue 0
         @dbpack = File.size("#{ download_dir }/#{ dbname }.bz2").to_bytes rescue 0
     end

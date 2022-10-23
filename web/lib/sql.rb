@@ -6,39 +6,29 @@ module SQL
     # Wrapper for a database connection.
     class Database
 
-        def initialize(taginfo_config, sources)
-            @sources = sources
+        def initialize(taginfo_config)
             @dir = taginfo_config.get('paths.data_dir', '../../data')
             filename = @dir + '/taginfo-master.db'
             @db = SQLite3::Database.new(filename, { :readonly => true })
             @db.results_as_hash = true
-            @min_duration = taginfo_config.get('logging.min_duration', 0)
-
-            select('SELECT * FROM sources ORDER BY no').execute().each do |source|
-                sources.add(taginfo_config, source['id'], source['name'], source['data_until'], source['update_start'], source['update_end'], source['visible'].to_i == 1)
-            end
 
             pcre_extension = taginfo_config.get('paths.sqlite3_pcre_extension')
             if pcre_extension
                 @db.load_extension(pcre_extension)
             end
+
             @db.execute('PRAGMA journal_mode = OFF')
+
             @db.execute('SELECT * FROM languages') do |row|
                 Language.new(row)
             end
+
+            @min_duration = taginfo_config.get('logging.min_duration', 0)
         end
 
         def attach_source(filename, name)
             @db.execute('ATTACH DATABASE ? AS ?', "#{ @dir }/#{ filename }", name)
             @db.execute("PRAGMA #{ name }.journal_mode = OFF")
-        end
-
-        def attach_sources
-            @sources.each do |source|
-                attach_source(source.dbname, source.id.to_s)
-            end
-            attach_source('taginfo-history.db', 'history')
-            self
         end
 
         def close
