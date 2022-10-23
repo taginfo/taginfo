@@ -103,6 +103,9 @@ module SQL
 
             @query      = [query]
             @conditions = []
+            @limit      = nil
+            @group_by   = nil
+            @order_by   = nil
 
             @params = params
         end
