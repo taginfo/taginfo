@@ -84,6 +84,12 @@ You can change various settings in the [config file](web/uwsgi.ini) and use
 it through a web server like Apache2 or Nginx.
 
 
+## Tests
+
+There are a few tests for the Ruby code. Call `rake` in the `web` directory to
+run the tests.
+
+
 ## Javascript
 
 Taginfo uses the following Javascript libraries:
