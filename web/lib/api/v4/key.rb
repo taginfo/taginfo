@@ -92,7 +92,7 @@ class Taginfo < Sinatra::Base
                                                                           OR (s.key2 LIKE ? ESCAPE '@') AND s.key1=?", query, key, query, key).get_first_i
         else
             total = @db.count('db.similar_keys').
-                        condition("key1=? OR key2=?", key, key).
+                        condition('key1=? OR key2=?', key, key).
                         get_first_i
         end
 
@@ -172,7 +172,7 @@ class Taginfo < Sinatra::Base
             end
         end
 
-        return generate_json_result(4, out);
+        return generate_json_result(4, out)
     end
 
     api(4, 'key/values', {
@@ -456,7 +456,7 @@ class Taginfo < Sinatra::Base
         :ui => '/keys/highway#chronology'
     }) do
         if not @sources.get(:chronology)
-            return generate_json_result(0, []);
+            return generate_json_result(0, [])
         end
 
         key = params[:key]
@@ -467,7 +467,7 @@ class Taginfo < Sinatra::Base
 
         data = unpack_chronology(res)
 
-        return generate_json_result(data.size(), data);
+        return generate_json_result(data.size(), data)
     end
 
     api(4, 'key/overview', {
@@ -552,7 +552,7 @@ class Taginfo < Sinatra::Base
             data[:description][row['lang']] = { :text => row['description'], :dir => direction_from_lang_code(row['lang']) }
         }
 
-        return generate_json_result(1, data);
+        return generate_json_result(1, data)
     end
 
 end

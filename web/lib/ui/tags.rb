@@ -28,7 +28,7 @@ class Taginfo < Sinatra::Base
         @filter_type = get_filter()
         @sel = Hash.new('')
         @sel[@filter_type] = ' selected="selected"'
-        @filter_xapi = { 'all' => '*', nil => '*', 'nodes' => 'node', 'ways' => 'way', 'relations' => 'relation' }[@filter_type];
+        @filter_xapi = { 'all' => '*', nil => '*', 'nodes' => 'node', 'ways' => 'way', 'relations' => 'relation' }[@filter_type]
 
         @wiki_count = @db.count('wiki.wikipages').condition('key=? AND value=?', @key, @value).get_first_i
         if @wiki_count == 0

@@ -144,7 +144,7 @@ class Taginfo < Sinatra::Base
 
         res.each do |data|
             unless data['wiki'].nil?
-                data['wiki'].values.each do |data_for_lang|
+                data['wiki'].each_value do |data_for_lang|
                     add_image_data(images, data_for_lang, 'image')
                     add_image_data(images, data_for_lang, 'osmcarto_rendering')
                 end

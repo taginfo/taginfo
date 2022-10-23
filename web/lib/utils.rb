@@ -112,11 +112,11 @@ def turbo_link(count, filter, key, value=nil)
         end
         url = @taginfo_config.get('turbo.url_prefix', 'https://overpass-turbo.eu/?') + 'w=' + Rack::Utils::escape('"' + key + '"=' + value + filter_condition.to_s + ' ' + @taginfo_config.get('turbo.wizard_area', 'global')) + '&R'
     else
-        template = 'key';
+        template = 'key'
         parameters = { :key => key }
 
         unless value.nil?
-            parameters[:value] = value;
+            parameters[:value] = value
             template += '-value'
         end
 
@@ -304,9 +304,9 @@ def get_wiki_result(res)
             :on_way           => row['on_way'].to_i      == 1,
             :on_area          => row['on_area'].to_i     == 1,
             :on_relation      => row['on_relation'].to_i == 1,
-            :tags_implies     => row['tags_implies'    ].split(','),
+            :tags_implies     => row['tags_implies'].split(','),
             :tags_combination => row['tags_combination'].split(','),
-            :tags_linked      => row['tags_linked'     ].split(','),
+            :tags_linked      => row['tags_linked'].split(','),
             :status           => row['approval_status']
         } }
     )
@@ -320,7 +320,7 @@ def paging_results(array)
         [ :url,        :STRING, 'URL of the request.' ],
         [ :data_until, :STRING, 'All changes in the source until this date are reflected in this taginfo result.' ],
         [ :data,       :ARRAY_OF_HASHES, 'Array with results.', array ]
-    ];
+    ]
 end
 
 def no_paging_results(array)
@@ -329,7 +329,7 @@ def no_paging_results(array)
         [ :url,        :STRING, 'URL of the request.' ],
         [ :data_until, :STRING, 'All changes in the source until this date are reflected in this taginfo result.' ],
         [ :data,       :ARRAY_OF_HASHES, 'Array with results.', array ]
-    ];
+    ]
 end
 
 MAX_IMAGE_WIDTH = 300
@@ -352,10 +352,10 @@ def unpack_chronology(raw_data)
     if raw_data
         flat_data = raw_data.unpack('l*')
 
-        while (flat_data.size() > 0) do
+        while !flat_data.empty?
             day = flat_data.shift(4)
             data << {
-                :date      => Time.at(day[0] * (60*60*24)).to_date.to_s,
+                :date      => Time.at(day[0] * (60 * 60 * 24)).to_date.to_s,
                 :nodes     => day[1],
                 :ways      => day[2],
                 :relations => day[3]
@@ -363,5 +363,5 @@ def unpack_chronology(raw_data)
         end
     end
 
-    return data
+    data
 end

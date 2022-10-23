@@ -109,7 +109,7 @@ class Taginfo < Sinatra::Base
                 end
             end
 
-        return generate_json_result(4, out);
+        return generate_json_result(4, out)
     end
 
     api(4, 'relation/wiki_pages', {
@@ -141,8 +141,7 @@ class Taginfo < Sinatra::Base
 
         res = @db.execute('SELECT * FROM wiki.relation_pages LEFT OUTER JOIN wiki.wiki_images USING (image) WHERE rtype = ? ORDER BY lang', rtype)
 
-        return generate_json_result(res.size, res.map{ |row|
-                {
+        return generate_json_result(res.size, res.map{ |row| {
                 :lang             => row['lang'],
                 :dir              => direction_from_lang_code(row['lang']),
                 :language         => ::Language[row['lang']].native_name,

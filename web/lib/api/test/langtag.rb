@@ -26,7 +26,6 @@ class Taginfo < Sinatra::Base
         :example => { :page => 1, :rp => 10, :sortname => 'key', :sortorder => 'asc' },
         :ui => '/reports/name_tags'
     }) do
-
         total = @db.count('db.keys').
             condition("key LIKE '%name%'").
             condition_if("key LIKE '%' || ? || '%'", params[:query]).
@@ -70,9 +69,9 @@ class Taginfo < Sinatra::Base
         }, json_opts(params[:format]))
     end
 
-    @@bcp47_filters = {};
+    @@bcp47_filters = {}
     BCP47::SUBTAG_TYPES.each do |type|
-        @@bcp47_filters[type.to_sym] = { :expr => type, :doc => "Show entries of type '#{type}' only." };
+        @@bcp47_filters[type.to_sym] = { :expr => type, :doc => "Show entries of type '#{type}' only." }
     end
 
     api(0, 'langtags', {
@@ -91,15 +90,14 @@ class Taginfo < Sinatra::Base
         :example => { :page => 1, :rp => 10, :sortname => :subtag, :sortorder => 'asc' },
         :ui => '/reports/name_tags#bcp47'
     }) do
-
         @filter_type = BCP47.get_filter(params[:filter])
 
         total = @db.count('languages.subtags').
-                condition_if("stype = ?", @filter_type).
+                condition_if('stype = ?', @filter_type).
                 get_first_value().to_i
 
         res = @db.select('SELECT * FROM languages.subtags').
-            condition_if("stype = ?", @filter_type).
+            condition_if('stype = ?', @filter_type).
             condition_if("subtag LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%'", params[:query], params[:query]).
             order_by(@ap.sortname, @ap.sortorder) { |o|
                 o.subtag

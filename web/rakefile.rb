@@ -2,7 +2,7 @@ require 'rake'
 require 'rake/testtask'
 #require 'rake/clean'
 
-$: << 'lib'
+$LOAD_PATH << 'lib'
 
 task :default => :test
 

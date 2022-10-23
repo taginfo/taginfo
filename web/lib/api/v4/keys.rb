@@ -125,23 +125,24 @@ class Taginfo < Sinatra::Base
 
         return generate_json_result(total,
             res.map{ |row| h = {
-                :key                      => row['key'],
-                :count_all                => row['count_all'].to_i,
-                :count_all_fraction       => (row['count_all'].to_f / @db.stats('objects')).round(4),
-                :count_nodes              => row['count_nodes'].to_i,
-                :count_nodes_fraction     => (row['count_nodes'].to_f / @db.stats('nodes_with_tags')).round(4),
-                :count_ways               => row['count_ways'].to_i,
-                :count_ways_fraction      => (row['count_ways'].to_f / @db.stats('ways')).round(4),
-                :count_relations          => row['count_relations'].to_i,
-                :count_relations_fraction => (row['count_relations'].to_f / @db.stats('relations')).round(4),
-                :values_all               => row['values_all'].to_i,
-                :users_all                => row['users_all'].to_i,
-                :in_wiki                  => row['in_wiki'].to_i != 0,
-                :projects                 => row['projects'].to_i
+                    :key                      => row['key'],
+                    :count_all                => row['count_all'].to_i,
+                    :count_all_fraction       => (row['count_all'].to_f / @db.stats('objects')).round(4),
+                    :count_nodes              => row['count_nodes'].to_i,
+                    :count_nodes_fraction     => (row['count_nodes'].to_f / @db.stats('nodes_with_tags')).round(4),
+                    :count_ways               => row['count_ways'].to_i,
+                    :count_ways_fraction      => (row['count_ways'].to_f / @db.stats('ways')).round(4),
+                    :count_relations          => row['count_relations'].to_i,
+                    :count_relations_fraction => (row['count_relations'].to_f / @db.stats('relations')).round(4),
+                    :values_all               => row['values_all'].to_i,
+                    :users_all                => row['users_all'].to_i,
+                    :in_wiki                  => row['in_wiki'].to_i != 0,
+                    :projects                 => row['projects'].to_i
+                }
+                h[:wikipages] = row['wikipages'] if row['wikipages']
+                h[:prevalent_values] = row['prevalent_values'][0, 10] if row['prevalent_values']
+                h
             }
-            h[:wikipages] = row['wikipages'] if row['wikipages']
-            h[:prevalent_values] = row['prevalent_values'][0,10] if row['prevalent_values']
-            h }
         )
     end
 

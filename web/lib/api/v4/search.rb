@@ -138,7 +138,7 @@ class Taginfo < Sinatra::Base
 
         # searching for the empty string is very expensive, so we'll just return an empty result
         if query == ''
-            return generate_json_result(0, []);
+            return generate_json_result(0, [])
         end
 
         begin

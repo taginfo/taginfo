@@ -1,4 +1,4 @@
-$: << 'lib'
+$LOAD_PATH << 'lib'
 require File.join(File.dirname(__FILE__), '..', 'lib', 'utils.rb')
 require 'test/unit'
 

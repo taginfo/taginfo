@@ -74,7 +74,7 @@ class Taginfo < Sinatra::Base
             content_type res['icon_type']
             res['icon']
         else
-            redirect('/img/generic-project-icon.svg');
+            redirect('/img/generic-project-icon.svg')
         end
     end
 

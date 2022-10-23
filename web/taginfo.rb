@@ -45,25 +45,25 @@ require 'sinatra/base'
 require 'sinatra/r18n'
 require 'rack/contrib'
 
-require 'lib/utils.rb'
-require 'lib/taglinks.rb'
-require 'lib/config.rb'
-require 'lib/javascript.rb'
-require 'lib/language.rb'
-require 'lib/sql.rb'
-require 'lib/sources.rb'
-require 'lib/reports.rb'
-require 'lib/api.rb'
-require 'lib/langtag/bcp47.rb'
+require 'lib/utils'
+require 'lib/taglinks'
+require 'lib/config'
+require 'lib/javascript'
+require 'lib/language'
+require 'lib/sql'
+require 'lib/sources'
+require 'lib/reports'
+require 'lib/api'
+require 'lib/langtag/bcp47'
 
 #------------------------------------------------------------------------------
 
-TAGINFO_CONFIG = TaginfoConfig.new(File.expand_path(File.dirname(__FILE__)) + '/../../taginfo-config.json');
+TAGINFO_CONFIG = TaginfoConfig.new(File.expand_path(File.dirname(__FILE__)) + '/../../taginfo-config.json')
 
 #------------------------------------------------------------------------------
 
 ALL_SECTIONS = %w(download taginfo test)
-SECTIONS = Hash[TAGINFO_CONFIG.get('instance.sections', ALL_SECTIONS).collect { |s| [s.to_sym, s] } ]
+SECTIONS = Hash[TAGINFO_CONFIG.get('instance.sections', ALL_SECTIONS).collect { |s| [s.to_sym, s] }]
 
 class Taginfo < Sinatra::Base
 
@@ -233,7 +233,7 @@ class Taginfo < Sinatra::Base
     load 'lib/ui/search.rb'
     load 'lib/ui/tags.rb'
 
-    SECTIONS.keys.each do |section|
+    SECTIONS.each_key do |section|
         load "lib/ui/#{ section }.rb"
     end
 

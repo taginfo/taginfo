@@ -58,7 +58,7 @@ require 'mediawikiapi.rb'
 def get_namespaces(api)
     data = api.query(:meta => 'siteinfo', :siprop => 'namespaces')
     namespaces = {}
-    data['query']['namespaces'].values.each do |ns|
+    data['query']['namespaces'].each_value do |ns|
         if ns['canonical'] =~ /^[A-Z]{2}$/
             namespaces[ns['canonical']] = ns['id']
         end

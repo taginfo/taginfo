@@ -286,7 +286,7 @@ class WikiPage
         if template.parameters.size != 0
             puts "ERROR: More than two parameters on RelatedTerm template"
         end
-        puts "#{ "  " * level }Related term: lang='#{lang}' term='#{term}'"
+        puts "#{ '  ' * level }Related term: lang='#{lang}' term='#{term}'"
         if LANGUAGE_CODE.match(lang)
             if defined?(@key)
                 db.execute("INSERT INTO tag_page_related_terms (key, value, lang, term) VALUES (?, ?, ?, ?)", [@key, @value, lang, term])
@@ -305,7 +305,7 @@ class WikiPage
         if lang == ''
             lang = 'en'
         end
-        puts "#{ "  " * level }Wikipedia link: lang='#{lang}' title='#{title}'"
+        puts "#{ '  ' * level }Wikipedia link: lang='#{lang}' title='#{title}'"
         if lang == 'commons' || LANGUAGE_CODE.match(lang)
             if defined?(@key)
                 db.execute("INSERT INTO tag_page_wikipedia_links (key, value, lang, title) VALUES (?, ?, ?, ?)", [@key, @value, lang, title])
@@ -417,6 +417,7 @@ class WikiPage
             parse_template_description(template, level, db)
         end
     end
+
 end
 
 #------------------------------------------------------------------------------
@@ -457,9 +458,9 @@ class KeyOrTagPage < WikiPage
             onWay      ? 1 : 0,
             onArea     ? 1 : 0,
             onRelation ? 1 : 0,
-            tags_implies.    sort.uniq.join(','),
+            tags_implies.sort.uniq.join(','),
             tags_combination.sort.uniq.join(','),
-            tags_linked.     sort.uniq.join(','),
+            tags_linked.sort.uniq.join(','),
             approval_status,
             statuslink,
             wikidata
@@ -517,16 +518,13 @@ end
 class Template
 
     attr_reader :name, :parameters, :named_parameters
+    attr_writer :parname
 
     def initialize(name=nil)
         @name             = name
         @parname          = nil
         @parameters       = []
         @named_parameters = {}
-    end
-
-    def parname(name)
-        @parname = name
     end
 
     def has_parname

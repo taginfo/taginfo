@@ -55,7 +55,7 @@ path = ARGV.shift.sub(%r{^/}, '')
 options = {}
 ARGV.each do |arg|
     (k, v) = arg.split('=')
-    options[k] = v;
+    options[k] = v
 end
 
 api_call(path, options)

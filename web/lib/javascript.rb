@@ -10,7 +10,7 @@ def javascript_tags
 end
 
 def javascript_for(*ids)
-    (@javascript ||= [] ) << Javascript.init(ids)
+    (@javascript ||= []) << Javascript.init(ids)
 end
 
 class Javascript

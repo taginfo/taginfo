@@ -1,0 +1,29 @@
+AllCops:
+  NewCops: enable
+
+Layout/EmptyLinesAroundClassBody:
+  EnforcedStyle: empty_lines
+Layout/IndentationWidth:
+  Width: 4
+Layout/SpaceInsideStringInterpolation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# Too many to fix for now, look at these later
+Layout/DotPosition:
+  Enabled: False
+Layout/HashAlignment:
+  Enabled: False
+Layout/FirstHashElementIndentation:
+  Enabled: False
+Layout/LineLength:
+  Enabled: False
+Layout/MultilineMethodCallIndentation:
+  Enabled: False
+Layout/SpaceInsideArrayLiteralBrackets:
+  Enabled: False
+Style/HashSyntax:
+  Enabled: False
+Style/StringLiterals:
+  Enabled: False

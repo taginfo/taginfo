@@ -36,7 +36,7 @@ database.results_as_hash = true
 unicode_data_file = "#{dir}/UnicodeData.txt"
 
 mappings = database.execute("SELECT codepoint_from, codepoint_to, script FROM unicode_codepoint_script_mapping").map do |row|
-   [(row['codepoint_from'].to_i .. row['codepoint_to'].to_i), row['script']]
+    [(row['codepoint_from'].to_i .. row['codepoint_to'].to_i), row['script']]
 end
 
 def get_script(mappings, codepoint)

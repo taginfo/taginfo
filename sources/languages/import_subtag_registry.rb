@@ -8,7 +8,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013-2020  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2013-2022  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -107,8 +107,8 @@ database.transaction do |db|
         if SUBTAG_TYPES.include?(entry.type) &&
             entry.description != 'Private use' &&
             (entry.type != 'language' || (entry.scope != 'special' && entry.scope != 'collection')) &&
-            (entry.type != 'script'   || !entry.subtag.match(%r{^Z}) ) &&
-            (entry.type != 'region'   || entry.subtag.match(%r{^[A-Z]{2}$}) )
+            (entry.type != 'script'   || !entry.subtag.match(%r{^Z})) &&
+            (entry.type != 'region'   || entry.subtag.match(%r{^[A-Z]{2}$}))
             db.execute("INSERT INTO subtags (stype, subtag, added, suppress_script, scope, description, prefix) VALUES (?, ?, ?, ?, ?, ?, ?)", [
                 entry.type,
                 entry.subtag,

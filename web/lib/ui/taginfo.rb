@@ -24,7 +24,7 @@ class Taginfo < Sinatra::Base
                     out += i18n_walk(line, level+1, path + '.' + key, en[key], other[key])
                 end
             else
-                if other.nil?|| ! other[key]
+                if other.nil?|| !other[key]
                     out += line.call(level, key, name, en[key], '<span style="color: red;">MISSING</span>')
                 else
                     out += line.call(level, key, name, en[key], other[key])
@@ -60,7 +60,7 @@ class Taginfo < Sinatra::Base
 
     get '/taginfo/status' do
         content_type 'text/plain'
-        age_in_days = DateTime.now() - DateTime.parse(@data_until)
+        age_in_days = DateTime.now - DateTime.parse(@data_until)
         if age_in_days.to_f > 1.5
             halt 400, "data_too_old\n"
         else
@@ -176,16 +176,16 @@ class Taginfo < Sinatra::Base
                     get_first_i
             end
 
-            @data[key]['values_match'] = matching;
+            @data[key]['values_match'] = matching
 
-            @data[key]['links'] = match.call('VALUE');
+            @data[key]['links'] = match.call('VALUE')
         end
 
         erb :'taginfo/taglinks'
     end
 
     get '/taginfo/wiki-problems' do
-        @title = "Wiki problems"
+        @title = 'Wiki problems'
         @section = 'taginfo'
         @section_title = t.taginfo.meta
 

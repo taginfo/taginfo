@@ -50,6 +50,7 @@ SELECT codepoint, d.script, s.name AS script_name, category, d.name FROM script 
                 :category    => row['category'],
                 :name        => row['name']
             } }
-        );
+        )
     end
+
 end

@@ -36,8 +36,6 @@ class Taginfo < Sinatra::Base
 
                     data[:has_map] = result['count_all'].to_i > 0
                     data
-                else
-                    nil
                 end
             else
                 desc = get_tag_description(key, value)

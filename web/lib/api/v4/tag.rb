@@ -136,7 +136,7 @@ class Taginfo < Sinatra::Base
                 end
         end
 
-        return generate_json_result(4, out);
+        return generate_json_result(4, out)
     end
 
     api(4, 'tag/wiki_pages', {
@@ -275,7 +275,7 @@ class Taginfo < Sinatra::Base
         :ui => '/tags/highway=primary#chronology'
     }) do
         if not @sources.get(:chronology)
-            return generate_json_result(0, []);
+            return generate_json_result(0, [])
         end
 
         key = params[:key]
@@ -288,7 +288,7 @@ class Taginfo < Sinatra::Base
 
         data = unpack_chronology(res)
 
-        return generate_json_result(data.size(), data);
+        return generate_json_result(data.size(), data)
     end
 
     api(4, 'tag/overview', {
@@ -366,6 +366,7 @@ class Taginfo < Sinatra::Base
         }
 
 
-        return generate_json_result(1, data);
+        return generate_json_result(1, data)
     end
+
 end

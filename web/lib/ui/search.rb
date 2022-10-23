@@ -69,7 +69,7 @@ END_XML
         if format == 'simple'
             # simple format is used by the search box on the website itself,
             # it is just a list of suggestions
-            return res.to_json + "\n";
+            return res.to_json + "\n"
         else
             # this is the OpenSearch standard format
             return [

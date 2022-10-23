@@ -75,10 +75,10 @@ not_in_cache = 0
 database.execute("DELETE FROM cache_pages WHERE EXISTS (SELECT * FROM cache_pages b WHERE cache_pages.title=b.title AND cache_pages.timestamp < b.timestamp); ")
 
 # Remove all very old cache entries
-database.execute("DELETE FROM cache_pages WHERE timestamp < ?", [Time.now.to_i - (60*60*24*CACHE_HARD_EXPIRE)]);
+database.execute("DELETE FROM cache_pages WHERE timestamp < ?", [Time.now.to_i - (60 * 60 * 24 * CACHE_HARD_EXPIRE)])
 
 # Remove some not so old cache entries
-database.execute("DELETE FROM cache_pages WHERE timestamp < ? LIMIT 10", [Time.now.to_i - (60*60*24*CACHE_SOFT_EXPIRE)]);
+database.execute("DELETE FROM cache_pages WHERE timestamp < ? LIMIT 10", [Time.now.to_i - (60 * 60 * 24 * CACHE_SOFT_EXPIRE)])
 
 database.transaction do |db|
     puts "Found #{ image_titles.size } different image titles"
@@ -96,7 +96,7 @@ database.transaction do |db|
                 result = row['body']
             end
 
-            if not result then
+            if not result
                 not_in_cache += 1
                 puts "CACHE: Page '#{ title }' not in cache"
                 starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)

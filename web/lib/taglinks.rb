@@ -1,4 +1,3 @@
-
 class TagLink
 
     attr_reader :title, :url
