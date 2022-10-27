@@ -518,13 +518,16 @@ end
 class Template
 
     attr_reader :name, :parameters, :named_parameters
-    attr_writer :parname
 
     def initialize(name=nil)
         @name             = name
         @parname          = nil
         @parameters       = []
         @named_parameters = {}
+    end
+
+    def parname(name)
+        @parname = name
     end
 
     def has_parname
