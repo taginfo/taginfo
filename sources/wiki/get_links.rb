@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-# coding: utf-8
 #------------------------------------------------------------------------------
 #
 #  get_links.rb [DIR]
@@ -17,7 +16,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2015-2017  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2015-2022  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -76,6 +75,5 @@ File.open(dir + '/interesting_wiki_pages.list') do |tagpages|
         what_links_to(api, title)
     end
 end
-
 
 #-- THE END -------------------------------------------------------------------

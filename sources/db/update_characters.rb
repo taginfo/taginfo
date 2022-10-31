@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-# coding: utf-8
 #------------------------------------------------------------------------------
 #
 #  Taginfo source: DB
@@ -8,7 +7,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013-2017  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2013-2022  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -43,8 +42,8 @@ regexes = [
     [ 'plain',   %r{^[a-z]([a-z_]*[a-z])?$} ],
     [ 'colon',   %r{^[a-z][a-z_:]*[a-z]$} ],
     [ 'letters', %r{^[\p{L}\p{M}]([\p{L}\p{M}\p{N}_:]*[\p{L}\p{M}\p{N}])?$}u ],
-    [ 'space',   %r{[\p{Z}]}u ],
-    [ 'problem', %r{[=+/&<>;\@'"?%#\\,\p{C}]}u ]
+    [ 'space',   %r{\p{Z}}u ],
+    [ 'problem', %r{[=+/&<>;@'"?%#\\,\p{C}]}u ]
 ]
 
 keys = {}

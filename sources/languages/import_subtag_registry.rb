@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-# coding: utf-8
 #------------------------------------------------------------------------------
 #
 #  Taginfo source: Languages
@@ -75,7 +74,7 @@ registry_file = "#{dir}/language-subtag-registry"
 begin
     subtag = nil
     last_key = nil
-    open(registry_file) do |file|
+    File.open(registry_file) do |file|
         file.each do |line|
             line.chomp!
             if line == '%%'
@@ -84,7 +83,7 @@ begin
 #                file_date = $1
             elsif line =~ /^\s+(.*)/
                 if subtag.respond_to?(last_key)
-                    subtag.send(last_key, $1)
+                    subtag.send(last_key, Regexp.last_match(1))
                 end
             else
                 (key, value) = line.split(/: /)
@@ -121,6 +120,5 @@ database.transaction do |db|
         end
     end
 end
-
 
 #-- THE END -------------------------------------------------------------------

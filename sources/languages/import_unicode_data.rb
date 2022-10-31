@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-# coding: utf-8
 #------------------------------------------------------------------------------
 #
 #  Taginfo source: Languages
@@ -8,7 +7,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013-2021  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2013-2022  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -49,7 +48,7 @@ def get_script(mappings, codepoint)
 end
 
 database.transaction do |db|
-    open(unicode_data_file) do |file|
+    File.open(unicode_data_file) do |file|
         file.each do |line|
             line.chomp!
             (codepoint, name, category) = line.split(';')

@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-# coding: utf-8
 #------------------------------------------------------------------------------
 #
 #  Taginfo source: Projects
@@ -8,7 +7,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2014-2017  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2014-2022  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -40,7 +39,7 @@ project_list = ARGV[1] || 'project_list.txt'
 #------------------------------------------------------------------------------
 
 projects = []
-open(project_list) do |file|
+File.open(project_list) do |file|
     file.each do |line|
         projects << line.chomp.split(' ')
     end
@@ -75,7 +74,7 @@ projects.each do |id, url|
         response = fetch(url)
         begin
             last_modified = Time.parse(response['Last-Modified'] || response['Date']).utc.iso8601
-        rescue
+        rescue ArgumentError
             last_modified = Time.now.utc
         end
         db.execute("INSERT INTO projects (id, json_url, last_modified, fetch_date, fetch_status, fetch_json, status, data_updated) VALUES (?, ?, ?, ?, CAST(? AS TEXT), ?, ?, ?)", [
@@ -98,6 +97,5 @@ projects.each do |id, url|
         ])
     end
 end
-
 
 #-- THE END -------------------------------------------------------------------

@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-# coding: utf-8
 #------------------------------------------------------------------------------
 #
 #  Taginfo source: Projects
@@ -8,7 +7,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2014-2020  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2014-2022  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -82,6 +81,5 @@ projects.each do |id, url|
         puts "  #{id} #{url} ERROR"
     end
 end
-
 
 #-- THE END -------------------------------------------------------------------

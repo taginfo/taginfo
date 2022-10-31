@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-# coding: utf-8
 #------------------------------------------------------------------------------
 #
 #  extract_words.rb [DIR]
@@ -10,7 +9,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013-2017  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2013-2022  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -34,7 +33,7 @@ require 'sqlite3'
 class Words
 
     def initialize
-        @words = Hash.new
+        @words = {}
     end
 
     def add(key, value, lang, word)
@@ -103,7 +102,7 @@ class WordExtractor
 #        value.downcase! unless value.nil?
 #        return false if word == key || word == value
 
-        return true
+        true
     end
 
     def parse(key, value, lang, text)
@@ -146,6 +145,5 @@ database.transaction do |db|
         db.execute('INSERT INTO words (key, value, words) VALUES (?, ?, ?)', [key, value, wordlist])
     end
 end
-
 
 #-- THE END -------------------------------------------------------------------

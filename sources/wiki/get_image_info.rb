@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-# coding: utf-8
 #------------------------------------------------------------------------------
 #
 #  get_image_info.rb [DIR]
@@ -43,7 +42,7 @@ require 'uri'
 require 'json'
 require 'sqlite3'
 
-require 'mediawikiapi.rb'
+require 'mediawikiapi'
 
 CACHE_HARD_EXPIRE = 60 # days
 CACHE_SOFT_EXPIRE = 30 # days
@@ -96,12 +95,12 @@ database.transaction do |db|
                 result = row['body']
             end
 
-            if not result
+            if !result
                 not_in_cache += 1
                 puts "CACHE: Page '#{ title }' not in cache"
                 starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
                 response = api.get(:action => 'query', :format => 'json', :prop => 'imageinfo', :iiprop => 'url|size|mime', :titles => title, :iiurlwidth => 10, :iiurlheight => 10)
-                result = response.body()
+                result = response.body
                 time_spent_in_api_calls += Process.clock_gettime(Process::CLOCK_MONOTONIC) - starting
                 database.execute("INSERT INTO cache.cache_pages (title, timestamp, body) VALUES (?, ?, ?)", [title, Time.now.to_i, result])
             end
@@ -170,6 +169,5 @@ end
 puts "In cache: #{ in_cache }"
 puts "Not in cache: #{ not_in_cache }"
 puts "Time spent in API calls: #{ time_spent_in_api_calls.to_i }s"
-
 
 #-- THE END -------------------------------------------------------------------

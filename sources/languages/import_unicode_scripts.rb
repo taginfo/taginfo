@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-# coding: utf-8
 #------------------------------------------------------------------------------
 #
 #  Taginfo source: Languages
@@ -8,7 +7,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013-2021  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2013-2022  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -38,7 +37,7 @@ codepoint_script_mapping_file = "#{dir}/Scripts.txt"
 scripts = {}
 
 database.transaction do |db|
-    open(property_value_alias_file) do |file|
+    File.open(property_value_alias_file) do |file|
         file.each do |line|
             line.chomp!
             if line.match(%r{^sc ;})
@@ -49,7 +48,7 @@ database.transaction do |db|
         end
     end
 
-    open(codepoint_script_mapping_file) do |file|
+    File.open(codepoint_script_mapping_file) do |file|
         file.each do |line|
             line.chomp!
             next if line == '' or line[0] == '#'
@@ -78,6 +77,5 @@ database.transaction do |db|
         end
     end
 end
-
 
 #-- THE END -------------------------------------------------------------------

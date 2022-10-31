@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-# coding: utf-8
 #------------------------------------------------------------------------------
 #
 #  Taginfo source: Projects
@@ -8,7 +7,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2014-2021  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2014-2022  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -45,27 +44,21 @@ class Log
 
     def fatal(message)
         @messages << "FATAL: #{message}"
-        if @state < 3
-            @state = 3
-        end
+        @state = 3 if @state < 3
     end
 
     def error(message)
         @messages << "ERROR: #{message}"
-        if @state < 2
-            @state = 2
-        end
+        @state = 2 if @state < 2
     end
 
     def warning(message)
         @messages << "WARNING: #{message}"
-        if @state < 1
-            @state = 1
-        end
+        @state = 1 if @state < 1
     end
 
     def get_log
-        return @messages.join("\n")
+        @messages.join("\n")
     end
 
     def get_state
@@ -260,12 +253,11 @@ database.execute("SELECT id, fetch_json FROM projects WHERE status='OK' ORDER BY
         database.transaction do |db|
             log = Log.new
             parse_and_check(id, data, log, db)
-            db.execute("UPDATE projects SET error_log=?, status=? WHERE id=?", [log.get_log(), log.get_state(), id])
+            db.execute("UPDATE projects SET error_log=?, status=? WHERE id=?", [log.get_log, log.get_state, id])
         end
     rescue JSON::ParserError
         database.execute("UPDATE projects SET status='JSON_ERROR' WHERE id=?", [id])
     end
 end
-
 
 #-- THE END -------------------------------------------------------------------

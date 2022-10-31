@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-# coding: utf-8
 #------------------------------------------------------------------------------
 #
 #  get_wiki_data.rb [DIR]
@@ -83,7 +82,7 @@ class WikiPage
                 :approval_status, :statuslink, :wikidata
 
     def self.pages
-        @@pages.values.sort{ |a,b| a.title <=> b.title }
+        @@pages.values.sort{ |a, b| a.title <=> b.title }
     end
 
     def self.find(name)
@@ -96,7 +95,7 @@ class WikiPage
         @namespace = namespace  # 'XX' (mediawiki namespace or '')
         @title     = title      # wiki page title
 
-        @has_templ  = false
+        @has_templ = false
         @parsed = nil
 
         @tags_linked = []
@@ -219,7 +218,7 @@ class WikiPage
             db.execute("INSERT INTO problems (location, reason, title, lang, key, value) VALUES ('Template:Key/Value/RelationDescription', 'image parameter empty', ?, ?, ?, ?)", [title, lang, key, value])
         elsif IMAGE_TITLE_FORMAT.match(ititle)
             @image = "File:#{$2}"
-            if ! PAGE_TITLE_FORMAT.match(ititle)
+            if !PAGE_TITLE_FORMAT.match(ititle)
                 puts "WARN: possible invalid character in image title: page='#{title}' image='#{ititle}'"
             end
         else
@@ -235,7 +234,7 @@ class WikiPage
             db.execute("INSERT INTO problems (location, reason, title, lang, key, value) VALUES ('Template:Key/Value/RelationDescription', 'osmcarto-rendering parameter empty', ?, ?, ?, ?)", [title, lang, key, value])
         elsif IMAGE_TITLE_FORMAT.match(ititle)
             @osmcarto_rendering = "File:#{$2}"
-            if ! PAGE_TITLE_FORMAT.match(ititle)
+            if !PAGE_TITLE_FORMAT.match(ititle)
                 puts "WARN: possible invalid character in osmcarto-rendering image title: page='#{title}' image='#{ititle}'"
             end
         else
@@ -263,7 +262,7 @@ class WikiPage
                 db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'invalid value for ' || ? || ' parameter', ?, ?, ?, ?, ?)", [param_name, title, lang, key, value, param])
             end
         end
-        return false
+        false
     end
 
     def parse_template_key_tag(template, level, db)
@@ -627,7 +626,6 @@ api = MediaWikiAPI::API.new('/w/index.php?')
 cache = Cache.new(dir, database, api)
 
 database.transaction do |db|
-
     File.open(dir + '/interesting_wiki_pages.list') do |wikipages|
         wikipages.each do |line|
             line.chomp!
@@ -665,8 +663,6 @@ database.transaction do |db|
 
     cache.cleanup
     cache.print_stats
-
 end
-
 
 #-- THE END -------------------------------------------------------------------

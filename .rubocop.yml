@@ -5,9 +5,31 @@ Layout/EmptyLinesAroundClassBody:
   EnforcedStyle: empty_lines
 Layout/IndentationWidth:
   Width: 4
+Layout/SpaceBeforeBlockBraces:
+  EnforcedStyle: no_space
+Layout/SpaceInsidePercentLiteralDelimiters:
+  Enabled: False
 Layout/SpaceInsideStringInterpolation:
   Enabled: false
+Metrics/BlockLength:
+  Max: 50
+Metrics/MethodLength:
+  Max: 50
+Naming/AccessorMethodName:
+  Enabled: False
 Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
+Style/NegatedIf:
+  Enabled: false
+Style/NumericPredicate:
+  EnforcedStyle: comparison
+Style/RegexpLiteral:
+  Enabled: false
+Style/StringConcatenation:
+  Enabled: false
+Style/TrailingCommaInArrayLiteral:
   Enabled: false
 
 # Too many to fix for now, look at these later
