@@ -51,7 +51,7 @@ taginfo:
     comparison: Sleutel-/Tagvergelijking
     overview: Overzicht
     links: Links
-    data_from: Data van
+    data_from: Gegevens van
     data_from_description: Laatste update van de taginfo database
     instance:
         title: Over deze taginfo-website
@@ -274,8 +274,8 @@ pages:
         note: Sommige indexen zitten niet in de hier beschikbare databases. De  'Ingepakt' grootte is de grootte zonder deze indexen, de 'Uitgepakt' grootte bevat de indexen die je waarschijnlijk wilt bouwen na het downloaden.
     reports:
         intro: |
-            Rapporten geven de tag data weer vanuit verschillende hoeken.
-            Ze brengen vaak data samen van verschillende bronnen op interessante manieren. Sommige
+            Rapporten geven de tag-gegevens weer vanuit verschillende hoeken.
+            Ze brengen vaak gegevens samen van verschillende bronnen op interessante manieren. Sommige
             van de rapporten kunnen helpen met het vinden van specifieke fouten.
         list: Lijst van alle rapporten
         data_sources: Databronnen gebruikt
@@ -431,7 +431,7 @@ pages:
             documentation_url: Documentatie
             last_update: Laatste update
             json_url: JSON-projectbestand
-            info: Deze data wordt geleverd door het project voor taginfo via het 'JSON-projectbestand' wat hierboven is gelinkt. Zie de <a href="//wiki.openstreetmap.org/wiki/Taginfo/projects" class="extlink">wiki</a> voor een formaatbeschrijving.
+            info: Deze data wordt door het project geleverd aan taginfo via het 'JSON-projectbestand' wat hierboven is gelinkt. Zie de <a href="//wiki.openstreetmap.org/wiki/Taginfo/projects" class="extlink">wiki</a> voor een formaatbeschrijving.
         tags:
             title: Tags gebruikt door dit project
             intro: Deze data wordt geleverd door het project en is niet per definitie compleet. Lees alsjeblieft de projectdocumentatie voor details.
@@ -468,7 +468,7 @@ sources:
         description: Statistieken over elke sleutel en elke tag van de OSM-database.
     wiki:
         name: Wiki
-        description: Data van de tag- en sleutelpagina's van de OSM wiki.
+        description: Gegevens van de tag- en sleutelpagina's van de OSM wiki.
     languages:
         name: Talen
         description: Taalnamen, -codes en dergelijke van IANA en Unicode registers.
