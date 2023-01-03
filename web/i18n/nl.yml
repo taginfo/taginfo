@@ -81,7 +81,7 @@ misc:
     values_tooltip: Hoeveelheid verschillende waarden voor deze sleutel.
     users_tooltip: Hoeveelheid unieke gebruikers die het laatst objecten gewijzigd hebben met deze sleutel.
     prevalent_values: Voornamelijke waarden
-    prevalent_values_tooltip: Tot tien van de meest voorkomende waarden van deze sleutel (alleen als meer dan 1% van de tags met deze sleutel de waarden hebben).
+    prevalent_values_tooltip: Tot tien van de meest voorkomende waarden van deze sleutel (alleen als meer dan 1% van de tags met deze sleutel deze waarde heeft).
     in_wiki_tooltip: Heeft tenminste één wikipagina.
     status: Status
     approval_status: Goedkeuringsstatus
@@ -89,8 +89,8 @@ misc:
 help:
     search:
         title: Zoeken
-        intro: Gebruik het zoekveld rechtsboven om te zoeken naar tag sleutels en waarden.
-        string: Je kan zoeken naar tag sleutels een waarden
+        intro: Gebruik het zoekveld rechtsboven om te zoeken naar tagsleutels en -waarden.
+        string: Je kan zoeken naar tagsleutels en -waarden
         substring: Slechts een deel van de sleutel/waarde werkt ook
         complete_tags: Je kan zoeken naar complete tags
         values_only: Je kan ook zoeken naar alleen waarden
@@ -162,10 +162,10 @@ pages:
             text: |
                 <p>OpenStreetMap gebruikt <b>tags</b> om betekenis toe te voegen aan geografische objecten. Er
                 is geen vaste lijst van deze tags. Nieuwe tags kunnen worden uitgevonden en gebruikt als nodig.
-                Iedereen kan nieuwe tags bedenken en deze aan nieuwe of bestaande objecten toevoegen.
+                Iedereen kan een nieuwe tag bedenken en deze aan nieuwe of bestaande objecten toevoegen.
                 Dit maakt OpenStreetMap enorm flexibel, maar soms ook iets moeilijk
                 om mee te werken.</p>
-                <p>Of je  bijdraagt aan OSM of de OSM-gegevens gebruikt, er zijn altijd
+                <p>Of je bijdraagt aan OSM of de OSM-gegevens gebruikt, er zijn altijd
                 vragen als: Welke tags gebruiken mensen voor eigenschap X? Welke tags kan ik gebruiken
                 voor eigenschap Y zodat het goed op de kaart verschijnt? Is de tag Z beschreven
                 op de wiki echt in gebruik en waar?</p>
@@ -176,7 +176,7 @@ pages:
                 hoe ze gebruikt zijn en wat ze betekenen. Zie een <a href="sources">lijst van bronnen</a>
                 die taginfo gebruikt.</p>
         about_site:
-            title: Over deze site
+            title: Over deze website
         building_on_taginfo:
             title: Bouwen op taginfo
             pre: |
@@ -187,15 +187,15 @@ pages:
                 <a href="taginfo/apidoc">API-documentatie</a> voor de details, enkele algemene informatie is beschikbaar
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">op de OSM wiki</a>.
                 De servers die de taginfo API draaien hebben geen onbeperkte bronnen.
-                Gebruik de API alstublieft verantwoord. In geval van twijfel neem contact met de onderhouders van de
-                site die je gebruikt of praat met ons op de mailinglijst.</p>
+                Gebruik de API alsjeblieft verantwoord. In geval van twijfel kan je contact opnemen met de onderhouders van de
+                website die je gebruikt of praat met ons op de mailinglijst.</p>
             download: |
                 <h3>Download</h3>
                 <p>Als je wilt spelen met de gegevens gebruikt door taginfo, kan je de
                 regulier bijgewerkte Sqlite database-bestanden downloaden. Al het voorverwerken is al gedaan voor je.
                 Zie de <a href="download">downloadpagina</a> voor een lijst van bestanden. Let op dat
                 sommige van deze bestanden vrij groot kunnen zijn. Als je ze regelmatig wilt downloaden,
-                neem contact op met de onderhouders van de site die je gebruikt of praat met ons op de mailinglijst.</p>
+                neem contact op met de onderhouders van de website die je gebruikt of praat met ons op de mailinglijst.</p>
             license: |
                 <h3>Licentie</h3>
                 <p>De gegevens beschikbaar via taginfo zijn beschikbaar onder de ODbL, de
@@ -244,7 +244,7 @@ pages:
             intro: Hier is een lijst van huidig gebruikte bronnen. Meer bronnen kunnen worden geïntegreerd in de toekomst.
         description:
             db: |
-                <p>Statistieken over sleutels, tags, en relatietypes zijn gegenereerd van de <a class="extlink" href="https://planet.openstreetmap.org/">OSM-database</a> (of een extract), net zoals de kaarten die de geografische verspreiding van nodes en wegen tonen.</p>
+                <p>Statistieken over sleutels, tags en relatietypes zijn gegenereerd van de <a class="extlink" href="https://planet.openstreetmap.org/">OSM-database</a> (of een extract), net zoals de kaarten die de geografische verspreiding van nodes en wegen tonen.</p>
             wiki: |
                 <p>De <a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> wordt gelezen en alle Key:*, Tag:*, en Relation:* pagina's (in alle verschillende talen) worden geanalyseerd. Beschrijvingen, afbeeldingen, gerelateerde tags en dergelijke worden er uitgehaald.</p>
             languages: |
@@ -271,7 +271,7 @@ pages:
         packed: Ingepakt
         unpacked: Uitgepakt
         description: Beschrijving
-        note: Sommige indexen zitten niet in de hier beschikbare databases. De  'Ingepakt' grootte is de grootte zonder deze indexen, de 'Uitgepakt' grootte bevat de indexen die je waarschijnlijk wilt bouwen na het downloaden.
+        note: Sommige indexen zitten niet in de hier beschikbare databases. De 'Ingepakt' grootte is de grootte zonder deze indexen, de 'Uitgepakt' grootte bevat de indexen die je waarschijnlijk wilt bouwen na het downloaden.
     reports:
         intro: |
             Rapporten geven de tag-gegevens weer vanuit verschillende hoeken.
@@ -291,7 +291,7 @@ pages:
         nothing_to_compare: Er zijn geen sleutels/tags om te vergelijken. Ga naar een sleutel- of tagpagina en voeg ze toe.
     keys:
         intro: |
-                Deze tabel geeft alle tag sleutels weer die in de database bestaan of in een van de andere bronnen.
+                Deze tabel geeft alle tagsleutels weer die in de database bestaan of in een van de andere bronnen.
     tags:
         intro: |
                 Deze tabel geeft de meest voorkomende tags in de database weer.
@@ -437,7 +437,7 @@ pages:
             intro: Deze data wordt geleverd door het project en is niet per definitie compleet. Lees alsjeblieft de projectdocumentatie voor details.
             description: Hoe deze sleutel/tag gebruikt is in het project
             count_all_tooltip: Hoeveelheid objecten in database met deze sleutel/tag
-            objects_tooltip: Objecttypen die het project gebruikt
+            objects_tooltip: Objecttypes die het project gebruikt
 
 flexigrid:
     pagetext: Pagina
@@ -504,11 +504,11 @@ reports:
             tab: Gewoon
             title: Gewone sleutels
             intro: |
-                <p>Sleutel die alleen kleine letters bevatten (<span
+                <p>Sleutels die alleen kleine letters bevatten (<span
                 class="char">a</span> tot <span class="char">z</span>) en de
                 underscore (<span class="char">_</span>). Eerste en laatste
-                karakters moeten letters zijn. De meest simpele sleutels moeten in
-                deze categorie vallen.</p>
+                karakters moeten letters zijn. Het merendeel van de simpele
+                sleutels valt in deze categorie.</p>
         colon:
             tab: Dubbele punt
             title: Sleutels met dubbele punt
@@ -546,11 +546,11 @@ reports:
                 class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> of controle
                 karakters. Deze karakters kunnen problematisch zijn, omdat ze
                 gebruikt worden om strings in verschillende programmeertalen af te bakenen of
-                een speciale betekenis hebben in XML, HTML, URLs, en andere plaatsen. Het
-                is teken wordt vaak gebruikt als een afscheiding tussen tag sleutels en
-                waarden. Sleutels die in deze lijst voorkomen zijn niet per definitie fout
-                daarentegen. Maar in veel gevallen zijn ze slechts een resultaat van en fout
-                en zouden ze opgelost moeten worden.</p>
+                een speciale betekenis hebben in XML, HTML, URLs en op andere plaatsen. Het
+                is-teken wordt vaak gebruikt als een afscheiding tussen tagsleutels en
+                -waarden. Sleutels die in deze lijst voorkomen zijn niet per definitie fout
+                daarentegen. Maar in veel gevallen zijn ze slechts het resultaat van een fout
+                en zouden ze gerepareerd moeten worden.</p>
         rest:
             tab: Rest
             title: Alle andere sleutels
@@ -578,19 +578,19 @@ reports:
         name: Veel gebruikte sleutels zonder wikipagina
         intro: |
             <p>Deze tabel geeft sleutels weer die meer dan 10&thinsp;000 keer in de OSM
-            database voorkomen maar geen wikipagina hebben die ze beschrijft.  Als je iets weet over een
-            van deze sleutels, creëer alsjeblieft de wikipagina door te klikken op de link in de
+            database voorkomen maar geen wikipagina hebben die ze beschrijft. Als je iets weet over een
+            van deze sleutels, creëer dan alsjeblieft de wikipagina door te klikken op de link in de
             linkerkolom en de sleutel te beschrijven. Soms is het logisch om een
-            redirect naar een andere wikipagina aan te maken. Om dit te dien voer de regel met
+            redirect naar een andere wikipagina aan te maken. Om dit te dien hoef je slechts een regel met
             <tt style="background-color: #f0f0f0; padding: 0 2px;">#REDIRECT [[<i>paginanaam</i>]]</tt>
-            in de wikipagina in.</p>
+            in de wikipagina in te voeren.</p>
         also_show_keys: Geef ook sleutels weer die geen Engelse wikipagina hebben, maar wel een in een andere taal.
         table:
             create_wiki_page: Creëer wikipagina...
     key_lengths:
         name: Sleutellengtes
         intro: |
-            Tag sleutels kunnen tussen 0 en 255 (Unicode) karakters lang zijn. Zeer korte of zeer lange sleutels zijn vaak, maar niet altijd fouten.
+            Tagsleutels kunnen tussen 0 en 255 (Unicode) karakters lang zijn. Zeer korte of zeer lange sleutels zijn vaak, maar niet altijd fouten.
         table:
             number_of_objects: Hoeveelheid objecten
         histogram:
@@ -606,7 +606,7 @@ reports:
             page: Pagina in wiki beschikbaar, maar bevat geen standaard template.
             redirect: Pagina is een redirect.
         intro: |
-            Deze tabel geeft alle tag sleutels weer waarvoor er wikipagina's beschikbaar zijn en in welke taal ze er zijn.
+            Deze tabel geeft alle tagsleutels weer waarvoor er wikipagina's beschikbaar zijn en in welke taal ze er zijn.
     languages:
         name: Talen
         intro: |
@@ -622,15 +622,15 @@ reports:
     wiki_pages_about_non_existing_keys:
         name: Wikipagina's over niet bestaande sleutels
         intro: |
-            Deze tabel geeft sleutels weer waarvoor een wikipagina bestaat, maar geen enkele
-            keer voorkomt in de database. Dit is niet per definitie een fout (misschien heeft iemand
+            Deze tabel geeft sleutels weer waarvoor een wikipagina bestaat, maar die geen enkele
+            keer voorkomen in de database. Dit is niet per definitie een fout (misschien heeft iemand
             de documentatie in de wiki toegevoegd als voorbereiding voor het gebruik van een sleutel, of de
             wikipagina documenteert een nu verouderde sleutel), maar het kan ook een typefout of ander fout zijn.
         wiki_pages: Wikipagina's
     name_tags:
-        name: Varianten van naam tags
+        name: Varianten van naamtags
         intro: |
-            <p>Dit rapport geeft informatie weer, gerelateerd aan de naamgeving van objecten in OSM
+            <p>Dit rapport geeft informatie weer, gerelateerd aan de naamgeving van objecten in OSM,
             gebruikmakend van de <tt>name</tt> tag en zijn varianten.</p>
         overview:
             tab: Overzicht
@@ -655,7 +655,7 @@ reports:
                 geregistreerd zijn die relevant zijn voor OSM. Voor meer informatie bekijk ook de
                 <a href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
                 pagina over IETF taal tags</a> en de <a
-                href="http://www.langtag.net/">langtag.net</a> site.</p>
+                href="http://www.langtag.net/">langtag.net</a> website.</p>
                 <p>Let er op dat de data weergegeven in deze tabel <b>niet</b> van OpenStreetMap is,
                 er worden slechts de bouwblokken weergegeven die gebruikt kunnen worden om talen te beschrijven
                 onafhankelijk van of ze daadwerkelijk gebruikt worden in OSM.
@@ -663,8 +663,8 @@ reports:
     similar_keys:
         name: Soortgelijke sleutels
         intro: |
-            Dit rapport geeft de veel gebruikte sleutels en soortgelijke sleutels
-            die weinig gebruikt worden weer. Dit belicht veel spelfouten van gebruikelijke sleutels, maar is niet
+            Dit rapport geeft sleutels weer die veel gebruikt worden en soortgelijke sleutels
+            die weinig gebruikt worden. Dit belicht veel spelfouten van gebruikelijke sleutels, maar is niet
             perfect. Wees voorzichtig bij het repareren vaan data! Bewerk NIET zomaar mechanisch
             zulke sleutels met zoeken en vervangen. Kijk naar elke individuele situatie
             en repareer ook andere problemen die je ziet.
@@ -696,10 +696,10 @@ reports:
         name: Wiki analyseproblemen
         intro: |
             Taginfo leest alle wikipagina's die sleutels, tags en
-            relaties beschrijven om informatie over deze tags te vinden. Dit rapport geeft een lijst
-            van problemen die ondervonden werden tijdens het lezen van die pagina's weer. Dit zijn niet
+            relaties beschrijven om informatie over deze tags te vinden. Dit rapport toont een lijst
+            van problemen die ondervonden worden tijdens het lezen van die pagina's. Dit zijn niet
             per definitie fouten in de wiki, ze betekenen slechts dat iets in
-            de wikipagina's niet geformatteerd is zoals taginfo dit begrijpt. Of
+            de wikipagina's niet geformatteerd is zoals taginfo verwachtte. Of
             de pagina moet verbeterd worden, of taginfo moet gerepareerd worden.
         location: Locatie
         reason: Reden
