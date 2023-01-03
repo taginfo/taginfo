@@ -167,7 +167,7 @@ pages:
                 om mee te werken.</p>
                 <p>Of je bijdraagt aan OSM of de OSM-gegevens gebruikt, er zijn altijd
                 vragen als: Welke tags gebruiken mensen voor eigenschap X? Welke tags kan ik gebruiken
-                voor eigenschap Y zodat het goed op de kaart verschijnt? Is de tag Z beschreven
+                voor eigenschap Y zodat het goed op de kaart verschijnt? Is de tag Z die beschreven is
                 op de wiki echt in gebruik en waar?</p>
                 <p>Taginfo helpt je door het weergeven van statistieken over welke tags daadwerkelijk in de
                 database zitten, hoe veel mensen die tags gebruiken, waar ze gebruikt zijn en dergelijke. Het
@@ -306,7 +306,7 @@ pages:
         empty_role: lege rol
     projects:
         intro: |
-                Deze tabel geeft alle projecten weer, die bekend zijn voor taginfo en OSM-tags gebruiken op een of andere manier.<br/>Voor meer informatie over deze functionaliteit zie de <a href="//wiki.openstreetmap.org/wiki/Taginfo/projects" class="extlink">wiki</a>.
+                Deze tabel geeft alle projecten weer die bekend zijn voor taginfo en OSM-tags gebruiken op een of andere manier.<br/>Voor meer informatie over deze functionaliteit zie de <a href="//wiki.openstreetmap.org/wiki/Taginfo/projects" class="extlink">wiki</a>.
     key:
         description_from_wiki: Beschrijving van deze sleutel uit de wiki (indien beschikbaar in je gekozen taal, anders in het Engels).
         no_description_in_wiki: Geen Engelse beschrijving voor deze sleutel in de wiki. (Zie ook het "Wiki" tabblad.)
@@ -526,7 +526,7 @@ reports:
                 <p>Kleine letter hebben meestal de
                 voorkeur voor sleutels, maar soms worden hoofdletters gebruikt
                 (bijvoorbeeld voor bekende afkortingen) of letters van andere
-                alfabetten (bijvoorbeeld voor sleutel die alleen relevant zijn voor een gebied waar
+                alfabetten (bijvoorbeeld voor sleutels die alleen relevant zijn voor een gebied waar
                 waar het alfabet voornamelijk gebruikt wordt).</p>
         space:
             tab: Witruimte
