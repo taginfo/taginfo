@@ -38,7 +38,7 @@ taginfo:
     report: Rapport
     reports: Rapporten
     international: Internationaal
-    apidoc: API Documentatie
+    apidoc: API-documentatie
     project: Project
     projects: Projecten
     test: Test
@@ -48,14 +48,14 @@ taginfo:
     relations: Relaties
     combinations: Combinaties
     key_combinations: Combinaties
-    comparison: Key/Tag Comparison
+    comparison: Sleutel-/Tagvergelijking
     overview: Overzicht
     links: Links
     data_from: Data van
     data_from_description: Laatste update van de taginfo database
     instance:
-        title: Over deze taginfo site
-        other: Zie de <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> voor andere sites.
+        title: Over deze taginfo-website
+        other: Zie de <a href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">OSM wiki</a> voor andere websites.
 
 misc:
     values_less_than_one_percent: geen waarden met meer dan 1%
@@ -79,7 +79,7 @@ misc:
     ways_tooltip: Hoeveelheid wegen (als absolute waarde en als percentage van alle wegen).
     relations_tooltip: Hoeveelheid relaties (als absolute waarde en als percentage van alle relaties).
     values_tooltip: Hoeveelheid verschillende waarden voor deze sleutel.
-    users_tooltip: Hoeveelheid unieke gebruikers die het laats objecten gewijzigd hebben met deze sleutel.
+    users_tooltip: Hoeveelheid unieke gebruikers die het laatst objecten gewijzigd hebben met deze sleutel.
     prevalent_values: Voornamelijke waarden
     prevalent_values_tooltip: Tot tien van de meest voorkomende waarden van deze sleutel (alleen als meer dan 1% van de tags met deze sleutel de waarden hebben).
     in_wiki_tooltip: Heeft tenminste één wikipagina.
@@ -95,10 +95,10 @@ help:
         complete_tags: Je kan zoeken naar complete tags
         values_only: Je kan ook zoeken naar alleen waarden
         suggestions: |
-            Voor je gemakt worden populaire sleutels en tags gesuggereerd
+            Voor je gemak worden populaire sleutels en tags gesuggereerd
             terwijl je typt. Gebruik je cursorknoppen om er een te selecteren en druk op
             <span class="key">Enter</span>.
-            Je zal direct naar die sleutel- of tag pagina gaan.
+            Je zal direct naar die sleutel- of tagpagina gaan.
     keyboard:
         title: Sneltoetsen
         site_navigation: Sitenavigatie
@@ -155,7 +155,7 @@ pages:
                 ze betekenen en hoe ze gebruikt worden.</p>
             more: Meer over taginfo...
         international:
-            see: Zie andere taginfo sites...
+            see: Zie andere taginfo-websites...
     about:
         about_taginfo:
             title: Over taginfo
@@ -165,7 +165,7 @@ pages:
                 Iedereen kan nieuwe tags bedenken en deze aan nieuwe of bestaande objecten toevoegen.
                 Dit maakt OpenStreetMap enorm flexibel, maar soms ook iets moeilijk
                 om mee te werken.</p>
-                <p>Of je  bijdraagt aan OSM of de OSM data gebruikt, er zijn altijd
+                <p>Of je  bijdraagt aan OSM of de OSM-gegevens gebruikt, er zijn altijd
                 vragen als: Welke tags gebruiken mensen voor eigenschap X? Welke tags kan ik gebruiken
                 voor eigenschap Y zodat het goed op de kaart verschijnt? Is de tag Z beschreven
                 op de wiki echt in gebruik en waar?</p>
@@ -180,25 +180,25 @@ pages:
         building_on_taginfo:
             title: Bouwen op taginfo
             pre: |
-                <p>U kunt de data van taginfo ook gebruiken in je eigen projecten:</p>
+                <p>U kunt de gegevens van taginfo ook gebruiken in je eigen projecten:</p>
             api: |
                 <h3>API</h3>
-                <p>Taginfo data is toegankelijk via een REST API. Zie de
-                <a href="taginfo/apidoc">API documentatie</a> voor de details, enkele algemene informatie is beschikbaar
+                <p>Taginfo-gegevens zijn toegankelijk via een REST API. Zie de
+                <a href="taginfo/apidoc">API-documentatie</a> voor de details, enkele algemene informatie is beschikbaar
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">op de OSM wiki</a>.
                 De servers die de taginfo API draaien hebben geen onbeperkte bronnen.
                 Gebruik de API alstublieft verantwoord. In geval van twijfel neem contact met de onderhouders van de
                 site die je gebruikt of praat met ons op de mailinglijst.</p>
             download: |
                 <h3>Download</h3>
-                <p>Als je wilt spelen met de data gebruikt door taginfo, kan je de
-                regulier bijgewerkte Sqlite database bestanden downloaden. Al het voorverwerken is al gedaan voor je.
+                <p>Als je wilt spelen met de gegevens gebruikt door taginfo, kan je de
+                regulier bijgewerkte Sqlite database-bestanden downloaden. Al het voorverwerken is al gedaan voor je.
                 Zie de <a href="download">downloadpagina</a> voor een lijst van bestanden. Let op dat
                 sommige van deze bestanden vrij groot kunnen zijn. Als je ze regelmatig wilt downloaden,
                 neem contact op met de onderhouders van de site die je gebruikt of praat met ons op de mailinglijst.</p>
             license: |
                 <h3>Licentie</h3>
-                <p>De data beschikbaar via taginfo is beschikbaar onder de ODbL, de
+                <p>De gegevens beschikbaar via taginfo zijn beschikbaar onder de ODbL, de
                 <a class="extlink" href="//www.openstreetmap.org/copyright">zelfde
                 licentie als de OpenStreetMap data</a>.</p>
         software:
@@ -206,23 +206,23 @@ pages:
             text: |
                 <p>De taginfo software is gecreëerd en onderhouden door
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/User:Joto">Jochen Topf</a>.
-                Het webontwerp is gecreëerd door
+                Het webdesign is gecreëerd door
                 <a class="extlink" href="https://ctd-studio.co.uk/">Christian Topf</a>.</p>
                 <h3>Vertalingen</h3>
-                <p>We hebben vertalers nodig voor de taginfo gebruikersinterface. zie het <a
-                href="taginfo/translations">vertalingenoverzicht</a> voor talen die
+                <p>We hebben vertalers nodig voor de taginfo gebruikersinterface. Zie het <a
+                href="taginfo/translations">vertalingsoverzicht</a> voor talen die
                 wat werk nodig hebben. Meer informatie over het helpen is te vinden op de
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/I18N">OSM wiki</a>.</p>
                 <h3>Code</h3>
-                <p>Alle software achter de taginfo sites is Open Source. Je kan het vinden op
+                <p>Alle software achter de taginfo-websites is Open Source. Je kan het vinden op
                 <a class="extlink" href="https://github.com/taginfo/taginfo/">GitHub</a>. Voor een overzicht
                 zie de pagina over de <a class="extlink"
                 href="//wiki.openstreetmap.org/wiki/Taginfo/Architecture">taginfo
                 architectuur</a> op de OSM wiki.</p>
                 <h3>Draai je eigen instantie</h3>
                 <p>Je kan je eigen
-                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">taginfo site</a>,
-                draaien, bijvoorbeeld met alleen data voor je eigen land. Instructies zijn
+                <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites">taginfo-website</a>,
+                draaien, bijvoorbeeld met alleen gegevens voor je eigen land. Instructies zijn
                 <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Running">op de OSM
                 wiki</a> te vinden.</p>
                 <h3>Foutrapportages en functieverzoeken</h3>
@@ -235,34 +235,34 @@ pages:
                 als je vragen hebt of wil helpen.</p>
     sources:
         intro: |
-            <p>Taginfo verzamelt data over OSM tags van enkele bronnen en brengt ze
+            <p>Taginfo verzamelt data over OSM-tags van enkele bronnen en brengt ze
             samen voor simpel bladeren en ontdekken.</p>
-            <p>Let erop dat taginfo deze data alleen laat zien. Als je deze wilt veranderen, moet
+            <p>Let erop dat taginfo deze data slechts laat zien. Als je deze wilt veranderen, moet
             je terug naar de bron.</p>
         list:
             title: Lijst van bronnen
             intro: Hier is een lijst van huidig gebruikte bronnen. Meer bronnen kunnen worden geïntegreerd in de toekomst.
         description:
             db: |
-                <p>Statistieken over sleutels, tags, en relatietypes zijn gegenereerd van de <a class="extlink" href="https://planet.openstreetmap.org/">OSM database</a> (of een extract), net zoals de kaarten die de geografische verspreiding van nodes en wegen tonen.</p>
+                <p>Statistieken over sleutels, tags, en relatietypes zijn gegenereerd van de <a class="extlink" href="https://planet.openstreetmap.org/">OSM-database</a> (of een extract), net zoals de kaarten die de geografische verspreiding van nodes en wegen tonen.</p>
             wiki: |
                 <p>De <a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> wordt gelezen en alle Key:*, Tag:*, en Relation:* pagina's (in alle verschillende talen) worden geanalyseerd. Beschrijvingen, afbeeldingen, gerelateerde tags en dergelijke worden er uitgehaald.</p>
             languages: |
                 <p>Taginfo krijgt informatie over de verschillende talen van de wereld, hun codes, namen en dergelijke van enkele <a class="extlink" href="https://www.iana.org/">IANA</a> en <a class="extlink" href="https://www.unicode.org/">Unicode</a> registers.</p>
             projects: |
-                <p>Projecten die OSM tags op een of andere manier gebruiken, zoals bewerkers, kaarten, routeerders en dergelijke. Zie <a href="projects">de projectlijst</a>.</p>
+                <p>Projecten die OSM-tags op een of andere manier gebruiken, zoals bewerkers, kaarten, routeplanners en dergelijke. Zie <a href="projects">de projectlijst</a>.</p>
             chronology: |
                 <p>Aantal sleutels/tags in de loop van de tijd van <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">planet historie</a>.</p>
         updates:
             title: Updates
-            intro: De taginfo data wordt regulier bijgewerkt vanuit de bronnen.
-        data_until: Data tot
+            intro: De taginfo-gegevens worden regulier bijgewerkt vanuit de bronnen.
+        data_until: Gegevens tot
         last_update_run: Laatste update gedraaid
         data_until_explanation: Alle bewerkingen tot deze tijd zullen in de data zitten, latere kunnen er mogelijk inzitten.
         to: tot
     download:
         intro: |
-            <p>Hier kun je de database gebruikt door taginfo downloaden. Alle data is opgeslagen
+            <p>Hier kun je de database gebruikt door taginfo downloaden. Alle gegevens zijn opgeslagen
             in <a class="extlink" href="https://www.sqlite.org/">Sqlite</a> databases.
             De databasebestanden zijn dan verpakt met <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
             <p>Als je deze databases niet wil downloaden, maar geautomatiseerde toegang nodig hebt tot
@@ -306,9 +306,9 @@ pages:
         empty_role: lege rol
     projects:
         intro: |
-                Deze tabel geeft alle projecten weer, die bekend zijn voor taginfo en OSM tags gebruiken op een of andere manier.<br/>Voor meer informatie over deze functionaliteit zie de <a href="//wiki.openstreetmap.org/wiki/Taginfo/projects" class="extlink">wiki</a>.
+                Deze tabel geeft alle projecten weer, die bekend zijn voor taginfo en OSM-tags gebruiken op een of andere manier.<br/>Voor meer informatie over deze functionaliteit zie de <a href="//wiki.openstreetmap.org/wiki/Taginfo/projects" class="extlink">wiki</a>.
     key:
-        description_from_wiki: Beschrijving van deze sleutel van de wiki (als beschikbaar in je gekozen taal, anders in het Engels).
+        description_from_wiki: Beschrijving van deze sleutel uit de wiki (indien beschikbaar in je gekozen taal, anders in het Engels).
         no_description_in_wiki: Geen Engelse beschrijving voor deze sleutel in de wiki. (Zie ook het "Wiki" tabblad.)
         filter:
             label: |
@@ -321,9 +321,9 @@ pages:
         number_objects: Hoeveelheid objecten
         number_values: Hoeveelheid waarden
         values_used: Waarden gebruikt met deze sleutel
-        tag_description_from_wiki: Beschrijving van de tag van de wiki (als beschikbaar in je gekozen taal, anders in het Engels).
+        tag_description_from_wiki: Beschrijving van de tag uit de wiki (indien beschikbaar in je gekozen taal, anders in het Engels).
         overview:
-            objects_last_edited_by: objecten met deze sleutel zijn het laatst bewerkt door %1 verschillende gebruikers.
+            objects_last_edited_by: Objecten met deze sleutel zijn het laatst bewerkt door %1 verschillende gebruikers.
             no_endorsement: (Dit betekent niet dat al deze gebruikers de sleutel steunen.)
             distribution_of_values: Verspreiding van waarden
         other_keys_used:
@@ -335,7 +335,7 @@ pages:
         geographic_distribution:
             title: Geografische verspreiding van deze sleutel
             all: Dit geeft de verspreiding van nodes en wegen met deze sleutel weer, relaties worden niet weergegeven
-            nodes: Dit geeft de verspreding van nodes met deze sleutel weer.
+            nodes: Dit geeft de verspreiding van nodes met deze sleutel weer.
             ways: Dit geeft de verspreiding van wegen met deze sleutel weer.
             relations: Het weergeven van een geografische locatie voor de verschillende typen relaties is niet eenvoudig, dus we proberen hier geen kaart weer te geven.
         wiki_pages:
@@ -343,7 +343,7 @@ pages:
             none_found: Geen wikipagina beschikbaar voor deze sleutel.
             create: Creëer wikipagina voor deze sleutel.
             wiki_page: Wikipagina
-            implied_tags: Geimpliceerde Tags
+            implied_tags: Geïmpliceerde Tags
             combined_tags: Gecombineerde Tags
             linked_tags: Gekoppelde Tags
         projects:
@@ -357,7 +357,7 @@ pages:
             similarity: Overeenkomst
             similarity_tooltip: Kleinere getallen betekenen meer overeenkomst
     tag:
-        description_from_wiki: Beschrijving tag van de wiki (als beschikbaar in je gekozen taal, anders in het Engels).
+        description_from_wiki: Beschrijving van deze tag uit de wiki (indien beschikbaar in je gekozen taal, anders in het Engels).
         no_description_in_wiki: Geen Engelse beschrijving voor deze tag in de wiki. (Zie ook het "Wiki" tabblad.)
         button_disabled: Knop uitgeschakeld, omdat er te veel objecten zijn met deze tag.
         number_objects: Hoeveelheid objecten
@@ -371,13 +371,13 @@ pages:
             from_count_tooltip: Hoeveelheid objecten met andere tag/sleutel die ook deze tag hebben.
         combinations:
             title: Combinaties
-            description: Deze tabel geeft alleen de meest gebruikt combinaties van de meest voorkomende tags weer.
+            description: Deze tabel geeft alleen de meest gebruikte combinaties van de meest voorkomende tags weer.
         chronology:
-            no_chronology: Sorry. De chronologie kan alleeen gegenereerd worden voor de meest voorkomende tags.
+            no_chronology: Sorry. De chronologie kan alleen gegenereerd worden voor de meest voorkomende tags.
         geographic_distribution:
             title: Geografische verspreiding van deze tag.
             all: Dit geeft de verspreiding van nodes en wegen met deze tag weer, relaties worden niet weergegeven
-            nodes: Dit geeft de verspreding van nodes met deze tag weer.
+            nodes: Dit geeft de verspreiding van nodes met deze tag weer.
             ways: Dit geeft de verspreiding van wegen met deze tag weer.
             relations: Het weergeven van een geografische locatie voor de verschillende typen relaties is niet eenvoudig, dus we proberen hier geen kaart weer te geven.
             no_map: Sorry. De kaart kan alleen worden gemaakt voor de meest voorkomende tags. Probeer de overpass turbo link.
@@ -387,7 +387,7 @@ pages:
             create: Creëer wikipagina voor deze tag.
             suggest_key_wiki_page: Misschien vind je meer informatie op de wikipagina voor de sleutel %1.
             wiki_page: Wikipagina
-            implied_tags: Geimpliceerde Tags
+            implied_tags: Geïmpliceerde Tags
             combined_tags: Gecombineerde Tags
             linked_tags: Gekoppelde Tags
         projects:
@@ -395,7 +395,7 @@ pages:
             description: Hoe deze tag gebruikt wordt in het project
     relation:
         name: Relatietype
-        description_from_wiki: Beschrijving van dit relatietype from the wiki (if available in your chosen language, otherwise in English).
+        description_from_wiki: Beschrijving van dit relatietype uit de wiki (indien beschikbaar in je gekozen taal, anders in het Engels).
         no_description_in_wiki: Geen Engels beschrijving beschikbaar voor dit relatietype op de wiki. (Zie ook het "Wiki" tabblad.)
         button_disabled: Knop uitgeschakeld, omdat er te veel objecten zijn met dit relatietype.
         overview:
@@ -410,7 +410,7 @@ pages:
             objects_tooltip: Relatieleden met deze rol (en als percentage van alle leden) voor dit relatietype.
             nodes_tooltip: Relatieleden van het type node met deze rol (en als percentage van alle leden van het type node) voor dit relatietype.
             ways_tooltip: Relatieleden van het type weg met deze rol (en als percentage van alle leden van het type weg) voor dit relatietype.
-            relations_tooltip: Relatieleden van het type relation met deze rol (en als percentage van alle leden van het type relatied) voor dit relatietype.
+            relations_tooltip: Relatieleden van het type relatie met deze rol (en als percentage van alle leden van het type relatie) voor dit relatietype.
             no_roles_info: Er is geen informatie over rollen van dit relatietype (waarschijnlijk omdat er slechts enkele van deze relaties zijn).
         graph:
             tab: Rollengrafiek
@@ -430,14 +430,14 @@ pages:
             description: Beschrijving
             documentation_url: Documentatie
             last_update: Laatste update
-            json_url: JSON projectbestand
-            info: Deze data wordt geleverd door het project voor taginfo via het 'JSON projectbestand' wat hierboven is gelinkt. Zie de <a href="//wiki.openstreetmap.org/wiki/Taginfo/projects" class="extlink">wiki</a> voor een formaatbeschrijving.
+            json_url: JSON-projectbestand
+            info: Deze data wordt geleverd door het project voor taginfo via het 'JSON-projectbestand' wat hierboven is gelinkt. Zie de <a href="//wiki.openstreetmap.org/wiki/Taginfo/projects" class="extlink">wiki</a> voor een formaatbeschrijving.
         tags:
             title: Tags gebruikt door dit project
             intro: Deze data wordt geleverd door het project en is niet per definitie compleet. Lees alsjeblieft de projectdocumentatie voor details.
             description: Hoe deze sleutel/tag gebruikt is in het project
             count_all_tooltip: Hoeveelheid objecten in database met deze sleutel/tag
-            objects_tooltip: objecttypen die het project gebruikt
+            objects_tooltip: Objecttypen die het project gebruikt
 
 flexigrid:
     pagetext: Pagina
@@ -465,16 +465,16 @@ sources:
         description: Verzamelde statistieken over tijd.
     db:
         name: Database
-        description: Statistieken over elke sleutel en elke tag van de OSM database.
+        description: Statistieken over elke sleutel en elke tag van de OSM-database.
     wiki:
         name: Wiki
-        description: Data van de tag en sleutel paginas van de OSM wiki.
+        description: Data van de tag- en sleutelpagina's van de OSM wiki.
     languages:
         name: Talen
-        description: Taalnamen, codes en dergelijke van IANA en Unicode registers.
+        description: Taalnamen, -codes en dergelijke van IANA en Unicode registers.
     projects:
         name: Projecten
-        description: Externe projecten en de OSM sleutels/tags die ze gebruiken.
+        description: Externe projecten en de OSM-sleutels/tags die ze gebruiken.
     chronology:
         name: Chronologie
         description: Aantal sleutels/tags in de loop van de tijd van OSM.
@@ -483,14 +483,14 @@ reports:
     characters_in_keys:
         name: Karakters in sleutels
         intro: |
-            Elk geldig Unicode karakter kan voorkomen in een OSM sleutel, maar meestal
+            Elk geldig Unicode karakter kan voorkomen in een OSM-sleutel, maar meestal
             worden alleen kleine letters (a-z) en de underscore (_)
             gebruikt. De dubbele punt (:) wordt vaak gebruikt als een scheidingskarakter. Dit
-            rapport categoriseert alle sleutels op basis van de characters die ze gebruiken.
+            rapport categoriseert alle sleutels op basis van de karakters die ze gebruiken.
         statistics:
             tab: Statistieken
             title: Statistiekenoverzicht
-            fraction: Fraction
+            fraction: Aandeel
             characters: Karakters in sleutel
             characters_in_keys:
                 plain: Alleen kleine letters (<span class="char">a</span> tot <span class="char">z</span>) en underscore (<span class="char">_</span>), eerste en laatste karakters zijn letters.
@@ -557,7 +557,7 @@ reports:
             intro: |
                 <p>Sleutels die niet in de bovenstaande categorieën vallen.</p>
     database_statistics:
-        name: Databasestatistieken
+        name: Database-statistieken
         objects_in_db: Hoeveelheid objecten in de database
         tags_in_db: Hoeveelheid tags in de database
         distinct_keys: Hoeveelheid unieke sleutels
@@ -590,7 +590,7 @@ reports:
     key_lengths:
         name: Sleutellengtes
         intro: |
-            Tag sleutels kunnen tussen 0 en 255 (Unicode) karakters lang zijn. Zeer korte of zee lange sleutels zijn vaak, maar niet altijd fouten.
+            Tag sleutels kunnen tussen 0 en 255 (Unicode) karakters lang zijn. Zeer korte of zeer lange sleutels zijn vaak, maar niet altijd fouten.
         table:
             number_of_objects: Hoeveelheid objecten
         histogram:
@@ -602,7 +602,7 @@ reports:
         name: Taalvergelijkingstabel voor sleutel in de wiki
         icons:
             template: Pagina in wiki beschikbaar en bevat standaard template.
-            error: Pagina in wiki beschikbaar en bevat standaard template, maar kon niet geparseerd worden.
+            error: Pagina in wiki beschikbaar en bevat standaard template, maar kon niet geanalyseerd worden.
             page: Pagina in wiki beschikbaar, maar bevat geen standaard template.
             redirect: Pagina is een redirect.
         intro: |
@@ -617,8 +617,8 @@ reports:
         code: Code
         native_name: Lokale naam
         english_name: Engelse naam
-        wiki_key_pages: Wiki sleutelpagina's
-        wiki_tag_pages: Wiki tagpagina's
+        wiki_key_pages: Wikipagina's voor sleutels
+        wiki_tag_pages: Wikipagina's voor tags
     wiki_pages_about_non_existing_keys:
         name: Wikipagina's over niet bestaande sleutels
         intro: |
@@ -654,7 +654,7 @@ reports:
                 varianten en dergelijke beschrijven. De volgende lijst geeft de subtags weer die op dit moment
                 geregistreerd zijn die relevant zijn voor OSM. Voor meer informatie bekijk ook de
                 <a href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
-                pagina over IETF language tags</a> en de <a
+                pagina over IETF taal tags</a> en de <a
                 href="http://www.langtag.net/">langtag.net</a> site.</p>
                 <p>Let er op dat de data weergegeven in deze tabel <b>niet</b> van OpenStreetMap is,
                 er worden slechts de bouwblokken weergegeven die gebruikt kunnen worden om talen te beschrijven
@@ -676,7 +676,7 @@ reports:
     historic_development:
         name: Historische ontwikkeling
         intro: |
-            Ontwikkeling van enkele belangrijke statistieken na verloop van tijd. Deze data is
+            Ontwikkeling van enkele belangrijke statistieken na verloop van tijd. Deze gegevens zijn
             verzameld door taginfo, gaten zijn mogelijk wanneer taginfo niet draaide
             op een dag voor een enkele reden.
         keys:
@@ -686,21 +686,21 @@ reports:
         relation_types:
             title: Unieke relatietypes
     wiki_images:
-        name: Wikiafbeeldingen
+        name: Wiki-afbeeldingen
         intro: |
             Afbeeldingen worden gebruikt in de wiki om sleutels te symboliseren in verschillende
             talen. Soms is de afbeelding van de ene taal beter als van de andere
             Maar soms is het juist logisch om verschillende afbeeldingen te hebben,
             bijvoorbeeld wegens verschillende culturele achtergronden en dergelijke.
     wiki_problems:
-        name: Wiki parseerproblemen
+        name: Wiki analyseproblemen
         intro: |
             Taginfo leest alle wikipagina's die sleutels, tags en
             relaties beschrijven om informatie over deze tags te vinden. Dit rapport geeft een lijst
             van problemen die ondervonden werden tijdens het lezen van die pagina's weer. Dit zijn niet
             per definitie fouten in de wiki, ze betekenen slechts dat iets in
             de wikipagina's niet geformatteerd is zoals taginfo dit begrijpt. Of
-            de oagina moeten verbeterd worden, of taginfo moet gerepareerd worden.
+            de pagina moet verbeterd worden, of taginfo moet gerepareerd worden.
         location: Locatie
         reason: Reden
         wiki_page: Wikipagina
