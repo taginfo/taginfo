@@ -652,7 +652,7 @@ reports:
                 (BCP47)</a>. Taal
                 tags bestaan uit een of meer <i>subtags</i> die de taal, script,
                 varianten en dergelijke beschrijven. De volgende lijst geeft de subtags weer die op dit moment
-                geregistreerd zijn die relevant zijn voor OSM. Voor meer informatie bekijk ook de
+                geregistreerd zijn en die relevant zijn voor OSM. Voor meer informatie bekijk ook de
                 <a href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
                 pagina over IETF taal tags</a> en de <a
                 href="http://www.langtag.net/">langtag.net</a> website.</p>
