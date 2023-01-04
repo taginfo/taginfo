@@ -689,8 +689,8 @@ reports:
         name: Wiki-afbeeldingen
         intro: |
             Afbeeldingen worden gebruikt in de wiki om sleutels te symboliseren in verschillende
-            talen. Soms is de afbeelding van de ene taal beter als van de andere
-            Maar soms is het juist logisch om verschillende afbeeldingen te hebben,
+            talen. Soms is de afbeelding van de ene taal beter als van de andere.
+            Het is soms echter juist logisch om verschillende afbeeldingen te hebben,
             bijvoorbeeld wegens verschillende culturele achtergronden en dergelijke.
     wiki_problems:
         name: Wiki analyseproblemen
