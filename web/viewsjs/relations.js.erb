@@ -4,7 +4,7 @@
  %>
 function page_init() {
     create_flexigrid('grid-relations', {
-        url: '/api/4/relations/all',
+        url: build_link('/api/4/relations/all'),
         colModel: [
             { display: '<%= h(osm.relation_type) %>', name: 'rtype', width: 220, sortable: true },
             { display: '<span title="<%= h(page.relations_of_type_tooltip) %>"><%= h(osm.relations) %></span>', name: 'count', width: 250, sortable: true, align: 'center' },

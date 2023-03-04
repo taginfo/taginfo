@@ -5,7 +5,7 @@
 var create_flexigrid_for = {
     list: function() {
         create_flexigrid('grid-wiki-problems', {
-            url: '/api/0/wiki/problems',
+            url: build_link('/api/0/wiki/problems'),
             colModel: [
                 { display: 'Location', name: 'location', width: 200, sortable: true },
                 { display: 'Reason', name: 'reason', width: 240, sortable: true },

@@ -6,7 +6,7 @@
 var create_flexigrid_for = {
     tags: function(project) {
         create_flexigrid('grid-tags', {
-            url: '/api/4/project/tags?project=' + encodeURIComponent(project),
+            url: build_link('/api/4/project/tags?project=' + encodeURIComponent(project)),
             colModel: [
                 { display: '<%= h(osm.tag) %>', name: 'tag', width: 260, sortable: true },
                 { display: '<span title="<%= h(misc.in_wiki_tooltip) %>">Wiki</span>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
@@ -40,7 +40,7 @@ var create_flexigrid_for = {
 };
 
 function page_init() {
-    up = function() { window.location = '/projects'; }
+    up = function() { window.location = build_link('/projects'); }
     const dataset = document.querySelector('h1').dataset;
     init_tabs([dataset.project]);
 }

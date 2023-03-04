@@ -1,7 +1,7 @@
 var create_flexigrid_for = {
     projects: function() {
         create_flexigrid('grid-projects', {
-            url: '/api/4/projects/all',
+            url: build_link('/api/4/projects/all'),
             colModel: [
                 { display: '<%= h(@trans.t.taginfo.project) %>', name: 'name', width: 400, sortable: true },
                 { display: '<%= h(@trans.t.osm.keys) %>', name: 'unique_keys', width: 40, sortable: true, align: 'right' },
@@ -28,7 +28,7 @@ var create_flexigrid_for = {
     },
     keys: function() {
         create_flexigrid('grid-keys', {
-            url: '/api/4/projects/keys',
+            url: build_link('/api/4/projects/keys'),
             colModel: [
                 { display: '<%= h(@trans.t.osm.keys) %>', name: 'key', width: 500, sortable: true },
                 { display: '<%= h(@trans.t.taginfo.projects) %>', name: 'projects', width: 40, sortable: true, align: 'right' },
@@ -55,7 +55,7 @@ var create_flexigrid_for = {
     },
     tags: function() {
         create_flexigrid('grid-tags', {
-            url: '/api/4/projects/tags',
+            url: build_link('/api/4/projects/tags'),
             colModel: [
                 { display: '<%= h(@trans.t.osm.tags) %>', name: 'tag', width: 600, sortable: true },
                 { display: '<%= h(@trans.t.taginfo.projects) %>', name: 'projects', width: 40, sortable: true, align: 'right' },

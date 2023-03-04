@@ -12,14 +12,14 @@
     @languages_lookup = @languages.map{ |lang| "'#{lang}': #{lang_lookup[lang]}" }.join(', ')
 %>
 function page_init() {
-    up = function() { window.location = '/reports'; };
+    up = function() { window.location = build_link('/reports'); };
     var lang_to_idx = {
         <%= @languages_lookup %>
     };
     var rp = calculate_flexigrid_rp(jQuery('div.box')) - 1;
     current_grid = 'grid-keys';
     grids[current_grid] = jQuery('#grid-keys').flexigrid(jQuery.extend({}, flexigrid_defaults, texts.flexigrid, {
-        url: '/api/4/keys/wiki_pages',
+        url: build_link('/api/4/keys/wiki_pages'),
         colModel: [
             { display: '<%= h(osm.key) %>', name: 'key', width: 160, sortable: true },
             <% @languages.each do |lang| %>

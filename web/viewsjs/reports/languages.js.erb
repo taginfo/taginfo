@@ -1,8 +1,8 @@
 <% page = @trans.t.reports.languages %>
 function page_init() {
-    up = function() { window.location = '/reports'; };
+    up = function() { window.location = build_link('/reports'); };
     create_flexigrid('grid-langs', {
-        url: '/api/4/wiki/languages',
+        url: build_link('/api/4/wiki/languages'),
         colModel: [
             { display: '<%= h(page.code) %>', name: 'code', width: 60, sortable: true },
             { display: '<%= h(page.native_name) %>', name: 'native_name', width: 150, sortable: true },

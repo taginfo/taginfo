@@ -5,7 +5,7 @@
  %>
 function create_flexigrid_with_option(english) {
     create_flexigrid('grid-keys', {
-        url: '/api/4/keys/without_wiki_page?english=' + english,
+        url: build_link('/api/4/keys/without_wiki_page?english=' + english),
         colModel: [
             { display: '<%= h(page.table.create_wiki_page) %>', name: 'create_wiki_page', width: 200, sortable: false },
             { display: '<%= h(osm.key) %>', name: 'key', width: 180, sortable: true },
@@ -40,7 +40,7 @@ function english() {
 }
 
 function page_init() {
-    up = function() { window.location = '/reports'; };
+    up = function() { window.location = build_link('/reports'); };
     create_flexigrid_with_option(english());
     jQuery('#english').bind('click', function() {
         jQuery('#grid-keys').flexOptions({

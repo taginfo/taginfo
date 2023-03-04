@@ -7,7 +7,7 @@ var create_flexigrid_for = {};
 ['plain', 'colon', 'letters', 'space', 'problem', 'rest'].forEach(function(category) {
     create_flexigrid_for[category] = function() {
         create_flexigrid('grid-' + category, {
-            url: '/api/4/keys/all?filter=characters_' + category + '&include=prevalent_values',
+            url: build_link('/api/4/keys/all?filter=characters_' + category + '&include=prevalent_values'),
             colModel: [
                 { display: '<%= h(osm.key) %>', name: 'key', width: 250, sortable: true },
                 { display: '<span title="<%= h(misc.objects_tooltip) %>"><img src="/img/types/all.svg" width="16" height="16" alt=""/> <%= h(osm.objects) %></span>', name: 'count_all', width: 150, sortable: true, align: 'center' },
@@ -39,7 +39,7 @@ var create_flexigrid_for = {};
 });
 
 function page_init() {
-    up = function() { window.location = '/reports'; };
+    up = function() { window.location = build_link('/reports'); };
     init_tabs([]);
 
     var w = 968,

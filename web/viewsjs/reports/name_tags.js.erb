@@ -9,7 +9,7 @@ function tt(text, c, title) {
 var create_flexigrid_for = {
     "overview": function() {
         create_flexigrid('grid-name', {
-            url: '/api/0/keys/name',
+            url: build_link('/api/0/keys/name'),
             colModel: [
                 { display: '<%= h(osm.key) %>', name: 'key', width: 250, sortable: true },
                 { display: '<%= h(osm.objects) %>', name: 'count_all', width: 100, sortable: true, align: 'right' },
@@ -49,7 +49,7 @@ var create_flexigrid_for = {
     "bcp47": function() {
         const filter_type = document.getElementById('subtag-filter').value;
         create_flexigrid('grid-bcp47-subtags', {
-            url: '/api/0/langtags?filter=' + encodeURIComponent(filter_type),
+            url: build_link('/api/0/langtags?filter=' + encodeURIComponent(filter_type)),
             colModel: [
                 { display: 'Type',        name: 'type',        width:  80, sortable: false },
                 { display: 'Subtag',      name: 'subtag',      width:  80, sortable: true },
@@ -79,7 +79,7 @@ var create_flexigrid_for = {
 };
 
 function page_init() {
-    up = function() { window.location = '/reports'; };
+    up = function() { window.location = build_link('/reports'); };
     const filter = document.getElementById('subtag-filter');
     filter.addEventListener('change', function(element) {
         window.location.search = new URLSearchParams({ 'filter': element.target.value });

@@ -6,7 +6,7 @@
 var create_flexigrid_for = {
     keys: function() {
         create_flexigrid('grid-keys', {
-            url: '/api/4/keys/all?include=prevalent_values',
+            url: build_link('/api/4/keys/all?include=prevalent_values'),
             colModel: [
                 { display: '<%= h(misc.length) %>', name: 'length', width: 60, sortable: true, align: 'right' },
                 { display: '<%= h(osm.key) %>', name: 'key', width: 180, sortable: true },
@@ -45,7 +45,7 @@ end
 hist = hist.map{ |item| item.nil? ? 0 : item } %>
 
 function page_init() {
-    up = function() { window.location = '/reports'; };
+    up = function() { window.location = build_link('/reports'); };
     init_tabs([]);
 
     var bar_width = 6,

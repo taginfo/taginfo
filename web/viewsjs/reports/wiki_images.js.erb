@@ -1,5 +1,5 @@
 function page_init() {
-    up = function() { window.location = '/reports'; };
+    up = function() { window.location = build_link('/reports'); };
 
     const keys = <%= @db.select("SELECT DISTINCT key FROM wiki.wikipages WHERE value IS NULL AND image IN (SELECT image FROM wiki.wiki_images) ORDER BY key").execute().map{ |row| row['key'] }.to_json; %>;
 

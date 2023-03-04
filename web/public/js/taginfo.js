@@ -2,7 +2,7 @@
 
 var grids = {},
     current_grid = '',
-    up = function() { window.location = '/'; };
+    up = function() { window.location = build_link('/'); };
 
 /* ============================ */
 
@@ -48,14 +48,22 @@ function resize_grid(the_grid) {
 
 /* ============================ */
 
+function build_link_with_prefix(prefix, path, params) {
+    if (params && Object.keys(params).length > 0) {
+        const p = new URLSearchParams(params);
+        path += '?' + p.toString();
+    }
+    return prefix + path;
+}
+
 const bad_chars_for_url = /[.=\/]/;
 
 function url_for_key(key) {
     const k = encodeURIComponent(key);
     if (key.match(bad_chars_for_url)) {
-        return '/keys/?key=' + k;
+        return build_link('/keys/?key=' + k);
     } else {
-        return '/keys/' + k;
+        return build_link('/keys/' + k);
     }
 }
 
@@ -63,23 +71,23 @@ function url_for_tag(key, value) {
     const k = encodeURIComponent(key);
     const v = encodeURIComponent(value);
     if (key.match(bad_chars_for_url) || value.match(bad_chars_for_url)) {
-        return '/tags/?key=' + k + '&value=' + v;
+        return build_link('/tags/?key=' + k + '&value=' + v);
     } else {
-        return '/tags/' + k + '=' + v;
+        return build_link('/tags/' + k + '=' + v);
     }
 }
 
 function url_for_rtype(rtype) {
     const t = encodeURIComponent(rtype);
     if (rtype.match(bad_chars_for_url)) {
-        return '/relations/?rtype=' + t;
+        return build_link('/relations/?rtype=' + t);
     } else {
-        return '/relations/' + t;
+        return build_link('/relations/' + t);
     }
 }
 
 function url_for_project(id) {
-    return '/projects/' + encodeURIComponent(id);
+    return build_link('/projects/' + encodeURIComponent(id));
 }
 
 function url_for_wiki(title, options) {
@@ -234,7 +242,7 @@ function link_to_rtype(rtype, attr) {
 }
 
 function link_to_project(id, name) {
-    icon_url = '/api/4/project/icon?project=' + id;
+    icon_url = build_link('/api/4/project/icon?project=' + id);
     return img({ src: icon_url, width: 16, height: 16, alt: '' }) + ' ' + link(
         url_for_project(id),
         html_escape(name)
@@ -870,9 +878,9 @@ jQuery(document).ready(function() {
         select: function(event, ui) {
             const query = ui.item.value;
             if (query.match(/=/)) {
-                window.location = '/tags/' + ui.item.value;
+                window.location = build_link('/tags/' + ui.item.value);
             } else {
-                window.location = '/keys/' + ui.item.value;
+                window.location = build_link('/keys/' + ui.item.value);
             }
         }
     });
@@ -896,25 +904,25 @@ jQuery(document).ready(function() {
                         jQuery('input.qsbox').focus();
                         return false;
                     case 104: // h
-                        window.location = '/';
+                        window.location = build_link('/');
                         return false;
                     case 107: // k
-                        window.location = '/keys';
+                        window.location = build_link('/keys');
                         return false;
                     case 112: // p
-                        window.location = '/projects';
+                        window.location = build_link('/projects');
                         return false;
                     case 114: // r
-                        window.location = '/relations';
+                        window.location = build_link('/relations');
                         return false;
                     case 115: // s
                         jQuery('input#search').focus();
                         return false;
                     case 116: // t
-                        window.location = '/tags';
+                        window.location = build_link('/tags');
                         return false;
                     case 120: // x
-                        window.location = '/reports';
+                        window.location = build_link('/reports');
                         return false;
                 }
             }

@@ -4,7 +4,7 @@
  %>
 function page_init() {
     create_flexigrid('grid-keys', {
-        url: '/api/4/keys/all?include=prevalent_values',
+        url: build_link('/api/4/keys/all?include=prevalent_values'),
         colModel: [
             { display: '<%= h(osm.key) %>', name: 'key', width: 160, sortable: true },
             { display: '<span title="<%= h(misc.objects_tooltip) %>"><img src="/img/types/all.svg" width="16" height="16" alt=""/> <%= h(osm.objects) %></span>', name: 'count_all', width: 160, sortable: true, align: 'center' },

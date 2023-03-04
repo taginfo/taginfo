@@ -7,7 +7,7 @@
 var create_flexigrid_for = {
     overview: function(rtype) {
         create_flexigrid('grid-overview', {
-            url: '/api/4/relation/stats?rtype=' + encodeURIComponent(rtype),
+            url: build_link('/api/4/relation/stats?rtype=' + encodeURIComponent(rtype)),
             colModel: [
                 { display: '<%= h(page.overview.member_type) %>', name: 'type', width: 100, sortable: true },
                 { display: '<%= h(page.overview.member_count) %>', name: 'count', width: 260, sortable: true, align: 'right' }
@@ -30,7 +30,7 @@ var create_flexigrid_for = {
     },
     roles: function(rtype) {
         create_flexigrid('grid-roles', {
-            url: '/api/4/relation/roles?rtype=' + encodeURIComponent(rtype),
+            url: build_link('/api/4/relation/roles?rtype=' + encodeURIComponent(rtype)),
             colModel: [
                 { display: '<%= h(osm.relation_member_role) %>', name: 'role', width: 250, sortable: true },
                 { display: '<span title="<%= h(page.roles.objects_tooltip) %>"><img src="/img/types/all.svg" width="16" height="16" alt=""/> <%= h(osm.relation_members) %></span>', name: 'count_all_members', width: 250, sortable: true, align: 'center' },
@@ -59,7 +59,7 @@ var create_flexigrid_for = {
     },
     wiki: function(rtype) {
         create_flexigrid('grid-wiki', {
-            url: '/api/4/relation/wiki_pages?rtype=' + encodeURIComponent(rtype),
+            url: build_link('/api/4/relation/wiki_pages?rtype=' + encodeURIComponent(rtype)),
             colModel: [
                 { display: '<%= h(misc.language) %>', name: 'lang', width: 150, sortable: false },
                 { display: '<%= h(page.wiki_pages.wiki_page) %>', name: 'title', width: 160, sortable: false, align: 'right' },
@@ -86,7 +86,7 @@ var create_flexigrid_for = {
     },
     projects: function(rtype) {
         create_flexigrid('grid-projects', {
-            url: '/api/4/relation/projects?rtype=' + encodeURIComponent(rtype),
+            url: build_link('/api/4/relation/projects?rtype=' + encodeURIComponent(rtype)),
             colModel: [
                 { display: '<%= h(taginfo.project) %>', name: 'project_name', width: 280, sortable: true },
                 { display: '<%= h(page.projects.description) %>', name: 'description', width: 600, sortable: false, align: 'left' }
@@ -277,7 +277,7 @@ function page_init() {
     set_inner_html_to('taglink', link_to_value('type', rtype));
     init_tabs([rtype]);
 
-    fetch('/api/4/relation/roles?sortname=count_all_members&sortorder=asc&min_fraction=0.01&rtype=' + encodeURIComponent(rtype)).
+    fetch(build_link('/api/4/relation/roles?sortname=count_all_members&sortorder=asc&min_fraction=0.01&rtype=' + encodeURIComponent(rtype))).
         then(response => response.json()).
         then(roles => create_role_chart(roles));
 }

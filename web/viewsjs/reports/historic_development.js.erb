@@ -78,7 +78,7 @@ function init_stat(key, data) {
 }
 
 function page_init() {
-    up = function() { window.location = '/reports'; };
+    up = function() { window.location = build_link('/reports'); };
     init_tabs([]);
     var data = <%= data.to_json %>;
 

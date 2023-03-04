@@ -7,7 +7,7 @@
 var create_flexigrid_for = {
     overview: function(key, filter_type) {
         create_flexigrid('grid-overview', {
-            url: '/api/4/key/stats?key=' + encodeURIComponent(key),
+            url: build_link('/api/4/key/stats?key=' + encodeURIComponent(key)),
             colModel: [
                 { display: '<%= h(misc.object_type) %>', name: 'type', width: 100, sortable: true },
                 { display: '<%= h(page.number_objects) %>', name: 'count', width: 260, sortable: true, align: 'center' },
@@ -32,7 +32,7 @@ var create_flexigrid_for = {
     },
     values: function(key, filter_type, lang) {
         create_flexigrid('grid-values', {
-            url: '/api/4/key/values?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type) + '&lang=' + encodeURIComponent(lang),
+            url: build_link('/api/4/key/values?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type) + '&lang=' + encodeURIComponent(lang)),
             colModel: [
                 { display: '<%= h(osm.value) %>', name: 'value', width: 200, sortable: true },
                 { display: '<%= h(misc.count) %>', name: 'count', width: 260, sortable: true, align: 'center' },
@@ -60,7 +60,7 @@ var create_flexigrid_for = {
     },
     combinations: function(key, filter_type) {
         create_flexigrid('grid-keys', {
-            url: '/api/4/key/combinations?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type),
+            url: build_link('/api/4/key/combinations?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type)),
             colModel: [
                 { display: '<span title="<%= h(page.other_keys_used.to_count_tooltip) %>"><%= h(misc.count) %> &rarr;</span>', name: 'to_count', width: 260, sortable: true, align: 'center' },
                 { display: '<span title="<%= h(page.other_keys_used.other_key_tooltip) %>"><%= h(page.other_keys_used.other) %></span>', name: 'other_key', width: 400, sortable: true },
@@ -85,7 +85,7 @@ var create_flexigrid_for = {
     },
     similar: function(key) {
         create_flexigrid('grid-similar', {
-            url: '/api/4/key/similar?key=' + encodeURIComponent(key),
+            url: build_link('/api/4/key/similar?key=' + encodeURIComponent(key)),
             colModel: [
                 { display: '<%= h(page.similar.other) %>', name: 'other_key', width: 500, sortable: true },
                 { display: '<span title="<%= h(page.similar.count_all_tooltip) %>"><%= h(misc.count) %></span>', name: 'count_all', width: 160, sortable: true, align: 'right' },
@@ -109,13 +109,13 @@ var create_flexigrid_for = {
         });
     },
     chronology: function(key) {
-        fetch('/api/4/key/chronology?key=' + encodeURIComponent(key)).
+        fetch(build_link('/api/4/key/chronology?key=' + encodeURIComponent(key))).
             then(response => response.json()).
             then(data => draw_chronology_chart(data.data, filter.value));
     },
     wiki: function(key, filter_type) {
         create_flexigrid('grid-wiki', {
-            url: '/api/4/key/wiki_pages?key=' + encodeURIComponent(key),
+            url: build_link('/api/4/key/wiki_pages?key=' + encodeURIComponent(key)),
             colModel: [
                 { display: '<%= h(misc.language) %>', name: 'lang', width: 150, sortable: false },
                 { display: '<%= h(page.wiki_pages.wiki_page) %>', name: 'title', width: 160, sortable: false, align: 'right' },
@@ -152,7 +152,7 @@ var create_flexigrid_for = {
     },
     projects: function(key, filter_type) {
         create_flexigrid('grid-projects', {
-            url: '/api/4/key/projects?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type),
+            url: build_link('/api/4/key/projects?key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter_type)),
             colModel: [
                 { display: '<%= h(taginfo.project) %>', name: 'project_name', width: 280, sortable: true },
                 { display: '<%= h(osm.tag) %>', name: 'tag', width: 220, sortable: true },
@@ -242,7 +242,7 @@ function redraw_chart(prevalent_values) {
 }
 
 function page_init() {
-    up = function() { window.location = '/keys'; }
+    up = function() { window.location = build_link('/keys'); }
     activate_josm_button();
 
     const filter = document.getElementById('filter');
@@ -258,7 +258,7 @@ function page_init() {
 
     init_tabs([key, filter.value, '<%= r18n.locale.code %>']);
 
-    fetch('/api/4/key/prevalent_values?min_fraction=0.02&key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter.value)).
+    fetch(build_link('/api/4/key/prevalent_values?min_fraction=0.02&key=' + encodeURIComponent(key) + '&filter=' + encodeURIComponent(filter.value))).
             then(response => response.json()).
             then(function(data) {
                 const prevalent_values = data.data;

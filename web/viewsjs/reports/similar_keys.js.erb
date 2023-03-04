@@ -4,9 +4,9 @@
     sim = @trans.t.reports.similar_keys
  %>
 function page_init() {
-    up = function() { window.location = '/reports'; };
+    up = function() { window.location = build_link('/reports'); };
         create_flexigrid('grid-keys', {
-            url: '/api/4/keys/similar',
+            url: build_link('/api/4/keys/similar'),
             colModel: [
                 { display: '<%= h(sim.key_common) %>', name: 'key_common', width: 350, sortable: true },
                 { display: '<%= h(sim.count_common) %>', name: 'count_all_common', width: 100, sortable: true, align: 'right' },
