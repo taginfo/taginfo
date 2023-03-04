@@ -365,3 +365,7 @@ def unpack_chronology(raw_data)
 
     data
 end
+
+def build_link(link)
+    link
+end

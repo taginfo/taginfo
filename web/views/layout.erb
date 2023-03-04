@@ -43,14 +43,14 @@
     </header>
     <nav>
     <ul id="menu">
-        <li><a <%= in_section('keys') %>href="/keys"><%= h(t.osm.keys) %></a></li>
-        <li><a <%= in_section('tags') %>href="/tags"><%= h(t.osm.tags) %></a></li>
-        <li><a <%= in_section('relations') %>href="/relations"><%= h(t.osm.relations) %></a></li>
-        <li><a <%= in_section('projects') %>href="/projects"><%= h(t.taginfo.projects) %></a></li>
-        <li><a <%= in_section('reports') %>href="/reports"><%= h(t.taginfo.reports) %></a></li>
-        <li><a <%= in_section('about') %>href="/about"><%= h(t.taginfo.about) %></a></li>
+        <li><a <%= in_section('keys') %>href="<%= build_link('/keys') %>"><%= h(t.osm.keys) %></a></li>
+        <li><a <%= in_section('tags') %>href="<%= build_link('/tags') %>"><%= h(t.osm.tags) %></a></li>
+        <li><a <%= in_section('relations') %>href="<%= build_link('/relations') %>"><%= h(t.osm.relations) %></a></li>
+        <li><a <%= in_section('projects') %>href="<%= build_link('/projects') %>"><%= h(t.taginfo.projects) %></a></li>
+        <li><a <%= in_section('reports') %>href="<%= build_link('/reports') %>"><%= h(t.taginfo.reports) %></a></li>
+        <li><a <%= in_section('about') %>href="<%= build_link('/about') %>"><%= h(t.taginfo.about) %></a></li>
 <% if @section == 'taginfo' %>
-        <li><a <%= in_section('taginfo') %>href="/taginfo"><%= h(t.taginfo.meta) %></a></li>
+        <li><a <%= in_section('taginfo') %>href="<%= build_link('/taginfo') %>"><%= h(t.taginfo.meta) %></a></li>
 <% end %>
     </ul>
     </nav>
@@ -66,9 +66,9 @@
         <div id="footer_left"><span id="osmlink"><a class="extlink" href="//www.openstreetmap.org/"><b>OpenStreetMap</b></a> &middot;</span>
             <a href="//www.openstreetmap.org/copyright">Data &copy; OSM contributors (ODbL)</a></div>
         <div id="footer_right">
-            <a href="/sources"><%= h(t.taginfo.sources) %></a> &middot;
+            <a href="<%= build_link('/sources') %>"><%= h(t.taginfo.sources) %></a> &middot;
 <% if SECTIONS[:download] %>
-            <a href="/download"><%= h(t.taginfo.download) %></a> &middot;
+            <a href="<%= build_link('/download') %>"><%= h(t.taginfo.download) %></a> &middot;
 <% end %>
 <% if SECTIONS[:taginfo] %>
             <a href="/taginfo/apidoc">API</a> &middot;
