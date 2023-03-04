@@ -7,7 +7,7 @@
 var create_flexigrid_for = {
     keys: function(query) {
         create_flexigrid('grid-keys', {
-            url: build_link('/api/4/keys/all?query=' + encodeURIComponent(query)),
+            url: build_link('/api/4/keys/all', { query: query }),
             colModel: [
                 { display: '<%= h(misc.count) %>', name: 'count_all', width: 80, sortable: true, align: 'right' },
                 { display: '<%= h(osm.key) %>', name: 'key', width: 500, sortable: true }
@@ -27,7 +27,7 @@ var create_flexigrid_for = {
     },
     values: function(query) {
         create_flexigrid('grid-values', {
-            url: build_link('/api/4/search/by_value?query=' + encodeURIComponent(query)),
+            url: build_link('/api/4/search/by_value', { query: query }),
             colModel: [
                 { display: '<%= h(misc.count) %>', name: 'count_all', width: 80, sortable: true, align: 'right' },
                 { display: '<%= h(osm.key) %>', name: 'key', width: 250, sortable: true },
@@ -49,7 +49,7 @@ var create_flexigrid_for = {
     },
     relations: function(query) {
         create_flexigrid('grid-relations', {
-            url: build_link('/api/4/relations/all?query=' + encodeURIComponent(query)),
+            url: build_link('/api/4/relations/all', { query: query }),
             colModel: [
                 { display: '<%= h(misc.count) %>', name: 'count', width: 80, sortable: true, align: 'right' },
                 { display: '<%= h(osm.relation_type) %>', name: 'rtype', width: 500, sortable: true }
@@ -69,7 +69,7 @@ var create_flexigrid_for = {
     },
     roles: function(query) {
         create_flexigrid('grid-roles', {
-            url: build_link('/api/4/search/by_role?query=' + encodeURIComponent(query)),
+            url: build_link('/api/4/search/by_role', { query: query }),
             colModel: [
                 { display: '<%= h(misc.count) %>', name: 'count_all', width: 80, sortable: true, align: 'right' },
                 { display: '<%= h(osm.relation_types) %>', name: 'rtype', width: 250, sortable: true },
@@ -92,7 +92,7 @@ var create_flexigrid_for = {
     tags: function(query) {
         const q = query.split('=', 2);
         create_flexigrid('grid-tags', {
-            url: build_link('/api/4/search/by_key_and_value?query=' + encodeURIComponent(query)),
+            url: build_link('/api/4/search/by_key_and_value', { query: query }),
             colModel: [
                 { display: '<%= h(misc.count) %>', name: 'count_all', width: 80, sortable: true, align: 'right' },
                 { display: '<%= h(osm.key) %>', name: 'key', width: 300, sortable: true },
@@ -114,7 +114,7 @@ var create_flexigrid_for = {
     },
     fulltext: function(query) {
         create_flexigrid('grid-fulltext', {
-            url: build_link('/api/4/search/by_keyword?query=' + encodeURIComponent(query)),
+            url: build_link('/api/4/search/by_keyword', { query: query }),
             colModel: [
                 { display: '<%= h(osm.key) %>', name: 'key', width: 300, sortable: true },
                 { display: '<%= h(osm.value) %>', name: 'value', width: 500, sortable: true }

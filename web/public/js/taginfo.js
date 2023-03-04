@@ -286,7 +286,7 @@ function link_to_rtype(rtype, attr) {
 }
 
 function link_to_project(id, name) {
-    icon_url = build_link('/api/4/project/icon?project=' + id);
+    icon_url = build_link('/api/4/project/icon', { project: id });
     return img({ src: icon_url, width: 16, height: 16, alt: '' }) + ' ' + link(
         url_for_project(id),
         html_escape(name)

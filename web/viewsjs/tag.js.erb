@@ -17,7 +17,7 @@ function link_to_key_or_tag(key, value) {
 var create_flexigrid_for = {
     overview: function(key, value, filter_type) {
         create_flexigrid('grid-overview', {
-            url: build_link('/api/4/tag/stats?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value)),
+            url: build_link('/api/4/tag/stats', { key: key, value: value }),
             colModel: [
                 { display: '<%= h(misc.object_type) %>', name: 'type', width: 100, sortable: true },
                 { display: '<%= h(page.number_objects) %>', name: 'count', width: 260, sortable: true, align: 'center' }
@@ -40,7 +40,7 @@ var create_flexigrid_for = {
     },
     combinations: function(key, value, filter_type) {
         create_flexigrid('grid-combinations', {
-            url: build_link('/api/4/tag/combinations?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value) + '&filter=' + encodeURIComponent(filter_type)),
+            url: build_link('/api/4/tag/combinations', { key: key, value: value, filter: filter_type }),
             colModel: [
                 { display: '<span title="<%= h(page.other_tags_used.to_count_tooltip) %>"><%= h(misc.count) %> &rarr;</span>', name: 'to_count', width: 260, sortable: true, align: 'center' },
                 { display: '<span title="<%= h(page.other_tags_used.other_key_tooltip) %>"><%= h(page.other_tags_used.other) %></span>', name: 'other_tag', width: 400, sortable: true },
@@ -64,13 +64,13 @@ var create_flexigrid_for = {
         });
     },
     chronology: function(key, value) {
-        fetch(build_link('/api/4/tag/chronology?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value))).
+        fetch(build_link('/api/4/tag/chronology', { key: key, value: value })).
             then(response => response.json()).
             then(data => draw_chronology_chart(data.data, filter.value));
     },
     wiki: function(key, value) {
         create_flexigrid('grid-wiki', {
-            url: build_link('/api/4/tag/wiki_pages?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value)),
+            url: build_link('/api/4/tag/wiki_pages', { key: key, value: value }),
             colModel: [
                 { display: '<%= h(misc.language) %>', name: 'lang', width: 150, sortable: false },
                 { display: '<%= h(page.wiki_pages.wiki_page) %>', name: 'title', width: 200, sortable: false, align: 'right' },
@@ -107,7 +107,7 @@ var create_flexigrid_for = {
     },
     projects: function(key, value, filter_type) {
         create_flexigrid('grid-projects', {
-            url: build_link('/api/4/tag/projects?key=' + encodeURIComponent(key) + '&value=' + encodeURIComponent(value) + '&filter=' + encodeURIComponent(filter_type)),
+            url: build_link('/api/4/tag/projects', { key: key, value: value, filter: filter_type }),
             colModel: [
                 { display: '<%= h(taginfo.project) %>', name: 'project_name', width: 280, sortable: true },
                 { display: '<%= h(osm.tag) %>', name: 'tag', width: 220, sortable: true },

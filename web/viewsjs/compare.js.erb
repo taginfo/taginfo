@@ -7,12 +7,14 @@ function page_init() {
     const datasets = Array.from(document.querySelectorAll('h2'), s => s.dataset);
     const fetch_promises = datasets.map(function(d, index) {
         let url = '/api/4/';
+        let params = { key: d.key };
         if (d.value) {
-            url += 'tag/overview?key=' + encodeURIComponent(d.key) + '&value=' + encodeURIComponent(d.value);
+            url += 'tag/overview'
+            params['value'] = d.value;
         } else {
-            url += 'key/overview?key=' + encodeURIComponent(d.key);
+            url += 'key/overview'
         }
-        url = build_link(url);
+        url = build_link(url, params);
 
         return fetch(url).
             then( response => response.json() ).

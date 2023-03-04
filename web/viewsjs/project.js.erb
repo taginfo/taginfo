@@ -6,7 +6,7 @@
 var create_flexigrid_for = {
     tags: function(project) {
         create_flexigrid('grid-tags', {
-            url: build_link('/api/4/project/tags?project=' + encodeURIComponent(project)),
+            url: build_link('/api/4/project/tags', { project: project }),
             colModel: [
                 { display: '<%= h(osm.tag) %>', name: 'tag', width: 260, sortable: true },
                 { display: '<span title="<%= h(misc.in_wiki_tooltip) %>">Wiki</span>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
