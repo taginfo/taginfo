@@ -112,23 +112,23 @@ def parse_and_check(id, data, log, db)
 
     p = data[:project].clone
 
-    unless p[:name] && p[:name].is_a?(String)
+    unless p[:name]&.is_a?(String)
         log.fatal "MISSING project.name OR NOT A STRING."
     end
 
-    unless p[:description] && p[:name].is_a?(String)
+    unless p[:description]&.is_a?(String)
         log.fatal "MISSING project.description OR NOT A STRING."
     end
 
-    unless p[:project_url] && p[:name].is_a?(String)
+    unless p[:project_url]&.is_a?(String)
         log.fatal "MISSING project.project_url OR NOT A STRING."
     end
 
-    unless p[:contact_name] && p[:name].is_a?(String)
+    unless p[:contact_name]&.is_a?(String)
         log.error "MISSING project.contact_name OR NOT A STRING."
     end
 
-    unless p[:contact_email] && p[:name].is_a?(String)
+    unless p[:contact_email]&.is_a?(String)
         log.error "MISSING project.contact_email OR NOT A STRING."
     end
 
