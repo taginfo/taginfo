@@ -7,7 +7,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2020-2022  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2020-2023  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -38,11 +38,11 @@ database.transaction do |db|
     File.open(wikimedias_file) do |file|
         file.each do |line|
             fields = line.split(',')
-            if fields[2] == 'wikipedia'
-                prefix = fields[1]
-                language = CGI.unescapeHTML(fields[3])
-                db.execute("INSERT INTO wikipedia_sites (prefix, language) VALUES (?, ?)", [prefix, language])
-            end
+            next unless fields[2] == 'wikipedia'
+
+            prefix = fields[1]
+            language = CGI.unescapeHTML(fields[3])
+            db.execute("INSERT INTO wikipedia_sites (prefix, language) VALUES (?, ?)", [prefix, language])
         end
     end
 end

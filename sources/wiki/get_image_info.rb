@@ -18,7 +18,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013-2022  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2013-2023  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -113,12 +113,9 @@ database.transaction do |db|
                 next
             end
 
-            normalized = data['query']['normalized']
-            if normalized
-                normalized.each do |n|
-                    db.execute('UPDATE wikipages SET image=? WHERE image=?', [n['to'], n['from']])
-                    db.execute('UPDATE relation_pages SET image=? WHERE image=?', [n['to'], n['from']])
-                end
+            data['query']['normalized']&.each do |n|
+                db.execute('UPDATE wikipages SET image=? WHERE image=?', [n['to'], n['from']])
+                db.execute('UPDATE relation_pages SET image=? WHERE image=?', [n['to'], n['from']])
             end
 
             if !data['query']['pages']
@@ -127,40 +124,42 @@ database.transaction do |db|
                 next
             end
 
-            data['query']['pages'].each do |k,v|
-                if v['imageinfo'] && ! images_added[v['title']]
-                    info = v['imageinfo'][0]
-                    if info['thumburl'] && info['thumburl'].match(%r{^(.*/)[0-9]{1,4}(px-.*)$})
-                        prefix = $1
-                        suffix = $2
-                    else
-                        prefix = nil
-                        suffix = nil
-                        puts "Wrong thumbnail format: '#{info['thumburl']}'"
-                    end
+            data['query']['pages'].each do |_, v|
+                next unless v['imageinfo']
+                next if images_added[v['title']]
 
-                    # The OSM wiki reports the wrong thumbnail URL for images
-                    # transcluded from Wikimedia Commons. This fixes those
-                    # URLs.
-                    if prefix && info['url'].match(%r{^https://upload\.wikimedia\.org/wikipedia/commons})
-                        prefix.sub!('https://wiki.openstreetmap.org/w/images', 'https://upload.wikimedia.org/wikipedia/commons')
-                    end
-
-                    images_added[v['title']] = 1
-                    db.execute("INSERT INTO wiki_images (image, width, height, size, mime, image_url, thumb_url_prefix, thumb_url_suffix) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [
-                        v['title'],
-                        info['width'],
-                        info['height'],
-                        info['size'],
-                        info['mime'],
-                        info['url'],
-                        prefix,
-                        suffix
-                    ])
+                info = v['imageinfo'][0]
+                if info['thumburl']&.match(%r{^(.*/)[0-9]{1,4}(px-.*)$})
+                    prefix = Regexp.last_match(1)
+                    suffix = Regexp.last_match(2)
+                else
+                    prefix = nil
+                    suffix = nil
+                    puts "Wrong thumbnail format: '#{info['thumburl']}'"
                 end
+
+                # The OSM wiki reports the wrong thumbnail URL for images
+                # transcluded from Wikimedia Commons. This fixes those
+                # URLs.
+                if prefix && info['url'].match(%r{^https://upload\.wikimedia\.org/wikipedia/commons})
+                    prefix.sub!('https://wiki.openstreetmap.org/w/images', 'https://upload.wikimedia.org/wikipedia/commons')
+                end
+
+                images_added[v['title']] = 1
+                db.execute("INSERT INTO wiki_images (image, width, height, size, mime, image_url, thumb_url_prefix, thumb_url_suffix) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                           [
+                               v['title'],
+                               info['width'],
+                               info['height'],
+                               info['size'],
+                               info['mime'],
+                               info['url'],
+                               prefix,
+                               suffix
+                           ])
             end
-        rescue => ex
-            puts "Wiki API call error: #{ex.message}"
+        rescue => e
+            puts "Wiki API call error: #{e.message}"
             pp data
         end
     end

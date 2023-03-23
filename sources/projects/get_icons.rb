@@ -7,7 +7,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2014-2022  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2014-2023  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -77,7 +77,7 @@ projects.each do |id, url|
         else
             puts "  #{id} #{url} ERROR code=#{response.code}"
         end
-    rescue
+    rescue StandardError
         puts "  #{id} #{url} ERROR"
     end
 end

@@ -1,4 +1,3 @@
-# coding: utf-8
 #------------------------------------------------------------------------------
 #
 #  MediaWikiAPI
@@ -9,7 +8,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013-2020  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2013-2023  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -31,10 +30,10 @@ require 'uri'
 require 'net/https'
 
 module MediaWikiAPI
-
+    # Class for querying the MediaWiki API
     class API
 
-        def initialize(path='/w/api.php?')
+        def initialize(path = '/w/api.php?')
             @url = 'https://wiki.openstreetmap.org' + path
             @headers = {}
             add_header('User-agent', 'taginfo/1.0 (https://wiki.osm.org/wiki/Taginfo)')
@@ -45,7 +44,7 @@ module MediaWikiAPI
         end
 
         def build_path(params)
-            URI(@url + params.to_a.map{ |el| CGI::escape(el[0].to_s) + '=' + CGI::escape(el[1].to_s) }.join('&'))
+            URI(@url + params.to_a.map{ |el| CGI.escape(el[0].to_s) + '=' + CGI.escape(el[1].to_s) }.join('&'))
         end
 
         def get(params)
@@ -55,7 +54,7 @@ module MediaWikiAPI
                 http.use_ssl = true
                 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
             end
-#            puts "Getting path [#{uri.request_uri}]"
+            # puts "Getting path [#{uri.request_uri}]"
             response = http.get(uri.request_uri, @headers)
             response.body.force_encoding('UTF-8')
             response
@@ -69,7 +68,6 @@ module MediaWikiAPI
         end
 
     end
-
 end
 
 #-- THE END -------------------------------------------------------------------

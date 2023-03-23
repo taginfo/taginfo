@@ -7,7 +7,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2014-2022  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2014-2023  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -35,6 +35,7 @@ database = SQLite3::Database.new(dir + '/taginfo-projects.db')
 
 #------------------------------------------------------------------------------
 
+# Simple logging class
 class Log
 
     def initialize
@@ -62,11 +63,9 @@ class Log
     end
 
     def get_state
-        if @state < 3
-            return 'OK'
-        else
-            return 'PARSE_ERROR'
-        end
+        return 'OK' if @state < 3
+
+        'PARSE_ERROR'
     end
 
 end
@@ -140,16 +139,17 @@ def parse_and_check(id, data, log, db)
         log.error "OPTIONAL project.icon_url MUST BE STRING."
     end
 
-    db.execute("UPDATE projects SET name=?, description=?, project_url=?, doc_url=?, icon_url=?, contact_name=?, contact_email=? WHERE id=?", [
-        p[:name],
-        p[:description],
-        p[:project_url],
-        p[:doc_url],
-        p[:icon_url],
-        p[:contact_name],
-        p[:contact_email],
-        id
-    ])
+    db.execute("UPDATE projects SET name=?, description=?, project_url=?, doc_url=?, icon_url=?, contact_name=?, contact_email=? WHERE id=?",
+               [
+                   p[:name],
+                   p[:description],
+                   p[:project_url],
+                   p[:doc_url],
+                   p[:icon_url],
+                   p[:contact_name],
+                   p[:contact_email],
+                   id
+               ])
 
     p.delete(:name)
     p.delete(:description)
@@ -226,18 +226,19 @@ def parse_and_check(id, data, log, db)
             end
 
             if !has_error
-                db.execute("INSERT INTO project_tags (project_id, key, value, description, doc_url, icon_url, on_node, on_way, on_relation, on_area) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [
-                    id,
-                    d[:key],
-                    d[:value],
-                    d[:description],
-                    d[:doc_url],
-                    d[:icon_url],
-                    on['node'],
-                    on['way'],
-                    on['relation'],
-                    on['area'],
-                ])
+                db.execute("INSERT INTO project_tags (project_id, key, value, description, doc_url, icon_url, on_node, on_way, on_relation, on_area) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                           [
+                               id,
+                               d[:key],
+                               d[:value],
+                               d[:description],
+                               d[:doc_url],
+                               d[:icon_url],
+                               on['node'],
+                               on['way'],
+                               on['relation'],
+                               on['area'],
+                           ])
             end
         end
     end

@@ -7,7 +7,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2014-2022  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2014-2023  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -77,24 +77,26 @@ projects.each do |id, url|
         rescue ArgumentError
             last_modified = Time.now.utc
         end
-        db.execute("INSERT INTO projects (id, json_url, last_modified, fetch_date, fetch_status, fetch_json, status, data_updated) VALUES (?, ?, ?, ?, CAST(? AS TEXT), ?, ?, ?)", [
-            id,
-            url,
-            last_modified,
-            Time.now.utc.iso8601,
-            response.code,
-            response.body,
-            (response.code == '200' ? 'OK' : 'FETCH ERROR'),
-            last_modified
-        ])
-    rescue
-        db.execute("INSERT INTO projects (id, json_url, fetch_date, fetch_status, status) VALUES (?, ?, ?, ?, ?)", [
-            id,
-            url,
-            Time.now.utc.iso8601,
-            '500',
-            'FETCH ERROR'
-        ])
+        db.execute("INSERT INTO projects (id, json_url, last_modified, fetch_date, fetch_status, fetch_json, status, data_updated) VALUES (?, ?, ?, ?, CAST(? AS TEXT), ?, ?, ?)",
+                   [
+                       id,
+                       url,
+                       last_modified,
+                       Time.now.utc.iso8601,
+                       response.code,
+                       response.body,
+                       (response.code == '200' ? 'OK' : 'FETCH ERROR'),
+                       last_modified
+                   ])
+    rescue StandardError
+        db.execute("INSERT INTO projects (id, json_url, fetch_date, fetch_status, status) VALUES (?, ?, ?, ?, ?)",
+                   [
+                       id,
+                       url,
+                       Time.now.utc.iso8601,
+                       '500',
+                       'FETCH ERROR'
+                   ])
     end
 end
 

@@ -17,6 +17,8 @@ Metrics/MethodLength:
   Max: 50
 Naming/AccessorMethodName:
   Enabled: False
+Style/ClassVars:
+  Enabled: false
 Style/FrozenStringLiteralComment:
   Enabled: false
 Style/IfUnlessModifier:

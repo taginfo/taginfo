@@ -5,7 +5,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Read the links we got from get_links.rb, classify them, and add the to the
+#  Read the links we got from get_links.rb, classify them, and add them to the
 #  taginfo-wiki.db database.
 #
 #  Classification (link_class):
@@ -25,7 +25,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2017-2022  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2017-2023  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -50,77 +50,69 @@ database = SQLite3::Database.new(dir + '/taginfo-wiki.db')
 database.results_as_hash = true
 
 # Regular expression matching Key/Tag/Relation pages in all languages
-regexp_ktr = Regexp.new('^(?:(.*):)?(Key|Tag|Relation):(.*)$')
+REGEXP_KTR = %r{'^(?:(.*):)?(Key|Tag|Relation):(.*)$'}.freeze
+
+def classify_from(from)
+    case from
+    when /^Category:/
+        'category'
+    when /^(([A-Za-z]+):)?Template(_talk)?:/
+        'template'
+    when /Map_Features/i
+        'map_features'
+    when /Import/i
+        'import'
+    when /How_to_map_a$/
+        'how_to_map'
+    when /Proposed_features/i
+        'proposed'
+    when /^(([A-Za-z]+):)?User(_talk)?:/
+        'user'
+    else
+        'rest'
+    end
+end
+
+def classify_link(db, from, to)
+    link_class = classify_from(from)
+
+    fm = from.match(REGEXP_KTR)
+    if fm
+        from_lang = fm[1]
+        from_type = fm[2]
+        from_name = fm[3]
+    end
+
+    tm = to.match(REGEXP_KTR)
+    if tm
+        to_lang = tm[1]
+        to_type = tm[2]
+        to_name = tm[3]
+    end
+
+    if fm && tm
+        link_class = if from_type == to_type && from_name == to_name
+                         'same'
+                     elsif from_type == 'Tag' && to_type == 'Key' && from_name.sub(/=.*/, '') == to_name
+                         'tag_to_key'
+                     elsif from_type == 'Key' && to_type == 'Tag' && to_name.sub(/=.*/, '') == from_name
+                         'key_to_tag'
+                     else
+                         'ktr'
+                     end
+    end
+
+    db.execute("INSERT INTO wiki_links (link_class, from_title, from_lang, from_type, from_name, to_title, to_lang, to_type, to_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+               [ link_class, from, from_lang, from_type, from_name, to, to_lang, to_type, to_name ])
+    # puts "#{link_class}\t#{from}\t#{from_lang}\t#{from_type}\t#{from_name}\t#{to}\t#{to_lang}\t#{to_type}\t#{to_name}"
+end
 
 database.transaction do |db|
-
     File.open(dir + '/links.list') do |linkfile|
         linkfile.each do |line|
             line.chomp!
             (from, to) = line.split("\t")
-
-            link_class = 'rest'
-
-            if from =~ /^Category:/
-                link_class = 'category'
-            end
-
-            if from =~ /^(([A-Za-z]+):)?Template(_talk)?:/
-                link_class = 'template'
-            end
-
-            if from =~ /Map_Features/i
-                link_class = 'map_features'
-            end
-
-            if from =~ /Import/i
-                link_class = 'import'
-            end
-
-            if from =~ /How_to_map_a$/
-                link_class = 'how_to_map'
-            end
-
-            if from =~ /Proposed_features/i
-                link_class = 'proposed'
-            end
-
-            if from =~ /^(([A-Za-z]+):)?User(_talk)?:/
-                link_class = 'user'
-            end
-
-            fm = from.match regexp_ktr
-            if fm
-                from_lang = fm[1]
-                from_type = fm[2]
-                from_name = fm[3]
-            end
-
-            tm = to.match regexp_ktr
-            if tm
-                to_lang = tm[1]
-                to_type = tm[2]
-                to_name = tm[3]
-            end
-
-            if fm && tm
-                if from_type == to_type && from_name == to_name
-                    link_class = 'same'
-                elsif from_type == 'Tag' && to_type == 'Key' && from_name.sub(/=.*/, '') == to_name
-                    link_class = 'tag_to_key'
-                elsif from_type == 'Key' && to_type == 'Tag' && to_name.sub(/=.*/, '') == from_name
-                    link_class = 'key_to_tag'
-                else
-                    link_class = 'ktr'
-                end
-            end
-
-            db.execute("INSERT INTO wiki_links (link_class, from_title, from_lang, from_type, from_name, to_title, to_lang, to_type, to_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", [
-                link_class,
-                from, from_lang, from_type, from_name,
-                to, to_lang, to_type, to_name
-            ])
-#        puts "#{link_class}\t#{from}\t#{from_lang}\t#{from_type}\t#{from_name}\t#{to}\t#{to_lang}\t#{to_type}\t#{to_name}"
+            classify_link(db, from, to)
         end
     end
 end

@@ -9,7 +9,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013-2022  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2013-2023  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@ class Words
 
     # Remove words that appear too often
     def cleanup
-        @words.delete_if do |k, v|
+        @words.delete_if do |_, v|
             v.size >= 10
         end
     end
@@ -97,10 +97,10 @@ class WordExtractor
         # digits make for bad words
         return false if word =~ /\d/
 
-#        # not interested if word == key or == value
-#        key.downcase!
-#        value.downcase! unless value.nil?
-#        return false if word == key || word == value
+        ## not interested if word == key or == value
+        # key.downcase!
+        # value.downcase! unless value.nil?
+        # return false if word == key || word == value
 
         true
     end
@@ -129,16 +129,16 @@ words = Words.new
 we = WordExtractor.new(words)
 
 database.execute("SELECT * FROM wikipages") do |row|
-#    puts "key=#{ row['key'] } value=#{ row['value'] } lang=#{ row['lang'] }"
+    # puts "key=#{ row['key'] } value=#{ row['value'] } lang=#{ row['lang'] }"
     we.parse(row['key'], row['value'], row['lang'], row['body'])
 end
 
 words.cleanup
 words.invert
 
-#words.dump do |key, value, words|
-#    puts "#{key}=#{value}: #{words}"
-#end
+# words.dump do |key, value, words|
+#     puts "#{key}=#{value}: #{words}"
+# end
 
 database.transaction do |db|
     words.dump do |key, value, wordlist|

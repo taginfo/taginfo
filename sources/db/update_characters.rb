@@ -7,7 +7,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013-2022  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2013-2023  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -38,18 +38,18 @@ database.execute("PRAGMA cache_size    = 1000000")
 
 #------------------------------------------------------------------------------
 
-regexes = [
+REGEXES = [
     [ 'plain',   %r{^[a-z]([a-z_]*[a-z])?$} ],
     [ 'colon',   %r{^[a-z][a-z_:]*[a-z]$} ],
     [ 'letters', %r{^[\p{L}\p{M}]([\p{L}\p{M}\p{N}_:]*[\p{L}\p{M}\p{N}])?$}u ],
     [ 'space',   %r{\p{Z}}u ],
     [ 'problem', %r{[=+/&<>;@'"?%#\\,\p{C}]}u ]
-]
+].freeze
 
 keys = {}
 database.execute("SELECT key FROM keys WHERE characters IS NULL").map{ |row| row['key'] }.each do |key|
     keys[key] = 'rest'
-    regexes.each do |type, regex|
+    REGEXES.each do |type, regex|
         if key.match(regex)
             keys[key] = type
             break

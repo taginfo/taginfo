@@ -7,7 +7,7 @@
 #
 #------------------------------------------------------------------------------
 #
-#  Copyright (C) 2013-2022  Jochen Topf <jochen@topf.org>
+#  Copyright (C) 2013-2023  Jochen Topf <jochen@topf.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -40,34 +40,35 @@ database.transaction do |db|
     File.open(property_value_alias_file) do |file|
         file.each do |line|
             line.chomp!
-            if line.match(%r{^sc ;})
-                (_, script, name) = line.split(%r{\s*;\s*})
-                scripts[name] = script
-                db.execute("INSERT INTO unicode_scripts (script, name) VALUES (?, ?)", [script, name])
-            end
+            next unless line.match(%r{^sc ;})
+
+            (_, script, name) = line.split(%r{\s*;\s*})
+            scripts[name] = script
+            db.execute("INSERT INTO unicode_scripts (script, name) VALUES (?, ?)", [script, name])
         end
     end
 
     File.open(codepoint_script_mapping_file) do |file|
         file.each do |line|
             line.chomp!
-            next if line == '' or line[0] == '#'
+            next if line == '' || line[0] == '#'
 
-            if not line.match(%r{^([0-9A-F.]+) +; +([^ ]+) # (..) })
+            unless line.match(%r{^([0-9A-F.]+) +; +([^ ]+) # (..) })
                 puts "Line does not match: #{line}"
                 next
             end
 
-            codes = $1
-            name = $2
-            gc = $3
+            codes = Regexp.last_match(1)
+            name = Regexp.last_match(2)
+            gc = Regexp.last_match(3)
 
-            if codes.match(%r{^[0-9A-F]{4,5}$})
+            case codes
+            when %r{^[0-9A-F]{4,5}$}
                 from = codes.to_i(16)
-                to   = codes.to_i(16)
-            elsif codes.match(%r{^([0-9A-F]{4,5})..([0-9A-F]{4,5})$})
-                from = $1.to_i(16)
-                to   = $2.to_i(16)
+                to   = from
+            when %r{^([0-9A-F]{4,5})..([0-9A-F]{4,5})$}
+                from = Regexp.last_match(1).to_i(16)
+                to   = Regexp.last_match(2).to_i(16)
             else
                 puts "Line does not match: #{line}"
                 next
