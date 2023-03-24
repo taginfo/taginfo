@@ -16,7 +16,7 @@
 --></style>
 <% end %>
 <script type="text/javascript">
-  function build_link(link) { return build_link_with_prefix('', link); }
+  function build_link(...args) { return build_link_with_prefix('', ...args); }
 </script>
 <%= javascript_tags %>
 </head>
