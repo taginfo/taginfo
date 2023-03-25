@@ -272,7 +272,7 @@ end
 
 def wrap_description(translation, description)
     if description[0] != ''
-        return "<span lang='#{description[1]}' dir='#{description[2] ? 'ltr' : 'rtl'}' title='#{ h(translation.description_from_wiki) }' tipsy='#{r18n.locale.ltr? ? 'w' : 'e'}'>#{ h(description[0]) }</span>"
+        return "<span lang='#{description[1]}' dir='#{description[2] ? 'ltr' : 'rtl'}' title='#{ h(translation.description_from_wiki) }' data-tooltip-position='#{r18n.locale.ltr? ? 'OnRight' : 'OnLeft'}'>#{ h(description[0]) }</span>"
     else
         return "<span class='empty'>#{ h(translation.no_description_in_wiki) }</span>"
     end

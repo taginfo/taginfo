@@ -3,7 +3,7 @@
     misc = @trans.t.misc
  %>
 function tt(text, c, title) {
-    return tag('tt', text, { 'class': c, 'title': title, 'tipsy': 'w' });
+    return tag('tt', text, { 'class': c, 'title': title, 'data-tooltip-position': 'OnLeft' });
 }
 
 var create_flexigrid_for = {

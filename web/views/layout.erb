@@ -21,8 +21,9 @@
 <%= javascript_tags %>
 </head>
 <body>
+    <div id="tooltip"></div>
     <header>
-        <div id="header_date" title="<%= h(t.taginfo.data_from_description) %>" tipsy="<%= r18n.locale.ltr? ? 'ne' : 'nw' %>"><%= h(t.taginfo.data_from) %>: <%= @data_until %> UTC</div>
+        <div id="header_date" title="<%= h(t.taginfo.data_from_description) %>" data-tooltip-position="OnLeft"><%= h(t.taginfo.data_from) %>: <%= @data_until %> UTC</div>
         <div id="header_forms" class="no-print">
             <form id="set_language" action="/switch_locale">
                 <input type="hidden" id="url" name="url" value="<%= request.path %>"/>

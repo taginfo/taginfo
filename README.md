@@ -95,7 +95,6 @@ run the tests.
 Taginfo uses the following Javascript libraries:
 * jQuery 1.11.1
 * jQuery UI 1.9.2
-* [tipsy](http://onehackoranother.com/projects/jquery/tipsy/)
 * Flexigrid (from [Google Code](http://code.google.com/p/flexigrid/) and
   [flexigrid.info](http://www.flexigrid.info/), but with changes and bugfixes)
 * [slicknav](http://slicknav.com/)

@@ -38,11 +38,16 @@ function fmt_prevalent_role_list(list) {
         return empty(page.roles_less_than_one_percent);
     }
     return list.map(function(item) {
+        let attrs = { 'data-tooltip-position': 'OnLeft' };
+        let role;
         if (item.role) {
-            return tag('span', fmt_role(item.role), { tipsy: 'e', title: html_escape(item.role) + ' (' + fmt_as_percent(item.fraction) + ')' });
+            attrs['title'] = html_escape(item.role) + ' (' + fmt_as_percent(item.fraction) + ')';
+            role = fmt_role(item.role);
         } else {
-            return tag('span', empty('<%= h(page.empty_role) %>'), { tipsy: 'e', title: '(' + fmt_as_percent(item.fraction) + ')' });
+            attrs['title'] = '(' + fmt_as_percent(item.fraction) + ')';
+            role = empty('<%= h(page.empty_role) %>');
         }
+        return tag('span', role, attrs);
     }).join(' &bull; ');
 }
 

@@ -6,15 +6,45 @@ var grids = {},
 
 /* ============================ */
 
-function init_tipsy() {
-    jQuery('*[tipsy]').each(function(index, obj) {
-        obj = jQuery(obj);
-        obj.tipsy({ opacity: 1, delayIn: 500, gravity: obj.attr('tipsy') });
-    });
-    jQuery('*[tipsy_html]').each(function(index, obj) {
-        obj = jQuery(obj);
-        obj.tipsy({ opacity: 1, delayIn: 500, gravity: obj.attr('tipsy_html'), html: true });
-    });
+function init_tooltips() {
+    const tooltips = document.querySelectorAll('*[data-tooltip-position]');
+    const tt = document.getElementById('tooltip');
+
+    for (let tooltip of tooltips) {
+        if (tooltip.hasAttribute('title')) {
+            tooltip.setAttribute('data-tooltip-text', tooltip.getAttribute('title'));
+            tooltip.removeAttribute('title');
+        }
+
+        tooltip.addEventListener("mouseenter", function(ev) {
+            ev.preventDefault();
+
+            const b = this.getBoundingClientRect();
+
+            let x, y;
+            if (this.getAttribute('data-tooltip-position') == 'OnLeft') {
+                x = b.x;
+                y = b.y + b.height / 2;
+            } else if (this.getAttribute('data-tooltip-position') == 'OnRight') {
+                x = b.x + b.width;
+                y = b.y + b.height / 2;
+            } else {
+                x = b.x + b.width / 2;
+                y = b.y + b.height / 2;
+            }
+
+            tt.innerHTML = "<div class='tooltips'><div class='" + this.getAttribute("data-tooltip-position") + "'>" + this.getAttribute("data-tooltip-text") + "</div></div>";
+            tt.style.display = 'inline-block';
+            tt.style.left = '' + x + 'px';
+            tt.style.top = '' + y + 'px';
+        });
+
+        tooltip.addEventListener("mouseleave", function(ev) {
+            ev.preventDefault();
+            tt.removeAttribute('style');
+            tt.innerHTML = '';
+        });
+    }
 }
 
 function resize_box() {
@@ -379,18 +409,11 @@ function fmt_wiki_image_popup(image) {
 
     if (w < max_size) {
         url = image.image_url;
-    } else {
-        w = thumb_size;
-        h = other_size;
     }
 
-    return tag('span', link_to_wiki(image.title), {
-        'class': 'overflow',
-        tipsy_html: 's',
-        title: html_escape(tag('div', img({ src: url }), {
-            'class': 'img_popup',
-            style: style({ width: w + 'px', height: h + 'px' })
-        }))
+    return tag('div', link_to_wiki(image.title), {
+        'data-tooltip-position': 'OnTop',
+        title: html_escape(img({ src: url }))
     });
 }
 
@@ -526,7 +549,7 @@ function fmt_prevalent_value_list(key, list) {
         return empty(texts.misc.values_less_than_one_percent);
     }
     return list.map(function(item) {
-        return link_to_value(key, item.value, { tipsy: 'e', title: fmt_as_percent(item.fraction) });
+        return link_to_value(key, item.value, { 'data-tooltip-position': 'OnLeft', title: fmt_as_percent(item.fraction) });
     }).join(' &bull; ');
 }
 
@@ -540,10 +563,19 @@ const flexigrid_defaults = {
     usepager      : true,
     useRp         : false,
     onSuccess     : function(grid) {
-        init_tipsy();
         grid.fixHeight();
-        jQuery('th *[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 's', offset: 3 });
-        jQuery('.sDiv input[title]').tipsy({ opacity: 1, delayIn: 500, gravity: 'e' });
+
+        // Set up tooltip for table header fields
+        for (let el of document.querySelectorAll('th *[title]')) {
+            el.setAttribute('data-tooltip-position', 'OnTop');
+        }
+
+        // Set up tooltip for table search field
+        for (let el of document.querySelectorAll('.sDiv input[title]')) {
+            el.setAttribute('data-tooltip-position', 'OnLeft');
+        }
+
+        init_tooltips();
         jQuery('input.qsbox').bind('keydown', function(event) {
             if (event.which == 27) { // esc
                 this.blur();
@@ -858,13 +890,13 @@ jQuery(document).ready(function() {
         return b;
     })(window.location.search.substr(1).split('&'));
 
-    init_tipsy();
-
     resize_box();
 
     if (typeof page_init === 'function') {
         page_init();
     }
+
+    init_tooltips();
 
     jQuery('#locale').bind('change', function() {
         jQuery('#url').val(window.location.pathname);

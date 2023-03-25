@@ -152,30 +152,6 @@ html[dir="rtl"] .slicknav_nav .disabled {
 
 /* ========== */
 
-.tipsy { font-size: 0.8rem; position: absolute; padding: 5px; z-index: 100000; }
-.tipsy-inner { background-color: #000; color: #FFF; max-width: 220px; padding: 5px 8px 4px 8px; text-align: center; }
-
-/* Rounded corners */
-.tipsy-inner { border-radius: 4px; }
-
-.tipsy-arrow { position: absolute; width: 0; height: 0; line-height: 0; border: 5px dashed #000; }
-
-/* Rules to colour arrows */
-.tipsy-arrow-n { border-bottom-color: #000; }
-.tipsy-arrow-s { border-top-color: #000; }
-.tipsy-arrow-e { border-left-color: #000; }
-.tipsy-arrow-w { border-right-color: #000; }
-.tipsy-n .tipsy-arrow { top: 0px; left: 50%; margin-left: -5px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent; }
-.tipsy-nw .tipsy-arrow { top: 0; left: 10px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent;}
-.tipsy-ne .tipsy-arrow { top: 0; right: 10px; border-bottom-style: solid; border-top: none;  border-left-color: transparent; border-right-color: transparent;}
-.tipsy-s .tipsy-arrow { bottom: 0; left: 50%; margin-left: -5px; border-top-style: solid; border-bottom: none;  border-left-color: transparent; border-right-color: transparent; }
-.tipsy-sw .tipsy-arrow { bottom: 0; left: 10px; border-top-style: solid; border-bottom: none;  border-left-color: transparent; border-right-color: transparent; }
-.tipsy-se .tipsy-arrow { bottom: 0; right: 10px; border-top-style: solid; border-bottom: none; border-left-color: transparent; border-right-color: transparent; }
-.tipsy-e .tipsy-arrow { right: 0; top: 50%; margin-top: -5px; border-left-style: solid; border-right: none; border-top-color: transparent; border-bottom-color: transparent; }
-.tipsy-w .tipsy-arrow { left: 0; top: 50%; margin-top: -5px; border-right-style: solid; border-left: none; border-top-color: transparent; border-bottom-color: transparent; }
-
-/* ========== */
-
 form#filter-form {
     margin-top: 0px;
     height: 3ex;
@@ -960,8 +936,7 @@ html[dir="rtl"] #overview {
     direction: ltr;
 }
 
-html[dir="rtl"] #overview p,
-html[dir="rtl"] .tipsy {
+html[dir="rtl"] #overview p {
     direction: rtl;
 }
 
@@ -997,5 +972,115 @@ html[dir="rtl"] .ui-dialog .ui-dialog-title {
 /* slicknav.min.css */
 html[dir="rtl"] .slicknav_btn {
     float: left;
+}
+
+/* tooltips */
+#tooltip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 100000;
+}
+
+.tooltips {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: inline-block;
+}
+
+.tooltips div {
+    min-width: 100%;
+    display: inline-block;
+    position: absolute;
+    width: max-content;
+    max-width: 400px;
+    background: #202020;
+    color: #ffffff;
+    font-size: 1rem;
+    line-height: 1.2;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-out;
+}
+
+.tooltips div.OnTop {
+    left: 0;
+    bottom: 15px;
+    transform: translate(-50%, 0);
+    text-align: center;
+}
+
+.tooltips div.OnTop:before {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 8px solid #202020;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    bottom: -8px;
+    margin-left: -8px;
+    left: 50%;
+}
+
+.tooltips div.OnBottom {
+    left: 0;
+    top: 15px;
+    transform: translate(-50%, 0);
+    text-align: center;
+}
+
+.tooltips div.OnBottom:before {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border-bottom: 8px solid #202020;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    top: -8px;
+    margin-left: -8px;
+    left: 50%;
+}
+
+.tooltips div.OnLeft {
+    right: 15px;
+    top: -15px;
+}
+
+.tooltips div.OnLeft:before {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 8px solid #202020;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    top: 50%;
+    margin-top: -8px;
+    right: -8px;
+}
+
+.tooltips div.OnRight {
+    left: 15px;
+    top: -15px;
+}
+
+.tooltips div.OnRight:before {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border-right: 8px solid #202020;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    top: 50%;
+    margin-top: -8px;
+    left: -8px;
 }
 

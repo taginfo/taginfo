@@ -48,6 +48,7 @@ function fill_data(datasets, item, index) {
     get_el(index, '.wiki div.data').innerHTML += item.wiki_pages.map(
         w => tag('span', html_escape(w.lang), {
             'class': 'badge lang',
+            'data-tooltip-position': 'OnTop',
             title: html_escape(w.native + ' (' + w.english + ')')
         })
     ).join(' ');
@@ -62,7 +63,5 @@ function fill_data(datasets, item, index) {
 function data_complete(data) {
     const comparison_list = new ComparisonList(data);
     comparison_list.store();
-
-    jQuery('div.prevalent_values a').tipsy({ opacity: 1, delayIn: 500, gravity: 'w' });
-    jQuery('span.lang').tipsy({ opacity: 1, delayIn: 500, gravity: 'n' });
+    init_tooltips();
 }
