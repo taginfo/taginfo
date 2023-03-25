@@ -67,8 +67,6 @@ SECTIONS = Hash[TAGINFO_CONFIG.get('instance.sections', ALL_SECTIONS).collect{ |
 
 class Taginfo < Sinatra::Base
 
-    register Sinatra::R18n
-
     use Rack::JSONP
 
     mime_type :opensearch, 'application/opensearchdescription+xml'
@@ -106,9 +104,13 @@ class Taginfo < Sinatra::Base
         @taginfo_config = TAGINFO_CONFIG
 
         if request.cookies['taginfo_locale'] && request.path != '/switch_locale'
-            params[:locale] = request.cookies['taginfo_locale']
+            session[:locale] = request.cookies['taginfo_locale']
         end
+    end
 
+    register Sinatra::R18n
+
+    before do
         javascript_for(:taginfo)
         javascript r18n.locale.code + '/texts'
 
