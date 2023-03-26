@@ -8,7 +8,6 @@
     <link rel="stylesheet" type="text/css" href="/css/taginfo.css" />
     <link rel="stylesheet" type="text/css" href="/css/smoothness/jquery-ui-1.8.10.custom-minified.css" />
     <link rel="stylesheet" type="text/css" href="/css/flexigrid/flexigrid-minified.css" />
-    <link rel="stylesheet" type="text/css" href="/css/slicknav.min.css" />
     <link rel="search" type="application/opensearchdescription+xml" href="/search/opensearch.xml" title="<%= @taginfo_config.get('opensearch.shortname') %>" />
 <% if @css %>
     <style type="text/css"><!--
@@ -46,7 +45,7 @@
         </div>
     </header>
     <nav>
-    <ul id="menu">
+    <ul id="menu" class="no-print">
         <li><a <%= in_section('keys') %>href="<%= build_link('/keys') %>"><%= h(t.osm.keys) %></a></li>
         <li><a <%= in_section('tags') %>href="<%= build_link('/tags') %>"><%= h(t.osm.tags) %></a></li>
         <li><a <%= in_section('relations') %>href="<%= build_link('/relations') %>"><%= h(t.osm.relations) %></a></li>

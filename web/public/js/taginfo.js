@@ -1054,10 +1054,17 @@ jQuery(document).ready(function() {
         }
     });
 
-    jQuery('#tools').slicknav({
-        prependTo: '#toolsmenu',
-        label: ''
-    });
+    const tools_button = document.getElementById('toolsmenu');
+    if (tools_button) {
+        tools_button.addEventListener('click', function(ev) {
+            const tools = document.getElementById('tools');
+            if (tools.style.display) {
+                tools.style.display = null;
+            } else {
+                tools.style.display = 'block';
+            }
+        });
+    }
 
     jQuery(window).resize(function() {
         jQuery('select').trigger('render');

@@ -135,21 +135,6 @@ html[dir="rtl"] div#pre-text {
     cursor: not-allowed !important;
 }
 
-.slicknav_nav .disabled {
-    text-align: right;
-    padding: 9px 14px !important;
-    margin-left: 0 !important;
-}
-
-html[dir="rtl"] .slicknav_nav .disabled {
-    text-align: left;
-}
-
-.slicknav_nav .button {
-    border: none;
-    border-radius: 0;
-}
-
 /* ========== */
 
 form#filter-form {
@@ -282,12 +267,6 @@ input:focus {
         display: inline;
     }
 
-    @media print {
-        ul#menu li {
-            display: none !important;
-        }
-    }
-
     ul#menu li:after {
         content: " \00b7 ";
     }
@@ -305,6 +284,29 @@ input:focus {
         text-decoration: none;
         border-bottom: 3px solid #b8b8b0;
     }
+
+    div#tools {
+        clear: right;
+        float: right;
+        font-size: 0.8rem;
+        margin-top: 4px;
+    }
+
+    div#tools ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    div#tools li {
+        display: inline;
+    }
+
+    html[dir="rtl"] div#tools {
+        clear: left;
+        float: left;
+    }
+
 }
 
 @media screen and (max-width: 640px) {
@@ -361,63 +363,65 @@ input:focus {
         text-align: right;
         font-size: 1.2rem;
     }
-}
 
-.slicknav_menu {
-    display: none;
-    padding: 0 0 1px 0 !important;
-}
+    #toolsmenu {
+        background-image: url('/img/tools.png');
+        background-size: 24px 24px;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-color: #b8b8b0;
+        border-radius: 4px;
+        width: 32px;
+        height: 32px;
+        margin: 0 0 8px 8px;
+        float: right;
+    }
 
-body > .slicknav_menu > .slicknav_btn {
-    margin: 10px 10px 6px 5px !important;
-}
+    html[dir="rtl"] div#toolsmenu {
+        float: left;
+    }
 
-html[dir="rtl"] body > .slicknav_menu > .slicknav_btn {
-    margin: 10px 5px 6px 10px !important;
-}
-
-body > .slicknav_menu > .slicknav_nav {
-    background: linear-gradient(to bottom, #ffffff 0%, #e8e8e4 100%);
-}
-
-#toolsmenu .slicknav_nav {
-    position: absolute;
-    top: 104px;
-    z-index: 100;
-    border-radius: 4px;
-}
-
-html[dir="ltr"] #toolsmenu .slicknav_nav {
-    right: 50px;
-}
-
-html[dir="rtl"] #toolsmenu .slicknav_nav {
-    left: 50px;
-}
-
-.slicknav_nav a {
-    color: #202020 !important;
-    text-align: right;
-    font-size: 1.2rem;
-}
-
-html[dir="rtl"] .slicknav_nav a {
-    text-align: left;
-}
-
-@media screen and (max-width: 640px) {
-    #set_language, #header_date, #tools, #comparison-list, .pJSON, #osmlink {
+    div#tools {
         display: none;
     }
 
-    .slicknav_menu {
-        display: block;
-        margin-bottom: 10px;
-        background: transparent none repeat scroll 0 0 !important;
+    div#tools ul {
+        position: absolute;
+        top: 60px;
+        right: 44px;
+        margin: 0;
+        z-index: 10000;
+        background: #e8e8e4;
+        border: 1px solid #b8b8b0;
+        border-radius: 4px;
+        list-style: none;
     }
 
-    body > .slicknav_menu {
-        border-bottom: 1px solid #b8b8b0;
+    div#tools li {
+        padding: 5px 10px;
+        margin: 2px 5px;
+        text-indent: 0;
+        text-transform: uppercase;
+        font-weight: normal;
+        text-align: right;
+        font-size: 1.2rem;
+        display: block;
+    }
+
+    div#tools li.button {
+        background-color: transparent;
+        border: none;
+    }
+
+    div#tools a {
+        text-decoration: none;
+        color: #202020;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    #set_language, #header_date, #comparison-list, .pJSON, #osmlink {
+        display: none;
     }
 
     header {
@@ -606,55 +610,6 @@ div#tabs form {
 }
 
 /* ========== */
-
-div#tools {
-    clear: right;
-    float: right;
-    font-size: 0.8rem;
-    margin-top: 4px;
-}
-
-div#tools ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-div#tools li {
-    display: inline;
-}
-
-html[dir="rtl"] div#tools {
-    clear: left;
-    float: left;
-}
-
-div#toolsmenu {
-    float: right;
-    font-size: 12px;
-}
-
-html[dir="rtl"] div#toolsmenu {
-    float: left;
-}
-
-div#toolsmenu .slicknav_icon {
-    display: none;
-}
-
-div#toolsmenu .slicknav_btn {
-    background-image: url('/img/tools.png');
-    background-size: 24px 24px;
-    background-position: center center;
-    background-repeat: no-repeat;
-    width: 32px;
-    height: 32px;
-    margin: 0 0 0 10px;
-}
-
-html[dir="rtl"] div#toolsmenu .slicknav_btn {
-    margin: 0 10px 0 0;
-}
 
 span.badge {
     position: relative;
@@ -1024,11 +979,6 @@ html[dir="rtl"] .ui-dialog .ui-dialog-titlebar-close {
 html[dir="rtl"] .ui-dialog .ui-dialog-title {
     float: right;
     margin: .1em 0 .1em 16px;
-}
-
-/* slicknav.min.css */
-html[dir="rtl"] .slicknav_btn {
-    float: left;
 }
 
 /* tooltips */
