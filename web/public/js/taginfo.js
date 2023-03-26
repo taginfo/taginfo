@@ -1042,9 +1042,16 @@ jQuery(document).ready(function() {
         }
     });
 
-    jQuery('#menu').slicknav({
-        prependTo: 'body',
-        label: ''
+    const menu_button = document.getElementById('menu-button');
+    menu_button.addEventListener('click', function(ev) {
+        const menu = document.getElementById('menu');
+        if (menu.style.display) {
+            menu.style.display = null;
+            menu_button.classList.remove('active');
+        } else {
+            menu.style.display = 'block';
+            menu_button.classList.add('active');
+        }
     });
 
     jQuery('#tools').slicknav({
