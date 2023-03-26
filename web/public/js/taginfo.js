@@ -708,7 +708,7 @@ function table_down() {
 function table_right() {
     const current = jQuery('.trOver');
     if (current.size() > 0) {
-        const link = current.find('a.pref');
+        let link = current.find('a.pref');
         if (link.size() == 0) {
             link = current.find('a');
         }
