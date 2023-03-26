@@ -226,12 +226,16 @@ function create_chart(params) {
                 .attr('dy', '0.5em')
                 .text(d => d.label);
 
-    jQuery('svg a[href$="(other)"]').removeAttr('href').css('text-decoration', 'none');
+    const other = document.querySelector('svg a[href$="(other)"]');
+    if (other) {
+        other.removeAttribute('href');
+        other.style.textDecoration = 'none';
+    }
 }
 
 function redraw_chart(prevalent_values) {
     set_inner_html_to('canvas-values', '');
-    const max_height = jQuery(window).height() - 300;
+    const max_height = window.innerHeight - 300;
     create_chart({
         key: document.querySelector('h1').dataset.key,
         width: 160,
@@ -263,8 +267,6 @@ function page_init() {
             then(function(data) {
                 const prevalent_values = data.data;
                 redraw_chart(prevalent_values);
-                jQuery(window).resize(function() {
-                    redraw_chart(prevalent_values);
-                });
+                window.addEventListener('resize', () => redraw_chart(prevalent_values) );
     });
 }

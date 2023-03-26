@@ -843,18 +843,25 @@ class ComparisonListDisplay {
 /* ============================ */
 
 function activate_josm_button() {
-    if (jQuery('#josm_button').length != 0) {
-        jQuery('#josm_button').bind('click', function() {
-            const url = jQuery('#josm_button')[0].href;
-            jQuery.get(url, function(data) {
-                if (data.substring(0, 2) != 'OK') {
-                    alert("Problem contacting JOSM. Is it running? Is remote control activated?");
-                    console.log("Answer from JOSM: [" + data + "]");
-                }
-            });
-            return false;
-        });
+    const button = document.getElementById('josm_button');
+    if (!button) {
+        return;
     }
+
+    button.addEventListener('click', async function(ev) {
+        ev.preventDefault();
+        try {
+            const response = await fetch(button.getAttribute('href'));
+            const text = await response.text();
+
+            if (!response.ok || text.substring(0, 2) != 'OK') {
+                throw new Error(text);
+            }
+        } catch (error) {
+            console.log("Error when contacting JOSM: ", error);
+            alert("Problem contacting JOSM. Is it running? Is remote control activated?");
+        }
+    });
 }
 
 /* ============================ */
@@ -876,9 +883,8 @@ function project_tag_desc(description, icon, url) {
 /* ============================ */
 
 jQuery(document).ready(function() {
-    jQuery('#javascriptmsg').remove();
-
-    jQuery('#help_link').bind('click', open_help);
+    document.getElementById('javascriptmsg').remove();
+    document.getElementById('help_link').addEventListener('click', open_help);
 
     jQuery.getQueryString = (function(a) {
         if (a == "") return {};
@@ -917,104 +923,123 @@ jQuery(document).ready(function() {
         }
     });
 
-    jQuery(document).bind('keypress', function(event) {
+    document.addEventListener('keypress', function(event) {
         if (event.ctrlKey || event.altKey || event.metaKey) {
             return;
         }
-        if (event.target == document.body) {
-            if (event.which >= 49 && event.which <= 57) { // digit
-                jQuery("#tabs").tabs("select", event.which - 49);
-            } else {
-                switch (event.which) {
-                    case 63: // ?
-                        open_help();
-                        return false;
-                    case 99: // c
-                        window.location = (new ComparisonList()).url();
-                        return false;
-                    case 102: // f
-                        jQuery('input.qsbox').focus();
-                        return false;
-                    case 104: // h
-                        window.location = build_link('/');
-                        return false;
-                    case 107: // k
-                        window.location = build_link('/keys');
-                        return false;
-                    case 112: // p
-                        window.location = build_link('/projects');
-                        return false;
-                    case 114: // r
-                        window.location = build_link('/relations');
-                        return false;
-                    case 115: // s
-                        jQuery('input#search').focus();
-                        return false;
-                    case 116: // t
-                        window.location = build_link('/tags');
-                        return false;
-                    case 120: // x
-                        window.location = build_link('/reports');
-                        return false;
+
+        if (event.target != document.body) {
+            return;
+        }
+
+        if (event.which >= 49 && event.which <= 57) { // digit
+            jQuery("#tabs").tabs("select", event.which - 49);
+            return;
+        }
+
+        switch (event.which) {
+            case 63: // ?
+                open_help();
+                break;
+            case 99: // c
+                window.location = (new ComparisonList()).url();
+                break;
+            case 102: // f
+                for (el of document.querySelectorAll('input.qsbox')) {
+                    el.focus();
                 }
-            }
+                break;
+            case 104: // h
+                window.location = build_link('/');
+                break;
+            case 107: // k
+                window.location = build_link('/keys');
+                break;
+            case 112: // p
+                window.location = build_link('/projects');
+                break;
+            case 114: // r
+                window.location = build_link('/relations');
+                break;
+            case 115: // s
+                document.getElementById('search').focus();
+                break;
+            case 116: // t
+                window.location = build_link('/tags');
+                break;
+            case 120: // x
+                window.location = build_link('/reports');
+                break;
         }
     });
 
-    jQuery(document).bind('keyup', function(event) {
+    document.addEventListener('keyup', function(event) {
         if (event.ctrlKey || event.altKey || event.metaKey) {
             return;
         }
-        if (event.target == document.body) {
-            switch (event.which) {
-                case 36: // home
-                    jQuery('div.pFirst:visible').click();
-                    return false;
-                case 33: // page up
-                    jQuery('div.pPrev:visible').click();
-                    return false;
-                case 34: // page down
-                    jQuery('div.pNext:visible').click();
-                    return false;
-                case 35: // end
-                    jQuery('div.pLast:visible').click();
-                    return false;
-                case 37: // arrow left
-                    up();
-                    return false;
-                case 38: // arrow up
-                    table_up();
-                    return false;
-                case 39: // arrow right
-                    table_right();
-                    return false;
-                case 40: // arrow down
-                    table_down();
-                    return false;
-            }
+
+        if (event.target != document.body) {
+            return;
+        }
+
+        switch (event.which) {
+            case 36: // home
+                event.preventDefault();
+                jQuery('div.pFirst:visible').click();
+                break;
+            case 33: // page up
+                event.preventDefault();
+                jQuery('div.pPrev:visible').click();
+                break;
+            case 34: // page down
+                event.preventDefault();
+                jQuery('div.pNext:visible').click();
+                break;
+            case 35: // end
+                event.preventDefault();
+                jQuery('div.pLast:visible').click();
+                break;
+            case 37: // arrow left
+                event.preventDefault();
+                up();
+                break;
+            case 38: // arrow up
+                event.preventDefault();
+                table_up();
+                break;
+            case 39: // arrow right
+                event.preventDefault();
+                table_right();
+                break;
+            case 40: // arrow down
+                event.preventDefault();
+                table_down();
+                break;
         }
     });
 
-    jQuery(document).bind('keydown', function(event) {
+    document.addEventListener('keydown', function(event) {
         if (event.target == document.body && event.which == 9) {
+            event.preventDefault();
             jQuery('input#search').focus();
-            return false;
         }
     });
 
-    jQuery('input#search').bind('keydown', function(event) {
+    document.getElementById('search').addEventListener('keydown', function(event) {
         if (event.which == 27) { // esc
+            event.preventDefault();
             this.blur();
-            return false;
         }
         if (event.which == 9) { // tab
+            event.preventDefault();
             jQuery('input.qsbox:visible').focus();
-            return false;
         }
     });
 
-    jQuery('#search_form').bind('submit', function(event) {
-        return jQuery('input#search').val() != '';
+    document.getElementById('search_form').addEventListener('submit', function(event) {
+        if (document.getElementById('search').value == '') {
+            event.preventDefault();
+        }
     });
 
     jQuery('#menu').slicknav({

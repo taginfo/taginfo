@@ -42,7 +42,7 @@ function english() {
 function page_init() {
     up = function() { window.location = build_link('/reports'); };
     create_flexigrid_with_option(english());
-    jQuery('#english').bind('click', function() {
+    document.getElementById('english').addEventListener('click', () => {
         jQuery('#grid-keys').flexOptions({
             url: '/api/4/keys/without_wiki_page?english=' + english()
         }).flexReload();

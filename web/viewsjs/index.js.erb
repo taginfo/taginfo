@@ -94,41 +94,28 @@ function resize_home() {
         .start();
 }
 
+function fill_list(max_height, list, data, func) {
+    list.innerHTML = '';
+    let  i = 0;
+    while (list.offsetHeight < max_height && data[i]) {
+        list.innerHTML += func(data[i]) + '&nbsp;&bull; ';
+        i++;
+    }
+    list.innerHTML += '...';
+}
+
 function fill_lists() {
-    const key_list = jQuery('#key_list').empty();
-    const tag_list = jQuery('#tag_list').empty();
-    const relation_list = jQuery('#relation_list').empty();
+    const key_list = document.getElementById('key_list');
+    const tag_list = document.getElementById('tag_list');
+    const rel_list = document.getElementById('relation_list');
     const title_td_height = 42;
     const reserve_height = 64;
-    const max_height = jQuery('table').height() / 3 - title_td_height - reserve_height;
+    const table_height = document.querySelector('table').getBoundingClientRect().height;
+    const max_height = table_height / 3 - title_td_height - reserve_height;
 
-    let  i = 0;
-
-    while (key_list.outerHeight() < max_height && keys_data[i]) {
-        const d = keys_data[i];
-        key_list.append(link_to_key(d.text));
-        key_list.append(' &bull; ');
-        i++;
-    }
-    key_list.append('...');
-
-    i = 0;
-    while (tag_list.outerHeight() < max_height && tags_data[i]) {
-        const d = tags_data[i];
-        tag_list.append(link_to_tag(d[0], d[1]));
-        tag_list.append(' &bull; ');
-        i++;
-    }
-    tag_list.append('...');
-
-    i = 0;
-    while (relation_list.outerHeight() < max_height && relations_data[i]) {
-        const d = relations_data[i];
-        relation_list.append(link_to_rtype(d));
-        relation_list.append(' &bull; ');
-        i++;
-    }
-    relation_list.append('...');
+    fill_list(max_height, key_list, keys_data, (d) => link_to_key(d.text) );
+    fill_list(max_height, tag_list, tags_data, (d) => link_to_tag(d[0], d[1]) );
+    fill_list(max_height, rel_list, relations_data, (d) => link_to_rtype(d) );
 }
 
 var timeout_id = 0;
@@ -141,6 +128,6 @@ function trigger_resize() {
 }
 
 function page_init() {
-    jQuery(window).resize(trigger_resize);
+    window.addEventListener('resize', trigger_resize);
     resize_home();
 }
