@@ -576,16 +576,21 @@ const flexigrid_defaults = {
         }
 
         init_tooltips();
-        jQuery('input.qsbox').bind('keydown', function(event) {
-            if (event.which == 27) { // esc
-                this.blur();
-                return false;
-            }
-            if (event.which == 9) { // tab
-                jQuery('input#search').focus();
-                return false;
-            }
-        });
+
+        // Set up keyboard functions for search box in table headers
+        for (let el of document.querySelectorAll('input.qsbox')) {
+            el.addEventListener('keydown', function(ev) {
+                if (ev.which == 27) { // esc
+                    ev.preventDefault();
+                    this.blur();
+                }
+                if (ev.which == 9) { // tab
+                    ev.preventDefault();
+                    document.getElementById('search').focus();
+                }
+            });
+        }
+
         jQuery('div.bDiv:visible').bind('click', function(event) {
             const row = jQuery(event.target).parents('tr');
             jQuery('div.bDiv:visible tr').removeClass('trOver');
@@ -886,9 +891,10 @@ jQuery(document).ready(function() {
 
     init_tooltips();
 
-    jQuery('#locale').bind('change', function() {
-        jQuery('#url').val(window.location.pathname);
-        jQuery('#set_language').submit();
+    // Initialize language switcher
+    document.getElementById('locale').addEventListener('change', function() {
+        document.getElementById('url').value = window.location.pathname;
+        document.getElementById('set_language').submit();
     });
 
     jQuery('#search').autocomplete({
@@ -1000,7 +1006,7 @@ jQuery(document).ready(function() {
     document.addEventListener('keydown', function(event) {
         if (event.target == document.body && event.which == 9) {
             event.preventDefault();
-            jQuery('input#search').focus();
+            document.getElementById('search').focus();
         }
     });
 
