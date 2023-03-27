@@ -1,34 +1,29 @@
-<table class="boxes" width="100%">
-    <tr>
-        <td><h2><%= h(t.pages.about.about_taginfo.title) %></h2></td>
-        <td rowspan="4" width="20"></td>
-        <td><h2><%= h(t.pages.about.building_on_taginfo.title) %></h2></td>
-        <td rowspan="4" width="20"></td>
-        <td><h2><%= h(t.pages.about.software.title) %></h2></td>
-    </tr>
-    <tr>
-        <td class="box">
-<%= t.pages.about.about_taginfo.text %>
-        </td>
-        <td rowspan="3" class="box">
-<%= t.pages.about.building_on_taginfo.pre %>
-<%= t.pages.about.building_on_taginfo.api %>
+<h1 class="section"><%= h(t.taginfo.about) %></h1>
+<div class="fboxes">
+    <div class="fbox">
+        <h2><%= h(t.pages.about.about_taginfo.title) %></h2>
+        <div><%= t.pages.about.about_taginfo.text %></div>
+    </div>
+    <div class="fbox">
+        <h2><%= h(t.pages.about.building_on_taginfo.title) %></h2>
+        <div>
+            <%= t.pages.about.building_on_taginfo.pre %>
+            <%= t.pages.about.building_on_taginfo.api %>
 <%  if SECTIONS[:download] %>
-<%=   t.pages.about.building_on_taginfo.download %>
+            <%=   t.pages.about.building_on_taginfo.download %>
 <%  end %>
-<%= t.pages.about.building_on_taginfo.license %>
-        </td>
-        <td rowspan="3" class="box">
-<%= t.pages.about.software.text %>
-        </td>
-    </tr>
-    <tr>
-        <td><h2><%= h(t.pages.about.about_site.title) %></h2></td>
-    </tr>
-    <tr>
-        <td class="box">
+            <%= t.pages.about.building_on_taginfo.license %>
+        </div>
+    </div>
+    <div class="fbox">
+        <h2><%= h(t.pages.about.software.title) %></h2>
+        <div><%= t.pages.about.software.text %></div>
+    </div>
+    <div class="fbox">
+        <h2><%= h(t.pages.about.about_site.title) %></h2>
+        <div>
             <p><%= @taginfo_config.get('instance.description') %></p>
             <%= @taginfo_config.get('instance.about') %>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>

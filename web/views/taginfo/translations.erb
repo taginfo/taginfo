@@ -1,7 +1,7 @@
-<div class="pre" lang="en" dir="ltr">
+<div lang="en" dir="ltr">
     <h1>Translations Overview</h1>
 </div>
-<div class="box resize" style="overflow: auto;" lang="en" dir="ltr">
+<div class="box" lang="en" dir="ltr">
     <table class="list">
 <% r18n.available_locales.sort{ |a,b| a.code <=> b.code }.each_with_index do |locale, n| %>
 <%   percent = (@num_texts[locale.code].to_f / @num_texts['en'].to_f * 100).to_i %>

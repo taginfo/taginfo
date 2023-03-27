@@ -177,6 +177,14 @@ class Taginfo < Sinatra::Base
         end
     end
 
+    %w(help).each do |page|
+        get '/' + page do
+            @title = t.misc.help
+            section page
+            erb page.to_sym
+        end
+    end
+
     %w(keys tags relations).each do |page|
         get '/' + page do
             @title = t.osm[page]
@@ -225,7 +233,6 @@ class Taginfo < Sinatra::Base
     # user interface
     load 'lib/ui/compare.rb'
     load 'lib/ui/embed.rb'
-    load 'lib/ui/help.rb'
     load 'lib/ui/keys.rb'
     load 'lib/ui/projects.rb'
     load 'lib/ui/relation.rb'

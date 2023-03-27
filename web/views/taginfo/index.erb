@@ -1,29 +1,32 @@
-<div class="pre ui-helper-clearfix" lang="en" dir="ltr">
-    <div id="pre-text">
-        <h1>taginfo META</h1>
-        <p>This section is for developers only.</p>
+<h1>taginfo META</h1>
+<p>This section is for developers only.</p>
+<p>Version: <%= @commit_date %> (<a class="extlink" href="https://github.com/taginfo/taginfo/commit/<%= @commit %>"><%= @commit[0, 10] %></a>)</p>
+<div class="fboxes" lang="en" dir="ltr">
+    <div class="fbox">
+        <h2>Menu</h2>
+        <div>
+            <ul class="reportlist">
+                <li><a href="/taginfo/apidoc"><%= t.taginfo.apidoc %></a></li>
+                <li><a href="/taginfo/translations">Translations Overview</a></li>
+                <li><a href="/taginfo/i18n">Translated Texts</a></li>
+                <li><a href="/taginfo/config">Configuration</a></li>
+                <li><a href="/taginfo/stats">Statistics</a></li>
+                <li><a href="/taginfo/projects">Projects</a></li>
+                <li><a href="/taginfo/taglinks">Tag links</a></li>
+                <li><a href="/taginfo/wiki-problems">Problems encountered when parsing wiki</a></li>
+            </ul>
+        </div>
     </div>
-</div>
-<div class="box resize" lang="en" dir="ltr">
-    <h2>Menu</h2>
-    <ul>
-        <li><a href="/taginfo/apidoc"><%= t.taginfo.apidoc %></a></li>
-        <li><a href="/taginfo/translations">Translations Overview</a></li>
-        <li><a href="/taginfo/i18n">Translated Texts</a></li>
-        <li><a href="/taginfo/config">Configuration</a></li>
-        <li><a href="/taginfo/stats">Statistics</a></li>
-        <li><a href="/taginfo/projects">Projects</a></li>
-        <li><a href="/taginfo/taglinks">Tag links</a></li>
-        <li><a href="/taginfo/wiki-problems">Problems encountered when parsing wiki</a></li>
-    </ul>
-    <h2>Software Version</h2>
-    <p><%= @commit_date %> (<a class="extlink" href="https://github.com/taginfo/taginfo/commit/<%= @commit %>"><%= @commit[0, 10] %></a>)</p>
-    <h2>Config Settings</h2>
-    <table class="list">
-        <tr><th class="tl">Variable</th><th class="tl">Setting</th></tr>
-<% [:url, :name, :description, :icon, :contact, :area].each do |k| %>
-        <tr><td><%= k %></td><td><%= @taginfo_config.get("instance.#{k}") %></td></tr>
-<% end %>
-    </table>
-    <p style="margin-top: 10px;">These config settings are also available from the <tt>/api/4/site/info</tt> <a href="/taginfo/apidoc#api_4_site_info">API call</a>.</p>
+    <div class="fbox">
+        <h2>Config Settings</h2>
+        <div>
+        <table class="list">
+            <tr><th class="tl">Variable</th><th class="tl">Setting</th></tr>
+    <% [:url, :name, :description, :icon, :contact, :area].each do |k| %>
+            <tr><td><%= k %></td><td><%= @taginfo_config.get("instance.#{k}") %></td></tr>
+    <% end %>
+        </table>
+        <p style="margin-top: 10px;">These config settings are also available from the <tt>/api/4/site/info</tt> <a href="/taginfo/apidoc#api_4_site_info">API call</a>.</p>
+        </div>
+    </div>
 </div>

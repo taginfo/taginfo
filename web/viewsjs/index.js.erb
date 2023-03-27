@@ -17,11 +17,9 @@ const relations_data = <%= relations.map{ |row| row['rtype'] }.to_json.gsub(/\],
 const font_family = 'Impact';
 const font_weight = 'normal';
 
-var width, height;
-
 up = function() {};
 
-function draw(words) {
+function draw(words, width, height) {
     // This color scheme isn't available in newer D3 versions, but we'll keep
     // it for the time being.
     const category20b = [ 3750777, 5395619, 7040719, 10264286, 6519097, 9216594, 11915115,
@@ -53,33 +51,22 @@ function draw(words) {
 }
 
 function resize_home() {
-    const tagcloud = jQuery('#tagcloud');
-    if (tagcloud.css('display') == 'none') {
-        tagcloud.empty();
-        fill_lists();
+    fill_list('key_list', keys_data, (d) => link_to_key(d.text) );
+    fill_list('tag_list', tags_data, (d) => link_to_tag(d[0], d[1]) );
+    fill_list('relation_list', relations_data, (d) => link_to_rtype(d) );
+
+    const tagcloud = document.getElementById('tagcloud');
+    tagcloud.innerHTML = '';
+    if (tagcloud.offsetParent === null) {
         return;
     }
 
-    tagcloud.empty();
-    tagcloud.height(0);
-
-    resize_box();
-
-    fill_lists();
-
-    height = tagcloud.parent().innerHeight();
-    tagcloud.parent().children().each(function(index) {
-        if (this.id != 'tagcloud') {
-            height -= jQuery(this).outerHeight(true);
-        }
-    });
-    height -= 50;
-    tagcloud.height(height);
-
-    width = tagcloud.parent().width();
+    const padding = 16;
+    const width = tagcloud.getBoundingClientRect().width - padding;
+    const height = tagcloud.getBoundingClientRect().height - padding;
 
     // The cloud function mangles the data in the words array, so we need to clone it
-    data = keys_data.map(function(d) {
+    let data = keys_data.map(function(d) {
         return Object.assign({}, d);
     });
 
@@ -90,11 +77,18 @@ function resize_home() {
         .font(font_family)
         .fontWeight(font_weight)
         .fontSize(d => d.size)
-        .on('end', draw)
+        .on('end', (words) => draw(words, width, height))
         .start();
 }
 
-function fill_list(max_height, list, data, func) {
+function fill_list(list_name, data, func) {
+    const list = document.getElementById(list_name);
+    const reserve_height = 56;
+    let max_height = list.parentNode.offsetHeight - reserve_height;
+    if (max_height > 1000) {
+        max_height = 1000;
+    }
+
     list.innerHTML = '';
     let  i = 0;
     while (list.offsetHeight < max_height && data[i]) {
@@ -102,20 +96,6 @@ function fill_list(max_height, list, data, func) {
         i++;
     }
     list.innerHTML += '...';
-}
-
-function fill_lists() {
-    const key_list = document.getElementById('key_list');
-    const tag_list = document.getElementById('tag_list');
-    const rel_list = document.getElementById('relation_list');
-    const title_td_height = 42;
-    const reserve_height = 64;
-    const table_height = document.querySelector('table').getBoundingClientRect().height;
-    const max_height = table_height / 3 - title_td_height - reserve_height;
-
-    fill_list(max_height, key_list, keys_data, (d) => link_to_key(d.text) );
-    fill_list(max_height, tag_list, tags_data, (d) => link_to_tag(d[0], d[1]) );
-    fill_list(max_height, rel_list, relations_data, (d) => link_to_rtype(d) );
 }
 
 var timeout_id = 0;

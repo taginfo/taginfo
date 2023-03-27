@@ -720,23 +720,6 @@ function table_right() {
 
 /* ============================ */
 
-function open_help() {
-    jQuery('#help').dialog({
-        modal: true,
-        resizable: false,
-        title: texts.misc.help,
-        minWidth: 800,
-        minHeight: 400,
-        position: { my: 'top', at: 'top+100' },
-        create: function(event, ui) {
-            jQuery('#help_tabs').tabs();
-        }
-    });
-    return false;
-}
-
-/* ============================ */
-
 class ComparisonList {
 
     list = [];
@@ -884,7 +867,6 @@ function project_tag_desc(description, icon, url) {
 
 jQuery(document).ready(function() {
     document.getElementById('javascriptmsg').remove();
-    document.getElementById('help_link').addEventListener('click', open_help);
 
     jQuery.getQueryString = (function(a) {
         if (a == "") return {};
@@ -938,9 +920,6 @@ jQuery(document).ready(function() {
         }
 
         switch (event.which) {
-            case 63: // ?
-                open_help();
-                break;
             case 99: // c
                 window.location = (new ComparisonList()).url();
                 break;

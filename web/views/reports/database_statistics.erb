@@ -2,43 +2,35 @@
 img.icon_large {
     position: relative;
     top: 1px;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
 }
 CSS
 %>
 <h1><%= h(t.reports.database_statistics.name) %></h1>
 
-<table class="boxes" style="margin-bottom: 10px;">
-    <tr>
-        <td><h2><img class="icon_large" src="/img/types/all.svg" width="20" height="20" alt=""/> <%= h(t.osm.objects) %></h2></td>
-        <td rowspan="4" width="20"></td>
-        <td><h2><img class="icon_large" src="/img/types/tag.svg" width="20" height="20" alt=""/> <%= h(t.osm.tags) %></h2></td>
-        <td rowspan="4" width="20"></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td class="box">
+<div class="fboxes">
+    <div class="fbox">
+        <h2><img class="icon_large" src="/img/types/all.svg" alt=""/> <%= h(t.osm.objects) %></h2>
+        <div>
             <table>
                 <tr><td><%= h(t.reports.database_statistics.objects_in_db) %>:</td><td class="number"><%= @db.stats('objects').to_s_with_ts %></td></tr>
                 <tr><td><%= h(t.reports.database_statistics.tags_in_db) %>:</td><td class="number"><%= @db.stats('object_tags').to_s_with_ts %></td></tr>
             </table>
-        </td>
-        <td class="box">
+        </div>
+    </div>
+    <div class="fbox">
+        <h2><img class="icon_large" src="/img/types/tag.svg" alt=""/> <%= h(t.osm.tags) %></h2>
+        <div>
             <table>
                 <tr><td><%= h(t.reports.database_statistics.distinct_keys) %>:</td><td class="number"><%= @db.stats('num_keys').to_s_with_ts %></td></tr>
                 <tr><td><%= h(t.reports.database_statistics.distinct_tags) %>:</td><td class="number"><%= @db.stats('num_tags').to_s_with_ts %></td></tr>
             </table>
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><h2><img class="icon_large" src="/img/types/node.svg" width="20" height="20" alt=""/> <%= h(t.osm.nodes) %></h2></td>
-        <td><h2><img class="icon_large" src="/img/types/way.svg" width="20" height="20" alt=""/> <%= h(t.osm.ways) %></h2></td>
-        <td><h2><img class="icon_large" src="/img/types/relation.svg" width="20" height="20" alt=""/> <%= h(t.osm.relations) %></h2></td>
-    </tr>
-    <tr>
-        <td class="box">
+        </div>
+    </div>
+    <div class="fbox">
+        <h2><img class="icon_large" src="/img/types/node.svg" alt=""/> <%= h(t.osm.nodes) %></h2>
+        <div>
             <table>
                 <tr><td><%= h(t.reports.database_statistics.nodes_in_db) %>:</td><td class="number"><%= @db.stats('nodes').to_s_with_ts %></td></tr>
                 <tr><td><%= h(t.reports.database_statistics.nodes_with_tags_in_db) %>:</td><td class="number"><%= @db.stats('nodes_with_tags').to_s_with_ts %></td></tr>
@@ -46,21 +38,27 @@ CSS
                 <tr><td><%= h(t.reports.database_statistics.tags_on_nodes) %>:</td><td class="number"><%= @db.stats('node_tags').to_s_with_ts %></td></tr>
                 <tr><td><%= h(t.reports.database_statistics.avg_tags_per_tagged_node) %>:</td><td class="number"><%= ( 100.0 * @db.stats('node_tags') / @db.stats('nodes_with_tags')).to_i.to_f / 100 %></td></tr>
             </table>
-        </td>
-        <td class="box">
+        </div>
+    </div>
+    <div class="fbox">
+        <h2><img class="icon_large" src="/img/types/way.svg" alt=""/> <%= h(t.osm.ways) %></h2>
+        <div>
             <table>
                 <tr><td><%= h(t.reports.database_statistics.ways_in_db) %>:</td><td class="number"><%= @db.stats('ways').to_s_with_ts %></td></tr>
                 <tr><td><%= h(t.reports.database_statistics.closed_ways_in_db) %>:</td><td class="number"><%= @db.stats('closed_ways').to_s_with_ts %></td></tr>
                 <tr><td><%= h(t.reports.database_statistics.tags_on_ways) %>:</td><td class="number"><%= @db.stats('way_tags').to_s_with_ts %></td></tr>
                 <tr><td><%= h(t.reports.database_statistics.avg_tags_per_way) %>:</td><td class="number"><%= ( 100.0 * @db.stats('way_tags') / @db.stats('ways')).to_i.to_f / 100 %></td></tr>
             </table>
-        </td>
-        <td class="box">
+        </div>
+    </div>
+    <div class="fbox">
+        <h2><img class="icon_large" src="/img/types/relation.svg" alt=""/> <%= h(t.osm.relations) %></h2>
+        <div>
             <table>
                 <tr><td><%= h(t.reports.database_statistics.relations_in_db) %>:</td><td class="number"><%= @db.stats('relations').to_s_with_ts %></td></tr>
                 <tr><td><%= h(t.reports.database_statistics.tags_on_relations) %>:</td><td class="number"><%= @db.stats('relation_tags').to_s_with_ts %></td></tr>
                 <tr><td><%= h(t.reports.database_statistics.avg_tags_per_relation) %>:</td><td class="number"><%= ( 100.0 * @db.stats('relation_tags') / @db.stats('relations')).to_i.to_f / 100 %></td></tr>
             </table>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>

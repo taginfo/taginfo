@@ -1,22 +1,32 @@
-<table class="boxes resize" width="100%">
-    <tr>
-        <td width="232" height="40"><h2><a href="/keys"><%= h(t.osm.keys) %></a></h2></td>
-        <td rowspan="6" width="20" class="cloudcontainer"></td>
-        <td height="40" class="cloudcontainer"><h2><%= h(t.pages.index.popular_keys) %></h2></td>
-        <td rowspan="6" width="20"></td>
-        <td width="232" height="40"><h2><a href="/reports"><%= h(t.taginfo.reports) %></a></h2></td>
-        <td rowspan="6" width="20"></td>
-        <td width="232" height="40"><h2><a href="/about"><%= h(t.taginfo.about) %></a></h2></td>
-    </tr>
-    <tr>
-        <td class="box">
+<div class="gboxes">
+    <div class="gbox" id="gbox-keys">
+        <h2><a href="/keys"><%= h(t.osm.keys) %></a></h2>
+        <div>
             <div id="key_list"></div>
             <div class="emphasis" style="margin: 10px 0 0 0;"><a href="/keys"><%= h(t.pages.index.keys.listkeys) %></a></div>
-        </td>
-        <td rowspan="5" class="box cloudcontainer">
-            <div id="tagcloud" class="cloudcontainer" style="margin: 15px 0; line-height: 200%; text-align: justify; overflow: hidden;"></div>
-        </td>
-        <td rowspan="5" class="box">
+        </div>
+    </div>
+    <div class="gbox" id="gbox-tags">
+        <h2><a href="/tags"><%= h(t.osm.tags) %></a></h2>
+        <div>
+            <div id="tag_list"></div>
+            <div class="emphasis" style="margin: 10px 0 0 0;"><a href="/tags"><%= h(t.pages.index.tags.listtags) %></a></div>
+        </div>
+    </div>
+    <div class="gbox" id="gbox-relations">
+        <h2><a href="/relations"><%= h(t.osm.relation_types) %></a></h2>
+        <div>
+            <div id="relation_list"></div>
+            <div class="emphasis" style="margin: 10px 0 0 0;"><a href="/relations"><%= h(t.pages.index.relations.listrelations) %></a></div>
+        </div>
+    </div>
+    <div class="gbox" id="gbox-tagcloud">
+        <h2><%= h(t.pages.index.popular_keys) %></h2>
+        <div id="tagcloud" style="line-height: 200%; text-align: justify; overflow: hidden;"></div>
+    </div>
+    <div class="gbox" id="gbox-reports">
+        <h2><a href="/reports"><%= h(t.taginfo.reports) %></a></h2>
+        <div>
             <p><%= t.pages.reports.intro %></p>
             <ul style="margin: 0 0 0 18px; padding: 0;">
 <% Report.each_visible do |report| %>
@@ -24,34 +34,21 @@
 <% end %>
             </ul>
             <p class="emphasis" style="margin-top: 20px;"><a href="/reports"><%= h(t.pages.index.reports.listreports) %></a></p>
-        </td>
-        <td rowspan="3" class="box">
+        </div>
+    </div>
+    <div class="gbox" id="gbox-about">
+        <h2><a href="/about"><%= h(t.taginfo.about) %></a></h2>
+        <div>
             <%= t.pages.index.about.intro %>
             <p class="emphasis" style="margin-top: 20px;"><a href="/about"><%= h(t.pages.index.about.more) %></a></p>
-        </td>
-    </tr>
-    <tr>
-        <td height="40"><h2><a href="/tags"><%= h(t.osm.tags) %></a></h2></td>
-    </tr>
-    <tr>
-        <td class="box">
-            <div id="tag_list"></div>
-            <div class="emphasis" style="margin: 10px 0 0 0;"><a href="/tags"><%= h(t.pages.index.tags.listtags) %></a></div>
-        </td>
-    </tr>
-    <tr>
-        <td height="40"><h2><a href="/relations"><%= h(t.osm.relation_types) %></a></h2></td>
-        <td height="40"><h2><%= h(t.taginfo.international) %></h2></td>
-    </tr>
-    <tr>
-        <td class="box">
-            <div id="relation_list"></div>
-            <div class="emphasis" style="margin: 10px 0 0 0;"><a href="/relations"><%= h(t.pages.index.relations.listrelations) %></a></div>
-        </td>
-        <td class="box">
+        </div>
+    </div>
+    <div class="gbox" id="gbox-desc">
+        <h2><%= h(t.taginfo.international) %></h2>
+        <div>
             <p><%= @taginfo_config.get('instance.description') %></p>
             <p class="emphasis" style="margin-top: 20px;"><a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/Sites"><%= h(t.pages.index.international.see) %></a></p>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>
 <% javascript_for(:d3, :d3_cloud) %>

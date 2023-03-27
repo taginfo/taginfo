@@ -1,5 +1,7 @@
-<div class="pre" lang="en" dir="ltr">
+<div lang="en" dir="ltr">
     <h1>Statistics</h1>
+</div>
+<div class="box" lang="en" dir="ltr">
     <table class="desc">
 <% @stats.each do |stat| %>
         <tr><th><%= stat['key'] %></th><td><%= stat['value'].to_s_with_ts %></td></tr>

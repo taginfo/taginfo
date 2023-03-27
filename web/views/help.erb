@@ -1,0 +1,67 @@
+<h1 class="section"><%= h(t.misc.help) %></h1>
+
+<h2><%= h(t.help.search.title) %></h2>
+
+<p><%= h(t.help.search.intro) %></p>
+
+<div class="help-boxes">
+    <div class="help-box">
+        <p><%= h(t.help.search.string) %>:</p>
+        <p class="search">highway</p>
+    </div>
+    <div class="help-box">
+        <p><%= h(t.help.search.complete_tags) %>:</p>
+        <p class="search">highway=residential</p>
+    </div>
+    <div class="help-box">
+        <p><%= h(t.help.search.values_only) %>:</p>
+        <p class="search">=residential</p>
+    </div>
+    <div class="help-box">
+        <p><%= h(t.help.search.substring) %>:</p>
+        <p class="search">way</p>
+    </div>
+</div>
+
+<p><%= t.help.search.suggestions %></p>
+
+<h2><%= h(t.help.keyboard.title) %></h2>
+
+<div class="help-boxes">
+    <div class="help-box">
+        <h3><%= h(t.help.keyboard.site_navigation) %></h3>
+        <table>
+            <tr><td><span class="key">h</span></td><td> - <%= h(t.help.keyboard.home_page) %></td></tr>
+            <tr><td><span class="key">k</span></td><td> - <%= h(t.help.keyboard.keys_page) %></td></tr>
+            <tr><td><span class="key">t</span></td><td> - <%= h(t.help.keyboard.tags_page) %></td></tr>
+            <tr><td><span class="key">r</span></td><td> - <%= h(t.help.keyboard.relations_page) %></td></tr>
+            <tr><td><span class="key">p</span></td><td> - <%= h(t.help.keyboard.projects_page) %></td></tr>
+            <tr><td><span class="key">x</span></td><td> - <%= h(t.help.keyboard.reports_page) %></td></tr>
+            <tr><td><span class="key">c</span></td><td> - <%= h(t.help.keyboard.compare_page) %></td></tr>
+            <tr><td><span class="key">&larr;</span></td><td> - <%= h(t.help.keyboard.up) %></td></tr>
+        </table>
+    </div>
+    <div class="help-box">
+        <h3><%= h(t.help.keyboard.page_navigation) %></h3>
+        <table>
+            <tr><td><span class="key">s</span></td><td> - <%= h(t.help.keyboard.activate_search) %></tr><td>
+            <tr><td><span class="key"><%= h(t.help.keyboard.keys.tab) %></span></td><td> - <%= h(t.help.keyboard.switch_input) %></tr><td>
+            <tr><td><span class="key">1</span> - <span class="key">9</span></td><td> - <%= h(t.help.keyboard.switch_tab) %></tr><td>
+            <tr><td><span class="key"><%= h(t.help.keyboard.keys.esc) %></span></td><td> - <%= h(t.help.keyboard.deactivate) %></tr><td>
+        </table>
+    </div>
+    <div class="help-box">
+        <h3><%= h(t.help.keyboard.table_navigation) %></h3>
+        <table>
+            <tr><td><span class="key"><%= h(t.help.keyboard.keys.home) %></span></td><td> - <%= h(t.help.keyboard.first_page) %></td></tr>
+            <tr><td><span class="key"><%= h(t.help.keyboard.keys.pageup) %></span></td><td> - <%= h(t.help.keyboard.prev_page) %></td></tr>
+            <tr><td><span class="key"><%= h(t.help.keyboard.keys.pagedown) %></span></td><td> - <%= h(t.help.keyboard.next_page) %></td></tr>
+            <tr><td><span class="key"><%= h(t.help.keyboard.keys.end) %></span></td><td> - <%= h(t.help.keyboard.last_page) %></td></tr>
+            <tr><td><span class="key">&uarr;</span></td><td> - <%= h(t.help.keyboard.prev_entry) %></td></tr>
+            <tr><td><span class="key">&darr;</span></td><td> - <%= h(t.help.keyboard.next_entry) %></td></tr>
+            <tr><td><span class="key">&rarr;</span></td><td> - <%= h(t.help.keyboard.enter_entry) %></td></tr>
+            <tr><td><span class="key">f</span></td><td> - <%= h(t.help.keyboard.activate_filter) %></td></tr>
+        </table>
+    </div>
+</div>
+

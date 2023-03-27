@@ -1,24 +1,19 @@
-<div class="pre ui-helper-clearfix">
-    <div id="pre-text">
-        <h1 class="section"><%= h(t.taginfo.sources) %></h1>
-        <%= t.pages.sources.intro %>
-    </div>
-</div>
-<table class="boxes" width="100%">
-    <tr>
-        <td><h2><%= h(t.pages.sources.list.title) %></h2></td>
-        <td rowspan="2" width="20"></td>
-        <td><h2><%= h(t.pages.sources.updates.title) %></h2></td>
-    </tr>
-    <tr>
-        <td class="box">
+<h1 class="section"><%= h(t.taginfo.sources) %></h1>
+<%= t.pages.sources.intro %>
+<div class="fboxes">
+    <div class="fbox">
+        <h2><%= h(t.pages.sources.list.title) %></h2>
+        <div>
             <p><%= h(t.pages.sources.list.intro) %></p>
 <% @sources.visible.each_with_index do |source, n| c = (n%2!=0) ? ' even' : '' %>
-            <h2><%= h(t.sources[source.id].name) %></h2>
+            <h3><%= h(t.sources[source.id].name) %></h3>
             <%= t.pages.sources.description[source.id] %>
 <% end %>
-        </td>
-        <td class="box">
+        </div>
+    </div>
+    <div class="fbox">
+        <h2><%= h(t.pages.sources.updates.title) %></h2>
+        <div>
             <p><%= h(t.pages.sources.updates.intro) %></p>
             <table class="list">
                 <tr>
@@ -35,6 +30,6 @@
 <% end %>
             </table>
             <p class="note">* <%= h(t.pages.sources.data_until_explanation) %></p>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>

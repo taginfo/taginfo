@@ -76,16 +76,10 @@
 <% if SECTIONS[:taginfo] %>
             <a href="/taginfo/apidoc">API</a> &middot;
 <% end %>
-            <a id="help_link" href="#help"><%= h(t.misc.help) %></a> &middot;
+            <a id="help-link" target="_blank" href="<%= build_link('/help') %>"><%= h(t.misc.help) %></a> &middot;
             <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo"><%= h(t.taginfo.wiki) %></a>
         </div>
     </footer>
     <div id="javascriptmsg">This website only works with Javascript! Please enable Javascript in your browser.</div>
-    <div id="help"><div id="help_tabs">
-        <ul>
-            <li><a href="/help/search"><%= h(t.help.search.title) %></a></li>
-            <li><a href="/help/keyboard"><%= h(t.help.keyboard.title) %></a></li>
-        </ul>
-    </div></div>
 </body>
 </html>

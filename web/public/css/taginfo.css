@@ -236,6 +236,11 @@ input#search, p.search {
     border-radius: 4px;
 }
 
+p.search {
+    height: 16px;
+    padding: 4px;
+}
+
 input:focus {
     background-color: #ffffe0 !important;
     outline: none;
@@ -872,7 +877,7 @@ html[dir="rtl"] table.help_table th {
 span.key {
     position: relative;
     top: -1px;
-    border: 1px solid #e8e8e8;
+    border: 1px solid #d0d0d0;
     padding: 1px 4px;
     border-radius: 4px;
     background-color: #f0f0f0;
@@ -902,12 +907,6 @@ div.img_popup {
 }
 
 /* ==========  */
-
-@media screen and (max-width: 1023px) {
-    .cloudcontainer {
-        display: none;
-    }
-}
 
 div#tagcloud a:hover {
     text-decoration: none;
@@ -1089,5 +1088,175 @@ html[dir="rtl"] .ui-dialog .ui-dialog-title {
     top: 50%;
     margin-top: -8px;
     left: -8px;
+}
+
+/* ==========  */
+
+div.help-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+div.help-box {
+    flex: 1 1 auto;
+    background-color: #ddddd4;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+div.help-box h3 {
+    margin: 0 0 6px 0;
+}
+
+/* ==========  */
+
+div.fboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 20px;
+    margin-bottom: 8px;
+}
+
+div.fbox {
+    flex: 1 1 auto;
+    flex-basis: 30em;
+}
+
+div.fbox h2 {
+    text-transform: uppercase;
+    font-weight: normal;
+    margin: 16px 0 2px 2px;
+}
+
+div.fbox > div {
+    background-color: #ddddd4;
+    padding: 8px;
+    border-radius: 4px;
+    height: calc(100% - 54px);
+}
+
+div.fbox h3 {
+    margin: 10px 0 4px 0;
+}
+
+/* ==========  */
+
+div.gboxes {
+    display: grid;
+    gap: 0 20px;
+    margin-bottom: 8px;
+    height: calc(100vh - 170px);
+    min-height: 400px;
+    overflow: auto;
+}
+
+@media screen and (min-width: 1025px) {
+    div.gboxes {
+        grid-template-columns: 240px auto 240px 224px;
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-areas:
+            "keys tagcloud reports about"
+            "keys tagcloud reports about"
+            "tags tagcloud reports about"
+            "tags tagcloud reports about"
+            "rels tagcloud reports desc"
+            "rels tagcloud reports desc";
+    }
+}
+
+@media screen and (max-width: 1024px) and (min-width: 641px) {
+    div.gboxes {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-areas:
+            "keys reports about"
+            "keys reports about"
+            "tags reports about"
+            "tags reports desc"
+            "rels reports desc"
+            "rels reports desc";
+    }
+
+    #gbox-tagcloud {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 640px) and (min-width: 461px) {
+    div.gboxes {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(3, 1fr);
+        grid-template-areas:
+            "keys reports"
+            "tags reports"
+            "rels reports";
+    }
+
+    #gbox-tagcloud, #gbox-about, #gbox-desc {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    div.gboxes {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-areas:
+            "keys"
+            "tags"
+            "rels";
+    }
+
+    #gbox-tagcloud, #gbox-about, #gbox-desc, #gbox-reports {
+        display: none;
+    }
+}
+
+div.gbox h2 {
+    text-transform: uppercase;
+    font-weight: normal;
+    margin: 16px 0 2px 2px;
+}
+
+div.gbox h2 a {
+    color: #000000;
+    text-decoration: none;
+}
+
+div.gbox > div {
+    background-color: #ddddd4;
+    padding: 8px;
+    border-radius: 4px;
+    height: calc(100% - 60px);
+}
+
+#gbox-keys {
+    grid-area: keys;
+}
+
+#gbox-tags {
+    grid-area: tags;
+}
+
+#gbox-relations {
+    grid-area: rels;
+}
+
+#gbox-tagcloud {
+    grid-area: tagcloud;
+}
+
+#gbox-reports {
+    grid-area: reports;
+}
+
+#gbox-about {
+    grid-area: about;
+}
+
+#gbox-desc {
+    grid-area: desc;
 }
 
