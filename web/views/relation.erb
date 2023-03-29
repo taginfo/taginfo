@@ -37,7 +37,7 @@
         </table>
         <p><%= h(t.pages.relation.overview.see_also) %>: type=<span id="taglink"></span></p>
     </div>
-    <div id="roles">
+    <div id="roles" class="resize">
         <h2><%= h(t.pages.relation.roles.title) %></h2>
 <% if @count_relation_roles > 0 %>
         <table id="grid-roles">
@@ -65,7 +65,7 @@
             <p><a class="extlink" target="_blank" rel="nofollow" href="//wiki.openstreetmap.org/w/index.php?action=edit&title=Relation:<%= @rtype_uri %>"><%= h(t.pages.relation.wiki_pages.create) %></a></p>
         <% end %>
     </div>
-    <div id="projects">
+    <div id="projects" class="resize">
         <h2><%= h(t.pages.relation.projects.title) %></h2>
         <table id="grid-projects">
         </table>

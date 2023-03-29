@@ -68,19 +68,19 @@
         </table>
         <p><span title="<%= h(t.pages.key.overview.no_endorsement) %>" data-tooltip-position="OnBottom"><%= t.pages.key.overview.objects_last_edited_by(@user_count.to_s_with_ts) %></span></p>
     </div>
-    <div id="values">
+    <div id="values" class="resize">
         <h2><%= h(t.pages.key.values_used) %></h2>
         <div>
             <table id="grid-values">
             </table>
         </div>
     </div>
-    <div id="combinations">
+    <div id="combinations" class="resize">
         <h2><%= h(t.pages.key.other_keys_used.title) %></h2>
         <table id="grid-keys">
         </table>
     </div>
-    <div id="similar">
+    <div id="similar" class="resize">
         <h2><%= h(t.pages.key.similar.title) %></h2>
         <table id="grid-similar">
         </table>
@@ -126,7 +126,7 @@
             <p><a class="extlink" target="_blank" rel="nofollow" href="//wiki.openstreetmap.org/w/index.php?action=edit&title=Key:<%= @key_uri %>"><%= h(t.pages.key.wiki_pages.create) %></a></p>
         <% end %>
     </div>
-    <div id="projects">
+    <div id="projects" class="resize">
         <h2><%= h(t.pages.key.projects.title) %></h2>
         <table id="grid-projects">
         </table>

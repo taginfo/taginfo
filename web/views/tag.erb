@@ -70,7 +70,7 @@
         <p><%= link %></p>
 <% end %>
     </div>
-    <div id="combinations">
+    <div id="combinations" class="resize">
         <div class="boxpre">
             <h2><%= h(t.pages.tag.combinations.title) %></h2>
             <p><%= h(t.pages.tag.combinations.description) %></p>
@@ -127,7 +127,7 @@
             <p><a class="extlink" target="_blank" rel="nofollow" href="//wiki.openstreetmap.org/w/index.php?action=edit&title=Tag:<%= escape(@tag) %>"><%= h(t.pages.tag.wiki_pages.create) %></a></p>
         <% end %>
     </div>
-    <div id="projects">
+    <div id="projects" class="resize">
         <h2><%= h(t.pages.tag.projects.title) %></h2>
         <table id="grid-projects">
         </table>

@@ -2,6 +2,7 @@
 
 var grids = {},
     current_grid = '',
+    tabs = null,
     up = function() { window.location = build_link('/'); };
 
 /* ============================ */
@@ -48,27 +49,39 @@ function init_tooltips() {
 }
 
 function resize_box() {
-    const wrapper = jQuery('.resize,.ui-tabs-panel');
-    let height = jQuery(window).height();
+    const wrapper = document.querySelectorAll('.resize,.tabs-panel');
+    if (wrapper.length == 0) {
+        return;
+    }
 
-    height -= jQuery('header').outerHeight(true);
-    height -= jQuery('#menu').outerHeight(true);
-    height -= jQuery('div.pre').outerHeight(true);
-    height -= jQuery('.ui-tabs-nav').outerHeight(true);
-    height -= jQuery('footer').outerHeight(true);
+    let height= window.visualViewport.height;
+    height -= (wrapper[0].getBoundingClientRect().top + window.scrollY);
+    height -= document.querySelector('footer').getBoundingClientRect().height;
+    height -= 46;
 
     if (height < 440) {
         height = 440;
     }
 
-    wrapper.outerHeight(height);
+    height = '' + height + 'px';
+
+    for (let el of wrapper) {
+        el.style.minHeight = height;
+        if (Array.from(el.classList).includes('resize')) {
+            el.style.height = height;
+        }
+    }
+
+    if (tabs) {
+        tabs.resize();
+    }
 }
 
 function resize_grid(the_grid) {
     if (grids[the_grid]) {
         let grid = grids[the_grid][0].grid;
         let oldrp = grid.getRp();
-        let rp = calculate_flexigrid_rp(jQuery(grids[current_grid][0]).parents('.resize,.ui-tabs-panel'));
+        let rp = calculate_flexigrid_rp(jQuery(grids[current_grid][0]).parents('.resize'));
         if (rp != oldrp) {
             grid.newRp(rp);
             grid.fixHeight();
@@ -615,7 +628,7 @@ function create_flexigrid(domid, options) {
     if (grids[domid] == null) {
         // grid doesn't exist yet, so create it
         const me = jQuery('#' + domid);
-        const rp = calculate_flexigrid_rp(me.parents('.resize,.ui-tabs-panel'));
+        const rp = calculate_flexigrid_rp(me.parents('.resize'));
         grids[domid] = me.flexigrid(jQuery.extend({}, flexigrid_defaults, texts.flexigrid, options, { rp: rp }));
     } else {
         // grid does exist, make sure it has the right size
@@ -623,30 +636,88 @@ function create_flexigrid(domid, options) {
     }
 }
 
-function init_tabs(params) {
-    return jQuery('#tabs').tabs({
-        activate: function (event, ui) {
-            resize_box();
-            const index = ui.newTab.closest("li").index();
-            if (index != 0 || window.location.hash != '') {
-                window.location.hash = ui.newTab.context.hash;
-            }
-            if (ui.newTab.context.hash.substring(1) in create_flexigrid_for) {
-                create_flexigrid_for[ui.newTab.context.hash.substring(1)].apply(this, params);
-            }
-        },
-        create: function (event, ui) {
-            resize_box();
-            const index = jQuery(this).tabs("option", "selected");
-            const id = jQuery(jQuery(this).children()[index+1]).attr('id');
-            if (index != 0 || window.location.hash != '') {
-                window.location.hash = id;
-            }
-            if (id in create_flexigrid_for) {
-                create_flexigrid_for[id].apply(this, params);
+class Tabs {
+    constructor(id, tabname, params) {
+        this.id = document.getElementById(id);
+        this.params = params;
+
+        // First child is <ul> with tab buttons
+        this.buttonBox = Array.from(this.id.children)[0];
+        this.buttons = this.buttonBox.children;
+
+        // Every child except the first is a tab
+        this.tabs = Array.from(this.id.children).slice(1);
+
+        this.buttonBox.dataset.left = ' ';
+        this.buttonBox.dataset.right = ' ';
+
+        for (let button of this.buttons) {
+            button.addEventListener('click', this.click.bind(this));
+        }
+        for (let tab of this.tabs) {
+            tab.classList.add('tabs-panel');
+        }
+
+        resize_box();
+        //  this.resize();
+
+        if (tabname == '' || !this.get_index(tabname)) {
+            tabname = this.tabs[0].id;
+        }
+
+        this.activate(tabname);
+    }
+
+    resize() {
+        let b = this.buttonBox;
+        let dl = ' ';
+        let dr = ' ';
+        if (b.clientWidth - b.scrollWidth < 0) {
+            dl = '≪';
+            dr = '≫';
+        }
+        b.dataset.left = dl;
+        b.dataset.right = dr;
+    }
+
+    choose(n) {
+        for (let button of this.buttons) {
+            button.classList.remove('active');
+        }
+        this.buttons[n].classList.add('active');
+        for (let tab of this.tabs) {
+            tab.style.display = 'none';
+        }
+        this.tabs[n].style.display = null;
+        window.location.hash = this.tabs[n].id;
+    }
+
+    get_index(tabname) {
+        for (let n = 0; n < this.tabs.length; ++n) {
+            if (this.tabs[n].id == tabname) {
+                return n;
             }
         }
-    });
+    }
+
+    activate(tabname) {
+        this.choose(this.get_index(tabname));
+        if (tabname in create_flexigrid_for) {
+            create_flexigrid_for[tabname].apply(this, this.params);
+        }
+    }
+
+    click(ev) {
+        if (ev.target) {
+            ev.preventDefault();
+            this.activate(ev.target.getAttribute('href').substring(1));
+        }
+    }
+}
+
+function init_tabs(params) {
+    tabs = new Tabs('tabs', window.location.hash.slice(1), params);
+    tabs.resize();
 }
 
 function create_characters_flexigrid(string) {
@@ -659,6 +730,8 @@ function create_characters_flexigrid(string) {
             { display: texts.unicode.general_category, name: 'general_category', width: 150, sortable: false },
             { display: texts.unicode.name, name: 'name', width: 600, sortable: false, align: 'left' }
         ],
+        usepager: false,
+        useRp: false,
         preProcess: function(data) {
             data.rows = data.data.map(function(row) {
                 return { 'cell': [
@@ -921,7 +994,7 @@ jQuery(document).ready(function() {
         }
 
         if (event.which >= 49 && event.which <= 57) { // digit
-            jQuery("#tabs").tabs("select", event.which - 49);
+            tabs.choose(event.which - 49);
             return;
         }
 
@@ -1051,8 +1124,7 @@ jQuery(document).ready(function() {
         });
     }
 
-    jQuery(window).resize(function() {
-        jQuery('select').trigger('render');
+    addEventListener('resize', function() {
         resize_box();
         resize_grid(current_grid);
     });
