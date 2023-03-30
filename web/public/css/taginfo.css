@@ -80,6 +80,10 @@ a:hover {
     text-decoration: underline;
 }
 
+div#tagcloud a:hover {
+    text-decoration: none;
+}
+
 span.badchar {
     color: #e00000;
 }
@@ -551,51 +555,6 @@ div.box {
 
 /* ==========  */
 
-div.boxes {
-    width: 232px;
-    float: right;
-}
-
-table.boxes {
-    border-collapse: collapse;
-}
-
-.boxes h2 {
-    text-transform: uppercase;
-    font-weight: normal;
-    margin: 16px 0 2px 0px;
-}
-
-.boxes h2 a {
-    color: #000000;
-    text-decoration: none;
-}
-
-.boxes h3 {
-    margin: 12px 0 2px 0;
-}
-
-table.boxes td {
-    vertical-align: bottom;
-}
-
-table.boxes td.box {
-    vertical-align: top;
-    font-size: 0.9rem;
-    background-color: #ddddd4;
-    padding: 8px;
-    border-radius: 4px;
-}
-
-table.boxes td.box table {
-    width: 100%;
-}
-
-/* ==========  */
-
-div#tabs {
-}
-
 div#tabs > ul {
     position: relative;
     display: flex;
@@ -955,18 +914,6 @@ div.wiki_image img {
     padding: 1px;
 }
 
-div.img_popup {
-    background-image: url(/img/indicator.gif);
-    background-position: center center;
-    background-repeat: no-repeat;
-}
-
-/* ==========  */
-
-div#tagcloud a:hover {
-    text-decoration: none;
-}
-
 /* ==========  */
 
 .canvas svg text {
@@ -1017,16 +964,6 @@ html[dir="rtl"] #map div {
 /* overwrites inline style="margin: 0 0 0 18px; padding: 0;" */
 html[dir="rtl"] td ul {
     margin: 0 18px 0 0!important;
-}
-
-html[dir="rtl"] .ui-dialog .ui-dialog-titlebar-close {
-    right: auto;
-    left: 0.3em;
-}
-
-html[dir="rtl"] .ui-dialog .ui-dialog-title {
-    float: right;
-    margin: .1em 0 .1em 16px;
 }
 
 /* tooltips */
