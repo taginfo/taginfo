@@ -22,7 +22,9 @@ img {
 }
 
 img.map {
+    position: absolute;
     border: 1px solid #b8b8b0;
+    width: calc(100% - 40px);
 }
 
 td img {

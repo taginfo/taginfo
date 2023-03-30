@@ -93,21 +93,24 @@
         <% if @has_map %>
             <% if @filter_type == 'all' %>
                 <p><%= h(t.pages.tag.geographic_distribution.all) %></p>
-                <div style="background-image: url(<%= @taginfo_config.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: 1px 1px;"/>
-                    <img class="map" src="/api/4/tag/distribution/nodes?key=<%= @key_uri %>&value=<%= @value_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>" style="position: absolute;"/>
-                    <img class="map" src="/api/4/tag/distribution/ways?key=<%= @key_uri %>&value=<%= @value_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
+                <div>
+                    <img class="map" src="<%= @taginfo_config.get('geodistribution.background_image') %>" alt="" style="max-width: <%= @img_width %>px; z-index: 1; background-color: #ddddd4"/>
+                    <img class="map" src="/api/4/tag/distribution/nodes?key=<%= @key_uri %>&value=<%= @value_uri %>" alt="" style="max-width: <%= @img_width %>px; z-index: 2;"/>
+                    <img class="map" src="/api/4/tag/distribution/ways?key=<%= @key_uri %>&value=<%= @value_uri %>" alt="" style="max-width: <%= @img_width %>px; z-index: 3;"/>
                     <div class="note"><%= @taginfo_config.get('geodistribution.image_attribution') %></div>
                 </div>
             <% elsif @filter_type == 'nodes' %>
                 <p><%= h(t.pages.tag.geographic_distribution.nodes) %></p>
-                <div style="background-image: url(<%= @taginfo_config.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: 1px 1px;"/>
-                    <img class="map" src="/api/4/tag/distribution/nodes?key=<%= @key_uri %>&value=<%= @value_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
+                <div>
+                    <img class="map" src="<%= @taginfo_config.get('geodistribution.background_image') %>" alt="" style="max-width: <%= @img_width %>px; z-index: 1; background-color: #ddddd4"/>
+                    <img class="map" src="/api/4/tag/distribution/nodes?key=<%= @key_uri %>&value=<%= @value_uri %>" alt="" style="max-width: <%= @img_width %>px; z-index: 2;"/>
                     <div class="note"><%= @taginfo_config.get('geodistribution.image_attribution') %></div>
                 </div>
             <% elsif @filter_type == 'ways' %>
                 <p><%= h(t.pages.tag.geographic_distribution.ways) %></p>
-                <div style="background-image: url(<%= @taginfo_config.get('geodistribution.background_image') %>); background-repeat: no-repeat; background-position: 1px 1px;"/>
-                    <img class="map" src="/api/4/tag/distribution/ways?key=<%= @key_uri %>&value=<%= @value_uri %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
+                <div>
+                    <img class="map" src="<%= @taginfo_config.get('geodistribution.background_image') %>" alt="" style="max-width: <%= @img_width %>px; z-index: 1; background-color: #ddddd4"/>
+                    <img class="map" src="/api/4/tag/distribution/ways?key=<%= @key_uri %>&value=<%= @value_uri %>" alt="" style="max-width: <%= @img_width %>px; z-index: 3;"/>
                     <div class="note"><%= @taginfo_config.get('geodistribution.image_attribution') %></div>
                 </div>
             <% elsif @filter_type == 'relations' %>
