@@ -1,8 +1,4 @@
 <div>
-    <div>
-        <h1 data-key="<%= h(@key) %>"></h1>
-        <p><%= @desc %></p>
-    </div>
     <div id="toolsmenu"></div>
     <form id="filter-form">
         <label for="filter"><%= h(t.pages.key.filter.label) %></label>
@@ -37,6 +33,10 @@
 <% end %>
             <li class="button"><%= turbo_link(@count_all_values, @filter_type, @key) %></li>
         </ul>
+    </div>
+    <div>
+        <h1 data-key="<%= h(@key) %>"></h1>
+        <p><%= @desc %></p>
     </div>
 </div>
 <div id="tabs">

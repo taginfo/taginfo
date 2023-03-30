@@ -1,8 +1,4 @@
 <div>
-    <div>
-        <h1 data-rtype="<%= h(@rtype) %>"><%= h(t.pages.relation.name) %>: </h1>
-        <p><%= @desc %></p>
-    </div>
     <div id="toolsmenu"></div>
     <div id="tools" class="no-print">
         <ul>
@@ -15,6 +11,10 @@
 <% end %>
             <li class="button"><%= turbo_link(@count_all_values, 'relations', 'type', @rtype) %></li>
         </ul>
+    </div>
+    <div>
+        <h1 data-rtype="<%= h(@rtype) %>"><%= h(t.pages.relation.name) %>: </h1>
+        <p><%= @desc %></p>
     </div>
 </div>
 <div id="tabs">
