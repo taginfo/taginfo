@@ -425,7 +425,7 @@ function fmt_wiki_image_popup(image) {
         url = image.image_url;
     }
 
-    return tag('div', link_to_wiki(image.title), {
+    return tag('div', hover_expand(link_to_wiki(image.title)), {
         'data-tooltip-position': 'OnTop',
         title: html_escape(img({ src: url }))
     });
