@@ -230,6 +230,29 @@ input#search {
     font-size: 0.9rem;
 }
 
+#suggestions {
+    position: relative;
+    display: none;
+    width: 228px;
+    padding: 2px 2px;
+    font-size: 0.9rem;
+    background-color: #ffffff;
+    border: 1px solid #a0a0a0;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+#suggestions a {
+    display: block;
+    padding: 4px 6px;
+    text-decoration: none;
+}
+
+#suggestions a.active {
+    background-color: #ddddd4;
+    border-radius: 4px;
+}
+
 input#search, p.search {
     background-image: url('/css/flexigrid/images/magnifier.png');
     background-size: 20px 20px;

@@ -36,7 +36,10 @@
                 </select>
             </form>
 <% unless @nosearch %>
-            <form id="search_form" action="/search"><input type="text" id="search" name="q" value="<%= h(params[:q]) %>"/></form>
+            <form id="search_form" action="/search">
+                <input type="text" id="search" name="q" value="<%= h(params[:q]) %>" autocomplete="off"/>
+                <div id="suggestions"></div>
+            </form>
 <% end %>
         </div>
         <div id="header_logo">

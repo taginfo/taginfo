@@ -3,6 +3,7 @@
 var grids = {},
     current_grid = '',
     tabs = null,
+    autocomplete = null,
     up = function() { window.location = build_link('/'); };
 
 /* ============================ */
@@ -943,6 +944,98 @@ function project_tag_desc(description, icon, url) {
 
 /* ============================ */
 
+class Autocomplete {
+    constructor(id, results) {
+        this.data = [];
+        this.current = 0;
+        this.value = '';
+        this.element = document.getElementById(id);
+        this.results = document.getElementById(results);
+        this.source = '/search/suggest?format=simple&term=';
+        this.element.addEventListener('input', this.trigger.bind(this));
+        this.element.parentNode.addEventListener('keydown', this.key.bind(this));
+    }
+
+    trigger(ev) {
+        this.value = this.element.value;
+        if (this.value.length < 2) {
+            this.clear();
+            return;
+        }
+        fetch(this.source + encodeURIComponent(this.value))
+            .then( (response) => response.json() )
+            .then( (data) => this.display.apply(this, [data]) );
+    }
+
+    update() {
+        this.element.value = this.current == 0 ? this.value : this.data[this.current - 1];
+        let n = 1;
+        for (let c of this.results.children) {
+            if (n == this.current) {
+                c.classList.add('active');
+            } else {
+                c.classList.remove('active');
+            }
+            n += 1;
+        }
+    }
+
+    key(ev) {
+        if (event.key == 'ArrowUp') {
+            ev.preventDefault();
+            if (this.current == 0) {
+                this.current = this.data.length;
+            } else {
+                this.current -= 1;
+            }
+            this.update();
+        } else if (event.key == 'ArrowDown') {
+            ev.preventDefault();
+            if (this.current == this.data.length) {
+                this.current = 0;
+            } else {
+                this.current += 1;
+            }
+            this.update();
+        } else if (event.key == 'Enter') {
+            if (this.current > 0) {
+                ev.preventDefault();
+                window.location = this.results.children[this.current - 1].href;
+            }
+        } else if (event.key == 'Escape') {
+            ev.preventDefault();
+            this.clear();
+            this.element.value = this.value;
+            this.element.focus();
+        }
+    }
+
+    clear() {
+        this.current = 0;
+        this.data = [];
+        this.results.innerHTML = '';
+        this.results.style.display = null;
+    }
+
+    display(data) {
+        if (data.length == 0) {
+            this.clear();
+            return;
+        }
+        this.current = 0;
+        this.data = data;
+        let out = '';
+        for (let d of data) {
+            const link = d.match(/=/) ? build_link('/tags/' + d) : build_link('/keys/' + d);
+            out += '<a href="' + link + '">' + d + '</a>';
+        }
+        this.results.innerHTML = out;
+        this.results.style.display = 'block';
+    }
+}
+
+/* ============================ */
+
 jQuery(document).ready(function() {
     document.getElementById('javascriptmsg').remove();
 
@@ -970,19 +1063,7 @@ jQuery(document).ready(function() {
         document.getElementById('set_language').submit();
     });
 
-    jQuery('#search').autocomplete({
-        minLength: 2,
-        source: '/search/suggest?format=simple',
-        delay: 10,
-        select: function(event, ui) {
-            const query = ui.item.value;
-            if (query.match(/=/)) {
-                window.location = build_link('/tags/' + ui.item.value);
-            } else {
-                window.location = build_link('/keys/' + ui.item.value);
-            }
-        }
-    });
+    autocomplete = new Autocomplete('search', 'suggestions');
 
     document.addEventListener('keypress', function(event) {
         if (event.ctrlKey || event.altKey || event.metaKey) {
