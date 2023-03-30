@@ -110,16 +110,6 @@ a.section {
     text-decoration: none;
 }
 
-div#pre-text {
-    float: left;
-    max-width: 60em;
-    margin-bottom: 8px;
-}
-
-html[dir="rtl"] div#pre-text {
-    float: right;
-}
-
 /* ==========  */
 
 .button {
