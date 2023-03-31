@@ -5,7 +5,7 @@ function page_init() {
 
     document.querySelectorAll('.keyimg').forEach(function(element, index) {
         element.setAttribute('href', url_for_key(keys[index]));
-        element.textContent = fmt_key(keys[index]);
+        element.textContent = fmt_key(keys[index]).replaceAll(':', '\u200b:');
     });
 }
 
