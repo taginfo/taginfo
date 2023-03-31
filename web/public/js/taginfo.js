@@ -25,14 +25,14 @@ function init_tooltips() {
 
             let x, y;
             if (this.getAttribute('data-tooltip-position') == 'OnLeft') {
-                x = b.x;
-                y = b.y + b.height / 2;
+                x = b.x + window.scrollX;
+                y = b.y + window.scrollY + b.height / 2;
             } else if (this.getAttribute('data-tooltip-position') == 'OnRight') {
-                x = b.x + b.width;
-                y = b.y + b.height / 2;
+                x = b.x + window.scrollX + b.width;
+                y = b.y + window.scrollY + b.height / 2;
             } else {
-                x = b.x + b.width / 2;
-                y = b.y + b.height / 2;
+                x = b.x + window.scrollX + b.width / 2;
+                y = b.y + window.scrollY + b.height / 2;
             }
 
             tt.innerHTML = "<div class='tooltips'><div class='" + this.getAttribute("data-tooltip-position") + "'>" + this.getAttribute("data-tooltip-text") + "</div></div>";
