@@ -112,37 +112,44 @@ var create_flexigrid_for = {
     }
 };
 
+var data = []
 function create_role_chart(roles) {
-    if (roles.total == 0) {
-        return;
-    }
+    if (data.length == 0) {
+        if (roles.total == 0) {
+            return;
+        }
 
-    let data = [];
-    roles.data.forEach(function(r) {
-        ['node', 'way', 'relation'].forEach(function(type) {
-            const count = r['count_' + type + '_members'];
+        roles.data.forEach(function(r) {
+            ['node', 'way', 'relation'].forEach(function(type) {
+                const count = r['count_' + type + '_members'];
 
-            let title = '' + count + ' member ' + type + 's with ';
-            let label;
-            if (r.role === null) {
-                title += "other roles";
-                label = '...';
-            } else {
-                title += "role '" + r.role + "'";
-                label = r.role == '' ? '(empty)' : r.role;
-            }
+                let title = '' + count + ' member ' + type + 's with ';
+                let label;
+                if (r.role === null) {
+                    title += "other roles";
+                    label = '...';
+                } else {
+                    title += "role '" + r.role + "'";
+                    label = r.role == '' ? '(empty)' : r.role;
+                }
 
-            data.push({
-                role: r.role,
-                type: type + 's',
-                value: count,
-                label: label,
-                title: title
+                data.push({
+                    role: r.role,
+                    type: type + 's',
+                    value: count,
+                    label: label,
+                    title: title
+                });
             });
         });
-    });
+    } else {
+        document.querySelector('div.canvas').innerHTML = '';
+    }
 
-    const width = 800;
+    let width = document.querySelector('div.canvas').getBoundingClientRect().width - 20;
+    if (width > 800) {
+        width = 800;
+    }
     const height = 360;
     const margin = 20;
 
@@ -198,7 +205,7 @@ function create_role_chart(roles) {
 
     // Add x-axis ticks.
     const xtick = svg.selectAll(".x")
-        .data(x.ticks(10))
+        .data(x.ticks(width > 480 ? 10 : width > 240 ? 5 : 2))
         .enter().append("g")
             .attr("class", "x")
             .attr("transform", function(d) { return "translate(" + x(d) + "," + y(1) + ")"; });
@@ -280,4 +287,6 @@ function page_init() {
     fetch(build_link('/api/4/relation/roles?sortname=count_all_members&sortorder=asc&min_fraction=0.01&rtype=' + encodeURIComponent(rtype))).
         then(response => response.json()).
         then(roles => create_role_chart(roles));
+
+    window.addEventListener('resize', ev => create_role_chart() );
 }
