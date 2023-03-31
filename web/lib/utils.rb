@@ -367,5 +367,5 @@ def unpack_chronology(raw_data)
 end
 
 def build_link(link)
-    link
+    @taginfo_config.prefix + link
 end

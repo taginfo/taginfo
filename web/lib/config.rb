@@ -11,6 +11,13 @@ class TaginfoConfig
         @id = id
     end
 
+    def prefix
+        if @id
+            return '/' + @id
+        end
+        return ''
+    end
+
     def get(key, default=nil)
         tree = @config
         key.split('.').each do |i|
