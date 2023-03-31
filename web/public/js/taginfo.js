@@ -1218,7 +1218,8 @@ function tomorrow() {
 }
 
 function draw_chronology_chart(data, filter) {
-    const w = 900;
+    const box_width = document.getElementById('chart-chronology').getBoundingClientRect().width;
+    const w = Math.min(900, box_width - 100);
     const h = 400;
     const margin = { top: 10, right: 15, bottom: 60, left: 80 };
 
@@ -1249,7 +1250,7 @@ function draw_chronology_chart(data, filter) {
                       .range([0, w]);
 
     const axis_x = d3.axisBottom(scale_x)
-                     .tickFormat(d3.timeFormat('%b %Y'));
+                     .tickFormat(d3.timeFormat(w > 500 ? '%b %Y' : '%Y'));
 
     const scale_y = d3.scaleLinear()
                       .domain([0, max])
@@ -1294,6 +1295,12 @@ function draw_chronology_chart(data, filter) {
         .attr('stroke-linejoin', 'round')
         .attr('stroke-linecap', 'round')
         .attr('d', line);
+
+    var resizeTimer;
+    window.addEventListener('resize', function(ev) {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout( ev => draw_chronology_chart(data, filter) , 250);
+    });
 }
 
 /* ============================ */
