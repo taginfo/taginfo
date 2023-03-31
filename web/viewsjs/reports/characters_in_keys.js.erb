@@ -38,11 +38,10 @@ var create_flexigrid_for = {};
     };
 });
 
-function page_init() {
-    up = function() { window.location = build_link('/reports'); };
-    init_tabs([]);
-
-    var w = 968,
+function build_graph() {
+    document.getElementById('canvas').innerHTML = '';
+    const box_width = document.getElementById('statistics').getBoundingClientRect().width;
+    var w = Math.min(968, box_width - 40),
         h = 50,
         max = <%= @db.stats('num_keys') %>,
         data = <%= i = '@'; %w(plain colon letters space problem rest).map{ |type| i=i.next; { :label => i, :value => @db.stats('characters_in_keys_' + type) } }.to_json %>;
@@ -80,4 +79,16 @@ function page_init() {
                 .style('text-anchor', 'middle')
                 .text(d => d['label']);
 
+}
+
+function page_init() {
+    up = function() { window.location = build_link('/reports'); };
+    init_tabs([]);
+    build_graph();
+
+    var resizeTimer;
+    window.addEventListener('resize', function(ev) {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(build_graph, 250);
+    });
 }
