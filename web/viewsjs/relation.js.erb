@@ -275,7 +275,7 @@ function create_role_chart(roles) {
 }
 
 function page_init() {
-    up = function() { window.location = '/relations'; };
+    up = function() { window.location = build_link('/relations'); };
     activate_josm_button();
 
     const h1 = document.querySelector('h1');
