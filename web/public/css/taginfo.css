@@ -1,6 +1,13 @@
 /* taginfo.css */
 
+html {
+    height: 100%;
+}
+
 body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     font-family: Arial,sans-serif;
     padding: 0;
     margin: 0;
@@ -82,10 +89,10 @@ a:hover {
     text-decoration: underline;
 }
 
-div#tagcloud {
-    line-height: 200%;
-    text-align: justify;
+div#tagcloud svg {
     overflow: hidden;
+    width: 100%;
+    height: 100%;
 }
 
 div#tagcloud a:hover {
@@ -512,6 +519,7 @@ input:focus {
 /* ========== */
 
 main {
+    flex-basis: 100%;
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -535,12 +543,9 @@ div.section_title {
 /* ========== */
 
 footer {
-    clear: both;
-    position: relative;
     font-size: 0.9rem;
     margin: 0 20px;
-    padding: 4px 0;
-    height: 20px;
+    padding: 6px 0;
 }
 
 div#footer_left {
@@ -1131,9 +1136,8 @@ div.fbox h3 {
 
 div.gboxes {
     display: grid;
-    gap: 0 20px;
-    margin-bottom: 8px;
-    height: calc(100vh - 170px);
+    gap: 20px 20px;
+    height: 100%;
     min-height: 400px;
     overflow: auto;
 }
@@ -1200,10 +1204,16 @@ div.gboxes {
     }
 }
 
+div.gbox {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 100%;
+}
+
 div.gbox h2 {
     text-transform: uppercase;
     font-weight: normal;
-    margin: 16px 0 2px 2px;
+    margin: 0 0 2px 2px;
 }
 
 div.gbox h2 a {
@@ -1214,8 +1224,21 @@ div.gbox h2 a {
 div.gbox > div {
     background-color: #ddddd4;
     padding: 8px;
-    border-radius: 4px;
-    height: calc(100% - 60px);
+    overflow: hidden;
+}
+
+div.gbox > div.emphasis {
+    padding: 0 8px 8px 8px;
+}
+
+div.gbox > div:nth-child(2) {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+div.gbox > div:last-child {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
 
 #gbox-keys {
