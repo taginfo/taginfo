@@ -63,7 +63,7 @@ function resize_home() {
     const height = tagcloud.getBoundingClientRect().height;
 
     // The cloud function mangles the data in the words array, so we need to clone it
-    let data = keys_data.map(function(d) {
+    const data = keys_data.map(function(d) {
         return Object.assign({}, d);
     });
 
@@ -80,17 +80,20 @@ function resize_home() {
 
 function fill_list(list_name, data, func) {
     const element = document.getElementById(list_name);
+    element.innerHTML = '';
 
     let i = 0;
     let texts = [];
-    while (element.clientHeight < element.parentNode.clientHeight - 16) {
+    while (element.clientHeight < element.parentNode.clientHeight - 16 && i < data.length) {
         const text = func(data[i]);
         texts.push(text);
         element.innerHTML += text + '&nbsp;&bull; ';
         i++;
     }
-    texts.pop();
-    texts.pop();
+    if (i < data.length - 2) {
+        texts.pop();
+        texts.pop();
+    }
     element.innerHTML = texts.join('&nbsp;&bull; ') + '...';
 }
 
@@ -104,6 +107,6 @@ function trigger_resize() {
 }
 
 function page_init() {
-    window.addEventListener('resize', trigger_resize);
     resize_home();
+    window.addEventListener('resize', trigger_resize);
 }
