@@ -107,20 +107,36 @@ var create_flexigrid_for = {
             }
         });
     },
-    characters: function(key, filter_type) {
-        return create_characters_flexigrid(key);
+    characters: function(rtype) {
+        return create_characters_flexigrid(rtype);
     }
 };
 
-var data = []
-function create_role_chart(roles) {
-    if (data.length == 0) {
+class ChartRoles {
+    data;
+    element;
+    rtype;
+
+    constructor(id, rtype) {
+        this.element = document.getElementById(id);
+        this.rtype = rtype;
+    }
+
+    load() {
+        let foo = this;
+        fetch(build_link('/api/4/relation/roles', { sortname: 'count_all_members', sortorder: 'asc', min_fraction: 0.01, rtype: this.rtype }))
+            .then(response => response.json())
+            .then(roles => this.init(roles));
+    }
+
+    init(roles) {
         if (roles.total == 0) {
             return;
         }
 
-        roles.data.forEach(function(r) {
-            ['node', 'way', 'relation'].forEach(function(type) {
+        this.data = [];
+        for (let r of roles.data) {
+            for (let type of ['node', 'way', 'relation']) {
                 const count = r['count_' + type + '_members'];
 
                 let title = '' + count + ' member ' + type + 's with ';
@@ -133,145 +149,155 @@ function create_role_chart(roles) {
                     label = r.role == '' ? '(empty)' : r.role;
                 }
 
-                data.push({
+                this.data.push({
                     role: r.role,
                     type: type + 's',
                     value: count,
                     label: label,
                     title: title
                 });
-            });
-        });
-    } else {
-        document.querySelector('div.canvas').innerHTML = '';
+            }
+        }
+
+        this.draw();
     }
 
-    let width = document.querySelector('div.canvas').getBoundingClientRect().width - 20;
-    if (width > 800) {
-        width = 800;
-    }
-    const height = 360;
-    const margin = 20;
+    draw() {
+        if (this.data === undefined) {
+            this.load();
+            return;
+        }
 
-    const x = d3.scaleLinear().range([0, width  - 2 * margin]);
-    const y = d3.scaleLinear().range([0, height - 2 * margin]);
+        this.element.innerHTML = '';
 
-    const color = d3.scaleOrdinal(d3.schemeCategory10);
+        const max_width = 800;
+        let width = this.element.getBoundingClientRect().width - 20;
+        if (width > max_width) {
+            width = max_width;
+        }
+        const height = 360;
+        const margin = 20;
 
-    const percent = d3.format('~%');
+        const x = d3.scaleLinear().range([0, width  - 2 * margin]);
+        const y = d3.scaleLinear().range([0, height - 2 * margin]);
 
-    const svg = d3.select('div.canvas').append('svg')
-        .attr('width', width + 20)
-        .attr('height', height)
-        .append('g')
-            .attr('transform', "translate(" + 2 * margin + "," + margin + ")");
+        const color = d3.scaleOrdinal(d3.schemeCategory10);
 
-    const root = d3.hierarchy(d3.group(data, d => d.type, d => d.role));
+        const percent = d3.format('~%');
 
-    const treemap = d3.treemap()
-        .round(true)
-        .tile(d3.treemapSliceDice)
-        .size([width - 2 * margin, height - 2 * margin]);
+        const svg = d3.select(this.element).append('svg')
+            .attr('width', width + 20)
+            .attr('height', height)
+            .append('g')
+                .attr('transform', "translate(" + 2 * margin + "," + margin + ")");
 
-    treemap(root.sum(d => d.value));
+        const root = d3.hierarchy(d3.group(this.data, d => d.type, d => d.role));
 
-    svg.selectAll('.role')
-        .data(root.leaves())
-            .enter().append('a')
-                .attr('class', 'role')
-                .style('text-decoration', 'none')
-                .attr("xlink:title", d => d.data.title)
+        const treemap = d3.treemap()
+            .round(true)
+            .tile(d3.treemapSliceDice)
+            .size([width - 2 * margin, height - 2 * margin]);
+
+        treemap(root.sum(d => d.value));
+
+        svg.selectAll('.role')
+            .data(root.leaves())
+                .enter().append('a')
+                    .attr('class', 'role')
+                    .style('text-decoration', 'none')
+                    .attr("xlink:title", d => d.data.title)
+                    .call(function(c) {
+                        c.append("rect")
+                            .attr('x', d => d.x0)
+                            .attr('y', d => d.y0)
+                            .attr('width', d => d.x1 - d.x0)
+                            .attr('height', d => d.y1 - d.y0)
+                            .style("fill", d => color(d.data.role));
+                        c.append("text")
+                            .attr("x", d => d.x0 + (d.x1 - d.x0) / 2)
+                            .attr("y", d => d.y0 + (d.y1 - d.y0) / 2)
+                            .attr("dy", 4)
+                            .attr("text-anchor", "middle")
+                            .style("fill", "#fff")
+                            .text(function(d) {
+                                if (d.x1 - d.x0 > 40 && d.y1 - d.y0 > 10) {
+                                    return d.data.label;
+                                } else {
+                                    return '';
+                                }
+                            });
+                    });
+
+        // Add x-axis ticks.
+        const xtick = svg.selectAll(".x")
+            .data(x.ticks(width > 480 ? 10 : width > 240 ? 5 : 2))
+            .enter().append("g")
+                .attr("class", "x")
+                .attr("transform", function(d) { return "translate(" + x(d) + "," + y(1) + ")"; });
+
+        xtick.append("line")
+            .attr("y2", 6)
+            .style("stroke", "#000");
+
+        xtick.append("text")
+            .attr("y", 8)
+            .attr("text-anchor", "middle")
+            .attr("dy", ".71em")
+            .text(percent);
+
+        // Add y-axis ticks.
+        const ytick = svg.selectAll(".y")
+            .data(y.ticks(10))
+            .enter().append("g")
+                .attr("class", "y")
+                .attr("transform", function(d) { return "translate(0," + y(1 - d) + ")"; });
+
+        ytick.append("line")
+            .attr("x1", -6)
+            .style("stroke", "#000");
+
+        ytick.append("text")
+            .attr("x", -8)
+            .attr("text-anchor", "end")
+            .attr("dy", ".35em")
+            .text(percent);
+
+        // Add a group for each member type.
+        const member_types_svg = svg.selectAll(".member_types")
+            .data(root.children)
+            .enter().append("g")
+                .attr("class", "member_types")
+                .attr("transform", d => 'translate(' + d.x0 + ', -6)')
                 .call(function(c) {
-                    c.append("rect")
-                        .attr('x', d => d.x0)
-                        .attr('y', d => d.y0)
-                        .attr('width', d => d.x1 - d.x0)
-                        .attr('height', d => d.y1 - d.y0)
-                        .style("fill", d => color(d.data.role));
+                    c.append("line")
+                        .attr("x1", 0)
+                        .attr("y1", -3.7)
+                        .attr("x2", d => d.x1 - d.x0 )
+                        .attr("y2", -3.7)
+                        .style("stroke", "#000");
                     c.append("text")
-                        .attr("x", d => d.x0 + (d.x1 - d.x0) / 2)
-                        .attr("y", d => d.y0 + (d.y1 - d.y0) / 2)
-                        .attr("dy", 4)
+                        .attr("x", 0)
+                        .attr("text-anchor", "start")
+                        .text(d => (d.x1 - d.x0) > 10 ? '<' : '');
+                    c.append("text")
+                        .attr("x", d => d.x1 - d.x0 )
+                        .attr("text-anchor", "end")
+                        .text(d => (d.x1 - d.x0) > 10 ? '>' : '');
+                    c.append("text")
+                        .attr("x", d => (d.x1 - d.x0) / 2 )
                         .attr("text-anchor", "middle")
-                        .style("fill", "#fff")
-                        .text(function(d) {
-                            if (d.x1 - d.x0 > 40 && d.y1 - d.y0 > 10) {
-                                return d.data.label;
-                            } else {
-                                return '';
-                            }
-                        });
+                        .style("stroke", "#ddddd4")
+                        .style("stroke-width", 4)
+                        .style("fill", "#000")
+                        .text(d => (d.x1 - d.x0) > 40 ? texts.osm[d.data[0]] : '');
+                    c.append("text")
+                        .attr("x", d => (d.x1 - d.x0) / 2 )
+                        .attr("text-anchor", "middle")
+                        .style("fill", "#000")
+                        .text(d => (d.x1 - d.x0) > 40 ? texts.osm[d.data[0]] : '');
                 });
 
-    // Add x-axis ticks.
-    const xtick = svg.selectAll(".x")
-        .data(x.ticks(width > 480 ? 10 : width > 240 ? 5 : 2))
-        .enter().append("g")
-            .attr("class", "x")
-            .attr("transform", function(d) { return "translate(" + x(d) + "," + y(1) + ")"; });
-
-    xtick.append("line")
-        .attr("y2", 6)
-        .style("stroke", "#000");
-
-    xtick.append("text")
-        .attr("y", 8)
-        .attr("text-anchor", "middle")
-        .attr("dy", ".71em")
-        .text(percent);
-
-    // Add y-axis ticks.
-    const ytick = svg.selectAll(".y")
-        .data(y.ticks(10))
-        .enter().append("g")
-            .attr("class", "y")
-            .attr("transform", function(d) { return "translate(0," + y(1 - d) + ")"; });
-
-    ytick.append("line")
-        .attr("x1", -6)
-        .style("stroke", "#000");
-
-    ytick.append("text")
-        .attr("x", -8)
-        .attr("text-anchor", "end")
-        .attr("dy", ".35em")
-        .text(percent);
-
-    // Add a group for each member type.
-    const member_types_svg = svg.selectAll(".member_types")
-        .data(root.children)
-        .enter().append("g")
-            .attr("class", "member_types")
-            .attr("transform", d => 'translate(' + d.x0 + ', -6)')
-            .call(function(c) {
-                c.append("line")
-                    .attr("x1", 0)
-                    .attr("y1", -3.7)
-                    .attr("x2", d => d.x1 - d.x0 )
-                    .attr("y2", -3.7)
-                    .style("stroke", "#000");
-                c.append("text")
-                    .attr("x", 0)
-                    .attr("text-anchor", "start")
-                    .text(d => (d.x1 - d.x0) > 10 ? '<' : '');
-                c.append("text")
-                    .attr("x", d => d.x1 - d.x0 )
-                    .attr("text-anchor", "end")
-                    .text(d => (d.x1 - d.x0) > 10 ? '>' : '');
-                c.append("text")
-                    .attr("x", d => (d.x1 - d.x0) / 2 )
-                    .attr("text-anchor", "middle")
-                    .style("stroke", "#ddddd4")
-                    .style("stroke-width", 4)
-                    .style("fill", "#000")
-                    .text(d => (d.x1 - d.x0) > 40 ? texts.osm[d.data[0]] : '');
-                c.append("text")
-                    .attr("x", d => (d.x1 - d.x0) / 2 )
-                    .attr("text-anchor", "middle")
-                    .style("fill", "#000")
-                    .text(d => (d.x1 - d.x0) > 40 ? texts.osm[d.data[0]] : '');
-            });
-
+    }
 }
 
 function page_init() {
@@ -282,11 +308,12 @@ function page_init() {
     const rtype = h1.dataset.rtype;
     h1.innerHTML += fmt_rtype(rtype);
     set_inner_html_to('taglink', link_to_value('type', rtype));
-    init_tabs([rtype]);
 
-    fetch(build_link('/api/4/relation/roles', { sortname: 'count_all_members', sortorder: 'asc', min_fraction: 0.01, rtype: rtype })).
-        then(response => response.json()).
-        then(roles => create_role_chart(roles));
+    const chart = new ChartRoles('chart-roles', rtype);
 
-    window.addEventListener('resize', ev => create_role_chart() );
+    init_tabs([rtype], {
+        'graph': () => chart.draw()
+    });
+
+    redraw_on_resize(chart);
 }

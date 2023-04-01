@@ -49,6 +49,14 @@ function init_tooltips() {
     }
 }
 
+function redraw_on_resize(chart) {
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => chart.draw(), 250);
+    });
+}
+
 function resize_box() {
     const wrapper = document.querySelectorAll('.resize,.tabs-panel');
     if (wrapper.length == 0) {
@@ -79,10 +87,10 @@ function resize_box() {
 }
 
 function resize_grid(the_grid) {
-    if (grids[the_grid]) {
-        let grid = grids[the_grid][0].grid;
-        let oldrp = grid.getRp();
-        let rp = calculate_flexigrid_rp(jQuery(grids[current_grid][0]).parents('.resize'));
+    if (the_grid in grids) {
+        const grid = grids[the_grid][0].grid;
+        const oldrp = grid.getRp();
+        const rp = calculate_flexigrid_rp(jQuery(grids[current_grid][0]).parents('.resize'));
         if (rp != oldrp) {
             grid.newRp(rp);
             grid.fixHeight();
@@ -638,16 +646,21 @@ function create_flexigrid(domid, options) {
 }
 
 class Tabs {
-    constructor(id, tabname, params) {
-        this.id = document.getElementById(id);
-        this.params = params;
+    activateCallbacks = [];
+    element;
+    buttonBox;
+    buttons;
+    tabs;
+
+    constructor(id) {
+        this.element = document.getElementById(id);
 
         // First child is <ul> with tab buttons
-        this.buttonBox = Array.from(this.id.children)[0];
+        this.buttonBox = Array.from(this.element.children)[0];
         this.buttons = this.buttonBox.children;
 
         // Every child except the first is a tab
-        this.tabs = Array.from(this.id.children).slice(1);
+        this.tabs = Array.from(this.element.children).slice(1);
 
         this.buttonBox.dataset.left = ' ';
         this.buttonBox.dataset.right = ' ';
@@ -660,13 +673,6 @@ class Tabs {
         }
 
         resize_box();
-        //  this.resize();
-
-        if (tabname == '' || !this.get_index(tabname)) {
-            tabname = this.tabs[0].id;
-        }
-
-        this.activate(tabname);
     }
 
     resize() {
@@ -691,6 +697,10 @@ class Tabs {
         }
         this.tabs[n].style.display = null;
         window.location.hash = this.tabs[n].id;
+
+        if (n in this.activateCallbacks) {
+            this.activateCallbacks[n]();
+        }
     }
 
     get_index(tabname) {
@@ -699,13 +709,15 @@ class Tabs {
                 return n;
             }
         }
+        return 0;
+    }
+
+    on_activate(tabname, func) {
+        this.activateCallbacks[this.get_index(tabname)] = func;
     }
 
     activate(tabname) {
         this.choose(this.get_index(tabname));
-        if (tabname in create_flexigrid_for) {
-            create_flexigrid_for[tabname].apply(this, this.params);
-        }
     }
 
     click(ev) {
@@ -716,9 +728,28 @@ class Tabs {
     }
 }
 
-function init_tabs(params) {
-    tabs = new Tabs('tabs', window.location.hash.slice(1), params);
+function init_tabs(params, callbacks) {
+    tabs = new Tabs('tabs');
+
+    if (params) {
+        for (const tab in create_flexigrid_for) {
+            tabs.on_activate(tab, create_flexigrid_for[tab].bind(this, ...params));
+        }
+    } else {
+        for (const tab in create_flexigrid_for) {
+            tabs.on_activate(tab, create_flexigrid_for[tab].bind(this));
+        }
+    }
+
+    if (callbacks) {
+        for (const tab in callbacks) {
+            tabs.on_activate(tab, callbacks[tab]);
+        }
+    }
+
+    tabs.activate(window.location.hash.substring(1));
     tabs.resize();
+    return tabs;
 }
 
 function create_characters_flexigrid(string) {
