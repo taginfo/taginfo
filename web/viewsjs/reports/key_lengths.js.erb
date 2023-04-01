@@ -107,7 +107,7 @@ function page_init() {
                         t.append('text')
                             .attr('y', 16)
                             .style('text-anchor', 'middle')
-                            .text((d, i) => i == <%= max_length %> ? '>' + <%= max_length %> : i)
+                            .text((d, i) => i == <%= max_length %> ? '>=' + <%= max_length %> : i)
                     })
                     .append('line')
                         .style('stroke', 'black')
