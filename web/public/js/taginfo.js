@@ -1068,7 +1068,7 @@ class Autocomplete {
 
 /* ============================ */
 
-jQuery(document).ready(function() {
+function whenReady() {
     document.getElementById('javascriptmsg').remove();
 
     jQuery.getQueryString = (function(a) {
@@ -1117,8 +1117,8 @@ jQuery(document).ready(function() {
                 break;
             case 'f':
                 event.preventDefault();
-                for (el of document.querySelectorAll('input.qsbox')) {
-                    el.focus();
+                for (element of document.querySelectorAll('input.qsbox')) {
+                    element.focus();
                 }
                 break;
             case 'h':
@@ -1208,7 +1208,9 @@ jQuery(document).ready(function() {
     document.getElementById('search').addEventListener('keydown', function(event) {
         if (event.key == 'Tab') {
             event.preventDefault();
-            jQuery('input.qsbox:visible').focus();
+            for (element of document.querySelectorAll('input.qsbox')) {
+                element.focus();
+            }
         }
     });
 
@@ -1246,7 +1248,7 @@ jQuery(document).ready(function() {
         resize_box();
         resize_grid(current_grid);
     });
-});
+}
 
 function tomorrow() {
     let d = new Date();
@@ -1341,3 +1343,10 @@ function draw_chronology_chart(data, filter) {
 }
 
 /* ============================ */
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", whenReady);
+} else {
+    whenReady();
+}
+
