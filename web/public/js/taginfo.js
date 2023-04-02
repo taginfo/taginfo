@@ -1116,6 +1116,7 @@ jQuery(document).ready(function() {
                 window.location = (new ComparisonList()).url();
                 break;
             case 'f':
+                event.preventDefault();
                 for (el of document.querySelectorAll('input.qsbox')) {
                     el.focus();
                 }
@@ -1133,6 +1134,7 @@ jQuery(document).ready(function() {
                 window.location = build_link('/relations');
                 break;
             case 's':
+                event.preventDefault();
                 document.getElementById('search').focus();
                 break;
             case 't':
