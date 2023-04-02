@@ -89,29 +89,6 @@ var create_flexigrid_for = {
             }
         });
     },
-    tags: function(query) {
-        const q = query.split('=', 2);
-        create_flexigrid('grid-tags', {
-            url: build_link('/api/4/search/by_key_and_value', { query: query }),
-            colModel: [
-                { display: '<%= h(misc.count) %>', name: 'count_all', width: 80, sortable: true, align: 'right' },
-                { display: '<%= h(osm.key) %>', name: 'key', width: 300, sortable: true },
-                { display: '<%= h(osm.value) %>', name: 'value', width: 500, sortable: true }
-            ],
-            sortname: 'count_all',
-            sortorder: 'desc',
-            preProcess: function(data) {
-                data.rows = data.data.map(function(row) {
-                    return { 'cell': [
-                        fmt_with_ts(row.count_all),
-                        link_to_key_with_highlight(row.key, q[0]),
-                        link_to_value_with_highlight(row.key, row.value, q[1])
-                    ] };
-                });
-                return data;
-            }
-        });
-    },
     fulltext: function(query) {
         create_flexigrid('grid-fulltext', {
             url: build_link('/api/4/search/by_keyword', { query: query }),
