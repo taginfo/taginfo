@@ -602,11 +602,12 @@ const flexigrid_defaults = {
         // Set up keyboard functions for search box in table headers
         for (let el of document.querySelectorAll('input.qsbox')) {
             el.addEventListener('keydown', function(ev) {
-                if (ev.which == 27) { // esc
+                if (ev.key == 'Escape') {
                     ev.preventDefault();
                     this.blur();
+                    return;
                 }
-                if (ev.which == 9) { // tab
+                if (ev.key == 'Tab') {
                     ev.preventDefault();
                     document.getElementById('search').focus();
                 }
@@ -1110,34 +1111,34 @@ jQuery(document).ready(function() {
             return;
         }
 
-        switch (event.which) {
-            case 99: // c
+        switch (event.key) {
+            case 'c':
                 window.location = (new ComparisonList()).url();
                 break;
-            case 102: // f
+            case 'f':
                 for (el of document.querySelectorAll('input.qsbox')) {
                     el.focus();
                 }
                 break;
-            case 104: // h
+            case 'h':
                 window.location = build_link('/');
                 break;
-            case 107: // k
+            case 'k':
                 window.location = build_link('/keys');
                 break;
-            case 112: // p
+            case 'p':
                 window.location = build_link('/projects');
                 break;
-            case 114: // r
+            case 'r':
                 window.location = build_link('/relations');
                 break;
-            case 115: // s
+            case 's':
                 document.getElementById('search').focus();
                 break;
-            case 116: // t
+            case 't':
                 window.location = build_link('/tags');
                 break;
-            case 120: // x
+            case 'x':
                 window.location = build_link('/reports');
                 break;
         }
@@ -1152,36 +1153,36 @@ jQuery(document).ready(function() {
             return;
         }
 
-        switch (event.which) {
-            case 36: // home
+        switch (event.key) {
+            case 'Home':
                 event.preventDefault();
                 jQuery('div.pFirst:visible').click();
                 break;
-            case 33: // page up
+            case 'PageUp':
                 event.preventDefault();
                 jQuery('div.pPrev:visible').click();
                 break;
-            case 34: // page down
+            case 'PageDown':
                 event.preventDefault();
                 jQuery('div.pNext:visible').click();
                 break;
-            case 35: // end
+            case 'End':
                 event.preventDefault();
                 jQuery('div.pLast:visible').click();
                 break;
-            case 37: // arrow left
+            case 'ArrowLeft':
                 event.preventDefault();
                 up();
                 break;
-            case 38: // arrow up
+            case 'ArrowUp':
                 event.preventDefault();
                 table_up();
                 break;
-            case 39: // arrow right
+            case 'ArrowRight':
                 event.preventDefault();
                 table_right();
                 break;
-            case 40: // arrow down
+            case 'ArrowDown':
                 event.preventDefault();
                 table_down();
                 break;
@@ -1189,7 +1190,7 @@ jQuery(document).ready(function() {
     });
 
     document.addEventListener('keydown', function(event) {
-        if (event.target == document.body && event.which == 9) {
+        if (event.target == document.body && event.key == 'Tab') {
             event.preventDefault();
             document.getElementById('search').focus();
         }
@@ -1199,7 +1200,6 @@ jQuery(document).ready(function() {
         if (event.key == 'Escape') {
             event.preventDefault();
             this.blur();
-            return;
         }
     });
 
