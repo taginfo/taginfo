@@ -1071,16 +1071,6 @@ class Autocomplete {
 function whenReady() {
     document.getElementById('javascriptmsg').remove();
 
-    jQuery.getQueryString = (function(a) {
-        if (a == "") return {};
-        let b = {};
-        for (var i = 0; i < a.length; i++) {
-            const p = a[i].split('=');
-            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-        }
-        return b;
-    })(window.location.search.substr(1).split('&'));
-
     resize_box();
 
     if (typeof page_init === 'function') {
