@@ -1195,12 +1195,16 @@ jQuery(document).ready(function() {
         }
     });
 
-    document.getElementById('search').addEventListener('keydown', function(event) {
-        if (event.which == 27) { // esc
+    document.getElementById('search').addEventListener('keyup', function(event) {
+        if (event.key == 'Escape') {
             event.preventDefault();
             this.blur();
+            return;
         }
-        if (event.which == 9) { // tab
+    });
+
+    document.getElementById('search').addEventListener('keydown', function(event) {
+        if (event.key == 'Tab') {
             event.preventDefault();
             jQuery('input.qsbox:visible').focus();
         }
