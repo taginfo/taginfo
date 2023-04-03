@@ -28,16 +28,6 @@ var taginfo_taglist = (function(){
         return 'https://taginfo.openstreetmap.org/' + path;
     }
 
-    function taginfo_key_link(key) {
-        return link_to(url_for_taginfo('keys/?') +
-                       jQuery.param({ 'key': key }), key);
-    }
-
-    function taginfo_tag_link(key, value) {
-        return link_to(url_for_taginfo('tags/?') +
-                       jQuery.param({ 'key': key, 'value': value }), value);
-    }
-
     function type_image(type) {
         return '<img src="' +
                  url_for_taginfo('img/types/' + type + '.svg') +
@@ -331,16 +321,19 @@ var taginfo_taglist = (function(){
         }
 
         if (tags.match(/=/)) {
-            url += 'tags=' + encodeURIComponent(tags);
+            url += 'tags=';
         } else {
-            url += 'key=' + encodeURIComponent(tags);
+            url += 'key=';
         }
+        url += encodeURIComponent(tags);
 
         fetch(url).
             then(response => response.json()).
             then(function(json) {
-                element.html(create_table(json.data, options));
-                jQuery("td a img", element).parent().parent().css("text-align", "center");
+                element.innerHTML = create_table(json.data, options);
+                for (const img of element.querySelectorAll('td a img')) {
+                    img.parentNode.parentNode.style.textAlign = 'center';
+                }
         });
     }
 
@@ -348,26 +341,25 @@ var taginfo_taglist = (function(){
 
         show_table: function(element, tags, options) {
             if (typeof(element) === 'string') {
-                element = jQuery(element);
+                element = document.getElementById(element);
             }
             insert_table(element, tags, options);
         },
 
         convert_to_taglist: function(elements) {
             if (typeof(elements) === 'string') {
-                elements = jQuery(elements);
+                elements = document.querySelectorAll(elements);
             }
-            elements.each(function() {
-                var element = jQuery(this),
-                    tags = element.data("taginfo-taglist-tags"),
-                    options = element.data("taginfo-taglist-options");
+            for (const element of elements) {
+                const tags = element.dataset.taginfoTaglistTags;
+                let options = JSON.parse(element.dataset.taginfoTaglistOptions);
 
                 if (typeof(options) !== 'object') {
                     options = {};
                 }
 
                 insert_table(element, tags, options);
-            });
+            }
         }
 
     };
