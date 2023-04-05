@@ -1,24 +1,24 @@
 # web/lib/reports.rb
 class Report
 
-    @@reports = Array.new
+    @@reports = []
 
     attr_reader :title, :sources
 
     def self.each
-        @@reports.sort_by{ |report| report.title }.each do |report|
+        @@reports.sort_by(&:title).each do |report|
             yield report
         end
     end
 
     def self.each_visible
-        @@reports.select{ |report| report.visible? }.sort_by{ |report| report.title }.each do |report|
+        @@reports.select(&:visible?).sort_by(&:title).each do |report|
             yield report
         end
     end
 
     def self.each_visible_with_index
-        @@reports.select{ |report| report.visible? }.sort_by{ |report| report.title }.each_with_index do |report, idx|
+        @@reports.select(&:visible?).sort_by(&:title).each_with_index do |report, idx|
             yield report, idx
         end
     end
@@ -26,15 +26,15 @@ class Report
     def initialize(title, *sources)
         @@reports << self
         @title = title
-        @sources = Hash.new
-        @visible = sources.size > 0
+        @sources = {}
+        @visible = !sources.empty?
         sources.each do |id|
             @sources[id] = 1
         end
     end
 
     def uses_source?(id)
-        sources.has_key? id
+        sources.key?(id)
     end
 
     def name
@@ -58,9 +58,8 @@ Report.new 'Key lengths', :db
 Report.new 'Language comparison table for keys in the wiki', :wiki
 Report.new 'Languages', :wiki
 Report.new 'Wiki pages about non-existing keys', :db, :wiki
-Report.new 'Name tags' #disabled
+Report.new 'Name tags' # disabled
 Report.new 'Similar keys', :db
 Report.new 'Historic development', :db
 Report.new 'Wiki images', :wiki
-#Report.new 'Wiki problems', :wiki
-
+# Report.new 'Wiki problems', :wiki

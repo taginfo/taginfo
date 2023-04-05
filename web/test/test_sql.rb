@@ -22,16 +22,12 @@ class TestSql < Test::Unit::TestCase
 
     def test_order_by_simple
         assert_kind_of SQL::Select, @select
-        @select.order_by(:foo, 'ASC') do |o|
-            o.foo
-        end
+        @select.order_by(:foo, 'ASC', &:foo)
         assert_equal 'test ORDER BY foo ASC', @select.build_query
     end
 
     def test_order_by_desc
-        @select.order_by(:foo, 'DESC') do |o|
-            o.foo
-        end
+        @select.order_by(:foo, 'DESC', &:foo)
         assert_equal 'test ORDER BY foo DESC', @select.build_query
     end
 
@@ -60,7 +56,7 @@ class TestSql < Test::Unit::TestCase
     end
 
     def test_order_by_array_reverse
-        @select.order_by([:bar, :foo], 'DESC') do |o|
+        @select.order_by(%i[bar foo], 'DESC') do |o|
             o.foo
             o.bar!
         end
@@ -68,7 +64,7 @@ class TestSql < Test::Unit::TestCase
     end
 
     def test_order_by_array_multiple
-        @select.order_by([:bar, :foo], 'DESC') do |o|
+        @select.order_by(%i[bar foo], 'DESC') do |o|
             o.foo 'f1'
             o.foo! :f2
             o.bar :baz
@@ -86,17 +82,13 @@ class TestSql < Test::Unit::TestCase
 
     def test_order_by_asc_or_desc
         assert_raise ArgumentError do
-            @select.order_by(:foo, 'blub') do |o|
-                o.foo
-            end
+            @select.order_by(:foo, 'blub', &:foo)
         end
     end
 
     def test_order_by_no_def
         assert_raise ArgumentError do
-            @select.order_by(:foo) do |o|
-                o.bar
-            end
+            @select.order_by(:foo, &:bar)
         end
     end
 

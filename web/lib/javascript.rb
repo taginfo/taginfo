@@ -1,12 +1,12 @@
 # web/lib/javascript.rb
 
-def javascript(url=nil, &block)
-    @javascript ||= Array.new
+def javascript(url = nil, &block)
+    @javascript ||= []
     @javascript << Javascript.new(url, &block)
 end
 
 def javascript_tags
-    @javascript.flatten.uniq.map{ |js| js.to_html }.join("\n")
+    @javascript.flatten.uniq.map(&:to_html).join("\n")
 end
 
 def javascript_for(*ids)
@@ -28,7 +28,7 @@ class Javascript
         js = []
         ids.each do |id|
             @@js_files[id].each do |file|
-                js << self.new(file)
+                js << new(file)
             end
         end
         js
@@ -46,9 +46,9 @@ class Javascript
 
     def to_html
         if @file.nil?
-            %Q{    <script type="text/javascript">\n#{ @content }\n</script>}
+            %(    <script type="text/javascript">\n#{ @content }\n</script>)
         else
-            %Q{    <script type="text/javascript" src="/js/#{ @file }.js"></script>}
+            %(    <script type="text/javascript" src="/js/#{ @file }.js"></script>)
         end
     end
 
@@ -77,10 +77,9 @@ class JQuery
             :usepager      => true,
             :useRp         => true,
             :rp            => 15,
-            :rpOptions     => [10,15,20,25,50,100],
+            :rpOptions     => [10, 15, 20, 25, 50, 100]
         }
         "jQuery('##{id}').flexigrid(" + defaults.merge(options).to_json + ");\n"
     end
 
 end
-

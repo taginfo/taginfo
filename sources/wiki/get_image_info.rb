@@ -158,7 +158,7 @@ database.transaction do |db|
                                suffix
                            ])
             end
-        rescue => e
+        rescue StandardError => e
             puts "Wiki API call error: #{e.message}"
             pp data
         end

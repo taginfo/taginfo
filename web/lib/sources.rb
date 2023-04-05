@@ -5,8 +5,8 @@ class Sources
         data_dir = taginfo_config.get('paths.data_dir', '../../data')
         download_dir = taginfo_config.get('paths.download_dir', '../../download')
 
-        @sources = Hash.new
-        db.select('SELECT * FROM sources ORDER BY no').execute().each do |source|
+        @sources = {}
+        db.select('SELECT * FROM sources ORDER BY no').execute.each do |source|
             @sources[source['id'].to_sym] = Source.new(data_dir, download_dir, source['id'], source['name'], source['data_until'], source['update_start'], source['update_end'], source['visible'].to_i == 1)
         end
         @sources.each_value do |source|
@@ -28,7 +28,7 @@ class Sources
     end
 
     def visible
-        @sources.values.select{ |source| source.visible }
+        @sources.values.select(&:visible)
     end
 
     def get(id)
@@ -61,7 +61,7 @@ class Source
     end
 
     def link_download
-        %Q{<a rel="nofollow" href="/download/#{ dbname }.bz2">#{ dbname }.bz2</a>}
+        %(<a rel="nofollow" href="/download/#{ dbname }.bz2">#{ dbname }.bz2</a>)
     end
 
 end

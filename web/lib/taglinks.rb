@@ -32,8 +32,9 @@ class TagMatch
 
     def links(value)
         if match(value)
-            return call(value).map{ |link| link.html }
+            return call(value).map(&:html)
         end
+
         []
     end
 
@@ -70,10 +71,7 @@ TAGLINKS = {
 
 def get_links(key, value)
     tm = TAGLINKS[key.to_sym]
-    if tm
-        return tm.links(value)
-    end
+    return tm.links(value) if tm
 
-    return []
+    []
 end
-

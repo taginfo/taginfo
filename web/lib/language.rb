@@ -1,7 +1,7 @@
 # web/lib/language.rb
 class Language
 
-    @@languages = Hash.new
+    @@languages = {}
 
     attr_reader :code, :english_name, :native_name
 
@@ -13,7 +13,7 @@ class Language
     end
 
     def self.[](code)
-        @@languages[code] || self.new('code' => code, 'english_name' => '(unknown)', 'native_name' => '(unknown)')
+        @@languages[code] || new('code' => code, 'english_name' => '(unknown)', 'native_name' => '(unknown)')
     end
 
     def self.each

@@ -26,8 +26,8 @@
 #
 #------------------------------------------------------------------------------
 
-v=RUBY_VERSION.split('.').map{ |x| x.to_i }
-if v[0] < 2 or (v[0] == 2 and v[1] < 4)
+v = RUBY_VERSION.split('.').map(&:to_i)
+if v[0] < 2 || (v[0] == 2 && v[1] < 4)
     STDERR.puts "You need at least Ruby 2.4 to run taginfo"
     exit(1)
 end
@@ -62,8 +62,8 @@ TAGINFO_CONFIG = TaginfoConfig.new(File.expand_path(File.dirname(__FILE__)) + '/
 
 #------------------------------------------------------------------------------
 
-ALL_SECTIONS = %w(download taginfo test)
-SECTIONS = Hash[TAGINFO_CONFIG.get('instance.sections', ALL_SECTIONS).collect { |s| [s.to_sym, s] }]
+ALL_SECTIONS = %w[download taginfo test].freeze
+SECTIONS = Hash[TAGINFO_CONFIG.get('instance.sections', ALL_SECTIONS).collect{ |s| [s.to_sym, s] }]
 
 class Taginfo < Sinatra::Base
 
@@ -91,7 +91,7 @@ class Taginfo < Sinatra::Base
 
     # make trimming \n after %> the default in erb templates
     alias_method :erb_orig, :erb
-    def erb(template, options={}, locals={})
+    def erb(template, options = {}, locals = {})
         options[:trim] = '>' unless options[:trim]
         erb_orig template, options, locals
     end
@@ -99,7 +99,7 @@ class Taginfo < Sinatra::Base
     # when do we expect the next data update
     def next_update
         # 7 hours after midnight UTC
-        ((Time.utc(Time.now.year(), Time.now.month(), Time.now.day(), 7, 0, 0) + (Time.now.hour < 7 ? 0 : 24)*60*60)-Time.now).to_i.to_i
+        ((Time.utc(Time.now.year, Time.now.month, Time.now.day, 7, 0, 0) + (Time.now.hour < 7 ? 0 : 24) * 60 * 60) - Time.now).to_i.to_i
     end
 
     before do
@@ -121,7 +121,7 @@ class Taginfo < Sinatra::Base
         @sources = Sources.new(@taginfo_config, @db)
         $WIKIPEDIA_SITES = @db.execute('SELECT prefix FROM wikipedia_sites').map{ |row| row['prefix'] }
 
-        data_until_raw = @db.select("SELECT min(data_until) FROM sources WHERE id='db'").get_first_value()
+        data_until_raw = @db.select("SELECT min(data_until) FROM sources WHERE id='db'").get_first_value
         @data_until = data_until_raw.sub(/:..$/, '')
         @data_until_m = data_until_raw.sub(' ', 'T') + 'Z'
     end
@@ -141,8 +141,8 @@ class Taginfo < Sinatra::Base
         end
         begin
             @ap = APIParameters.new(params)
-        rescue ArgumentError => ex
-            halt 412, { :error => ex.message }.to_json
+        rescue ArgumentError => e
+            halt 412, { :error => e.message }.to_json
         end
     end
 
@@ -169,7 +169,7 @@ class Taginfo < Sinatra::Base
 
     #-------------------------------------
 
-    %w(about sources).each do |page|
+    %w[about sources].each do |page|
         get '/' + page do
             @title = t.taginfo[page]
             section page
@@ -177,7 +177,7 @@ class Taginfo < Sinatra::Base
         end
     end
 
-    %w(help).each do |page|
+    %w[help].each do |page|
         get '/' + page do
             @title = t.misc.help
             section page
@@ -185,7 +185,7 @@ class Taginfo < Sinatra::Base
         end
     end
 
-    %w(keys tags relations).each do |page|
+    %w[keys tags relations].each do |page|
         get '/' + page do
             @title = t.osm[page]
             section page
@@ -197,7 +197,7 @@ class Taginfo < Sinatra::Base
 
     #-------------------------------------
 
-    get %r{/js/([a-z][a-z](-[a-zA-Z]+)?)/(.*).js} do |lang, dummy, js|
+    get %r{/js/([a-z][a-z](-[a-zA-Z]+)?)/(.*).js} do |lang, _, js|
         expires next_update
         @lang = lang
         @trans = R18n::I18n.new(lang, 'i18n')
@@ -245,7 +245,6 @@ class Taginfo < Sinatra::Base
     end
 
     # run application
-    run! if app_file == $0
+    run! if app_file == $PROGRAM_NAME
 
 end
-

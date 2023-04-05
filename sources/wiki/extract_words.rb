@@ -30,13 +30,14 @@ require 'sqlite3'
 
 #------------------------------------------------------------------------------
 
+# A list of words found in wiki pages.
 class Words
 
     def initialize
         @words = {}
     end
 
-    def add(key, value, lang, word)
+    def add(key, value, _lang, word)
         entry = [key, value]
         if @words[word]
             @words[word] << entry
@@ -84,13 +85,14 @@ end
 
 #------------------------------------------------------------------------------
 
+# Extracts words out of wiki pages and adds them to a word list.
 class WordExtractor
 
     def initialize(words)
         @words = words
     end
 
-    def interested_in(word, key, value, lang)
+    def interested_in(word, _key, _value, _lang)
         # not interested in very short words
         return false if word.size <= 2
 

@@ -2,7 +2,6 @@
 #
 # SQL database wrapper with convenience methods for query building.
 module SQL
-
     # Wrapper for a database connection.
     class Database
 
@@ -42,12 +41,12 @@ module SQL
             duration = Time.now - t1
 
             if duration > @min_duration
-                if params.size > 0
-                    p = ' params=[' + params.map{ |param| "'#{param}'" }.join(', ') + ']'
-                else
-                    p = ''
-                end
-                ($queries_log||$stderr).puts %Q{SQL duration=#{ duration.round(2) } query="#{ query };"} + p
+                p = if params.empty?
+                        ''
+                    else
+                        ' params=[' + params.map{ |param| "'#{param}'" }.join(', ') + ']'
+                    end
+                ($queries_log || $stderr).puts %(SQL duration=#{ duration.round(2) } query="#{ query };") + p
             end
 
             out
@@ -143,12 +142,7 @@ module SQL
         end
 
         def order_by(values, direction, &block)
-            if values.is_a?(Array)
-                values = values.compact
-            else
-                values = [values]
-            end
-
+            values = values.is_a?(Array) ? values.compact : [values]
             o = Order.new(values, &block)
 
             if direction != 'ASC' && direction != 'DESC'
@@ -184,7 +178,7 @@ module SQL
             self
         end
 
-        def limit(limit, offset=0)
+        def limit(limit, offset = 0)
             @limit = "LIMIT #{limit} OFFSET #{offset}"
             self
         end
@@ -201,28 +195,29 @@ module SQL
         end
 
         def execute(&block)
-            q = build_query()
+            q = build_query
             @db.execute(q, *@params, &block)
         end
 
         def get_first_row
-            q = build_query()
+            q = build_query
             @db.get_first_row(q, *@params)
         end
 
         def get_first_value
-            q = build_query()
+            q = build_query
             @db.get_first_value(q, *@params)
         end
 
         def get_first_i
-            get_first_value().to_i
+            get_first_value.to_i
         end
 
         def get_columns(*columns)
-            q = build_query()
+            q = build_query
             row = @db.get_first_row(q, *@params)
             return [nil] * columns.size if row.nil?
+
             columns.map{ |column| row[column.to_s].to_i }
         end
 
@@ -249,7 +244,7 @@ module SQL
         attr_reader :default
 
         def initialize(values, &block)
-            @allowed = Hash.new
+            @allowed = {}
             if block_given?
                 yield self
             else
@@ -260,14 +255,14 @@ module SQL
         end
 
         def _allowed(field)
-            @allowed.has_key?(field.to_s)
+            @allowed.key?(field.to_s)
         end
 
         def [](field)
             @allowed[field]
         end
 
-        def _add(field, attribute=nil)
+        def _add(field, attribute = nil)
             field = field.to_s
             @default = field unless defined? @default
             if field =~ /^(.*)!$/
@@ -278,11 +273,11 @@ module SQL
             end
             attribute = field if attribute.nil?
 
-            @allowed[field] ||= Array.new
+            @allowed[field] ||= []
             @allowed[field] << OrderElement.new(attribute.to_s, reverse)
         end
 
-        def method_missing(field, attribute=nil)
+        def method_missing(field, attribute = nil)
             _add(field, attribute)
         end
 

@@ -54,11 +54,10 @@ def what_links_to(api, title)
             bl['title'].gsub!(/\s/, '_')
             puts "#{bl['title']}\t#{title}"
         end
-        if data['query-continue']
-            blcontinue = data['query-continue']['backlinks']['blcontinue'].gsub(/\s/, '_')
-        else
-            return
-        end
+
+        return unless data['query-continue']
+
+        blcontinue = data['query-continue']['backlinks']['blcontinue'].gsub(/\s/, '_')
     end
 end
 

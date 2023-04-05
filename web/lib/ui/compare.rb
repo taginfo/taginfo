@@ -4,11 +4,9 @@ class Taginfo < Sinatra::Base
     get %r{/compare/(.*)} do |items|
         @data = []
 
-        if !items.nil?
-            items.split('/').each do |item|
-                kv = item.split('=')
-                @data << { :key => kv[0], :value => kv[1] }
-            end
+        items&.split('/')&.each do |item|
+            kv = item.split('=')
+            @data << { :key => kv[0], :value => kv[1] }
         end
 
         if params[:key].is_a?(Array)
@@ -27,7 +25,7 @@ class Taginfo < Sinatra::Base
             value = data[:value]
 
             if value.nil?
-                result = @db.select("SELECT count_all FROM db.keys").condition('key = ?', key).get_first_row()
+                result = @db.select("SELECT count_all FROM db.keys").condition('key = ?', key).get_first_row
                 if result
                     desc = get_key_description(key)
                     data[:desc]            = h(desc[0])
@@ -56,4 +54,3 @@ class Taginfo < Sinatra::Base
     end
 
 end
-
