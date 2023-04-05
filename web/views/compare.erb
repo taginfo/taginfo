@@ -1,10 +1,11 @@
 <% @css = <<"CSS"
 .comparison {
     display: grid;
-    grid-template-rows: repeat(6, auto);
     grid-auto-flow: column;
+    grid-template-rows: repeat(6, auto);
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 1px 10px;
+    margin-bottom: 20px;
 }
 
 .comparison a.close {
@@ -46,6 +47,12 @@
 
 .comparison > div.map {
     border-radius: 0 0 10px 10px;
+    height: 100%;
+}
+
+.comparison > div.map img.map {
+    position: relative;
+    width: auto;
 }
 
 .comparison > div.map div {
