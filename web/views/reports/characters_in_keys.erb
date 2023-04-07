@@ -50,13 +50,13 @@ categories = [
         </table>
     </div>
 <% categories.map{ |c| c[:name] }.each do |category| %>
-    <div id="<%= category %>" class="resize">
+    <div id="<%= category %>">
         <h2><%= h(t.reports.characters_in_keys[category].title) %></h2>
         <div class="boxpre">
             <%= t.reports.characters_in_keys[category].intro %>
         </div>
-        <table id="grid-<%= category %>">
-        </table>
+        <div id="grid-<%= category %>">
+        </div>
     </div>
 <% end %>
 </div>

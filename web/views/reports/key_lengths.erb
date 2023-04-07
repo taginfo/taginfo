@@ -9,10 +9,10 @@
         <li><a href="#keys"><%= h(t.osm.keys) %></a></li>
         <li><a href="#histogram"><%= h(t.reports.key_lengths.histogram.name) %></a></li>
     </ul>
-    <div id="keys" class="resize">
+    <div id="keys">
         <h2><%= h(t.osm.keys) %></h2>
-        <table id="grid-keys">
-        </table>
+        <div id="grid-keys">
+        </div>
     </div>
     <div id="histogram">
         <h2><%= h(t.reports.key_lengths.histogram.name) %></h2>

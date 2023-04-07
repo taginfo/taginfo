@@ -4,12 +4,12 @@
  %>
 function page_init() {
     create_flexigrid('grid-relations', {
-        url: build_link('/api/4/relations/all'),
+        url: '/api/4/relations/all',
         colModel: [
             { display: '<%= h(osm.relation_type) %>', name: 'rtype', width: 220, sortable: true },
-            { display: '<span title="<%= h(page.relations_of_type_tooltip) %>"><%= h(osm.relations) %></span>', name: 'count', width: 250, sortable: true, align: 'center' },
+            { display: '<%= h(osm.relations) %>', name: 'count', width: 250, sortable: true, align: 'center', title: '<%= h(page.relations_of_type_tooltip) %>' },
             { display: '<%= h(osm.tag) %>', name: 'tag', width: 250, sortable: false },
-            { display: '<span title="<%= h(page.prevalent_roles_tooltip) %>"><%= h(page.prevalent_roles) %></span>', name: 'prevalent_roles', width: 550, sortable: false }
+            { display: '<%= h(page.prevalent_roles) %>', name: 'prevalent_roles', width: 550, sortable: false, title: '<%= h(page.prevalent_roles_tooltip) %>' }
         ],
         searchitems: [
             { display: '<%= h(osm.relation_type) %>', name: 'rtype' }

@@ -16,14 +16,12 @@ function page_init() {
     var lang_to_idx = {
         <%= @languages_lookup %>
     };
-    var rp = calculate_flexigrid_rp(jQuery('div.box')) - 1;
-    current_grid = 'grid-keys';
-    grids[current_grid] = jQuery('#grid-keys').flexigrid(jQuery.extend({}, flexigrid_defaults, texts.flexigrid, {
-        url: build_link('/api/4/keys/wiki_pages'),
+    create_flexigrid('grid-keys', {
+        url: '/api/4/keys/wiki_pages',
         colModel: [
             { display: '<%= h(osm.key) %>', name: 'key', width: 160, sortable: true },
             <% @languages.each do |lang| %>
-            { display: '<span title="<%= ::Language[lang].native_name %>" class="badge lang" style="padding: 0"><%= h(lang) %></span>', name: '<%= h(lang) %>', align: 'center', width: <%= lang.length * 9 + 1 %>, sortable: false },
+            { display: '<span class="badge lang" style="padding: 0"><%= h(lang) %></span>', name: '<%= h(lang) %>', align: 'center', width: <%= lang.length * 9 + 1 %>, sortable: false, title: '<%= ::Language[lang].native_name %>' },
             <% end %>
         ],
         searchitems: [
@@ -31,11 +29,6 @@ function page_init() {
         ],
         sortname: 'key',
         sortorder: 'asc',
-        showTableToggleBtn: false,
-        rp: rp,
-        onSuccess: function(grid) {
-            grid.fixHeight();
-        },
         preProcess: function(data) {
             return {
                 total: data.total,
@@ -50,5 +43,5 @@ function page_init() {
                 })
             };
         }
-    }));
+    });
 }

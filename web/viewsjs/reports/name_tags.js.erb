@@ -9,11 +9,11 @@ function tt(text, c, title) {
 var create_flexigrid_for = {
     "overview": function() {
         create_flexigrid('grid-name', {
-            url: build_link('/api/0/keys/name'),
+            url: '/api/0/keys/name',
             colModel: [
                 { display: '<%= h(osm.key) %>', name: 'key', width: 250, sortable: true },
                 { display: '<%= h(osm.objects) %>', name: 'count_all', width: 100, sortable: true, align: 'right' },
-                { display: '<span title="<%= h(misc.in_wiki_tooltip) %>">Wiki</span>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
+                { display: 'Wiki', name: 'in_wiki', width: 20, sortable: true, align: 'center', title: '<%= h(misc.in_wiki_tooltip) %>' },
                 { display: 'Prefix', name: 'prefix', width: 100, sortable: true },
                 { display: 'Type', name: 'type', width: 100, sortable: true },
                 { display: 'Langtag', name: 'langtag', width: 100, sortable: true },
@@ -49,7 +49,8 @@ var create_flexigrid_for = {
     "bcp47": function() {
         const filter_type = document.getElementById('subtag-filter').value;
         create_flexigrid('grid-bcp47-subtags', {
-            url: build_link('/api/0/langtags?filter=' + encodeURIComponent(filter_type)),
+            url: '/api/0/langtags',
+            params: { filter: filter_type },
             colModel: [
                 { display: 'Type',        name: 'type',        width:  80, sortable: false },
                 { display: 'Subtag',      name: 'subtag',      width:  80, sortable: true },

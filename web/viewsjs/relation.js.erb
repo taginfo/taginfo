@@ -7,7 +7,8 @@
 var create_flexigrid_for = {
     overview: function(rtype) {
         create_flexigrid('grid-overview', {
-            url: build_link('/api/4/relation/stats', { rtype: rtype }),
+            url: '/api/4/relation/stats',
+            params: { rtype: rtype },
             colModel: [
                 { display: '<%= h(page.overview.member_type) %>', name: 'type', width: 100, sortable: true },
                 { display: '<%= h(page.overview.member_count) %>', name: 'count', width: 260, sortable: true, align: 'right' }
@@ -30,13 +31,14 @@ var create_flexigrid_for = {
     },
     roles: function(rtype) {
         create_flexigrid('grid-roles', {
-            url: build_link('/api/4/relation/roles', { rtype: rtype }),
+            url: '/api/4/relation/roles',
+            params: { rtype: rtype },
             colModel: [
                 { display: '<%= h(osm.relation_member_role) %>', name: 'role', width: 250, sortable: true },
-                { display: '<span title="<%= h(page.roles.objects_tooltip) %>"><img src="/img/types/all.svg" width="16" height="16" alt=""/> <%= h(osm.relation_members) %></span>', name: 'count_all_members', width: 250, sortable: true, align: 'center' },
-                { display: '<span title="<%= h(page.roles.nodes_tooltip) %>"><img src="/img/types/node.svg" width="16" height="16" alt=""/> <%= h(osm.relation_member_nodes) %></span>', name: 'count_node_members', width: 250, sortable: true, align: 'center' },
-                { display: '<span title="<%= h(page.roles.ways_tooltip) %>"><img src="/img/types/way.svg" width="16" height="16" alt=""/> <%= h(osm.relation_member_ways) %></span>', name: 'count_way_members', width: 250, sortable: true, align: 'center' },
-                { display: '<span title="<%= h(page.roles.relations_tooltip) %>"><img src="/img/types/relation.svg" width="16" height="16" alt=""/> <%= h(osm.relation_member_relations) %></span>', name: 'count_relation_members', width: 250, sortable: true, align: 'center' },
+                { display: '<img src="/img/types/all.svg" width="16" height="16" alt=""/> <%= h(osm.relation_members) %>', name: 'count_all_members', width: 250, sortable: true, align: 'center', title: '<%= h(page.roles.objects_tooltip) %>' },
+                { display: '<img src="/img/types/node.svg" width="16" height="16" alt=""/> <%= h(osm.relation_member_nodes) %>', name: 'count_node_members', width: 250, sortable: true, align: 'center', title: '<%= h(page.roles.nodes_tooltip) %>' },
+                { display: '<img src="/img/types/way.svg" width="16" height="16" alt=""/> <%= h(osm.relation_member_ways) %>', name: 'count_way_members', width: 250, sortable: true, align: 'center', title: '<%= h(page.roles.ways_tooltip) %>' },
+                { display: '<img src="/img/types/relation.svg" width="16" height="16" alt=""/> <%= h(osm.relation_member_relations) %>', name: 'count_relation_members', width: 250, sortable: true, align: 'center', title: '<%= h(page.roles.relations_tooltip) %>' },
             ],
             searchitems: [
                 { display: '<%= h(osm.relation_member_role) %>', name: 'role' }
@@ -59,15 +61,14 @@ var create_flexigrid_for = {
     },
     wiki: function(rtype) {
         create_flexigrid('grid-wiki', {
-            url: build_link('/api/4/relation/wiki_pages', { rtype: rtype }),
+            url: '/api/4/relation/wiki_pages',
+            params: { rtype: rtype },
             colModel: [
                 { display: '<%= h(misc.language) %>', name: 'lang', width: 150, sortable: false },
                 { display: '<%= h(page.wiki_pages.wiki_page) %>', name: 'title', width: 160, sortable: false, align: 'right' },
                 { display: '<%= h(misc.description) %>', name: 'description', width: 500, sortable: false },
                 { display: '<%= h(misc.image) %>', name: 'image', width: 300, sortable: false }
             ],
-            usepager: false,
-            useRp: false,
             preProcess: function(data) {
                 return {
                     total: data.total,
@@ -86,7 +87,8 @@ var create_flexigrid_for = {
     },
     projects: function(rtype) {
         create_flexigrid('grid-projects', {
-            url: build_link('/api/4/relation/projects', { rtype: rtype }),
+            url: '/api/4/relation/projects',
+            params: { rtype: rtype },
             colModel: [
                 { display: '<%= h(taginfo.project) %>', name: 'project_name', width: 280, sortable: true },
                 { display: '<%= h(page.projects.description) %>', name: 'description', width: 600, sortable: false, align: 'left' }

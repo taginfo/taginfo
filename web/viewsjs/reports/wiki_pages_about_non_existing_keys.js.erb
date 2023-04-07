@@ -5,7 +5,8 @@
 function page_init() {
     up = function() { window.location = build_link('/reports'); };
     create_flexigrid('grid-keys', {
-        url: build_link('/api/4/keys/all?filter=in_wiki,not_in_db&include=wikipages'),
+        url: '/api/4/keys/all',
+        params: { filter: 'in_wiki,not_in_db', include: 'wikipages' },
         colModel: [
             { display: '<%= h(osm.key) %>', name: 'key', width: 250, sortable: true, align: 'left' },
             { display: '<%= h(page.wiki_pages) %>', name: 'wikipages', width: 600, sortable: false, align: 'left' }

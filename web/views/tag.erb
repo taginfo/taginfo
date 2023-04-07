@@ -58,8 +58,8 @@
         </div>
 <% end %>
         <h2><%= h(t.taginfo.overview) %></h2>
-        <table id="grid-overview">
-        </table>
+        <div id="grid-overview">
+        </div>
 <% if @has_rtype_link or @links.size > 0 %>
         <h2><%= h(t.taginfo.links) %></h2>
 <% end %>
@@ -70,13 +70,13 @@
         <p><%= link %></p>
 <% end %>
     </div>
-    <div id="combinations" class="resize">
+    <div id="combinations">
         <div class="boxpre">
             <h2><%= h(t.pages.tag.combinations.title) %></h2>
             <p><%= h(t.pages.tag.combinations.description) %></p>
         </div>
-        <table id="grid-combinations">
-        </table>
+        <div id="grid-combinations">
+        </div>
     </div>
 <% if @sources.get(:chronology) %>
     <div id="chronology">
@@ -123,21 +123,21 @@
     <div id="wiki">
         <h2><%= h(t.pages.tag.wiki_pages.title) %></h2>
         <% if @wiki_count > 0 %>
-            <table id="grid-wiki">
-            </table>
+            <div id="grid-wiki">
+            </div>
         <% else %>
             <p class="empty"><%= h(t.pages.tag.wiki_pages.none_found) %> <%= @wiki_count_key > 0 ? t.pages.tag.wiki_pages.suggest_key_wiki_page('<span id="keylink"></span>') : '' %></p>
             <p><a class="extlink" target="_blank" rel="nofollow" href="//wiki.openstreetmap.org/w/index.php?action=edit&title=Tag:<%= escape(@tag) %>"><%= h(t.pages.tag.wiki_pages.create) %></a></p>
         <% end %>
     </div>
-    <div id="projects" class="resize">
+    <div id="projects">
         <h2><%= h(t.pages.tag.projects.title) %></h2>
-        <table id="grid-projects">
-        </table>
+        <div id="grid-projects">
+        </div>
     </div>
     <div id="characters">
         <h2><%= h(t.pages.tag.characters.title) %></h2>
-        <table id="grid-characters">
-        </table>
+        <div id="grid-characters">
+        </div>
     </div>
 </div>

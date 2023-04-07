@@ -6,7 +6,7 @@
 function page_init() {
     up = function() { window.location = build_link('/reports'); };
     create_flexigrid('grid-problems', {
-        url: build_link('/api/0/wiki/problems'),
+        url: '/api/0/wiki/problems',
         colModel: [
             { display: '<%= h(page.wiki_page) %>', name: 'title', width: 280, sortable: true, align: 'left' },
             { display: '<%= h(page.location) %>', name: 'location', width: 140, sortable: true, align: 'left' },

@@ -109,7 +109,6 @@ class Taginfo < Sinatra::Base
             params[:locale] = request.cookies['taginfo_locale']
         end
 
-        javascript_for(:common)
         javascript_for(:taginfo)
         javascript r18n.locale.code + '/texts'
 
@@ -189,7 +188,6 @@ class Taginfo < Sinatra::Base
         get '/' + page do
             @title = t.osm[page]
             section page
-            javascript_for(:flexigrid)
             javascript "#{ r18n.locale.code }/#{ page }"
             erb page.to_sym
         end

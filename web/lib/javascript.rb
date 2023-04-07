@@ -16,10 +16,7 @@ end
 class Javascript
 
     @@js_files = {
-        :common    => [ 'jquery-1.11.1.min' ],
-#        :common    => [ 'common' ],
         :taginfo   => [ 'taginfo' ],
-        :flexigrid => [ 'jquery-migrate-1.2.1.min', 'flexigrid-minified' ],
         :d3        => [ 'd3/d3.min' ],
         :d3_cloud  => [ 'd3/d3.layout.cloud' ],
     }
@@ -50,36 +47,6 @@ class Javascript
         else
             %(    <script type="text/javascript" src="/js/#{ @file }.js"></script>)
         end
-    end
-
-end
-
-class JQuery
-
-    # "include" the convenience methods from R18n::Helpers.
-    # Uses extend instead of include, because we want this
-    # to work not with instances of JQuery but they should
-    # show up as JQuery class methods.
-    extend R18n::Helpers
-
-    def self.flexigrid(id, options)
-        defaults = {
-            :method        => 'GET',
-            :dataType      => 'json',
-            :pagetext      => t.flexigrid.pagetext,
-            :pagestat      => t.flexigrid.pagestat,
-            :outof         => t.flexigrid.outof,
-            :findtext      => t.flexigrid.findtext,
-            :procmsg       => t.flexigrid.procmsg,
-            :nomsg         => t.flexigrid.nomsg,
-            :errormsg      => t.flexigrid.errormsg,
-            :showToggleBtn => false,
-            :usepager      => true,
-            :useRp         => true,
-            :rp            => 15,
-            :rpOptions     => [10, 15, 20, 25, 50, 100]
-        }
-        "jQuery('##{id}').flexigrid(" + defaults.merge(options).to_json + ");\n"
     end
 
 end

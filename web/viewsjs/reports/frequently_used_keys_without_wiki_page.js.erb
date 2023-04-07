@@ -5,14 +5,15 @@
  %>
 function create_flexigrid_with_option(english) {
     create_flexigrid('grid-keys', {
-        url: build_link('/api/4/keys/without_wiki_page?english=' + english),
+        url: '/api/4/keys/without_wiki_page',
+        params: { english: english },
         colModel: [
             { display: '<%= h(page.table.create_wiki_page) %>', name: 'create_wiki_page', width: 200, sortable: false },
             { display: '<%= h(osm.key) %>', name: 'key', width: 180, sortable: true },
-            { display: '<span title="<%= h(misc.objects_tooltip) %>"><img src="/img/types/all.svg" width="16" height="16" alt=""/> <%= h(osm.objects) %></span>', name: 'count_all', width: 70, sortable: true, align: 'right' },
+            { display: '<img src="/img/types/all.svg" width="16" height="16" alt=""/> <%= h(osm.objects) %>', name: 'count_all', width: 70, sortable: true, align: 'right', title: '<%= h(misc.objects_tooltip) %>' },
             { display: '<%= h(osm.users) %>', name: 'users_all', width: 44, sortable: true, align: 'right' },
-            { display: '<span title="<%= h(misc.values_tooltip) %>"><%= h(osm.values) %></span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
-            { display: '<span title="<%= h(misc.prevalent_values_tooltip) %>"><%= h(misc.prevalent_values) %></span>', name: 'prevalent_values', width: 500, sortable: true }
+            { display: '<%= h(osm.values) %>', name: 'values_all', width: 70, sortable: true, align: 'right', title: '<%= h(misc.values_tooltip) %>' },
+            { display: '<%= h(misc.prevalent_values) %>', name: 'prevalent_values', width: 500, sortable: true, title: '<%= h(misc.prevalent_values_tooltip) %>' }
         ],
         searchitems: [
             { display: '<%= h(osm.key) %>', name: 'key' }
@@ -43,8 +44,7 @@ function page_init() {
     up = function() { window.location = build_link('/reports'); };
     create_flexigrid_with_option(english());
     document.getElementById('english').addEventListener('click', () => {
-        jQuery('#grid-keys').flexOptions({
-            url: '/api/4/keys/without_wiki_page?english=' + english()
-        }).flexReload();
+        grids['grid-keys'].config.params.english = english();
+        grids['grid-keys'].load();
     });
 }

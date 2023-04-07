@@ -6,14 +6,15 @@
 var create_flexigrid_for = {
     keys: function() {
         create_flexigrid('grid-keys', {
-            url: build_link('/api/4/keys/all?include=prevalent_values'),
+            url: '/api/4/keys/all',
+            params: { include: 'prevalent_values' },
             colModel: [
                 { display: '<%= h(misc.length) %>', name: 'length', width: 60, sortable: true, align: 'right' },
                 { display: '<%= h(osm.key) %>', name: 'key', width: 180, sortable: true },
-                { display: '<span title="<%= h(misc.objects_tooltip) %>"><img src="/img/types/all.svg" width="16" height="16" alt=""/> <%= h(osm.objects) %></span>', name: 'count_all', width: 200, sortable: true, align: 'center' },
-                { display: '<span title="<%= h(misc.in_wiki_tooltip) %>">Wiki</span>', name: 'in_wiki', width: 20, sortable: true, align: 'center' },
-                { display: '<span title="<%= h(misc.values_tooltip) %>"><%= h(osm.values) %></span>', name: 'values_all', width: 70, sortable: true, align: 'right' },
-                { display: '<span title="<%= h(misc.prevalent_values_tooltip) %>"><%= h(misc.prevalent_values) %></span>', name: 'prevalent_values', width: 550, sortable: true }
+                { display: '<img src="/img/types/all.svg" width="16" height="16" alt=""/> <%= h(osm.objects) %>', name: 'count_all', width: 200, sortable: true, align: 'center', title: '<%= h(misc.objects_tooltip) %>' },
+                { display: 'Wiki', name: 'in_wiki', width: 20, sortable: true, align: 'center', title: '<%= h(misc.in_wiki_tooltip) %>' },
+                { display: '<%= h(osm.values) %>', name: 'values_all', width: 70, sortable: true, align: 'right', title: '<%= h(misc.values_tooltip) %>' },
+                { display: '<%= h(misc.prevalent_values) %>', name: 'prevalent_values', width: 550, sortable: true, title: '<%= h(misc.prevalent_values_tooltip) %>' }
             ],
             searchitems: [
                 { display: '<%= h(osm.key) %>', name: 'key' }
@@ -54,7 +55,7 @@ function page_init() {
         bar_step = bar_width + bar_skip,
         data = <%= hist.to_json %>,
         w = bar_step * data.length,
-        h = Math.min(400, $('#tabs').height() - 160),
+        h = Math.min(400, document.getElementById('tabs').getBoundingClientRect().height - 160),
         margin = { top: 10, right: 15, bottom: 60, left: 60 };
 
     var scale_y = d3.scaleLinear()

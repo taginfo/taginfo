@@ -33,15 +33,15 @@
         </div>
 <% end %>
         <h2><%= h(t.pages.relation.overview.title) %></h2>
-        <table id="grid-overview">
-        </table>
+        <div id="grid-overview">
+        </div>
         <p><%= h(t.pages.relation.overview.see_also) %>: type=<span id="taglink"></span></p>
     </div>
-    <div id="roles" class="resize">
+    <div id="roles">
         <h2><%= h(t.pages.relation.roles.title) %></h2>
 <% if @count_relation_roles > 0 %>
-        <table id="grid-roles">
-        </table>
+        <div id="grid-roles">
+        </div>
 <% else %>
         <p class="empty"><%= h(t.pages.relation.roles.no_roles_info) %></p>
 <% end %>
@@ -58,21 +58,21 @@
     <div id="wiki">
         <h2><%= h(t.pages.relation.wiki_pages.title) %></h2>
         <% if @wiki_count > 0 %>
-            <table id="grid-wiki">
-            </table>
+            <div id="grid-wiki">
+            </div>
         <% else %>
             <p class="empty"><%= h(t.pages.relation.wiki_pages.none_found) %></p>
             <p><a class="extlink" target="_blank" rel="nofollow" href="//wiki.openstreetmap.org/w/index.php?action=edit&title=Relation:<%= @rtype_uri %>"><%= h(t.pages.relation.wiki_pages.create) %></a></p>
         <% end %>
     </div>
-    <div id="projects" class="resize">
+    <div id="projects">
         <h2><%= h(t.pages.relation.projects.title) %></h2>
-        <table id="grid-projects">
-        </table>
+        <div id="grid-projects">
+        </div>
     </div>
     <div id="characters">
         <h2><%= h(t.pages.relation.characters.title) %></h2>
-        <table id="grid-characters">
-        </table>
+        <div id="grid-characters">
+        </div>
     </div>
 </div>

@@ -12,7 +12,7 @@ function init_tooltips() {
     const tooltips = document.querySelectorAll('*[data-tooltip-position]');
     const tt = document.getElementById('tooltip');
 
-    for (let tooltip of tooltips) {
+    for (const tooltip of tooltips) {
         if (tooltip.hasAttribute('title')) {
             tooltip.setAttribute('data-tooltip-text', tooltip.getAttribute('title'));
             tooltip.removeAttribute('title');
@@ -55,47 +55,6 @@ function redraw_on_resize(chart) {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => chart.draw(), 250);
     });
-}
-
-function resize_box() {
-    const wrapper = document.querySelectorAll('.resize,.tabs-panel');
-    if (wrapper.length == 0) {
-        return;
-    }
-
-    let height= window.visualViewport.height;
-    height -= (wrapper[0].getBoundingClientRect().top + window.scrollY);
-    height -= document.querySelector('footer').getBoundingClientRect().height;
-    height -= 46;
-
-    if (height < 440) {
-        height = 440;
-    }
-
-    height = '' + height + 'px';
-
-    for (let el of wrapper) {
-        el.style.minHeight = height;
-        if (Array.from(el.classList).includes('resize')) {
-            el.style.height = height;
-        }
-    }
-
-    if (tabs) {
-        tabs.resize();
-    }
-}
-
-function resize_grid(the_grid) {
-    if (the_grid in grids) {
-        const grid = grids[the_grid][0].grid;
-        const oldrp = grid.getRp();
-        const rp = calculate_flexigrid_rp(jQuery(grids[current_grid][0]).parents('.resize'));
-        if (rp != oldrp) {
-            grid.newRp(rp);
-            grid.fixHeight();
-        }
-    }
 }
 
 /* ============================ */
@@ -162,7 +121,7 @@ const non_printable = "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u0
 function translate(str, fn) {
     let result = '';
 
-    for (var i=0; i < str.length; i++) {
+    for (let i = 0; i < str.length; i++) {
         result += fn(str.charAt(i));
     }
 
@@ -577,31 +536,208 @@ function fmt_prevalent_value_list(key, list) {
 
 /* ============================ */
 
-const flexigrid_defaults = {
-    method        : 'GET',
-    dataType      : 'json',
-    showToggleBtn : false,
-    height        : 'auto',
-    usepager      : true,
-    useRp         : false,
-    onSuccess     : function(grid) {
-        grid.fixHeight();
+class ResizeManager {
+    timer;
+    callbacks = {};
 
-        // Set up tooltip for table header fields
-        for (let el of document.querySelectorAll('th *[title]')) {
-            el.setAttribute('data-tooltip-position', 'OnTop');
+    constructor() {
+        window.addEventListener('resize', event => {
+            clearTimeout(this.timer);
+            this.timer = setTimeout(event => this.callCallbacks(), 250);
+        });
+    }
+
+    addCallback(id, func) {
+        this.callbacks[id] = func;
+    }
+
+    callCallbacks() {
+        for (const id in this.callbacks) {
+            const element = document.getElementById(id);
+            if (element.parentNode.style.display == 'none') {
+                if (grids[id]) {
+                    grids[id].remove();
+                    delete grids[id];
+                }
+                delete this.callbacks[id];
+            } else {
+                this.callbacks[id]();
+            }
+        }
+    }
+}
+
+let resizeManager = new ResizeManager;
+
+class DynamicTableColumn {
+
+    name; // Name of this column
+    display; // HTML that will be shown in this column
+    width; // Width in pixels
+    sortable = false; // Can we sort the table by this column?
+    align = 'left'; // Header and content alignment
+    title; // Optional tooltip title
+    headerElement; // The DOM element for the header cell
+
+    constructor(config) {
+        this.name = config.name;
+        this.display = config.display;
+        this.width = config.width;
+
+        if (config.sortable) {
+            this.sortable = config.sortable;
         }
 
-        // Set up tooltip for table search field
-        for (let el of document.querySelectorAll('.sDiv input[title]')) {
-            el.setAttribute('data-tooltip-position', 'OnLeft');
+        if (config.align) {
+            this.align = config.align;
         }
 
-        init_tooltips();
+        if (config.title) {
+            this.title = config.title;
+        }
+    }
 
-        // Set up keyboard functions for search box in table headers
-        for (let el of document.querySelectorAll('input.qsbox')) {
-            el.addEventListener('keydown', function(ev) {
+    makeHeaderElement(num, max) {
+        const element = document.createElement('div');
+        element.classList.add('dt-header');
+        element.dataset.name = this.name;
+
+        element.style.gridColumnStart = num * 2 - 1;
+        element.style.textAlign = this.align;
+
+        if (this.sortable) {
+            element.style.cursor = 'pointer';
+        }
+
+        if (this.title) {
+            element.setAttribute('title', this.title);
+            element.setAttribute('data-tooltip-position', 'OnTop');
+        }
+
+        if (num < max) {
+            element.style.width = this.width + 'px';
+        } else {
+            element.style.minWidth = this.width + 'px';
+        }
+
+        element.innerHTML = this.display;
+
+        this.headerElement = element;
+        return element;
+    }
+
+    makeBodyElement(num, row, max) {
+        const element = document.createElement('div');
+        element.classList.add('dt-body');
+        element.classList.add('dt-line' + (row % 2));
+        element.classList.add('dt-col' + num);
+        element.classList.add('dt-row' + row);
+
+        element.style.textAlign = this.align;
+
+        if (num + 1 < max) {
+            element.style.width = this.width + 'px';
+        }
+
+        return element;
+    }
+
+    setWidth(width) {
+        this.width = width;
+        this.headerElement.style.width = width + 'px';
+    }
+}
+
+class DynamicTable {
+
+    element; // The div element for the whole table including the toolbar
+    config; // The original table configuration
+    toolbar; // The toolbar element
+    table; // The div element used for the table
+    queryInput; // The input element with the query
+    columns = []; // The table column definitions
+
+    usepager = true;
+    page = 1; // The page currently displayed
+    rp = 0; // The number of rows per page
+    total = 0; // The total number of rows in this table
+
+    currentRow = 0;
+
+    constructor(element, config) {
+        this.element = element;
+        this.config = config;
+
+        for (const column of this.config.colModel) {
+            this.columns.push(new DynamicTableColumn(column));
+        }
+
+        if (this.config.usepager !== undefined && !this.config.usepager) {
+            this.usepager = false;
+        }
+    }
+
+    calculateRowsPerPage() {
+        const rowHeight = 20 /*cell*/ + 2 * 2 /*cell padding*/;
+        const parentHeight = this.element.parentNode.getBoundingClientRect().height;
+        const parentPaddingHeight = 2 * 20;
+
+        let height = parentHeight - parentPaddingHeight;
+        for (const child of this.element.parentNode.children) {
+            height -= child.getBoundingClientRect().height;
+        }
+
+        return Math.max(10, Math.floor(height / rowHeight) - 2);
+    }
+
+    hasSearch() {
+        return this.config.searchitems !== undefined;
+    }
+
+    searchFor() {
+        const s = this.config.searchitems;
+        return s ? s[0].display : undefined;
+    }
+
+    initToolbar() {
+        let tools = [];
+        for (const toolClasses of ['dt-first dt-button', 'dt-prev dt-button', 'dt-page', 'dt-next dt-button', 'dt-last dt-button', 'dt-reload dt-button', 'dt-json no-print', 'dt-info', 'dt-search']) {
+            const newElement = document.createElement('div');
+            newElement.className = toolClasses;
+            tools.push(newElement);
+        }
+
+        tools[0].addEventListener('click', this.goToFirstPage.bind(this));
+        tools[1].addEventListener('click', this.goToPrevPage.bind(this));
+
+        tools[2].innerHTML = '<span class="dt-page-msg">'
+            + texts.flexigrid.pagetext
+            + ' </span><input type="text" size="4"> '
+            + texts.flexigrid.outof
+            + ' <span class="dt-page-max"></span>';
+
+        tools[2].addEventListener('change', event => {
+            event.preventDefault();
+            this.page = parseInt(event.target.value);
+            this.load();
+        });
+
+        tools[3].addEventListener('click', this.goToNextPage.bind(this));
+        tools[4].addEventListener('click', this.goToLastPage.bind(this));
+        tools[5].addEventListener('click', this.load.bind(this));
+
+        tools[6].innerHTML = '<a href="" target="_blank">JSON</a>';
+
+        if (this.hasSearch()) {
+            this.queryInput = document.createElement('input');
+            this.queryInput.className = 'qsbox';
+            this.queryInput.setAttribute('type', 'text');
+            this.queryInput.setAttribute('size', 20);
+            this.queryInput.setAttribute('name', 'q');
+            this.queryInput.setAttribute('placeholder', texts.misc.search_for + ': ' + this.searchFor());
+            this.queryInput.addEventListener('change', this.load.bind(this));
+
+            this.queryInput.addEventListener('keydown', function(ev) {
                 if (ev.key == 'Escape') {
                     ev.preventDefault();
                     this.blur();
@@ -612,38 +748,376 @@ const flexigrid_defaults = {
                     document.getElementById('search').focus();
                 }
             });
+
+            tools[8].append(this.queryInput);
         }
 
-        jQuery('div.bDiv:visible').bind('click', function(event) {
-            const row = jQuery(event.target).parents('tr');
-            jQuery('div.bDiv:visible tr').removeClass('trOver');
-            jQuery(row).addClass('trOver');
-        });
+        this.toolbar = document.createElement('div');
+        this.toolbar.classList.add('dt-toolbar');
+        this.toolbar.append(...tools);
+        this.element.append(this.toolbar);
     }
-};
 
-function calculate_flexigrid_rp(box) {
-    let height = box.innerHeight();
+    dragStart(el, num, event) {
+        event.target.setPointerCapture(event.pointerId);
+        event.preventDefault();
 
-    height -= box.children('h2').outerHeight(true);
-    height -= box.children('.boxpre').outerHeight(true);
-    height -= box.children('.pDiv').outerHeight();
-    height -= 100; // table tools and header, possibly horizontal scrollbar
+        const origWidth = this.columns[num - 1].width;
+        const x = event.clientX;
+        let dx = 0;
 
-    return Math.floor(height / 26);
+        el.onpointermove = (event) => {
+            dx = event.clientX - x;
+            const width = origWidth + dx;
+            if (width >= 10 && width <= 1000) {
+                this.columns[num - 1].setWidth(width);
+                for (const c of this.element.querySelectorAll('.dt-col' + (num - 1))) {
+                    c.style.width = width + 'px';
+                }
+            }
+        };
+
+        el.onpointerup = function(event) {
+            el.onpointermove = null;
+            el.onpointerup = null;
+        };
+    }
+
+    clear() {
+        for (const bodyElement of this.table.querySelectorAll('.dt-body,.dt-handle')) {
+            bodyElement.remove();
+        }
+    }
+
+    initHandles(num_rows) {
+        const rowEnd = 'span ' + (num_rows + 1);
+        for (let i = 1; i < this.columns.length; i++) {
+            const handle = document.createElement('div');
+            const element = document.createElement('div');
+            element.classList.add('dt-handle');
+            element.append(handle);
+            element.style.gridColumnStart = i * 2;
+            element.style.gridRowEnd = rowEnd;
+            handle.addEventListener('dragstart', () => false);
+
+            handle.addEventListener('pointerdown', this.dragStart.bind(this, element, i));
+
+            this.table.append(element);
+        }
+    }
+
+    initTable() {
+        this.table = document.createElement('div');
+        this.table.classList.add('dt-table');
+        this.table.style.gridTemplateColumns = 'repeat(' + ((this.columns.length - 1) * 2) + ', min-content) auto';
+
+        let n = 1;
+        for (const column of this.columns) {
+            const element = column.makeHeaderElement(n, this.columns.length);
+            if (column.name == this.config.sortname) {
+                element.classList.add('dt-sort-' + this.config.sortorder);
+            }
+            if (column.sortable) {
+                element.addEventListener('click', event => this.sort(event));
+            }
+            this.table.append(element);
+            n++;
+        }
+
+        if (this.usepager) {
+            this.table.addEventListener('wheel', event => {
+                if (!event.shiftKey) {
+                    return;
+                }
+                if (event.deltaY < 0) {
+                    event.preventDefault();
+                    this.goToPrevPage();
+                } else if (event.deltaY > 0) {
+                    event.preventDefault();
+                    this.goToNextPage();
+                }
+            });
+        }
+
+        this.table.addEventListener('click', event => {
+            const rowClass = Array.prototype.find.call(event.target.classList, val => val.match(/^dt-row/));
+            if (rowClass) {
+                this.currentRow = parseInt(rowClass.substring(6)) + 1;
+                this.updateCurrentRow();
+            }
+        });
+
+        this.element.append(this.table);
+    }
+
+    sort(event) {
+        const element = event.currentTarget;
+        const columnName = element.dataset.name;
+        if (this.config.sortname == columnName) {
+            if (this.config.sortorder == 'asc') {
+                this.config.sortorder = 'desc';
+                element.classList.remove('dt-sort-asc');
+            } else {
+                this.config.sortorder = 'asc';
+                element.classList.remove('dt-sort-desc');
+            }
+            element.classList.add('dt-sort-' + this.config.sortorder);
+        } else {
+            const sort_elements = element.parentNode.querySelectorAll('.dt-sort-asc,.dt-sort-desc');
+            for (const el of sort_elements) {
+                el.classList.remove('dt-sort-desc');
+                el.classList.remove('dt-sort-asc');
+            }
+            element.classList.add('dt-sort-' + this.config.sortorder);
+            this.config.sortname = columnName;
+        }
+        this.load();
+    }
+
+    setUpHTML() {
+        if (this.usepager) {
+            this.initToolbar();
+            this.rp = this.calculateRowsPerPage();
+        }
+        this.initTable();
+
+        this.element.classList.add('dynamic-table');
+    }
+
+    remove() {
+        this.element.innerHTML = '';
+    }
+
+    firstRow() {
+        return (this.page - 1) * this.rp + 1;
+    }
+
+    lastRow() {
+        return Math.min(this.page * this.rp, this.total);
+    }
+
+    updateCurrentRow() {
+        for (const element of this.table.querySelectorAll('.dt-current-row')) {
+            element.classList.remove('dt-current-row');
+        }
+
+        if (this.currentRow == 0) {
+            return;
+        }
+
+        for (const element of this.table.querySelectorAll('.dt-row' + (this.currentRow - 1))) {
+            element.classList.add('dt-current-row');
+        }
+    }
+
+    gotoPrevRow() {
+        if (this.currentRow == 1) {
+            if (this.page == 1) {
+                return;
+            }
+            this.currentRow = this.rp;
+            this.goToPrevPage();
+        } else {
+            this.currentRow--;
+        }
+        this.updateCurrentRow();
+    }
+
+    gotoNextRow() {
+        if (this.rp == 0) {
+            if (this.currentRow < this.total) {
+                this.currentRow++;
+            }
+            this.updateCurrentRow();
+            return;
+        }
+
+        if (this.page == this.max_page) {
+            const cells = this.table.querySelectorAll('.dt-body');
+            const last = Array.prototype.slice.call(cells, -1)[0];
+            const lastRow = parseInt(Array.prototype.find.call(last.classList, val => val.match(/^dt-row/)).substring(6)) + 1;
+            if (this.currentRow == lastRow) {
+                return;
+            }
+        }
+        if (this.currentRow == this.rp) {
+            this.currentRow = 1;
+            this.goToNextPage();
+        } else {
+            this.currentRow++;
+        }
+        this.updateCurrentRow();
+    }
+
+    get max_page() {
+        return Math.ceil(this.total / this.rp);
+    }
+
+    goToFirstPage() {
+        if (this.page == 1) {
+            return;
+        }
+        this.page = 1;
+        this.load();
+    }
+
+    goToPrevPage() {
+        if (this.page == 1) {
+            return;
+        }
+        this.page -= 1;
+        this.load();
+    }
+
+    goToNextPage() {
+        if (this.page == this.max_page) {
+            return;
+        }
+        this.page += 1;
+        this.load();
+    }
+
+    goToLastPage() {
+        if (this.page == this.max_page) {
+            return;
+        }
+        this.page = this.max_page;
+        this.load();
+    }
+
+    makeActive(element) {
+        while (!element.classList.contains('dt-col0')) {
+            element = element.previousSibling;
+        }
+        for (let i = 0; i < this.columns.length; i++) {
+            element.classList.add('active');
+            element = element.nextSibling;
+        }
+    }
+
+    makeInactive(element) {
+        while (!element.classList.contains('dt-col0')) {
+            element = element.previousSibling;
+        }
+        for (let i = 0; i < this.columns.length; i++) {
+            element.classList.remove('active');
+            element = element.nextSibling;
+        }
+    }
+
+    fromToMessage(total) {
+        let msg = '<span class="dt-wide">' + texts.flexigrid.pagestat;
+        msg = msg.replace('{from}', '</span>' + this.firstRow() + '<span class="dt-narrow">\u2009\u2013\u2009</span><span class="dt-wide">');
+        msg = msg.replace('{to}', '</span>' + this.lastRow() + '<span class="dt-narrow">\u2009/\u2009</span><span class="dt-wide">');
+        msg = msg.replace('{total}', '</span>' + total + '<span class="dt-wide">');
+        return msg + '</span>';
+    }
+
+    display(data) {
+        this.total = data.total;
+
+        if (this.toolbar) {
+            this.toolbar.querySelector('.dt-page input').value = this.page;
+            this.toolbar.querySelector('.dt-page span.dt-page-max').innerText = this.max_page;
+            this.toolbar.querySelector('.dt-json a').setAttribute('href', data.url);
+
+            this.toolbar.querySelector('.dt-info').innerHTML = this.fromToMessage(data.total);
+        }
+
+        this.clear();
+        this.initHandles(data.rows.length);
+
+        let elements = [];
+        let row_num = 0;
+        for (const row of data.rows) {
+            let column = 0;
+            for (const cell of row.cell) {
+                const element = this.columns[column].makeBodyElement(column, row_num, this.columns.length);
+                element.innerHTML = cell;
+                element.addEventListener('mouseover', this.makeActive.bind(this, element));
+                element.addEventListener('mouseout', this.makeInactive.bind(this, element));
+                elements.push(element);
+                column++;
+            }
+            row_num++;
+        }
+
+        this.table.append(...elements);
+
+        init_tooltips();
+
+        this.updateCurrentRow();
+
+        if (this.usepager) {
+            resizeManager.addCallback(this.element.id, this.resize.bind(this));
+        }
+    }
+
+    resize() {
+        if (this.controller) {
+            this.controller.abort();
+        }
+        this.clear();
+        this.rp = this.calculateRowsPerPage();
+        this.load();
+    }
+
+    buildURL() {
+        let p = {};
+
+        for (const param in this.config.params) {
+            p[param] = this.config.params[param];
+        }
+
+        if (this.config.sortname) {
+            p.sortname = this.config.sortname;
+            p.sortorder = this.config.sortorder;
+        }
+
+        if (this.usepager) {
+            p.page = this.page;
+            p.rp = this.rp;
+        }
+
+        if (this.queryInput !== undefined && this.queryInput.value != '') {
+            p.query = this.queryInput.value;
+        }
+
+        return build_link(this.config.url, p);
+    }
+
+    load() {
+        if (this.toolbar) {
+            if (window.innerWidth <= 800) {
+                this.toolbar.querySelector('.dt-info').innerText = '...';
+            } else {
+                this.toolbar.querySelector('.dt-info').innerText = texts.flexigrid.procmsg;
+            }
+        }
+
+        if (this.controller) {
+            this.controller.abort();
+        }
+
+        this.controller = new AbortController();
+        fetch(this.buildURL(), { signal: this.controller.signal })
+            .then( response => response.json() )
+            .then( data => this.config.preProcess(data) )
+            .then( data => { this.controller = undefined; this.display.apply(this, [data]); });
+    }
 }
 
 function create_flexigrid(domid, options) {
-    current_grid = domid;
-    if (grids[domid] == null) {
-        // grid doesn't exist yet, so create it
-        const me = jQuery('#' + domid);
-        const rp = calculate_flexigrid_rp(me.parents('.resize'));
-        grids[domid] = me.flexigrid(jQuery.extend({}, flexigrid_defaults, texts.flexigrid, options, { rp: rp }));
-    } else {
-        // grid does exist, make sure it has the right size
-        resize_grid(domid);
+    if (grids[domid]) {
+        return;
     }
+
+    const element = document.getElementById(domid);
+    const dt = new DynamicTable(element, options);
+    dt.setUpHTML();
+    dt.load();
+    grids[domid] = dt;
+    current_grid = domid;
 }
 
 class Tabs {
@@ -666,34 +1140,20 @@ class Tabs {
         this.buttonBox.dataset.left = ' ';
         this.buttonBox.dataset.right = ' ';
 
-        for (let button of this.buttons) {
+        for (const button of this.buttons) {
             button.addEventListener('click', this.click.bind(this));
         }
-        for (let tab of this.tabs) {
+        for (const tab of this.tabs) {
             tab.classList.add('tabs-panel');
         }
-
-        resize_box();
-    }
-
-    resize() {
-        let b = this.buttonBox;
-        let dl = ' ';
-        let dr = ' ';
-        if (b.clientWidth - b.scrollWidth < 0) {
-            dl = '≪';
-            dr = '≫';
-        }
-        b.dataset.left = dl;
-        b.dataset.right = dr;
     }
 
     choose(n) {
-        for (let button of this.buttons) {
+        for (const button of this.buttons) {
             button.classList.remove('active');
         }
         this.buttons[n].classList.add('active');
-        for (let tab of this.tabs) {
+        for (const tab of this.tabs) {
             tab.style.display = 'none';
         }
         this.tabs[n].style.display = null;
@@ -748,20 +1208,25 @@ function init_tabs(params, callbacks) {
         }
     }
 
-    tabs.activate(window.location.hash.substring(1));
-    tabs.resize();
+    if (window.location.hash == '') {
+        tabs.choose(0);
+    } else {
+        tabs.activate(window.location.hash.substring(1));
+    }
+
     return tabs;
 }
 
 function create_characters_flexigrid(string) {
     return create_flexigrid('grid-characters', {
-        url: '/api/4/unicode/characters?string=' + encodeURIComponent(string),
+        url: '/api/4/unicode/characters',
+        params: { string: string },
         colModel: [
             { display: texts.unicode.character, name: 'character', width: 20, sortable: true },
             { display: texts.unicode.codepoint, name: 'codepoint', width: 60, sortable: true, align: 'right' },
             { display: texts.unicode.script, name: 'script', width: 100, sortable: true },
             { display: texts.unicode.general_category, name: 'general_category', width: 150, sortable: false },
-            { display: texts.unicode.name, name: 'name', width: 600, sortable: false, align: 'left' }
+            { display: texts.unicode.name, name: 'name', width: 150, sortable: false, align: 'left' }
         ],
         usepager: false,
         useRp: false,
@@ -789,43 +1254,28 @@ function d3_colors() {
 /* ============================ */
 
 function table_up() {
-    const current = jQuery('.trOver:visible');
-    if (current.size() > 0) {
-        const prev = jQuery('div.bDiv:visible tr.trOver').removeClass('trOver').prev();
-        if (prev.size() > 0) {
-            prev.addClass('trOver');
-        } else {
-            jQuery('div.pPrev:visible').click();
-        }
-    } else {
-        jQuery('div.bDiv:visible tr:last').addClass('trOver');
-    }
+    grids[current_grid].gotoPrevRow();
 }
 
 function table_down() {
-    const current = jQuery('.trOver:visible');
-    if (current.size() > 0) {
-        const next = jQuery('div.bDiv:visible tr.trOver').removeClass('trOver').next();
-        if (next.size() > 0) {
-            next.addClass('trOver');
-        } else {
-            jQuery('div.pNext:visible').click();
-        }
-    } else {
-        jQuery('div.bDiv:visible tr:first').addClass('trOver');
-    }
+    grids[current_grid].gotoNextRow();
 }
 
 function table_right() {
-    const current = jQuery('.trOver');
-    if (current.size() > 0) {
-        let link = current.find('a.pref');
-        if (link.size() == 0) {
-            link = current.find('a');
-        }
-        if (link.size() > 0) {
-            window.location = link.attr('href');
-        }
+    const table = grids[current_grid];
+    if (table.currentRow == 0) {
+        return;
+    }
+
+    const apref = document.querySelectorAll('.dt-current-row a.pref');
+    if (apref.length > 0) {
+        window.location = apref[0].getAttribute('href');
+        return;
+    }
+
+    const a = document.querySelectorAll('.dt-current-row a');
+    if (a.length > 0) {
+        window.location = a[0].getAttribute('href');
     }
 }
 
@@ -1071,8 +1521,6 @@ class Autocomplete {
 function whenReady() {
     document.getElementById('javascriptmsg').remove();
 
-    resize_box();
-
     if (typeof page_init === 'function') {
         page_init();
     }
@@ -1148,19 +1596,19 @@ function whenReady() {
         switch (event.key) {
             case 'Home':
                 event.preventDefault();
-                jQuery('div.pFirst:visible').click();
+                grids[current_grid].goToFirstPage();
                 break;
             case 'PageUp':
                 event.preventDefault();
-                jQuery('div.pPrev:visible').click();
+                grids[current_grid].goToPrevPage();
                 break;
             case 'PageDown':
                 event.preventDefault();
-                jQuery('div.pNext:visible').click();
+                grids[current_grid].goToNextPage();
                 break;
             case 'End':
                 event.preventDefault();
-                jQuery('div.pLast:visible').click();
+                grids[current_grid].goToLastPage();
                 break;
             case 'ArrowLeft':
                 event.preventDefault();
@@ -1233,11 +1681,6 @@ function whenReady() {
             }
         });
     }
-
-    addEventListener('resize', function() {
-        resize_box();
-        resize_grid(current_grid);
-    });
 }
 
 function tomorrow() {
@@ -1325,11 +1768,7 @@ function draw_chronology_chart(data, filter) {
         .attr('stroke-linecap', 'round')
         .attr('d', line);
 
-    var resizeTimer;
-    window.addEventListener('resize', function(ev) {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout( ev => draw_chronology_chart(data, filter) , 250);
-    });
+    resizeManager.addCallback('chart-chronology', () => draw_chronology_chart(data, filter) );
 }
 
 /* ============================ */

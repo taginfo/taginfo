@@ -192,7 +192,7 @@ class Taginfo < Sinatra::Base
         @stats_reason = @db.select("SELECT reason, count(*) AS count FROM wiki.problems GROUP BY reason ORDER BY reason").execute()
         @stats_lang   = @db.select("SELECT lang,   count(*) AS count FROM wiki.problems GROUP BY lang   ORDER BY lang").execute()
 
-        javascript_for(:flexigrid, :d3)
+        javascript_for(:d3)
         javascript "#{ r18n.locale.code }/taginfo/wiki-problems"
         erb :'taginfo/wiki-problems'
     end

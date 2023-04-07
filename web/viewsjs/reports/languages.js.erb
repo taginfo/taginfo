@@ -2,7 +2,7 @@
 function page_init() {
     up = function() { window.location = build_link('/reports'); };
     create_flexigrid('grid-langs', {
-        url: build_link('/api/4/wiki/languages'),
+        url: '/api/4/wiki/languages',
         colModel: [
             { display: '<%= h(page.code) %>', name: 'code', width: 60, sortable: true },
             { display: '<%= h(page.native_name) %>', name: 'native_name', width: 150, sortable: true },
@@ -12,7 +12,6 @@ function page_init() {
         ],
         sortname: 'code',
         sortorder: 'asc',
-        showToggleBtn: false,
         usepager: false,
         useRp: false,
         preProcess: function(data) {
