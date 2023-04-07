@@ -575,7 +575,7 @@ class Cache
         results = @db.execute("SELECT * FROM cache.cache_pages WHERE title=? AND timestamp=?", [page.title, page.timestamp])
 
         unless results.empty?
-            page.content = row[0]['body']
+            page.content = results[0]['body']
             puts "CACHE: Page '#{ page.title }' in cache (#{ page.timestamp })"
             @in_cache += 1
             return
