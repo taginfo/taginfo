@@ -1,5 +1,13 @@
 /* taginfo.css */
 
+:root {
+    --color-light: #ddddd4; /* background for large boxes etc. */
+    --color-dark: #b8b8b0; /* background for table headers etc. */
+    --color-darker: #a0a098; /* smaller, really dark elements */
+    --color-tooltip: #202020; /* tooltip background */
+    --color-border: #b8b8b0; /* borders around buttons, input fields, etc. */
+}
+
 html {
     height: 100%;
 }
@@ -30,7 +38,7 @@ img {
 
 img.map {
     position: absolute;
-    border: 1px solid #b8b8b0;
+    border: 1px solid var(--color-dark);
     width: calc(100% - 40px);
 }
 
@@ -129,8 +137,8 @@ a.section {
 
 .button {
     background-color: #f0f0f0;
-    color: #303030;
-    border: 1px solid #e8e8e8;
+    color: #808080;
+    border: 1px solid var(--color-border);
     padding: 2px 4px;
     border-radius: 4px;
 }
@@ -161,7 +169,7 @@ select {
     margin: 0;
     padding: 2px 4px;
     min-width: 10em;
-    border: 1px solid #a0a0a0;
+    border: 1px solid var(--color-border);
     border-radius: 4px;
     font-size: 0.9rem;
     cursor: pointer;
@@ -242,7 +250,7 @@ input#search {
     padding: 2px 2px;
     font-size: 0.9rem;
     background-color: #ffffff;
-    border: 1px solid #a0a0a0;
+    border: 1px solid var(--color-border);
     border-radius: 4px;
     z-index: 1;
 }
@@ -254,7 +262,7 @@ input#search {
 }
 
 #suggestions a.active {
-    background-color: #ddddd4;
+    background-color: var(--color-light);
     border-radius: 4px;
 }
 
@@ -264,7 +272,7 @@ input#search, p.search {
     background-repeat: no-repeat;
     background-position: right center;
     background-color: #ffffff;
-    border: 1px solid #a0a0a0;
+    border: 1px solid var(--color-border);
     border-radius: 4px;
 }
 
@@ -291,7 +299,7 @@ input:focus {
     ul#menu {
         margin: 0px 0px 20px 0px;
         padding: 2px 20px;
-        border-bottom: 1px solid #b8b8b0;
+        border-bottom: 1px solid var(--color-dark);
         background: linear-gradient(to bottom, #ffffff 0%, #e8e8e4 100%);
     }
 
@@ -314,12 +322,12 @@ input:focus {
 
     ul#menu a:hover {
         text-decoration: none;
-        border-bottom: 3px solid #b8b8b0;
+        border-bottom: 3px solid var(--color-dark);
     }
 
     ul#menu a.selected {
         text-decoration: none;
-        border-bottom: 3px solid #b8b8b0;
+        border-bottom: 3px solid var(--color-dark);
     }
 
     div#tools {
@@ -350,7 +358,7 @@ input:focus {
     #menu-button-wrapper {
         height: 48px;
         margin-bottom: 6px;
-        border-bottom: 1px solid #b8b8b0;
+        border-bottom: 1px solid var(--color-dark);
     }
 
     #menu-button {
@@ -359,7 +367,7 @@ input:focus {
         background-size: 24px 24px;
         background-position: center center;
         background-repeat: no-repeat;
-        background-color: #b8b8b0;
+        background-color: var(--color-dark);
         border-radius: 4px;
         width: 32px;
         height: 32px;
@@ -381,7 +389,7 @@ input:focus {
         width: 100%;
         z-index: 10000;
         background: linear-gradient(to bottom, #ffffff 0%, #e8e8e4 100%);
-        border-bottom: 3px solid #b8b8b0;
+        border-bottom: 3px solid var(--color-dark);
         list-style: none;
     }
 
@@ -409,7 +417,7 @@ input:focus {
         background-size: 24px 24px;
         background-position: center center;
         background-repeat: no-repeat;
-        background-color: #b8b8b0;
+        background-color: var(--color-dark);
         border-radius: 4px;
         width: 32px;
         height: 32px;
@@ -432,7 +440,7 @@ input:focus {
         margin: 0;
         z-index: 10000;
         background: #e8e8e4;
-        border: 1px solid #b8b8b0;
+        border: 1px solid var(--color-dark);
         border-radius: 4px;
         list-style: none;
     }
@@ -574,7 +582,7 @@ html[dir="rtl"] div#footer_right {
 /* ========== */
 
 div.box {
-    background-color: #ddddd4;
+    background-color: var(--color-light);
     padding: 20px;
     border-radius: 4px;
 }
@@ -619,7 +627,7 @@ div#tabs > ul:after {
 div#tabs > ul > li {
     list-style: none;
     white-space: nowrap;
-    border: 1px solid #ddddd4;
+    border: 1px solid var(--color-light);
     border-radius: 4px;
     margin: 0 4px 0 0;
 }
@@ -633,7 +641,7 @@ div#tabs > ul > li > a {
 }
 
 div#tabs > ul > li.active {
-    background-color: #ddddd4;
+    background-color: var(--color-light);
 }
 
 div#tabs > ul > li.active > a {
@@ -644,7 +652,7 @@ div#tabs > div {
     position: relative;
     top: -3px;
     padding: 20px;
-    background-color: #ddddd4;
+    background-color: var(--color-light);
     border-radius: 4px;
 }
 
@@ -666,7 +674,7 @@ span.badge {
     position: relative;
     top: -1px;
     color: #202020;
-    border: 1px solid #b8b8b0;
+    border: 1px solid var(--color-dark);
     font-weight: bold;
     font-size: 0.8rem;
     padding: 0 4px;
@@ -696,7 +704,7 @@ td.number {
 
 span.char {
     background-color: #f0f0f0;
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--color-border);
     padding: 0 2px;
     border-radius: 4px;
 }
@@ -709,7 +717,7 @@ span.char {
     height: 2.5ex;
     float: right;
     font-size: 0.9rem;
-    border: 1px solid #a0a0a0;
+    border: 1px solid var(--color-border);
     border-radius: 4px;
     padding: 2px 28px 2px 4px;
 }
@@ -735,7 +743,7 @@ html[dir="rtl"] #comparison-list {
     position: absolute;
     margin-top: 1px;
     margin-left: 10px;
-    border: 1px solid #a0a0a0;
+    border: 1px solid var(--color-border);
     background-color: #ffffff;
     padding: 0;
     z-index: 99;
@@ -774,7 +782,7 @@ div.bar {
     margin: 4px 0 0 6px !important;
     padding: 0 !important;
     height: 8px !important;
-    background-color: #a0a098;
+    background-color: var(--color-darker);
 }
 
 /* ========== */
@@ -794,12 +802,12 @@ table.list {
 }
 
 table.list th, table.list td {
-    border-right: 1px solid #ddddd4;
+    border-right: 1px solid var(--color-light);
     padding: 2px 6px;
 }
 
 table.list th {
-    background-color: #b8b8b0;
+    background-color: var(--color-dark);
     height: 28px;
     vertical-align: middle;
 }
@@ -842,7 +850,7 @@ table.list .warn {
 /* ==========  */
 
 table.desc {
-    background-color: #ddddd4;
+    background-color: var(--color-light);
     border-radius: 4px;
     padding: 6px;
     width: 100%;
@@ -858,7 +866,7 @@ table.desc > tbody > tr > th {
 
 table.desc > tbody > tr > td {
     vertical-align: top;
-    background-color: #f8f8f8;
+    background-color: #f0f0f0;
     padding: 2px 4px;
     border-radius: 1px;
 }
@@ -896,7 +904,7 @@ div.hDiv table th span {
 span.key {
     position: relative;
     top: -1px;
-    border: 1px solid #d0d0d0;
+    border: 1px solid var(--color-border);
     padding: 1px 4px;
     border-radius: 4px;
     background-color: #f0f0f0;
@@ -914,7 +922,7 @@ div.wiki_image {
 }
 
 div.wiki_image img {
-    border: 1px solid #a0a0a0;
+    border: 1px solid var(--color-border);
     border-radius: 4px;
     padding: 1px;
 }
@@ -995,7 +1003,7 @@ html[dir="rtl"] td ul {
     position: absolute;
     width: max-content;
     max-width: 400px;
-    background: #202020;
+    background: var(--color-tooltip);
     color: #ffffff;
     font-size: 1rem;
     line-height: 1.2;
@@ -1017,7 +1025,7 @@ html[dir="rtl"] td ul {
     content: "";
     width: 0;
     height: 0;
-    border-top: 8px solid #202020;
+    border-top: 8px solid var(--color-tooltip);
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
     bottom: -8px;
@@ -1037,7 +1045,7 @@ html[dir="rtl"] td ul {
     content: "";
     width: 0;
     height: 0;
-    border-bottom: 8px solid #202020;
+    border-bottom: 8px solid var(--color-tooltip);
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
     top: -8px;
@@ -1055,7 +1063,7 @@ html[dir="rtl"] td ul {
     content: "";
     width: 0;
     height: 0;
-    border-left: 8px solid #202020;
+    border-left: 8px solid var(--color-tooltip);
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
     top: 50%;
@@ -1073,7 +1081,7 @@ html[dir="rtl"] td ul {
     content: "";
     width: 0;
     height: 0;
-    border-right: 8px solid #202020;
+    border-right: 8px solid var(--color-tooltip);
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
     top: 50%;
@@ -1092,7 +1100,7 @@ div.help-boxes {
 
 div.help-box {
     flex: 1 1 auto;
-    background-color: #ddddd4;
+    background-color: var(--color-light);
     padding: 8px;
     border-radius: 4px;
 }
@@ -1122,7 +1130,7 @@ div.fbox h2 {
 }
 
 div.fbox > div {
-    background-color: #ddddd4;
+    background-color: var(--color-light);
     padding: 8px;
     border-radius: 4px;
     height: calc(100% - 54px);
@@ -1222,7 +1230,7 @@ div.gbox h2 a {
 }
 
 div.gbox > div {
-    background-color: #ddddd4;
+    background-color: var(--color-light);
     padding: 8px;
     overflow: hidden;
 }
