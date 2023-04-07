@@ -192,10 +192,10 @@ class WikiPage
                 context.last.add_parameter(c)
             when '|' # template parameter
                 context.last.add_parameter(m[1].strip)
-                context.last.parname(nil)
+                context.last.parname = nil
             when '=' # named template parameter
                 parameter_name = m[1].strip == ':' ? 'subkey' : m[1].strip
-                context.last.parname(parameter_name)
+                context.last.parname = parameter_name
             end
 
             # 'after' is our next 'text'
