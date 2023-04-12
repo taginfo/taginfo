@@ -658,11 +658,12 @@ class DynamicTable {
     columns = []; // The table column definitions
 
     usepager = true;
-    page = 1; // The page currently displayed
+    currentPage = 1; // The page currently displayed
     rp = 0; // The number of rows per page
-    total = 0; // The total number of rows in this table
+    totalRows = 0; // The total number of rows in this table
 
-    currentRow = 0;
+    numRows = 0; // Number of rows on this page
+    currentRow = 0; // Currently selected row (0 means none)
 
     constructor(element, config) {
         this.element = element;
@@ -720,10 +721,10 @@ class DynamicTable {
             event.preventDefault();
             const newPage = parseInt(event.target.value);
             if (newPage < 1 || newPage > this.maxPage) {
-                event.target.value = this.page;
+                event.target.value = this.currentPage;
                 return;
             }
-            this.page = newPage;
+            this.currentPage = newPage;
             this.load();
         });
 
@@ -741,7 +742,7 @@ class DynamicTable {
             this.queryInput.setAttribute('name', 'q');
             this.queryInput.setAttribute('placeholder', texts.misc.search_for + ': ' + this.searchFor());
             this.queryInput.addEventListener('change', () => {
-                this.page = 1;
+                this.currentPage = 1;
                 this.currentRow = 0;
                 this.load();
             });
@@ -798,8 +799,8 @@ class DynamicTable {
         }
     }
 
-    initHandles(numRows) {
-        const rowEnd = 'span ' + (numRows + 1);
+    initHandles() {
+        const rowEnd = 'span ' + (this.numRows + 1);
         for (let i = 1; i < this.columns.length; i++) {
             const handle = document.createElement('div');
             const element = document.createElement('div');
@@ -852,7 +853,7 @@ class DynamicTable {
             const rowClass = Array.prototype.find.call(event.target.classList, val => val.match(/^dt-row/));
             if (rowClass) {
                 this.currentRow = parseInt(rowClass.substring(6)) + 1;
-                this.updateCurrentRow();
+                this.updateCurrentRowDisplay();
             }
         });
 
@@ -897,15 +898,15 @@ class DynamicTable {
         this.element.innerHTML = '';
     }
 
-    firstRow() {
-        return (this.page - 1) * this.rp + 1;
+    get firstRow() {
+        return (this.currentPage - 1) * this.rp + 1;
     }
 
-    lastRow() {
-        return Math.min(this.page * this.rp, this.total);
+    get lastRow() {
+        return Math.min(this.currentPage * this.rp, this.totalRows);
     }
 
-    updateCurrentRow() {
+    updateCurrentRowDisplay() {
         for (const element of this.table.querySelectorAll('.dt-current-row')) {
             element.classList.remove('dt-current-row');
         }
@@ -921,7 +922,7 @@ class DynamicTable {
 
     gotoPrevRow() {
         if (this.currentRow == 1) {
-            if (this.page == 1) {
+            if (this.currentPage == 1) {
                 return;
             }
             this.currentRow = this.rp;
@@ -929,23 +930,22 @@ class DynamicTable {
         } else {
             this.currentRow--;
         }
-        this.updateCurrentRow();
+        this.updateCurrentRowDisplay();
     }
 
     gotoNextRow() {
         if (this.rp == 0) {
-            if (this.currentRow < this.total) {
+            if (this.currentRow < this.totalRows) {
                 this.currentRow++;
             }
-            this.updateCurrentRow();
+            this.updateCurrentRowDisplay();
             return;
         }
 
-        if (this.page == this.maxPage) {
+        if (this.currentPage == this.maxPage) {
             const cells = this.table.querySelectorAll('.dt-body');
             const last = Array.prototype.slice.call(cells, -1)[0];
-            const lastRow = parseInt(Array.prototype.find.call(last.classList, val => val.match(/^dt-row/)).substring(6)) + 1;
-            if (this.currentRow == lastRow) {
+            if (this.currentRow == this.numRows) {
                 return;
             }
         }
@@ -955,18 +955,18 @@ class DynamicTable {
         } else {
             this.currentRow++;
         }
-        this.updateCurrentRow();
+        this.updateCurrentRowDisplay();
     }
 
     get maxPage() {
-        return Math.ceil(this.total / this.rp);
+        return Math.ceil(this.totalRows / this.rp);
     }
 
     goToFirstPage() {
-        if (this.page == 1) {
+        if (this.currentPage == 1) {
             return;
         }
-        this.page = 1;
+        this.currentPage = 1;
         if (this.currentRow != 0) {
             this.currentRow = this.rp;
         }
@@ -974,10 +974,10 @@ class DynamicTable {
     }
 
     goToPrevPage() {
-        if (this.page == 1) {
+        if (this.currentPage == 1) {
             return;
         }
-        this.page -= 1;
+        this.currentPage -= 1;
         if (this.currentRow != 0) {
             this.currentRow = this.rp;
         }
@@ -985,10 +985,10 @@ class DynamicTable {
     }
 
     goToNextPage() {
-        if (this.page == this.maxPage) {
+        if (this.currentPage == this.maxPage) {
             return;
         }
-        this.page += 1;
+        this.currentPage += 1;
         if (this.currentRow != 0) {
             this.currentRow = 1;
         }
@@ -996,10 +996,10 @@ class DynamicTable {
     }
 
     goToLastPage() {
-        if (this.page == this.maxPage) {
+        if (this.currentPage == this.maxPage) {
             return;
         }
-        this.page = this.maxPage;
+        this.currentPage = this.maxPage;
         if (this.currentRow != 0) {
             this.currentRow = 1;
         }
@@ -1026,17 +1026,17 @@ class DynamicTable {
         }
     }
 
-    fromToMessage(total) {
+    fromToMessage() {
         let msg = '<span class="dt-wide">' + texts.flexigrid.pagestat;
-        msg = msg.replace('{from}', '</span>' + this.firstRow() + '<span class="dt-narrow">\u2009\u2013\u2009</span><span class="dt-wide">');
-        msg = msg.replace('{to}', '</span>' + this.lastRow() + '<span class="dt-narrow">\u2009/\u2009</span><span class="dt-wide">');
-        msg = msg.replace('{total}', '</span>' + total + '<span class="dt-wide">');
+        msg = msg.replace('{from}', '</span>' + this.firstRow + '<span class="dt-narrow">\u2009\u2013\u2009</span><span class="dt-wide">');
+        msg = msg.replace('{to}', '</span>' + this.lastRow + '<span class="dt-narrow">\u2009/\u2009</span><span class="dt-wide">');
+        msg = msg.replace('{total}', '</span>' + this.totalRows + '<span class="dt-wide">');
         return msg + '</span>';
     }
 
     display(data) {
         if (data.total == 0) {
-            this.total = 1;
+            this.totalRows = 1;
             this.toolbar.querySelector('.dt-page input').value = 0;
             this.toolbar.querySelector('.dt-page span.dt-page-max').innerText = 0;
             this.toolbar.querySelector('.dt-json a').setAttribute('href', data.url);
@@ -1046,18 +1046,19 @@ class DynamicTable {
             return;
         }
 
-        this.total = data.total;
+        this.totalRows = data.total;
 
         if (this.toolbar) {
-            this.toolbar.querySelector('.dt-page input').value = this.page;
+            this.toolbar.querySelector('.dt-page input').value = this.currentPage;
             this.toolbar.querySelector('.dt-page span.dt-page-max').innerText = this.maxPage;
             this.toolbar.querySelector('.dt-json a').setAttribute('href', data.url);
 
-            this.toolbar.querySelector('.dt-info').innerHTML = this.fromToMessage(data.total);
+            this.toolbar.querySelector('.dt-info').innerHTML = this.fromToMessage();
         }
 
         this.clear();
-        this.initHandles(data.rows.length);
+        this.numRows = data.rows.length;
+        this.initHandles();
 
         let elements = [];
         let rowNum = 0;
@@ -1078,7 +1079,7 @@ class DynamicTable {
 
         initTooltips();
 
-        this.updateCurrentRow();
+        this.updateCurrentRowDisplay();
 
         if (this.usepager) {
             resizeManager.addCallback(this.element.id, this.resize.bind(this));
@@ -1107,7 +1108,7 @@ class DynamicTable {
         }
 
         if (this.usepager) {
-            p.page = this.page;
+            p.page = this.currentPage;
             p.rp = this.rp;
         }
 
