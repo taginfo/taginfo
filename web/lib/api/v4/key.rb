@@ -222,6 +222,10 @@ class Taginfo < Sinatra::Base
                 get_first_value()
         end
 
+        if total > 1000 and !@ap.do_paging?
+            halt 412, { :error => 'number of results too large, use paging' }.to_json
+        end
+
         res = @db.select('SELECT * FROM db.tags').
             condition('key = ?', key).
             condition_if_true("count_#{filter_type} > 0", filter_type != 'all').
@@ -274,7 +278,7 @@ class Taginfo < Sinatra::Base
         :description => 'Get most prevalent values used with a given key.',
         :parameters => {
             :key => 'Tag key (required).',
-            :min_fraction => 'Only return values which are used in at least this percent of all objects with this key (optional, default = 0.01).'
+            :min_fraction => 'Only return values which are used in at least this percent of all objects with this key (optional, default = 0.01, minimum 0.01).'
         },
         :paging => :no,
         :filter => {
@@ -296,6 +300,9 @@ class Taginfo < Sinatra::Base
         min_fraction = 0.01
         if params[:min_fraction]
             min_fraction = params[:min_fraction].to_f
+            if min_fraction < 0.01
+                halt 412, { :error => 'min_fraction must be >= 0.1' }.to_json
+            end
         end
         filter_type = get_filter()
 
