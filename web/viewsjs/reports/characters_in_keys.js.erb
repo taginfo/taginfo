@@ -13,7 +13,7 @@ var create_flexigrid_for = {};
                 { display: '<%= h(osm.key) %>', name: 'key', width: 250, sortable: true },
                 { display: '<img src="/img/types/all.svg" width="16" height="16" alt=""/> <%= h(osm.objects) %>', name: 'count_all', width: 150, sortable: true, align: 'center', title: '<%= h(misc.objects_tooltip) %>' },
                 { display: '<%= h(osm.users) %>', name: 'users_all', width: 44, sortable: true, align: 'right', title: '<%= h(misc.users_tooltip) %>' },
-                { display: 'Wiki', name: 'in_wiki', width: 20, sortable: true, align: 'center', title: '<%= h(misc.in_wiki_tooltip) %>' },
+                { display: '<%= h(@trans.t.taginfo.wiki) %>', name: 'in_wiki', width: 20, sortable: true, align: 'center', title: '<%= h(misc.in_wiki_tooltip) %>' },
                 { display: '<%= h(osm.values) %>', name: 'values_all', width: 70, sortable: true, align: 'right', title: '<%= h(misc.values_tooltip) %>' },
                 { display: '<%= h(misc.prevalent_values) %>', name: 'prevalent_values', width: 600, sortable: true, title: '<%= h(misc.prevalent_values_tooltip) %>' }
             ],
