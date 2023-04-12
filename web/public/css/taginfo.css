@@ -1488,8 +1488,7 @@ div.dt-table div.dt-body.dt-current-row {
 }
 
 div.dt-table div.dt-body.active {
-    outline: 1px solid var(--color-tooltip);
-    z-index: 1;
+    background-color: #ffffff;
 }
 
 div.dt-table div.dt-line0 {
