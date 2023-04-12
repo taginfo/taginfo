@@ -967,6 +967,9 @@ class DynamicTable {
             return;
         }
         this.page = 1;
+        if (this.currentRow != 0) {
+            this.currentRow = this.rp;
+        }
         this.load();
     }
 
@@ -975,6 +978,9 @@ class DynamicTable {
             return;
         }
         this.page -= 1;
+        if (this.currentRow != 0) {
+            this.currentRow = this.rp;
+        }
         this.load();
     }
 
@@ -983,6 +989,9 @@ class DynamicTable {
             return;
         }
         this.page += 1;
+        if (this.currentRow != 0) {
+            this.currentRow = 1;
+        }
         this.load();
     }
 
@@ -991,6 +1000,9 @@ class DynamicTable {
             return;
         }
         this.page = this.maxPage;
+        if (this.currentRow != 0) {
+            this.currentRow = 1;
+        }
         this.load();
     }
 
@@ -1282,14 +1294,6 @@ function d3_colors() {
 }
 
 /* ============================ */
-
-function table_up() {
-    grids[current_grid].gotoPrevRow();
-}
-
-function table_down() {
-    grids[current_grid].gotoNextRow();
-}
 
 function table_right() {
     const table = grids[current_grid];
@@ -1646,7 +1650,7 @@ function whenReady() {
                 break;
             case 'ArrowUp':
                 event.preventDefault();
-                table_up();
+                grids[current_grid].gotoPrevRow();
                 break;
             case 'ArrowRight':
                 event.preventDefault();
@@ -1654,7 +1658,7 @@ function whenReady() {
                 break;
             case 'ArrowDown':
                 event.preventDefault();
-                table_down();
+                grids[current_grid].gotoNextRow();
                 break;
         }
     });
