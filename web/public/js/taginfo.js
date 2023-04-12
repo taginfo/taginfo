@@ -8,7 +8,7 @@ var grids = {},
 
 /* ============================ */
 
-function init_tooltips() {
+function initTooltips() {
     const tooltips = document.querySelectorAll('*[data-tooltip-position]');
     const tt = document.getElementById('tooltip');
 
@@ -798,8 +798,8 @@ class DynamicTable {
         }
     }
 
-    initHandles(num_rows) {
-        const rowEnd = 'span ' + (num_rows + 1);
+    initHandles(numRows) {
+        const rowEnd = 'span ' + (numRows + 1);
         for (let i = 1; i < this.columns.length; i++) {
             const handle = document.createElement('div');
             const element = document.createElement('div');
@@ -872,8 +872,8 @@ class DynamicTable {
             }
             element.classList.add('dt-sort-' + this.config.sortorder);
         } else {
-            const sort_elements = element.parentNode.querySelectorAll('.dt-sort-asc,.dt-sort-desc');
-            for (const el of sort_elements) {
+            const sortElements = element.parentNode.querySelectorAll('.dt-sort-asc,.dt-sort-desc');
+            for (const el of sortElements) {
                 el.classList.remove('dt-sort-desc');
                 el.classList.remove('dt-sort-asc');
             }
@@ -1048,23 +1048,23 @@ class DynamicTable {
         this.initHandles(data.rows.length);
 
         let elements = [];
-        let row_num = 0;
+        let rowNum = 0;
         for (const row of data.rows) {
             let column = 0;
             for (const cell of row.cell) {
-                const element = this.columns[column].makeBodyElement(column, row_num, this.columns.length);
+                const element = this.columns[column].makeBodyElement(column, rowNum, this.columns.length);
                 element.innerHTML = cell;
                 element.addEventListener('mouseover', this.makeActive.bind(this, element));
                 element.addEventListener('mouseout', this.makeInactive.bind(this, element));
                 elements.push(element);
                 column++;
             }
-            row_num++;
+            rowNum++;
         }
 
         this.table.append(...elements);
 
-        init_tooltips();
+        initTooltips();
 
         this.updateCurrentRow();
 
@@ -1194,7 +1194,7 @@ class Tabs {
         }
     }
 
-    get_index(tabname) {
+    getIndex(tabname) {
         for (let n = 0; n < this.tabs.length; ++n) {
             if (this.tabs[n].id == tabname) {
                 return n;
@@ -1203,12 +1203,12 @@ class Tabs {
         return 0;
     }
 
-    on_activate(tabname, func) {
-        this.activateCallbacks[this.get_index(tabname)] = func;
+    onActivate(tabname, func) {
+        this.activateCallbacks[this.getIndex(tabname)] = func;
     }
 
     activate(tabname) {
-        this.choose(this.get_index(tabname));
+        this.choose(this.getIndex(tabname));
     }
 
     click(ev) {
@@ -1224,17 +1224,17 @@ function init_tabs(params, callbacks) {
 
     if (params) {
         for (const tab in create_flexigrid_for) {
-            tabs.on_activate(tab, create_flexigrid_for[tab].bind(this, ...params));
+            tabs.onActivate(tab, create_flexigrid_for[tab].bind(this, ...params));
         }
     } else {
         for (const tab in create_flexigrid_for) {
-            tabs.on_activate(tab, create_flexigrid_for[tab].bind(this));
+            tabs.onActivate(tab, create_flexigrid_for[tab].bind(this));
         }
     }
 
     if (callbacks) {
         for (const tab in callbacks) {
-            tabs.on_activate(tab, callbacks[tab]);
+            tabs.onActivate(tab, callbacks[tab]);
         }
     }
 
@@ -1555,7 +1555,7 @@ function whenReady() {
         page_init();
     }
 
-    init_tooltips();
+    initTooltips();
 
     // Initialize language switcher
     document.getElementById('locale').addEventListener('change', function() {
