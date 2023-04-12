@@ -444,7 +444,7 @@ pages:
             objects_tooltip: Types d'objets utilisés par ce projet
             description: Utilisation de ce tag/clé
 
-flexigrid:
+dynamic_table:
     pagetext: Page
     pagestat: Affichage de {from} à {to} de {total} éléments
     outof: de

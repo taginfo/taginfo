@@ -439,7 +439,7 @@ pages:
             count_all_tooltip: Hoeveelheid objecten in database met deze sleutel/tag
             objects_tooltip: Objecttypes die het project gebruikt
 
-flexigrid:
+dynamic_table:
     pagetext: Pagina
     pagestat: Geeft {from} tot {to} van {total} items weer
     outof: van

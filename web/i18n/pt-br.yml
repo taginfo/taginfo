@@ -344,7 +344,7 @@ pages:
             intro: Esses dados são disponibilizados pelo projeto e não são necessariamente completos. Por favor veja a documentação do projeto para mais detalhes.
             description: Como esta chave/etiqueta é utilizada no projeto
 
-flexigrid:
+dynamic_table:
     pagetext: Página
     pagestat: Exibindo de {from} à {to} de {total} itens
     outof: de

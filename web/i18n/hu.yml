@@ -300,7 +300,7 @@ pages:
             create: Készíts wiki-lapot a kapcsolattípushoz
             wiki_page: Wiki-lap
 
-flexigrid:
+dynamic_table:
     pagetext: Oldal
     pagestat: Elemek megjelenítve {from} - {to}, összesen {total}
     outof: /

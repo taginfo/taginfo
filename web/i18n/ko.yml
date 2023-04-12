@@ -434,7 +434,7 @@ pages:
             count_all_tooltip: 데이터베이스 상에 있는 이 키/태그를 가진 요소의 수
             objects_tooltip: 이 프로젝트에서 사용한 요소의 유형
 
-flexigrid:
+dynamic_table:
     pagetext: 페이지
     pagestat: |
         {total} 항목 중 {from}번째부터 {to}번째까지 표시

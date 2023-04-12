@@ -712,9 +712,9 @@ class DynamicTable {
         tools[1].addEventListener('click', this.goToPrevPage.bind(this));
 
         tools[2].innerHTML = '<span class="dt-page-msg">'
-            + texts.flexigrid.pagetext
+            + texts.dynamic_table.pagetext
             + ' </span><input type="text" size="4"> '
-            + texts.flexigrid.outof
+            + texts.dynamic_table.outof
             + ' <span class="dt-page-max"></span>';
 
         tools[2].addEventListener('change', event => {
@@ -1027,7 +1027,7 @@ class DynamicTable {
     }
 
     fromToMessage() {
-        let msg = '<span class="dt-wide">' + texts.flexigrid.pagestat;
+        let msg = '<span class="dt-wide">' + texts.dynamic_table.pagestat;
         msg = msg.replace('{from}', '</span>' + this.firstRow + '<span class="dt-narrow">\u2009\u2013\u2009</span><span class="dt-wide">');
         msg = msg.replace('{to}', '</span>' + this.lastRow + '<span class="dt-narrow">\u2009/\u2009</span><span class="dt-wide">');
         msg = msg.replace('{total}', '</span>' + this.totalRows + '<span class="dt-wide">');
@@ -1041,7 +1041,7 @@ class DynamicTable {
             this.toolbar.querySelector('.dt-page span.dt-page-max').innerText = 0;
             this.toolbar.querySelector('.dt-json a').setAttribute('href', data.url);
 
-            this.toolbar.querySelector('.dt-info').innerHTML = texts.flexigrid.nomsg;
+            this.toolbar.querySelector('.dt-info').innerHTML = texts.dynamic_table.nomsg;
             this.clear();
             return;
         }
@@ -1124,7 +1124,7 @@ class DynamicTable {
             if (window.innerWidth <= 800) {
                 this.toolbar.querySelector('.dt-info').innerText = '...';
             } else {
-                this.toolbar.querySelector('.dt-info').innerText = texts.flexigrid.procmsg;
+                this.toolbar.querySelector('.dt-info').innerText = texts.dynamic_table.procmsg;
             }
         }
 
@@ -1145,7 +1145,7 @@ class DynamicTable {
             this.display(data);
         } catch (error) {
             this.clear();
-            this.toolbar.querySelector('.dt-info').innerHTML = '<span class="bad">' + texts.flexigrid.errormsg + '</span>';
+            this.toolbar.querySelector('.dt-info').innerHTML = '<span class="bad">' + texts.dynamic_table.errormsg + '</span>';
         }
     }
 }

@@ -425,7 +425,7 @@ pages:
             count_all_tooltip: Número de obxectos na base de datos con esta clave/etiqueta
             objects_tooltip: Os tipos de obxecto que o proyecto emprega
 
-flexigrid:
+dynamic_table:
     pagetext: Páxina
     pagestat: Estase a amosar de {from} a {to} dos {total} elementos
     outof: de

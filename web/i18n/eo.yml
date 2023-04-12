@@ -387,7 +387,7 @@ pages:
             count_all_tooltip: Nombro da objektoj en la datumbazo kun tiu ĉi etikedo/ŝlosilo
             objects_tooltip: Objekt-tipoj uzataj de la projekto
 
-flexigrid:
+dynamic_table:
     pagetext: Paĝo
     pagestat: Montranta {from} ĝis {to} el {total} elementoj
     outof: el

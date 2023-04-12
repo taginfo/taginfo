@@ -430,7 +430,7 @@ pages:
             count_all_tooltip: تعداد اشیای دارای این کلید/برچسب در پایگاه‌داده
             objects_tooltip: نوع اشیای مورداستفادهٔ پروژه
 
-flexigrid:
+dynamic_table:
     pagetext: صفحه
     pagestat: نمایش {from} تا {to} از {total} مورد
     outof: از

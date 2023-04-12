@@ -444,7 +444,7 @@ pages:
             count_all_tooltip: Nombre d'objectes a la base de dades amb aquesta clau/etiqueta
             objects_tooltip: Tipus d'objectes que usa el projecte
 
-flexigrid:
+dynamic_table:
     pagetext: Pàgina
     pagestat: Mostrant del {from} al {to} de {total} elements
     outof: de

@@ -441,7 +441,7 @@ pages:
             count_all_tooltip: Số đối tượng trong cơ sở dữ liệu có chìa khóa/thẻ này
             objects_tooltip: Các kiểu đối tượng được sử dụng bởi dự án
 
-flexigrid:
+dynamic_table:
     pagetext: Trang
     pagestat: Đang xem các mục từ {from} đến {to} trên {total}
     outof: trên

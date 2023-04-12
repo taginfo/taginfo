@@ -443,7 +443,7 @@ pages:
             count_all_tooltip: Počet objektů v databází s tímto klíčem/značkou
             objects_tooltip: Typ objektů použitých projektem
 
-flexigrid:
+dynamic_table:
     pagetext: Strana
     pagestat: Zobrazuji {from} až {to} z {total} položek
     outof: z

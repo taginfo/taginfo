@@ -253,7 +253,7 @@ pages:
             last_update: 最后更新
             json_url: 项目的JSON文件
 
-flexigrid:
+dynamic_table:
     pagetext: 页
     pagestat: 显示总计 {total} 项中的从{from}到{to}项
     outof: of

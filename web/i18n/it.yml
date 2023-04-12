@@ -485,7 +485,7 @@ pages:
             count_all_tooltip: Numero di oggetti nel database con questa chiave/tag
             objects_tooltip: Tipo di oggetti che il progetto utilizza
 
-flexigrid:
+dynamic_table:
     pagetext: Pagina
     pagestat: Visualizzazione da {from} a {to} di {total} oggetti
     outof: di

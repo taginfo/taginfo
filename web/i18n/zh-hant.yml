@@ -431,7 +431,7 @@ pages:
             count_all_tooltip: 資料庫裡有此鍵或標籤的物件數目
             objects_tooltip: 此專案使用的物件類型
 
-flexigrid:
+dynamic_table:
     pagetext: 頁
     pagestat: 顯示 {total} 項的第 {from} 到第 {to} 項
     outof: of

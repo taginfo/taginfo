@@ -424,7 +424,7 @@ pages:
             count_all_tooltip: データベース中でこのキー/タグが使われているオブジェクトの数
             objects_tooltip: プロジェクトが使っているオブジェクトの種類
 
-flexigrid:
+dynamic_table:
     pagetext: ページ
     pagestat: |
         {total}項目中{from}件目から{to}件目を表示しています

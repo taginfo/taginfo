@@ -407,7 +407,7 @@ pages:
             count_all_tooltip: عدد العناصر في قاعدة البيانات باستخدام هذا المفتاح/الوسم
             objects_tooltip: أنواع العناصر التي يستخدمها المشروع
 
-flexigrid:
+dynamic_table:
     pagetext: صفحة
     pagestat: عرض {from} إلى {to} من {total} عنصر/عناصر
     outof: من
