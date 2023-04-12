@@ -1,5 +1,6 @@
 <%
     misc = @trans.t.misc
+    lang = r18n.locale.code || 'en'
 %>
 function page_init() {
     up = function() { window.location = build_link('/'); }
@@ -46,6 +47,13 @@ function fill_data(datasets, item, index) {
             get_el(index, '.prevalent_values div.data').innerHTML = fmt_prevalent_value_list(item.key, item.prevalent_values);
         }
     }
+
+    const descElement = get_el(index, '.description');
+    const lang = item.description['<%= lang %>'] ? '<%= lang %>' : 'en';
+    descElement.setAttribute('lang', lang);
+    descElement.setAttribute('dir', item.description[lang].dir);
+    descElement.innerText = item.description[lang].text;
+
     get_el(index, '.projects div').innerHTML += item.projects;
     get_el(index, '.wiki div.data').innerHTML += item.wiki_pages.map(
         w => tag('span', html_escape(w.lang), {

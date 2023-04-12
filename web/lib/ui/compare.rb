@@ -27,20 +27,10 @@ class Taginfo < Sinatra::Base
             if value.nil?
                 result = @db.select("SELECT count_all FROM db.keys").condition('key = ?', key).get_first_row
                 if result
-                    desc = get_key_description(key)
-                    data[:desc]            = h(desc[0])
-                    data[:lang]            = desc[1]
-                    data[:dir]             = desc[2]
-
                     data[:has_map] = result['count_all'].to_i > 0
                     data
                 end
             else
-                desc = get_tag_description(key, value)
-                data[:desc]            = h(desc[0])
-                data[:lang]            = desc[1]
-                data[:dir]             = desc[2]
-
                 data[:has_map] = (@db.count('tag_distributions').condition('key=? AND value=?', key, value).get_first_i > 0)
                 data
             end
