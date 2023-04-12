@@ -2,10 +2,15 @@
 
 :root {
     --color-light: #ddddd4; /* background for large boxes etc. */
+    --color-lighter: #f0f0e8; /* background for some small elements */
     --color-dark: #b8b8b0; /* background for table headers etc. */
     --color-darker: #a0a098; /* smaller, really dark elements */
     --color-tooltip: #202020; /* tooltip background */
     --color-border: #b8b8b0; /* borders around buttons, input fields, etc. */
+    --color-text: #404040; /* normal text */
+    --color-stripe0: #e8e8e4; /* striped table first color */
+    --color-stripe1: #d0d0c8; /* striped table second color */
+    --color-red: #e00000; /* bad, warnings, ... */
 }
 
 html {
@@ -62,7 +67,7 @@ h2 {
 }
 
 p {
-    color: #404040;
+    color: var(--color-text);
     margin: 0 0 6px 0;
     max-width: 60em;
 }
@@ -77,6 +82,7 @@ div#javascriptmsg {
     top: 0px;
     left: 380px;
     background-color: #f08080;
+    border-radius: 4px;
     padding: 10px;
     margin: 20px 40px;
 }
@@ -89,8 +95,8 @@ html[dir="rtl"] div#javascriptmsg {
 /* ========== */
 
 a {
+    color: #083e76; /* blue link */
     text-decoration: none;
-    color: #083e76;
 }
 
 a:hover {
@@ -108,16 +114,15 @@ div#tagcloud a:hover {
 }
 
 span.badchar {
-    color: #e00000;
+    color: var(--color-red);
 }
 
 span.whitespace {
-    background-color: #e00000;
+    background-color: var(--color-red);
 }
 
 .empty {
     font-style: italic;
-    color: #404040;
 }
 
 a.extlink:before {
@@ -136,8 +141,7 @@ a.section {
 /* ==========  */
 
 .button {
-    background-color: #f0f0f0;
-    color: #808080;
+    background-color: var(--color-lighter);
     border: 1px solid var(--color-border);
     padding: 2px 4px;
     border-radius: 4px;
@@ -203,7 +207,6 @@ div#header_date {
     right: 20px;
     font-size: 0.8rem;
     text-align: right;
-    color: #808080;
 }
 
 html[dir="rtl"] div#header_date {
@@ -257,6 +260,7 @@ input#search {
 #suggestions a {
     display: block;
     padding: 4px 6px;
+    color: var(--color-text);
     text-decoration: none;
 }
 
@@ -401,9 +405,9 @@ input:focus {
     ul#menu a {
         padding: 5px 10px;
         margin: 2px 5px;
+        color: var(--color-text);
         text-decoration: none;
         display: block;
-        color: #202020;
         text-align: right;
         font-size: 1.2rem;
     }
@@ -459,7 +463,7 @@ input:focus {
 
     div#tools a {
         text-decoration: none;
-        color: #202020;
+        color: var(--color-text);
     }
 }
 
@@ -641,7 +645,7 @@ div#tabs > ul > li > a {
     display: block;
     padding: 2px 8px 4px 8px;
     font-size: 1.2rem;
-    color: #505050;
+    color: var(--color-text);
     text-decoration: none;
 }
 
@@ -679,7 +683,7 @@ div#tabs form {
 span.badge {
     position: relative;
     top: -1px;
-    color: #202020;
+    color: var(--color-text);
     border: 1px solid var(--color-dark);
     font-weight: bold;
     font-size: 0.8rem;
@@ -688,15 +692,15 @@ span.badge {
 }
 
 span.lang {
-    background-color: #f0e0f0;
+    background-color: #f0e0f0; /* light violet */
 }
 
 span.unicode-script {
-    background-color: #e0f0e0;
+    background-color: #e0f0e0; /* light green */
 }
 
 span.unicode-gc {
-    background-color: #e0f0f0;
+    background-color: #e0f0f0; /* light cyan */
 }
 
 .note {
@@ -709,7 +713,7 @@ td.number {
 }
 
 span.char {
-    background-color: #f0f0f0;
+    background-color: var(--color-lighter);
     border: 1px solid var(--color-border);
     padding: 0 2px;
     border-radius: 4px;
@@ -819,13 +823,13 @@ table.list th {
 }
 
 table.list td {
-    background-color: #e8e8e4;
+    background-color: var(--color-stripe0);
     height: 22px;
     vertical-align: top;
 }
 
 table.list td.even {
-    background-color: #d0d0c8;
+    background-color: var(--color-stripe1);
 }
 
 table.list th.tl, table.list td.tl {
@@ -850,7 +854,7 @@ table.list td.nowrap {
 }
 
 table.list .warn {
-    color: #e00000;
+    color: var(--color-red);
 }
 
 /* ==========  */
@@ -872,7 +876,7 @@ table.desc > tbody > tr > th {
 
 table.desc > tbody > tr > td {
     vertical-align: top;
-    background-color: #f0f0f0;
+    background-color: var(--color-lighter);
     padding: 2px 4px;
     border-radius: 1px;
 }
@@ -892,11 +896,11 @@ ul.reportlist {
 /* ==========  */
 
 .good {
-    color: #00a000;
+    color: #00a000; /* green */
 }
 
 .bad {
-    color: #ff0000;
+    color: var(--color-red);
 }
 
 /* ==========  */
@@ -907,7 +911,7 @@ span.key {
     border: 1px solid var(--color-border);
     padding: 1px 4px;
     border-radius: 4px;
-    background-color: #f0f0f0;
+    background-color: var(--color-lighter);
     font-family: monospace;
 }
 
@@ -1356,6 +1360,7 @@ div.dt-toolbar div.dt-json:hover {
 }
 
 div.dt-toolbar div.dt-json a {
+    color: var(--color-text);
     text-decoration: none;
 }
 
@@ -1488,11 +1493,11 @@ div.dt-table div.dt-body.active {
 }
 
 div.dt-table div.dt-line0 {
-    background-color: #e8e8e4;
+    background-color: var(--color-stripe0);
 }
 
 div.dt-table div.dt-line1 {
-    background-color: #d0d0c8;
+    background-color: var(--color-stripe1);
 }
 
 /* ==========  */
