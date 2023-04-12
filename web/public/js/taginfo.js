@@ -1014,6 +1014,17 @@ class DynamicTable {
     }
 
     display(data) {
+        if (data.total == 0) {
+            this.total = 1;
+            this.toolbar.querySelector('.dt-page input').value = 0;
+            this.toolbar.querySelector('.dt-page span.dt-page-max').innerText = 0;
+            this.toolbar.querySelector('.dt-json a').setAttribute('href', data.url);
+
+            this.toolbar.querySelector('.dt-info').innerHTML = texts.flexigrid.nomsg;
+            this.clear();
+            return;
+        }
+
         this.total = data.total;
 
         if (this.toolbar) {
@@ -1086,7 +1097,7 @@ class DynamicTable {
         return build_link(this.config.url, p);
     }
 
-    load() {
+    async load() {
         if (this.toolbar) {
             if (window.innerWidth <= 800) {
                 this.toolbar.querySelector('.dt-info').innerText = '...';
@@ -1100,10 +1111,20 @@ class DynamicTable {
         }
 
         this.controller = new AbortController();
-        fetch(this.buildURL(), { signal: this.controller.signal })
-            .then( response => response.json() )
-            .then( data => this.config.preProcess(data) )
-            .then( data => { this.controller = undefined; this.display.apply(this, [data]); });
+
+        try {
+            const response = await fetch(this.buildURL(), { signal: this.controller.signal });
+            if (!response.ok) {
+                throw new Error("Network error");
+            }
+            const json = await response.json();
+            this.controller = undefined
+            const data = this.config.preProcess(json)
+            this.display(data);
+        } catch (error) {
+            this.clear();
+            this.toolbar.querySelector('.dt-info').innerHTML = '<span class="bad">' + texts.flexigrid.errormsg + '</span>';
+        }
     }
 }
 
