@@ -6,7 +6,7 @@ class Taginfo < Sinatra::Base
         :parameters => {
             :string => 'Character string (required).'
         },
-        :paging => :yes,
+        :paging => :optional,
         :result => paging_results([
             [:char,        :TEXT, 'Unicode character.'],
             [:codepoint,   :INT,  'Unicode code point.'],
