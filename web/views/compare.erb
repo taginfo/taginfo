@@ -47,20 +47,28 @@
 
 .comparison > div.map {
     border-radius: 0 0 10px 10px;
-    height: 100%;
-}
-
-.comparison > div.map img.map {
-    position: relative;
-    width: auto;
+    display: flex;
 }
 
 .comparison > div.map div {
-    background-image: url(#{ @taginfo_config.get('geodistribution.background_image') });
-    background-repeat: no-repeat;
-    background-position: center 2px;
-    background-size: #{ @img_width }px #{ @img_height }px;
     position: relative;
+    margin: auto;
+}
+
+.comparison > div.map img.map-fg {
+    position: relative;
+    display: block;
+    width: auto;
+    height: auto;
+}
+
+.comparison > div.map img.map-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    z-index: 1;
 }
 
 html[dir="rtl"] .comparison a.close {
@@ -138,14 +146,6 @@ CSS
     <div class="projects item<%= num %>">
         <div><b><%= h(t.pages[key_or_tag].projects.title) %>:</b> </div>
     </div>
-    <div class="map item<%= num %>">
-<% if data[:has_map] %>
-        <div>
-            <img class="map" src="/api/4/<%= key_or_tag %>/distribution/nodes?key=<%= data[:key] %><%= data[:value].nil? ? '' : ('&amp;value=' + data[:value]) %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>" style="position: absolute;"/>
-            <img class="map" src="/api/4/<%= key_or_tag %>/distribution/ways?key=<%= data[:key] %><%= data[:value].nil? ? '' : ('&amp;value=' + data[:value]) %>" alt="" width="<%= @img_width %>" height="<%= @img_height %>"/>
-            <div class="note"><%= @taginfo_config.get('geodistribution.image_attribution') %></div>
-        </div>
-<% end %>
-    </div>
+    <div class="map item<%= num %>"><div></div></div>
 <% end %>
 <% end %>
