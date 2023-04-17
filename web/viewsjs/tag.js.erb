@@ -5,7 +5,7 @@
     page = @trans.t.pages.tag
  %>
 function link_to_key_or_tag(key, value) {
-    var link = link_to_key(key) + '=';
+    let link = link_to_key(key) + '=';
     if (value && value != '') {
         link += link_to_value(key, value, { 'class': 'pref' });
     } else {
@@ -14,17 +14,16 @@ function link_to_key_or_tag(key, value) {
     return link;
 }
 
-var create_flexigrid_for = {
+const tabsConfig = {
     overview: function(key, value, filter_type) {
-        create_flexigrid('grid-overview', {
+        return new DynamicTable('grid-overview', {
             url: '/api/4/tag/stats',
             params: { key: key, value: value },
             colModel: [
                 { display: '<%= h(misc.object_type) %>', name: 'type', width: 100, sortable: true },
                 { display: '<%= h(page.number_objects) %>', name: 'count', width: 260, sortable: true, align: 'center' }
             ],
-            usepager: false,
-            useRp: false,
+            usePager: false,
             preProcess: function(data) {
                 return {
                     total: 4,
@@ -40,7 +39,7 @@ var create_flexigrid_for = {
         });
     },
     combinations: function(key, value, filter_type) {
-        create_flexigrid('grid-combinations', {
+        return new DynamicTable('grid-combinations', {
             url: '/api/4/tag/combinations',
             params: { key: key, value: value, filter: filter_type },
             colModel: [
@@ -57,7 +56,7 @@ var create_flexigrid_for = {
                 data.rows = data.data.map(function(row) {
                     return { 'cell': [
                         fmt_value_with_percent(row.together_count, row.to_fraction),
-                        link_to_key_or_tag(row.other_key, row.other_value),
+                        hover_expand(link_to_key_or_tag(row.other_key, row.other_value)),
                         fmt_value_with_percent(row.together_count, row.from_fraction),
                     ] };
                 });
@@ -66,12 +65,13 @@ var create_flexigrid_for = {
         });
     },
     chronology: function(key, value) {
-        fetch(build_link('/api/4/tag/chronology', { key: key, value: value })).
-            then(response => response.json()).
-            then(data => draw_chronology_chart(data.data, filter.value));
+        return new ChartChronology(build_link('/api/4/tag/chronology', { key: key, value: value }), filter.value);
     },
     wiki: function(key, value) {
-        create_flexigrid('grid-wiki', {
+        if (!document.getElementById('grid-wiki')) {
+            return [];
+        }
+        return new DynamicTable('grid-wiki', {
             url: '/api/4/tag/wiki_pages',
             params: { key: key, value: value },
             colModel: [
@@ -85,6 +85,7 @@ var create_flexigrid_for = {
                 { display: '<%= h(page.wiki_pages.combined_tags) %>', name: 'tags_combination', width: 120, sortable: false },
                 { display: '<%= h(page.wiki_pages.linked_tags) %>', name: 'tags_linked', width: 220, sortable: false }
             ],
+            usePager: false,
             preProcess: function(data) {
                 data.rows = data.data.map(function(row) {
                     return { 'cell': [
@@ -107,7 +108,7 @@ var create_flexigrid_for = {
         });
     },
     projects: function(key, value, filter_type) {
-        create_flexigrid('grid-projects', {
+        return new DynamicTable('grid-projects', {
             url: '/api/4/tag/projects',
             params: { key: key, value: value, filter: filter_type },
             colModel: [
@@ -124,8 +125,8 @@ var create_flexigrid_for = {
             preProcess: function(data) {
                 data.rows = data.data.map(function(row) {
                     return { 'cell': [
-                        link_to_project(row.project_id, row.project_name),
-                        row.value === null ? (link_to_key(row.key) + '=*') : link_to_tag(row.key, row.value),
+                        hover_expand(link_to_project(row.project_id, row.project_name)),
+                        hover_expand(row.value === null ? (link_to_key(row.key) + '=*') : link_to_tag(row.key, row.value)),
                         fmt_type_icon('node',     row.on_node) +
                         fmt_type_icon('way',      row.on_way) +
                         fmt_type_icon('area',     row.on_area) +
@@ -138,7 +139,7 @@ var create_flexigrid_for = {
         });
     },
     characters: function(key, value, filter_type) {
-        return create_characters_flexigrid(value);
+        return createCharactersTable(value);
     }
 };
 
@@ -161,5 +162,5 @@ function page_init() {
     set_inner_html_to('keylink', link_to_key(key));
     set_inner_html_to('relationlink', link_to_rtype(value));
 
-    init_tabs([key, value, filter.value]);
+    initTabs(tabsConfig, [key, value, filter.value]);
 }

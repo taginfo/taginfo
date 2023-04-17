@@ -4,17 +4,16 @@
     taginfo = @trans.t.taginfo
     page = @trans.t.pages.relation
  %>
-var create_flexigrid_for = {
+const tabsConfig = {
     overview: function(rtype) {
-        create_flexigrid('grid-overview', {
+        return new DynamicTable('grid-overview', {
             url: '/api/4/relation/stats',
             params: { rtype: rtype },
             colModel: [
                 { display: '<%= h(page.overview.member_type) %>', name: 'type', width: 100, sortable: true },
                 { display: '<%= h(page.overview.member_count) %>', name: 'count', width: 260, sortable: true, align: 'right' }
             ],
-            usepager: false,
-            useRp: false,
+            usePager: false,
             preProcess: function(data) {
                 return {
                     total: 4,
@@ -30,7 +29,7 @@ var create_flexigrid_for = {
         });
     },
     roles: function(rtype) {
-        create_flexigrid('grid-roles', {
+        return new DynamicTable('grid-roles', {
             url: '/api/4/relation/roles',
             params: { rtype: rtype },
             colModel: [
@@ -59,8 +58,11 @@ var create_flexigrid_for = {
             }
         });
     },
+    graph: function(rtype) {
+        return new ChartRoles('chart-roles', rtype);
+    },
     wiki: function(rtype) {
-        create_flexigrid('grid-wiki', {
+        return new DynamicTable('grid-wiki', {
             url: '/api/4/relation/wiki_pages',
             params: { rtype: rtype },
             colModel: [
@@ -69,6 +71,7 @@ var create_flexigrid_for = {
                 { display: '<%= h(misc.description) %>', name: 'description', width: 500, sortable: false },
                 { display: '<%= h(misc.image) %>', name: 'image', width: 300, sortable: false }
             ],
+            usePager: false,
             preProcess: function(data) {
                 return {
                     total: data.total,
@@ -86,7 +89,7 @@ var create_flexigrid_for = {
         });
     },
     projects: function(rtype) {
-        create_flexigrid('grid-projects', {
+        return new DynamicTable('grid-projects', {
             url: '/api/4/relation/projects',
             params: { rtype: rtype },
             colModel: [
@@ -101,7 +104,7 @@ var create_flexigrid_for = {
             preProcess: function(data) {
                 data.rows = data.data.map(function(row) {
                     return { 'cell': [
-                        link_to_project(row.project_id, row.project_name, row.project_icon_url),
+                        hover_expand(link_to_project(row.project_id, row.project_name, row.project_icon_url)),
                         project_tag_desc(row.description, row.icon_url, row.doc_url)
                     ] };
                 });
@@ -110,22 +113,23 @@ var create_flexigrid_for = {
         });
     },
     characters: function(rtype) {
-        return create_characters_flexigrid(rtype);
+        return createCharactersTable(rtype);
     }
 };
 
 class ChartRoles {
-    data;
+    id;
     element;
     rtype;
+    data;
 
     constructor(id, rtype) {
+        this.id = id;
         this.element = document.getElementById(id);
         this.rtype = rtype;
     }
 
     load() {
-        let foo = this;
         fetch(build_link('/api/4/relation/roles', { sortname: 'count_all_members', sortorder: 'asc', min_fraction: 0.01, rtype: this.rtype }))
             .then(response => response.json())
             .then(roles => this.init(roles));
@@ -144,7 +148,7 @@ class ChartRoles {
                 let title = '' + count + ' member ' + type + 's with ';
                 let label;
                 if (r.role === null) {
-                    title += "other roles";
+                    title += 'other roles';
                     label = '...';
                 } else {
                     title += "role '" + r.role + "'";
@@ -161,6 +165,10 @@ class ChartRoles {
             }
         }
 
+        this.draw();
+    }
+
+    resize() {
         this.draw();
     }
 
@@ -191,7 +199,7 @@ class ChartRoles {
             .attr('width', width + 20)
             .attr('height', height)
             .append('g')
-                .attr('transform', "translate(" + 2 * margin + "," + margin + ")");
+                .attr('transform', 'translate(' + 2 * margin + ',' + margin + ')');
 
         const root = d3.hierarchy(d3.group(this.data, d => d.type, d => d.role));
 
@@ -207,20 +215,20 @@ class ChartRoles {
                 .enter().append('a')
                     .attr('class', 'role')
                     .style('text-decoration', 'none')
-                    .attr("xlink:title", d => d.data.title)
+                    .attr('xlink:title', d => d.data.title)
                     .call(function(c) {
-                        c.append("rect")
+                        c.append('rect')
                             .attr('x', d => d.x0)
                             .attr('y', d => d.y0)
                             .attr('width', d => d.x1 - d.x0)
                             .attr('height', d => d.y1 - d.y0)
-                            .style("fill", d => color(d.data.role));
-                        c.append("text")
-                            .attr("x", d => d.x0 + (d.x1 - d.x0) / 2)
-                            .attr("y", d => d.y0 + (d.y1 - d.y0) / 2)
-                            .attr("dy", 4)
-                            .attr("text-anchor", "middle")
-                            .style("fill", "#fff")
+                            .style('fill', d => color(d.data.role));
+                        c.append('text')
+                            .attr('x', d => d.x0 + (d.x1 - d.x0) / 2)
+                            .attr('y', d => d.y0 + (d.y1 - d.y0) / 2)
+                            .attr('dy', 4)
+                            .attr('text-anchor', 'middle')
+                            .style('fill', '#fff')
                             .text(function(d) {
                                 if (d.x1 - d.x0 > 40 && d.y1 - d.y0 > 10) {
                                     return d.data.label;
@@ -231,76 +239,76 @@ class ChartRoles {
                     });
 
         // Add x-axis ticks.
-        const xtick = svg.selectAll(".x")
+        const xtick = svg.selectAll('.x')
             .data(x.ticks(width > 480 ? 10 : width > 240 ? 5 : 2))
-            .enter().append("g")
-                .attr("class", "x")
-                .attr("transform", function(d) { return "translate(" + x(d) + "," + y(1) + ")"; });
+            .enter().append('g')
+                .attr('class', 'x')
+                .attr('transform', d => 'translate(' + x(d) + ',' + y(1) + ')');
 
-        xtick.append("line")
-            .attr("y2", 6)
-            .style("stroke", "#000");
+        xtick.append('line')
+            .attr('y2', 6)
+            .style('stroke', '#000');
 
-        xtick.append("text")
-            .attr("y", 8)
-            .attr("text-anchor", "middle")
-            .attr("dy", ".71em")
+        xtick.append('text')
+            .attr('y', 8)
+            .attr('text-anchor', 'middle')
+            .attr('dy', '.71em')
             .text(percent);
 
         // Add y-axis ticks.
-        const ytick = svg.selectAll(".y")
+        const ytick = svg.selectAll('.y')
             .data(y.ticks(10))
-            .enter().append("g")
-                .attr("class", "y")
-                .attr("transform", function(d) { return "translate(0," + y(1 - d) + ")"; });
+            .enter().append('g')
+                .attr('class', 'y')
+                .attr('transform', d => 'translate(0,' + y(1 - d) + ')');
 
-        ytick.append("line")
-            .attr("x1", -6)
-            .style("stroke", "#000");
+        ytick.append('line')
+            .attr('x1', -6)
+            .style('stroke', '#000');
 
-        ytick.append("text")
-            .attr("x", -8)
-            .attr("text-anchor", "end")
-            .attr("dy", ".35em")
+        ytick.append('text')
+            .attr('x', -8)
+            .attr('text-anchor', 'end')
+            .attr('dy', '.35em')
             .text(percent);
 
         // Add a group for each member type.
-        const member_types_svg = svg.selectAll(".member_types")
+        const member_types_svg = svg.selectAll('.member_types')
             .data(root.children)
-            .enter().append("g")
-                .attr("class", "member_types")
-                .attr("transform", d => 'translate(' + d.x0 + ', -6)')
+            .enter().append('g')
+                .attr('class', 'member_types')
+                .attr('transform', d => 'translate(' + d.x0 + ', -6)')
                 .call(function(c) {
-                    c.append("line")
-                        .attr("x1", 0)
-                        .attr("y1", -3.7)
-                        .attr("x2", d => d.x1 - d.x0 )
-                        .attr("y2", -3.7)
-                        .style("stroke", "#000");
-                    c.append("text")
-                        .attr("x", 0)
-                        .attr("text-anchor", "start")
+                    c.append('line')
+                        .attr('x1', 0)
+                        .attr('y1', -3.7)
+                        .attr('x2', d => d.x1 - d.x0 )
+                        .attr('y2', -3.7)
+                        .style('stroke', '#000');
+                    c.append('text')
+                        .attr('x', 0)
+                        .attr('text-anchor', 'start')
                         .text(d => (d.x1 - d.x0) > 10 ? '<' : '');
-                    c.append("text")
-                        .attr("x", d => d.x1 - d.x0 )
-                        .attr("text-anchor", "end")
+                    c.append('text')
+                        .attr('x', d => d.x1 - d.x0 )
+                        .attr('text-anchor', 'end')
                         .text(d => (d.x1 - d.x0) > 10 ? '>' : '');
-                    c.append("text")
-                        .attr("x", d => (d.x1 - d.x0) / 2 )
-                        .attr("text-anchor", "middle")
-                        .style("stroke", "#ddddd4")
-                        .style("stroke-width", 4)
-                        .style("fill", "#000")
+                    c.append('text')
+                        .attr('x', d => (d.x1 - d.x0) / 2 )
+                        .attr('text-anchor', 'middle')
+                        .style('stroke', '#ddddd4')
+                        .style('stroke-width', 4)
+                        .style('fill', '#000')
                         .text(d => (d.x1 - d.x0) > 40 ? texts.osm[d.data[0]] : '');
-                    c.append("text")
-                        .attr("x", d => (d.x1 - d.x0) / 2 )
-                        .attr("text-anchor", "middle")
-                        .style("fill", "#000")
+                    c.append('text')
+                        .attr('x', d => (d.x1 - d.x0) / 2 )
+                        .attr('text-anchor', 'middle')
+                        .style('fill', '#000')
                         .text(d => (d.x1 - d.x0) > 40 ? texts.osm[d.data[0]] : '');
                 });
 
     }
-}
+} // class ChartRoles
 
 function page_init() {
     up = function() { window.location = build_link('/relations'); };
@@ -311,11 +319,5 @@ function page_init() {
     h1.innerHTML += fmt_rtype(rtype);
     set_inner_html_to('taglink', link_to_value('type', rtype));
 
-    const chart = new ChartRoles('chart-roles', rtype);
-
-    init_tabs([rtype], {
-        'graph': () => chart.draw()
-    });
-
-    redraw_on_resize(chart);
+    initTabs(tabsConfig, [rtype]);
 }

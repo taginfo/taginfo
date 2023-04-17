@@ -4,35 +4,37 @@
     taginfo = @trans.t.taginfo
     page = @trans.t.pages.key
  %>
-var create_flexigrid_for = {
+const tabsConfig = {
     overview: function(key, filter_type) {
-        create_flexigrid('grid-overview', {
-            url: '/api/4/key/stats',
-            params: { key: key },
-            colModel: [
-                { display: '<%= h(misc.object_type) %>', name: 'type', width: 100, sortable: true },
-                { display: '<%= h(page.number_objects) %>', name: 'count', width: 260, sortable: true, align: 'center' },
-                { display: '<%= h(page.number_values) %>', name: 'value', width: 140, sortable: true, align: 'right' }
-            ],
-            usepager: false,
-            useRp: false,
-            preProcess: function(data) {
-                return {
-                    total: 4,
-                    page: 1,
-                    rows: data.data.map(function(row) {
-                        return { 'cell': [
-                            fmt_type_image(row.type),
-                            fmt_value_with_percent(row.count, row.count_fraction),
-                            fmt_with_ts(row.values)
-                        ]};
-                    })
-                };
-            }
-        });
+        return [
+            new DynamicTable('grid-overview', {
+                url: '/api/4/key/stats',
+                params: { key: key },
+                colModel: [
+                    { display: '<%= h(misc.object_type) %>', name: 'type', width: 100, sortable: true },
+                    { display: '<%= h(page.number_objects) %>', name: 'count', width: 260, sortable: true, align: 'center' },
+                    { display: '<%= h(page.number_values) %>', name: 'value', width: 140, sortable: true, align: 'right' }
+                ],
+                usePager: false,
+                preProcess: function(data) {
+                    return {
+                        total: 4,
+                        page: 1,
+                        rows: data.data.map(function(row) {
+                            return { 'cell': [
+                                fmt_type_image(row.type),
+                                fmt_value_with_percent(row.count, row.count_fraction),
+                                fmt_with_ts(row.values)
+                            ]};
+                        })
+                    };
+                }
+            }),
+            new ChartValues(key, filter_type)
+        ];
     },
     values: function(key, filter_type, lang) {
-        create_flexigrid('grid-values', {
+        return new DynamicTable('grid-values', {
             url: '/api/4/key/values',
             params: { key: key, filter: filter_type, lang: lang },
             colModel: [
@@ -61,7 +63,7 @@ var create_flexigrid_for = {
         });
     },
     combinations: function(key, filter_type) {
-        create_flexigrid('grid-combinations', {
+        return new DynamicTable('grid-combinations', {
             url: '/api/4/key/combinations',
             params: { key: key, filter: filter_type },
             colModel: [
@@ -78,7 +80,7 @@ var create_flexigrid_for = {
                 data.rows = data.data.map(function(row) {
                     return { 'cell': [
                         fmt_value_with_percent(row.together_count, row.to_fraction),
-                        link_to_key(row.other_key),
+                        hover_expand(link_to_key(row.other_key)),
                         fmt_value_with_percent(row.together_count, row.from_fraction),
                     ] };
                 });
@@ -87,7 +89,7 @@ var create_flexigrid_for = {
         });
     },
     similar: function(key) {
-        create_flexigrid('grid-similar', {
+        return new DynamicTable('grid-similar', {
             url: '/api/4/key/similar',
             params: { key: key },
             colModel: [
@@ -103,7 +105,7 @@ var create_flexigrid_for = {
             preProcess: function(data) {
                 data.rows = data.data.map(function(row) {
                     return { 'cell': [
-                        link_to_key_with_highlight(row.other_key, key),
+                        hover_expand(link_to_key_with_highlight(row.other_key, key)),
                         row.count_all,
                         row.similarity
                     ] };
@@ -113,12 +115,10 @@ var create_flexigrid_for = {
         });
     },
     chronology: function(key) {
-        fetch(build_link('/api/4/key/chronology', { key: key })).
-            then(response => response.json()).
-            then(data => draw_chronology_chart(data.data, filter.value));
+        return new ChartChronology(build_link('/api/4/key/chronology', { key: key }), filter.value);
     },
     wiki: function(key, filter_type) {
-        create_flexigrid('grid-wiki', {
+        return new DynamicTable('grid-wiki', {
             url: '/api/4/key/wiki_pages',
             params: { key: key },
             colModel: [
@@ -132,6 +132,7 @@ var create_flexigrid_for = {
                 { display: '<%= h(page.wiki_pages.combined_tags) %>', name: 'tags_combination', width: 120, sortable: false },
                 { display: '<%= h(page.wiki_pages.linked_tags) %>', name: 'tags_linked', width: 220, sortable: false }
             ],
+            usePager: false,
             preProcess: function(data) {
                 data.rows = data.data.map(function(row) {
                     return { 'cell': [
@@ -154,7 +155,7 @@ var create_flexigrid_for = {
         });
     },
     projects: function(key, filter_type) {
-        create_flexigrid('grid-projects', {
+        return new DynamicTable('grid-projects', {
             url: '/api/4/key/projects',
             params: { key: key, filter: filter_type },
             colModel: [
@@ -171,8 +172,8 @@ var create_flexigrid_for = {
             preProcess: function(data) {
                 data.rows = data.data.map(function(row) {
                     return { 'cell': [
-                        link_to_project(row.project_id, row.project_name),
-                        row.value === null ? (link_to_key(row.key) + '=*') : link_to_tag(row.key, row.value),
+                        hover_expand(link_to_project(row.project_id, row.project_name)),
+                        hover_expand(row.value === null ? (link_to_key(row.key) + '=*') : link_to_tag(row.key, row.value)),
                         fmt_type_icon('node',     row.on_node) +
                         fmt_type_icon('way',      row.on_way) +
                         fmt_type_icon('area',     row.on_area) +
@@ -185,69 +186,93 @@ var create_flexigrid_for = {
         });
     },
     characters: function(key, filter_type) {
-        return create_characters_flexigrid(key);
+        return createCharactersTable(key);
     }
 };
 
-function create_chart(params) {
-    let y = 0;
-    params.data.forEach(function(d) {
-        d['y'] = y;
-        y += d['count'];
-        if (d.value === null) {
-            d.label = '(other)';
-        } else {
-            d.label = d.value;
-        }
-    });
+class ChartValues {
+    id = 'chart-values';
+    key;
+    url;
+    data;
 
-    const scale = d3.scaleLinear()
-                    .domain([0, params.max])
-                    .range([0, params.height]);
-
-    const color = d3.scaleOrdinal()
-                    .range(d3_colors());
-
-    const chart = d3.select('#canvas-values').append('svg')
-                    .attr('width', params.width)
-                    .attr('height', params.height);
-
-    chart.selectAll('rect')
-        .data(params.data)
-        .enter()
-        .append('svg:a')
-            .attr('href', d => url_for_tag(params.key, d.label))
-            .attr('transform', d => 'translate(10, ' + scale(d['y']) + ')')
-            .call(function(c) {
-                c.append('rect')
-                    .attr('width', 20)
-                    .attr('height', d => scale(d['count']))
-                    .style('fill', (d, i) => color(i));
-            })
-            .append('text')
-                .attr('x', 25)
-                .attr('y', d => scale(d['count'] / 2))
-                .attr('dy', '0.5em')
-                .text(d => d.label);
-
-    const other = document.querySelector('svg a[href$="(other)"]');
-    if (other) {
-        other.removeAttribute('href');
-        other.style.textDecoration = 'none';
+    constructor(key, filter) {
+        this.key = key;
+        this.url = build_link('/api/4/key/prevalent_values', { min_fraction: 0.02, key: key, filter: filter });
     }
-}
 
-function redraw_chart(prevalent_values) {
-    set_inner_html_to('canvas-values', '');
-    const max_height = window.innerHeight - 300;
-    create_chart({
-        key: document.querySelector('h1').dataset.key,
-        width: 160,
-        height: Math.min(440, max_height),
-        max: document.getElementById('canvas-values').dataset.count,
-        data: prevalent_values
-    });
-}
+    async load() {
+        const response = await fetch(this.url);
+        const json = await response.json();
+        this.data = json.data;
+        this.draw();
+    }
+
+    colors() {
+        return ['#1f77b4', '#aec7e8', '#ff7f0e', '#ffbb78', '#2ca02c',
+                '#98df8a', '#d62728', '#ff9896', '#9467bd', '#c5b0d5',
+                '#8c564b', '#c49c94', '#e377c2', '#f7b6d2', '#7f7f7f',
+                '#c7c7c7', '#bcbd22', '#dbdb8d', '#17becf', '#9edae5'];
+    }
+
+    draw() {
+        set_inner_html_to('canvas-values', '');
+        const max_height = window.innerHeight - 300;
+        const width = 160;
+        const height = Math.min(440, max_height);
+        const max = document.getElementById('canvas-values').dataset.count;
+
+        let y = 0;
+        this.data.forEach(function(d) {
+            d['y'] = y;
+            y += d['count'];
+            if (d.value === null) {
+                d.label = '(other)';
+            } else {
+                d.label = d.value;
+            }
+        });
+
+        const scale = d3.scaleLinear()
+                        .domain([0, max])
+                        .range([0, height]);
+
+        const color = d3.scaleOrdinal()
+                        .range(this.colors());
+
+        const chart = d3.select('#canvas-values').append('svg')
+                        .attr('width', width)
+                        .attr('height', height);
+
+        chart.selectAll('rect')
+            .data(this.data)
+            .enter()
+            .append('svg:a')
+                .attr('href', d => url_for_tag(this.key, d.label))
+                .attr('transform', d => 'translate(10, ' + scale(d['y']) + ')')
+                .call(function(c) {
+                    c.append('rect')
+                        .attr('width', 20)
+                        .attr('height', d => scale(d['count']))
+                        .style('fill', (d, i) => color(i));
+                })
+                .append('text')
+                    .attr('x', 25)
+                    .attr('y', d => scale(d['count'] / 2))
+                    .attr('dy', '0.5em')
+                    .text(d => d.label);
+
+        const other = document.querySelector('svg a[href$="(other)"]');
+        if (other) {
+            other.removeAttribute('href');
+            other.style.textDecoration = 'none';
+        }
+    }
+
+    resize() {
+        this.draw();
+    }
+} // class ChartValues
 
 function page_init() {
     up = function() { window.location = build_link('/keys'); }
@@ -264,13 +289,5 @@ function page_init() {
 
     new ComparisonListDisplay(key);
 
-    init_tabs([key, filter.value, '<%= r18n.locale.code %>']);
-
-    fetch(build_link('/api/4/key/prevalent_values', { min_fraction: 0.02, key: key, filter: filter.value })).
-            then(response => response.json()).
-            then(function(data) {
-                const prevalent_values = data.data;
-                redraw_chart(prevalent_values);
-                window.addEventListener('resize', () => redraw_chart(prevalent_values) );
-    });
+    initTabs(tabsConfig, [key, filter.value, '<%= r18n.locale.code %>']);
 }

@@ -2,10 +2,104 @@
     osm = @trans.t.osm
     misc = @trans.t.misc
     page = @trans.t.reports.key_lengths
- %>
-var create_flexigrid_for = {
+
+    hist = []
+    max_length = 60
+    @db.execute("SELECT min(length(key), #{ max_length }) AS length, count(*) AS count FROM db.keys GROUP BY 1 ORDER BY 1") do |row|
+        hist[row['length'].to_i] = row['count'].to_i
+    end
+    hist = hist.map{ |item| item.nil? ? 0 : item }
+%>
+
+class ChartKeyLengthHistogram {
+    data;
+    max;
+
+    constructor(data, max) {
+        this.data = data;
+        this.max = max;
+    }
+
+    draw() {
+        const barWidth = 6;
+        const barSkip = 2;
+        const barStep = barWidth + barSkip;
+        const width = barStep * this.data.length;
+        const height = Math.min(400, document.getElementById('tabs').getBoundingClientRect().height - 160);
+        const margin = { top: 10, right: 15, bottom: 60, left: 60 };
+
+        const scaleY = d3.scaleLinear()
+                        .domain([0, this.max])
+                        .range([height, 0]);
+
+        const chart = d3.select('#canvas-histogram').append('svg')
+                        .attr('width', width + margin.left + margin.right)
+                        .attr('height', height + margin.top + margin.bottom)
+                        .append('g')
+                            .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
+                            .call(function(c) {
+                                c.append('rect')
+                                    .attr('width', width)
+                                    .attr('height', height + 10)
+                                    .attr('y', -5)
+                                    .style('fill', 'white')
+                                    .style('stroke', '#d0d0c8')
+                            });
+
+        chart.append('g')
+            .attr('class', 'x axis')
+            .attr('transform', 'translate(0, ' + (height + 10) + ')')
+            .append('text')
+                .attr('x', width / 2)
+                .attr('y', 36)
+                .style('text-anchor', 'middle')
+                .text('<%= page.histogram.key_length %>');
+
+        chart.append('g')
+            .attr('class', 'y axis')
+            .style('fill', 'black')
+            .call(d3.axisLeft(scaleY))
+            .append('text')
+                .attr('transform', 'rotate(-90)')
+                .attr('x', -height / 2)
+                .attr('y', -50)
+                .style('text-anchor', 'middle')
+                .text('<%= page.histogram.number_of_keys %>');
+
+        chart.selectAll('rect')
+            .data(this.data)
+            .enter()
+            .append('g')
+                .call(function(c) {
+                    c.append('g')
+                        .attr('transform', function(d, i) { return 'translate(' + (i * barStep + barStep / 2) + ', ' + (height + 10) + ')';})
+                        .style('display', function(d, i) { return i == 1 || i % 10 == 0 ? '' : 'none'; })
+                        .call(function(t) {
+                            t.append('text')
+                                .attr('y', 16)
+                                .style('text-anchor', 'middle')
+                                .text((d, i) => i == <%= max_length %> ? '>=' + <%= max_length %> : i)
+                        })
+                        .append('line')
+                            .style('stroke', 'black')
+                            .style('shape-rendering', 'crispEdges')
+                            .attr('y2', 6);
+                })
+            .append('rect')
+                .style('fill', '#083e76')
+                .attr('x', (d, i) => i * barStep)
+                .attr('y', d => scaleY(d))
+                .attr('width', barWidth)
+                .attr('height', d => height - scaleY(d))
+                .attr('title', (d, i) => '' + d + ' keys of length ' + i);
+
+    }
+
+} // class ChartKeyLengthHistogram
+
+const tabsConfig = {
     keys: function() {
-        create_flexigrid('grid-keys', {
+        return new DynamicTable('grid-keys', {
             url: '/api/4/keys/all',
             params: { include: 'prevalent_values' },
             colModel: [
@@ -35,92 +129,16 @@ var create_flexigrid_for = {
                 return data;
             }
         });
+    },
+    histogram: function() {
+        const data = <%= hist.to_json %>;
+        const max = <%= hist.max %>;
+        const chart = new ChartKeyLengthHistogram(data, max);
+        chart.draw();
     }
 };
 
-<%
-hist = Array.new
-max_length = 60
-@db.execute("SELECT min(length(key), #{ max_length }) AS length, count(*) AS count FROM db.keys GROUP BY 1 ORDER BY 1") do |row|
-    hist[row['length'].to_i] = row['count'].to_i
-end
-hist = hist.map{ |item| item.nil? ? 0 : item } %>
-
 function page_init() {
     up = function() { window.location = build_link('/reports'); };
-    init_tabs([]);
-
-    var bar_width = 6,
-        bar_skip = 2,
-        bar_step = bar_width + bar_skip,
-        data = <%= hist.to_json %>,
-        w = bar_step * data.length,
-        h = Math.min(400, document.getElementById('tabs').getBoundingClientRect().height - 160),
-        margin = { top: 10, right: 15, bottom: 60, left: 60 };
-
-    var scale_y = d3.scaleLinear()
-                    .domain([0, <%= hist.max %>])
-                    .range([h, 0]);
-
-    var chart = d3.select('#canvas-histogram').append('svg')
-                    .attr('width', w + margin.left + margin.right)
-                    .attr('height', h + margin.top + margin.bottom)
-                    .append('g')
-                        .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
-                        .call(function(c) {
-                            c.append('rect')
-                                .attr('width', w)
-                                .attr('height', h + 10)
-                                .attr('y', -5)
-                                .style('fill', 'white')
-                                .style('stroke', '#d0d0c8')
-                        });
-
-    chart.append('g')
-        .attr('class', 'x axis')
-        .attr('transform', 'translate(0, ' + (h + 10) + ')')
-        .append('text')
-            .attr('x', w/2)
-            .attr('y', 36)
-            .style('text-anchor', 'middle')
-            .text('<%= page.histogram.key_length %>');
-
-    chart.append('g')
-        .attr('class', 'y axis')
-        .style('fill', 'black')
-        .call(d3.axisLeft(scale_y))
-        .append('text')
-            .attr('transform', 'rotate(-90)')
-            .attr('x', -h/2)
-            .attr('y', -50)
-            .style('text-anchor', 'middle')
-            .text('<%= page.histogram.number_of_keys %>');
-
-    chart.selectAll('rect')
-        .data(data)
-        .enter()
-        .append('g')
-            .call(function(c) {
-                c.append('g')
-                    .attr('transform', function(d, i) { return 'translate(' + (i * bar_step + bar_step/2) + ', ' + (h+10) + ')';})
-                    .style('display', function(d, i) { return i == 1 || i % 10 == 0 ? '' : 'none'; })
-                    .call(function(t) {
-                        t.append('text')
-                            .attr('y', 16)
-                            .style('text-anchor', 'middle')
-                            .text((d, i) => i == <%= max_length %> ? '>=' + <%= max_length %> : i)
-                    })
-                    .append('line')
-                        .style('stroke', 'black')
-                        .style('shape-rendering', 'crispEdges')
-                        .attr('y2', 6);
-            })
-        .append('rect')
-            .style('fill', '#083e76')
-            .attr('x', (d, i) => i * bar_step)
-            .attr('y', d => scale_y(d))
-            .attr('width', bar_width)
-            .attr('height', d => h - scale_y(d))
-            .attr('title', (d, i) => '' + d + ' keys of length ' + i);
-
+    initTabs(tabsConfig);
 }

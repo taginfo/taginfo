@@ -1,10 +1,54 @@
 // taginfo.js
 
-var grids = {},
-    current_grid = '',
-    tabs = null,
+var tabs = null,
     autocomplete = null,
     up = function() { window.location = build_link('/'); };
+
+/* ============================ */
+
+class WidgetManager {
+    timer;
+    widgets = {};
+
+    constructor() {
+        window.addEventListener('resize', () => {
+            clearTimeout(this.timer);
+            this.timer = setTimeout(this.resize.bind(this), 250);
+        });
+
+        document.addEventListener('keyup', event => this.keyUp.call(this, event) );
+    }
+
+    addWidget(widget) {
+        this.widgets[widget.id] = widget;
+    }
+
+    resize() {
+        for (const id in this.widgets) {
+            const widget = this.widgets[id];
+            widget.resize.apply(widget);
+        }
+    }
+
+    keyUp(event) {
+        if (event.ctrlKey || event.altKey || event.metaKey) {
+            return;
+        }
+
+        if (event.target != document.body) {
+            return;
+        }
+
+        for (const id in this.widgets) {
+            if (this.widgets[id].keyUp) {
+                this.widgets[id].keyUp(event);
+                return;
+            }
+        }
+    }
+} // class WidgetManager
+
+let widgetManager = new WidgetManager();
 
 /* ============================ */
 
@@ -18,8 +62,8 @@ function initTooltips() {
             tooltip.removeAttribute('title');
         }
 
-        tooltip.addEventListener("mouseenter", function(ev) {
-            ev.preventDefault();
+        tooltip.addEventListener("mouseenter", function(event) {
+            event.preventDefault();
 
             const b = this.getBoundingClientRect();
 
@@ -41,20 +85,12 @@ function initTooltips() {
             tt.style.top = '' + y + 'px';
         });
 
-        tooltip.addEventListener("mouseleave", function(ev) {
-            ev.preventDefault();
+        tooltip.addEventListener("mouseleave", function(event) {
+            event.preventDefault();
             tt.removeAttribute('style');
             tt.innerHTML = '';
         });
     }
-}
-
-function redraw_on_resize(chart) {
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => chart.draw(), 250);
-    });
 }
 
 /* ============================ */
@@ -536,44 +572,12 @@ function fmt_prevalent_value_list(key, list) {
 
 /* ============================ */
 
-class ResizeManager {
-    timer;
-    callbacks = {};
-
-    constructor() {
-        window.addEventListener('resize', event => {
-            clearTimeout(this.timer);
-            this.timer = setTimeout(event => this.callCallbacks(), 250);
-        });
-    }
-
-    addCallback(id, func) {
-        this.callbacks[id] = func;
-    }
-
-    callCallbacks() {
-        for (const id in this.callbacks) {
-            const element = document.getElementById(id);
-            if (element.parentNode.style.display == 'none') {
-                if (grids[id]) {
-                    grids[id].remove();
-                    delete grids[id];
-                }
-                delete this.callbacks[id];
-            } else {
-                this.callbacks[id]();
-            }
-        }
-    }
-}
-
-let resizeManager = new ResizeManager;
-
 class DynamicTableColumn {
 
     name; // Name of this column
-    display; // HTML that will be shown in this column
-    width; // Width in pixels
+    display; // HTML that will be shown in this column header
+    width; // Width in widthUnits
+    widthUnit = 'px';
     sortable = false; // Can we sort the table by this column?
     align = 'left'; // Header and content alignment
     title; // Optional tooltip title
@@ -595,14 +599,18 @@ class DynamicTableColumn {
         if (config.title) {
             this.title = config.title;
         }
+
+        if (config.widthUnit) {
+            this.widthUnit = config.widthUnit;
+        }
     }
 
-    makeHeaderElement(num, max) {
+    makeHeaderElement(col, max) {
         const element = document.createElement('div');
         element.classList.add('dt-header');
         element.dataset.name = this.name;
 
-        element.style.gridColumnStart = num * 2 - 1;
+        element.style.gridColumnStart = col * 2 + 1;
         element.style.textAlign = this.align;
 
         if (this.sortable) {
@@ -614,10 +622,10 @@ class DynamicTableColumn {
             element.setAttribute('data-tooltip-position', 'OnTop');
         }
 
-        if (num < max) {
-            element.style.width = this.width + 'px';
+        if (col + 1 < max) {
+            element.style.width = this.width + this.widthUnit;
         } else {
-            element.style.minWidth = this.width + 'px';
+            element.style.minWidth = this.width + this.widthUnit;
         }
 
         element.innerHTML = this.display;
@@ -626,17 +634,16 @@ class DynamicTableColumn {
         return element;
     }
 
-    makeBodyElement(num, row, max) {
+    makeBodyElement(col, row, max) {
         const element = document.createElement('div');
         element.classList.add('dt-body');
-        element.classList.add('dt-line' + (row % 2));
-        element.classList.add('dt-col' + num);
-        element.classList.add('dt-row' + row);
+        element.dataset.col = col;
+        element.dataset.row = row;
 
         element.style.textAlign = this.align;
 
-        if (num + 1 < max) {
-            element.style.width = this.width + 'px';
+        if (col + 1 < max) {
+            element.style.width = this.width + this.widthUnit;
         }
 
         return element;
@@ -644,12 +651,12 @@ class DynamicTableColumn {
 
     setWidth(width) {
         this.width = width;
-        this.headerElement.style.width = width + 'px';
+        this.headerElement.style.width = width + this.widthUnits;
     }
-}
+} // class DynamicTableColumn
 
 class DynamicTable {
-
+    id; // The id of this table
     element; // The div element for the whole table including the toolbar
     config; // The original table configuration
     toolbar; // The toolbar element
@@ -657,38 +664,63 @@ class DynamicTable {
     queryInput; // The input element with the query
     columns = []; // The table column definitions
 
-    usepager = true;
-    currentPage = 1; // The page currently displayed
+    usePager = true;
     rp = 0; // The number of rows per page
+
     totalRows = 0; // The total number of rows in this table
+    currentRow = 0; // The current row (range: 0 to totalRows - 1)
 
-    numRows = 0; // Number of rows on this page
-    currentRow = 0; // Currently selected row (0 means none)
+    get currentPage() {
+        return this.page(this.currentRow);
+    }
 
-    constructor(element, config) {
-        this.element = element;
+    get maxPage() {
+        return Math.ceil(this.totalRows / this.rp);
+    }
+
+    get rowOnPage() {
+        return this.currentRow % this.rp;
+    }
+
+    constructor(id, config) {
+        this.id = id;
+        this.element = document.getElementById(id);
         this.config = config;
 
         for (const column of this.config.colModel) {
             this.columns.push(new DynamicTableColumn(column));
         }
 
-        if (this.config.usepager !== undefined && !this.config.usepager) {
-            this.usepager = false;
+        if (this.config.usePager !== undefined && !this.config.usePager) {
+            this.usePager = false;
         }
+
+        if (this.usePager) {
+            this.initToolbar();
+        }
+        this.initTable();
+
+        this.element.classList.add('dynamic-table');
+    }
+
+    page(rowNum) {
+        if (this.rp == 0) {
+            return 0;
+        }
+        return Math.floor(rowNum / this.rp);
     }
 
     calculateRowsPerPage() {
         const rowHeight = 20 /*cell*/ + 2 * 2 /*cell padding*/;
         const parentHeight = this.element.parentNode.getBoundingClientRect().height;
-        const parentPaddingHeight = 2 * 20;
+        const padding = 2 * 20 /* top/bottom padding */ + 1 /* bottom border */;
 
-        let height = parentHeight - parentPaddingHeight;
+        let height = parentHeight - padding;
         for (const child of this.element.parentNode.children) {
             height -= child.getBoundingClientRect().height;
         }
 
-        return Math.max(10, Math.floor(height / rowHeight) - 2);
+        return Math.max(10, Math.floor(height / rowHeight));
     }
 
     hasSearch() {
@@ -702,7 +734,11 @@ class DynamicTable {
 
     initToolbar() {
         let tools = [];
-        for (const toolClasses of ['dt-first dt-button', 'dt-prev dt-button', 'dt-page', 'dt-next dt-button', 'dt-last dt-button', 'dt-reload dt-button', 'dt-json no-print', 'dt-info', 'dt-search']) {
+        for (const toolClasses of ['dt-first dt-button', 'dt-prev dt-button',
+                                   'dt-page',
+                                   'dt-next dt-button', 'dt-last dt-button',
+                                   'dt-reload dt-button', 'dt-json no-print',
+                                   'dt-info', 'dt-search']) {
             const newElement = document.createElement('div');
             newElement.className = toolClasses;
             tools.push(newElement);
@@ -719,13 +755,15 @@ class DynamicTable {
 
         tools[2].addEventListener('change', event => {
             event.preventDefault();
-            const newPage = parseInt(event.target.value);
-            if (newPage < 1 || newPage > this.maxPage) {
-                event.target.value = this.currentPage;
-                return;
+            let newPage = parseInt(event.target.value);
+            if (newPage < 1) {
+                newPage = 1;
+                event.target.value = newPage;
+            } else if (newPage > this.maxPage) {
+                newPage = this.maxPage;
+                event.target.value = newPage;
             }
-            this.currentPage = newPage;
-            this.load();
+            this.updateDisplay((newPage - 1) * this.rp);
         });
 
         tools[3].addEventListener('click', this.goToNextPage.bind(this));
@@ -742,19 +780,18 @@ class DynamicTable {
             this.queryInput.setAttribute('name', 'q');
             this.queryInput.setAttribute('placeholder', texts.misc.search_for + ': ' + this.searchFor());
             this.queryInput.addEventListener('change', () => {
-                this.currentPage = 1;
                 this.currentRow = 0;
                 this.load();
             });
 
-            this.queryInput.addEventListener('keydown', function(ev) {
-                if (ev.key == 'Escape') {
-                    ev.preventDefault();
+            this.queryInput.addEventListener('keydown', function(event) {
+                if (event.key == 'Escape') {
+                    event.preventDefault();
                     this.blur();
                     return;
                 }
-                if (ev.key == 'Tab') {
-                    ev.preventDefault();
+                if (event.key == 'Tab') {
+                    event.preventDefault();
                     document.getElementById('search').focus();
                 }
             });
@@ -768,7 +805,7 @@ class DynamicTable {
         this.element.append(this.toolbar);
     }
 
-    dragStart(el, num, event) {
+    dragStart(element, num, event) {
         event.target.setPointerCapture(event.pointerId);
         event.preventDefault();
 
@@ -776,31 +813,31 @@ class DynamicTable {
         const x = event.clientX;
         let dx = 0;
 
-        el.onpointermove = (event) => {
+        element.onpointermove = (event) => {
             dx = event.clientX - x;
             const width = origWidth + dx;
             if (width >= 10 && width <= 1000) {
                 this.columns[num - 1].setWidth(width);
-                for (const c of this.element.querySelectorAll('.dt-col' + (num - 1))) {
+                for (const c of this.element.querySelectorAll('div[data-col="' + (num - 1) + '"]')) {
                     c.style.width = width + 'px';
                 }
             }
         };
 
-        el.onpointerup = function(event) {
-            el.onpointermove = null;
-            el.onpointerup = null;
+        element.onpointerup = function(event) {
+            element.onpointermove = null;
+            element.onpointerup = null;
         };
     }
 
-    clear() {
+    clearTableBody() {
         for (const bodyElement of this.table.querySelectorAll('.dt-body,.dt-handle')) {
             bodyElement.remove();
         }
     }
 
-    initHandles() {
-        const rowEnd = 'span ' + (this.numRows + 1);
+    initHandles(numRows) {
+        const rowEnd = 'span ' + (numRows + 1);
         for (let i = 1; i < this.columns.length; i++) {
             const handle = document.createElement('div');
             const element = document.createElement('div');
@@ -821,9 +858,9 @@ class DynamicTable {
         this.table.classList.add('dt-table');
         this.table.style.gridTemplateColumns = 'repeat(' + ((this.columns.length - 1) * 2) + ', min-content) auto';
 
-        let n = 1;
-        for (const column of this.columns) {
-            const element = column.makeHeaderElement(n, this.columns.length);
+        for (let col = 0; col < this.columns.length; col++) {
+            const column = this.columns[col];
+            const element = column.makeHeaderElement(col, this.columns.length);
             if (column.name == this.config.sortname) {
                 element.classList.add('dt-sort-' + this.config.sortorder);
             }
@@ -831,10 +868,9 @@ class DynamicTable {
                 element.addEventListener('click', event => this.sort(event));
             }
             this.table.append(element);
-            n++;
         }
 
-        if (this.usepager) {
+        if (this.usePager) {
             this.table.addEventListener('wheel', event => {
                 if (!event.shiftKey) {
                     return;
@@ -850,9 +886,9 @@ class DynamicTable {
         }
 
         this.table.addEventListener('click', event => {
-            const rowClass = Array.prototype.find.call(event.target.classList, val => val.match(/^dt-row/));
-            if (rowClass) {
-                this.currentRow = parseInt(rowClass.substring(6)) + 1;
+            const item = event.target.closest('.dt-body');
+            if (item) {
+                this.currentRow = this.currentPage * this.rp + parseInt(item.dataset.row);
                 this.updateCurrentRowDisplay();
             }
         });
@@ -881,155 +917,16 @@ class DynamicTable {
             element.classList.add('dt-sort-' + this.config.sortorder);
             this.config.sortname = columnName;
         }
+        this.currentRow = 0;
         this.load();
-    }
-
-    setUpHTML() {
-        if (this.usepager) {
-            this.initToolbar();
-            this.rp = this.calculateRowsPerPage();
-        }
-        this.initTable();
-
-        this.element.classList.add('dynamic-table');
-    }
-
-    remove() {
-        this.element.innerHTML = '';
-    }
-
-    get firstRow() {
-        return (this.currentPage - 1) * this.rp + 1;
-    }
-
-    get lastRow() {
-        return Math.min(this.currentPage * this.rp, this.totalRows);
-    }
-
-    updateCurrentRowDisplay() {
-        for (const element of this.table.querySelectorAll('.dt-current-row')) {
-            element.classList.remove('dt-current-row');
-        }
-
-        if (this.currentRow == 0) {
-            return;
-        }
-
-        for (const element of this.table.querySelectorAll('.dt-row' + (this.currentRow - 1))) {
-            element.classList.add('dt-current-row');
-        }
-    }
-
-    gotoPrevRow() {
-        if (this.currentRow == 1) {
-            if (this.currentPage == 1) {
-                return;
-            }
-            this.currentRow = this.rp;
-            this.goToPrevPage();
-        } else {
-            this.currentRow--;
-        }
-        this.updateCurrentRowDisplay();
-    }
-
-    gotoNextRow() {
-        if (this.rp == 0) {
-            if (this.currentRow < this.totalRows) {
-                this.currentRow++;
-            }
-            this.updateCurrentRowDisplay();
-            return;
-        }
-
-        if (this.currentPage == this.maxPage) {
-            const cells = this.table.querySelectorAll('.dt-body');
-            const last = Array.prototype.slice.call(cells, -1)[0];
-            if (this.currentRow == this.numRows) {
-                return;
-            }
-        }
-        if (this.currentRow == this.rp) {
-            this.currentRow = 1;
-            this.goToNextPage();
-        } else {
-            this.currentRow++;
-        }
-        this.updateCurrentRowDisplay();
-    }
-
-    get maxPage() {
-        return Math.ceil(this.totalRows / this.rp);
-    }
-
-    goToFirstPage() {
-        if (this.currentPage == 1) {
-            return;
-        }
-        this.currentPage = 1;
-        if (this.currentRow != 0) {
-            this.currentRow = this.rp;
-        }
-        this.load();
-    }
-
-    goToPrevPage() {
-        if (this.currentPage == 1) {
-            return;
-        }
-        this.currentPage -= 1;
-        if (this.currentRow != 0) {
-            this.currentRow = this.rp;
-        }
-        this.load();
-    }
-
-    goToNextPage() {
-        if (this.currentPage == this.maxPage) {
-            return;
-        }
-        this.currentPage += 1;
-        if (this.currentRow != 0) {
-            this.currentRow = 1;
-        }
-        this.load();
-    }
-
-    goToLastPage() {
-        if (this.currentPage == this.maxPage) {
-            return;
-        }
-        this.currentPage = this.maxPage;
-        if (this.currentRow != 0) {
-            this.currentRow = 1;
-        }
-        this.load();
-    }
-
-    makeActive(element) {
-        while (!element.classList.contains('dt-col0')) {
-            element = element.previousSibling;
-        }
-        for (let i = 0; i < this.columns.length; i++) {
-            element.classList.add('active');
-            element = element.nextSibling;
-        }
-    }
-
-    makeInactive(element) {
-        while (!element.classList.contains('dt-col0')) {
-            element = element.previousSibling;
-        }
-        for (let i = 0; i < this.columns.length; i++) {
-            element.classList.remove('active');
-            element = element.nextSibling;
-        }
     }
 
     fromToMessage() {
+        const firstRow = this.currentRow - this.rowOnPage + 1;
+        const lastRow = Math.min(this.totalRows, firstRow + this.rp - 1);
         let msg = '<span class="dt-wide">' + texts.dynamic_table.pagestat;
-        msg = msg.replace('{from}', '</span>' + this.firstRow + '<span class="dt-narrow">\u2009\u2013\u2009</span><span class="dt-wide">');
-        msg = msg.replace('{to}', '</span>' + this.lastRow + '<span class="dt-narrow">\u2009/\u2009</span><span class="dt-wide">');
+        msg = msg.replace('{from}', '</span>' + firstRow + '<span class="dt-narrow">\u2009\u2013\u2009</span><span class="dt-wide">');
+        msg = msg.replace('{to}', '</span>' + lastRow + '<span class="dt-narrow">\u2009/\u2009</span><span class="dt-wide">');
         msg = msg.replace('{total}', '</span>' + this.totalRows + '<span class="dt-wide">');
         return msg + '</span>';
     }
@@ -1042,23 +939,22 @@ class DynamicTable {
             this.toolbar.querySelector('.dt-json a').setAttribute('href', data.url);
 
             this.toolbar.querySelector('.dt-info').innerHTML = texts.dynamic_table.nomsg;
-            this.clear();
+            this.clearTableBody();
             return;
         }
 
         this.totalRows = data.total;
 
         if (this.toolbar) {
-            this.toolbar.querySelector('.dt-page input').value = this.currentPage;
+            this.toolbar.querySelector('.dt-page input').value = this.currentPage + 1;
             this.toolbar.querySelector('.dt-page span.dt-page-max').innerText = this.maxPage;
             this.toolbar.querySelector('.dt-json a').setAttribute('href', data.url);
 
             this.toolbar.querySelector('.dt-info').innerHTML = this.fromToMessage();
         }
 
-        this.clear();
-        this.numRows = data.rows.length;
-        this.initHandles();
+        this.clearTableBody();
+        this.initHandles(data.rows.length);
 
         let elements = [];
         let rowNum = 0;
@@ -1081,8 +977,8 @@ class DynamicTable {
 
         this.updateCurrentRowDisplay();
 
-        if (this.usepager) {
-            resizeManager.addCallback(this.element.id, this.resize.bind(this));
+        if (this.usePager) {
+            widgetManager.addWidget(this);
         }
     }
 
@@ -1090,8 +986,7 @@ class DynamicTable {
         if (this.controller) {
             this.controller.abort();
         }
-        this.clear();
-        this.rp = this.calculateRowsPerPage();
+        this.clearTableBody();
         this.load();
     }
 
@@ -1107,9 +1002,12 @@ class DynamicTable {
             p.sortorder = this.config.sortorder;
         }
 
-        if (this.usepager) {
-            p.page = this.currentPage;
+        if (this.usePager) {
+            if (this.element.querySelectorAll('.dt-body').length == 0) {
+                this.rp = this.calculateRowsPerPage();
+            }
             p.rp = this.rp;
+            p.page = this.currentPage + 1;
         }
 
         if (this.queryInput !== undefined && this.queryInput.value != '') {
@@ -1120,16 +1018,16 @@ class DynamicTable {
     }
 
     async load() {
+        if (this.controller) {
+            this.controller.abort();
+        }
+
         if (this.toolbar) {
             if (window.innerWidth <= 800) {
                 this.toolbar.querySelector('.dt-info').innerText = '...';
             } else {
                 this.toolbar.querySelector('.dt-info').innerText = texts.dynamic_table.procmsg;
             }
-        }
-
-        if (this.controller) {
-            this.controller.abort();
         }
 
         this.controller = new AbortController();
@@ -1144,54 +1042,159 @@ class DynamicTable {
             const data = this.config.preProcess(json)
             this.display(data);
         } catch (error) {
-            this.clear();
+            this.clearTableBody();
             this.toolbar.querySelector('.dt-info').innerHTML = '<span class="bad">' + texts.dynamic_table.errormsg + '</span>';
         }
     }
-}
 
-function create_flexigrid(domid, options) {
-    if (grids[domid]) {
-        return;
+    elementsInRow(row) {
+        return this.table.querySelectorAll('div[data-row="' + row + '"]');
     }
 
-    const element = document.getElementById(domid);
-    const dt = new DynamicTable(element, options);
-    dt.setUpHTML();
+    makeActive(element) {
+        for (const el of this.elementsInRow(element.dataset.row)) {
+            el.classList.add('active');
+        }
+    }
+
+    makeInactive(element) {
+        for (const el of this.elementsInRow(element.dataset.row)) {
+            el.classList.remove('active');
+        }
+    }
+
+    updateCurrentRowDisplay() {
+        for (const element of this.table.querySelectorAll('.dt-current-row')) {
+            element.classList.remove('dt-current-row');
+        }
+
+        for (const element of this.elementsInRow(this.rowOnPage)) {
+            element.classList.add('dt-current-row');
+        }
+    }
+
+    updateDisplay(newRow) {
+        if (newRow < 0) {
+            newRow = 0;
+        } else if (newRow >= this.totalRows) {
+            newRow = this.totalRows - 1;
+        }
+
+        if (this.currentRow == newRow) {
+            return;
+        }
+
+        if (this.currentPage == this.page(newRow)) {
+            this.currentRow = newRow;
+
+            for (const element of this.table.querySelectorAll('.active')) {
+                element.classList.remove('active');
+            }
+
+            this.updateCurrentRowDisplay();
+            return;
+        }
+
+        this.currentRow = newRow;
+        this.load();
+    }
+
+    goToPrevRow() {
+        this.updateDisplay(this.currentRow - 1);
+    }
+
+    goToNextRow() {
+        this.updateDisplay(this.currentRow + 1);
+    }
+
+    goToFirstPage() {
+        this.updateDisplay(0);
+    }
+
+    goToPrevPage() {
+        this.updateDisplay(this.currentRow - this.rp);
+    }
+
+    goToNextPage() {
+        this.updateDisplay(this.currentRow + this.rp);
+    }
+
+    goToLastPage() {
+        this.updateDisplay(this.totalRows - 1);
+    }
+
+    selectRow() {
+        const apref = this.element.querySelectorAll('.dt-current-row a.pref');
+        if (apref.length > 0) {
+            window.location = apref[0].getAttribute('href');
+            return;
+        }
+
+        const a = this.element.querySelectorAll('.dt-current-row a');
+        if (a.length > 0) {
+            window.location = a[0].getAttribute('href');
+        }
+    }
+
+    keyUp(event) {
+        switch (event.key) {
+            case 'Home': event.preventDefault(); this.goToFirstPage(); break;
+            case 'PageUp': event.preventDefault(); this.goToPrevPage(); break;
+            case 'PageDown': event.preventDefault(); this.goToNextPage(); break;
+            case 'End': event.preventDefault(); this.goToLastPage(); break;
+            case 'ArrowUp': event.preventDefault(); this.goToPrevRow(); break;
+            case 'ArrowDown': event.preventDefault(); this.goToNextRow(); break;
+            case 'ArrowRight': event.preventDefault(); this.selectRow(); break;
+        }
+    }
+} // class DynamicTable
+
+function createDynamicTable(id, options) {
+    const dt = new DynamicTable(id, options);
     dt.load();
-    grids[domid] = dt;
-    current_grid = domid;
+    return dt;
 }
 
 class Tabs {
-    activateCallbacks = [];
     element;
-    buttonBox;
     buttons;
     tabs;
+    widgets = [];
+    state = [];
+    numTabs;
+    currentTab;
 
     constructor(id) {
         this.element = document.getElementById(id);
 
+        const children = Array.from(this.element.children);
+
         // First child is <ul> with tab buttons
-        this.buttonBox = Array.from(this.element.children)[0];
-        this.buttons = this.buttonBox.children;
+        this.buttons = children[0].children;
+        this.numTabs = this.buttons.length;
 
         // Every child except the first is a tab
-        this.tabs = Array.from(this.element.children).slice(1);
-
-        this.buttonBox.dataset.left = ' ';
-        this.buttonBox.dataset.right = ' ';
+        this.tabs = children.slice(1);
 
         for (const button of this.buttons) {
             button.addEventListener('click', this.click.bind(this));
         }
-        for (const tab of this.tabs) {
-            tab.classList.add('tabs-panel');
+
+        for (let i = 0; i < this.numTabs; i++) {
+            this.widgets[i] = [];
+        }
+    }
+
+    setTabFromURL() {
+        if (window.location.hash == '') {
+            this.choose(0);
+        } else {
+            this.activate(window.location.hash.substring(1));
         }
     }
 
     choose(n) {
+        this.currentTab = n;
         for (const button of this.buttons) {
             button.classList.remove('active');
         }
@@ -1199,12 +1202,23 @@ class Tabs {
         for (const tab of this.tabs) {
             tab.style.display = 'none';
         }
-        this.tabs[n].style.display = null;
+        this.tabs[n].style.display = 'block';
         window.location.hash = this.tabs[n].id;
 
-        if (n in this.activateCallbacks) {
-            this.activateCallbacks[n]();
+        for (const widget of this.widgets[this.currentTab]) {
+            if (this.state[this.currentTab] == 'resize') {
+                if (widget && widget.resize) {
+                    widget.resize();
+                }
+            } else if (this.state[this.currentTab] != 'ok') {
+                if (widget && widget.load) {
+                    widget.load();
+                } else if (widget && widget.draw) {
+                    widget.draw();
+                }
+            }
         }
+        this.state[this.currentTab] = 'ok';
     }
 
     getIndex(tabname) {
@@ -1216,52 +1230,68 @@ class Tabs {
         return 0;
     }
 
-    onActivate(tabname, func) {
-        this.activateCallbacks[this.getIndex(tabname)] = func;
-    }
-
     activate(tabname) {
         this.choose(this.getIndex(tabname));
     }
 
-    click(ev) {
-        if (ev.target) {
-            ev.preventDefault();
-            this.activate(ev.target.getAttribute('href').substring(1));
+    click(event) {
+        if (event.target) {
+            event.preventDefault();
+            const href = event.target.closest('[href]').getAttribute('href');
+            if (href) {
+                const scroll = window.scrollY;
+                this.activate(href.substring(1));
+                window.scrollTo({ top: scroll });
+            }
         }
+    }
+
+    keyUp(event) {
+        if (event.which >= 49 && event.which <= 57) { // digit
+            this.choose(event.which - 49);
+            return;
+        }
+
+        for (const widget of this.widgets[this.currentTab]) {
+            if (widget && widget.keyUp) {
+                widget.keyUp(event);
+                return;
+            }
+        }
+    }
+
+    addWidget(tab, widget) {
+        if (Array.isArray(widget)) {
+            for (const w of widget) {
+                this.widgets[this.getIndex(tab)].push(w);
+            }
+            return;
+        }
+        this.widgets[this.getIndex(tab)].push(widget);
+    }
+
+    resize() {
+        for (const widget of this.widgets[this.currentTab]) {
+            if (widget && widget.resize) {
+                widget.resize();
+            }
+        }
+        for (let i = 0; i < this.state.length; ++i) {
+            if (i != this.currentTab) {
+                this.state[i] = 'resize';
+            }
+        }
+    }
+} // class Tabs
+
+function initTabs(config, params) {
+    for (const tab in config) {
+        tabs.addWidget(tab, config[tab].apply(this, params));
     }
 }
 
-function init_tabs(params, callbacks) {
-    tabs = new Tabs('tabs');
-
-    if (params) {
-        for (const tab in create_flexigrid_for) {
-            tabs.onActivate(tab, create_flexigrid_for[tab].bind(this, ...params));
-        }
-    } else {
-        for (const tab in create_flexigrid_for) {
-            tabs.onActivate(tab, create_flexigrid_for[tab].bind(this));
-        }
-    }
-
-    if (callbacks) {
-        for (const tab in callbacks) {
-            tabs.onActivate(tab, callbacks[tab]);
-        }
-    }
-
-    if (window.location.hash == '') {
-        tabs.choose(0);
-    } else {
-        tabs.activate(window.location.hash.substring(1));
-    }
-
-    return tabs;
-}
-
-function create_characters_flexigrid(string) {
-    return create_flexigrid('grid-characters', {
+function createCharactersTable(string) {
+    return new DynamicTable('grid-characters', {
         url: '/api/4/unicode/characters',
         params: { string: string },
         colModel: [
@@ -1271,8 +1301,7 @@ function create_characters_flexigrid(string) {
             { display: texts.unicode.general_category, name: 'general_category', width: 150, sortable: false },
             { display: texts.unicode.name, name: 'name', width: 150, sortable: false, align: 'left' }
         ],
-        usepager: false,
-        useRp: false,
+        usePager: false,
         preProcess: function(data) {
             data.rows = data.data.map(function(row) {
                 return { 'cell': [
@@ -1286,32 +1315,6 @@ function create_characters_flexigrid(string) {
             return data;
         }
     });
-}
-
-/* ============================ */
-
-function d3_colors() {
-    return ["#1f77b4","#aec7e8","#ff7f0e","#ffbb78","#2ca02c","#98df8a","#d62728","#ff9896","#9467bd","#c5b0d5","#8c564b","#c49c94","#e377c2","#f7b6d2","#7f7f7f","#c7c7c7","#bcbd22","#dbdb8d","#17becf","#9edae5"];
-}
-
-/* ============================ */
-
-function table_right() {
-    const table = grids[current_grid];
-    if (table.currentRow == 0) {
-        return;
-    }
-
-    const apref = document.querySelectorAll('.dt-current-row a.pref');
-    if (apref.length > 0) {
-        window.location = apref[0].getAttribute('href');
-        return;
-    }
-
-    const a = document.querySelectorAll('.dt-current-row a');
-    if (a.length > 0) {
-        window.location = a[0].getAttribute('href');
-    }
 }
 
 /* ============================ */
@@ -1381,7 +1384,7 @@ class ComparisonList {
 
         return '/compare/?' + params.toString();
     }
-}
+} // class ComparisonList
 
 class ComparisonListDisplay {
 
@@ -1417,7 +1420,7 @@ class ComparisonListDisplay {
         enable_disable('clear', length > 0);
         enable_disable('compare', length >= 2);
     }
-}
+} // class ComparisonListDisplay
 
 /* ============================ */
 
@@ -1427,8 +1430,8 @@ function activate_josm_button() {
         return;
     }
 
-    button.addEventListener('click', async function(ev) {
-        ev.preventDefault();
+    button.addEventListener('click', async function(event) {
+        event.preventDefault();
         try {
             const response = await fetch(button.getAttribute('href'));
             const text = await response.text();
@@ -1473,7 +1476,7 @@ class Autocomplete {
         this.element.parentNode.addEventListener('keydown', this.key.bind(this));
     }
 
-    trigger(ev) {
+    trigger(event) {
         this.value = this.element.value;
         if (this.value.length < 2) {
             this.clear();
@@ -1497,9 +1500,9 @@ class Autocomplete {
         }
     }
 
-    key(ev) {
+    key(event) {
         if (event.key == 'ArrowUp') {
-            ev.preventDefault();
+            event.preventDefault();
             if (this.current == 0) {
                 this.current = this.data.length;
             } else {
@@ -1507,7 +1510,7 @@ class Autocomplete {
             }
             this.update();
         } else if (event.key == 'ArrowDown') {
-            ev.preventDefault();
+            event.preventDefault();
             if (this.current == this.data.length) {
                 this.current = 0;
             } else {
@@ -1516,11 +1519,11 @@ class Autocomplete {
             this.update();
         } else if (event.key == 'Enter') {
             if (this.current > 0) {
-                ev.preventDefault();
+                event.preventDefault();
                 window.location = this.results.children[this.current - 1].href;
             }
         } else if (event.key == 'Escape') {
-            ev.preventDefault();
+            event.preventDefault();
             this.clear();
             this.element.value = this.value;
             this.element.focus();
@@ -1549,15 +1552,24 @@ class Autocomplete {
         this.results.innerHTML = out;
         this.results.style.display = 'block';
     }
-}
+} // class Autocomplete
 
 /* ============================ */
 
 function whenReady() {
     document.getElementById('javascriptmsg').remove();
 
+    if (document.getElementById('tabs')) {
+        tabs = new Tabs('tabs');
+    }
+
     if (typeof page_init === 'function') {
         page_init();
+    }
+
+    if (tabs) {
+        widgetManager.addWidget(tabs);
+        tabs.setTabFromURL();
     }
 
     initTooltips();
@@ -1576,11 +1588,6 @@ function whenReady() {
         }
 
         if (event.target != document.body) {
-            return;
-        }
-
-        if (event.which >= 49 && event.which <= 57) { // digit
-            tabs.choose(event.which - 49);
             return;
         }
 
@@ -1628,39 +1635,9 @@ function whenReady() {
             return;
         }
 
-        switch (event.key) {
-            case 'Home':
-                event.preventDefault();
-                grids[current_grid].goToFirstPage();
-                break;
-            case 'PageUp':
-                event.preventDefault();
-                grids[current_grid].goToPrevPage();
-                break;
-            case 'PageDown':
-                event.preventDefault();
-                grids[current_grid].goToNextPage();
-                break;
-            case 'End':
-                event.preventDefault();
-                grids[current_grid].goToLastPage();
-                break;
-            case 'ArrowLeft':
-                event.preventDefault();
-                up();
-                break;
-            case 'ArrowUp':
-                event.preventDefault();
-                grids[current_grid].gotoPrevRow();
-                break;
-            case 'ArrowRight':
-                event.preventDefault();
-                table_right();
-                break;
-            case 'ArrowDown':
-                event.preventDefault();
-                grids[current_grid].gotoNextRow();
-                break;
+        if (event.key == 'ArrowLeft') {
+            event.preventDefault();
+            up();
         }
     });
 
@@ -1694,7 +1671,7 @@ function whenReady() {
     });
 
     const menu_button = document.getElementById('menu-button');
-    menu_button.addEventListener('click', function(ev) {
+    menu_button.addEventListener('click', () => {
         const menu = document.getElementById('menu');
         if (menu.style.display) {
             menu.style.display = null;
@@ -1707,7 +1684,7 @@ function whenReady() {
 
     const tools_button = document.getElementById('toolsmenu');
     if (tools_button) {
-        tools_button.addEventListener('click', function(ev) {
+        tools_button.addEventListener('click', () => {
             const tools = document.getElementById('tools');
             if (tools.style.display) {
                 tools.style.display = null;
@@ -1718,93 +1695,121 @@ function whenReady() {
     }
 }
 
-function tomorrow() {
-    let d = new Date();
-    d.setDate(d.getDate() + 1);
-    return d.toISOString().substring(0, 10);
-}
+class ChartChronology {
+    id = 'chart-chronology';
+    element;
+    url;
+    filter;
+    data;
 
-function draw_chronology_chart(data, filter) {
-    const box_width = document.getElementById('chart-chronology').getBoundingClientRect().width;
-    const w = Math.min(900, box_width - 100);
-    const h = 400;
-    const margin = { top: 10, right: 15, bottom: 60, left: 80 };
-
-    if (data[0].date > '2007-10-07') {
-        data.unshift({date: '2007-10-07', nodes: 0, ways: 0, relations: 0});
+    constructor(url, filter) {
+        this.element = document.getElementById(this.id);
+        this.url = url;
+        this.filter = filter;
     }
 
-    data.push({date: tomorrow(), nodes: 0, ways: 0, relations: 0});
+    async load() {
+        const response = await fetch(this.url);
+        const json = await response.json();
+        this.data = this.prepareData(json.data);
+        this.draw();
+    }
 
-    let sum = 0;
-    data.forEach(function(d) {
-        d.date = new Date(d.date);
-        if (filter == 'all') {
-            sum += d.nodes + d.ways + d.relations;
-        } else {
-            sum += d[filter];
+    tomorrow() {
+        let d = new Date();
+        d.setDate(d.getDate() + 1);
+        return d.toISOString().substring(0, 10);
+    }
+
+    prepareData(data) {
+        if (data[0].date > '2007-10-07') {
+            data.unshift({date: '2007-10-07', nodes: 0, ways: 0, relations: 0});
         }
-        d.sum = sum;
-    });
 
-    const t0 = data[0].date;
-    const t1 = data[data.length - 1].date;
+        data.push({date: this.tomorrow(), nodes: 0, ways: 0, relations: 0});
 
-    const max = d3.max(data, d => d.sum);
+        let sum = 0;
+        data.forEach(d => {
+            d.date = new Date(d.date);
+            if (this.filter == 'all') {
+                sum += d.nodes + d.ways + d.relations;
+            } else {
+                sum += d[this.filter];
+            }
+            d.sum = sum;
+        });
 
-    const scale_x = d3.scaleTime()
-                      .domain([t0, t1])
-                      .range([0, w]);
+        return data;
+    }
 
-    const axis_x = d3.axisBottom(scale_x)
-                     .tickFormat(d3.timeFormat(w > 500 ? '%b %Y' : '%Y'));
+    draw() {
+        this.element.innerHTML = '';
 
-    const scale_y = d3.scaleLinear()
-                      .domain([0, max])
-                      .range([h, 0]);
+        const boxWidth = this.element.getBoundingClientRect().width;
+        const w = Math.min(900, boxWidth - 100);
+        const h = 400;
+        const margin = { top: 10, right: 15, bottom: 60, left: 80 };
 
-    const line = d3.line().curve(d3.curveStepAfter)
-                   .x(d => scale_x(d.date))
-                   .y(d => scale_y(d.sum));
+        const t0 = this.data[0].date;
+        const t1 = this.data[this.data.length - 1].date;
 
-    d3.select('#chart-chronology svg').remove();
+        const max = d3.max(this.data, d => d.sum);
 
-    const chart = d3.select('#chart-chronology').append('svg')
-                    .attr('width', w + margin.left + margin.right)
-                    .attr('height', h + margin.top + margin.bottom)
-                    .append('g')
-                        .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
-                        .call(function(c) {
-                            c.append('rect')
-                                .attr('width', w + 10)
-                                .attr('height', h + 10)
-                                .attr('x', -5)
-                                .attr('y', -5)
-                                .style('fill', 'white')
-                                .style('stroke', '#d0d0c8')
-                        });
+        const scaleX = d3.scaleTime()
+                         .domain([t0, t1])
+                         .range([0, w]);
 
-    chart.append('g')
-        .attr('class', 'x axis')
-        .attr('transform', 'translate(0, ' + (h + 5) + ')')
-        .call(axis_x);
+        const axisX = d3.axisBottom(scaleX)
+                        .tickFormat(d3.timeFormat(w > 500 ? '%b %Y' : '%Y'));
 
-    chart.append('g')
-        .attr('class', 'y axis')
-        .attr('transform', 'translate(-5, 0)')
-        .call(d3.axisLeft(scale_y));
+        const scaleY = d3.scaleLinear()
+                         .domain([0, max])
+                         .range([h, 0]);
 
-    chart.append('path')
-        .datum(data)
-        .attr('fill', 'none')
-        .attr('stroke', '#083e76')
-        .attr('stroke-width', 1.5)
-        .attr('stroke-linejoin', 'round')
-        .attr('stroke-linecap', 'round')
-        .attr('d', line);
+        const line = d3.line()
+                       .curve(d3.curveStepAfter)
+                       .x(d => scaleX(d.date))
+                       .y(d => scaleY(d.sum));
 
-    resizeManager.addCallback('chart-chronology', () => draw_chronology_chart(data, filter) );
-}
+        const chart = d3.select(this.element).append('svg')
+                        .attr('width', w + margin.left + margin.right)
+                        .attr('height', h + margin.top + margin.bottom)
+                        .append('g')
+                            .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
+                            .call(function(c) {
+                                c.append('rect')
+                                    .attr('width', w + 10)
+                                    .attr('height', h + 10)
+                                    .attr('x', -5)
+                                    .attr('y', -5)
+                                    .style('fill', 'white')
+                                    .style('stroke', '#d0d0c8')
+                            });
+
+        chart.append('g')
+             .attr('class', 'x axis')
+             .attr('transform', 'translate(0, ' + (h + 5) + ')')
+             .call(axisX);
+
+        chart.append('g')
+             .attr('class', 'y axis')
+             .attr('transform', 'translate(-5, 0)')
+             .call(d3.axisLeft(scaleY));
+
+        chart.append('path')
+             .datum(this.data)
+             .attr('fill', 'none')
+             .attr('stroke', '#083e76')
+             .attr('stroke-width', 1.5)
+             .attr('stroke-linejoin', 'round')
+             .attr('stroke-linecap', 'round')
+             .attr('d', line);
+    }
+
+    resize() {
+        this.draw();
+    }
+} // class ChartChronology
 
 /* ============================ */
 

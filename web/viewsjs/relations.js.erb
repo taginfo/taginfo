@@ -2,34 +2,6 @@
     osm = @trans.t.osm
     page = @trans.t.pages.relations
  %>
-function page_init() {
-    create_flexigrid('grid-relations', {
-        url: '/api/4/relations/all',
-        colModel: [
-            { display: '<%= h(osm.relation_type) %>', name: 'rtype', width: 220, sortable: true },
-            { display: '<%= h(osm.relations) %>', name: 'count', width: 250, sortable: true, align: 'center', title: '<%= h(page.relations_of_type_tooltip) %>' },
-            { display: '<%= h(osm.tag) %>', name: 'tag', width: 250, sortable: false },
-            { display: '<%= h(page.prevalent_roles) %>', name: 'prevalent_roles', width: 550, sortable: false, title: '<%= h(page.prevalent_roles_tooltip) %>' }
-        ],
-        searchitems: [
-            { display: '<%= h(osm.relation_type) %>', name: 'rtype' }
-        ],
-        sortname: 'count',
-        sortorder: 'desc',
-        preProcess: function(data) {
-            data.rows = data.data.map(function(row) {
-                return { 'cell': [
-                    link_to_rtype(row.rtype),
-                    fmt_value_with_percent(row.count, row.count_fraction),
-                    link_to_tag('type', row.rtype),
-                    fmt_prevalent_role_list(row.prevalent_roles)
-                ] };
-            });
-            return data;
-        }
-    });
-};
-
 function fmt_prevalent_role_list(list) {
     if (list === null) {
         return empty('<%= h(page.no_information) %>');
@@ -51,3 +23,30 @@ function fmt_prevalent_role_list(list) {
     }).join(' &bull; ');
 }
 
+function page_init() {
+    widgetManager.addWidget(createDynamicTable('grid-relations', {
+        url: '/api/4/relations/all',
+        colModel: [
+            { display: '<%= h(osm.relation_type) %>', name: 'rtype', width: 220, sortable: true },
+            { display: '<%= h(osm.relations) %>', name: 'count', width: 250, sortable: true, align: 'center', title: '<%= h(page.relations_of_type_tooltip) %>' },
+            { display: '<%= h(osm.tag) %>', name: 'tag', width: 250, sortable: false },
+            { display: '<%= h(page.prevalent_roles) %>', name: 'prevalent_roles', width: 550, sortable: false, title: '<%= h(page.prevalent_roles_tooltip) %>' }
+        ],
+        searchitems: [
+            { display: '<%= h(osm.relation_type) %>', name: 'rtype' }
+        ],
+        sortname: 'count',
+        sortorder: 'desc',
+        preProcess: function(data) {
+            data.rows = data.data.map(function(row) {
+                return { 'cell': [
+                    hover_expand(link_to_rtype(row.rtype)),
+                    fmt_value_with_percent(row.count, row.count_fraction),
+                    hover_expand(link_to_tag('type', row.rtype)),
+                    fmt_prevalent_role_list(row.prevalent_roles)
+                ] };
+            });
+            return data;
+        }
+    }));
+};

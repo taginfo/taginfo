@@ -658,12 +658,13 @@ div#tabs > ul > li.active > a {
 }
 
 div#tabs > div {
+    display: none;
     position: relative;
     top: -3px;
     padding: 20px;
     background-color: var(--color-light);
     border-radius: 4px;
-    flex-basis: 100%;
+    flex: 1 1 auto;
 }
 
 /* ==========  */
@@ -1481,22 +1482,23 @@ div.dt-table div.dt-header span img {
 
 div.dt-table div.dt-body {
     padding: 2px 6px;
+    background-color: var(--color-stripe1);
 }
 
 div.dt-table div.dt-body.dt-current-row {
-    background-color: #ffffff;
+    background-color: #ffffff !important;
 }
 
 div.dt-table div.dt-body.active {
-    background-color: #ffffff;
+    background-color: #ffffff !important;
 }
 
-div.dt-table div.dt-line0 {
+div.dt-table div.dt-body[data-row$="0"],
+div.dt-table div.dt-body[data-row$="2"],
+div.dt-table div.dt-body[data-row$="4"],
+div.dt-table div.dt-body[data-row$="6"],
+div.dt-table div.dt-body[data-row$="8"] {
     background-color: var(--color-stripe0);
-}
-
-div.dt-table div.dt-line1 {
-    background-color: var(--color-stripe1);
 }
 
 /* ==========  */
@@ -1504,3 +1506,8 @@ div.dt-table div.dt-line1 {
 #grid-overview {
     max-width: 540px;
 }
+
+.multi-map {
+    position: relative;
+}
+

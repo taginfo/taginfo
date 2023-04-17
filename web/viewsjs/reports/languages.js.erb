@@ -1,7 +1,7 @@
 <% page = @trans.t.reports.languages %>
 function page_init() {
     up = function() { window.location = build_link('/reports'); };
-    create_flexigrid('grid-langs', {
+    widgetManager.addWidget(createDynamicTable('grid-langs', {
         url: '/api/4/wiki/languages',
         colModel: [
             { display: '<%= h(page.code) %>', name: 'code', width: 60, sortable: true },
@@ -12,8 +12,7 @@ function page_init() {
         ],
         sortname: 'code',
         sortorder: 'asc',
-        usepager: false,
-        useRp: false,
+        usePager: false,
         preProcess: function(data) {
             return {
                 total: data.total,
@@ -29,5 +28,5 @@ function page_init() {
                 })
             };
         }
-    });
+    }));
 }

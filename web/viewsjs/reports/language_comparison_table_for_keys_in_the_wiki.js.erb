@@ -13,15 +13,15 @@
 %>
 function page_init() {
     up = function() { window.location = build_link('/reports'); };
-    var lang_to_idx = {
+    const lang_to_idx = {
         <%= @languages_lookup %>
     };
-    create_flexigrid('grid-keys', {
+    widgetManager.addWidget(createDynamicTable('grid-keys', {
         url: '/api/4/keys/wiki_pages',
         colModel: [
             { display: '<%= h(osm.key) %>', name: 'key', width: 160, sortable: true },
             <% @languages.each do |lang| %>
-            { display: '<span class="badge lang" style="padding: 0"><%= h(lang) %></span>', name: '<%= h(lang) %>', align: 'center', width: <%= lang.length * 9 + 1 %>, sortable: false, title: '<%= ::Language[lang].native_name %>' },
+            { display: '<span class="badge lang" style="padding: 0"><%= h(lang) %></span>', name: '<%= h(lang) %>', align: 'center', widthUnit: 'em', width: <%= lang.length * 0.8 %>, sortable: false, title: '<%= ::Language[lang].native_name %>' },
             <% end %>
         ],
         searchitems: [
@@ -34,8 +34,8 @@ function page_init() {
                 total: data.total,
                 page: data.page,
                 rows: data.data.map(function(row) {
-                    d = [link_to_key(row.key) <%= @languages.map{ ", ''"}.join() %>];
-                    for (var lang in row.lang) {
+                    d = [hover_expand(link_to_key(row.key)) <%= @languages.map{ ", ''"}.join() %>];
+                    for (let lang in row.lang) {
                         ptype = row.lang[lang];
                         d[lang_to_idx[lang]] = '<img width="16" height="16" src="/img/sources/wiki/wiki-' + ptype + '.png" alt="[' + ptype + ']"/>';
                     }
@@ -43,5 +43,5 @@ function page_init() {
                 })
             };
         }
-    });
+    }));
 }

@@ -6,9 +6,9 @@ function tt(text, c, title) {
     return tag('tt', text, { 'class': c, 'title': title, 'data-tooltip-position': 'OnLeft' });
 }
 
-var create_flexigrid_for = {
-    "overview": function() {
-        create_flexigrid('grid-name', {
+const tabsConfig = {
+    overview: function() {
+        return new DynamicTable('grid-name', {
             url: '/api/0/keys/name',
             colModel: [
                 { display: '<%= h(osm.key) %>', name: 'key', width: 250, sortable: true },
@@ -46,9 +46,9 @@ var create_flexigrid_for = {
             }
         });
     },
-    "bcp47": function() {
+    bcp47: function() {
         const filter_type = document.getElementById('subtag-filter').value;
-        create_flexigrid('grid-bcp47-subtags', {
+        return new DynamicTable('grid-bcp47-subtags', {
             url: '/api/0/langtags',
             params: { filter: filter_type },
             colModel: [
@@ -85,5 +85,5 @@ function page_init() {
     filter.addEventListener('change', function(element) {
         window.location.search = new URLSearchParams({ 'filter': element.target.value });
     });
-    init_tabs([]);
+    initTabs(tabsConfig);
 }

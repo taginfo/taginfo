@@ -2,9 +2,9 @@
     osm = @trans.t.osm
     misc = @trans.t.misc
  %>
-var create_flexigrid_for = {
+const tabsConfig = {
     list: function() {
-        create_flexigrid('grid-wiki-problems', {
+        return new DynamicTable('grid-wiki-problems', {
             url: '/api/0/wiki/problems',
             colModel: [
                 { display: 'Location', name: 'location', width: 200, sortable: true },
@@ -25,7 +25,7 @@ var create_flexigrid_for = {
                         row.location,
                         row.reason,
                         link_to_wiki(row.title),
-                        row.reason == "wrong lang format" ? '' : fmt_language(row.lang, 'auto', '', ''),
+                        row.reason == 'wrong lang format' ? '' : fmt_language(row.lang, 'auto', '', ''),
                         row.key === null ? '' :
                             row.value === null ? link_to_key(row.key) : link_to_tag(row.key, row.value),
                         row.info
@@ -38,5 +38,5 @@ var create_flexigrid_for = {
 };
 
 function page_init() {
-    init_tabs();
+    initTabs(tabsConfig);
 }

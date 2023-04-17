@@ -3,10 +3,10 @@
     misc = @trans.t.misc
  %>
 
-var create_flexigrid_for = {
+const tabsConfig = {
     tags: function(query) {
         const q = query.split('=', 2);
-        create_flexigrid('grid-tags', {
+        return new DynamicTable('grid-tags', {
             url: '/api/4/search/by_key_and_value',
             params: { query: query },
             colModel: [
@@ -31,5 +31,5 @@ var create_flexigrid_for = {
 };
 
 function page_init() {
-    init_tabs([document.getElementById('query').textContent]);
+    initTabs(tabsConfig, [document.getElementById('query').textContent]);
 }

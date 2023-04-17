@@ -2,11 +2,13 @@
     osm = @trans.t.osm
     misc = @trans.t.misc
  %>
-var create_flexigrid_for = {};
+let tabsConfig = {
+    statistics: () => new ChartCharactersInKeysStats()
+};
 
 ['plain', 'colon', 'letters', 'space', 'problem', 'rest'].forEach(function(category) {
-    create_flexigrid_for[category] = function() {
-        create_flexigrid('grid-' + category, {
+    tabsConfig[category] = function() {
+        return new DynamicTable('grid-' + category, {
             url: '/api/4/keys/all',
             params: { filter: 'characters_' + category, include: 'prevalent_values' },
             colModel: [
@@ -25,7 +27,7 @@ var create_flexigrid_for = {};
             preProcess: function(data) {
                 data.rows = data.data.map(function(row) {
                     return { 'cell': [
-                        link_to_key(row.key),
+                        hover_expand(link_to_key(row.key)),
                         fmt_value_with_percent(row.count_all, row.count_all_fraction),
                         fmt_with_ts(row.users_all),
                         link_to_key_with_tab(row.key, 'wiki', fmt_checkmark(row.in_wiki)),
@@ -39,57 +41,57 @@ var create_flexigrid_for = {};
     };
 });
 
-function build_graph() {
-    document.getElementById('canvas').innerHTML = '';
-    const box_width = document.getElementById('statistics').getBoundingClientRect().width;
-    var w = Math.min(968, box_width - 40),
-        h = 50,
-        max = <%= @db.stats('num_keys') %>,
-        data = <%= i = '@'; %w(plain colon letters space problem rest).map{ |type| i=i.next; { :label => i, :value => @db.stats('characters_in_keys_' + type) } }.to_json %>;
+class ChartCharactersInKeysStats {
+    id = 'statistics';
 
-    var colors = { 'A': '#2ca02c', 'B': '#98df8a', 'C': '#dbdb8d', 'D': '#d62728', 'E': '#ff9896', 'F': '#aec7e8' };
+    draw() {
+        document.getElementById('canvas').innerHTML = '';
+        const boxWidth = document.getElementById('statistics').getBoundingClientRect().width;
+        const w = Math.min(968, boxWidth - 40);
+        const h = 50;
+        const max = <%= @db.stats('num_keys') %>;
+        const data = <%= i = '@'; %w(plain colon letters space problem rest).map{ |type| i=i.next; { :label => i, :value => @db.stats('characters_in_keys_' + type) } }.to_json %>;
 
-    var y = 0;
-    data.forEach(function(d) {
-        d['y'] = y;
-        y += d['value'];
-    });
+        const colors = { 'A': '#2ca02c', 'B': '#98df8a', 'C': '#dbdb8d', 'D': '#d62728', 'E': '#ff9896', 'F': '#aec7e8' };
 
-    var scale = d3.scaleLinear()
-                    .domain([0, max])
-                    .range([0, w]);
+        let y = 0;
+        data.forEach(function(d) {
+            d['y'] = y;
+            y += d['value'];
+        });
 
-    var chart = d3.select('#canvas').append('svg')
-                    .attr('width', w)
-                    .attr('height', h);
+        const scale = d3.scaleLinear()
+                        .domain([0, max])
+                        .range([0, w]);
 
-    chart.selectAll('rect')
-        .data(data)
-        .enter()
-        .append('g')
-            .attr('transform', function(d) { return 'translate(' + scale(d['y']) + ', 0)'; })
-            .call(function(c) {
-                c.append('rect')
-                    .attr('height', 20)
-                    .attr('width', d => scale(d['value']))
-                    .style('fill', d => colors[d['label']]);
-            })
-            .append('text')
-                .attr('x', d => scale(d['value'] / 2))
-                .attr('y', 34)
-                .style('text-anchor', 'middle')
-                .text(d => d['label']);
+        const chart = d3.select('#canvas').append('svg')
+                        .attr('width', w)
+                        .attr('height', h);
 
-}
+        chart.selectAll('rect')
+            .data(data)
+            .enter()
+            .append('g')
+                .attr('transform', d => 'translate(' + scale(d['y']) + ', 0)')
+                .call(function(c) {
+                    c.append('rect')
+                        .attr('height', 20)
+                        .attr('width', d => scale(d['value']))
+                        .style('fill', d => colors[d['label']]);
+                })
+                .append('text')
+                    .attr('x', d => scale(d['value'] / 2))
+                    .attr('y', 34)
+                    .style('text-anchor', 'middle')
+                    .text(d => d['label']);
+    }
+
+    resize() {
+        this.draw();
+    }
+} // class ChartCharactersInKeysStats
 
 function page_init() {
     up = function() { window.location = build_link('/reports'); };
-    init_tabs([]);
-    build_graph();
-
-    var resizeTimer;
-    window.addEventListener('resize', function(ev) {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(build_graph, 250);
-    });
+    initTabs(tabsConfig);
 }

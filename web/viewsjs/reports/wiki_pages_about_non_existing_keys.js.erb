@@ -4,7 +4,7 @@
  %>
 function page_init() {
     up = function() { window.location = build_link('/reports'); };
-    create_flexigrid('grid-keys', {
+    widgetManager.addWidget(createDynamicTable('grid-keys', {
         url: '/api/4/keys/all',
         params: { filter: 'in_wiki,not_in_db', include: 'wikipages' },
         colModel: [
@@ -27,11 +27,11 @@ function page_init() {
                     wikilinks.push(w);
                 }
                 return { 'cell': [
-                    link_to_key(row.key),
+                    hover_expand(link_to_key(row.key)),
                     wikilinks.join(' &nbsp;&bull;&nbsp; ')
                 ] };
             });
             return data;
         }
-    });
+    }));
 }

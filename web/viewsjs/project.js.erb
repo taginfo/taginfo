@@ -3,9 +3,9 @@
     misc = @trans.t.misc
     page = @trans.t.pages.project
  %>
-var create_flexigrid_for = {
+const tabsConfig = {
     tags: function(project) {
-        create_flexigrid('grid-tags', {
+        return new DynamicTable('grid-tags', {
             url: '/api/4/project/tags',
             params: { project: project },
             colModel: [
@@ -43,5 +43,5 @@ var create_flexigrid_for = {
 function page_init() {
     up = function() { window.location = build_link('/projects'); }
     const dataset = document.querySelector('h1').dataset;
-    init_tabs([dataset.project]);
+    initTabs(tabsConfig, [dataset.project]);
 }

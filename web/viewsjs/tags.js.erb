@@ -3,7 +3,7 @@
     misc = @trans.t.misc
  %>
 function page_init() {
-    create_flexigrid('grid-tags', {
+    widgetManager.addWidget(createDynamicTable('grid-tags', {
         url: '/api/4/tags/popular',
         colModel: [
             { display: '<%= h(osm.tag) %>', name: 'tag', width: 300, sortable: true },
@@ -33,5 +33,5 @@ function page_init() {
             });
             return data;
         }
-    });
+    }));
 }

@@ -3,87 +3,102 @@ page = @trans.t.reports.historic_development
 
 data = {}
 ['num_keys', 'num_tags', 'relation_types'].each do |key|
-    data[key] = @db.execute("SELECT udate, value FROM history.history_stats WHERE key=? ORDER BY udate", key).map do |row|
+    data[key] = @db.execute("SELECT udate, value FROM history.history_stats WHERE key='#{key}' ORDER BY udate").map do |row|
         [ row['udate'], row['value'].to_i ]
     end
 end
 %>
 
-var create_flexigrid_for = {
-}
+class ChartHistory {
+    key;
+    data;
+    element;
 
-function init_stat(key, data) {
-    var radius = 1.5,
-        w = 900,
-        h = 400,
-        margin = { top: 10, right: 15, bottom: 60, left: 80 };
+    constructor(key, data) {
+        this.key = key;
+        this.data = data;
+        this.element = document.getElementById('canvas_' + key);
 
-    data.forEach(function(d) {
-        d[0] = new Date(d[0]);
-    });
+        for (let d of this.data) {
+            d[0] = new Date(d[0]);
+        };
+    }
 
-    var t0 = data[0][0];
-        t1 = data[data.length - 1][0];
+    draw() {
+        this.element.innerHTML = '';
+        const box = document.getElementById(this.key).getBoundingClientRect();
 
-    var max = d3.max(data, function(d) {
-        return d[1];
-    });
+        const radius = 1.5;
+        const w = Math.min(900, box.width - 140);
+        const h = Math.min(400, box.height - 130);
+        const margin = { top: 10, right: 15, bottom: 40, left: 80 };
 
-    var scale_x = d3.scaleTime()
-                    .domain([t0, t1])
-                    .range([0, w]);
+        const t0 = this.data[0][0];
+        const t1 = this.data[this.data.length - 1][0];
 
-    var axis_x = d3.axisBottom(scale_x)
-                    .tickFormat(d3.timeFormat('%b %Y'));
+        const max = d3.max(this.data, d => d[1]);
 
-    var scale_y = d3.scaleLinear()
-                    .domain([0, max])
-                    .range([h, 0]);
+        const scaleX = d3.scaleTime()
+                         .domain([t0, t1])
+                         .range([0, w]);
 
-    var chart = d3.select('#canvas_' + key).append('svg')
-                    .attr('width', w + margin.left + margin.right)
-                    .attr('height', h + margin.top + margin.bottom)
-                    .append('g')
-                        .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
-                        .call(function(c) {
-                            c.append('rect')
-                                .attr('width', w + 10)
-                                .attr('height', h + 10)
-                                .attr('x', -5)
-                                .attr('y', -5)
-                                .style('fill', 'white')
-                                .style('stroke', '#d0d0c8')
-                        });
+        const axisX = d3.axisBottom(scaleX)
+                        .tickFormat(d3.timeFormat(box.width > 800 ? '%b %Y' : '%Y'));
 
-    chart.append('g')
-        .attr('class', 'x axis')
-        .attr('transform', 'translate(0, ' + (h + 5) + ')')
-        .call(axis_x);
+        const scaleY = d3.scaleLinear()
+                         .domain([0, max])
+                         .range([h, 0]);
 
-    chart.append('g')
-        .attr('class', 'y axis')
-        .attr('transform', 'translate(-5, 0)')
-        .call(d3.axisLeft(scale_y));
+        const chart = d3.select(this.element).append('svg')
+                        .attr('width', w + margin.left + margin.right)
+                        .attr('height', h + margin.top + margin.bottom)
+                        .append('g')
+                            .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
+                            .call(function(c) {
+                                c.append('rect')
+                                    .attr('width', w + 10)
+                                    .attr('height', h + 10)
+                                    .attr('x', -5)
+                                    .attr('y', -5)
+                                    .style('fill', 'white')
+                                    .style('stroke', '#d0d0c8')
+                            });
 
-    chart.selectAll('circle')
-        .data(data)
-        .enter()
-        .append('circle')
-            .style('fill', '#083e76')
-            .attr('cx', (d, i) => scale_x(d[0]))
-            .attr('cy', d => scale_y(d[1]))
-            .attr('r', radius)
-            .attr('title', (d, i) => d3.timeFormat('%Y-%m-%d')(d[0]) + ': ' + d[1]);
+        chart.append('g')
+            .attr('class', 'x axis')
+            .attr('transform', 'translate(0, ' + (h + 5) + ')')
+            .call(axisX);
 
+        chart.append('g')
+            .attr('class', 'y axis')
+            .attr('transform', 'translate(-5, 0)')
+            .call(d3.axisLeft(scaleY));
+
+        chart.selectAll('circle')
+            .data(this.data)
+            .enter()
+            .append('circle')
+                .style('fill', '#083e76')
+                .attr('cx', (d, i) => scaleX(d[0]))
+                .attr('cy', d => scaleY(d[1]))
+                .attr('r', radius)
+                .attr('title', (d, i) => d3.timeFormat('%Y-%m-%d')(d[0]) + ': ' + d[1]);
+
+    }
+
+    resize() {
+        this.draw();
+    }
+} // class ChartHistory
+
+const tabsConfig = {
+    num_keys: data => new ChartHistory('num_keys', data['num_keys']),
+    num_tags: data => new ChartHistory('num_tags', data['num_tags']),
+    relation_types: data => new ChartHistory('relation_types', data['relation_types'])
 }
 
 function page_init() {
     up = function() { window.location = build_link('/reports'); };
-    init_tabs([]);
-    var data = <%= data.to_json %>;
-
-    Object.keys(data).forEach(function(key) {
-        init_stat(key, data[key]);
-    });
+    const data = <%= data.to_json %>;
+    initTabs(tabsConfig, [data]);
 }
-
