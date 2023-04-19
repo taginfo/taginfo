@@ -50,6 +50,7 @@ taginfo:
     key_combinations: 組合
     comparison: 鍵與標籤的比較
     overview: 總覽
+    characters: 字符
     links: 鏈接
     data_from: 資料來自
     data_from_description: taginfo 資料庫的上次更新
@@ -313,6 +314,8 @@ pages:
             ways: 只有路徑
             relations: 只有關係
         button_disabled: 按鈕已禁用，因為此鍵有太多物件。
+        characters:
+            title: 此鍵中的 Unicode 字符
         number_objects: 物件數量
         number_values: 值數量
         values_used: 此鍵用的值
@@ -355,6 +358,8 @@ pages:
         description_from_wiki: 此標籤在 wiki 上的描述（除非有你選擇的語言，否則都是英文）。
         no_description_in_wiki: 此標籤在 wiki 上沒有英文描述。（參見「wiki」分頁）。
         button_disabled: 按鈕已禁用，因為太多物件有此標籤。
+        characters:
+            title: 此值中的 Unicode 字符
         number_objects: 物件數量
         overview:
             see_also: 參見關係類型頁面
@@ -371,8 +376,11 @@ pages:
             no_chronology: 抱歉。只能爲最頻繁的標籤生成年表。
         geographic_distribution:
             title: 此標籤的地理分佈
+            all: 顯示有此標籤的節點和路徑分佈，並不顯示關係。
             relations: 關係沒有地理位置，所以沒有地圖可以顯示。
             no_map: 抱歉，地圖只能為最常用的標籤產生，試試 overpass turbo 連結。
+            nodes: 顯示有此標籤的節點分佈
+            ways: 顯示有此標籤的路徑分佈
         wiki_pages:
             title: 關於此標籤的 wiki 頁面
             none_found: 沒有此標籤的 wiki 頁面。
@@ -657,6 +665,12 @@ reports:
             title: 獨特標籤
         relation_types:
             title: 獨特關係類型
+    unicode: 
+        character: 字符
+        codepoint: 碼點
+        general_category: General Category
+        name: Unicode 碼點名稱
+        script: 文字
     wiki_images:
         name: Wiki 圖片
         intro: |
