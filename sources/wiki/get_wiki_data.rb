@@ -486,7 +486,7 @@ class RelationPage < WikiPage
         @rtype = title.gsub(/^([^:]+:)?Relation:/, '') # relation type
 
         m = /^(.*):Relation:/.match(title)
-        @lang = m ? m[1] : 'en' # IETF language tag
+        @lang = m ? m[1].downcase : 'en' # IETF language tag
     end
 
     def insert(db)
