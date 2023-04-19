@@ -479,6 +479,13 @@ sources:
         name: 年表
         description: 歷史星球上隨時間變化的鍵/標籤數量。
 
+unicode:
+    character: 字符
+    codepoint: 碼點
+    general_category: General Category
+    name: Unicode 碼點名稱
+    script: 文字
+
 reports:
     characters_in_keys:
         name: 在鍵裡的字元
@@ -665,12 +672,6 @@ reports:
             title: 獨特標籤
         relation_types:
             title: 獨特關係類型
-    unicode: 
-        character: 字符
-        codepoint: 碼點
-        general_category: General Category
-        name: Unicode 碼點名稱
-        script: 文字
     wiki_images:
         name: Wiki 圖片
         intro: |
