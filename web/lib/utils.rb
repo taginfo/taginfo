@@ -369,7 +369,11 @@ def unpack_chronology(raw_data)
 end
 
 def build_link(link)
-    @taginfo_config.prefix + link
+    if (@taginfo_config.id != '')
+        '/' + @taginfo_config.prefix + link
+    else
+        link
+    end
 end
 
 def data_as_script(data)

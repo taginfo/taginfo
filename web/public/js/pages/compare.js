@@ -5,16 +5,17 @@ function page_init() {
 
     activateTagHistoryButton(context.data);
 
-    const fetch_promises = context.data.map(function(d, index) {
-        let params = { key: d.key };
-        if (d.keyOrTag.type == 'tag') {
-            params['value'] = d.value;
+    const fetch_promises = context.data.map(function(dataItem, index) {
+        let params = { key: dataItem.key };
+        let key_or_tag = dataItem.keyOrTag;
+        if (key_or_tag.type == 'tag') {
+            params['value'] = dataItem.value;
         }
-        const url = build_link('/api/4/' + d.keyOrTag.type + '/overview', params);
+        const url = build_link_with_prefix(key_or_tag.instance, '/api/4/' + key_or_tag.type + '/overview', params);
 
         return fetch(url).
             then( response => response.json() ).
-            then( d => { fill_data(d.data, index); return d; } );
+            then( d => { fill_data(key_or_tag.instance, d.data, index); return d; } );
     });
 
     Promise.all(fetch_promises).then(r => data_complete(r.map(d => d.data)));
@@ -24,7 +25,7 @@ function get_el(index, el) {
     return document.querySelector('.item' + index + el);
 }
 
-function fill_data(item, index) {
+function fill_data(instance, item, index) {
     const cl = new ComparisonList();
     context.data.forEach(function(ditem, i) {
         if (i != index) {
@@ -34,6 +35,7 @@ function fill_data(item, index) {
     get_el(index, ' a.close').setAttribute('href', cl.url());
 
     const itemObject = createKeyOrTag(item.key, item.value);
+    itemObject.instance = instance;
     get_el(index, ' h2').innerHTML = itemObject.fullLink();
 
     const descElement = get_el(index, '.description');
@@ -42,6 +44,10 @@ function fill_data(item, index) {
         descElement.setAttribute('lang', lang);
         descElement.setAttribute('dir', item.description[lang].dir);
         descElement.innerText = item.description[lang].text;
+    }
+    if (instance != '') {
+        const instanceElement = get_el(index, '.instance');
+        instanceElement.innerText = context.instances[instance];
     }
 
     document.querySelectorAll('.item' + index + '.counts table td').forEach(function(c, index) {
@@ -76,14 +82,14 @@ function fill_data(item, index) {
 
         const imgNodes = document.createElement('img');
         imgNodes.className = 'map map-fg';
-        imgNodes.setAttribute('src', build_link(apiPrefix + 'nodes', apiParams));
+        imgNodes.setAttribute('src', build_link_with_prefix(instance, apiPrefix + 'nodes', apiParams));
         imgNodes.setAttribute('alt', '');
         imgNodes.style.position = 'absolute';
         imgNodes.style.zIndex = '2';
 
         const imgWays = document.createElement('img');
         imgWays.className = 'map map-fg';
-        imgWays.setAttribute('src', build_link(apiPrefix + 'ways', apiParams));
+        imgWays.setAttribute('src', build_link_with_prefix(instance, apiPrefix + 'ways', apiParams));
         imgWays.setAttribute('alt', '');
         imgWays.style.zIndex = '3';
 

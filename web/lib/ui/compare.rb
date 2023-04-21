@@ -4,14 +4,21 @@ class Taginfo < Sinatra::Base
     get %r{/compare/(.*)} do |items|
         @data = []
 
+        # syntax is key=value@instance
         items&.split('/')&.each do |item|
-            kv = item.split('=')
-            @data << { :key => kv[0], :value => kv[1] }
+            ti = item.split('@')
+            kv = ti[0].split('=')
+            instance = ''
+            if ti.length > 1
+                instance = ti[1]
+            end
+            @data << { :instance => instance, :key => kv[0], :value => kv[1] }
         end
 
         if params[:key].is_a?(Array)
             params[:key].each_with_index do |key, index|
                 @data << {
+                    :instance => params[:instance][index],
                     :key => key,
                     :value => (params[:value].is_a?(Array) ? (params[:value][index] == '' ? nil : params[:value][index]) : nil)
                 }

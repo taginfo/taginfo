@@ -4,7 +4,7 @@ var tabs = null,
     autocomplete = null,
     up = function() { window.location = build_link('/'); };
 
-const bad_chars_for_url = /[.=\/]/;
+const bad_chars_for_url = /[.=\/@]/;
 const bad_chars_for_keys = '!"#$%&()*+,/;<=>?@[\\]^`{|}~' + "'";
 const non_printable = "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u0009\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f\u0080\u0081\u0082\u0083\u0084\u0085\u0086\u0087\u0088\u0089\u008a\u008b\u008c\u008d\u008f\u0090\u0091\u0092\u0093\u0094\u0095\u0096\u0097\u0098\u0099\u009a\u009b\u009c\u009d\u009f\u200e\u200f";
 
@@ -119,7 +119,11 @@ class TaginfoKey extends TaginfoObject {
     }
 
     toFullString() {
-        return this.key;
+        if (this.instance == '') {
+            return this.key;
+        }
+
+        return this.key + "@" + this.instance;
     }
 
     toJSON() {
@@ -193,7 +197,11 @@ class TaginfoTag extends TaginfoObject {
     }
 
     toFullString() {
-        return this.key + '=' + this.value;
+        if (this.instance == '') {
+            return this.key + '=' + this.value;
+        }
+
+        return this.key + '=' + this.value + "@" + this.instance;
     }
 
     toJSON() {
@@ -391,7 +399,10 @@ function build_link_with_prefix(prefix, path, params) {
         const p = new URLSearchParams(params);
         path += '?' + p.toString();
     }
-    return prefix + path;
+    if (prefix == '') {
+        return path;
+    }
+    return '/' + prefix + path;
 }
 
 function build_link(...args) {
@@ -1514,14 +1525,14 @@ class ComparisonList {
     url() {
         if (this.list.every( item => item.isClean() )) {
             const kv = this.list.map( item => item.toFullString() );
-            return '/compare/' + kv.join('/');
+            return build_link('/compare/' + kv.join('/'));
         }
 
         let params = new URLSearchParams();
         this.list.forEach( item => params.append('key[]', item.key) );
         this.list.forEach( item => params.append('value[]', item.value || '') );
 
-        return '/compare/?' + params.toString();
+        return build_link('/compare/?' + params.toString());
     }
 } // class ComparisonList
 

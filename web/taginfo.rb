@@ -125,7 +125,7 @@ class Taginfo < Sinatra::Base
         @data_until_m = data_until_raw.sub(' ', 'T') + 'Z'
 
         @context = {
-            instance: @taginfo_config.prefix,
+            instance: @taginfo_config.id,
             lang: r18n.locale.code || 'en'
         }
     end

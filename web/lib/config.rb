@@ -4,19 +4,11 @@ class TaginfoConfig
 
     attr_reader :id
 
-    def initialize(configfile, id = nil)
+    def initialize(configfile, id = '')
         open(configfile) do |file|
             @config = JSON.parse(file.gets(nil), { :create_additions => false })
         end
         @id = id
-    end
-
-    def prefix
-        if @id
-            return '/' + @id
-        end
-
-        ''
     end
 
     def get(key, default = nil)
