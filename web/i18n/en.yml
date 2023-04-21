@@ -454,6 +454,7 @@ dynamic_table:
     procmsg: Processing, please wait...
     nomsg: No items
     errormsg: Connection Error
+    filter_nothing_found: Nothing found matching your query.
 
 comparison:
     list: Comparison list

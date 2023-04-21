@@ -1480,6 +1480,17 @@ div.dt-table div.dt-header span img {
     top: 4px;
 }
 
+div.dt-table div.dt-noresult {
+    margin-top: 1px;
+    border: 1px solid var(--color-red);
+    background-color: var(--color-stripe0);
+    grid-column: 1 / -1;
+    grid-row: 2 / 2;
+    text-align: center;
+    font-size: 1rem;
+    padding: 20px;
+}
+
 div.dt-table div.dt-body {
     padding: 2px 6px;
     background-color: var(--color-stripe1);

@@ -55,7 +55,8 @@ const tabsConfig = {
                     ] };
                 });
                 return data;
-            }
+            },
+            empty: '<%= h(t.pages.relation.roles.no_roles_info) %>'
         });
     },
     graph: function(rtype) {

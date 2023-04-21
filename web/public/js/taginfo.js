@@ -636,7 +636,7 @@ class DynamicTableColumn {
 
     makeBodyElement(col, row, max) {
         const element = document.createElement('div');
-        element.classList.add('dt-body');
+        element.className = 'dt-body';
         element.dataset.col = col;
         element.dataset.row = row;
 
@@ -685,6 +685,11 @@ class DynamicTable {
     constructor(id, config) {
         this.id = id;
         this.element = document.getElementById(id);
+
+        if (!this.element) {
+            throw new Error('No HTML object found with id "' + id + '" for DynamicTable.');
+        }
+
         this.config = config;
 
         for (const column of this.config.colModel) {
@@ -831,7 +836,7 @@ class DynamicTable {
     }
 
     clearTableBody() {
-        for (const bodyElement of this.table.querySelectorAll('.dt-body,.dt-handle')) {
+        for (const bodyElement of this.table.querySelectorAll('.dt-body,.dt-handle,.dt-noresult')) {
             bodyElement.remove();
         }
     }
@@ -934,12 +939,28 @@ class DynamicTable {
     display(data) {
         if (data.total == 0) {
             this.totalRows = 1;
-            this.toolbar.querySelector('.dt-page input').value = 0;
-            this.toolbar.querySelector('.dt-page span.dt-page-max').innerText = 0;
+            this.toolbar.querySelector('.dt-page input').value = '0';
+            this.toolbar.querySelector('.dt-page span.dt-page-max').innerText = '0';
             this.toolbar.querySelector('.dt-json a').setAttribute('href', data.url);
-
             this.toolbar.querySelector('.dt-info').innerHTML = texts.dynamic_table.nomsg;
+
             this.clearTableBody();
+
+            const noResultMessage = document.createElement('span');
+            noResultMessage.className = 'empty';
+            if (this.queryInput.value != '') {
+                noResultMessage.innerText = texts.dynamic_table.filter_nothing_found;
+            } else if (this.config.empty) {
+                noResultMessage.innerText = this.config.empty;
+            } else {
+                noResultMessage.innerText = texts.dynamic_table.nomsg;
+            }
+
+            const noResultElement = document.createElement('div');
+            noResultElement.className = 'dt-noresult';
+            noResultElement.append(noResultMessage);
+            this.table.append(noResultElement);
+
             return;
         }
 
@@ -1003,7 +1024,7 @@ class DynamicTable {
         }
 
         if (this.usePager) {
-            if (this.element.querySelectorAll('.dt-body').length == 0) {
+            if (this.element.querySelectorAll('.dt-body,.dt-noresult').length == 0) {
                 this.rp = this.calculateRowsPerPage();
             }
             p.rp = this.rp;
@@ -1286,7 +1307,12 @@ class Tabs {
 
 function initTabs(config, params) {
     for (const tab in config) {
-        tabs.addWidget(tab, config[tab].apply(this, params));
+        try {
+            tabs.addWidget(tab, config[tab].apply(this, params));
+        } catch (e) {
+            // Ignore tables that can't be created. This is usually because
+            // there is no data available.
+        }
     }
 }
 
