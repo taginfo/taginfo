@@ -1,0 +1,28 @@
+<div class="fbox">
+    <h2><%= h(t.pages.sources.statistics) %></h2>
+    <div>
+        <table class="desc">
+            <tr><th>Languages:</th><td><%= @db.stats('subtag_language') %></td></tr>
+            <tr><th>Regions:</th><td><%= @db.stats('subtag_region') %></td></tr>
+            <tr><th>Scripts:</th><td><%= @db.stats('subtag_script') %></td></tr>
+            <tr><th>Variants:</th><td><%= @db.stats('subtag_variant') %></td></tr>
+        </table>
+    </div>
+</div>
+<div class="fbox">
+    <h2><%= h(t.pages.sources.languages.subtags.title) %></h2>
+    <div>
+        <%= t.pages.sources.languages.subtags.intro %>
+        <p><a href="languages/subtags"><%= h(t.pages.sources.languages.subtags.show) %></a></p>
+    </div>
+</div>
+<div class="fbox">
+    <h2><%= h(t.pages.sources.languages.wikipedia_sites.title) %></h2>
+    <div>
+        <img src="/img/sources/wikipedia.png" style="float: left; margin-right: 10px;"/>
+        <p>There are <b><%= @db.stats('wikipedia_sites') %></b> wikipedia sites
+        for the different languages. Taginfo uses these to parse the values of
+        the <a href="<%= build_link('/keys/wikipedia') %>">wikipedia</a>
+        tag.</p>
+    </div>
+</div>

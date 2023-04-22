@@ -190,11 +190,11 @@ pages:
                 <p>Kontaktu nin ĉe la <a class="extlink" href="//lists.openstreetmap.org/listinfo/taginfo-dev">dissendolisto taginfo-dev</a>, se vi havas iujn demandojn aŭ volas helpi.</p>
     sources:
         intro: |
-            <p>Taginfo akiras datumojn pri OSM-etikedoj el kelkaj fontoj kaj kunigas ilin por facile ilin foliumi kaj analizi.</p>
-            <p>Rimarku, ke taginfo nur montras tiujn ĉi datumojn. Se vi volas ŝanĝi ilin, vi devas iri al ilia fonto.</p>
-        list:
-            title: Listo de fontoj
-            intro: Jen la listo de nune uzataj fontoj. Pliaj fontoj eble estos aldonitaj estontece.
+            Taginfo akiras datumojn pri OSM-etikedoj el kelkaj fontoj kaj
+            kunigas ilin por facile ilin foliumi kaj analizi. Jen la listo de
+            nune uzataj fontoj. Pliaj fontoj eble estos aldonitaj estontece.
+        display_only: |
+            Rimarku, ke taginfo nur montras tiujn ĉi datumojn. Se vi volas ŝanĝi ilin, vi devas iri al ilia fonto.
         description:
             db: |
                 <p>Statistikoj pri ŝlosiloj, etikedoj kaj rilatoj estas generataj de <a class="extlink" href="https://planet.openstreetmap.org/">OSM-datumbazo</a> (aŭ ĝia kopio), same mapoj, kiuj vidigas geografian distribuon de nodoj kaj linioj.</p>
@@ -203,7 +203,7 @@ pages:
             languages: |
                 <p>Taginfo akiras informojn pri diversaj lingvoj de la mondo, iliajn kodojn, nomojn, ktp. el listoj de <a class="extlink" href="https://www.iana.org/">IANA</a> kaj <a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
-                <p>Projektoj, kiuj iel uzas OSM-etikedojn, kiel redaktiloj, mapoj, navigiloj, ktp. Vidu la <a href="projects">liston de projektoj</a>.</p>
+                <p>Projektoj, kiuj iel uzas OSM-etikedojn, kiel redaktiloj, mapoj, navigiloj, ktp.</p>
             chronology: |
                 <p>Nombro de ŝlosiloj/etikedoj laŭlonge de la <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">history planet</a>.</p>
         updates:
@@ -213,6 +213,31 @@ pages:
         last_update_run: Lasta ĝisdatigo je
         data_until_explanation: Ĉiuj redaktoj ĝis tiu ĉi dato troviĝos en la datumbazo, postaj ĝisdatigoj necrete.
         to: ĝis
+        languages:
+            subtags:
+                title: BCP47-subetikedoj
+                filter:
+                    label: Montri nur subetikedojn de speco
+                    all: Ĉiuj
+                    language: Lingvo
+                    script: Alfabeto
+                    region: Regiono
+                    variant: Variaĵo
+                intro: |
+                    <p><a href="https://www.ietf.org/">IETF</a> difinas <i>lingvajn
+                    etikedojn</i> en iliaj normaj<a
+                    href="https://tools.ietf.org/html/bcp47">etikedoj por identigi
+                    lingvojn (BCP47)</a>. Lingvaj etikedoj konsistas el almenaŭ unu
+                    <i>subetikedo</i> priskribanta lingvon, alfabeton, variaĵojn,
+                    ktp. Por pliaj informoj, vidu ankaŭ la <a
+                    href="https://en.wikipedia.org/wiki/IETF_language_tag">Vikipedian
+                    artikolon pri IETF lingvaj etikedoj</a> kaj la retejon <a
+                    href="http://www.langtag.net/">langtag.net</a>.</p>
+                note: |
+                    Rimarku, ke datumoj montrataj en tiu ĉi tabelo ne devenas el
+                    OpenStreetMap, ĝi nur montras konstru-pecojn, kiujn oni povas
+                    uzi por priskribi lingvojn senrilate, ĉu ili estas nune uzataj
+                    en OSM.
     download:
         intro: |
             <p>Tie ĉi vi povas elŝuti la datumbazojn uzatajn de taginfo. Ĉiuj datumoj estas konservitaj en datumbazojn <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>. Datumbazaj dosieroj estas kompaktigitaj per <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
@@ -542,20 +567,6 @@ reports:
         overview:
             tab: Sumigo
             title: Sumigo
-        bcp47:
-            tab: BCP47-subetikedoj
-            title: BCP47-subetikedoj
-            filter:
-                label: Montri nur subetikedojn de speco
-                all: Ĉiuj
-                language: Lingvo
-                script: Alfabeto
-                region: Regiono
-                variant: Variaĵo
-            intro: |
-                <p><a href="https://www.ietf.org/">IETF</a> difinas <i>lingvajn etikedojn</i> en iliaj normaj<a href="https://tools.ietf.org/html/bcp47">etikedoj por identigi lingvojn (BCP47)</a>. Lingvaj etikedoj konsistas el almenaŭ unu <i>subetikedo</i> priskribanta lingvon, alfabeton, variaĵojn, ktp. La jena listo montras nune registritajn subetikedojn. Por pliaj informoj, vidu ankaŭ la <a href="https://en.wikipedia.org/wiki/IETF_language_tag">Vikipedian artikolon pri IETF lingvaj etikedoj</a> kaj la retejon <a href="http://www.langtag.net/">langtag.net</a>.</p>
-                <p>Rimarku, ke datumoj montrataj en tiu ĉi tabelo <b>ne</b> devenas el OpenStreetMap, ĝi nur montras konstru-pecojn, kiujn oni povas uzi por priskribi lingvojn senrilate, ĉu ili estas nune uzataj en OSM.
-                </p>
     similar_keys:
         name: Similaj ŝlosiloj
         intro: |

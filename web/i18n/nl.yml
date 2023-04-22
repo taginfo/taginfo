@@ -235,13 +235,13 @@ pages:
                 als je vragen hebt of wil helpen.</p>
     sources:
         intro: |
-            <p>Taginfo verzamelt data over OSM-tags van enkele bronnen en brengt ze
-            samen voor simpel bladeren en ontdekken.</p>
-            <p>Let erop dat taginfo deze data slechts laat zien. Als je deze wilt veranderen, moet
-            je terug naar de bron.</p>
-        list:
-            title: Lijst van bronnen
-            intro: Hier is een lijst van huidig gebruikte bronnen. Meer bronnen kunnen worden geïntegreerd in de toekomst.
+            Taginfo verzamelt data over OSM-tags van enkele bronnen en brengt
+            ze samen voor simpel bladeren en ontdekken. Hier is een lijst van
+            huidig gebruikte bronnen. Meer bronnen kunnen worden geïntegreerd
+            in de toekomst.
+        display_only: |
+            Let erop dat taginfo deze data slechts laat zien. Als je deze wilt
+            veranderen, moet je terug naar de bron.
         description:
             db: |
                 <p>Statistieken over sleutels, tags en relatietypes zijn gegenereerd van de <a class="extlink" href="https://planet.openstreetmap.org/">OSM-database</a> (of een extract), net zoals de kaarten die de geografische verspreiding van nodes en wegen tonen.</p>
@@ -250,7 +250,7 @@ pages:
             languages: |
                 <p>Taginfo krijgt informatie over de verschillende talen van de wereld, hun codes, namen en dergelijke van enkele <a class="extlink" href="https://www.iana.org/">IANA</a> en <a class="extlink" href="https://www.unicode.org/">Unicode</a> registers.</p>
             projects: |
-                <p>Projecten die OSM-tags op een of andere manier gebruiken, zoals bewerkers, kaarten, routeplanners en dergelijke. Zie <a href="projects">de projectlijst</a>.</p>
+                <p>Projecten die OSM-tags op een of andere manier gebruiken, zoals bewerkers, kaarten, routeplanners en dergelijke.</p>
             chronology: |
                 <p>Aantal sleutels/tags in de loop van de tijd van <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">planet historie</a>.</p>
         updates:
@@ -260,6 +260,31 @@ pages:
         last_update_run: Laatste update gedraaid
         data_until_explanation: Alle bewerkingen tot deze tijd zullen in de data zitten, latere kunnen er mogelijk inzitten.
         to: tot
+        languages:
+            subtags:
+                title: BCP47 Subtags
+                filter:
+                    label: Geef alleen subtags van type weer
+                    all: Alle
+                    language: Taal
+                    script: Script
+                    region: Regio
+                    variant: Variant
+                intro: |
+                    <p>De <a href="https://www.ietf.org/">IETF</a> definieert <i>taal
+                    tags</i> in zijn standaard
+                    <a href="https://tools.ietf.org/html/bcp47">Tags voor het identificeren van talen
+                    (BCP47)</a>. Taal
+                    tags bestaan uit een of meer <i>subtags</i> die de taal, script,
+                    varianten en dergelijke beschrijven. Voor meer informatie bekijk ook de
+                    <a href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
+                    pagina over IETF taal tags</a> en de <a
+                    href="http://www.langtag.net/">langtag.net</a> website.</p>
+                note: |
+                    Let er op dat de data weergegeven in deze tabel niet van
+                    OpenStreetMap is, er worden slechts de bouwblokken weergegeven
+                    die gebruikt kunnen worden om talen te beschrijven
+                    onafhankelijk van of ze daadwerkelijk gebruikt worden in OSM.
     download:
         intro: |
             <p>Hier kun je de database gebruikt door taginfo downloaden. Alle gegevens zijn opgeslagen
@@ -635,31 +660,6 @@ reports:
         overview:
             tab: Overzicht
             title: Overzicht
-        bcp47:
-            tab: BCP47 Subtags
-            title: BCP47 Subtags
-            filter:
-                label: Geef alleen subtags van type weer
-                all: Alle
-                language: Taal
-                script: Script
-                region: Regio
-                variant: Variant
-            intro: |
-                <p>De <a href="https://www.ietf.org/">IETF</a> definieert <i>taal
-                tags</i> in zijn standaard
-                <a href="https://tools.ietf.org/html/bcp47">Tags voor het identificeren van talen
-                (BCP47)</a>. Taal
-                tags bestaan uit een of meer <i>subtags</i> die de taal, script,
-                varianten en dergelijke beschrijven. De volgende lijst geeft de subtags weer die op dit moment
-                geregistreerd zijn en die relevant zijn voor OSM. Voor meer informatie bekijk ook de
-                <a href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
-                pagina over IETF taal tags</a> en de <a
-                href="http://www.langtag.net/">langtag.net</a> website.</p>
-                <p>Let er op dat de data weergegeven in deze tabel <b>niet</b> van OpenStreetMap is,
-                er worden slechts de bouwblokken weergegeven die gebruikt kunnen worden om talen te beschrijven
-                onafhankelijk van of ze daadwerkelijk gebruikt worden in OSM.
-                </p>
     similar_keys:
         name: Soortgelijke sleutels
         intro: |

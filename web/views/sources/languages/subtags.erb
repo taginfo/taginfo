@@ -1,0 +1,28 @@
+<%
+@filter_type = BCP47.get_filter(params[:filter])
+@sel = Hash.new('')
+@sel[@filter_type] = ' selected="selected"'
+
+@css = <<"CSS"
+form#subtag-filter-form {
+    margin-bottom: 10px;
+}
+CSS
+%>
+<h1><a href="<%= build_link("/sources/#{ @source.id }") %>"><%= @source.name %></a>: <%= h(t.pages.sources.languages.subtags.title) %></h1>
+
+<%= t.pages.sources.languages.subtags.intro %>
+<p><i><%= t.pages.sources.languages.subtags.note %></i></p>
+
+<div class="box">
+    <form id="subtag-filter-form">
+        <label for="subtag-filter"><%= h(t.pages.sources.languages.subtags.filter.label) %>:</label>
+        <select id="subtag-filter" name="subtag-filter">
+            <option value="all"<%= @sel[''] %>><%= t.pages.sources.languages.subtags.filter.all %></option>
+<% BCP47::SUBTAG_TYPES.each do |type| %>
+            <option value="<%= type %>"<%= @sel[type] %>><%= t.pages.sources.languages.subtags.filter[type] %></option>
+<% end %>
+        </select>
+    </form>
+    <div id="grid-subtags"></div>
+</div>

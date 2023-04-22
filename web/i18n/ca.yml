@@ -235,12 +235,12 @@ pages:
                 si teniu preguntes o voleu col·laborar.</p>
     sources:
         intro: |
-            <p>Taginfo recull dades sobre les etiquetes d'OSM de diverses fonts i les
-            ajunta per què siguin fàcils de navegar i descobrir.</p>
-            <p>Fixeu-vos que taginfo només mostra aquestes dades. Si voleu canviar-ho, haureu de tornar a les fonts.</p>
-        list:
-            title: Llista de fonts
-            intro: Aquí hi ha una llista de les fonts usades actualment. En el futur, es poden integrar més fonts.
+            Taginfo recull dades sobre les etiquetes d'OSM de diverses fonts i
+            les ajunta per què siguin fàcils de navegar i descobrir. Aquí hi ha
+            una llista de les fonts usades actualment. En el futur, es poden
+            integrar més fonts.
+        display_only: |
+            Fixeu-vos que taginfo només mostra aquestes dades. Si voleu canviar-ho, haureu de tornar a les fonts.
         description:
             db: |
                 <p>Estadístiques sobre les claus, etiquetes i tipus de relacions es generen a partir de la <a class="extlink" href="https://planet.openstreetmap.org/">base de dades d'OSM database</a> (o un extracte) així com els mapes que mostren la distribució geogràfica de nodes i vies.</p>
@@ -249,7 +249,7 @@ pages:
             languages: |
                 <p>Taginfo obté informació sobre els diferents idiomes del món, els seus codis, noms, etc. des de diversos registres de l'<a class="extlink" href="https://www.iana.org/">IANA</a> i d'<a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
-                <p>Els projectes que d'alguna manera usen les etiquetes d'OSM, com ara editors, mapes, encaminadors,  etc. Vegeu <a href="projects">la llista de projectes</a>.</p>
+                <p>Els projectes que d'alguna manera usen les etiquetes d'OSM, com ara editors, mapes, encaminadors,  etc.</p>
             chronology: |
                 <p>Nombre de claus/etiquetes al llarg del temps de la <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">història del planeta</a>.</p>
         updates:
@@ -259,6 +259,30 @@ pages:
         last_update_run: Última actualització
         data_until_explanation: Totes les edicions fins aquest moment seran a les dades, les últimes edicions, pot ser.
         to: a
+        languages:
+            subtags:
+                title: Subetiquetes BCP47
+                filter:
+                    label: Mostra només etiquetes del tipus
+                    all: Tots
+                    language: Idioma
+                    script: Alfabet
+                    region: Regió
+                    variant: Variant
+                intro: |
+                    <p>L'<a href="https://www.ietf.org/">IETF</a> defineix <i>etiquetes
+                    d'idiomes</i> en els seu estàndard
+                    <a href="https://tools.ietf.org/html/bcp47">Etiquetes per Identificar Idiomes
+                    (BCP47)</a>. Les etiquetes
+                    d'idiomes consisteixen en una o més <i>subetiquetes</i> que descriuen l'idioma,
+                    alfabet, variants, etc. For more information see also the
+                    l'<a href="https://ca.wikipedia.org/wiki/Codi_de_llengua_IETF">entrada
+                    a la Viquipèdia sobre les etiquetes d'idioma IETF</a> el lloc de <a
+                    href="http://www.langtag.net/">langtag.net</a>.</p>
+                note: |
+                    Fixeu-vos que les dades que es mostren en aquesta taula not śon d'OpenStreetMap,
+                    tan sols mostra les peces que es poden usar per descriure idiomes
+                    independentment de si realment s'usen a OSM.
     download:
         intro: |
             <p>Aquí podeu descarregar la base de dades usada per taginfo. Totes les dades estan desades
@@ -647,32 +671,6 @@ reports:
         overview:
             tab: Descripció general
             title: Descripció general
-        bcp47:
-            tab: Subetiquetes BCP47
-            title: Subetiquetes BCP47
-            filter:
-                label: Mostra només etiquetes del tipus
-                all: Tots
-                language: Idioma
-                script: Alfabet
-                region: Regió
-                variant: Variant
-            intro: |
-                <p>L'<a href="https://www.ietf.org/">IETF</a> defineix <i>etiquetes
-                d'idiomes</i> en els seu estàndard
-                <a href="https://tools.ietf.org/html/bcp47">Etiquetes per Identificar Idiomes
-                (BCP47)</a>. Les etiquetes
-                d'idiomes consisteixen en una o més <i>subetiquetes</i> que descriuen l'idioma,
-                alfabet, variants, etc. La llista següent mostra les subetiquetes actualment
-                registrades que són rellevants per OSM. Per més informació, vegeu també
-                registered that are relevant for OSM. For more information see also the
-                l'<a href="https://ca.wikipedia.org/wiki/Codi_de_llengua_IETF">entrada
-                a la Viquipèdia sobre les etiquetes d'idioma IETF</a> el lloc de <a
-                href="http://www.langtag.net/">langtag.net</a>.</p>
-                <p>Fixeu-vos que les dades que es mostren en aquesta taula <b>not</b> śon d'OpenStreetMap,
-                tan sols mostra les peces que es poden usar per descriure idiomes
-                independentment de si realment s'usen a OSM.
-                </p>
     similar_keys:
         name: Claus semblants
         intro: |

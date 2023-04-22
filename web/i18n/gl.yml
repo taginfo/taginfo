@@ -231,13 +231,13 @@ pages:
                 se vostede ten cuestións ou quere axudar.</p>
     sources:
         intro: |
-            <p>O Taginfo recompila datos acerca das etiquetas do OSM de varias fontes e os une
-            para unha doada navegación e descobrimento.</p>
-            <p>Teña en conta que o taginfo só amosa estes datos. Se desexa mudalo,
-            ten que ir de novo á fonte.</p>
-        list:
-            title: Listaxe de fontes
-            intro: Velaquí ten unha listaxe de fontes empregadas actualmente. Máis fontes poderían integrarse no futuro.
+            O Taginfo recompila datos acerca das etiquetas do OSM de varias
+            fontes e os une para unha doada navegación e descobrimento. Velaquí
+            ten unha listaxe de fontes empregadas actualmente. Máis fontes
+            poderían integrarse no futuro.
+        display_only: |
+            Teña en conta que o taginfo só amosa estes datos. Se desexa mudalo,
+            ten que ir de novo á fonte.
         description:
             db: |
                 <p>As estatísticas sobre as claves, etiquetas e tipos de relación son xeradas a partir da <a class="extlink" href="https://planet.openstreetmap.org/">base de datos do OSM</a> (ou un anaco) así coma os mapas que amosan a distribución xeográfica dos nós e vías.</p>
@@ -246,7 +246,7 @@ pages:
             languages: |
                 <p>O Taginfo obtén información acerca das diferentes linguas do mundo, os seus códigos, nomes, etc. de varios rexistros de <a class="extlink" href="https://www.iana.org/">IANA</a> e <a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
-                <p>Proxectos que empregan etiquetas do OSM dalgún xeito, tales coma editores, mapas, enrutadores, etc. Ollar <a href="projects">a listaxe dos proxectos</a>.</p>
+                <p>Proxectos que empregan etiquetas do OSM dalgún xeito, tales coma editores, mapas, enrutadores, etc.</p>
         updates:
             title: Actualizacións
             intro: Os datos do taginfo actualízanse de xeito regular dende as fontes.
@@ -254,6 +254,31 @@ pages:
         last_update_run: Última execución da actualización
         data_until_explanation: Tódalas edicións até este intre estarán nos datos, as edicións seguintes poderían estar.
         to: a
+        languages:
+            subtags:
+                title: Subetiquetas BCP47
+                filter:
+                    label: Amosar só as subetiquetas de tipo
+                    all: Todos
+                    language: Lingua
+                    script: Escritura
+                    region: Rexión
+                    variant: Variante
+                intro: |
+                    <p>O <a href="https://www.ietf.org/">IETF</a> define as <i>etiquetas
+                    de lingua</i> nos seus estándares
+                    <a href="https://tools.ietf.org/html/bcp47">Etiquetas para a Identificación de Linguas
+                    (BCP47)</a>. As etiquetas
+                    de lingua consisten nunha ou máis <i>subetiquetas</i> describindo a lingua,
+                    escritura, variantes, etc. Para máis información ollar tamén o
+                    <a href="https://en.wikipedia.org/wiki/IETF_language_tag">artigo da Wikipedia
+                    sobre as etiquetas de lingua IETF</a> e o sitio <a
+                    href="http://www.langtag.net/">langtag.net</a>.</p>
+                note: |
+                    Teña en conta que os datos amosados nesta táboa non son do
+                    OpenStreetMap, só amosan os bloques que poden empregarse para
+                    describir linguas independentemente de se en realidad son
+                    empregados no OSM.
     download:
         intro: |
             <p>Velaquí pode baixar as bases de datos empregadas polo taginfo. Tódolos datos almacénanse
@@ -619,31 +644,6 @@ reports:
         overview:
             tab: Resumo
             title: Resumo
-        bcp47:
-            tab: Subetiquetas BCP47
-            title: Subetiquetas BCP47
-            filter:
-                label: Amosar só as subetiquetas de tipo
-                all: Todos
-                language: Lingua
-                script: Escritura
-                region: Rexión
-                variant: Variante
-            intro: |
-                <p>O <a href="https://www.ietf.org/">IETF</a> define as <i>etiquetas
-                de lingua</i> nos seus estándares
-                <a href="https://tools.ietf.org/html/bcp47">Etiquetas para a Identificación de Linguas
-                (BCP47)</a>. As etiquetas
-                de lingua consisten nunha ou máis <i>subetiquetas</i> describindo a lingua,
-                escritura, variantes, etc. A seguinte listaxe amosa as subetiquetas rexistradas
-                a día de hoxe que son relevantes para o OSM. Para máis información ollar tamén o
-                <a href="https://en.wikipedia.org/wiki/IETF_language_tag">artigo da Wikipedia
-                sobre as etiquetas de lingua IETF</a> e o sitio <a
-                href="http://www.langtag.net/">langtag.net</a>.</p>
-                <p>Teña en conta que os datos amosados nesta táboa <b>non</b> son do OpenStreetMap,
-                só amosan os bloques que poden empregarse para describir linguas
-                independentemente de se en realidad son empregados no OSM.
-                </p>
     similar_keys:
         name: Claves semellantes
         intro: |

@@ -227,11 +227,10 @@ pages:
                 href="//lists.openstreetmap.org/listinfo/taginfo-dev">taginfo-dev 메일링 리스트</a>로 우리에게 연락하세요.</p>
     sources:
         intro: |
-            <p>taginfo는 여러 출처에서 OSM 태그에 대한 데이터를 수집하고, 쉬운 탐색과 가독성을 위해 조합합니다.</p>
-            <p>taginfo는 데이터를 보여주기만 한다는 것을 명심하세요. 만약 이를 바꾸고 싶다면, 출처로 돌아가야 합니다.</p>
-        list:
-            title: 출처 목록
-            intro: 현재 사용하는 출처의 목록입니다. 나중에 새로운 출처가 추가될지도 모릅니다.
+            taginfo는 여러 출처에서 OSM 태그에 대한 데이터를 수집하고, 쉬운 탐색과 가독성을 위해 조합합니다.
+            현재 사용하는 출처의 목록입니다. 나중에 새로운 출처가 추가될지도 모릅니다.
+        display_only: |
+            taginfo는 데이터를 보여주기만 한다는 것을 명심하세요. 만약 이를 바꾸고 싶다면, 출처로 돌아가야 합니다.
         description:
             db: |
                 <p>키, 태그, 관계의 종류에 대한 통계와 노드와 길의 지리적 분포를 보여주는 지도는 <a class="extlink" href="https://planet.openstreetmap.org/">OSM 데이터베이스</a>(또는 데이터베이스의 발췌물)로 작성되었습니다.</p>
@@ -240,7 +239,7 @@ pages:
             languages: |
                 <p>taginfo는 전 세계의 언어에 관한 코드와 명칭 등의 정보를 <a class="extlink" href="https://www.iana.org/">IANA</a>와 <a class="extlink" href="https://www.unicode.org/">Unicode</a> 레지스트리에서 받고 있습니다.</p>
             projects: |
-                <p>편집기, 지도, 경로 탐색기 등의 몇 가지 방법으로 OSM 태그를 사용하는 프로젝트는 <a href="projects">프로젝트 목록</a>을 참조하세요.</p>
+                <p>편집기, 지도, 경로 탐색기 등의 몇 가지 방법으로 OSM 태그를 사용하는 프로젝트는 프로젝트 목록을 참조하세요.</p>
             chronology: |
                 <p>과거 <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">OSM 데이터</a>에 존재하는 키/태그의 개수.</p>
         updates:
@@ -250,6 +249,27 @@ pages:
         last_update_run: 마지막 갱신
         data_until_explanation: 이 시각까지의 모든 편집이 데이터에 반영되며, 이후 편집이 반영될 수도 있습니다.
         to: ～
+        languages:
+            subtags:
+                title: BCP47 하위 태그
+                filter:
+                    label: 유형의 하위 태그만 표시
+                    all: 전체
+                    language: 언어
+                    script: 문자 체계
+                    region: 지역
+                    variant: 변이형
+                intro: |
+                    <p><a href="https://www.ietf.org/">IETF</a>는 <a
+                    href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages(BCP47)</a>로
+                    표준 <i>언어 태그</i>를 정의합니다.
+                    언어 태그는 언어, 문자 체계, 변이형 등을 설명하는 하나 이상의 <i>하위 태그</i>로 구성되어 있습니다.
+                    다음 목록은 OSM과 관련되어 있으면서 현재 등록된 하위 태그를 나타냅니다.
+                    자세한 정보는 <a href="https://ko.wikipedia.org/wiki/IETF_%EC%96%B8%EC%96%B4_%ED%83%9C%EA%B7%B8">IETF
+                    언어 태그 위키피디아 문서</a>와 <a href="http://www.langtag.net/">langtag.net</a> 사이트 참조.</p>
+                note: |
+                    이 표의 데이터는 OpenStreetMap에서 가져온 것이 아니고, 어디서 설명하든 상관없이
+                    언어를 설명할 때 사용할 수 있는 구성 요소만 나타낸다는 점을 명심하세요.
     download:
         intro: |
             <p>taginfo가 사용하는 데이터베이스를 여기에서 다운로드받을 수 있습니다. 모든 데이터는 <a class="extlink"
@@ -620,26 +640,6 @@ reports:
         overview:
             tab: 개요
             title: 개요
-        bcp47:
-            tab: BCP47 하위 태그
-            title: BCP47 하위 태그
-            filter:
-                label: 유형의 하위 태그만 표시
-                all: 전체
-                language: 언어
-                script: 문자 체계
-                region: 지역
-                variant: 변이형
-            intro: |
-                <p><a href="https://www.ietf.org/">IETF</a>는 <a
-                href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages(BCP47)</a>로
-                표준 <i>언어 태그</i>를 정의합니다.
-                언어 태그는 언어, 문자 체계, 변이형 등을 설명하는 하나 이상의 <i>하위 태그</i>로 구성되어 있습니다.
-                다음 목록은 OSM과 관련되어 있으면서 현재 등록된 하위 태그를 나타냅니다.
-                자세한 정보는 <a href="https://ko.wikipedia.org/wiki/IETF_%EC%96%B8%EC%96%B4_%ED%83%9C%EA%B7%B8">IETF
-                언어 태그 위키피디아 문서</a>와 <a href="http://www.langtag.net/">langtag.net</a> 사이트 참조.</p>
-                <p>이 표의 데이터는 OpenStreetMap에서 가져온 것이 <b>아니고</b>, 어디서 설명하든 상관없이
-                언어를 설명할 때 사용할 수 있는 구성 요소만 나타낸다는 점을 명심하세요.</p>
     similar_keys:
         name: 비슷한 키
         intro: |

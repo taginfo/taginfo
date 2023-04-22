@@ -234,13 +234,13 @@ pages:
                 <a class="extlink" href="//lists.openstreetmap.org/listinfo/taginfo-dev">danh sách thư taginfo-dev</a>.</p>
     sources:
         intro: |
-            <p>Taginfo lấy dữ liệu về thẻ OSM từ nhiều nguồn gốc và thu thập dữ liệu
-            để duyệt và khám phá một cách dễ dàng.</p>
-            <p>Lưu ý rằng taginfo chỉ hiển thị dữ liệu này. Các dữ liệu phải được sửa đổi tại nguồn gốc.</p>
-            <p>Lưu ý rằng taginfo chỉ hiển thị dữ liệu này. Các dữ liệu phải được sửa đổi tại nguồn gốc.</p>
-        list:
-            title: Danh sách nguồn gốc
-            intro: Danh sách này có các nguồn gốc được sử dụng hiện tại. Có thể mai mốt tích hợp thêm nguồn gốc.
+            Taginfo lấy dữ liệu về thẻ OSM từ nhiều nguồn gốc và thu thập dữ
+            liệu để duyệt và khám phá một cách dễ dàng. Danh sách này có các
+            nguồn gốc được sử dụng hiện tại. Có thể mai mốt tích hợp thêm nguồn
+            gốc.
+        display_only: |
+            Lưu ý rằng taginfo chỉ hiển thị dữ liệu này. Các dữ liệu phải được
+            sửa đổi tại nguồn gốc.
         description:
             db: |
                 <p>Thống kê về các chìa khóa, thẻ, và loại quan hệ được tạo ra từ <a class="extlink" href="https://planet.openstreetmap.org/">cơ sở dữ liệu OSM</a> (hoặc một bản trích) cũng như các bản đồ trình bày sự phân phối địa lý của các nốt và lối.</p>
@@ -249,7 +249,7 @@ pages:
             languages: |
                 <p>Taginfo lấy thông tin về các ngôn ngữ trên thế giới, từ các mã, tên, v.v., từ một số cơ sở dữ liệu <a class="extlink" href="https://www.iana.org/">IANA</a> và <a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
-                <p>Các dự án sử dụng thẻ OSM một cách nào đó, thí dụ như trình vẽ, bản đồ, trình chỉ đường, v.v. Xem <a href="projects">danh sách dự án</a>.</p>
+                <p>Các dự án sử dụng thẻ OSM một cách nào đó, thí dụ như trình vẽ, bản đồ, trình chỉ đường, v.v.</p>
             chronology: |
                 <p>Số lần sử dụng chìa khóa hoặc thẻ theo thời gian từ <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">thế giới có lịch sử</a>.</p>
         updates:
@@ -259,6 +259,30 @@ pages:
         last_update_run: Cập nhật lần cuối
         data_until_explanation: Tất cả các sửa đổi cho tới lúc này sẽ xuất hiện trong dữ liệu; các sửa đổi về sau có thể xuất hiện.
         to: đến
+        languages:
+            subtags:
+                title: Thẻ phụ BCP 47
+                filter:
+                    label: Chỉ hiển thị thẻ phụ loại
+                    all: Tất cả
+                    language: Ngôn ngữ
+                    script: Hệ chữ viết
+                    region: Khu vực
+                    variant: Biến thể
+                intro: |
+                    <p><a href="https://www.ietf.org/">IETF</a> định rõ các <i>thẻ
+                    ngôn ngữ</i> trong tiêu chuẩn
+                    <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages
+                    (BCP 47)</a>. Thẻ ngôn ngữ
+                    có ít nhất một <i>thẻ phụ</i> miêu tả ngôn ngữ,
+                    hệ chữ viết, biến thể, v.v. Để tìm hiểu thêm, hãy đọc
+                    <a href="https://en.wikipedia.org/wiki/IETF_language_tag">bài Wikipedia
+                    về thẻ ngôn ngữ IETF</a> và trang Web <a
+                    href="http://www.langtag.net/">langtag.net</a>.</p>
+                note: |
+                    Lưu ý rằng dữ liệu trong bảng này không phải lấy từ
+                    OpenStreetMap, nó chỉ hiển thị căn bản để miêu tả ngôn ngữ
+                    không kể nó thực sự được dùng trong OSM hay không.
     download:
         intro: |
             <p>Ở đây bạn có thể tải về các cơ sở dữ liệu được sử dụng bởi taginfo. Tất cả dữ liệu được lưu giữ
@@ -631,31 +655,6 @@ reports:
         overview:
             tab: Tóm lược
             title: Tóm lược
-        bcp47:
-            tab: Thẻ phụ BCP 47
-            title: Thẻ phụ BCP 47
-            filter:
-                label: Chỉ hiển thị thẻ phụ loại
-                all: Tất cả
-                language: Ngôn ngữ
-                script: Hệ chữ viết
-                region: Khu vực
-                variant: Biến thể
-            intro: |
-                <p><a href="https://www.ietf.org/">IETF</a> định rõ các <i>thẻ
-                ngôn ngữ</i> trong tiêu chuẩn
-                <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages
-                (BCP 47)</a>. Thẻ ngôn ngữ
-                có ít nhất một <i>thẻ phụ</i> miêu tả ngôn ngữ,
-                hệ chữ viết, biến thể, v.v. Danh sách sau có các thẻ phụ đã đăng ký
-                có liên quan đến OSM. Để tìm hiểu thêm, hãy đọc
-                <a href="https://en.wikipedia.org/wiki/IETF_language_tag">bài Wikipedia
-                về thẻ ngôn ngữ IETF</a> và trang Web <a
-                href="http://www.langtag.net/">langtag.net</a>.</p>
-                <p>Lưu ý rằng dữ liệu trong bảng này <b>không phải</b> lấy từ OpenStreetMap,
-                nó chỉ hiển thị căn bản để miêu tả ngôn ngữ
-                không kể nó thực sự được dùng trong OSM hay không.
-                </p>
     similar_keys:
         name: Chìa khóa tương tự
         intro: |

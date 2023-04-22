@@ -62,4 +62,12 @@ class Source
         %(<a rel="nofollow" href="/download/#{ dbname }.bz2">#{ dbname }.bz2</a>)
     end
 
+    def update_duration
+        ((Time.parse(update_end) - Time.parse(update_start)) / 60).round
+    end
+
+    def has_index_page?
+        File.exist?("views/sources/#{ id }/index.erb")
+    end
+
 end

@@ -184,11 +184,12 @@ pages:
                 <p>Jeżeli masz jakieś pytania bądź chcesz pomóc, skontaktuj się z nami na <a class="extlink" href="//lists.openstreetmap.org/listinfo/taginfo-dev">liście dyskusyjnej taginfo-dev</a>.</p>
     sources:
         intro: |
-            <p>Taginfo pobiera dane o OSM z różnych źródeł i zbiera je razem dla łatwiejszego ich przeglądania.</p>
-            <p>Zauważ, że taginfo tylko wyświetla dane, więc jeśli chcesz je zmienić musisz dotrzeć do ich źródła.</p>
-        list:
-            title: Lista źródeł
-            intro: Tutaj znajdziesz listę aktualnie używanych źródeł. Więcej może się pojawić w przyszłości.
+            Taginfo pobiera dane o OSM z różnych źródeł i zbiera je razem dla
+            łatwiejszego ich przeglądania. Tutaj znajdziesz listę aktualnie
+            używanych źródeł. Więcej może się pojawić w przyszłości.
+        display_only: |
+            Zauważ, że taginfo tylko wyświetla dane, więc jeśli chcesz je
+            zmienić musisz dotrzeć do ich źródła.
         description:
             db: |
                 <p>Statystyki na temat kluczy, tagów, i typów relacji są generowane z <a class="extlink" href="https://planet.openstreetmap.org/">bazy OSM</a> (lub jej części), tak samo mapy które pokazują dystrybucję węzłów i dróg</p>
@@ -197,7 +198,7 @@ pages:
             languages: |
                 <p>Taginfo pobiera informacje o różnych językach świata, ich kodów, nazw, itd. z <a class="extlink" href="https://www.iana.org/">IANA</a> i <a class="extlink" href="https://www.unicode.org/">rejestrów Unicode</a>.</p>
             projects: |
-                <p>Projekty, które w jakiś sposób używają znaczników OSM, takie jak edytory, mapy, nawigacje, itp. Zajrzyj do <a href="projects">listy projektów</a>.</p>
+                <p>Projekty, które w jakiś sposób używają znaczników OSM, takie jak edytory, mapy, nawigacje, itp.</p>
         updates:
             title: Aktualizacje
             intro: Baza taginfo jest regularnie aktualizowana ze źródeł.
@@ -205,6 +206,32 @@ pages:
         last_update_run: Ostatnia aktualizacja
         data_until_explanation: Wszystkie zmiany wprowadzone do tego czasu będą uwzględnione, późniejsze niekoniecznie.
         to: do
+        languages:
+            subtags:
+                title: Podtagi BCP47
+                filter:
+                    label: Pokaż tylko podtagi typu
+                    all: Wszystkie
+                    language: Język
+                    script: Alfabet
+                    region: Region
+                    variant: Wariant
+                intro: |
+                    <p><a href="https://www.ietf.org/">IETF</a> definiuje
+                    <i>znaczniki języków</i> za pomocą normy <a
+                    href="https://tools.ietf.org/html/bcp47">Znaczników
+                    Identyfikacji Języków (BCP47)</a>. Znaczniki języka zawierają
+                    jeden lub więcej <i>znaczników podrzędnych</i> opisujących
+                    język, skrypt, warianty itp. Więcej
+                    informacji znajdziesz w artukule <a
+                    href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedii
+                    o znacznikach językowych IETF</a> oraz na stronie <a
+                    href="http://www.langtag.net/">langtag.net</a>.</p>
+                note: |
+                  Zwróć uwagę, że dane w tej tabeli nie pochodzą z bazy
+                  OpenStreetMap i jedynie pokazują elementy, które mogą być użyte
+                  by opisać języki niezależnie od tego, w jaki sposób są użyte w
+                  OSM.
     download:
         intro: |
             <p>Tutaj możesz pobrać pliki bazy danych, z których korzysta taginfo. Wszystkie dane są przechowywane w bazach <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>.
@@ -528,20 +555,6 @@ reports:
         overview:
             tab: Omówienie
             title: Omówienie
-        bcp47:
-            tab: Podtagi BCP47
-            title: Podtagi BCP47
-            filter:
-                label: Pokaż tylko podtagi typu
-                all: Wszystkie
-                language: Język
-                script: Alfabet
-                region: Region
-                variant: Wariant
-            intro: |
-                <p><a href="https://www.ietf.org/">IETF</a> definiuje <i>znaczniki języków</i> za pomocą normy <a href="https://tools.ietf.org/html/bcp47">Znaczników Identyfikacji Języków (BCP47)</a>. Znaczniki języka zawierają jeden lub więcej <i>znaczników podrzędnych</i> opisujących język, skrypt, warianty itp. Poniższa lista pokazuje obecnie zarejestrowane podrzędne znaczniki istotne dla OSM. Więcej informacji znajdziesz w artukule <a href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedii o znacznikach językowych IETF</a> oraz na stronie <a href="http://www.langtag.net/">langtag.net</a>.</p>
-                <p>Zwróć uwagę, że dane w tej tabeli <b>nie pochodzą</b> z bazy OpenStreetMap i jedynie pokazują elementy, które mogą być użyte by opisać języki niezależnie od tego, w jaki sposób są użyte w OSM.
-                </p>
     similar_keys:
         name: Podobne klucze
         intro: |

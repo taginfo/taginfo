@@ -260,13 +260,13 @@ pages:
                 mailing list</a> se avete domanda o avete bisogno di aiuto.</p>
     sources:
         intro: |
-            <p>Taginfo prende i dati dai tag OSM da diverse fonti e li fonde
-            insieme per una facile navigazione e scoperta.</p> <p>Da notare che
-            Taginfo visualizza solo i dati. Se volete cambiarli, dovete tornare
-            alla fonte dei dati.</p>
-        list:
-            title: Lista delle fonti
-            intro: In questa lista sono elencate le fonti attualmente utilizzate. Ulteriori fonti potrebbero essere aggiunte in futuro.
+            Taginfo prende i dati dai tag OSM da diverse fonti e li fonde
+            insieme per una facile navigazione e scoperta. In questa lista sono
+            elencate le fonti attualmente utilizzate. Ulteriori fonti
+            potrebbero essere aggiunte in futuro.
+        display_only: |
+            Da notare che Taginfo visualizza solo i dati. Se volete cambiarli,
+            dovete tornare alla fonte dei dati.
         description:
             db: |
                 <p>Le statistiche sulle chiavi, tag e sui tipi di relazioni
@@ -288,8 +288,7 @@ pages:
                 class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Progetti che usano i tag di OSM in qualche modo, come
-                strumenti di modifica, mappe, navigatori, ecc. Vedi <a
-                href="projects">la lista dei progetti</a>.</p>
+                strumenti di modifica, mappe, navigatori, ecc.</p>
             chronology: |
                 <p>Numero di chiavi/tag nel tempo da <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">file di planet storico</a>.</p>
             wikidata: |
@@ -301,6 +300,32 @@ pages:
         last_update_run: Ultimo aggiornamento eseguito
         data_until_explanation: Tutte le modifiche eseguite fino a questo orario saranno presenti nei dati, le modifiche successive potrebbero esserci.
         to: a
+        languages:
+            subtags:
+                title: I sotto-tag BCP47
+                filter:
+                    label: Mostra solo i sotto-tag di tipo
+                    all: Tutti
+                    language: Lingua
+                    script: Script
+                    region: Regione
+                    variant: Variante
+                intro: |
+                    <p>Lo <a href="https://www.ietf.org/">IETF</a> definisce i
+                    <i>tag delle lingue</i> in un suo standard <a
+                    href="https://tools.ietf.org/html/bcp47">Tags for Identifying
+                    Languages (BCP47)</a>. I tag delle lingue consistono in uno o
+                    più <i>sotto-tag</i> che descrivono le lingua, gli script, le
+                    varianti, ecc. Per maggiori informazioni vedi anche la <a
+                    href="https://en.wikipedia.org/wiki/IETF_language_tag">pagina
+                    di Wikipedia sui tag per le lingue di IETF</a> e il sito <a
+                    href="http://www.langtag.net/">langtag.net</a>.</p>
+                note: |
+                    Nota che i dati mostrati in questa tabella non provengono da
+                    OpenStreetMap, vengono soltanto mostrati i blocchetti da unire
+                    che possono essere usati per descrivere le lingue
+                    indipendentemente dal fatto che siano realmente utilizzati in
+                    OSM.
     download:
         intro: |
             <p>Qui potete scaricare il database usato da Taginfo. Tutti i dati
@@ -723,33 +748,6 @@ reports:
         overview:
             tab: Anteprima
             title: Anteprima
-        bcp47:
-            tab: I sotto-tag BCP47
-            title: I sotto-tag BCP47
-            filter:
-                label: Mostra solo i sotto-tag di tipo
-                all: Tutti
-                language: Lingua
-                script: Script
-                region: Regione
-                variant: Variante
-            intro: |
-                <p>Lo <a href="https://www.ietf.org/">IETF</a> definisce i
-                <i>tag delle lingue</i> in un suo standard <a
-                href="https://tools.ietf.org/html/bcp47">Tags for Identifying
-                Languages (BCP47)</a>. I tag delle lingue consistono in uno o
-                più <i>sotto-tag</i> che descrivono le lingua, gli script, le
-                varianti, ecc. La lista seguente mostrai sotto-tag attualmente
-                registrati che sono rilevanti per OSM. Per maggiori
-                informazioni vedi anche la <a
-                href="https://en.wikipedia.org/wiki/IETF_language_tag">pagina
-                di Wikipedia sui tag per le lingue di IETF</a> e il sito <a
-                href="http://www.langtag.net/">langtag.net</a>.</p> <p>Nota che
-                i dati mostrati in questa tabella <b>non</b> provengono da
-                OpenStreetMap, vengono soltanto mostrati i blocchetti da unire
-                che possono essere usati per descrivere le lingue
-                indipendentemente dal fatto che siano realmente utilizzati in
-                OSM.</p>
     similar_keys:
         name: Chiavi simili
         intro: |

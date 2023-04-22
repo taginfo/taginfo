@@ -231,13 +231,12 @@ pages:
                 跟我們聯絡。</p>
     sources:
         intro: |
-            <p>Taginfo 從數個來源收集關於 OSM 標籤的資訊並
-            集中在一起以便於瀏覽和探索。</p>
-            <p>注意 taginfo 只顯示此資料。如果你想改變它，
-            你必須回到資料來源處。</p>
-        list:
-            title: 來源列表
-            intro: 這是目前使用的資料來源列表，未來可能會整合更多來源。
+            Taginfo 從數個來源收集關於 OSM 標籤的資訊並
+            集中在一起以便於瀏覽和探索。
+            這是目前使用的資料來源列表，未來可能會整合更多來源。
+        display_only: |
+            注意 taginfo 只顯示此資料。如果你想改變它，
+            你必須回到資料來源處。
         description:
             db: |
                 <p>關於鍵、標籤和關係類型的統計數據皆產生自 <a class="extlink" href="https://planet.openstreetmap.org/">OSM 資料庫</a>（或某個提取檔），跟地圖上的節點和路徑一樣。</p>
@@ -246,7 +245,7 @@ pages:
             languages: |
                 <p>Taginfo 取得世界不同語言的資料，它們的代碼、名稱等來自數個 <a class="extlink" href="https://www.iana.org/">IANA</a> 和 <a class="extlink" href="https://www.unicode.org/">Unicode</a> 登記名冊。</p>
             projects: |
-                <p>以一些方式使用 OSM 標籤的專案，像是編輯器、路線規劃等，請見<a href="projects">專案列表</a>。</p>
+                <p>以一些方式使用 OSM 標籤的專案，像是編輯器、路線規劃等，請見專案列表。</p>
             chronology: |
                 <p><a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">歷史星球</a>上隨時間變化的鍵/標籤數量。</p>
         updates:
@@ -256,6 +255,28 @@ pages:
         last_update_run: 上次執行更新
         data_until_explanation: 所有直到此時的編輯會在資料裡，更晚的編輯可能會有。
         to: 到
+        languages:
+            subtags:
+                title: BCP47 子標籤
+                filter:
+                    label: 只顯示子標籤類型
+                    all: 全部
+                    language: 語言
+                    script: 文字
+                    region: 地區
+                    variant: 變體
+                intro: |
+                    <p><a href="https://www.ietf.org/">IETF</a> 在它的 <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages
+                    (BCP47)</a> 標準中定義了<i>語言代碼</i>
+                    。語言代碼包含一個或更多描述該語言、文字、變體等的<i>子標籤</i>。
+                    下方列表顯示目前在 OSM 中被登記為適合的子標籤。
+                    更多資訊參見
+                    <a href="https://en.wikipedia.org/wiki/IETF_language_tag">在維基百科
+                    上的 IETF 語言標籤文章</a>和<a
+                    href="http://www.langtag.net/">langtag.net</a>網站。</p>
+                note: |
+                    注意此表格顯示的資料不是來自 OpenStreetMap，
+                    這些只是可以用來描述語言的積木，無關於有沒有真正用在 OSM 裡。
     download:
         intro: |
             <p>你能在這裡下載 taginfo 所用的資料庫。所有資料被儲存
@@ -626,28 +647,6 @@ reports:
         overview:
             tab: 總覽
             title: 總覽
-        bcp47:
-            tab: BCP47 子標籤
-            title: BCP47 子標籤
-            filter:
-                label: 只顯示子標籤類型
-                all: 全部
-                language: 語言
-                script: 文字
-                region: 地區
-                variant: 變體
-            intro: |
-                <p><a href="https://www.ietf.org/">IETF</a> 在它的 <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages
-                (BCP47)</a> 標準中定義了<i>語言代碼</i>
-                。語言代碼包含一個或更多描述該語言、文字、變體等的<i>子標籤</i>。
-                下方列表顯示目前在 OSM 中被登記為適合的子標籤。
-                更多資訊參見
-                <a href="https://en.wikipedia.org/wiki/IETF_language_tag">在維基百科
-                上的 IETF 語言標籤文章</a>和<a
-                href="http://www.langtag.net/">langtag.net</a>網站。</p>
-                <p>注意此表格顯示的資料<b>不是</b>來自 OpenStreetMap，
-                這些只是可以用來描述語言的積木，無關於有沒有真正用在 OSM 裡。
-                </p>
     similar_keys:
         name: 相似的鍵
         intro: |

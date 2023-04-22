@@ -698,6 +698,16 @@ function fmt_project_tag_desc(description, icon, url) {
     return out;
 }
 
+function fmt_wikidata_item(item, description) {
+    let url = 'https://www.wikidata.org/wiki/';
+    if (item[0] == 'P') {
+        url += 'Property:' + encodeURI(item);
+    } else {
+        url += encodeURI(item);
+    }
+    return link(url, html_escape(item), { target: '_blank', 'class': 'extlink' }) + ' \u00b7 ' + description;
+}
+
 /* ============================ */
 
 class DynamicTableColumn {

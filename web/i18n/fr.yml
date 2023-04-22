@@ -236,13 +236,13 @@ pages:
                 si vous avez des questions ou besoin d'aide.</p>
     sources:
         intro: |
-            <p>Taginfo collecte des données sur les tags OSM depuis plusieurs sources et les assemble
-            pour en faciliter l'exploration.</p>
-            <p>Notez que taginfo ne fait que présenter ces données. Si vous souhaitez les modifier, vous
-            devez remonter à la source.</p>
-        list:
-            title: Liste des sources
-            intro: Voici la liste des sources utilisées actuellement. D'autres sources pourront être intégrées dans le futur.
+            Taginfo collecte des données sur les tags OSM depuis plusieurs
+            sources et les assemble pour en faciliter l'exploration. Voici la
+            liste des sources utilisées actuellement. D'autres sources pourront
+            être intégrées dans le futur.
+        display_only: |
+            Notez que taginfo ne fait que présenter ces données. Si vous souhaitez les modifier, vous
+            devez remonter à la source.
         description:
             db: |
                 <p>Les statistiques sur les clés, tags, et types de relations sont générés depuis la <a class="extlink" href="https://planet.openstreetmap.org/">base de données OSM</a> (ou un extrait) ainsi que les cartes présentant la distribution géographique des nœuds et des chemins.</p>
@@ -251,7 +251,7 @@ pages:
             languages: |
                 <p>Taginfo récupère les informations sur les différentes langues du monde, leurs codes, noms, etc. depuis plusieurs registres de l'<a class="extlink" href="https://www.iana.org/">IANA</a> et d'<a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
-                <p>Ce sont les projects qui utilisent les tags OSM, comme les éditeurs, les cartes, les routeurs, etc. Regardez <a href="projects">la liste des projets</a>.</p>
+                <p>Ce sont les projects qui utilisent les tags OSM, comme les éditeurs, les cartes, les routeurs, etc.</p>
             chronology: |
                 <p>L'évolution du nombre de clés/tags au cours du temps depuis le fichier <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/"><i>planet</i> historisé</a>.</p>
         updates:
@@ -261,6 +261,32 @@ pages:
         last_update_run: Dernière mise à jour
         data_until_explanation: Toutes les modifications jusqu'à cette date sont présentes, les modifications ultérieures le sont peut-être.
         to: à
+        languages:
+            subtags:
+                title: Sous-tags BCP47
+                filter:
+                    label: N'afficher que les sous-tags de type 
+                    all: Tous
+                    language: Langue
+                    script: Script
+                    region: Région
+                    variant: Variante
+                intro: |
+                    <p>L'<a href="https://www.ietf.org/">IETF</a> définit des
+                    <i>tags de langue</i> dans sa norme <a
+                    href="https://tools.ietf.org/html/bcp47">Tags for Identifying
+                    Languages (BCP47)</a>. Les tags de langue sont constitués d'un
+                    ou plusieurs <i>sous-tags</i> décrivant la langue, le script,
+                    les variantes, etc... Pour plus d'information, voir aussi la
+                    page <a
+                    href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
+                    sur les tags de langues de l'IETF</a> et le site <a
+                    href="http://www.langtag.net/">langtag.net</a>.</p>
+                note: |
+                    Notez que les données présentées dans ce tableau ne proviennent
+                    pas d'OpenStreetMap. Il affiche juste les blocs qui permettent
+                    de décrire des langues, sans tenir compte de leur utilisation
+                    ou non dans OSM.
     download:
         intro: |
             <p>Vous pouvez télécharger les données utilisées par taginfo. Toutes les données sont stockées
@@ -647,31 +673,6 @@ reports:
         overview:
             tab: Vue d'ensemble
             title: Vue d'ensemble
-        bcp47:
-            tab: Sous-tags BCP47
-            title: Sous-tags BCP47
-            filter:
-                label: N'afficher que les sous-tags de type 
-                all: Tous
-                language: Langue
-                script: Script
-                region: Région
-                variant: Variante
-            intro: |
-                <p>L'<a href="https://www.ietf.org/">IETF</a> définit des <i>tags
-                de langue</i> dans sa norme
-                <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages
-                (BCP47)</a>. Les tags de langue
-                sont constitués d'un ou plusieurs <i>sous-tags</i> décrivant la langue,
-                le script, les variantes, etc... La liste suivante montre les sous-tags
-                existants actuellement et quisont pertinants pour OSM. Pour plus d'information, voir aussi la page
-                <a href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
-                sur les tags de langues de l'IETF</a> et le site <a
-                href="http://www.langtag.net/">langtag.net</a>.</p>
-                <p>Notez que les données présentées dans ce tableau <b>ne proviennent pas</b> d'OpenStreetMap.
-                Il affiche juste les blocs qui permettent de décrire des langues,
-                sans tenir compte de leur utilisation ou non dans OSM.
-                </p>
     similar_keys:
         count_common: Quantité
         count_rare: Quantité

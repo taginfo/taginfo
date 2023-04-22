@@ -159,9 +159,6 @@ pages:
         software:
             title: Taginfo软件
     sources:
-        list:
-            title: 来源列表
-            intro: 这是目前使用的来源列表。未来可能还将引入更多来源。
         updates:
             title: 更新
             intro: Taginfo的数据会定期从来源更新

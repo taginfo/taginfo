@@ -1,0 +1,11 @@
+<div class="fbox">
+    <h2><%= h(t.pages.sources.statistics) %></h2>
+    <div>
+        <table class="desc">
+            <tr><th>Node versions:</th><td><%= @db.stats('chronology_num_visible_nodes').to_s_with_ts %></td></tr>
+            <tr><th>Way versions:</th><td><%= @db.stats('chronology_num_visible_ways').to_s_with_ts %></td></tr>
+            <tr><th>Relation version:</th><td><%= @db.stats('chronology_num_visible_relations').to_s_with_ts %></td></tr>
+            <tr><th>Distinct keys:</th><td><%= @db.stats('chronology_num_keys').to_s_with_ts %></td></tr>
+        </table>
+    </div>
+</div>

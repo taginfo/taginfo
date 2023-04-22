@@ -72,6 +72,11 @@ p {
     max-width: 60em;
 }
 
+li {
+    color: var(--color-text);
+    margin: 0 0 2px 0;
+}
+
 .emphasis {
     font-weight: bold;
     font-size: 1rem;
@@ -590,6 +595,10 @@ div.box {
     border-radius: 4px;
 }
 
+div.box :first-child {
+    margin-top: 0;
+}
+
 @media screen and (max-width: 640px) {
     div.box {
         padding: 10px;
@@ -877,6 +886,7 @@ table.desc > tbody > tr > th {
     font-weight: normal;
     width: 8em;
     padding: 2px;
+    white-space: nowrap;
 }
 
 table.desc > tbody > tr > td {
@@ -1142,6 +1152,10 @@ div.fbox > div {
     padding: 8px;
     border-radius: 4px;
     height: calc(100% - 54px);
+}
+
+div.fbox > div p {
+    padding: 4px 10px;
 }
 
 div.fbox h3 {

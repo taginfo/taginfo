@@ -1,0 +1,39 @@
+<%
+count_all = @db.select("SELECT count(distinct(image)) AS count FROM wiki.wikipages").execute()[0]['count']
+count_small = @db.select("SELECT count(distinct(image)) AS count FROM wiki.wikipages WHERE image IN (SELECT image FROM wiki.wiki_images WHERE width * height < 64 * 64)").execute()[0]['count']
+count_tall = @db.select("SELECT count(distinct(image)) AS count FROM wiki.wikipages WHERE image IN (SELECT image FROM wiki.wiki_images WHERE height > width * 2)").execute()[0]['count']
+count_wide = @db.select("SELECT count(distinct(image)) AS count FROM wiki.wikipages WHERE image IN (SELECT image FROM wiki.wiki_images WHERE width > height *2)").execute()[0]['count']
+count_large = @db.select("SELECT count(distinct(image)) AS count FROM wiki.wikipages WHERE image IN (SELECT image FROM wiki.wiki_images WHERE size > 20000000)").execute()[0]['count']
+%>
+<div class="fbox">
+    <h2><%= h(t.pages.sources.statistics) %></h2>
+    <div>
+        <table class="desc">
+            <tr><th>Pages for keys:</th><td><%= @db.stats('wiki_pages_for_keys') %></td></tr>
+            <tr><th>Pages for tags:</th><td><%= @db.stats('wiki_pages_for_tags') %></td></tr>
+            <tr><th>Pages for relation types:</th><td><%= @db.stats('wiki_pages_for_relation_types') %></td></tr>
+            <tr><th>Images:</th><td><%= @db.stats('wiki_images') %></td></tr>
+            <tr><th>Languages:</th><td><%= @db.stats('wiki_languages') %></td></tr>
+        </table>
+    </div>
+</div>
+<div class="fbox">
+    <h2>Image sizes</h2>
+    <div>
+        <p>There a a total of <b><%= count_all %></b> distinct images used as reference images on Key:/Tag:/Relation: pages. Of these...</p>
+        <ul>
+            <li><b><%= count_small %></b> are smaller than 64&#x78;64 pixels.</li>
+            <li><b><%= count_tall %></b> are more than twice as tall as they are wide.</li>
+            <li><b><%= count_wide %></b> are more than twice as wide as they are tall.</li>
+            <li><b><%= count_large %></b> have more than 20 MB.</li>
+        </ul>
+        <p><a href="wiki/image_size">Show images...</a></p>
+    </div>
+</div>
+<div class="fbox">
+    <h2><%= h(t.reports.wiki_images.name) %></h2>
+    <div>
+        <p><%= h(t.reports.wiki_images.intro) %></p>
+        <p><a href="wiki/image_comparison">Show images...</a></p>
+    </div>
+</div>

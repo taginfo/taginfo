@@ -236,26 +236,26 @@ pages:
                 if you have questions or want to help.</p>
     sources:
         intro: |
-            <p>Taginfo collects data about OSM tags from several sources and brings them
-            together for easy browsing and discovery.</p>
-            <p>Note that taginfo only displays this data. If you want to change it, you
-            have to go back to the source.</p>
-        list:
-            title: List of Sources
-            intro: Here is a list of currently used sources. More sources might be integrated in the future.
+            Taginfo collects data about OSM tags from several sources and
+            brings them together for easy browsing and discovery. Here is a
+            list of currently used sources. More sources might be integrated in
+            the future.
+        display_only: |
+            Note that taginfo only displays this data. If you want to change it, you
+            have to go back to the source.
         description:
             db: |
                 <p>Statistics about keys, tags, and relation types are generated from the <a class="extlink" href="https://planet.openstreetmap.org/">OSM database</a> (or an extract) as well as the maps that show the geographic distribution of nodes and ways.</p>
             wiki: |
                 <p>The <a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> is read and all Key:*, Tag:*, and Relation:* pages (in all the different languages) are analyzed. Descriptions, images, related tags, etc. are extracted from them.</p>
             languages: |
-                <p>Taginfo gets information about the different languages of the world, their codes, names, etc. from several <a class="extlink" href="https://www.iana.org/">IANA</a> and <a class="extlink" href="https://www.unicode.org/">Unicode</a> registries.</p>
+                <p>Taginfo gets information about the different languages of the world, their codes, names, etc. from several <a class="extlink" href="https://www.iana.org/">IANA</a> and <a class="extlink" href="https://www.unicode.org/">Unicode</a> registries and from Wikipedia.</p>
             projects: |
-                <p>Projects that use OSM tags in some way, such as editors, maps, routers, etc. See <a href="projects">the project list</a>.</p>
+                <p>Projects that use OSM tags in some way, such as editors, maps, routers, etc.</p>
             chronology: |
                 <p>Number of keys/tags over time from <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">history planet</a>.</p>
             wikidata: |
-                <p>The <a class="extlink" href="https://www.wikidata.org/">Wikimedia wikidata database</a> connects OSM keys, tags, and relations to other concepts.</p>
+                <p>The <a class="extlink" href="https://www.wikidata.org/">Wikidata database</a> connects OSM keys, tags, and relations to other concepts using the property <a href="https://www.wikidata.org/wiki/Property:P1282">P1282</a>.</p>
         updates:
             title: Updates
             intro: The taginfo data is updated regularly from the sources.
@@ -263,6 +263,76 @@ pages:
         last_update_run: Last update run
         data_until_explanation: All edits until this time will be in the data, later edits might be.
         to: to
+        data: Data
+        database_size: Database size
+        minutes: mins
+        statistics: Statistics
+        import_errors: Import errors
+        languages:
+            subtags:
+                title: BCP47 Subtags
+                filter:
+                    label: Show only subtags of type
+                    all: All
+                    language: Language
+                    script: Script
+                    region: Region
+                    variant: Variant
+                columns:
+                    type: Type
+                    subtag: Subtag
+                    description: Description
+                    added: Added
+                    notes: Notes
+                intro: |
+                    <p>The <a href="https://www.ietf.org/">IETF</a> defines
+                    <i>language tags</i> in its standard <a
+                    href="https://tools.ietf.org/html/bcp47">Tags for
+                    Identifying Languages (BCP47)</a>. Language tags consist of
+                    one or more <i>subtags</i> describing the languages,
+                    scripts, regions, and variants. For more information see
+                    also the <a
+                    href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
+                    entry on IETF language tags</a> and the <a
+                    href="http://www.langtag.net/">langtag.net</a> site.</p>
+                note: |
+                    Note that the data shown in this table is not from
+                    OpenStreetMap, it just shows the building blocks that can
+                    be used to describe languages irrespective of whether they
+                    are actually used in OSM.
+                show: Show all language subtags...
+            wikipedia_sites:
+                title: Wikipedia sites
+        wikidata:
+            index:
+                show_items: Show all Wikidata items...
+                show_errors: Show all errors...
+            stats:
+                keys: Key items
+                tags: Tag items
+                relations: Relation items
+                roles: Role items
+                qcode: Items with Q code
+                pcode: Items with P code
+            items:
+                title: Items
+                description: |
+                    These are all Wikidata items with the property P1282 and
+                    the OSM key, tag, or relation they link to. Not shown are
+                    "Role" type properties and properties that don't have the
+                    correct format.
+                columns:
+                    type: Type
+                    ktr: Key/Tag/Relation
+                    item: Wikidata item
+            errors:
+                description: |
+                    These are all the issues encountered when importing the
+                    Wikidata items with property P1282.
+                columns:
+                    item: Wikidata item
+                    p1282: Value of P1282 property
+                    error: Error message
     download:
         intro: |
             <p>Here you can download the databases used by taginfo. All the data is stored
@@ -655,31 +725,6 @@ reports:
         overview:
             tab: Overview
             title: Overview
-        bcp47:
-            tab: BCP47 Subtags
-            title: BCP47 Subtags
-            filter:
-                label: Show only subtags of type
-                all: All
-                language: Language
-                script: Script
-                region: Region
-                variant: Variant
-            intro: |
-                <p>The <a href="https://www.ietf.org/">IETF</a> defines <i>language
-                tags</i> in its standard
-                <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages
-                (BCP47)</a>. Language
-                tags consist of one or more <i>subtags</i> describing the language,
-                script, variants, etc. The following list shows the subtags currently
-                registered that are relevant for OSM. For more information see also the
-                <a href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
-                entry on IETF language tags</a> and the <a
-                href="http://www.langtag.net/">langtag.net</a> site.</p>
-                <p>Note that the data shown in this table is <b>not</b> from OpenStreetMap,
-                it just shows the building blocks that can be used to describe languages
-                irrespective of whether they are actually used in OSM.
-                </p>
     similar_keys:
         name: Similar keys
         intro: |

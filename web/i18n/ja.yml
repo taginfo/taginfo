@@ -230,13 +230,12 @@ pages:
                 に連絡してください。</p>
     sources:
         intro: |
-            <p>taginfo はいくつかの情報源から OSM タグについてのデータを収集し、
-            見やすく探索しやすいように組み合わせます。</p>
+            taginfo はいくつかの情報源から OSM タグについてのデータを収集し、
+            見やすく探索しやすいように組み合わせます。
+            現在使用している情報源の一覧です。将来的には他の情報源も組み込むかもしれません。
+        display_only: |
             <p>なお taginfo はこのデータを表示するだけです。
             データを変更したい場合は、情報源に戻る必要があります。</p>
-        list:
-            title: 情報源の一覧
-            intro: 現在使用している情報源の一覧です。将来的には他の情報源も組み込むかもしれません。
         description:
             db: |
                 <p>キー、タグ、リレーション種別に関する統計は、 <a class="extlink" href="https://planet.openstreetmap.org/">OSM データベース</a>（またはそれを展開したもの）から作成されます。ノードやウェイの地理的な分布を表す地図も同様です。</p>
@@ -245,7 +244,7 @@ pages:
             languages: |
                 <p>taginfo は世界の各言語に関するコードや名称などの情報を、 <a class="extlink" href="https://www.iana.org/">IANA</a> や <a class="extlink" href="https://www.unicode.org/">Unicode</a> レジストリなどから取得しています。</p>
             projects: |
-                <p>OSM タグをある方法で使っている、エディタ、地図、経路検索などのプロジェクトです。<a href="projects">プロジェクト一覧</a>を参照してください。</p>
+                <p>OSM タグをある方法で使っている、エディタ、地図、経路検索などのプロジェクトです。</p>
         updates:
             title: 更新状況
             intro: taginfo データは情報源から定期的に更新されます。
@@ -253,6 +252,29 @@ pages:
         last_update_run: 更新の最終実行
         data_until_explanation: この時刻までのすべての編集がデータに含まれ、以降の編集も含まれることがあります。
         to: ～
+        languages:
+            subtags:
+                title: BCP47 サブタグ
+                filter:
+                    label: 表示するサブタグの種類
+                    all: すべて
+                    language: 言語
+                    script: 記法
+                    region: 地域
+                    variant: 派生形
+                intro: |
+                    <p><a href="https://www.ietf.org/">IETF</a> は標準「<a
+                    href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages
+                    (BCP47)</a>」の中で、<i>言語タグ</i>を規定しています。言語タグは言語、
+                    文字、派生形などを記述する1つ以上の<i>サブタグ</i>から成ります。
+                    以下の一覧は現在 OSM に関して登録されているサブタグを示します。詳しい情報は、
+                    <a href="https://ja.wikipedia.org/wiki/IETF%E8%A8%80%E8%AA%9E%E3%82%BF%E3%82%B0">
+                    ウィキペディアの IETF 言語タグの記事</a>と<a href="http://www.langtag.net/">
+                    langtag.net</a>のサイトを参照してください。</p>
+                note: |
+                    なお、この表にあるデータは OpenStreetMap からのものではなく、
+                    OSM で実際に使われているかどうかにかかわらず、言語を記述するために使われる
+                    可能性があるブロックを表示しているだけです。
     download:
         intro: |
             <p>taginfo で使われるデータベースをここからダウンロードできます。すべてのデータが
@@ -614,29 +636,6 @@ reports:
         overview:
             tab: 概要
             title: 概要
-        bcp47:
-            tab: BCP47 サブタグ
-            title: BCP47 サブタグ
-            filter:
-                label: 表示するサブタグの種類
-                all: すべて
-                language: 言語
-                script: 記法
-                region: 地域
-                variant: 派生形
-            intro: |
-                <p><a href="https://www.ietf.org/">IETF</a> は標準「<a
-                href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages
-                (BCP47)</a>」の中で、<i>言語タグ</i>を規定しています。言語タグは言語、
-                文字、派生形などを記述する1つ以上の<i>サブタグ</i>から成ります。
-                以下の一覧は現在 OSM に関して登録されているサブタグを示します。詳しい情報は、
-                <a href="https://ja.wikipedia.org/wiki/IETF%E8%A8%80%E8%AA%9E%E3%82%BF%E3%82%B0">
-                ウィキペディアの IETF 言語タグの記事</a>と<a href="http://www.langtag.net/">
-                langtag.net</a>のサイトを参照してください。</p>
-                <p>なお、この表にあるデータは OpenStreetMap からのものでは<b>なく</b>、
-                OSM で実際に使われているかどうかにかかわらず、言語を記述するために使われる
-                可能性があるブロックを表示しているだけです。
-                </p>
     similar_keys:
         name: 似たキー名
         intro: |

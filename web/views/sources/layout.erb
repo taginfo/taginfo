@@ -1,0 +1,19 @@
+<h1 class="section"><%= @source.name %></h1>
+
+<%= t.pages.sources.description[@source.id] %>
+
+<div class="fboxes">
+    <div class="fbox">
+        <h2><%= h(t.pages.sources.data) %></h2>
+        <div>
+            <table class="desc">
+                <tr><th><%= h(t.pages.sources.data_until) %>*:</th><td><%= @source.data_until %> UTC</td></tr>
+                <tr><th><%= h(t.pages.sources.last_update_run) %>:</th><td><%= h(@source.update_start + ' ' + t.pages.sources.to + ' ' + @source.update_end) %> UTC (<%= @source.update_duration %> <%= h(t.pages.sources.minutes) %> )</td></tr>
+                <tr><th><%= h(t.pages.sources.database_size) %>:</th><td><%= @source.dbsize %></td></tr>
+                <tr><th><%= h(t.taginfo.download) %>:</th><td><%= @source.link_download %> (<%= @source.dbpack %>)</td></tr>
+            </table>
+            <p class="note">* <%= h(t.pages.sources.data_until_explanation) %></p>
+        </div>
+    </div>
+<%= yield %>
+</div>

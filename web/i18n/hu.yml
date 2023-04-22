@@ -150,13 +150,13 @@ pages:
             see: Lásd a többi taginfo oldalt...
     sources:
         intro: |
-            <p>A taginfo az OSM címkéket különböző forrásokból gyűjti be, majd egyesíti őket
-            a könnyű kereshetőség és felfedezés érdekében.</p>
-            <p> Megjegyzendő, hogy a taginfo csak megjeleníti ezeket az adatokat.
-            Ha módosítani szeretnéd, vissza kell menned a forráshoz.</p>
-        list:
-            title: Források listája
-            intro: Ez egy lista a jelenleg használt forrásokról. A jövőben további források is beépítésre kerülhetnek.
+            A taginfo az OSM címkéket különböző forrásokból gyűjti be, majd
+            egyesíti őket a könnyű kereshetőség és felfedezés érdekében. Ez egy
+            lista a jelenleg használt forrásokról. A jövőben további források
+            is beépítésre kerülhetnek.
+        display_only: |
+            Megjegyzendő, hogy a taginfo csak megjeleníti ezeket az adatokat.
+            Ha módosítani szeretnéd, vissza kell menned a forráshoz.
         updates:
             title: Frissítések
             intro: A taginfo adatok rendszeresen frissülnek a forrásokból.

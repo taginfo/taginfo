@@ -157,13 +157,13 @@ pages:
             title: Sobre o taginfo
     sources:
         intro: |
-            <p>Taginfo obtém dados sobre etiquetas OSM a partir de fontes diversas, e os
-            unifica para facilitar navegação e consulta.</p>
-            <p>O sistema apenas exibe esses dados. Se você quer alterá-los, precisa
-            voltar a aquelas fontes.</p>
-        list:
-            title: Lista de Fontes
-            intro: Aqui está uma lista das fontes usadas atualmente. Mais fontes poderão ser incorporadas no futuro.
+            Taginfo obtém dados sobre etiquetas OSM a partir de fontes
+            diversas, e os unifica para facilitar navegação e consulta. Aqui
+            está uma lista das fontes usadas atualmente. Mais fontes poderão
+            ser incorporadas no futuro.
+        display_only: |
+            O sistema apenas exibe esses dados. Se você quer alterá-los,
+            precisa voltar a aquelas fontes.
         description:
             db: |
                 <p>Estatísticas sobre chaves, etiquetas e tipos de relação são geradas a partir da
@@ -180,7 +180,7 @@ pages:
                 <a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
                 <p>Projetos que usam etiquetas OSM de alguma maneira, tais como editores, mapas,
-                aplicações de roteamento, etc. Veja a <a href="projects">lista de projetos</a>.</p>
+                aplicações de roteamento, etc.</p>
         updates:
             title: Atualizações
             intro: Os dados do taginfo são atualizados periodicamente a partir dessas fontes.
@@ -188,6 +188,16 @@ pages:
         last_update_run: Data da última atualização
         data_until_explanation: Somente as edições realizadas até este momento serão processadas.
         to: a
+        languages:
+            subtags:
+                title: Subetiquetas BCP47
+                filter:
+                    label: Mostrar somente etiquetas do tipo
+                    all: Todas
+                    language: Linguagem
+                    script: Script
+                    region: Região
+                    variant: Variante
     download:
         intro: |
             <p>Aqui você pode baixar os bancos de dados usados pelo taginfo. Todos os dados são
@@ -456,13 +466,3 @@ reports:
         overview:
             tab: Visão geral
             title: Visão geral
-        bcp47:
-            tab: Subetiquetas BCP47
-            title: Subetiquetas BCP47
-            filter:
-                label: Mostrar somente etiquetas do tipo
-                all: Todas
-                language: Linguagem
-                script: Script
-                region: Região
-                variant: Variante

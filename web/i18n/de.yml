@@ -251,26 +251,26 @@ pages:
                 wenn Du Fragen hast oder Hilfe brauchst.</p>
     sources:
         intro: |
-            <p>Taginfo führt Daten über OSM-Tags aus verschiedenen Quellen zusammen,
-            zum einfachen Suchen und Finden.</p>
-            <p>Taginfo zeigt diese Daten nur an. Wenn Du sie ändern willst, dann mußt
-            Du sie an der Quelle ändern.</p>
-        list:
-            title: Die Datenquellen
-            intro: Dies ist eine Liste der derzeit verwendeten Datenquellen. Weitere Datenquellen werden in der Zukunft vielleicht ergänzt.
+            Taginfo führt Daten über OSM-Tags aus verschiedenen Quellen
+            zusammen, zum einfachen Suchen und Finden. Dies ist eine Liste der
+            derzeit verwendeten Datenquellen. Weitere Datenquellen werden in
+            der Zukunft vielleicht ergänzt.
+        display_only: |
+            Taginfo zeigt diese Daten nur an. Wenn Du sie ändern willst, dann mußt
+            Du sie an der Quelle ändern.
         description:
             db: |
                 <p>Statistiken über Keys, Tags, und Relations-Typen, sowie Karten für die geographische Verteilung der Nodes und Ways, werden aus der <a class="extlink" href="https://planet.openstreetmap.org/">OSM-Datenbank</a> (oder einem Extrakt) generiert.</p>
             wiki: |
                 <p>Das <a class="extlink" href="//wiki.openstreetmap.org/">OSM Wiki</a> wird gelesen und alle Key:*-, Tag:*-, und Relation:*-Seiten (in allen Sprachen) analysiert. Beschreibungen, Bilder, verwandte Tags, usw. werden aus den Seiten extrahiert.</p>
             languages: |
-                <p>Taginfo bekommt Informationen über die verschiedenen Sprachen dieser Welt, ihre Codes, Namen, usw. aus diversen Datenbanken der <a class="extlink" href="https://www.iana.org/">IANA</a> und vom <a class="extlink" href="https://www.unicode.org/">Unicode Consortium</a>.</p>
+                <p>Taginfo bekommt Informationen über die verschiedenen Sprachen dieser Welt, ihre Codes, Namen, usw. aus diversen Datenbanken der <a class="extlink" href="https://www.iana.org/">IANA</a> und vom <a class="extlink" href="https://www.unicode.org/">Unicode Consortium</a> und von der Wikipedia.</p>
             projects: |
-                <p>Projekte, die OSM-Tags in irgendeiner Weise nutzen, zum Beispiel Editoren, Karten, Router, usw. Siehe auch die <a href="projects">Projektliste</a>.</p>
+                <p>Projekte, die OSM-Tags in irgendeiner Weise nutzen, zum Beispiel Editoren, Karten, Router, usw.</p>
             chronology: |
                 <p>Anzahl der Keys/Tags über die Zeit vom <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">history planet</a>.</p>
             wikidata: |
-                <p>Die <a class="extlink" href="https://www.wikidata.org/">Wikimedia Wikidata Datenbank</a> verbindet OSM-Keys, -Tags und -Relations mit anderen Konzepten.</p>
+                <p>Die <a class="extlink" href="https://www.wikidata.org/">Wikidata Datenbank</a> verbindet OSM-Keys, -Tags und -Relations mit anderen Konzepten mittels des Properties <a href="https://www.wikidata.org/wiki/Property:P1282">P1282</a>.</p>
         updates:
             title: Aktualisierung
             intro: Die Taginfo-Daten werden regelmäßig aktualisiert.
@@ -278,6 +278,74 @@ pages:
         last_update_run: Letzte Aktualisierung
         data_until_explanation: Alle Änderungen bis zu diesem Zeitpunkt sind auf jeden Fall in den Daten, spätere können unter Umständen auch drin sein.
         to: bis
+        data: Daten
+        database_size: Datenbankgröße
+        minutes: min
+        statistics: Statistik
+        import_errors: Import-Fehler
+        languages:
+            subtags:
+                title: BCP47 Subtags
+                filter:
+                    label: Nur Subtags anzeigen vom Typ
+                    all: Alle
+                    language: Sprache
+                    script: Schrift
+                    region: Region
+                    variant: Variante
+                columns:
+                    type: Typ
+                    subtag: Subtag
+                    description: Beschreibung
+                    added: Hinzugefügt
+                    notes: Bemerkungen
+                intro: |
+                    <p>Die <a href="https://www.ietf.org/">IETF</a> definiert
+                    <i>language tags</i> (Sprach-Tags) in ihrem Standard <a
+                    href="https://tools.ietf.org/html/bcp47">Tags for Identifying
+                    Languages (BCP47)</a>. Diese Sprach-Tags bestehen aus einem
+                    oder mehreren <i>subtags</i>, die die Sprache, Schriftsystem,
+                    Regionen und Varianten bezeichnen. Mehr dazu gibt es im <a
+                    href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia-Eintrag
+                    zu den IETF-Sprachtags</a> und unter <a
+                    href="http://www.langtag.net/">langtag.net</a>.</p>
+                note: |
+                    Bitte beachte, dass die Daten in dieser Tabelle nicht
+                    aus OpenStreetMap stammen. Dies sind nur die "Bauteile", die
+                    benutzt werden können, um Sprachen zu beschreiben, unabhängig
+                    davon, ob sie derzeit bei OSM benutzt werden.
+            wikipedia_sites:
+                title: Wikipedia-Sprachversionen
+        wikidata:
+            index:
+                show_items: Alle Wikidata-Datenobjekte anzeigen...
+                show_errors: Alle Fehler anzeigen...
+            stats:
+                keys: Key-Datenobjekte
+                tags: Tag-Datenobjekte
+                relations: Relation-Datenobjekte
+                roles: Role-Datenobjekte
+                qcode: Datenobjekte mit Q-Code
+                pcode: Datenobjekte mit P-Code
+            items:
+                title: Items
+                description: |
+                  Dies sind alle Wikidata-Items mit dem Property P1282 (mit dem
+                  OSM-Key, -Tag, oder -Relation, mit dem es verbunden ist).
+                  Nicht angezeigt werden hier Properties mit dem Typ "Role"
+                  und Properties, die nicht das richtige Format haben.
+                columns:
+                    type: Typ
+                    ktr: Key/Tag/Relation
+                    item: Wikidata-Datenobjekt
+            errors:
+                description: |
+                  Hier werden alle Probleme angezeigt, die beim Import der
+                  Wikidata-Datenobjekte mit Property P1282 aufgetreten sind.
+                columns:
+                    item: Wikidata-Datenobjekt
+                    p1282: Wert des Properties P1282
+                    error: Fehlermeldung
     download:
         intro: |
             <p>Hier kannst Du die Datenbanken herunterladen, die von Taginfo verwendet
@@ -700,31 +768,6 @@ reports:
         overview:
             tab: Übersicht
             title: Übersicht
-        bcp47:
-            tab: BCP47 Subtags
-            title: BCP47 Subtags
-            filter:
-                label: Nur Subtags anzeigen vom Typ
-                all: Alle
-                language: Sprache
-                script: Schrift
-                region: Region
-                variant: Variante
-            intro: |
-                <p>Die <a href="https://www.ietf.org/">IETF</a> definiert
-                <i>language tags</i> (Sprach-Tags) in ihrem Standard
-                <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages
-                (BCP47)</a>. Diese Sprach-Tags bestehen aus einem oder mehreren
-                <i>subtags</i>, die die Sprache, Schriftsystem, Varianten, usw.
-                bezeichnen. Die folgende Liste zeigt die derzeit registrierten
-                Subtags an, die für OSM relevant sind. Mehr dazu gibt es im
-                <a href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia-Eintrag
-                zu den IETF-Sprachtags</a> und unter <a
-                href="http://www.langtag.net/">langtag.net</a>.</p>
-                <p>Bitte beachte, dass die Daten in dieser Tabelle <b>nicht</b>
-                aus OpenStreetMap stammen. Dies sind nur die "Bauteile", die
-                benutzt werden können, um Sprachen zu beschreiben, unabhängig
-                davon, ob sie derzeit bei OSM benutzt werden.</p>
     similar_keys:
         name: Ähnliche Keys
         intro: |

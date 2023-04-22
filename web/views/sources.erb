@@ -1,35 +1,26 @@
+<%
+@css = <<"CSS"
+dt {
+    margin: 20px 0 6px 0;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+dd {
+    margin-left: 10px;
+}
+CSS
+%>
 <h1 class="section"><%= h(t.taginfo.sources) %></h1>
-<%= t.pages.sources.intro %>
+<p><%= h(t.pages.sources.intro) %></p>
+<p><i><%= h(t.pages.sources.display_only) %></i></p>
 <div class="fboxes">
+<% @sources.visible.each do |source| %>
     <div class="fbox">
-        <h2><%= h(t.pages.sources.list.title) %></h2>
+        <h2><a href="<%= build_link("/sources/#{ source.id }") %>"><%= h(t.sources[source.id].name) %></a></h2>
         <div>
-            <p><%= h(t.pages.sources.list.intro) %></p>
-<% @sources.visible.each_with_index do |source, n| c = (n%2!=0) ? ' even' : '' %>
-            <h3><%= h(t.sources[source.id].name) %></h3>
             <%= t.pages.sources.description[source.id] %>
-<% end %>
+            <p><a href="<%= build_link("/sources/#{ source.id }") %>">More about this source...</a></p>
         </div>
     </div>
-    <div class="fbox">
-        <h2><%= h(t.pages.sources.updates.title) %></h2>
-        <div>
-            <p><%= h(t.pages.sources.updates.intro) %></p>
-            <table class="list">
-                <tr>
-                    <th class="tl"><%= h(t.taginfo.source) %></th>
-                    <th><%= h(t.pages.sources.data_until) %>*</th>
-                    <th><%= h(t.pages.sources.last_update_run) %></th>
-                </tr>
-<% @sources.visible.each_with_index do |source, n| c = (n%2!=0) ? ' even' : '' %>
-                <tr>
-                    <td class="<%= c %>"><%= h(t.sources[source.id].name) %>
-                    <td class="tc<%= c %> nowrap"><%= h(source.data_until) %> UTC</td>
-                    <td class="tc<%= c %> nowrap"><%= h(source.update_start.to_s + ' ' + t.pages.sources.to + ' ' + source.update_end.to_s) %> UTC</td>
-                </tr>
 <% end %>
-            </table>
-            <p class="note">* <%= h(t.pages.sources.data_until_explanation) %></p>
-        </div>
-    </div>
 </div>

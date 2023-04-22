@@ -91,9 +91,9 @@ class Taginfo < Sinatra::Base
 
     # make trimming \n after %> the default in erb templates
     alias_method :erb_orig, :erb
-    def erb(template, options = {}, locals = {})
+    def erb(template, options = {}, locals = {}, &block)
         options[:trim] = '>' unless options[:trim]
-        erb_orig template, options, locals
+        erb_orig template, options, locals, &block
     end
 
     # when do we expect the next data update
@@ -173,20 +173,16 @@ class Taginfo < Sinatra::Base
 
     #-------------------------------------
 
-    %w[about sources].each do |page|
-        get '/' + page do
-            @title = t.taginfo[page]
-            section page
-            erb page.to_sym
-        end
+    get '/about' do
+        @title = t.taginfo.about
+        section :about
+        erb :about
     end
 
-    %w[help].each do |page|
-        get '/' + page do
-            @title = t.misc.help
-            section page
-            erb page.to_sym
-        end
+    get '/help' do
+        @title = t.misc.help
+        section :help
+        erb :help
     end
 
     %w[keys tags relations].each do |page|
@@ -234,6 +230,7 @@ class Taginfo < Sinatra::Base
     # current API (version 4)
     load 'lib/api/v4/key.rb'
     load 'lib/api/v4/keys.rb'
+    load 'lib/api/v4/languages.rb'
     load 'lib/api/v4/project.rb'
     load 'lib/api/v4/projects.rb'
     load 'lib/api/v4/relation.rb'
@@ -244,6 +241,7 @@ class Taginfo < Sinatra::Base
     load 'lib/api/v4/tags.rb'
     load 'lib/api/v4/unicode.rb'
     load 'lib/api/v4/wiki.rb'
+    load 'lib/api/v4/wikidata.rb'
 
     # test API (unstable, do not use)
     load 'lib/api/test/langtag.rb'
@@ -256,6 +254,7 @@ class Taginfo < Sinatra::Base
     load 'lib/ui/relation.rb'
     load 'lib/ui/reports.rb'
     load 'lib/ui/search.rb'
+    load 'lib/ui/sources.rb'
     load 'lib/ui/tags.rb'
 
     SECTIONS.each_key do |section|

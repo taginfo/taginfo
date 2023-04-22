@@ -39,42 +39,10 @@ const tabsConfig = {
                 ];
             }
         });
-    },
-    bcp47: function() {
-        const filter_type = document.getElementById('subtag-filter').value;
-        return new DynamicTable('grid-bcp47-subtags', {
-            url: '/api/0/langtags',
-            params: { filter: filter_type },
-            colModel: [
-                { display: 'Type',        name: 'type',        width:  80 },
-                { display: 'Subtag',      name: 'subtag',      width:  80, sortable: true },
-                { display: 'Description', name: 'description', width: 500, sortable: true },
-                { display: 'Added',       name: 'added',       width:  80, sortable: true },
-                { display: 'Notes',       name: 'notes',       width: 400 }
-            ],
-            searchitems: [
-                { display: 'Subtag or description', name: 'text' }
-            ],
-            sortname: 'subtag',
-            sortorder: 'asc',
-            processRow: row => {
-                return [
-                    row.type,
-                    tag('tt', row.subtag),
-                    row.description,
-                    row.added,
-                    row.notes
-                ];
-            }
-        });
     }
 };
 
 function page_init() {
     up = function() { window.location = build_link('/reports'); };
-    const filter = document.getElementById('subtag-filter');
-    filter.addEventListener('change', function(element) {
-        window.location.search = new URLSearchParams({ 'filter': element.target.value });
-    });
     initTabs(tabsConfig);
 }

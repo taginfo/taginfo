@@ -235,13 +235,12 @@ pages:
                 máte-li dotazy nebo chcete-li pomoci.</p>
     sources:
         intro: |
-            <p>Taginfo sbírá data o značkách OSM z vícero zdrojů a dává je dohromady
-            pro snadné procházení a průzkum.</p>
-            <p>Uvědomte si, že taginfo tato data pouze zobrazuje. Pokud je chcete změnit,
-            musíte je opravit u zdroje.</p>
-        list:
-            title: Seznam zdrojů
-            intro: Zde je seznam aktuálně používaných zdrojů. V budoucnu můžeme integrovat více zdrojů.
+            Taginfo sbírá data o značkách OSM z vícero zdrojů a dává je
+            dohromady pro snadné procházení a průzkum. Zde je seznam aktuálně
+            používaných zdrojů. V budoucnu můžeme integrovat více zdrojů.
+        display_only: |
+            Uvědomte si, že taginfo tato data pouze zobrazuje. Pokud je chcete změnit,
+            musíte je opravit u zdroje.
         description:
             db: |
                 <p>Statistika o klíčích, značkách a typech relací se generuje z <a class="extlink" href="https://planet.openstreetmap.org/">databáze OSM</a> (nebo z extractu) a stejně se vytvářejí mapy, které ukazují geografické rozmístění uzlů a cest.</p>
@@ -250,7 +249,7 @@ pages:
             languages: |
                 <p>Taginfo získává informace o různých jazycích světa, jejich kódech, názvech, atd. z různých registrů <a class="extlink" href="https://www.iana.org/">IANA</a> a <a class="extlink" href="https://www.unicode.org/">Unicode</a>.</p>
             projects: |
-                <p>Projekty, které nějak používají značky OSM, jako jsou editory, mapy, navigace, atd. Viz <a href="projects">seznam projektů</a>.</p>
+                <p>Projekty, které nějak používají značky OSM, jako jsou editory, mapy, navigace, atd.</p>
             chronology: |
                 <p>Množství klíčů/značek během času podle <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">historie OSM</a>.</p>
         updates:
@@ -260,6 +259,30 @@ pages:
         last_update_run: Poslední aktualizace proběhla
         data_until_explanation: Všechny editace do tohoto času jsou již v datech, pozdější možná.
         to: do
+        languages:
+            subtags:
+                title: Podznačky BCP47
+                filter:
+                    label: Ukaž pouze podznačky typu
+                    all: Vše
+                    language: Jazyk
+                    script: Písmo
+                    region: Region
+                    variant: Varianta
+                intro: |
+                    <p><a href="https://www.ietf.org/">IETF</a> definuje <i>jazykové
+                    značky</i> ve svém standardu
+                    <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages
+                    (BCP47)</a>. Jazykové
+                    značky obsahují jednu nebo více <i>podznaček</popisující jazyk,
+                    písmo, variantu, atd. Pro více informací se podívejte
+                    také na <a href="https://en.wikipedia.org/wiki/IETF_language_tag">položku Wikipedie
+                    o jazykovýách značkách IETF</a> a stránky <a
+                    href="http://www.langtag.net/">langtag.net</a>.</p>
+                note: |
+                    Uvědomte si, že data zobrazená v této taublce nejsou z OpenStreetMap,
+                    ukazuje pouze základní kameny, které lze použít pro popis jazyků
+                    bez ohledu na to, zda jsou skutečně použity v OSM.
     download:
         intro: |
             <p>Zde si můžete stáhnout databáze, které taginfo používá. Všechna data jsou uložena
@@ -638,31 +661,6 @@ reports:
         overview:
             tab: Přehled
             title: Přehled
-        bcp47:
-            tab: Podznačky BCP47
-            title: Podznačky BCP47
-            filter:
-                label: Ukaž pouze podznačky typu
-                all: Vše
-                language: Jazyk
-                script: Písmo
-                region: Region
-                variant: Varianta
-            intro: |
-                <p><a href="https://www.ietf.org/">IETF</a> definuje <i>jazykové
-                značky</i> ve svém standardu
-                <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages
-                (BCP47)</a>. Jazykové
-                značky obsahují jednu nebo více <i>podznaček</popisující jazyk,
-                písmo, variantu, atd. Následující seznam ukazuje podznačky, které jsou
-                momentálně registrované a mají význam pro OSM. Pro více informací se podívejte
-                také na <a href="https://en.wikipedia.org/wiki/IETF_language_tag">položku Wikipedie
-                o jazykovýách značkách IETF</a> a stránky <a
-                href="http://www.langtag.net/">langtag.net</a>.</p>
-                <p>Uvědomte si, že data zobrazená v této taublce <b>nejsou</b> z OpenStreetMap,
-                ukazuje pouze základní kameny, které lze použít pro popis jazyků
-                bez ohledu na to, zda jsou skutečně použity v OSM.
-                </p>
     similar_keys:
         name: Podobné klíče
         intro: |

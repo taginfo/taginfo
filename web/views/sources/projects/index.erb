@@ -1,0 +1,21 @@
+<div class="fbox">
+    <h2><%= h(t.pages.sources.statistics) %></h2>
+    <div>
+        <table class="desc">
+            <tr><th>Projects:</th><td><%= @db.stats('projects') %></td></tr>
+            <tr><th>Projects with errors:</th><td><%= @db.stats('projects') - @db.stats('projects_ok') %></td></tr>
+            <tr><th>Keys:</th><td><%= @db.stats('project_keys') %> (<%= @db.stats('project_unique_keys') %> unique keys)</td></tr>
+            <tr><th>Tags:</th><td><%= @db.stats('project_tags') %> (<%= @db.stats('project_unique_tags') %> unique tags)</td></tr>
+        </table>
+        <p><b><a href="<%= build_link('/projects') %>">See all projects...</a></b></p>
+    </div>
+</div>
+<div class="fbox">
+    <h2>Project Icons</h2>
+    <div><%
+res = @db.select("SELECT id, coalesce(name, id) AS name FROM projects.projects WHERE icon IS NOT NULL ORDER BY id").execute
+res.each do |row|%>
+        <a href="<%= build_link('/projects/' + row['id']) %>"><img src="<%= build_link('/api/4/project/icon?project=' + row['id']) %>" title="<%= row['name'] %>" alt="" width="32" height="32"/></a>
+<% end %>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+<%
+
+count_all = @db.select("SELECT count(distinct(image)) AS count FROM wiki.wikipages").execute()[0]['count']
+count_small = @db.select("SELECT count(distinct(image)) AS count FROM wiki.wikipages WHERE image IN (SELECT image FROM wiki.wiki_images WHERE width * height < 64 * 64)").execute()[0]['count']
+count_tall = @db.select("SELECT count(distinct(image)) AS count FROM wiki.wikipages WHERE image IN (SELECT image FROM wiki.wiki_images WHERE height > width * 2)").execute()[0]['count']
+count_wide = @db.select("SELECT count(distinct(image)) AS count FROM wiki.wikipages WHERE image IN (SELECT image FROM wiki.wiki_images WHERE width > height *2)").execute()[0]['count']
+count_large = @db.select("SELECT count(distinct(image)) AS count FROM wiki.wikipages WHERE image IN (SELECT image FROM wiki.wiki_images WHERE size > 20000000)").execute()[0]['count']
+
+query_prefix = "SELECT key, value, width, height, size, image_url, count(*) AS count FROM wiki.wiki_images i, wiki.wikipages p WHERE i.image = p.image AND "
+query_order = " GROUP BY key, value, image_url ORDER BY "
+
+@css = <<'CSS'
+div.imagelist {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: stretch;
+}
+div.imagelist img {
+    padding: 4px;
+}
+div.imagelist .imgbox {
+    margin: 2px;
+    padding: 2px;
+    background-color: var(--color-lighter);
+    border-radius: 4px;
+    width: min-content;
+    flex-grow: 1;
+    text-align: center;
+}
+CSS
+%>
+<h1><a href="<%= build_link("/sources/#{ @source.id }") %>"><%= @source.name %></a>: Image sizes</h1>
+
+<p>Images in the Wiki representing keys, tags, or relation types work best when
+they are not too small (hard to see), too large (load time too long) and when
+the aspect ratio is near 1:1.</p>
+
+<div id="tabs">
+    <ul class="no-print">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#small">Small</a></li>
+        <li><a href="#tall">Tall</a></li>
+        <li><a href="#wide">Wide</a></li>
+        <li><a href="#large">Large</a></li>
+    </ul>
+    <div id="overview">
+        <h2>Overview</h2>
+        <p>There a a total of <b><%= count_all %></b> distinct images used as reference images on Key:/Tag:/Relation: pages. Of these...</p>
+        <ul>
+            <li><b><%= count_small %></b> are smaller than 64&#x78;64 pixels.</li>
+            <li><b><%= count_tall %></b> are more than twice as tall as they are wide.</li>
+            <li><b><%= count_wide %></b> are more than twice as wide as they are tall.</li>
+            <li><b><%= count_large %></b> have more than 20 MB.</li>
+        </ul>
+    </div>
+    <div id="small">
+        <h2>Small images</h2>
+        <pre>width &#x78; height &lt; 64 &#x78; 64</pre>
+        <div class="imagelist">
+<% @db.select(query_prefix + 'width * height < 64 * 64' + query_order + 'width * height').execute().each do |row| %>
+            <div class="imgbox">
+                <img src="<%= row['image_url'] %>" title="<%= row['width'] %> &#x78; <%= row['height'] %>"/>
+                <p data-key="<%= row['key'] %>" data-value="<%= row['value'] %>" data-count="<%= row['count'] %>"></p>
+            </div>
+<% end %>
+        </div>
+    </div>
+
+    <div id="tall">
+        <h2>Tall images</h2>
+        <pre>height &gt; 2 &#x78; width</pre>
+        <div class="imagelist">
+<% @db.select(query_prefix + 'height > 2 * width' + query_order + 'height / width DESC').execute().each do |row| %>
+            <div class="imgbox">
+                <img src="<%= row['image_url'] %>" title="<%= row['width'] %> &#x78; <%= row['height'] %> / 1 : <%= (row['height'] / row['width']).to_i %>" style="max-height: 200px;"/>
+                <p data-key="<%= row['key'] %>" data-value="<%= row['value'] %>" data-count="<%= row['count'] %>"></p>
+            </div>
+<% end %>
+        </div>
+    </div>
+    <div id="wide">
+        <h2>Wide images</h2>
+        <pre>width &gt; 2 &#x78; height</pre>
+        <div class="imagelist">
+<% @db.select(query_prefix + 'width > 2 * height' + query_order + 'width / height DESC').execute().each do |row| %>
+            <div class="imgbox">
+                <img src="<%= row['image_url'] %>" title="<%= row['width'] %> &#x78; <%= row['height'] %> / <%= (row['width'] / row['height']).to_i %> : 1" style="max-width: 200px;"/>
+                <p data-key="<%= row['key'] %>" data-value="<%= row['value'] %>" data-count="<%= row['count'] %>"></p>
+            </div>
+<% end %>
+        </div>
+    </div>
+    <div id="large">
+        <h2>Large images</h2>
+        <pre>size &gt; 20 MB</pre>
+        <div class="imagelist">
+<% @db.select(query_prefix + 'size > 20000000' + query_order + 'size DESC').execute().each do |row| %>
+            <div class="imgbox">
+                <img src="<%= row['image_url'] %>" title="<%= (row['size'] / 1000000).to_i %> MB" style="max-width: 200px; max-height: 200px;"/>
+                <p data-key="<%= row['key'] %>" data-value="<%= row['value'] %>" data-count="<%= row['count'] %>"></p>
+            </div>
+<% end %>
+        </div>
+    </div>
+</div>
