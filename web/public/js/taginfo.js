@@ -948,7 +948,7 @@ class DynamicTable {
 
             const noResultMessage = document.createElement('span');
             noResultMessage.className = 'empty';
-            if (this.queryInput.value != '') {
+            if (this.queryInput && this.queryInput.value != '') {
                 noResultMessage.innerText = texts.dynamic_table.filter_nothing_found;
             } else if (this.config.empty) {
                 noResultMessage.innerText = this.config.empty;
