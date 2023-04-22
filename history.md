@@ -152,3 +152,22 @@ project. The numerous small improvements and bugfixes can't all be listed.
 * Improved support for mobile: Tool links are now also available on smaller
   screens.
 
+## December 2021
+
+* Add "characters" tab to key/tag/relation pages showing a table with all
+  Unicode characters used in the key/tag/relation.
+
+## October 2022
+
+* Started using Rubocop to help cleaning up Ruby code.
+* Started to add some code making running a multi-instance version of taginfo
+  easier.
+
+## March/April 2023
+
+* Large refactoring of the CSS and Javascript. Removed dependency on jQuery
+  and several other Javascript libraries and modernized the Javascript code.
+  Use modern CSS functionality like flex and grid layouts.
+* A lot of the site works better with smaller screens now though much work
+  remains.
+
