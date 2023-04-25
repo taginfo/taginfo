@@ -474,6 +474,7 @@ dynamic_table:
     procmsg: Daten werden geladen, bitte warten...
     nomsg: Keine Einträge
     errormsg: Fehler in der Verbindung
+    filter_nothing_found: Nichts gefunden, was auf die Suche paßt
 
 comparison:
     list: Vergleichsliste
