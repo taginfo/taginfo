@@ -11,9 +11,9 @@ const tabsConfig = {
                 url: '/api/4/key/stats',
                 params: { key: key },
                 colModel: [
-                    { display: '<%= h(misc.object_type) %>', name: 'type', width: 100, sortable: true },
-                    { display: '<%= h(page.number_objects) %>', name: 'count', width: 260, sortable: true, align: 'center' },
-                    { display: '<%= h(page.number_values) %>', name: 'value', width: 140, sortable: true, align: 'right' }
+                    { display: '<%= h(misc.object_type) %>', name: 'type', width: 100 },
+                    { display: '<%= h(page.number_objects) %>', name: 'count', width: 260, align: 'center' },
+                    { display: '<%= h(page.number_values) %>', name: 'value', width: 140, align: 'right' }
                 ],
                 usePager: false,
                 preProcess: function(data) {

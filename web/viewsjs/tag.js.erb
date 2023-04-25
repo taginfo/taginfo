@@ -20,8 +20,8 @@ const tabsConfig = {
             url: '/api/4/tag/stats',
             params: { key: key, value: value },
             colModel: [
-                { display: '<%= h(misc.object_type) %>', name: 'type', width: 100, sortable: true },
-                { display: '<%= h(page.number_objects) %>', name: 'count', width: 260, sortable: true, align: 'center' }
+                { display: '<%= h(misc.object_type) %>', name: 'type', width: 100 },
+                { display: '<%= h(page.number_objects) %>', name: 'count', width: 260, align: 'center' }
             ],
             usePager: false,
             preProcess: function(data) {

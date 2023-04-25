@@ -13,7 +13,7 @@ function createTable(english) {
             { display: '<img src="/img/types/all.svg" width="16" height="16" alt=""/> <%= h(osm.objects) %>', name: 'count_all', width: 70, sortable: true, align: 'right', title: '<%= h(misc.objects_tooltip) %>' },
             { display: '<%= h(osm.users) %>', name: 'users_all', width: 44, sortable: true, align: 'right' },
             { display: '<%= h(osm.values) %>', name: 'values_all', width: 70, sortable: true, align: 'right', title: '<%= h(misc.values_tooltip) %>' },
-            { display: '<%= h(misc.prevalent_values) %>', name: 'prevalent_values', width: 500, sortable: true, title: '<%= h(misc.prevalent_values_tooltip) %>' }
+            { display: '<%= h(misc.prevalent_values) %>', name: 'prevalent_values', width: 500, title: '<%= h(misc.prevalent_values_tooltip) %>' }
         ],
         searchitems: [
             { display: '<%= h(osm.key) %>', name: 'key' }

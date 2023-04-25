@@ -1322,11 +1322,11 @@ function createCharactersTable(string) {
         url: '/api/4/unicode/characters',
         params: { string: string },
         colModel: [
-            { display: texts.unicode.character, name: 'character', width: 20, sortable: true },
-            { display: texts.unicode.codepoint, name: 'codepoint', width: 60, sortable: true, align: 'right' },
-            { display: texts.unicode.script, name: 'script', width: 100, sortable: true },
-            { display: texts.unicode.general_category, name: 'general_category', width: 150, sortable: false },
-            { display: texts.unicode.name, name: 'name', width: 150, sortable: false, align: 'left' }
+            { display: texts.unicode.character, name: 'character', width: 20 },
+            { display: texts.unicode.codepoint, name: 'codepoint', width: 60, align: 'right' },
+            { display: texts.unicode.script, name: 'script', width: 100 },
+            { display: texts.unicode.general_category, name: 'general_category', width: 150 },
+            { display: texts.unicode.name, name: 'name', width: 150, align: 'left' }
         ],
         usePager: false,
         preProcess: function(data) {

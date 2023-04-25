@@ -16,7 +16,7 @@ function page_init() {
             { display: '<%= h(@trans.t.taginfo.wiki) %>', name: 'in_wiki', width: 25, sortable: true, align: 'center', title: '<%= h(misc.in_wiki_tooltip) %>' },
             { display: '<%= h(@trans.t.taginfo.projects) %>', name: 'projects', width: 40, sortable: true, align: 'right' },
             { display: '<%= h(osm.values) %>', name: 'values_all', width: 70, sortable: true, align: 'right', title: '<%= h(misc.values_tooltip) %>' },
-            { display: '<%= h(misc.prevalent_values) %>', name: 'prevalent_values', width: 200, sortable: true, title: '<%= h(misc.prevalent_values_tooltip) %>' }
+            { display: '<%= h(misc.prevalent_values) %>', name: 'prevalent_values', width: 200, title: '<%= h(misc.prevalent_values_tooltip) %>' }
         ],
         searchitems: [
             { display: '<%= h(osm.key) %>', name: 'key' }
