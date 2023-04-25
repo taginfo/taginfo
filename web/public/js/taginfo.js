@@ -609,6 +609,7 @@ class DynamicTableColumn {
         const element = document.createElement('div');
         element.classList.add('dt-header');
         element.dataset.name = this.name;
+        element.dataset.col = col;
 
         element.style.gridColumnStart = col * 2 + 1;
         element.style.textAlign = this.align;
