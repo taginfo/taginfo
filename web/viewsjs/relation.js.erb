@@ -14,17 +14,11 @@ const tabsConfig = {
                 { display: '<%= h(page.overview.member_count) %>', name: 'count', width: 260, sortable: true, align: 'right' }
             ],
             usePager: false,
-            preProcess: function(data) {
-                return {
-                    total: 4,
-                    page: 1,
-                    rows: data.data.map(function(row) {
-                        return { 'cell': [
-                            fmt_type_image(row.type),
-                            fmt_with_ts(row.count)
-                        ]};
-                    })
-                };
+            processRow: row => {
+                return [
+                    fmt_type_image(row.type),
+                    fmt_with_ts(row.count)
+                ];
             }
         });
     },
@@ -44,17 +38,14 @@ const tabsConfig = {
             ],
             sortname: 'count_all_members',
             sortorder: 'desc',
-            preProcess: function(data) {
-                data.rows = data.data.map(function(row) {
-                    return { 'cell': [
-                        fmt_role(row.role),
-                        fmt_value_with_percent(row.count_all_members, row.count_all_members_fraction),
-                        fmt_value_with_percent(row.count_node_members, row.count_node_members_fraction),
-                        fmt_value_with_percent(row.count_way_members, row.count_way_members_fraction),
-                        fmt_value_with_percent(row.count_relation_members, row.count_relation_members_fraction)
-                    ] };
-                });
-                return data;
+            processRow: row => {
+                return [
+                    fmt_role(row.role),
+                    fmt_value_with_percent(row.count_all_members, row.count_all_members_fraction),
+                    fmt_value_with_percent(row.count_node_members, row.count_node_members_fraction),
+                    fmt_value_with_percent(row.count_way_members, row.count_way_members_fraction),
+                    fmt_value_with_percent(row.count_relation_members, row.count_relation_members_fraction)
+                ];
             },
             empty: '<%= h(t.pages.relation.roles.no_roles_info) %>'
         });
@@ -73,19 +64,13 @@ const tabsConfig = {
                 { display: '<%= h(misc.image) %>', name: 'image', width: 300, sortable: false }
             ],
             usePager: false,
-            preProcess: function(data) {
-                return {
-                    total: data.total,
-                    page: 1,
-                    rows: data.data.map(function(row) {
-                        return { 'cell': [
-                            fmt_language(row.lang, row.dir, row.language, row.language_en),
-                            link_to_wiki(row.title),
-                            fmt_desc(row.lang, row.dir, row.description),
-                            fmt_wiki_image_popup(row.image)
-                        ]};
-                    })
-                };
+            processRow: row => {
+                return [
+                    fmt_language(row.lang, row.dir, row.language, row.language_en),
+                    link_to_wiki(row.title),
+                    fmt_desc(row.lang, row.dir, row.description),
+                    fmt_wiki_image_popup(row.image)
+                ];
             }
         });
     },
@@ -102,14 +87,11 @@ const tabsConfig = {
             ],
             sortname: 'project_name',
             sortorder: 'asc',
-            preProcess: function(data) {
-                data.rows = data.data.map(function(row) {
-                    return { 'cell': [
-                        hover_expand(link_to_project(row.project_id, row.project_name, row.project_icon_url)),
-                        project_tag_desc(row.description, row.icon_url, row.doc_url)
-                    ] };
-                });
-                return data;
+            processRow: row => {
+                return [
+                    hover_expand(link_to_project(row.project_id, row.project_name, row.project_icon_url)),
+                    project_tag_desc(row.description, row.icon_url, row.doc_url)
+                ];
             }
         });
     },

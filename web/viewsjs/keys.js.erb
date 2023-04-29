@@ -23,22 +23,19 @@ function page_init() {
         ],
         sortname: 'count_all',
         sortorder: 'desc',
-        preProcess: function(data) {
-            data.rows = data.data.map(function(row) {
-                return { 'cell': [
-                    hover_expand(link_to_key(row.key)),
-                    fmt_value_with_percent(row.count_all,       row.count_all_fraction),
-                    fmt_value_with_percent(row.count_nodes,     row.count_nodes_fraction),
-                    fmt_value_with_percent(row.count_ways,      row.count_ways_fraction),
-                    fmt_value_with_percent(row.count_relations, row.count_relations_fraction),
-                    fmt_with_ts(row.users_all),
-                    link_to_key_with_tab(row.key, 'wiki', fmt_checkmark(row.in_wiki)),
-                    link_to_key_with_tab(row.key, 'projects', html_escape(row.projects)),
-                    fmt_with_ts(row.values_all),
-                    fmt_prevalent_value_list(row.key, row.prevalent_values)
-                ] };
-            });
-            return data;
+        processRow: row => {
+            return [
+                hover_expand(link_to_key(row.key)),
+                fmt_value_with_percent(row.count_all,       row.count_all_fraction),
+                fmt_value_with_percent(row.count_nodes,     row.count_nodes_fraction),
+                fmt_value_with_percent(row.count_ways,      row.count_ways_fraction),
+                fmt_value_with_percent(row.count_relations, row.count_relations_fraction),
+                fmt_with_ts(row.users_all),
+                link_to_key_with_tab(row.key, 'wiki', fmt_checkmark(row.in_wiki)),
+                link_to_key_with_tab(row.key, 'projects', html_escape(row.projects)),
+                fmt_with_ts(row.values_all),
+                fmt_prevalent_value_list(row.key, row.prevalent_values)
+            ];
         }
     }));
 }

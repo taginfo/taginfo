@@ -37,16 +37,13 @@ function page_init() {
         ],
         sortname: 'count',
         sortorder: 'desc',
-        preProcess: function(data) {
-            data.rows = data.data.map(function(row) {
-                return { 'cell': [
-                    hover_expand(link_to_rtype(row.rtype)),
-                    fmt_value_with_percent(row.count, row.count_fraction),
-                    hover_expand(link_to_tag('type', row.rtype)),
-                    fmt_prevalent_role_list(row.prevalent_roles)
-                ] };
-            });
-            return data;
+        processRow: row => {
+            return [
+                hover_expand(link_to_rtype(row.rtype)),
+                fmt_value_with_percent(row.count, row.count_fraction),
+                hover_expand(link_to_tag('type', row.rtype)),
+                fmt_prevalent_role_list(row.prevalent_roles)
+            ];
         }
     }));
 };

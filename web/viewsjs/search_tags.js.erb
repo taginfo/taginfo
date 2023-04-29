@@ -16,15 +16,12 @@ const tabsConfig = {
             ],
             sortname: 'count_all',
             sortorder: 'desc',
-            preProcess: function(data) {
-                data.rows = data.data.map(function(row) {
-                    return { 'cell': [
-                        fmt_with_ts(row.count_all),
-                        link_to_key_with_highlight(row.key, q[0]),
-                        link_to_value_with_highlight(row.key, row.value, q[1])
-                    ] };
-                });
-                return data;
+            processRow: row => {
+                return [
+                    fmt_with_ts(row.count_all),
+                    link_to_key_with_highlight(row.key, q[0]),
+                    link_to_value_with_highlight(row.key, row.value, q[1])
+                ];
             }
         });
     },

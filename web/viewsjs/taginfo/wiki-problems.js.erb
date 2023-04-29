@@ -19,19 +19,16 @@ const tabsConfig = {
             ],
             sortname: 'reason',
             sortorder: 'asc',
-            preProcess: function(data) {
-                data.rows = data.data.map(function(row) {
-                    return { 'cell': [
-                        row.location,
-                        row.reason,
-                        link_to_wiki(row.title),
-                        row.reason == 'wrong lang format' ? '' : fmt_language(row.lang, 'auto', '', ''),
-                        row.key === null ? '' :
-                            row.value === null ? link_to_key(row.key) : link_to_tag(row.key, row.value),
-                        row.info
-                    ] };
-                });
-                return data;
+            processRow: row => {
+                return [
+                    row.location,
+                    row.reason,
+                    link_to_wiki(row.title),
+                    row.reason == 'wrong lang format' ? '' : fmt_language(row.lang, 'auto', '', ''),
+                    row.key === null ? '' :
+                        row.value === null ? link_to_key(row.key) : link_to_tag(row.key, row.value),
+                    row.info
+                ];
             }
         });
     }

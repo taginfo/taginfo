@@ -1061,11 +1061,16 @@ class DynamicTable {
             }
             const json = await response.json();
             this.controller = undefined
-            const data = this.config.preProcess(json)
-            this.display(data);
+
+            json.rows = json.data.map(row => {
+                return { 'cell': this.config.processRow(row) };
+            });
+
+            this.display(json);
         } catch (error) {
             this.clearTableBody();
             this.toolbar.querySelector('.dt-info').innerHTML = '<span class="bad">' + texts.dynamic_table.errormsg + '</span>';
+            throw(error);
         }
     }
 
@@ -1329,17 +1334,14 @@ function createCharactersTable(string) {
             { display: texts.unicode.name, name: 'name', width: 150, align: 'left' }
         ],
         usePager: false,
-        preProcess: function(data) {
-            data.rows = data.data.map(function(row) {
-                return { 'cell': [
-                    row.char,
-                    link('https://decodeunicode.org/' + fmt_unicode_code_point(row.codepoint), fmt_unicode_code_point(row.codepoint), { target: '_blank', title: 'decodeunicode.org' }),
-                    fmt_unicode_script(row.script, row.script_name),
-                    fmt_unicode_general_category(row.category),
-                    row.name
-                ] };
-            });
-            return data;
+        processRow: row => {
+            return [
+                row.char,
+                link('https://decodeunicode.org/' + fmt_unicode_code_point(row.codepoint), fmt_unicode_code_point(row.codepoint), { target: '_blank', title: 'decodeunicode.org' }),
+                fmt_unicode_script(row.script, row.script_name),
+                fmt_unicode_general_category(row.category),
+                row.name
+            ];
         }
     });
 }

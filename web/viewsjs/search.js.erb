@@ -15,14 +15,11 @@ const tabsConfig = {
             ],
             sortname: 'count_all',
             sortorder: 'desc',
-            preProcess: function(data) {
-                data.rows = data.data.map(function(row) {
-                    return { 'cell': [
-                        fmt_with_ts(row.count_all),
-                        link_to_key_with_highlight(row.key, query)
-                    ] };
-                });
-                return data;
+            processRow: row => {
+                return [
+                    fmt_with_ts(row.count_all),
+                    link_to_key_with_highlight(row.key, query)
+                ];
             }
         });
     },
@@ -37,15 +34,12 @@ const tabsConfig = {
             ],
             sortname: 'count_all',
             sortorder: 'desc',
-            preProcess: function(data) {
-                data.rows = data.data.map(function(row) {
-                    return { 'cell': [
-                        fmt_with_ts(row.count_all),
-                        link_to_key(row.key),
-                        link_to_value_with_highlight(row.key, row.value, query)
-                    ] };
-                });
-                return data;
+            processRow: row => {
+                return [
+                    fmt_with_ts(row.count_all),
+                    link_to_key(row.key),
+                    link_to_value_with_highlight(row.key, row.value, query)
+                ];
             }
         });
     },
@@ -59,14 +53,11 @@ const tabsConfig = {
             ],
             sortname: 'count',
             sortorder: 'desc',
-            preProcess: function(data) {
-                data.rows = data.data.map(function(row) {
-                    return { 'cell': [
-                        fmt_with_ts(row.count),
-                        link_to_rtype_with_highlight(row.rtype, query)
-                    ] };
-                });
-                return data;
+            processRow: row => {
+                return [
+                    fmt_with_ts(row.count),
+                    link_to_rtype_with_highlight(row.rtype, query)
+                ];
             }
         });
     },
@@ -81,15 +72,12 @@ const tabsConfig = {
             ],
             sortname: 'count_all',
             sortorder: 'desc',
-            preProcess: function(data) {
-                data.rows = data.data.map(function(row) {
-                    return { 'cell': [
-                        fmt_with_ts(row.count_all),
-                        link_to_rtype(row.rtype),
-                        highlight(row.role, query)
-                    ] };
-                });
-                return data;
+            processRow: row => {
+                return [
+                    fmt_with_ts(row.count_all),
+                    link_to_rtype(row.rtype),
+                    highlight(row.role, query)
+                ];
             }
         });
     },
@@ -103,14 +91,11 @@ const tabsConfig = {
             ],
             sortname: 'key',
             sortorder: 'asc',
-            preProcess: function(data) {
-                data.rows = data.data.map(function(row) {
-                    return { 'cell': [
-                        link_to_key(row.key),
-                        row.value ? link_to_value(row.key, row.value) : ''
-                    ] };
-                });
-                return data;
+            processRow: row => {
+                return [
+                    link_to_key(row.key),
+                    row.value ? link_to_value(row.key, row.value) : ''
+                ];
             }
         });
     }
