@@ -982,7 +982,7 @@ class DynamicTable {
         let rowNum = 0;
         for (const row of data.rows) {
             let column = 0;
-            for (const cell of row.cell) {
+            for (const cell of row) {
                 const element = this.columns[column].makeBodyElement(column, rowNum, this.columns.length);
                 element.innerHTML = cell;
                 element.addEventListener('mouseover', this.makeActive.bind(this, element));
@@ -1063,7 +1063,7 @@ class DynamicTable {
             this.controller = undefined
 
             json.rows = json.data.map(row => {
-                return { 'cell': this.config.processRow(row) };
+                return this.config.processRow(row);
             });
 
             this.display(json);
