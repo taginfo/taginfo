@@ -34,14 +34,11 @@ function fill_data(datasets, item, index) {
     });
     get_el(index, ' a.close').setAttribute('href', cl.url());
 
-    if (item.value) {
-        get_el(index, ' h2').innerHTML = link_to_tag(item.key, item.value);
-    } else {
-        get_el(index, ' h2').innerHTML = link_to_key(item.key);
-        if (item.prevalent_values) {
-            get_el(index, '.prevalent_values div b').textContent = h(texts.misc.prevalent_values) + ':';
-            get_el(index, '.prevalent_values div.data').innerHTML = fmt_prevalent_value_list(item.key, item.prevalent_values);
-        }
+    const itemObject = createKeyOrTag(item.key, item.value);
+    get_el(index, ' h2').innerHTML = itemObject.fullLink();
+    if (!item.value && item.prevalent_values) {
+        get_el(index, '.prevalent_values div b').textContent = h(texts.misc.prevalent_values) + ':';
+        get_el(index, '.prevalent_values div.data').innerHTML = fmt_prevalent_value_list(itemObject.toKey(), item.prevalent_values);
     }
 
     const descElement = get_el(index, '.description');

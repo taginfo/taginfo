@@ -14,8 +14,9 @@ const tabsConfig = {
             sortname: 'name',
             sortorder: 'asc',
             processRow: row => {
+                const project = new TaginfoProject(row.id, row.name);
                 return [
-                    hover_expand(link_to_project(row.id, row.name)),
+                    hover_expand(project.link()),
                     html_escape(row.unique_keys),
                     html_escape(row.unique_tags),
                     html_escape(row.description)
@@ -38,10 +39,11 @@ const tabsConfig = {
             sortname: 'projects',
             sortorder: 'desc',
             processRow: row => {
+                const key = new TaginfoKey(row.key);
                 return [
-                    hover_expand(link_to_key(row.key)),
-                    link_to_key_with_tab(row.key, 'projects', html_escape(row.projects)),
-                    link_to_key_with_tab(row.key, 'wiki', fmt_checkmark(row.in_wiki)),
+                    hover_expand(key.link()),
+                    key.link({tab: 'projects', content: html_escape(row.projects)}),
+                    key.link({tab: 'wiki', content: fmt_checkmark(row.in_wiki)}),
                     fmt_value_with_percent(row.count_all, row.count_all_fraction),
                 ];
             }
@@ -62,10 +64,11 @@ const tabsConfig = {
             sortname: 'projects',
             sortorder: 'desc',
             processRow: row => {
+                const tag = new TaginfoTag(row.key, row.value);
                 return [
-                    hover_expand(link_to_tag(row.key, row.value)),
-                    link_to_tag_with_tab(row.key, row.value, 'projects', html_escape(row.projects)),
-                    link_to_tag_with_tab(row.key, row.value, 'wiki', fmt_checkmark(row.in_wiki)),
+                    hover_expand(tag.fullLink({ with_asterisk: true })),
+                    tag.link({tab: 'projects', content: html_escape(row.projects)}),
+                    tag.link({tab: 'wiki', content: fmt_checkmark(row.in_wiki)}),
                     fmt_value_with_percent(row.count_all, row.count_all_fraction),
                 ];
             }

@@ -16,13 +16,14 @@ const tabsConfig = {
             sortname: 'reason',
             sortorder: 'asc',
             processRow: row => {
+                const wikiPage = new TaginfoWikiPage(row.title);
+                const keyOrTag = createKeyOrTag(row.key, row.value);
                 return [
                     row.location,
                     row.reason,
-                    link_to_wiki(row.title),
+                    wikiPage.link(),
                     row.reason == 'wrong lang format' ? '' : fmt_language(row.lang, 'auto', '', ''),
-                    row.key === null ? '' :
-                        row.value === null ? link_to_key(row.key) : link_to_tag(row.key, row.value),
+                    row.key === null ? '' : keyOrTag.fullLink({ with_asterisk: true }),
                     row.info
                 ];
             }

@@ -59,9 +59,10 @@ const tabsConfig = {
             ],
             usePager: false,
             processRow: row => {
+                const wikiPage = new TaginfoWikiPage(row.title);
                 return [
                     fmt_language(row.lang, row.dir, row.language, row.language_en),
-                    link_to_wiki(row.title),
+                    wikiPage.link(),
                     fmt_desc(row.lang, row.dir, row.description),
                     fmt_wiki_image_popup(row.image)
                 ];
@@ -82,9 +83,10 @@ const tabsConfig = {
             sortname: 'project_name',
             sortorder: 'asc',
             processRow: row => {
+                const project = new TaginfoProject(row.project_id, row.project_name);
                 return [
-                    hover_expand(link_to_project(row.project_id, row.project_name, row.project_icon_url)),
-                    project_tag_desc(row.description, row.icon_url, row.doc_url)
+                    hover_expand(project.link()),
+                    fmt_project_tag_desc(row.description, row.icon_url, row.doc_url)
                 ];
             }
         });
@@ -291,8 +293,9 @@ function page_init() {
     up = function() { window.location = build_link('/relations'); };
     activate_josm_button();
 
-    document.querySelector('h1').innerHTML += fmt_rtype(context.rtype);
-    set_inner_html_to('taglink', link_to_value('type', context.rtype));
+    const relation = new TaginfoRelation(context.rtype);
+    document.querySelector('h1').innerHTML += relation.content();
+    set_inner_html_to('taglink', relation.toTag().link());
 
     initTabs(tabsConfig, [context.rtype]);
 }

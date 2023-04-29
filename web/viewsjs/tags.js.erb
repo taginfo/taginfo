@@ -16,14 +16,15 @@ function page_init() {
         sortname: 'count_all',
         sortorder: 'desc',
         processRow: row => {
+            const tag = new TaginfoTag(row.key, row.value);
             return [
-                hover_expand(link_to_tag(row.key, row.value, {}, { 'class': 'pref' })),
+                hover_expand(tag.toKey().link() + '=' + tag.link({attrs: {'class': 'pref'}})),
                 fmt_value_with_percent(row.count_all,       row.count_all_fraction),
                 fmt_value_with_percent(row.count_nodes,     row.count_nodes_fraction),
                 fmt_value_with_percent(row.count_ways,      row.count_ways_fraction),
                 fmt_value_with_percent(row.count_relations, row.count_relations_fraction),
-                link_to_tag_with_tab(row.key, row.value, 'wiki', fmt_checkmark(row.in_wiki)),
-                link_to_tag_with_tab(row.key, row.value, 'projects', html_escape(row.projects))
+                tag.link({tab: 'wiki', content: fmt_checkmark(row.in_wiki)}),
+                tag.link({tab: 'projects', content: html_escape(row.projects)}),
             ];
         }
     }));

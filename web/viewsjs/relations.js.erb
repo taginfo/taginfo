@@ -34,10 +34,11 @@ function page_init() {
         sortname: 'count',
         sortorder: 'desc',
         processRow: row => {
+            const relation = new TaginfoRelation(row.rtype);
             return [
-                hover_expand(link_to_rtype(row.rtype)),
+                hover_expand(relation.link()),
                 fmt_value_with_percent(row.count, row.count_fraction),
-                hover_expand(link_to_tag('type', row.rtype)),
+                hover_expand(relation.toTag().link()),
                 fmt_prevalent_role_list(row.prevalent_roles)
             ];
         }

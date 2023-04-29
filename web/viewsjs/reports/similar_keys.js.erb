@@ -15,10 +15,12 @@ function page_init() {
         sortname: 'count_all_common',
         sortorder: 'desc',
         processRow: row => {
+            const commonKey = new TaginfoKey(row.key_common);
+            const rareKey = new TaginfoKey(row.key_rare);
             return [
-                    hover_expand(link_to_key(row.key_common)),
+                    hover_expand(commonKey.link()),
                     row.count_all_common,
-                    hover_expand(link_to_key(row.key_rare)),
+                    hover_expand(rareKey.link()),
                     row.count_all_rare,
                     row.similarity
             ];

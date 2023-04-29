@@ -26,9 +26,9 @@ class ChartKeysTagsRelations {
     }
 
     draw() {
-        this.fill_list('key_list', this.data.keys, (d) => link_to_key(d.text));
-        this.fill_list('tag_list', this.data.tags, (d) => link_to_tag(d[0], d[1]));
-        this.fill_list('relation_list', this.data.relations, (d) => link_to_rtype(d));
+        this.fill_list('key_list', this.data.keys, d => (new TaginfoKey(d.text)).link());
+        this.fill_list('tag_list', this.data.tags, d => (new TaginfoTag(d[0], d[1])).fullLink());
+        this.fill_list('relation_list', this.data.relations, d => (new TaginfoRelation(d)).link());
     }
 
     resize() {
@@ -87,7 +87,7 @@ class ChartTagCloud {
                     .data(words)
                     .enter()
                     .append('svg:a')
-                        .attr('xlink:href', d => url_for_key(d.text))
+                        .attr('xlink:href', d => (new TaginfoKey(d.text)).url())
                         .append('text')
                         .style('font-size', d => d.size + 'px')
                         .style('font-family', this.fontFamily)

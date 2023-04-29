@@ -38,9 +38,9 @@ const tabsConfig = {
             sortorder: 'desc',
             processRow: row => {
                 return [
-                    hover_expand(link_to_value(key, row.value)),
+                    hover_expand(key.toTag(row.value).link()),
                     fmt_value_with_percent(row.count, row.fraction),
-                    link_to_tag_with_tab(key, row.value, 'wiki', fmt_checkmark(row.in_wiki)),
+                    key.toTag(row.value).link({tab: 'wiki', content: fmt_checkmark(row.in_wiki)}),
                     fmt_desc(row.desclang, row.descdir, row.description)
                 ];
             }
@@ -61,9 +61,10 @@ const tabsConfig = {
             sortname: 'to_count',
             sortorder: 'desc',
             processRow: row => {
+                const otherKey = new TaginfoKey(row.other_key);
                 return [
                     fmt_value_with_percent(row.together_count, row.to_fraction),
-                    hover_expand(link_to_key(row.other_key)),
+                    hover_expand(otherKey.link()),
                     fmt_value_with_percent(row.together_count, row.from_fraction),
                 ];
             }
@@ -84,8 +85,9 @@ const tabsConfig = {
             sortname: 'other_key',
             sortorder: 'asc',
             processRow: row => {
+                const otherKey = new TaginfoKey(row.other_key);
                 return [
-                    hover_expand(link_to_key_with_highlight(row.other_key, key)),
+                    hover_expand(otherKey.link({ highlight: key })),
                     row.count_all,
                     row.similarity
                 ];
@@ -112,9 +114,10 @@ const tabsConfig = {
             ],
             usePager: false,
             processRow: row => {
+                const wikiPage = new TaginfoWikiPage(row.title);
                 return [
                     fmt_language(row.lang, row.dir, row.language, row.language_en),
-                    link_to_wiki(row.title),
+                    wikiPage.link(),
                     fmt_desc(row.lang, row.dir, row.description),
                     fmt_wiki_image_popup(row.image),
                     fmt_type_icon('node',     row.on_node) +
@@ -145,14 +148,16 @@ const tabsConfig = {
             sortname: 'tag',
             sortorder: 'asc',
             processRow: row => {
+                const project = new TaginfoProject(row.project_id, row.project_name);
+                const rowKeyOrTag = createKeyOrTag(row.key, row.value);
                 return [
-                    hover_expand(link_to_project(row.project_id, row.project_name)),
-                    hover_expand(row.value === null ? (link_to_key(row.key) + '=*') : link_to_tag(row.key, row.value)),
+                    hover_expand(project.link()),
+                    hover_expand(rowKeyOrTag.fullLink({ with_asterisk: true })),
                     fmt_type_icon('node',     row.on_node) +
                     fmt_type_icon('way',      row.on_way) +
                     fmt_type_icon('area',     row.on_area) +
                     fmt_type_icon('relation', row.on_relation),
-                    project_tag_desc(row.description, row.icon_url, row.doc_url)
+                    fmt_project_tag_desc(row.description, row.icon_url, row.doc_url)
                 ];
             }
         });
@@ -220,7 +225,7 @@ class ChartValues {
             .data(this.data)
             .enter()
             .append('svg:a')
-                .attr('href', d => url_for_tag(this.key, d.label))
+                .attr('href', d => this.key.toTag(d.label).url())
                 .attr('transform', d => 'translate(10, ' + scale(d['y']) + ')')
                 .call(function(c) {
                     c.append('rect')
@@ -255,9 +260,11 @@ function page_init() {
         window.location.search = new URLSearchParams({ 'filter': element.target.value });
     });
 
-    document.querySelector('h1').innerHTML = fmt_key(context.key);
+    const key = new TaginfoKey(context.key);
+
+    document.querySelector('h1').innerHTML = key.content();
 
     new ComparisonListDisplay(context.key);
 
-    initTabs(tabsConfig, [context.key, filter.value, context.lang]);
+    initTabs(tabsConfig, [key, filter.value, context.lang]);
 }

@@ -2,7 +2,8 @@ function page_init() {
     up = function() { window.location = build_link('/reports'); };
 
     document.querySelectorAll('.keyimg').forEach(function(element, index) {
-        element.setAttribute('href', url_for_key(context.keys[index]));
-        element.textContent = fmt_key(context.keys[index]).replaceAll(':', '\u200b:');
+        const key = new TaginfoKey(context.keys[index]);
+        element.setAttribute('href', key.url());
+        element.textContent = key.content().replaceAll(':', '\u200b:');
     });
 }

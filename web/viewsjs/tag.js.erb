@@ -1,13 +1,3 @@
-function link_to_key_or_tag(key, value) {
-    let link = link_to_key(key) + '=';
-    if (value && value != '') {
-        link += link_to_value(key, value, { 'class': 'pref' });
-    } else {
-        link += '*';
-    }
-    return link;
-}
-
 const tabsConfig = {
     overview: function(key, value, filter_type) {
         return new DynamicTable('grid-overview', {
@@ -41,9 +31,10 @@ const tabsConfig = {
             sortname: 'to_count',
             sortorder: 'desc',
             processRow: row => {
+                const other = createKeyOrTag(row.other_key, row.other_value);
                 return [
                     fmt_value_with_percent(row.together_count, row.to_fraction),
-                    hover_expand(link_to_key_or_tag(row.other_key, row.other_value)),
+                    hover_expand(other.fullLink({ with_asterisk: true })),
                     fmt_value_with_percent(row.together_count, row.from_fraction),
                 ];
             }
@@ -72,9 +63,10 @@ const tabsConfig = {
             ],
             usePager: false,
             processRow: row => {
+                const wikiPage = new TaginfoWikiPage(row.title);
                 return [
                     fmt_language(row.lang, row.dir, row.language, row.language_en),
-                    link_to_wiki(row.title),
+                    wikiPage.link(),
                     fmt_desc(row.lang, row.dir, row.description),
                     fmt_wiki_image_popup(row.image),
                     fmt_type_icon('node',     row.on_node) +
@@ -105,14 +97,16 @@ const tabsConfig = {
             sortname: 'tag',
             sortorder: 'asc',
             processRow: row => {
+                const project = new TaginfoProject(row.project_id, row.project_name);
+                const rowKeyOrTag = createKeyOrTag(row.key, row.value);
                 return [
-                    hover_expand(link_to_project(row.project_id, row.project_name)),
-                    hover_expand(row.value === null ? (link_to_key(row.key) + '=*') : link_to_tag(row.key, row.value)),
+                    hover_expand(project.link()),
+                    hover_expand(rowKeyOrTag.fullLink({ with_asterisk: true })),
                     fmt_type_icon('node',     row.on_node) +
                     fmt_type_icon('way',      row.on_way) +
                     fmt_type_icon('area',     row.on_area) +
                     fmt_type_icon('relation', row.on_relation),
-                    project_tag_desc(row.description, row.icon_url, row.doc_url)
+                    fmt_project_tag_desc(row.description, row.icon_url, row.doc_url)
                 ];
             }
         });
@@ -130,13 +124,15 @@ function page_init() {
         window.location.search = new URLSearchParams({ 'filter': element.target.value });
     });
 
-    up = function() { window.location = url_for_key(context.key); };
-    document.querySelector('h1').innerHTML = link_to_key(context.key) + '=' + fmt_value(context.value);
+    const key = new TaginfoKey(context.key);
+
+    up = function() { window.location = key.url(); };
+    document.querySelector('h1').innerHTML = key.link() + '=' + key.toTag(context.value).content();
 
     new ComparisonListDisplay(context.key, context.value);
 
-    set_inner_html_to('keylink', link_to_key(context.key));
-    set_inner_html_to('relationlink', link_to_rtype(context.value));
+    set_inner_html_to('keylink', key.link());
+    set_inner_html_to('relationlink', (new TaginfoRelation(context.value)).link());
 
     initTabs(tabsConfig, [context.key, context.value, filter.value]);
 }

@@ -26,7 +26,8 @@ function page_init() {
         sortorder: 'asc',
         processRow: row => {
             let d = new Array(1 + context.languages.length);
-            d[0] = hover_expand(link_to_key(row.key));
+            const key = new TaginfoKey(row.key);
+            d[0] = hover_expand(key.link());
             d = d.fill('', 1, context.languages.length + 1);
             for (const lang in row.lang) {
                 ptype = row.lang[lang];

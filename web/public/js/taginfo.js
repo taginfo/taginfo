@@ -4,6 +4,10 @@ var tabs = null,
     autocomplete = null,
     up = function() { window.location = build_link('/'); };
 
+const bad_chars_for_url = /[.=\/]/;
+const bad_chars_for_keys = '!"#$%&()*+,/;<=>?@[\\]^`{|}~' + "'";
+const non_printable = "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u0009\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f\u0080\u0081\u0082\u0083\u0084\u0085\u0086\u0087\u0088\u0089\u008a\u008b\u008c\u008d\u008f\u0090\u0091\u0092\u0093\u0094\u0095\u0096\u0097\u0098\u0099\u009a\u009b\u009c\u009d\u009f\u200e\u200f";
+
 const context = JSON.parse(document.getElementById('context').textContent);
 
 /* ============================ */
@@ -50,7 +54,246 @@ class WidgetManager {
     }
 } // class WidgetManager
 
-let widgetManager = new WidgetManager();
+const widgetManager = new WidgetManager();
+
+/* ============================ */
+
+class TaginfoObject {
+    instance;
+    path = '';
+    params = {};
+    tab;
+
+    constructor(inst = context.instance) {
+        this.instance = inst;
+    }
+
+    url() {
+        let url = build_link_with_prefix(this.instance, this.path, this.params);
+        if (this.tab) {
+            url += '#' + this.tab;
+        }
+        return url;
+    }
+
+    link(params = {}) {
+        if (params.tab) {
+            this.tab = params.tab;
+        }
+        let content;
+        if (params.highlight) {
+            content = highlight(params.content || this.toString(), params.highlight);
+        } else {
+            content = params.content || this.content();
+        }
+        return link(this.url(), content, params.attrs);
+    }
+
+} // class TaginfoObject
+
+class TaginfoKey extends TaginfoObject {
+
+    constructor(key, instance) {
+        super(instance);
+        this.key = key;
+
+        if (key.match(bad_chars_for_url)) {
+            this.path = '/keys/';
+            this.params = {key: key};
+        } else {
+            this.path = '/keys/' + encodeURIComponent(key);
+        }
+    }
+
+    toString() {
+        return this.key;
+    }
+
+    content() {
+        if (this.key == '') {
+            return span(texts.misc.empty_string, 'badchar empty');
+        }
+
+        return translate(this.key, function(c) {
+            if (bad_chars_for_keys.indexOf(c) != -1) {
+                return span(c, 'badchar');
+            } else if (non_printable.indexOf(c) != -1) {
+                return span("\ufffd", 'badchar');
+            } else if (c == ' ') {
+                return span('&#x2423;', 'badchar');
+            } else if (c.match(/\s/)) {
+                return span('&nbsp;', 'whitespace');
+            } else {
+                return c;
+            }
+        });
+    }
+
+    toKey() {
+        return this;
+    }
+
+    toTag(value) {
+        return new TaginfoTag(this.key, value, this.instance);
+    }
+
+    fullLink(params = {}) {
+        if (params.with_asterisk) {
+            return this.link(params) + '=*';
+        }
+        return this.link(params);
+    }
+
+} // class TaginfoKey
+
+class TaginfoTag extends TaginfoObject {
+
+    constructor(key, value, instance) {
+        super(instance);
+        this.key = key;
+        this.value = value;
+
+        if (key.match(bad_chars_for_url) || value.match(bad_chars_for_url)) {
+            this.path = '/tags/';
+            this.params = {key: key, value: value};
+        } else {
+            const k = encodeURIComponent(this.key);
+            const v = encodeURIComponent(this.value);
+            this.path = '/tags/' + k + '=' + v;
+        }
+    }
+
+    toString() {
+        return this.value;
+    }
+
+    content() {
+        if (this.value == '') {
+            return span(texts.misc.empty_string, 'badchar empty');
+        }
+
+        return html_escape(this.value)
+                .replace(/ /g, '&#x2423;')
+                .replace(/\s/g, span('&nbsp;', 'whitespace'));
+    }
+
+    toKey() {
+        return new TaginfoKey(this.key, this.instance);
+    }
+
+    fullLink(params = {}) {
+        return this.toKey().link(params) + '=' + this.link(params);
+    }
+
+} // class TaginfoTag
+
+function createKeyOrTag(key, value) {
+    if (value === null || value === undefined || value == '') {
+        return new TaginfoKey(key);
+    }
+    return new TaginfoTag(key, value);
+}
+
+class TaginfoRelation extends TaginfoObject {
+
+    constructor(rtype, instance) {
+        super(instance);
+        this.rtype = rtype;
+
+        if (rtype.match(bad_chars_for_url)) {
+            this.path = '/relations/';
+            this.params = {rtype: rtype};
+        } else {
+            this.path = '/relations/' + encodeURIComponent(rtype);
+        }
+    }
+
+    toString() {
+        return this.rtype;
+    }
+
+    content() {
+        if (this.rtype == '') {
+            return span(texts.misc.empty_string, 'badchar empty');
+        }
+
+        return translate(this.rtype, function(c) {
+            if (c == ' ') {
+                return span('&#x2423;', 'badchar');
+            } else if (c.match(/\s/)) {
+                return span('&nbsp;', 'whitespace');
+            } else if (c.match(/[a-zA-Z0-9_:]/)) {
+                return c;
+            } else {
+                return span(c, 'badchar');
+            }
+        });
+    }
+
+    toTag() {
+        return new TaginfoTag('type', this.rtype, this.instance);
+    }
+
+} // class TaginfoRelation
+
+class TaginfoProject {
+    id;
+    name;
+
+    constructor(id, name) {
+        this.id = id;
+        this.name = name
+    }
+
+    url() {
+        return build_link('/projects/' + encodeURIComponent(this.id));
+    }
+
+    iconURL() {
+        return build_link('/api/4/project/icon', { project: this.id });
+    }
+
+    img(size) {
+        return img({ src: this.iconURL(), width: size, height: size, alt: '' });
+    }
+
+    link() {
+        return this.img(16) + ' ' + link(this.url(), html_escape(this.name));
+    }
+
+} // class TaginfoProject
+
+class TaginfoWikiPage {
+    title = '';
+
+    constructor(title) {
+        this.title = title;
+    }
+
+    url(options) {
+        let path = '//wiki.openstreetmap.org/';
+
+        if (options && options.edit) {
+            path += 'w/index.php?action=edit&title=';
+        } else {
+            path += 'wiki/';
+        }
+
+        return path + encodeURIComponent(this.title);
+    }
+
+    link(options) {
+        if (this.title == '') {
+            return '';
+        }
+
+        return link(this.url(options),
+            html_escape(this.title),
+            { target: '_blank', 'class': 'extlink' }
+        );
+    }
+
+} // class TaginfoWikiPage
 
 /* ============================ */
 
@@ -109,56 +352,7 @@ function build_link(...args) {
     return build_link_with_prefix(context.instance, ...args);
 }
 
-const bad_chars_for_url = /[.=\/]/;
-
-function url_for_key(key) {
-    const k = encodeURIComponent(key);
-    if (key.match(bad_chars_for_url)) {
-        return build_link('/keys/?key=' + k);
-    } else {
-        return build_link('/keys/' + k);
-    }
-}
-
-function url_for_tag(key, value) {
-    const k = encodeURIComponent(key);
-    const v = encodeURIComponent(value);
-    if (key.match(bad_chars_for_url) || value.match(bad_chars_for_url)) {
-        return build_link('/tags/?key=' + k + '&value=' + v);
-    } else {
-        return build_link('/tags/' + k + '=' + v);
-    }
-}
-
-function url_for_rtype(rtype) {
-    const t = encodeURIComponent(rtype);
-    if (rtype.match(bad_chars_for_url)) {
-        return build_link('/relations/?rtype=' + t);
-    } else {
-        return build_link('/relations/' + t);
-    }
-}
-
-function url_for_project(id) {
-    return build_link('/projects/' + encodeURIComponent(id));
-}
-
-function url_for_wiki(title, options) {
-    let path = '//wiki.openstreetmap.org/';
-
-    if (options && options.edit) {
-        path += 'w/index.php?action=edit&title=';
-    } else {
-        path += 'wiki/';
-    }
-
-    return path + encodeURIComponent(title);
-}
-
 /* ============================ */
-
-const bad_chars_for_keys = '!"#$%&()*+,/;<=>?@[\\]^`{|}~' + "'";
-const non_printable = "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u0009\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f\u0080\u0081\u0082\u0083\u0084\u0085\u0086\u0087\u0088\u0089\u008a\u008b\u008c\u008d\u008f\u0090\u0091\u0092\u0093\u0094\u0095\u0096\u0097\u0098\u0099\u009a\u009b\u009c\u009d\u009f\u200e\u200f";
 
 function translate(str, fn) {
     let result = '';
@@ -170,206 +364,23 @@ function translate(str, fn) {
     return result;
 }
 
-function fmt_desc(lang, dir, desc) {
-    if (desc === null) {
-        return '';
-    }
-    return '<span lang="' + lang + '" dir="' + dir + '">' + html_escape(desc) + '</span>';
-}
-
-function fmt_status(status) {
-    if (status === null) {
-        return '';
-    }
-    return html_escape(status);
-}
-
-function fmt_key(key) {
-    if (key == '') {
-        return span(texts.misc.empty_string, 'badchar empty');
-    }
-
-    return translate(key, function(c) {
-        if (bad_chars_for_keys.indexOf(c) != -1) {
-            return span(c, 'badchar');
-        } else if (non_printable.indexOf(c) != -1) {
-            return span("\ufffd", 'badchar');
-        } else if (c == ' ') {
-            return span('&#x2423;', 'badchar');
-        } else if (c.match(/\s/)) {
-            return span('&nbsp;', 'whitespace');
-        } else {
-            return c;
-        }
-    });
-}
-
-function fmt_value(value) {
-    if (value == '') {
-        return span(texts.misc.empty_string, 'badchar empty');
-    }
-
-    return html_escape(value)
-            .replace(/ /g, '&#x2423;')
-            .replace(/\s/g, span('&nbsp;', 'whitespace'));
-}
-
-function fmt_rtype(rtype) {
-    if (rtype == '') {
-        return span(texts.misc.empty_string, 'badchar empty');
-    }
-
-    return translate(rtype, function(c) {
-        if (c == ' ') {
-            return span('&#x2423;', 'badchar');
-        } else if (c.match(/\s/)) {
-            return span('&nbsp;', 'whitespace');
-        } else if (c.match(/[a-zA-Z0-9_:]/)) {
-            return c;
-        } else {
-            return span(c, 'badchar');
-        }
-    });
-}
-
-function fmt_role(role) {
-    if (role == '') {
-        return span(texts.misc.empty_string, 'empty');
-    }
-
-    return translate(role, function(c) {
-        if (bad_chars_for_keys.indexOf(c) != -1) {
-            return span(c, 'badchar');
-        } else if (c == ' ') {
-            return span('&#x2423;', 'badchar');
-        } else if (c.match(/\s/)) {
-            return span('&nbsp;', 'whitespace');
-        } else {
-            return c;
-        }
-    });
-}
-
-/* ============================ */
-
-function link_to_key(key, attr) {
-    return link(
-        url_for_key(key),
-        fmt_key(key),
-        attr
-    );
-}
-
-function link_to_key_with_tab(key, tab, text) {
-    return link(
-        url_for_key(key) + '#' + tab,
-        text
-    );
-}
-
-function link_to_tag_with_tab(key, value, tab, text) {
-    return link(
-        url_for_tag(key, value) + '#' + tab,
-        text
-    );
-}
-
-function link_to_value(key, value, attr) {
-    return link(
-        url_for_tag(key, value),
-        fmt_value(value),
-        attr
-    );
-}
-
-function link_to_tag(key, value, key_attr, value_attr) {
-    return link_to_key(key, key_attr) + '=' + link_to_value(key, value, value_attr);
-}
-
-function link_to_rtype(rtype, attr) {
-    return link(
-        url_for_rtype(rtype),
-        fmt_rtype(rtype),
-        attr
-    );
-}
-
-function link_to_project(id, name) {
-    icon_url = build_link('/api/4/project/icon', { project: id });
-    return img({ src: icon_url, width: 16, height: 16, alt: '' }) + ' ' + link(
-        url_for_project(id),
-        html_escape(name)
-    );
-}
-
-function link_to_wiki(title, options) {
-    if (title == '') {
-        return '';
-    }
-
-    return link(
-        url_for_wiki(title, options),
-        html_escape(title),
-        { target: '_blank', 'class': 'extlink' }
-    );
-}
-
-function link_to_url(url) {
-    return link(
-        encodeURI(url),
-        html_escape(url.replace(/^http:\/\//, '')),
-        { target: '_blank', 'class': 'extlink' }
-    );
-}
-
-function link_to_url_nofollow(url) {
-    return link(
-        encodeURI(url),
-        html_escape(url.replace(/^http:\/\//, '')),
-        { target: '_blank', 'class': 'extlink', 'rel': 'nofollow' }
-    );
-}
-
-function highlight(str, query) {
-    return html_escape(str).replace(new RegExp('(' + html_escape(query) + ')', 'gi'), "<b>$1</b>");
-}
-
-function link_to_key_with_highlight(key, query) {
-    return link(
-        url_for_key(key),
-        highlight(key, query)
-    );
-}
-
-function link_to_value_with_highlight(key, value, query) {
-    return link(
-        url_for_tag(key, value),
-        highlight(value, query)
-    );
-}
-
-function link_to_rtype_with_highlight(rtype, query) {
-    return link(
-        url_for_rtype(rtype),
-        highlight(rtype, query)
-    );
-}
-
-/* ============================ */
-
-function set_inner_html_to(id, html) {
-    const element = document.getElementById(id);
-    if (element) {
-        element.innerHTML = html;
-    }
-}
-
 function html_escape(text) {
     return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 function h(text) {
     return html_escape(text);
+}
+
+function highlight(str, query) {
+    return html_escape(str).replace(new RegExp('(' + html_escape(query) + ')', 'gi'), "<b>$1</b>");
+}
+
+function set_inner_html_to(id, html) {
+    const element = document.getElementById(id);
+    if (element) {
+        element.innerHTML = html;
+    }
 }
 
 function tag(element, text, attrs) {
@@ -422,6 +433,38 @@ function hover_expand(text) {
 
 /* ============================ */
 
+function fmt_desc(lang, dir, desc) {
+    if (desc === null) {
+        return '';
+    }
+    return '<span lang="' + lang + '" dir="' + dir + '">' + html_escape(desc) + '</span>';
+}
+
+function fmt_status(status) {
+    if (status === null) {
+        return '';
+    }
+    return html_escape(status);
+}
+
+function fmt_role(role) {
+    if (role == '') {
+        return span(texts.misc.empty_string, 'empty');
+    }
+
+    return translate(role, function(c) {
+        if (bad_chars_for_keys.indexOf(c) != -1) {
+            return span(c, 'badchar');
+        } else if (c == ' ') {
+            return span('&#x2423;', 'badchar');
+        } else if (c.match(/\s/)) {
+            return span('&nbsp;', 'whitespace');
+        } else {
+            return c;
+        }
+    });
+}
+
 function fmt_wiki_image_popup(image) {
     if (! image.title) {
         return empty(texts.misc.no_image);
@@ -438,7 +481,8 @@ function fmt_wiki_image_popup(image) {
         url = image.image_url;
     }
 
-    return tag('div', hover_expand(link_to_wiki(image.title)), {
+    const wikiPage = new TaginfoWikiPage(image.title);
+    return tag('div', hover_expand(wikiPage.link()), {
         'data-tooltip-position': 'OnTop',
         title: html_escape(img({ src: url }))
     });
@@ -564,10 +608,9 @@ function fmt_key_or_tag_list(list) {
     return list.map(function(tag) {
         if (tag.match(/=/)) {
             const el = tag.split('=', 2);
-            return link_to_tag(el[0], el[1]);
-        } else {
-            return link_to_key(tag);
+            return (new TaginfoTag(el[0], el[1])).fullLink();
         }
+        return (new TaginfoKey(tag)).link();
     }).join(' &bull; ');
 }
 
@@ -575,9 +618,25 @@ function fmt_prevalent_value_list(key, list) {
     if (list.length == 0) {
         return empty(texts.misc.values_less_than_one_percent);
     }
-    return list.map(function(item) {
-        return link_to_value(key, item.value, { 'data-tooltip-position': 'OnLeft', title: fmt_as_percent(item.fraction) });
-    }).join(' &bull; ');
+    return list.map(
+        item => key.toTag(item.value).link({
+            attrs: { 'data-tooltip-position': 'OnLeft', title: fmt_as_percent(item.fraction) }
+        })
+    ).join(' &bull; ');
+}
+
+function fmt_project_tag_desc(description, icon, url) {
+    let out = '';
+    if (icon) {
+        out += img({src: icon, alt: '', style: 'max-width: 16px; max-height: 16px;'}) + ' ';
+    }
+    if (description) {
+        out += html_escape(description) + ' ';
+    }
+    if (url) {
+        out += '[' + link(url, 'More...', { target: '_blank', 'class': 'extlink' }) + ']';
+    }
+    return out;
 }
 
 /* ============================ */
@@ -1335,6 +1394,8 @@ function initTabs(config, params) {
     }
 }
 
+/* ============================ */
+
 function createCharactersTable(string) {
     return new DynamicTable('grid-characters', {
         url: '/api/4/unicode/characters',
@@ -1350,7 +1411,7 @@ function createCharactersTable(string) {
         processRow: row => {
             return [
                 row.char,
-                link('https://decodeunicode.org/' + fmt_unicode_code_point(row.codepoint), fmt_unicode_code_point(row.codepoint), { target: '_blank', title: 'decodeunicode.org' }),
+                link('https://decodeunicode.org/' + fmt_unicode_code_point(row.codepoint), fmt_unicode_code_point(row.codepoint), { target: '_blank', title: 'decodeunicode.org', class: 'extlink' }),
                 fmt_unicode_script(row.script, row.script_name),
                 fmt_unicode_general_category(row.category),
                 row.name
@@ -1486,22 +1547,6 @@ function activate_josm_button() {
             alert("Problem contacting JOSM. Is it running? Is remote control activated?");
         }
     });
-}
-
-/* ============================ */
-
-function project_tag_desc(description, icon, url) {
-    let out = '';
-    if (icon) {
-        out += img({src: icon, alt: '', style: 'max-width: 16px; max-height: 16px;'}) + ' ';
-    }
-    if (description) {
-        out += html_escape(description) + ' ';
-    }
-    if (url) {
-        out += '[' + link(url, 'More...', { target: '_blank', 'class': 'extlink' }) + ']';
-    }
-    return out;
 }
 
 /* ============================ */

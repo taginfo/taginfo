@@ -15,14 +15,16 @@ function page_init() {
         processRow: row => {
             let wikilinks = [];
             for (wikipage of row.wikipages) {
-                let w = link_to_wiki(wikipage.title);
+                const wikiPage = new TaginfoWikiPage(wikipage.title);
+                let w = wikiPage.link();
                 if (wikipage.type == 'redirect') {
                     w += ' (REDIRECT)';
                 }
                 wikilinks.push(w);
             }
+            const key = new TaginfoKey(row.key);
             return [
-                hover_expand(link_to_key(row.key)),
+                hover_expand(key.link()),
                 wikilinks.join(' &nbsp;&bull;&nbsp; ')
             ];
         }
