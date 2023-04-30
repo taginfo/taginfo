@@ -207,7 +207,7 @@ class Taginfo < Sinatra::Base
 
         expires next_update
         content_type 'text/javascript'
-        'const texts = ' + JSON.generate(trans, { indent: ' ', object_nl:"\n" }) + ';'
+        'const texts = ' + JSON.generate(trans, { indent: '  ', object_nl:"\n" }) + ';'
     end
 
     get %r{/js/([a-z][a-z](-[a-zA-Z]+)?)/(.*).js} do |lang, _, js|
