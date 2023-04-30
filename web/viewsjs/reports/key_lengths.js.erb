@@ -1,8 +1,4 @@
 <%
-    osm = @trans.t.osm
-    misc = @trans.t.misc
-    page = @trans.t.reports.key_lengths
-
     hist = []
     max_length = 60
     @db.execute("SELECT min(length(key), #{ max_length }) AS length, count(*) AS count FROM db.keys GROUP BY 1 ORDER BY 1") do |row|
@@ -53,7 +49,7 @@ class ChartKeyLengthHistogram {
                 .attr('x', width / 2)
                 .attr('y', 36)
                 .style('text-anchor', 'middle')
-                .text('<%= page.histogram.key_length %>');
+                .text(h(texts.reports.key_lengths.histogram.key_length));
 
         chart.append('g')
             .attr('class', 'y axis')
@@ -64,7 +60,7 @@ class ChartKeyLengthHistogram {
                 .attr('x', -height / 2)
                 .attr('y', -50)
                 .style('text-anchor', 'middle')
-                .text('<%= page.histogram.number_of_keys %>');
+                .text(h(texts.reports.key_lengths.histogram.number_of_keys));
 
         chart.selectAll('rect')
             .data(this.data)
@@ -103,15 +99,15 @@ const tabsConfig = {
             url: '/api/4/keys/all',
             params: { include: 'prevalent_values' },
             colModel: [
-                { display: '<%= h(misc.length) %>', name: 'length', width: 60, sortable: true, align: 'right' },
-                { display: '<%= h(osm.key) %>', name: 'key', width: 180, sortable: true },
-                { display: '<img src="/img/types/all.svg" width="16" height="16" alt=""/> <%= h(osm.objects) %>', name: 'count_all', width: 200, sortable: true, align: 'center', title: '<%= h(misc.objects_tooltip) %>' },
-                { display: '<%= h(@trans.t.taginfo.wiki) %>', name: 'in_wiki', width: 20, sortable: true, align: 'center', title: '<%= h(misc.in_wiki_tooltip) %>' },
-                { display: '<%= h(osm.values) %>', name: 'values_all', width: 70, sortable: true, align: 'right', title: '<%= h(misc.values_tooltip) %>' },
-                { display: '<%= h(misc.prevalent_values) %>', name: 'prevalent_values', width: 550, title: '<%= h(misc.prevalent_values_tooltip) %>' }
+                { display: h(texts.misc.length), name: 'length', width: 60, sortable: true, align: 'right' },
+                { display: h(texts.osm.key), name: 'key', width: 180, sortable: true },
+                { display: '<img src="/img/types/all.svg" width="16" height="16" alt=""/> ' + h(texts.osm.objects), name: 'count_all', width: 200, sortable: true, align: 'center', title: h(texts.misc.objects_tooltip) },
+                { display: h(texts.taginfo.wiki), name: 'in_wiki', width: 20, sortable: true, align: 'center', title: h(texts.misc.in_wiki_tooltip) },
+                { display: h(texts.osm.values), name: 'values_all', width: 70, sortable: true, align: 'right', title: h(texts.misc.values_tooltip) },
+                { display: h(texts.misc.prevalent_values), name: 'prevalent_values', width: 550, title: h(texts.misc.prevalent_values_tooltip) }
             ],
             searchitems: [
-                { display: '<%= h(osm.key) %>', name: 'key' }
+                { display: h(texts.osm.key), name: 'key' }
             ],
             sortname: 'length',
             sortorder: 'asc',

@@ -1,18 +1,14 @@
-<%
-    osm = @trans.t.osm
-    page = @trans.t.reports.wiki_pages_about_non_existing_keys
- %>
 function page_init() {
     up = function() { window.location = build_link('/reports'); };
     widgetManager.addWidget(createDynamicTable('grid-keys', {
         url: '/api/4/keys/all',
         params: { filter: 'in_wiki,not_in_db', include: 'wikipages' },
         colModel: [
-            { display: '<%= h(osm.key) %>', name: 'key', width: 250, sortable: true, align: 'left' },
-            { display: '<%= h(page.wiki_pages) %>', name: 'wikipages', width: 600, sortable: false, align: 'left' }
+            { display: h(texts.osm.key), name: 'key', width: 250, sortable: true },
+            { display: h(texts.reports.wiki_pages_about_non_existing_keys.wiki_pages), name: 'wikipages', width: 600 }
         ],
         searchitems: [
-            { display: '<%= h(osm.key) %>', name: 'key' }
+            { display: h(texts.osm.key), name: 'key' }
         ],
         sortname: 'count_all',
         sortorder: 'desc',

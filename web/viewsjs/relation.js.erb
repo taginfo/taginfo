@@ -1,17 +1,11 @@
-<%
-    osm = @trans.t.osm
-    misc = @trans.t.misc
-    taginfo = @trans.t.taginfo
-    page = @trans.t.pages.relation
- %>
 const tabsConfig = {
     overview: function(rtype) {
         return new DynamicTable('grid-overview', {
             url: '/api/4/relation/stats',
             params: { rtype: rtype },
             colModel: [
-                { display: '<%= h(page.overview.member_type) %>', name: 'type', width: 100, sortable: true },
-                { display: '<%= h(page.overview.member_count) %>', name: 'count', width: 260, sortable: true, align: 'right' }
+                { display: h(texts.pages.relation.overview.member_type), name: 'type', width: 100, sortable: true },
+                { display: h(texts.pages.relation.overview.member_count), name: 'count', width: 260, sortable: true, align: 'right' }
             ],
             usePager: false,
             processRow: row => {
@@ -27,14 +21,14 @@ const tabsConfig = {
             url: '/api/4/relation/roles',
             params: { rtype: rtype },
             colModel: [
-                { display: '<%= h(osm.relation_member_role) %>', name: 'role', width: 250, sortable: true },
-                { display: '<img src="/img/types/all.svg" width="16" height="16" alt=""/> <%= h(osm.relation_members) %>', name: 'count_all_members', width: 250, sortable: true, align: 'center', title: '<%= h(page.roles.objects_tooltip) %>' },
-                { display: '<img src="/img/types/node.svg" width="16" height="16" alt=""/> <%= h(osm.relation_member_nodes) %>', name: 'count_node_members', width: 250, sortable: true, align: 'center', title: '<%= h(page.roles.nodes_tooltip) %>' },
-                { display: '<img src="/img/types/way.svg" width="16" height="16" alt=""/> <%= h(osm.relation_member_ways) %>', name: 'count_way_members', width: 250, sortable: true, align: 'center', title: '<%= h(page.roles.ways_tooltip) %>' },
-                { display: '<img src="/img/types/relation.svg" width="16" height="16" alt=""/> <%= h(osm.relation_member_relations) %>', name: 'count_relation_members', width: 250, sortable: true, align: 'center', title: '<%= h(page.roles.relations_tooltip) %>' },
+                { display: h(texts.osm.relation_member_role), name: 'role', width: 250, sortable: true },
+                { display: '<img src="/img/types/all.svg" width="16" height="16" alt=""/> ' + h(texts.osm.relation_members), name: 'count_all_members', width: 250, sortable: true, align: 'center', title: h(texts.pages.relation.roles.objects_tooltip) },
+                { display: '<img src="/img/types/node.svg" width="16" height="16" alt=""/> ' + h(texts.osm.relation_member_nodes), name: 'count_node_members', width: 250, sortable: true, align: 'center', title: h(texts.pages.relation.roles.nodes_tooltip) },
+                { display: '<img src="/img/types/way.svg" width="16" height="16" alt=""/> ' + h(texts.osm.relation_member_ways), name: 'count_way_members', width: 250, sortable: true, align: 'center', title: h(texts.pages.relation.roles.ways_tooltip) },
+                { display: '<img src="/img/types/relation.svg" width="16" height="16" alt=""/> ' + h(texts.osm.relation_member_relations), name: 'count_relation_members', width: 250, sortable: true, align: 'center', title: h(texts.pages.relation.roles.relations_tooltip) },
             ],
             searchitems: [
-                { display: '<%= h(osm.relation_member_role) %>', name: 'role' }
+                { display: h(texts.osm.relation_member_role), name: 'role' }
             ],
             sortname: 'count_all_members',
             sortorder: 'desc',
@@ -47,7 +41,7 @@ const tabsConfig = {
                     fmt_value_with_percent(row.count_relation_members, row.count_relation_members_fraction)
                 ];
             },
-            empty: '<%= h(t.pages.relation.roles.no_roles_info) %>'
+            empty: h(texts.pages.relation.roles.no_roles_info)
         });
     },
     graph: function(rtype) {
@@ -58,10 +52,10 @@ const tabsConfig = {
             url: '/api/4/relation/wiki_pages',
             params: { rtype: rtype },
             colModel: [
-                { display: '<%= h(misc.language) %>', name: 'lang', width: 150, sortable: false },
-                { display: '<%= h(page.wiki_pages.wiki_page) %>', name: 'title', width: 160, sortable: false, align: 'right' },
-                { display: '<%= h(misc.description) %>', name: 'description', width: 500, sortable: false },
-                { display: '<%= h(misc.image) %>', name: 'image', width: 300, sortable: false }
+                { display: h(texts.misc.language), name: 'lang', width: 150, sortable: false },
+                { display: h(texts.pages.relation.wiki_pages.wiki_page), name: 'title', width: 160, sortable: false, align: 'right' },
+                { display: h(texts.misc.description), name: 'description', width: 500, sortable: false },
+                { display: h(texts.misc.image), name: 'image', width: 300, sortable: false }
             ],
             usePager: false,
             processRow: row => {
@@ -79,11 +73,11 @@ const tabsConfig = {
             url: '/api/4/relation/projects',
             params: { rtype: rtype },
             colModel: [
-                { display: '<%= h(taginfo.project) %>', name: 'project_name', width: 280, sortable: true },
-                { display: '<%= h(page.projects.description) %>', name: 'description', width: 600, sortable: false, align: 'left' }
+                { display: h(texts.taginfo.project), name: 'project_name', width: 280, sortable: true },
+                { display: h(texts.pages.relation.projects.description), name: 'description', width: 600, sortable: false, align: 'left' }
             ],
             searchitems: [
-                { display: '<%= h(taginfo.project) %>/<%= h(osm.value) %>', name: 'project_value' }
+                { display: h(texts.taginfo.project) + '/' + h(texts.osm.value), name: 'project_value' }
             ],
             sortname: 'project_name',
             sortorder: 'asc',

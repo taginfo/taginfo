@@ -1,5 +1,4 @@
 <%
-    misc = @trans.t.misc
     lang = r18n.locale.code || 'en'
 %>
 function page_init() {
@@ -43,7 +42,7 @@ function fill_data(datasets, item, index) {
     } else {
         get_el(index, ' h2').innerHTML = link_to_key(item.key);
         if (item.prevalent_values) {
-            get_el(index, '.prevalent_values div b').textContent = '<%= h(misc.prevalent_values) %>:';
+            get_el(index, '.prevalent_values div b').textContent = h(texts.misc.prevalent_values) + ':';
             get_el(index, '.prevalent_values div.data').innerHTML = fmt_prevalent_value_list(item.key, item.prevalent_values);
         }
     }

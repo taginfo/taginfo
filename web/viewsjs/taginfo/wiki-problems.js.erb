@@ -1,7 +1,3 @@
-<%
-    osm = @trans.t.osm
-    misc = @trans.t.misc
- %>
 const tabsConfig = {
     list: function() {
         return new DynamicTable('grid-wiki-problems', {
@@ -10,8 +6,8 @@ const tabsConfig = {
                 { display: 'Location', name: 'location', width: 200, sortable: true },
                 { display: 'Reason', name: 'reason', width: 240, sortable: true },
                 { display: 'Wiki page', name: 'title', width: 180, sortable: true },
-                { display: '<%= h(misc.language) %>', name: 'lang', width: 50, sortable: true },
-                { display: '<%= h(osm.tag) %>', name: 'tag', width: 150, sortable: true },
+                { display: h(texts.misc.language), name: 'lang', width: 50, sortable: true },
+                { display: h(texts.osm.tag), name: 'tag', width: 150, sortable: true },
                 { display: 'Additional info', name: 'info', width: 240, sortable: false },
             ],
             searchitems: [

@@ -3,13 +3,13 @@ const tabsConfig = {
         return new DynamicTable('grid-projects', {
             url: '/api/4/projects/all',
             colModel: [
-                { display: '<%= h(@trans.t.taginfo.project) %>', name: 'name', width: 400, sortable: true },
-                { display: '<%= h(@trans.t.osm.keys) %>', name: 'unique_keys', width: 40, sortable: true, align: 'right' },
-                { display: '<%= h(@trans.t.osm.tags) %>', name: 'unique_tags', width: 40, sortable: true, align: 'right' },
-                { display: '<%= h(@trans.t.misc.description) %>', name: 'description', width: 800, sortable: false }
+                { display: h(texts.taginfo.project), name: 'name', width: 400, sortable: true },
+                { display: h(texts.osm.keys), name: 'unique_keys', width: 40, sortable: true, align: 'right' },
+                { display: h(texts.osm.tags), name: 'unique_tags', width: 40, sortable: true, align: 'right' },
+                { display: h(texts.misc.description), name: 'description', width: 800, sortable: false }
             ],
             searchitems: [
-                { display: '<%= h(@trans.t.taginfo.project) %>/<%= h(@trans.t.misc.description) %>', name: 'name' }
+                { display: h(texts.taginfo.project) + '/' + h(texts.misc.description), name: 'name' }
             ],
             sortname: 'name',
             sortorder: 'asc',
@@ -27,13 +27,13 @@ const tabsConfig = {
         return new DynamicTable('grid-keys', {
             url: '/api/4/projects/keys',
             colModel: [
-                { display: '<%= h(@trans.t.osm.keys) %>', name: 'key', width: 500, sortable: true },
-                { display: '<%= h(@trans.t.taginfo.projects) %>', name: 'projects', width: 40, sortable: true, align: 'right' },
-                { display: '<%= h(@trans.t.taginfo.wiki) %>', name: 'in_wiki', width: 20, sortable: true, align: 'center', title: '<%= h(@trans.misc.in_wiki_tooltip) %>' },
-                { display: '<img src="/img/types/all.svg" width="16" height="16" alt=""/> <%= h(@trans.osm.objects) %>', name: 'count_all', width: 200, sortable: true, align: 'center', title: '<%= h(@trans.misc.objects_tooltip) %>' }
+                { display: h(texts.osm.keys), name: 'key', width: 500, sortable: true },
+                { display: h(texts.taginfo.projects), name: 'projects', width: 40, sortable: true, align: 'right' },
+                { display: h(texts.taginfo.wiki), name: 'in_wiki', width: 20, sortable: true, align: 'center', title: h(texts.misc.in_wiki_tooltip) },
+                { display: '<img src="/img/types/all.svg" width="16" height="16" alt=""/> ' + h(texts.osm.objects), name: 'count_all', width: 200, sortable: true, align: 'center', title: h(texts.misc.objects_tooltip) }
             ],
             searchitems: [
-                { display: '<%= h(@trans.t.osm.keys) %>', name: 'key' }
+                { display: h(texts.osm.keys), name: 'key' }
             ],
             sortname: 'projects',
             sortorder: 'desc',
@@ -51,13 +51,13 @@ const tabsConfig = {
         return new DynamicTable('grid-tags', {
             url: '/api/4/projects/tags',
             colModel: [
-                { display: '<%= h(@trans.t.osm.tags) %>', name: 'tag', width: 600, sortable: true },
-                { display: '<%= h(@trans.t.taginfo.projects) %>', name: 'projects', width: 40, sortable: true, align: 'right' },
-                { display: '<%= h(@trans.t.taginfo.wiki) %>', name: 'in_wiki', width: 20, sortable: true, align: 'center', title: '<%= h(@trans.misc.in_wiki_tooltip) %>' },
-                { display: '<img src="/img/types/all.svg" width="16" height="16" alt=""/> <%= h(@trans.osm.objects) %>', name: 'count_all', width: 200, sortable: true, align: 'center', title: '<%= h(@trans.misc.objects_tooltip) %>' }
+                { display: h(texts.osm.tags), name: 'tag', width: 600, sortable: true },
+                { display: h(texts.taginfo.projects), name: 'projects', width: 40, sortable: true, align: 'right' },
+                { display: h(texts.taginfo.wiki), name: 'in_wiki', width: 20, sortable: true, align: 'center', title: h(texts.misc.in_wiki_tooltip) },
+                { display: '<img src="/img/types/all.svg" width="16" height="16" alt=""/> ' + h(texts.osm.objects), name: 'count_all', width: 200, sortable: true, align: 'center', title: h(texts.misc.objects_tooltip) }
             ],
             searchitems: [
-                { display: '<%= h(@trans.t.osm.tags) %>', name: 'tags' }
+                { display: h(texts.osm.tags), name: 'tags' }
             ],
             sortname: 'projects',
             sortorder: 'desc',

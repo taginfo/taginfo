@@ -1,19 +1,14 @@
-<%
-    misc = @trans.t.misc
-    osm = @trans.t.osm
-    page = @trans.t.reports.wiki_problems
- %>
 function page_init() {
     up = function() { window.location = build_link('/reports'); };
     return new DynamicTable('grid-problems', {
         url: '/api/0/wiki/problems',
         colModel: [
-            { display: '<%= h(page.wiki_page) %>', name: 'title', width: 280, sortable: true, align: 'left' },
-            { display: '<%= h(page.location) %>', name: 'location', width: 140, sortable: true, align: 'left' },
-            { display: '<%= h(page.reason) %>', name: 'reason', width: 280, sortable: true, align: 'left' },
-            { display: '<%= h(page.lang) %>', name: 'lang', width: 50, sortable: true, align: 'left' },
-            { display: '<%= h(osm.tag) %>', name: 'tag', width: 160, sortable: true, align: 'left' },
-            { display: '<%= h(page.info) %>', name: 'info', width: 600, sortable: false, align: 'left' }
+            { display: h(texts.reports.wiki_problems.wiki_page), name: 'title', width: 280, sortable: true, align: 'left' },
+            { display: h(texts.reports.wiki_problems.location), name: 'location', width: 140, sortable: true, align: 'left' },
+            { display: h(texts.reports.wiki_problems.reason), name: 'reason', width: 280, sortable: true, align: 'left' },
+            { display: h(texts.reports.wiki_problems.lang), name: 'lang', width: 50, sortable: true, align: 'left' },
+            { display: h(texts.osm.tag), name: 'tag', width: 160, sortable: true, align: 'left' },
+            { display: h(texts.page.info), name: 'info', width: 600, sortable: false, align: 'left' }
         ],
         sortname: 'title',
         sortorder: 'asc',

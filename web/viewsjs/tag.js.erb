@@ -1,9 +1,3 @@
-<%
-    osm = @trans.t.osm
-    misc = @trans.t.misc
-    taginfo = @trans.t.taginfo
-    page = @trans.t.pages.tag
- %>
 function link_to_key_or_tag(key, value) {
     let link = link_to_key(key) + '=';
     if (value && value != '') {
@@ -20,8 +14,8 @@ const tabsConfig = {
             url: '/api/4/tag/stats',
             params: { key: key, value: value },
             colModel: [
-                { display: '<%= h(misc.object_type) %>', name: 'type', width: 100 },
-                { display: '<%= h(page.number_objects) %>', name: 'count', width: 260, align: 'center' }
+                { display: h(texts.misc.object_type), name: 'type', width: 100 },
+                { display: h(texts.pages.tag.number_objects), name: 'count', width: 260, align: 'center' }
             ],
             usePager: false,
             processRow: row => {
@@ -37,12 +31,12 @@ const tabsConfig = {
             url: '/api/4/tag/combinations',
             params: { key: key, value: value, filter: filter_type },
             colModel: [
-                { display: '<%= h(misc.count) %> &rarr;', name: 'to_count', width: 260, sortable: true, align: 'center', title: '<%= h(page.other_tags_used.to_count_tooltip) %>' },
-                { display: '<%= h(page.other_tags_used.other) %>', name: 'other_tag', width: 400, sortable: true, title: '<%= h(page.other_tags_used.other_key_tooltip) %>' },
-                { display: '&rarr; <%= h(misc.count) %>', name: 'from_count', width: 260, sortable: true, align: 'center', title: '<%= h(page.other_tags_used.from_count_tooltip) %>' }
+                { display: h(texts.misc.count) + ' &rarr;', name: 'to_count', width: 260, sortable: true, align: 'center', title: h(texts.pages.tag.other_tags_used.to_count_tooltip) },
+                { display: h(texts.pages.tag.other_tags_used.other), name: 'other_tag', width: 400, sortable: true, title: h(texts.pages.tag.other_tags_used.other_key_tooltip) },
+                { display: '&rarr; ' + h(texts.misc.count), name: 'from_count', width: 260, sortable: true, align: 'center', title: h(texts.pages.tag.other_tags_used.from_count_tooltip) }
             ],
             searchitems: [
-                { display: '<%= h(page.other_tags_used.other) %>', name: 'other_tag' }
+                { display: h(texts.pages.tag.other_tags_used.other), name: 'other_tag' }
             ],
             sortname: 'to_count',
             sortorder: 'desc',
@@ -66,15 +60,15 @@ const tabsConfig = {
             url: '/api/4/tag/wiki_pages',
             params: { key: key, value: value },
             colModel: [
-                { display: '<%= h(misc.language) %>', name: 'lang', width: 150, sortable: false },
-                { display: '<%= h(page.wiki_pages.wiki_page) %>', name: 'title', width: 200, sortable: false, align: 'right' },
-                { display: '<%= h(misc.description) %>', name: 'description', width: 400, sortable: false },
-                { display: '<%= h(misc.image) %>', name: 'image', width: 120, sortable: false },
-                { display: '<%= h(osm.objects) %>', name: 'objects', width:  80, sortable: false },
-                { display: '<%= h(misc.status) %>', name: 'status', width: 60, sortable: false, title: '<%= h(misc.approval_status) %>' },
-                { display: '<%= h(page.wiki_pages.implied_tags) %>', name: 'tags_implied', width: 120, sortable: false },
-                { display: '<%= h(page.wiki_pages.combined_tags) %>', name: 'tags_combination', width: 120, sortable: false },
-                { display: '<%= h(page.wiki_pages.linked_tags) %>', name: 'tags_linked', width: 220, sortable: false }
+                { display: h(texts.misc.language), name: 'lang', width: 150, sortable: false },
+                { display: h(texts.pages.tag.wiki_pages.wiki_page), name: 'title', width: 200, sortable: false, align: 'right' },
+                { display: h(texts.misc.description), name: 'description', width: 400, sortable: false },
+                { display: h(texts.misc.image), name: 'image', width: 120, sortable: false },
+                { display: h(texts.osm.objects), name: 'objects', width:  80, sortable: false },
+                { display: h(texts.misc.status), name: 'status', width: 60, sortable: false, title: h(texts.misc.approval_status) },
+                { display: h(texts.pages.tag.wiki_pages.implied_tags), name: 'tags_implied', width: 120, sortable: false },
+                { display: h(texts.pages.tag.wiki_pages.combined_tags), name: 'tags_combination', width: 120, sortable: false },
+                { display: h(texts.pages.tag.wiki_pages.linked_tags), name: 'tags_linked', width: 220, sortable: false }
             ],
             usePager: false,
             processRow: row => {
@@ -100,13 +94,13 @@ const tabsConfig = {
             url: '/api/4/tag/projects',
             params: { key: key, value: value, filter: filter_type },
             colModel: [
-                { display: '<%= h(taginfo.project) %>', name: 'project_name', width: 280, sortable: true },
-                { display: '<%= h(osm.tag) %>', name: 'tag', width: 220, sortable: true },
-                { display: '<%= h(osm.objects) %>', name: 'objects', width:  80, sortable: false },
-                { display: '<%= h(page.projects.description) %>', name: 'description', width: 200, sortable: false, align: 'left' }
+                { display: h(texts.taginfo.project), name: 'project_name', width: 280, sortable: true },
+                { display: h(texts.osm.tag), name: 'tag', width: 220, sortable: true },
+                { display: h(texts.osm.objects), name: 'objects', width:  80, sortable: false },
+                { display: h(texts.pages.tag.projects.description), name: 'description', width: 200, sortable: false, align: 'left' }
             ],
             searchitems: [
-                { display: '<%= h(taginfo.project) %>', name: 'project_name' }
+                { display: h(texts.taginfo.project), name: 'project_name' }
             ],
             sortname: 'tag',
             sortorder: 'asc',

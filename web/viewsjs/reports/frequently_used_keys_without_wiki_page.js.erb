@@ -1,22 +1,17 @@
-<%
-    osm = @trans.t.osm
-    misc = @trans.t.misc
-    page = @trans.t.reports.frequently_used_keys_without_wiki_page
- %>
 function createTable(english) {
     const theTable = createDynamicTable('grid-keys', {
         url: '/api/4/keys/without_wiki_page',
         params: { english: english },
         colModel: [
-            { display: '<%= h(page.table.create_wiki_page) %>', name: 'create_wiki_page', width: 200, sortable: false },
-            { display: '<%= h(osm.key) %>', name: 'key', width: 180, sortable: true },
-            { display: '<img src="/img/types/all.svg" width="16" height="16" alt=""/> <%= h(osm.objects) %>', name: 'count_all', width: 70, sortable: true, align: 'right', title: '<%= h(misc.objects_tooltip) %>' },
-            { display: '<%= h(osm.users) %>', name: 'users_all', width: 44, sortable: true, align: 'right' },
-            { display: '<%= h(osm.values) %>', name: 'values_all', width: 70, sortable: true, align: 'right', title: '<%= h(misc.values_tooltip) %>' },
-            { display: '<%= h(misc.prevalent_values) %>', name: 'prevalent_values', width: 500, title: '<%= h(misc.prevalent_values_tooltip) %>' }
+            { display: h(texts.reports.frequently_used_keys_without_wiki_page.table.create_wiki_page), name: 'create_wiki_page', width: 200, sortable: false },
+            { display: h(texts.osm.key), name: 'key', width: 180, sortable: true },
+            { display: '<img src="/img/types/all.svg" width="16" height="16" alt=""/> ' + h(texts.osm.objects), name: 'count_all', width: 70, sortable: true, align: 'right', title: h(texts.misc.objects_tooltip) },
+            { display: h(texts.osm.users), name: 'users_all', width: 44, sortable: true, align: 'right' },
+            { display: h(texts.osm.values), name: 'values_all', width: 70, sortable: true, align: 'right', title: h(texts.misc.values_tooltip) },
+            { display: h(texts.misc.prevalent_values), name: 'prevalent_values', width: 500, title: h(texts.misc.prevalent_values_tooltip) }
         ],
         searchitems: [
-            { display: '<%= h(osm.key) %>', name: 'key' }
+            { display: h(texts.osm.key), name: 'key' }
         ],
         sortname: 'count_all',
         sortorder: 'desc',

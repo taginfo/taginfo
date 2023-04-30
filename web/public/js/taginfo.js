@@ -362,6 +362,10 @@ function html_escape(text) {
     return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
+function h(text) {
+    return html_escape(text);
+}
+
 function tag(element, text, attrs) {
     let attributes = '';
     if (attrs !== undefined) {
