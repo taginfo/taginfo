@@ -195,6 +195,21 @@ class Taginfo < Sinatra::Base
 
     #-------------------------------------
 
+    get %r{/js/([a-z][a-z](-[a-zA-Z]+)?)/texts.js} do |lang, _|
+        trans = R18n::I18n.new(lang, 'i18n').t.to_hash
+
+        trans.delete('human_time')
+        trans.each_key do |item|
+            if trans[item].is_a?(String)
+                trans.delete(item)
+            end
+        end
+
+        expires next_update
+        content_type 'text/javascript'
+        'const texts = ' + JSON.generate(trans, { indent: ' ', object_nl:"\n" }) + ';'
+    end
+
     get %r{/js/([a-z][a-z](-[a-zA-Z]+)?)/(.*).js} do |lang, _, js|
         expires next_update
         @lang = lang
