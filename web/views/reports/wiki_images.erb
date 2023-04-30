@@ -1,4 +1,7 @@
-<% @css = <<'CSS'
+<%
+@context[:keys] = @db.select("SELECT DISTINCT key FROM wiki.wikipages WHERE value IS NULL AND image IN (SELECT image FROM wiki.wiki_images) ORDER BY key").execute().map{ |row| row['key'] }
+
+@css = <<'CSS'
 h2 {
     margin: 12px 0 0 6px !important;
 }

@@ -1,5 +1,5 @@
 let tabsConfig = {
-    statistics: () => new ChartCharactersInKeysStats()
+    statistics: () => new ChartCharactersInKeysStats(context.data, context.numKeys)
 };
 
 ['plain', 'colon', 'letters', 'space', 'problem', 'rest'].forEach(function(category) {
@@ -36,25 +36,29 @@ let tabsConfig = {
 
 class ChartCharactersInKeysStats {
     id = 'statistics';
+    data;
+    numKeys;
+
+    constructor(data, numKeys) {
+        this.data = data;
+        this.numKeys = numKeys;
+    }
 
     draw() {
         document.getElementById('canvas').innerHTML = '';
         const boxWidth = document.getElementById('statistics').getBoundingClientRect().width;
         const w = Math.min(968, boxWidth - 40);
         const h = 50;
-        const max = <%= @db.stats('num_keys') %>;
-        const data = <%= i = '@'; %w(plain colon letters space problem rest).map{ |type| i=i.next; { :label => i, :value => @db.stats('characters_in_keys_' + type) } }.to_json %>;
-
         const colors = { 'A': '#2ca02c', 'B': '#98df8a', 'C': '#dbdb8d', 'D': '#d62728', 'E': '#ff9896', 'F': '#aec7e8' };
 
         let y = 0;
-        data.forEach(function(d) {
+        this.data.forEach(function(d) {
             d['y'] = y;
             y += d['value'];
         });
 
         const scale = d3.scaleLinear()
-                        .domain([0, max])
+                        .domain([0, this.numKeys])
                         .range([0, w]);
 
         const chart = d3.select('#canvas').append('svg')
@@ -62,7 +66,7 @@ class ChartCharactersInKeysStats {
                         .attr('height', h);
 
         chart.selectAll('rect')
-            .data(data)
+            .data(this.data)
             .enter()
             .append('g')
                 .attr('transform', d => 'translate(' + scale(d['y']) + ', 0)')

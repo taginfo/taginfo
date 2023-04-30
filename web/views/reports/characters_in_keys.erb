@@ -7,6 +7,15 @@ categories = [
     { category: 'E', name: 'problem', color: '#ff9896' },
     { category: 'F', name: 'rest',    color: '#aec7e8' },
 ]
+
+@context[:numKeys] = @db.stats('num_keys')
+
+i = '@';
+@context[:data] = %w(plain colon letters space problem rest).map{ |type|
+    i = i.next;
+    { label: i, value: @db.stats('characters_in_keys_' + type) }
+}
+
 %>
 
 <div>

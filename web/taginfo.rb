@@ -123,6 +123,11 @@ class Taginfo < Sinatra::Base
         data_until_raw = @db.select("SELECT min(data_until) FROM sources WHERE id='db'").get_first_value
         @data_until = data_until_raw.sub(/:..$/, '')
         @data_until_m = data_until_raw.sub(' ', 'T') + 'Z'
+
+        @context = {
+            instance: @taginfo_config.prefix,
+            lang: r18n.locale.code || 'en'
+        }
     end
 
     after do

@@ -1,37 +1,36 @@
-<%
-    @languages = @db.execute('SELECT language FROM wiki_languages ORDER by language').map do |row|
-        row['language']
-    end
-
-    lang_lookup = Hash.new
-    @languages.each_with_index do |lang, idx|
-        lang_lookup[lang] = idx + 1
-    end
-    @languages_lookup = @languages.map{ |lang| "'#{lang}': #{lang_lookup[lang]}" }.join(', ')
-%>
 function page_init() {
     up = function() { window.location = build_link('/reports'); };
-    const lang_to_idx = {
-        <%= @languages_lookup %>
-    };
+
+    let columns = [
+        { display: h(texts.osm.key), name: 'key', width: 160, sortable: true }
+    ]
+
+    for (const lang of context.languages) {
+        columns.push({
+            display: '<span class="badge lang" style="padding: 0">' + h(lang[0]) + '</span>',
+            name: h(lang[0]),
+            align: 'center',
+            widthUnit: 'em',
+            width: lang[0].length * 0.8,
+            title: h(lang[1])
+        })
+    }
+
     widgetManager.addWidget(createDynamicTable('grid-keys', {
         url: '/api/4/keys/wiki_pages',
-        colModel: [
-            { display: h(texts.osm.key), name: 'key', width: 160, sortable: true },
-            <% @languages.each do |lang| %>
-            { display: '<span class="badge lang" style="padding: 0"><%= h(lang) %></span>', name: '<%= h(lang) %>', align: 'center', widthUnit: 'em', width: <%= lang.length * 0.8 %>, title: '<%= ::Language[lang].native_name %>' },
-            <% end %>
-        ],
+        colModel: columns,
         searchitems: [
             { display: h(texts.osm.key), name: 'key' }
         ],
         sortname: 'key',
         sortorder: 'asc',
         processRow: row => {
-            let d = [hover_expand(link_to_key(row.key)) <%= @languages.map{", ''"}.join() %>];
+            let d = new Array(1 + context.languages.length);
+            d[0] = hover_expand(link_to_key(row.key));
+            d = d.fill('', 1, context.languages.length + 1);
             for (const lang in row.lang) {
                 ptype = row.lang[lang];
-                d[lang_to_idx[lang]] = '<img width="16" height="16" src="/img/sources/wiki/wiki-' + ptype + '.png" alt="[' + ptype + ']"/>';
+                d[context.lang_to_idx[lang]] = '<img width="16" height="16" src="/img/sources/wiki/wiki-' + ptype + '.png" alt="[' + ptype + ']"/>';
             }
             return d;
         }

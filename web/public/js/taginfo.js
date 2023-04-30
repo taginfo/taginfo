@@ -4,6 +4,8 @@ var tabs = null,
     autocomplete = null,
     up = function() { window.location = build_link('/'); };
 
+const context = JSON.parse(document.getElementById('context').textContent);
+
 /* ============================ */
 
 class WidgetManager {

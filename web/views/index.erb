@@ -1,3 +1,20 @@
+<%
+# This is the maximum number of tags in the tag cloud. Javascript code will only show
+# as many of them as will fit in the window.
+tagcloud_number_of_keys = 300
+tagcloud_number_of_tags = 30
+tagcloud_number_of_relations = 30
+keys = @db.select("SELECT key, scale1 FROM popular_keys ORDER BY scale1 DESC LIMIT #{ tagcloud_number_of_keys }").
+    execute().
+    each_with_index{ |tag, idx| tag['pos'] = (tagcloud_number_of_keys - idx) / tagcloud_number_of_keys.to_f }
+tags = @db.select("SELECT skey, svalue FROM top_tags WHERE skey NOT IN ('source', 'source_ref', 'attribution') ORDER BY count_all DESC LIMIT #{ tagcloud_number_of_tags }").execute()
+relations = @db.select("SELECT rtype FROM db.relation_types ORDER BY count DESC LIMIT #{ tagcloud_number_of_relations }").execute()
+@context[:data] = {
+    keys: keys.map{ |tag| { :text => tag['key'], :size => tagcloud_size(tag) } },
+    tags: tags.map{ |entry| [ entry['skey'], entry['svalue'] ] },
+    relations: relations.map{ |row| row['rtype'] }
+}
+%>
 <div class="gboxes">
     <div class="gbox" id="gbox-keys">
         <h2><a href="/keys"><%= h(t.osm.keys) %></a></h2>

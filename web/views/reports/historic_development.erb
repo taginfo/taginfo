@@ -1,3 +1,12 @@
+<%
+data = {}
+['num_keys', 'num_tags', 'relation_types'].each do |key|
+    data[key] = @db.execute("SELECT udate, value FROM history.history_stats WHERE key='#{key}' ORDER BY udate").map do |row|
+        [ row['udate'], row['value'].to_i ]
+    end
+end
+@context[:data] = data
+%>
 <div>
     <div>
         <h1><%= h(t.reports.historic_development.name) %></h1>

@@ -1,4 +1,7 @@
-<% @css = <<"CSS"
+<%
+@context[:backgroundImage] = @taginfo_config.get('geodistribution.background_image')
+
+@css = <<"CSS"
 .comparison {
     display: grid;
     grid-auto-flow: column;

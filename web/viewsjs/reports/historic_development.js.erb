@@ -1,14 +1,3 @@
-<%
-page = @trans.t.reports.historic_development
-
-data = {}
-['num_keys', 'num_tags', 'relation_types'].each do |key|
-    data[key] = @db.execute("SELECT udate, value FROM history.history_stats WHERE key='#{key}' ORDER BY udate").map do |row|
-        [ row['udate'], row['value'].to_i ]
-    end
-end
-%>
-
 class ChartHistory {
     key;
     data;
@@ -99,6 +88,5 @@ const tabsConfig = {
 
 function page_init() {
     up = function() { window.location = build_link('/reports'); };
-    const data = <%= data.to_json %>;
-    initTabs(tabsConfig, [data]);
+    initTabs(tabsConfig, [context.data]);
 }

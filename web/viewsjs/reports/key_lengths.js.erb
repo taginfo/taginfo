@@ -1,19 +1,12 @@
-<%
-    hist = []
-    max_length = 60
-    @db.execute("SELECT min(length(key), #{ max_length }) AS length, count(*) AS count FROM db.keys GROUP BY 1 ORDER BY 1") do |row|
-        hist[row['length'].to_i] = row['count'].to_i
-    end
-    hist = hist.map{ |item| item.nil? ? 0 : item }
-%>
-
 class ChartKeyLengthHistogram {
     data;
     max;
+    maxLength;
 
-    constructor(data, max) {
+    constructor(data, maxLength) {
         this.data = data;
-        this.max = max;
+        this.max = Math.max(...data);
+        this.maxLength = maxLength;
     }
 
     draw() {
@@ -66,15 +59,15 @@ class ChartKeyLengthHistogram {
             .data(this.data)
             .enter()
             .append('g')
-                .call(function(c) {
+                .call(c => {
                     c.append('g')
                         .attr('transform', function(d, i) { return 'translate(' + (i * barStep + barStep / 2) + ', ' + (height + 10) + ')';})
                         .style('display', function(d, i) { return i == 1 || i % 10 == 0 ? '' : 'none'; })
-                        .call(function(t) {
+                        .call(t => {
                             t.append('text')
                                 .attr('y', 16)
                                 .style('text-anchor', 'middle')
-                                .text((d, i) => i == <%= max_length %> ? '>=' + <%= max_length %> : i)
+                                .text((d, i) => i == this.maxLength ? '>=' + this.maxLength : i)
                         })
                         .append('line')
                             .style('stroke', 'black')
@@ -124,9 +117,7 @@ const tabsConfig = {
         });
     },
     histogram: function() {
-        const data = <%= hist.to_json %>;
-        const max = <%= hist.max %>;
-        const chart = new ChartKeyLengthHistogram(data, max);
+        const chart = new ChartKeyLengthHistogram(context.data, context.maxLength);
         chart.draw();
     }
 };

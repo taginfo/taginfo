@@ -1,26 +1,10 @@
-<%
-# This is the maximum number of tags in the tag cloud. Javascript code will only show
-# as many of them as will fit in the window.
-tagcloud_number_of_keys = 300
-tagcloud_number_of_tags = 30
-tagcloud_number_of_relations = 30
-keys = @db.select("SELECT key, scale1 FROM popular_keys ORDER BY scale1 DESC LIMIT #{ tagcloud_number_of_keys }").
-    execute().
-    each_with_index{ |tag, idx| tag['pos'] = (tagcloud_number_of_keys - idx) / tagcloud_number_of_keys.to_f }
-tags = @db.select("SELECT skey, svalue FROM top_tags WHERE skey NOT IN ('source', 'source_ref', 'attribution') ORDER BY count_all DESC LIMIT #{ tagcloud_number_of_tags }").execute()
-relations = @db.select("SELECT rtype FROM db.relation_types ORDER BY count DESC LIMIT #{ tagcloud_number_of_relations }").execute()
-%>
-
-const keys_data = <%= keys.map{ |tag| { :text => tag['key'], :size => tagcloud_size(tag) } }.to_json.gsub(/\},/, "},\n") %>;
-const tags_data = <%= tags.map{ |entry| [ entry['skey'], entry['svalue'] ] }.to_json.gsub(/\],/, "],\n") %>;
-const relations_data = <%= relations.map{ |row| row['rtype'] }.to_json.gsub(/\],/, "],\n") %>;
-const font_family = 'Impact';
-const font_weight = 'normal';
-
-up = function() {};
-
 class ChartKeysTagsRelations {
     id = 'key-tags-relations-lists';
+    data;
+
+    constructor(data) {
+        this.data = data;
+    }
 
     fill_list(list_name, data, func) {
         const element = document.getElementById(list_name);
@@ -42,9 +26,9 @@ class ChartKeysTagsRelations {
     }
 
     draw() {
-        this.fill_list('key_list', keys_data, (d) => link_to_key(d.text));
-        this.fill_list('tag_list', tags_data, (d) => link_to_tag(d[0], d[1]));
-        this.fill_list('relation_list', relations_data, (d) => link_to_rtype(d));
+        this.fill_list('key_list', this.data.keys, (d) => link_to_key(d.text));
+        this.fill_list('tag_list', this.data.tags, (d) => link_to_tag(d[0], d[1]));
+        this.fill_list('relation_list', this.data.relations, (d) => link_to_rtype(d));
     }
 
     resize() {
@@ -53,11 +37,15 @@ class ChartKeysTagsRelations {
 } // class ChartKeysTagsRelations
 
 class ChartTagCloud {
+    fontFamily = 'Impact';
+    fontWeight = 'normal';
     id = 'tagcloud';
     element;
+    data;
 
-    constructor() {
+    constructor(data) {
         this.element = document.getElementById(this.id);
+        this.data = data;
     }
 
     draw() {
@@ -70,14 +58,14 @@ class ChartTagCloud {
         const height = this.element.getBoundingClientRect().height;
 
         // The cloud function mangles the data in the words array, so we need to clone it
-        const data = keys_data.map(d => Object.assign({}, d));
+        const data = this.data.map(d => Object.assign({}, d));
 
         d3.layout.cloud().size([width, height])
             .words(data)
             .timeInterval(10)
             .rotate(() => ~~(Math.random() * 5) * 30 - 60)
-            .font(font_family)
-            .fontWeight(font_weight)
+            .font(this.fontFamily)
+            .fontWeight(this.fontWeight)
             .fontSize(d => d.size)
             .on('end', (words) => this._draw.call(this, words, width, height))
             .start();
@@ -102,8 +90,8 @@ class ChartTagCloud {
                         .attr('xlink:href', d => url_for_key(d.text))
                         .append('text')
                         .style('font-size', d => d.size + 'px')
-                        .style('font-family', font_family)
-                        .style('font-weight', font_weight)
+                        .style('font-family', this.fontFamily)
+                        .style('font-weight', this.fontWeight)
                         .style('fill', (d, i) => d3.rgb(fill(i)).darker(0.5))
                         .attr('text-anchor', 'middle')
                         .attr('transform', function(d) {
@@ -118,11 +106,13 @@ class ChartTagCloud {
 } // class ChartTagCloud
 
 function page_init() {
-    const lists = new ChartKeysTagsRelations();
+    up = function() {};
+
+    const lists = new ChartKeysTagsRelations(context.data);
     widgetManager.addWidget(lists);
     lists.draw();
 
-    const tagCloud = new ChartTagCloud();
+    const tagCloud = new ChartTagCloud(context.data.keys);
     widgetManager.addWidget(tagCloud);
     tagCloud.draw();
 }
