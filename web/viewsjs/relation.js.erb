@@ -52,10 +52,10 @@ const tabsConfig = {
             url: '/api/4/relation/wiki_pages',
             params: { rtype: rtype },
             colModel: [
-                { display: h(texts.misc.language), name: 'lang', width: 150, sortable: false },
-                { display: h(texts.pages.relation.wiki_pages.wiki_page), name: 'title', width: 160, sortable: false, align: 'right' },
-                { display: h(texts.misc.description), name: 'description', width: 500, sortable: false },
-                { display: h(texts.misc.image), name: 'image', width: 300, sortable: false }
+                { display: h(texts.misc.language), name: 'lang', width: 150 },
+                { display: h(texts.pages.relation.wiki_pages.wiki_page), name: 'title', width: 160, align: 'right' },
+                { display: h(texts.misc.description), name: 'description', width: 500 },
+                { display: h(texts.misc.image), name: 'image', width: 300 }
             ],
             usePager: false,
             processRow: row => {
@@ -74,7 +74,7 @@ const tabsConfig = {
             params: { rtype: rtype },
             colModel: [
                 { display: h(texts.taginfo.project), name: 'project_name', width: 280, sortable: true },
-                { display: h(texts.pages.relation.projects.description), name: 'description', width: 600, sortable: false }
+                { display: h(texts.pages.relation.projects.description), name: 'description', width: 600 }
             ],
             searchitems: [
                 { display: h(texts.taginfo.project) + '/' + h(texts.osm.value), name: 'project_value' }
