@@ -291,10 +291,8 @@ function page_init() {
     up = function() { window.location = build_link('/relations'); };
     activate_josm_button();
 
-    const h1 = document.querySelector('h1');
-    const rtype = h1.dataset.rtype;
-    h1.innerHTML += fmt_rtype(rtype);
-    set_inner_html_to('taglink', link_to_value('type', rtype));
+    document.querySelector('h1').innerHTML += fmt_rtype(context.rtype);
+    set_inner_html_to('taglink', link_to_value('type', context.rtype));
 
-    initTabs(tabsConfig, [rtype]);
+    initTabs(tabsConfig, [context.rtype]);
 }

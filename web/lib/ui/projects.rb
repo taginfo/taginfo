@@ -26,6 +26,8 @@ class Taginfo < Sinatra::Base
 
         section :projects
 
+        @context[:project] = h(@project_id)
+
         javascript "#{ r18n.locale.code }/project"
         erb :project
     end

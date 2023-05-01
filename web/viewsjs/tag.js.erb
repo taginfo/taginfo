@@ -130,16 +130,13 @@ function page_init() {
         window.location.search = new URLSearchParams({ 'filter': element.target.value });
     });
 
-    const h1 = document.querySelector('h1');
-    const key = h1.dataset.key;
-    const value = h1.dataset.value;
-    up = function() { window.location = url_for_key(key); };
-    h1.innerHTML = link_to_key(key) + '=' + fmt_value(value);
+    up = function() { window.location = url_for_key(context.key); };
+    document.querySelector('h1').innerHTML = link_to_key(context.key) + '=' + fmt_value(context.value);
 
-    new ComparisonListDisplay(key, value);
+    new ComparisonListDisplay(context.key, context.value);
 
-    set_inner_html_to('keylink', link_to_key(key));
-    set_inner_html_to('relationlink', link_to_rtype(value));
+    set_inner_html_to('keylink', link_to_key(context.key));
+    set_inner_html_to('relationlink', link_to_rtype(context.value));
 
-    initTabs(tabsConfig, [key, value, filter.value]);
+    initTabs(tabsConfig, [context.key, context.value, filter.value]);
 }

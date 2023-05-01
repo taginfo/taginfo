@@ -18,7 +18,7 @@ const tabsConfig = {
                     ];
                 }
             }),
-            new ChartValues(key, filter_type)
+            new ChartValues(key, filter_type, context.countAllValues)
         ];
     },
     values: function(key, filter_type, lang) {
@@ -167,10 +167,12 @@ class ChartValues {
     key;
     url;
     data;
+    countAllValues;
 
-    constructor(key, filter) {
+    constructor(key, filter, countAllValues) {
         this.key = key;
         this.url = build_link('/api/4/key/prevalent_values', { min_fraction: 0.02, key: key, filter: filter });
+        this.countAllValues = countAllValues;
     }
 
     async load() {
@@ -189,10 +191,8 @@ class ChartValues {
 
     draw() {
         set_inner_html_to('canvas-values', '');
-        const max_height = window.innerHeight - 300;
         const width = 160;
-        const height = Math.min(440, max_height);
-        const max = document.getElementById('canvas-values').dataset.count;
+        const height = Math.min(440, window.innerHeight - 300);
 
         let y = 0;
         this.data.forEach(function(d) {
@@ -206,7 +206,7 @@ class ChartValues {
         });
 
         const scale = d3.scaleLinear()
-                        .domain([0, max])
+                        .domain([0, this.countAllValues])
                         .range([0, height]);
 
         const color = d3.scaleOrdinal()
@@ -255,11 +255,9 @@ function page_init() {
         window.location.search = new URLSearchParams({ 'filter': element.target.value });
     });
 
-    const h1 = document.querySelector('h1');
-    const key = h1.dataset.key;
-    h1.innerHTML = fmt_key(key);
+    document.querySelector('h1').innerHTML = fmt_key(context.key);
 
-    new ComparisonListDisplay(key);
+    new ComparisonListDisplay(context.key);
 
-    initTabs(tabsConfig, [key, filter.value, context.lang]);
+    initTabs(tabsConfig, [context.key, filter.value, context.lang]);
 }

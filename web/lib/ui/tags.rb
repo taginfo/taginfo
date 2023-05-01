@@ -59,6 +59,9 @@ class Taginfo < Sinatra::Base
 
         @links = get_links(@key, @value)
 
+        @context[:key] = h(@key)
+        @context[:value] = h(@value)
+
         javascript_for(:d3)
         javascript "#{ r18n.locale.code }/tag"
         erb :tag

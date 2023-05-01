@@ -33,6 +33,5 @@ const tabsConfig = {
 
 function page_init() {
     up = function() { window.location = build_link('/projects'); }
-    const dataset = document.querySelector('h1').dataset;
-    initTabs(tabsConfig, [dataset.project]);
+    initTabs(tabsConfig, [context.project]);
 }

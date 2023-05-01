@@ -33,6 +33,9 @@ class Taginfo < Sinatra::Base
         @img_width  = @taginfo_config.get('geodistribution.width')  * @taginfo_config.get('geodistribution.scale_image')
         @img_height = @taginfo_config.get('geodistribution.height') * @taginfo_config.get('geodistribution.scale_image')
 
+        @context[:key] = h(@key)
+        @context[:countAllValues] = @count_all_values
+
         javascript_for(:d3)
         javascript "#{ r18n.locale.code }/key"
         erb :key

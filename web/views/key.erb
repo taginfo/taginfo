@@ -35,7 +35,7 @@
         </ul>
     </div>
     <div>
-        <h1 data-key="<%= h(@key) %>"></h1>
+        <h1></h1>
         <p><%= @desc %></p>
     </div>
 </div>
@@ -56,7 +56,7 @@
     <div id="overview">
         <div style="float: right; text-align: center; padding-left: 20px;">
             <p><%= h(t.pages.key.overview.distribution_of_values) %></p>
-            <div class="canvas" id="canvas-values" data-count="<%= @count_all_values %>"></div>
+            <div class="canvas" id="canvas-values"></div>
         </div>
 <% if @image_url %>
         <div class="wiki_image">
