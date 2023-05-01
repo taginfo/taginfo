@@ -112,9 +112,7 @@ html[dir="rtl"] table.compstat th {
 
 CSS
 %>
-<div class="pre">
-    <h1 class="section"><%= h(t.taginfo.comparison) %></h1>
-</div>
+<h1 class="section"><%= h(t.taginfo.comparison) %></h1>
 <% if @data.size == 0 %>
 <p class="empty"><%= h(t.pages.compare.nothing_to_compare) %></p>
 <% else %>
