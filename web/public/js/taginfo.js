@@ -105,6 +105,10 @@ function build_link_with_prefix(prefix, path, params) {
     return prefix + path;
 }
 
+function build_link(...args) {
+    return build_link_with_prefix(context.instance, ...args);
+}
+
 const bad_chars_for_url = /[.=\/]/;
 
 function url_for_key(key) {

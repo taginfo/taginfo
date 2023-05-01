@@ -15,9 +15,6 @@
     <script id="context" type="application/json">
 <%= @context.to_json %>
     </script>
-    <script type="text/javascript">
-        function build_link(...args) { return build_link_with_prefix('<%= @taginfo_config.prefix %>', ...args); }
-    </script>
 <%= javascript_tags %>
 </head>
 <body>
