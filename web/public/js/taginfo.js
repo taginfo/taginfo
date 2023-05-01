@@ -729,6 +729,9 @@ class DynamicTable {
 
         let height = parentHeight - padding;
         for (const child of this.element.parentNode.children) {
+            const style = window.getComputedStyle(child);
+            height -= parseInt(style.marginTop);
+            height -= parseInt(style.marginBottom);
             height -= child.getBoundingClientRect().height;
         }
 
