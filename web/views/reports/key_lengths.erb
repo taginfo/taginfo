@@ -1,12 +1,14 @@
 <%
-    hist = []
-    max_length = 60
-    @db.execute("SELECT min(length(key), #{ max_length }) AS length, count(*) AS count FROM db.keys GROUP BY 1 ORDER BY 1") do |row|
-        hist[row['length'].to_i] = row['count'].to_i
-    end
+javascript_for(:d3)
 
-    @context[:maxLength] = max_length
-    @context[:data] = hist.map{ |item| item.nil? ? 0 : item }
+hist = []
+max_length = 60
+@db.execute("SELECT min(length(key), #{ max_length }) AS length, count(*) AS count FROM db.keys GROUP BY 1 ORDER BY 1") do |row|
+    hist[row['length'].to_i] = row['count'].to_i
+end
+
+@context[:maxLength] = max_length
+@context[:data] = hist.map{ |item| item.nil? ? 0 : item }
 %>
 <div>
     <h1><%= h(t.reports.key_lengths.name) %></h1>
@@ -27,4 +29,3 @@
         <div class="canvas" id="canvas-histogram"></div>
     </div>
 </div>
-<% javascript_for(:d3) %>

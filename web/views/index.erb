@@ -1,4 +1,6 @@
 <%
+javascript_for(:d3, :d3_cloud)
+
 # This is the maximum number of tags in the tag cloud. Javascript code will only show
 # as many of them as will fit in the window.
 tagcloud_number_of_keys = 300
@@ -62,4 +64,3 @@ relations = @db.select("SELECT rtype FROM db.relation_types ORDER BY count DESC 
         </div>
     </div>
 </div>
-<% javascript_for(:d3, :d3_cloud) %>

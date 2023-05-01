@@ -1,4 +1,6 @@
 <%
+javascript_for(:d3)
+
 data = {}
 ['num_keys', 'num_tags', 'relation_types'].each do |key|
     data[key] = @db.execute("SELECT udate, value FROM history.history_stats WHERE key='#{key}' ORDER BY udate").map do |row|
@@ -32,4 +34,3 @@ end
         <div class="canvas" id="canvas_relation_types"></div>
     </div>
 </div>
-<% javascript_for(:d3) %>
