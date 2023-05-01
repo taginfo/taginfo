@@ -9,10 +9,8 @@
     @context[:data] = hist.map{ |item| item.nil? ? 0 : item }
 %>
 <div>
-    <div>
-        <h1><%= h(t.reports.key_lengths.name) %></h1>
-        <p><%= h(t.reports.key_lengths.intro) %></p>
-    </div>
+    <h1><%= h(t.reports.key_lengths.name) %></h1>
+    <p><%= h(t.reports.key_lengths.intro) %></p>
 </div>
 <div id="tabs">
     <ul>
