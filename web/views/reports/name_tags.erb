@@ -16,15 +16,12 @@
     </ul>
     <div id="overview">
         <h2><%= h(t.reports.name_tags.overview.title) %></h2>
-        <div class="boxpre">
-            <p>Tag keys containing "name".</p>
-        </div>
-        <div id="grid-name">
-        </div>
+        <div><p>Tag keys containing "name".</p></div>
+        <div id="grid-name"></div>
     </div>
     <div id="bcp47">
         <h2><%= h(t.reports.name_tags.bcp47.title) %></h2>
-        <div class="boxpre">
+        <div>
             <%= t.reports.name_tags.bcp47.intro %>
             <form id="subtag-filter-form">
                 <label for="subtag-filter"><%= h(t.reports.name_tags.bcp47.filter.label) %>:</label>
@@ -36,7 +33,6 @@
                 </select>
             </form>
         </div>
-        <div id="grid-bcp47-subtags">
-        </div>
+        <div id="grid-bcp47-subtags"></div>
     </div>
 </div>

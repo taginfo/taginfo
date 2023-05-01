@@ -5,12 +5,11 @@
     </div>
 </div>
 <div class="box">
-    <div class="boxpre">
+    <div>
         <form method="" type="GET" style="margin-bottom: 10px;">
             <input type="checkbox" name="english" id="english"<%= params[:english] == '1' ? ' checked="checked"' : '' %>/>
             <%= h(t.reports.frequently_used_keys_without_wiki_page.also_show_keys) %>
         </form>
     </div>
-    <div id="grid-keys">
-    </div>
+    <div id="grid-keys"></div>
 </div>

@@ -6,8 +6,7 @@
 </div>
 <div class="box">
 <% begin @db.count('db.similar_keys_common_rare').execute() %>
-    <div id="grid-keys">
-    </div>
+    <div id="grid-keys"></div>
 <% rescue %>
     <p><i>Report not available due to missing database table. Please run update!</i></p>
 <% end %>

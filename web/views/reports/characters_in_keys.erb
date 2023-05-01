@@ -34,7 +34,7 @@ i = '@';
     </ul>
     <div id="statistics">
         <h2><%= h(t.reports.characters_in_keys.statistics.title) %></h2>
-        <div class="canvas boxpre" id="canvas" style="margin: 20px 0;"></div>
+        <div class="canvas" id="canvas" style="margin: 20px 0;"></div>
         <table class="list">
             <tr>
                 <th>&nbsp;</th>
@@ -61,11 +61,8 @@ i = '@';
 <% categories.map{ |c| c[:name] }.each do |category| %>
     <div id="<%= category %>">
         <h2><%= h(t.reports.characters_in_keys[category].title) %></h2>
-        <div class="boxpre">
-            <%= t.reports.characters_in_keys[category].intro %>
-        </div>
-        <div id="grid-<%= category %>">
-        </div>
+        <div><%= t.reports.characters_in_keys[category].intro %></div>
+        <div id="grid-<%= category %>"></div>
     </div>
 <% end %>
 </div>
