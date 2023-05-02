@@ -371,3 +371,8 @@ end
 def build_link(link)
     @taginfo_config.prefix + link
 end
+
+def data_as_script(data)
+    data.to_json.gsub('<', '\u003C')
+end
+

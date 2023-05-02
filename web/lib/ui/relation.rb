@@ -25,7 +25,7 @@ class Taginfo < Sinatra::Base
 
         @count_relation_roles = @db.count('relation_roles').condition("rtype=?", @rtype).get_first_i
 
-        @context[:rtype] = h(@rtype)
+        @context[:rtype] = @rtype
 
         javascript_for(:d3)
         javascript "#{ r18n.locale.code }/relation"

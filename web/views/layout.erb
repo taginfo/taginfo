@@ -13,7 +13,7 @@
 --></style>
 <% end %>
     <script id="context" type="application/json">
-<%= @context.to_json %>
+<%= data_as_script(@context) %>
     </script>
 <%= javascript_tags %>
 </head>
