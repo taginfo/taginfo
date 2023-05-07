@@ -37,6 +37,9 @@ create_master_database() {
     if [ -e "$DATADIR/chronology/taginfo-chronology.db" ]; then
         run_sql "DIR=$DATADIR" "$MASTER_DB" "$SRCDIR/master-chronology.sql"
     fi
+    if [ -e "$DATADIR/wikidata/taginfo-wikidata.db" ]; then
+        run_sql "DIR=$DATADIR" "$MASTER_DB" "$SRCDIR/master-wikidata.sql"
+    fi
 }
 
 create_selection_database() {
