@@ -15,6 +15,10 @@ class Taginfo < Sinatra::Base
             @project_id = params[:project]
         end
 
+        if @project_id.nil? or @project_id == ''
+            redirect(build_link('/projects'))
+        end
+
         @project = @db.select("SELECT * FROM projects.projects").
             condition("id = ?", @project_id).execute()[0]
 

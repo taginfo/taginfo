@@ -269,6 +269,8 @@ pages:
                 <p>Projekte, die OSM-Tags in irgendeiner Weise nutzen, zum Beispiel Editoren, Karten, Router, usw. Siehe auch die <a href="projects">Projektliste</a>.</p>
             chronology: |
                 <p>Anzahl der Keys/Tags über die Zeit vom <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">history planet</a>.</p>
+            wikidata: |
+                <p>Die <a class="extlink" href="https://www.wikidata.org/">Wikimedia Wikidata Datenbank</a> verbindet OSM-Keys, -Tags und -Relations mit anderen Konzepten.</p>
         updates:
             title: Aktualisierung
             intro: Die Taginfo-Daten werden regelmäßig aktualisiert.
@@ -506,6 +508,9 @@ sources:
     chronology:
         name: Chronologie
         description: Anzahl der Keys/Tags über die Zeit.
+    wikidata:
+        name: Wikidata
+        description: Die Wikimedia Wikidata Datenbank verbindet OSM-Keys, -Tags und -Relations mit anderen Konzepten.
 
 unicode:
     character: Zeichen

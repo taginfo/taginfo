@@ -44,7 +44,7 @@ class Taginfo < Sinatra::Base
         end
     end
 
-    get '/taginfo' do
+    get! '/taginfo' do
         @section = 'taginfo'
         @section_title = t.taginfo.meta
 
