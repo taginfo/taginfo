@@ -1012,10 +1012,12 @@ class DynamicTable {
     display(data) {
         if (data.total == 0) {
             this.totalRows = 1;
-            this.toolbar.querySelector('.dt-page input').value = '0';
-            this.toolbar.querySelector('.dt-page span.dt-page-max').innerText = '0';
-            this.toolbar.querySelector('.dt-json a').setAttribute('href', data.url);
-            this.toolbar.querySelector('.dt-info').innerHTML = texts.dynamic_table.nomsg;
+            if (this.toolbar) {
+                this.toolbar.querySelector('.dt-page input').value = '0';
+                this.toolbar.querySelector('.dt-page span.dt-page-max').innerText = '0';
+                this.toolbar.querySelector('.dt-json a').setAttribute('href', data.url);
+                this.toolbar.querySelector('.dt-info').innerHTML = texts.dynamic_table.nomsg;
+            }
 
             this.clearTableBody();
 
@@ -1141,7 +1143,9 @@ class DynamicTable {
             this.display(json);
         } catch (error) {
             this.clearTableBody();
-            this.toolbar.querySelector('.dt-info').innerHTML = '<span class="bad">' + texts.dynamic_table.errormsg + '</span>';
+            if (this.toolbar) {
+                this.toolbar.querySelector('.dt-info').innerHTML = '<span class="bad">' + texts.dynamic_table.errormsg + '</span>';
+            }
             throw(error);
         }
     }
@@ -1798,6 +1802,11 @@ class ChartChronology {
     async load() {
         const response = await fetch(this.url);
         const json = await response.json();
+
+        if (json.total == 0) {
+            return;
+        }
+
         this.data = this.prepareData(json.data);
         this.draw();
     }

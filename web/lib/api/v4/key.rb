@@ -214,6 +214,11 @@ class Taginfo < Sinatra::Base
             condition('key = ?', key).
             get_columns(:count, :count_values)
 
+        if this_key_count.nil? or total.nil?
+            this_key_count = 0
+            total = 0
+        end
+
         if params[:query].to_s != ''
             total = @db.count('db.tags').
                 condition('key = ?', key).

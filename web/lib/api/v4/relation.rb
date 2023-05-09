@@ -30,7 +30,11 @@ class Taginfo < Sinatra::Base
 
         relation_type_info = @db.select('SELECT * FROM relation_types').
             condition("rtype=?", rtype).
-            execute()[0]
+            get_first_row()
+
+        if relation_type_info.nil?
+            return generate_json_result(0, []);
+        end
 
         if params[:min_fraction]
             min_count = params[:min_fraction].to_f * relation_type_info['members_all'].to_f
