@@ -1,6 +1,7 @@
+
 osm:
     tag: Tag
-    tags: Tags
+    tags: Tag
     key: Chiave
     keys: Chiavi
     value: Valore
@@ -8,16 +9,16 @@ osm:
     node: Nodo
     nodes: Nodi
     way: Way
-    ways: Ways
+    ways: Way
     relation: Relazione
     relations: Relazioni
-    relation_type: Tipo di Relazione
-    relation_types: Tipi di Relazioni
-    relation_member: Membro della Relazione
-    relation_members: Membri della Relazione
-    relation_member_nodes: Nodi membro della relazione
-    relation_member_ways: Ways membro della relazione
-    relation_member_relations: Relazioni membro della relazione
+    relation_type: Tipo di relazione
+    relation_types: Tipi di relazioni
+    relation_member: Membro della relazione
+    relation_members: Membri della relazione
+    relation_member_nodes: Membri di tipo nodo
+    relation_member_ways: Membri di tpo way
+    relation_member_relations: Membri di tipo relazione
     relation_member_role: Ruolo
     relation_member_roles: Ruoli
     object: Oggetto
@@ -30,12 +31,12 @@ taginfo:
     source: Fonte
     sources: Fonti
     download: Download
-    about: Riguardo a Taginfo
+    about: Informazioni su Taginfo
     contact: Contatti
     meta: Meta
     wiki: Wiki
-    report: Report
-    reports: Reports
+    report: Rapporto
+    reports: Rapporti
     international: International
     apidoc: API Documentation
     project: Progetto
@@ -46,11 +47,12 @@ taginfo:
     maps: Mappe
     relations: Relazioni
     combinations: Combinazioni
-    key_combinations: Combinazioni delle Chiavi
-    comparison: Confronto Chiavi/Valori
+    key_combinations: Combinazioni delle chiavi
+    comparison: Confronto chiavi/valori
     overview: Panoramica
+    characters: Caratteri
     links: Collegamenti
-    data_from: Fonte Dati
+    data_from: Fonte dati
     data_from_description: Ultimo aggiornamento al database taginfo
     instance:
         title: Informazioni sul sito taginfo
@@ -73,9 +75,9 @@ misc:
     area: Area
     language: Lingua
     search_for: Ricerca per
-    objects_tooltip: Numero di oggetti (come valore assoluto e come percentuale di tutti i nodi, ways, e relazioni).
-    nodes_tooltip: Numero di nodi (come valore assoluto e come percentuale di nodi taggati, per es. i nodi senza nessun tags vengono ignorati).
-    ways_tooltip: Numero di ways (come valore e percentuale di tutte le ways).
+    objects_tooltip: Numero di oggetti (come valore assoluto e come percentuale di tutti i nodi, way, e relazioni).
+    nodes_tooltip: Numero di nodi (come valore assoluto e come percentuale di nodi taggati, per es. i nodi senza nessun tag vengono ignorati).
+    ways_tooltip: Numero di way (come valore e percentuale di tutte le way).
     relations_tooltip: Numero delle relazioni (come valore assoluto e come percentuale di tutte le relazioni).
     values_tooltip: Numero dei valori differenti per questa chiave.
     users_tooltip: Numero di singoli utenti che hanno usato recentemente questa chiave.
@@ -89,7 +91,7 @@ help:
     search:
         title: Ricerca
         intro: Utilizza la casella di ricerca nell'angolo in alto a destra per cercare Chiavi e Valori dei tag.
-        string: Puoi cercare le Chiavi e i Valori dei tag
+        string: Puoi cercare le chiavi e i valori dei tag
         substring: Funziona anche se inserisci solo una parte della Chiave/Valore
         complete_tags: Puoi cercare tag completi
         values_only: Puoi anche cercare solo tra i Valori dei tag
@@ -114,8 +116,8 @@ help:
         keys_page: Pagina delle Chiavi
         tags_page: Pagina dei Valori
         relations_page: Pagina delle Relazioni
-        reports_page: Pagina dei Report
         projects_page: Pagina dei Progetti
+        reports_page: Pagina dei Rapporti
         compare_page: Pagina dei Confronti
         first_page: Prima pagina
         prev_page: Pagina precedente
@@ -172,7 +174,7 @@ pages:
                 tag posso utilizzare per la caratteristica Y perché appaia in
                 maniera corretta sulla mappa? Il tag Z descritto nella pagina
                 wiki è veramente utilizzato e dove?</p> <p>Taginfo ti fornisce
-                un aiuto mostrandoti delle statistiche a riguardo di quali tags
+                un aiuto mostrandoti delle statistiche a riguardo di quali tag
                 sono realmente nel database, quante persone usano questi tag,
                 dove sono utilizzati e altre informazioni analoghe. Raccogli
                 informazioni sui tag anche dal sito wiki e da altre fonti.
@@ -258,7 +260,7 @@ pages:
                 mailing list</a> se avete domanda o avete bisogno di aiuto.</p>
     sources:
         intro: |
-            <p>Taginfo prende i dati dai tags OSM da diverse fonti e li fonde
+            <p>Taginfo prende i dati dai tag OSM da diverse fonti e li fonde
             insieme per una facile navigazione e scoperta.</p> <p>Da notare che
             Taginfo visualizza solo i dati. Se volete cambiarli, dovete tornare
             alla fonte dei dati.</p>
@@ -290,6 +292,8 @@ pages:
                 href="projects">la lista dei progetti</a>.</p>
             chronology: |
                 <p>Numero di chiavi/tag nel tempo da <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">file di planet storico</a>.</p>
+            wikidata: |
+                <p>Il <a class="extlink" href="https://www.wikidata.org/">database wikidata di Wikimedia</a> collega le chiavi, i tag e le relazioni di OSM con altre idee.</p>
         updates:
             title: Aggiornamenti
             intro: I dati di taginfo vengono aggiornati regolarmente dalle loro fonti.
@@ -314,10 +318,10 @@ pages:
         note: Alcuni indici non sono presenti nel database disponibile qui per il download. La dimensione 'compressa' è la dimensione senza questi indici, la dimensione 'decompressa' include gli indici che probabilmente vorrai creare dopo il download.
     reports:
         intro: |
-            I Reports mostrano i dati da prospettive differenti. Spesso
+            I rapporti mostrano i dati da prospettive differenti. Spesso
             riuniscono i dati da diverse fonti in modi interessanti. Alcuni di
-            questi reports possono aiutare a trovare certi tipi di errori, come
-            ad esempio chiavi popolari senza una pagina nel wiki.
+            questi rapporti possono aiutare a trovare certi tipi di errori, come
+            ad esempio le chiavi popolari che non hanno una pagina nel wiki.
         list: Lista di tutti i rapporti
         data_sources: Fonti di dati utilizzate
     search:
@@ -361,7 +365,7 @@ pages:
                  Filtro:
             none: Nessun filtro
             nodes: Solo nodi
-            ways: Solo percorsi (Ways)
+            ways: Solo percorsi (Way)
             relations: Solo relazioni
         button_disabled: Pulsante disabilitato, perché ci sono troppi oggetti con questa chiave.
         number_objects: Numero degli oggetti
@@ -386,7 +390,7 @@ pages:
             relations: Le relazioni non hanno una localizzazione geografica, pertanto una mappa non può essere mostrata.
         wiki_pages:
             title: Pagine wiki su questa chiave
-            none_found: Non ci sono pagine wiki disponibili su questa chiave.
+            none_found: Non ci sono pagine wiki disponibili per questa chiave.
             create: Crea una pagina wiki per questa chiave
             wiki_page: Pagina wiki
             implied_tags: Tag impliciti
@@ -402,6 +406,8 @@ pages:
             count_all_tooltip: Numero degli oggetti con la chiave simile
             similarity: Somiglianza
             similarity_tooltip: Un numero più basso indica una maggiore somiglianza
+        characters:
+            title: Caratteri Unicode in questa chiave
     tag:
         description_from_wiki: Descrizione di questo tag dalla pagina wiki (se disponibile nella lingua selezionata, altrimenti in inglese).
         no_description_in_wiki: Nessuna descrizione nel wiki
@@ -413,7 +419,7 @@ pages:
             title: Altri tag utilizzati assieme a questo tag.
             other: Altri tag
             to_count_tooltip: Numero degli oggetti con questo tag che hanno anche l'altro tag o chiave.
-            other_key_tooltip: Tags o chiave utilizzata assieme a questo tag.
+            other_key_tooltip: Chiave utilizzata assieme a questo tag.
             from_count_tooltip: Numero di oggetti con l'altro tag o chiave che hanno anche questo tag.
         combinations:
             title: Combinazioni
@@ -439,6 +445,8 @@ pages:
         projects:
             title: Progetti che utilizzano questo tag
             description: Come questo tag è utilizzato nel progetto
+        characters:
+            title: Caratteri Unicode in questo valore del tag
     relation:
         name: Tipo di relazione
         description_from_wiki: La descrizione di questo tipo di relazione è preso dalla pagina wiki (se disponibile nella lingua selezionata, altrimenti in inglese).
@@ -469,6 +477,8 @@ pages:
         projects:
             title: Progetti che utilizzano questo tipo di relazione
             description: Come questo tipo di relazione viene utilizzato nel progetto
+        characters:
+            title: Caratteri Unicode nel tipo di relazione
     project:
         overview:
             project_name: Nome del progetto
@@ -479,7 +489,7 @@ pages:
             json_url: file JSON del progetto
             info: Questi dati sono forniti dal progetto a taginfo attraverso il 'JSON project file' (file JSON del progetto) indicato nel collegamento qui sopra. Vedi la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">pagina wiki</a> per una descrizione del formato.
         tags:
-            title: Tags usati da questo progetto
+            title: Tag usati da questo progetto
             intro: Questi dati sono forniti dal progetto e non sono necessariamente completi. Per favore consulta la documentazione del progetto per dettagli.
             description: Come questa chiave/tag viene utilizzata nel progetto
             count_all_tooltip: Numero di oggetti nel database con questa chiave/tag
@@ -493,6 +503,7 @@ dynamic_table:
     procmsg: Elaborazione, attendere prego...
     nomsg: Nessun oggetto
     errormsg: Errore di Connessione
+    filter_nothing_found: Nessun risultato corrispondente alla tua richiesta
 
 comparison:
     list: Lista dei confronti
@@ -505,7 +516,7 @@ comparison:
 sources:
     master:
         name: Master
-        description: Statistiche aggregate e dati eterogenei sono necessari per l'interfaccia utente di Taginfo.
+        description: Statistiche aggregate e dati eterogenei richiesti per l'interfaccia utente di Taginfo.
     history:
         name: Storico
         description: Statistiche aggregate rispetto al tempo.
@@ -524,7 +535,17 @@ sources:
     chronology:
         name: Cronologia
         description: Numero di chiavi/tag nel tempo da file planet storico.
+    wikidata:
+        name: Wikidata
+        description: Il database wikidata di Wikimedia collega le chiavi, i tag e le relazioni di OSM con altre idee.
 
+unicode:
+    character: Carattere
+    codepoint: Codice univoco
+    script: Scrittura
+    general_category: Categoria generale
+    name: Nome del codice univoco Unicode
+    
 reports:
     characters_in_keys:
         name: Caratteri nelle chiavi
@@ -655,7 +676,7 @@ reports:
             number_of_objects: Numero degli oggetti
         histogram:
             name: Istogramma
-            intro: Questo istogramma mostra quante chiavi ci sono con ogni lunghezza.
+            intro: Questo istogramma mostra quante chiavi sono presenti per ogni lunghezza.
             key_length: Lunghezza della chiave
             number_of_keys: Numero delle chiavi
     language_comparison_table_for_keys_in_the_wiki:
@@ -745,7 +766,7 @@ reports:
         count_rare: Conteggio
         similarity: Somiglianza
     historic_development:
-        name: Analisi dello Storico
+        name: Analisi dello storico
         intro: |
             Analisi di alcune statistiche rispetto al tempo. Questi dati sono
             stati raccolti da taginfo, è possibile che siano presenti delle
