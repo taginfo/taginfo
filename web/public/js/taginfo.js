@@ -89,6 +89,11 @@ class TaginfoObject {
         return link(this.url(), content, params.attrs);
     }
 
+    isEqual(other) {
+        return  this.instance == other.instance && this.key == other.key &&
+                this.value == other.value && this.rtype == other.rtype;
+    }
+
 } // class TaginfoObject
 
 class TaginfoKey extends TaginfoObject {
@@ -105,8 +110,24 @@ class TaginfoKey extends TaginfoObject {
         }
     }
 
+    get type() {
+        return 'key';
+    }
+
     toString() {
         return this.key;
+    }
+
+    toFullString() {
+        return this.key;
+    }
+
+    toJSON() {
+        return {key: this.key, instance: this.instance};
+    }
+
+    isClean() {
+        return this.key.match(/^[a-zA-Z0-9:_]+$/) !== null;
     }
 
     content() {
@@ -163,8 +184,25 @@ class TaginfoTag extends TaginfoObject {
         }
     }
 
+    get type() {
+        return 'tag';
+    }
+
     toString() {
         return this.value;
+    }
+
+    toFullString() {
+        return this.key + '=' + this.value;
+    }
+
+    toJSON() {
+        return {key: this.key, value: this.value, instance: this.instance};
+    }
+
+    isClean() {
+        return (this.key.match(/^[a-zA-Z0-9:_]+$/) !== null) &&
+               (this.value.match(/^[a-zA-Z0-9:_]+$/) !== null)
     }
 
     content() {
@@ -192,6 +230,14 @@ function createKeyOrTag(key, value) {
         return new TaginfoKey(key);
     }
     return new TaginfoTag(key, value);
+}
+
+function createKeyOrTagFromHash(data) {
+    let result = createKeyOrTag(data.key, data.value);
+    if (typeof data.instance === 'string') {
+        result.instance = data.instance;
+    }
+    return result;
 }
 
 class TaginfoRelation extends TaginfoObject {
@@ -586,7 +632,7 @@ function fmt_with_ts(value) {
     if (value === null) {
         return '-';
     } else {
-        return value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1&#x202f;');
+        return value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1\u202f');
     }
 }
 
@@ -595,7 +641,7 @@ function fmt_as_percent(value) {
 }
 
 function fmt_checkmark(value) {
-    return value ? '&#x2714;' : '-';
+    return value ? '\u2714' : '-';
 }
 
 function fmt_value_with_percent(value, fraction) {
@@ -1431,17 +1477,13 @@ class ComparisonList {
     list = [];
 
     constructor(list = []) {
-        this.list = list.map(function(d) {
-            if (d.value === undefined) {
-                d.value = null;
-            }
-            return [d.key, d.value];
-        });
+        this.list = list.map( d => createKeyOrTagFromHash(d) );
     }
 
     load() {
         const tcl = window.sessionStorage.getItem('taginfo_comparison_list');
-        this.list = tcl ? JSON.parse(tcl) : [];
+        const list = tcl ? JSON.parse(tcl) : [];
+        this.list = list.map( d => createKeyOrTagFromHash(d) );
     }
 
     store() {
@@ -1452,9 +1494,9 @@ class ComparisonList {
         return this.list.length;
     }
 
-    add(key, value = null) {
-        if (!this.contains(key, value)) {
-            this.list.push([key, value]);
+    add(keyOrTag) {
+        if (!this.contains(keyOrTag)) {
+            this.list.push(keyOrTag);
         }
     }
 
@@ -1462,8 +1504,8 @@ class ComparisonList {
         this.list = [];
     }
 
-    contains(key, value) {
-        return this.list.find( item => item[0] == key && item[1] == value ) !== undefined;
+    contains(keyOrTag) {
+        return this.list.find( item => item.isEqual(keyOrTag) ) !== undefined;
     }
 
     compare() {
@@ -1473,42 +1515,32 @@ class ComparisonList {
     }
 
     url() {
-        const item_is_clean = function(text) {
-            return text === null || text.match(/^[a-zA-Z0-9:_]+$/) !== null;
-        };
-
-        const is_clean = this.list.every( item => item_is_clean(item[0]) &&
-                                                   item_is_clean(item[1]) );
-
-        if (is_clean) {
-            const kv = this.list.map( item => item[0] + (item[1] === null ? '' : ('=' + item[1])) );
+        if (this.list.every( item => item.isClean() )) {
+            const kv = this.list.map( item => item.toFullString() );
             return '/compare/' + kv.join('/');
         }
 
         let params = new URLSearchParams();
-        this.list.forEach( item => params.append('key[]', item[0] ) );
-        this.list.forEach( item => params.append('value[]', item[1] || '' ) );
+        this.list.forEach( item => params.append('key[]', item.key) );
+        this.list.forEach( item => params.append('value[]', item.value || '') );
 
         return '/compare/?' + params.toString();
     }
 } // class ComparisonList
 
 class ComparisonListDisplay {
-
     comparison_list;
-    key = null;
-    value = null;
+    keyOrTag;
 
-    constructor(key, value = null) {
+    constructor(keyOrTag) {
         const list = new ComparisonList();
         this.comparison_list = list;
-        this.key = key;
-        this.value = value;
+        this.keyOrTag = keyOrTag;
 
         list.load();
         this.update();
 
-        document.getElementById('comparison-list-add').addEventListener('click', () => { list.add(key, value); list.store(); this.update(); });
+        document.getElementById('comparison-list-add').addEventListener('click', () => { list.add(keyOrTag); list.store(); this.update(); });
         document.getElementById('comparison-list-clear').addEventListener('click', () => { list.clear(); list.store(); this.update(); });
         document.getElementById('comparison-list-compare').addEventListener('click', () => { list.compare(); });
     }
@@ -1523,7 +1555,7 @@ class ComparisonListDisplay {
             document.getElementById('comparison-list-' + id).className = condition ? '' : 'disabled';
         };
 
-        enable_disable('add', !this.comparison_list.contains(this.key, this.value));
+        enable_disable('add', !this.comparison_list.contains(this.keyOrTag));
         enable_disable('clear', length > 0);
         enable_disable('compare', length >= 2);
     }
@@ -1684,7 +1716,9 @@ function whenReady() {
 
         switch (event.key) {
             case 'c':
-                window.location = (new ComparisonList()).url();
+                const cl = new ComparisonList();
+                cl.load();
+                window.location = cl.url();
                 break;
             case 'f':
                 event.preventDefault();

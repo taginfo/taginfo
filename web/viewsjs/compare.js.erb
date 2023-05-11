@@ -1,21 +1,18 @@
 function page_init() {
-    up = function() { window.location = build_link('/'); }
+    for (let d of context.data) {
+        d.keyOrTag = createKeyOrTagFromHash(d);
+    }
 
-    const datasets = Array.from(document.querySelectorAll('h2'), s => s.dataset);
-    const fetch_promises = datasets.map(function(d, index) {
-        let url = '/api/4/';
+    const fetch_promises = context.data.map(function(d, index) {
         let params = { key: d.key };
-        if (d.value) {
-            url += 'tag/overview'
+        if (d.keyOrTag.type == 'tag') {
             params['value'] = d.value;
-        } else {
-            url += 'key/overview'
         }
-        url = build_link(url, params);
+        const url = build_link('/api/4/' + d.keyOrTag.type + '/overview', params);
 
         return fetch(url).
             then( response => response.json() ).
-            then( d => { fill_data(datasets, d.data, index); return d; } );
+            then( d => { fill_data(d.data, index); return d; } );
     });
 
     Promise.all(fetch_promises).then(r => data_complete(r.map(d => d.data)));
@@ -25,21 +22,17 @@ function get_el(index, el) {
     return document.querySelector('.item' + index + el);
 }
 
-function fill_data(datasets, item, index) {
+function fill_data(item, index) {
     const cl = new ComparisonList();
-    datasets.forEach(function(ditem, i) {
+    context.data.forEach(function(ditem, i) {
         if (i != index) {
-            cl.add(ditem.key, ditem.value);
+            cl.add(ditem.keyOrTag);
         }
     });
     get_el(index, ' a.close').setAttribute('href', cl.url());
 
     const itemObject = createKeyOrTag(item.key, item.value);
     get_el(index, ' h2').innerHTML = itemObject.fullLink();
-    if (!item.value && item.prevalent_values) {
-        get_el(index, '.prevalent_values div b').textContent = h(texts.misc.prevalent_values) + ':';
-        get_el(index, '.prevalent_values div.data').innerHTML = fmt_prevalent_value_list(itemObject.toKey(), item.prevalent_values);
-    }
 
     const descElement = get_el(index, '.description');
     const lang = item.description[context.lang] ? context.lang : 'en';
@@ -49,7 +42,16 @@ function fill_data(datasets, item, index) {
         descElement.innerText = item.description[lang].text;
     }
 
-    get_el(index, '.projects div').innerHTML += item.projects;
+    document.querySelectorAll('.item' + index + '.counts table td').forEach(function(c, index) {
+        c.innerText = fmt_with_ts(item.counts[index].count);
+    });
+
+    if (!item.value && item.prevalent_values) {
+        get_el(index, '.prevalent_values div b').textContent = h(texts.misc.prevalent_values) + ':';
+        get_el(index, '.prevalent_values div.data').innerHTML = fmt_prevalent_value_list(itemObject.toKey(), item.prevalent_values);
+    }
+
+    get_el(index, '.wiki div b').innerText = texts.pages[itemObject.type].wiki_pages.title + ':';
     get_el(index, '.wiki div.data').innerHTML += item.wiki_pages.map(
         w => tag('span', html_escape(w.lang), {
             'class': 'badge lang',
@@ -58,9 +60,8 @@ function fill_data(datasets, item, index) {
         })
     ).join(' ');
 
-    document.querySelectorAll('.item' + index + '.counts table td').forEach(function(c, index) {
-        c.innerHTML = fmt_with_ts(item.counts[index].count);
-    });
+    get_el(index, '.projects b').innerText = texts.pages[itemObject.type].projects.title + ':';
+    get_el(index, '.projects .data').innerText = item.projects;
 
     if (item.has_map) {
         const apiPrefix = '/api/4/' + (item.value ? 'tag' : 'key') + '/distribution/';

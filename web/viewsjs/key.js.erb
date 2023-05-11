@@ -264,7 +264,7 @@ function page_init() {
 
     document.querySelector('h1').innerHTML = key.content();
 
-    new ComparisonListDisplay(context.key);
+    new ComparisonListDisplay(key);
 
     initTabs(tabsConfig, [key, filter.value, context.lang]);
 }

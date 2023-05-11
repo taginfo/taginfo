@@ -25,6 +25,7 @@ class Taginfo < Sinatra::Base
             value = data[:value]
 
             if value.nil?
+                data.delete(:value)
                 result = @db.select("SELECT count_all FROM db.keys").condition('key = ?', key).get_first_row
                 if result
                     data[:has_map] = result['count_all'].to_i > 0

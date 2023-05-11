@@ -125,11 +125,12 @@ function page_init() {
     });
 
     const key = new TaginfoKey(context.key);
+    const tag = key.toTag(context.value);
 
     up = function() { window.location = key.url(); };
-    document.querySelector('h1').innerHTML = key.link() + '=' + key.toTag(context.value).content();
+    document.querySelector('h1').innerHTML = key.link() + '=' + tag.content();
 
-    new ComparisonListDisplay(context.key, context.value);
+    new ComparisonListDisplay(tag);
 
     set_inner_html_to('keylink', key.link());
     set_inner_html_to('relationlink', (new TaginfoRelation(context.value)).link());

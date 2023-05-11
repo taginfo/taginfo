@@ -1,5 +1,6 @@
 <%
 @context[:backgroundImage] = @taginfo_config.get('geodistribution.background_image')
+@context[:data] = @data
 
 @css = <<"CSS"
 .comparison {
@@ -118,14 +119,9 @@ CSS
 <% else %>
 <div class="comparison">
 <% @data.each_with_index do |data, num| %>
-    <% key_or_tag = data[:value].nil? ? 'key' : 'tag' %>
     <div class="title item<%= num %>">
         <a class="close" href="#"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMCAxMCcgc3Ryb2tlPScjODA4MDgwJyBzdHJva2Utd2lkdGg9JzEuNScgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz48cGF0aCBkPSdNMiAyIEw4IDggTTggMiBMMiA4Jy8+PC9zdmc+Cg" data-src="/img/close.svg"/></a>
-        <h2 data-key="<%= h(data[:key]) %>"
-<% if data[:value] %>
-    data-value="<%= h(data[:value]) %>"
-<% end %>
-        ></h2>
+        <h2></h2>
         <div class="description item<%= num %>"></div>
     </div>
     <div class="counts item<%= num %>">
@@ -141,12 +137,10 @@ CSS
         <div class="data"></div>
     </div>
     <div class="wiki item<%= num %>">
-        <div><b><%= h(t.pages[key_or_tag].wiki_pages.title) %>:</b></div>
+        <div><b></b></div>
         <div class="data"></div>
     </div>
-    <div class="projects item<%= num %>">
-        <div><b><%= h(t.pages[key_or_tag].projects.title) %>:</b> </div>
-    </div>
+    <div class="projects item<%= num %>"><b></b> <span class="data"></span></div>
     <div class="map item<%= num %>"><div></div></div>
 <% end %>
 <% end %>
