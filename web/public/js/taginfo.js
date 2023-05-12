@@ -1062,7 +1062,7 @@ class DynamicTable {
                 this.toolbar.querySelector('.dt-page input').value = '0';
                 this.toolbar.querySelector('.dt-page span.dt-page-max').innerText = '0';
                 this.toolbar.querySelector('.dt-json a').setAttribute('href', data.url);
-                this.toolbar.querySelector('.dt-info').innerHTML = texts.dynamic_table.nomsg;
+                this.toolbar.querySelector('.dt-info').innerText = texts.dynamic_table.nomsg;
             }
 
             this.clearTableBody();
@@ -1190,9 +1190,8 @@ class DynamicTable {
         } catch (error) {
             this.clearTableBody();
             if (this.toolbar) {
-                this.toolbar.querySelector('.dt-info').innerHTML = '<span class="bad">' + texts.dynamic_table.errormsg + '</span>';
+                this.toolbar.querySelector('.dt-info').innerHTML = span(h(texts.dynamic_table.errormsg), 'bad');
             }
-            throw(error);
         }
     }
 
