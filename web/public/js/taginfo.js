@@ -767,7 +767,7 @@ class DynamicTableColumn {
 
     setWidth(width) {
         this.width = width;
-        this.headerElement.style.width = width + this.widthUnits;
+        this.headerElement.style.width = width + this.widthUnit;
     }
 } // class DynamicTableColumn
 
