@@ -1782,7 +1782,7 @@ function whenReady() {
     document.getElementById('search').addEventListener('keydown', function(event) {
         if (event.key == 'Tab') {
             event.preventDefault();
-            for (element of document.querySelectorAll('input.qsbox')) {
+            for (const element of document.querySelectorAll('input.qsbox')) {
                 element.focus();
             }
         }
