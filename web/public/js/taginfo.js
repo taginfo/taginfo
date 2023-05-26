@@ -691,8 +691,7 @@ class DynamicTableColumn {
 
     name; // Name of this column
     display; // HTML that will be shown in this column header
-    width; // Width in widthUnits
-    widthUnit = 'px';
+    width; // Width in px
     sortable = false; // Can we sort the table by this column?
     align = 'left'; // Header and content alignment
     title; // Optional tooltip title
@@ -713,10 +712,6 @@ class DynamicTableColumn {
 
         if (config.title) {
             this.title = config.title;
-        }
-
-        if (config.widthUnit) {
-            this.widthUnit = config.widthUnit;
         }
     }
 
@@ -739,9 +734,9 @@ class DynamicTableColumn {
         }
 
         if (col + 1 < max) {
-            element.style.width = this.width + this.widthUnit;
+            element.style.width = this.width + 'px';
         } else {
-            element.style.minWidth = this.width + this.widthUnit;
+            element.style.minWidth = this.width + 'px';
         }
 
         element.innerHTML = this.display;
@@ -759,7 +754,7 @@ class DynamicTableColumn {
         element.style.textAlign = this.align;
 
         if (col + 1 < max) {
-            element.style.width = this.width + this.widthUnit;
+            element.style.width = this.width + 'px';
         }
 
         return element;
@@ -767,7 +762,7 @@ class DynamicTableColumn {
 
     setWidth(width) {
         this.width = width;
-        this.headerElement.style.width = width + this.widthUnits;
+        this.headerElement.style.width = width + 'px';
     }
 } // class DynamicTableColumn
 
