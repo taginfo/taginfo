@@ -28,7 +28,7 @@ class Taginfo < Sinatra::Base
         @context[:rtype] = @rtype
 
         javascript_for(:d3)
-        javascript "#{ r18n.locale.code }/relation"
+        javascript "pages/relation"
         erb :relation
     end
 

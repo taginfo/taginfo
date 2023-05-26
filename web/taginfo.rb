@@ -162,12 +162,12 @@ class Taginfo < Sinatra::Base
     #-------------------------------------
 
     get '/' do
-        javascript "#{ r18n.locale.code }/index"
+        javascript "pages/index"
         erb :index
     end
 
     get '/test-index' do
-        javascript "#{ r18n.locale.code }/test-index"
+        javascript "pages/test-index"
         erb :'test-index'
     end
 
@@ -193,7 +193,7 @@ class Taginfo < Sinatra::Base
         get '/' + page do
             @title = t.osm[page]
             section page
-            javascript "#{ r18n.locale.code }/#{ page }"
+            javascript "/pages/#{ page }"
             erb page.to_sym
         end
     end

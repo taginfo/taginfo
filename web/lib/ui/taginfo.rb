@@ -120,7 +120,7 @@ class Taginfo < Sinatra::Base
             "<tr><td class='#{c}' style='padding-left: #{ level * 16 + 6 }px;'><span data-tooltip-position='OnRight' title='#{ name }'>#{ key }</span></td><td class='#{c}'>#{ en }</td><td class='#{c}' lang='#{@lang}' dir='#{direction_from_lang_code(@lang)}'>#{ other }</td></tr>"
         }
 
-        javascript "#{ r18n.locale.code }/taginfo/i18n"
+        javascript "pages/taginfo/i18n"
         erb :'taginfo/i18n'
     end
 
@@ -193,7 +193,7 @@ class Taginfo < Sinatra::Base
         @stats_lang   = @db.select("SELECT lang,   count(*) AS count FROM wiki.problems GROUP BY lang   ORDER BY lang").execute()
 
         javascript_for(:d3)
-        javascript "#{ r18n.locale.code }/taginfo/wiki-problems"
+        javascript "pages/taginfo/wiki-problems"
         erb :'taginfo/wiki-problems'
     end
 

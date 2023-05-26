@@ -7,10 +7,10 @@ class Taginfo < Sinatra::Base
 
         @query = params[:q]
         if @query =~ /(.*)=(.*)/
-            javascript "#{ r18n.locale.code }/search_tags"
+            javascript "pages/search_tags"
             erb :search_tags
         else
-            javascript "#{ r18n.locale.code }/search"
+            javascript "pages/search"
             erb :search
         end
     end

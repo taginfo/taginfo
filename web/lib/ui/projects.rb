@@ -4,7 +4,7 @@ class Taginfo < Sinatra::Base
     get '/projects' do
         @title = t.taginfo.projects
         section :projects
-        javascript "#{ r18n.locale.code }/projects"
+        javascript "pages/projects"
         erb :projects
     end
 
@@ -32,7 +32,7 @@ class Taginfo < Sinatra::Base
 
         @context[:project] = @project_id
 
-        javascript "#{ r18n.locale.code }/project"
+        javascript "pages/project"
         erb :project
     end
 

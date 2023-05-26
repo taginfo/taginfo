@@ -63,7 +63,7 @@ class Taginfo < Sinatra::Base
         @context[:value] = @value
 
         javascript_for(:d3)
-        javascript "#{ r18n.locale.code }/tag"
+        javascript "pages/tag"
         erb :tag
     end
 

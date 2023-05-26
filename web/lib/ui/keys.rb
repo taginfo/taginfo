@@ -37,7 +37,7 @@ class Taginfo < Sinatra::Base
         @context[:countAllValues] = @count_all_values
 
         javascript_for(:d3)
-        javascript "#{ r18n.locale.code }/key"
+        javascript "pages/key"
         erb :key
     end
 
