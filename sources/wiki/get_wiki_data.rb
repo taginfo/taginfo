@@ -57,8 +57,8 @@ PAGE_TITLE_FORMAT = %r{^([-_:.,= ()]|[[:alnum:]])+$}.freeze
 # Format of image titles
 IMAGE_TITLE_FORMAT = %r{^(file|image):(.*)$}i.freeze
 
-# Language code format (something link 'en', or 'en_GB')
-LANGUAGE_CODE = %r{^[a-z]{2}(-[a-z0-9]+)?$}i.freeze
+# Language code format (something link 'en', or 'en-GB')
+LANGUAGE_CODE = %r{^[a-z]{2,3}(-[a-z0-9]+)?$}i.freeze
 
 CONTAINS_SLASH = %r{/}.freeze
 
