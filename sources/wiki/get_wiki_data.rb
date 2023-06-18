@@ -227,7 +227,7 @@ class WikiPage
     def set_osmcarto_rendering(ititle, db)
         @osmcarto_rendering = ''
         if ititle.nil?
-            puts "ERROR: invalid osmcarto-rendering: page='#{title}' image=nil"
+            puts "ERROR: empty osmcarto-rendering: page='#{title}' image=nil"
             db.execute("INSERT INTO problems (location, reason, title, lang, key, value) VALUES ('Template:Key/Value/RelationDescription', 'osmcarto-rendering parameter empty', ?, ?, ?, ?)", [title, lang, key, value])
         elsif IMAGE_TITLE_FORMAT.match(ititle)
             @osmcarto_rendering = "File:#{Regexp.last_match(2)}"
@@ -235,8 +235,8 @@ class WikiPage
                 puts "WARN: possible invalid character in osmcarto-rendering image title: page='#{title}' image='#{ititle}'"
             end
         else
-            puts "ERROR: invalid osmcarto-rendering: page='#{title}' image='#{ititle}'"
-            db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'invalid osmcarto-rendering parameter', ?, ?, ?, ?, ?)", [title, lang, key, value, ititle])
+            puts "ERROR: non-file osmcarto-rendering: page='#{title}' image='#{ititle}'"
+            db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'non-file osmcarto-rendering parameter', ?, ?, ?, ?, ?)", [title, lang, key, value, ititle])
         end
     end
 
