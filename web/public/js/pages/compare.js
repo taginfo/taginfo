@@ -3,6 +3,10 @@ function page_init() {
         d.keyOrTag = createKeyOrTagFromHash(d);
     }
 
+    const chronologyLinkElement = document.getElementById('chronology-link');
+    chronologyLinkElement.setAttribute('href',
+        'https://taghistory.raifer.tech/?#' + context.data.map( d => '***/' + encodeURIComponent(d.key) + '/' + (d.value ? encodeURIComponent(d.value) : '') ).join('&'))
+
     const fetch_promises = context.data.map(function(d, index) {
         let params = { key: d.key };
         if (d.keyOrTag.type == 'tag') {

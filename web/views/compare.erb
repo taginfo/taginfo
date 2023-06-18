@@ -111,12 +111,21 @@ html[dir="rtl"] table.compstat th {
     text-align: right;
 }
 
+#tools {
+    position: absolute;
+    right: 20px;
+    margin-top: -4px !important;
+}
+
 CSS
 %>
 <h1 class="section"><%= h(t.taginfo.comparison) %></h1>
 <% if @data.size == 0 %>
 <p class="empty"><%= h(t.pages.compare.nothing_to_compare) %></p>
 <% else %>
+<div id="tools" class="no-print"><ul><li class="button">
+    <a target="_new" id="chronology-link"><%= h(t.comparison.chronology_button) %></a>
+</li></ul></div>
 <div class="comparison">
 <% @data.each_with_index do |data, num| %>
     <div class="title item<%= num %>">
@@ -143,4 +152,5 @@ CSS
     <div class="projects item<%= num %>"><b></b> <a class="data"></a></div>
     <div class="map item<%= num %>"><div></div></div>
 <% end %>
+</div>
 <% end %>
