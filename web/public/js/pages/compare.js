@@ -62,6 +62,8 @@ function fill_data(item, index) {
 
     get_el(index, '.projects b').innerText = texts.pages[itemObject.type].projects.title + ':';
     get_el(index, '.projects .data').innerText = item.projects;
+    itemObject.tab = 'projects';
+    get_el(index, '.projects .data').setAttribute('href', itemObject.url());
 
     if (item.has_map) {
         const apiPrefix = '/api/4/' + (item.value ? 'tag' : 'key') + '/distribution/';
