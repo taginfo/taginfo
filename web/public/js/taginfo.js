@@ -1183,6 +1183,7 @@ class DynamicTable {
 
             this.display(json);
         } catch (error) {
+            console.log(error);
             this.clearTableBody();
             if (this.toolbar) {
                 this.toolbar.querySelector('.dt-info').innerHTML = span(h(texts.dynamic_table.errormsg), 'bad');
