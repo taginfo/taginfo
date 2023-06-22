@@ -253,7 +253,7 @@ class ChartValues {
 
 function page_init() {
     up = function() { window.location = build_link('/keys'); }
-    activate_josm_button();
+    activateJOSMButton();
 
     const filter = document.getElementById('filter');
     filter.addEventListener('change', function(element) {

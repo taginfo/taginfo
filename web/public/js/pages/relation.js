@@ -291,7 +291,7 @@ class ChartRoles {
 
 function page_init() {
     up = function() { window.location = build_link('/relations'); };
-    activate_josm_button();
+    activateJOSMButton();
     activateTagHistoryButton([{ type: 'relation', key: 'type', value: context.rtype }]);
 
     const relation = new TaginfoRelation(context.rtype);

@@ -117,7 +117,7 @@ const tabsConfig = {
 };
 
 function page_init() {
-    activate_josm_button();
+    activateJOSMButton();
 
     const filter = document.getElementById('filter');
     filter.addEventListener('change', function(element) {

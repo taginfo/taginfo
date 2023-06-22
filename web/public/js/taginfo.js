@@ -1558,7 +1558,7 @@ class ComparisonListDisplay {
 
 /* ============================ */
 
-function activate_josm_button() {
+function activateJOSMButton() {
     const button = document.getElementById('josm_button');
     if (!button) {
         return;
