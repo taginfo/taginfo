@@ -75,9 +75,11 @@ cd web
 
 You can also use it via [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/).
 
+(On Debian install these packages: `uwsgi uwsgi-core uwsgi-plugin-rack-ruby3.1`.)
+
 ```sh
 cd web
-uwsgi uwsgi.ini
+bundle exec uwsgi uwsgi.ini
 ```
 
 You can change various settings in the [config file](web/uwsgi.ini) and use
