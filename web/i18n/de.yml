@@ -485,7 +485,6 @@ comparison:
     add_tag: Diesen Tag hinzufügen
     clear: Vergleichsliste löschen
     compare: Keys/Tags vergleichen
-    chronology_button: Chronologie anzeigen
 
 sources:
     master:

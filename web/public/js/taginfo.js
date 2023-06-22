@@ -1580,6 +1580,19 @@ function activate_josm_button() {
     });
 }
 
+function activateTagHistoryButton(data) {
+    const buttonElement = document.getElementById('osm-tag-history-button');
+    const items = data.map(d => {
+        if (!d.type || d.type == 'all') {
+            d.type = '***';
+        } else if (d.type.endsWith('s')) {
+            d.type = d.type.substring(0, d.type.length - 1);
+        }
+        return d.type + '/' + encodeURIComponent(d.key) + '/' + (d.value ? encodeURIComponent(d.value) : '');
+    });
+    buttonElement.setAttribute('href', 'https://taghistory.raifer.tech/?#' + items.join('&'));
+}
+
 /* ============================ */
 
 class Autocomplete {

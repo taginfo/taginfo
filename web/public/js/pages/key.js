@@ -260,6 +260,8 @@ function page_init() {
         window.location.search = new URLSearchParams({ 'filter': element.target.value });
     });
 
+    activateTagHistoryButton([{ type: filter.value, key: context.key }]);
+
     const key = new TaginfoKey(context.key);
 
     document.querySelector('h1').innerHTML = key.content();

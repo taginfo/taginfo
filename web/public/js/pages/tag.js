@@ -124,6 +124,8 @@ function page_init() {
         window.location.search = new URLSearchParams({ 'filter': element.target.value });
     });
 
+    activateTagHistoryButton([{ type: filter.value, key: context.key, value: context.value }]);
+
     const key = new TaginfoKey(context.key);
     const tag = key.toTag(context.value);
 

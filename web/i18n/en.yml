@@ -465,7 +465,6 @@ comparison:
     add_tag: Add this tag to list
     clear: Clear comparison list
     compare: Compare keys/tags
-    chronology_button: Show chronology graph
 
 sources:
     master:

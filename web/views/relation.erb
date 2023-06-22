@@ -10,6 +10,7 @@
             <li class="button disabled" title="<%= h(t.pages.relation.button_disabled) %>">JOSM</li>
 <% end %>
             <li class="button"><%= turbo_link(@count_all_values, 'relations', 'type', @rtype) %></li>
+            <li class="button"><a target="_new" id="osm-tag-history-button">OSM Tag History</a></li>
         </ul>
     </div>
     <div>
