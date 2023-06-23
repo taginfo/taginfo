@@ -3,8 +3,7 @@
 # This module contains code related to the IETF BCP47 "Tags for Identifying
 # Languages" and the IANA language subtag registry.
 module BCP47
-
-    SUBTAG_TYPES = %w( language script region variant )
+    SUBTAG_TYPES = %w[ language script region variant ]
 
     def self.get_filter(p)
         if p && SUBTAG_TYPES.include?(p)
@@ -27,10 +26,10 @@ module BCP47
         attr_reader :prefix, :type, :langtag, :langtag_state, :lang, :lang_state, :lang_note, :script, :script_state, :script_note, :region, :region_state, :region_note, :notes
 
         def get_by_code(stype, subtag)
-            @db.select("SELECT * FROM languages.subtags WHERE stype=? AND subtag=?", stype, subtag).execute() do |row|
+            @db.select("SELECT * FROM languages.subtags WHERE stype=? AND subtag=?", stype, subtag).execute do |row|
                 return row
             end
-            return nil
+            nil
         end
 
         def initialize(db, key)

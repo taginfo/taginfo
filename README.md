@@ -25,7 +25,7 @@ when you switch to a new version, sometimes things can break.
 
 It uses:
 
-* Ruby (must be at least 2.4)
+* Ruby (must be at least 3.0)
 * [Sinatra web framework](http://www.sinatrarb.com/) and other ruby libraries
 * curl binary
 * sqlite3 binary (version 3.9 or above with FTS5 and regexp support)

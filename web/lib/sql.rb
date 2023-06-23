@@ -157,10 +157,10 @@ module SQL
             end
 
             unless values.empty?
-                @order_by = "ORDER BY " + values.map{ |value|
+                @order_by = "ORDER BY " + values.map do |value|
                     value = o.default if value.nil?
                     o[value.to_s].map{ |oel| oel.to_s(direction) }.join(',')
-                }.join(',')
+                end.join(',')
             end
 
             self
@@ -243,7 +243,7 @@ module SQL
 
         attr_reader :default
 
-        def initialize(values, &block)
+        def initialize(values)
             @allowed = {}
             if block_given?
                 yield self
@@ -266,7 +266,7 @@ module SQL
             field = field.to_s
             @default = field unless defined? @default
             if field =~ /^(.*)!$/
-                field = $1
+                field = ::Regexp.last_match(1)
                 reverse = true
             else
                 reverse = false
@@ -282,5 +282,4 @@ module SQL
         end
 
     end
-
 end

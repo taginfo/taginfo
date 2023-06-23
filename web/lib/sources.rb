@@ -16,10 +16,8 @@ class Sources
     end
 
     # Enumerate all available sources
-    def each
-        @sources.each_value do |source|
-            yield source
-        end
+    def each(&block)
+        @sources.each_value(&block)
     end
 
     # The number of available sources

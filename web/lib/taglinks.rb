@@ -51,20 +51,21 @@ TAGLINKS = {
         return [ TagLink.new('ISO: ' + value, 'https://www.iso.org/obp/ui/#iso:code:3166:' + value),
                  TagLink.new('Wikipedia: ' + value, 'https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#' + value) ]
     }),
-    phone:     tag_match(%r{^\+[0-9. -]+$},  lambda { |value| return [ TagLink.new('Phone number: ' + value, 'tel:' + value.gsub(/[ .-]+/, '-')) ] }),
+    phone:     tag_match(%r{^\+[0-9. -]+$},  ->(value){ return [ TagLink.new('Phone number: ' + value, 'tel:' + value.gsub(/[ .-]+/, '-')) ] }),
     'ref:bag': tag_match(%r{^[0-9]+$},       lambda { |value|
         id = value.rjust(16, '0')
         return [ TagLink.new('Basisregistratie Adressen en Gebouwen (BAG): ' + id, 'https://bagviewer.kadaster.nl/lvbag/bag-viewer/index.html#?searchQuery=' + id) ]
     }),
-    species:   tag_match(%r{^[a-zA-Z -]+$},  lambda { |value| return [ TagLink.new('Wikispecies: ' + value, 'https://species.wikimedia.org/wiki/' + value) ] }),
-    url:       tag_match(%r{^https?://},     lambda { |value| return [ TagLink.new('Website', value) ] }),
-    website:   tag_match(%r{^https?://},     lambda { |value| return [ TagLink.new('Website', value) ] }),
-    wikidata:  tag_match(%r{^Q[0-9]{1,10}$}, lambda { |value| return [ TagLink.new('Wikidata: ' + value, 'https://www.wikidata.org/wiki/' + value) ] }),
+    species:   tag_match(%r{^[a-zA-Z -]+$},  ->(value){ return [ TagLink.new('Wikispecies: ' + value, 'https://species.wikimedia.org/wiki/' + value) ] }),
+    url:       tag_match(%r{^https?://},     ->(value){ return [ TagLink.new('Website', value) ] }),
+    website:   tag_match(%r{^https?://},     ->(value){ return [ TagLink.new('Website', value) ] }),
+    wikidata:  tag_match(%r{^Q[0-9]{1,10}$}, ->(value){ return [ TagLink.new('Wikidata: ' + value, 'https://www.wikidata.org/wiki/' + value) ] }),
     wikipedia: tag_match(%r{^[a-z-]{2,8}:},  lambda { |value|
         c = value.split(':')
         if $WIKIPEDIA_SITES.include?(c[0])
             return [ TagLink.new('Wikipedia', "https://#{c[0]}.wikipedia.org/wiki/#{c[1]}") ]
         end
+
         return []
     })
 }

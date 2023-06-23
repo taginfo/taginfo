@@ -5,22 +5,16 @@ class Report
 
     attr_reader :title, :sources
 
-    def self.each
-        @@reports.sort_by(&:title).each do |report|
-            yield report
-        end
+    def self.each(&block)
+        @@reports.sort_by(&:title).each(&block)
     end
 
-    def self.each_visible
-        @@reports.select(&:visible?).sort_by(&:title).each do |report|
-            yield report
-        end
+    def self.each_visible(&block)
+        @@reports.select(&:visible?).sort_by(&:title).each(&block)
     end
 
-    def self.each_visible_with_index
-        @@reports.select(&:visible?).sort_by(&:title).each_with_index do |report, idx|
-            yield report, idx
-        end
+    def self.each_visible_with_index(&block)
+        @@reports.select(&:visible?).sort_by(&:title).each_with_index(&block)
     end
 
     def initialize(title, *sources)

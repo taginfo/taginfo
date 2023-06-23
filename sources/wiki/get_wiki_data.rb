@@ -318,12 +318,12 @@ class WikiPage
         if template.named_parameters['description']
             desc = []
             template.named_parameters['description'].each do |i|
-                if i.class == Template
+                if i.instance_of?(Template)
                     desc << ' ' << i.parameters.join('=') << ' '
                 else
                     desc << i
                 end
-                @description = desc.join('').strip
+                @description = desc.join.strip
                 if PROBLEMATIC_DESCRIPTION.match(@description)
                     puts "ERROR: problematic description: #{ @description }"
                     db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'description parameter should only contain plain text', ?, ?, ?, ?, ?)", [title, lang, key, value, description])
@@ -355,13 +355,13 @@ class WikiPage
         @on_relation = parse_type('onRelation', template.named_parameters['onRelation'], db)
 
         template.named_parameters['implies']&.each do |i|
-            if i.class == Template
+            if i.instance_of?(Template)
                 tags_implies << i.parameters.join('=')
             end
         end
 
         template.named_parameters['combination']&.each do |i|
-            if i.class == Template
+            if i.instance_of?(Template)
                 tags_combination << i.parameters.join('=')
             end
         end
@@ -372,7 +372,7 @@ class WikiPage
 
         if template.named_parameters['statuslink']
             @statuslink = template.named_parameters['statuslink'][0]
-            if @statuslink.class == Template
+            if @statuslink.instance_of?(Template)
                 @statuslink = nil
             end
         end
@@ -633,11 +633,12 @@ database.transaction do |db|
             line.chomp!
             (type, timestamp, namespace, title) = line.split("\t")
 
-            if title =~ /(^|:)Key:/
+            case title
+            when /(^|:)Key:/
                 page = KeyPage.new(type, timestamp, namespace, title)
-            elsif title =~ /(^|:)Tag:/
+            when /(^|:)Tag:/
                 page = TagPage.new(type, timestamp, namespace, title)
-            elsif title =~ /(^|:)Relation:/
+            when /(^|:)Relation:/
                 page = RelationPage.new(type, timestamp, namespace, title)
             else
                 puts "ERROR: Wiki page has wrong format: '#{title}'"

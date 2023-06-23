@@ -2,30 +2,30 @@
 class Taginfo < Sinatra::Base
 
     get %r{/tags/(.*)} do |tag|
-        if tag.match(/=/)
-            kv = tag.split('=', 2)
-        else
-            kv = [ tag, '' ]
-        end
-        if params[:key].nil?
-            @key = kv[0]
-        else
-            @key = params[:key]
-        end
-        if params[:value].nil?
-            @value = kv[1]
-        else
-            @value = params[:value]
-        end
+        kv = if tag.match(/=/)
+                 tag.split('=', 2)
+             else
+                 [ tag, '' ]
+             end
+        @key = if params[:key].nil?
+                   kv[0]
+               else
+                   params[:key]
+               end
+        @value = if params[:value].nil?
+                     kv[1]
+                 else
+                     params[:value]
+                 end
         @tag = @key + '=' + @value
 
-        @key_uri  = escape(@key)
-        @value_uri  = escape(@value)
+        @key_uri = escape(@key)
+        @value_uri = escape(@value)
 
         @title = [@key + '=' + @value, t.osm.tags]
         section :tags
 
-        @filter_type = get_filter()
+        @filter_type = get_filter
         @sel = Hash.new('')
         @sel[@filter_type] = ' selected="selected"'
         @filter_xapi = { 'all' => '*', nil => '*', 'nodes' => 'node', 'ways' => 'way', 'relations' => 'relation' }[@filter_type]
@@ -39,7 +39,7 @@ class Taginfo < Sinatra::Base
         @desc = wrap_description(t.pages.tag, get_tag_description(@key, @value))
 
         @db.select("SELECT width, height, image_url, thumb_url_prefix, thumb_url_suffix FROM wiki.wikipages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang=? AND key=? AND value=? UNION SELECT width, height, image_url, thumb_url_prefix, thumb_url_suffix FROM wiki.wikipages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang='en' AND key=? AND value=? LIMIT 1", r18n.locale.code, @key, @value, @key, @value).
-            execute() do |row|
+            execute do |row|
                 @image_url = build_image_url(row)
             end
 
@@ -68,4 +68,3 @@ class Taginfo < Sinatra::Base
     end
 
 end
-

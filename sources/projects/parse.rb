@@ -24,7 +24,6 @@
 #
 #------------------------------------------------------------------------------
 
-require 'pp'
 require 'json'
 require 'sqlite3'
 
@@ -111,23 +110,23 @@ def parse_and_check(id, data, log, db)
 
     p = data[:project].clone
 
-    unless p[:name]&.is_a?(String)
+    unless p[:name].is_a?(String)
         log.fatal "MISSING project.name OR NOT A STRING."
     end
 
-    unless p[:description]&.is_a?(String)
+    unless p[:description].is_a?(String)
         log.fatal "MISSING project.description OR NOT A STRING."
     end
 
-    unless p[:project_url]&.is_a?(String)
+    unless p[:project_url].is_a?(String)
         log.fatal "MISSING project.project_url OR NOT A STRING."
     end
 
-    unless p[:contact_name]&.is_a?(String)
+    unless p[:contact_name].is_a?(String)
         log.error "MISSING project.contact_name OR NOT A STRING."
     end
 
-    unless p[:contact_email]&.is_a?(String)
+    unless p[:contact_email].is_a?(String)
         log.error "MISSING project.contact_email OR NOT A STRING."
     end
 
@@ -183,7 +182,7 @@ def parse_and_check(id, data, log, db)
             has_error = false
             on = { 'node' => 0, 'way' => 0, 'relation' => 0, 'area' => 0 }
             if d[:object_types]
-                if d[:object_types].class == Array
+                if d[:object_types].instance_of?(Array)
                     if d[:object_types] == []
                         log.warning "EMPTY tags.#{n}.object_types IS INTERPRETED AS 'ALL TYPES'. PLEASE REMOVE object_types OR ADD SOME TYPES."
                         on = { 'node' => 1, 'way' => 1, 'relation' => 1, 'area' => 1 }

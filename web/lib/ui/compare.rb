@@ -20,7 +20,7 @@ class Taginfo < Sinatra::Base
 
         @data = @data[0..4] # allow to compare maximum of 5 items
 
-        @data = @data.map{ |data|
+        @data = @data.map do |data|
             key   = data[:key]
             value = data[:value]
 
@@ -35,7 +35,7 @@ class Taginfo < Sinatra::Base
                 data[:has_map] = (@db.count('tag_distributions').condition('key=? AND value=?', key, value).get_first_i > 0)
                 data
             end
-        }.compact
+        end.compact
 
         @img_width  = (@taginfo_config.get('geodistribution.width')  * @taginfo_config.get('geodistribution.scale_compare_image')).to_i
         @img_height = (@taginfo_config.get('geodistribution.height') * @taginfo_config.get('geodistribution.scale_compare_image')).to_i

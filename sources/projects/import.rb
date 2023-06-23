@@ -41,7 +41,7 @@ project_list = ARGV[1] || 'project_list.txt'
 projects = []
 File.open(project_list) do |file|
     file.each do |line|
-        projects << line.chomp.split(' ')
+        projects << line.chomp.split
     end
 end
 
@@ -59,7 +59,7 @@ def fetch(uri_str, limit = 10)
     response = http.request(request)
 
     case response
-    when Net::HTTPRedirection then
+    when Net::HTTPRedirection
         location = response['location']
         puts "    redirect to #{location}"
         fetch(location, limit - 1)

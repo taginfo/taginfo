@@ -2,13 +2,13 @@
 class Taginfo < Sinatra::Base
 
     get %r{/relations/(.*)} do |rtype|
-        if params[:rtype].nil?
-            @rtype = rtype
-        else
-            @rtype = params[:rtype]
-        end
+        @rtype = if params[:rtype].nil?
+                     rtype
+                 else
+                     params[:rtype]
+                 end
 
-        @rtype_uri  = escape(@rtype)
+        @rtype_uri = escape(@rtype)
 
         @title = [@rtype, t.osm.relations]
         section :relations
@@ -19,7 +19,7 @@ class Taginfo < Sinatra::Base
         @desc = wrap_description(t.pages.relation, get_relation_description(@rtype))
 
         @db.select("SELECT width, height, image_url, thumb_url_prefix, thumb_url_suffix FROM wiki.relation_pages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang=? AND rtype=? UNION SELECT width, height, image_url, thumb_url_prefix, thumb_url_suffix FROM wiki.relation_pages LEFT OUTER JOIN wiki.wiki_images USING(image) WHERE lang='en' AND rtype=? LIMIT 1", r18n.locale.code, @rtype, @rtype).
-            execute() do |row|
+            execute do |row|
                 @image_url = build_image_url(row)
             end
 

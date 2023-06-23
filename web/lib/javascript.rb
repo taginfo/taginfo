@@ -18,7 +18,7 @@ class Javascript
     @@js_files = {
         :taginfo   => [ 'taginfo' ],
         :d3        => [ 'd3/d3.min' ],
-        :d3_cloud  => [ 'd3/d3.layout.cloud' ],
+        :d3_cloud  => [ 'd3/d3.layout.cloud' ]
     }
 
     def self.init(ids)
