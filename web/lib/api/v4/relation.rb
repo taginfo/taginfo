@@ -79,7 +79,7 @@ class Taginfo < Sinatra::Base
                 :count_way_members               =>  row['count_ways'].to_i,
                 :count_way_members_fraction      =>  relation_type_info['members_ways'].to_i == 0 ? 0 : (row['count_ways'].to_f / relation_type_info['members_ways'].to_i).round(4),
                 :count_relation_members          =>  row['count_relations'].to_i,
-                :count_relation_members_fraction =>  relation_type_info['members_relations'].to_i == 0 ? 0 : (row['count_relations'].to_f / relation_type_info['members_relations'].to_i).round(4),
+                :count_relation_members_fraction =>  relation_type_info['members_relations'].to_i == 0 ? 0 : (row['count_relations'].to_f / relation_type_info['members_relations'].to_i).round(4)
             } }
         )
     end

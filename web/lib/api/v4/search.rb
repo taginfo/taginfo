@@ -46,7 +46,7 @@ class Taginfo < Sinatra::Base
             res.map{ |row| {
                 :key       => row['key'],
                 :value     => row['value'],
-                :count_all => row['count_all'].to_i,
+                :count_all => row['count_all'].to_i
             }}
         )
     end
@@ -116,7 +116,7 @@ class Taginfo < Sinatra::Base
             res.map{ |row| {
                 :rtype     => row['rtype'],
                 :role      => row['role'],
-                :count_all => row['count_all'].to_i,
+                :count_all => row['count_all'].to_i
             }}
         )
     end
@@ -164,7 +164,7 @@ class Taginfo < Sinatra::Base
             res.map{ |row| {
                 :key       => row['key'],
                 :value     => row['value'],
-                :count_all => row['count_all'].to_i,
+                :count_all => row['count_all'].to_i
             }}
         )
     end

@@ -262,7 +262,7 @@ class Taginfo < Sinatra::Base
         :description => 'Get chronology of tag counts.',
         :parameters => {
             :key => 'Tag key (required).',
-            :value => 'Tag value (required).',
+            :value => 'Tag value (required).'
         },
         :paging => :no,
         :result => no_paging_results([

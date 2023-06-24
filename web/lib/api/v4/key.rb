@@ -455,7 +455,7 @@ class Taginfo < Sinatra::Base
     api(4, 'key/chronology', {
         :description => 'Get chronology of key counts.',
         :parameters => {
-            :key => 'Tag key (required).',
+            :key => 'Tag key (required).'
         },
         :paging => :no,
         :result => no_paging_results([
@@ -535,7 +535,7 @@ class Taginfo < Sinatra::Base
                     :type           => type,
                     :count          => row['count_' + type].to_i,
                     :count_fraction => (row['count_' + type].to_f / get_total(type)).round(4),
-                    :values         => row['values_' + type].to_i,
+                    :values         => row['values_' + type].to_i
                 }
             end
             data[:projects] = row['projects'].to_i
