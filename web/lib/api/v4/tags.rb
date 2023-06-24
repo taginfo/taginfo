@@ -89,7 +89,7 @@ class Taginfo < Sinatra::Base
                             info = { 'description' => w['description'] }
                             unless w['image'].nil?
                                 images[w['image']] = 1
-                                info['image'] = {'image' => w['image']}
+                                info['image'] = { 'image' => w['image'] }
                             end
                             data['wiki'][w['lang']] = info
                         end
@@ -113,11 +113,11 @@ class Taginfo < Sinatra::Base
                             info = { 'description' => w['description'] }
                             unless w['image'].nil?
                                 images[w['image']] = 1
-                                info['image'] = {'image' => w['image']}
+                                info['image'] = { 'image' => w['image'] }
                             end
                             unless w['osmcarto_rendering'].nil?
                                 images[w['osmcarto_rendering']] = 1
-                                info['osmcarto_rendering'] = {'image' => w['osmcarto_rendering']}
+                                info['osmcarto_rendering'] = { 'image' => w['osmcarto_rendering'] }
                             end
                             data['wiki'][w['lang']] = info
                         end

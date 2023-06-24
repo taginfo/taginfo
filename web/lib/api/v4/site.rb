@@ -11,7 +11,7 @@ class Taginfo < Sinatra::Base
             [:background_image,    :STRING, 'URL of background image'],
             [:image_attribution,   :STRING, 'map attribution for comparison background']
         ],
-        :example => { }
+        :example => {}
     }) do
         data = {}
         [:width, :height, :scale_image, :scale_compare_image, :background_image, :image_attribution].each do |k|
@@ -30,7 +30,7 @@ class Taginfo < Sinatra::Base
             [:contact,     :STRING, 'Contact information to admin.'],
             [:area,        :STRING, 'Description of area covered.']
         ],
-        :example => { }
+        :example => {}
     }) do
         data = {}
         [:url, :name, :description, :icon, :contact, :area].each do |k|
@@ -48,7 +48,7 @@ class Taginfo < Sinatra::Base
             [:update_start, :STRING, 'Date/Timestamp when last update was started.'],
             [:update_end  , :STRING, 'Date/Timestamp when last update was finished.']
         ],
-        :example => { },
+        :example => {},
         :ui => '/sources'
     }) do
         return JSON.generate(@sources.visible.map do |source| {

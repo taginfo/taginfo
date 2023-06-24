@@ -56,7 +56,7 @@ class Taginfo < Sinatra::Base
             [:value,    :STRING, 'Value this wiki page is for (or null if not a "Tag" page)'],
             [:info,     :STRING, 'Informational string dependant on type of problem']
         ]),
-        :example => { },
+        :example => {},
         :ui => '/taginfo/wiki-problems#list'
     }) do
         total = @db.count('wiki.problems').
