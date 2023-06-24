@@ -15,7 +15,7 @@ class Taginfo < Sinatra::Base
             :ways      => { :doc => 'Only values on tags used on ways.' },
             :relations => { :doc => 'Only values on tags used on relations.' }
         },
-        :sort => %w( together_count other_tag from_fraction ),
+        :sort => %w[ together_count other_tag from_fraction ],
         :result => paging_results([
             [:other_key,      :STRING, 'Other key.'],
             [:other_value,    :STRING, 'Other value (may be empty).'],
@@ -34,9 +34,9 @@ class Taginfo < Sinatra::Base
         if @ap.sortname == 'to_count'
             @ap.sortname = ['together_count']
         elsif @ap.sortname == 'from_count'
-            @ap.sortname = ['from_fraction', 'together_count', 'other_key', 'other_value']
+            @ap.sortname = %w[ from_fraction together_count other_key other_value ]
         elsif @ap.sortname == 'other_tag'
-            @ap.sortname = ['other_key', 'other_value']
+            @ap.sortname = %w[ other_key other_value ]
         end
 
         cq = @db.count('db.tag_combinations')
@@ -121,14 +121,14 @@ class Taginfo < Sinatra::Base
         out = []
 
         # default values
-        ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
+        %w[ all nodes ways relations ].each_with_index do |type, n|
             out[n] = { :type => type, :count => 0, :count_fraction => 0.0 }
         end
 
         @db.select('SELECT * FROM db.tags').
             condition('key = ? AND value = ?', key, value).
             execute do |row|
-                ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
+                %w[ all nodes ways relations ].each_with_index do |type, n|
                     out[n] = {
                         :type           => type,
                         :count          => row['count_'  + type].to_i,
@@ -195,7 +195,7 @@ class Taginfo < Sinatra::Base
             :ways      => { :doc => 'Only values on tags used on ways.' },
             :relations => { :doc => 'Only values on tags used on relations.' }
         },
-        :sort => %w( project_name tag ),
+        :sort => %w[ project_name tag ],
         :result => paging_results([
             [:project_id,       :STRING, 'Project ID'],
             [:project_name,     :STRING, 'Project name'],
@@ -333,13 +333,13 @@ class Taginfo < Sinatra::Base
         data = { :key => key, :value => value, :counts => [] }
 
         # default values
-        ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
+        %w[ all nodes ways relations ].each_with_index do |type, n|
             data[:counts][n] = { :type => type, :count => 0, :count_fraction => 0.0 }
         end
 
         row = @db.select("SELECT count_all, count_nodes, count_ways, count_relations FROM db.tags").condition('key=? AND value=?', key, value).get_first_row
         if row
-            ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
+            %w[ all nodes ways relations ].each_with_index do |type, n|
                 data[:counts][n] = {
                     :type           => type,
                     :count          => row['count_' + type].to_i,

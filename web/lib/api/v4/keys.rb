@@ -17,7 +17,7 @@ class Taginfo < Sinatra::Base
         :parameters => { :query => 'Only show keys matching this query (substring match, optional).' },
         :paging => :optional,
         :filter => @@filters,
-        :sort => %w( key count_all count_nodes count_ways count_relations values_all users_all in_wiki length ),
+        :sort => %w[ key count_all count_nodes count_ways count_relations values_all users_all in_wiki length ],
         :result => paging_results([
             [:key,                      :STRING, 'Key'],
             [:count_all,                :INT,    'Number of objects in the OSM database with this key.'],
@@ -150,7 +150,7 @@ class Taginfo < Sinatra::Base
         :description => 'Get list of wiki pages in different languages for all keys.',
         :parameters => { :query => 'Only show keys matching this query (substring match, optional).' },
         :paging => :optional,
-        :sort => %w( key ),
+        :sort => %w[ key ],
         :result => paging_results([
             [:key, :STRING, 'Key'],
             [:lang, :HASH, 'Hash with language codes as keys and values showing what type of wiki pages are available.']
@@ -186,7 +186,7 @@ class Taginfo < Sinatra::Base
         :description => 'Get list of pairs of similar keys, one used very often, one used rarely.',
         :parameters => { :query => 'Only show keys matching this query (substring match, optional).' },
         :paging => :optional,
-        :sort => %w( key_common key_rare count_all_common count_all_rare similarity ),
+        :sort => %w[ key_common key_rare count_all_common count_all_rare similarity ],
         :result => paging_results([
             [:key_common,       :STRING, 'Key thats used often in OSM database'],
             [:count_all_common, :INT,    'Number of objects in the OSM database with the common key.'],
@@ -247,7 +247,7 @@ class Taginfo < Sinatra::Base
             :query => 'Only show results where the key matches this query (substring match, optional).'
         },
         :paging => :optional,
-        :sort => %w( key count_all values_all users_all ),
+        :sort => %w[ key count_all values_all users_all ],
         :result => paging_results([
             [:key,                :STRING, 'Key'],
             [:count_all,          :INT,    'Number of objects in database with this key.'],

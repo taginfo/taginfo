@@ -14,7 +14,7 @@ class Taginfo < Sinatra::Base
             [:wiki_tag_pages         , :INT,    'Number of "Tag" wiki pages in this language.'],
             [:wiki_tag_pages_fraction, :FLOAT,  'Number of "Tag" wiki pages in this language in relation to the number of tags described in any language in the wiki.']
         ]),
-        :sort => %w( code native_name english_name wiki_key_pages wiki_tag_pages ),
+        :sort => %w[ code native_name english_name wiki_key_pages wiki_tag_pages ],
         :example => { :sortname => 'wiki_key_pages', :sortorder => 'desc' },
         :ui => '/reports/languages'
     }) do
@@ -46,7 +46,7 @@ class Taginfo < Sinatra::Base
     api(0, 'wiki/problems', {
         :description => 'Show problems encountered by taginfo while parsing wiki pages',
         :paging => :optional,
-        :sort => %w( location reason title lang tag ),
+        :sort => %w[ location reason title lang tag ],
         :result => paging_results([
             [:location, :STRING, 'Problem location'],
             [:reason,   :STRING, 'Problem reason'],

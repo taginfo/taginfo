@@ -4,7 +4,7 @@ def add_image_data(images, data, image_type)
     unless data[image_type].nil?
         data_title = data[image_type]['image']
         if images[data_title] != 1
-            %w(width height mime image_url thumb_url_prefix thumb_url_suffix).each do |arg|
+            %w[ width height mime image_url thumb_url_prefix thumb_url_suffix ].each do |arg|
                 data[image_type][arg] = images[data_title][arg]
             end
         end
@@ -95,7 +95,7 @@ class Taginfo < Sinatra::Base
                         end
 
                         wiki_default = wiki.select{ |w| w['lang'] == 'en' }[0] || wiki[0]
-                        %w(on_node on_way on_area on_relation).each do |arg|
+                        %w[ on_node on_way on_area on_relation ].each do |arg|
                             data[arg] = wiki_default[arg]
                         end
                     end
@@ -123,7 +123,7 @@ class Taginfo < Sinatra::Base
                         end
 
                         wiki_default = wiki.select{ |w| w['lang'] == 'en' }[0] || wiki[0]
-                        %w(on_node on_way on_area on_relation).each do |arg|
+                        %w[ on_node on_way on_area on_relation ].each do |arg|
                             data[arg] = wiki_default[arg]
                         end
                     end
@@ -179,7 +179,7 @@ class Taginfo < Sinatra::Base
         :description => 'Get list of most often used tags.',
         :parameters => { :query => 'Only show tags matching this query (substring match in key and value, optional).' },
         :paging => :optional,
-        :sort => %w( tag count_all count_nodes count_ways count_relations ),
+        :sort => %w[ tag count_all count_nodes count_ways count_relations ],
         :result => paging_results([
             [:key,                      :STRING, 'Key'],
             [:value,                    :STRING, 'Value'],

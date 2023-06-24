@@ -4,7 +4,7 @@ class Taginfo < Sinatra::Base
     api(4, 'search/by_key_and_value', {
         :description => 'Search for tags by key and/or value.',
         :parameters => { :query => 'Value to search for (substring search, required).' },
-        :sort => %w( count_all key value ),
+        :sort => %w[ count_all key value ],
         :paging => :optional,
         :result => paging_results([
             [:key,       :STRING, 'Key'],
@@ -26,7 +26,7 @@ class Taginfo < Sinatra::Base
                 sel = @db.select('SELECT * FROM ftsearch WHERE key MATCH ?', query_key)
             else
                 total = @db.execute(%q{SELECT count(*) FROM ftsearch WHERE ftsearch MATCH 'key:"' || ? || '" value:"' || ? || '"'}, query_key, query_value)[0][0].to_i
-                sel = @db.select(%q{SELECT * FROM ftsearch WHERE ftsearch MATCH 'key:"' || ? || '" value:"' || ? || '"'}, query_key, query_value)
+                sel = @db.select(%q(SELECT * FROM ftsearch WHERE ftsearch MATCH 'key:"' || ? || '" value:"' || ? || '"'), query_key, query_value)
             end
 
             res = sel.
@@ -55,7 +55,7 @@ class Taginfo < Sinatra::Base
     api(4, 'search/by_keyword', {
         :description => 'Search for keys and tags by keyword in wiki pages.',
         :parameters => { :query => 'Value to search for (substring search, required).' },
-        :sort => %w( key value ),
+        :sort => %w[ key value ],
         :paging => :optional,
         :result => paging_results([
             [:key,   :STRING, 'Key'],
@@ -88,7 +88,7 @@ class Taginfo < Sinatra::Base
     api(4, 'search/by_role', {
         :description => 'Search for relation roles.',
         :parameters => { :query => 'Role to search for (substring search, required).' },
-        :sort => %w( count_all rtype role ),
+        :sort => %w[ count_all rtype role ],
         :paging => :optional,
         :result => paging_results([
             [:rtype,     :STRING, 'Relation type.'],
@@ -127,7 +127,7 @@ class Taginfo < Sinatra::Base
     api(4, 'search/by_value', {
         :description => 'Search for tags by value.',
         :parameters => { :query => 'Value to search for (substring search, required).' },
-        :sort => %w( count_all key value ),
+        :sort => %w[ count_all key value ],
         :paging => :optional,
         :result => paging_results([
             [:key,       :STRING, 'Key'],

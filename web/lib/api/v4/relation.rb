@@ -9,7 +9,7 @@ class Taginfo < Sinatra::Base
             :min_fraction => 'Only return roles which are used in at least this percent of all members (optional).'
         },
         :paging => :optional,
-        :sort => %w( role count_all_members count_node_members count_way_members count_relation_members ),
+        :sort => %w[ role count_all_members count_node_members count_way_members count_relation_members ],
         :result => paging_results([
             [:rtype,                           :STRING, 'Relation type'],
             [:role,                            :STRING, 'Relation member role.'],
@@ -99,14 +99,14 @@ class Taginfo < Sinatra::Base
         out = []
 
         # default values
-        ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
+        %w[ all nodes ways relations ].each_with_index do |type, n|
             out[n] = { :type => type, :count => 0 }
         end
 
         @db.select('SELECT * FROM db.relation_types').
             condition('rtype = ?', rtype).
             execute do |row|
-                ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
+                %w[ all nodes ways relations ].each_with_index do |type, n|
                     out[n] = {
                         :type   => type,
                         :count  => row['members_' + type].to_i
@@ -173,7 +173,7 @@ class Taginfo < Sinatra::Base
             :query => 'Only show results where the value matches this query (substring match, optional).'
         },
         :paging => :optional,
-        :sort => %w( project_name ),
+        :sort => %w[ project_name ],
         :result => paging_results([
             [:project_id,       :STRING, 'Project ID'],
             [:project_name,     :STRING, 'Project name'],

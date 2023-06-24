@@ -7,7 +7,7 @@ class Taginfo < Sinatra::Base
             :query => 'Only show results where the relation type matches this query (substring match, optional).'
         },
         :paging => :optional,
-        :sort => %w( rtype count ),
+        :sort => %w[ rtype count ],
         :result => paging_results([
             [:rtype,           :STRING, 'Relation type'],
             [:count,           :INT,    'Number of relations with this type.'],

@@ -5,7 +5,7 @@ class Taginfo < Sinatra::Base
         :description => 'Get list of all keys/tags used by a project.',
         :parameters => { :project => 'Project ID (required)' },
         :paging => :optional,
-        :sort => %w( tag count_all in_wiki ),
+        :sort => %w[ tag count_all in_wiki ],
         :result => paging_results([
             [:key,         :STRING,  'Key'],
             [:value,       :STRING,  'Value'],

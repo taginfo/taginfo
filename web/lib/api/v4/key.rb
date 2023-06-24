@@ -14,7 +14,7 @@ class Taginfo < Sinatra::Base
             :ways      => { :doc => 'Only values on tags used on ways.' },
             :relations => { :doc => 'Only values on tags used on relations.' }
         },
-        :sort => %w( together_count other_key from_fraction ),
+        :sort => %w[ together_count other_key from_fraction ],
         :result => paging_results([
             [:other_key,      :STRING, 'Other key.'],
             [:together_count, :INT,    'Number of objects that have both keys.'],
@@ -30,7 +30,7 @@ class Taginfo < Sinatra::Base
         if @ap.sortname == 'to_count'
             @ap.sortname = ['together_count']
         elsif @ap.sortname == 'from_count'
-            @ap.sortname = ['from_fraction', 'together_count', 'other_key']
+            @ap.sortname = %w[ from_fraction together_count other_key ]
         end
 
         cq = @db.count('db.key_combinations')
@@ -76,7 +76,7 @@ class Taginfo < Sinatra::Base
             :query => 'Only show results where the other_key matches this query (substring match, optional).'
         },
         :paging => :optional,
-        :sort => %w( other_key count_all similarity ),
+        :sort => %w[ other_key count_all similarity ],
         :result => paging_results([
             [:other_key,  :STRING, 'Other key.'],
             [:count_all,  :INT,    'Number of objects that have the other key.'],
@@ -158,13 +158,13 @@ class Taginfo < Sinatra::Base
         out = []
 
         # default values
-        ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
+        %w[ all nodes ways relations ].each_with_index do |type, n|
             out[n] = { :type => type, :count => 0, :count_fraction => 0.0, :values => 0 }
         end
 
         row = @db.select('SELECT * FROM db.keys').condition('key = ?', key).get_first_row
         if row
-            ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
+            %w[ all nodes ways relations ].each_with_index do |type, n|
                 out[n] = {
                     :type           => type,
                     :count          => row['count_' + type].to_i,
@@ -191,7 +191,7 @@ class Taginfo < Sinatra::Base
             :ways      => { :doc => 'Only values on tags used on ways.' },
             :relations => { :doc => 'Only values on tags used on relations.' }
         },
-        :sort => %w( value count_all count_nodes count_ways count_relations in_wiki ),
+        :sort => %w[ value count_all count_nodes count_ways count_relations in_wiki ],
         :result => paging_results([
             [:value,       :STRING, 'Value'],
             [:count,       :INT,    'Number of times this key/value is in the OSM database.'],
@@ -391,7 +391,7 @@ class Taginfo < Sinatra::Base
             :ways      => { :doc => 'Only values on tags used on ways.' },
             :relations => { :doc => 'Only values on tags used on relations.' }
         },
-        :sort => %w( project_name tag ),
+        :sort => %w[ project_name tag ],
         :result => paging_results([
             [:project_id,       :STRING, 'Project ID'],
             [:project_name,     :STRING, 'Project name'],
@@ -529,13 +529,13 @@ class Taginfo < Sinatra::Base
         data = { :key => key, :counts => [] }
 
         # default values
-        ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
+        %w[ all nodes ways relations ].each_with_index do |type, n|
             data[:counts][n] = { :type => type, :count => 0, :count_fraction => 0.0, :values => 0 }
         end
 
         row = @db.select('SELECT * FROM db.keys').condition('key = ?', key).get_first_row
         if row
-            ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
+            %w[ all nodes ways relations ].each_with_index do |type, n|
                 data[:counts][n] = {
                     :type           => type,
                     :count          => row['count_' + type].to_i,

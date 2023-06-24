@@ -8,7 +8,7 @@ class Taginfo < Sinatra::Base
             :query => 'Only show projects where name or description matches this query (substring match, optional).'
         },
         :paging => :optional,
-        :sort => %w( name unique_keys unique_values ),
+        :sort => %w[ name unique_keys unique_values ],
         :result => paging_results([
             [:id,          :STRING, 'Project id'],
             [:name,        :STRING, 'Project name'],
@@ -70,7 +70,7 @@ class Taginfo < Sinatra::Base
         :description => 'Get list of all keys used by at least one project.',
         :parameters => { :query => 'Only show keys matching this query (substring match, optional).' },
         :paging => :optional,
-        :sort => %w( key projects in_wiki count_all ),
+        :sort => %w[ key projects in_wiki count_all ],
         :result => paging_results([
             [:key,                :STRING, 'Key'],
             [:projects,           :INT,    'Number of projects using this key'],
@@ -116,7 +116,7 @@ class Taginfo < Sinatra::Base
         :description => 'Get list of all tags used by at least one project.',
         :parameters => { :query => 'Only show tags matching this query (substring match, optional).' },
         :paging => :optional,
-        :sort => %w( key value projects in_wiki count_all ),
+        :sort => %w[ key value projects in_wiki count_all ],
         :result => paging_results([
             [:key,                :STRING, 'Key'],
             [:value,              :STRING, 'Value'],
