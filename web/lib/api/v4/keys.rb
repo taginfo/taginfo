@@ -73,7 +73,7 @@ class Taginfo < Sinatra::Base
                 o.length :key
             }.
             paging(@ap).
-            execute()
+            execute
 
         if include_data[:wikipages]
             reshash = Hash.new
@@ -89,7 +89,7 @@ class Taginfo < Sinatra::Base
             wikipages = @db.select('SELECT key, lang, title, type FROM wiki.wikipages').
                 condition("key IN (#{ key_list.join(',') }) AND value IS NULL").
                 order_by([:key, :lang], 'ASC').
-                execute()
+                execute
 
             wikipages.each do |wp|
                 key = wp['key']
@@ -112,7 +112,7 @@ class Taginfo < Sinatra::Base
             prevvalues = @db.select('SELECT key, value, count, fraction FROM db.prevalent_values').
                 condition("key IN (#{ key_list.join(',') })").
                 order_by([:count], 'DESC').
-                execute()
+                execute
 
             prevvalues.each do |pv|
                 key = pv['key']
@@ -168,7 +168,7 @@ class Taginfo < Sinatra::Base
                 o.key
             }.
             paging(@ap).
-            execute()
+            execute
 
         return generate_json_result(total,
             res.map{ |row|
@@ -225,7 +225,7 @@ class Taginfo < Sinatra::Base
                 o.similarity! :count_all_rare
             }.
             paging(@ap).
-            execute()
+            execute
 
         return generate_json_result(total,
             res.map{ |row| {
@@ -288,7 +288,7 @@ class Taginfo < Sinatra::Base
                 o.users_all
             }.
             paging(@ap).
-            execute()
+            execute
 
         reshash = Hash.new
         res.each do |row|
@@ -299,7 +299,7 @@ class Taginfo < Sinatra::Base
         prevvalues = @db.select('SELECT key, value, count, fraction FROM db.prevalent_values').
             condition("key IN (#{ res.map{ |row| "'" + SQLite3::Database.quote(row['key']) + "'" }.join(',') })").
             order_by([:count], 'DESC').
-            execute()
+            execute
 
         prevvalues.each do |pv|
             key = pv['key']

@@ -215,7 +215,7 @@ class Taginfo < Sinatra::Base
                 o.count_relations
             }.
             paging(@ap).
-            execute()
+            execute
 
         return generate_json_result(total,
             res.map{ |row| {

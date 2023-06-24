@@ -33,14 +33,14 @@ class Taginfo < Sinatra::Base
                 o.count
             }.
             paging(@ap).
-            execute()
+            execute
 
         all_relations = @db.stats('relations').to_i
 
         prevroles = @db.select('SELECT rtype, role, count, fraction FROM db.prevalent_roles').
             condition("rtype IN (#{ res.map{ |row| "'" + SQLite3::Database.quote(row['rtype']) + "'" }.join(',') })").
             order_by([:count], 'DESC').
-            execute()
+            execute
 
         pr = {}
         res.each do |row|

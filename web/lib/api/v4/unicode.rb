@@ -39,7 +39,7 @@ script AS (
 )
 SELECT codepoint, d.script, s.name AS script_name, category, d.name FROM script d, unicode_scripts s WHERE d.script = s.script ORDER BY num", str, str).
             paging(@ap).
-            execute()
+            execute
 
         return generate_json_result(str.length,
             res.map{ |row| {

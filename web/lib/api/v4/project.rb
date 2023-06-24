@@ -40,7 +40,7 @@ class Taginfo < Sinatra::Base
                 o.in_wiki :value
             }.
             paging(@ap).
-            execute()
+            execute
 
         return generate_json_result(total,
             res.map{ |row| {
@@ -69,7 +69,7 @@ class Taginfo < Sinatra::Base
         project_id = params[:project]
         res = @db.select('SELECT icon_type, icon FROM projects.projects').
             condition('id = ?', project_id).
-            execute()[0]
+            execute[0]
         if res['icon']
             content_type res['icon_type']
             res['icon']

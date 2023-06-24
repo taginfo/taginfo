@@ -36,7 +36,7 @@ class Taginfo < Sinatra::Base
                     o.value
                 }.
                 paging(@ap).
-                execute()
+                execute
         rescue
             total = 0
             res = []
@@ -73,7 +73,7 @@ class Taginfo < Sinatra::Base
                 o.value
             }.
             paging(@ap).
-            execute()
+            execute
 
         return generate_json_result(total,
             res.map{ |row| {
@@ -110,7 +110,7 @@ class Taginfo < Sinatra::Base
                 o.role
             }.
             paging(@ap).
-            execute()
+            execute
 
         return generate_json_result(total,
             res.map{ |row| {
@@ -154,7 +154,7 @@ class Taginfo < Sinatra::Base
                     o.value
                 }.
                 paging(@ap).
-                execute()
+                execute
         rescue
             total = 0
             res = []

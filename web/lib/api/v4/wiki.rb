@@ -26,7 +26,7 @@ class Taginfo < Sinatra::Base
                 o.wiki_key_pages
                 o.wiki_tag_pages
             }.
-            execute()
+            execute
 
         return generate_json_result(res.size,
             res.map{ |row| {
@@ -81,7 +81,7 @@ class Taginfo < Sinatra::Base
                 o.lang :value
             }.
             paging(@ap).
-            execute()
+            execute
 
         return generate_json_result(total,
             res.map{ |row| {

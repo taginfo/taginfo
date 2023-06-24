@@ -28,7 +28,7 @@ class Taginfo < Sinatra::Base
     }) do
         key = params[:key]
         value = params[:value]
-        filter_type = get_filter()
+        filter_type = get_filter
         query_substr = like_contains(params[:query])
 
         if @ap.sortname == 'to_count'
@@ -50,7 +50,7 @@ class Taginfo < Sinatra::Base
         has_this_key = @db.select("SELECT count_#{filter_type} FROM db.tags").
             condition('key = ?', key).
             condition('value = ?', value).
-            get_first_value()
+            get_first_value
 
         res = (params[:query].to_s != '' ?
             @db.select("SELECT p.key1 AS other_key, p.value1 AS other_value, p.count_#{filter_type} AS together_count, k.count_#{filter_type} AS other_count, CAST(p.count_#{filter_type} AS REAL) / k.count_#{filter_type} AS from_fraction FROM db.tag_combinations p, top_tags k WHERE p.key1=k.skey AND p.value1=k.svalue AND k.svalue != '' AND p.key2=? AND p.value2=? AND ((p.key1 LIKE ? ESCAPE '@') OR (p.value1 LIKE ? ESCAPE '@')) AND p.count_#{filter_type} > 0
@@ -68,7 +68,7 @@ class Taginfo < Sinatra::Base
                 o.from_fraction
             }.
             paging(@ap).
-            execute()
+            execute
 
         return generate_json_result(total,
             res.map{ |row| {
@@ -126,7 +126,7 @@ class Taginfo < Sinatra::Base
 
         @db.select('SELECT * FROM db.tags').
             condition('key = ? AND value = ?', key, value).
-            execute() do |row|
+            execute do |row|
                 ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
                     out[n] = {
                         :type           => type,
@@ -214,7 +214,7 @@ class Taginfo < Sinatra::Base
     }) do
         key = params[:key]
         value = params[:value]
-        filter_type = get_filter()
+        filter_type = get_filter
         q = like_contains(params[:query])
 
         total = @db.select("SELECT count(*) FROM (SELECT project_id, key, MAX(value) AS value FROM projects.project_tags WHERE key=? AND (value=? OR value IS NULL) GROUP BY project_id, key) AS s JOIN projects.project_tags t JOIN projects.projects p ON p.id=t.project_id AND t.project_id=s.project_id AND t.key=s.key AND (t.value=s.value OR (t.value IS NULL AND s.value IS NULL))", key, value).
@@ -223,7 +223,7 @@ class Taginfo < Sinatra::Base
             condition_if("on_node = ?",                    filter_type == 'nodes'     ? 1 : '').
             condition_if("on_way = ? OR on_area = 1",      filter_type == 'ways'      ? 1 : '').
             condition_if("on_relation = ? OR on_area = 1", filter_type == 'relations' ? 1 : '').
-            get_first_value().to_i
+            get_first_value.to_i
 
         res = @db.select("SELECT p.name, p.icon_url AS project_icon_url, t.* FROM (SELECT project_id, key, MAX(value) AS value FROM projects.project_tags WHERE key=? AND (value=? OR value IS NULL) GROUP BY project_id, key) AS s JOIN projects.project_tags t JOIN projects.projects p ON p.id=t.project_id AND t.project_id=s.project_id AND t.key=s.key AND (t.value=s.value OR (t.value IS NULL AND s.value IS NULL))", key, value).
             condition("p.status = 'OK'").
@@ -238,7 +238,7 @@ class Taginfo < Sinatra::Base
                 o.tag 'lower(p.name)'
             }.
             paging(@ap).
-            execute()
+            execute
 
         return generate_json_result(total,
             res.map{ |row| {
@@ -284,11 +284,11 @@ class Taginfo < Sinatra::Base
         res = @db.select('SELECT data FROM chronology.tags_chronology').
             condition('key = ?', key).
             condition('value = ?', value).
-            get_first_value()
+            get_first_value
 
         data = unpack_chronology(res)
 
-        return generate_json_result(data.size(), data)
+        return generate_json_result(data.size, data)
     end
 
     api(4, 'tag/overview', {
@@ -335,7 +335,7 @@ class Taginfo < Sinatra::Base
             data[:counts][n] = { :type => type, :count => 0, :count_fraction => 0.0 }
         end
 
-        row = @db.select("SELECT count_all, count_nodes, count_ways, count_relations FROM db.tags").condition('key=? AND value=?', key, value).get_first_row()
+        row = @db.select("SELECT count_all, count_nodes, count_ways, count_relations FROM db.tags").condition('key=? AND value=?', key, value).get_first_row
         if row
             ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
                 data[:counts][n] = {
@@ -346,7 +346,7 @@ class Taginfo < Sinatra::Base
             end
         end
 
-        data[:wiki_pages] = @db.select("SELECT DISTINCT lang FROM wiki.wikipages WHERE key=? AND value=? ORDER BY lang", key, value).execute().map do |row|
+        data[:wiki_pages] = @db.select("SELECT DISTINCT lang FROM wiki.wikipages WHERE key=? AND value=? ORDER BY lang", key, value).execute.map do |row|
             lang = row['lang']
             {
                 :lang    => lang,
@@ -356,12 +356,12 @@ class Taginfo < Sinatra::Base
             }
         end
 
-        data[:projects] = @db.select("SELECT projects FROM projects.project_unique_tags WHERE key=? AND value=?", key, value).execute().map{ |row| row['projects'] }[0] || 0
+        data[:projects] = @db.select("SELECT projects FROM projects.project_unique_tags WHERE key=? AND value=?", key, value).execute.map{ |row| row['projects'] }[0] || 0
 
         data[:has_map] = (@db.count('tag_distributions').condition('key=? AND value=?', key, value).get_first_i > 0)
 
         data[:description] = {}
-        @db.select("SELECT description, lang FROM wiki.wikipages WHERE key=? AND value=? AND description IS NOT NULL ORDER BY lang", key, value).execute().each{ |row|
+        @db.select("SELECT description, lang FROM wiki.wikipages WHERE key=? AND value=? AND description IS NOT NULL ORDER BY lang", key, value).execute.each{ |row|
             data[:description][row['lang']] = { :text => row['description'], :dir => direction_from_lang_code(row['lang']) }
         }
 

@@ -47,7 +47,7 @@ class Taginfo < Sinatra::Base
                 o.unique_tags :unique_keys
             }.
             paging(@ap).
-            execute()
+            execute
 
         return generate_json_result(total,
             res.map{ |row| {
@@ -97,7 +97,7 @@ class Taginfo < Sinatra::Base
                 o.count_all :key
             }.
             paging(@ap).
-            execute()
+            execute
 
         return generate_json_result(total,
             res.map{ |row| {
@@ -144,7 +144,7 @@ class Taginfo < Sinatra::Base
                 o.count_all :key
             }.
             paging(@ap).
-            execute()
+            execute
 
         return generate_json_result(total,
             res.map{ |row| {

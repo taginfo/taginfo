@@ -30,7 +30,7 @@ class Taginfo < Sinatra::Base
 
         relation_type_info = @db.select('SELECT * FROM relation_types').
             condition("rtype=?", rtype).
-            get_first_row()
+            get_first_row
 
         if relation_type_info.nil?
             return generate_json_result(0, []);
@@ -58,7 +58,7 @@ class Taginfo < Sinatra::Base
                 o.count_relation_members :count_relations
             }.
             paging(@ap).
-            execute()
+            execute
 
         if min_count and not params[:query] and not @ap.do_paging?
             row = @db.execute('SELECT rtype, NULL AS role, sum(count_all) AS count_all, sum(count_nodes) AS count_nodes, sum(count_ways) AS count_ways, sum(count_relations) AS relations FROM relation_roles WHERE rtype=? AND count_all < ? GROUP BY rtype', rtype, min_count).first
@@ -104,7 +104,7 @@ class Taginfo < Sinatra::Base
 
         @db.select('SELECT * FROM db.relation_types').
             condition('rtype = ?', rtype).
-            execute() do |row|
+            execute do |row|
                 ['all', 'nodes', 'ways', 'relations'].each_with_index do |type, n|
                     out[n] = {
                         :type   => type,
@@ -207,7 +207,7 @@ class Taginfo < Sinatra::Base
                 o.project_name 'lower(p.name)'
             }.
             paging(@ap).
-            execute()
+            execute
 
         return generate_json_result(total,
             res.map{ |row| {
