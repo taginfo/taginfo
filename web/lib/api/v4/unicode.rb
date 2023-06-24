@@ -42,14 +42,15 @@ SELECT codepoint, d.script, s.name AS script_name, category, d.name FROM script 
             execute
 
         return generate_json_result(str.length,
-            res.map{ |row| {
+            res.map do |row| {
                 :char        => row['codepoint'].chr(Encoding::UTF_8),
                 :codepoint   => row['codepoint'],
                 :script      => row['script'],
                 :script_name => row['script_name'],
                 :category    => row['category'],
                 :name        => row['name']
-            } }
+            }
+            end
         )
     end
 

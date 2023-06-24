@@ -28,10 +28,10 @@ class Taginfo < Sinatra::Base
 
         res = @db.select('SELECT * FROM relation_types').
             condition_if("rtype LIKE ? ESCAPE '@'", like_contains(params[:query])).
-            order_by(@ap.sortname, @ap.sortorder) { |o|
+            order_by(@ap.sortname, @ap.sortorder) do |o|
                 o.rtype
                 o.count
-            }.
+            end.
             paging(@ap).
             execute
 
@@ -56,12 +56,13 @@ class Taginfo < Sinatra::Base
         end
 
         return generate_json_result(total,
-            res.map{ |row| {
+            res.map do |row| {
                 :rtype           => row['rtype'],
                 :count           => row['count'].to_i,
                 :count_fraction  => row['count'].to_f / all_relations,
                 :prevalent_roles => row['members_all'] ? pr[row['rtype']][0,10] : nil
-            } }
+            }
+            end
         )
     end
 

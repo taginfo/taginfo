@@ -50,13 +50,13 @@ class Taginfo < Sinatra::Base
             condition("rtype=?", rtype).
             condition_if("role LIKE ? ESCAPE '@'", like_contains(params[:query])).
             condition_if("count_all >= ?", min_count).
-            order_by(@ap.sortname, @ap.sortorder) { |o|
+            order_by(@ap.sortname, @ap.sortorder) do |o|
                 o.role
                 o.count_all_members      :count_all
                 o.count_node_members     :count_nodes
                 o.count_way_members      :count_ways
                 o.count_relation_members :count_relations
-            }.
+            end.
             paging(@ap).
             execute
 
@@ -69,7 +69,7 @@ class Taginfo < Sinatra::Base
         end
 
         return generate_json_result(total,
-            res.map{ |row| {
+            res.map do |row| {
                 :rtype                           =>  row['rtype'],
                 :role                            =>  row['role'],
                 :count_all_members               =>  row['count_all'].to_i,
@@ -80,7 +80,8 @@ class Taginfo < Sinatra::Base
                 :count_way_members_fraction      =>  relation_type_info['members_ways'].to_i == 0 ? 0 : (row['count_ways'].to_f / relation_type_info['members_ways'].to_i).round(4),
                 :count_relation_members          =>  row['count_relations'].to_i,
                 :count_relation_members_fraction =>  relation_type_info['members_relations'].to_i == 0 ? 0 : (row['count_relations'].to_f / relation_type_info['members_relations'].to_i).round(4)
-            } }
+            }
+            end
         )
     end
 
@@ -145,7 +146,7 @@ class Taginfo < Sinatra::Base
 
         res = @db.execute('SELECT * FROM wiki.relation_pages LEFT OUTER JOIN wiki.wiki_images USING (image) WHERE rtype = ? ORDER BY lang', rtype)
 
-        return generate_json_result(res.size, res.map{ |row| {
+        return generate_json_result(res.size, res.map do |row| {
                 :lang             => row['lang'],
                 :dir              => direction_from_lang_code(row['lang']),
                 :language         => ::Language[row['lang']].native_name,
@@ -162,7 +163,7 @@ class Taginfo < Sinatra::Base
                     :thumb_url_suffix => row['thumb_url_suffix']
                 }
             }
-        })
+        end)
     end
 
     api(4, 'relation/projects', {
@@ -203,14 +204,14 @@ class Taginfo < Sinatra::Base
             condition("status = 'OK' AND on_relation = 1").
             condition("key = 'type' AND value = ?", rtype).
             condition_if("value LIKE ? ESCAPE '@' OR name LIKE ? ESCAPE '@'", q, q).
-            order_by(@ap.sortname, @ap.sortorder) { |o|
+            order_by(@ap.sortname, @ap.sortorder) do |o|
                 o.project_name 'lower(p.name)'
-            }.
+            end.
             paging(@ap).
             execute
 
         return generate_json_result(total,
-            res.map{ |row| {
+            res.map do |row| {
                 :project_id       => row['project_id'],
                 :project_name     => row['name'],
                 :project_icon_url => row['project_icon_url'],
@@ -218,7 +219,8 @@ class Taginfo < Sinatra::Base
                 :description      => row['description'],
                 :doc_url          => row['doc_url'],
                 :icon_url         => row['icon_url']
-            } }
+            }
+            end
         )
     end
 

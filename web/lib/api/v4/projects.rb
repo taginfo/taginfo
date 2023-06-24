@@ -39,18 +39,18 @@ class Taginfo < Sinatra::Base
         res = @db.select('SELECT * FROM projects.projects').
             condition("status=?", status).
             condition_if("name LIKE ? ESCAPE '@' OR description LIKE ? ESCAPE '@'", q, q).
-            order_by(@ap.sortname, @ap.sortorder) { |o|
+            order_by(@ap.sortname, @ap.sortorder) do |o|
                 o.name 'lower(name)'
                 o.unique_keys
                 o.unique_keys :unique_tags
                 o.unique_tags
                 o.unique_tags :unique_keys
-            }.
+            end.
             paging(@ap).
             execute
 
         return generate_json_result(total,
-            res.map{ |row| {
+            res.map do |row| {
                 :id          => row['id'],
                 :name        => row['name'],
                 :project_url => row['project_url'],
@@ -61,7 +61,8 @@ class Taginfo < Sinatra::Base
                 :tag_entries => row['tag_entries'],
                 :unique_keys => row['unique_keys'],
                 :unique_tags => row['unique_tags']
-            }}
+            }
+            end
         )
     end
 
@@ -87,7 +88,7 @@ class Taginfo < Sinatra::Base
 
         res = @db.select('SELECT * FROM projects.project_unique_keys').
             condition_if("key LIKE ? ESCAPE '@'", q).
-            order_by(@ap.sortname, @ap.sortorder) { |o|
+            order_by(@ap.sortname, @ap.sortorder) do |o|
                 o.key
                 o.projects
                 o.projects :key
@@ -95,18 +96,19 @@ class Taginfo < Sinatra::Base
                 o.in_wiki :key
                 o.count_all
                 o.count_all :key
-            }.
+            end.
             paging(@ap).
             execute
 
         return generate_json_result(total,
-            res.map{ |row| {
+            res.map do |row| {
                 :key                => row['key'],
                 :projects           => row['projects'],
                 :in_wiki            => row['in_wiki'],
                 :count_all          => row['count_all'],
                 :count_all_fraction => (row['count_all'].to_f / @db.stats('objects')).round(4)
-            }}
+            }
+            end
         )
     end
 
@@ -133,7 +135,7 @@ class Taginfo < Sinatra::Base
 
         res = @db.select('SELECT * FROM projects.project_unique_tags').
             condition_if("key LIKE ? ESCAPE '@' OR value LIKE ? ESCAPE '@'", q, q).
-            order_by(@ap.sortname, @ap.sortorder) { |o|
+            order_by(@ap.sortname, @ap.sortorder) do |o|
                 o.tag :key
                 o.tag :value
                 o.projects
@@ -142,19 +144,20 @@ class Taginfo < Sinatra::Base
                 o.in_wiki :key
                 o.count_all
                 o.count_all :key
-            }.
+            end.
             paging(@ap).
             execute
 
         return generate_json_result(total,
-            res.map{ |row| {
+            res.map do |row| {
                 :key                => row['key'],
                 :value              => row['value'],
                 :projects           => row['projects'],
                 :in_wiki            => row['in_wiki'],
                 :count_all          => row['count_all'],
                 :count_all_fraction => (row['count_all'].to_f / @db.stats('objects')).round(4)
-            }}
+            }
+            end
         )
     end
 

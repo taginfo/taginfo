@@ -30,11 +30,11 @@ class Taginfo < Sinatra::Base
             end
 
             res = sel.
-                order_by(@ap.sortname, @ap.sortorder) { |o|
+                order_by(@ap.sortname, @ap.sortorder) do |o|
                     o.count_all
                     o.key
                     o.value
-                }.
+                end.
                 paging(@ap).
                 execute
         rescue
@@ -43,11 +43,12 @@ class Taginfo < Sinatra::Base
         end
 
         return generate_json_result(total,
-            res.map{ |row| {
+            res.map do |row| {
                 :key       => row['key'],
                 :value     => row['value'],
                 :count_all => row['count_all'].to_i
-            }}
+            }
+            end
         )
     end
 
@@ -68,18 +69,19 @@ class Taginfo < Sinatra::Base
         total = @db.count('wiki.words').condition("words LIKE ? ESCAPE '@'", like_contains(query)).get_first_i
 
         res = @db.select("SELECT key, value FROM wiki.words WHERE words LIKE ? ESCAPE '@'", like_contains(query)).
-            order_by(@ap.sortname, @ap.sortorder) { |o|
+            order_by(@ap.sortname, @ap.sortorder) do |o|
                 o.key
                 o.value
-            }.
+            end.
             paging(@ap).
             execute
 
         return generate_json_result(total,
-            res.map{ |row| {
+            res.map do |row| {
                 :key   => row['key'],
                 :value => row['value']
-            }}
+            }
+            end
         )
     end
 
@@ -104,20 +106,21 @@ class Taginfo < Sinatra::Base
 
         res = @db.select('SELECT rtype, role, count_all FROM db.relation_roles').
             condition_if("role LIKE ? ESCAPE '@'", like_contains(query)).
-            order_by(@ap.sortname, @ap.sortorder) { |o|
+            order_by(@ap.sortname, @ap.sortorder) do |o|
                 o.count_all
                 o.rtype
                 o.role
-            }.
+            end.
             paging(@ap).
             execute
 
         return generate_json_result(total,
-            res.map{ |row| {
+            res.map do |row| {
                 :rtype     => row['rtype'],
                 :role      => row['role'],
                 :count_all => row['count_all'].to_i
-            }}
+            }
+            end
         )
     end
 
@@ -148,11 +151,11 @@ class Taginfo < Sinatra::Base
 
             res = @db.select('SELECT * FROM ftsearch').
                 condition("value MATCH ?", query).
-                order_by(@ap.sortname, @ap.sortorder) { |o|
+                order_by(@ap.sortname, @ap.sortorder) do |o|
                     o.count_all
                     o.key
                     o.value
-                }.
+                end.
                 paging(@ap).
                 execute
         rescue
@@ -161,11 +164,12 @@ class Taginfo < Sinatra::Base
         end
 
         return generate_json_result(total,
-            res.map{ |row| {
+            res.map do |row| {
                 :key       => row['key'],
                 :value     => row['value'],
                 :count_all => row['count_all'].to_i
-            }}
+            }
+            end
         )
     end
 

@@ -152,7 +152,7 @@ class Taginfo < Sinatra::Base
         end
 
         return generate_json_result(res.size,
-            res.map{ |row| {
+            res.map do |row| {
                 :key                      => row['key'],
                 :value                    => row['value'],
                 :in_wiki                  => row['in_wiki'],
@@ -170,7 +170,8 @@ class Taginfo < Sinatra::Base
                 :on_area                  => row['on_area'].to_i     == 1,
                 :on_relation              => row['on_relation'].to_i == 1,
                 :projects                 => row['projects'].to_i
-            } }
+            }
+            end
         )
     end
 
@@ -203,7 +204,7 @@ class Taginfo < Sinatra::Base
 
         res = @db.select('SELECT * FROM top_tags').
             condition_if("(skey LIKE ? ESCAPE '@') OR (svalue LIKE ? ESCAPE '@')", like_contains(params[:query]), like_contains(params[:query])).
-            order_by(@ap.sortname, @ap.sortorder) { |o|
+            order_by(@ap.sortname, @ap.sortorder) do |o|
                 o.tag :skey
                 o.tag :svalue
                 o.in_wiki
@@ -213,12 +214,12 @@ class Taginfo < Sinatra::Base
                 o.count_nodes
                 o.count_ways
                 o.count_relations
-            }.
+            end.
             paging(@ap).
             execute
 
         return generate_json_result(total,
-            res.map{ |row| {
+            res.map do |row| {
                 :key                      => row['skey'],
                 :value                    => row['svalue'],
                 :in_wiki                  => row['in_wiki'],
@@ -231,7 +232,8 @@ class Taginfo < Sinatra::Base
                 :count_relations          => row['count_relations'].to_i,
                 :count_relations_fraction => (row['count_relations'].to_f / @db.stats('relations')).round(4),
                 :projects                 => row['projects'].to_i
-            } }
+            }
+            end
         )
     end
 

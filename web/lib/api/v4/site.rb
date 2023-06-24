@@ -51,13 +51,14 @@ class Taginfo < Sinatra::Base
         :example => { },
         :ui => '/sources'
     }) do
-        return JSON.generate(@sources.visible.map{ |source| {
+        return JSON.generate(@sources.visible.map do |source| {
             :id           => source.id,
             :name         => source.name,
             :data_until   => source.data_until,
             :update_start => source.update_start,
             :update_end   => source.update_end
-        }}, json_opts(params[:format]))
+        }
+        end, json_opts(params[:format]))
     end
 
 end
