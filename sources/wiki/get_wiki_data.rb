@@ -99,6 +99,8 @@ class WikiPage
         @has_templ = false
         @parsed = nil
 
+        @tags_implies = []
+        @tags_combination = []
         @tags_linked = []
         @group = ''
 
@@ -356,13 +358,13 @@ class WikiPage
 
         template.named_parameters['implies']&.each do |i|
             if i.instance_of?(Template)
-                tags_implies << i.parameters.join('=')
+                @tags_implies << i.parameters.join('=')
             end
         end
 
         template.named_parameters['combination']&.each do |i|
             if i.instance_of?(Template)
-                tags_combination << i.parameters.join('=')
+                @tags_combination << i.parameters.join('=')
             end
         end
 
@@ -423,8 +425,6 @@ class KeyOrTagPage < WikiPage
 
         (@lang, @tag, @key, @value, @ttype) = parse_title(title)
 
-        @tags_implies = []
-        @tags_combination = []
         @on_node = false
         @on_way = false
         @on_area = false
