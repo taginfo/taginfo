@@ -484,6 +484,8 @@ class RelationPage < WikiPage
         super(type, timestamp, namespace, title)
 
         @rtype = title.gsub(/^([^:]+:)?Relation:/, '') # relation type
+        @tags_implies = []
+        @tags_combination = []
 
         m = /^(.*):Relation:/.match(title)
         @lang = m ? m[1].downcase : 'en' # IETF language tag
