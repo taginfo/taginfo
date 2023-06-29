@@ -180,11 +180,20 @@ class WikiPage
                 return
             end
 
+            # 'after' is our next 'text'
+            text = m[3]
+
             # do the right thing depending on next token
             case m[2]
             when '{{' # start of template
-                context.last.add_parameter(m[1].strip)
-                context << Template.new
+                if %r(^!}}).match(m[3])
+                    text[0..2] = '|'
+                elsif %r(^=}}).match(m[3])
+                    text[0..2] = '='
+                else
+                    context.last.add_parameter(m[1].strip)
+                    context << Template.new
+                end
             when '}}' # end of template
                 context.last.add_parameter(m[1].strip)
                 c = context.pop
@@ -199,9 +208,6 @@ class WikiPage
                 parameter_name = m[1].strip == ':' ? 'subkey' : m[1].strip
                 context.last.parname = parameter_name
             end
-
-            # 'after' is our next 'text'
-            text = m[3]
         end
     rescue StandardError => e
         puts "FATAL: Parsing of page '#{title}' failed '#{e.message}':"
