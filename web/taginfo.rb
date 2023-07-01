@@ -219,7 +219,7 @@ class Taginfo < Sinatra::Base
         expires next_update
         @lang = lang
         @trans = R18n::I18n.new(lang, 'i18n')
-        erb :"#{js}.js", :layout => false, :content_type => 'text/javascript', :views => 'viewsjs'
+        erb :"#{js}.js", :layout => false, :content_type => 'text/javascript'
     end
 
     #--------------------------------------------------------------------------
