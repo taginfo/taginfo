@@ -86,7 +86,7 @@ def process_item_entry(db, item, prop, desc)
         ptype = m[1].downcase
         pcontent = m[2]
     else
-        db.execute("INSERT INTO wikidata_p1282_errors (item, propvalue, description, error) VALUES (?, ?, ?, ?)", [item, prop, desc, "Property value has invalid format"])
+        db.execute("INSERT INTO wikidata_p1282_errors (item, code, propvalue, description, error) VALUES (?, ?, ?, ?, ?)", [item, code, prop, desc, "Property value has invalid format (Must match /^(Key|Tag|Relation|Role):/)"])
         return
     end
 
@@ -101,7 +101,7 @@ def process_item_entry(db, item, prop, desc)
         rrole = pcontent
     end
 
-    db.execute("INSERT INTO wikidata_p1282 (item, propvalue, ptype, key, value, relation_type, relation_role) VALUES (?, ?, ?, ?, ?, ?, ?)", [code, prop, ptype, key, value, rtype, rrole])
+    db.execute("INSERT INTO wikidata_p1282 (code, propvalue, ptype, key, value, relation_type, relation_role) VALUES (?, ?, ?, ?, ?, ?, ?)", [code, prop, ptype, key, value, rtype, rrole])
 end
 
 def process_label_entry(db, item, label, lang)
@@ -112,7 +112,7 @@ def process_label_entry(db, item, label, lang)
     end
 
     code = m[1]
-    db.execute("INSERT INTO wikidata_labels (item, label, lang) VALUES (?, ?, ?)", [code, label, lang])
+    db.execute("INSERT INTO wikidata_labels (code, label, lang) VALUES (?, ?, ?)", [code, label, lang])
 end
 
 #------------------------------------------------------------------------------
