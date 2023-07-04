@@ -32,7 +32,7 @@ require 'time'
 #------------------------------------------------------------------------------
 
 dir = ARGV[0] || '.'
-db = SQLite3::Database.new(dir + '/taginfo-projects.db')
+db = SQLite3::Database.new(dir + '/projects-cache.db')
 
 project_list = ARGV[1] || 'project_list.txt'
 
@@ -68,6 +68,15 @@ def fetch(uri_str, limit = 10)
     end
 end
 
+ids = projects.map{ |id, _| "'#{ id }'" }.join(',')
+
+db.execute("DELETE FROM fetch_log WHERE id NOT IN(#{ ids })")
+
+# Make sure the log is not growing indefinitely
+db.execute("DELETE FROM fetch_log WHERE fetch_status != '200' AND date(fetch_date, '+1 week') < date('now')")
+
+NOW = Time.now.utc.iso8601
+
 projects.each do |id, url|
     puts "  #{id} #{url}"
     begin
@@ -75,27 +84,26 @@ projects.each do |id, url|
         begin
             last_modified = Time.parse(response['Last-Modified'] || response['Date']).utc.iso8601
         rescue ArgumentError
-            last_modified = Time.now.utc
+            last_modified = NOW
         end
-        db.execute("INSERT INTO projects (id, json_url, last_modified, fetch_date, fetch_status, fetch_json, status, data_updated) VALUES (?, ?, ?, ?, CAST(? AS TEXT), ?, ?, ?)",
+        if response.code == '200'
+            db.execute("DELETE FROM fetch_log WHERE id=?", [id])
+        end
+        db.execute("INSERT INTO fetch_log (id, json_url, last_modified, fetch_date, fetch_status, fetch_json) VALUES (?, ?, ?, ?, CAST(? AS TEXT), ?)",
                    [
                        id,
                        url,
                        last_modified,
-                       Time.now.utc.iso8601,
+                       NOW,
                        response.code,
-                       response.body,
-                       (response.code == '200' ? 'OK' : 'FETCH ERROR'),
-                       last_modified
+                       response.body
                    ])
     rescue StandardError
-        db.execute("INSERT INTO projects (id, json_url, fetch_date, fetch_status, status) VALUES (?, ?, ?, ?, ?)",
+        db.execute("INSERT INTO fetch_log (id, json_url, fetch_date, fetch_status) VALUES (?, ?, ?, '999')",
                    [
                        id,
                        url,
-                       Time.now.utc.iso8601,
-                       '500',
-                       'FETCH ERROR'
+                       NOW,
                    ])
     end
 end
