@@ -43,7 +43,7 @@ database.transaction do |db|
             prefix = fields[1]
             articles = fields[5]
             language = CGI.unescapeHTML(fields[3])
-            db.execute("INSERT INTO wikipedia_sites (prefix, language, articles) VALUES (?, ?)", [prefix, language, articles])
+            db.execute("INSERT INTO wikipedia_sites (prefix, language, articles) VALUES (?, ?, ?)", [prefix, language, articles])
         end
     end
 end
