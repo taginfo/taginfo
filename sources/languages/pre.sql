@@ -47,7 +47,6 @@ DROP TABLE IF EXISTS wikipedia_sites;
 
 CREATE TABLE wikipedia_sites (
     prefix   TEXT,
-    language TEXT,
-    articles INT
+    language TEXT
 );
 

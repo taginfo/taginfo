@@ -41,9 +41,8 @@ database.transaction do |db|
             next unless fields[2] == 'wikipedia'
 
             prefix = fields[1]
-            articles = fields[5]
             language = CGI.unescapeHTML(fields[3])
-            db.execute("INSERT INTO wikipedia_sites (prefix, language, articles) VALUES (?, ?, ?)", [prefix, language, articles])
+            db.execute("INSERT INTO wikipedia_sites (prefix, language) VALUES (?, ?)", [prefix, language])
         end
     end
 end
