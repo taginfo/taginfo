@@ -645,9 +645,11 @@ function fmt_checkmark(value) {
 }
 
 function fmt_value_with_percent(value, fraction) {
-    return tag('div', fmt_with_ts(value), { 'class': 'value' }) +
-           tag('div', fmt_as_percent(fraction), { 'class': 'fraction' }) +
-           tag('div', '', { 'class': 'bar', style: style({ width: (fraction*100).toFixed() + 'px' }) });
+    return tag('div',
+            tag('div', fmt_with_ts(value), { 'class': 'value' }) +
+            tag('div', fmt_as_percent(fraction), { 'class': 'fraction' }) +
+            tag('div', '', { 'class': 'bar', style: style({ width: (fraction*100).toFixed() + 'px' }) }),
+            { 'class': 'value-fraction' });
 }
 
 function fmt_key_or_tag_list(list) {

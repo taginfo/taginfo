@@ -773,9 +773,13 @@ html[dir="rtl"] #comparison-list {
 
 /* ========== */
 
+div.value-fraction {
+    display: flex;
+}
+
 div.value {
     width: 6em;
-    float: left;
+    min-width: 6em;
     padding: 0 !important;
     margin: 0 !important;
     text-align: right;
@@ -783,14 +787,13 @@ div.value {
 
 div.fraction {
     width: 5em;
-    float: left;
+    min-width: 5em;
     padding: 0 !important;
     margin: 0 !important;
     text-align: right;
 }
 
 div.bar {
-    float: left;
     margin: 4px 0 0 6px !important;
     padding: 0 !important;
     height: 8px !important;
