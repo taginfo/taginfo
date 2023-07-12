@@ -935,7 +935,7 @@ class DynamicTable {
         element.onpointermove = (event) => {
             dx = event.clientX - x;
             const width = origWidth + dx;
-            if (width >= 10 && width <= 1000) {
+            if (width >= 20 && width <= 1000) {
                 this.columns[num - 1].setWidth(width);
                 for (const c of this.element.querySelectorAll('div[data-col="' + (num - 1) + '"]')) {
                     c.style.width = width + 'px';
