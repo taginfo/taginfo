@@ -1495,6 +1495,9 @@ div.dt-table div.dt-noresult {
 div.dt-table div.dt-body {
     padding: 2px 6px;
     background-color: var(--color-stripe1);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 div.dt-table div.dt-body.dt-current-row {
@@ -1511,6 +1514,12 @@ div.dt-table div.dt-body[data-row$="4"],
 div.dt-table div.dt-body[data-row$="6"],
 div.dt-table div.dt-body[data-row$="8"] {
     background-color: var(--color-stripe0);
+}
+
+div.dt-table div.dt-body div {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 /* ==========  */
