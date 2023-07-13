@@ -125,6 +125,7 @@ function page_init() {
     });
 
     activateTagHistoryButton([{ type: filter.value, key: context.key, value: context.value }]);
+    activateOhsomeButton(filter.value, context.key, context.value);
 
     const key = new TaginfoKey(context.key);
     const tag = key.toTag(context.value);

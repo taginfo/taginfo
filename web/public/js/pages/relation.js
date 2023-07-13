@@ -293,6 +293,7 @@ function page_init() {
     up = function() { window.location = build_link('/relations'); };
     activateJOSMButton();
     activateTagHistoryButton([{ type: 'relation', key: 'type', value: context.rtype }]);
+    activateOhsomeButton('relations', 'type', context.rtype);
 
     const relation = new TaginfoRelation(context.rtype);
     document.querySelector('h1').innerHTML += relation.content();

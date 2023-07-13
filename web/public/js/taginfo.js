@@ -1595,6 +1595,23 @@ function activateTagHistoryButton(data) {
     buttonElement.setAttribute('href', 'https://taghistory.raifer.tech/?#' + items.join('&'));
 }
 
+function activateOhsomeButton(filter, key, value = '') {
+    let p = new URLSearchParams({
+        backend: 'ohsomeApi',
+        key: encodeURIComponent(key),
+        value: value
+    });
+
+    if (!filter || filter == 'all') {
+        p.append('types', 'node,way,relation');
+    } else {
+        p.append('types', filter.substring(0, filter.length - 1));
+    }
+
+    const buttonElement = document.getElementById('ohsome-button');
+    buttonElement.setAttribute('href', 'https://dashboard.ohsome.org/#' + p.toString());
+}
+
 /* ============================ */
 
 class Autocomplete {

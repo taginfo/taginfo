@@ -261,6 +261,7 @@ function page_init() {
     });
 
     activateTagHistoryButton([{ type: filter.value, key: context.key }]);
+    activateOhsomeButton(filter.value, context.key);
 
     const key = new TaginfoKey(context.key);
 
