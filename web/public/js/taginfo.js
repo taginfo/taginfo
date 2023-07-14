@@ -1598,7 +1598,7 @@ function activateTagHistoryButton(data) {
 function activateOhsomeButton(filter, key, value = '') {
     let p = new URLSearchParams({
         backend: 'ohsomeApi',
-        key: encodeURIComponent(key),
+        key: key,
         value: value
     });
 
