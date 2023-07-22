@@ -252,18 +252,22 @@ class ChartValues {
 } // class ChartValues
 
 function page_init() {
+    const key = new TaginfoKey(context.key);
+
     up = function() { window.location = build_link('/keys'); }
+
     activateJOSMButton();
 
     const filter = document.getElementById('filter');
     filter.addEventListener('change', function(element) {
-        window.location.search = new URLSearchParams({ 'filter': element.target.value });
+        if (element.target.value != 'all') {
+            key.params.filter = element.target.value;
+        }
+        window.location = key.url();
     });
 
     activateTagHistoryButton([{ type: filter.value, key: context.key }]);
     activateOhsomeButton(filter.value, context.key);
-
-    const key = new TaginfoKey(context.key);
 
     document.querySelector('h1').innerHTML = key.content();
 

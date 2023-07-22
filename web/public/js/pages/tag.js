@@ -117,18 +117,21 @@ const tabsConfig = {
 };
 
 function page_init() {
+    const key = new TaginfoKey(context.key);
+    const tag = key.toTag(context.value);
+
     activateJOSMButton();
 
     const filter = document.getElementById('filter');
     filter.addEventListener('change', function(element) {
-        window.location.search = new URLSearchParams({ 'filter': element.target.value });
+        if (element.target.value != 'all') {
+            tag.params.filter = element.target.value;
+        }
+        window.location = tag.url();
     });
 
     activateTagHistoryButton([{ type: filter.value, key: context.key, value: context.value }]);
     activateOhsomeButton(filter.value, context.key, context.value);
-
-    const key = new TaginfoKey(context.key);
-    const tag = key.toTag(context.value);
 
     up = function() { window.location = key.url(); };
     document.querySelector('h1').innerHTML = key.link() + '=' + tag.content();
