@@ -1621,7 +1621,7 @@ class Autocomplete {
         this.value = '';
         this.element = document.getElementById(id);
         this.results = document.getElementById(results);
-        this.source = '/search/suggest?format=simple&term=';
+        this.source = build_link('/search/suggest?format=simple&term=');
         this.element.addEventListener('input', this.trigger.bind(this));
         this.element.parentNode.addEventListener('keydown', this.key.bind(this));
     }

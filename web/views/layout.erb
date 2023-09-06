@@ -25,7 +25,7 @@
     <header>
         <div id="header_date" title="<%= h(t.taginfo.data_from_description) %>" data-tooltip-position="OnLeft"><%= h(t.taginfo.data_from) %>: <%= @data_until %> UTC</div>
         <div id="header_forms" class="no-print">
-            <form id="set_language" action="/switch_locale">
+            <form id="set_language" action="<%= build_link('/switch_locale') %>">
                 <input type="hidden" id="url" name="url" value="<%= request.path %>"/>
                 <select id="locale" name="locale">
 <% r18n.available_locales.sort{ |a,b| a.title <=> b.title }.select{ |locale| ::Language.has?(locale.code) }.each do |locale| %>
@@ -34,7 +34,7 @@
                 </select>
             </form>
 <% unless @nosearch %>
-            <form id="search_form" action="/search">
+            <form id="search_form" action="<%= build_link('/search') %>">
                 <input type="text" id="search" name="q" value="<%= h(params[:q]) %>" autocomplete="off"/>
                 <div id="suggestions"></div>
             </form>
