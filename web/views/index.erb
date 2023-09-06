@@ -19,41 +19,41 @@ relations = @db.select("SELECT rtype FROM db.relation_types ORDER BY count DESC 
 %>
 <div class="gboxes">
     <div class="gbox" id="gbox-keys">
-        <h2><a href="/keys"><%= h(t.osm.keys) %></a></h2>
+        <h2><a href="<%= build_link('/keys') %>"><%= h(t.osm.keys) %></a></h2>
         <div><div id="key_list"></div></div>
-        <div class="emphasis"><a href="/keys"><%= h(t.pages.index.keys.listkeys) %></a></div>
+        <div class="emphasis"><a href="<%= build_link('/keys') %>"><%= h(t.pages.index.keys.listkeys) %></a></div>
     </div>
     <div class="gbox" id="gbox-tags">
-        <h2><a href="/tags"><%= h(t.osm.tags) %></a></h2>
+        <h2><a href="<%= build_link('/tags') %>"><%= h(t.osm.tags) %></a></h2>
         <div><div id="tag_list"></div></div>
-        <div class="emphasis"><a href="/tags"><%= h(t.pages.index.tags.listtags) %></a></div>
+        <div class="emphasis"><a href="<%= build_link('/tags') %>"><%= h(t.pages.index.tags.listtags) %></a></div>
     </div>
     <div class="gbox" id="gbox-relations">
-        <h2><a href="/relations"><%= h(t.osm.relation_types) %></a></h2>
+        <h2><a href="<%= build_link('/relations') %>"><%= h(t.osm.relation_types) %></a></h2>
         <div><div id="relation_list"></div></div>
-        <div class="emphasis"><a href="/relations"><%= h(t.pages.index.relations.listrelations) %></a></div>
+        <div class="emphasis"><a href="<%= build_link('/relations') %>"><%= h(t.pages.index.relations.listrelations) %></a></div>
     </div>
     <div class="gbox" id="gbox-tagcloud">
         <h2><%= h(t.pages.index.popular_keys) %></h2>
         <div id="tagcloud"></div>
     </div>
     <div class="gbox" id="gbox-reports">
-        <h2><a href="/reports"><%= h(t.taginfo.reports) %></a></h2>
+        <h2><a href="<%= build_link('/reports') %>"><%= h(t.taginfo.reports) %></a></h2>
         <div>
             <p><%= t.pages.reports.intro %></p>
             <ul style="margin: 0 0 0 18px; padding: 0;">
 <% Report.each_visible do |report| %>
-                <li><a href="<%= report.url %>"><%= h(t.reports[report.name].name) %></a></li>
+                <li><a href="<%= build_link(report.url) %>"><%= h(t.reports[report.name].name) %></a></li>
 <% end %>
             </ul>
-            <p class="emphasis" style="margin-top: 20px;"><a href="/reports"><%= h(t.pages.index.reports.listreports) %></a></p>
+            <p class="emphasis" style="margin-top: 20px;"><a href="<%= build_link('/reports') %>"><%= h(t.pages.index.reports.listreports) %></a></p>
         </div>
     </div>
     <div class="gbox" id="gbox-about">
-        <h2><a href="/about"><%= h(t.taginfo.about) %></a></h2>
+        <h2><a href="<%= build_link('/about') %>"><%= h(t.taginfo.about) %></a></h2>
         <div>
             <%= t.pages.index.about.intro %>
-            <p class="emphasis" style="margin-top: 20px;"><a href="/about"><%= h(t.pages.index.about.more) %></a></p>
+            <p class="emphasis" style="margin-top: 20px;"><a href="<%= build_link('/about') %>"><%= h(t.pages.index.about.more) %></a></p>
         </div>
     </div>
     <div class="gbox" id="gbox-desc">
