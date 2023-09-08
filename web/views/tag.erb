@@ -95,22 +95,22 @@
                 <p><%= h(t.pages.tag.geographic_distribution.all) %></p>
                 <div class="multi-map">
                     <img class="map" src="<%= @taginfo_config.get('geodistribution.background_image') %>" alt="" style="max-width: <%= @img_width %>px; z-index: 1; background-color: #ddddd4"/>
-                    <img class="map" src="/api/4/tag/distribution/nodes?key=<%= @key_uri %>&value=<%= @value_uri %>" alt="" style="max-width: <%= @img_width %>px; z-index: 2;"/>
-                    <img class="map" src="/api/4/tag/distribution/ways?key=<%= @key_uri %>&value=<%= @value_uri %>" alt="" style="max-width: <%= @img_width %>px; z-index: 3; position: relative;"/>
+                    <img class="map" src="<%= build_link("/api/4/tag/distribution/nodes?key=#{ @key_uri }&value=#{ @value_uri }") %>" alt="" style="max-width: <%= @img_width %>px; z-index: 2;"/>
+                    <img class="map" src="<%= build_link("/api/4/tag/distribution/ways?key=#{ @key_uri }&value=#{ @value_uri }") %>" alt="" style="max-width: <%= @img_width %>px; z-index: 3; position: relative;"/>
                     <div class="note"><%= @taginfo_config.get('geodistribution.image_attribution') %></div>
                 </div>
             <% elsif @filter_type == 'nodes' %>
                 <p><%= h(t.pages.tag.geographic_distribution.nodes) %></p>
                 <div class="multi-map">
                     <img class="map" src="<%= @taginfo_config.get('geodistribution.background_image') %>" alt="" style="max-width: <%= @img_width %>px; z-index: 1; background-color: #ddddd4"/>
-                    <img class="map" src="/api/4/tag/distribution/nodes?key=<%= @key_uri %>&value=<%= @value_uri %>" alt="" style="max-width: <%= @img_width %>px; z-index: 2; position: relative;"/>
+                    <img class="map" src="<%= build_link("/api/4/tag/distribution/nodes?key=#{ @key_uri }&value=#{ @value_uri }") %>" alt="" style="max-width: <%= @img_width %>px; z-index: 2; position: relative;"/>
                     <div class="note"><%= @taginfo_config.get('geodistribution.image_attribution') %></div>
                 </div>
             <% elsif @filter_type == 'ways' %>
                 <p><%= h(t.pages.tag.geographic_distribution.ways) %></p>
                 <div class="multi-map">
                     <img class="map" src="<%= @taginfo_config.get('geodistribution.background_image') %>" alt="" style="max-width: <%= @img_width %>px; z-index: 1; background-color: #ddddd4"/>
-                    <img class="map" src="/api/4/tag/distribution/ways?key=<%= @key_uri %>&value=<%= @value_uri %>" alt="" style="max-width: <%= @img_width %>px; z-index: 3; position: relative;"/>
+                    <img class="map" src="<%= build_link("/api/4/tag/distribution/ways?key=#{ @key_uri }&value=#{ @value_uri }") %>" alt="" style="max-width: <%= @img_width %>px; z-index: 3; position: relative;"/>
                     <div class="note"><%= @taginfo_config.get('geodistribution.image_attribution') %></div>
                 </div>
             <% elsif @filter_type == 'relations' %>
