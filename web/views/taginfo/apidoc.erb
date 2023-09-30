@@ -55,11 +55,11 @@
     </tr>
     <tr>
         <th>Example:</th>
-        <td><a rel="nofollow" href="<%= h(doc.show_example) %>" target="_blank"><%= h(doc.show_example) %></a></td>
+        <td><a rel="nofollow" href="<%= build_link(h(doc.show_example)) %>" target="_blank"><%= h(doc.show_example) %></a></td>
     </tr>
     <tr>
         <th title="User interface page where this API is used">UI Example:</th>
-        <td><a href="<%= h(doc.show_ui) %>" target="_blank"><%= h(doc.show_ui) %></a></td>
+        <td><a href="<%= build_link(h(doc.show_ui)) %>" target="_blank"><%= h(doc.show_ui) %></a></td>
     </tr>
 <% if doc.notes %>
     <tr>
