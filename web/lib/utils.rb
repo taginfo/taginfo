@@ -370,7 +370,7 @@ end
 
 def build_link(link)
     if (@taginfo_config.id != '')
-        '/' + @taginfo_config.prefix + link
+        '/' + @taginfo_config.id + link
     else
         link
     end
