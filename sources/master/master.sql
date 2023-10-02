@@ -62,6 +62,49 @@ ANALYZE db.keys;
 
 -- ============================================================================
 
+DROP TABLE IF EXISTS project_unique_keys;
+
+CREATE TABLE project_unique_keys (
+    key       VARCHAR NOT NULL,
+    projects  INTEGER DEFAULT 0,
+    in_wiki   INTEGER DEFAULT 0,
+    count_all INTEGER DEFAULT 0
+);
+
+INSERT INTO project_unique_keys (key, projects)
+    SELECT key, count(*) FROM (SELECT DISTINCT key, project_id FROM projects.project_tags) GROUP BY key;
+
+INSERT INTO stats (key, value) SELECT 'project_unique_keys', count(*) FROM project_unique_keys;
+
+DROP TABLE IF EXISTS project_unique_tags;
+
+CREATE TABLE project_unique_tags (
+    key       VARCHAR NOT NULL,
+    value     VARCHAR NOT NULL,
+    projects  INTEGER DEFAULT 0,
+    in_wiki   INTEGER DEFAULT 0,
+    count_all INTEGER DEFAULT 0
+);
+
+INSERT INTO project_unique_tags (key, value, projects)
+    SELECT key, value, count(*) FROM (SELECT DISTINCT key, value, project_id FROM projects.project_tags WHERE value IS NOT NULL) GROUP BY key, value;
+
+INSERT INTO stats (key, value) SELECT 'project_unique_tags', count(*) FROM project_unique_tags;
+
+UPDATE project_unique_keys SET in_wiki = lang_count FROM wiki.wikipages_keys w WHERE project_unique_keys.key = w.key;
+UPDATE project_unique_tags SET in_wiki = lang_count FROM wiki.wikipages_tags w WHERE project_unique_tags.key = w.key AND project_unique_tags.value = w.value;
+
+UPDATE project_unique_keys SET count_all = d.count_all FROM db.keys d WHERE project_unique_keys.key = d.key;
+UPDATE project_unique_tags SET count_all = d.count_all FROM db.tags d WHERE project_unique_tags.key = d.key AND project_unique_tags.value = d.value;
+
+ANALYZE project_unique_keys;
+ANALYZE project_unique_tags;
+
+CREATE INDEX project_unique_keys_key_idx       ON project_unique_keys (key);
+CREATE INDEX project_unique_tags_key_value_idx ON project_unique_tags (key, value);
+
+-- ============================================================================
+
 UPDATE projects.project_unique_keys SET in_wiki=(SELECT lang_count FROM wiki.wikipages_keys w WHERE projects.project_unique_keys.key = w.key);
 UPDATE projects.project_unique_keys SET in_wiki=0 WHERE in_wiki IS NULL;
 
