@@ -82,11 +82,11 @@ class Taginfo < Sinatra::Base
         :ui => '/projects#keys'
     }) do
         q = like_contains(params[:query])
-        total = @db.count('projects.project_unique_keys').
+        total = @db.count('project_unique_keys').
             condition_if("key LIKE ? ESCAPE '@'", q).
             get_first_i
 
-        res = @db.select('SELECT * FROM projects.project_unique_keys').
+        res = @db.select('SELECT * FROM project_unique_keys').
             condition_if("key LIKE ? ESCAPE '@'", q).
             order_by(@ap.sortname, @ap.sortorder) do |o|
                 o.key
@@ -129,11 +129,11 @@ class Taginfo < Sinatra::Base
         :ui => '/projects#tags'
     }) do
         q = like_contains(params[:query])
-        total = @db.count('projects.project_unique_tags').
+        total = @db.count('project_unique_tags').
             condition_if("key LIKE ? ESCAPE '@' OR value LIKE ? ESCAPE '@'", q, q).
             get_first_i
 
-        res = @db.select('SELECT * FROM projects.project_unique_tags').
+        res = @db.select('SELECT * FROM project_unique_tags').
             condition_if("key LIKE ? ESCAPE '@' OR value LIKE ? ESCAPE '@'", q, q).
             order_by(@ap.sortname, @ap.sortorder) do |o|
                 o.tag :key

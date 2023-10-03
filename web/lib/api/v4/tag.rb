@@ -358,7 +358,7 @@ class Taginfo < Sinatra::Base
             }
         end
 
-        data[:projects] = @db.select("SELECT projects FROM projects.project_unique_tags WHERE key=? AND value=?", key, value).execute.map{ |row| row['projects'] }[0] || 0
+        data[:projects] = @db.select("SELECT projects FROM project_unique_tags WHERE key=? AND value=?", key, value).execute.map{ |row| row['projects'] }[0] || 0
 
         data[:has_map] = (@db.count('tag_distributions').condition('key=? AND value=?', key, value).get_first_i > 0)
 
