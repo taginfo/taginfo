@@ -36,7 +36,7 @@ class Taginfo < Sinatra::Base
             condition_if("name LIKE ? ESCAPE '@' OR description LIKE ? ESCAPE '@'", q, q).
             get_first_i
 
-        res = @db.select('SELECT * FROM projects.projects').
+        res = @db.select('SELECT id, name, project_url, icon_url, doc_url, description, key_entries, tag_entries, unique_keys, unique_tags FROM projects.projects').
             condition("status=?", status).
             condition_if("name LIKE ? ESCAPE '@' OR description LIKE ? ESCAPE '@'", q, q).
             order_by(@ap.sortname, @ap.sortorder) do |o|
