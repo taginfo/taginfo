@@ -6,6 +6,30 @@
 --
 -- ============================================================================
 
+-- XXX This is done before attaching the other databases, because there are
+--     tables with the same names in projects db.
+
+DROP TABLE IF EXISTS project_unique_keys;
+
+CREATE TABLE project_unique_keys (
+    key       VARCHAR NOT NULL,
+    projects  INTEGER DEFAULT 0,
+    in_wiki   INTEGER DEFAULT 0,
+    count_all INTEGER DEFAULT 0
+);
+
+DROP TABLE IF EXISTS project_unique_tags;
+
+CREATE TABLE project_unique_tags (
+    key       VARCHAR NOT NULL,
+    value     VARCHAR NOT NULL,
+    projects  INTEGER DEFAULT 0,
+    in_wiki   INTEGER DEFAULT 0,
+    count_all INTEGER DEFAULT 0
+);
+
+-- ============================================================================
+
 ATTACH DATABASE '__DIR__/db/taginfo-db.db'                 AS db;
 ATTACH DATABASE '__DIR__/wiki/taginfo-wiki.db'             AS wiki;
 ATTACH DATABASE '__DIR__/languages/taginfo-languages.db'   AS languages;
@@ -62,29 +86,10 @@ ANALYZE db.keys;
 
 -- ============================================================================
 
-DROP TABLE IF EXISTS project_unique_keys;
-
-CREATE TABLE project_unique_keys (
-    key       VARCHAR NOT NULL,
-    projects  INTEGER DEFAULT 0,
-    in_wiki   INTEGER DEFAULT 0,
-    count_all INTEGER DEFAULT 0
-);
-
 INSERT INTO project_unique_keys (key, projects)
     SELECT key, count(*) FROM (SELECT DISTINCT key, project_id FROM projects.project_tags) GROUP BY key;
 
 INSERT INTO stats (key, value) SELECT 'project_unique_keys', count(*) FROM project_unique_keys;
-
-DROP TABLE IF EXISTS project_unique_tags;
-
-CREATE TABLE project_unique_tags (
-    key       VARCHAR NOT NULL,
-    value     VARCHAR NOT NULL,
-    projects  INTEGER DEFAULT 0,
-    in_wiki   INTEGER DEFAULT 0,
-    count_all INTEGER DEFAULT 0
-);
 
 INSERT INTO project_unique_tags (key, value, projects)
     SELECT key, value, count(*) FROM (SELECT DISTINCT key, value, project_id FROM projects.project_tags WHERE value IS NOT NULL) GROUP BY key, value;
