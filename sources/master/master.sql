@@ -51,19 +51,6 @@ ANALYZE master_stats;
 
 -- ============================================================================
 
-INSERT INTO db.keys (key) SELECT DISTINCT key FROM wiki.wikipages WHERE key NOT IN (SELECT key FROM db.keys);
-
-UPDATE db.keys SET in_wiki=1    WHERE key IN (SELECT DISTINCT key FROM wiki.wikipages WHERE value IS NULL);
-UPDATE db.keys SET in_wiki_en=1 WHERE key IN (SELECT DISTINCT key FROM wiki.wikipages WHERE value IS NULL AND lang='en');
-
--- ============================================================================
-
-UPDATE db.keys SET projects=(SELECT projects FROM projects.project_unique_keys WHERE projects.project_unique_keys.key=db.keys.key);
-
-ANALYZE db.keys;
-
--- ============================================================================
-
 DROP TABLE IF EXISTS project_unique_keys;
 
 CREATE TABLE project_unique_keys (
@@ -107,6 +94,19 @@ CREATE INDEX project_unique_tags_key_value_idx ON project_unique_tags (key, valu
 
 -- ============================================================================
 
+INSERT INTO db.keys (key) SELECT DISTINCT key FROM wiki.wikipages WHERE key NOT IN (SELECT key FROM db.keys);
+
+UPDATE db.keys SET in_wiki=1    WHERE key IN (SELECT DISTINCT key FROM wiki.wikipages WHERE value IS NULL);
+UPDATE db.keys SET in_wiki_en=1 WHERE key IN (SELECT DISTINCT key FROM wiki.wikipages WHERE value IS NULL AND lang='en');
+
+-- ============================================================================
+
+UPDATE db.keys SET projects=(SELECT projects FROM project_unique_keys WHERE project_unique_keys.key=db.keys.key);
+
+ANALYZE db.keys;
+
+-- ============================================================================
+
 -- too slow, so we drop it for now
 -- INSERT INTO db.tags (key, value) SELECT DISTINCT key, value FROM wiki.wikipages WHERE key || '=XX=' || value NOT IN (SELECT key || '=XX=' || value FROM db.tags);
 
@@ -144,7 +144,7 @@ UPDATE top_tags SET
 UPDATE top_tags SET in_wiki=1    WHERE skey || '=' || svalue IN (SELECT DISTINCT tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*');
 UPDATE top_tags SET in_wiki_en=1 WHERE skey || '=' || svalue IN (SELECT DISTINCT tag FROM wiki.wikipages WHERE value IS NOT NULL AND value != '*' AND lang='en');
 
-UPDATE top_tags SET projects=(SELECT projects FROM projects.project_unique_tags p WHERE p.key=skey AND p.value=svalue);
+UPDATE top_tags SET projects=(SELECT projects FROM project_unique_tags p WHERE p.key=skey AND p.value=svalue);
 
 CREATE UNIQUE INDEX top_tags_key_value_idx ON top_tags (skey, svalue);
 
