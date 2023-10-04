@@ -236,7 +236,7 @@ INSERT INTO languages (code) SELECT DISTINCT lang FROM wiki.wikipages WHERE lang
 UPDATE languages SET wiki_key_pages=(SELECT count(DISTINCT key) FROM wiki.wikipages WHERE lang=code AND value IS NULL);
 UPDATE languages SET wiki_tag_pages=(SELECT count(DISTINCT key || '=' || value) FROM wiki.wikipages WHERE lang=code AND value IS NOT NULL);
 
-ANALYZE languages;
+ANALYZE main.languages;
 
 -- ============================================================================
 
