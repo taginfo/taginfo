@@ -6,7 +6,7 @@
 --
 -- ============================================================================
 
-ATTACH DATABASE '__DIR__/chronology/taginfo-chronology.db' AS chronology;
+ATTACH DATABASE 'file:__DIR__/chronology/taginfo-chronology.db?mode=ro' AS chronology;
 
 -- ============================================================================
 

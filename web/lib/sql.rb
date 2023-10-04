@@ -26,7 +26,7 @@ module SQL
         end
 
         def attach_source(filename, name)
-            @db.execute('ATTACH DATABASE ? AS ?', "#{ @dir }/#{ filename }", name)
+            @db.execute('ATTACH DATABASE ? AS ?', "file:#{ @dir }/#{ filename }?mode=ro", name)
             @db.execute("PRAGMA #{ name }.journal_mode = OFF")
         end
 

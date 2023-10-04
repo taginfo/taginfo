@@ -11,8 +11,8 @@
 --
 -- ============================================================================
 
-ATTACH DATABASE '__DIR__/db/taginfo-db.db'     AS db;
-ATTACH DATABASE '__DIR__/wiki/taginfo-wiki.db' AS wiki;
+ATTACH DATABASE 'file:__DIR__/db/taginfo-db.db?mode=ro'     AS db;
+ATTACH DATABASE 'file:__DIR__/wiki/taginfo-wiki.db?mode=ro' AS wiki;
 
 -- ============================================================================
 

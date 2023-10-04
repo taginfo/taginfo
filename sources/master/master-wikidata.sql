@@ -6,7 +6,7 @@
 --
 -- ============================================================================
 
-ATTACH DATABASE '__DIR__/wikidata/taginfo-wikidata.db' AS wikidata;
+ATTACH DATABASE 'file:__DIR__/wikidata/taginfo-wikidata.db?mode=ro' AS wikidata;
 
 -- ============================================================================
 
