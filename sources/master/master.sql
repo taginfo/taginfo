@@ -6,34 +6,12 @@
 --
 -- ============================================================================
 
--- XXX This is done before attaching the other databases, because there are
---     tables with the same names in projects db.
-
-DROP TABLE IF EXISTS project_unique_keys;
-
-CREATE TABLE project_unique_keys (
-    key       VARCHAR NOT NULL,
-    projects  INTEGER DEFAULT 0,
-    in_wiki   INTEGER DEFAULT 0,
-    count_all INTEGER DEFAULT 0
-);
-
-DROP TABLE IF EXISTS project_unique_tags;
-
-CREATE TABLE project_unique_tags (
-    key       VARCHAR NOT NULL,
-    value     VARCHAR NOT NULL,
-    projects  INTEGER DEFAULT 0,
-    in_wiki   INTEGER DEFAULT 0,
-    count_all INTEGER DEFAULT 0
-);
-
 -- ============================================================================
 
-ATTACH DATABASE '__DIR__/db/taginfo-db.db'                 AS db;
-ATTACH DATABASE '__DIR__/wiki/taginfo-wiki.db'             AS wiki;
-ATTACH DATABASE '__DIR__/languages/taginfo-languages.db'   AS languages;
-ATTACH DATABASE '__DIR__/projects/taginfo-projects.db'     AS projects;
+ATTACH DATABASE '__DIR__/db/taginfo-db.db'                            AS db;
+ATTACH DATABASE 'file:__DIR__/wiki/taginfo-wiki.db?mode=ro'           AS wiki;
+ATTACH DATABASE 'file:__DIR__/languages/taginfo-languages.db?mode=ro' AS languages;
+ATTACH DATABASE 'file:__DIR__/projects/taginfo-projects.db?mode=ro'   AS projects;
 
 -- ============================================================================
 
@@ -86,6 +64,25 @@ ANALYZE db.keys;
 
 -- ============================================================================
 
+DROP TABLE IF EXISTS project_unique_keys;
+
+CREATE TABLE project_unique_keys (
+    key       VARCHAR NOT NULL,
+    projects  INTEGER DEFAULT 0,
+    in_wiki   INTEGER DEFAULT 0,
+    count_all INTEGER DEFAULT 0
+);
+
+DROP TABLE IF EXISTS project_unique_tags;
+
+CREATE TABLE project_unique_tags (
+    key       VARCHAR NOT NULL,
+    value     VARCHAR NOT NULL,
+    projects  INTEGER DEFAULT 0,
+    in_wiki   INTEGER DEFAULT 0,
+    count_all INTEGER DEFAULT 0
+);
+
 INSERT INTO project_unique_keys (key, projects)
     SELECT key, count(*) FROM (SELECT DISTINCT key, project_id FROM projects.project_tags) GROUP BY key;
 
@@ -107,28 +104,6 @@ ANALYZE project_unique_tags;
 
 CREATE INDEX project_unique_keys_key_idx       ON project_unique_keys (key);
 CREATE INDEX project_unique_tags_key_value_idx ON project_unique_tags (key, value);
-
--- ============================================================================
-
-UPDATE projects.project_unique_keys SET in_wiki=(SELECT lang_count FROM wiki.wikipages_keys w WHERE projects.project_unique_keys.key = w.key);
-UPDATE projects.project_unique_keys SET in_wiki=0 WHERE in_wiki IS NULL;
-
-UPDATE projects.project_unique_tags SET in_wiki=(SELECT lang_count FROM wiki.wikipages_tags w WHERE projects.project_unique_tags.key = w.key AND projects.project_unique_tags.value = w.value);
-UPDATE projects.project_unique_tags SET in_wiki=0 WHERE in_wiki IS NULL;
-
-UPDATE projects.project_unique_keys SET count_all=(SELECT count_all FROM db.keys WHERE projects.project_unique_keys.key = db.keys.key);
-UPDATE projects.project_unique_keys SET count_all=0 WHERE count_all IS NULL;
-
-WITH tags_count_all AS
-    (SELECT t.key, t.value, t.count_all
-       FROM db.tags t, projects.project_unique_tags p
-       WHERE t.key = p.key AND t.value = p.value)
-UPDATE projects.project_unique_tags SET count_all=(SELECT count_all FROM tags_count_all WHERE projects.project_unique_tags.key = tags_count_all.key AND projects.project_unique_tags.value = tags_count_all.value);
-
-UPDATE projects.project_unique_tags SET count_all=0 WHERE count_all IS NULL;
-
-ANALYZE projects.project_unique_keys;
-ANALYZE projects.project_unique_tags;
 
 -- ============================================================================
 
