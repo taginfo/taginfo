@@ -92,6 +92,13 @@ There are a few tests for the Ruby code. Call `rake` in the `web` directory to
 run the tests.
 
 
+## Rubocop
+
+There is a configuration for [Rubocop](https://rubocop.org/). You can run
+Rubocop with `rubocop FILENAME.rb...` to check one or more Ruby files. Fixing
+issues is currently an ongoing process.
+
+
 ## Javascript
 
 Taginfo uses the following Javascript libraries:

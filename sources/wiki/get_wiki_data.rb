@@ -186,9 +186,10 @@ class WikiPage
             # do the right thing depending on next token
             case m[2]
             when '{{' # start of template
-                if %r(^!}}).match(m[3])
+                case m[3]
+                when %r(^!}})
                     text[0..2] = '|'
-                elsif %r(^=}}).match(m[3])
+                when %r(^=}})
                     text[0..2] = '='
                 else
                     context.last.add_parameter(m[1].strip)

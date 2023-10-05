@@ -25,8 +25,8 @@ API_VERSION = ENV['TAGINFO_API_VERSION'] || '4'
 
 def api_call(path, params)
     query = []
-    params.each_pair do |k,v|
-        query << k + '=' + v
+    params.each_pair do |k, v|
+        query << (k + '=' + v)
     end
     uri = URI::HTTP.build({
         :host  => API_SERVER,
@@ -34,7 +34,7 @@ def api_call(path, params)
         :path  => '/api/' + API_VERSION + '/' + path,
         :query => query.join('&')
     })
-    STDERR.puts "URI=#{uri}"
+    warn "URI=#{uri}"
 
     request = Net::HTTP::Get.new(uri.request_uri)
     request['User-Agent'] = 'tapi/1.0 (Taginfo)'
@@ -42,8 +42,8 @@ def api_call(path, params)
         http.request(request)
     end
     if result.code != '200'
-        STDERR.puts "#{result.code} #{result.message}"
-        STDERR.puts result.body
+        warn "#{result.code} #{result.message}"
+        warn result.body
         exit 1
     end
 
@@ -59,4 +59,3 @@ ARGV.each do |arg|
 end
 
 api_call(path, options)
-

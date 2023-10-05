@@ -5,9 +5,9 @@
 
 require 'json'
 
-require File.expand_path(File.dirname(__FILE__)) + '/../web/lib/config.rb'
+require __dir__ + '/../web/lib/config.rb'
 
-taginfo_config = TaginfoConfig.new(File.expand_path(File.dirname(__FILE__)) + '/../../taginfo-config.json')
+taginfo_config = TaginfoConfig.new(__dir__ + '/../../taginfo-config.json')
 
 value = taginfo_config.get(ARGV[0], ARGV[1])
 if value.nil?
@@ -16,4 +16,3 @@ if value.nil?
 end
 
 puts value
-

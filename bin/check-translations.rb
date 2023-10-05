@@ -15,39 +15,35 @@ def look_for_error(path, data)
     if data.nil?
         puts "No data for #{path.sub(/^\./, '')}"
         return true
-    elsif data.class == Hash
+    elsif data.instance_of?(Hash)
         data.keys.sort.each do |key|
             if look_for_error(path + '.' + key, data[key])
                 return true
             end
         end
     end
-    return false
+    false
 end
 
-def walk(path, en, other)
-    en.keys.sort.each do |key|
+def walk(path, lang_en, lang_other)
+    lang_en.keys.sort.each do |key|
         name = path.sub(/^\./, '') + '.' + key
-        if en[key].class == Hash
-            if other.nil?
-                puts "MISSING: #{name} [en=#{en[key]}]"
+        if lang_en[key].instance_of?(Hash)
+            if lang_other.nil?
+                puts "MISSING: #{name} [en=#{ lang_en[key] }]"
             else
-                walk(path + '.' + key, en[key], other[key])
-                if other[key] && other[key].empty?
-                    other.delete(key)
+                walk(path + '.' + key, lang_en[key], lang_other[key])
+                if lang_other[key] && lang_other[key].empty?
+                    lang_other.delete(key)
                 end
             end
+        elsif lang_other.nil? || !lang_other[key]
+            puts "MISSING: #{name} [en=#{ lang_en[key] }]"
         else
-#            puts "#{name} [#{en[key]}] [#{other[key]}]"
-            if other.nil? || ! other[key]
-                puts "MISSING: #{name} [en=#{en[key]}]"
-            else
-                other.delete(key)
-            end
+            lang_other.delete(key)
         end
     end
 end
-
 
 if look_for_error('', i18n_lang)
     exit 1
@@ -55,10 +51,7 @@ end
 
 walk('', i18n_en, i18n_lang)
 
-
 unless i18n_lang.empty?
     puts "keys in translation that are not in English version:"
-    require 'pp'
     pp i18n_lang
 end
-
