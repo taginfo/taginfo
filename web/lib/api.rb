@@ -139,17 +139,17 @@ class APIParameters
             @results_per_page = p[:rp].to_i
         end
 
-        if p[:sortname].nil? || p[:sortname] == ''
-            @sortname = nil
-        else
-            @sortname = p[:sortname].gsub(/[^a-z_]/, '_')
-        end
+        @sortname = if p[:sortname].nil? || p[:sortname] == ''
+                        nil
+                    else
+                        p[:sortname].gsub(/[^a-z_]/, '_')
+                    end
 
-        if p[:sortorder] == 'desc' || p[:sortorder] == 'DESC'
-            @sortorder = 'DESC'
-        else
-            @sortorder = 'ASC'
-        end
+        @sortorder = if p[:sortorder] == 'desc' || p[:sortorder] == 'DESC'
+                         'DESC'
+                     else
+                         'ASC'
+                     end
     end
 
     def do_paging?
@@ -190,7 +190,7 @@ def get_png(table, type, key, value = nil)
         condition('key = ?', key).
         condition_if('value = ?', value).
         get_first_value ||
-    @db.select('SELECT png FROM db.key_distributions').
-        is_null('key').
-        get_first_value
+        @db.select('SELECT png FROM db.key_distributions').
+            is_null('key').
+            get_first_value
 end

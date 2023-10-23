@@ -5,7 +5,7 @@ class TaginfoConfig
     attr_reader :id
 
     def initialize(configfile, id = '')
-        open(configfile) do |file|
+        File.open(configfile) do |file|
             @config = JSON.parse(file.gets(nil), { :create_additions => false })
         end
         @id = id

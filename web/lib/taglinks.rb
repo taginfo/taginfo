@@ -68,7 +68,7 @@ TAGLINKS = {
 
         return []
     })
-}
+}.freeze
 
 def get_links(key, value)
     tm = TAGLINKS[key.to_sym]

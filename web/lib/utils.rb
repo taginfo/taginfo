@@ -136,15 +136,16 @@ def level0_url(filter, key, value)
     end
     query += '"];'
 
-    if filter == 'nodes'
-        query = 'node' + query
-    elsif filter == 'ways'
-        query = '(way' + query + '>;);'
-    elsif filter == 'relations'
-        query = 'rel' + query
-    else
-        query = '(node' + query + 'way' + query + '>;rel' + query + ');'
-    end
+    query = case filter
+            when 'nodes'
+                'node' + query
+            when 'ways'
+                '(way' + query + '>;);'
+            when 'relations'
+                'rel' + query
+            else
+                '(node' + query + 'way' + query + '>;rel' + query + ');'
+            end
 
     overpass_url = @taginfo_config.get('level0.overpass_url_prefix') + Rack::Utils.build_query({ :data => '[out:xml];' + query + 'out meta;' })
 
@@ -168,8 +169,8 @@ end
 # ------------------------------------------------------------------------------
 
 def tagcloud_size(tag)
-    x = tag['scale1'].to_f / 20 + tag['pos'] / 4
-    (x * 40 + 12).to_i
+    x = (tag['scale1'].to_f / 20) + (tag['pos'] / 4)
+    ((x * 40) + 12).to_i
 end
 
 def get_filter
@@ -184,7 +185,8 @@ def get_total(type)
         'all'       => 'objects',
         'nodes'     => 'nodes_with_tags',
         'ways'      => 'ways',
-        'relations' => 'relations' }[type]
+        'relations' => 'relations'
+    }[type]
 
     @db.stats(key)
 end
@@ -244,11 +246,11 @@ def get_description(table, attr, param, value)
                     .condition("lang=? AND #{attr}=?", lang, param)
 
         if attr == 'key'
-            if value.nil?
-                select = select.condition('value IS NULL')
-            else
-                select = select.condition('value=?', value)
-            end
+            select = if value.nil?
+                         select.condition('value IS NULL')
+                     else
+                         select.condition('value=?', value)
+                     end
         end
 
         desc = select.get_first_value
@@ -308,8 +310,7 @@ def get_wiki_result(res)
             :tags_linked      => row['tags_linked'].split(','),
             :status           => row['approval_status']
         }
-        end
-    )
+    end)
 end
 
 def paging_results(array)
@@ -369,14 +370,13 @@ def unpack_chronology(raw_data)
 end
 
 def build_link(link)
-    if (@taginfo_config.id != '')
-        '/' + @taginfo_config.id + link
-    else
+    if @taginfo_config.id == ''
         link
+    else
+        '/' + @taginfo_config.id + link
     end
 end
 
 def data_as_script(data)
     data.to_json.gsub('<', '\u003C')
 end
-
