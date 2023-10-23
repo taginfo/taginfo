@@ -3,14 +3,6 @@
 #  check-translations.rb DIR LANG
 #
 
-v=RUBY_VERSION.split('.').map{ |x| x.to_i }
-if (v[0]*100+v[1])*100+v[0] < 10901
-    STDERR.puts "You need at least Ruby 1.9.1 to run taginfo"
-    exit(1)
-end
-
-#------------------------------------------------------------------------------
-
 require 'yaml'
 
 dir  = ARGV[0]
