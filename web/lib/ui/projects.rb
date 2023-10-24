@@ -15,7 +15,7 @@ class Taginfo < Sinatra::Base
                           params[:project]
                       end
 
-        if @project_id.nil? or @project_id == ''
+        if @project_id.nil? || (@project_id == '')
             redirect(build_link('/projects'))
         end
 

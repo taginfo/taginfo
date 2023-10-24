@@ -18,19 +18,19 @@ class Taginfo < Sinatra::Base
     # Return opensearch description (see www.opensearch.org)
     get '/search/opensearch.xml' do
         content_type :opensearch
-        opensearch = <<END_XML
-<?xml version="1.0" encoding="UTF-8"?>
-<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-    <ShortName>#{ @taginfo_config.get('opensearch.shortname') }</ShortName>
-    <Description>#{ @taginfo_config.get('opensearch.description') }</Description>
-    <Tags>#{ @taginfo_config.get('opensearch.tags') }</Tags>
-    <Contact>#{ @taginfo_config.get('opensearch.contact') }</Contact>
-    <Url type="application/x-suggestions+json" rel="suggestions" template="__URL__/search/suggest?term={searchTerms}"/>
-    <Url type="text/html" method="get" template="__URL__/search?q={searchTerms}"/>
-    <Url type="application/opensearchdescription+xml" rel="self" template="__URL__/search/opensearch.xml"/>
-    <Image height="16" width="16" type="image/x-icon">__URL__/favicon.ico</Image>
-</OpenSearchDescription>
-END_XML
+        opensearch = <<~END_XML
+            <?xml version="1.0" encoding="UTF-8"?>
+            <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+                <ShortName>#{ @taginfo_config.get('opensearch.shortname') }</ShortName>
+                <Description>#{ @taginfo_config.get('opensearch.description') }</Description>
+                <Tags>#{ @taginfo_config.get('opensearch.tags') }</Tags>
+                <Contact>#{ @taginfo_config.get('opensearch.contact') }</Contact>
+                <Url type="application/x-suggestions+json" rel="suggestions" template="__URL__/search/suggest?term={searchTerms}"/>
+                <Url type="text/html" method="get" template="__URL__/search?q={searchTerms}"/>
+                <Url type="application/opensearchdescription+xml" rel="self" template="__URL__/search/opensearch.xml"/>
+                <Image height="16" width="16" type="image/x-icon">__URL__/favicon.ico</Image>
+            </OpenSearchDescription>
+        END_XML
         return opensearch.gsub(/__URL__/, @taginfo_config.get('instance.url'))
     end
 
@@ -43,25 +43,26 @@ END_XML
             order_by([:score], 'DESC').
             limit(10)
 
-        if query =~ /^=(.*)/
-            value = $1
+        case query
+        when /^=(.*)/
+            value = ::Regexp.last_match(1)
             res = sel.
                 condition_if("value LIKE ? ESCAPE '@'", like_prefix(value)).
-                execute().
+                execute.
                 map{ |row| row['key'] + '=' + row['value'].to_s }
-        elsif query =~ /^([^=]+)=(.*)/
-            key = $1
-            value = $2
+        when /^([^=]+)=(.*)/
+            key = ::Regexp.last_match(1)
+            value = ::Regexp.last_match(2)
             res = sel.
                 condition_if("key LIKE ? ESCAPE '@'", like_prefix(key)).
                 condition_if("value LIKE ? ESCAPE '@'", like_prefix(value)).
-                execute().
+                execute.
                 map{ |row| row['key'] + '=' + row['value'].to_s }
         else
             res = sel.
                 condition_if("key LIKE ? ESCAPE '@'", like_prefix(query)).
                 is_null('value').
-                execute().
+                execute.
                 map{ |row| row['key'] }
         end
 
@@ -70,15 +71,15 @@ END_XML
             # simple format is used by the search box on the website itself,
             # it is just a list of suggestions
             return res.to_json + "\n"
-        else
-            # this is the OpenSearch standard format
-            return [
-                query, # the query string
-                res, # the list of suggestions
-                res.map{ |item| '' }, # the standard says this is for descriptions, we don't have any so this is empty
-                res.map{ |item| @taginfo_config.get('instance.url') + '/tags/' + item } # the page this search should got to (ignored by FF, Chrome)
-            ].to_json + "\n"
         end
+
+        # this is the OpenSearch standard format
+        return [
+            query, # the query string
+            res, # the list of suggestions
+            res.map{ |item| '' }, # the standard says this is for descriptions, we don't have any so this is empty
+            res.map{ |item| @taginfo_config.get('instance.url') + '/tags/' + item } # the page this search should got to (ignored by FF, Chrome)
+        ].to_json + "\n"
     end
 
 end
