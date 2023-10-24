@@ -73,12 +73,12 @@ CREATE TABLE project_unique_tags (
 INSERT INTO project_unique_keys (key, projects)
     SELECT key, count(*) FROM (SELECT DISTINCT key, project_id FROM projects.project_tags) GROUP BY key;
 
-INSERT INTO stats (key, value) SELECT 'project_unique_keys', count(*) FROM project_unique_keys;
+INSERT INTO master_stats (key, value) SELECT 'project_unique_keys', count(*) FROM project_unique_keys;
 
 INSERT INTO project_unique_tags (key, value, projects)
     SELECT key, value, count(*) FROM (SELECT DISTINCT key, value, project_id FROM projects.project_tags WHERE value IS NOT NULL) GROUP BY key, value;
 
-INSERT INTO stats (key, value) SELECT 'project_unique_tags', count(*) FROM project_unique_tags;
+INSERT INTO master_stats (key, value) SELECT 'project_unique_tags', count(*) FROM project_unique_tags;
 
 UPDATE project_unique_keys SET in_wiki = lang_count FROM wiki.wikipages_keys w WHERE project_unique_keys.key = w.key;
 UPDATE project_unique_tags SET in_wiki = lang_count FROM wiki.wikipages_tags w WHERE project_unique_tags.key = w.key AND project_unique_tags.value = w.value;
