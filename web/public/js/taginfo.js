@@ -1734,8 +1734,6 @@ class Autocomplete {
 /* ============================ */
 
 function whenReady() {
-    document.getElementById('javascriptmsg').remove();
-
     if (document.getElementById('tabs')) {
         tabs = new Tabs('tabs');
     }
