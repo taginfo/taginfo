@@ -1558,6 +1558,12 @@ class ComparisonListDisplay {
         list.load();
         this.update();
 
+        document.addEventListener('keyup', (event) => {
+            if (event.key == '+') {
+                list.add(keyOrTag); list.store(); this.update();
+            }
+        });
+
         document.getElementById('comparison-list-add').addEventListener('click', () => { list.add(keyOrTag); list.store(); this.update(); });
         document.getElementById('comparison-list-clear').addEventListener('click', () => { list.clear(); list.store(); this.update(); });
         document.getElementById('comparison-list-compare').addEventListener('click', () => { list.compare(); });

@@ -85,6 +85,7 @@ misc:
     in_wiki_tooltip: Zu diesem Key/Tag gibt es mindestens eine Wiki-Seite.
     status: Status
     approval_status: Annahme-Status
+    other: Sonstiges
 
 help:
     search:
@@ -132,6 +133,7 @@ help:
         deactivate: Eingabefelder deaktivieren
         up: Übergeordn. Seite
         switch_input: Wechsel der Eingabef.
+        add_to_comparison: Diesen Key/Tag in Vergleichsliste aufnehmen
 
 pages:
     not_found:
