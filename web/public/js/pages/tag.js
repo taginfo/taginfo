@@ -8,12 +8,10 @@ const tabsConfig = {
                 { display: h(texts.pages.tag.number_objects), name: 'count', width: 260, align: 'center' }
             ],
             usePager: false,
-            processRow: row => {
-                return [
-                    fmt_type_image(row.type),
-                    fmt_value_with_percent(row.count, row.count_fraction)
-                ];
-            }
+            processRow: row => [
+                fmt_type_image(row.type),
+                fmt_value_with_percent(row.count, row.count_fraction)
+            ]
         });
     },
     combinations: function(key, value, filter_type) {

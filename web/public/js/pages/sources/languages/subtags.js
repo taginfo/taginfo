@@ -14,15 +14,13 @@ function createTable(filter_type) {
         ],
         sortname: 'subtag',
         sortorder: 'asc',
-        processRow: row => {
-            return [
-                row.type,
-                tag('tt', row.subtag),
-                row.description,
-                row.added,
-                row.notes
-            ];
-        }
+        processRow: row => [
+            row.type,
+            tag('tt', row.subtag),
+            row.description,
+            row.added,
+            row.notes
+        ]
     });
 }
 

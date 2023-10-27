@@ -8,12 +8,10 @@ const tabsConfig = {
                 { display: h(texts.pages.relation.overview.member_count), name: 'count', width: 260, sortable: true, align: 'right' }
             ],
             usePager: false,
-            processRow: row => {
-                return [
-                    fmt_type_image(row.type),
-                    fmt_with_ts(row.count)
-                ];
-            }
+            processRow: row => [
+                fmt_type_image(row.type),
+                fmt_with_ts(row.count)
+            ]
         });
     },
     roles: function(rtype) {
@@ -32,15 +30,13 @@ const tabsConfig = {
             ],
             sortname: 'count_all_members',
             sortorder: 'desc',
-            processRow: row => {
-                return [
-                    fmt_role(row.role),
-                    fmt_value_with_percent(row.count_all_members, row.count_all_members_fraction),
-                    fmt_value_with_percent(row.count_node_members, row.count_node_members_fraction),
-                    fmt_value_with_percent(row.count_way_members, row.count_way_members_fraction),
-                    fmt_value_with_percent(row.count_relation_members, row.count_relation_members_fraction)
-                ];
-            },
+            processRow: row => [
+                fmt_role(row.role),
+                fmt_value_with_percent(row.count_all_members, row.count_all_members_fraction),
+                fmt_value_with_percent(row.count_node_members, row.count_node_members_fraction),
+                fmt_value_with_percent(row.count_way_members, row.count_way_members_fraction),
+                fmt_value_with_percent(row.count_relation_members, row.count_relation_members_fraction)
+            ],
             empty: h(texts.pages.relation.roles.no_roles_info)
         });
     },

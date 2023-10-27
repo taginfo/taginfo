@@ -10,13 +10,11 @@ const tabsConfig = {
                     { display: h(texts.pages.key.number_values), name: 'value', width: 140, align: 'right' }
                 ],
                 usePager: false,
-                processRow: row => {
-                    return [
-                        fmt_type_image(row.type),
-                        fmt_value_with_percent(row.count, row.count_fraction),
-                        fmt_with_ts(row.values)
-                    ];
-                }
+                processRow: row => [
+                    fmt_type_image(row.type),
+                    fmt_value_with_percent(row.count, row.count_fraction),
+                    fmt_with_ts(row.values)
+                ]
             }),
             new ChartValues(key, filter_type, context.countAllValues)
         ];
@@ -36,14 +34,12 @@ const tabsConfig = {
             ],
             sortname: 'count',
             sortorder: 'desc',
-            processRow: row => {
-                return [
-                    hover_expand(key.toTag(row.value).link()),
-                    fmt_value_with_percent(row.count, row.fraction),
-                    key.toTag(row.value).link({tab: 'wiki', content: fmt_checkmark(row.in_wiki)}),
-                    fmt_desc(row.desclang, row.descdir, row.description)
-                ];
-            }
+            processRow: row => [
+                hover_expand(key.toTag(row.value).link()),
+                fmt_value_with_percent(row.count, row.fraction),
+                key.toTag(row.value).link({tab: 'wiki', content: fmt_checkmark(row.in_wiki)}),
+                fmt_desc(row.desclang, row.descdir, row.description)
+            ]
         });
     },
     combinations: function(key, filter_type) {
