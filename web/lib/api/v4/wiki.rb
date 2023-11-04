@@ -43,6 +43,185 @@ class Taginfo < Sinatra::Base
         )
     end
 
+    api(4, 'wiki/key_status', {
+        :description => 'List all keys documented on the wiki with their status.',
+        :parameters => {
+            :status => 'Only show keys with this status (optional).'
+        },
+        :paging => :optional,
+        :result => paging_results([
+            [:status, :STRING, 'Status.'],
+            [:key,    :STRING, 'Key.'],
+            [:langs,  :ARRAY_OF_STRINGS, 'List of languages that have this status and key'],
+        ]),
+        :example => { :status => 'obsolete' },
+        :ui => '/sources/wiki/tag_status#keys'
+    }) do
+        status = params[:status]
+
+        if status == 'none'
+            none = true
+            status = ''
+            total = @db.select('SELECT count(distinct key) FROM wikipages WHERE approval_status IS NULL AND value IS NULL').
+                get_first_i
+        else
+            total = @db.select("SELECT count(distinct (coalesce(approval_status, '@') || key)) FROM wikipages").
+                condition('value IS NULL').
+                condition_if('approval_status = ?', status).
+                get_first_i
+        end
+
+        res = @db.select("SELECT approval_status, key, json_group_array(lang) AS languages FROM wikipages").
+            condition('value IS NULL').
+            condition_if('approval_status = ?', status).
+            condition_if_true('approval_status IS NULL', none).
+            order_by(@ap.sortname, @ap.sortorder) do |o|
+                o.key
+            end.
+            group_by('approval_status, key').
+            paging(@ap).
+            execute
+
+        return generate_json_result(total,
+            res.map do |row| {
+                :status => row['approval_status'],
+                :key    => row['key'],
+                :langs  => JSON.parse(row['languages']).sort
+            }
+            end
+        )
+    end
+
+    api(4, 'wiki/tag_status', {
+        :description => 'List all tags documented on the wiki with their status.',
+        :parameters => {
+            :status => 'Only show tags with this status (optional).'
+        },
+        :paging => :optional,
+        :result => paging_results([
+            [:status, :STRING, 'Status.'],
+            [:key,    :STRING, 'Key.'],
+            [:value,  :STRING, 'Value.'],
+            [:langs,  :ARRAY_OF_STRINGS, 'List of languages that have this status, key, and value.'],
+        ]),
+        :example => { :status => 'obsolete' },
+        :ui => '/sources/wiki/tag_status#tags'
+    }) do
+        status = params[:status]
+
+        if status == 'none'
+            none = true
+            status = ''
+            total = @db.select('SELECT count(distinct (key || value)) FROM wikipages WHERE approval_status IS NULL AND value IS NOT NULL').
+                get_first_i
+        else
+            total = @db.select("SELECT count(distinct (coalesce(approval_status, '@') || key || value)) FROM wikipages").
+                condition('value IS NOT NULL').
+                condition_if('approval_status = ?', status).
+                get_first_i
+        end
+
+        res = @db.select("SELECT distinct approval_status, key, value, json_group_array(lang) AS languages FROM wikipages").
+            condition('value IS NOT NULL').
+            condition_if('approval_status = ?', status).
+            condition_if_true('approval_status IS NULL', none).
+            order_by(@ap.sortname, @ap.sortorder) do |o|
+                o.key
+                o.value
+            end.
+            group_by('approval_status, key, value').
+            paging(@ap).
+            execute
+
+        return generate_json_result(total,
+            res.map do |row| {
+                :status => row['approval_status'],
+                :key    => row['key'],
+                :value  => row['value'],
+                :langs  => JSON.parse(row['languages']).sort
+            }
+            end
+        )
+    end
+
+    api(4, 'wiki/inconsistent_key_status', {
+        :description => 'List all keys documented on the wiki which have a different status in different languages.',
+        :paging => :optional,
+        :result => paging_results([
+            [:key,    :STRING, 'Key.'],
+            [:counts, :HASH, 'Hash mapping status values to counts of wiki pages.'],
+        ]),
+        :example => {},
+        :ui => '/sources/wiki/tag_status#inconsistent_keys'
+    }) do
+        total = @db.stats('wiki_inconsistent_status_keys')
+
+        res = @db.select(<<EOF
+WITH key_status_count AS (
+    SELECT p.key, p.approval_status AS status, count(*) AS count
+        FROM wikipages p, inconsistent_status_keys d
+        WHERE d.key = p.key AND p.value IS NULL AND p.approval_status IS NOT NULL
+        GROUP BY p.key, p.approval_status
+),
+res AS (
+    SELECT key, json_group_object(status, count) AS counts
+        FROM key_status_count GROUP BY key
+)
+SELECT * FROM res
+EOF
+            ).
+            paging(@ap).
+            execute
+
+        return generate_json_result(total,
+            res.map do |row| {
+                :key    => row['key'],
+                :counts => JSON.parse(row['counts']),
+            }
+            end
+        )
+    end
+
+    api(4, 'wiki/inconsistent_tag_status', {
+        :description => 'List all tags documented on the wiki which have a different status in different languages.',
+        :paging => :optional,
+        :result => paging_results([
+            [:key,    :STRING, 'Key.'],
+            [:value,  :STRING, 'Value.'],
+            [:counts, :HASH, 'Hash mapping status values to counts of wiki pages.'],
+        ]),
+        :example => {},
+        :ui => '/sources/wiki/tag_status#inconsistent_tags'
+    }) do
+        total = @db.stats('wiki_inconsistent_status_tags')
+
+        res = @db.select(<<EOF
+WITH tag_status_count AS (
+    SELECT p.key, p.value, p.approval_status AS status, count(*) AS count
+        FROM wikipages p, inconsistent_status_tags d
+        WHERE d.key = p.key AND d.value = p.value AND p.approval_status IS NOT NULL
+        GROUP BY p.key, p.value, p.approval_status
+),
+res AS (
+    SELECT key, value, json_group_object(status, count) AS counts
+        FROM tag_status_count GROUP BY key, value
+)
+SELECT * FROM res
+EOF
+            ).
+            paging(@ap).
+            execute
+
+        return generate_json_result(total,
+            res.map do |row| {
+                :key    => row['key'],
+                :value  => row['value'],
+                :counts => JSON.parse(row['counts']),
+            }
+            end
+        )
+    end
+
     api(4, 'wiki/problems', {
         :description => 'Show problems encountered by taginfo while parsing wiki pages',
         :paging => :optional,

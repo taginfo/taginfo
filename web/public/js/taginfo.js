@@ -500,9 +500,9 @@ function fmt_desc(lang, dir, desc) {
 
 function fmt_status(status) {
     if (status === null) {
-        return '';
+        return '<i>(none)</i>';
     }
-    return html_escape(status);
+    return '<span class="tagstatus tagstatus-' + html_escape(status.replace(/[^a-z]+/, '-')) + '">' + html_escape(status) + '</span>';
 }
 
 function fmt_role(role) {

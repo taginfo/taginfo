@@ -1,4 +1,18 @@
 <%
+@css = <<'CSS'
+.tagstatuslist-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 4px 10px;
+    gap: 4px;
+}
+
+.tagstatuslist-item {
+    min-width: 8em;
+}
+
+CSS
+
 count_all = @db.select("SELECT count(distinct(image)) AS count FROM wiki.wikipages").execute()[0]['count']
 count_small = @db.select("SELECT count(distinct(image)) AS count FROM wiki.wikipages WHERE image IN (SELECT image FROM wiki.wiki_images WHERE width * height < 64 * 64)").execute()[0]['count']
 count_tall = @db.select("SELECT count(distinct(image)) AS count FROM wiki.wikipages WHERE image IN (SELECT image FROM wiki.wiki_images WHERE height > width * 2)").execute()[0]['count']
@@ -15,6 +29,18 @@ count_large = @db.select("SELECT count(distinct(image)) AS count FROM wiki.wikip
             <tr><th>Images:</th><td><%= @db.stats('wiki_images') %></td></tr>
             <tr><th>Languages:</th><td><%= @db.stats('wiki_languages') %></td></tr>
         </table>
+    </div>
+</div>
+<div class="fbox">
+    <h2>Tag Status</h2>
+    <div>
+        <p>Tag status from the wiki info boxes.</p>
+        <div class="tagstatuslist-container">
+<% @db.select('SELECT approval_status AS status, count(*) AS count FROM wikipages WHERE approval_status IS NOT NULL GROUP BY approval_status HAVING count > 10 ORDER BY count DESC').execute do |row| %>
+            <div class="tagstatuslist-item"><%= TagStatus[row['status']].badge %>: <%= row['count'] %></div>
+<% end %>
+        </div>
+        <p><a href="wiki/tag_status">More...</a></p>
     </div>
 </div>
 <div class="fbox">

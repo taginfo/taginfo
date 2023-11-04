@@ -1,0 +1,163 @@
+<%
+@filter_type = params[:status]
+@sel = Hash.new('')
+@sel[@filter_type] = ' selected="selected"'
+
+@wiki_pages_for_keys = @db.stats('wiki_pages_for_keys')
+@wiki_pages_for_tags = @db.stats('wiki_pages_for_tags')
+
+@css = <<"CSS"
+form#status-filter-form {
+    margin-bottom: 10px;
+}
+
+.tagstatustable-table {
+    background-color: var(--color-light);
+    border-radius: 4px;
+    padding: 6px;
+    border-spacing: 0;
+}
+
+.tagstatustable-head {
+    text-align: left;
+    width: 8em;
+    padding: 2px;
+    white-space: nowrap;
+}
+
+.tagstatustable-status {
+    text-align: left;
+    font-weight: normal;
+}
+
+.tagstatustable-data {
+    text-align: right;
+    background-color: var(--color-lighter);
+    padding: 2px 4px;
+}
+
+.tagstatustable-percent {
+    border-right: 8px solid var(--color-light);
+}
+
+.tagstatustable-total {
+    border-top: 1px solid var(--color-light);
+}
+
+.tagstatustable-known {
+    font-weight: bold;
+}
+CSS
+%>
+<h1><a href="<%= build_link("/sources/#{ @source.id }") %>"><%= @source.name %></a>: Tag status</h1>
+
+<p>The <tt>KeyDescription</tt> and <tt>ValueDescription</tt> templates in the
+wiki have a field called <tt>status</tt>. It is used in the info boxes on all
+Key and Tag pages. For details and available status values see the explanations
+on the <a class="extlink" target="_blank"
+href="https://wiki.openstreetmap.org/wiki/Tag_status">Tag status</a> page in
+the Wiki.</p>
+
+<div id="tabs">
+    <ul class="no-print">
+        <li><a href="#overview"><%= t.taginfo.overview %></a></li>
+        <li><a href="#keys"><%= t.osm.keys %></a></li>
+        <li><a href="#tags"><%= t.osm.tags %></a></li>
+        <li><a href="#inconsistent_keys">Keys with inconsistent status</a></li>
+        <li><a href="#inconsistent_tags">Tags with inconsistent status</a></li>
+    </ul>
+    <div id="overview">
+        <table class="tagstatustable-table">
+            <thead><tr>
+                <th class="tagstatustable-head">Tag status</th>
+                <th class="tagstatustable-head" colspan="2">All pages</th>
+                <th class="tagstatustable-head" colspan="2">Key pages</th>
+                <th class="tagstatustable-head" colspan="2">Tag pages</th>
+            </tr></thead>
+<%
+count_all = 0
+count_keys = 0
+count_tags = 0
+
+@db.select(<<EOF).
+SELECT approval_status AS status,
+       count(*) AS count_all,
+       count(*) FILTER (WHERE value IS NULL) AS count_keys,
+       count(*) FILTER (WHERE value IS NOT NULL) AS count_tags
+    FROM wikipages
+    GROUP BY approval_status
+    ORDER BY count_all DESC
+EOF
+    execute do |row|
+        count_all += row['count_all'].to_i
+        count_keys += row['count_keys'].to_i
+        count_tags += row['count_tags'].to_i
+
+        if TagStatus[row['status']].known then
+            status_class='tagstatustable-known'
+        end
+%>
+            <tbody><tr>
+                <th class="tagstatustable-status"><%= TagStatus[row['status']].badge %></th>
+                <td class="tagstatustable-data"><%= row['count_all'] %></td>
+                <td class="tagstatustable-data tagstatustable-percent"><%= row['count_all'] * 100 / (@wiki_pages_for_keys + @wiki_pages_for_tags) %>%</td>
+                <td class="tagstatustable-data"><%= row['count_keys'] %></td>
+                <td class="tagstatustable-data tagstatustable-percent"><%= row['count_keys'] * 100 / @wiki_pages_for_keys %>%</td>
+                <td class="tagstatustable-data"><%= row['count_tags'] %></td>
+                <td class="tagstatustable-data"><%= row['count_tags'] * 100 / @wiki_pages_for_tags %>%</td>
+            </tr>
+<% end %>
+            <tr class="total">
+                <th class="tagstatustable-status"><b>Total:</b></th>
+                <td class="tagstatustable-data tagstatustable-total"><%= count_all %></td>
+                <td class="tagstatustable-data tagstatustable-total tagstatustable-percent">100%</td>
+                <td class="tagstatustable-data tagstatustable-total"><%= count_keys %></td>
+                <td class="tagstatustable-data tagstatustable-total tagstatustable-percent">100%</td>
+                <td class="tagstatustable-data tagstatustable-total"><%= count_tags %></td>
+                <td class="tagstatustable-data tagstatustable-total">100%</td>
+            </tr></tbody>
+        </table>
+    </div>
+    <div id="keys">
+        <form id="status-filter-form-key">
+            <label for="status-filter-key"><%= h('Only show pages with tag status') %>:</label>
+            <select id="status-filter-key" name="status-filter-key">
+                <option value=""<%= @sel[''] %>>(any)</option>
+                <option value="none"<%= @sel['none'] %>>(none)</option>
+<% @db.select('SELECT approval_status AS status, count(distinct key) AS count FROM wikipages WHERE approval_status IS NOT NULL AND value IS NULL GROUP BY approval_status ORDER BY count DESC').execute do |row| %>
+                <option value="<%= h(row['status']) %>"<%= @sel[row['status']] %>><%= h(row['status']) %> (<%= row['count'] %>)</option>
+<% end %>
+            </select>
+        </form>
+        <div id="grid-keys"></div>
+    </div>
+    <div id="tags">
+        <form id="status-filter-form-tag">
+            <label for="status-filter-tag"><%= h('Only show pages with tag status') %>:</label>
+            <select id="status-filter-tag" name="status-filter-tag">
+                <option value=""<%= @sel[''] %>>(any)</option>
+                <option value="none"<%= @sel['none'] %>>(none)</option>
+<% @db.select('SELECT approval_status AS status, count(distinct key || value) AS count FROM wikipages WHERE approval_status IS NOT NULL AND value IS NOT NULL GROUP BY approval_status ORDER BY count DESC').execute do |row| %>
+                <option value="<%= h(row['status']) %>"<%= @sel[row['status']] %>><%= h(row['status']) %> (<%= row['count'] %>)</option>
+<% end %>
+            </select>
+        </form>
+        <div id="grid-tags"></div>
+    </div>
+    <div id="inconsistent_keys">
+<% if @db.stats('wiki_inconsistent_status_keys') > 0 %>
+        <p>Shows all keys with different status in different languages. Keys with unset status are ignored.</p>
+        <div id="grid-inconsistent-keys"></div>
+<% else %>
+        <p>Status information for all keys is consistent between language pages.</p>
+<% end %>
+    </div>
+    <div id="inconsistent_tags">
+<% if @db.stats('wiki_inconsistent_status_tags') > 0 %>
+        <p>Shows all tags with different status in different languages. Tags with unset status are ignored.</p>
+        <div id="grid-inconsistent-tags"></div>
+<% else %>
+        <p>Status information for all tags is consistent between language pages.</p>
+<% end %>
+    </div>
+</div>

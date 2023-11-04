@@ -152,6 +152,27 @@ a.section {
     text-decoration: none;
 }
 
+/* ===== TAG STATUS =====  */
+
+.tagstatus {
+    background-color: var(--color-lighter);
+    border: 1px solid var(--color-darker);
+    border-left: 3px solid var(--color-darker);
+    padding: 1px 3px;
+}
+
+.tagstatus-approved, .tagstatus-de-facto {
+    background-color: #b0f0b0;
+}
+
+.tagstatus-in-use, .tagstatus-proposed, .tagstatus-imported, .tagstatus-obsolete, .tagstatus-undefined {
+    background-color: #ffffff;
+}
+
+.tagstatus-deprecated, .tagstatus-discardable {
+    background-color: #f0b0b0;
+}
+
 /* ==========  */
 
 .button {

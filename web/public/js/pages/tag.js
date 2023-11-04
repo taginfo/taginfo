@@ -61,7 +61,7 @@ const tabsConfig = {
                 { display: h(texts.misc.description), name: 'description', width: 300 },
                 { display: h(texts.misc.image), name: 'image', width: 100 },
                 { display: h(texts.osm.objects), name: 'objects', width:  80 },
-                { display: h(texts.misc.status), name: 'status', width: 60, title: h(texts.misc.approval_status) },
+                { display: h(texts.misc.status), name: 'status', width: 70, title: h(texts.misc.approval_status) },
                 { display: h(texts.pages.tag.wiki_pages.implied_tags), name: 'tags_implied', width: 120 },
                 { display: h(texts.pages.tag.wiki_pages.combined_tags), name: 'tags_combination', width: 120 },
                 { display: h(texts.pages.tag.wiki_pages.linked_tags), name: 'tags_linked', width: 220 }
