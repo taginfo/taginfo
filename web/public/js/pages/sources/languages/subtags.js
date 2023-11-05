@@ -31,6 +31,5 @@ function page_init() {
     widgetManager.addWidget(theTable);
     filter.addEventListener('change', function(element) {
         window.location.search = new URLSearchParams({ 'filter': element.target.value });
-        theTable.load();
     });
 }
