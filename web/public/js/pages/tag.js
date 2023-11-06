@@ -125,6 +125,9 @@ function page_init() {
         if (element.target.value != 'all') {
             tag.params.filter = element.target.value;
         }
+        if (window.location.hash != '') {
+            tag.tab = window.location.hash.substring(1);
+        }
         window.location = tag.url();
     });
 
