@@ -28,7 +28,7 @@ It uses:
 * Ruby (must be at least 3.0)
 * [Sinatra web framework](http://www.sinatrarb.com/) and other ruby libraries
 * curl binary
-* sqlite3 binary (version 3.9 or above with FTS5 and regexp support)
+* sqlite3 binary (version 3.33 or above with FTS5 and regexp support)
 * Optional: Parallel bzip (pbzip2)
 
 Install the Debian/Ubuntu packages:
