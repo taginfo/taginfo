@@ -13,7 +13,9 @@ module SQL
 
             pcre_extension = taginfo_config.get('paths.sqlite3_pcre_extension')
             if pcre_extension
+                @db.enable_load_extension(true)
                 @db.load_extension(pcre_extension)
+                @db.enable_load_extension(false)
             end
 
             @db.execute('PRAGMA journal_mode = OFF')
