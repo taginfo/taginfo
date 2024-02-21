@@ -35,7 +35,7 @@
             </form>
 <% unless @nosearch %>
             <form id="search_form" action="<%= build_link('/search') %>">
-                <input type="text" id="search" name="q" value="<%= h(params[:q]) %>" autocomplete="off"/>
+                <input type="text" id="search" name="q" value="<%= h(params[:q]) %>" autocomplete="off" autocapitalize="off"/>
                 <div id="suggestions"></div>
             </form>
 <% end %>
