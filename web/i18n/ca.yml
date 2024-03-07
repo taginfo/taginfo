@@ -105,6 +105,7 @@ help:
         site_navigation: Navegació del lloc
         page_navigation: Navegació de pàgina
         table_navigation: Navegació de taula
+        add_to_comparison: Afegir la parella key/tag a la comparació actual
         keys:
             home: Inici
             end: Fi
@@ -476,6 +477,7 @@ dynamic_table:
     procmsg: S'està processant, espereu...
     nomsg: Cap element
     errormsg: Error de connexió
+    filter_nothing_found: No s'ha trobat res amb aquesta consulta
 
 comparison:
     list: Llista de comparacions
