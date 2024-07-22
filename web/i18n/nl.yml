@@ -50,6 +50,7 @@ taginfo:
     key_combinations: Combinaties
     comparison: Sleutel-/Tagvergelijking
     overview: Overzicht
+    characters: Tekens
     links: Links
     data_from: Gegevens van
     data_from_description: Laatste update van de taginfo database
@@ -85,6 +86,7 @@ misc:
     in_wiki_tooltip: Heeft tenminste één wikipagina.
     status: Status
     approval_status: Goedkeuringsstatus
+    other: Andere
 
 help:
     search:
@@ -132,6 +134,7 @@ help:
         deactivate: Deactiveer invoervelden
         up: Omhoog in pagina hiërarchie
         switch_input: Schakel invoervelden
+        add_to_comparison: Voeg huidige sleutel/tag toe aan de vergelijkingslijst
 
 pages:
     not_found:
@@ -180,7 +183,7 @@ pages:
         building_on_taginfo:
             title: Bouwen op taginfo
             pre: |
-                <p>U kunt de gegevens van taginfo ook gebruiken in je eigen projecten:</p>
+                <p>Je kunt de gegevens van taginfo ook gebruiken in je eigen projecten:</p>
             api: |
                 <h3>API</h3>
                 <p>Taginfo-gegevens zijn toegankelijk via een REST API. Zie de
@@ -253,6 +256,8 @@ pages:
                 <p>Projecten die OSM-tags op een of andere manier gebruiken, zoals bewerkers, kaarten, routeplanners en dergelijke.</p>
             chronology: |
                 <p>Aantal sleutels/tags in de loop van de tijd van <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">planet historie</a>.</p>
+            wikidata: |
+                <p>De <a class="extlink" href="https://www.wikidata.org/">Wikidata-database</a> verbindt OSM sleutels, tags, en relaties aan andere concepten met behulp van de eigenschap <a href="https://www.wikidata.org/wiki/Property:P1282">P1282</a>.</p>
         updates:
             title: Updates
             intro: De taginfo-gegevens worden regulier bijgewerkt vanuit de bronnen.
@@ -260,6 +265,11 @@ pages:
         last_update_run: Laatste update gedraaid
         data_until_explanation: Alle bewerkingen tot deze tijd zullen in de data zitten, latere kunnen er mogelijk inzitten.
         to: tot
+        data: Gegevens
+        database_size: Databasegrootte
+        minutes: min
+        statistics: Statistieken
+        import_errors: Import-fouten
         languages:
             subtags:
                 title: BCP47 Subtags
@@ -270,27 +280,67 @@ pages:
                     script: Script
                     region: Regio
                     variant: Variant
+                columns:
+                    type: Type
+                    subtag: Subtag
+                    description: Beschrijving
+                    added: Toegevoegd
+                    notes: Opmerkingen
                 intro: |
                     <p>De <a href="https://www.ietf.org/">IETF</a> definieert <i>taal
                     tags</i> in zijn standaard
                     <a href="https://tools.ietf.org/html/bcp47">Tags voor het identificeren van talen
                     (BCP47)</a>. Taal
                     tags bestaan uit een of meer <i>subtags</i> die de taal, script,
-                    varianten en dergelijke beschrijven. Voor meer informatie bekijk ook de
-                    <a href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
-                    pagina over IETF taal tags</a> en de <a
+                    varianten en dergelijke beschrijven. Voor meer informatie bekijk
+                    ook de <a
+                    href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia
+                    pagina over IETF taal-tags</a> en de <a
                     href="http://www.langtag.net/">langtag.net</a> website.</p>
                 note: |
                     Let er op dat de data weergegeven in deze tabel niet van
                     OpenStreetMap is, er worden slechts de bouwblokken weergegeven
                     die gebruikt kunnen worden om talen te beschrijven
                     onafhankelijk van of ze daadwerkelijk gebruikt worden in OSM.
+                show: Geef alle taal-subtags weer...
+            wikipedia_sites:
+                title: Wikipedia-websites
+        wikidata:
+            index:
+                show_items: Geef alle Wikidata-items weer...
+                show_errors: Geef alle fouten weer...
+            stats:
+                keys: Sleutel-items
+                tags: Tag-items
+                relations: Relatie-items
+                roles: Rol-items
+                qcode: Items met Q-code
+                pcode: Items met P-code
+            items:
+                title: Items
+                description: |
+                    Dit zijn alle Wikidata-items met de eigenschap P1282 en
+                    de OSM sleutel, tag, of relatie waar ze aan gekoppeld zijn. Niet weergegeven zijn
+                    "Rol"-type eigenschappen en eigenschappen die niet het
+                    juiste formaat hebben.
+                columns:
+                    type: Type
+                    ktr: Sleutel/Tag/Relatie
+                    item: Wikidata-item
+            errors:
+                description: |
+                    Dit zijn alle problemen die zijn tegengekomen bij het importeren van de
+                    Wikidata-items met eigenschap P1282.
+                columns:
+                    item: Wikidata-item
+                    p1282: Waarde van P1282-eigenschap
+                    error: Foutmelding
     download:
         intro: |
-            <p>Hier kun je de database gebruikt door taginfo downloaden. Alle gegevens zijn opgeslagen
+            <p>Hier kun je de database gebruiken door taginfo te downloaden. Alle gegevens zijn opgeslagen
             in <a class="extlink" href="https://www.sqlite.org/">Sqlite</a> databases.
             De databasebestanden zijn dan verpakt met <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
-            <p>Als je deze databases niet wil downloaden, maar geautomatiseerde toegang nodig hebt tot
+            <p>Als je deze databases niet wilt downloaden, maar geautomatiseerde toegang nodig hebt tot
             de data, kan je ook de <a href="about">API</a> gebruiken.</p>
         file: Bestand
         packed: Ingepakt
@@ -381,6 +431,8 @@ pages:
             count_all_tooltip: Hoeveelheid objecten met de soortgelijke sleutel
             similarity: Overeenkomst
             similarity_tooltip: Kleinere getallen betekenen meer overeenkomst
+        characters:
+            title: Unicode-tekens in deze sleutel
     tag:
         description_from_wiki: Beschrijving van deze tag uit de wiki (indien beschikbaar in je gekozen taal, anders in het Engels).
         no_description_in_wiki: Geen Engelse beschrijving voor deze tag in de wiki. (Zie ook het "Wiki" tabblad.)
@@ -418,6 +470,8 @@ pages:
         projects:
             title: Projecten die deze tag gebruiken
             description: Hoe deze tag gebruikt wordt in het project
+        characters:
+            title: Unicode-tekens in deze waarde
     relation:
         name: Relatietype
         description_from_wiki: Beschrijving van dit relatietype uit de wiki (indien beschikbaar in je gekozen taal, anders in het Engels).
@@ -448,6 +502,8 @@ pages:
         projects:
             title: Projecten die dit relatietype gebruiken
             description: Hoe dit relatietype wordt gebruikt in het project
+        characters:
+            title: Unicode-tekens in relatietype
     project:
         overview:
             project_name: Projectnaam
@@ -469,9 +525,10 @@ dynamic_table:
     pagestat: Geeft {from} tot {to} van {total} items weer
     outof: van
     findtext: Zoek
-    procmsg: Verwerkt, wacht alsjeblieft...
+    procmsg: Wordt verwerkt, wacht alsjeblieft...
     nomsg: Geen items
     errormsg: Verbindingsprobleem
+    filter_nothing_found: Niets gevonden wat overeenkomt met je zoekopdracht.
 
 comparison:
     list: Vergelijkingslijst
@@ -503,26 +560,36 @@ sources:
     chronology:
         name: Chronologie
         description: Aantal sleutels/tags in de loop van de tijd van OSM.
+    wikidata:
+        name: Wikidata
+        description: De Wikimedia wikidata-database verbindt OSM sleutels, tags, en relaties aan andere concepten.
+
+unicode:
+    character: Char
+    codepoint: Codepunt
+    script: Script
+    general_category: Algemene categorie
+    name: Unicode-codepunt naam
 
 reports:
     characters_in_keys:
-        name: Karakters in sleutels
+        name: Tekens in sleutels
         intro: |
-            Elk geldig Unicode karakter kan voorkomen in een OSM-sleutel, maar meestal
+            Elk geldig Unicode-teken kan voorkomen in een OSM-sleutel, maar meestal
             worden alleen kleine letters (a-z) en de underscore (_)
-            gebruikt. De dubbele punt (:) wordt vaak gebruikt als een scheidingskarakter. Dit
-            rapport categoriseert alle sleutels op basis van de karakters die ze gebruiken.
+            gebruikt. De dubbele punt (:) wordt vaak gebruikt als een scheidingsteken. Dit
+            rapport categoriseert alle sleutels op basis van de tekens die ze gebruiken.
         statistics:
             tab: Statistieken
             title: Statistiekenoverzicht
             fraction: Aandeel
-            characters: Karakters in sleutel
+            characters: Tekens in sleutel
             characters_in_keys:
-                plain: Alleen kleine letters (<span class="char">a</span> tot <span class="char">z</span>) en underscore (<span class="char">_</span>), eerste en laatste karakters zijn letters.
+                plain: Alleen kleine letters (<span class="char">a</span> tot <span class="char">z</span>) en underscore (<span class="char">_</span>), eerste en laatste tekens zijn letters.
                 colon: Als A maar met een of meer dubbele punten (<span class="char">:</span>) erin.
                 letters: Als B maar met hoofdletters of letters van ander alfabetten.
-                space: Minsten een witruimte karakter (spatie, tab, nieuwe regel, carriage return, of van andere alfabetten).
-                problem: Bevat mogelijk problematisch karakters <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
+                space: Minsten een witruimte-teken (spatie, tab, nieuwe regel, carriage return, of van andere alfabetten).
+                problem: Bevat mogelijk problematische tekens <span class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span>.
                 rest: Alle andere.
                 total: Totaal
         plain:
@@ -532,7 +599,7 @@ reports:
                 <p>Sleutels die alleen kleine letters bevatten (<span
                 class="char">a</span> tot <span class="char">z</span>) en de
                 underscore (<span class="char">_</span>). Eerste en laatste
-                karakters moeten letters zijn. Het merendeel van de simpele
+                tekens moeten letters zijn. Het merendeel van de simpele
                 sleutels valt in deze categorie.</p>
         colon:
             tab: Dubbele punt
@@ -543,7 +610,7 @@ reports:
                 letters (<span class="char">a</span> tot <span
                 class="char">z</span>) en underscores (<span
                 class="char">_</span>). De dubbele punt wordt vaak gebruikt als een hiërarchie
-                scheidingskarakter.</p>
+                scheidingsteken.</p>
         letters:
             tab: Letters
             title: Sleutels met hoofdletters of letters van andere alfabetten
@@ -558,18 +625,18 @@ reports:
             title: Sleutels met witruimte
             intro: |
                 <p>Sleutels met witruimte zoals spatie, tab,
-                nieuwe regel, carriage return, of witruimte karakters van andere
+                nieuwe regel, carriage return, of witruimte-tekens van andere
                 alfabetten. Witruimte in sleutels kan verwarrend zijn, zeker aan
                 het begin of einde van de sleutel, omdat ze onzichtbaar zijn.
                 Meestal moet de witruimte verwijderd of de underscore
                 (<span class="char">_</span>) gebruikt worden als vervanging.</p>
         problem:
             tab: Problematisch
-            title: Sleutels met mogelijk problematische karakters
+            title: Sleutels met mogelijk problematische tekens
             intro: |
-                <p>Sleutels met mogelijk problematische karakters: <span
+                <p>Sleutels met mogelijk problematische tekens: <span
                 class="char">=+/&amp;&lt;&gt;;'"?%#@\,</span> of controle
-                karakters. Deze karakters kunnen problematisch zijn, omdat ze
+                -tekens. Deze tekens kunnen problematisch zijn, omdat ze
                 gebruikt worden om strings in verschillende programmeertalen af te bakenen of
                 een speciale betekenis hebben in XML, HTML, URLs en op andere plaatsen. Het
                 is-teken wordt vaak gebruikt als een afscheiding tussen tagsleutels en
@@ -615,7 +682,7 @@ reports:
     key_lengths:
         name: Sleutellengtes
         intro: |
-            Tagsleutels kunnen tussen 0 en 255 (Unicode) karakters lang zijn. Zeer korte of zeer lange sleutels zijn vaak, maar niet altijd fouten.
+            Tagsleutels kunnen tussen 0 en 255 (Unicode-)tekens lang zijn. Zeer korte of zeer lange sleutels zijn vaak, maar niet altijd fouten.
         table:
             number_of_objects: Hoeveelheid objecten
         histogram:
@@ -706,4 +773,3 @@ reports:
         wiki_page: Wikipagina
         lang: Taal.
         info: Extra informatie
-
