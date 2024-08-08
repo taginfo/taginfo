@@ -33,7 +33,7 @@ It uses:
 
 Install the Debian/Ubuntu packages:
 ```sh
-$ sudo apt-get install curl sqlite3 sqlite3-pcre
+$ sudo apt-get install curl sqlite3
 $ sudo apt-get install ruby-passenger libapache2-mod-passenger
 ```
 
