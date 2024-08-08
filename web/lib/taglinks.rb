@@ -51,6 +51,7 @@ TAGLINKS = {
         return [ TagLink.new('ISO: ' + value, 'https://www.iso.org/obp/ui/#iso:code:3166:' + value),
                  TagLink.new('Wikipedia: ' + value, 'https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#' + value) ]
     }),
+    image:     tag_match(%r{^https?://},     ->(value){ return [ TagLink.new('Image', value) ] }),
     phone:     tag_match(%r{^\+[0-9. -]+$},  ->(value){ return [ TagLink.new('Phone number: ' + value, 'tel:' + value.gsub(/[ .-]+/, '-')) ] }),
     'ref:bag': tag_match(%r{^[0-9]+$},       lambda { |value|
         id = value.rjust(16, '0')
