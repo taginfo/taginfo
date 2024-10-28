@@ -263,7 +263,7 @@ pages:
         database_size: 資料庫大小
         minutes: 分鐘
         statistics: 統計
-        import_errors: 匯入錯誤        
+        import_errors: 匯入錯誤
         languages:
             subtags:
                 title: BCP47 子標籤
@@ -287,7 +287,7 @@ pages:
                     注意此表格顯示的資料不是來自 OpenStreetMap，
                     這些只是可以用來描述語言的積木，無關於有沒有真正用在 OSM 裡。
                 show: 顯示所有語言子標籤...
-             wikipedia_sites:
+            wikipedia_sites:
                 title: 維基百科網站
         wikidata:
             index:
