@@ -17,6 +17,7 @@ CREATE TABLE languages (
     wiki_tag_pages INTEGER  -- count of wiki pages with the title "code:Tag:*" (or "Tag:*" for code='en')
 );
 
+INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('af',      'af', 'Afrikaans', 'Afrikaans');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('ar',      'ar', 'Arabic', 'العربية');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('az',      'az', 'Azerbaijani', 'Azərbaycan dili');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('bg',      'bg', 'Bulgarian', 'Български език');
