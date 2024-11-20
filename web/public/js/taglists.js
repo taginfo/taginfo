@@ -61,8 +61,8 @@ var taginfo_taglist = (function(){
                 'count': 'Počet'
             },
             'de': {
-                'key': 'Key',
-                'value': 'Value',
+                'key': 'Schlüssel',
+                'value': 'Wert',
                 'element': 'Element',
                 'description': 'Beschreibung',
                 'image': 'Bild',
