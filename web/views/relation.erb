@@ -29,14 +29,23 @@
         <li><a href="#characters"><%= h(t.taginfo.characters) %></a></li>
     </ul>
     <div id="overview">
-<% if @image_url %>
-        <div class="wiki_image">
-            <img src="<%= @image_url.sub(/^http:/, '') %>" alt=""/>
-        </div>
-<% end %>
         <h2><%= h(t.pages.relation.overview.title) %></h2>
-        <div id="grid-overview"></div>
-        <p><%= h(t.pages.relation.overview.see_also) %>: type=<span id="taglink"></span></p>
+        <div class="overview-container">
+            <div class="overview-box">
+                <h3><%= h(t.pages.sources.statistics) %></h3>
+                <div id="grid-overview"></div>
+            </div>
+<% if @image_url %>
+            <div class="overview-box wiki_image">
+                <h3><%= h(t.misc.image) %></h3>
+                <img src="<%= @image_url.sub(/^http:/, '') %>" alt=""/>
+            </div>
+<% end %>
+            <div class="overview-box">
+                <h3><%= h(t.taginfo.links) %></h3>
+                <p><%= h(t.pages.relation.overview.see_also) %>: type=<span id="taglink"></span></p>
+            </div>
+        </div>
     </div>
     <div id="roles">
         <h2><%= h(t.pages.relation.roles.title) %></h2>

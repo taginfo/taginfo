@@ -936,14 +936,12 @@ p.search {
 
 /* ==========  */
 
-div.wiki_image {
-    float: right;
-}
-
 div.wiki_image img {
     border: 1px solid var(--color-border);
     border-radius: 4px;
     padding: 1px;
+    max-width: 296px;
+    max-height: 226px;
 }
 
 /* ==========  */
@@ -1564,9 +1562,97 @@ div.dt-table div.dt-body div {
 
 #grid-overview {
     max-width: 300px;
+    margin: auto;
 }
 
 .multi-map {
     position: relative;
+}
+
+/* ==========  */
+
+.overview-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.overview-box {
+    width: 300px;
+    height: 250px;
+    padding: 10px;
+    background-color: var(--color-lighter);
+    border-radius: 4px;
+    text-align: center;
+}
+
+.overview-box h3 {
+    margin: 0 0 6px 0;
+}
+
+.overview-box p {
+    margin: 6px 0;
+}
+
+/* ==========  */
+
+.treemap {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    margin: auto;
+    border-radius: 4px;
+}
+
+.treemap-item {
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+    border-radius: 2px;
+    border: 1px solid transparent;
+    color: black;
+}
+
+.treemap-label {
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 2px 4px;
+    hyphens: auto;
+    hyphenate-character: '';
+}
+
+.treemap-item:hover {
+    text-decoration: none;
+    border: 1px solid var(--color-darker);
+}
+
+.treemap-rest {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70"><rect width="70" height="70" fill="whitesmoke"/><g transform="rotate(45)"><rect width="99" height="45" fill="silver"/><rect y="-50" width="99" height="45" fill="silver"/></g></svg>');
+    background-size: 10px 10px;
+}
+
+.treemap-popup {
+    display: none;
+    position: absolute;
+    top: 200px;
+    width: 300px;
+    box-sizing: border-box;
+    padding: 4px;
+    white-space: pre;
+    background-color: white;
+}
+
+.treemap-item:hover .treemap-popup {
+    display: flex;
+}
+
+.treemap-rest .treemap-popup div:first-child {
+    font-style: italic;
+}
+
+.treemap-popup div:last-child {
+    position: absolute;
+    right: 4px;
+    text-align: right;
 }
 

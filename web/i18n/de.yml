@@ -419,6 +419,7 @@ pages:
             objects_last_edited_by: Objekte mit diesem Key wurden zuletzt von %1 verschiedenen Usern editiert.
             no_endorsement: (Das bedeutet nicht, dass alle diese User den Key befürworten.)
             distribution_of_values: Aufteilung der Values
+            all_other_values: Alle anderen Values
         other_keys_used:
             title: Andere Keys, die mit diesem Key benutzt werden
             other: Andere Keys

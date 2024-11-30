@@ -175,7 +175,7 @@ class ChartValues {
 
     constructor(key, filter, countAllValues) {
         this.key = key;
-        this.url = build_link('/api/4/key/prevalent_values', { min_fraction: 0.02, key: key, filter: filter });
+        this.url = build_link('/api/4/key/prevalent_values', { min_fraction: 0.002, key: key, filter: filter });
         this.countAllValues = countAllValues;
     }
 
@@ -186,63 +186,73 @@ class ChartValues {
         this.draw();
     }
 
-    colors() {
-        return ['#1f77b4', '#aec7e8', '#ff7f0e', '#ffbb78', '#2ca02c',
-                '#98df8a', '#d62728', '#ff9896', '#9467bd', '#c5b0d5',
-                '#8c564b', '#c49c94', '#e377c2', '#f7b6d2', '#7f7f7f',
-                '#c7c7c7', '#bcbd22', '#dbdb8d', '#17becf', '#9edae5'];
-    }
-
     draw() {
-        set_inner_html_to('canvas-values', '');
-        const width = 160;
-        const height = Math.min(440, window.innerHeight - 300);
+        const width = 300;
+        const height = 200;
 
-        let y = 0;
-        this.data.forEach(function(d) {
-            d['y'] = y;
-            y += d['count'];
-            if (d.value === null) {
-                d.label = '(other)';
-            } else {
-                d.label = d.value;
-            }
-        });
-
-        const scale = d3.scaleLinear()
-                        .domain([0, this.countAllValues])
-                        .range([0, height]);
-
-        const color = d3.scaleOrdinal()
-                        .range(this.colors());
-
-        const chart = d3.select('#canvas-values').append('svg')
-                        .attr('width', width)
-                        .attr('height', height);
-
-        chart.selectAll('rect')
-            .data(this.data)
-            .enter()
-            .append('svg:a')
-                .attr('href', d => this.key.toTag(d.label).url())
-                .attr('transform', d => 'translate(10, ' + scale(d['y']) + ')')
-                .call(function(c) {
-                    c.append('rect')
-                        .attr('width', 20)
-                        .attr('height', d => scale(d['count']))
-                        .style('fill', (d, i) => color(i));
-                })
-                .append('text')
-                    .attr('x', 25)
-                    .attr('y', d => scale(d['count'] / 2))
-                    .attr('dy', '0.5em')
-                    .text(d => d.label);
-
-        const other = document.querySelector('svg a[href$="(other)"]');
-        if (other) {
-            other.removeAttribute('href');
-            other.style.textDecoration = 'none';
+        const key = this.key;
+        const tree_data = {
+            name: '',
+            children: this.data.map(function(d) {
+                var title_name = d.value || '';
+                const name = d.fraction > 0.01 ? title_name : '';
+                if (title_name.length > 30) {
+                    title_name = title_name.substring(0, 30) + '\u2026';
+                }
+                return {
+                    name: name,
+                    // add soft hyphens in places where it is good to break the text if needed
+                    namebr: name.replaceAll(new RegExp('([^a-zA-Z])', 'g'), '\u200b$1\u200b').replaceAll(new RegExp('([a-z])([A-Z])', 'g'), '$1\u200b$2'),
+                    rest: d.value === null,
+                    value: d.count,
+                    fraction: d.fraction,
+                    title_name: (title_name || h(texts.pages.key.overview.all_other_values)),
+                    formatted_count: fmt_with_ts(d.count) + ' (' + fmt_as_percent(d.fraction) + ')',
+                };
+            })
         }
+
+        const color = d3.scaleOrdinal(tree_data.children.map((d, i) => i), d3.schemePastel1);
+
+        const root = d3.treemap()
+            .size([width, height])
+            .padding(1)
+            .round(true)
+        (d3.hierarchy(tree_data)
+            .sum(d => d.value)
+            .sort((a, b) => b.value - a.value));
+
+        set_inner_html_to('distribution-of-values', '');
+        const treemap = d3.select('#distribution-of-values').append('div')
+            .classed('treemap', true);
+
+        treemap.selectAll('a')
+            .data(root.leaves())
+            .join('a')
+            .classed('treemap-item', true)
+            .classed('treemap-rest', d => d.data.rest)
+            .attr('style', (d, i) => `width: ${d.x1 - d.x0}px; height: ${d.y1 - d.y0}px; background-color: ${color(i)}; left: ${d.x0}px; top: ${d.y0}px`)
+          .call(selection => {
+              selection.append('div')
+                .classed('treemap-popup', true)
+                  .attr('style', (d, i) => `transform: translate(-${d.x0}px, -${d.y0}px)`)
+                  .call(selection => {
+                      selection.append('div')
+                        .text(d => d.data.title_name);
+                  })
+                  .call(selection => {
+                      selection.append('div')
+                        .text(d => d.data.formatted_count);
+                  })
+              selection.append('div')
+                  .attr('style', (d, i) => `width: ${d.x1 - d.x0 - 2}px; height: ${d.y1 - d.y0 - 2}px;`)
+                  .classed('treemap-label', true)
+                  .attr('lang', 'en') // most popular tag values are in English, say so to use English hyphenation
+                  .text(d => d.data.namebr);
+          })
+
+        treemap.selectAll('.treemap-item:not(.treemap-rest)')
+            .attr('href', d => key.toTag(d.data.name).url())
     }
 
     resize() {

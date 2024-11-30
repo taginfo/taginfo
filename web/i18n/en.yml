@@ -401,6 +401,7 @@ pages:
             objects_last_edited_by: Objects with this key were last edited by %1 different users.
             no_endorsement: (This does not mean that all those users endorse this key.)
             distribution_of_values: Distribution of values
+            all_other_values: All other values
         other_keys_used:
             title: Other keys used together with this key
             other: Other keys

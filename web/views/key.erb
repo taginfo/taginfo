@@ -56,18 +56,24 @@
         <li><a href="#characters"><%= h(t.taginfo.characters) %></a></li>
     </ul>
     <div id="overview">
-        <div style="float: right; text-align: center; padding-left: 20px;">
-            <p><%= h(t.pages.key.overview.distribution_of_values) %></p>
-            <div class="canvas" id="canvas-values"></div>
-        </div>
-<% if @image_url %>
-        <div class="wiki_image">
-            <img src="<%= @image_url.sub(/^http:/, '') %>" alt=""/>
-        </div>
-<% end %>
         <h2><%= h(t.taginfo.overview) %></h2>
-        <div id="grid-overview"></div>
-        <p><span title="<%= h(t.pages.key.overview.no_endorsement) %>" data-tooltip-position="OnBottom"><%= t.pages.key.overview.objects_last_edited_by(@user_count.to_s_with_ts) %></span></p>
+        <div class="overview-container">
+            <div class="overview-box">
+                <h3><%= h(t.pages.sources.statistics) %></h3>
+                <div id="grid-overview"></div>
+                <p title="<%= h(t.pages.key.overview.no_endorsement) %>"><%= t.pages.key.overview.objects_last_edited_by(@user_count.to_s_with_ts) %></p>
+            </div>
+<% if @image_url %>
+            <div class="overview-box wiki_image">
+                <h3><%= h(t.misc.image) %></h3>
+                <img src="<%= @image_url.sub(/^http:/, '') %>" alt=""/>
+            </div>
+<% end %>
+            <div class="overview-box">
+                <h3><%= h(t.pages.key.overview.distribution_of_values) %></h3>
+                <div id="distribution-of-values"></div>
+            </div>
+        </div>
     </div>
     <div id="values">
         <h2><%= h(t.pages.key.values_used) %></h2>

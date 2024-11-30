@@ -4,8 +4,8 @@ const tabsConfig = {
             url: '/api/4/relation/stats',
             params: { rtype: rtype },
             colModel: [
-                { display: h(texts.pages.relation.overview.member_type), name: 'type', width: 100, sortable: true },
-                { display: h(texts.pages.relation.overview.member_count), name: 'count', width: 260, sortable: true, align: 'right' }
+                { display: h(texts.pages.relation.overview.member_type), name: 'type', width: 90, sortable: true },
+                { display: h(texts.pages.relation.overview.member_count), name: 'count', width: 50, sortable: true, align: 'right' }
             ],
             usePager: false,
             processRow: row => [

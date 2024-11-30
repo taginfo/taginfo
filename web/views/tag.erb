@@ -54,22 +54,32 @@
         <li><a href="#characters"><%= h(t.taginfo.characters) %></a></li>
     </ul>
     <div id="overview">
-<% if @image_url %>
-        <div class="wiki_image">
-            <img src="<%= @image_url.sub(/^http:/, '') %>" alt=""/>
-        </div>
-<% end %>
         <h2><%= h(t.taginfo.overview) %></h2>
-        <div id="grid-overview"></div>
-<% if @has_rtype_link or @links.size > 0 %>
-        <h2><%= h(t.taginfo.links) %></h2>
+        <div class="overview-container">
+            <div class="overview-box">
+                <h3><%= h(t.pages.sources.statistics) %></h3>
+                <div id="grid-overview"></div>
+            </div>
+<% if @image_url %>
+            <div class="overview-box wiki_image">
+                <h3><%= h(t.misc.image) %></h3>
+                <img src="<%= @image_url.sub(/^http:/, '') %>" alt=""/>
+            </div>
+<% end %>
+<% if @has_link_box %>
+            <div class="overview-box">
+                <h3><%= h(t.taginfo.links) %></h3>
 <% end %>
 <% if @has_rtype_link %>
-        <p><%= h(t.pages.tag.overview.see_also) %>: <span id="relationlink"></span></p>
+                <p><%= h(t.pages.tag.overview.see_also) %>: <span id="relationlink"></span></p>
 <% end %>
 <% @links.each do |link| %>
-        <p><%= link %></p>
+                <p><%= link %></p>
 <% end %>
+<% if @has_link_box %>
+            </div>
+<% end %>
+        </div>
     </div>
     <div id="combinations">
         <div>
