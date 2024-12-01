@@ -4,13 +4,16 @@ const tabsConfig = {
             url: '/api/4/tag/stats',
             params: { key: key, value: value },
             colModel: [
-                { display: h(texts.misc.object_type), name: 'type', width: 100 },
-                { display: h(texts.pages.tag.number_objects), name: 'count', width: 260, align: 'center' }
+                { display: h(texts.misc.object_type), name: 'type', width: 90 },
+                { display: h(texts.pages.tag.number_objects), name: 'count', width: 120, align: 'center' }
             ],
             usePager: false,
             processRow: row => [
                 fmt_type_image(row.type),
-                fmt_value_with_percent(row.count, row.count_fraction)
+                tag('div',
+                    tag('div', fmt_with_ts(row.count), { 'class': 'value' }) +
+                    tag('div', fmt_as_percent(row.count_fraction), { 'class': 'fraction' }),
+                    { 'class': 'value-fraction' })
             ]
         });
     },
