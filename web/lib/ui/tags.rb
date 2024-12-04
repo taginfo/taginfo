@@ -80,6 +80,7 @@ class Taginfo < Sinatra::Base
         @wikipage_en = @wikipages.find{ |row| row[:lang] == 'en' }
 
         @projects_count = @db.select('SELECT count(distinct project_id) FROM projects.project_tags').condition('key=? AND value=?', @key, @value).get_first_i
+        @projects = @db.select('SELECT DISTINCT id, coalesce(name, id) AS name FROM projects.projects p JOIN projects.project_tags t ON p.id = t.project_id').condition('t.key=? AND t.value=?', @key, @value).order_by('id', 'ASC').execute
 
         javascript_for(:d3)
         javascript "pages/tag"

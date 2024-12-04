@@ -54,6 +54,7 @@ class Taginfo < Sinatra::Base
         @wikipage_en = @wikipages.find{ |row| row[:lang] == 'en' }
 
         @projects_count = @db.select('SELECT count(distinct project_id) FROM projects.project_tags').condition('key=?', @key).get_first_i
+        @projects = @db.select('SELECT DISTINCT id, coalesce(name, id) AS name FROM projects.projects p JOIN projects.project_tags t ON p.id = t.project_id').condition('t.key=?', @key).order_by('id', 'ASC').execute
 
         @discardable = {}
         status = @db.select("SELECT approval_status FROM wiki.wikipages_keys WHERE key=?", @key).get_first_value

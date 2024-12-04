@@ -59,9 +59,6 @@
             <div class="overview-item">
                 <h3><%= h(t.pages.sources.statistics) %></h3>
                 <div id="grid-overview"></div>
-<% if @projects_count > 0 %>
-                <p><%= t.pages.tag.overview.known_projects(@projects_count) %></p>
-<% end %>
             </div>
 <% if @has_chronology %>
             <div class="overview-item">
@@ -98,6 +95,15 @@
 <% if @has_link_box %>
             </div>
 <% end %>
+            <div class="overview-item">
+                <h3><%= h(t.taginfo.projects) %></h3>
+                <p><%= h(t.pages.tag.overview.known_projects(@projects.count)) %></p>
+                <div class="projects-container">
+<% @projects.each do |row| %>
+                    <a class="projects-item" href="<%= build_link('/projects/' + row['id']) %>"><img class="projects-image" src="<%= build_link('/api/4/project/icon?project=' + row['id']) %>" title="<%= row['name'] %>" alt=""/></a>
+<% end %>
+                </div>
+            </div>
         </div>
     </div>
     <div id="combinations">

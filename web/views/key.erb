@@ -129,11 +129,6 @@ CSS
                            <a class="extlink" target="_blank" href="https://wiki.openstreetmap.org/wiki/Discardable_tags">Discardable tags</a></p>
                     </div>
 <% end %>
-<% if @projects_count > 0 %>
-                    <div>
-                        <p><%= t.pages.key.overview.known_projects(@projects_count) %></p>
-                    </div>
-<% end %>
                 </div>
             </div>
 <% end %>
@@ -153,6 +148,15 @@ CSS
 <% end %>
             </div>
 <% end %>
+            <div class="overview-item">
+                <h3><%= h(t.taginfo.projects) %></h3>
+                <p><%= h(t.pages.key.overview.known_projects(@projects.count)) %></p>
+                <div class="projects-container">
+<% @projects.each do |row| %>
+                    <a class="projects-item" href="<%= build_link('/projects/' + row['id']) %>"><img class="projects-image" src="<%= build_link('/api/4/project/icon?project=' + row['id']) %>" title="<%= row['name'] %>" alt=""/></a>
+<% end %>
+                </div>
+            </div>
         </div>
     </div>
     <div id="values">

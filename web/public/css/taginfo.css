@@ -1777,4 +1777,25 @@ div.gbox > div:last-child {
     text-align: right;
 }
 
+/* ==========  */
+
+.projects-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    margin: auto;
+}
+
+.projects-item {
+    display: block;
+    width: 16px;
+    height: 16px;
+}
+
+.projects-image {
+    max-width: 16px;
+    max-height: 16px;
+}
+
 /* ===== THE END =====  */
