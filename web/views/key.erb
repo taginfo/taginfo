@@ -63,6 +63,12 @@
                 <div id="grid-overview"></div>
                 <p title="<%= h(t.pages.key.overview.no_endorsement) %>"><%= t.pages.key.overview.objects_last_edited_by(@user_count.to_s_with_ts) %></p>
             </div>
+<% if @sources.get(:chronology) %>
+            <div class="overview-box">
+                <h3><%= h(t.taginfo.chronology) %></h3>
+                <div id="overview-chronology"></div>
+            </div>
+<% end %>
 <% if @image_url %>
             <div class="overview-box wiki_image">
                 <h3><%= h(t.misc.image) %></h3>

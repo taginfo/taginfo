@@ -19,6 +19,7 @@ const tabsConfig = {
                     fmt_with_ts(row.values)
                 ]
             }),
+            new ChartChronology('overview-chronology', build_link('/api/4/key/chronology', { key: key }), filter.value, 190),
             new ChartValues(key, filter_type, context.countAllValues)
         ];
     },
@@ -94,7 +95,7 @@ const tabsConfig = {
         });
     },
     chronology: function(key) {
-        return new ChartChronology(build_link('/api/4/key/chronology', { key: key }), filter.value);
+        return new ChartChronology('chart-chronology', build_link('/api/4/key/chronology', { key: key }), filter.value, 400);
     },
     wiki: function(key, filter_type) {
         return new DynamicTable('grid-wiki', {

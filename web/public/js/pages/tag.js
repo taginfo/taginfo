@@ -1,21 +1,24 @@
 const tabsConfig = {
     overview: function(key, value, filter_type) {
-        return new DynamicTable('grid-overview', {
-            url: '/api/4/tag/stats',
-            params: { key: key, value: value },
-            colModel: [
-                { display: h(texts.misc.object_type), name: 'type', width: 90 },
-                { display: h(texts.pages.tag.number_objects), name: 'count', width: 120, align: 'center' }
-            ],
-            usePager: false,
-            processRow: row => [
-                fmt_type_image(row.type),
-                tag('div',
-                    tag('div', fmt_with_ts(row.count), { 'class': 'value' }) +
-                    tag('div', fmt_as_percent(row.count_fraction), { 'class': 'fraction' }),
-                    { 'class': 'value-fraction' })
-            ]
-        });
+        return [
+            new DynamicTable('grid-overview', {
+                url: '/api/4/tag/stats',
+                params: { key: key, value: value },
+                colModel: [
+                    { display: h(texts.misc.object_type), name: 'type', width: 90 },
+                    { display: h(texts.pages.tag.number_objects), name: 'count', width: 120, align: 'center' }
+                ],
+                usePager: false,
+                processRow: row => [
+                    fmt_type_image(row.type),
+                    tag('div',
+                        tag('div', fmt_with_ts(row.count), { 'class': 'value' }) +
+                        tag('div', fmt_as_percent(row.count_fraction), { 'class': 'fraction' }),
+                        { 'class': 'value-fraction' })
+                ]
+            }),
+            new ChartChronology('overview-chronology', build_link('/api/4/tag/chronology', { key: key, value: value }), filter.value, 190)
+        ];
     },
     combinations: function(key, value, filter_type) {
         return new DynamicTable('grid-combinations', {
@@ -42,7 +45,7 @@ const tabsConfig = {
         });
     },
     chronology: function(key, value) {
-        return new ChartChronology(build_link('/api/4/tag/chronology', { key: key, value: value }), filter.value);
+        return new ChartChronology('chart-chronology', build_link('/api/4/tag/chronology', { key: key, value: value }), filter.value, 400);
     },
     wiki: function(key, value) {
         if (!document.getElementById('grid-wiki')) {

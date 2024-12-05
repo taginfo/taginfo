@@ -60,6 +60,12 @@
                 <h3><%= h(t.pages.sources.statistics) %></h3>
                 <div id="grid-overview"></div>
             </div>
+<% if @sources.get(:chronology) %>
+            <div class="overview-box">
+                <h3><%= h(t.taginfo.chronology) %></h3>
+                <div id="overview-chronology"></div>
+            </div>
+<% end %>
 <% if @image_url %>
             <div class="overview-box wiki_image">
                 <h3><%= h(t.misc.image) %></h3>

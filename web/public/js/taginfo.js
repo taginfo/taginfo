@@ -1873,16 +1873,19 @@ function whenReady() {
 }
 
 class ChartChronology {
-    id = 'chart-chronology';
+    id;
     element;
     url;
     filter;
     data;
+    height;
 
-    constructor(url, filter) {
+    constructor(id, url, filter, height) {
+        this.id = id;
         this.element = document.getElementById(this.id);
         this.url = url;
         this.filter = filter;
+        this.height = height;
     }
 
     async load() {
@@ -1928,9 +1931,9 @@ class ChartChronology {
         this.element.innerHTML = '';
 
         const boxWidth = this.element.getBoundingClientRect().width;
-        const w = Math.min(900, boxWidth - 100);
-        const h = 400;
-        const margin = { top: 10, right: 15, bottom: 60, left: 80 };
+        const w = Math.min(900, boxWidth - 60);
+        const h = this.height;
+        const margin = { top: 10, right: 15, bottom: 30, left: 40 };
 
         const t0 = this.data[0].date;
         const t1 = this.data[this.data.length - 1].date;
@@ -1942,11 +1945,16 @@ class ChartChronology {
                          .range([0, w]);
 
         const axisX = d3.axisBottom(scaleX)
+                        .ticks(w / 80)
                         .tickFormat(d3.timeFormat(w > 500 ? '%b %Y' : '%Y'));
 
         const scaleY = d3.scaleLinear()
                          .domain([0, max])
                          .range([h, 0]);
+
+        const axisY = d3.axisLeft(scaleY)
+                        .ticks(h / 40)
+                        .tickFormat(d3.formatPrefix(",.0f", max));
 
         const line = d3.line()
                        .curve(d3.curveStepAfter)
@@ -1976,7 +1984,7 @@ class ChartChronology {
         chart.append('g')
              .attr('class', 'y axis')
              .attr('transform', 'translate(-5, 0)')
-             .call(d3.axisLeft(scaleY));
+             .call(axisY);
 
         chart.append('path')
              .datum(this.data)
