@@ -36,6 +36,19 @@ class Taginfo < Sinatra::Base
         @context[:key] = @key
         @context[:countAllValues] = @count_all_values
 
+        @wikipages = @db.select("SELECT DISTINCT lang, title FROM wiki.wikipages WHERE key=? AND value IS NULL ORDER BY lang", @key).execute.map do |row|
+            lang = row['lang']
+            {
+                :lang    => lang,
+                :title   => row['title'],
+                :english => ::Language[lang].english_name,
+                :native  => ::Language[lang].native_name,
+                :dir     => direction_from_lang_code(lang)
+            }
+        end
+
+        @wikipage_en = @wikipages.find{ |row| row[:lang] == 'en' }
+
         javascript_for(:d3)
         javascript "pages/key"
         erb :key

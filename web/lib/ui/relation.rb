@@ -27,6 +27,19 @@ class Taginfo < Sinatra::Base
 
         @context[:rtype] = @rtype
 
+        @wikipages = @db.select("SELECT DISTINCT lang, title FROM wiki.relation_pages WHERE rtype=? ORDER BY lang", @rtype).execute.map do |row|
+            lang = row['lang']
+            {
+                :lang    => lang,
+                :title   => row['title'],
+                :english => ::Language[lang].english_name,
+                :native  => ::Language[lang].native_name,
+                :dir     => direction_from_lang_code(lang)
+            }
+        end
+
+        @wikipage_en = @wikipages.find{ |row| row[:lang] == 'en' }
+
         javascript_for(:d3)
         javascript "pages/relation"
         erb :relation

@@ -66,10 +66,20 @@
                 <div id="overview-chronology"></div>
             </div>
 <% end %>
+<% if @wikipages.size > 0 %>
+            <div class="overview-box">
+                <h3><%= h(t.taginfo.wiki) %></h3>
+<% if @wikipage_en %>
+                <p><a class="extlink" target="_blank" href="https://wiki.openstreetmap.org/<%= @wikipage_en[:title] %>"><%= @wikipage_en[:title] %></a></p>
+<% end %>
+                <div>
+<% @wikipages.each do |row| %>
+                    <a class="badge lang" target="_blank" data-tooltip-position="OnTop" data-tooltip-text="<%= row[:native] %> (<%= row[:english] %>)" href="https://wiki.openstreetmap.org/<%= row[:title] %>"><%= row[:lang] %></a>
+<% end %>
+                </div>
 <% if @image_url %>
-            <div class="overview-box wiki_image">
-                <h3><%= h(t.misc.image) %></h3>
-                <img src="<%= @image_url.sub(/^http:/, '') %>" alt=""/>
+                <img class="wiki_image" src="<%= @image_url.sub(/^http:/, '') %>" alt=""/>
+<% end %>
             </div>
 <% end %>
 <% if @has_link_box %>

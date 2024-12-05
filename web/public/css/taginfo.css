@@ -690,7 +690,7 @@ div#tabs form {
 
 /* ========== */
 
-span.badge {
+.badge {
     position: relative;
     top: -1px;
     color: var(--color-text);
@@ -702,7 +702,7 @@ span.badge {
     white-space: nowrap;
 }
 
-span.lang {
+.lang {
     background-color: #f0e0f0; /* light violet */
 }
 
@@ -936,12 +936,13 @@ p.search {
 
 /* ==========  */
 
-div.wiki_image img {
+.wiki_image {
+    margin-top: 6px;
     border: 1px solid var(--color-border);
     border-radius: 4px;
     padding: 1px;
     max-width: 296px;
-    max-height: 226px;
+    max-height: 140px;
 }
 
 /* ==========  */
