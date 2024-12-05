@@ -36,6 +36,10 @@ class Taginfo < Sinatra::Base
         @context[:key] = @key
         @context[:countAllValues] = @count_all_values
 
+        if @sources.get(:chronology)
+            @has_chronology = @db.count('keys_chronology').condition('key=?', @key).get_first_i > 0
+        end
+
         @wikipages = @db.select("SELECT DISTINCT lang, title FROM wiki.wikipages WHERE key=? AND value IS NULL ORDER BY lang", @key).execute.map do |row|
             lang = row['lang']
             {

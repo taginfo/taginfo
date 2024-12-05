@@ -63,11 +63,13 @@
                 <div id="grid-overview"></div>
                 <p title="<%= h(t.pages.key.overview.no_endorsement) %>"><%= t.pages.key.overview.objects_last_edited_by(@user_count.to_s_with_ts) %></p>
             </div>
+<% if @count_all_values > 0 %>
             <div class="overview-box">
                 <h3><%= h(t.pages.key.overview.distribution_of_values) %></h3>
                 <div id="distribution-of-values"></div>
             </div>
-<% if @sources.get(:chronology) %>
+<% end %>
+<% if @has_chronology %>
             <div class="overview-box">
                 <h3><%= h(t.taginfo.chronology) %></h3>
                 <div id="overview-chronology"></div>
@@ -89,10 +91,12 @@
 <% end %>
             </div>
 <% end %>
+<% if @projects.size > 0 %>
             <div class="overview-box">
                 <h3><%= h(t.pages.key.overview.distribution_of_values) %></h3>
                 <div id="distribution-of-values"></div>
             </div>
+<% end %>
         </div>
     </div>
     <div id="values">
