@@ -1164,6 +1164,27 @@ div.fbox h3 {
 
 /* ==========  */
 
+.project-icons-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+    text-align: center;
+}
+
+.project-icons-item {
+    display: block;
+    width: 32px;
+    max-height: 32px;
+}
+
+.project-icons-image {
+    max-width: 32px;
+    max-height: 32px;
+}
+
+/* ==========  */
+
 div.gboxes {
     display: grid;
     gap: 20px 20px;

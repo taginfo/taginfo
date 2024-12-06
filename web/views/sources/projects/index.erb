@@ -12,10 +12,10 @@
 </div>
 <div class="fbox">
     <h2>Project Icons</h2>
-    <div><%
+    <div class="project-icons-container"><%
 res = @db.select("SELECT id, coalesce(name, id) AS name FROM projects.projects WHERE icon IS NOT NULL ORDER BY id").execute
 res.each do |row|%>
-        <a href="<%= build_link('/projects/' + row['id']) %>"><img src="<%= build_link('/api/4/project/icon?project=' + row['id']) %>" title="<%= row['name'] %>" alt="" width="32" height="32"/></a>
+        <a class="project-icons-item" href="<%= build_link('/projects/' + row['id']) %>"><img class="project-icons-image" src="<%= build_link('/api/4/project/icon?project=' + row['id']) %>" title="<%= row['name'] %>" alt=""/></a>
 <% end %>
     </div>
 </div>
