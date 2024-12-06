@@ -30,10 +30,11 @@ It uses:
 * curl binary
 * sqlite3 binary (version 3.33 or above with FTS5 and regexp support)
 * Optional: Parallel bzip (pbzip2)
+* Optional: Vips image library with [Ruby bindings](https://github.com/libvips/ruby-vips)
 
 Install the Debian/Ubuntu packages:
 ```sh
-$ sudo apt-get install curl sqlite3
+$ sudo apt-get install curl sqlite3 ruby-vips
 $ sudo apt-get install ruby-passenger libapache2-mod-passenger
 ```
 

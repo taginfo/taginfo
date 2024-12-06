@@ -29,6 +29,13 @@ require 'uri'
 require 'sqlite3'
 require 'time'
 
+vips_available = true
+begin
+    require 'vips'
+rescue LoadError
+    vips_available = false
+end
+
 #------------------------------------------------------------------------------
 
 dir = ARGV[0] || '.'
@@ -66,8 +73,23 @@ projects.each do |id, url|
     if response.code == '200'
         content_type = response['content-type'].force_encoding('UTF-8')
         content_type.sub!(/ *;.*/, '')
-        if content_type =~ %r{^image/}
-            puts "  #{id} #{url} #{content_type}"
+        if vips_available and (content_type == 'image/png' or content_type == 'image/jpg')
+            input_image = Vips::Image.new_from_source(Vips::Source.new_from_memory(response.body), '')
+            if input_image.width > 32 or input_image.height > 32
+                resized_image = input_image.resize(32.to_f / [input_image.width, input_image.height].max)
+                puts "  #{id} #{url} #{content_type} (#{input_image.width}x#{input_image.height} RESIZED TO #{resized_image.width}x#{resized_image.height})"
+                if content_type == 'image/png'
+                    image = SQLite3::Blob.new(resized_image.pngsave_buffer)
+                else
+                    image = SQLite3::Blob.new(resized_image.jpgsave_buffer)
+                end
+            else
+                puts "  #{id} #{url} #{content_type} (#{input_image.width}x#{input_image.height} USED AS IS)"
+                image = SQLite3::Blob.new(response.body)
+            end
+            database.execute("UPDATE projects SET icon_type = ?, icon = ? WHERE id = ?", [ content_type, image, id ])
+        elsif content_type =~ %r{^image/}
+            puts "  #{id} #{url} #{content_type} (USED AS IS)"
             image = SQLite3::Blob.new(response.body)
             database.execute("UPDATE projects SET icon_type = ?, icon = ? WHERE id = ?", [ content_type, image, id ])
         else
@@ -76,8 +98,8 @@ projects.each do |id, url|
     else
         puts "  #{id} #{url} ERROR code=#{response.code}"
     end
-rescue StandardError
-    puts "  #{id} #{url} ERROR"
+rescue StandardError => e
+    puts "  #{id} #{url} ERROR: #{e.full_message}"
 end
 
 #-- THE END -------------------------------------------------------------------
