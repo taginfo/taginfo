@@ -195,19 +195,19 @@ class ChartValues {
         const tree_data = {
             name: '',
             children: this.data.map(function(d) {
-                var title_name = d.value || '';
-                const name = d.fraction > 0.01 ? title_name : '';
-                if (title_name.length > 30) {
-                    title_name = title_name.substring(0, 30) + '\u2026';
+                var name = d.value || '';
+                // add soft hyphens in places where it is good to break the text if needed
+                const display_name = d.fraction > 0.01 ? name.replaceAll(new RegExp('([^a-zA-Z])', 'g'), '\u200b$1\u200b').replaceAll(new RegExp('([a-z])([A-Z])', 'g'), '$1\u200b$2') : '';
+                if (name.length > 30) {
+                    name = name.substring(0, 30) + '\u2026';
                 }
                 return {
-                    name: name,
-                    // add soft hyphens in places where it is good to break the text if needed
-                    namebr: name.replaceAll(new RegExp('([^a-zA-Z])', 'g'), '\u200b$1\u200b').replaceAll(new RegExp('([a-z])([A-Z])', 'g'), '$1\u200b$2'),
+                    tag_value: d.value,
+                    display_name: display_name,
                     rest: d.value === null,
                     value: d.count,
                     fraction: d.fraction,
-                    title_name: (title_name || h(texts.pages.key.overview.all_other_values)),
+                    name: (name || h(texts.pages.key.overview.all_other_values)),
                     formatted_count: fmt_with_ts(d.count) + ' (' + fmt_as_percent(d.fraction) + ')',
                 };
             })
@@ -239,7 +239,7 @@ class ChartValues {
                   .attr('style', (d, i) => `transform: translate(-${d.x0}px, -${d.y0}px)`)
                   .call(selection => {
                       selection.append('div')
-                        .text(d => d.data.title_name);
+                        .text(d => d.data.name);
                   })
                   .call(selection => {
                       selection.append('div')
@@ -249,11 +249,11 @@ class ChartValues {
                   .attr('style', (d, i) => `width: ${d.x1 - d.x0 - 2}px; height: ${d.y1 - d.y0 - 2}px;`)
                   .classed('treemap-label', true)
                   .attr('lang', 'en') // most popular tag values are in English, say so to use English hyphenation
-                  .text(d => d.data.namebr);
+                  .text(d => d.data.display_name);
           })
 
         treemap.selectAll('.treemap-item:not(.treemap-rest)')
-            .attr('href', d => key.toTag(d.data.name).url())
+            .attr('href', d => key.toTag(d.data.tag_value).url())
     }
 
     resize() {
