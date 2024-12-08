@@ -56,7 +56,7 @@
     <div id="overview">
         <h2><%= h(t.taginfo.overview) %></h2>
         <div class="overview-container">
-            <div class="overview-box">
+            <div class="overview-item">
                 <h3><%= h(t.pages.sources.statistics) %></h3>
                 <div id="grid-overview"></div>
 <% if @projects_count > 0 %>
@@ -64,13 +64,13 @@
 <% end %>
             </div>
 <% if @has_chronology %>
-            <div class="overview-box">
+            <div class="overview-item">
                 <h3><%= h(t.taginfo.chronology) %></h3>
                 <div id="overview-chronology"></div>
             </div>
 <% end %>
 <% if @wikipages.size > 0 %>
-            <div class="overview-box overview-box-wiki">
+            <div class="overview-item overview-item-wiki">
                 <h3><%= h(t.taginfo.wiki) %></h3>
 <% if @wikipage_en %>
                 <p><a class="extlink" target="_blank" href="https://wiki.openstreetmap.org/<%= @wikipage_en[:title] %>"><%= @wikipage_en[:title] %></a></p>
@@ -81,12 +81,12 @@
 <% end %>
                 </div>
 <% if @image_url %>
-                <div class="wiki_image" style="background-image: url(<%= @image_url.sub(/^http:/, '') %>);"></div>
+                <div class="overview-item-wiki-image" style="background-image: url(<%= @image_url.sub(/^http:/, '') %>);"></div>
 <% end %>
             </div>
 <% end %>
 <% if @has_link_box %>
-            <div class="overview-box">
+            <div class="overview-item">
                 <h3><%= h(t.taginfo.links) %></h3>
 <% end %>
 <% if @has_rtype_link %>

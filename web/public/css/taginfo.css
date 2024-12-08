@@ -936,16 +936,6 @@ p.search {
 
 /* ==========  */
 
-.wiki_image {
-    margin-top: 6px;
-    flex-grow: 1;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-}
-
-/* ==========  */
-
 .canvas svg text {
     font: 12px Arial,sans-serif;
 }
@@ -1560,11 +1550,6 @@ div.dt-table div.dt-body div {
 
 /* ==========  */
 
-#grid-overview {
-    max-width: 300px;
-    margin: auto;
-}
-
 .multi-map {
     position: relative;
 }
@@ -1577,7 +1562,7 @@ div.dt-table div.dt-body div {
     gap: 10px;
 }
 
-.overview-box {
+.overview-item {
     width: 300px;
     height: 250px;
     padding: 10px;
@@ -1586,17 +1571,25 @@ div.dt-table div.dt-body div {
     text-align: center;
 }
 
-.overview-box h3 {
+.overview-item h3 {
     margin: 0 0 6px 0;
 }
 
-.overview-box p {
+.overview-item p {
     margin: 6px 0;
 }
 
-.overview-box-wiki {
+.overview-item-wiki {
     display: flex;
     flex-direction: column;
+}
+
+.overview-item-wiki-image {
+    margin-top: 6px;
+    flex-grow: 1;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 
 /* ==========  */
