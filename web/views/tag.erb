@@ -70,7 +70,7 @@
             </div>
 <% end %>
 <% if @wikipages.size > 0 %>
-            <div class="overview-box">
+            <div class="overview-box overview-box-wiki">
                 <h3><%= h(t.taginfo.wiki) %></h3>
 <% if @wikipage_en %>
                 <p><a class="extlink" target="_blank" href="https://wiki.openstreetmap.org/<%= @wikipage_en[:title] %>"><%= @wikipage_en[:title] %></a></p>
@@ -81,7 +81,7 @@
 <% end %>
                 </div>
 <% if @image_url %>
-                <img class="wiki_image" src="<%= @image_url.sub(/^http:/, '') %>" alt=""/>
+                <div class="wiki_image" style="background-image: url(<%= @image_url.sub(/^http:/, '') %>);"></div>
 <% end %>
             </div>
 <% end %>

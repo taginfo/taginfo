@@ -938,11 +938,10 @@ p.search {
 
 .wiki_image {
     margin-top: 6px;
-    border: 1px solid var(--color-border);
-    border-radius: 4px;
-    padding: 1px;
-    max-width: 296px;
-    max-height: 140px;
+    flex-grow: 1;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 
 /* ==========  */
@@ -1593,6 +1592,11 @@ div.dt-table div.dt-body div {
 
 .overview-box p {
     margin: 6px 0;
+}
+
+.overview-box-wiki {
+    display: flex;
+    flex-direction: column;
 }
 
 /* ==========  */
