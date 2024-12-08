@@ -5,9 +5,9 @@ const tabsConfig = {
                 url: '/api/4/key/stats',
                 params: { key: key },
                 colModel: [
-                    { display: h(texts.misc.object_type), name: 'type', width: 90 },
-                    { display: h(texts.pages.key.number_objects), name: 'count', width: 120, align: 'center' },
-                    { display: h(texts.osm.values), name: 'value', width: 50, align: 'right' }
+                    { display: h(texts.misc.object_type), name: 'type' },
+                    { display: h(texts.pages.key.number_objects), name: 'count', align: 'center' },
+                    { display: h(texts.osm.values), name: 'value', align: 'right' }
                 ],
                 usePager: false,
                 processRow: row => [
