@@ -16,6 +16,14 @@ UPDATE relation_pages SET status='p' WHERE type='page' AND has_templ=0;
 UPDATE relation_pages SET status='t' WHERE type='page' AND has_templ=1 AND parsed=1;
 UPDATE relation_pages SET status='e' WHERE type='page' AND has_templ=1 AND parsed=0;
 
+CREATE TABLE inconsistent_status_keys AS
+    SELECT DISTINCT a.key FROM wikipages a, wikipages b
+        WHERE a.key = b.key AND a.value IS NULL AND b.value IS NULL AND a.approval_status != b.approval_status;
+
+CREATE TABLE inconsistent_status_tags AS
+    SELECT DISTINCT a.key, a.value FROM wikipages a, wikipages b
+        WHERE a.key = b.key AND a.value = b.value AND a.approval_status != b.approval_status;
+
 CREATE INDEX relation_pages_rtype_idx ON relation_pages(rtype);
 
 CREATE INDEX wiki_images_image_idx ON wiki_images(image);
@@ -48,6 +56,9 @@ INSERT INTO stats (key, value) SELECT 'wiki_pages_for_relation_types_with_templa
 INSERT INTO stats (key, value) SELECT 'wiki_pages_for_relation_types_with_error',       count(*) FROM relation_pages WHERE status='e';
 
 INSERT INTO stats (key, value) SELECT 'wiki_languages', count(*) FROM wiki_languages;
+
+INSERT INTO stats (key, value) SELECT 'wiki_inconsistent_status_keys', count(*) FROM inconsistent_status_keys;
+INSERT INTO stats (key, value) SELECT 'wiki_inconsistent_status_tags', count(*) FROM inconsistent_status_tags;
 
 ANALYZE;
 
