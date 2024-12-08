@@ -34,6 +34,9 @@
             <div class="overview-box">
                 <h3><%= h(t.pages.sources.statistics) %></h3>
                 <div id="grid-overview"></div>
+<% if @projects_count > 0 %>
+                <p><%= t.pages.relation.overview.known_projects(@projects_count) %></p>
+<% end %>
             </div>
 <% if @wikipages.size > 0 %>
             <div class="overview-box">

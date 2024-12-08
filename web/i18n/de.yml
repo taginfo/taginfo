@@ -420,6 +420,7 @@ pages:
             no_endorsement: (Das bedeutet nicht, dass alle diese User den Key befürworten.)
             distribution_of_values: Aufteilung der Values
             all_other_values: Alle anderen Values
+            known_projects: Taginfo kennt %1 Projekte, die diesen Key referenzieren.
         other_keys_used:
             title: Andere Keys, die mit diesem Key benutzt werden
             other: Andere Keys
@@ -459,6 +460,7 @@ pages:
         number_objects: Anzahl Objekte
         overview:
             see_also: Siehe auch auf der Relation-Typ-Seite
+            known_projects: Taginfo kennt %1 Projekte, die diesen Tag referenzieren.
         other_tags_used:
             title: Tags, die mit diesem Tag zusammen benutzt werden
             other: Andere Tags
@@ -502,6 +504,7 @@ pages:
             member_type: Member-Typ
             member_count: Anzahl Member
             see_also: Siehe auch auf der Tag-Seite
+            known_projects: Taginfo kennt %1 Projekte, die diesen Relation-Typ referenzieren.
         roles:
             tab: Roles
             title: Member Roles

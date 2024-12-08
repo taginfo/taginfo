@@ -53,6 +53,8 @@ class Taginfo < Sinatra::Base
 
         @wikipage_en = @wikipages.find{ |row| row[:lang] == 'en' }
 
+        @projects_count = @db.select('SELECT count(distinct project_id) FROM projects.project_tags').condition('key=?', @key).get_first_i
+
         javascript_for(:d3)
         javascript "pages/key"
         erb :key

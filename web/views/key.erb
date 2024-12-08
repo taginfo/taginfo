@@ -62,6 +62,9 @@
                 <h3><%= h(t.pages.sources.statistics) %></h3>
                 <div id="grid-overview"></div>
                 <p title="<%= h(t.pages.key.overview.no_endorsement) %>"><%= t.pages.key.overview.objects_last_edited_by(@user_count.to_s_with_ts) %></p>
+<% if @projects_count > 0 %>
+                <p><%= t.pages.key.overview.known_projects(@projects_count) %></p>
+<% end %>
             </div>
 <% if @count_all_values > 0 %>
             <div class="overview-box">
