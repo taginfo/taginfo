@@ -1370,7 +1370,9 @@ class Tabs {
             tab.style.display = 'none';
         }
         this.tabs[n].style.display = 'block';
-        window.location.hash = this.tabs[n].id;
+        if (n > 0 || window.location.hash != '') {
+            window.location.hash = this.tabs[n].id;
+        }
 
         for (const widget of this.widgets[this.currentTab]) {
             if (this.state[this.currentTab] == 'resize') {
@@ -1756,6 +1758,10 @@ function whenReady() {
     });
 
     autocomplete = new Autocomplete('search', 'suggestions');
+
+    window.addEventListener('popstate', function(event) {
+        tabs?.setTabFromURL();
+    })
 
     document.addEventListener('keypress', function(event) {
         if (event.ctrlKey || event.altKey || event.metaKey) {
