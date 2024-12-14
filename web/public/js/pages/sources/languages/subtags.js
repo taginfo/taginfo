@@ -25,7 +25,6 @@ function createTable(filter_type) {
 }
 
 function page_init() {
-    up = function() { window.location = build_link('/sources/languages'); };
     const filter = document.getElementById('subtag-filter');
     const theTable = createTable(filter.value);
     widgetManager.addWidget(theTable);

@@ -1,5 +1,4 @@
 function page_init() {
-    up = function() { window.location = build_link('/reports'); };
     widgetManager.addWidget(createDynamicTable('grid-problems', {
         url: '/api/0/wiki/problems',
         colModel: [

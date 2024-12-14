@@ -106,8 +106,6 @@ class ChartTagCloud {
 } // class ChartTagCloud
 
 function page_init() {
-    up = function() {};
-
     const lists = new ChartKeysTagsRelations(context.data);
     widgetManager.addWidget(lists);
     lists.draw();

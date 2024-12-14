@@ -77,6 +77,5 @@ const tabsConfig = {
 }
 
 function page_init() {
-    up = function() { window.location = build_link('/'); }
     initTabs(tabsConfig);
 }

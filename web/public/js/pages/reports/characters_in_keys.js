@@ -90,6 +90,5 @@ class ChartCharactersInKeysStats {
 } // class ChartCharactersInKeysStats
 
 function page_init() {
-    up = function() { window.location = build_link('/reports'); };
     initTabs(tabsConfig);
 }

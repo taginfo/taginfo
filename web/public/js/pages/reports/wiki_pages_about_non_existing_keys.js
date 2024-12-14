@@ -1,5 +1,4 @@
 function page_init() {
-    up = function() { window.location = build_link('/reports'); };
     widgetManager.addWidget(createDynamicTable('grid-keys', {
         url: '/api/4/keys/all',
         params: { filter: 'in_wiki,not_in_db', include: 'wikipages' },

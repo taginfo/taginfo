@@ -264,8 +264,6 @@ class ChartValues {
 function page_init() {
     const key = new TaginfoKey(context.key);
 
-    up = function() { window.location = build_link('/keys'); }
-
     activateJOSMButton();
 
     const filter = document.getElementById('filter');

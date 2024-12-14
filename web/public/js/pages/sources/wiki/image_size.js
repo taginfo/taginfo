@@ -1,5 +1,4 @@
 function page_init() {
-    up = function() { window.location = build_link('/sources/wiki'); };
     initTabs();
 
     for (const element of document.querySelectorAll('.imgbox p')) {

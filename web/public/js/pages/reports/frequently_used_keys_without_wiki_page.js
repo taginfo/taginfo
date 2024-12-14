@@ -37,7 +37,6 @@ function english() {
 }
 
 function page_init() {
-    up = function() { window.location = build_link('/reports'); };
     const theTable = createTable(english());
     document.getElementById('english').addEventListener('click', () => {
         theTable.config.params.english = english();

@@ -1,6 +1,4 @@
 function page_init() {
-    up = function() { window.location = build_link('/reports'); };
-
     let columns = [
         { display: h(texts.osm.key), name: 'key', width: 160, sortable: true }
     ]

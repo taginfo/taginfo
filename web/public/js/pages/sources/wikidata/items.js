@@ -1,6 +1,4 @@
 function page_init() {
-    up = function() { window.location = build_link('/sources/wikidata'); }
-
     widgetManager.addWidget(createDynamicTable('grid-items', {
         url: '/api/4/wikidata/all',
         params: { lang: context.lang },

@@ -2,7 +2,7 @@
 
 var tabs = null,
     autocomplete = null,
-    up = function() { window.location = build_link('/'); };
+    up = null;
 
 const bad_chars_for_url = /[.=\/@]/;
 const bad_chars_for_keys = '!"#$%&()*+,/;<=>?@[\\]^`{|}~' + "'";
@@ -1809,20 +1809,26 @@ function whenReady() {
         }
     });
 
-    document.addEventListener('keyup', function(event) {
-        if (event.ctrlKey || event.altKey || event.metaKey) {
-            return;
-        }
+    if (window.location.pathname != '/') {
+        document.addEventListener('keyup', function(event) {
+            if (event.ctrlKey || event.altKey || event.metaKey) {
+                return;
+            }
 
-        if (event.target != document.body) {
-            return;
-        }
+            if (event.target != document.body) {
+                return;
+            }
 
-        if (event.key == 'ArrowLeft') {
-            event.preventDefault();
-            up();
-        }
-    });
+            if (event.key == 'ArrowLeft') {
+                event.preventDefault();
+                if (up) {
+                    up();
+                    return;
+                }
+                window.location.pathname = window.location.pathname.replace(/\/[^/]*$/, '');
+            }
+        });
+    }
 
     document.addEventListener('keydown', function(event) {
         if (event.target == document.body && event.key == 'Tab') {
