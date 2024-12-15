@@ -5,6 +5,12 @@ def javascript(url)
     @javascript << Javascript.new(url)
 end
 
+def javascript_if_exists(url)
+    if File.exist?("public/js/#{ url }.js")
+        javascript url
+    end
+end
+
 def javascript_tags
     @javascript.flatten.uniq.map(&:to_html).join("\n")
 end
