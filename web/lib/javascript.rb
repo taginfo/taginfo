@@ -1,8 +1,8 @@
 # web/lib/javascript.rb
 
-def javascript(url = nil, &block)
+def javascript(url)
     @javascript ||= []
-    @javascript << Javascript.new(url, &block)
+    @javascript << Javascript.new(url)
 end
 
 def javascript_tags
