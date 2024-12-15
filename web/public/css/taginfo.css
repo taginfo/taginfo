@@ -1571,6 +1571,12 @@ div.dt-table div.dt-body div {
     text-align: center;
 }
 
+@media print {
+    .overview-item {
+        break-inside: avoid;
+    }
+}
+
 .overview-item h3 {
     margin: 0 0 6px 0;
 }
@@ -1609,6 +1615,12 @@ div.dt-table div.dt-body div {
     border-radius: 2px;
     border: 1px solid transparent;
     color: black;
+}
+
+@media print {
+    .treemap-item {
+        border: 1px solid var(--color-darker);
+    }
 }
 
 .treemap-label {
