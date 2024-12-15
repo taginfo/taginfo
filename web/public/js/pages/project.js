@@ -2,6 +2,7 @@ const tabsConfig = {
     tags: function(project) {
         return new DynamicTable('grid-tags', {
             url: '/api/4/project/tags',
+            csv: true,
             params: { project: project },
             colModel: [
                 { display: h(texts.osm.tag), name: 'tag', width: 260, sortable: true },

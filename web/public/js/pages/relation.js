@@ -17,6 +17,7 @@ const tabsConfig = {
     roles: function(rtype) {
         return new DynamicTable('grid-roles', {
             url: '/api/4/relation/roles',
+            csv: true,
             params: { rtype: rtype },
             colModel: [
                 { display: h(texts.osm.relation_member_role), name: 'role', width: 120, sortable: true },
@@ -68,6 +69,7 @@ const tabsConfig = {
     projects: function(rtype) {
         return new DynamicTable('grid-projects', {
             url: '/api/4/relation/projects',
+            csv: true,
             params: { rtype: rtype },
             colModel: [
                 { display: h(texts.taginfo.project), name: 'project_name', width: 280, sortable: true },

@@ -23,6 +23,7 @@ const tabsConfig = {
     combinations: function(key, value, filter_type) {
         return new DynamicTable('grid-combinations', {
             url: '/api/4/tag/combinations',
+            csv: true,
             params: { key: key, value: value, filter: filter_type },
             colModel: [
                 { display: h(texts.misc.count) + ' &rarr;', name: 'to_count', width: 260, sortable: true, align: 'center', title: h(texts.pages.tag.other_tags_used.to_count_tooltip) },
@@ -88,6 +89,7 @@ const tabsConfig = {
     projects: function(key, value, filter_type) {
         return new DynamicTable('grid-projects', {
             url: '/api/4/tag/projects',
+            csv: true,
             params: { key: key, value: value, filter: filter_type },
             colModel: [
                 { display: h(texts.taginfo.project), name: 'project_name', width: 250, sortable: true },

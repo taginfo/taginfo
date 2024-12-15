@@ -1,6 +1,7 @@
 function page_init() {
     widgetManager.addWidget(createDynamicTable('grid-keys', {
         url: '/api/4/keys/all',
+        csv: true,
         params: { include: 'prevalent_values' },
         colModel: [
             { display: h(texts.osm.key), name: 'key', width: 100, sortable: true },

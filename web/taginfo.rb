@@ -139,7 +139,6 @@ class Taginfo < Sinatra::Base
     #-------------------------------------
 
     before '/api/*' do
-        content_type :json, :charset => 'UTF-8'
         expires next_update
         cors = @taginfo_config.get('instance.access_control_allow_origin', '')
         if cors != ""
@@ -150,6 +149,8 @@ class Taginfo < Sinatra::Base
         rescue ArgumentError => e
             halt 412, { :error => e.message }.to_json
         end
+        content_type @ap.format, :charset => 'UTF-8'
+        @api = API.complete_paths[request.path_info]
     end
 
     #-------------------------------------

@@ -1,19 +1,30 @@
 # web/lib/api.rb
 
+require 'csv'
+
 class API
 
     @@paths = {}
 
-    attr_accessor :version, :path, :parameters, :paging, :filter, :sort, :result, :description, :notes, :example, :ui
+    # Maps from complete path (something like /api/4/key/combinations) to the
+    # API object implementing this path.
+    @@complete_paths = {}
+
+    attr_accessor :version, :path, :parameters, :paging, :filter, :sort, :result, :description, :notes, :example, :ui, :formats
 
     def self.paths
         @@paths
+    end
+
+    def self.complete_paths
+        @@complete_paths
     end
 
     def initialize(version, path, doc)
         @version = version
         @path = path
         @doc = doc
+        @formats = [:json]
 
         doc.each_pair do |k, v|
             instance_variable_set("@#{k}".to_sym, v)
@@ -21,6 +32,8 @@ class API
 
         @@paths[version] = {} unless @@paths[version]
         @@paths[version][path] = self
+
+        @@complete_paths[complete_path] = self
     end
 
     def complete_path
@@ -120,7 +133,7 @@ end
 
 class APIParameters
 
-    attr_reader :page, :results_per_page, :sortorder
+    attr_reader :page, :results_per_page, :sortorder, :format
     attr_accessor :sortname
 
     def initialize(params)
@@ -150,6 +163,12 @@ class APIParameters
                      else
                          'ASC'
                      end
+
+        if p[:format] == 'csv'
+            @format = :csv
+        else
+            @format = :json
+        end
     end
 
     def do_paging?
@@ -160,6 +179,24 @@ class APIParameters
         @results_per_page * (@page - 1)
     end
 
+end
+
+def generate_result(api, total, data)
+    if @ap.format == :csv
+        attachment @attachment
+        return generate_csv_result(api, total, data)
+    end
+    return generate_json_result(total, data)
+end
+
+def generate_csv_result(api, total, data)
+    columns = api.result.find{ |d| d[0] == :data and d[1] == :ARRAY_OF_HASHES }[3].map{ |d| d[0].to_s }
+    return CSV.generate do |csv|
+        csv << columns
+        data.each do |d|
+            csv << d.values
+        end
+    end
 end
 
 def generate_json_result(total, data)

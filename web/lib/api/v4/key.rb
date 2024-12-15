@@ -3,6 +3,7 @@ class Taginfo < Sinatra::Base
 
     api(4, 'key/combinations', {
         :description => 'Find keys that are used together with a given key.',
+        :formats => [:json, :csv],
         :parameters => {
             :key => 'Tag key (required).',
             :query => 'Only show results where the other_key matches this query (substring match, optional).'
@@ -58,7 +59,9 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute
 
-        return generate_json_result(total,
+        @attachment = "key-#{ clean_for_filename(key) }-combinations.csv"
+
+        return generate_result(@api, total,
             res.map do |row| {
                 :other_key      => row['other_key'],
                 :together_count => row['together_count'].to_i,
@@ -71,6 +74,7 @@ class Taginfo < Sinatra::Base
 
     api(4, 'key/similar', {
         :description => 'Find keys that are similar to a given key.',
+        :formats => [:json, :csv],
         :parameters => {
             :key => 'Tag key (required).',
             :query => 'Only show results where the other_key matches this query (substring match, optional).'
@@ -112,7 +116,9 @@ class Taginfo < Sinatra::Base
                     paging(@ap).
                     execute
 
-        return generate_json_result(total,
+        @attachment = "key-#{ clean_for_filename(key) }-similar.csv"
+
+        return generate_result(@api, total,
             rows.map do |row| {
                 :other_key  => row['other_key'],
                 :count_all  => row['count_all'],
@@ -124,6 +130,7 @@ class Taginfo < Sinatra::Base
 
     api(4, 'key/distribution/nodes', {
         :description => 'Get map with distribution of this key in the database (nodes only).',
+        :formats => [:png],
         :parameters => { :key => 'Tag key (required).' },
         :result => 'PNG image.',
         :example => { :key => 'amenity' },
@@ -134,6 +141,7 @@ class Taginfo < Sinatra::Base
 
     api(4, 'key/distribution/ways', {
         :description => 'Get map with distribution of this key in the database (ways only).',
+        :formats => [:png],
         :parameters => { :key => 'Tag key (required).' },
         :result => 'PNG image.',
         :example => { :key => 'highway' },
@@ -179,6 +187,7 @@ class Taginfo < Sinatra::Base
 
     api(4, 'key/values', {
         :description => 'Get values used with a given key.',
+        :formats => [:json, :csv],
         :parameters => {
             :key => 'Tag key (required).',
             :lang => "Language for description (optional, default: 'en').",
@@ -197,9 +206,9 @@ class Taginfo < Sinatra::Base
             [:count,       :INT,    'Number of times this key/value is in the OSM database.'],
             [:fraction,    :FLOAT,  'Number of times in relation to number of times this key is in the OSM database.'],
             [:in_wiki,     :BOOL,   'Is there at least one wiki page for this tag?'],
+            [:description, :STRING, 'Description of the tag from the wiki.'],
             [:desclang,    :STRING, 'Language the description of the tag is in.'],
-            [:descdir,     :STRING, 'Writing direction ("ltr", "rtl", or "auto") of description of the tag.'],
-            [:description, :STRING, 'Description of the tag from the wiki.']
+            [:descdir,     :STRING, 'Writing direction ("ltr", "rtl", or "auto") of description of the tag.']
         ]),
         :example => { :key => 'highway', :page => 1, :rp => 10, :sortname => 'count_ways', :sortorder => 'desc' },
         :ui => '/keys/highway#values'
@@ -268,7 +277,9 @@ class Taginfo < Sinatra::Base
             end
         end
 
-        return generate_json_result(total,
+        @attachment = "key-#{ clean_for_filename(key) }-values.csv"
+
+        return generate_result(@api, total,
             res.map do |row| {
                 :value       => row['value'],
                 :count       => row['count_' + filter_type].to_i,
@@ -380,6 +391,7 @@ class Taginfo < Sinatra::Base
 
     api(4, 'key/projects', {
         :description => 'Get projects using a given key.',
+        :formats => [:json, :csv],
         :parameters => {
             :key => 'Tag key (required).',
             :query => 'Only show results where the project name or tag value matches this query (substring match, optional).'
@@ -438,7 +450,9 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute
 
-        return generate_json_result(total,
+        @attachment = "key-#{ clean_for_filename(key) }-projects.csv"
+
+        return generate_result(@api, total,
             res.map do |row| {
                 :project_id       => row['project_id'],
                 :project_name     => row['name'],

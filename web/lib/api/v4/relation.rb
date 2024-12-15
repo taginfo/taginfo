@@ -3,6 +3,7 @@ class Taginfo < Sinatra::Base
 
     api(4, 'relation/roles', {
         :description => 'Member role statistics for a relation of given type.',
+        :formats => [:json, :csv],
         :parameters => {
             :rtype => 'Relation type (required).',
             :query => 'Only show results where the role matches this query (substring match, optional).',
@@ -68,7 +69,9 @@ class Taginfo < Sinatra::Base
             end
         end
 
-        return generate_json_result(total,
+        @attachment = "relation-#{ clean_for_filename(rtype) }-roles.csv"
+
+        return generate_result(@api, total,
             res.map do |row| {
                 :rtype                           =>  row['rtype'],
                 :role                            =>  row['role'],
@@ -168,6 +171,7 @@ class Taginfo < Sinatra::Base
 
     api(4, 'relation/projects', {
         :description => 'Get projects using a given relation type.',
+        :formats => [:json, :csv],
         :parameters => {
             :rtype => 'Relation type (required)',
             :query => 'Only show results where the value matches this query (substring match, optional).'
@@ -178,12 +182,7 @@ class Taginfo < Sinatra::Base
             [:project_id,       :STRING, 'Project ID'],
             [:project_name,     :STRING, 'Project name'],
             [:project_icon_url, :STRING, 'Project icon URL'],
-            [:key,              :STRING, 'Key'],
-            [:value,            :STRING, 'Value'],
-            [:on_node,          :BOOL,   'For nodes?'],
-            [:on_way,           :BOOL,   'For ways?'],
-            [:on_relation,      :BOOL,   'For relations?'],
-            [:on_area,          :BOOL,   'For areas?'],
+            [:rtype,            :STRING, 'Relation type'],
             [:description,      :STRING, 'Description'],
             [:doc_url,          :STRING, 'Documentation URL'],
             [:icon_url,         :STRING, 'Icon URL']
@@ -210,7 +209,9 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute
 
-        return generate_json_result(total,
+        @attachment = "relation-#{ clean_for_filename(rtype) }-projects.csv"
+
+        return generate_result(@api, total,
             res.map do |row| {
                 :project_id       => row['project_id'],
                 :project_name     => row['name'],

@@ -1,6 +1,7 @@
 function page_init() {
     widgetManager.addWidget(createDynamicTable('grid-tags', {
         url: '/api/4/tags/popular',
+        csv: true,
         colModel: [
             { display: h(texts.osm.tag), name: 'tag', width: 200, sortable: true },
             { display: '<img src="/img/types/all.svg" width="16" height="16" alt=""/> ' + h(texts.osm.objects), name: 'count_all', width: 200, sortable: true, align: 'center', title: h(texts.misc.objects_tooltip) },

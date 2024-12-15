@@ -14,6 +14,7 @@ class Taginfo < Sinatra::Base
 
     api(4, 'keys/all', {
         :description => 'Get list of all keys.',
+        :formats => [:json, :csv],
         :parameters => { :query => 'Only show keys matching this query (substring match, optional).' },
         :paging => :optional,
         :filter => @@filters,
@@ -123,7 +124,9 @@ class Taginfo < Sinatra::Base
             end
         end
 
-        return generate_json_result(total,
+        @attachment = "keys.csv"
+
+        return generate_result(@api, total,
             res.map do |row| h = {
                     :key                      => row['key'],
                     :count_all                => row['count_all'].to_i,
@@ -139,8 +142,10 @@ class Taginfo < Sinatra::Base
                     :in_wiki                  => row['in_wiki'].to_i != 0,
                     :projects                 => row['projects'].to_i
                 }
-                h[:wikipages] = row['wikipages'] if row['wikipages']
-                h[:prevalent_values] = row['prevalent_values'][0, 10] if row['prevalent_values']
+                if @ap.format == :json
+                    h[:wikipages] = row['wikipages'] if row['wikipages']
+                    h[:prevalent_values] = row['prevalent_values'][0, 10] if row['prevalent_values']
+                end
                 h
             end
         )

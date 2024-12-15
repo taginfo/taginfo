@@ -166,6 +166,10 @@ def wiki_link(title)
     external_link('wikilink_' + title.gsub(%r{[^A-Za-z0-9]}, '_'), title, prefix + title)
 end
 
+def clean_for_filename(str)
+    str.gsub(/[^a-zA-Z0-9-]+/, '_')
+end
+
 # ------------------------------------------------------------------------------
 
 def tagcloud_size(tag)
@@ -220,8 +224,8 @@ end
 
 # Like the 'get' method but specific for API calls, includes documentation for API calls
 def api(version, path, doc = nil, &block)
-    API.new(version, path, doc) unless doc.nil?
-    get("/api/#{version}/#{path}", &block)
+    api = API.new(version, path, doc) unless doc.nil?
+    get(api.complete_path, &block)
 end
 
 # ------------------------------------------------------------------------------

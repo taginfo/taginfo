@@ -3,6 +3,7 @@ class Taginfo < Sinatra::Base
 
     api(4, 'project/tags', {
         :description => 'Get list of all keys/tags used by a project.',
+        :formats => [:json, :csv],
         :parameters => { :project => 'Project ID (required)' },
         :paging => :optional,
         :sort => %w[ tag count_all in_wiki ],
@@ -42,7 +43,9 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute
 
-        return generate_json_result(total,
+        @attachment = "project-#{ clean_for_filename(project_id) }-tags.csv"
+
+        return generate_result(@api, total,
             res.map do |row| {
                 :key         => row['key'],
                 :value       => row['value'],
@@ -62,8 +65,9 @@ class Taginfo < Sinatra::Base
 
     api(4, 'project/icon', {
         :description => 'Get icon of a project.',
+        :formats => [:image],
         :parameters => { :project => 'Project ID (required)' },
-        :result => 'PNG image.',
+        :result => 'Image in some format.',
         :example => { :project => 'id_editor' },
         :ui => '/projects/id_editor'
     }) do

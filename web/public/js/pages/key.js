@@ -26,6 +26,7 @@ const tabsConfig = {
     values: function(key, filter_type, lang) {
         return new DynamicTable('grid-values', {
             url: '/api/4/key/values',
+            csv: true,
             params: { key: key, filter: filter_type, lang: lang },
             colModel: [
                 { display: h(texts.osm.value), name: 'value', width: 140, sortable: true },
@@ -49,6 +50,7 @@ const tabsConfig = {
     combinations: function(key, filter_type) {
         return new DynamicTable('grid-combinations', {
             url: '/api/4/key/combinations',
+            csv: true,
             params: { key: key, filter: filter_type },
             colModel: [
                 { display: h(texts.misc.count) + ' &rarr;', name: 'to_count', width: 250, sortable: true, align: 'center', title: h(texts.pages.key.other_keys_used.to_count_tooltip) },
@@ -73,6 +75,7 @@ const tabsConfig = {
     similar: function(key) {
         return new DynamicTable('grid-similar', {
             url: '/api/4/key/similar',
+            csv: true,
             params: { key: key },
             colModel: [
                 { display: h(texts.pages.key.similar.other), name: 'other_key', width: 300, sortable: true },
@@ -135,6 +138,7 @@ const tabsConfig = {
     projects: function(key, filter_type) {
         return new DynamicTable('grid-projects', {
             url: '/api/4/key/projects',
+            csv: true,
             params: { key: key, filter: filter_type },
             colModel: [
                 { display: h(texts.taginfo.project), name: 'project_name', width: 250, sortable: true },

@@ -3,6 +3,7 @@ class Taginfo < Sinatra::Base
 
     api(4, 'projects/all', {
         :description => 'Get list of all projects using OSM tags known to taginfo.',
+        :formats => [:json, :csv],
         :parameters => {
             :status => 'Only show projects with given status (default is "OK")',
             :query => 'Only show projects where name or description matches this query (substring match, optional).'
@@ -49,7 +50,9 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute
 
-        return generate_json_result(total,
+        @attachment = "projects.csv"
+
+        return generate_result(@api, total,
             res.map do |row| {
                 :id          => row['id'],
                 :name        => row['name'],
@@ -68,6 +71,7 @@ class Taginfo < Sinatra::Base
 
     api(4, 'projects/keys', {
         :description => 'Get list of all keys used by at least one project.',
+        :formats => [:json, :csv],
         :parameters => { :query => 'Only show keys matching this query (substring match, optional).' },
         :paging => :optional,
         :sort => %w[ key projects in_wiki count_all ],
@@ -100,7 +104,9 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute
 
-        return generate_json_result(total,
+        @attachment = "projects-keys.csv"
+
+        return generate_result(@api, total,
             res.map do |row| {
                 :key                => row['key'],
                 :projects           => row['projects'],
@@ -114,6 +120,7 @@ class Taginfo < Sinatra::Base
 
     api(4, 'projects/tags', {
         :description => 'Get list of all tags used by at least one project.',
+        :formats => [:json, :csv],
         :parameters => { :query => 'Only show tags matching this query (substring match, optional).' },
         :paging => :optional,
         :sort => %w[ key value projects in_wiki count_all ],
@@ -148,7 +155,9 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute
 
-        return generate_json_result(total,
+        @attachment = "projects-tags.csv"
+
+        return generate_result(@api, total,
             res.map do |row| {
                 :key                => row['key'],
                 :value              => row['value'],

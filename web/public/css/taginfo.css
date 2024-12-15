@@ -1426,25 +1426,26 @@ div.gbox > div:last-child {
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjODA4MDgwIiBzdHJva2Utd2lkdGg9IjMuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cG9seWxpbmUgcG9pbnRzPSIyMyA0IDIzIDEwIDE3IDEwIj48L3BvbHlsaW5lPjxwb2x5bGluZSBwb2ludHM9IjEgMjAgMSAxNCA3IDE0Ij48L3BvbHlsaW5lPjxwYXRoIGQ9Ik0zLjUxIDlhOSA5IDAgMCAxIDE0Ljg1LTMuMzZMMjMgMTBNMSAxNGw0LjY0IDQuMzZBOSA5IDAgMCAwIDIwLjQ5IDE1Ij48L3BhdGg+PC9zdmc+Cg); /* reload.svg */
 }
 
-.dt-json {
+.dt-api:not(:empty) {
     font-size: 1rem;
-    margin: 0 10px;
+    margin-left: 10px;
     padding: 2px 4px;
     border: 1px solid transparent;
     border-radius: 4px;
 }
 
-.dt-json:hover {
+.dt-api:not(:empty):hover {
     border: 1px solid #ffffff;
 }
 
-.dt-json a {
+.dt-api a {
     color: var(--color-text);
     text-decoration: none;
 }
 
 .dt-info {
     white-space: nowrap;
+    margin-left: 10px;
 }
 
 .dt-narrow {
@@ -1492,7 +1493,7 @@ div.gbox > div:last-child {
         margin: 0;
     }
 
-    .dt-json {
+    .dt-api {
         margin: 0;
     }
 }

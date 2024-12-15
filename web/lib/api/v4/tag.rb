@@ -3,6 +3,7 @@ class Taginfo < Sinatra::Base
 
     api(4, 'tag/combinations', {
         :description => 'Find keys and tags that are used together with a given tag.',
+        :formats => [:json, :csv],
         :parameters => {
             :key => 'Tag key (required).',
             :value => 'Tag value (required).',
@@ -70,7 +71,9 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute
 
-        return generate_json_result(total,
+        @attachment = "tag-#{ clean_for_filename(key) }=#{ clean_for_filename(value) }-combinations.csv"
+
+        return generate_result(@api, total,
             res.map do |row| {
                 :other_key      => row['other_key'],
                 :other_value    => row['other_value'],
@@ -84,6 +87,7 @@ class Taginfo < Sinatra::Base
 
     api(4, 'tag/distribution/nodes', {
         :description => 'Get map with distribution of this tag in the database (nodes only). Will return empty image if there is no map available for this tag.',
+        :formats => [:png],
         :parameters => { :key => 'Tag key (required).', :value => 'Tag value (required).' },
         :result => 'PNG image.',
         :example => { :key => 'amenity', :value => 'post_box' },
@@ -94,6 +98,7 @@ class Taginfo < Sinatra::Base
 
     api(4, 'tag/distribution/ways', {
         :description => 'Get map with distribution of this tag in the database (ways only). Will return empty image if there is no map available for this tag.',
+        :formats => [:png],
         :parameters => { :key => 'Tag key (required).', :value => 'Tag value (required).' },
         :result => 'PNG image.',
         :example => { :key => 'highway', :value => 'residential' },
@@ -183,6 +188,7 @@ class Taginfo < Sinatra::Base
 
     api(4, 'tag/projects', {
         :description => 'Get projects using a given tag.',
+        :formats => [:json, :csv],
         :parameters => {
             :key => 'Tag key (required).',
             :value => 'Tag value (required).',
@@ -241,7 +247,9 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute
 
-        return generate_json_result(total,
+        @attachment = "tag-#{ clean_for_filename(key) }=#{ clean_for_filename(value) }-projects.csv"
+
+        return generate_result(@api, total,
             res.map do |row| {
                 :project_id       => row['project_id'],
                 :project_name     => row['name'],

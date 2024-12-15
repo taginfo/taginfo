@@ -2,6 +2,7 @@ const tabsConfig = {
     projects: function() {
         return new DynamicTable('grid-projects', {
             url: '/api/4/projects/all',
+            csv: true,
             colModel: [
                 { display: h(texts.taginfo.project), name: 'name', width: 400, sortable: true },
                 { display: h(texts.osm.keys), name: 'unique_keys', width: 40, sortable: true, align: 'right' },
@@ -27,6 +28,7 @@ const tabsConfig = {
     keys: function() {
         return new DynamicTable('grid-keys', {
             url: '/api/4/projects/keys',
+            csv: true,
             colModel: [
                 { display: h(texts.osm.keys), name: 'key', width: 500, sortable: true },
                 { display: h(texts.taginfo.projects), name: 'projects', width: 40, sortable: true, align: 'right' },
@@ -52,6 +54,7 @@ const tabsConfig = {
     tags: function() {
         return new DynamicTable('grid-tags', {
             url: '/api/4/projects/tags',
+            csv: true,
             colModel: [
                 { display: h(texts.osm.tags), name: 'tag', width: 600, sortable: true },
                 { display: h(texts.taginfo.projects), name: 'projects', width: 40, sortable: true, align: 'right' },

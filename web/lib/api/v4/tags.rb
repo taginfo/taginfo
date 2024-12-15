@@ -177,6 +177,7 @@ class Taginfo < Sinatra::Base
 
     api(4, 'tags/popular', {
         :description => 'Get list of most often used tags.',
+        :formats => [:json, :csv],
         :parameters => { :query => 'Only show tags matching this query (substring match in key and value, optional).' },
         :paging => :optional,
         :sort => %w[ tag count_all count_nodes count_ways count_relations ],
@@ -218,7 +219,9 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute
 
-        return generate_json_result(total,
+        @attachment = "tags.csv"
+
+        return generate_result(@api, total,
             res.map do |row| {
                 :key                      => row['skey'],
                 :value                    => row['svalue'],
