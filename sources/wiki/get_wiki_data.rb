@@ -335,7 +335,7 @@ class WikiPage
                 @description = desc.join.strip
                 if PROBLEMATIC_DESCRIPTION.match(@description)
                     puts "ERROR: problematic description: #{ @description }"
-                    db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'description parameter should only contain plain text', ?, ?, ?, ?, ?)", [title, lang, key, value, description])
+                    db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'description parameter contains characters that might be problematic', ?, ?, ?, ?, ?)", [title, lang, key, value, description])
                 end
             end
         end
