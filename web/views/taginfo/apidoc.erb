@@ -1,8 +1,21 @@
+<% @css = <<'CSS'
+.apidoc-container {
+    display: flex;
+    gap: 20px;
+}
+
+.apidoc-menu {
+}
+CSS
+%>
 <div lang="en" dir="ltr">
 
 <h1 class="section">API Documentation</h1>
 
 <p>See <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">the OSM wiki</a> for general information about the API.</p>
+
+<div class="apidoc-container">
+<div>
 
 <h2>Table of Contents</h2>
 
@@ -16,6 +29,9 @@
         end
     end %>
 </ul>
+
+</div>
+<div>
 
 <%  API.paths.keys.sort.each do |version|
         if version > 0
@@ -72,4 +88,5 @@
         end
     end %>
 
+</div>
 </div>
