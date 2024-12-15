@@ -15,7 +15,9 @@ class Taginfo < Sinatra::Base
 
         @title = [@source.name, t.taginfo.sources]
         section :sources
-        javascript "pages/sources/#{ @source.id }/#{ page }"
+        if File.exist?("public/js/pages/sources/#{ @source.id }/#{ page }.js")
+            javascript "pages/sources/#{ @source.id }/#{ page }"
+        end
     end
 
     get %r{/sources/([a-z]+)} do |source|

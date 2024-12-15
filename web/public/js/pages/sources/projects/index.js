@@ -1,2 +1,0 @@
-function page_init() {
-}
