@@ -48,9 +48,6 @@ require 'mediawikiapi'
 # wiki templates, links or other wiki syntax.
 PROBLEMATIC_DESCRIPTION = %r{[<>{}\[\]]}.freeze
 
-# The format of a wikidata item.
-WIKIDATA_FORMAT = %r{^Q[0-9]+}.freeze
-
 # The format of a mediawiki page title.
 PAGE_TITLE_FORMAT = %r{^([-_:.,= ()]|[[:alnum:]])+$}.freeze
 
@@ -80,7 +77,7 @@ class WikiPage
                 :tags_implies, :tags_combination, :tags_linked,
                 :parsed, :has_templ, :group,
                 :on_node, :on_way, :on_area, :on_relation,
-                :approval_status, :statuslink, :wikidata
+                :approval_status, :statuslink
 
     def self.pages
         @@pages.values.sort{ |a, b| a.title <=> b.title }
@@ -385,15 +382,6 @@ class WikiPage
                 @statuslink = nil
             end
         end
-
-        return unless template.named_parameters['wikidata']
-
-        wikidata = template.named_parameters['wikidata'][0]
-        if WIKIDATA_FORMAT.match(wikidata)
-            @wikidata = wikidata
-        else
-            db.execute("INSERT INTO problems (location, reason, title, lang, key, value, info) VALUES ('Template:Key/Value/RelationDescription', 'wikidata parameter does not match Q###', ?, ?, ?, ?, ?)", [title, lang, key, value, wikidata])
-        end
     end
 
     def parse_template(template, level, db)
@@ -440,7 +428,7 @@ class KeyOrTagPage < WikiPage
 
     def insert(db)
         db.execute(
-            "INSERT INTO wikipages (lang, tag, key, value, title, body, tgroup, type, has_templ, parsed, redirect_target, description, image, osmcarto_rendering, on_node, on_way, on_area, on_relation, tags_implies, tags_combination, tags_linked, approval_status, statuslink, wikidata) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO wikipages (lang, tag, key, value, title, body, tgroup, type, has_templ, parsed, redirect_target, description, image, osmcarto_rendering, on_node, on_way, on_area, on_relation, tags_implies, tags_combination, tags_linked, approval_status, statuslink) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             [
                 lang,
                 tag,
@@ -464,8 +452,7 @@ class KeyOrTagPage < WikiPage
                 tags_combination.sort.uniq.join(','),
                 tags_linked.sort.uniq.join(','),
                 approval_status,
-                statuslink,
-                wikidata
+                statuslink
             ]
         )
     end

@@ -32,8 +32,7 @@ CREATE TABLE wikipages (
     tags_linked        TEXT,
     status             TEXT,
     approval_status    TEXT,
-    statuslink         TEXT,
-    wikidata           TEXT
+    statuslink         TEXT
 );
 
 DROP TABLE IF EXISTS relation_pages;
