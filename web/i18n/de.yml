@@ -316,6 +316,7 @@ pages:
                     aus OpenStreetMap stammen. Dies sind nur die "Bauteile", die
                     benutzt werden können, um Sprachen zu beschreiben, unabhängig
                     davon, ob sie derzeit bei OSM benutzt werden.
+                show: Alle Sprach-Subtags anzeigen...
             wikipedia_sites:
                 title: Wikipedia-Sprachversionen
         wikidata:
