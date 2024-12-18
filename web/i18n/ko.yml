@@ -1,4 +1,3 @@
-
 osm:
     tag: 태그
     tags: 태그
@@ -681,4 +680,3 @@ reports:
         wiki_page: 위키 문서
         lang: 언어
         info: 비고
-

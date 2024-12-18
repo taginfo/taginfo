@@ -1,4 +1,3 @@
-
 osm:
     tag: 標籤
     tags: 標籤
@@ -735,4 +734,3 @@ reports:
         wiki_page: Wiki 頁面
         lang: 語言
         info: 額外資訊
-

@@ -1,4 +1,3 @@
-
 osm:
     tag: Tag
     tags: Tags
@@ -777,4 +776,3 @@ reports:
         wiki_page: Wiki page
         lang: Lang.
         info: Additional information
-

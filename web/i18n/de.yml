@@ -511,8 +511,8 @@ pages:
             title: Member Roles
             objects_tooltip: Relation Members mit dieser Role (und als Prozentsatz aller Members) für diesen Relation-Typ.
             nodes_tooltip: Relation Members vom Typ Node mit dieser Rolle (und als Prozentsatz aller Members von Typ Node) für diesen Relation-Typ.
-            ways_tooltip:  Relation Members vom Typ Way mit dieser Rolle (und als Prozentsatz aller Members von Typ Way) für diesen Relation-Typ.
-            relations_tooltip:  Relation Members vom Typ Relation mit dieser Rolle (und als Prozentsatz aller Members von Typ Relation) für diesen Relation-Typ.
+            ways_tooltip: Relation Members vom Typ Way mit dieser Rolle (und als Prozentsatz aller Members von Typ Way) für diesen Relation-Typ.
+            relations_tooltip: Relation Members vom Typ Relation mit dieser Rolle (und als Prozentsatz aller Members von Typ Relation) für diesen Relation-Typ.
             no_roles_info: Zu diesem Relation-Typ gibt es keine Informationen über Roles (wahrscheinlich weil es nur sehr wenige dieser Relations gibt).
         graph:
             tab: Role-Diagramm
@@ -810,4 +810,3 @@ reports:
             oder anderen Sprachversion besser. Manchmal ist es aber wegen
             verschiedener kultureller Hintergründe oder dergleichen auch
             sinnvoll, unterschiedliche Bilder zu benutzen.
-

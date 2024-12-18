@@ -1,4 +1,3 @@
-
 osm:
     tag: タグ
     tags: タグ
@@ -678,4 +677,3 @@ reports:
         wiki_page: ウィキページ
         lang: 言語
         info: 追加情報
-

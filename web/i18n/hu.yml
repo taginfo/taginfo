@@ -1,4 +1,3 @@
-
 osm:
     tag: Címke
     tags: Címkék
@@ -289,7 +288,7 @@ pages:
             objects_tooltip: Kapcsolattagok ezzel a szereppel (és az összes tag arányában)
             nodes_tooltip: Pont típusú kapcsolattagok ezzel a szereppel (és az összes pont típusú tag arányában) ehhez a kapcsolattípushoz.
             ways_tooltip: Vonal típusú kapcsolattagok ezzel a szereppel (és az összes vonal típusú tag arányában) ehhez a kapcsolattípushoz.
-            relations_tooltip:  Kapcsolat típusú kapcsolattagok ezzel a szereppel (és az összes kapcsolat típusú tag arányában) ehhez a kapcsolattípushoz.
+            relations_tooltip: Kapcsolat típusú kapcsolattagok ezzel a szereppel (és az összes kapcsolat típusú tag arányában) ehhez a kapcsolattípushoz.
             no_roles_info: Nincs információ a kapcsolattípus szerepéről (feltehetőleg azért, mert nagyon kevés az ilyen kapcsolat).
         graph:
             tab: Szerep diagram
