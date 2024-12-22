@@ -1778,6 +1778,9 @@ function whenReady() {
                 cl.load();
                 window.location = cl.url();
                 break;
+            case 'd':
+                window.location = build_link('/sources');
+                break;
             case 'f':
                 event.preventDefault();
                 for (element of document.querySelectorAll('input.qsbox')) {

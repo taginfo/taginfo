@@ -118,6 +118,7 @@ help:
         relations_page: Relations page
         projects_page: Projects page
         reports_page: Reports page
+        sources_page: Sources page
         compare_page: Comparison page
         first_page: First page
         prev_page: Previous page
