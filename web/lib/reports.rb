@@ -54,7 +54,7 @@ Report.new 'Database statistics', '/sources/db'
 Report.new 'Characters in keys', :db
 Report.new 'Frequently used keys without wiki page', :db, :wiki
 Report.new 'Key lengths', :db
-Report.new 'Language comparison table for keys in the wiki', :wiki
+Report.new 'Language comparison table for keys in the wiki', '/sources/wiki/language_comparison_table_for_keys'
 Report.new 'Languages', :wiki
 Report.new 'Wiki pages about non-existing keys', :db, :wiki
 Report.new 'Name tags' # disabled

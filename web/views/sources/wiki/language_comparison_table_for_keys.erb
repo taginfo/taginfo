@@ -13,7 +13,7 @@
 %>
 <div>
     <div>
-        <h1><%= h(t.reports.language_comparison_table_for_keys_in_the_wiki.name) %></h1>
+        <h1><a href="<%= build_link("/sources/#{ @source.id }") %>"><%= @source.name %></a>: <%= h(t.reports.language_comparison_table_for_keys_in_the_wiki.name) %></h1>
         <p><%= h(t.reports.language_comparison_table_for_keys_in_the_wiki.intro) %></p>
     </div>
 </div>

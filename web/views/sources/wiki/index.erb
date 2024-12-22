@@ -37,3 +37,10 @@ count_large = @db.select("SELECT count(distinct(image)) AS count FROM wiki.wikip
         <p><a href="wiki/image_comparison">Show images...</a></p>
     </div>
 </div>
+<div class="fbox">
+    <h2><%= h(t.sources.languages.name) %></h2>
+    <div>
+        <p><%= h(t.reports.language_comparison_table_for_keys_in_the_wiki.intro) %></p>
+        <p><a href="wiki/language_comparison_table_for_keys"><%= h(t.reports.language_comparison_table_for_keys_in_the_wiki.name) %></a></p>
+    </div>
+</div>
