@@ -678,7 +678,7 @@ reports:
             idioma es mejor. Pero a veces tiene sentido tener diferentes
             imágenes a causa de diferentes trasfondos culturales o algo así.
     wiki_problems:
-        name: Problemas de análisis de la wiki
+        name: Problemas de análisis
         intro: |
             Taginfo lee todas las páginas wiki utilizadas para describir las
             claves, etiquetas y relaciones para encontrar información sobre las

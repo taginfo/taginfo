@@ -43,21 +43,21 @@ class Taginfo < Sinatra::Base
         )
     end
 
-    api(0, 'wiki/problems', {
+    api(4, 'wiki/problems', {
         :description => 'Show problems encountered by taginfo while parsing wiki pages',
         :paging => :optional,
-        :sort => %w[ location reason title lang tag ],
+        :sort => %w[ title location reason lang tag ],
         :result => paging_results([
+            [:title,    :STRING, 'Wiki page title where the problem occurred'],
             [:location, :STRING, 'Problem location'],
             [:reason,   :STRING, 'Problem reason'],
-            [:title,    :STRING, 'Wiki page title where the problem occurred'],
             [:lang,     :STRING, 'Wiki language of this page'],
             [:key,      :STRING, 'Key this wiki page is for (or null if neither "Key" nor "Tag" page)'],
             [:value,    :STRING, 'Value this wiki page is for (or null if not a "Tag" page)'],
             [:info,     :STRING, 'Informational string dependant on type of problem']
         ]),
         :example => {},
-        :ui => '/taginfo/wiki-problems#list'
+        :ui => '/sources/wiki/parsing_problems#list'
     }) do
         total = @db.count('wiki.problems').
             condition_if("location || ' ' || reason || ' ' || title || ' ' LIKE ? ESCAPE '@'", like_contains(params[:query])).
@@ -86,9 +86,9 @@ class Taginfo < Sinatra::Base
 
         return generate_json_result(total,
             res.map do |row| {
+                :title    => row['title'],
                 :location => row['location'],
                 :reason   => row['reason'],
-                :title    => row['title'],
                 :lang     => row['lang'],
                 :key      => row['key'],
                 :value    => row['value'],

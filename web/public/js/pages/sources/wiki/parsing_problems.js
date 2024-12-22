@@ -1,14 +1,14 @@
 const tabsConfig = {
     list: function() {
         return new DynamicTable('grid-wiki-problems', {
-            url: '/api/0/wiki/problems',
+            url: '/api/4/wiki/problems',
             colModel: [
-                { display: 'Location', name: 'location', width: 200, sortable: true },
-                { display: 'Reason', name: 'reason', width: 240, sortable: true },
-                { display: 'Wiki page', name: 'title', width: 180, sortable: true },
-                { display: h(texts.misc.language), name: 'lang', width: 50, sortable: true },
-                { display: h(texts.osm.tag), name: 'tag', width: 150, sortable: true },
-                { display: 'Additional info', name: 'info', width: 240 },
+                { display: h(texts.reports.wiki_problems.wiki_page), name: 'title', width: 280, sortable: true },
+                { display: h(texts.reports.wiki_problems.location), name: 'location', width: 140, sortable: true },
+                { display: h(texts.reports.wiki_problems.reason), name: 'reason', width: 280, sortable: true },
+                { display: h(texts.reports.wiki_problems.lang), name: 'lang', width: 30, sortable: true },
+                { display: h(texts.osm.tag), name: 'tag', width: 160, sortable: true },
+                { display: h(texts.reports.wiki_problems.info), name: 'info', width: 600 }
             ],
             searchitems: [
                 { display: 'Location/Reason/Wiki page', name: 'filter' }
@@ -18,9 +18,9 @@ const tabsConfig = {
             processRow: row => {
                 const wikiPage = new TaginfoWikiPage(row.title);
                 return [
+                    wikiPage.link(),
                     row.location,
                     row.reason,
-                    wikiPage.link(),
                     row.reason == 'wrong lang format' ? '' : fmt_language(row.lang, 'auto', '', ''),
                     row.key === null ? '' : createKeyOrTag(row.key, row.value).fullLink({ with_asterisk: true }),
                     row.info

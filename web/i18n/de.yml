@@ -753,7 +753,7 @@ reports:
             Fehler sein.
         wiki_pages: Wiki-Seiten
     wiki_problems:
-        name: Probleme beim Parsen von Wiki-Seiten
+        name: Probleme beim Parsen
         intro: |
             Taginfo liest alle Wiki-Seiten, die Keys, Tags oder Relationen
             beschreiben, um Informationen über Tags zu finden. Dieser Report

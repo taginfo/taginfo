@@ -1,11 +1,17 @@
-<div lang="en" dir="ltr">
+<%
+@title = 'Wiki problems'
+@section = 'taginfo'
+@section_title = t.taginfo.meta
+
+@stats_reason = @db.select("SELECT reason, count(*) AS count FROM wiki.problems GROUP BY reason ORDER BY reason").execute
+@stats_lang   = @db.select("SELECT lang,   count(*) AS count FROM wiki.problems GROUP BY lang   ORDER BY lang").execute
+%>
+<div>
     <div>
-        <h1 class="section">Wiki problems</h1>
-        <p>The following problems were encountered when taginfo parsed the
-        wiki. Some of these problems are taginfos fault, some should be
-        fixed in the wiki. For a description of the problems see the <a
-        href="https://wiki.openstreetmap.org/wiki/Taginfo/Parsing_the_Wiki">OSM
-        wiki</a>.</p>
+        <h1><a href="<%= build_link("/sources/#{ @source.id }") %>"><%= @source.name %></a>: <%= h(t.reports.wiki_problems.name) %></h1>
+        <p><%= h(t.reports.wiki_problems.intro) %></p>
+        <p>For a description of the problems reasons see the
+           <a href="https://wiki.openstreetmap.org/wiki/Taginfo/Parsing_the_Wiki">OSM wiki</a>.</p>
     </div>
 </div>
 <div id="tabs" lang="en" dir="ltr">

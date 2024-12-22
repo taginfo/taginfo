@@ -835,7 +835,7 @@ reports:
             che è la migliore. Tuttavia in alcuni casi ha senso avere diverse
             immagini a causa del diverso background culturale o simili motivi.
     wiki_problems:
-        name: Problemi nella analisi (parsing) del wiki
+        name: Problemi nella analisi
         intro: |
             Taginfo legge tutte le pagine sul sito wiki utilizzate per
             descrivere le chiavi, i tag e le relazioni per trovare informazioni

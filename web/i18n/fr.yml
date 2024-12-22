@@ -702,6 +702,6 @@ reports:
             par taginfo. Soit la page doit être corrigée soit taginfo doit être débogué.
         lang: Lang.
         location: Emplacement
-        name: Problèmes d'analyse syntaxique
+        name: Problèmes d'analyse
         reason: Raison
         wiki_page: Page wiki

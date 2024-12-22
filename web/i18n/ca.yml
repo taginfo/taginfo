@@ -705,7 +705,7 @@ reports:
             és millor. Però a vegades, té sentit tenir imatges
             diferents degut a les diferències culturals.
     wiki_problems:
-        name: Problemes d'anàlisis de la wiki
+        name: Problemes d'anàlisis
         intro: |
             Taginfo llegeix totes les pàgines wiki usades per descriure claus, etiquetes i
             relacions per buscar informació sobre les etiquetes. Aquest informe mostra una llista

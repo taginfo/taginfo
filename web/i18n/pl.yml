@@ -579,7 +579,7 @@ reports:
         intro: |
             Ilustracje używane na wiki w różnych językach do reprezentacji kluczy. Czasami zdjęcia z jednego wariantu są lepsze niż inne. Ale czasami ma sens, aby te obrazy były różne z powodu różnic kulturowych i innych.
     wiki_problems:
-        name: Problemy składni wiki
+        name: Problemy składni
         intro: |
             Taginfo czyta wszystkie strony wiki opisujące klucze, znaczniki i relacje, aby znaleźć informacje dotyczące znaczników. Ten raport wyświetla listę problemów napotkanych podczas wczytywania tych stron. Niekoniecznie są to błędy na wiki, być może na wiki jest coś sformatowane na sposób niezrozumiały dla taginfo. Albo strona wymaga naprawy albo oprogramowanie taginfo.
         location: Adres

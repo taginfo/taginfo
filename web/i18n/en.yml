@@ -764,7 +764,7 @@ reports:
             variant is better. But sometimes it makes sense to have different
             images because of different cultural backgrounds or so.
     wiki_problems:
-        name: Wiki parsing problems
+        name: Parsing problems
         intro: |
             Taginfo reads all wiki pages used to describe keys, tags, and
             relations to find information about tags. This report shows a list
