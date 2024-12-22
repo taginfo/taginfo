@@ -1,4 +1,6 @@
 <%
+@title.unshift(h(t.reports.wiki_images.name))
+
 @context[:keys] = @db.select("SELECT DISTINCT key FROM wiki.wikipages WHERE value IS NULL AND image IN (SELECT image FROM wiki.wiki_images) ORDER BY key").execute().map{ |row| row['key'] }
 
 @css = <<'CSS'

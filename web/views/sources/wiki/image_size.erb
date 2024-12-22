@@ -1,4 +1,5 @@
 <%
+@title.unshift('Image sizes')
 
 count_all = @db.select("SELECT count(distinct(image)) AS count FROM wiki.wikipages").execute()[0]['count']
 count_small = @db.select("SELECT count(distinct(image)) AS count FROM wiki.wikipages WHERE image IN (SELECT image FROM wiki.wiki_images WHERE width * height < 64 * 64)").execute()[0]['count']

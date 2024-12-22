@@ -1,4 +1,6 @@
 <%
+@title.unshift(h(t.pages.sources.languages.subtags.title))
+
 @filter_type = BCP47.get_filter(params[:filter])
 @sel = Hash.new('')
 @sel[@filter_type] = ' selected="selected"'

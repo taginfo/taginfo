@@ -1,7 +1,5 @@
 <%
-@title = 'Wiki problems'
-@section = 'taginfo'
-@section_title = t.taginfo.meta
+@title.unshift(h(t.reports.wiki_problems.name))
 
 @stats_reason = @db.select("SELECT reason, count(*) AS count FROM wiki.problems GROUP BY reason ORDER BY reason").execute
 @stats_lang   = @db.select("SELECT lang,   count(*) AS count FROM wiki.problems GROUP BY lang   ORDER BY lang").execute

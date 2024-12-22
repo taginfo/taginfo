@@ -1,3 +1,7 @@
+<%
+@title.unshift(h(t.pages.sources.import_errors))
+%>
+
 <h1><a href="<%= build_link("/sources/#{ @source.id }") %>"><%= @source.name %></a>:
     <%= h(t.pages.sources.import_errors) %></h1>
 

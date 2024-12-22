@@ -1,15 +1,17 @@
 <%
-    languages = @db.execute('SELECT language FROM wiki_languages ORDER by language').map do |row|
-        [row['language'], ::Language[row['language']].native_name]
-    end
+@title.unshift(h(t.reports.language_comparison_table_for_keys_in_the_wiki.name))
 
-    lang_lookup = {}
-    languages.each_with_index do |lang, idx|
-        lang_lookup[lang[0]] = idx + 1
-    end
+languages = @db.execute('SELECT language FROM wiki_languages ORDER by language').map do |row|
+    [row['language'], ::Language[row['language']].native_name]
+end
 
-    @context[:languages] = languages
-    @context[:lang_to_idx] = lang_lookup
+lang_lookup = {}
+languages.each_with_index do |lang, idx|
+    lang_lookup[lang[0]] = idx + 1
+end
+
+@context[:languages] = languages
+@context[:lang_to_idx] = lang_lookup
 %>
 <div>
     <div>
