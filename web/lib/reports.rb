@@ -3,7 +3,7 @@ class Report
 
     @@reports = []
 
-    attr_reader :title, :sources
+    attr_reader :title, :sources, :redirect
 
     def self.each(&block)
         @@reports.sort_by(&:title).each(&block)
@@ -22,8 +22,13 @@ class Report
         @title = title
         @sources = {}
         @visible = !sources.empty?
+        @redirect = nil
         sources.each do |id|
-            @sources[id] = 1
+            if id.instance_of?(String) then
+                @redirect = id
+            else
+                @sources[id] = 1
+            end
         end
     end
 
@@ -45,7 +50,7 @@ class Report
 
 end
 
-Report.new 'Database statistics', :db
+Report.new 'Database statistics', '/sources/db'
 Report.new 'Characters in keys', :db
 Report.new 'Frequently used keys without wiki page', :db, :wiki
 Report.new 'Key lengths', :db
@@ -55,5 +60,5 @@ Report.new 'Wiki pages about non-existing keys', :db, :wiki
 Report.new 'Name tags' # disabled
 Report.new 'Similar keys', :db
 Report.new 'Historic development', :db
-Report.new 'Wiki images', :wiki
+Report.new 'Wiki images', '/sources/wiki/image_comparison'
 # Report.new 'Wiki problems', :wiki

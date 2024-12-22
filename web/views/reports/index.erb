@@ -4,8 +4,8 @@
     <h2><%= h(t.pages.reports.list) %></h2>
     <div>
         <ul class="reportlist">
-<% Report.each_visible_with_index do |report, n| c = (n%2!=0) ? ' even' : '' %>
-            <li><a href="<%= build_link(report.url) %>"><%= h(t.reports[report.name].name) %></a></li>
+<% Report.each_visible_with_index do |report| %>
+            <li><a href="<%= build_link(report.redirect || report.url) %>"><%= h(t.reports[report.name].name) %></a></li>
 <% end %>
         </ul>
     </div>
