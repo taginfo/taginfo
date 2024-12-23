@@ -269,6 +269,16 @@ pages:
                 note: |
                     이 표의 데이터는 OpenStreetMap에서 가져온 것이 아니고, 어디서 설명하든 상관없이
                     언어를 설명할 때 사용할 수 있는 구성 요소만 나타낸다는 점을 명심하세요.
+        wiki:
+            language_comparison_table_for_keys:
+                name: 키를 설명하는 위키 문서 간 언어 비교표
+                icons:
+                    template: 이용 가능하면서 표준 틀을 갖추고 있는 위키 문서.
+                    error: 이용 가능하면서 표준 틀을 갖추고 있지만 분석할 수 없는 위키 문서.
+                    page: 이용 가능하지만 표준 틀을 갖추고 있지 않는 위키 문서.
+                    redirect: 리다이렉트 문서.
+                intro: |
+                    이 표는 이용 가능한 위키 문서가 있는 모든 태그 키를 언어별로 나타냅니다.
     download:
         intro: |
             <p>taginfo가 사용하는 데이터베이스를 여기에서 다운로드받을 수 있습니다. 모든 데이터는 <a class="extlink"
@@ -605,15 +615,6 @@ reports:
             intro: 이 막대 그래프는 각각의 길이에 얼마나 많은 키가 있는지를 나타냅니다.
             key_length: 키의 길이
             number_of_keys: 키의 개수
-    language_comparison_table_for_keys_in_the_wiki:
-        name: 키를 설명하는 위키 문서 간 언어 비교표
-        icons:
-            template: 이용 가능하면서 표준 틀을 갖추고 있는 위키 문서.
-            error: 이용 가능하면서 표준 틀을 갖추고 있지만 분석할 수 없는 위키 문서.
-            page: 이용 가능하지만 표준 틀을 갖추고 있지 않는 위키 문서.
-            redirect: 리다이렉트 문서.
-        intro: |
-            이 표는 이용 가능한 위키 문서가 있는 모든 태그 키를 언어별로 나타냅니다.
     languages:
         name: 언어
         intro: |

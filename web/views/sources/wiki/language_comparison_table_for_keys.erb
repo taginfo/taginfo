@@ -1,5 +1,5 @@
 <%
-@title.unshift(h(t.reports.language_comparison_table_for_keys_in_the_wiki.name))
+@title.unshift(h(t.pages.sources.wiki.language_comparison_table_for_keys.name))
 
 languages = @db.execute('SELECT language FROM wiki_languages ORDER by language').map do |row|
     [row['language'], ::Language[row['language']].native_name]
@@ -15,16 +15,16 @@ end
 %>
 <div>
     <div>
-        <h1><a href="<%= build_link("/sources/#{ @source.id }") %>"><%= @source.name %></a>: <%= h(t.reports.language_comparison_table_for_keys_in_the_wiki.name) %></h1>
-        <p><%= h(t.reports.language_comparison_table_for_keys_in_the_wiki.intro) %></p>
+        <h1><a href="<%= build_link("/sources/#{ @source.id }") %>"><%= @source.name %></a>: <%= h(t.pages.sources.wiki.language_comparison_table_for_keys.name) %></h1>
+        <p><%= h(t.pages.sources.wiki.language_comparison_table_for_keys.intro) %></p>
     </div>
 </div>
 <div class="box">
     <div id="grid-keys"></div>
     <table>
-        <tr><td><img width="16" height="16" src="/img/sources/wiki/wiki-t.png" alt="[t]"/></td><td><%= h(t.reports.language_comparison_table_for_keys_in_the_wiki.icons.template) %></td></tr>
-        <tr><td><img width="16" height="16" src="/img/sources/wiki/wiki-e.png" alt="[e]"/></td><td><%= h(t.reports.language_comparison_table_for_keys_in_the_wiki.icons.error)    %></td></tr>
-        <tr><td><img width="16" height="16" src="/img/sources/wiki/wiki-p.png" alt="[p]"/></td><td><%= h(t.reports.language_comparison_table_for_keys_in_the_wiki.icons.page)     %></td></tr>
-        <tr><td><img width="16" height="16" src="/img/sources/wiki/wiki-r.png" alt="[r]"/></td><td><%= h(t.reports.language_comparison_table_for_keys_in_the_wiki.icons.redirect) %></td></tr>
+        <tr><td><img width="16" height="16" src="/img/sources/wiki/wiki-t.png" alt="[t]"/></td><td><%= h(t.pages.sources.wiki.language_comparison_table_for_keys.icons.template) %></td></tr>
+        <tr><td><img width="16" height="16" src="/img/sources/wiki/wiki-e.png" alt="[e]"/></td><td><%= h(t.pages.sources.wiki.language_comparison_table_for_keys.icons.error)    %></td></tr>
+        <tr><td><img width="16" height="16" src="/img/sources/wiki/wiki-p.png" alt="[p]"/></td><td><%= h(t.pages.sources.wiki.language_comparison_table_for_keys.icons.page)     %></td></tr>
+        <tr><td><img width="16" height="16" src="/img/sources/wiki/wiki-r.png" alt="[r]"/></td><td><%= h(t.pages.sources.wiki.language_comparison_table_for_keys.icons.redirect) %></td></tr>
     </table>
 </div>

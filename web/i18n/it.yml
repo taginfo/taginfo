@@ -373,6 +373,18 @@ pages:
                     p1282: Valore della proprietà P1282
                     error: Messaggio di errore
 
+        wiki:
+            language_comparison_table_for_keys:
+                name: Tabella Comparativa Linguaggi per le Chiavi nella Wiki
+                icons:
+                    template: Una pagina è disponibile sul sito wiki e contiene un template standard.
+                    error: Una pagina è disponibile sul sito wiki e contiene un template standard, ma non si riesce ad estrarne il significato.
+                    page: Una pagina è disponibile sul sito wiki, ma non contiene un template standard.
+                    redirect: La pagina è un redirect.
+                intro: |
+                    Questa tabella mostra i valori di tutti i tag usati per le chiavi
+                    per cui è disponibile una pagina sul sito wiki e in che lingua è la
+                    pagina.
     download:
         intro: |
             <p>Qui potete scaricare il database usato da Taginfo. Tutti i dati
@@ -755,17 +767,6 @@ reports:
             intro: Questo istogramma mostra quante chiavi sono presenti per ogni lunghezza.
             key_length: Lunghezza della chiave
             number_of_keys: Numero delle chiavi
-    language_comparison_table_for_keys_in_the_wiki:
-        name: Tabella Comparativa Linguaggi per le Chiavi nella Wiki
-        icons:
-            template: Una pagina è disponibile sul sito wiki e contiene un template standard.
-            error: Una pagina è disponibile sul sito wiki e contiene un template standard, ma non si riesce ad estrarne il significato.
-            page: Una pagina è disponibile sul sito wiki, ma non contiene un template standard.
-            redirect: La pagina è un redirect.
-        intro: |
-            Questa tabella mostra i valori di tutti i tag usati per le chiavi
-            per cui è disponibile una pagina sul sito wiki e in che lingua è la
-            pagina.
     languages:
         name: Linguaggi
         intro: |

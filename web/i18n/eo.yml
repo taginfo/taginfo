@@ -237,6 +237,16 @@ pages:
                     OpenStreetMap, ĝi nur montras konstru-pecojn, kiujn oni povas
                     uzi por priskribi lingvojn senrilate, ĉu ili estas nune uzataj
                     en OSM.
+        wiki:
+            language_comparison_table_for_keys:
+                name: Lingva kompar-tablo por ŝlosiloj en la vikio
+                icons:
+                    template: Viki-paĝo disponebla kaj enhavas norman ŝablonon.
+                    error: Viki-paĝo disponebla kaj enhavas norman ŝablonon, sed kiu ne pritraktebla.
+                    page: Viki-paĝo disponebla, sen ne enhavas norman ŝablonon.
+                    redirect: Paĝo aldirektas.
+                intro: |
+                    La jena tabelo montras ĉiujn etikedajn ŝlosilojn pri kiuj estas disponeblaj viki-paĝoj kaj en kiuj lingvoj ili estas.
     download:
         intro: |
             <p>Tie ĉi vi povas elŝuti la datumbazojn uzatajn de taginfo. Ĉiuj datumoj estas konservitaj en datumbazojn <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>. Datumbazaj dosieroj estas kompaktigitaj per <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
@@ -536,15 +546,6 @@ reports:
             intro: La jena histogramo montras kiom da ŝlosiloj havas specifan longon.
             key_length: Ŝlosila longo
             number_of_keys: Nombro da ŝlosiloj
-    language_comparison_table_for_keys_in_the_wiki:
-        name: Lingva kompar-tablo por ŝlosiloj en la vikio
-        icons:
-            template: Viki-paĝo disponebla kaj enhavas norman ŝablonon.
-            error: Viki-paĝo disponebla kaj enhavas norman ŝablonon, sed kiu ne pritraktebla.
-            page: Viki-paĝo disponebla, sen ne enhavas norman ŝablonon.
-            redirect: Paĝo aldirektas.
-        intro: |
-            La jena tabelo montras ĉiujn etikedajn ŝlosilojn pri kiuj estas disponeblaj viki-paĝoj kaj en kiuj lingvoj ili estas.
     languages:
         name: Lingvoj
         intro: |

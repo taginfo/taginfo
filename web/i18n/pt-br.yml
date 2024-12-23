@@ -197,6 +197,17 @@ pages:
                     script: Script
                     region: Região
                     variant: Variante
+        wiki:
+            language_comparison_table_for_keys:
+                name: Tabela de comparação de idiomas para chaves no wiki
+                icons:
+                    template: Página disponível no wiki e contém predefinição padrão.
+                    error: Página no wiki disponível e contém predefinição padrão, porém ela não pode ser interpretada.
+                    page: Página no wiki disponível, porém não contém predefinição padrão.
+                    redirect: A página é um redirecionamento.
+                intro: |
+                    Esta tabela mostra todas as chaves de etiquetas que possuem páginas no wiki,
+                    e em que idiomas elas estão disponíveis.
     download:
         intro: |
             <p>Aqui você pode baixar os bancos de dados usados pelo taginfo. Todos os dados são
@@ -426,16 +437,6 @@ reports:
             intro: Este histograma mostra quantas chaves existem para cada comprimento.
             key_length: Comprimento da chave
             number_of_keys: Número de chaves
-    language_comparison_table_for_keys_in_the_wiki:
-        name: Tabela de comparação de idiomas para chaves no wiki
-        icons:
-            template: Página disponível no wiki e contém predefinição padrão.
-            error: Página no wiki disponível e contém predefinição padrão, porém ela não pode ser interpretada.
-            page: Página no wiki disponível, porém não contém predefinição padrão.
-            redirect: A página é um redirecionamento.
-        intro: |
-            Esta tabela mostra todas as chaves de etiquetas que possuem páginas no wiki,
-            e em que idiomas elas estão disponíveis.
     languages:
         name: Idiomas
         intro: |

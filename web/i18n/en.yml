@@ -335,6 +335,16 @@ pages:
                     item: Wikidata item
                     p1282: Value of P1282 property
                     error: Error message
+        wiki:
+            language_comparison_table_for_keys:
+                name: Language comparison table for keys in the wiki
+                icons:
+                    template: Page in wiki available and contains standard template.
+                    error: Page in wiki available and contains standard template, but couldn't be parsed.
+                    page: Page in wiki available but doesn't contain standard template.
+                    redirect: Page is a redirect.
+                intro: |
+                    This table shows all tag keys for which there are wiki pages available and in what languages they are.
     download:
         intro: |
             <p>Here you can download the databases used by taginfo. All the data is stored
@@ -694,15 +704,6 @@ reports:
             intro: This histogram shows how many keys there are of each length.
             key_length: Key length
             number_of_keys: Number of keys
-    language_comparison_table_for_keys_in_the_wiki:
-        name: Language comparison table for keys in the wiki
-        icons:
-            template: Page in wiki available and contains standard template.
-            error: Page in wiki available and contains standard template, but couldn't be parsed.
-            page: Page in wiki available but doesn't contain standard template.
-            redirect: Page is a redirect.
-        intro: |
-            This table shows all tag keys for which there are wiki pages available and in what languages they are.
     languages:
         name: Languages
         intro: |

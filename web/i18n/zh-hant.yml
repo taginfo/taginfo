@@ -314,6 +314,16 @@ pages:
                     item: Wikidata項目
                     p1282: 屬性P1282的值
                     error: 錯誤訊息
+        wiki:
+            language_comparison_table_for_keys:
+                name: wiki 裡的鍵頁面的語言比較
+                icons:
+                    template: 有 wiki 頁面且包含標準模板。
+                    error: 有 wiki 頁面且包含標準模板，但無法分析。
+                    page: 有 wiki 頁面但不包含標準模板。
+                    redirect: 重新導向頁面。
+                intro: |
+                    此表格顯示有 wiki 頁面的所有標籤鍵，以及它們有什麼語言。
     download:
         intro: |
             <p>你能在這裡下載 taginfo 所用的資料庫。所有資料被儲存
@@ -658,15 +668,6 @@ reports:
             intro: 此直方圖顯示每個長度有多少鍵。
             key_length: 鍵長度
             number_of_keys: 鍵數量
-    language_comparison_table_for_keys_in_the_wiki:
-        name: wiki 裡的鍵頁面的語言比較
-        icons:
-            template: 有 wiki 頁面且包含標準模板。
-            error: 有 wiki 頁面且包含標準模板，但無法分析。
-            page: 有 wiki 頁面但不包含標準模板。
-            redirect: 重新導向頁面。
-        intro: |
-            此表格顯示有 wiki 頁面的所有標籤鍵，以及它們有什麼語言。
     languages:
         name: 語言
         intro: |

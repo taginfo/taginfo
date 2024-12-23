@@ -232,6 +232,16 @@ pages:
                     OpenStreetMap i jedynie pokazują elementy, które mogą być użyte
                     by opisać języki niezależnie od tego, w jaki sposób są użyte w
                     OSM.
+        wiki:
+            language_comparison_table_for_keys:
+                name: Tabela porównawcza języków na wiki
+                icons:
+                    template: Strona na wiki istnieje i zawiera standardowy szablon.
+                    error: Strona na wiki istnieje i zawiera standardowy szablon, ale nie mogła zostać przetworzona.
+                    page: Strona na wiki istnieje, ale nie zawiera standardowego szablonu.
+                    redirect: Strona jest przekierowaniem.
+                intro: |
+                    Ta tabela pokazuje wszystkie tagi, dla których istnieją strony na wiki oraz to, w jakich są językach.
     download:
         intro: |
             <p>Tutaj możesz pobrać pliki bazy danych, z których korzysta taginfo. Wszystkie dane są przechowywane w bazach <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>.
@@ -525,15 +535,6 @@ reports:
             intro: Ten histogram pokazuje ile jest kluczy danej długości.
             key_length: Długość klucza
             number_of_keys: Liczba kluczy
-    language_comparison_table_for_keys_in_the_wiki:
-        name: Tabela porównawcza języków na wiki
-        icons:
-            template: Strona na wiki istnieje i zawiera standardowy szablon.
-            error: Strona na wiki istnieje i zawiera standardowy szablon, ale nie mogła zostać przetworzona.
-            page: Strona na wiki istnieje, ale nie zawiera standardowego szablonu.
-            redirect: Strona jest przekierowaniem.
-        intro: |
-            Ta tabela pokazuje wszystkie tagi, dla których istnieją strony na wiki oraz to, w jakich są językach.
     languages:
         name: Języki
         intro: |

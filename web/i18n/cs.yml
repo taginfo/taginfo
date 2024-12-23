@@ -283,6 +283,16 @@ pages:
                     Uvědomte si, že data zobrazená v této taublce nejsou z OpenStreetMap,
                     ukazuje pouze základní kameny, které lze použít pro popis jazyků
                     bez ohledu na to, zda jsou skutečně použity v OSM.
+        wiki:
+            language_comparison_table_for_keys:
+                name: Srovnání jazyků klíčů na wiki
+                icons:
+                    template: Stránka je na wiki a obsahuje standardní šablonu.
+                    error: Stránka je na wiki, obsahuje standardní šablonu, ale nelze ji zpracovat.
+                    page: Stránka je na wiki, ale neobsahuje standardní šablonu.
+                    redirect: Stránka je přesměrována.
+                intro: |
+                    Tato tabulka zobrazuje všechny klíče, pro které je dostupná wiki stránka a v jakém jazyce.
     download:
         intro: |
             <p>Zde si můžete stáhnout databáze, které taginfo používá. Všechna data jsou uložena
@@ -625,15 +635,6 @@ reports:
             intro: Tento histogram ukazuje, kolik existuje klíčů o dané délce.
             key_length: Délka klíče
             number_of_keys: Počet klíčů
-    language_comparison_table_for_keys_in_the_wiki:
-        name: Srovnání jazyků klíčů na wiki
-        icons:
-            template: Stránka je na wiki a obsahuje standardní šablonu.
-            error: Stránka je na wiki, obsahuje standardní šablonu, ale nelze ji zpracovat.
-            page: Stránka je na wiki, ale neobsahuje standardní šablonu.
-            redirect: Stránka je přesměrována.
-        intro: |
-            Tato tabulka zobrazuje všechny klíče, pro které je dostupná wiki stránka a v jakém jazyce.
     languages:
         name: Jazyky
         intro: |

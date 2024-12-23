@@ -282,6 +282,16 @@ pages:
                     Lưu ý rằng dữ liệu trong bảng này không phải lấy từ
                     OpenStreetMap, nó chỉ hiển thị căn bản để miêu tả ngôn ngữ
                     không kể nó thực sự được dùng trong OSM hay không.
+        wiki:
+            language_comparison_table_for_keys:
+                name: Bảng so sánh ngôn ngữ theo chìa khóa trên wiki
+                icons:
+                    template: Trang wiki có sẵn và có bản mẫu chuẩn.
+                    error: Trang wiki có sẵn và có bản mẫu chuẩn nhưng không thể phân tích.
+                    page: Trang wiki có sẵn nhưng không có bản mẫu chuẩn.
+                    redirect: Trang đổi hướng.
+                intro: |
+                    Bảng này có các chìa khóa thẻ có sẵn trang wiki và có các ngôn ngữ của các trang wiki.
     download:
         intro: |
             <p>Ở đây bạn có thể tải về các cơ sở dữ liệu được sử dụng bởi taginfo. Tất cả dữ liệu được lưu giữ
@@ -618,15 +628,6 @@ reports:
             intro: Biểu đồ tần suất này cho biết số chìa khóa theo độ dài.
             key_length: Độ dài chìa khóa
             number_of_keys: Số chìa khóa
-    language_comparison_table_for_keys_in_the_wiki:
-        name: Bảng so sánh ngôn ngữ theo chìa khóa trên wiki
-        icons:
-            template: Trang wiki có sẵn và có bản mẫu chuẩn.
-            error: Trang wiki có sẵn và có bản mẫu chuẩn nhưng không thể phân tích.
-            page: Trang wiki có sẵn nhưng không có bản mẫu chuẩn.
-            redirect: Trang đổi hướng.
-        intro: |
-            Bảng này có các chìa khóa thẻ có sẵn trang wiki và có các ngôn ngữ của các trang wiki.
     languages:
         name: Ngôn ngữ
         intro: |

@@ -287,6 +287,16 @@ pages:
                     pas d'OpenStreetMap. Il affiche juste les blocs qui permettent
                     de décrire des langues, sans tenir compte de leur utilisation
                     ou non dans OSM.
+        wiki:
+            language_comparison_table_for_keys:
+                name: Comparaison par langue des clés disposant d'une page wiki
+                icons:
+                    template: Page disponible dans le wiki et contenant les modèles standards.
+                    error: Page disponible dans le wiki et contenant les modèles standards, mais impossible à déchiffrer.
+                    page: Page disponible dans le wiki mais ne contenant pas les modèles standards.
+                    redirect: Page de redirection.
+                intro: |
+                    Ce tableau présente toutes les clés de tags possédant une page wiki et dans quelle langue.
     download:
         intro: |
             <p>Vous pouvez télécharger les données utilisées par taginfo. Toutes les données sont stockées
@@ -637,15 +647,6 @@ reports:
             intro: Cet histogramme présente le nombre de clés pour une longueur donnée.
             key_length: Longueur de la clé
             number_of_keys: Nombre de clés
-    language_comparison_table_for_keys_in_the_wiki:
-        name: Comparaison par langue des clés disposant d'une page wiki
-        icons:
-            template: Page disponible dans le wiki et contenant les modèles standards.
-            error: Page disponible dans le wiki et contenant les modèles standards, mais impossible à déchiffrer.
-            page: Page disponible dans le wiki mais ne contenant pas les modèles standards.
-            redirect: Page de redirection.
-        intro: |
-            Ce tableau présente toutes les clés de tags possédant une page wiki et dans quelle langue.
     languages:
         name: Langues
         intro: |

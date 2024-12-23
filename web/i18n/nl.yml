@@ -334,6 +334,16 @@ pages:
                     item: Wikidata-item
                     p1282: Waarde van P1282-eigenschap
                     error: Foutmelding
+        wiki:
+            language_comparison_table_for_keys:
+                name: Taalvergelijkingstabel voor sleutel in de wiki
+                icons:
+                    template: Pagina in wiki beschikbaar en bevat standaard template.
+                    error: Pagina in wiki beschikbaar en bevat standaard template, maar kon niet geanalyseerd worden.
+                    page: Pagina in wiki beschikbaar, maar bevat geen standaard template.
+                    redirect: Pagina is een redirect.
+                intro: |
+                    Deze tabel geeft alle tagsleutels weer waarvoor er wikipagina's beschikbaar zijn en in welke taal ze er zijn.
     download:
         intro: |
             <p>Hier kun je de database gebruiken door taginfo te downloaden. Alle gegevens zijn opgeslagen
@@ -689,15 +699,6 @@ reports:
             intro: Dit histogram geeft weer hoeveel tags er zijn van elke lengte.
             key_length: Sleutellengte
             number_of_keys: Hoeveelheid sleutels
-    language_comparison_table_for_keys_in_the_wiki:
-        name: Taalvergelijkingstabel voor sleutel in de wiki
-        icons:
-            template: Pagina in wiki beschikbaar en bevat standaard template.
-            error: Pagina in wiki beschikbaar en bevat standaard template, maar kon niet geanalyseerd worden.
-            page: Pagina in wiki beschikbaar, maar bevat geen standaard template.
-            redirect: Pagina is een redirect.
-        intro: |
-            Deze tabel geeft alle tagsleutels weer waarvoor er wikipagina's beschikbaar zijn en in welke taal ze er zijn.
     languages:
         name: Talen
         intro: |

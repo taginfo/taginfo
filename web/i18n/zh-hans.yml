@@ -165,6 +165,9 @@ pages:
         last_update_run: 最后一次更新运行于
         data_until_explanation: 所有截止到这天的修改都会在数据里，之后的数据也有可能包含在内。
         to: 到
+        wiki:
+            language_comparison_table_for_keys:
+                name: Wiki中的键的多语言对照表
     download:
         file: 文件
         packed: 打包后的
@@ -296,8 +299,6 @@ reports:
             intro: 该直方图反映了不同长度的键与他们的数目的关系。
             key_length: 键长度
             number_of_keys: 键的数目
-    language_comparison_table_for_keys_in_the_wiki:
-        name: Wiki中的键的多语言对照表
     languages:
         name: 语言
         code: 语言代码

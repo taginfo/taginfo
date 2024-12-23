@@ -350,6 +350,17 @@ pages:
                     item: Wikidata-Datenobjekt
                     p1282: Wert des Properties P1282
                     error: Fehlermeldung
+        wiki:
+            language_comparison_table_for_keys:
+                name: Sprach-Vergleichstabelle für Keys aus dem Wiki
+                icons:
+                    template: Seite im Wiki vorhanden und enthält Standard-Vorlage.
+                    error: Seite im Wiki vorhanden und enthält Standard-Vorlage. Die Vorlage konnte von taginfo aber nicht verstanden werden.
+                    page: Seite im Wiki vorhanden, enthält aber keine Standard-Vorlage.
+                    redirect: Seite im Wiki ist ein Verweise auf andere Wiki-Seite.
+                intro: |
+                    Diese Tabelle zeigt alle Keys zu denen es mindestens eine Wiki-Seite gibt und in
+                    welchen Sprachen diese Wiki-Seiten sind.
     download:
         intro: |
             <p>Hier kannst Du die Datenbanken herunterladen, die von Taginfo verwendet
@@ -719,16 +730,6 @@ reports:
             intro: Dieses Histogramm zeigt wieviele Keys es mit welcher Länge gibt.
             key_length: Key-Länge
             number_of_keys: Anzahl Keys
-    language_comparison_table_for_keys_in_the_wiki:
-        name: Sprach-Vergleichstabelle für Keys aus dem Wiki
-        icons:
-            template: Seite im Wiki vorhanden und enthält Standard-Vorlage.
-            error: Seite im Wiki vorhanden und enthält Standard-Vorlage. Die Vorlage konnte von taginfo aber nicht verstanden werden.
-            page: Seite im Wiki vorhanden, enthält aber keine Standard-Vorlage.
-            redirect: Seite im Wiki ist ein Verweise auf andere Wiki-Seite.
-        intro: |
-            Diese Tabelle zeigt alle Keys zu denen es mindestens eine Wiki-Seite gibt und in
-            welchen Sprachen diese Wiki-Seiten sind.
     languages:
         name: Sprachen
         intro: |

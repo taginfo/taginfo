@@ -278,6 +278,16 @@ pages:
                     OpenStreetMap, só amosan os bloques que poden empregarse para
                     describir linguas independentemente de se en realidad son
                     empregados no OSM.
+        wiki:
+            language_comparison_table_for_keys:
+                name: Táboa de comparación de lingua para as claves na wiki
+                icons:
+                    template: Páxina na wiki dispoñíbel e contén o padrón estándar.
+                    error: Páxina na wiki dispoñíbel e contén o padrón estándar, pero non puido ser analizada.
+                    page: Páxina na wiki dispoñíbel pero non contén o padrón estándar.
+                    redirect: A páxina é unha redirección.
+                intro: |
+                    Esta táboa amosa tódalas claves da etiquetas para os cales hai páxinas na wiki dispoñíbeis e en que linguas están.
     download:
         intro: |
             <p>Velaquí pode baixar as bases de datos empregadas polo taginfo. Tódolos datos almacénanse
@@ -606,15 +616,6 @@ reports:
             intro: Este histograma amosa cantas claves hai de cada lonxitude.
             key_length: Lonxitude da clave
             number_of_keys: Número de claves
-    language_comparison_table_for_keys_in_the_wiki:
-        name: Táboa de comparación de lingua para as claves na wiki
-        icons:
-            template: Páxina na wiki dispoñíbel e contén o padrón estándar.
-            error: Páxina na wiki dispoñíbel e contén o padrón estándar, pero non puido ser analizada.
-            page: Páxina na wiki dispoñíbel pero non contén o padrón estándar.
-            redirect: A páxina é unha redirección.
-        intro: |
-            Esta táboa amosa tódalas claves da etiquetas para os cales hai páxinas na wiki dispoñíbeis e en que linguas están.
     languages:
         name: Linguas
         intro: |

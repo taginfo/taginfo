@@ -279,6 +279,16 @@ pages:
                     OpenStreetMap, sólo muestran los bloques que pueden utilizarse
                     para describir idiomas independientemente de si en realidad son
                     utilizados en OSM.
+        wiki:
+            language_comparison_table_for_keys:
+                name: Tabla de comparación de idioma para las claves en la wiki
+                icons:
+                    template: Página wiki disponible y contiene la plantilla estándar.
+                    error: Página wiki disponible y contiene la plantilla estándar, pero no pudo ser analizado.
+                    page: Página wiki disponible pero no contiene la plantilla estándar.
+                    redirect: La página es una redirección.
+                intro: |
+                    Esta tabla muestra todas las claves de la etiquetas para los cuales hay páginas wiki disponibles y en qué idiomas están.
     download:
         intro: |
             <p>Aquí puedes descargar las bases de datos utilizadas por taginfo. Todos los datos se almacenan
@@ -607,15 +617,6 @@ reports:
             intro: Este histograma muestra cuántas claves hay de cada longitud.
             key_length: Longitud de la clave
             number_of_keys: Número de claves
-    language_comparison_table_for_keys_in_the_wiki:
-        name: Tabla de comparación de idioma para las claves en la wiki
-        icons:
-            template: Página wiki disponible y contiene la plantilla estándar.
-            error: Página wiki disponible y contiene la plantilla estándar, pero no pudo ser analizado.
-            page: Página wiki disponible pero no contiene la plantilla estándar.
-            redirect: La página es una redirección.
-        intro: |
-            Esta tabla muestra todas las claves de la etiquetas para los cuales hay páginas wiki disponibles y en qué idiomas están.
     languages:
         name: Idiomas
         intro: |

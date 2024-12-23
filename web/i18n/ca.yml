@@ -283,6 +283,16 @@ pages:
                     Fixeu-vos que les dades que es mostren en aquesta taula not śon d'OpenStreetMap,
                     tan sols mostra les peces que es poden usar per descriure idiomes
                     independentment de si realment s'usen a OSM.
+        wiki:
+            language_comparison_table_for_keys:
+                name: Taula de comparació d'idiomes per claus a la wiki
+                icons:
+                    template: Pàgina wiki disponible i conté una plantilla estàndard.
+                    error: Pàgina wiki disponible i conté una plantilla estàndard, però no s'ha pogut analitzar.
+                    page: Pàgina wiki disponible, però no conté una plantilla estàndard.
+                    redirect: La pàgina és una redirecció.
+                intro: |
+                    Aquesta taula mostra totes les etiquetes per les quals hi ha una pàgina wiki disponible i en quins idiomes són.
     download:
         intro: |
             <p>Aquí podeu descarregar la base de dades usada per taginfo. Totes les dades estan desades
@@ -635,15 +645,6 @@ reports:
             intro: Aquest histograma mostra quantes claus hi ha de cada llargada.
             key_length: Llargada de la clau
             number_of_keys: Nombre de claus
-    language_comparison_table_for_keys_in_the_wiki:
-        name: Taula de comparació d'idiomes per claus a la wiki
-        icons:
-            template: Pàgina wiki disponible i conté una plantilla estàndard.
-            error: Pàgina wiki disponible i conté una plantilla estàndard, però no s'ha pogut analitzar.
-            page: Pàgina wiki disponible, però no conté una plantilla estàndard.
-            redirect: La pàgina és una redirecció.
-        intro: |
-            Aquesta taula mostra totes les etiquetes per les quals hi ha una pàgina wiki disponible i en quins idiomes són.
     languages:
         name: Idiomes
         intro: |
