@@ -1,3 +1,26 @@
+<%
+@css = <<'CSS'
+.translations {
+    font-size: 1rem !important;
+}
+.translations tr:nth-child(even) td {
+    background-color: var(--color-stripe0);
+}
+.translations tr:nth-child(odd) td {
+    background-color: var(--color-stripe1);
+}
+.translations td:first-child {
+    border-left: 2px solid transparent;
+}
+.translations td:first-child.with-html {
+    border-left: 2px solid red;
+}
+.parameter {
+    color: #20a020;
+    font-weight: bold;
+}
+CSS
+%>
 <div lang="en" dir="ltr">
     <h1>Translations of taginfo texts</h1>
 </div>
@@ -5,7 +28,7 @@
 <% if @error %>
     <p style="color: red;"><%= @error %></p>
 <% else %>
-    <table class="list">
+    <table class="list translations">
         <th></th>
         <th><a class="extlink" style="float: right;" href="https://github.com/taginfo/taginfo/blob/master/web/i18n/en.yml">on github</a>English</th>
         <th><a class="extlink" style="float: right;" href="https://github.com/taginfo/taginfo/blob/master/web/i18n/<%= @lang.downcase %>.yml">on github</a>

@@ -110,10 +110,9 @@ class Taginfo < Sinatra::Base
             @error = "Unknown language: #{@lang}"
         end
 
-        c = 'even'
         @line = lambda { |level, key, name, en, other|
-            c = c == '' ? 'even' : ''
-            "<tr><td class='#{c}' style='padding-left: #{ (level * 16) + 6 }px;'><span data-tooltip-position='OnRight' title='#{ name }'>#{ key }</span></td><td class='#{c}'>#{ en }</td><td class='#{c}' lang='#{@lang}' dir='#{direction_from_lang_code(@lang)}'>#{ other }</td></tr>"
+            with_html = en.include?('<') ? 'with-html' : ''
+            "<tr><td class='#{ with_html }' style='padding-left: #{ (level * 16) + 6 }px;'><span data-tooltip-position='OnRight' title='#{ name }'>#{ key }</span></td><td>#{ en.gsub(/(%[0-9])/, '<span class="parameter">\1</span>') }</td><td lang='#{@lang}' dir='#{direction_from_lang_code(@lang)}'>#{ other.gsub(/(%[0-9])/, '<span class="parameter">\1</span>') }</td></tr>"
         }
 
         javascript "pages/taginfo/i18n"
