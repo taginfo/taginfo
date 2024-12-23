@@ -408,6 +408,25 @@ pages:
                     diverse lingue. A volte c'è un'immagine in una delle varie lingue
                     che è la migliore. Tuttavia in alcuni casi ha senso avere diverse
                     immagini a causa del diverso background culturale o simili motivi.
+        db:
+            stats:
+                name: Statistiche del Database
+                objects_in_db: Numero di oggetti nel database
+                tags_in_db: Numero di tag nel database
+                distinct_keys: Numero di chiavi univoche
+                distinct_tags: Numero di tag univoci
+                nodes_in_db: Numero di nodi nel database
+                nodes_with_tags_in_db: Numero di nodi nel database con almeno un tag
+                nodes_with_tags_in_db_percent: Percentuale di nodi con almeno un tag
+                tags_on_nodes: Numero di tag sui nodi
+                avg_tags_per_tagged_node: Numero medio di tag per ogni nodo con dei tag
+                ways_in_db: Numero di way nel database
+                closed_ways_in_db: Numero di way chiuse nel database
+                tags_on_ways: Numero tag sulle way
+                avg_tags_per_way: Numero medio di tag per ogni way
+                relations_in_db: Numero di relazioni nel database
+                tags_on_relations: Numero di tag sulle relazione
+                avg_tags_per_relation: Numero medio di tag per ogni relazione
     download:
         intro: |
             <p>Qui potete scaricare il database usato da Taginfo. Tutti i dati
@@ -743,24 +762,6 @@ reports:
             intro: |
                 <p>chiavi che non rientrano in nessuna delle altre
                 categorie.</p>
-    database_statistics:
-        name: Statistiche del Database
-        objects_in_db: Numero di oggetti nel database
-        tags_in_db: Numero di tag nel database
-        distinct_keys: Numero di chiavi univoche
-        distinct_tags: Numero di tag univoci
-        nodes_in_db: Numero di nodi nel database
-        nodes_with_tags_in_db: Numero di nodi nel database con almeno un tag
-        nodes_with_tags_in_db_percent: Percentuale di nodi con almeno un tag
-        tags_on_nodes: Numero di tag sui nodi
-        avg_tags_per_tagged_node: Numero medio di tag per ogni nodo con dei tag
-        ways_in_db: Numero di way nel database
-        closed_ways_in_db: Numero di way chiuse nel database
-        tags_on_ways: Numero tag sulle way
-        avg_tags_per_way: Numero medio di tag per ogni way
-        relations_in_db: Numero di relazioni nel database
-        tags_on_relations: Numero di tag sulle relazione
-        avg_tags_per_relation: Numero medio di tag per ogni relazione
     frequently_used_keys_without_wiki_page:
         name: Chiavi Usate Frequentemente Senza una Pagina Wiki
         intro: |

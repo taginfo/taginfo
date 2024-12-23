@@ -297,6 +297,25 @@ pages:
                     서로 다른 언어에서 키를 이미지로 나타내기 위해 위키에서 사용하는 이미지.
                     때때로 다른 언어에서 사용된 이미지가 더 좋을 수 있습니다.
                     하지만 서로 다른 문화적 배경 때문에 서로 다른 이미지를 갖는 것이 좋은 경우가 많습니다.
+        db:
+            stats:
+                name: 데이터베이스 통계
+                objects_in_db: 데이터베이스 상에서 요소의 개수
+                tags_in_db: 데이터베이스 상에서 태그의 개수
+                distinct_keys: 서로 다른 키의 개수
+                distinct_tags: 서로 다른 태그의 개수
+                nodes_in_db: 데이터베이스 상에서 노드의 개수
+                nodes_with_tags_in_db: 적어도 태그가 1개 이상 달린 노드의 개수
+                nodes_with_tags_in_db_percent: 적어도 태그가 1개 이상 달린 노드의 비율
+                tags_on_nodes: 노드에 달린 태그의 개수
+                avg_tags_per_tagged_node: 태그가 달린 노드 1개당 평균 태그 수
+                ways_in_db: 데이터베이스 상에서 길의 개수
+                closed_ways_in_db: 닫힌 길의 개수
+                tags_on_ways: 길에 달린 태그의 개수
+                avg_tags_per_way: 태그가 달린 길 1개당 평균 태그 수
+                relations_in_db: 데이터베이스 상에서 관계의 개수
+                tags_on_relations: 관계에 달린 태그의 개수
+                avg_tags_per_relation: 태그가 달린 관계 1개당 평균 태그 수
     download:
         intro: |
             <p>taginfo가 사용하는 데이터베이스를 여기에서 다운로드받을 수 있습니다. 모든 데이터는 <a class="extlink"
@@ -592,24 +611,6 @@ reports:
             title: 나머지 키
             intro: |
                 <p>다른 범주에 들지 않은 키.</p>
-    database_statistics:
-        name: 데이터베이스 통계
-        objects_in_db: 데이터베이스 상에서 요소의 개수
-        tags_in_db: 데이터베이스 상에서 태그의 개수
-        distinct_keys: 서로 다른 키의 개수
-        distinct_tags: 서로 다른 태그의 개수
-        nodes_in_db: 데이터베이스 상에서 노드의 개수
-        nodes_with_tags_in_db: 적어도 태그가 1개 이상 달린 노드의 개수
-        nodes_with_tags_in_db_percent: 적어도 태그가 1개 이상 달린 노드의 비율
-        tags_on_nodes: 노드에 달린 태그의 개수
-        avg_tags_per_tagged_node: 태그가 달린 노드 1개당 평균 태그 수
-        ways_in_db: 데이터베이스 상에서 길의 개수
-        closed_ways_in_db: 닫힌 길의 개수
-        tags_on_ways: 길에 달린 태그의 개수
-        avg_tags_per_way: 태그가 달린 길 1개당 평균 태그 수
-        relations_in_db: 데이터베이스 상에서 관계의 개수
-        tags_on_relations: 관계에 달린 태그의 개수
-        avg_tags_per_relation: 태그가 달린 관계 1개당 평균 태그 수
     frequently_used_keys_without_wiki_page:
         name: 자주 사용하지만 위키 문서가 없는 키
         intro: |

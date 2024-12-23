@@ -311,6 +311,25 @@ pages:
                     Hình ảnh được sử dụng trong wiki để tượng trưng các chìa khóa trong các bản dịch.
                     Đôi khi hình trong một bản dịch hợp hơn hình trong bản dịch kia.
                     Đôi khi nên có nhiều hình khác nhau vì nền văn hóa khác nhau.
+        db:
+            stats:
+                name: Thống kê cơ sở dữ liệu
+                objects_in_db: Số đối tượng trong cơ sở dữ liệu
+                tags_in_db: Số thẻ trong cơ sở dữ liệu
+                distinct_keys: Số chìa khóa khác nhau
+                distinct_tags: Số thẻ khác nhau
+                nodes_in_db: Số nốt trong cơ sở dữ liệu
+                nodes_with_tags_in_db: Số nốt có ít nhất một thẻ
+                nodes_with_tags_in_db_percent: Số phần trăm các nốt có ít nhất một thẻ
+                tags_on_nodes: Số thẻ trong nốt
+                avg_tags_per_tagged_node: Số thẻ trung bình trên nốt có thẻ
+                ways_in_db: Số lối trong cơ sở dữ liệu
+                closed_ways_in_db: Số lối đóng
+                tags_on_ways: Số thẻ trong lối
+                avg_tags_per_way: Số thẻ trung bình trên lối
+                relations_in_db: Số quan hệ trong cơ sở dữ liệu
+                tags_on_relations: Số thẻ trong quan hệ
+                avg_tags_per_relation: Số thẻ trung bình trên quan hệ
     download:
         intro: |
             <p>Ở đây bạn có thể tải về các cơ sở dữ liệu được sử dụng bởi taginfo. Tất cả dữ liệu được lưu giữ
@@ -606,24 +625,6 @@ reports:
             title: Các chìa khóa khác
             intro: |
                 <p>Các chìa khóa không hợp các thể loại kia.</p>
-    database_statistics:
-        name: Thống kê cơ sở dữ liệu
-        objects_in_db: Số đối tượng trong cơ sở dữ liệu
-        tags_in_db: Số thẻ trong cơ sở dữ liệu
-        distinct_keys: Số chìa khóa khác nhau
-        distinct_tags: Số thẻ khác nhau
-        nodes_in_db: Số nốt trong cơ sở dữ liệu
-        nodes_with_tags_in_db: Số nốt có ít nhất một thẻ
-        nodes_with_tags_in_db_percent: Số phần trăm các nốt có ít nhất một thẻ
-        tags_on_nodes: Số thẻ trong nốt
-        avg_tags_per_tagged_node: Số thẻ trung bình trên nốt có thẻ
-        ways_in_db: Số lối trong cơ sở dữ liệu
-        closed_ways_in_db: Số lối đóng
-        tags_on_ways: Số thẻ trong lối
-        avg_tags_per_way: Số thẻ trung bình trên lối
-        relations_in_db: Số quan hệ trong cơ sở dữ liệu
-        tags_on_relations: Số thẻ trong quan hệ
-        avg_tags_per_relation: Số thẻ trung bình trên quan hệ
     frequently_used_keys_without_wiki_page:
         name: Frequently used keys without wiki page
         intro: |

@@ -314,6 +314,25 @@ pages:
                     jazycích. Někdy je varianta obrázku z jednoho nebo jiného jazyka
                     lepší. Ale někdy má smysl mít různé obrázky v různých jazycích
                     kvůli různému kulturnímu pozadí a podobně.
+        db:
+            stats:
+                name: Statistika databáze
+                objects_in_db: Počet objektů v databázi
+                tags_in_db: Počet značek v databázi
+                distinct_keys: Počet různých klíčů
+                distinct_tags: Počet různých značek
+                nodes_in_db: Počet uzlů v databázi
+                nodes_with_tags_in_db: Počet uzlů s alespoň jednou značkou
+                nodes_with_tags_in_db_percent: Procent uzlů s alespoň jednou značkou
+                tags_on_nodes: Počet značek na uzlech
+                avg_tags_per_tagged_node: Průměrný počet značek na označený uzel
+                ways_in_db: Počet cest v databázi
+                closed_ways_in_db: Počet uzavřených cest
+                tags_on_ways: Počet značek na cestách
+                avg_tags_per_way: Průměrný počet značek na cestě
+                relations_in_db: Počet relací v databázi
+                tags_on_relations: Počet značek na relacích
+                avg_tags_per_relation: Průměrný počet značek na relaci
     download:
         intro: |
             <p>Zde si můžete stáhnout databáze, které taginfo používá. Všechna data jsou uložena
@@ -614,24 +633,6 @@ reports:
             title: Všechny další klíče
             intro: |
                 <p>Klíče, které nespadají do žádné ostatní kategorie.</p>
-    database_statistics:
-        name: Statistika databáze
-        objects_in_db: Počet objektů v databázi
-        tags_in_db: Počet značek v databázi
-        distinct_keys: Počet různých klíčů
-        distinct_tags: Počet různých značek
-        nodes_in_db: Počet uzlů v databázi
-        nodes_with_tags_in_db: Počet uzlů s alespoň jednou značkou
-        nodes_with_tags_in_db_percent: Procent uzlů s alespoň jednou značkou
-        tags_on_nodes: Počet značek na uzlech
-        avg_tags_per_tagged_node: Průměrný počet značek na označený uzel
-        ways_in_db: Počet cest v databázi
-        closed_ways_in_db: Počet uzavřených cest
-        tags_on_ways: Počet značek na cestách
-        avg_tags_per_way: Průměrný počet značek na cestě
-        relations_in_db: Počet relací v databázi
-        tags_on_relations: Počet značek na relacích
-        avg_tags_per_relation: Průměrný počet značek na relaci
     frequently_used_keys_without_wiki_page:
         name: Často používané klíče bez wiki stránky
         intro: |

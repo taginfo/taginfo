@@ -172,6 +172,13 @@ pages:
                 name: Wiki解析问题
             image_comparison:
                 name: Wiki图片
+        db:
+            stats:
+                name: 数据库统计信息
+                objects_in_db: 数据库中的对象数量
+                tags_in_db: 数据库中的标签数量
+                distinct_keys: 不相同的键的数量
+                distinct_tags: 不相同的标签的数量
     download:
         file: 文件
         packed: 打包后的
@@ -286,12 +293,6 @@ reports:
         intro: |
             任何有效的Unicode字符都可以出现在OSM的键中，但通常会被用到的只有小写拉丁字母 (a-z) 和下划线 (_) 。
             冒号 (:) 通常用作分隔符。这份报告根据所有键所使用的字符对它们进行分类。
-    database_statistics:
-        name: 数据库统计信息
-        objects_in_db: 数据库中的对象数量
-        tags_in_db: 数据库中的标签数量
-        distinct_keys: 不相同的键的数量
-        distinct_tags: 不相同的标签的数量
     frequently_used_keys_without_wiki_page:
         name: 没有Wiki页面的常用键
     key_lengths:

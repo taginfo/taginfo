@@ -343,6 +343,25 @@ pages:
                     在 wiki 中不同語言用來象徵鍵的圖片。
                     有時來自其他語言的圖片比較好，
                     但有時候會因為不同的文化背景等而有不同圖片。
+        db:
+            stats:
+                name: 資料庫統計資料
+                objects_in_db: 資料庫裡的物件數量
+                tags_in_db: 資料庫裡的標籤數量
+                distinct_keys: 相異的鍵數量
+                distinct_tags: 相異的標籤數量
+                nodes_in_db: 資料庫裡的節點數量
+                nodes_with_tags_in_db: 至少有一個標籤的節點數量
+                nodes_with_tags_in_db_percent: 至少有一個標籤的節點百分比
+                tags_on_nodes: 在節點上的標籤數量
+                avg_tags_per_tagged_node: 每個已標籤節點的平均標籤數量
+                ways_in_db: 資料庫裡的路徑數量
+                closed_ways_in_db: 封閉路徑的數量
+                tags_on_ways: 在路徑上的標籤數量
+                avg_tags_per_way: 每個路徑的平均標籤數量
+                relations_in_db: 資料庫裡的關係數量
+                tags_on_relations: 關係的標籤數量
+                avg_tags_per_relation: 每個關係的平均標籤數量
     download:
         intro: |
             <p>你能在這裡下載 taginfo 所用的資料庫。所有資料被儲存
@@ -647,24 +666,6 @@ reports:
             title: 其他的鍵
             intro: |
                 <p>不符合任何其他分類的鍵。</p>
-    database_statistics:
-        name: 資料庫統計資料
-        objects_in_db: 資料庫裡的物件數量
-        tags_in_db: 資料庫裡的標籤數量
-        distinct_keys: 相異的鍵數量
-        distinct_tags: 相異的標籤數量
-        nodes_in_db: 資料庫裡的節點數量
-        nodes_with_tags_in_db: 至少有一個標籤的節點數量
-        nodes_with_tags_in_db_percent: 至少有一個標籤的節點百分比
-        tags_on_nodes: 在節點上的標籤數量
-        avg_tags_per_tagged_node: 每個已標籤節點的平均標籤數量
-        ways_in_db: 資料庫裡的路徑數量
-        closed_ways_in_db: 封閉路徑的數量
-        tags_on_ways: 在路徑上的標籤數量
-        avg_tags_per_way: 每個路徑的平均標籤數量
-        relations_in_db: 資料庫裡的關係數量
-        tags_on_relations: 關係的標籤數量
-        avg_tags_per_relation: 每個關係的平均標籤數量
     frequently_used_keys_without_wiki_page:
         name: 沒有 wiki 頁面的常用鍵
         intro: |

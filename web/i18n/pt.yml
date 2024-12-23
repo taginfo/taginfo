@@ -208,6 +208,9 @@ pages:
                 intro: |
                     Esta tabela mostra todas as chaves de etiquetas que possuem páginas no wiki,
                     e em que linguagens elas estão disponíveis.
+        db:
+            stats:
+                name: Estatísticas do banco de dados
     download:
         intro: |
             <p>Aqui você pode baixar os bancos de dados usados pelo taginfo. Todos os dados são
@@ -419,8 +422,6 @@ reports:
         problem:
             tab: Problemático
             title: Chaves com caracteres possivelmente problemáticos
-    database_statistics:
-        name: Estatísticas do banco de dados
     frequently_used_keys_without_wiki_page:
         name: Chaves frequentemente usadas sem páginas no wiki
         also_show_keys: Também mostrar chaves que não possuem uma página no wiki em inglês, mas possuem em alguma outra linguagem.

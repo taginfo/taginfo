@@ -365,6 +365,25 @@ pages:
                     talen. Soms is de afbeelding van de ene taal beter als van de andere.
                     Het is soms echter juist logisch om verschillende afbeeldingen te hebben,
                     bijvoorbeeld wegens verschillende culturele achtergronden en dergelijke.
+        db:
+            stats:
+                name: Database-statistieken
+                objects_in_db: Hoeveelheid objecten in de database
+                tags_in_db: Hoeveelheid tags in de database
+                distinct_keys: Hoeveelheid unieke sleutels
+                distinct_tags: Hoeveelheid unieke tags
+                nodes_in_db: Hoeveelheid nodes in de database
+                nodes_with_tags_in_db: Hoeveelheid nodes met minstens een tag
+                nodes_with_tags_in_db_percent: Percentage nodes met minstens een tag
+                tags_on_nodes: Hoeveelheid tags op nodes.
+                avg_tags_per_tagged_node: Gemiddeld aantal tags per getagde node
+                ways_in_db: Hoeveelheid wegen in de database
+                closed_ways_in_db: Hoeveelheid gesloten wegen
+                tags_on_ways: Hoeveelheid tags op wegen
+                avg_tags_per_way: Gemiddeld aantal tags per weg
+                relations_in_db: Hoeveelheid relaties in de database
+                tags_on_relations: Hoeveelheid tags op relaties
+                avg_tags_per_relation: Gemiddeld aantal tags per relatie
     download:
         intro: |
             <p>Hier kun je de database gebruiken door taginfo te downloaden. Alle gegevens zijn opgeslagen
@@ -678,24 +697,6 @@ reports:
             title: Alle andere sleutels
             intro: |
                 <p>Sleutels die niet in de bovenstaande categorieën vallen.</p>
-    database_statistics:
-        name: Database-statistieken
-        objects_in_db: Hoeveelheid objecten in de database
-        tags_in_db: Hoeveelheid tags in de database
-        distinct_keys: Hoeveelheid unieke sleutels
-        distinct_tags: Hoeveelheid unieke tags
-        nodes_in_db: Hoeveelheid nodes in de database
-        nodes_with_tags_in_db: Hoeveelheid nodes met minstens een tag
-        nodes_with_tags_in_db_percent: Percentage nodes met minstens een tag
-        tags_on_nodes: Hoeveelheid tags op nodes.
-        avg_tags_per_tagged_node: Gemiddeld aantal tags per getagde node
-        ways_in_db: Hoeveelheid wegen in de database
-        closed_ways_in_db: Hoeveelheid gesloten wegen
-        tags_on_ways: Hoeveelheid tags op wegen
-        avg_tags_per_way: Gemiddeld aantal tags per weg
-        relations_in_db: Hoeveelheid relaties in de database
-        tags_on_relations: Hoeveelheid tags op relaties
-        avg_tags_per_relation: Gemiddeld aantal tags per relatie
     frequently_used_keys_without_wiki_page:
         name: Veel gebruikte sleutels zonder wikipagina
         intro: |

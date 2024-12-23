@@ -255,6 +255,25 @@ pages:
                 name: Zdjęcia na wiki
                 intro: |
                     Ilustracje używane na wiki w różnych językach do reprezentacji kluczy. Czasami zdjęcia z jednego wariantu są lepsze niż inne. Ale czasami ma sens, aby te obrazy były różne z powodu różnic kulturowych i innych.
+        db:
+            stats:
+                name: Statystyka bazy danych
+                objects_in_db: Liczba obiektów w bazie
+                tags_in_db: Liczba tagów w bazie
+                distinct_keys: Liczba unikatowych kluczy
+                distinct_tags: Liczba unikatowych tagów
+                nodes_in_db: Liczba węzłów w bazie
+                nodes_with_tags_in_db: Liczba węzłów z przynajmniej jednym tagiem
+                nodes_with_tags_in_db_percent: Procent węzłów z przynajmniej jednym tagiem
+                tags_on_nodes: Liczba tagów na węzłach
+                avg_tags_per_tagged_node: Średnia liczba tagów na otagowany węzeł
+                ways_in_db: Liczba dróg w bazie
+                closed_ways_in_db: Liczba zamkniętych dróg
+                tags_on_ways: Liczba tagów na drogach
+                avg_tags_per_way: Średnia liczba tagów na drogę
+                relations_in_db: Liczba relacji w bazie
+                tags_on_relations: Liczba tagów na relację
+                avg_tags_per_relation: Średnia liczba tagów na relację
     download:
         intro: |
             <p>Tutaj możesz pobrać pliki bazy danych, z których korzysta taginfo. Wszystkie dane są przechowywane w bazach <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>.
@@ -512,24 +531,6 @@ reports:
             title: Wszystkie pozostałe klucze
             intro: |
                 <p>Klucze niepasujące do innych kategorii.</p>
-    database_statistics:
-        name: Statystyka bazy danych
-        objects_in_db: Liczba obiektów w bazie
-        tags_in_db: Liczba tagów w bazie
-        distinct_keys: Liczba unikatowych kluczy
-        distinct_tags: Liczba unikatowych tagów
-        nodes_in_db: Liczba węzłów w bazie
-        nodes_with_tags_in_db: Liczba węzłów z przynajmniej jednym tagiem
-        nodes_with_tags_in_db_percent: Procent węzłów z przynajmniej jednym tagiem
-        tags_on_nodes: Liczba tagów na węzłach
-        avg_tags_per_tagged_node: Średnia liczba tagów na otagowany węzeł
-        ways_in_db: Liczba dróg w bazie
-        closed_ways_in_db: Liczba zamkniętych dróg
-        tags_on_ways: Liczba tagów na drogach
-        avg_tags_per_way: Średnia liczba tagów na drogę
-        relations_in_db: Liczba relacji w bazie
-        tags_on_relations: Liczba tagów na relację
-        avg_tags_per_relation: Średnia liczba tagów na relację
     frequently_used_keys_without_wiki_page:
         name: Często używane klucze bez strony na wiki
         intro: |

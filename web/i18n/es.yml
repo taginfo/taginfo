@@ -311,6 +311,25 @@ pages:
                     diferentes idiomas. A veces, la imagen de una u otra variante de
                     idioma es mejor. Pero a veces tiene sentido tener diferentes
                     imágenes a causa de diferentes trasfondos culturales o algo así.
+        db:
+            stats:
+                name: Estadísticas de la base de datos
+                objects_in_db: Número de objetos en la base de datos
+                tags_in_db: Número de etiquetas en la base de datos
+                distinct_keys: Número de claves distintas
+                distinct_tags: Número de etiquetas distintas
+                nodes_in_db: Número de nodos en la base de datos
+                nodes_with_tags_in_db: Número de nodos con al menos una etiqueta
+                nodes_with_tags_in_db_percent: Porcentaje de nodos con al menos una etiqueta
+                tags_on_nodes: Número de etiquetas en los nodos
+                avg_tags_per_tagged_node: Número promedio de etiquetas por nodo etiquetado
+                ways_in_db: Número de vías en la base de datos
+                closed_ways_in_db: Número de vías cerradas
+                tags_on_ways: Número de etiquetas en las vías
+                avg_tags_per_way: Número promedio de etiquetas por vía
+                relations_in_db: Número de relaciones en la base de datos
+                tags_on_relations: Número de etiquetas en las relaciones
+                avg_tags_per_relation: Número promedio de etiquetas por relación
     download:
         intro: |
             <p>Aquí puedes descargar las bases de datos utilizadas por taginfo. Todos los datos se almacenan
@@ -597,24 +616,6 @@ reports:
             title: Todas las otras claves
             intro: |
                 <p>Las claves que no encajan en ninguna de las otras categorías.</p>
-    database_statistics:
-        name: Estadísticas de la base de datos
-        objects_in_db: Número de objetos en la base de datos
-        tags_in_db: Número de etiquetas en la base de datos
-        distinct_keys: Número de claves distintas
-        distinct_tags: Número de etiquetas distintas
-        nodes_in_db: Número de nodos en la base de datos
-        nodes_with_tags_in_db: Número de nodos con al menos una etiqueta
-        nodes_with_tags_in_db_percent: Porcentaje de nodos con al menos una etiqueta
-        tags_on_nodes: Número de etiquetas en los nodos
-        avg_tags_per_tagged_node: Número promedio de etiquetas por nodo etiquetado
-        ways_in_db: Número de vías en la base de datos
-        closed_ways_in_db: Número de vías cerradas
-        tags_on_ways: Número de etiquetas en las vías
-        avg_tags_per_way: Número promedio de etiquetas por vía
-        relations_in_db: Número de relaciones en la base de datos
-        tags_on_relations: Número de etiquetas en las relaciones
-        avg_tags_per_relation: Número promedio de etiquetas por relación
     frequently_used_keys_without_wiki_page:
         name: Claves de uso frecuente sin página wiki
         intro: |

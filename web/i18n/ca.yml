@@ -314,6 +314,25 @@ pages:
                     idiomes. A vegades l'imatge d'un o altre idioma
                     és millor. Però a vegades, té sentit tenir imatges
                     diferents degut a les diferències culturals.
+        db:
+            stats:
+                name: Estadístiques de la base de dades
+                objects_in_db: Nombre d'objectes a la base de dades
+                tags_in_db: Nombre d'etiquetes a la base de dades
+                distinct_keys: Nombre de claus diferents
+                distinct_tags: Nombre d'etiquetes diferents
+                nodes_in_db: Nombre de nodes a la base de dades
+                nodes_with_tags_in_db: Nombre de nodes amb almenys una etiqueta
+                nodes_with_tags_in_db_percent: Percentatge de nodes amb almenys una etiqueta
+                tags_on_nodes: Nombre d'etiquetes en nodes
+                avg_tags_per_tagged_node: Nombre mitjà d'etiquetes per node etiquetat
+                ways_in_db: Nombre de vies a la base de dades
+                closed_ways_in_db: Nombre de vies tancades
+                tags_on_ways: Nombre d'etiquetes en vies
+                avg_tags_per_way: Nombre mitjà d'etiquetes per via
+                relations_in_db: Nombre de relacions a la base de dades
+                tags_on_relations: Nombre d'etiquetes en relacions
+                avg_tags_per_relation: Nombre mitjà d'etiquetes per relació
     download:
         intro: |
             <p>Aquí podeu descarregar la base de dades usada per taginfo. Totes les dades estan desades
@@ -624,24 +643,6 @@ reports:
             title: Totes les altres claus
             intro: |
                 <p>Claus que no encaixen en cap de les altres categories.</p>
-    database_statistics:
-        name: Estadístiques de la base de dades
-        objects_in_db: Nombre d'objectes a la base de dades
-        tags_in_db: Nombre d'etiquetes a la base de dades
-        distinct_keys: Nombre de claus diferents
-        distinct_tags: Nombre d'etiquetes diferents
-        nodes_in_db: Nombre de nodes a la base de dades
-        nodes_with_tags_in_db: Nombre de nodes amb almenys una etiqueta
-        nodes_with_tags_in_db_percent: Percentatge de nodes amb almenys una etiqueta
-        tags_on_nodes: Nombre d'etiquetes en nodes
-        avg_tags_per_tagged_node: Nombre mitjà d'etiquetes per node etiquetat
-        ways_in_db: Nombre de vies a la base de dades
-        closed_ways_in_db: Nombre de vies tancades
-        tags_on_ways: Nombre d'etiquetes en vies
-        avg_tags_per_way: Nombre mitjà d'etiquetes per via
-        relations_in_db: Nombre de relacions a la base de dades
-        tags_on_relations: Nombre d'etiquetes en relacions
-        avg_tags_per_relation: Nombre mitjà d'etiquetes per relació
     frequently_used_keys_without_wiki_page:
         name: Claus usades freqüentment sense pàgina wiki
         intro: |

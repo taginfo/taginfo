@@ -316,6 +316,25 @@ pages:
                     Parfois l’image d’une page dans une langue est meilleure que celle dans une autre.
                     Mais il est parfois judicieux d’utiliser des images différentes pour des raisons culturelles.
                 name: Images du wiki
+        db:
+            stats:
+                name: Statistiques de la base de données
+                objects_in_db: Nombre d'objets
+                tags_in_db: Nombre de tags
+                distinct_keys: Nombre de clés distinctes
+                distinct_tags: Nombre de tags distincts
+                nodes_in_db: Nombre de nœuds
+                nodes_with_tags_in_db: Nombre de nœuds avec au moins un tag
+                nodes_with_tags_in_db_percent: Pourcentage de nœuds avec au moins un tag
+                tags_on_nodes: Nombre de tags sur les nœuds
+                avg_tags_per_tagged_node: Nombre moyen de tags par nœud taggué
+                ways_in_db: Nombre de chemins
+                closed_ways_in_db: Nombre de chemins fermés
+                tags_on_ways: Nombre de tags sur les chemins
+                avg_tags_per_way: Nombre moyen de tag par chemin
+                relations_in_db: Nombre de relations
+                tags_on_relations: Nombre de tags sur les relations
+                avg_tags_per_relation: Nombre moyen de tag par relation
     download:
         intro: |
             <p>Vous pouvez télécharger les données utilisées par taginfo. Toutes les données sont stockées
@@ -612,24 +631,6 @@ reports:
             title: Toutes les autres clés
             intro: |
                 <p>Clés ne correspondant à aucune autre catégorie.</p>
-    database_statistics:
-        name: Statistiques de la base de données
-        objects_in_db: Nombre d'objets
-        tags_in_db: Nombre de tags
-        distinct_keys: Nombre de clés distinctes
-        distinct_tags: Nombre de tags distincts
-        nodes_in_db: Nombre de nœuds
-        nodes_with_tags_in_db: Nombre de nœuds avec au moins un tag
-        nodes_with_tags_in_db_percent: Pourcentage de nœuds avec au moins un tag
-        tags_on_nodes: Nombre de tags sur les nœuds
-        avg_tags_per_tagged_node: Nombre moyen de tags par nœud taggué
-        ways_in_db: Nombre de chemins
-        closed_ways_in_db: Nombre de chemins fermés
-        tags_on_ways: Nombre de tags sur les chemins
-        avg_tags_per_way: Nombre moyen de tag par chemin
-        relations_in_db: Nombre de relations
-        tags_on_relations: Nombre de tags sur les relations
-        avg_tags_per_relation: Nombre moyen de tag par relation
     frequently_used_keys_without_wiki_page:
         name: Clés fréquement utilisées ne disposant pas d'une page wiki
         intro: |

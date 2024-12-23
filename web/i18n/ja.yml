@@ -304,6 +304,25 @@ pages:
                     それぞれの言語におけるキーを象徴するためにウィキで使われている画像です。
                     画像は同一だったり、言語によって異なったほうが良かったりします。
                     しかし、文化的背景の違いなどによって異なる画像が使われることがわかる場合もあります。
+        db:
+            stats:
+                name: データベースの統計
+                objects_in_db: データベース中のオブジェクト数
+                tags_in_db: データベース中のタグ数
+                distinct_keys: 識別されたキー数
+                distinct_tags: 識別されたタグ数
+                nodes_in_db: データベース中のノード数
+                nodes_with_tags_in_db: 1つ以上のタグがあるノード数
+                nodes_with_tags_in_db_percent: 1つ以上のタグがあるノードの割合
+                tags_on_nodes: ノード上のタグ数
+                avg_tags_per_tagged_node: タグがあるノードあたりの平均タグ数
+                ways_in_db: データベース中のウェイ数
+                closed_ways_in_db: 閉じたウェイ数
+                tags_on_ways: ウェイ上のタグ数
+                avg_tags_per_way: ウェイあたりの平均タグ数
+                relations_in_db: データベース中のリレーション数
+                tags_on_relations: リレーション上のタグ数
+                avg_tags_per_relation: リレーションあたりの平均タグ数
     download:
         intro: |
             <p>taginfo で使われるデータベースをここからダウンロードできます。すべてのデータが
@@ -586,24 +605,6 @@ reports:
             title: その他のキーすべて
             intro: |
                 <p>他の分類に合わないキーです。</p>
-    database_statistics:
-        name: データベースの統計
-        objects_in_db: データベース中のオブジェクト数
-        tags_in_db: データベース中のタグ数
-        distinct_keys: 識別されたキー数
-        distinct_tags: 識別されたタグ数
-        nodes_in_db: データベース中のノード数
-        nodes_with_tags_in_db: 1つ以上のタグがあるノード数
-        nodes_with_tags_in_db_percent: 1つ以上のタグがあるノードの割合
-        tags_on_nodes: ノード上のタグ数
-        avg_tags_per_tagged_node: タグがあるノードあたりの平均タグ数
-        ways_in_db: データベース中のウェイ数
-        closed_ways_in_db: 閉じたウェイ数
-        tags_on_ways: ウェイ上のタグ数
-        avg_tags_per_way: ウェイあたりの平均タグ数
-        relations_in_db: データベース中のリレーション数
-        tags_on_relations: リレーション上のタグ数
-        avg_tags_per_relation: リレーションあたりの平均タグ数
     frequently_used_keys_without_wiki_page:
         name: よく使われているもののウィキページのないキー
         intro: |
