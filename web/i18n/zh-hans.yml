@@ -140,7 +140,7 @@ pages:
         reports:
             listreports: 查看所有报告
         about:
-            intro:
+            intro: |
                 <p>OpenStreetMap 使用<b>key=value</b>表中的<b>标签</b>来为地理上的要素添加含义。
                 Taginfo通过多种来源收集这些标签的使用信息来帮助您理解他们的含义及用法。</p>
             more: 关于taginfo的更多
@@ -187,16 +187,16 @@ pages:
         no_match: 未能匹配到结果
     keys:
         intro: |
-                这个表展示了数据库或其他一切来源中的所有标签的键
+            这个表展示了数据库或其他一切来源中的所有标签的键
     tags:
         intro: |
-                这个表展示了数据库中最常用的标签。
+            这个表展示了数据库中最常用的标签。
     key:
         description_from_wiki: Wiki上关于您所选的键的解释（若您当前的语言不可用则将默认为英文）
         no_description_in_wiki: 在Wiki上找不到这个键的英文描述（亦可参见“Wiki”标签页）
         filter:
             label: |
-                 过滤器:
+                过滤器:
             none: 无过滤器
             nodes: 仅节点
             ways: 仅路径

@@ -150,7 +150,7 @@ pages:
         reports:
             listreports: Zie alle rapporten...
         about:
-            intro:
+            intro: |
                 <p>OpenStreetMap gebruikt <b>tags</b> met de vorm <b>sleutel=waarde</b>
                 om betekenis toe te voegen aan geografische objecten. Taginfo verzamelt informatie
                 over deze tags van enkele bronnen om je te helpen begrijpen wat
@@ -365,10 +365,10 @@ pages:
         nothing_to_compare: Er zijn geen sleutels/tags om te vergelijken. Ga naar een sleutel- of tagpagina en voeg ze toe.
     keys:
         intro: |
-                Deze tabel geeft alle tagsleutels weer die in de database bestaan of in een van de andere bronnen.
+            Deze tabel geeft alle tagsleutels weer die in de database bestaan of in een van de andere bronnen.
     tags:
         intro: |
-                Deze tabel geeft de meest voorkomende tags in de database weer.
+            Deze tabel geeft de meest voorkomende tags in de database weer.
     relations:
         name: Relatietypes
         intro: Informatie over de verschillende typen relaties (aangegeven door de <a href="keys/type?filter=relations">type</a> tag).
@@ -380,13 +380,13 @@ pages:
         empty_role: lege rol
     projects:
         intro: |
-                Deze tabel geeft alle projecten weer die bekend zijn voor taginfo en OSM-tags gebruiken op een of andere manier.<br/>Voor meer informatie over deze functionaliteit zie de <a href="//wiki.openstreetmap.org/wiki/Taginfo/projects" class="extlink">wiki</a>.
+            Deze tabel geeft alle projecten weer die bekend zijn voor taginfo en OSM-tags gebruiken op een of andere manier.<br/>Voor meer informatie over deze functionaliteit zie de <a href="//wiki.openstreetmap.org/wiki/Taginfo/projects" class="extlink">wiki</a>.
     key:
         description_from_wiki: Beschrijving van deze sleutel uit de wiki (indien beschikbaar in je gekozen taal, anders in het Engels).
         no_description_in_wiki: Geen Engelse beschrijving voor deze sleutel in de wiki. (Zie ook het "Wiki" tabblad.)
         filter:
             label: |
-                 Filter:
+                Filter:
             none: Geen filter
             nodes: Alleen nodes
             ways: Alleen wegen

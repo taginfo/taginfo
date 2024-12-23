@@ -151,7 +151,7 @@ pages:
         reports:
             listreports: See all reports...
         about:
-            intro:
+            intro: |
                 <p>OpenStreetMap uses <b>tags</b> of the form <b>key=value</b>
                 to add meaning to geographic objects. Taginfo collects information
                 about these tags from several sources to help you understand what
@@ -366,10 +366,10 @@ pages:
         nothing_to_compare: There are no keys/tags to compare. Go to any key or tag page and add them.
     keys:
         intro: |
-                This table shows all tag keys that exist in the database or in any of the other sources.
+            This table shows all tag keys that exist in the database or in any of the other sources.
     tags:
         intro: |
-                This table shows the most common tags in the database.
+            This table shows the most common tags in the database.
     relations:
         name: Relation types
         intro: Information about the different types of relations (indicated by the <a href="keys/type?filter=relations">type</a> tag).
@@ -381,13 +381,13 @@ pages:
         empty_role: empty role
     projects:
         intro: |
-                This table shows all projects known to taginfo that use OSM tags in some way.<br/>For more about this functionality see the <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
+            This table shows all projects known to taginfo that use OSM tags in some way.<br/>For more about this functionality see the <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
     key:
         description_from_wiki: Description of this key from the wiki (if available in your chosen language, otherwise in English).
         no_description_in_wiki: No English language description for this key in the wiki. (See also the "Wiki" tab.)
         filter:
             label: |
-                 Filter:
+                Filter:
             none: No filter
             nodes: Nodes only
             ways: Ways only

@@ -146,7 +146,7 @@ pages:
         reports:
             listreports: Vidi ĉiujn raportojn…
         about:
-            intro:
+            intro: |
                 <p>OpenStreetMap uzas <b>etikedojn</b> en la formo <b>ŝlosilo=valoro</b> por signifigi geografiajn objektojn. Taginfo kolektas informojn pri tiuj ĉi etikedoj el kelkaj fontoj por helpi al vi kompreni kion ili signifas kaj kiel ili estas uzataj.</p>
             more: Pli pri taginfo…
         international:
@@ -263,10 +263,10 @@ pages:
         nothing_to_compare: Estas neniuj ŝlosiloj/etikedoj por kompari. Iru al iu paĝo pri ŝlosilo aŭ etikedo kaj aldoni ilin.
     keys:
         intro: |
-                La jena tabelo montras ĉiujn etikedajn ŝlosilojn, kiuj ekzistas en la datumbazo aŭ en aliaj fontoj.
+            La jena tabelo montras ĉiujn etikedajn ŝlosilojn, kiuj ekzistas en la datumbazo aŭ en aliaj fontoj.
     tags:
         intro: |
-                La jena tabelo montras la plej ofte uzatajn etikedojn en la datumbazo.
+            La jena tabelo montras la plej ofte uzatajn etikedojn en la datumbazo.
     relations:
         name: Rilat-tipoj
         intro: Informoj pri diversaj tipoj de rilatoj (indikataj per la etikedo <a href="keys/type?filter=relations">type</a>).
@@ -278,13 +278,13 @@ pages:
         empty_role: malplena rolo
     projects:
         intro: |
-                Tiu ĉi tabelo montras ĉiujn projektoj konatajn al taginfo, kiuj uzas OSM-etikedojn iamaniere.<br/>Por pliaj informoj pri tiu ĉi eblo, vidu la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">vikion</a>.
+            Tiu ĉi tabelo montras ĉiujn projektoj konatajn al taginfo, kiuj uzas OSM-etikedojn iamaniere.<br/>Por pliaj informoj pri tiu ĉi eblo, vidu la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">vikion</a>.
     key:
         description_from_wiki: Priskribo de tiu ĉi ŝlosilo de la vikio (se disponebla en elektita lingvo, alie en la angla).
         no_description_in_wiki: Neniu priskribo en la angla pri tiu ĉi ŝlosilo en la vikio. (Vidu ankaŭ la langeton 'Vikio'.)
         filter:
             label: |
-                 Filtrilo:
+                Filtrilo:
             none: Neniu filtrilo
             nodes: Nur nodoj
             ways: Nur linioj

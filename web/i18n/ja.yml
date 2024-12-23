@@ -142,7 +142,7 @@ pages:
         reports:
             listreports: すべてのレポートを表示...
         about:
-            intro:
+            intro: |
                 <p>OpenStreetMap は<b>キー=値</b>という形の<b>タグ</b>を使って、
                 地理的なオブジェクトに意味づけしています。
                 taginfo はこのようなタグに関する情報を様々な情報源から収集し、
@@ -304,10 +304,10 @@ pages:
         nothing_to_compare: 比較するキーやタグがありません。キーまたはタグのページに移動して追加してください。
     keys:
         intro: |
-                この表ではデータベースやその他のリソースに存在するすべてのタグのキーを表示しています。
+            この表ではデータベースやその他のリソースに存在するすべてのタグのキーを表示しています。
     tags:
         intro: |
-                この表ではデータベース中でよく使われているタグを表示しています。
+            この表ではデータベース中でよく使われているタグを表示しています。
     relations:
         name: リレーション種別
         intro: リレーションの各種別についての情報（<a href="keys/type?filter=relations">type</a>タグで識別されるもの）です。
@@ -319,13 +319,13 @@ pages:
         empty_role: 空のロール
     projects:
         intro: |
-                この表では、OSMタグの使い方からtaginfoが把握しているすべてのプロジェクトを表示しています。<br/>この機能についての詳細は、<a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">ウィキ</a>を参照してください。
+            この表では、OSMタグの使い方からtaginfoが把握しているすべてのプロジェクトを表示しています。<br/>この機能についての詳細は、<a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">ウィキ</a>を参照してください。
     key:
         description_from_wiki: ウィキによるこのキーの説明です（選択している言語に存在する場合、なければ英語）。
         no_description_in_wiki: このキーの英語での説明がウィキにありません（"ウィキ"タブを参照してください）。
         filter:
             label: |
-                 絞り込み:
+                絞り込み:
             none: 条件なし
             nodes: ノードのみ
             ways: ウェイのみ

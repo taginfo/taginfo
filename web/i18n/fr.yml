@@ -148,7 +148,7 @@ pages:
         reports:
             listreports: Voir tous les rapports...
         about:
-            intro:
+            intro: |
                 <p>OpenStreetMap utilise des <b>tags</b> de la forme <b>clé=valeur</b>
                 pour rajouter des informations aux objets géographiques. Taginfo rassemble
                 les informations sur ces tags de plusieurs sources afin de vous aider à
@@ -321,10 +321,10 @@ pages:
         nothing_to_compare: Il n’y a aucun élément à comparer. Rendez-vous sur une page clé/tag pour en ajouter.
     keys:
         intro: |
-                Ce tableau présente les clés présentes dans la base de données ou dans l'une des autres sources.
+            Ce tableau présente les clés présentes dans la base de données ou dans l'une des autres sources.
     tags:
         intro: |
-                Ce tableau présente les tags les plus fréquents dans la base de données.
+            Ce tableau présente les tags les plus fréquents dans la base de données.
     relations:
         name: Types de relation
         intro: Information sur les différents types de relations (indiqués par la clé <a href="keys/type?filter=relations">type</a>).
@@ -336,13 +336,13 @@ pages:
         empty_role: rôle vide
     projects:
         intro: |
-                Ce tableau présente les projets connus de taginfo qui utilisent des tags OSM.<br/>Pour plus d'informations sur cette fonctionalité, merci de lire le <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
+            Ce tableau présente les projets connus de taginfo qui utilisent des tags OSM.<br/>Pour plus d'informations sur cette fonctionalité, merci de lire le <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
     key:
         description_from_wiki: Description de cette clé depuis le wiki (dans votre langue choisie si possible, sinon en anglais).
         no_description_in_wiki: Aucune description dans le wiki
         filter:
             label: |
-                 Filtre :
+                Filtre :
             none: Aucun filtre
             nodes: Seulement les nœuds
             ways: Seulement les chemins

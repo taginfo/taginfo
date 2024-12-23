@@ -314,10 +314,10 @@ pages:
         nothing_to_compare: No hi ha cap clau/etiqueta a comparar. Aneu a qualsevol pàgina de clau o etiqueta i afegiu-la.
     keys:
         intro: |
-                Aquesta taula mostra totes les claus d'etiquetes que existeixen a la base de dades o en qualsevol altre de les fonts.
+            Aquesta taula mostra totes les claus d'etiquetes que existeixen a la base de dades o en qualsevol altre de les fonts.
     tags:
         intro: |
-                Aquesta taula mostra les etiquetes més comunes de la base de dades.
+            Aquesta taula mostra les etiquetes més comunes de la base de dades.
     relations:
         name: Tipus de relacions
         intro: Informació sobre els diferents tipus de relacions (indicat per l'etiqueta <a href="keys/type?filter=relations">type</a>).
@@ -329,13 +329,13 @@ pages:
         empty_role: rol buit
     projects:
         intro: |
-                Aquesta taula mostra tots els projectes coneguts per taginfo que d'alguna manera usen etiquetes OSM.<br/>Per més informació sobre aquesta funcionalitat, vegeu la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
+            Aquesta taula mostra tots els projectes coneguts per taginfo que d'alguna manera usen etiquetes OSM.<br/>Per més informació sobre aquesta funcionalitat, vegeu la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
     key:
         description_from_wiki: Descripció d'aquesta clau a la wiki (si està disponible, en l'idioma que heu escollit, sinó, en anglès).
         no_description_in_wiki: No hi ha cap descripció en anglès d'aquesta clau a la wiki. (Vegeu també la pestanya "Wiki".)
         filter:
             label: |
-                 Filtre:
+                Filtre:
             none: Cap filtre
             nodes: Només nodes
             ways: Només vies

@@ -143,7 +143,7 @@ pages:
         reports:
             listreports: Ver todos los reportes...
         about:
-            intro:
+            intro: |
                 <p>OpenStreetMap utiliza <b>etiquetas</b> de la forma <b>clave=valor</b>
                 para añadir significado a los objetos geográficos. Taginfo recopila información
                 acerca de estas etiquetas de varias fuentes para ayudarle a entender qué
@@ -310,10 +310,10 @@ pages:
         nothing_to_compare: Hay no hay claves/etiquetas para comparar. Ir a cualquier página de clave o etiqueta y agregarlas.
     keys:
         intro: |
-                Esta tabla muestra todas las claves de etiquetas que existen en la base de datos o en cualquiera de las otras fuentes.
+            Esta tabla muestra todas las claves de etiquetas que existen en la base de datos o en cualquiera de las otras fuentes.
     tags:
         intro: |
-                Esta tabla muestra las etiquetas más comunes en la base de datos.
+            Esta tabla muestra las etiquetas más comunes en la base de datos.
     relations:
         name: Tipos de relación
         intro: Información sobre los diferentes tipos de relaciones (indicados por el <a href="keys/type?filter=relations">tipo</a> de etiqueta).
@@ -325,13 +325,13 @@ pages:
         empty_role: rol vacío
     projects:
         intro: |
-                Esta tabla muestra todos los proyectos conocidos por taginfo que utilizan etiquetas OSM de alguna manera.<br/>Para más información sobre esta funcionalidad ver la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
+            Esta tabla muestra todos los proyectos conocidos por taginfo que utilizan etiquetas OSM de alguna manera.<br/>Para más información sobre esta funcionalidad ver la <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
     key:
         description_from_wiki: Descripción de esta clave desde la wiki (si está disponible en su idioma elegido, si no en Inglés).
         no_description_in_wiki: No hay descripción en el idioma Inglés para esta clave en la wiki. (Véase también la pestaña "Wiki".)
         filter:
             label: |
-                 Filtro:
+                Filtro:
             none: Sin filtro
             nodes: Sólo los nodos
             ways: Sólo las vías

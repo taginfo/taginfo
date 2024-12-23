@@ -143,7 +143,7 @@ pages:
         reports:
             listreports: Ollar tódolos reportes...
         about:
-            intro:
+            intro: |
                 <p>O OpenStreetMap emprega <b>etiquetas</b> do xeito <b>clave=valor</b>
                 para engadir significado ós obxectos xeográficos. O Taginfo recompila información
                 acerca destas etiquetas de varias fontes para axudarlle a entender que
@@ -309,10 +309,10 @@ pages:
         nothing_to_compare: Non hai claves/etiquetas para comparar. Ir a calquera páxina de clave ou etiqueta e engadilas.
     keys:
         intro: |
-                Esta táboa amosa tódalas claves de etiquetas que existen na base de datos ou en calquera das outras fontes.
+            Esta táboa amosa tódalas claves de etiquetas que existen na base de datos ou en calquera das outras fontes.
     tags:
         intro: |
-                Esta táboa amosa as etiquetas máis comúns na base de datos.
+            Esta táboa amosa as etiquetas máis comúns na base de datos.
     relations:
         name: Tipos de relación
         intro: Información sobre os diferentes tipos de relacións (indicados polo <a href="keys/type?filter=relations">tipo</a> de etiqueta).
@@ -324,13 +324,13 @@ pages:
         empty_role: rol baleiro
     projects:
         intro: |
-                Esta táboa amosa tódolos proxectos coñecidos polo taginfo que empregan etiquetas do OSM dalgún xeito.<br/>Para máis información sobre esta funcionalidade ollar a <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
+            Esta táboa amosa tódolos proxectos coñecidos polo taginfo que empregan etiquetas do OSM dalgún xeito.<br/>Para máis información sobre esta funcionalidade ollar a <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
     key:
         description_from_wiki: Descrición desta clave dende a wiki (se está dispoñíbel na súa lingua escollida, se non en inglés).
         no_description_in_wiki: Non hai descrición na lingua 'inglés' para esta clave na wiki. (Ollar tamén a lapela "Wiki".)
         filter:
             label: |
-                 Filtro:
+                Filtro:
             none: Sen filtro
             nodes: Só os nós
             ways: Só as vías

@@ -143,7 +143,7 @@ pages:
         reports:
             listreports: Ver todos os relatórios...
         about:
-            intro:
+            intro: |
                 <p>O OpenStreetMap usa <b>etiquetas</b> na forma <b>chave=valor</b>
                 para adicionar significado a objetos geográficos. Taginfo é um software
                 que coleta informação a respeito dessas etiquetas, a partir de várias
@@ -228,10 +228,10 @@ pages:
         nothing_to_compare: Não há chaves/etiquetas para comparar. Vá para a página de algumas chaves ou etiquetas e adicione-as.
     keys:
         intro: |
-                Esta tabela mostra todas as etiquetas que existem no banco de dados ou em qualquer uma das outras fontes.
+            Esta tabela mostra todas as etiquetas que existem no banco de dados ou em qualquer uma das outras fontes.
     tags:
         intro: |
-                Esta tabela mostra as etiquetas mais comuns no banco de dados.
+            Esta tabela mostra as etiquetas mais comuns no banco de dados.
     relations:
         name: Tipos de relação
         intro: Informação sobre os diferentes tipos de relação (indicados pela etiqueta <a href="keys/type?filter=relations">type</a>).
@@ -246,7 +246,7 @@ pages:
         no_description_in_wiki: Não há descrição em inglês para esta chave no wiki. (Veja também a guia "Wiki".)
         filter:
             label: |
-                 Filter:
+                Filter:
             none: Nenhum filtro
             nodes: Somente pontos
             ways: Somente linhas

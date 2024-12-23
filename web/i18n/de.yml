@@ -151,7 +151,7 @@ pages:
         reports:
             listreports: Alle Reports...
         about:
-            intro:
+            intro: |
                 <p>OpenStreetMap benutzt <b>Tags</b> der Form <b>Key=Value</b>,
                 um geographischen Objekten Bedeutungen zuzuweisen. Taginfo sammelt
                 Informationen über solche Tags aus verschiedenen Quellen, um Dir
@@ -334,18 +334,18 @@ pages:
             items:
                 title: Items
                 description: |
-                  Dies sind alle Wikidata-Items mit dem Property P1282 (mit dem
-                  OSM-Key, -Tag, oder -Relation, mit dem es verbunden ist).
-                  Nicht angezeigt werden hier Properties mit dem Typ "Role"
-                  und Properties, die nicht das richtige Format haben.
+                    Dies sind alle Wikidata-Items mit dem Property P1282 (mit dem
+                    OSM-Key, -Tag, oder -Relation, mit dem es verbunden ist).
+                    Nicht angezeigt werden hier Properties mit dem Typ "Role"
+                    und Properties, die nicht das richtige Format haben.
                 columns:
                     type: Typ
                     ktr: Key/Tag/Relation
                     item: Wikidata-Datenobjekt
             errors:
                 description: |
-                  Hier werden alle Probleme angezeigt, die beim Import der
-                  Wikidata-Datenobjekte mit Property P1282 aufgetreten sind.
+                    Hier werden alle Probleme angezeigt, die beim Import der
+                    Wikidata-Datenobjekte mit Property P1282 aufgetreten sind.
                 columns:
                     item: Wikidata-Datenobjekt
                     p1282: Wert des Properties P1282
@@ -386,10 +386,10 @@ pages:
         nothing_to_compare: Keine Keys/Tags zum Vergleichen vorhanden. Sie können auf den Key/Tag-Seiten in die Vergleichliste aufgenommen werden.
     keys:
         intro: |
-                Diese Tabelle zeigt alle Keys, die in der Datenbank oder einer anderen Quelle vorkommen.
+            Diese Tabelle zeigt alle Keys, die in der Datenbank oder einer anderen Quelle vorkommen.
     tags:
         intro: |
-                Diese Tabelle zeigt die häufigsten Tags in der Datenbank.
+            Diese Tabelle zeigt die häufigsten Tags in der Datenbank.
     relations:
         name: Relations-Typen
         intro: Information zu den verschiedenen Typen von Relations (zu erkennen am <a href="keys/type?filter=relations">type</a> tag).
@@ -407,7 +407,7 @@ pages:
         no_description_in_wiki: Keine deutschsprachige Beschreibung dieses Keys im Wiki. (Siehe auch im "Wiki"-Tab.)
         filter:
             label: |
-                 Filter:
+                Filter:
             none: Kein Filter
             nodes: Nur Nodes
             ways: Nur Ways

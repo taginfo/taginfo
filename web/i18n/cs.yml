@@ -148,7 +148,7 @@ pages:
         reports:
             listreports: Všechny zprávy...
         about:
-            intro:
+            intro: |
                 <p>OpenStreetMap používá <b>značky</b> ve tvaru <b>klíč=hodnota</b>
                 pro popis geografických objektů. Taginfo sbírá informace
                 o těchto značkách z několika zdrojů, aby vám pomohl pochopit,
@@ -314,10 +314,10 @@ pages:
         nothing_to_compare: Nemáme žádné klíče/značky k porovnání. Jděte na nějakou stránku klíče nebo značky a přidejte je.
     keys:
         intro: |
-                Tato tabulka zobrazuje včechny klíče značek, které existují v databázi nebo v nějakém z jiných zdrojů.
+            Tato tabulka zobrazuje včechny klíče značek, které existují v databázi nebo v nějakém z jiných zdrojů.
     tags:
         intro: |
-                Tato tabulka zobrazuje nejrozšířenější značky v databázi.
+            Tato tabulka zobrazuje nejrozšířenější značky v databázi.
     relations:
         name: Typy relací
         intro: Informace o různých typech relací (popsaných značkou <a href="keys/type?filter=relations">type</a>).
@@ -329,13 +329,13 @@ pages:
         empty_role: prázdná role
     projects:
         intro: |
-                Tato tabulka zobrazuje všechny projekty, o kterých taginfo ví, které používají nějakým způsobem značky OSM.<br/>Pro více informací o této funkci se podívejte na <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
+            Tato tabulka zobrazuje všechny projekty, o kterých taginfo ví, které používají nějakým způsobem značky OSM.<br/>Pro více informací o této funkci se podívejte na <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
     key:
         description_from_wiki: Popis tohoto klíče z wiki (je-li dostupný ve zvoleném jazyce, jinak v angličtině).
         no_description_in_wiki: Tento klíč nemá na wiki žádný popis v angličtině. (Viz také záložku "Wiki".)
         filter:
             label: |
-                 Filtr:
+                Filtr:
             none: Žádný filtr
             nodes: Pouze uzly
             ways: Pouze cesty

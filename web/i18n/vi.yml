@@ -147,7 +147,7 @@ pages:
         reports:
             listreports: Xem tất cả các thống kế…
         about:
-            intro:
+            intro: |
                 <p>OpenStreetMap sử dụng các <b>thẻ</b> có dạng <b>chìa khóa=giá trị</b>
                 để định nghĩa các đối tượng địa lý. Taginfo thu thập thông tin
                 về các thẻ này từ nhiều nguồn để giúp bạn tìm hiểu
@@ -316,10 +316,10 @@ pages:
         nothing_to_compare: Không có chìa khóa/thẻ để so sánh. Mở trang chìa khóa hoặc thẻ nào để cộng thêm.
     keys:
         intro: |
-                Bảng này có các chìa khóa thẻ tồn tại trong cơ sở dữ liệu hoặc trong những nguồn gốc khác.
+            Bảng này có các chìa khóa thẻ tồn tại trong cơ sở dữ liệu hoặc trong những nguồn gốc khác.
     tags:
         intro: |
-                Bảng này có các thẻ phổ biến nhất trong cơ sở dữ liệu.
+            Bảng này có các thẻ phổ biến nhất trong cơ sở dữ liệu.
     relations:
         name: Loại quan hệ
         intro: Thông tin về các loại quan hệ (theo thẻ <a href="keys/type?filter=relations">type</a>).
@@ -331,13 +331,13 @@ pages:
         empty_role: vai trò trống
     projects:
         intro: |
-                Bảng này có các dự án được taginfo biết đến mà sử dụng thẻ OSM một cách nào đó.<br/>Xem thêm về chức năng này tại <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
+            Bảng này có các dự án được taginfo biết đến mà sử dụng thẻ OSM một cách nào đó.<br/>Xem thêm về chức năng này tại <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
     key:
         description_from_wiki: Lời miêu tả chìa khóa này trên wiki (trong ngôn ngữ của bạn nếu có sẵn, nếu không thì trong tiếng Anh).
         no_description_in_wiki: Không có lời miêu tả chìa khóa này trong tiếng Anh trên wiki. (Xem thêm thẻ “Wiki”.)
         filter:
             label: |
-                 Bộ lọc:
+                Bộ lọc:
             none: Không lọc
             nodes: Chỉ nốt
             ways: Chỉ lối

@@ -149,7 +149,7 @@ pages:
         reports:
             listreports: 檢視所有報告...
         about:
-            intro:
+            intro: |
                 <p>OpenStreetMap 用<b>鍵=值</b>格式的<b>標籤</b>
                 來為地理物件增加意義。taginfo 從數個來源收集這些標籤的資訊
                 來幫助你知道這些標籤的意義和他們被怎麼用。</p>
@@ -345,10 +345,10 @@ pages:
         nothing_to_compare: 沒有鍵或標籤可以比較。去任何鍵或標籤頁面新增它們。
     keys:
         intro: |
-                此表格顯示所有存在資料庫或任何其他來源裡的標籤鍵。
+            此表格顯示所有存在資料庫或任何其他來源裡的標籤鍵。
     tags:
         intro: |
-                此表格顯示資料庫裡最常用的標籤。
+            此表格顯示資料庫裡最常用的標籤。
     relations:
         name: 關係類型
         intro: 關於不同類型的關係的資訊（被 <a href="keys/type?filter=relations">type</a> 標籤指出的）。
@@ -360,13 +360,13 @@ pages:
         empty_role: 空角色
     projects:
         intro: |
-                此表格展示所有以一些方式使用 OSM 標籤的 taginfo 已知專案。<br/>更多關於功能請見 <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>。
+            此表格展示所有以一些方式使用 OSM 標籤的 taginfo 已知專案。<br/>更多關於功能請見 <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>。
     key:
         description_from_wiki: 此鍵在 wiki 上的描述（除非有你選擇的語言，否則都是英文）。
         no_description_in_wiki: 此鍵在 wiki 上沒有英文描述。（參見「wiki」分頁）。
         filter:
             label: |
-                 篩選器：
+                篩選器：
             none: 沒有篩選器
             nodes: 只有節點
             ways: 只有路徑

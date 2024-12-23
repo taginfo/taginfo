@@ -139,7 +139,7 @@ pages:
         reports:
             listreports: Összes jelentés megtekintése...
         about:
-            intro:
+            intro: |
                 <p>Az OpenStreetMap <b>kulcs/érték</b> formájú <b>címkéket</b> használ
                 a földrajzi objektumok leírására. A taginfo ezekről a címkékről gyűjt
                 adatokat különböző forrásokból azért, hogy könnyebben tudd értelmezni,
@@ -193,10 +193,10 @@ pages:
         nothing_to_compare: Nincsenek összehasonlítható kulcsok/értékek. Menj egy kulcs vagy címke lapjára és add a listához.
     keys:
         intro: |
-                Ez a táblázat az adatbázisban és egyéb forrásokban található összes kulcsot tartalmazza.
+            Ez a táblázat az adatbázisban és egyéb forrásokban található összes kulcsot tartalmazza.
     tags:
         intro: |
-                Ez a táblázat az adatbázisban található leggyakoribb címkéket tartalmazza.
+            Ez a táblázat az adatbázisban található leggyakoribb címkéket tartalmazza.
     relations:
         name: Kapcsolattípusok
         intro: Információk a különböző típusú kapcsolatokról (a <a href="keys/type?filter=relations">type</a> címke alapján).
@@ -211,7 +211,7 @@ pages:
         no_description_in_wiki: A kulcsnak nincs angol nyelvű leírása a wikiben. (Lásd még "Wiki" fül.)
         filter:
             label: |
-                 Szűrő:
+                Szűrő:
             none: Nincs szűrés
             nodes: Csak pontok
             ways: Csak vonalak
@@ -266,7 +266,7 @@ pages:
             title: A címkéről szóló wiki-lap
             none_found: Nem érhető el wiki-lap a címkéhez.
             create: Készíts wiki-lapot a címkéhez
-            suggest_key_wiki_page: "%1 kulcsról bővebb információt találhatsz a wikin."
+            suggest_key_wiki_page: '%1 kulcsról bővebb információt találhatsz a wikin.'
             wiki_page: Wiki-lap
             implied_tags: Benne foglalt címkék
             combined_tags: Kombinálható címkék

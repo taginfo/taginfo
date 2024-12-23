@@ -434,7 +434,7 @@ pages:
         no_description_in_wiki: Nessuna descrizione nel wiki
         filter:
             label: |
-                 Filtro:
+                Filtro:
             none: Nessun filtro
             nodes: Solo nodi
             ways: Solo percorsi (Way)

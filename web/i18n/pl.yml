@@ -228,10 +228,10 @@ pages:
                     o znacznikach językowych IETF</a> oraz na stronie <a
                     href="http://www.langtag.net/">langtag.net</a>.</p>
                 note: |
-                  Zwróć uwagę, że dane w tej tabeli nie pochodzą z bazy
-                  OpenStreetMap i jedynie pokazują elementy, które mogą być użyte
-                  by opisać języki niezależnie od tego, w jaki sposób są użyte w
-                  OSM.
+                    Zwróć uwagę, że dane w tej tabeli nie pochodzą z bazy
+                    OpenStreetMap i jedynie pokazują elementy, które mogą być użyte
+                    by opisać języki niezależnie od tego, w jaki sposób są użyte w
+                    OSM.
     download:
         intro: |
             <p>Tutaj możesz pobrać pliki bazy danych, z których korzysta taginfo. Wszystkie dane są przechowywane w bazach <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>.
@@ -259,10 +259,10 @@ pages:
         nothing_to_compare: Nie ma klucz i tagów do porównania. Dodaj je na jakiejś stronie klucza lub tagu.
     keys:
         intro: |
-                Ta tabela pokazuje wszystkie klucze tagów z bazy danych lub innych źródeł.
+            Ta tabela pokazuje wszystkie klucze tagów z bazy danych lub innych źródeł.
     tags:
         intro: |
-                Ta tabela pokazuje najbardziej rozpowszechnione tagi w bazie danych.
+            Ta tabela pokazuje najbardziej rozpowszechnione tagi w bazie danych.
     relations:
         name: Typy relacji
         intro: Informacje o różnych typach relacji (oznaczonych tagiem <a href="keys/type?filter=relations">type</a>).
@@ -274,13 +274,13 @@ pages:
         empty_role: pusta rola
     projects:
         intro: |
-                Ta tabela pokazuje wszystkie znane taginfo projekty, które korzystają na jakiś sposób ze znaczników OSM.<br/>Po więcej informacji dotyczących tej funkcji zajrzyj do <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
+            Ta tabela pokazuje wszystkie znane taginfo projekty, które korzystają na jakiś sposób ze znaczników OSM.<br/>Po więcej informacji dotyczących tej funkcji zajrzyj do <a href="//wiki.openstreetmap.org/wiki/Taginfo/Projects" class="extlink">wiki</a>.
     key:
         description_from_wiki: Opis tego klucza z wiki (jeśli dostępne w wybranym języku, w przeciwnym razie po angielsku).
         no_description_in_wiki: Brak opisu na wiki.
         filter:
             label: |
-                 Filtr:
+                Filtr:
             none: Bez filtra
             nodes: Tylko punkty
             ways: Tylko linie
