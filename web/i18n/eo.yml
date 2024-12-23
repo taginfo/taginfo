@@ -247,6 +247,15 @@ pages:
                     redirect: Paĝo aldirektas.
                 intro: |
                     La jena tabelo montras ĉiujn etikedajn ŝlosilojn pri kiuj estas disponeblaj viki-paĝoj kaj en kiuj lingvoj ili estas.
+            parsing_problems:
+                name: Viki-analiz-eraroj
+                intro: |
+                    Taginfo legas ĉiujn viki-paĝojn uzatajn por priskribi ŝlosilojn, etikedojn kaj rilatojn por trovi informojn pri etikedoj. Tiu ĉi raporto montras liston de eraroj okazintaj dum legi tiujn paĝojn. Ili ne estas nepre eraroj en la vikio, eble io estas alimaniere aranĝita ol taginfo-aj normoj. Aŭ la paĝo aŭ taginfo bezonas esti riparita.
+                location: Loko
+                reason: Kialo
+                wiki_page: Viki-paĝo
+                lang: Lingvo
+                info: Pliaj informoj
     download:
         intro: |
             <p>Tie ĉi vi povas elŝuti la datumbazojn uzatajn de taginfo. Ĉiuj datumoj estas konservitaj en datumbazojn <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>. Datumbazaj dosieroj estas kompaktigitaj per <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
@@ -590,12 +599,3 @@ reports:
         name: Viki-bildoj
         intro: |
             Bildoj uzataj en la vikio por reprezenti ŝlosilojn en diversaj lingvoj. Iam iuj bildoj estas pli bonaj ol aliaj. Tamen iam estas sence havi diversajn bildojn pro diversaj kulturaj fonoj, ktp.
-    wiki_problems:
-        name: Viki-analiz-eraroj
-        intro: |
-            Taginfo legas ĉiujn viki-paĝojn uzatajn por priskribi ŝlosilojn, etikedojn kaj rilatojn por trovi informojn pri etikedoj. Tiu ĉi raporto montras liston de eraroj okazintaj dum legi tiujn paĝojn. Ili ne estas nepre eraroj en la vikio, eble io estas alimaniere aranĝita ol taginfo-aj normoj. Aŭ la paĝo aŭ taginfo bezonas esti riparita.
-        location: Loko
-        reason: Kialo
-        wiki_page: Viki-paĝo
-        lang: Lingvo
-        info: Pliaj informoj

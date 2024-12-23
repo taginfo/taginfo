@@ -168,6 +168,8 @@ pages:
         wiki:
             language_comparison_table_for_keys:
                 name: Wiki中的键的多语言对照表
+            parsing_problems:
+                name: Wiki解析问题
     download:
         file: 文件
         packed: 打包后的
@@ -325,5 +327,3 @@ reports:
         name: 历史上的开发用数据
     wiki_images:
         name: Wiki图片
-    wiki_problems:
-        name: Wiki解析问题

@@ -324,6 +324,19 @@ pages:
                     redirect: 重新導向頁面。
                 intro: |
                     此表格顯示有 wiki 頁面的所有標籤鍵，以及它們有什麼語言。
+            parsing_problems:
+                name: Wiki 解析問題
+                intro: |
+                    Taginfo 讀取所有用來描述鍵、標籤和關係的 wiki 頁面
+                    來找到關於標籤的資訊。此報告列出
+                    在讀取這些頁面時遇到的問題。這些不一定是 wiki 裡的錯誤，
+                    這只是代表在 wiki 頁面裡的某物不是用 taginfo 了解的格式。
+                    可能是該頁面或 taginfo 需要修正。
+                location: 位置
+                reason: 原因
+                wiki_page: Wiki 頁面
+                lang: 語言
+                info: 額外資訊
     download:
         intro: |
             <p>你能在這裡下載 taginfo 所用的資料庫。所有資料被儲存
@@ -722,16 +735,3 @@ reports:
             在 wiki 中不同語言用來象徵鍵的圖片。
             有時來自其他語言的圖片比較好，
             但有時候會因為不同的文化背景等而有不同圖片。
-    wiki_problems:
-        name: Wiki 解析問題
-        intro: |
-            Taginfo 讀取所有用來描述鍵、標籤和關係的 wiki 頁面
-            來找到關於標籤的資訊。此報告列出
-            在讀取這些頁面時遇到的問題。這些不一定是 wiki 裡的錯誤，
-            這只是代表在 wiki 頁面裡的某物不是用 taginfo 了解的格式。
-            可能是該頁面或 taginfo 需要修正。
-        location: 位置
-        reason: 原因
-        wiki_page: Wiki 頁面
-        lang: 語言
-        info: 額外資訊

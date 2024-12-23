@@ -344,6 +344,20 @@ pages:
                     redirect: Pagina is een redirect.
                 intro: |
                     Deze tabel geeft alle tagsleutels weer waarvoor er wikipagina's beschikbaar zijn en in welke taal ze er zijn.
+            parsing_problems:
+                name: Wiki analyseproblemen
+                intro: |
+                    Taginfo leest alle wikipagina's die sleutels, tags en
+                    relaties beschrijven om informatie over deze tags te vinden. Dit rapport toont een lijst
+                    van problemen die ondervonden worden tijdens het lezen van die pagina's. Dit zijn niet
+                    per definitie fouten in de wiki, ze betekenen slechts dat iets in
+                    de wikipagina's niet geformatteerd is zoals taginfo verwachtte. Of
+                    de pagina moet verbeterd worden, of taginfo moet gerepareerd worden.
+                location: Locatie
+                reason: Reden
+                wiki_page: Wikipagina
+                lang: Taal.
+                info: Extra informatie
     download:
         intro: |
             <p>Hier kun je de database gebruiken door taginfo te downloaden. Alle gegevens zijn opgeslagen
@@ -759,17 +773,3 @@ reports:
             talen. Soms is de afbeelding van de ene taal beter als van de andere.
             Het is soms echter juist logisch om verschillende afbeeldingen te hebben,
             bijvoorbeeld wegens verschillende culturele achtergronden en dergelijke.
-    wiki_problems:
-        name: Wiki analyseproblemen
-        intro: |
-            Taginfo leest alle wikipagina's die sleutels, tags en
-            relaties beschrijven om informatie over deze tags te vinden. Dit rapport toont een lijst
-            van problemen die ondervonden worden tijdens het lezen van die pagina's. Dit zijn niet
-            per definitie fouten in de wiki, ze betekenen slechts dat iets in
-            de wikipagina's niet geformatteerd is zoals taginfo verwachtte. Of
-            de pagina moet verbeterd worden, of taginfo moet gerepareerd worden.
-        location: Locatie
-        reason: Reden
-        wiki_page: Wikipagina
-        lang: Taal.
-        info: Extra informatie

@@ -45,9 +45,9 @@ count_large = @db.select("SELECT count(distinct(image)) AS count FROM wiki.wikip
     </div>
 </div>
 <div class="fbox">
-    <h2><%= h(t.reports.wiki_problems.name) %></h2>
+    <h2><%= h(t.pages.sources.wiki.parsing_problems.name) %></h2>
     <div>
-        <p><%= h(t.reports.wiki_problems.intro) %></p>
+        <p><%= h(t.pages.sources.wiki.parsing_problems.intro) %></p>
         <p><a href="wiki/parsing_problems">See report...</a></p>
     </div>
 </div>

@@ -293,6 +293,20 @@ pages:
                     redirect: Stránka je přesměrována.
                 intro: |
                     Tato tabulka zobrazuje všechny klíče, pro které je dostupná wiki stránka a v jakém jazyce.
+            parsing_problems:
+                name: Problémy s procházením wiki
+                intro: |
+                    Taginfo čte všechny wiki stránky, které popisují klíče, značky a relace,
+                    aby získal informace o značkách. Tato zpráva ukazuje seznam problémů,
+                    na které jsme narazili při čtení těchto stránek. Nejedná se nutně
+                    o chyby na wiki, znamená to jen, že něco na wiki stránce není naformátováno
+                    tak, aby tomu taginfo rozumnělo. Buď je potřeba opravit stránku,
+                    nebo se musí upravit taginfo.
+                location: Umístění
+                reason: Důvod
+                wiki_page: Wiki stránka
+                lang: Jazyk
+                info: Další informace
     download:
         intro: |
             <p>Zde si můžete stáhnout databáze, které taginfo používá. Všechna data jsou uložena
@@ -694,20 +708,6 @@ reports:
             jazycích. Někdy je varianta obrázku z jednoho nebo jiného jazyka
             lepší. Ale někdy má smysl mít různé obrázky v různých jazycích
             kvůli různému kulturnímu pozadí a podobně.
-    wiki_problems:
-        name: Problémy s procházením wiki
-        intro: |
-            Taginfo čte všechny wiki stránky, které popisují klíče, značky a relace,
-            aby získal informace o značkách. Tato zpráva ukazuje seznam problémů,
-            na které jsme narazili při čtení těchto stránek. Nejedná se nutně
-            o chyby na wiki, znamená to jen, že něco na wiki stránce není naformátováno
-            tak, aby tomu taginfo rozumnělo. Buď je potřeba opravit stránku,
-            nebo se musí upravit taginfo.
-        location: Umístění
-        reason: Důvod
-        wiki_page: Wiki stránka
-        lang: Jazyk
-        info: Další informace
 unicode:
     character: Znak
     codepoint: Kódový bod

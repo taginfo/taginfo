@@ -242,6 +242,15 @@ pages:
                     redirect: Strona jest przekierowaniem.
                 intro: |
                     Ta tabela pokazuje wszystkie tagi, dla których istnieją strony na wiki oraz to, w jakich są językach.
+            parsing_problems:
+                name: Problemy składni
+                intro: |
+                    Taginfo czyta wszystkie strony wiki opisujące klucze, znaczniki i relacje, aby znaleźć informacje dotyczące znaczników. Ten raport wyświetla listę problemów napotkanych podczas wczytywania tych stron. Niekoniecznie są to błędy na wiki, być może na wiki jest coś sformatowane na sposób niezrozumiały dla taginfo. Albo strona wymaga naprawy albo oprogramowanie taginfo.
+                location: Adres
+                reason: Powód
+                wiki_page: Strona wiki
+                lang: Język
+                info: Dodatkowe informacje
     download:
         intro: |
             <p>Tutaj możesz pobrać pliki bazy danych, z których korzysta taginfo. Wszystkie dane są przechowywane w bazach <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>.
@@ -579,12 +588,3 @@ reports:
         name: Zdjęcia na wiki
         intro: |
             Ilustracje używane na wiki w różnych językach do reprezentacji kluczy. Czasami zdjęcia z jednego wariantu są lepsze niż inne. Ale czasami ma sens, aby te obrazy były różne z powodu różnic kulturowych i innych.
-    wiki_problems:
-        name: Problemy składni
-        intro: |
-            Taginfo czyta wszystkie strony wiki opisujące klucze, znaczniki i relacje, aby znaleźć informacje dotyczące znaczników. Ten raport wyświetla listę problemów napotkanych podczas wczytywania tych stron. Niekoniecznie są to błędy na wiki, być może na wiki jest coś sformatowane na sposób niezrozumiały dla taginfo. Albo strona wymaga naprawy albo oprogramowanie taginfo.
-        location: Adres
-        reason: Powód
-        wiki_page: Strona wiki
-        lang: Język
-        info: Dodatkowe informacje

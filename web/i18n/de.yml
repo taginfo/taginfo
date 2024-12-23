@@ -361,6 +361,22 @@ pages:
                 intro: |
                     Diese Tabelle zeigt alle Keys zu denen es mindestens eine Wiki-Seite gibt und in
                     welchen Sprachen diese Wiki-Seiten sind.
+            parsing_problems:
+                name: Probleme beim Parsen
+                intro: |
+                    Taginfo liest alle Wiki-Seiten, die Keys, Tags oder Relationen
+                    beschreiben, um Informationen über Tags zu finden. Dieser Report
+                    zeigt die Liste von Problemen, die beim Lesen dieser Wiki-Seiten
+                    aufgetreten sind. Manches davon sind Fehler in den Wiki-Seiten,
+                    manche Meldungen bedeuten aberr, dass etwas in den Wiki-Seiten so
+                    formatiert ist, dass es von Taginfo nicht verstanden wurde.
+                    Entweder muss die Wiki-Seite korrigiert oder Taginfo verbessert
+                    werden.
+                location: Ort
+                reason: Grund
+                wiki_page: Wiki-Seite
+                lang: Sprache
+                info: Weitere Informationen
     download:
         intro: |
             <p>Hier kannst Du die Datenbanken herunterladen, die von Taginfo verwendet
@@ -753,22 +769,6 @@ reports:
             obsolet wurde). Es kann aber auch ein Tippfehler oder anderer
             Fehler sein.
         wiki_pages: Wiki-Seiten
-    wiki_problems:
-        name: Probleme beim Parsen
-        intro: |
-            Taginfo liest alle Wiki-Seiten, die Keys, Tags oder Relationen
-            beschreiben, um Informationen über Tags zu finden. Dieser Report
-            zeigt die Liste von Problemen, die beim Lesen dieser Wiki-Seiten
-            aufgetreten sind. Manches davon sind Fehler in den Wiki-Seiten,
-            manche Meldungen bedeuten aberr, dass etwas in den Wiki-Seiten so
-            formatiert ist, dass es von Taginfo nicht verstanden wurde.
-            Entweder muss die Wiki-Seite korrigiert oder Taginfo verbessert
-            werden.
-        location: Ort
-        reason: Grund
-        wiki_page: Wiki-Seite
-        lang: Sprache
-        info: Weitere Informationen
     name_tags:
         name: Name-Tag-Varianten
         intro: |

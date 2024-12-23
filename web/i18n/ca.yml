@@ -293,6 +293,20 @@ pages:
                     redirect: La pàgina és una redirecció.
                 intro: |
                     Aquesta taula mostra totes les etiquetes per les quals hi ha una pàgina wiki disponible i en quins idiomes són.
+            parsing_problems:
+                name: Problemes d'anàlisis
+                intro: |
+                    Taginfo llegeix totes les pàgines wiki usades per descriure claus, etiquetes i
+                    relacions per buscar informació sobre les etiquetes. Aquest informe mostra una llista
+                    de problemes trobats mentre es llegien aquestes pàgines. Aquests no són
+                    necessariament errors a la wiki, tant sols signifiquen que alguna cosa de
+                    la pàgina wiki té un format que taginfo no entén. Tant pot ser que
+                    la pàgina s'hagi de corregir com que s'hagi d'arreglar taginfo.
+                location: Ubicació
+                reason: Raó
+                wiki_page: Pàgina wiki
+                lang: Idioma
+                info: Informació addicional
     download:
         intro: |
             <p>Aquí podeu descarregar la base de dades usada per taginfo. Totes les dades estan desades
@@ -705,17 +719,3 @@ reports:
             idiomes. A vegades l'imatge d'un o altre idioma
             és millor. Però a vegades, té sentit tenir imatges
             diferents degut a les diferències culturals.
-    wiki_problems:
-        name: Problemes d'anàlisis
-        intro: |
-            Taginfo llegeix totes les pàgines wiki usades per descriure claus, etiquetes i
-            relacions per buscar informació sobre les etiquetes. Aquest informe mostra una llista
-            de problemes trobats mentre es llegien aquestes pàgines. Aquests no són
-            necessariament errors a la wiki, tant sols signifiquen que alguna cosa de
-            la pàgina wiki té un format que taginfo no entén. Tant pot ser que
-            la pàgina s'hagi de corregir com que s'hagi d'arreglar taginfo.
-        location: Ubicació
-        reason: Raó
-        wiki_page: Pàgina wiki
-        lang: Idioma
-        info: Informació addicional

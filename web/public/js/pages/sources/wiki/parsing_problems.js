@@ -3,12 +3,12 @@ const tabsConfig = {
         return new DynamicTable('grid-wiki-problems', {
             url: '/api/4/wiki/problems',
             colModel: [
-                { display: h(texts.reports.wiki_problems.wiki_page), name: 'title', width: 280, sortable: true },
-                { display: h(texts.reports.wiki_problems.location), name: 'location', width: 140, sortable: true },
-                { display: h(texts.reports.wiki_problems.reason), name: 'reason', width: 280, sortable: true },
-                { display: h(texts.reports.wiki_problems.lang), name: 'lang', width: 30, sortable: true },
+                { display: h(texts.pages.sources.wiki.parsing_problems.wiki_page), name: 'title', width: 280, sortable: true },
+                { display: h(texts.pages.sources.wiki.parsing_problems.location), name: 'location', width: 140, sortable: true },
+                { display: h(texts.pages.sources.wiki.parsing_problems.reason), name: 'reason', width: 280, sortable: true },
+                { display: h(texts.pages.sources.wiki.parsing_problems.lang), name: 'lang', width: 30, sortable: true },
                 { display: h(texts.osm.tag), name: 'tag', width: 160, sortable: true },
-                { display: h(texts.reports.wiki_problems.info), name: 'info', width: 600 }
+                { display: h(texts.pages.sources.wiki.parsing_problems.info), name: 'info', width: 600 }
             ],
             searchitems: [
                 { display: 'Location/Reason/Wiki page', name: 'filter' }

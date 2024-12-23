@@ -289,6 +289,21 @@ pages:
                     redirect: La página es una redirección.
                 intro: |
                     Esta tabla muestra todas las claves de la etiquetas para los cuales hay páginas wiki disponibles y en qué idiomas están.
+            parsing_problems:
+                name: Problemas de análisis
+                intro: |
+                    Taginfo lee todas las páginas wiki utilizadas para describir las
+                    claves, etiquetas y relaciones para encontrar información sobre las
+                    etiquetas. Este reporte muestra una lista de problemas encontrados
+                    durante la lectura de esas páginas.  Estos no son necesariamente
+                    errores en la wiki, sólo significan que algo en las páginas wiki no
+                    está formateado en una forma que taginfo entienda. O bien la página
+                    tiene que ser corregida o taginfo tiene que ser corregido.
+                location: Ubicación
+                reason: Razón
+                wiki_page: Página wiki
+                lang: Idioma
+                info: Información adicional
     download:
         intro: |
             <p>Aquí puedes descargar las bases de datos utilizadas por taginfo. Todos los datos se almacenan
@@ -678,18 +693,3 @@ reports:
             diferentes idiomas. A veces, la imagen de una u otra variante de
             idioma es mejor. Pero a veces tiene sentido tener diferentes
             imágenes a causa de diferentes trasfondos culturales o algo así.
-    wiki_problems:
-        name: Problemas de análisis
-        intro: |
-            Taginfo lee todas las páginas wiki utilizadas para describir las
-            claves, etiquetas y relaciones para encontrar información sobre las
-            etiquetas. Este reporte muestra una lista de problemas encontrados
-            durante la lectura de esas páginas.  Estos no son necesariamente
-            errores en la wiki, sólo significan que algo en las páginas wiki no
-            está formateado en una forma que taginfo entienda. O bien la página
-            tiene que ser corregida o taginfo tiene que ser corregido.
-        location: Ubicación
-        reason: Razón
-        wiki_page: Página wiki
-        lang: Idioma
-        info: Información adicional

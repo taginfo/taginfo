@@ -297,6 +297,19 @@ pages:
                     redirect: Page de redirection.
                 intro: |
                     Ce tableau présente toutes les clés de tags possédant une page wiki et dans quelle langue.
+            parsing_problems:
+                info: Informations additionelles
+                intro: |
+                    Taginfo parcourt toutes les pages du wiki utilisées pour décrire les clés, tags et relations
+                    afin de récupérer leurs informations. Ce rapport présente une liste de problèmes rencontrés
+                    lors de la lecture de ces pages. Ce ne sont pas forcément des erreurs du wiki, elles indiquent
+                    juste que quelque chose dans les pages du wiki n’est pas formaté dans un sens compréhensible
+                    par taginfo. Soit la page doit être corrigée soit taginfo doit être débogué.
+                lang: Lang.
+                location: Emplacement
+                name: Problèmes d'analyse
+                reason: Raison
+                wiki_page: Page wiki
     download:
         intro: |
             <p>Vous pouvez télécharger les données utilisées par taginfo. Toutes les données sont stockées
@@ -693,16 +706,3 @@ reports:
             Parfois l’image d’une page dans une langue est meilleure que celle dans une autre.
             Mais il est parfois judicieux d’utiliser des images différentes pour des raisons culturelles.
         name: Images du wiki
-    wiki_problems:
-        info: Informations additionelles
-        intro: |
-            Taginfo parcourt toutes les pages du wiki utilisées pour décrire les clés, tags et relations
-            afin de récupérer leurs informations. Ce rapport présente une liste de problèmes rencontrés
-            lors de la lecture de ces pages. Ce ne sont pas forcément des erreurs du wiki, elles indiquent
-            juste que quelque chose dans les pages du wiki n’est pas formaté dans un sens compréhensible
-            par taginfo. Soit la page doit être corrigée soit taginfo doit être débogué.
-        lang: Lang.
-        location: Emplacement
-        name: Problèmes d'analyse
-        reason: Raison
-        wiki_page: Page wiki

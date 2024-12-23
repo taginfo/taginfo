@@ -385,6 +385,22 @@ pages:
                     Questa tabella mostra i valori di tutti i tag usati per le chiavi
                     per cui è disponibile una pagina sul sito wiki e in che lingua è la
                     pagina.
+            parsing_problems:
+                name: Problemi nella analisi
+                intro: |
+                    Taginfo legge tutte le pagine sul sito wiki utilizzate per
+                    descrivere le chiavi, i tag e le relazioni per trovare informazioni
+                    sui tag. Questo rapporto mostra una lista dei problemi riscontrati
+                    mentre queste pagine vengono lette. Questi non sono necessariamente
+                    degli errori nel wiki, vuole semplicemente dire che le pagine non
+                    sono formattate in una maniera che taginfo riesca a comprendere.
+                    Può essere sia che la pagina vada corretta oppure che taginfo vada
+                    sistemato.
+                location: Località
+                reason: Ragione
+                wiki_page: Pagina wiki
+                lang: Lingua
+                info: Informazioni aggiuntive
     download:
         intro: |
             <p>Qui potete scaricare il database usato da Taginfo. Tutti i dati
@@ -835,19 +851,3 @@ reports:
             diverse lingue. A volte c'è un'immagine in una delle varie lingue
             che è la migliore. Tuttavia in alcuni casi ha senso avere diverse
             immagini a causa del diverso background culturale o simili motivi.
-    wiki_problems:
-        name: Problemi nella analisi
-        intro: |
-            Taginfo legge tutte le pagine sul sito wiki utilizzate per
-            descrivere le chiavi, i tag e le relazioni per trovare informazioni
-            sui tag. Questo rapporto mostra una lista dei problemi riscontrati
-            mentre queste pagine vengono lette. Questi non sono necessariamente
-            degli errori nel wiki, vuole semplicemente dire che le pagine non
-            sono formattate in una maniera che taginfo riesca a comprendere.
-            Può essere sia che la pagina vada corretta oppure che taginfo vada
-            sistemato.
-        location: Località
-        reason: Ragione
-        wiki_page: Pagina wiki
-        lang: Lingua
-        info: Informazioni aggiuntive
