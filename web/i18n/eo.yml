@@ -256,6 +256,10 @@ pages:
                 wiki_page: Viki-paĝo
                 lang: Lingvo
                 info: Pliaj informoj
+            image_comparison:
+                name: Viki-bildoj
+                intro: |
+                    Bildoj uzataj en la vikio por reprezenti ŝlosilojn en diversaj lingvoj. Iam iuj bildoj estas pli bonaj ol aliaj. Tamen iam estas sence havi diversajn bildojn pro diversaj kulturaj fonoj, ktp.
     download:
         intro: |
             <p>Tie ĉi vi povas elŝuti la datumbazojn uzatajn de taginfo. Ĉiuj datumoj estas konservitaj en datumbazojn <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>. Datumbazaj dosieroj estas kompaktigitaj per <a class="extlink" href="http://www.bzip.org/">bzip2</a>.</p>
@@ -595,7 +599,3 @@ reports:
             title: Malegalaj etikedoj
         relation_types:
             title: Malegalaj rilat-tipoj
-    wiki_images:
-        name: Viki-bildoj
-        intro: |
-            Bildoj uzataj en la vikio por reprezenti ŝlosilojn en diversaj lingvoj. Iam iuj bildoj estas pli bonaj ol aliaj. Tamen iam estas sence havi diversajn bildojn pro diversaj kulturaj fonoj, ktp.

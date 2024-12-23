@@ -401,6 +401,13 @@ pages:
                 wiki_page: Pagina wiki
                 lang: Lingua
                 info: Informazioni aggiuntive
+            image_comparison:
+                name: Immagini wiki
+                intro: |
+                    Le immagini utilizzate nel sito wiki come simbolo per le chiavi in
+                    diverse lingue. A volte c'è un'immagine in una delle varie lingue
+                    che è la migliore. Tuttavia in alcuni casi ha senso avere diverse
+                    immagini a causa del diverso background culturale o simili motivi.
     download:
         intro: |
             <p>Qui potete scaricare il database usato da Taginfo. Tutti i dati
@@ -844,10 +851,3 @@ reports:
             title: Tag univoci
         relation_types:
             title: Tipo di relazioni univoci
-    wiki_images:
-        name: Immagini wiki
-        intro: |
-            Le immagini utilizzate nel sito wiki come simbolo per le chiavi in
-            diverse lingue. A volte c'è un'immagine in una delle varie lingue
-            che è la migliore. Tuttavia in alcuni casi ha senso avere diverse
-            immagini a causa del diverso background culturale o simili motivi.

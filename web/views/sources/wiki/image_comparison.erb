@@ -1,5 +1,5 @@
 <%
-@title.unshift(h(t.reports.wiki_images.name))
+@title.unshift(h(t.pages.sources.wiki.image_comparison.name))
 
 @context[:keys] = @db.select("SELECT DISTINCT key FROM wiki.wikipages WHERE value IS NULL AND image IN (SELECT image FROM wiki.wiki_images) ORDER BY key").execute().map{ |row| row['key'] }
 
@@ -56,8 +56,8 @@ CSS
 %>
 <div>
     <div>
-        <h1><a href="<%= build_link("/sources/#{ @source.id }") %>"><%= @source.name %></a>: <%= h(t.reports.wiki_images.name) %></h1>
-        <p><%= h(t.reports.wiki_images.intro) %></p>
+        <h1><a href="<%= build_link("/sources/#{ @source.id }") %>"><%= @source.name %></a>: <%= h(t.pages.sources.wiki.image_comparison.name) %></h1>
+        <p><%= h(t.pages.sources.wiki.image_comparison.intro) %></p>
     </div>
 </div>
 <div class="box">

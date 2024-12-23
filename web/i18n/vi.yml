@@ -305,6 +305,12 @@ pages:
                 wiki_page: Trang wiki
                 lang: Ngôn ngữ
                 info: Thông tin bổ sung
+            image_comparison:
+                name: Hình ảnh wiki
+                intro: |
+                    Hình ảnh được sử dụng trong wiki để tượng trưng các chìa khóa trong các bản dịch.
+                    Đôi khi hình trong một bản dịch hợp hơn hình trong bản dịch kia.
+                    Đôi khi nên có nhiều hình khác nhau vì nền văn hóa khác nhau.
     download:
         intro: |
             <p>Ở đây bạn có thể tải về các cơ sở dữ liệu được sử dụng bởi taginfo. Tất cả dữ liệu được lưu giữ
@@ -691,9 +697,3 @@ reports:
             title: Thẻ duy nhất
         relation_types:
             title: Loại quan hệ duy nhất
-    wiki_images:
-        name: Hình ảnh wiki
-        intro: |
-            Hình ảnh được sử dụng trong wiki để tượng trưng các chìa khóa trong các bản dịch.
-            Đôi khi hình trong một bản dịch hợp hơn hình trong bản dịch kia.
-            Đôi khi nên có nhiều hình khác nhau vì nền văn hóa khác nhau.

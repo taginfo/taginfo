@@ -170,6 +170,8 @@ pages:
                 name: Wiki中的键的多语言对照表
             parsing_problems:
                 name: Wiki解析问题
+            image_comparison:
+                name: Wiki图片
     download:
         file: 文件
         packed: 打包后的
@@ -325,5 +327,3 @@ reports:
         similarity: 相似性
     historic_development:
         name: 历史上的开发用数据
-    wiki_images:
-        name: Wiki图片

@@ -251,6 +251,10 @@ pages:
                 wiki_page: Strona wiki
                 lang: Język
                 info: Dodatkowe informacje
+            image_comparison:
+                name: Zdjęcia na wiki
+                intro: |
+                    Ilustracje używane na wiki w różnych językach do reprezentacji kluczy. Czasami zdjęcia z jednego wariantu są lepsze niż inne. Ale czasami ma sens, aby te obrazy były różne z powodu różnic kulturowych i innych.
     download:
         intro: |
             <p>Tutaj możesz pobrać pliki bazy danych, z których korzysta taginfo. Wszystkie dane są przechowywane w bazach <a class="extlink" href="https://www.sqlite.org/">Sqlite</a>.
@@ -584,7 +588,3 @@ reports:
             title: Unikalne znaczniki
         relation_types:
             title: Unikalne typy relacji
-    wiki_images:
-        name: Zdjęcia na wiki
-        intro: |
-            Ilustracje używane na wiki w różnych językach do reprezentacji kluczy. Czasami zdjęcia z jednego wariantu są lepsze niż inne. Ale czasami ma sens, aby te obrazy były różne z powodu różnic kulturowych i innych.

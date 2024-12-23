@@ -307,6 +307,13 @@ pages:
                 wiki_page: Pàgina wiki
                 lang: Idioma
                 info: Informació addicional
+            image_comparison:
+                name: Imatges de la wiki
+                intro: |
+                    Imatges usades a la wiki per simbolitzar les claus en diferents
+                    idiomes. A vegades l'imatge d'un o altre idioma
+                    és millor. Però a vegades, té sentit tenir imatges
+                    diferents degut a les diferències culturals.
     download:
         intro: |
             <p>Aquí podeu descarregar la base de dades usada per taginfo. Totes les dades estan desades
@@ -712,10 +719,3 @@ reports:
             title: Etiquetes úniques
         relation_types:
             title: Tipus de relacions únics
-    wiki_images:
-        name: Imatges de la wiki
-        intro: |
-            Imatges usades a la wiki per simbolitzar les claus en diferents
-            idiomes. A vegades l'imatge d'un o altre idioma
-            és millor. Però a vegades, té sentit tenir imatges
-            diferents degut a les diferències culturals.

@@ -307,6 +307,13 @@ pages:
                 wiki_page: Wiki stránka
                 lang: Jazyk
                 info: Další informace
+            image_comparison:
+                name: Wiki obrázky
+                intro: |
+                    Obrázky se na wiki používají pro ilustraci značek v různých
+                    jazycích. Někdy je varianta obrázku z jednoho nebo jiného jazyka
+                    lepší. Ale někdy má smysl mít různé obrázky v různých jazycích
+                    kvůli různému kulturnímu pozadí a podobně.
     download:
         intro: |
             <p>Zde si můžete stáhnout databáze, které taginfo používá. Všechna data jsou uložena
@@ -701,13 +708,6 @@ reports:
             title: Unikátní značky
         relation_types:
             title: Unikátní typy relací
-    wiki_images:
-        name: Wiki obrázky
-        intro: |
-            Obrázky se na wiki používají pro ilustraci značek v různých
-            jazycích. Někdy je varianta obrázku z jednoho nebo jiného jazyka
-            lepší. Ale někdy má smysl mít různé obrázky v různých jazycích
-            kvůli různému kulturnímu pozadí a podobně.
 unicode:
     character: Znak
     codepoint: Kódový bod

@@ -359,6 +359,13 @@ pages:
                 wiki_page: Wiki page
                 lang: Lang.
                 info: Additional information
+            image_comparison:
+                name: Wiki images
+                intro: |
+                    Images used in the wiki to symbolize the keys in different
+                    languages. Sometimes the image from one or the other language
+                    variant is better. But sometimes it makes sense to have different
+                    images because of different cultural backgrounds or so.
     download:
         intro: |
             <p>Here you can download the databases used by taginfo. All the data is stored
@@ -771,10 +778,3 @@ reports:
             title: Unique tags
         relation_types:
             title: Unique relation types
-    wiki_images:
-        name: Wiki images
-        intro: |
-            Images used in the wiki to symbolize the keys in different
-            languages. Sometimes the image from one or the other language
-            variant is better. But sometimes it makes sense to have different
-            images because of different cultural backgrounds or so.

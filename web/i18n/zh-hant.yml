@@ -337,6 +337,12 @@ pages:
                 wiki_page: Wiki 頁面
                 lang: 語言
                 info: 額外資訊
+            image_comparison:
+                name: Wiki 圖片
+                intro: |
+                    在 wiki 中不同語言用來象徵鍵的圖片。
+                    有時來自其他語言的圖片比較好，
+                    但有時候會因為不同的文化背景等而有不同圖片。
     download:
         intro: |
             <p>你能在這裡下載 taginfo 所用的資料庫。所有資料被儲存
@@ -729,9 +735,3 @@ reports:
             title: 獨特標籤
         relation_types:
             title: 獨特關係類型
-    wiki_images:
-        name: Wiki 圖片
-        intro: |
-            在 wiki 中不同語言用來象徵鍵的圖片。
-            有時來自其他語言的圖片比較好，
-            但有時候會因為不同的文化背景等而有不同圖片。

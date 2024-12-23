@@ -304,6 +304,13 @@ pages:
                 wiki_page: Página wiki
                 lang: Idioma
                 info: Información adicional
+            image_comparison:
+                name: Imágenes wiki
+                intro: |
+                    Las imágenes utilizadas en el wiki para simbolizar las claves en
+                    diferentes idiomas. A veces, la imagen de una u otra variante de
+                    idioma es mejor. Pero a veces tiene sentido tener diferentes
+                    imágenes a causa de diferentes trasfondos culturales o algo así.
     download:
         intro: |
             <p>Aquí puedes descargar las bases de datos utilizadas por taginfo. Todos los datos se almacenan
@@ -686,10 +693,3 @@ reports:
             title: Etiquetas únicas
         relation_types:
             title: Tipos de relación únicos
-    wiki_images:
-        name: Imágenes wiki
-        intro: |
-            Las imágenes utilizadas en el wiki para simbolizar las claves en
-            diferentes idiomas. A veces, la imagen de una u otra variante de
-            idioma es mejor. Pero a veces tiene sentido tener diferentes
-            imágenes a causa de diferentes trasfondos culturales o algo así.

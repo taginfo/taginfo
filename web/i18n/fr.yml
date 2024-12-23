@@ -310,6 +310,12 @@ pages:
                 name: Problèmes d'analyse
                 reason: Raison
                 wiki_page: Page wiki
+            image_comparison:
+                intro: |
+                    Images utilisées par le wiki pour symboliser les clés dans les différentes langues.
+                    Parfois l’image d’une page dans une langue est meilleure que celle dans une autre.
+                    Mais il est parfois judicieux d’utiliser des images différentes pour des raisons culturelles.
+                name: Images du wiki
     download:
         intro: |
             <p>Vous pouvez télécharger les données utilisées par taginfo. Toutes les données sont stockées
@@ -700,9 +706,3 @@ reports:
         key_rare: Clés rarement utilisées
         name: Clés similaires
         similarity: Similarité
-    wiki_images:
-        intro: |
-            Images utilisées par le wiki pour symboliser les clés dans les différentes langues.
-            Parfois l’image d’une page dans une langue est meilleure que celle dans une autre.
-            Mais il est parfois judicieux d’utiliser des images différentes pour des raisons culturelles.
-        name: Images du wiki
