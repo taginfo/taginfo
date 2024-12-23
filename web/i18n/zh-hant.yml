@@ -176,8 +176,7 @@ pages:
             title: 關於此網站
         building_on_taginfo:
             title: 用 taginfo 開發
-            pre: |
-                <p>你可以在自己的專案中使用來自 taginfo 的資料：</p>
+            pre: '你可以在自己的專案中使用來自 taginfo 的資料：'
             api: |
                 <h3>API</h3>
                 <p>Taginfo 資料可由 REST API 存取。看看

@@ -179,8 +179,7 @@ pages:
             title: O tomto serveru
         building_on_taginfo:
             title: Stavíme na taginfo
-            pre: |
-                <p>Můžete používat data z taginfo ve vašich vlastních projektech:</p>
+            pre: 'Můžete používat data z taginfo ve vašich vlastních projektech:'
             api: |
                 <h3>API</h3>
                 <p>K datům z Taginfo můžete přistupovat pomocí REST API. Podívejte se na

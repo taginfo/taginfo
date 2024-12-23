@@ -168,8 +168,7 @@ pages:
             title: دربارهٔ این وبسایت
         building_on_taginfo:
             title: توسعه بر پایهٔ taginfo
-            pre: |
-                <p>taginfo را در پروژه‌های خود به‌کار ببرید:</p>
+            pre: 'taginfo را در پروژه‌های خود به‌کار ببرید:'
             api: |
                 <h3>API</h3>
                 <p>دسترسی به داده‌های taginfo از طریق REST API میسر است. برای جزئیات

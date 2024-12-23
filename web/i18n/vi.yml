@@ -176,8 +176,7 @@ pages:
             title: Giới thiệu về trang này
         building_on_taginfo:
             title: Xây dựng trên taginfo
-            pre: |
-                <p>Bạn có thể sử dụng dữ liệu taginfo trong các dự án của bạn:</p>
+            pre: 'Bạn có thể sử dụng dữ liệu taginfo trong các dự án của bạn:'
             api: |
                 <h3>API</h3>
                 <p>Có thể truy cập dữ liệu taginfo qua API REST. Xem các chi tiết trong

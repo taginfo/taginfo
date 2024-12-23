@@ -181,8 +181,7 @@ pages:
             title: Over deze website
         building_on_taginfo:
             title: Bouwen op taginfo
-            pre: |
-                <p>Je kunt de gegevens van taginfo ook gebruiken in je eigen projecten:</p>
+            pre: 'Je kunt de gegevens van taginfo ook gebruiken in je eigen projecten:'
             api: |
                 <h3>API</h3>
                 <p>Taginfo-gegevens zijn toegankelijk via een REST API. Zie de

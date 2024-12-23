@@ -182,8 +182,7 @@ pages:
             title: About This Site
         building_on_taginfo:
             title: Building on taginfo
-            pre: |
-                <p>You can use the data from taginfo in your own projects:</p>
+            pre: 'You can use the data from taginfo in your own projects:'
             api: |
                 <h3>API</h3>
                 <p>Taginfo data can be accessed through a REST API. See the

@@ -162,8 +162,7 @@ pages:
             title: Pri tiu ĉi retejo
         building_on_taginfo:
             title: Bazi sur taginfo
-            pre: |
-                <p>Vi povas uzi datumojn el taginfo en viajn proprajn projektoj:</p>
+            pre: 'Vi povas uzi datumojn el taginfo en viajn proprajn projektoj:'
             api: |
                 <h3>API</h3>
                 <p>Taginfo-datumojn oni povas akiri per REST API. Vidu la <a href="taginfo/apidoc">dokumentaron pri API</a> por pliaj detaloj, iaj ĝeneralaj informoj troviĝas en la <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">OSM-vikio</a>. La serviloj gastigantaj la taginfo-API ne havas senliman komputpovon. Bonvolu prudente uzi la API. Se vi dubas, kontaktu la prizorgantojn de la retejo, kiujn vi uzas aŭ skribi al ni ĉe la dissendolisto.</p>

@@ -156,8 +156,7 @@ pages:
             title: O tej stronie
         building_on_taginfo:
             title: Projekty pochodne
-            pre: |
-                <p>Możesz użyć danych pochodzących z taginfo w swoich własnych projektach:</p>
+            pre: 'Możesz użyć danych pochodzących z taginfo w swoich własnych projektach:'
             api: |
                 <h3>API</h3>
                 <p>Dane taginfo można odpytać za pomocą REST API. Zajrzyj do <a href="taginfo/apidoc">dokumentacji API</a> po szczegóły, trochę ogólnych informacji znajduje się na <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo/API">wiki OSM</a>. Serwery na których hostowane jest API taginfo nie mają nieograniczonych zasobów. Prosimy odpowiedzialnie korzystać z API. Jeżeli masz jakieś wątpliwości, skontaktuj się z administratorami strony z której korzystasz lub zapytaj nas na naszej liści dyskusyjnej.</p>

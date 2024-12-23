@@ -173,8 +173,7 @@ pages:
             title: このサイトについて
         building_on_taginfo:
             title: taginfo を使った開発
-            pre: |
-                <p>taginfo からのデータを自分のプロジェクトで使うことができます。</p>
+            pre: 'taginfo からのデータを自分のプロジェクトで使うことができます。'
             api: |
                 <h3>API</h3>
                 <p>taginfo のデータには REST API を通してアクセスできます。詳細は

@@ -180,8 +180,7 @@ pages:
             title: Quant a aquesta pàgina
         building_on_taginfo:
             title: Construint sobre taginfo
-            pre: |
-                <p>Podeu usar les dades de taginfo en els vostres propis projectes:</p>
+            pre: 'Podeu usar les dades de taginfo en els vostres propis projectes:'
             api: |
                 <h3>API</h3>
                 <p>Les dades de Taginfo són accessibles a traves d'una API REST. Vegeu la

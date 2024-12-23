@@ -177,8 +177,7 @@ pages:
             title: Об этом сайте
         building_on_taginfo:
             title: Использование taginfo
-            pre: |
-                <p>Вы можете использовать данные из taginfo в ваших проектах:</p>
+            pre: 'Вы можете использовать данные из taginfo в ваших проектах:'
             api: |
                 <h3>API</h3>
                 <p>Данные Taginfo могут быть получены через REST API. См.

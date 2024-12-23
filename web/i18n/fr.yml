@@ -180,8 +180,7 @@ pages:
             title: À propos de ce site
         building_on_taginfo:
             title: Développer sur taginfo
-            pre: |
-                <p>Vous pouvez utiliser les données de taginfo dans vos projets :</p>
+            pre: 'Vous pouvez utiliser les données de taginfo dans vos projets:'
             api: |
                 <h3>API</h3>
                 <p>Les données de taginfo sont accessibles via une API REST. Regardez la

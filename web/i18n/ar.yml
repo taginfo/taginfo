@@ -163,8 +163,7 @@ pages:
             title: عن هذا الموقع
         building_on_taginfo:
             title: البناء على taginfo
-            pre: |
-                <p>يمكنك استخدام البيانات من Taginfo في المشاريع الخاصة بك:</p>
+            pre: 'يمكنك استخدام البيانات من Taginfo في المشاريع الخاصة بك:'
             api: |
                 <h3>API</h3>
                 <p>يمكن الوصول إلى بيانات Taginfo من خلال REST API. انظر إلى
