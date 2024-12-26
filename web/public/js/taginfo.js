@@ -1079,7 +1079,7 @@ class DynamicTable {
             if (this.toolbar) {
                 this.toolbar.querySelector('.dt-page input').value = '0';
                 this.toolbar.querySelector('.dt-page span.dt-page-max').innerText = '0';
-                this.toolbar.querySelector('.dt-json a').setAttribute('href', data.url);
+                this.toolbar.querySelector('.dt-json a').setAttribute('href', build_link(data.url));
                 this.toolbar.querySelector('.dt-info').innerText = texts.dynamic_table.nomsg;
             }
 

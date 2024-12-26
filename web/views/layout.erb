@@ -62,7 +62,7 @@
     <main>
 <% if under_section %>
         <div class="section_title">
-            <a class="section" href="/<%= @section %>"><%= @section_title %></a>
+            <a class="section" href="<%= build_link('/' + @section) %>"><%= @section_title %></a>
         </div>
 <% end %>
 <%= yield %>
@@ -75,7 +75,7 @@
             <a href="<%= build_link('/download') %>"><%= h(t.taginfo.download) %></a> &middot;
 <% end %>
 <% if SECTIONS[:taginfo] %>
-            <a href="/taginfo/apidoc">API</a> &middot;
+            <a href="<%= build_link('/taginfo/apidoc') %>">API</a> &middot;
 <% end %>
             <a id="help-link" target="_blank" href="<%= build_link('/help') %>"><%= h(t.misc.help) %></a> &middot;
             <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo"><%= h(t.taginfo.wiki) %></a>
