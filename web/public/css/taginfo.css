@@ -760,7 +760,7 @@ html[dir="rtl"] #comparison-list {
 }
 
 #comparison-list ul {
-    display: none;
+    visibility: hidden;
     position: absolute;
     margin-top: 1px;
     margin-left: 10px;
@@ -777,7 +777,9 @@ html[dir="rtl"] #comparison-list {
 }
 
 #comparison-list:hover ul {
-    display: block;
+    visibility: visible;
+    transition-property: visibility;
+    transition-delay: .2s;
 }
 
 /* ========== */
