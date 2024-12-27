@@ -182,6 +182,14 @@ html[dir="rtl"] form#filter-form {
     float: left;
 }
 
+@media screen and (max-width: 640px) {
+    #filter-form {
+        margin-bottom: 10px;
+    }
+}
+
+/* ========== */
+
 select {
     appearance: none;
     margin: 0;
@@ -202,60 +210,36 @@ select {
     background-size: 12px 12px;
 }
 
-/* ========== */
+/* ===== HEADER ===== */
 
 header {
-    padding: 15px 20px 4px 20px;
+    height: 40px;
+    padding: 10px 20px 14px 20px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
 }
 
-@media screen and (max-width: 640px) {
-    header {
-        position: absolute;
-        top: 20px;
-    }
+.header-logo {
+    position: relative;
+    top: 10px;
+    margin-right: auto;
 }
 
-div#header_logo:before {
-    left: 12px;
-    top: 0px;
+.header-logo:before {
+    left: -8px;
+    top: -5px;
     content: 'H';
 }
 
-div#header_date {
-    position: absolute;
-    top: 12px;
-    right: 20px;
+.header-date {
     font-size: 0.8rem;
-    text-align: right;
+    text-align: end;
+    padding-bottom: 4px;
 }
 
-html[dir="rtl"] div#header_date {
-    right: auto;
-    left: 20px;
-    text-align: left;
-}
-
-header div#header_forms {
-    position: absolute;
-    right: 20px;
-    top: 31px;
-}
-
-html[dir="rtl"] header div#header_forms {
-    right: auto;
-    left: 20px;
-}
-
-header div#header_forms form {
-    float: left;
-    padding-left: 22px;
+.header-language-switcher {
     height: 24px;
-}
-
-html[dir="rtl"] header div#header_forms form {
-    float: right;
-    padding-left: 0;
-    padding-right: 22px;
 }
 
 input#search {
@@ -270,13 +254,17 @@ input#search {
 }
 
 #search_form:before {
-    left: 16px;
+    left: 6px;
     top: -8px;
     content: 'S';
 }
 
 #suggestions {
     position: relative;
+}
+
+#suggestions {
+    position: absolute;
     display: none;
     width: 228px;
     padding: 2px 2px;
@@ -320,13 +308,39 @@ input:focus {
 }
 
 @media screen and (max-width: 640px) {
-    input#search {
-        margin-top: -1px;
-        height: 21px;
+    header {
+        position: absolute;
+        height: 30px;
+        width: calc(100% - 90px);
+    }
+
+    .header-logo {
+        top: 5px;
+    }
+
+    .header-logo img {
+        height: 36px;
+        width: auto;
+    }
+
+    .header-language-switcher, .header-date {
+        display: none;
     }
 }
 
-/* ========== */
+@media screen and (max-width: 490px) {
+    #search_form input {
+        width: 120px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    #search_form {
+        display: none;
+    }
+}
+
+/* ===== MENU ===== */
 
 @media screen and (min-width: 641px) {
     ul#menu {
@@ -465,6 +479,11 @@ input:focus {
         text-align: right;
         font-size: 1.2rem;
     }
+}
+
+/* ==== TOOLS MENU ====== */
+
+@media screen and (max-width: 640px) {
 
     #toolsmenu {
         background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9JzAgMCAyNCAyNCcgZmlsbD0nI2ZmZmZmZicgc3Ryb2tlPScjZmZmZmZmJyBzdHJva2Utd2lkdGg9JzAuMScgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz48cGF0aCBkPSdNMTQuNyA2LjNhMSAxIDAgMCAwIDAgMS40bDEuNiAxLjZhMSAxIDAgMCAwIDEuNCAwbDMuNzctMy43N2E2IDYgMCAwIDEtNy45NCA3Ljk0bC02LjkxIDYuOTFhMi4xMiAyLjEyIDAgMCAxLTMtM2w2LjkxLTYuOTFhNiA2IDAgMCAxIDcuOTQtNy45NGwtMy43NiAzLjc2eicvPjwvc3ZnPgo); /* tools.svg */
@@ -517,64 +536,14 @@ input:focus {
     }
 }
 
-@media screen and (max-width: 640px) {
-    #set_language, #header_date, #comparison-list, .pJSON, #osmlink {
-        display: none;
-    }
-
-    header {
-        top: 0;
-    }
-
-    div#header_logo {
-        padding: 3px 10px 0;
-        position: absolute;
-        left: 4px;
-        top: 1px;
-        right: 30px;
-        width: 136px;
-    }
-
-    html[dir="rtl"] div#header_logo {
-        left: 30px;
-        right: 4px;
-    }
-
-    header img {
-        height: 36px;
-        width: auto;
-    }
-
-    header div#header_forms form {
-        position: absolute;
-        top: -20px;
-        left: 130px;
-    }
-
-    html[dir="rtl"] header div#header_forms form {
-        left: auto;
-        right: 130px;
-    }
-
-    #filter-form {
-        margin-bottom: 10px;
-    }
-
-}
-
-@media screen and (max-width: 479px) {
-    header div#header_forms form input {
-        width: 120px;
-    }
-}
-
-@media screen and (max-width: 359px) {
-    header div#header_forms form {
-        display: none;
-    }
-}
-
 /* ========== */
+
+@media screen and (max-width: 640px) {
+    #comparison-list, .pJSON, #osmlink {
+        display: none;
+    }
+
+}
 
 main {
     flex-basis: 100%;

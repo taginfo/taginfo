@@ -23,9 +23,12 @@
         <div id="menu-button"></div>
     </div>
     <header>
-        <div id="header_date" title="<%= h(t.taginfo.data_from_description) %>" data-tooltip-position="OnLeft"><%= h(t.taginfo.data_from) %>: <%= @data_until %> UTC</div>
-        <div id="header_forms" class="no-print">
-            <form id="set_language" action="<%= build_link('/switch_locale') %>">
+        <div class="header-logo key-tooltip">
+            <a href="/"><img width="49" height="49" src="<%= @taginfo_config.get('instance.icon', '/img/logo/world.png') %>" alt="taginfo"/></a>
+            <a href="/"><img width="129" height="49" src="/img/logo/taginfo.png" alt="taginfo"/></a>
+        </div>
+        <div class="no-print">
+            <form class="header-language-switcher" id="set_language" action="<%= build_link('/switch_locale') %>">
                 <input type="hidden" id="url" name="url" value="<%= request.path %>"/>
                 <select id="locale" name="locale">
 <% r18n.available_locales.sort{ |a,b| a.title <=> b.title }.select{ |locale| ::Language.has?(locale.code) }.each do |locale| %>
@@ -33,16 +36,15 @@
 <% end %>
                 </select>
             </form>
+        </div>
+        <div>
+            <div class="header-date" title="<%= h(t.taginfo.data_from_description) %>" data-tooltip-position="OnLeft"><%= h(t.taginfo.data_from) %>: <%= @data_until %> UTC</div>
 <% unless @nosearch %>
             <form id="search_form" class="key-tooltip" action="<%= build_link('/search') %>">
                 <input type="text" id="search" name="q" value="<%= h(params[:q]) %>" autocomplete="off" autocapitalize="off" placeholder="[<%= h(t.osm.key.upcase) %>][=<%= h(t.osm.value.upcase) %>]"/>
                 <div id="suggestions"></div>
             </form>
 <% end %>
-        </div>
-        <div id="header_logo" class="key-tooltip">
-            <a href="/"><img width="49" height="49" src="<%= @taginfo_config.get('instance.icon', '/img/logo/world.png') %>" alt="taginfo"/></a>
-            <a href="/"><img width="129" height="49" src="/img/logo/taginfo.png" alt="taginfo"/></a>
         </div>
     </header>
     <nav>
