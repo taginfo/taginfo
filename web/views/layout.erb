@@ -34,28 +34,28 @@
                 </select>
             </form>
 <% unless @nosearch %>
-            <form id="search_form" action="<%= build_link('/search') %>">
+            <form id="search_form" class="key-tooltip" action="<%= build_link('/search') %>">
                 <input type="text" id="search" name="q" value="<%= h(params[:q]) %>" autocomplete="off" autocapitalize="off" placeholder="[<%= h(t.osm.key.upcase) %>][=<%= h(t.osm.value.upcase) %>]"/>
                 <div id="suggestions"></div>
             </form>
 <% end %>
         </div>
-        <div id="header_logo">
+        <div id="header_logo" class="key-tooltip">
             <a href="/"><img width="49" height="49" src="<%= @taginfo_config.get('instance.icon', '/img/logo/world.png') %>" alt="taginfo"/></a>
             <a href="/"><img width="129" height="49" src="/img/logo/taginfo.png" alt="taginfo"/></a>
         </div>
     </header>
     <nav>
     <ul id="menu" class="no-print">
-        <li><a <%= in_section('keys') %>href="<%= build_link('/keys') %>"><%= h(t.osm.keys) %></a></li>
-        <li><a <%= in_section('tags') %>href="<%= build_link('/tags') %>"><%= h(t.osm.tags) %></a></li>
-        <li><a <%= in_section('relations') %>href="<%= build_link('/relations') %>"><%= h(t.osm.relations) %></a></li>
-        <li><a <%= in_section('projects') %>href="<%= build_link('/projects') %>"><%= h(t.taginfo.projects) %></a></li>
-        <li><a <%= in_section('reports') %>href="<%= build_link('/reports') %>"><%= h(t.taginfo.reports) %></a></li>
-        <li><a <%= in_section('sources') %>href="<%= build_link('/sources') %>"><%= h(t.taginfo.sources) %></a></li>
-        <li><a <%= in_section('about') %>href="<%= build_link('/about') %>"><%= h(t.taginfo.about) %></a></li>
+        <li class="key-tooltip" id="menu-keys"><a <%= in_section('keys') %>href="<%= build_link('/keys') %>"><%= h(t.osm.keys) %></a></li>
+        <li class="key-tooltip" id="menu-tags"><a <%= in_section('tags') %>href="<%= build_link('/tags') %>"><%= h(t.osm.tags) %></a></li>
+        <li class="key-tooltip" id="menu-relations"><a <%= in_section('relations') %>href="<%= build_link('/relations') %>"><%= h(t.osm.relations) %></a></li>
+        <li class="key-tooltip" id="menu-projects"><a <%= in_section('projects') %>href="<%= build_link('/projects') %>"><%= h(t.taginfo.projects) %></a></li>
+        <li class="key-tooltip" id="menu-reports"><a <%= in_section('reports') %>href="<%= build_link('/reports') %>"><%= h(t.taginfo.reports) %></a></li>
+        <li class="key-tooltip" id="menu-sources"><a <%= in_section('sources') %>href="<%= build_link('/sources') %>"><%= h(t.taginfo.sources) %></a></li>
+        <li id="menu-about"><a <%= in_section('about') %>href="<%= build_link('/about') %>"><%= h(t.taginfo.about) %></a></li>
 <% if @section == 'taginfo' %>
-        <li><a <%= in_section('taginfo') %>href="<%= build_link('/taginfo') %>"><%= h(t.taginfo.meta) %></a></li>
+        <li id="menu-taginfo"><a <%= in_section('taginfo') %>href="<%= build_link('/taginfo') %>"><%= h(t.taginfo.meta) %></a></li>
 <% end %>
     </ul>
     </nav>
@@ -79,6 +79,9 @@
 <% end %>
             <a id="help-link" target="_blank" href="<%= build_link('/help') %>"><%= h(t.misc.help) %></a> &middot;
             <a class="extlink" href="//wiki.openstreetmap.org/wiki/Taginfo"><%= h(t.taginfo.wiki) %></a>
+        </div>
+        <div class="footer-middle">
+            <span class="key">?</span> <%= h(t.help.keyboard.show_keys) %>
         </div>
     </footer>
     <div id="javascriptmsg">This website only works with Javascript! Please enable Javascript in your browser.</div>

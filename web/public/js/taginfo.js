@@ -2,6 +2,7 @@
 
 var tabs = null,
     autocomplete = null,
+    questionMarkKeycode = null,
     up = null;
 
 const bad_chars_for_url = /[.=\/@]/;
@@ -876,11 +877,15 @@ class DynamicTable {
 
     initToolbar() {
         let tools = [];
-        for (const toolClasses of ['dt-first dt-button', 'dt-prev dt-button',
+        for (const toolClasses of ['dt-first dt-button key-tooltip',
+                                   'dt-prev dt-button key-tooltip',
                                    'dt-page',
-                                   'dt-next dt-button', 'dt-last dt-button',
-                                   'dt-reload dt-button', 'dt-json no-print',
-                                   'dt-info', 'dt-search']) {
+                                   'dt-next dt-button key-tooltip',
+                                   'dt-last dt-button key-tooltip',
+                                   'dt-reload dt-button',
+                                   'dt-json no-print',
+                                   'dt-info',
+                                   'dt-search key-tooltip']) {
             const newElement = document.createElement('div');
             newElement.className = toolClasses;
             tools.push(newElement);
@@ -1235,8 +1240,12 @@ class DynamicTable {
             element.classList.remove('dt-current-row');
         }
 
-        for (const element of this.elementsInRow(this.rowOnPage)) {
-            element.classList.add('dt-current-row');
+        const currentRow = this.elementsInRow(this.rowOnPage);
+        if (currentRow.length > 0) {
+            for (const element of currentRow) {
+                element.classList.add('dt-current-row');
+            }
+            currentRow[0].classList.add('key-tooltip');
         }
     }
 
@@ -1834,10 +1843,26 @@ function whenReady() {
     }
 
     document.addEventListener('keydown', function(event) {
+        if (event.target == document.body && event.key == '?' && window.innerWidth >= 1000) {
+            if (event.repeat) {
+                return;
+            }
+            questionMarkKeycode = event.keyCode;
+            event.preventDefault();
+            document.documentElement.style.setProperty('--key-info-visibility', 'visible');
+            return;
+        }
         if (event.target == document.body && event.key == 'Tab') {
             event.preventDefault();
             document.getElementById('search').focus();
         }
+        questionMarkKeycode = null;
+        document.documentElement.style.setProperty('--key-info-visibility', 'hidden');
+    });
+
+    document.addEventListener('keyup', function(event) {
+        questionMarkKeycode = null;
+        document.documentElement.style.setProperty('--key-info-visibility', 'hidden');
     });
 
     document.getElementById('search').addEventListener('keyup', function(event) {

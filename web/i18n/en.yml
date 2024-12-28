@@ -134,6 +134,7 @@ help:
         deactivate: Deactivate input fields
         up: Up in page hierarchy
         switch_input: Switch between input fields
+        show_keys: Show available shortcut keys
         add_to_comparison: Add current key/tag to comparison list
 
 pages:

@@ -134,6 +134,7 @@ help:
         deactivate: Eingabefelder deaktivieren
         up: Übergeordn. Seite
         switch_input: Wechsel der Eingabef.
+        show_keys: Verfügbare Tastenkürzel anzeigen
         add_to_comparison: Diesen Key/Tag in Vergleichsliste aufnehmen
 
 pages:
