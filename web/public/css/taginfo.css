@@ -56,12 +56,6 @@ img {
     border: 0 none;
 }
 
-img.map {
-    position: absolute;
-    border: 1px solid var(--color-dark);
-    width: calc(100% - 40px);
-}
-
 td img {
     position: relative;
     top: 3px;
@@ -1369,7 +1363,7 @@ div.gbox > div:last-child {
     grid-area: desc;
 }
 
-/* ==========  */
+/* ===== DYNAMIC TABLE =====  */
 
 div.dynamic-table {
     font-size: 0.9rem;
@@ -1649,13 +1643,19 @@ div.dt-table div.dt-body div {
     text-overflow: ellipsis;
 }
 
-/* ==========  */
+/* ===== MULTIMAP =====  */
 
-.multi-map {
+.multimap-container {
     position: relative;
 }
 
-/* ==========  */
+.multimap-img {
+    position: absolute;
+    border: 1px solid var(--color-dark);
+    width: calc(100% - 40px);
+}
+
+/* ===== OVERVIEW =====  */
 
 .overview-container {
     display: flex;
@@ -1699,7 +1699,7 @@ div.dt-table div.dt-body div {
     background-position: center;
 }
 
-/* ==========  */
+/* ===== TREEMAP =====  */
 
 .treemap {
     position: relative;
@@ -1767,3 +1767,4 @@ div.dt-table div.dt-body div {
     text-align: right;
 }
 
+/* ===== THE END =====  */
