@@ -840,7 +840,7 @@ class DynamicTable {
         }
         this.initTable();
 
-        this.element.classList.add('dynamic-table');
+        this.element.classList.add('dt-container');
     }
 
     page(rowNum) {
@@ -987,8 +987,9 @@ class DynamicTable {
         const rowEnd = 'span ' + (numRows + 1);
         for (let i = 1; i < this.columns.length; i++) {
             const handle = document.createElement('div');
+            handle.classList.add('dt-handle-handle');
             const element = document.createElement('div');
-            element.classList.add('dt-handle');
+            element.classList.add('dt-handle-space');
             element.append(handle);
             element.style.gridColumnStart = i * 2;
             element.style.gridRowEnd = rowEnd;

@@ -1365,11 +1365,11 @@ div.gbox > div:last-child {
 
 /* ===== DYNAMIC TABLE =====  */
 
-div.dynamic-table {
+.dt-container {
     font-size: 0.9rem;
 }
 
-div.dt-toolbar {
+.dt-toolbar {
     display: flex;
     align-items: center;
     background-color: var(--color-dark);
@@ -1379,18 +1379,13 @@ div.dt-toolbar {
     border-bottom: 1px solid var(--color-light);
 }
 
-div.dt-current-row[data-col="0"]:before {
+.dt-current-row[data-col="0"]:before {
     top: -19px;
     left: -12px;
     content: '\1f845\a \1f846\a\1f847';
 }
 
-div.dt-toolbar div {
-    padding: 2px;
-    white-space: nowrap;
-}
-
-div.dt-toolbar div.dt-button {
+.dt-button {
     position: relative;
     background-repeat: no-repeat;
     background-position: center center;
@@ -1403,65 +1398,66 @@ div.dt-toolbar div.dt-button {
     cursor: pointer;
 }
 
-div.dt-toolbar div.dt-button:hover {
+.dt-button:hover {
     border: 1px solid white;
 }
 
-div.dt-toolbar div.dt-first {
+.dt-first {
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMiAxMic+PHBhdGggZmlsbD0nIzgwODA4MCcgc3Ryb2tlPScjODA4MDgwJyBzdHJva2Utd2lkdGg9JzInIGQ9J00xIDExLjggTDEgMC4yIE0yIDYgTDEwIDEgTDEwIDExIHonLz48L3N2Zz4K); /* first.svg */
 }
 
-div.dt-toolbar div.dt-first:before {
+.dt-first:before {
     left: -22px;
     top: -8px;
     content: 'Home';
 }
 
-div.dt-toolbar div.dt-prev {
+.dt-prev {
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMiAxMic+PHBhdGggZmlsbD0nIzgwODA4MCcgc3Ryb2tlPScjODA4MDgwJyBzdHJva2Utd2lkdGg9JzInIGQ9J00yIDYgTDEwIDEgTDEwIDExIHonLz48L3N2Zz4K); /* prev.svg */
 }
 
-div.dt-toolbar div.dt-prev:before {
+.dt-prev:before {
     left: 12px;
     top: 12px;
     content: 'PgUp';
 }
 
-div.dt-toolbar div.dt-page {
+.dt-page {
     text-align: center;
     padding: 0 10px;
+    white-space: nowrap;
 }
 
-div.dt-toolbar div.dt-page input {
+.dt-page input {
     text-align: center;
 }
 
-div.dt-toolbar div.dt-next {
+.dt-next {
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMiAxMic+PHBhdGggZmlsbD0nIzgwODA4MCcgc3Ryb2tlPScjODA4MDgwJyBzdHJva2Utd2lkdGg9JzInIGQ9J00xMCA2IEwyIDEgTDIgMTEgeicvPjwvc3ZnPgo); /* next.svg */
 }
 
-div.dt-toolbar div.dt-next:before {
+.dt-next:before {
     left: -20px;
     top: -8px;
     content: 'PgDn';
 }
 
-div.dt-toolbar div.dt-last {
+.dt-last {
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMiAxMic+PHBhdGggZmlsbD0nIzgwODA4MCcgc3Ryb2tlPScjODA4MDgwJyBzdHJva2Utd2lkdGg9JzInIGQ9J00xMSAxMS44IEwxMSAwLjIgTTEwIDYgTDIgMSBMMiAxMSB6Jy8+PC9zdmc+Cg); /* last.svg */
 }
 
-div.dt-toolbar div.dt-last:before {
+.dt-last:before {
     left: 12px;
     top: 12px;
     content: 'End';
 }
 
-div.dt-toolbar div.dt-reload {
+.dt-reload {
     margin: 0 10px;
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjODA4MDgwIiBzdHJva2Utd2lkdGg9IjMuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cG9seWxpbmUgcG9pbnRzPSIyMyA0IDIzIDEwIDE3IDEwIj48L3BvbHlsaW5lPjxwb2x5bGluZSBwb2ludHM9IjEgMjAgMSAxNCA3IDE0Ij48L3BvbHlsaW5lPjxwYXRoIGQ9Ik0zLjUxIDlhOSA5IDAgMCAxIDE0Ljg1LTMuMzZMMjMgMTBNMSAxNGw0LjY0IDQuMzZBOSA5IDAgMCAwIDIwLjQ5IDE1Ij48L3BhdGg+PC9zdmc+Cg); /* reload.svg */
 }
 
-div.dt-toolbar div.dt-json {
+.dt-json {
     font-size: 1rem;
     margin: 0 10px;
     padding: 2px 4px;
@@ -1469,41 +1465,45 @@ div.dt-toolbar div.dt-json {
     border-radius: 4px;
 }
 
-div.dt-toolbar div.dt-json:hover {
+.dt-json:hover {
     border: 1px solid #ffffff;
 }
 
-div.dt-toolbar div.dt-json a {
+.dt-json a {
     color: var(--color-text);
     text-decoration: none;
 }
 
-div.dt-toolbar div.dt-info span.dt-narrow {
+.dt-info {
+    white-space: nowrap;
+}
+
+.dt-narrow {
     display: none;
 }
 
 @media screen and (max-width: 800px) {
-    div.dt-toolbar div.dt-info span.dt-wide {
+    .dt-wide {
         display: none;
     }
-    div.dt-toolbar div.dt-info span.dt-narrow {
+    .dt-narrow {
         display: inline;
     }
 }
 
-div.dt-toolbar div.dt-search {
+.dt-search {
     position: relative;
     flex-basis: 100%;
     text-align: right;
 }
 
-div.dt-toolbar div.dt-search:before {
+.dt-search:before {
     right: -8px;
     top: -8px;
     content: 'F';
 }
 
-div.dt-toolbar input {
+.dt-toolbar input {
     border: 1px solid var(--color-border);
     border-radius: 4px;
     margin: 0;
@@ -1511,24 +1511,24 @@ div.dt-toolbar input {
 }
 
 @media screen and (max-width: 800px) {
-    div.dt-toolbar div.dt-page {
+    .dt-page {
         padding: 0 2px;
     }
 
-    div.dt-toolbar div.dt-page span.dt-page-msg {
+    .dt-page-msg {
         display: none;
     }
 
-    div.dt-toolbar div.dt-reload {
+    .dt-reload {
         margin: 0;
     }
 
-    div.dt-toolbar div.dt-json {
+    .dt-json {
         margin: 0;
     }
 }
 
-div.dt-table {
+.dt-table {
     display: grid;
     line-height: 20px;
     height: 100%;
@@ -1537,12 +1537,7 @@ div.dt-table {
     border-bottom: 1px solid var(--color-dark);
 }
 
-div.dt-table div {
-    height: 20px;
-    overflow: hidden;
-}
-
-div.dt-table div.dt-handle {
+.dt-handle-space {
     position: relative;
     width: 1px;
     height: auto;
@@ -1553,7 +1548,7 @@ div.dt-table div.dt-handle {
     z-index: 2;
 }
 
-div.dt-table div.dt-handle div {
+.dt-handle-handle {
     position: relative;
     left: -7px;
     width: 15px;
@@ -1562,45 +1557,38 @@ div.dt-table div.dt-handle div {
     z-index: 3;
 }
 
-div.dt-table div.dt-handle:hover {
+.dt-handle-space:hover {
     background-color: #ffffff;
 }
 
-div.dt-table div.dt-header {
+.dt-header {
     position: relative;
     background-color: var(--color-border);
     font-weight: bold;
     padding: 2px 6px;
+    height: 20px;
 }
 
-div.dt-table div.dt-header.dt-sort-asc {
+.dt-header img {
+    position: relative;
+    top: 3px;
+}
+
+.dt-sort-asc {
     background-color: var(--color-darker);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMCAxMCc+PHBhdGggc3R5bGU9J2ZpbGw6ICMyMDIwMjAnIGQ9J00zIDEwIEg3IEw1IDh6Jy8+PC9zdmc+Cg); /* asc.svg */
     background-repeat: no-repeat;
     background-position: center bottom;
 }
 
-div.dt-table div.dt-header.dt-sort-desc {
+.dt-sort-desc {
     background-color: var(--color-darker);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMCAxMCc+PHBhdGggc3R5bGU9J2ZpbGw6ICMyMDIwMjAnIGQ9J00zIDAgSDcgTDUgMnonLz48L3N2Zz4K); /* desc.svg */
     background-repeat: no-repeat;
     background-position: center top;
 }
 
-div.dt-table div.dt-header span {
-    position: relative;
-    top: -1px;
-    vertical-align: middle;
-    width: 100%;
-    display: inline-block;
-}
-
-div.dt-table div.dt-header span img {
-    position: relative;
-    top: 4px;
-}
-
-div.dt-table div.dt-noresult {
+.dt-noresult {
     margin-top: 1px;
     border: 1px solid var(--color-red);
     background-color: var(--color-stripe0);
@@ -1611,33 +1599,34 @@ div.dt-table div.dt-noresult {
     padding: 20px;
 }
 
-div.dt-table div.dt-body {
+.dt-body {
     padding: 2px 6px;
     background-color: var(--color-stripe1);
+    height: 20px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-div.dt-table div.dt-body.dt-current-row {
+.dt-current-row {
     position: relative;
     overflow: visible;
     background-color: #ffffff !important;
 }
 
-div.dt-table div.dt-body.active {
+.dt-body.active {
     background-color: #ffffff !important;
 }
 
-div.dt-table div.dt-body[data-row$="0"],
-div.dt-table div.dt-body[data-row$="2"],
-div.dt-table div.dt-body[data-row$="4"],
-div.dt-table div.dt-body[data-row$="6"],
-div.dt-table div.dt-body[data-row$="8"] {
+.dt-body[data-row$="0"],
+.dt-body[data-row$="2"],
+.dt-body[data-row$="4"],
+.dt-body[data-row$="6"],
+.dt-body[data-row$="8"] {
     background-color: var(--color-stripe0);
 }
 
-div.dt-table div.dt-body div {
+.dt-body div {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

@@ -5,7 +5,7 @@ function page_init() {
 
     for (const lang of context.languages) {
         columns.push({
-            display: '<span class="badge lang" style="padding: 0">' + h(lang[0]) + '</span>',
+            display: '<span class="badge lang">' + h(lang[0]) + '</span>',
             name: h(lang[0]),
             align: 'center',
             width: lang[0].length * 8.5,
