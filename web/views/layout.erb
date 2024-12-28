@@ -35,7 +35,7 @@
             </form>
 <% unless @nosearch %>
             <form id="search_form" action="<%= build_link('/search') %>">
-                <input type="text" id="search" name="q" value="<%= h(params[:q]) %>" autocomplete="off" autocapitalize="off"/>
+                <input type="text" id="search" name="q" value="<%= h(params[:q]) %>" autocomplete="off" autocapitalize="off" placeholder="[<%= h(t.osm.key.upcase) %>][=<%= h(t.osm.value.upcase) %>]"/>
                 <div id="suggestions"></div>
             </form>
 <% end %>
