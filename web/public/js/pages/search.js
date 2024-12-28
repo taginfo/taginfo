@@ -4,8 +4,8 @@ const tabsConfig = {
             url: '/api/4/keys/all',
             params: { query: query },
             colModel: [
-                { display: h(texts.misc.count), name: 'count_all', width: 80, sortable: true, align: 'right' },
-                { display: h(texts.osm.key), name: 'key', width: 500, sortable: true }
+                { display: h(texts.misc.count), name: 'count_all', width: 70, sortable: true, align: 'right' },
+                { display: h(texts.osm.key), name: 'key', width: 160, sortable: true }
             ],
             sortname: 'count_all',
             sortorder: 'desc',
@@ -23,9 +23,9 @@ const tabsConfig = {
             url: '/api/4/search/by_value',
             params: { query: query },
             colModel: [
-                { display: h(texts.misc.count), name: 'count_all', width: 80, sortable: true, align: 'right' },
-                { display: h(texts.osm.key), name: 'key', width: 250, sortable: true },
-                { display: h(texts.osm.value), name: 'value', width: 500, sortable: true }
+                { display: h(texts.misc.count), name: 'count_all', width: 50, sortable: true, align: 'right' },
+                { display: h(texts.osm.key), name: 'key', width: 160, sortable: true },
+                { display: h(texts.osm.value), name: 'value', width: 160, sortable: true }
             ],
             sortname: 'count_all',
             sortorder: 'desc',
@@ -44,8 +44,8 @@ const tabsConfig = {
             url: '/api/4/relations/all',
             params: { query: query },
             colModel: [
-                { display: h(texts.misc.count), name: 'count', width: 80, sortable: true, align: 'right' },
-                { display: h(texts.osm.relation_type), name: 'rtype', width: 500, sortable: true }
+                { display: h(texts.misc.count), name: 'count', width: 50, sortable: true, align: 'right' },
+                { display: h(texts.osm.relation_type), name: 'rtype', width: 160, sortable: true }
             ],
             sortname: 'count',
             sortorder: 'desc',
@@ -63,9 +63,9 @@ const tabsConfig = {
             url: '/api/4/search/by_role',
             params: { query: query },
             colModel: [
-                { display: h(texts.misc.count), name: 'count_all', width: 80, sortable: true, align: 'right' },
-                { display: h(texts.osm.relation_type), name: 'rtype', width: 250, sortable: true },
-                { display: h(texts.osm.relation_member_roles), name: 'role', width: 500, sortable: true }
+                { display: h(texts.misc.count), name: 'count_all', width: 50, sortable: true, align: 'right' },
+                { display: h(texts.osm.relation_type), name: 'rtype', width: 160, sortable: true },
+                { display: h(texts.osm.relation_member_roles), name: 'role', width: 160, sortable: true }
             ],
             sortname: 'count_all',
             sortorder: 'desc',
@@ -84,8 +84,8 @@ const tabsConfig = {
             url: '/api/4/search/by_keyword',
             params: { query: query },
             colModel: [
-                { display: h(texts.osm.key), name: 'key', width: 300, sortable: true },
-                { display: h(texts.osm.value), name: 'value', width: 500, sortable: true }
+                { display: h(texts.osm.key), name: 'key', width: 160, sortable: true },
+                { display: h(texts.osm.value), name: 'value', width: 160, sortable: true }
             ],
             sortname: 'key',
             sortorder: 'asc',

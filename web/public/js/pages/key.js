@@ -28,8 +28,8 @@ const tabsConfig = {
             url: '/api/4/key/values',
             params: { key: key, filter: filter_type, lang: lang },
             colModel: [
-                { display: h(texts.osm.value), name: 'value', width: 200, sortable: true },
-                { display: h(texts.misc.count), name: 'count', width: 260, sortable: true, align: 'center' },
+                { display: h(texts.osm.value), name: 'value', width: 140, sortable: true },
+                { display: h(texts.misc.count), name: 'count', width: 230, sortable: true, align: 'center' },
                 { display: h(texts.taginfo.wiki), name: 'in_wiki', width: 25, sortable: true, align: 'center', title: h(texts.misc.in_wiki_tooltip) },
                 { display: h(texts.misc.description), name: 'description', width: 200, title: h(texts.pages.key.tag_description_from_wiki) }
             ],
@@ -51,9 +51,9 @@ const tabsConfig = {
             url: '/api/4/key/combinations',
             params: { key: key, filter: filter_type },
             colModel: [
-                { display: h(texts.misc.count) + ' &rarr;', name: 'to_count', width: 260, sortable: true, align: 'center', title: h(texts.pages.key.other_keys_used.to_count_tooltip) },
-                { display: h(texts.pages.key.other_keys_used.other), name: 'other_key', width: 400, sortable: true, title: h(texts.pages.key.other_keys_used.other_key_tooltip) },
-                { display: '&rarr; ' + h(texts.misc.count), name: 'from_count', width: 260, sortable: true, align: 'center', title: h(texts.pages.key.other_keys_used.from_count_tooltip) }
+                { display: h(texts.misc.count) + ' &rarr;', name: 'to_count', width: 250, sortable: true, align: 'center', title: h(texts.pages.key.other_keys_used.to_count_tooltip) },
+                { display: h(texts.pages.key.other_keys_used.other), name: 'other_key', width: 280, sortable: true, title: h(texts.pages.key.other_keys_used.other_key_tooltip) },
+                { display: '&rarr; ' + h(texts.misc.count), name: 'from_count', width: 250, sortable: true, align: 'center', title: h(texts.pages.key.other_keys_used.from_count_tooltip) }
             ],
             searchitems: [
                 { display: h(texts.pages.key.other_keys_used.other), name: 'other_key' }
@@ -102,10 +102,10 @@ const tabsConfig = {
             url: '/api/4/key/wiki_pages',
             params: { key: key },
             colModel: [
-                { display: h(texts.misc.language), name: 'lang', width: 150 },
-                { display: h(texts.pages.key.wiki_pages.wiki_page), name: 'title', width: 160, align: 'right' },
-                { display: h(texts.misc.description), name: 'description', width: 400 },
-                { display: h(texts.misc.image), name: 'image', width: 120 },
+                { display: h(texts.misc.language), name: 'lang', width: 100 },
+                { display: h(texts.pages.key.wiki_pages.wiki_page), name: 'title', width: 140, align: 'right' },
+                { display: h(texts.misc.description), name: 'description', width: 300 },
+                { display: h(texts.misc.image), name: 'image', width: 100 },
                 { display: h(texts.osm.objects), name: 'objects', width:  80 },
                 { display: h(texts.misc.status), name: 'status', width: 60, title: h(texts.misc.approval_status) },
                 { display: h(texts.pages.key.wiki_pages.implied_tags), name: 'tags_implied', width: 120 },
@@ -137,8 +137,8 @@ const tabsConfig = {
             url: '/api/4/key/projects',
             params: { key: key, filter: filter_type },
             colModel: [
-                { display: h(texts.taginfo.project), name: 'project_name', width: 280, sortable: true },
-                { display: h(texts.osm.tag), name: 'tag', width: 220, sortable: true },
+                { display: h(texts.taginfo.project), name: 'project_name', width: 250, sortable: true },
+                { display: h(texts.osm.tag), name: 'tag', width: 200, sortable: true },
                 { display: h(texts.osm.objects), name: 'objects', width:  80 },
                 { display: h(texts.pages.key.projects.description), name: 'description', width: 200 }
             ],

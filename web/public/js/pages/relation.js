@@ -19,11 +19,11 @@ const tabsConfig = {
             url: '/api/4/relation/roles',
             params: { rtype: rtype },
             colModel: [
-                { display: h(texts.osm.relation_member_role), name: 'role', width: 250, sortable: true },
-                { display: '<img src="/img/types/all.svg" width="16" height="16" alt=""/> ' + h(texts.osm.relation_members), name: 'count_all_members', width: 250, sortable: true, align: 'center', title: h(texts.pages.relation.roles.objects_tooltip) },
-                { display: '<img src="/img/types/node.svg" width="16" height="16" alt=""/> ' + h(texts.osm.relation_member_nodes), name: 'count_node_members', width: 250, sortable: true, align: 'center', title: h(texts.pages.relation.roles.nodes_tooltip) },
-                { display: '<img src="/img/types/way.svg" width="16" height="16" alt=""/> ' + h(texts.osm.relation_member_ways), name: 'count_way_members', width: 250, sortable: true, align: 'center', title: h(texts.pages.relation.roles.ways_tooltip) },
-                { display: '<img src="/img/types/relation.svg" width="16" height="16" alt=""/> ' + h(texts.osm.relation_member_relations), name: 'count_relation_members', width: 250, sortable: true, align: 'center', title: h(texts.pages.relation.roles.relations_tooltip) },
+                { display: h(texts.osm.relation_member_role), name: 'role', width: 120, sortable: true },
+                { display: '<img src="/img/types/all.svg" width="16" height="16" alt=""/> ' + h(texts.osm.relation_members), name: 'count_all_members', width: 240, sortable: true, align: 'center', title: h(texts.pages.relation.roles.objects_tooltip) },
+                { display: '<img src="/img/types/node.svg" width="16" height="16" alt=""/> ' + h(texts.osm.relation_member_nodes), name: 'count_node_members', width: 240, sortable: true, align: 'center', title: h(texts.pages.relation.roles.nodes_tooltip) },
+                { display: '<img src="/img/types/way.svg" width="16" height="16" alt=""/> ' + h(texts.osm.relation_member_ways), name: 'count_way_members', width: 240, sortable: true, align: 'center', title: h(texts.pages.relation.roles.ways_tooltip) },
+                { display: '<img src="/img/types/relation.svg" width="16" height="16" alt=""/> ' + h(texts.osm.relation_member_relations), name: 'count_relation_members', width: 240, sortable: true, align: 'center', title: h(texts.pages.relation.roles.relations_tooltip) },
             ],
             searchitems: [
                 { display: h(texts.osm.relation_member_role), name: 'role' }
@@ -48,10 +48,10 @@ const tabsConfig = {
             url: '/api/4/relation/wiki_pages',
             params: { rtype: rtype },
             colModel: [
-                { display: h(texts.misc.language), name: 'lang', width: 150 },
-                { display: h(texts.pages.relation.wiki_pages.wiki_page), name: 'title', width: 160, align: 'right' },
-                { display: h(texts.misc.description), name: 'description', width: 500 },
-                { display: h(texts.misc.image), name: 'image', width: 300 }
+                { display: h(texts.misc.language), name: 'lang', width: 100 },
+                { display: h(texts.pages.relation.wiki_pages.wiki_page), name: 'title', width: 140, align: 'right' },
+                { display: h(texts.misc.description), name: 'description', width: 400 },
+                { display: h(texts.misc.image), name: 'image', width: 100 }
             ],
             usePager: false,
             processRow: row => {
@@ -71,7 +71,7 @@ const tabsConfig = {
             params: { rtype: rtype },
             colModel: [
                 { display: h(texts.taginfo.project), name: 'project_name', width: 280, sortable: true },
-                { display: h(texts.pages.relation.projects.description), name: 'description', width: 600 }
+                { display: h(texts.pages.relation.projects.description), name: 'description', width: 320 }
             ],
             searchitems: [
                 { display: h(texts.taginfo.project) + '/' + h(texts.osm.value), name: 'project_value' }

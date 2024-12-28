@@ -55,10 +55,10 @@ const tabsConfig = {
             url: '/api/4/tag/wiki_pages',
             params: { key: key, value: value },
             colModel: [
-                { display: h(texts.misc.language), name: 'lang', width: 150 },
-                { display: h(texts.pages.tag.wiki_pages.wiki_page), name: 'title', width: 200, align: 'right' },
-                { display: h(texts.misc.description), name: 'description', width: 400 },
-                { display: h(texts.misc.image), name: 'image', width: 120 },
+                { display: h(texts.misc.language), name: 'lang', width: 100 },
+                { display: h(texts.pages.tag.wiki_pages.wiki_page), name: 'title', width: 180, align: 'right' },
+                { display: h(texts.misc.description), name: 'description', width: 300 },
+                { display: h(texts.misc.image), name: 'image', width: 100 },
                 { display: h(texts.osm.objects), name: 'objects', width:  80 },
                 { display: h(texts.misc.status), name: 'status', width: 60, title: h(texts.misc.approval_status) },
                 { display: h(texts.pages.tag.wiki_pages.implied_tags), name: 'tags_implied', width: 120 },
@@ -90,8 +90,8 @@ const tabsConfig = {
             url: '/api/4/tag/projects',
             params: { key: key, value: value, filter: filter_type },
             colModel: [
-                { display: h(texts.taginfo.project), name: 'project_name', width: 280, sortable: true },
-                { display: h(texts.osm.tag), name: 'tag', width: 220, sortable: true },
+                { display: h(texts.taginfo.project), name: 'project_name', width: 250, sortable: true },
+                { display: h(texts.osm.tag), name: 'tag', width: 200, sortable: true },
                 { display: h(texts.osm.objects), name: 'objects', width:  80 },
                 { display: h(texts.pages.tag.projects.description), name: 'description', width: 200 }
             ],
