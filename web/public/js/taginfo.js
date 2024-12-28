@@ -1857,12 +1857,12 @@ function whenReady() {
             document.getElementById('search').focus();
         }
         questionMarkKeycode = null;
-        document.documentElement.style.setProperty('--key-info-visibility', 'hidden');
+        document.documentElement.style.removeProperty('--key-info-visibility');
     });
 
     document.addEventListener('keyup', function(event) {
         questionMarkKeycode = null;
-        document.documentElement.style.setProperty('--key-info-visibility', 'hidden');
+        document.documentElement.style.removeProperty('--key-info-visibility');
     });
 
     document.getElementById('search').addEventListener('keyup', function(event) {
