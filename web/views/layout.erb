@@ -68,9 +68,9 @@
 <%= yield %>
     </main>
     <footer class="no-print">
-        <div id="footer_left"><span id="osmlink"><a class="extlink" href="//www.openstreetmap.org/"><b>OpenStreetMap</b></a> &middot;</span>
+        <div class="footer-start"><span id="osmlink"><a class="extlink" href="//www.openstreetmap.org/"><b>OpenStreetMap</b></a> &middot;</span>
             <a href="//www.openstreetmap.org/copyright">Data &copy; OSM contributors (ODbL)</a></div>
-        <div id="footer_right">
+        <div class="footer-end">
 <% if SECTIONS[:download] %>
             <a href="<%= build_link('/download') %>"><%= h(t.taginfo.download) %></a> &middot;
 <% end %>

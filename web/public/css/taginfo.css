@@ -135,7 +135,7 @@ a.extlink:before {
 }
 
 html[dir="rtl"] a.extlink:before {
-    content: "\1F517\00A0";
+    content: "\2190\2009";
 }
 
 a.section {
@@ -339,8 +339,8 @@ input:focus {
     }
 
     div#tools {
-        clear: right;
-        float: right;
+        clear: inline-end;
+        float: inline-end;
         font-size: 0.8rem;
         margin-top: 4px;
     }
@@ -354,12 +354,6 @@ input:focus {
     div#tools li {
         display: inline;
     }
-
-    html[dir="rtl"] div#tools {
-        clear: left;
-        float: left;
-    }
-
 }
 
 @media screen and (max-width: 640px) {
@@ -427,11 +421,7 @@ input:focus {
         width: 32px;
         height: 32px;
         margin: 0 0 8px 8px;
-        float: right;
-    }
-
-    html[dir="rtl"] div#toolsmenu {
-        float: left;
+        float: inline-end;
     }
 
     div#tools {
@@ -555,7 +545,7 @@ div.section_title {
     }
 }
 
-/* ========== */
+/* ===== FOOTER ===== */
 
 footer {
     font-size: 0.9rem;
@@ -563,21 +553,12 @@ footer {
     padding: 6px 0;
 }
 
-div#footer_left {
-    float: left;
+.footer-start {
+    float: inline-start;
 }
 
-html[dir="rtl"] div#footer_left {
-    direction: ltr;
-    float:right;
-}
-
-div#footer_right {
-    float: right;
-}
-
-html[dir="rtl"] div#footer_right {
-    float: left;
+.footer-end {
+    float: inline-end;
 }
 
 @media screen and (max-width: 640px) {
