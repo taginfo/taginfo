@@ -70,18 +70,20 @@ CREATE TABLE wiki_images (
 DROP TABLE IF EXISTS wikipages_keys;
 
 CREATE TABLE wikipages_keys (
-    key        TEXT,
-    langs      TEXT,
-    lang_count INTEGER
+    key             TEXT,
+    langs           TEXT,
+    lang_count      INTEGER,
+    approval_status TEXT
 );
 
 DROP TABLE IF EXISTS wikipages_tags;
 
 CREATE TABLE wikipages_tags (
-    key        TEXT,
-    value      TEXT,
-    langs      TEXT,
-    lang_count INTEGER
+    key             TEXT,
+    value           TEXT,
+    langs           TEXT,
+    lang_count      INTEGER,
+    approval_status TEXT
 );
 
 DROP TABLE IF EXISTS wiki_languages;

@@ -28,8 +28,17 @@ CREATE INDEX relation_pages_rtype_idx ON relation_pages(rtype);
 
 CREATE INDEX wiki_images_image_idx ON wiki_images(image);
 
-INSERT INTO wikipages_keys (key,        langs, lang_count) SELECT key,        group_concat(lang || ' ' || status), count(*) FROM wikipages WHERE value IS     NULL GROUP BY key;
-INSERT INTO wikipages_tags (key, value, langs, lang_count) SELECT key, value, group_concat(lang || ' ' || status), count(*) FROM wikipages WHERE value IS NOT NULL AND value != '*' GROUP BY key, value;
+INSERT INTO wikipages_keys (key, langs, lang_count, approval_status)
+    SELECT key, group_concat(lang || ' ' || status), count(*), max(approval_status)
+        FROM wikipages WHERE value IS NULL GROUP BY key;
+
+UPDATE wikipages_keys SET approval_status = NULL WHERE key IN (SELECT key FROM inconsistent_status_keys);
+
+INSERT INTO wikipages_tags (key, value, langs, lang_count, approval_status)
+    SELECT key, value, group_concat(lang || ' ' || status), count(*), max(approval_status)
+        FROM wikipages WHERE value IS NOT NULL AND value != '*' GROUP BY key, value;
+
+UPDATE wikipages_tags SET approval_status = NULL FROM inconsistent_status_tags i WHERE wikipages_tags.key = i.key AND wikipages_tags.value = i.value;
 
 INSERT INTO wiki_languages (language, count_pages) SELECT lang, count(*) FROM wikipages GROUP BY lang;
 
