@@ -50,8 +50,8 @@ class Source
         @update_end   = update_end
         @visible      = visible
 
-        @dbsize = File.size("#{ data_dir }/#{ dbname }").to_bytes rescue 0
-        @dbpack = File.size("#{ download_dir }/#{ dbname }.bz2").to_bytes rescue 0
+        @dbsize = File.size?("#{ data_dir }/#{ dbname }")&.to_bytes
+        @dbpack = File.size?("#{ download_dir }/#{ dbname }.bz2")&.to_bytes
     end
 
     def dbname

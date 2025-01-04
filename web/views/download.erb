@@ -26,8 +26,8 @@
 <% @sources.visible.each_with_index do |source, n| c = (n%2==0) ? '' : ' even' %>
         <tr>
             <td class="tl<%= c %>"><%= source.link_download %></td>
-            <td class="tr<%= c %>"><%= source.dbpack != 0 ? source.dbpack : "<span class='empty'>#{ t.misc.unknown }</span>" %></td>
-            <td class="tr<%= c %>"><%= source.dbsize != 0 ? source.dbsize : "<span class='empty'>#{ t.misc.unknown }</span>" %></td>
+            <td class="tr<%= c %>"><%= source.dbpack ? source.dbpack : "<span class='empty'>#{ t.misc.unknown }</span>" %></td>
+            <td class="tr<%= c %>"><%= source.dbsize ? source.dbsize : "<span class='empty'>#{ t.misc.unknown }</span>" %></td>
             <td class="tl<%= c %>"><%= t.sources[source.id].description %></td>
         </tr>
 <% end %>
