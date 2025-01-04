@@ -66,8 +66,4 @@ class Source
         ((Time.parse(update_end) - Time.parse(update_start)) / 60).round
     end
 
-    def has_index_page?
-        File.exist?("views/sources/#{ id }/index.erb")
-    end
-
 end
