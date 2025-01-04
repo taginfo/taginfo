@@ -26,9 +26,9 @@ const tabsConfig = {
             csv: true,
             params: { key: key, value: value, filter: filter_type },
             colModel: [
-                { display: h(texts.misc.count) + ' &rarr;', name: 'to_count', width: 260, sortable: true, align: 'center', title: h(texts.pages.tag.other_tags_used.to_count_tooltip) },
-                { display: h(texts.pages.tag.other_tags_used.other), name: 'other_tag', width: 400, sortable: true, title: h(texts.pages.tag.other_tags_used.other_key_tooltip) },
-                { display: '&rarr; ' + h(texts.misc.count), name: 'from_count', width: 260, sortable: true, align: 'center', title: h(texts.pages.tag.other_tags_used.from_count_tooltip) }
+                { display: h(texts.misc.count) + ' &rarr;', name: 'to_count', width: 250, sortable: true, align: 'center', title: h(texts.pages.tag.other_tags_used.to_count_tooltip) },
+                { display: h(texts.pages.tag.other_tags_used.other), name: 'other_tag', width: 180, sortable: true, title: h(texts.pages.tag.other_tags_used.other_key_tooltip) },
+                { display: '&rarr; ' + h(texts.misc.count), name: 'from_count', width: 250, sortable: true, align: 'center', title: h(texts.pages.tag.other_tags_used.from_count_tooltip) }
             ],
             searchitems: [
                 { display: h(texts.pages.tag.other_tags_used.other), name: 'other_tag' }

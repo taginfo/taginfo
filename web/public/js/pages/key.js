@@ -54,7 +54,7 @@ const tabsConfig = {
             params: { key: key, filter: filter_type },
             colModel: [
                 { display: h(texts.misc.count) + ' &rarr;', name: 'to_count', width: 250, sortable: true, align: 'center', title: h(texts.pages.key.other_keys_used.to_count_tooltip) },
-                { display: h(texts.pages.key.other_keys_used.other), name: 'other_key', width: 280, sortable: true, title: h(texts.pages.key.other_keys_used.other_key_tooltip) },
+                { display: h(texts.pages.key.other_keys_used.other), name: 'other_key', width: 140, sortable: true, title: h(texts.pages.key.other_keys_used.other_key_tooltip) },
                 { display: '&rarr; ' + h(texts.misc.count), name: 'from_count', width: 250, sortable: true, align: 'center', title: h(texts.pages.key.other_keys_used.from_count_tooltip) }
             ],
             searchitems: [

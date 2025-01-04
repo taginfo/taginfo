@@ -580,8 +580,8 @@ div.section_title {
 
 @media screen and (max-width: 640px) {
     main {
-        margin-left: 10px;
-        margin-right: 10px;
+        margin-left: 5px;
+        margin-right: 5px;
     }
 
     div.section_title {
@@ -619,7 +619,7 @@ footer {
 
 @media screen and (max-width: 640px) {
     footer {
-        margin: 0 10px;
+        margin: 0 5px;
     }
 }
 
@@ -638,7 +638,7 @@ div.box :first-child {
 
 @media screen and (max-width: 640px) {
     div.box {
-        padding: 10px;
+        padding: 5px;
     }
 }
 
@@ -719,6 +719,12 @@ div#tabs > div {
     background-color: var(--color-light);
     border-radius: 4px;
     flex: 1 1 auto;
+}
+
+@media screen and (max-width: 640px) {
+    div#tabs > div {
+        padding: 10px 5px;
+    }
 }
 
 /* ==========  */
@@ -1182,9 +1188,15 @@ div.fbox h2 {
 
 div.fbox > div {
     background-color: var(--color-light);
-    padding: 8px;
+    padding: 8px 2px;
     border-radius: 4px;
     height: calc(100% - 54px);
+}
+
+@media screen and (max-width: 640px) {
+    div.fbox > div {
+        padding: 4px 2px;
+    }
 }
 
 div.fbox > div p {
@@ -1514,8 +1526,14 @@ div.gbox > div:last-child {
         margin: 0;
     }
 
-    .dt-api {
-        margin: 0;
+    .dt-api:not(:empty) {
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .dt-api:not(:empty) {
+        display: none;
     }
 }
 

@@ -74,6 +74,7 @@ class Taginfo < Sinatra::Base
 
     configure do
         set :app_file, __FILE__
+        #set :bind, '0.0.0.0'
 
         # Disable rack-protection library because it messes up embedding
         # taginfo in an iframe. This should probably be done more
