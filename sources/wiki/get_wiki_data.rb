@@ -376,12 +376,12 @@ class WikiPage
             @approval_status = template.named_parameters['status'].join(',')
         end
 
-        if template.named_parameters['statuslink']
-            @statuslink = template.named_parameters['statuslink'][0]
-            if @statuslink.instance_of?(Template)
-                @statuslink = nil
-            end
-        end
+        return unless template.named_parameters['statuslink']
+
+        @statuslink = template.named_parameters['statuslink'][0]
+        return unless @statuslink.instance_of?(Template)
+
+        @statuslink = nil
     end
 
     def parse_template(template, level, db)

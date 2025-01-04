@@ -6,9 +6,9 @@ def javascript(url)
 end
 
 def javascript_if_exists(url)
-    if File.exist?("public/js/#{ url }.js")
-        javascript url
-    end
+    return unless File.exist?("public/js/#{ url }.js")
+
+    javascript url
 end
 
 def javascript_tags

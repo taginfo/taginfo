@@ -123,29 +123,29 @@ class APIParameters
     attr_reader :page, :results_per_page, :sortorder
     attr_accessor :sortname
 
-    def initialize(p)
-        if p[:rp].nil? || p[:rp] == '0' || p[:rp] == '' || p[:page].nil? || p[:page] == '0' || p[:page] == ''
+    def initialize(params)
+        if params[:rp].nil? || params[:rp] == '0' || params[:rp] == '' || params[:page].nil? || params[:page] == '0' || params[:page] == ''
             @page = 0
             @results_per_page = 0
         else
-            if p[:rp] !~ /^[0-9]{1,3}$/
+            if params[:rp] !~ /^[0-9]{1,3}$/
                 raise ArgumentError, 'results per page must be integer between 0 and 999'
             end
-            if p[:page] !~ /^[0-9]{1,6}$/
+            if params[:page] !~ /^[0-9]{1,6}$/
                 raise ArgumentError, 'page must be integer between 0 and 999999'
             end
 
-            @page = p[:page].to_i
-            @results_per_page = p[:rp].to_i
+            @page = params[:page].to_i
+            @results_per_page = params[:rp].to_i
         end
 
-        @sortname = if p[:sortname].nil? || p[:sortname] == ''
+        @sortname = if params[:sortname].nil? || params[:sortname] == ''
                         nil
                     else
-                        p[:sortname].gsub(/[^a-z_]/, '_')
+                        params[:sortname].gsub(/[^a-z_]/, '_')
                     end
 
-        @sortorder = if p[:sortorder] == 'desc' || p[:sortorder] == 'DESC'
+        @sortorder = if params[:sortorder] == 'desc' || params[:sortorder] == 'DESC'
                          'DESC'
                      else
                          'ASC'

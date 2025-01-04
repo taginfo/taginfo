@@ -77,7 +77,7 @@ class Taginfo < Sinatra::Base
         return [
             query, # the query string
             res, # the list of suggestions
-            res.map{ |item| '' }, # the standard says this is for descriptions, we don't have any so this is empty
+            res.map{ |_item| '' }, # the standard says this is for descriptions, we don't have any so this is empty
             res.map{ |item| @taginfo_config.get('instance.url') + '/tags/' + item } # the page this search should got to (ignored by FF, Chrome)
         ].to_json + "\n"
     end

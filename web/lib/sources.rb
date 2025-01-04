@@ -42,7 +42,7 @@ class Source
     # Create new source
     #  id - Symbol with id for this source
     #  name - Name of this source
-    def initialize(data_dir, download_dir, id, name, data_until, update_start, update_end, visible)
+    def initialize(data_dir, download_dir, id, name, data_until, update_start, update_end, visible) # rubocop:disable Metrics/ParameterLists
         @id           = id.to_sym
         @name         = name
         @data_until   = data_until

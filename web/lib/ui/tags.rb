@@ -62,7 +62,7 @@ class Taginfo < Sinatra::Base
         @context[:key] = @key
         @context[:value] = @value
 
-        if @has_rtype_link or @links.size > 0
+        if @has_rtype_link || !@links.empty?
             @has_link_box = true
         end
 

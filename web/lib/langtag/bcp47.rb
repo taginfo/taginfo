@@ -48,9 +48,9 @@ module BCP47
                 return
             end
 
-            @prefix  = $1 ? $1.chop : ''
-            @type    = $2 ? $2.chop : ''
-            @langtag = $3 ? $3[1,1000] : ''
+            @prefix  = ::Regexp.last_match(1) ? ::Regexp.last_match(1).chop : ''
+            @type    = ::Regexp.last_match(2) ? ::Regexp.last_match(2).chop : ''
+            @langtag = ::Regexp.last_match(3) ? ::Regexp.last_match(3)[1, 1000] : ''
             if @langtag == ''
                 return
             end
@@ -94,9 +94,10 @@ module BCP47
                 end
             end
 
-            if !subtags.empty? && subtags[0].match(REGION_PATTERN)
-                @region = subtags.shift
-            end
+            return if subtags.empty?
+            return unless subtags[0].match(REGION_PATTERN)
+
+            @region = subtags.shift
         end
 
     end

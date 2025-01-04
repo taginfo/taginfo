@@ -73,16 +73,16 @@ projects.each do |id, url|
     if response.code == '200'
         content_type = response['content-type'].force_encoding('UTF-8')
         content_type.sub!(/ *;.*/, '')
-        if vips_available and (content_type == 'image/png' or content_type == 'image/jpg')
+        if vips_available && ['image/png', 'image/jpg'].include?(content_type)
             input_image = Vips::Image.new_from_source(Vips::Source.new_from_memory(response.body), '')
-            if input_image.width > 32 or input_image.height > 32
+            if input_image.width > 32 || input_image.height > 32
                 resized_image = input_image.resize(32.to_f / [input_image.width, input_image.height].max)
                 puts "  #{id} #{url} #{content_type} (#{input_image.width}x#{input_image.height} RESIZED TO #{resized_image.width}x#{resized_image.height})"
-                if content_type == 'image/png'
-                    image = SQLite3::Blob.new(resized_image.pngsave_buffer)
-                else
-                    image = SQLite3::Blob.new(resized_image.jpgsave_buffer)
-                end
+                image = SQLite3::Blob.new(if content_type == 'image/png'
+                                              resized_image.pngsave_buffer
+                                          else
+                                              resized_image.jpgsave_buffer
+                                          end)
             else
                 puts "  #{id} #{url} #{content_type} (#{input_image.width}x#{input_image.height} USED AS IS)"
                 image = SQLite3::Blob.new(response.body)

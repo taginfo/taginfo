@@ -117,7 +117,7 @@ module SQL
             self
         end
 
-        def is_null(attribute)
+        def is_null(attribute) # rubocop:disable Naming/PredicateName
             condition("#{attribute} IS NULL")
             self
         end
@@ -173,9 +173,9 @@ module SQL
             self
         end
 
-        def paging(ap)
-            if ap.do_paging?
-                limit(ap.results_per_page, ap.first_result)
+        def paging(params)
+            if params.do_paging?
+                limit(params.results_per_page, params.first_result)
             end
             self
         end
@@ -227,7 +227,7 @@ module SQL
 
     class OrderElement
 
-        @@DIRECTION = { 'ASC' => 'DESC', 'DESC' => 'ASC' }
+        @@direction = { 'ASC' => 'DESC', 'DESC' => 'ASC' }
 
         def initialize(column, reverse)
             @column  = column
@@ -235,7 +235,7 @@ module SQL
         end
 
         def to_s(direction)
-            dir = @reverse ? @@DIRECTION[direction.upcase] : direction.upcase
+            dir = @reverse ? @@direction[direction.upcase] : direction.upcase
             "#{@column} #{dir}"
         end
 
@@ -281,6 +281,10 @@ module SQL
 
         def method_missing(field, attribute = nil)
             _add(field, attribute)
+        end
+
+        def respond_to_missing?(_name, _include_private)
+            true
         end
 
     end
