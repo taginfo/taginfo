@@ -8,7 +8,7 @@ class TagLink
     end
 
     def html
-        external_link('', @title, @url, true)
+        external_link('', @title, @url, new_window: true)
     end
 
 end

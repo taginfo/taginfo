@@ -85,11 +85,11 @@ def xapi_url(element, key, value = nil)
 end
 
 def xapi_link(element, key, value = nil)
-    external_link('xapi_button', 'XAPI', xapi_url(element, key, value), true)
+    external_link('xapi_button', 'XAPI', xapi_url(element, key, value), new_window: true)
 end
 
 def josm_link(element, key, value = nil)
-    external_link('josm_button', 'JOSM', 'http://127.0.0.1:8111/import?url=' + Rack::Utils.escape(xapi_url(element, key, value)), true)
+    external_link('josm_button', 'JOSM', 'http://127.0.0.1:8111/import?url=' + Rack::Utils.escape(xapi_url(element, key, value)), new_window: true)
 end
 
 def quote_double(text)
@@ -126,7 +126,7 @@ def turbo_link(count, filter, key, value = nil)
         url = @taginfo_config.get('turbo.url_prefix', 'https://overpass-turbo.eu/?') + Rack::Utils.build_query(parameters)
     end
 
-    external_link('turbo_button', 'Overpass turbo', url, true)
+    external_link('turbo_button', 'Overpass turbo', url, new_window: true)
 end
 
 def level0_url(filter, key, value)
@@ -153,10 +153,10 @@ def level0_url(filter, key, value)
 end
 
 def level0_link(filter, key, value = nil)
-    external_link('level0_button', 'Level0 Editor', level0_url(filter, key, value), true)
+    external_link('level0_button', 'Level0 Editor', level0_url(filter, key, value), new_window: true)
 end
 
-def external_link(id, title, link, new_window = false)
+def external_link(id, title, link, new_window: false)
     target = new_window ? 'target="_blank" ' : ''
     %(<a id="#{id}" #{target}rel="nofollow" class="extlink" href="#{link}">#{title}</a>)
 end
