@@ -164,7 +164,7 @@ class APIParameters
                          'ASC'
                      end
 
-        if p[:format] == 'csv'
+        if params[:format] == 'csv'
             @format = :csv
         else
             @format = :json
