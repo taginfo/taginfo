@@ -168,11 +168,6 @@ class Taginfo < Sinatra::Base
         erb :index
     end
 
-    get '/test-index' do
-        javascript "pages/test-index"
-        erb :'test-index'
-    end
-
     #-------------------------------------
 
     get '/about' do
