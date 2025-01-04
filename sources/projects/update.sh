@@ -9,7 +9,9 @@
 
 set -euo pipefail
 
-readonly SRCDIR=$(dirname "$(readlink -f "$0")")
+SRCDIR=$(dirname "$(readlink -f "$0")")
+readonly SRCDIR
+
 readonly DATADIR=$1
 
 if [ -z "$DATADIR" ]; then

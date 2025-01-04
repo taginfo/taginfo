@@ -19,7 +19,8 @@ fi
 readonly TAGINFO_SCRIPT="$1"
 
 if [ ! -v LAST_MESSAGE_TIMESTAMP ]; then
-    typeset -i -x LAST_MESSAGE_TIMESTAMP=$(date +%s)
+    typeset -i -x LAST_MESSAGE_TIMESTAMP
+    LAST_MESSAGE_TIMESTAMP=$(date +%s)
 fi
 
 print_message_impl() {

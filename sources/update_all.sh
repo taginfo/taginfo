@@ -18,7 +18,9 @@
 
 set -euo pipefail
 
-readonly SRCDIR=$(dirname "$(readlink -f "$0")")
+SRCDIR=$(dirname "$(readlink -f "$0")")
+readonly SRCDIR
+
 readonly DATADIR=$1
 
 if [ -z "$DATADIR" ]; then
@@ -29,7 +31,9 @@ fi
 # shellcheck source=/dev/null
 source "$SRCDIR/util.sh" all
 
-readonly LOGFILE=$(date +%Y%m%dT%H%M)
+LOGFILE=$(date +%Y%m%dT%H%M)
+readonly LOGFILE
+
 mkdir -p "$DATADIR/log"
 exec >"$DATADIR/log/$LOGFILE.log" 2>&1
 

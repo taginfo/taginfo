@@ -12,7 +12,9 @@ set -euo pipefail
 # uncomment this if you want to get a core file in case tagstats crashes
 #ulimit -c unlimited
 
-readonly SRCDIR=$(dirname "$(readlink -f "$0")")
+SRCDIR=$(dirname "$(readlink -f "$0")")
+readonly SRCDIR
+
 readonly DATADIR=$1
 
 if [ -z "$DATADIR" ]; then
