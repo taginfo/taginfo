@@ -155,7 +155,7 @@
             <div id="grid-wiki"></div>
         <% else %>
             <p class="empty"><%= h(t.pages.tag.wiki_pages.none_found) %> <%= @wiki_count_key > 0 ? t.pages.tag.wiki_pages.suggest_key_wiki_page('<span id="keylink"></span>') : '' %></p>
-            <p><a class="extlink" target="_blank" rel="nofollow" href="//wiki.openstreetmap.org/w/index.php?action=edit&title=Tag:<%= escape(@tag) %>"><%= h(t.pages.tag.wiki_pages.create) %></a></p>
+            <p><a class="extlink" target="_blank" rel="nofollow" href="//wiki.openstreetmap.org/w/index.php?action=edit&redlink=1&title=Tag:<%= escape(@tag) %>"><%= h(t.pages.tag.wiki_pages.create) %></a></p>
         <% end %>
     </div>
     <div id="projects">
