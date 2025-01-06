@@ -9,12 +9,8 @@ class Report
         @@reports.sort_by(&:title).each(&block)
     end
 
-    def self.each_visible(&block)
-        @@reports.select(&:visible?).sort_by(&:title).each(&block)
-    end
-
-    def self.each_visible_with_index(&block)
-        @@reports.select(&:visible?).sort_by(&:title).each_with_index(&block)
+    def self.each_visible_with_index(sources, &block)
+        @@reports.select{ |report| report.visible?(sources) }.sort_by(&:title).each_with_index(&block)
     end
 
     def initialize(title, *sources)
@@ -39,8 +35,8 @@ class Report
         '/reports/' + name
     end
 
-    def visible?
-        @visible
+    def visible?(sources)
+        @visible && @sources.all? { |s| sources.get(s[0]) }
     end
 
 end
@@ -53,3 +49,4 @@ Report.new 'Wiki pages about non-existing keys', :db, :wiki
 Report.new 'Name tags' # disabled
 Report.new 'Similar keys', :db
 Report.new 'Historic development', :db
+Report.new 'Discardable tags', :db, :wiki, :sw

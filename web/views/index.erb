@@ -42,7 +42,7 @@ relations = @db.select("SELECT rtype FROM db.relation_types ORDER BY count DESC 
         <div>
             <p><%= t.pages.reports.intro %></p>
             <ul style="margin: 0 0 0 18px; padding: 0;">
-<% Report.each_visible do |report| %>
+<% Report.each_visible_with_index(@sources) do |report| %>
                 <li><a href="<%= build_link(report.url) %>"><%= h(t.reports[report.name].name) %></a></li>
 <% end %>
             </ul>

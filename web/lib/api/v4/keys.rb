@@ -327,4 +327,57 @@ class Taginfo < Sinatra::Base
         )
     end
 
+    api(4, 'keys/discardable', {
+        :description => 'Return discardable tags.',
+        :formats => [:json, :csv],
+        :paging => :optional,
+        :sort => %w[ key wiki id josm count_all ],
+        :result => paging_results([
+            [:key,       :STRING, 'Key'],
+            [:wiki,      :BOOL,   ''],
+            [:id,        :BOOL,   ''],
+            [:josm,      :BOOL,   ''],
+            [:count_all, :INT,    'Number of objects with this key'],
+        ]),
+        :example => { :page => 1, :rp => 10 },
+        :ui => '/reports/discardable_tags'
+    }) do
+        total = @db.select("WITH keys AS (SELECT DISTINCT key FROM discardable_tags UNION SELECT key FROM wiki.wikipages_keys WHERE approval_status='discardable') SELECT count(DISTINCT key) FROM keys").get_first_value().to_i
+
+        res = @db.select("
+WITH fromsw AS (
+    SELECT key, max(source) FILTER (WHERE source = 'id') AS id, max(source) FILTER (WHERE source = 'josm') AS josm FROM discardable_tags GROUP BY key
+),
+fromwiki AS (
+    SELECT key, 'wiki' AS wiki FROM wiki.wikipages_keys WHERE approval_status='discardable'
+),
+discardable AS (
+    SELECT key, wiki, id, josm FROM fromsw s FULL OUTER JOIN fromwiki w USING (key)
+)
+SELECT d.key, d.wiki, d.id, d.josm, k.count_all FROM discardable d, keys k WHERE d.key = k.key
+").
+            order_by(@ap.sortname, @ap.sortorder) do |o|
+                o.key 'd.key'
+                o.wiki
+                o.id
+                o.josm
+                o.count_all
+            end.
+            paging(@ap).
+            execute
+
+        @attachment = "discardable-tags.csv"
+
+        return generate_result(@api, total,
+            res.map do |row| {
+                :key       => row['key'],
+                :wiki      => row['wiki'] == 'wiki',
+                :id        => row['id'] == 'id',
+                :josm      => row['josm'] == 'josm',
+                :count_all => row['count_all']
+            }
+            end
+        )
+    end
+
 end

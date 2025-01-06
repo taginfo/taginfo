@@ -8,11 +8,9 @@
     </div>
 </div>
 <div class="fbox">
-    <h2>Discardable Tags</h2>
+    <h2><%= h(t.reports.discardable_tags.name) %></h2>
     <div>
-        <p><i>Discardable tags</i> are tags that the OpenStreetMap community
-        has found not to be useful. Editors may remove these tags automatically
-        and silently when they save new versions of an object.</p>
+        <%= t.reports.discardable_tags.intro %>
         <p><a href="<%= build_link('/sources/sw/discardable_tags') %>">More...</a></p>
     </div>
 </div>

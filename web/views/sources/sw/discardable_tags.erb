@@ -3,11 +3,8 @@
 %>
 <div>
     <div>
-        <h1><a href="<%= build_link("/sources/#{ @source.id }") %>"><%= @source.name %></a>: Discardable Tags</h1>
-        <p><i>Discardable tags</i> are tags that the OpenStreetMap community
-        has found not to be useful. Editors may remove these tags automatically
-        and silently when they save new versions of an object.</p>
-        <p>More information on the wiki: <a class="extlink" href="https://wiki.openstreetmap.org/wiki/Discardable_tags">Discardable Tags</a></p>
+        <h1><a href="<%= build_link("/sources/#{ @source.id }") %>"><%= @source.name %></a>: <%= h(t.reports.discardable_tags.name) %></h1>
+        <%= t.reports.discardable_tags.intro %>
     </div>
 </div>
 <div class="box">

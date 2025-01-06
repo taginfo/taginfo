@@ -817,3 +817,11 @@ reports:
             title: Tags
         relation_types:
             title: Relation-Typen
+    discardable_tags:
+        name: Verwerfbare Tags
+        intro: |
+            <p><i>Verwerfbare Tags (discardable tags)</i> sind Tags, die die
+            OpenStreetMap-Community nicht (mehr) als nützlich erachtet. Editoren
+            können diese Tags automatisch und ohne Meldung entfernen, wenn sie
+            neue Versionen von Objekten speichern.</p>
+            <p>Weitere Informationen im Wiki: <a class="extlink" href="https://wiki.openstreetmap.org/wiki/Discardable_tags">Discardable Tags</a></p>
