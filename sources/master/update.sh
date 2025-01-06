@@ -42,6 +42,9 @@ create_master_database() {
     if [ -e "$DATADIR/wikidata/taginfo-wikidata.db" ]; then
         run_sql "DIR=$DATADIR" "$MASTER_DB" "$SRCDIR/master-wikidata.sql"
     fi
+    if [ -e "$DATADIR/wikidata/taginfo-sw.db" ]; then
+        run_sql "DIR=$DATADIR" "$MASTER_DB" "$SRCDIR/master-sw.sql"
+    fi
 }
 
 create_selection_database() {
