@@ -1,3 +1,36 @@
+<%
+@css = <<"CSS"
+.overview-item-status {
+    margin-top: 14px;
+}
+
+.overview-item-status > div {
+    margin-top: 20px;
+}
+
+.discardable-info {
+    background-color: var(--color-stripe0);
+    border: 1px dashed #c04040;
+    border-radius: 10px;
+    padding: 4px 0;
+}
+
+.discardable-info-badge {
+    border: 1px solid var(--color-dark);
+    border-radius: 4px;
+    padding: 1px 6px;
+    margin: 0 2px;
+}
+
+.discardable-info-true {
+    background-color: #fff;
+}
+
+.discardable-info-false {
+    color: var(--color-dark);
+}
+CSS
+%>
 <div>
     <div id="toolsmenu"></div>
     <form id="filter-form">
@@ -62,9 +95,6 @@
                 <h3><%= h(t.pages.sources.statistics) %></h3>
                 <div id="grid-overview"></div>
                 <p title="<%= h(t.pages.key.overview.no_endorsement) %>"><%= t.pages.key.overview.objects_last_edited_by(@user_count.to_s_with_ts) %></p>
-<% if @projects_count > 0 %>
-                <p><%= t.pages.key.overview.known_projects(@projects_count) %></p>
-<% end %>
             </div>
 <% if @count_all_values > 0 %>
             <div class="overview-item">
@@ -76,6 +106,35 @@
             <div class="overview-item">
                 <h3><%= h(t.taginfo.chronology) %></h3>
                 <div id="overview-chronology"></div>
+            </div>
+<% end %>
+<% if !@wikipages.empty? || !@discardable.select{ |_k, v| v }.empty? || @projects_count > 0 %>
+            <div class="overview-item">
+                <h3><%= h(t.misc.status) %></h3>
+                <div class="overview-item-status">
+<% if @tagstatus %>
+                    <p><%= h(t.pages.key.overview.status.from_wiki) %> <%= @tagstatus.badge %></p>
+<% else %>
+                    <p><%= h(t.pages.key.overview.status.unknown) %></p>
+                    <p><a href="#wiki"><%= h(t.pages.key.overview.status.see_wiki_tab) %></a></p>
+<% end %>
+<% if !@discardable.select{ |_k, v| v }.empty? %>
+                    <div class="discardable-info">
+                        <p><%= h(t.pages.key.overview.status.marked_discardable) %></p><p>
+<% @discardable.each do |k, v| %>
+                        <span class="discardable-info-badge discardable-info-<%= v %>"><%= h(t.misc.software[k].name) %></span>
+<% end %>
+                        </p>
+                        <p><%= h(t.reports.discardable_tags.more_on_wiki) %>
+                           <a class="extlink" target="_blank" href="https://wiki.openstreetmap.org/wiki/Discardable_tags">Discardable tags</a></p>
+                    </div>
+<% end %>
+<% if @projects_count > 0 %>
+                    <div>
+                        <p><%= t.pages.key.overview.known_projects(@projects_count) %></p>
+                    </div>
+<% end %>
+                </div>
             </div>
 <% end %>
 <% if @wikipages.size > 0 %>

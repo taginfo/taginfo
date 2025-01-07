@@ -502,7 +502,7 @@ function fmt_status(status) {
     if (status === null) {
         return '<i>(none)</i>';
     }
-    return '<span class="tagstatus tagstatus-' + html_escape(status.replace(/[^a-z]+/, '-')) + '">' + html_escape(status) + '</span>';
+    return '<a class="tagstatus tagstatus-' + html_escape(status.replace(/[^a-z]+/, '-')) + '" href="' + build_link('/sources/wiki/tag_status') + '">' + html_escape(status) + '</a>';
 }
 
 function fmt_role(role) {
@@ -1755,6 +1755,10 @@ class Autocomplete {
 function whenReady() {
     if (document.getElementById('tabs')) {
         tabs = new Tabs('tabs');
+    }
+
+    for (const el of document.getElementsByClassName('tagstatus')) {
+        el.setAttribute('href', build_link('/sources/wiki/tag_status'));
     }
 
     if (typeof page_init === 'function') {

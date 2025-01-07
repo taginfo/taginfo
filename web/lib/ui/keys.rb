@@ -55,6 +55,19 @@ class Taginfo < Sinatra::Base
 
         @projects_count = @db.select('SELECT count(distinct project_id) FROM projects.project_tags').condition('key=?', @key).get_first_i
 
+        @discardable = {}
+        status = @db.select("SELECT approval_status FROM wiki.wikipages_keys WHERE key=?", @key).get_first_value
+        @tagstatus = TagStatus[status] if status
+        @discardable[:wiki] = (status == 'discardable')
+
+        if @sources.get(:sw)
+            @discardable[:id] = false
+            @discardable[:josm] = false
+            @db.select("SELECT source FROM sw.discardable_tags WHERE key=?", @key).execute.each do |row|
+                @discardable[row['source'].to_sym] = true
+            end
+        end
+
         javascript_for(:d3)
         javascript "pages/key"
         erb :key

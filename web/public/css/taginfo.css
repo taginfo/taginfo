@@ -159,6 +159,12 @@ a.section {
     border: 1px solid var(--color-darker);
     border-left: 3px solid var(--color-darker);
     padding: 1px 3px;
+    color: black;
+    cursor: help;
+}
+
+.tagstatus:hover {
+    text-decoration: none;
 }
 
 .tagstatus-approved, .tagstatus-de-facto {

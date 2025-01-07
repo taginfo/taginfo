@@ -25,7 +25,7 @@ class TagStatus
     def badge
         return '<i>(none)</i>' unless name
 
-        "<span class='tagstatus#{ css_class }'>#{ name }</span>"
+        "<a class='tagstatus#{ css_class }'>#{ name }</a>"
     end
 
 end

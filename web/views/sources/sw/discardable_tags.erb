@@ -10,6 +10,7 @@
     </div>
 </div>
 <div class="box">
+    <p>This list does not show the discardable tag from the wiki. See <a href="<%= build_link('/reports/discardable_tags') %>">this report</a> instead.</p>
     <ul>
 <% @db.select("SELECT key, max(source) FILTER (WHERE source = 'id') AS id, max(source) FILTER (WHERE source = 'josm') AS josm FROM discardable_tags GROUP BY key ORDER BY key").execute do |row| %>
         <li><a href="<%= build_link('/keys/' + row['key']) %>"><%= row['key'] %></a> (<%= [row['id'], row['josm']].compact.join(', ') %>)</li>

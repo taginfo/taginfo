@@ -86,6 +86,13 @@ misc:
     status: Status
     approval_status: Annahme-Status
     other: Sonstiges
+    software:
+        id:
+            name: iD
+        josm:
+            name: JOSM
+        wiki:
+            name: Wiki
 
 help:
     search:
@@ -479,6 +486,11 @@ pages:
             distribution_of_values: Aufteilung der Values
             all_other_values: Alle anderen Values
             known_projects: Taginfo kennt %1 Projekte, die diesen Key referenzieren.
+            status:
+              from_wiki: 'Tag-Status von den Wiki-Seiten:'
+              unknown: Unbekannter oder uneindeutiger Tag-Status im Wiki.
+              see_wiki_tab: Siehe Wiki-Tab für Details.
+              marked_discardable: 'Tag ist als verwerfbar markiert von:'
         other_keys_used:
             title: Andere Keys, die mit diesem Key benutzt werden
             other: Andere Keys
