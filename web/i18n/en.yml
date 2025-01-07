@@ -789,4 +789,4 @@ reports:
             <p><i>Discardable tags</i> are tags that the OpenStreetMap community
             has found not to be useful. Editors may remove these tags automatically
             and silently when they save new versions of an object.</p>
-            <p>More information on the wiki: <a class="extlink" href="https://wiki.openstreetmap.org/wiki/Discardable_tags">Discardable Tags</a></p>
+            <p>More information on the wiki: <a class="extlink" target="_blank" href="https://wiki.openstreetmap.org/wiki/Discardable_tags">Discardable Tags</a></p>
