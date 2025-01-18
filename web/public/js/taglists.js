@@ -60,6 +60,15 @@ var taginfo_taglist = (function(){
                 'osmcarto_rendering': 'Ikona',
                 'count': 'Počet'
             },
+			'da': {
+                'key': 'Nøgle',
+                'value': 'Værdi',
+                'element': 'Element',
+                'description': 'Beskrivelse',
+                'image': 'Billede',
+                'osmcarto_rendering': 'Rendering',
+                'count': 'Antal'
+            },
             'de': {
                 'key': 'Key',
                 'value': 'Value',
