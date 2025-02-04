@@ -167,7 +167,7 @@ def wiki_link(title)
 end
 
 def clean_for_filename(str)
-    str.gsub(/[^a-zA-Z0-9-]+/, '_')
+    str&.gsub(/[^a-zA-Z0-9-]+/, '_')
 end
 
 # ------------------------------------------------------------------------------
