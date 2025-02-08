@@ -2006,7 +2006,7 @@ class ChartChronology {
 
         const axisY = d3.axisLeft(scaleY)
                         .ticks(h / 40)
-                        .tickFormat(d3.formatPrefix(",.0f", max));
+                        .tickFormat(d3.formatPrefix(",.0f", max / (h / 40)));
 
         const line = d3.line()
                        .curve(d3.curveStepAfter)
