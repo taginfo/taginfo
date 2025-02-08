@@ -1985,7 +1985,7 @@ class ChartChronology {
         const boxWidth = this.element.getBoundingClientRect().width;
         const w = Math.min(900, boxWidth - 60);
         const h = this.height;
-        const margin = { top: 10, right: 15, bottom: 30, left: 40 };
+        const margin = { top: 10, right: 15, bottom: 30, left: 45 };
 
         const t0 = this.data[0].date;
         const t1 = this.data[this.data.length - 1].date;
