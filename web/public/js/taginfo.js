@@ -1668,8 +1668,8 @@ class Autocomplete {
         this.element = document.getElementById(id);
         this.results = document.getElementById(results);
         this.source = build_link('/search/suggest?format=simple&term=');
-        this.element.addEventListener('input', this.trigger.bind(this));
-        this.element.parentNode.addEventListener('keydown', this.key.bind(this));
+        this.element?.addEventListener('input', this.trigger.bind(this));
+        this.element?.parentNode.addEventListener('keydown', this.key.bind(this));
     }
 
     trigger(event) {
@@ -1773,7 +1773,7 @@ function whenReady() {
     initTooltips();
 
     // Initialize language switcher
-    document.getElementById('locale').addEventListener('change', function() {
+    document.getElementById('locale')?.addEventListener('change', function() {
         document.getElementById('url').value = window.location.pathname;
         document.getElementById('set_language').submit();
     });
@@ -1877,14 +1877,16 @@ function whenReady() {
         document.documentElement.style.removeProperty('--key-info-visibility');
     });
 
-    document.getElementById('search').addEventListener('keyup', function(event) {
+    const search_element = document.getElementById('search');
+
+    search_element?.addEventListener('keyup', function(event) {
         if (event.key == 'Escape') {
             event.preventDefault();
             this.blur();
         }
     });
 
-    document.getElementById('search').addEventListener('keydown', function(event) {
+    search_element?.addEventListener('keydown', function(event) {
         if (event.key == 'Tab') {
             event.preventDefault();
             for (const element of document.querySelectorAll('input.qsbox')) {
@@ -1893,23 +1895,25 @@ function whenReady() {
         }
     });
 
-    document.getElementById('search_form').addEventListener('submit', function(event) {
+    document.getElementById('search_form')?.addEventListener('submit', function(event) {
         if (document.getElementById('search').value == '') {
             event.preventDefault();
         }
     });
 
     const menu_button = document.getElementById('menu-button');
-    menu_button.addEventListener('click', () => {
-        const menu = document.getElementById('menu');
-        if (menu.style.display) {
-            menu.style.display = null;
-            menu_button.classList.remove('active');
-        } else {
-            menu.style.display = 'block';
-            menu_button.classList.add('active');
-        }
-    });
+    if (menu_button) {
+        menu_button.addEventListener('click', () => {
+            const menu = document.getElementById('menu');
+            if (menu.style.display) {
+                menu.style.display = null;
+                menu_button.classList.remove('active');
+            } else {
+                menu.style.display = 'block';
+                menu_button.classList.add('active');
+            }
+        });
+    }
 
     const tools_button = document.getElementById('toolsmenu');
     if (tools_button) {
