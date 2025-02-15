@@ -12,7 +12,11 @@
             <td class="<%= c %>"><a href="/keys/<%= h(key) %>"><%= h(key) %></a></td>
             <td class="tr<%= c %>"><%= @data[key]['count_all'].to_s_with_ts %></td>
             <td class="tr<%= c %>"><%= @data[key]['values_all'].to_s_with_ts %></td>
-            <td class="tr<%= c %>"><%= @data[key]['values_match'].to_s_with_ts %> (<%= (@data[key]['values_match'] * 100 / @data[key]['values_all']).to_i %>%)</td>
+            <td class="tr<%= c %>"><%= @data[key]['values_match'].to_s_with_ts %>
+                <% if (@data[key]['values_all'] > 0) %>
+                (<%= (@data[key]['values_match'] * 100 / @data[key]['values_all']).to_i %>%)
+                <% end %>
+            </td>
             <td class="<%= c %>"><tt><%= h(match.regex.inspect[1..-2]) %></tt></td>
             <td class="<%= c %>"><ul class="reportlist"><%= @data[key]['links'].map{ |tl| '<li>' + h(tl.title) + ' &rarr; ' + h(tl.url) + '</li>' }.join %></ul></td>
         </tr>
