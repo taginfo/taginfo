@@ -39,12 +39,11 @@ class ChartKeysTagsRelations {
 class ChartTagCloud {
     fontFamily = 'Impact';
     fontWeight = 'normal';
-    id = 'tagcloud';
     element;
     data;
 
-    constructor(data) {
-        this.element = document.getElementById(this.id);
+    constructor(element, data) {
+        this.element = element;
         this.data = data;
     }
 
@@ -106,11 +105,16 @@ class ChartTagCloud {
 } // class ChartTagCloud
 
 function page_init() {
-    const lists = new ChartKeysTagsRelations(context.data);
-    widgetManager.addWidget(lists);
-    lists.draw();
+    if (document.getElementById('key_list')) {
+        const lists = new ChartKeysTagsRelations(context.data);
+        widgetManager.addWidget(lists);
+        lists.draw();
+    }
 
-    const tagCloud = new ChartTagCloud(context.data.keys);
-    widgetManager.addWidget(tagCloud);
-    tagCloud.draw();
+    const tagCloudElement = document.getElementById('tagcloud');
+    if (tagCloudElement) {
+        const tagCloud = new ChartTagCloud(tagCloudElement, context.data.keys);
+        widgetManager.addWidget(tagCloud);
+        tagCloud.draw();
+    }
 }
