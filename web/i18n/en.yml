@@ -801,4 +801,4 @@ reports:
             Discardable tags are tags that the OpenStreetMap community has
             found not to be useful. Editors may remove these tags automatically
             and silently when they save new versions of an object.
-        more_on_wiki: 'More informationen on the wiki:'
+        more_on_wiki: 'More information on the wiki:'
