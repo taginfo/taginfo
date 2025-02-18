@@ -63,9 +63,9 @@ misc:
     unknown: sconosciuto
     count: Conteggio
     image: Immagine
-    no_image: Nessuna Immagine
+    no_image: Nessuna immagine
     all: Tutto
-    object_type: Tipo Oggetto
+    object_type: Tipo oggetto
     description: Descrizione
     help: Aiuto
     length: Lunghezza
@@ -86,20 +86,27 @@ misc:
     status: Stato
     approval_status: Stato di approvazione
     other: Altro
+    software:
+        id:
+            name: iD
+        josm:
+            name: JOSM
+        wiki:
+            name: Wiki
 
 help:
     search:
         title: Ricerca
-        intro: Utilizza la casella di ricerca nell'angolo in alto a destra per cercare Chiavi e Valori dei tag.
+        intro: Utilizza la casella di ricerca nell'angolo in alto a destra per cercare chiavi e valori dei tag.
         string: Puoi cercare le chiavi e i valori dei tag
-        substring: Funziona anche se inserisci solo una parte della Chiave/Valore
+        substring: Funziona anche se inserisci solo una parte della chiave/valore
         complete_tags: Puoi cercare tag completi
-        values_only: Puoi anche cercare solo tra i Valori dei tag
+        values_only: Puoi anche cercare solo tra i valori dei tag
         suggestions: |
-            Per tua comodità mentre scrivi ti verranno suggerite le Chiavi e
+            Per tua comodità mentre scrivi ti verranno suggerite le chiavi e
             tag più frequenti. Usa i tasti freccia della tastiera per
             sceglierne una e premi <span class="key">Invio</span>. Verrai
-            portato direttamente alla pagine di quella Chiave o tag.
+            portato direttamente alla pagine di quella chiave o tag.
     keyboard:
         title: Scorciatoie con la tastiera
         site_navigation: Naviga nel sito
@@ -113,12 +120,13 @@ help:
             esc: Esc
             tab: TAB
         home_page: Pagina principale
-        keys_page: Pagina delle Chiavi
-        tags_page: Pagina dei Valori
-        relations_page: Pagina delle Relazioni
-        projects_page: Pagina dei Progetti
-        reports_page: Pagina dei Rapporti
-        compare_page: Pagina dei Confronti
+        keys_page: Pagina delle chiavi
+        tags_page: Pagina dei valori
+        relations_page: Pagina delle relazioni
+        projects_page: Pagina dei progetti
+        reports_page: Pagina dei rapporti
+        sources_page: Pagina delle fonti
+        compare_page: Pagina dei confronti
         first_page: Prima pagina
         prev_page: Pagina precedente
         next_page: Pagina successiva
@@ -133,6 +141,7 @@ help:
         deactivate: Disattiva la casella d'inserimento
         up: Vai alla pagina più in alto nella gerarchia
         switch_input: Spostati tra le caselle d'inserimento
+        show_keys: Mostra le scorciatoie da tastiera disponibili
         add_to_comparison: Aggiungi la chiave/tag corrente alla lista di confronto
 
 pages:
@@ -292,6 +301,8 @@ pages:
                 <p>Numero di chiavi/tag nel tempo da <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">file di planet storico</a>.</p>
             wikidata: |
                 <p>Il <a class="extlink" href="https://www.wikidata.org/">database wikidata di Wikimedia</a> collega le chiavi, i tag e le relazioni di OSM con altre idee.</p>
+            sw: |
+                <p>Configurazioni da vari programmi OSM (come gli editor).</p>
         updates:
             title: Aggiornamenti
             intro: I dati di taginfo vengono aggiornati regolarmente dalle loro fonti.
@@ -373,7 +384,7 @@ pages:
 
         wiki:
             language_comparison_table_for_keys:
-                name: Tabella Comparativa Linguaggi per le Chiavi nella Wiki
+                name: Tabella comparativa dele lingue per le chiavi nella Wiki
                 icons:
                     template: Una pagina è disponibile sul sito wiki e contiene un template standard.
                     error: Una pagina è disponibile sul sito wiki e contiene un template standard, ma non si riesce ad estrarne il significato.
@@ -408,7 +419,7 @@ pages:
                     immagini a causa del diverso background culturale o simili motivi.
         db:
             stats:
-                name: Statistiche del Database
+                name: Statistiche del database
                 objects_in_db: Numero di oggetti nel database
                 tags_in_db: Numero di tag nel database
                 distinct_keys: Numero di chiavi univoche
@@ -489,7 +500,7 @@ pages:
                 Filtro:
             none: Nessun filtro
             nodes: Solo nodi
-            ways: Solo percorsi (Way)
+            ways: Solo percorsi (way)
             relations: Solo relazioni
         button_disabled: Pulsante disabilitato, perché ci sono troppi oggetti con questa chiave.
         number_objects: Numero degli oggetti
@@ -497,11 +508,17 @@ pages:
         values_used: Valori usati con questa chiave
         tag_description_from_wiki: Descrizione di questo questo tag dalla pagina wiki (se disponibile nella lingua selezionata, altrimenti in inglese).
         overview:
-            all_other_values: Tutti gli altri valori
             objects_last_edited_by: Oggetti con questa chiave che sono stati modificati l'ultima volta da %1 utenti differenti.
-            no_endorsement: (Questo non significa che tutti questi utenti riconoscano questa chiave.)
+            no_endorsement: (questo non significa che tutti questi utenti riconoscano questa chiave.)
             distribution_of_values: Distribuzione dei valori
+            all_other_values: Tutti gli altri valori
             known_projects: Taginfo conosce %1 progetti che fanno riferimento a questa chiave.
+            status:
+                from_wiki: 'Stato del tag dalle pagine wiki:'
+                unknown: Stato del tag sulla wiki sconosciuto o ambiguo.
+                see_wiki_tab: Per i dettagli vedi la scheda dalla wiki.
+                marked_discardable: 'Il tag è marcato come scartabile da:'
+
         other_keys_used:
             title: Altre chiavi utilizzate assieme a questa chiave
             other: Altre chiavi
@@ -577,7 +594,7 @@ pages:
     relation:
         name: Tipo di relazione
         description_from_wiki: La descrizione di questo tipo di relazione è preso dalla pagina wiki (se disponibile nella lingua selezionata, altrimenti in inglese).
-        no_description_in_wiki: Nessuna descrizione in lingua inglese per questo tipo di relazione. (Vedi anche nella scheda "Wiki".)
+        no_description_in_wiki: Nessuna descrizione in lingua inglese per questo tipo di relazione. (vedi anche nella scheda "Wiki".)
         button_disabled: Pulsante disabilitato, perché ci sono troppi oggetti con questo tipo di relazione.
         overview:
             tab: Anteprima
@@ -630,7 +647,7 @@ dynamic_table:
     findtext: Trova
     procmsg: Elaborazione, attendere prego...
     nomsg: Nessun oggetto
-    errormsg: Errore di Connessione
+    errormsg: Errore di connessione
     filter_nothing_found: Nessun risultato corrispondente alla tua richiesta
 
 comparison:
@@ -666,7 +683,9 @@ sources:
     wikidata:
         name: Wikidata
         description: Il database wikidata di Wikimedia collega le chiavi, i tag e le relazioni di OSM con altre idee.
-
+    sw:
+        name: Software
+        description: Configurazioni da alcuni programmi OSM (come gli editor).
 unicode:
     character: Carattere
     codepoint: Codice univoco
@@ -761,7 +780,7 @@ reports:
                 <p>chiavi che non rientrano in nessuna delle altre
                 categorie.</p>
     frequently_used_keys_without_wiki_page:
-        name: Chiavi Usate Frequentemente Senza una Pagina Wiki
+        name: Chiavi usate frequentemente senza una pagina Wiki
         intro: |
             <p>Questa tabella mostra le chiavi che compaiono più di
             10&thinsp;000 volte nel database OSM, ma che non hanno una pagina
@@ -777,7 +796,7 @@ reports:
         table:
             create_wiki_page: Crea una pagina wiki...
     key_lengths:
-        name: Lunghezze Chiavi
+        name: Lunghezze chiavi
         intro: |
             I tag delle chiavi possono essere lunghi da 0 a 255 caratteri
             (Unicode). Le chiavi molto corte o molto lunghe sono spesso, ma non
@@ -790,7 +809,7 @@ reports:
             key_length: Lunghezza della chiave
             number_of_keys: Numero delle chiavi
     languages:
-        name: Linguaggi
+        name: Lingue
         intro: |
             OpenStreetMap è un progetto internazionale. I tag e le loro
             descrizioni possono essere in una qualsiasi lingua.
@@ -803,7 +822,7 @@ reports:
         wiki_key_pages: Pagine wiki per le chiavi
         wiki_tag_pages: Pagine wiki per i tag
     wiki_pages_about_non_existing_keys:
-        name: Pagine della Wiki Riguardanti Chiavi Non-Esistenti
+        name: Pagine della Wiki riguardanti chiavi non-esistenti
         intro: |
             Questa tabella mostra le chiavi per le quali esiste una pagina wiki,
             ma per le quali non ci sia neppure una singola presenza nel database.
@@ -850,3 +869,11 @@ reports:
             title: Tag univoci
         relation_types:
             title: Tipo di relazioni univoci
+    discardable_tags:
+        name: Tag scartabili
+        intro: |
+            I tag scartabili sono quei tag che la comunità OpenStreetMap ha
+            reputato non essere utili. Gli editor potrebbero rimuovere tali tag
+            automaticamente e in maniera silente durante il salvataggio della
+            nuova versione di un oggetto.
+        more_on_wiki: 'Più informazioni sulla wiki:'
