@@ -431,7 +431,7 @@ function h(text) {
 }
 
 function highlight(str, query) {
-    return html_escape(str).replace(new RegExp('(' + html_escape(query) + ')', 'gi'), "<b>$1</b>");
+    return html_escape(str).replaceAll(html_escape(query), "<b>$&</b>");
 }
 
 function set_inner_html_to(id, html) {
