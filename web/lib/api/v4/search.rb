@@ -29,14 +29,19 @@ class Taginfo < Sinatra::Base
                 sel = @db.select(%q(SELECT * FROM ftsearch WHERE ftsearch MATCH 'key:"' || ? || '" value:"' || ? || '"'), query_key, query_value)
             end
 
-            res = sel.
-                order_by(@ap.sortname, @ap.sortorder) do |o|
-                    o.count_all
-                    o.key
-                    o.value
-                end.
-                paging(@ap).
-                execute
+            if total > 1000000
+                total = 0
+                res = []
+            else
+                res = sel.
+                    order_by(@ap.sortname, @ap.sortorder) do |o|
+                        o.count_all
+                        o.key
+                        o.value
+                    end.
+                    paging(@ap).
+                    execute
+            end
         rescue
             total = 0
             res = []
