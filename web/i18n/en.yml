@@ -463,10 +463,10 @@ pages:
             all_other_values: All other values
             known_projects: Taginfo knows %1 projects referencing this key.
             status:
-              from_wiki: 'Tag status from wiki pages:'
-              unknown: Unknown or ambiguous tag status on the wiki.
-              see_wiki_tab: See Wiki tab for details.
-              marked_discardable: 'Tag is marked as discardable by:'
+                from_wiki: 'Tag status from wiki pages:'
+                unknown: Unknown or ambiguous tag status on the wiki.
+                see_wiki_tab: See Wiki tab for details.
+                marked_discardable: 'Tag is marked as discardable by:'
         other_keys_used:
             title: Other keys used together with this key
             other: Other keys
