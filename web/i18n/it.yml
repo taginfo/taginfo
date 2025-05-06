@@ -65,7 +65,7 @@ misc:
     image: Immagine
     no_image: Nessuna immagine
     all: Tutto
-    object_type: Tipo oggetto
+    object_type: Tipo
     description: Descrizione
     help: Aiuto
     length: Lunghezza
