@@ -65,7 +65,14 @@ TAGINFO_CONFIG = TaginfoConfig.new(File.expand_path(File.dirname(__FILE__)) + '/
 
 ALL_SECTIONS = %w[download taginfo test].freeze
 SECTIONS = Hash[TAGINFO_CONFIG.get('instance.sections', ALL_SECTIONS).collect{ |s| [s.to_sym, s] }]
-FOOTER = TAGINFO_CONFIG.get('instance.footer').transform_keys(&:to_sym)
+
+# For backward compatibility, for instance.footer values not found in taginfo-config.json, set to project defaults
+# previously hard-coded into views/layout.erb. https://github.com/taginfo/taginfo/issues/460
+TAGINFO_CONFIG.get('instance.footer') ? FOOTER = TAGINFO_CONFIG.get('instance.footer').transform_keys(&:to_sym) : FOOTER = Hash.new
+FOOTER[:project_name] = "OpenStreetMap" if FOOTER[:project_name].nil?
+FOOTER[:project_url] = "https://www.openstreetmap.org/" if FOOTER[:project_url].nil?
+FOOTER[:copyright_attribution] = "Data &copy; OSM contributors (ODbL)" if FOOTER[:copyright_attribution].nil?
+FOOTER[:copyright_url] = "https://www.openstreetmap.org/copyright" if FOOTER[:copyright_url].nil?
 
 class Taginfo < Sinatra::Base
 
