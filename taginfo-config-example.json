@@ -23,7 +23,13 @@
         // allow anybody.
         "access_control_allow_origin": "*",
         // Sections of the website that are enabled.
-        "sections": ["download", "taginfo"]
+        "sections": ["download", "taginfo"],
+        "footer": {
+            "project_name": "OpenStreetMap",
+            "project_url": "https://www.openstreetmap.org/",
+            "copyright_attribution": "Data &copy; OSM contributors (ODbL)",
+            "copyright_url": "https://www.openstreetmap.org/copyright"
+        }
     },
     // For the geodistribution map. See the wiki documentation about these settings.
     "geodistribution": {
