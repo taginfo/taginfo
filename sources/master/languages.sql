@@ -62,6 +62,8 @@ INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('sk', 
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('sq',      'sq', 'Albanian', 'Shqip');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('sr',      'sr', 'Serbian', 'српски језик / srpski jezik');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('sv',      'sv', 'Swedish', 'Svenska');
+INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('th',      'th', 'Thai', 'ภาษาไทย');
+INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('tl',      'tl', 'Tagalog', 'ᜏᜒᜃᜅ᜔ ᜆᜄᜎᜓᜄ᜔');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('tr',      'tr', 'Turkish', 'Türkçe');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('uk',      'uk', 'Ukrainian', 'Українська');
 INSERT INTO languages (code, iso639_1, english_name, native_name) VALUES ('vi',      'vi', 'Vietnamese', 'Tiếng Việt');
