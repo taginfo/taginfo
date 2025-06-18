@@ -70,8 +70,8 @@
 <%= yield %>
     </main>
     <footer class="no-print">
-        <div class="footer-start"><span id="osmlink"><a class="extlink" href="//www.openstreetmap.org/"><b>OpenStreetMap</b></a> &middot;</span>
-            <a href="//www.openstreetmap.org/copyright">Data &copy; OSM contributors (ODbL)</a></div>
+        <div class="footer-start"><span id="osmlink"><a class="extlink" href="<%= @taginfo_config.get('project.url', 'https://www.openstreetmap.org/') %>"><b><%= @taginfo_config.get('project.name', 'OpenStreetMap') %></b></a> &middot;</span>
+            <a href="<%= @taginfo_config.get('project.attribution_url', 'https://www.openstreetmap.org/copyright') %>"><%= @taginfo_config.get('project.attribution_text', 'Data © OSM contributors (ODbL)') %></a></div>
         <div class="footer-end">
 <% if SECTIONS[:download] %>
             <a href="<%= build_link('/download') %>"><%= h(t.taginfo.download) %></a> &middot;

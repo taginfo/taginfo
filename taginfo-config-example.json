@@ -25,6 +25,14 @@
         // Sections of the website that are enabled.
         "sections": ["download", "taginfo"]
     },
+    // The project we are showing data for. Usually this is OpenStreetMap
+    // but could be something like OpenHistoricalMap.
+    "project": {
+        "url": "https://www.openstreetmap.org/",
+        "name": "OpenStreetMap",
+        "attribution_url": "https://www.openstreetmap.org/copyright",
+        "attribution_text": "Data © OSM contributors (ODbL)"
+    },
     // For the geodistribution map. See the wiki documentation about these settings.
     "geodistribution": {
         "left": -180,
