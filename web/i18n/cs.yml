@@ -279,7 +279,7 @@ pages:
                     o jazykovýách značkách IETF</a> a stránky <a
                     href="http://www.langtag.net/">langtag.net</a>.</p>
                 note: |
-                    Uvědomte si, že data zobrazená v této taublce nejsou z OpenStreetMap,
+                    Uvědomte si, že data zobrazená v této tabulce nejsou z OpenStreetMap,
                     ukazuje pouze základní kameny, které lze použít pro popis jazyků
                     bez ohledu na to, zda jsou skutečně použity v OSM.
         wiki:
@@ -299,7 +299,7 @@ pages:
                     aby získal informace o značkách. Tato zpráva ukazuje seznam problémů,
                     na které jsme narazili při čtení těchto stránek. Nejedná se nutně
                     o chyby na wiki, znamená to jen, že něco na wiki stránce není naformátováno
-                    tak, aby tomu taginfo rozumnělo. Buď je potřeba opravit stránku,
+                    tak, aby tomu taginfo rozumělo. Buď je potřeba opravit stránku,
                     nebo se musí upravit taginfo.
                 location: Umístění
                 reason: Důvod
@@ -363,7 +363,7 @@ pages:
         nothing_to_compare: Nemáme žádné klíče/značky k porovnání. Jděte na nějakou stránku klíče nebo značky a přidejte je.
     keys:
         intro: |
-            Tato tabulka zobrazuje včechny klíče značek, které existují v databázi nebo v nějakém z jiných zdrojů.
+            Tato tabulka zobrazuje všechny klíče značek, které existují v databázi nebo v nějakém z jiných zdrojů.
     tags:
         intro: |
             Tato tabulka zobrazuje nejrozšířenější značky v databázi.
@@ -470,7 +470,7 @@ pages:
     relation:
         name: Typ relace
         description_from_wiki: Popis tohoto typu relace z wiki (je-li dostupný ve vašem jazyce, jinak v angličtině).
-        no_description_in_wiki: Tento typ relace nemá žádný anglický pops na wiki. (Viz také záložku "Wiki".)
+        no_description_in_wiki: Tento typ relace nemá žádný anglický popis na wiki. (Viz také záložka "Wiki".)
         button_disabled: Tlačítko je neaktivní, protože máme příliš mnoho objektů s tímto typem relace.
         overview:
             tab: Přehled
@@ -712,5 +712,5 @@ unicode:
     character: Znak
     codepoint: Kódový bod
     general_category: Obecná kategorie
-    name: Název kódového dodu Unicode
+    name: Název kódového bodu Unicode
     script: Skript
