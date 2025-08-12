@@ -212,6 +212,15 @@ var taginfo_taglist = (function(){
                 'image': '照片',
                 'osmcarto_rendering': '地圖標註',
                 'count': '計數'
+            },
+            'fa': {
+                'key': 'کلید',
+                'value': 'مقدار',
+                'element': 'عنصر',
+                'description': 'توضیحات',
+                'image': 'تصویر',
+                'osmcarto_rendering': 'نمایش نقشه',
+                'count': 'تعداد'
             }
         };
 
