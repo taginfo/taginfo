@@ -59,7 +59,8 @@ class Taginfo < Sinatra::Base
                 o.count_relation_members :count_relations
             end.
             paging(@ap).
-            execute
+            execute.
+            dup
 
         if min_count and not params[:query] and not @ap.do_paging?
             row = @db.execute('SELECT rtype, NULL AS role, sum(count_all) AS count_all, sum(count_nodes) AS count_nodes, sum(count_ways) AS count_ways, sum(count_relations) AS relations FROM relation_roles WHERE rtype=? AND count_all < ? GROUP BY rtype', rtype, min_count).first
