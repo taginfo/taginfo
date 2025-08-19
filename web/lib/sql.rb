@@ -28,7 +28,7 @@ module SQL
         end
 
         def attach_source(filename, name)
-            @db.execute('ATTACH DATABASE ? AS ?', "file:#{ @dir }/#{ filename }?mode=ro", name)
+            @db.execute('ATTACH DATABASE ? AS ?', ["file:#{ @dir }/#{ filename }?mode=ro", name])
             @db.execute("PRAGMA #{ name }.journal_mode = OFF")
         end
 
@@ -54,21 +54,21 @@ module SQL
             out
         end
 
-        def execute(*args, &block)
-            wrap_query(*args) do
-                @db.execute(*args, &block)
+        def execute(query, *args, &block)
+            wrap_query(query, *args) do
+                @db.execute(query, args, &block)
             end
         end
 
-        def get_first_row(*args)
-            wrap_query(*args) do
-                @db.get_first_row(*args)
+        def get_first_row(query, *args)
+            wrap_query(query, *args) do
+                @db.get_first_row(query, args)
             end
         end
 
-        def get_first_value(*args)
-            wrap_query(*args) do
-                @db.get_first_value(*args)
+        def get_first_value(query, *args)
+            wrap_query(query, *args) do
+                @db.get_first_value(query, args)
             end
         end
 
@@ -83,7 +83,7 @@ module SQL
         end
 
         def stats(key)
-            get_first_value('SELECT value FROM master_stats WHERE key=?', key.force_encoding('UTF-8')).to_i
+            get_first_value('SELECT value FROM master_stats WHERE key=?', [key.force_encoding('UTF-8')]).to_i
         end
 
         def quote(data)
@@ -198,17 +198,17 @@ module SQL
 
         def execute(&block)
             q = build_query
-            @db.execute(q, *@params, &block)
+            @db.execute(q, @params, &block)
         end
 
         def get_first_row
             q = build_query
-            @db.get_first_row(q, *@params)
+            @db.get_first_row(q, @params)
         end
 
         def get_first_value
             q = build_query
-            @db.get_first_value(q, *@params)
+            @db.get_first_value(q, @params)
         end
 
         def get_first_i
@@ -217,7 +217,7 @@ module SQL
 
         def get_columns(*columns)
             q = build_query
-            row = @db.get_first_row(q, *@params)
+            row = @db.get_first_row(q, @params)
             return [nil] * columns.size if row.nil?
 
             columns.map{ |column| row[column.to_s].to_i }

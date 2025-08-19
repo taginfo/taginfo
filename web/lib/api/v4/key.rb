@@ -332,7 +332,8 @@ class Taginfo < Sinatra::Base
             condition('key = ?', key).
             condition('count > ?', (count_all_values * min_fraction).to_i).
             order_by([:count], 'DESC').
-            execute
+            execute.
+            dup
 
         total = res.inject(0){ |sum, x| sum += x['count'].to_i }
         if total < count_all_values
