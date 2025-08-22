@@ -23,7 +23,7 @@ class TaginfoConfig
     # Config without anything that a security concious admin wouldn't want to
     # be public. Currently everything that contains local paths is removed.
     def sanitized_config
-        c = @config
+        c = @config.dup
         c['paths'] && c.delete('paths')
         c['sources']&.delete('db')
         c['sources']&.delete('chronology')
