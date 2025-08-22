@@ -85,7 +85,7 @@
         // disable Level0 Editor button if there are more than this many objects with a key/tag
         "max_results": 50,
         "overpass_url_prefix": "https://overpass-api.de/api/interpreter?",
-        "level0_url_prefix": "http://level0.osmz.ru/?"
+        "level0_url_prefix": "https://level0.osmz.ru/?"
     },
     "opensearch": {
         // For the OpenSearchDescription. You have to change at least the shortname and the contact for your instance.
