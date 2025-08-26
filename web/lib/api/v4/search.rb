@@ -19,13 +19,13 @@ class Taginfo < Sinatra::Base
 
         begin
             if query_key == ''
-                total = @db.execute('SELECT count(*) FROM ftsearch WHERE value MATCH ?', query_value)[0][0].to_i
+                total = @db.get_first_value('SELECT count(*) FROM ftsearch WHERE value MATCH ?', query_value).to_i
                 sel = @db.select('SELECT * FROM ftsearch WHERE value MATCH ?', query_value)
             elsif query_value == ''
-                total = @db.execute('SELECT count(*) FROM ftsearch WHERE key MATCH ?', query_key)[0][0].to_i
+                total = @db.get_first_value('SELECT count(*) AS count FROM ftsearch WHERE key MATCH ?', query_key).to_i
                 sel = @db.select('SELECT * FROM ftsearch WHERE key MATCH ?', query_key)
             else
-                total = @db.execute(%q{SELECT count(*) FROM ftsearch WHERE ftsearch MATCH 'key:"' || ? || '" value:"' || ? || '"'}, query_key, query_value)[0][0].to_i
+                total = @db.get_first_value(%q{SELECT count(*) FROM ftsearch WHERE ftsearch MATCH 'key:"' || ? || '" value:"' || ? || '"'}, query_key, query_value).to_i
                 sel = @db.select(%q(SELECT * FROM ftsearch WHERE ftsearch MATCH 'key:"' || ? || '" value:"' || ? || '"'), query_key, query_value)
             end
 
