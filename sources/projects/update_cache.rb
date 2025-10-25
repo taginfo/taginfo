@@ -36,6 +36,8 @@ db = SQLite3::Database.new(dir + '/projects-cache.db')
 
 project_list = ARGV[1] || 'project_list.txt'
 
+USER_AGENT = 'taginfo/1.0 (https://github.com/taginfo/taginfo)'.freeze
+
 #------------------------------------------------------------------------------
 
 projects = []
@@ -56,6 +58,7 @@ def fetch(uri_str, limit = 10)
     end
 
     request = Net::HTTP::Get.new(uri.request_uri)
+    request['User-Agent'] = USER_AGENT
     response = http.request(request)
 
     case response
@@ -75,16 +78,15 @@ db.execute("DELETE FROM fetch_log WHERE id NOT IN(#{ ids })")
 # Make sure the log is not growing indefinitely
 db.execute("DELETE FROM fetch_log WHERE fetch_status != '200' AND date(fetch_date, '+1 week') < date('now')")
 
-NOW = Time.now.utc.iso8601
-
 projects.each do |id, url|
     puts "  #{id} #{url}"
+    now = Time.now.utc.iso8601
     begin
         response = fetch(url)
         begin
             last_modified = Time.parse(response['Last-Modified'] || response['Date']).utc.iso8601
         rescue ArgumentError
-            last_modified = NOW
+            last_modified = now
         end
         if response.code == '200'
             db.execute("DELETE FROM fetch_log WHERE id=?", [id])
@@ -94,7 +96,7 @@ projects.each do |id, url|
                        id,
                        url,
                        last_modified,
-                       NOW,
+                       now,
                        response.code,
                        response.body
                    ])
@@ -103,9 +105,10 @@ projects.each do |id, url|
                    [
                        id,
                        url,
-                       NOW,
+                       now,
                    ])
     end
+    sleep(1)
 end
 
 #-- THE END -------------------------------------------------------------------

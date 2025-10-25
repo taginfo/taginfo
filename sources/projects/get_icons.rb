@@ -41,6 +41,8 @@ end
 dir = ARGV[0] || '.'
 database = SQLite3::Database.new(dir + '/taginfo-projects.db')
 
+USER_AGENT = 'taginfo/1.0 (https://github.com/taginfo/taginfo)'.freeze
+
 #------------------------------------------------------------------------------
 
 def fetch(uri_str, limit = 10)
@@ -54,6 +56,7 @@ def fetch(uri_str, limit = 10)
     end
 
     request = Net::HTTP::Get.new(uri.request_uri)
+    request['User-Agent'] = USER_AGENT
     response = http.request(request)
 
     case response
