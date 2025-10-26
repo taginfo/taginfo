@@ -40,6 +40,7 @@ require 'json'
 require 'sqlite3'
 require 'yaml'
 require 'date'
+require 'time'
 
 require 'sinatra/base'
 require 'sinatra/r18n'

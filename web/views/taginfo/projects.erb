@@ -19,7 +19,15 @@
                 <%= h(project['name']) %>
             </td>
             <td class="<%= c %> nowrap">
-                <%= h(project['fetch_date']) %><br/>
+<%   old_data = ((Time.now() - Time.parse(project['fetch_date'])) / (60*60*24)) > 7 %>
+<%   if old_data %>
+                <span class="warn">
+<%   end %>
+                <%= h(project['fetch_date']) %>
+<%   if old_data %>
+                </span>
+<%   end %>
+                <br/>
                 <%= h(project['data_updated']) %>
             </td>
             <td class="tc<%= c %> nowrap <%= project['fetch_status'] != '200' ? 'warn' : ''  %>"><%= h(project['fetch_status']) %></td>
