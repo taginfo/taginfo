@@ -6,26 +6,30 @@
 
 INSERT INTO source (id, name, update_start, data_until) SELECT 'wikidata', 'Wikidata', datetime('now'), datetime('now');
 
-DROP TABLE IF EXISTS wikidata_p1282;
+DROP TABLE IF EXISTS wikidata_keys;
 
-CREATE TABLE wikidata_p1282 (
-    code          TEXT,
-    propvalue     TEXT,
-    ptype         TEXT,
-    key           TEXT,
-    value         TEXT,
-    relation_type TEXT,
-    relation_role TEXT
+CREATE TABLE wikidata_keys (
+    code TEXT,
+    key  TEXT
 );
 
-DROP TABLE IF EXISTS wikidata_p1282_errors;
+DROP TABLE IF EXISTS wikidata_tags;
 
-CREATE TABLE wikidata_p1282_errors (
-    item          TEXT,
-    code          TEXT,
-    propvalue     TEXT,
-    description   TEXT,
-    error         TEXT
+CREATE TABLE wikidata_tags (
+    code  TEXT,
+    key   TEXT,
+    value TEXT
+);
+
+DROP TABLE IF EXISTS wikidata_errors;
+
+CREATE TABLE wikidata_errors (
+    wikidata    TEXT,
+    item        TEXT,
+    code        TEXT,
+    propvalue   TEXT,
+    description TEXT,
+    error       TEXT
 );
 
 DROP TABLE IF EXISTS wikidata_labels;

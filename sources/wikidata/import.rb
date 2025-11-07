@@ -72,36 +72,37 @@ def get_json(query)
     json['results']['bindings']
 end
 
-def process_item_entry(db, item, prop, desc)
+def process_key_entry(db, item, prop, desc)
     m = item.match(%r{^http://www.wikidata.org/entity/([PQ][0-9]+)$})
     if m
         code = m[1]
     else
-        db.execute("INSERT INTO wikidata_p1282_errors (item, propvalue, description, error) VALUES (?, ?, ?, ?)", [item, prop, desc, "Item has invalid format"])
+        db.execute("INSERT INTO wikidata_errors (wikidata, item, code, propvalue, description, error) VALUES ('P13786', ?, ?, ?, ?, ?)", [item, code, prop, desc, "Item has invalid format"])
         return
     end
 
-    m = prop.match(%r{^(Key|Tag|Relation|Role):(.*)$})
+    db.execute("INSERT INTO wikidata_keys (code, key) VALUES (?, ?)", [code, prop])
+end
+
+def process_tag_entry(db, item, prop, desc)
+    m = item.match(%r{^http://www.wikidata.org/entity/([PQ][0-9]+)$})
     if m
-        ptype = m[1].downcase
-        pcontent = m[2]
+        code = m[1]
     else
-        db.execute("INSERT INTO wikidata_p1282_errors (item, code, propvalue, description, error) VALUES (?, ?, ?, ?, ?)", [item, code, prop, desc, "Property value has invalid format (Must match /^(Key|Tag|Relation|Role):/)"])
+        db.execute("INSERT INTO wikidata_errors (wikidata, item, code, propvalue, description, error) VALUES ('P1282', ?, ?, ?, ?, ?)", [item, code, prop, desc, "Item has invalid format"])
         return
     end
 
-    case ptype
-    when "key"
-        key = pcontent
-    when "tag"
-        (key, value) = pcontent.split('=')
-    when "relation"
-        rtype = pcontent
-    when "role"
-        rrole = pcontent
+    m = prop.match(%r{^([^=]+)=([^=]+)$})
+    if m
+        key = m[1]
+        value = m[2]
+    else
+        db.execute("INSERT INTO wikidata_errors (wikidata, item, code, propvalue, description, error) VALUES ('P1282', ?, ?, ?, ?, ?)", [item, code, prop, desc, "Item has invalid format"])
+        return
     end
 
-    db.execute("INSERT INTO wikidata_p1282 (code, propvalue, ptype, key, value, relation_type, relation_role) VALUES (?, ?, ?, ?, ?, ?, ?)", [code, prop, ptype, key, value, rtype, rrole])
+    db.execute("INSERT INTO wikidata_tags (code, key, value) VALUES (?, ?, ?)", [code, key, value])
 end
 
 def process_label_entry(db, item, label, lang)
@@ -117,16 +118,25 @@ end
 
 #------------------------------------------------------------------------------
 
+data = get_json('SELECT ?item ?itemLabel ?prop WHERE { ?item wdt:P13786 ?prop . SERVICE wikibase:label { bd:serviceParam wikibase:language "en" } }')
+
+data.each do |entry|
+    item = entry['item']['value']
+    prop = entry['prop']['value']
+    desc = entry['itemLabel']['value']
+    process_key_entry(db, item, prop, desc)
+end
+
 data = get_json('SELECT ?item ?itemLabel ?prop WHERE { ?item wdt:P1282 ?prop . SERVICE wikibase:label { bd:serviceParam wikibase:language "en" } }')
 
 data.each do |entry|
     item = entry['item']['value']
     prop = entry['prop']['value']
     desc = entry['itemLabel']['value']
-    process_item_entry(db, item, prop, desc)
+    process_tag_entry(db, item, prop, desc)
 end
 
-data = get_json('SELECT DISTINCT ?item ?label (lang(?label) as ?label_lang) WHERE { ?item wdt:P1282 ?prop; rdfs:label ?label }')
+data = get_json('SELECT DISTINCT ?item ?label (lang(?label) as ?label_lang) WHERE { ?item wdt:P1282|wdt:P13786 ?prop; rdfs:label ?label }')
 
 data.each do |entry|
     item = entry['item']['value']
