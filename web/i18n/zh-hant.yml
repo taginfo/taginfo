@@ -248,8 +248,6 @@ pages:
                 <p>以一些方式使用 OSM 標籤的專案，像是編輯器、路線規劃等，請見專案列表。</p>
             chronology: |
                 <p><a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">歷史星球</a>上隨時間變化的鍵/標籤數量。</p>
-            wikidata: |
-                <p>運用<a href="https://www.wikidata.org/wiki/Property:P1282">P1282屬性連結</a><a class="extlink" href="https://www.wikidata.org/">Wikidata資料庫</a>與OSM鍵、標籤與關係到其他概念上。</p>
         updates:
             title: 更新
             intro: taginfo 資料定期地從來源更新。
@@ -287,32 +285,6 @@ pages:
                 show: 顯示所有語言子標籤...
             wikipedia_sites:
                 title: 維基百科網站
-        wikidata:
-            index:
-                show_items: 顯示所有Wikidata項目...
-                show_errors: 顯示所有錯誤...
-            stats:
-                keys: 鍵項目
-                tags: 標籤項目
-                relations: 關係項目
-                roles: 角色項目
-                qcode: 有 Q 值的項目
-                pcode: 有 P 值的項目
-            items:
-                title: 項目
-                description: |
-                    這些是有屬性P1282與OSM鍵、標籤或關係連結的Wikidata項目。沒有顯示的為"角色"類型屬性，以及其他沒有正確格式的項目。
-                columns:
-                    type: 種類
-                    ktr: 鍵/標籤/關係
-                    item: Wikidata項目
-            errors:
-                description: |
-                    這些是所有帶有屬性P1282的Wikidata項目匯入遇到的問題。
-                columns:
-                    item: Wikidata項目
-                    p1282: 屬性P1282的值
-                    error: 錯誤訊息
         wiki:
             language_comparison_table_for_keys:
                 name: wiki 裡的鍵頁面的語言比較

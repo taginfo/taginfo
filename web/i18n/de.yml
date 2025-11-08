@@ -280,7 +280,7 @@ pages:
             chronology: |
                 <p>Anzahl der Keys/Tags über die Zeit vom <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">history planet</a>.</p>
             wikidata: |
-                <p>Die <a class="extlink" href="https://www.wikidata.org/">Wikidata Datenbank</a> verbindet OSM-Keys, -Tags und -Relations mit anderen Konzepten mittels des Properties <a href="https://www.wikidata.org/wiki/Property:P1282">P1282</a>.</p>
+                <p>Die <a class="extlink" href="https://www.wikidata.org/">Wikidata-Datenbank</a> verbindet OSM-Keys und -Tags mit anderen Konzepten mittels der Properties <a class="extlink" href="https://www.wikidata.org/wiki/Property:P13786">P13786 <i>OpenStreetMap key</i></a> und <a class="extlink" href="https://www.wikidata.org/wiki/Property:P1282">P1282 <i>OpenStreetMap tag</i></a>.</p>
             sw: |
                 <p>Konfigurationen von verschiedenen OSM-Programmen (wie zum Beispiel Editoren).</p>
         updates:
@@ -336,28 +336,36 @@ pages:
             stats:
                 keys: Key-Datenobjekte
                 tags: Tag-Datenobjekte
-                relations: Relation-Datenobjekte
-                roles: Role-Datenobjekte
+                distinct_keys: Unterschiedliche Key-Datenobjekte
+                distinct_tags: Unterschiedliche Tag-Datenobjekte
+                items: Datenobjekte
+                labels: Datenobjektnamen
                 qcode: Datenobjekte mit Q-Code
                 pcode: Datenobjekte mit P-Code
-            items:
-                title: Items
+                errors_found: Importfehler
+            keys:
                 description: |
-                    Dies sind alle Wikidata-Items mit dem Property P1282 (mit dem
-                    OSM-Key, -Tag, oder -Relation, mit dem es verbunden ist).
-                    Nicht angezeigt werden hier Properties mit dem Typ "Role"
-                    und Properties, die nicht das richtige Format haben.
+                    Dies sind alle Wikidata-Datenobjekte mit dem Property
+                    P13786. Nicht angezeigt werden hier Properties, die nicht
+                    das richtige Format haben.
                 columns:
-                    type: Typ
-                    ktr: Key/Tag/Relation
-                    item: Wikidata-Datenobjekt
+                    item: Wikidata P13786 (OpenStreetMap key) Datenobjekt
+            tags:
+                description: |
+                    Dies sind alle Wikidata-Datenobjekte mit dem Property P1282
+                    Nicht angezeigt werden hier Properties, die nicht das
+                    richtige Format haben.
+                columns:
+                    item: Wikidata P1282 (OpenStreetMap tag) Datenobjekt
             errors:
                 description: |
                     Hier werden alle Probleme angezeigt, die beim Import der
-                    Wikidata-Datenobjekte mit Property P1282 aufgetreten sind.
+                    Wikidata-Datenobjekte mit Properties P13786 und P1282
+                    aufgetreten sind.
                 columns:
+                    property: Property
                     item: Wikidata-Datenobjekt
-                    p1282: Wert des Properties P1282
+                    propvalue: Wert des Properties
                     error: Fehlermeldung
         wiki:
             language_comparison_table_for_keys:

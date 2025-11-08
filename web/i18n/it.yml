@@ -299,8 +299,6 @@ pages:
                 strumenti di modifica, mappe, navigatori, ecc.</p>
             chronology: |
                 <p>Numero di chiavi/tag nel tempo da <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">file di planet storico</a>.</p>
-            wikidata: |
-                <p>Il <a class="extlink" href="https://www.wikidata.org/">database wikidata di Wikimedia</a> collega le chiavi, i tag e le relazioni di OSM con altre idee.</p>
             sw: |
                 <p>Configurazioni da vari programmi OSM (come gli editor).</p>
         updates:
@@ -350,38 +348,6 @@ pages:
                 show: Mostra tutti i sotto-tag delle lingue…
             wikipedia_sites:
                 title: Siti Wikipedia
-        wikidata:
-            index:
-                show_items: Mostra tutti gli elementi Wikidata…
-                show_errors: Mostra tutti gli errori…
-            stats:
-                keys: Elementi chiave
-                tags: Elementi tag
-                relations: Elementi relazione
-                roles: Elementi ruolo
-                qcode: Elementi con codice Q
-                pcode: Elementi con codice P
-            items:
-                title: Elementi
-                description: |
-                    Questi sono tutti gli elementi Wikidta con proprietà P1282
-                    e le chiavi, i tag e le relazioni OSM a cui sono collegati.
-                    Nono vengono mostrate tutte le proprietà di tipo "ruolo" e
-                    le proprietà che non sono nel formato corretto.
-                columns:
-                    type: Tipo
-                    ktr: Chiave/Tag/Relazione
-                    item: Elemento Wikidata
-            errors:
-                description: |
-                    Questi sono tutti gli errori avvenuti durante
-                    l'importazione degli elementi Wikidata con proprietà
-                    P1282.
-                columns:
-                    item: Elemento Wikidata
-                    p1282: Valore della proprietà P1282
-                    error: Messaggio di errore
-
         wiki:
             language_comparison_table_for_keys:
                 name: Tabella comparativa dele lingue per le chiavi nella Wiki

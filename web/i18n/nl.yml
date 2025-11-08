@@ -254,8 +254,6 @@ pages:
                 <p>Projecten die OSM-tags op een of andere manier gebruiken, zoals bewerkers, kaarten, routeplanners en dergelijke.</p>
             chronology: |
                 <p>Aantal sleutels/tags in de loop van de tijd van <a class="extlink" href="https://planet.openstreetmap.org/planet/full-history/">planet historie</a>.</p>
-            wikidata: |
-                <p>De <a class="extlink" href="https://www.wikidata.org/">Wikidata-database</a> verbindt OSM sleutels, tags, en relaties aan andere concepten met behulp van de eigenschap <a href="https://www.wikidata.org/wiki/Property:P1282">P1282</a>.</p>
         updates:
             title: Updates
             intro: De taginfo-gegevens worden regulier bijgewerkt vanuit de bronnen.
@@ -303,36 +301,6 @@ pages:
                 show: Geef alle taal-subtags weer...
             wikipedia_sites:
                 title: Wikipedia-websites
-        wikidata:
-            index:
-                show_items: Geef alle Wikidata-items weer...
-                show_errors: Geef alle fouten weer...
-            stats:
-                keys: Sleutel-items
-                tags: Tag-items
-                relations: Relatie-items
-                roles: Rol-items
-                qcode: Items met Q-code
-                pcode: Items met P-code
-            items:
-                title: Items
-                description: |
-                    Dit zijn alle Wikidata-items met de eigenschap P1282 en
-                    de OSM sleutel, tag, of relatie waar ze aan gekoppeld zijn. Niet weergegeven zijn
-                    "Rol"-type eigenschappen en eigenschappen die niet het
-                    juiste formaat hebben.
-                columns:
-                    type: Type
-                    ktr: Sleutel/Tag/Relatie
-                    item: Wikidata-item
-            errors:
-                description: |
-                    Dit zijn alle problemen die zijn tegengekomen bij het importeren van de
-                    Wikidata-items met eigenschap P1282.
-                columns:
-                    item: Wikidata-item
-                    p1282: Waarde van P1282-eigenschap
-                    error: Foutmelding
         wiki:
             language_comparison_table_for_keys:
                 name: Taalvergelijkingstabel voor sleutel in de wiki

@@ -1,0 +1,12 @@
+<%
+@title.unshift(h(t.osm.tags))
+%>
+
+<h1><a href="<%= build_link("/sources/#{ @source.id }") %>"><%= @source.name %></a>:
+    <%= h(t.osm.tags) %></h1>
+
+<p><%= h(t.pages.sources.wikidata.tags.description) %></p>
+
+<div class="box">
+    <div id="grid-items"></div>
+</div>

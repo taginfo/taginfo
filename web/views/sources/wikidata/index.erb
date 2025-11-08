@@ -2,20 +2,41 @@
     <h2><%= h(t.pages.sources.statistics) %></h2>
     <div>
         <table class="desc">
-            <tr><th><%= h(t.pages.sources.wikidata.stats.keys) %>:</th><td><%= @db.stats('wikidata_p1282_key') %></td></tr>
-            <tr><th><%= h(t.pages.sources.wikidata.stats.tags) %>:</th><td><%= @db.stats('wikidata_p1282_tag') %></td></tr>
-            <tr><th><%= h(t.pages.sources.wikidata.stats.relations) %>:</th><td><%= @db.stats('wikidata_p1282_relation') %></td></tr>
-            <tr><th><%= h(t.pages.sources.wikidata.stats.roles) %>:</th><td><%= @db.stats('wikidata_p1282_role') %></td></tr>
-            <tr><th><%= h(t.pages.sources.wikidata.stats.qcode) %>:</th><td><%= @db.stats('wikidata_p1282_pcode') %></td></tr>
-            <tr><th><%= h(t.pages.sources.wikidata.stats.pcode) %>:</th><td><%= @db.stats('wikidata_p1282_qcode') %></td></tr>
+            <tr><th><%= h(t.pages.sources.wikidata.stats.items) %>:</th><td><%= @db.stats('wikidata_keys') + @db.stats('wikidata_tags') %></td></tr>
+            <tr><th><%= h(t.pages.sources.wikidata.stats.labels) %>:</th><td><%= @db.stats('wikidata_labels') %></td></tr>
         </table>
-        <p><b><a href="<%= build_link('/sources/wikidata/items') %>"><%= h(t.pages.sources.wikidata.index.show_items) %></a></b></p>
+    </div>
+</div>
+<div class="fbox">
+    <h2><%= h(t.osm.keys) %></h2>
+    <div>
+        <table class="desc">
+            <tr><th><%= h(t.pages.sources.wikidata.stats.distinct_keys) %>:</th><td><%= @db.stats('wikidata_distinct_keys') %></td></tr>
+            <tr><th><%= h(t.pages.sources.wikidata.stats.keys) %>:</th><td><%= @db.stats('wikidata_keys') %></td></tr>
+            <tr><th><%= h(t.pages.sources.wikidata.stats.pcode) %>:</th><td><%= @db.stats('wikidata_keys_pcode') %></td></tr>
+            <tr><th><%= h(t.pages.sources.wikidata.stats.qcode) %>:</th><td><%= @db.stats('wikidata_keys_qcode') %></td></tr>
+        </table>
+        <p><b><a href="<%= build_link('/sources/wikidata/keys') %>"><%= h(t.pages.sources.wikidata.index.show_items) %></a></b></p>
+    </div>
+</div>
+<div class="fbox">
+    <h2><%= h(t.osm.tags) %></h2>
+    <div>
+        <table class="desc">
+            <tr><th><%= h(t.pages.sources.wikidata.stats.distinct_tags) %>:</th><td><%= @db.stats('wikidata_distinct_tags') %></td></tr>
+            <tr><th><%= h(t.pages.sources.wikidata.stats.tags) %>:</th><td><%= @db.stats('wikidata_tags') %></td></tr>
+            <tr><th><%= h(t.pages.sources.wikidata.stats.pcode) %>:</th><td><%= @db.stats('wikidata_tags_pcode') %></td></tr>
+            <tr><th><%= h(t.pages.sources.wikidata.stats.qcode) %>:</th><td><%= @db.stats('wikidata_tags_qcode') %></td></tr>
+        </table>
+        <p><b><a href="<%= build_link('/sources/wikidata/tags') %>"><%= h(t.pages.sources.wikidata.index.show_items) %></a></b></p>
     </div>
 </div>
 <div class="fbox">
     <h2><%= h(t.pages.sources.import_errors) %></h2>
     <div>
-        <p>There were <%= @db.stats('wikidata_p1282_errors') %> issues when importing from <%= h(t.sources.wikidata.name) %>.
+        <table class="desc">
+            <tr><th><%= h(t.pages.sources.wikidata.stats.errors_found) %>:</th><td><%= @db.stats('wikidata_errors') %></td></tr>
+        </table>
         <p><b><a href="<%= build_link('/sources/wikidata/errors') %>"><%= h(t.pages.sources.wikidata.index.show_errors) %></a></b></p>
     </div>
 </div>
