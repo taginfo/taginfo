@@ -138,6 +138,12 @@ def parse_and_check(id, data, log, db)
         log.error "OPTIONAL project.icon_url MUST BE STRING."
     end
 
+    %i[data_url project_url doc_url icon_url].each do |url|
+        if p[url] && !p[url].match(/^https:/)
+            log.warning "#{url} IS NOT A https URL: #{p[url]}"
+        end
+    end
+
     db.execute("UPDATE projects SET name=?, description=?, project_url=?, doc_url=?, icon_url=?, contact_name=?, contact_email=? WHERE id=?",
                [
                    p[:name],
