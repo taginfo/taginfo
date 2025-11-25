@@ -30,7 +30,7 @@
             </td>
             <td class="<%= c %> nowrap" style="max-width: 500px; overflow: hidden; text-overflow: ellipsis;">
                 <a title="JSON URL" href="<%= h(project['json_url']) %>"><%= h(project['json_url']) %></a><br/>
-                <a title="Data URL" href="<%= h(project['data_url']) %>"><%= h(project['data_url']) %></a><br/>
+                <a class="<%= (project['json_url'] != project['data_url']) ? 'warn' : '' %>" title="Data URL" href="<%= h(project['data_url']) %>"><%= h(project['data_url']) %></a><br/>
                 <a title="Project URL" href="<%= h(project['project_url']) %>"><%= h(project['project_url']) %></a><br/>
                 <a title="Doc URL" href="<%= h(project['doc_url']) %>"><%= h(project['doc_url']) %></a></br/>
                 <a title="Icon URL" href="<%= h(project['icon_url']) %>"><%= h(project['icon_url']) %></a>
