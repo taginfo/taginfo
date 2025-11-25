@@ -93,7 +93,7 @@ def parse_and_check(id, data, log, db)
     end
 
     data.each_key do |property|
-        unless property.match(/^(data_format|data_updated|data_url|project|tags)$/)
+        unless property.match(/^([$]schema|data_format|data_updated|data_url|project|tags)$/)
             log.warning "UNKNOWN PROPERTY: '#{property}'."
         end
     end
