@@ -59,9 +59,7 @@
         // Probably something like '.../taginfo-tools/build/src'. If this is
         // a relative path, it must be relative to the subdirectory of the
         // 'sources' directory.
-        "bin_dir": "../../../taginfo-tools/build/src",
-        // Path to sqlite regexp extension.
-        "sqlite3_pcre_extension": "/usr/lib/sqlite3/pcre.so"
+        "bin_dir": "../../../taginfo-tools/build/src"
     },
     // "XAPI" and "JOSM" buttons on key/tag pages
     "xapi": {

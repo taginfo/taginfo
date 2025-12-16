@@ -5,18 +5,13 @@
 </div>
 <div class="box" lang="en" dir="ltr">
     <table class="list">
-        <thead><th>Key</th><th>Count</th><th>Unique values</th><th>Matching values</th><th>Regex</th><th>Links (simplified display)</th></thead>
+        <thead><th>Key</th><th>Count</th><th>Unique values</th><th>Regex</th><th>Links (simplified display)</th></thead>
         <tbody>
 <% TAGLINKS.each_with_index do |(key, match), n| c = (n%2!=0) ? ' even' : '' %>
         <tr>
             <td class="<%= c %>"><a href="/keys/<%= h(key) %>"><%= h(key) %></a></td>
             <td class="tr<%= c %>"><%= @data[key]['count_all'].to_s_with_ts %></td>
             <td class="tr<%= c %>"><%= @data[key]['values_all'].to_s_with_ts %></td>
-            <td class="tr<%= c %>"><%= @data[key]['values_match'].to_s_with_ts %>
-                <% if (@data[key]['values_all'] > 0) %>
-                (<%= (@data[key]['values_match'] * 100 / @data[key]['values_all']).to_i %>%)
-                <% end %>
-            </td>
             <td class="<%= c %>"><tt><%= h(match.regex.inspect[1..-2]) %></tt></td>
             <td class="<%= c %>"><ul class="reportlist"><%= @data[key]['links'].map{ |tl| '<li>' + h(tl.title) + ' &rarr; ' + h(tl.url) + '</li>' }.join %></ul></td>
         </tr>

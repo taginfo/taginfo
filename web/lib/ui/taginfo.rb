@@ -155,24 +155,9 @@ class Taginfo < Sinatra::Base
 
         @data = {}
         TAGLINKS.each do |key, match|
-            row = @db.select("SELECT count_all, values_all FROM db.keys").
-                condition("key = ?", key.to_s).
-                get_first_row
-
-            @data[key] = row
-
-            matching = 0
-
-            pcre_extension = @taginfo_config.get('paths.sqlite3_pcre_extension')
-            if pcre_extension
-                matching = @db.count('db.tags').
-                    condition("key = ?", key.to_s).
-                    condition("value REGEXP ?", match.regex.to_s).
-                    get_first_i
-            end
-
-            @data[key]['values_match'] = matching
-
+            @data[key] = @db.select("SELECT count_all, values_all FROM db.keys").
+                             condition("key = ?", key.to_s).
+                             get_first_row
             @data[key]['links'] = match.call('VALUE')
         end
 
