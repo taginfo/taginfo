@@ -212,13 +212,6 @@ class Taginfo < Sinatra::Base
         'const texts = ' + JSON.generate(trans, { indent: '  ', object_nl: "\n" }) + ';'
     end
 
-    get %r{/js/([a-z][a-z](-[a-zA-Z]+)?)/(.*).js} do |lang, _, js|
-        expires next_update
-        @lang = lang
-        @trans = R18n::I18n.new(lang, 'i18n')
-        erb :"#{js}.js", :layout => false, :content_type => 'text/javascript'
-    end
-
     #--------------------------------------------------------------------------
 
     not_found do
