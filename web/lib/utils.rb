@@ -161,11 +161,6 @@ def external_link(id, title, link, new_window: false)
     %(<a id="#{id}" #{target}rel="nofollow" class="extlink" href="#{link}">#{title}</a>)
 end
 
-def wiki_link(title)
-    prefix = '//wiki.openstreetmap.org/wiki/'
-    external_link('wikilink_' + title.gsub(%r{[^A-Za-z0-9]}, '_'), title, prefix + title)
-end
-
 def clean_for_filename(str)
     str&.gsub(/[^a-zA-Z0-9-]+/, '_')
 end
