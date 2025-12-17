@@ -43,7 +43,6 @@ require 'date'
 require 'time'
 
 require 'sinatra/base'
-require 'sinatra/r18n'
 
 require 'lib/utils'
 require 'lib/taglinks'
@@ -56,6 +55,7 @@ require 'lib/tagstatus'
 require 'lib/reports'
 require 'lib/api'
 require 'lib/langtag/bcp47'
+require 'lib/r18n'
 
 #------------------------------------------------------------------------------
 

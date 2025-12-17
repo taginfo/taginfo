@@ -71,7 +71,7 @@ To start the web user interface:
 
 ```sh
 cd web
-./taginfo.rb
+bundle exec ruby taginfo.rb
 ```
 
 You can also use it via [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/).
