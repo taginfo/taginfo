@@ -44,7 +44,6 @@ require 'time'
 
 require 'sinatra/base'
 require 'sinatra/r18n'
-require 'rack/contrib'
 
 require 'lib/utils'
 require 'lib/taglinks'
@@ -68,8 +67,6 @@ ALL_SECTIONS = %w[download taginfo test].freeze
 SECTIONS = Hash[TAGINFO_CONFIG.get('instance.sections', ALL_SECTIONS).collect{ |s| [s.to_sym, s] }]
 
 class Taginfo < Sinatra::Base
-
-    use Rack::JSONP
 
     mime_type :opensearch, 'application/opensearchdescription+xml'
 
