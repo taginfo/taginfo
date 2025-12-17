@@ -83,7 +83,6 @@ class Taginfo < Sinatra::Base
 
     # make h() method for escaping HTML available
     helpers do
-        include Rack::Utils
         alias_method :h, :escape_html
     end
 
