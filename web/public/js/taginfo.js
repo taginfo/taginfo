@@ -326,7 +326,7 @@ class TaginfoWikiPage {
     }
 
     url(options) {
-        let path = '//wiki.openstreetmap.org/';
+        let path = 'https://wiki.openstreetmap.org/';
 
         if (options && options.edit) {
             path += 'w/index.php?action=edit&title=';
