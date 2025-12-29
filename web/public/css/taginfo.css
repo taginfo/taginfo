@@ -1442,6 +1442,10 @@ div.gbox > div:last-child {
     text-align: center;
 }
 
+.dt-page input:invalid {
+    background-color: #ffdddd !important;
+}
+
 .dt-next {
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMiAxMic+PHBhdGggZmlsbD0nIzgwODA4MCcgc3Ryb2tlPScjODA4MDgwJyBzdHJva2Utd2lkdGg9JzInIGQ9J00xMCA2IEwyIDEgTDIgMTEgeicvPjwvc3ZnPgo); /* next.svg */
 }

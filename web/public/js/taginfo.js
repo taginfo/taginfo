@@ -897,14 +897,14 @@ class DynamicTable {
 
         tools[2].innerHTML = '<span class="dt-page-msg">'
             + texts.dynamic_table.pagetext
-            + ' </span><input type="text" size="4"> '
+            + ' </span><input type="text" size="4" pattern="[0-9]+"> '
             + texts.dynamic_table.outof
             + ' <span class="dt-page-max"></span>';
 
-        tools[2].addEventListener('change', event => {
+        tools[2].querySelector('input').addEventListener('change', event => {
             event.preventDefault();
             let newPage = parseInt(event.target.value);
-            if (newPage < 1) {
+            if (Number.isNaN(newPage) ||newPage < 1) {
                 newPage = 1;
                 event.target.value = newPage;
             } else if (newPage > this.maxPage) {
