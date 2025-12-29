@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    bigdecimal (4.0.0)
     csv (3.3.5)
     json (2.13.2)
     mustermann (2.0.2)
@@ -46,6 +47,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  bigdecimal
   csv
   json
   rack
