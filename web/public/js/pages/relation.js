@@ -52,7 +52,7 @@ const tabsConfig = {
                 { display: h(texts.misc.language), name: 'lang', width: 100 },
                 { display: h(texts.pages.relation.wiki_pages.wiki_page), name: 'title', width: 140, align: 'right' },
                 { display: h(texts.misc.description), name: 'description', width: 400 },
-                { display: h(texts.misc.image), name: 'image', width: 100 }
+                { display: h(texts.misc.image), name: 'image', width: 120 }
             ],
             usePager: false,
             processRow: row => {

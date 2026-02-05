@@ -108,7 +108,7 @@ const tabsConfig = {
                 { display: h(texts.misc.language), name: 'lang', width: 100 },
                 { display: h(texts.pages.key.wiki_pages.wiki_page), name: 'title', width: 140, align: 'right' },
                 { display: h(texts.misc.description), name: 'description', width: 300 },
-                { display: h(texts.misc.image), name: 'image', width: 100 },
+                { display: h(texts.misc.image), name: 'image', width: 120 },
                 { display: h(texts.osm.objects), name: 'objects', width:  80 },
                 { display: h(texts.misc.status), name: 'status', width: 70, title: h(texts.misc.approval_status) },
                 { display: h(texts.pages.key.wiki_pages.implied_tags), name: 'tags_implied', width: 120 },
