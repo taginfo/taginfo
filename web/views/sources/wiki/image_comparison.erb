@@ -24,8 +24,8 @@ table.wiki-images td.images {
 
 table.wiki-images td.images div.langimg {
     position:relative;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     float: left;
     z-index: 0;
     margin-right: 4px;
@@ -34,7 +34,7 @@ table.wiki-images td.images div.langimg {
 table.wiki-images td.images div div {
     position: absolute;
     bottom: 0px;
-    width: 50px;
+    width: 40px;
     height: 12px;
     text-align: center;
     font-size: 0.8rem;
@@ -48,8 +48,8 @@ table.wiki-images td.images div img {
     z-index: 1;
     margin: 0 auto;
     display: block;
-    max-width: 50px;
-    max-height: 50px;
+    max-width: 40px;
+    max-height: 40px;
     top: 0;
 }
 CSS
@@ -75,7 +75,7 @@ CSS
 <% end %>
     <div class="langimg">
         <div><%= row['lang'] %></div>
-<%  imagesize = 50
+<%  imagesize = 40
     if row['width'].to_i <= imagesize && row['height'].to_i <= imagesize
         src = row['image_url']
     elsif row['thumb_url_prefix'].nil? || row['thumb_url_suffix'].nil?

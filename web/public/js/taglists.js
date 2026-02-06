@@ -261,7 +261,7 @@ var taginfo_taglist = (function(){
                 const d = data.wiki[lang] || data.wiki['en'];
                 if (d && d.image) {
                     return link_to_noescape(url_for_wiki(d.image.image),
-                                            '<img src="' + d.image.thumb_url_prefix + '100' + d.image.thumb_url_suffix + '"/>');
+                                            '<img src="' + d.image.thumb_url_prefix + '120' + d.image.thumb_url_suffix + '"/>');
                 }
             }
             return "";

@@ -332,7 +332,7 @@ def no_paging_results(array)
     ]
 end
 
-MAX_IMAGE_WIDTH = 300
+MAX_IMAGE_WIDTH = 330
 
 def build_image_url(row)
     w = row['width'].to_i
