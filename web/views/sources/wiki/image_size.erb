@@ -60,7 +60,7 @@ the aspect ratio is near 1:1.</p>
         <div class="imagelist">
 <% @db.select(query_prefix + 'width * height < 64 * 64' + query_order + 'width * height').execute().each do |row| %>
             <div class="imgbox">
-                <img src="<%= row['image_url'] %>" title="<%= row['width'] %> &#x78; <%= row['height'] %>"/>
+                <img loading="lazy" src="<%= row['image_url'] %>" title="<%= row['width'] %> &#x78; <%= row['height'] %>"/>
                 <p data-key="<%= row['key'] %>" data-value="<%= row['value'] %>" data-count="<%= row['count'] %>"></p>
             </div>
 <% end %>
@@ -73,7 +73,7 @@ the aspect ratio is near 1:1.</p>
         <div class="imagelist">
 <% @db.select(query_prefix + 'height > 2 * width' + query_order + 'height / width DESC').execute().each do |row| %>
             <div class="imgbox">
-                <img src="<%= row['image_url'] %>" title="<%= row['width'] %> &#x78; <%= row['height'] %> / 1 : <%= (row['height'] / row['width']).to_i %>" style="max-height: 200px;"/>
+                <img loading="lazy" src="<%= row['image_url'] %>" title="<%= row['width'] %> &#x78; <%= row['height'] %> / 1 : <%= (row['height'] / row['width']).to_i %>" style="max-height: 200px;"/>
                 <p data-key="<%= row['key'] %>" data-value="<%= row['value'] %>" data-count="<%= row['count'] %>"></p>
             </div>
 <% end %>
@@ -85,7 +85,7 @@ the aspect ratio is near 1:1.</p>
         <div class="imagelist">
 <% @db.select(query_prefix + 'width > 2 * height' + query_order + 'width / height DESC').execute().each do |row| %>
             <div class="imgbox">
-                <img src="<%= row['image_url'] %>" title="<%= row['width'] %> &#x78; <%= row['height'] %> / <%= (row['width'] / row['height']).to_i %> : 1" style="max-width: 200px;"/>
+                <img loading="lazy" src="<%= row['image_url'] %>" title="<%= row['width'] %> &#x78; <%= row['height'] %> / <%= (row['width'] / row['height']).to_i %> : 1" style="max-width: 200px;"/>
                 <p data-key="<%= row['key'] %>" data-value="<%= row['value'] %>" data-count="<%= row['count'] %>"></p>
             </div>
 <% end %>
@@ -97,7 +97,7 @@ the aspect ratio is near 1:1.</p>
         <div class="imagelist">
 <% @db.select(query_prefix + 'size > 20000000' + query_order + 'size DESC').execute().each do |row| %>
             <div class="imgbox">
-                <img src="<%= row['image_url'] %>" title="<%= (row['size'] / 1000000).to_i %> MB" style="max-width: 200px; max-height: 200px;"/>
+                <img loading="lazy" src="<%= row['image_url'] %>" title="<%= (row['size'] / 1000000).to_i %> MB" style="max-width: 200px; max-height: 200px;"/>
                 <p data-key="<%= row['key'] %>" data-value="<%= row['value'] %>" data-count="<%= row['count'] %>"></p>
             </div>
 <% end %>
