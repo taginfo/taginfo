@@ -14,10 +14,15 @@
 #
 #  Both files have the format:
 #
-#  <type> TAB <namespace> TAB <title>
+#  <type> TAB <timestamp> TAB <namespace> TAB <title>
 #
 #  The <type> is either 'page' or 'redirect', depending on whether this is a
 #  proper wiki page or a redirect to another wiki page, respectively.
+#
+#  The <timestamp> is the last change of that page. This changes when the
+#  page itself changes but also when any of its transcluded templates change
+#  There seems to be no way to get the Mediawiki API to return only the last
+#  change for the page itself.
 #
 #  The <namespaces> gives the namespace this page is in. This is empty for the
 #  main namespace.
