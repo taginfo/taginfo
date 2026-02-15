@@ -566,7 +566,7 @@ class Cache
 
     def get_page(page)
         @current_pagetitles[page.title] = page.timestamp
-        results = @db.execute("SELECT * FROM cache.cache_pages WHERE title=? AND timestamp=?", [page.title, page.timestamp])
+        results = @db.execute("SELECT * FROM cache.cache_pages WHERE title=? AND timestamp >= ?", [page.title, page.timestamp])
 
         unless results.empty?
             page.content = results[0]['body']
