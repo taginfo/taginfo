@@ -22,6 +22,8 @@ GEM
     rack-session (2.1.1)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
+    rack-utf8_sanitizer (1.11.1)
+      rack (>= 1.0, < 4.0)
     rackup (2.3.1)
       rack (>= 3)
     ruby2_keywords (0.0.5)
@@ -65,6 +67,7 @@ DEPENDENCIES
   r18n-core
   rack
   rack-contrib
+  rack-utf8_sanitizer
   rackup
   sinatra
   sqlite3

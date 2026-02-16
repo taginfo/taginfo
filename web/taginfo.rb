@@ -42,6 +42,7 @@ require 'yaml'
 require 'date'
 require 'time'
 
+require 'rack/utf8_sanitizer'
 require 'sinatra/base'
 
 require 'lib/utils'
@@ -67,6 +68,8 @@ ALL_SECTIONS = %w[download taginfo test].freeze
 SECTIONS = Hash[TAGINFO_CONFIG.get('instance.sections', ALL_SECTIONS).collect{ |s| [s.to_sym, s] }]
 
 class Taginfo < Sinatra::Base
+
+    use Rack::UTF8Sanitizer
 
     mime_type :opensearch, 'application/opensearchdescription+xml'
 
@@ -110,6 +113,11 @@ class Taginfo < Sinatra::Base
     register Sinatra::R18n
 
     before do
+        if request.path.include?("\ufffd") or request.path.include?('%EF%BF%BD')
+            halt 400, 'invalid UTF-8'
+            return
+        end
+
         javascript_for(:taginfo)
         javascript r18n.locale.code + '/texts'
 
@@ -132,7 +140,9 @@ class Taginfo < Sinatra::Base
     end
 
     after do
-        @db.close
+        if @db
+            @db.close
+        end
     end
 
     #-------------------------------------
