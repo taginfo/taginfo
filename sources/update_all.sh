@@ -168,6 +168,9 @@ main() {
     # shellcheck disable=SC2086 # we want word splitting here
     compress_extra_databases $sources_create
 
+    # make sure everything is written to disk before databases are used
+    sync
+
     print_message "Done update_all."
 }
 
