@@ -36,7 +36,7 @@ class Report
     end
 
     def visible?(sources)
-        @visible && @sources.all? { |s| sources.get(s[0]) }
+        @visible && @sources.all?{ |s| sources.get(s[0]) }
     end
 
 end

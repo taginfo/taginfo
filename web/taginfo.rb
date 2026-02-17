@@ -28,7 +28,7 @@
 
 v = RUBY_VERSION.split('.').map(&:to_i)
 if v[0] < 3
-    STDERR.puts "You need at least Ruby 3.0 to run taginfo"
+    warn "You need at least Ruby 3.0 to run taginfo"
     exit(1)
 end
 
@@ -60,7 +60,7 @@ require 'lib/r18n'
 
 #------------------------------------------------------------------------------
 
-TAGINFO_CONFIG = TaginfoConfig.new(File.expand_path(File.dirname(__FILE__)) + '/../../taginfo-config.json')
+TAGINFO_CONFIG = TaginfoConfig.new(__dir__ + '/../../taginfo-config.json')
 
 #------------------------------------------------------------------------------
 
@@ -75,7 +75,7 @@ class Taginfo < Sinatra::Base
 
     configure do
         set :app_file, __FILE__
-        #set :bind, '0.0.0.0'
+        # set :bind, '0.0.0.0'
 
         # Disable rack-protection library because it messes up embedding
         # taginfo in an iframe. This should probably be done more
@@ -90,7 +90,7 @@ class Taginfo < Sinatra::Base
     end
 
     # make trimming \n after %> the default in erb templates
-    alias_method :erb_orig, :erb
+    alias erb_orig erb
     def erb(template, options = {}, locals = {}, &block)
         options[:trim] = '>' unless options[:trim]
         erb_orig template, options, locals, &block
@@ -99,7 +99,7 @@ class Taginfo < Sinatra::Base
     # when do we expect the next data update
     def next_update
         # 7 hours after midnight UTC
-        ((Time.utc(Time.now.year, Time.now.month, Time.now.day, 7, 0, 0) + (Time.now.hour < 7 ? 0 : 24) * 60 * 60) - Time.now).to_i.to_i
+        ((Time.utc(Time.now.year, Time.now.month, Time.now.day, 7, 0, 0) + ((Time.now.hour < 7 ? 0 : 24) * 60 * 60)) - Time.now).to_i.to_i
     end
 
     before do
@@ -113,7 +113,7 @@ class Taginfo < Sinatra::Base
     register Sinatra::R18n
 
     before do
-        if request.path.include?("\ufffd") or request.path.include?('%EF%BF%BD')
+        if request.path.include?("\ufffd") || request.path.include?('%EF%BF%BD')
             halt 400, 'invalid UTF-8'
             return
         end
@@ -140,9 +140,7 @@ class Taginfo < Sinatra::Base
     end
 
     after do
-        if @db
-            @db.close
-        end
+        @db&.close
     end
 
     #-------------------------------------

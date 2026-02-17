@@ -164,11 +164,11 @@ class APIParameters
                          'ASC'
                      end
 
-        if params[:format] == 'csv'
-            @format = :csv
-        else
-            @format = :json
-        end
+        @format = if params[:format] == 'csv'
+                      :csv
+                  else
+                      :json
+                  end
     end
 
     def do_paging?
@@ -186,12 +186,12 @@ def generate_result(api, total, data)
         attachment @attachment
         return generate_csv_result(api, total, data)
     end
-    return generate_json_result(total, data)
+    generate_json_result(total, data)
 end
 
-def generate_csv_result(api, total, data)
+def generate_csv_result(api, _total, data)
     columns = api.result.find{ |d| d[0] == :data and d[1] == :ARRAY_OF_HASHES }[3].map{ |d| d[0].to_s }
-    return CSV.generate do |csv|
+    CSV.generate do |csv|
         csv << columns
         data.each do |d|
             csv << d.values
