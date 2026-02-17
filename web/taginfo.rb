@@ -64,8 +64,8 @@ TAGINFO_CONFIG = TaginfoConfig.new(File.expand_path(File.dirname(__FILE__)) + '/
 
 #------------------------------------------------------------------------------
 
-ALL_SECTIONS = %w[download taginfo test].freeze
-SECTIONS = Hash[TAGINFO_CONFIG.get('instance.sections', ALL_SECTIONS).collect{ |s| [s.to_sym, s] }]
+ALL_SECTIONS = %w[download taginfo].freeze
+SECTIONS = TAGINFO_CONFIG.get('instance.sections', ALL_SECTIONS).to_h{ |s| [s.to_sym, s] }
 
 class Taginfo < Sinatra::Base
 
