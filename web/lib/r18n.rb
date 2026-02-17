@@ -31,36 +31,35 @@ require 'r18n-core'
 
 # Define R18n module and register it
 module Sinatra
-  # R18n module for Sinatra with appropriate hooks
-  module R18n
-    def self.registered(app)
-      app.helpers ::R18n::Helpers
-      app.set :default_locale, proc { ::R18n::I18n.default }
-      app.set :translations, proc { ::R18n.default_places }
+    # R18n module for Sinatra with appropriate hooks
+    module R18n
+        def self.registered(app)
+            app.helpers ::R18n::Helpers
+            app.set :default_locale, proc{ ::R18n::I18n.default }
+            app.set :translations, proc{ ::R18n.default_places }
 
-      ::R18n.default_places { File.join(app.root, 'i18n') }
+            ::R18n.default_places{ File.join(app.root, 'i18n') }
 
-      app.before do
-        ::R18n.clear_cache! if self.class.development?
+            app.before do
+                ::R18n.clear_cache! if self.class.development?
 
-        ::R18n::I18n.default = settings.default_locale if settings.default_locale
+                ::R18n::I18n.default = settings.default_locale if settings.default_locale
 
-        locales = ::R18n::I18n.parse_http(request.env['HTTP_ACCEPT_LANGUAGE'])
-        if params[:locale]
-          locales.unshift(params[:locale])
-        elsif session[:locale]
-          locales.unshift(session[:locale])
+                locales = ::R18n::I18n.parse_http(request.env['HTTP_ACCEPT_LANGUAGE'])
+                if params[:locale]
+                    locales.unshift(params[:locale])
+                elsif session[:locale]
+                    locales.unshift(session[:locale])
+                end
+
+                i18n = ::R18n::I18n.new(
+                    locales, ::R18n.default_places,
+                    off_filters: :untranslated, on_filters: :untranslated_html
+                )
+                ::R18n.thread_set i18n
+            end
         end
-
-        i18n = ::R18n::I18n.new(
-          locales, ::R18n.default_places,
-          off_filters: :untranslated, on_filters: :untranslated_html
-        )
-        ::R18n.thread_set i18n
-      end
     end
-  end
 
-  register R18n
+    register R18n
 end
-
