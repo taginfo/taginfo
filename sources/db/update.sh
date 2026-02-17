@@ -58,7 +58,9 @@ run_tagstats() {
     fi
 
     print_message "Running tagstats... "
-#tagstats="valgrind --leak-check=full --show-reachable=yes $tagstats"
+    #tagstats="valgrind --leak-check=full --show-reachable=yes $tagstats"
+
+    # shellcheck disable=SC2086 # we want word splitting here
     run_exe "$tagstats" $open_selection_db \
         --index="$index" \
         --min-tag-combination-count="$min_tag_combination_count" \
