@@ -26,6 +26,11 @@ class Taginfo < Sinatra::Base
         :ui => '/keys/highway#combinations'
     }) do
         key = params[:key]
+        if not key then
+            halt 400, { :error => "missing required parameter 'key'" }.to_json
+            return
+        end
+
         filter_type = get_filter
 
         if @ap.sortname == 'to_count'
@@ -90,6 +95,11 @@ class Taginfo < Sinatra::Base
         :ui => '/keys/highway#similar'
     }) do
         key = params[:key]
+        if not key then
+            halt 400, { :error => "missing required parameter 'key'" }.to_json
+            return
+        end
+
         query = like_contains(params[:query])
 
         if params[:query].to_s != ''
@@ -163,6 +173,11 @@ class Taginfo < Sinatra::Base
         :ui => '/keys/amenity#overview'
     }) do
         key = params[:key]
+        if not key then
+            halt 400, { :error => "missing required parameter 'key'" }.to_json
+            return
+        end
+
         out = []
 
         # default values
@@ -214,6 +229,11 @@ class Taginfo < Sinatra::Base
         :ui => '/keys/highway#values'
     }) do
         key = params[:key]
+        if not key then
+            halt 400, { :error => "missing required parameter 'key'" }.to_json
+            return
+        end
+
         language = params[:lang] || 'en'
         filter_type = get_filter
 
@@ -316,6 +336,11 @@ class Taginfo < Sinatra::Base
         :notes => 'Returns an additional row with <i>value null</i> and <i>count</i> the sum of the counts for all values not listed.'
     }) do
         key = params[:key]
+        if not key then
+            halt 400, { :error => "missing required parameter 'key'" }.to_json
+            return
+        end
+
         min_fraction = 0.01
         if params[:min_fraction]
             min_fraction = params[:min_fraction].to_f
@@ -384,6 +409,10 @@ class Taginfo < Sinatra::Base
         :ui => '/keys/highway#wiki'
     }) do
         key = params[:key]
+        if not key then
+            halt 400, { :error => "missing required parameter 'key'" }.to_json
+            return
+        end
 
         res = @db.execute('SELECT * FROM wikipages LEFT OUTER JOIN wiki_images USING (image) WHERE value IS NULL AND key = ? ORDER BY lang', key)
 
@@ -423,6 +452,11 @@ class Taginfo < Sinatra::Base
         :ui => '/keys/highway#projects'
     }) do
         key = params[:key]
+        if not key then
+            halt 400, { :error => "missing required parameter 'key'" }.to_json
+            return
+        end
+
         q = like_contains(params[:query])
         filter_type = get_filter
 
@@ -492,6 +526,10 @@ class Taginfo < Sinatra::Base
         end
 
         key = params[:key]
+        if not key then
+            halt 400, { :error => "missing required parameter 'key'" }.to_json
+            return
+        end
 
         res = @db.select('SELECT data FROM chronology.keys_chronology').
             condition('key = ?', key).
@@ -541,6 +579,11 @@ class Taginfo < Sinatra::Base
         :ui => '/keys/amenity#overview'
     }) do
         key = params[:key]
+        if not key then
+            halt 400, { :error => "missing required parameter 'key'" }.to_json
+            return
+        end
+
         data = { :key => key, :counts => [] }
 
         # default values

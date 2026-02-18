@@ -25,6 +25,11 @@ class Taginfo < Sinatra::Base
     }) do
         project_id = params[:project]
 
+        if not project_id then
+            halt 400, { :error => "missing required parameter 'project_id'" }.to_json
+            return
+        end
+
         q = like_contains(params[:query])
         total = @db.select('SELECT count(*) FROM (SELECT p.key AS key, p.value AS value, p.on_node, p.on_way, p.on_relation, p.on_area, p.description, p.doc_url, p.icon_url, k.in_wiki, k.count_all FROM projects.project_tags p, project_unique_keys k WHERE p.project_id=? AND p.key = k.key AND p.value IS NULL UNION SELECT p.key AS key, p.value AS value, p.on_node, p.on_way, p.on_relation, p.on_area, p.description, p.doc_url, p.icon_url, t.in_wiki, t.count_all FROM projects.project_tags p, project_unique_tags t WHERE p.project_id=? AND p.key = t.key AND p.value = t.value)', project_id, project_id).
             condition_if("key LIKE ? ESCAPE '@' OR value LIKE ? ESCAPE '@'", q, q).
@@ -72,9 +77,21 @@ class Taginfo < Sinatra::Base
         :ui => '/projects/id_editor'
     }) do
         project_id = params[:project]
+
+        if not project_id then
+            halt 400, { :error => "missing required parameter 'project_id'" }.to_json
+            return
+        end
+
         res = @db.select('SELECT icon_type, icon FROM projects.projects').
             condition('id = ?', project_id).
             execute[0]
+
+        if not res then
+            halt 440, { :error => "unknown project" }.to_json
+            return
+        end
+
         if res['icon']
             content_type res['icon_type']
             res['icon']

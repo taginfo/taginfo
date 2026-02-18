@@ -28,6 +28,10 @@ class Taginfo < Sinatra::Base
         :notes => 'If the <i>query</i> parameter is not set and the <i>min_fraction</i> parameter is set and paging is disabled, the first row returned will have the role <i>null</i> and the counts are added up from all the results not shown due to the <i>min_fraction</i> parameter.'
     }) do
         rtype = params[:rtype]
+        if not rtype then
+            halt 400, { :error => "missing required parameter 'rtype'" }.to_json
+            return
+        end
 
         relation_type_info = @db.select('SELECT * FROM relation_types').
             condition("rtype=?", rtype).
@@ -100,6 +104,11 @@ class Taginfo < Sinatra::Base
         :ui => '/relations/multipolygon#overview'
     }) do
         rtype = params[:rtype]
+        if not rtype then
+            halt 400, { :error => "missing required parameter 'rtype'" }.to_json
+            return
+        end
+
         out = []
 
         # default values
@@ -147,6 +156,10 @@ class Taginfo < Sinatra::Base
         :ui => '/relations/multipolygon#wiki'
     }) do
         rtype = params[:rtype]
+        if not rtype then
+            halt 400, { :error => "missing required parameter 'rtype'" }.to_json
+            return
+        end
 
         res = @db.execute('SELECT * FROM wiki.relation_pages LEFT OUTER JOIN wiki.wiki_images USING (image) WHERE rtype = ? ORDER BY lang', rtype)
 
@@ -192,6 +205,11 @@ class Taginfo < Sinatra::Base
         :ui => '/relations/route#projects'
     }) do
         rtype = params[:rtype]
+        if not rtype then
+            halt 400, { :error => "missing required parameter 'rtype'" }.to_json
+            return
+        end
+
         q = like_contains(params[:query])
 
         total = @db.select('SELECT count(*) FROM projects.projects p, projects.project_tags t ON p.id=t.project_id').

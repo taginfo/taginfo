@@ -15,6 +15,11 @@ class Taginfo < Sinatra::Base
         :ui => '/search?q=highway%3Dresidential'
     }) do
         query = params[:query]
+        if not query then
+            halt 400, { :error => "missing required parameter 'query'" }.to_json
+            return
+        end
+
         (query_key, query_value) = query.split('=', 2)
 
         begin
@@ -69,7 +74,13 @@ class Taginfo < Sinatra::Base
         :example => { :query => 'fire', :page => 1, :rp => 10 },
         :ui => '/search?q=fire#fulltext'
     }) do
-        query = params[:query].downcase
+        query = params[:query]
+        if not query then
+            halt 400, { :error => "missing required parameter 'query'" }.to_json
+            return
+        end
+
+        query = query.downcase
 
         total = @db.count('wiki.words').condition("words LIKE ? ESCAPE '@'", like_contains(query)).get_first_i
 
@@ -104,6 +115,10 @@ class Taginfo < Sinatra::Base
         :ui => '/search?q=foo#roles'
     }) do
         query = params[:query]
+        if not query then
+            halt 400, { :error => "missing required parameter 'query'" }.to_json
+            return
+        end
 
         total = @db.count('db.relation_roles').
             condition_if("role LIKE ? ESCAPE '@'", like_contains(query)).
@@ -143,6 +158,10 @@ class Taginfo < Sinatra::Base
         :ui => '/search?q=foo#values'
     }) do
         query = params[:query]
+        if not query then
+            halt 400, { :error => "missing required parameter 'query'" }.to_json
+            return
+        end
 
         # searching for the empty string is very expensive, so we'll just return an empty result
         if query == ''

@@ -20,6 +20,11 @@ class Taginfo < Sinatra::Base
     }) do
         str = params[:string]
 
+        if not str then
+            halt 400, { :error => "missing required parameter 'string'" }.to_json
+            return
+        end
+
         res = @db.select("
 WITH RECURSIVE
 generate_series(value) AS (

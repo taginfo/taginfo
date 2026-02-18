@@ -29,6 +29,15 @@ class Taginfo < Sinatra::Base
     }) do
         key = params[:key]
         value = params[:value]
+        if not key then
+            halt 400, { :error => "missing required parameter 'key'" }.to_json
+            return
+        end
+        if not value then
+            halt 400, { :error => "missing required parameter 'value'" }.to_json
+            return
+        end
+
         filter_type = get_filter
         query_substr = like_contains(params[:query])
 
@@ -123,6 +132,15 @@ class Taginfo < Sinatra::Base
     }) do
         key = params[:key]
         value = params[:value]
+        if not key then
+            halt 400, { :error => "missing required parameter 'key'" }.to_json
+            return
+        end
+        if not value then
+            halt 400, { :error => "missing required parameter 'value'" }.to_json
+            return
+        end
+
         out = []
 
         # default values
@@ -221,6 +239,15 @@ class Taginfo < Sinatra::Base
     }) do
         key = params[:key]
         value = params[:value]
+        if not key then
+            halt 400, { :error => "missing required parameter 'key'" }.to_json
+            return
+        end
+        if not value then
+            halt 400, { :error => "missing required parameter 'value'" }.to_json
+            return
+        end
+
         filter_type = get_filter
         q = like_contains(params[:query])
 
@@ -290,6 +317,14 @@ class Taginfo < Sinatra::Base
 
         key = params[:key]
         value = params[:value]
+        if not key then
+            halt 400, { :error => "missing required parameter 'key'" }.to_json
+            return
+        end
+        if not value then
+            halt 400, { :error => "missing required parameter 'value'" }.to_json
+            return
+        end
 
         res = @db.select('SELECT data FROM chronology.tags_chronology').
             condition('key = ?', key).
@@ -338,6 +373,15 @@ class Taginfo < Sinatra::Base
     }) do
         key = params[:key]
         value = params[:value]
+        if not key then
+            halt 400, { :error => "missing required parameter 'key'" }.to_json
+            return
+        end
+        if not value then
+            halt 400, { :error => "missing required parameter 'value'" }.to_json
+            return
+        end
+
         data = { :key => key, :value => value, :counts => [] }
 
         # default values
