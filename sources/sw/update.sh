@@ -29,9 +29,6 @@ readonly DATABASE=$DATADIR/taginfo-sw.db
 # shellcheck source=/dev/null
 source "$SRCDIR/../util.sh" sw
 
-# Don't try to read git config which isn't there
-export GIT_CONFIG_GLOBAL=/dev/null
-
 process_id_tagging_schema() {
     print_message "Getting iD tagging schema info..."
 
