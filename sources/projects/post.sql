@@ -20,6 +20,7 @@ UPDATE projects SET tag_entries=(SELECT count(*) FROM project_tags WHERE project
 UPDATE projects SET unique_keys=(SELECT count(DISTINCT key)                 FROM project_tags WHERE project_id=id);
 UPDATE projects SET unique_tags=(SELECT count(DISTINCT key || '=' || value) FROM project_tags WHERE project_id=id AND value IS NOT NULL);
 
+CREATE INDEX project_tags_project_id_idx ON project_tags (project_id);
 CREATE INDEX project_tags_key_value_idx ON project_tags (key, value);
 
 ANALYZE;
