@@ -1090,8 +1090,8 @@ class DynamicTable {
             if (this.toolbar) {
                 this.toolbar.querySelector('.dt-page input').value = '0';
                 this.toolbar.querySelector('.dt-page span.dt-page-max').innerText = '0';
-                this.toolbar.querySelector('.dt-json a').setAttribute('href', build_link(data.url));
-                this.toolbar.querySelector('.dt-csv a')?.setAttribute('href', build_link(data.url + '&format=csv'));
+                this.toolbar.querySelector('.dt-json a').setAttribute('href', this.buildURL());
+                this.toolbar.querySelector('.dt-csv a')?.setAttribute('href', this.buildURL() + '&format=csv');
                 this.toolbar.querySelector('.dt-info').innerText = texts.dynamic_table.nomsg;
             }
 
@@ -1120,8 +1120,8 @@ class DynamicTable {
         if (this.toolbar) {
             this.toolbar.querySelector('.dt-page input').value = this.currentPage + 1;
             this.toolbar.querySelector('.dt-page span.dt-page-max').innerText = this.maxPage;
-            this.toolbar.querySelector('.dt-json a').setAttribute('href', build_link(data.url));
-            this.toolbar.querySelector('.dt-csv a')?.setAttribute('href', build_link(data.url + '&format=csv'));
+            this.toolbar.querySelector('.dt-json a').setAttribute('href', this.buildURL());
+            this.toolbar.querySelector('.dt-csv a')?.setAttribute('href', this.buildURL() + '&format=csv');
 
             this.toolbar.querySelector('.dt-info').innerHTML = this.fromToMessage();
         }
