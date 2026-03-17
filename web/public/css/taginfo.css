@@ -1318,6 +1318,7 @@ div.gbox h2 {
     text-transform: uppercase;
     font-weight: normal;
     margin: 0 0 2px 2px;
+    line-height: 1.3;
 }
 
 div.gbox h2 a {
