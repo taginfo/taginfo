@@ -530,7 +530,7 @@ function fmt_wiki_image_popup(image) {
 
     let w = image.width;
     let h = image.height;
-    const max_size = 180;
+    const max_size = 120;
     const thumb_size = w >= h ? max_size : parseInt(max_size / h * w);
     const other_size = (w >= h ? parseInt(max_size / w * h) : max_size) + 2;
     let url = image.thumb_url_prefix + thumb_size + image.thumb_url_suffix;
