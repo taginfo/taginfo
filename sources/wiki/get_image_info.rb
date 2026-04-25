@@ -97,7 +97,7 @@ database.transaction do |db|
                 not_in_cache += 1
                 puts "CACHE: Page '#{ title }' not in cache"
                 starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-                response = api.get(:action => 'query', :format => 'json', :prop => 'imageinfo', :iiprop => 'url|size|mime', :titles => title, :iiurlwidth => 10, :iiurlheight => 10)
+                response = api.get(:action => 'query', :format => 'json', :prop => 'imageinfo', :iiprop => 'url|size|mime', :titles => title, :iiurlwidth => 120)
                 result = response.body
                 time_spent_in_api_calls += Process.clock_gettime(Process::CLOCK_MONOTONIC) - starting
                 database.execute("INSERT INTO cache.cache_pages (title, timestamp, body) VALUES (?, ?, ?)", [title, Time.now.to_i, result])
