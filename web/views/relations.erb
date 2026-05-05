@@ -2,6 +2,17 @@
     <h1 class="section"><%= h(t.pages.relations.name) %></h1>
     <p><%= t.pages.relations.intro %></p>
 </div>
-<div class="box">
-    <div id="grid-relations"></div>
+<div id="tabs">
+    <ul class="no-print">
+        <li><a href="#types"><%= h(t.osm.relation_types) %></a></li>
+        <li><a href="#roles"><%= h(t.osm.relation_member_roles) %></a></li>
+    </ul>
+    <div id="types">
+        <h2><%= h(t.osm.relation_types) %></h2>
+        <div id="grid-relations"></div>
+    </div>
+    <div id="roles">
+        <h2><%= h(t.osm.relation_member_roles) %></h2>
+        <div id="grid-roles"></div>
+    </div>
 </div>

@@ -66,4 +66,64 @@ class Taginfo < Sinatra::Base
         )
     end
 
+    api(4, 'relations/roles', {
+        :description => 'Show all roles and relation types.',
+        :parameters => {
+            :query => 'Only show results where the role matches this query (substring match, optional).'
+        },
+        :paging => :optional,
+        :sort => %w[ role rtype count_all count_nodes count_ways count_relations ],
+        :result => paging_results([
+            [:role,            :STRING, 'Relation member role'],
+            [:rtype,           :STRING, 'Relation type'],
+            [:count_all,       :INT,    'Number of members with this relation type and role.'],
+            [:count_nodes,     :INT,    'Number of members of type node with this relation type and role.'],
+            [:count_ways,      :INT,    'Number of members of type way with this relation type and role.'],
+            [:count_relations, :INT,    'Number of members of type relation with this relation type and role.'],
+        ]),
+        :example => { :page => 1, :rp => 10 },
+        :ui => '/reports/roles'
+    }) do
+        total = @db.count('relation_roles').
+            condition_if("role LIKE ? ESCAPE '@'", like_contains(params[:query])).
+            get_first_i
+
+        res = @db.select('SELECT * FROM relation_roles').
+            condition_if("role LIKE ? ESCAPE '@'", like_contains(params[:query])).
+            order_by(@ap.sortname, @ap.sortorder) do |o|
+                o.role :role
+                o.role! :count_all
+                o.role :rtype
+                o.rtype :rtype
+                o.rtype! :count_all
+                o.rtype :role
+                o.count_all! :count_all
+                o.count_all :role
+                o.count_all :rtype
+                o.count_nodes! :count_nodes
+                o.count_nodes :role
+                o.count_nodes :rtype
+                o.count_ways! :count_ways
+                o.count_ways :role
+                o.count_ways :rtype
+                o.count_relations! :count_relations
+                o.count_relations :role
+                o.count_relations :rtype
+            end.
+            paging(@ap).
+            execute
+
+        return generate_json_result(total,
+            res.map do |row| {
+                :role            => row['role'],
+                :rtype           => row['rtype'],
+                :count_all       => row['count_all'].to_i,
+                :count_nodes     => row['count_nodes'].to_i,
+                :count_ways      => row['count_ways'].to_i,
+                :count_relations => row['count_relations'].to_i,
+            }
+            end
+        )
+    end
+
 end
