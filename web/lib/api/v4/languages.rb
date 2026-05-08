@@ -12,13 +12,13 @@ class Taginfo < Sinatra::Base
         :paging => :optional,
         :filter => @@bcp47_filters,
         :sort => %w[ subtag description added ],
-        :result => {
-            :type        => :STRING,
-            :subtag      => :STRING,
-            :description => :STRING,
-            :added       => :STRING,
-            :notes       => :STRING
-        },
+        :result => paging_results([
+            [:type,        :TEXT, '"Language", "Script", "Region", or "Variant"'],
+            [:subtag,      :TEXT, 'The subtag (code)'],
+            [:description, :TEXT, 'Name of the region etc.'],
+            [:added,       :TEXT, 'When was this entry added to the registry'],
+            [:notes,       :TEXT, 'Notes from the registry']
+        ]),
         :example => { :page => 1, :rp => 10, :sortname => :subtag, :sortorder => 'asc' },
         :ui => '/sources/languages/subtags'
     }) do
@@ -40,11 +40,8 @@ class Taginfo < Sinatra::Base
             paging(@ap).
             execute
 
-        return JSON.generate({
-            :page  => @ap.page,
-            :rp    => @ap.results_per_page,
-            :total => total,
-            :data  => res.map do |row|
+        return generate_json_result(total,
+            res.map do |row|
                 notes = ''
                 if row['suppress_script']
                     notes += "Default script: #{ row['suppress_script'] }"
@@ -60,7 +57,7 @@ class Taginfo < Sinatra::Base
                 :notes       => notes
                 }
             end
-        }, json_opts(params[:format]))
+        )
     end
 
 end
