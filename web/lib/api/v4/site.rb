@@ -42,11 +42,13 @@ class Taginfo < Sinatra::Base
     api(4, 'site/sources', {
         :description => 'Get information about the data sources used.',
         :result => [
-            [:id          , :STRING, 'Id'],
-            [:name        , :STRING, 'Name'],
-            [:data_until  , :STRING, 'All changes in the source until this date are reflected in taginfo.'],
-            [:update_start, :STRING, 'Date/Timestamp when last update was started.'],
-            [:update_end  , :STRING, 'Date/Timestamp when last update was finished.']
+            [:'', :ARRAY_OF_HASHES, 'Array with results.', [
+                [:id,           :STRING, 'Id'],
+                [:name,         :STRING, 'Name'],
+                [:data_until,   :STRING, 'All changes in the source until this date are reflected in taginfo.'],
+                [:update_start, :STRING, 'Date/Timestamp when last update was started.'],
+                [:update_end,   :STRING, 'Date/Timestamp when last update was finished.']
+            ]]
         ],
         :example => {},
         :ui => '/sources'
