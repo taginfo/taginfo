@@ -7,8 +7,8 @@
 INSERT INTO stats (key, value) SELECT 'wikidata_keys', count(*) FROM wikidata_keys;
 INSERT INTO stats (key, value) SELECT 'wikidata_tags', count(*) FROM wikidata_tags;
 
-INSERT INTO stats (key, value) SELECT 'wikidata_distinct_keys', count(distinct key) FROM wikidata_keys;
-INSERT INTO stats (key, value) SELECT 'wikidata_distinct_tags', count(distinct key || '=' || value) FROM wikidata_tags;
+INSERT INTO stats (key, value) SELECT 'wikidata_distinct_keys', count(DISTINCT key) FROM wikidata_keys;
+INSERT INTO stats (key, value) SELECT 'wikidata_distinct_tags', count(DISTINCT key || '=' || value) FROM wikidata_tags;
 
 INSERT INTO stats (key, value) SELECT 'wikidata_labels', count(*) FROM wikidata_labels;
 INSERT INTO stats (key, value) SELECT 'wikidata_errors', count(*) FROM wikidata_errors;

@@ -14,7 +14,7 @@ INSERT INTO stats (key, value)
     SELECT 'discardable_tags_' || source, count(*) FROM discardable_tags GROUP BY source;
 
 INSERT INTO stats (key, value)
-    SELECT 'discardable_tags', count(distinct key) FROM discardable_tags;
+    SELECT 'discardable_tags', count(DISTINCT key) FROM discardable_tags;
 
 ANALYZE;
 
