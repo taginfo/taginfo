@@ -526,7 +526,9 @@ class Template
     end
 
     def add_parameter(value)
-        return if value == ''
+        if value == ''
+            puts "ERROR: Found empty parameter in template '#{@name}'"
+        end
 
         if @parname.nil? # positional parameter
             # first parameter is really the name of this template
