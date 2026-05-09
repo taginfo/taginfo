@@ -526,11 +526,11 @@ class Template
     end
 
     def add_parameter(value)
-        if value == ''
-            puts "ERROR: Found empty parameter in template '#{@name}'"
-        end
-
         if @parname.nil? # positional parameter
+            if value == ''
+                puts "ERROR: Found empty parameter in template '#{@name}'"
+            end
+
             # first parameter is really the name of this template
             if @name.nil?
                 if value.is_a?(String) && (m = KNOWN_TEMPLATES.match(value))
@@ -543,6 +543,7 @@ class Template
                 @parameters << value
             end
         else # named parameter
+            return if value == '' # ignore unset named parameters
             @named_parameters[@parname] ||= []
             @named_parameters[@parname] << value
         end
