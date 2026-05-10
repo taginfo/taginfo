@@ -100,7 +100,7 @@ results = db_wikicache_images.execute("SELECT count(*) AS count FROM cache_pages
 print(%(taginfo_image_cache_age_days_bucket{le="+Inf"} #{results[0]['count']} #{IMAGE_CACHE_MODIFICATION_TIME_MS}\n))
 print(%(taginfo_image_cache_age_days_count #{results[0]['count']} #{IMAGE_CACHE_MODIFICATION_TIME_MS}\n))
 
-results = db_wikicache_images.execute("SELECT sum((unixepoch() - timestamp) / (60*60*24)) AS sum FROM cache_pages")
+results = db_wikicache_images.execute("SELECT COALESCE(sum((unixepoch() - timestamp) / (60*60*24)), 0) AS sum FROM cache_pages")
 print(%(taginfo_image_cache_age_days_sum #{results[0]['sum']} #{IMAGE_CACHE_MODIFICATION_TIME_MS}\n))
 
 print("\n")
