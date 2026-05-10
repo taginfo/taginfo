@@ -78,37 +78,29 @@ print("# HELP taginfo_data_from_seconds The last update from the OSM database re
 print("# TYPE taginfo_data_from_seconds gauge\n")
 print(%(taginfo_data_from_seconds #{results[0]['data_from']}\n))
 
-#------------------------------------------------------------------------------
-# Wiki image cache
-#------------------------------------------------------------------------------
-
-IMAGE_CACHE_DB = "#{SRCDIR}/wiki/wikicache-images.db"
-
-IMAGE_CACHE_MODIFICATION_TIME_MS = File.mtime(IMAGE_CACHE_DB).to_i * 1000
-
-db_wikicache_images = SQLite3::Database.new(IMAGE_CACHE_DB, { readonly: true, results_as_hash: true })
+db_wikicache_images = SQLite3::Database.new("#{SRCDIR}/wiki/wikicache-images.db", { readonly: true, results_as_hash: true })
 
 print("\n")
 print("# HELP taginfo_image_cache_age_days A histogram of image cache age in days\n")
 print("# TYPE taginfo_image_cache_age_days histogram\n")
 (10..100).step(10).each do |days|
     results = db_wikicache_images.execute("SELECT count(*) AS count FROM cache_pages WHERE ((unixepoch() - timestamp) / (60*60*24)) <= #{days}")
-    print(%(taginfo_image_cache_age_days_bucket{le="#{days}"} #{results[0]['count']} #{IMAGE_CACHE_MODIFICATION_TIME_MS}\n))
+    print(%(taginfo_image_cache_age_days_bucket{le="#{days}"} #{results[0]['count']}\n))
 end
 
 results = db_wikicache_images.execute("SELECT count(*) AS count FROM cache_pages")
-print(%(taginfo_image_cache_age_days_bucket{le="+Inf"} #{results[0]['count']} #{IMAGE_CACHE_MODIFICATION_TIME_MS}\n))
-print(%(taginfo_image_cache_age_days_count #{results[0]['count']} #{IMAGE_CACHE_MODIFICATION_TIME_MS}\n))
+print(%(taginfo_image_cache_age_days_bucket{le="+Inf"} #{results[0]['count']}\n))
+print(%(taginfo_image_cache_age_days_count #{results[0]['count']}\n))
 
 results = db_wikicache_images.execute("SELECT COALESCE(sum((unixepoch() - timestamp) / (60*60*24)), 0) AS sum FROM cache_pages")
-print(%(taginfo_image_cache_age_days_sum #{results[0]['sum']} #{IMAGE_CACHE_MODIFICATION_TIME_MS}\n))
+print(%(taginfo_image_cache_age_days_sum #{results[0]['sum']}\n))
 
 print("\n")
 print("# HELP taginfo_image_cache_repository_count Number of entries in image cache from different repositories\n")
 print("# TYPE taginfo_image_cache_repository_count gauge\n")
 results = db_wikicache_images.execute("SELECT COALESCE(value->>'imagerepository', 'NULL') AS repo, count(*) AS count FROM cache_pages, json_each(cache_pages.body, '$.query.pages') GROUP BY 1");
 results.each do |row|
-    print(%(taginfo_image_cache_repository_count{repo="#{row['repo']}"} #{row['count']} #{IMAGE_CACHE_MODIFICATION_TIME_MS}\n))
+    print(%(taginfo_image_cache_repository_count{repo="#{row['repo']}"} #{row['count']}\n))
 end
 
 #-- THE END -------------------------------------------------------------------
