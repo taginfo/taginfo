@@ -42,7 +42,7 @@ require 'sqlite3'
 
 require 'mediawikiapi'
 
-CACHE_HARD_EXPIRE = 60 # days
+CACHE_HARD_EXPIRE = 90 # days
 CACHE_SOFT_EXPIRE = 30 # days
 
 #------------------------------------------------------------------------------
