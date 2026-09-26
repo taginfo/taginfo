@@ -1,6 +1,7 @@
 # web/lib/utils.rb
 
 require 'time'
+require 'uri'
 
 # ------------------------------------------------------------------------------
 # patch some convenience methods into base classes
@@ -374,6 +375,14 @@ def build_link(link)
     else
         '/' + @taginfo_config.id + link
     end
+end
+
+def build_link_url(link)
+    link = URI(link)
+    if @taginfo_config.id != ''
+        link.path = '/' + @taginfo_config.id + link.path
+    end
+    link
 end
 
 def data_as_script(data)

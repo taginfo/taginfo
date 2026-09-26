@@ -201,7 +201,7 @@ end
 
 def generate_json_result(total, data)
     result = {
-        :url        => request.url,
+        :url        => build_link_url(request.url),
         :data_until => @data_until_m
     }
 
