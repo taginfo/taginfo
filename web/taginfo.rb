@@ -119,7 +119,8 @@ class Taginfo < Sinatra::Base
         end
 
         javascript_for(:taginfo)
-        javascript r18n.locale.code + '/texts'
+        current_locale = Sinatra::R18n.normalize_locale(r18n.locale.code)
+        javascript current_locale + '/texts'
 
         # set to immediate expire on normal pages
         # (otherwise switching languages doesn't work)
@@ -135,7 +136,7 @@ class Taginfo < Sinatra::Base
 
         @context = {
             instance: @taginfo_config.id,
-            lang: r18n.locale.code || 'en'
+            lang: current_locale || 'en'
         }
     end
 

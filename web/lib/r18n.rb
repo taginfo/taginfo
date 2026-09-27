@@ -33,6 +33,22 @@ require 'r18n-core'
 module Sinatra
     # R18n module for Sinatra with appropriate hooks
     module R18n
+        CHINESE_LOCALE_ALIASES = {
+            'zh' => 'zh-hans',
+            'zh-cn' => 'zh-hans',
+            'zh-sg' => 'zh-hans',
+            'zh-hans' => 'zh-hans',
+            'zh-tw' => 'zh-hant',
+            'zh-hk' => 'zh-hant',
+            'zh-mo' => 'zh-hant',
+            'zh-hant' => 'zh-hant'
+        }.freeze
+
+        def self.normalize_locale(locale)
+            code = locale.to_s.tr('_', '-').downcase
+            CHINESE_LOCALE_ALIASES.fetch(code, code)
+        end
+
         def self.registered(app)
             app.helpers ::R18n::Helpers
             app.set :default_locale, proc{ ::R18n::I18n.default }
@@ -51,6 +67,7 @@ module Sinatra
                 elsif session[:locale]
                     locales.unshift(session[:locale])
                 end
+                locales.map!{ |locale| Sinatra::R18n.normalize_locale(locale) }
 
                 i18n = ::R18n::I18n.new(
                     locales, ::R18n.default_places,
