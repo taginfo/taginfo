@@ -47,6 +47,7 @@ database.transaction do |db|
         db.execute("INSERT INTO deprecated_tags_id_mapping (old_tags, replace_tags) VALUES (?, ?)", [JSON.generate(entry['old']), JSON.generate(entry['replace'])])
     end
     discarded.each do |k, _|
+        next unless _ == true # skip keys where only some values are discardable
         db.execute("INSERT INTO discardable_tags (source, key) VALUES ('id', ?)", [k])
     end
 end
